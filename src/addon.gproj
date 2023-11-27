@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACEAnvil"
+ GUID "5EF75423BE839ACE"
+ TITLE "ACE Anvil"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+}

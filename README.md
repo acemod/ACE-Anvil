@@ -19,6 +19,6 @@ However, since ACE3 was initially released in 2015 and was based on even older p
 
 ### Can I contribute?
 
-Please do! We welcome any contribution that fits within ACE's scope. That means anything that is either a realism feature or just creature comforts are much appreciated. Ideally, hop on [our Discord](https://acemod.org/discord) and discuss what you want to do with the community first.
+Please do! We welcome any contribution that fits within ACE's scope. That means anything that is either a realism or just quality of life feature is much appreciated. Ideally, hop on [our Discord](https://acemod.org/discord) and discuss what you want to do with the community first.
 
 Since Arma Reforger is a test platform: Go wild. We're happy to add some features that might not be strictly within ACE's usual scope.

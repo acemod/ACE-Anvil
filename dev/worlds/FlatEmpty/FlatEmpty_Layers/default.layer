@@ -1,0 +1,12 @@
+SCR_FactionManager FactionManager_FFA : "{A1C54BBE72C5C696}Prefabs/MP/Managers/Factions/FactionManager_FFA.et" {
+ coords 64.176 1 182.233
+}
+SCR_BaseGameMode GameMode_Deathmatch_Automatic : "{B00D51315A1C7150}Prefabs/MP/Modes/Deathmatch/GameMode_Deathmatch_Automatic.et" {
+ coords 54.743 1 180.637
+}
+SCR_SpawnPoint : "{5392C4D80E4B18F8}Prefabs/MP/Spawning/SpawnPoint_FFA.et" {
+ coords 63.352 1 169.699
+}
+SCR_LoadoutManager : "{B7E5D7F4864D81C0}Prefabs/MP/Managers/Loadouts/LoadoutManager_FFA.et" {
+ coords 64.463 1 171.906
+}

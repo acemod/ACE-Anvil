@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_Anvil_Development_Environment"
+ GUID "5F22EB128624C3FC"
+ TITLE "ACE Anvil Development Environment"
+ Dependencies {
+  "5EF75423BE839ACE" "58D0FB3206B6F859"
+ }
+}

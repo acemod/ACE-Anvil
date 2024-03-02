@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{5DE8B7E486173279}Prefabs/Components/SupportStations/Heal/HealSupportStation_Gadget.ct"
+ Configurations {
+  ComponentTemplateResourceClass PC {
+  }
+  ComponentTemplateResourceClass XBOX_ONE : PC {
+  }
+  ComponentTemplateResourceClass XBOX_SERIES : PC {
+  }
+  ComponentTemplateResourceClass PS4 : PC {
+  }
+  ComponentTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

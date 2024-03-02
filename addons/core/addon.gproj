@@ -1,7 +1,7 @@
 GameProject {
- ID "ACE_Common"
+ ID "ACE_Core"
  GUID "60C4CE4888FF4621"
- TITLE "ACE - Common"
+ TITLE "ACE - Core"
  Dependencies {
   "58D0FB3206B6F859"
  }

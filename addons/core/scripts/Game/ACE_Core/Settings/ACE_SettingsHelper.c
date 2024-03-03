@@ -3,12 +3,12 @@
 class ACE_SettingsHelperT<Class T>
 {
 	//------------------------------------------------------------------------------------------------
-	//! Return settings for a category
-	static T GetCategorySettings()
+	//! Return settings for a mod
+	static T GetModSettings()
 	{
 		ACE_SettingsConfig settings = ArmaReforgerScripted.ACE_GetSettings();
 		if (settings)
-			return T.Cast(settings.GetSettingsCategoryConfig(T));
+			return T.Cast(settings.GetModSettings(T));
 		
 		return null;
 	}
@@ -19,11 +19,11 @@ class ACE_SettingsHelperT<Class T>
 class ACE_SettingsHelper
 {
 	//------------------------------------------------------------------------------------------------
-	//! Overrides settings for a category
-	static void SetCategorySettings(ACE_SettingsCategoryConfig config)
+	//! Overrides settings for a mod
+	static void SetModSettings(ACE_ModSettings config)
 	{
 		ACE_SettingsConfig settings = ArmaReforgerScripted.ACE_GetSettings();
 		if (settings)
-			settings.SetSettingsCategoryConfig(config);
+			settings.SetModSettings(config);
 	}
 }

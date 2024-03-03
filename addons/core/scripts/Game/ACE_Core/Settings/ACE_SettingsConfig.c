@@ -4,55 +4,47 @@
 class ACE_SettingsConfig
 {
 	[Attribute(desc: "Definitions of settings for all mods")]
-	protected ref array<ref ACE_SettingsCategoryConfig> m_aSettingsCategories;
-	protected ref map<typename,ACE_SettingsCategoryConfig> m_mSettingsCategories;
+	protected ref array<ref ACE_ModSettings> m_aModSettings;
+	protected ref map<typename,ACE_ModSettings> m_mModSettingsMap;
 	
 	//------------------------------------------------------------------------------------------------
-	//! Initializes config:
-	//! -  Construct map for faster look-up of configs
-	protected void Init()
+	//! Construct map for faster look-up of settings
+	protected void InitMap()
 	{
-		m_mSettingsCategories = new map<typename,ACE_SettingsCategoryConfig>();
+		m_mModSettingsMap = new map<typename,ACE_ModSettings>();
 		
-		foreach (ACE_SettingsCategoryConfig config : m_aSettingsCategories)
+		foreach (ACE_ModSettings settings : m_aModSettings)
 		{
-			m_mSettingsCategories[config.Type()] = config;
+			m_mModSettingsMap[settings.Type()] = settings;
 		};
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Return settings for all categories
-	array<ref ACE_SettingsCategoryConfig> GetSettingsCategoriesConfigs()
+	array<ref ACE_ModSettings> GetAllModSettings()
 	{
-		return m_aSettingsCategories;
+		return m_aModSettings;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Return settings for a category
-	ACE_SettingsCategoryConfig GetSettingsCategoryConfig(typename categoryType)
+	//! Return settings for a mod
+	ACE_ModSettings GetModSettings(typename modSettingsType)
 	{
-		if (!m_mSettingsCategories)
-			Init();
+		if (!m_mModSettingsMap)
+			InitMap();
 		
-		ACE_SettingsCategoryConfig config;
-		m_mSettingsCategories.Find(categoryType, config);
-		return config;
+		ACE_ModSettings settings;
+		m_mModSettingsMap.Find(modSettingsType, settings);
+		return settings;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Set settings for a category
-	void SetSettingsCategoryConfig(ACE_SettingsCategoryConfig config)
+	//! Set settings for a mod
+	void SetModSettings(ACE_ModSettings settings)
 	{
-		if (!m_mSettingsCategories)
-			Init();
+		if (!m_mModSettingsMap)
+			InitMap();
 		
-		m_mSettingsCategories[config.Type()] = config;
+		m_mModSettingsMap[settings.Type()] = settings;
 	}
-}
-
-//------------------------------------------------------------------------------------------------
-//! Settings for a category
-[BaseContainerProps()]
-class ACE_SettingsCategoryConfig
-{
 }

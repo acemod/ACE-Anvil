@@ -11,13 +11,15 @@ modded class ArmaReforgerScripted : ChimeraGame
 	{
 		if (!m_ACE_Settings)
 		{
+			// Load settings from config file
 			m_ACE_Settings = SCR_ConfigHelperT<ACE_SettingsConfig>.GetConfigObject("{A305FEB7400A2965}Configs/ACE/Settings.conf");
 			if (!m_ACE_Settings)
 				return false;
-						
+			
+			// Override with settings present in mission header
 			SCR_MissionHeader missionHeader = SCR_MissionHeader.Cast(GetGame().GetMissionHeader());
 			if (missionHeader)
-				missionHeader.ACE_ApplyToSettings(m_ACE_Settings);
+				missionHeader.ACE_ApplyToSettingConfig(m_ACE_Settings);
 		};
 		
 		return super.OnGameStart();

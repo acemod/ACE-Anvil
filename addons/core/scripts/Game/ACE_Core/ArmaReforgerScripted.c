@@ -19,7 +19,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 			// Override with settings present in mission header
 			SCR_MissionHeader missionHeader = SCR_MissionHeader.Cast(GetGame().GetMissionHeader());
 			if (missionHeader)
-				missionHeader.ACE_ApplyToSettingConfig(m_ACE_Settings);
+				missionHeader.ACE_ApplyToSettingsConfig(m_ACE_Settings);
 		};
 		
 		return super.OnGameStart();

@@ -7,7 +7,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	{
 		super.OnConsciousnessChanged(conscious);
 		ChimeraCharacter char = GetCharacter();
-		CEN_CarrierSystem_Helper.ReleaseFromCarrier(char);
-		CEN_CarrierSystem_Helper.ReleaseCarried(char);
+		ACE_Carrying_Helper.ReleaseFromCarrier(char);
+		ACE_Carrying_Helper.ReleaseCarried(char);
 	}
 }

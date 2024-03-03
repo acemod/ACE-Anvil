@@ -940,7 +940,7 @@ class SCR_BaseGameMode : BaseGameMode
 				}
 				
 				//------------------------------------------------------------------------------------------------
-				//!	CEN hard override: Clean up later since otherwise the carried player gets deleted as well...
+				//!	ACE hard override: Clean up later since otherwise the carried player gets deleted as well...
 				GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, 1000, false, controlledEntity);
 				//------------------------------------------------------------------------------------------------
 			}

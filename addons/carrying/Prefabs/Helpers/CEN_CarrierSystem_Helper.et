@@ -1,4 +1,4 @@
-CEN_CarrierSystem_Helper : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
+ACE_Carrying_Helper : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
  ID "4B42E71698F5739C"
  components {
   ControllersManagerComponent "{2CD4A765B3F3A3B1}" {

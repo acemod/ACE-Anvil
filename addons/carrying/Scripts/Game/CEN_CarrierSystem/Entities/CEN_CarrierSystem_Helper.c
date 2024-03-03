@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------------------------
-class CEN_CarrierSystem_HelperClass : GenericEntityClass
+class ACE_Carrying_HelperClass : GenericEntityClass
 {
 }
 
 //------------------------------------------------------------------------------------------------
 //! Helper compartment entity that dynamically gets created/deleted and attached/detached to carriers
-class CEN_CarrierSystem_Helper : GenericEntity
+class ACE_Carrying_Helper : GenericEntity
 {
 	protected IEntity m_eCarrier = null;
 	protected IEntity m_eCarried = null;
 	protected SCR_CharacterControllerComponent m_CarrierCharCtrl;
 	protected bool m_bMarkedForDeletion = false;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
-	private static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/CEN_CarrierSystem_Helper.et";
+	private static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et";
 	private static const int SEARCH_POS_RADIUS = 5; // m
 	private static const float PRONE_CHECK_TIMEOUT = 100; // ms
 	private static const float CLEANUP_TIMEOUT = 1000; // ms
@@ -23,7 +23,7 @@ class CEN_CarrierSystem_Helper : GenericEntity
 	//! in the compartment
 	static void Carry(IEntity carrier, IEntity carried)
 	{
-		CEN_CarrierSystem_Helper helper = CEN_CarrierSystem_Helper.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
+		ACE_Carrying_Helper helper = ACE_Carrying_Helper.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
 		helper.m_eCarrier = carrier;
 		helper.m_eCarried = carried;
 						
@@ -52,7 +52,7 @@ class CEN_CarrierSystem_Helper : GenericEntity
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void RpcDo_Owner_Carry(RplId carriedId)
 	{
-		GetGame().GetInputManager().AddActionListener("CEN_CarrierSystem_Release", EActionTrigger.DOWN, ActionReleaseCallback);
+		GetGame().GetInputManager().AddActionListener("ACE_Carrying_Release", EActionTrigger.DOWN, ActionReleaseCallback);
 		IEntity carried = RplComponent.Cast(Replication.FindItem(carriedId)).GetEntity();
 		Physics carriedPhys = carried.GetPhysics();
 		
@@ -79,7 +79,7 @@ class CEN_CarrierSystem_Helper : GenericEntity
 	//! Calls Release method on helper compartment entity
 	static void ReleaseFromCarrier(IEntity carrier)
 	{
-		CEN_CarrierSystem_Helper helper = GetHelperFromCarrier(carrier);
+		ACE_Carrying_Helper helper = GetHelperFromCarrier(carrier);
 		
 		if (!helper)
 			return;
@@ -92,7 +92,7 @@ class CEN_CarrierSystem_Helper : GenericEntity
 	//! Calls Release method on helper compartment entity
 	static void ReleaseCarried(IEntity carried)
 	{
-		CEN_CarrierSystem_Helper helper = GetHelperFromCarried(carried);
+		ACE_Carrying_Helper helper = GetHelperFromCarried(carried);
 		
 		if (!helper)
 			return;
@@ -170,7 +170,7 @@ class CEN_CarrierSystem_Helper : GenericEntity
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void RpcDo_Owner_CleanUp(RplId carriedId)
 	{
-		GetGame().GetInputManager().RemoveActionListener("CEN_CarrierSystem_Release", EActionTrigger.DOWN, ActionReleaseCallback);
+		GetGame().GetInputManager().RemoveActionListener("ACE_Carrying_Release", EActionTrigger.DOWN, ActionReleaseCallback);
 		
 		IEntity carried = RplComponent.Cast(Replication.FindItem(carriedId)).GetEntity();
 		if (carried)
@@ -204,7 +204,7 @@ class CEN_CarrierSystem_Helper : GenericEntity
 	//! Get the player that is carried by the given carrier
 	static IEntity GetCarried(IEntity carrier)
 	{
-		CEN_CarrierSystem_Helper helper = GetHelperFromCarrier(carrier);
+		ACE_Carrying_Helper helper = GetHelperFromCarrier(carrier);
 		if (!helper)
 			return null;
 		
@@ -215,7 +215,7 @@ class CEN_CarrierSystem_Helper : GenericEntity
 	//! Get the carrier that carries the given player
 	static IEntity GetCarrier(IEntity carried)
 	{
-		CEN_CarrierSystem_Helper helper = GetHelperFromCarried(carried);
+		ACE_Carrying_Helper helper = GetHelperFromCarried(carried);
 		if (!helper)
 			return null;
 		
@@ -224,17 +224,17 @@ class CEN_CarrierSystem_Helper : GenericEntity
 
 	//------------------------------------------------------------------------------------------------
 	//! Get the instance of the helper compartment entity for the given carrier
-	protected static CEN_CarrierSystem_Helper GetHelperFromCarrier(IEntity carrier)
+	protected static ACE_Carrying_Helper GetHelperFromCarrier(IEntity carrier)
 	{
 		if (!carrier)
 			return null;
 		
-		CEN_CarrierSystem_Helper helper;
+		ACE_Carrying_Helper helper;
 		IEntity child = carrier.GetChildren();
 		
 		while (child)
 		{
-			helper = CEN_CarrierSystem_Helper.Cast(child);
+			helper = ACE_Carrying_Helper.Cast(child);
 			
 			if (helper)
 				break;
@@ -250,12 +250,12 @@ class CEN_CarrierSystem_Helper : GenericEntity
 
 	//------------------------------------------------------------------------------------------------
 	//! Get the instance of the helper compartment entity for the given carried player
-	protected static CEN_CarrierSystem_Helper GetHelperFromCarried(IEntity carried)
+	protected static ACE_Carrying_Helper GetHelperFromCarried(IEntity carried)
 	{
 		if (!carried)
 			return null;
 		
-		CEN_CarrierSystem_Helper helper = CEN_CarrierSystem_Helper.Cast(carried.GetParent());
+		ACE_Carrying_Helper helper = ACE_Carrying_Helper.Cast(carried.GetParent());
 		
 		if (!helper || helper.m_bMarkedForDeletion)
 			return null;

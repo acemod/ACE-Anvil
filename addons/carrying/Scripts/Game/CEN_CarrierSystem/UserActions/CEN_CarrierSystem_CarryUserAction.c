@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class CEN_CarrierSystem_CarryUserAction : ScriptedUserAction
+class ACE_Carrying_CarryUserAction : ScriptedUserAction
 {
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
@@ -31,9 +31,9 @@ class CEN_CarrierSystem_CarryUserAction : ScriptedUserAction
 		};
 		
 		// Check if carrying is already in progress
-		if (CEN_CarrierSystem_Helper.IsCarrier(user) || CEN_CarrierSystem_Helper.IsCarried(GetOwner()))
+		if (ACE_Carrying_Helper.IsCarrier(user) || ACE_Carrying_Helper.IsCarried(GetOwner()))
 		{
-			SetCannotPerformReason("#CEN_CarrierSystem-UserAction_Carrying");
+			SetCannotPerformReason("#ACE_Carrying-UserAction_Carrying");
 			return false;
 		};
 			
@@ -43,7 +43,7 @@ class CEN_CarrierSystem_CarryUserAction : ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		CEN_CarrierSystem_Helper.Carry(pUserEntity, pOwnerEntity);
+		ACE_Carrying_Helper.Carry(pUserEntity, pOwnerEntity);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{FF78613C1DAFF28F}Prefabs/Helpers/CEN_CarrierSystem_Helper.et"
+ Name "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

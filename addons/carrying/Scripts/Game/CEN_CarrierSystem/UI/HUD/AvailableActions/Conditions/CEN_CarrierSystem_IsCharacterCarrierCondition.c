@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-class CEN_CarrierSystem_IsCharacterCarrierCondition : SCR_AvailableActionCondition
+class ACE_Carrying_IsCharacterCarrierCondition : SCR_AvailableActionCondition
 {
 	//------------------------------------------------------------------------------------------------
 	//! Returns true if the release action is available
@@ -9,6 +9,6 @@ class CEN_CarrierSystem_IsCharacterCarrierCondition : SCR_AvailableActionConditi
 		if (!data)
 			return false;
 		
-		return GetReturnResult(data.CEN_CarrierSystem_GetIsCharacterCarrier());
+		return GetReturnResult(data.ACE_Carrying_GetIsCharacterCarrier());
 	}
 }

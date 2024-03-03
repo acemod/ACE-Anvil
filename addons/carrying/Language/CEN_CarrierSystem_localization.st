@@ -2,14 +2,14 @@ StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
   CustomStringTableItem "{5DDEFB516A0DA608}" {
-   Id "CEN_CarrierSystem-AddonName"
-   Target_en_us "CEN - Carrier System"
+   Id "ACE_Carrying-AddonName"
+   Target_en_us "ACE - Carrying"
    Modified 1578023399
    Author "kexanone"
    LastChanged "kexanone"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
-   Id "CEN_CarrierSystem-UserAction_Carry"
+   Id "ACE_Carrying-UserAction_Carry"
    Target_en_us "Carry"
    Target_fr_fr "Porter"
    Target_de_de "Tragen"
@@ -18,7 +18,7 @@ StringTable {
    LastChanged "kexanone"
   }
   CustomStringTableItem "{5E0C2A71118B03B7}" {
-   Id "CEN_CarrierSystem-UserAction_Carrying"
+   Id "ACE_Carrying-UserAction_Carrying"
    Target_en_us "Carrying"
    Target_fr_fr "Porter"
    Target_de_de "Am Tragen"
@@ -27,7 +27,7 @@ StringTable {
    LastChanged "kexanone"
   }
   CustomStringTableItem "{5E0EB8A9BCC4201E}" {
-   Id "CEN_CarrierSystem-UserAction_Release"
+   Id "ACE_Carrying-UserAction_Release"
    Target_en_us "Release"
    Target_fr_fr "Déposer"
    Target_de_de "Ablegen"

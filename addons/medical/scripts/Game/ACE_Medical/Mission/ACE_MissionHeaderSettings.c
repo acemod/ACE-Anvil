@@ -4,7 +4,7 @@
 modded class ACE_MissionHeaderSettings
 {
 	[Attribute()]
-	ref ACE_Medical_Settings m_ACE_Medical_Settings;
+	protected ref ACE_Medical_Settings m_ACE_Medical_Settings;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Applies settings from mission header to config

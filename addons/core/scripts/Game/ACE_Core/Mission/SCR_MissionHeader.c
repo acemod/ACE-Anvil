@@ -3,7 +3,7 @@
 modded class SCR_MissionHeader : MissionHeader
 {
 	[Attribute(desc: "Settings for all ACE mods")]
-	ref ACE_MissionHeaderSettings m_ACE_Settings;
+	protected ref ACE_MissionHeaderSettings m_ACE_Settings;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Applies settings from mission header to config

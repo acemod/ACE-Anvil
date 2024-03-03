@@ -7,15 +7,13 @@ class ACE_Carrying_HelperClass : GenericEntityClass
 //! Helper compartment entity that dynamically gets created/deleted and attached/detached to carriers
 class ACE_Carrying_Helper : GenericEntity
 {
-	protected IEntity m_eCarrier = null;
-	protected IEntity m_eCarried = null;
+	protected IEntity m_eCarrier;
+	protected IEntity m_eCarried;
 	protected SCR_CharacterControllerComponent m_CarrierCharCtrl;
-	protected bool m_bMarkedForDeletion = false;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	private static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et";
 	private static const int SEARCH_POS_RADIUS = 5; // m
 	private static const float PRONE_CHECK_TIMEOUT = 100; // ms
-	private static const float CLEANUP_TIMEOUT = 1000; // ms
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>
@@ -29,8 +27,8 @@ class ACE_Carrying_Helper : GenericEntity
 						
 		carrier.AddChild(helper, carrier.GetAnimation().GetBoneIndex("Spine5"));
 		
-		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(carried.FindComponent(SCR_CompartmentAccessComponent));
-		if (!compartmentAccessComponent)
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(carried.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
 			return;
 		
 		PlayerManager playerManager = GetGame().GetPlayerManager();
@@ -41,7 +39,7 @@ class ACE_Carrying_Helper : GenericEntity
 
 		RplId carriedId = RplComponent.Cast(carried.FindComponent(RplComponent)).Id();
 		helper.Rpc(helper.RpcDo_Owner_Carry, carriedId);
-		compartmentAccessComponent.MoveInVehicle(helper, ECompartmentType.Cargo);
+		compartmentAccess.MoveInVehicle(helper, ECompartmentType.Cargo);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -108,19 +106,6 @@ class ACE_Carrying_Helper : GenericEntity
 	{
 		m_eCarrier.RemoveChild(this, true);
 		MoveOutCarried();
-		
-		RplId carriedId = RplId.Invalid();
-		
-		if (m_eCarried)
-		{
-			RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
-			carriedId = carriedRpl.Id();
-		};
-		
-		Rpc(RpcDo_CleanUpOwner, carriedId);
-		// Clean up later since otherwise the carried player gets deleted as well...
-		GetGame().GetCallqueue().CallLater(CleanUpServer, CLEANUP_TIMEOUT, false);
-		m_bMarkedForDeletion = true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -130,43 +115,44 @@ class ACE_Carrying_Helper : GenericEntity
 		if (!m_eCarried)
 			return;
 		
-		SCR_CompartmentAccessComponent compartmentAccessComponent = SCR_CompartmentAccessComponent.Cast(m_eCarried.FindComponent(SCR_CompartmentAccessComponent));
-		if (!compartmentAccessComponent)
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_eCarried.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
 			return;
+		
+		// Clean-up when carried has left the comparment
+		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
 		
 		vector target_pos;
 		vector target_transform[4];
-		m_eCarrier.GetTransform(target_transform);
+		m_eCarrier.GetWorldTransform(target_transform);
 		// target_transform[2] is vectorDir in Arma 3
 		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS);
 		target_transform[3] = target_pos;
-		compartmentAccessComponent.MoveOutVehicle(-1, target_transform);
-		
-		RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
-		if (!carriedRpl)
-			return;
+		compartmentAccess.MoveOutVehicle(-1, target_transform);
 		
 		// Broadcast teleport on network
-		vector helperTransform[4];
-		GetWorldTransform(helperTransform);
-		carriedRpl.ForceNodeMovement(helperTransform);
+		RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
+		if (carriedRpl)
+			carriedRpl.ForceNodeMovement(GetOrigin());
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Delete the helper once the carried player has left the compartment
-	//! Schedules iteself until clean-up could be completed
-	protected void CleanUpServer()
+	//! Clean-up when the carried player has left the compartment
+	protected void OnCompartmentLeft()
 	{
-		SCR_BaseCompartmentManagerComponent compartmentManager = SCR_BaseCompartmentManagerComponent.Cast(FindComponent(SCR_BaseCompartmentManagerComponent));
-		array<IEntity> occupants = {};
-		compartmentManager.GetOccupants(occupants);
+		RplId carriedId = RplId.Invalid();
 		
-		if (!occupants.IsEmpty())
+		if (m_eCarried)
 		{
-			GetGame().GetCallqueue().CallLater(CleanUpServer, CLEANUP_TIMEOUT, false);
-			return;
+			SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_eCarried.FindComponent(SCR_CompartmentAccessComponent));
+			if (compartmentAccess)
+				compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
+			
+			RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
+			carriedId = carriedRpl.Id();
 		};
 		
+		Rpc(RpcDo_Owner_CleanUp, carriedId);
 		SCR_EntityHelper.DeleteEntityAndChildren(this);
 	}
 	
@@ -176,7 +162,7 @@ class ACE_Carrying_Helper : GenericEntity
 	//! - Enable physical interaction between carrier and carried player
 	//! - Remove prone prevention handling
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_CleanUpOwner(RplId carriedId)
+	protected void RpcDo_Owner_CleanUp(RplId carriedId)
 	{
 		GetGame().GetInputManager().RemoveActionListener("ACE_Carrying_Release", EActionTrigger.DOWN, ActionReleaseCallback);
 		
@@ -250,9 +236,6 @@ class ACE_Carrying_Helper : GenericEntity
 			child = child.GetSibling();
 		};
 		
-		if (!helper || helper.m_bMarkedForDeletion)
-			return null;
-		
 		return helper;
 	}
 
@@ -263,11 +246,6 @@ class ACE_Carrying_Helper : GenericEntity
 		if (!carried)
 			return null;
 		
-		ACE_Carrying_Helper helper = ACE_Carrying_Helper.Cast(carried.GetParent());
-		
-		if (!helper || helper.m_bMarkedForDeletion)
-			return null;
-		
-		return helper;
+		return ACE_Carrying_Helper.Cast(carried.GetParent());
 	}
 }

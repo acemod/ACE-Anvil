@@ -1,0 +1,77 @@
+GameProject {
+ ID "ACE_Carrying"
+ GUID "5DBD560C5148E1DA"
+ TITLE "ACE - Medical Carrier"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{5DDEFB56EE00F4E3}" {
+      StringTableSource "{2E272B1D21C4446A}Language/CEN_CarrierSystem_localization.st"
+      Languages {
+       LanguageDefinition "{5DDEFB56EFB1F349}" {
+        Code "cs_cz"
+        StringTableRuntime "{6EE70B5B66F99E8F}Language/CEN_CarrierSystem_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F082}" {
+        Code "de_de"
+        StringTableRuntime "{BB991168755A8FAF}Language/CEN_CarrierSystem_localization.de_de.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F099}" {
+        Code "en_us"
+        StringTableRuntime "{E5699B231FA98AAE}Language/CEN_CarrierSystem_localization.en_us.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F0B6}" {
+        Code "es_es"
+        StringTableRuntime "{2025D6AAF1ABE1B1}Language/CEN_CarrierSystem_localization.es_es.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F0C1}" {
+        Code "fr_fr"
+        StringTableRuntime "{9B8D239D172802B3}Language/CEN_CarrierSystem_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F0DA}" {
+        Code "it_it"
+        StringTableRuntime "{1B91ACA9BA0A814A}Language/CEN_CarrierSystem_localization.it_it.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F0F7}" {
+        Code "ja_jp"
+        StringTableRuntime "{0B8A113B847BB1E1}Language/CEN_CarrierSystem_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F002}" {
+        Code "ko_kr"
+        StringTableRuntime "{AB3439971756B2DE}Language/CEN_CarrierSystem_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F01E}" {
+        Code "pl_pl"
+        StringTableRuntime "{F7459F6DA9B92EA2}Language/CEN_CarrierSystem_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F02B}" {
+        Code "pt_br"
+        StringTableRuntime "{223205A19247E418}Language/CEN_CarrierSystem_localization.pt_br.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F04F}" {
+        Code "ru_ru"
+        StringTableRuntime "{777311090F3E816E}Language/CEN_CarrierSystem_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{5DDEFB56EFB1F10F}" {
+        Code "zh_cn"
+        StringTableRuntime "{279B2AC25AB0EF26}Language/CEN_CarrierSystem_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig HEADLESS {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{8029A12EB049201B}Assets/Vehicles/Wheeled/workspaces/Vehicles_Wheeled.aw"
+ Configurations {
+  AnimWorkspaceResourceClass PC {
+  }
+  AnimWorkspaceResourceClass XBOX_ONE : PC {
+  }
+  AnimWorkspaceResourceClass XBOX_SERIES : PC {
+  }
+  AnimWorkspaceResourceClass PS4 : PC {
+  }
+  AnimWorkspaceResourceClass HEADLESS : PC {
+  }
+ }
+}

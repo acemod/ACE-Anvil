@@ -1,0 +1,21 @@
+SCR_ChimeraCharacter {
+ ID "0000000000000001"
+ components {
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    CEN_CarrierSystem_CarryUserAction "{5DDEFB529A8EBB97}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo UIInfo "{5DDEFB52A5D867D8}" {
+      Name "#CEN_CarrierSystem-UserAction_Carry"
+     }
+     VisibilityRange 2
+     Duration 1
+     CanAggregate 1
+     "Sort Priority" 11
+    }
+   }
+  }
+ }
+}

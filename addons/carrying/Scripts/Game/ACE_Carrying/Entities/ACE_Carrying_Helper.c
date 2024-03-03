@@ -106,9 +106,20 @@ class ACE_Carrying_Helper : GenericEntity
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void Release()
 	{
+		m_eCarrier.RemoveChild(this, true);
 		MoveOutCarried();
+		
+		RplId carriedId = RplId.Invalid();
+		
+		if (m_eCarried)
+		{
+			RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
+			carriedId = carriedRpl.Id();
+		};
+		
+		Rpc(RpcDo_CleanUpOwner, carriedId);
 		// Clean up later since otherwise the carried player gets deleted as well...
-		GetGame().GetCallqueue().CallLater(CleanUp, CLEANUP_TIMEOUT, false);
+		GetGame().GetCallqueue().CallLater(CleanUpServer, CLEANUP_TIMEOUT, false);
 		m_bMarkedForDeletion = true;
 	}
 	
@@ -130,11 +141,21 @@ class ACE_Carrying_Helper : GenericEntity
 		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS);
 		target_transform[3] = target_pos;
 		compartmentAccessComponent.MoveOutVehicle(-1, target_transform);
+		
+		RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
+		if (!carriedRpl)
+			return;
+		
+		// Broadcast teleport on network
+		vector helperTransform[4];
+		GetWorldTransform(helperTransform);
+		carriedRpl.ForceNodeMovement(helperTransform);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Delete the helper once the carried player has left the compartment
-	protected void CleanUp()
+	//! Schedules iteself until clean-up could be completed
+	protected void CleanUpServer()
 	{
 		SCR_BaseCompartmentManagerComponent compartmentManager = SCR_BaseCompartmentManagerComponent.Cast(FindComponent(SCR_BaseCompartmentManagerComponent));
 		array<IEntity> occupants = {};
@@ -142,23 +163,10 @@ class ACE_Carrying_Helper : GenericEntity
 		
 		if (!occupants.IsEmpty())
 		{
-			GetGame().GetCallqueue().CallLater(CleanUp, CLEANUP_TIMEOUT, false);
+			GetGame().GetCallqueue().CallLater(CleanUpServer, CLEANUP_TIMEOUT, false);
 			return;
 		};
 		
-		RplId carriedId = RplId.Invalid();
-		
-		if (m_eCarried)
-		{
-			RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
-			carriedId = carriedRpl.Id();
-			
-			vector carrierTransform[4];
-			m_eCarrier.GetWorldTransform(carrierTransform);
-			carriedRpl.ForceNodeMovement(carrierTransform);	
-		};
-					
-		Rpc(RpcDo_Owner_CleanUp, carriedId);
 		SCR_EntityHelper.DeleteEntityAndChildren(this);
 	}
 	
@@ -168,7 +176,7 @@ class ACE_Carrying_Helper : GenericEntity
 	//! - Enable physical interaction between carrier and carried player
 	//! - Remove prone prevention handling
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_Owner_CleanUp(RplId carriedId)
+	protected void RpcDo_CleanUpOwner(RplId carriedId)
 	{
 		GetGame().GetInputManager().RemoveActionListener("ACE_Carrying_Release", EActionTrigger.DOWN, ActionReleaseCallback);
 		

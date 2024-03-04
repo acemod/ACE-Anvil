@@ -1,0 +1,3 @@
+StringTable {
+ ItemClassName "CustomStringTableItem"
+}

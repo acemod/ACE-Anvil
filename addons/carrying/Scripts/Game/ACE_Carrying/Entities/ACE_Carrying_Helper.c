@@ -12,8 +12,8 @@ class ACE_Carrying_Helper : GenericEntity
 	protected SCR_CharacterControllerComponent m_CarrierCharCtrl;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	private static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et";
-	private static const int SEARCH_POS_RADIUS = 5; // m
-	private static const float PRONE_CHECK_TIMEOUT_MS = 100; // ms
+	private static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping carried player
+	private static const float PRONE_CHECK_TIMEOUT_MS = 100; // Timeout for checking whether carrier tries do go prone
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>
@@ -61,7 +61,7 @@ class ACE_Carrying_Helper : GenericEntity
 		SCR_PlayerController carrierCtrl = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		ChimeraCharacter carrier = ChimeraCharacter.Cast(carrierCtrl.GetControlledEntity());
 		m_CarrierCharCtrl = SCR_CharacterControllerComponent.Cast(carrier.GetCharacterController());
-		GetGame().GetCallqueue().CallLater(PreventProneCarrier, PRONE_CHECK_TIMEOUT, true);
+		GetGame().GetCallqueue().CallLater(PreventProneCarrier, PRONE_CHECK_TIMEOUT_MS, true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ class ACE_Carrying_Helper : GenericEntity
 		vector target_transform[4];
 		m_eCarrier.GetWorldTransform(target_transform);
 		// target_transform[2] is vectorDir in Arma 3
-		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS);
+		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS_M);
 		target_transform[3] = target_pos;
 		compartmentAccess.MoveOutVehicle(-1, target_transform);
 		

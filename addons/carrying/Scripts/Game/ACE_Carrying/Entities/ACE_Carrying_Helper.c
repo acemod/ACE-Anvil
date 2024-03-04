@@ -7,8 +7,8 @@ class ACE_Carrying_HelperClass : GenericEntityClass
 //! Helper compartment entity that dynamically gets created/deleted and attached/detached to carriers
 class ACE_Carrying_Helper : GenericEntity
 {
-	protected IEntity m_eCarrier;
-	protected IEntity m_eCarried;
+	protected IEntity m_pCarrier;
+	protected IEntity m_pCarried;
 	protected SCR_CharacterControllerComponent m_CarrierCharCtrl;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	private static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et";
@@ -22,8 +22,8 @@ class ACE_Carrying_Helper : GenericEntity
 	static void Carry(IEntity carrier, IEntity carried)
 	{
 		ACE_Carrying_Helper helper = ACE_Carrying_Helper.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
-		helper.m_eCarrier = carrier;
-		helper.m_eCarried = carried;
+		helper.m_pCarrier = carrier;
+		helper.m_pCarried = carried;
 						
 		carrier.AddChild(helper, carrier.GetAnimation().GetBoneIndex("Spine5"));
 		
@@ -104,7 +104,7 @@ class ACE_Carrying_Helper : GenericEntity
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void Release()
 	{
-		m_eCarrier.RemoveChild(this, true);
+		m_pCarrier.RemoveChild(this, true);
 		MoveOutCarried();
 	}
 	
@@ -112,10 +112,10 @@ class ACE_Carrying_Helper : GenericEntity
 	//! Moves the carried player out of the helper compartment
 	protected void MoveOutCarried()
 	{
-		if (!m_eCarried)
+		if (!m_pCarried)
 			return;
 		
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_eCarried.FindComponent(SCR_CompartmentAccessComponent));
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccess)
 			return;
 		
@@ -124,14 +124,14 @@ class ACE_Carrying_Helper : GenericEntity
 		
 		vector target_pos;
 		vector target_transform[4];
-		m_eCarrier.GetWorldTransform(target_transform);
+		m_pCarrier.GetWorldTransform(target_transform);
 		// target_transform[2] is vectorDir in Arma 3
 		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS_M);
 		target_transform[3] = target_pos;
 		compartmentAccess.MoveOutVehicle(-1, target_transform);
 		
 		// Broadcast teleport on network
-		RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
+		RplComponent carriedRpl =  RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
 		if (carriedRpl)
 			carriedRpl.ForceNodeMovement(GetOrigin());
 	}
@@ -142,13 +142,13 @@ class ACE_Carrying_Helper : GenericEntity
 	{
 		RplId carriedId = RplId.Invalid();
 		
-		if (m_eCarried)
+		if (m_pCarried)
 		{
-			SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_eCarried.FindComponent(SCR_CompartmentAccessComponent));
+			SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
 			if (compartmentAccess)
 				compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
 			
-			RplComponent carriedRpl =  RplComponent.Cast(m_eCarried.FindComponent(RplComponent));
+			RplComponent carriedRpl =  RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
 			carriedId = carriedRpl.Id();
 		};
 		
@@ -202,7 +202,7 @@ class ACE_Carrying_Helper : GenericEntity
 		if (!helper)
 			return null;
 		
-		return helper.m_eCarried;
+		return helper.m_pCarried;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -213,7 +213,7 @@ class ACE_Carrying_Helper : GenericEntity
 		if (!helper)
 			return null;
 		
-		return helper.m_eCarrier;
+		return helper.m_pCarrier;
 	}
 
 	//------------------------------------------------------------------------------------------------

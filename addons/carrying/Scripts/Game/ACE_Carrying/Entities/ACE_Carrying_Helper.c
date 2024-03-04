@@ -13,7 +13,7 @@ class ACE_Carrying_Helper : GenericEntity
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	private static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et";
 	private static const int SEARCH_POS_RADIUS = 5; // m
-	private static const float PRONE_CHECK_TIMEOUT = 100; // ms
+	private static const float PRONE_CHECK_TIMEOUT_MS = 100; // ms
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>

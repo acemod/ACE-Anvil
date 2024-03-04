@@ -6,9 +6,9 @@ class ACE_SettingsHelperT<Class T>
 	//! Return settings for a mod
 	static T GetModSettings()
 	{
-		ACE_SettingsConfig settings = ArmaReforgerScripted.ACE_GetSettings();
-		if (settings)
-			return T.Cast(settings.GetModSettings(T));
+		ACE_SettingsConfig config = ArmaReforgerScripted.ACE_GetSettingsConfig();
+		if (config)
+			return T.Cast(config.GetModSettings(T));
 		
 		return null;
 	}
@@ -20,10 +20,10 @@ class ACE_SettingsHelper
 {
 	//------------------------------------------------------------------------------------------------
 	//! Overrides settings for a mod
-	static void SetModSettings(ACE_ModSettings config)
+	static void SetModSettings(ACE_ModSettings settings)
 	{
-		ACE_SettingsConfig settings = ArmaReforgerScripted.ACE_GetSettings();
-		if (settings)
-			settings.SetModSettings(config);
+		ACE_SettingsConfig config = ArmaReforgerScripted.ACE_GetSettingsConfig();
+		if (config)
+			config.SetModSettings(settings);
 	}
 }

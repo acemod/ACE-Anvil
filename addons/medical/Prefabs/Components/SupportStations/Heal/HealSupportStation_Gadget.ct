@@ -1,4 +1,0 @@
-SCR_HealSupportStationComponent : "{96677F6071A680F1}Prefabs/Components/SupportStations/Heal/BaseHealSupportStation.ct" {
- m_fMaxHealScaled 1
- m_iDamageHealedEachExecution 34
-}

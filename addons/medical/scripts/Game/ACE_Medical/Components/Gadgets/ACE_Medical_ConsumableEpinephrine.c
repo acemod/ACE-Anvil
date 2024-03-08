@@ -60,7 +60,7 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 		};
 		
 		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
-		if (charCtrl.IsUnconscious())
+		if (charCtrl.GetLifeState() == ECharacterLifeState.INCAPACITATED)
 			return true;
 
 		failReason = SCR_EConsumableFailReason.UNDAMAGED;

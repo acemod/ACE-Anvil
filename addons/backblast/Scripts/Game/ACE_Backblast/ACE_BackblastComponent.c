@@ -2,6 +2,10 @@
 [ComponentEditorProps(category: "ACE Anvil", description: "ACE Backblast")]
 class ACE_BackblastComponentClass : ScriptComponentClass
 {
+	static override array<typename> Requires(IEntityComponentSource src)
+	{
+		return {EventHandlerManagerComponent};
+	}
 }
 
 //------------------------------------------------------------------------------------------------

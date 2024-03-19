@@ -1,3 +1,4 @@
+//------------------------------------------------------------------------------------------------
 [ComponentEditorProps(category: "ACE Anvil", description: "ACE Backblast")]
 class ACE_BackblastComponentClass : ScriptComponentClass
 {
@@ -7,32 +8,37 @@ class ACE_BackblastComponentClass : ScriptComponentClass
 	}
 }
 
+//------------------------------------------------------------------------------------------------
 class ACE_BackblastComponent : ScriptComponent
 {
 	[Attribute(defvalue: "0", desc: "Enable debug mode")]
 	private bool m_bDebugModeEnabled;
 
-	private IEntity m_Owner;
 	private const float INNER_RANGE = 15;
 	private const float OUTER_RANGE = 10;
 	private const float MAX_DAMAGE = 200;
 	private const float CONE_DEG = 90;
 
-	protected override void EOnInit(IEntity owner)
+	//------------------------------------------------------------------------------------------------
+	protected override void OnPostInit(IEntity owner)
 	{
-		super.EOnInit(owner);
-		m_Owner = owner;
-
+		super.OnPostInit(owner);
+		
+		if (!GetGame().InPlayMode())
+			return;
+		
+		if (!Replication.IsRunning() && !Replication.IsServer())
+			return;
+		
 		EventHandlerManagerComponent eventHandlerManager = EventHandlerManagerComponent.Cast(owner.FindComponent(EventHandlerManagerComponent));
 		eventHandlerManager.RegisterScriptHandler("OnProjectileShot", this, OnProjectileShot);
 	}
 
+	//------------------------------------------------------------------------------------------------
 	private void OnProjectileShot(int playerID, BaseWeaponComponent weapon, IEntity entity)
 	{
 		if (weapon.GetWeaponType() != EWeaponType.WT_ROCKETLAUNCHER)
-		{
 			return;
-		}
 
 		vector minBounds;
 		vector maxBounds;
@@ -56,43 +62,42 @@ class ACE_BackblastComponent : ScriptComponent
 
 		origin = origin.Multiply4(matrix);
 
-		AimingComponent aimingComponent = AimingComponent.Cast(m_Owner.FindComponent(AimingComponent));
+		AimingComponent aimingComponent = AimingComponent.Cast(GetOwner().FindComponent(AimingComponent));
 		vector weaponDir = aimingComponent.GetAimingDirectionWorld();
 		Backblast(origin, weaponDir);
 	}
 
+	//------------------------------------------------------------------------------------------------
 	private void Backblast(vector origin, vector weaponDir)
 	{
-		ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(m_Owner);
+		ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(GetOwner());
 		GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE, query.QueryCallback, null, EQueryEntitiesFlags.ALL);
 		array<SCR_ChimeraCharacter> affectedEntities = query.GetAffectedEntities();
 
 		if (affectedEntities.Count() == 0)
-		{
 			return;
-		}
 
 		foreach (SCR_ChimeraCharacter character : affectedEntities)
 		{
-			vector impact = character.AimingPosition();
-			vector dirVector = origin - impact;
-			float damage = CalcDamage(origin, weaponDir * -1, impact);
+			BaseDamageContext damageContext = new BaseDamageContext();
+			damageContext.hitPosition = character.AimingPosition();
+			damageContext.damageValue = CalcDamage(origin, weaponDir * -1, damageContext.hitPosition);
 
-			if (damage <= 0)
-			{
+			if (damageContext.damageValue <= 0)
 				continue;
-			}
 
-			vector hitPosDirNorm[3] = {
-				impact,
-				dirVector,
-				dirVector
-			};
+			damageContext.hitDirection = origin - damageContext.hitPosition;
+			damageContext.hitNormal = damageContext.hitDirection;
 
 			SCR_DamageManagerComponent damageManager = character.GetDamageManager();
-			HitZone hitZone = damageManager.GetDefaultHitZone();
-			Instigator instigator = Instigator.CreateInstigator(m_Owner);
-			damageManager.HandleDamage(EDamageType.EXPLOSIVE, damage, hitPosDirNorm, character, hitZone, instigator, null, 0, 0);
+			if (!damageManager)
+				continue;
+
+			damageContext.damageType = EDamageType.EXPLOSIVE;
+			damageContext.hitEntity = character;
+			damageContext.struckHitZone = damageManager.GetDefaultHitZone();
+			damageContext.instigator = Instigator.CreateInstigator(GetOwner());
+			damageManager.HandleDamage(damageContext);
 		}
 
 		if (m_bDebugModeEnabled)
@@ -102,6 +107,7 @@ class ACE_BackblastComponent : ScriptComponent
 		}
 	}
 
+	//------------------------------------------------------------------------------------------------
 	static float CalcDamage(vector origin, vector blastDir, vector impact)
 	{
 		vector dirVector = impact - origin;
@@ -117,48 +123,50 @@ class ACE_BackblastComponent : ScriptComponent
 	}
 }
 
+//------------------------------------------------------------------------------------------------
 class ACE_BackblastQueryCollector
 {
-	IEntity Owner;
-	ref array<SCR_ChimeraCharacter> affectedEntities = {};
+	protected IEntity m_pOwner;
+	protected ref array<SCR_ChimeraCharacter> m_aAffectedEntities = {};
 
+	//------------------------------------------------------------------------------------------------
 	void ACE_BackblastQueryCollector(IEntity owner)
 	{
-		Owner = owner;
+		m_pOwner = owner;
 	}
 
+	//------------------------------------------------------------------------------------------------
 	bool QueryCallback(IEntity entity)
 	{
-		if (entity == Owner)
-		{
-			return false;
-		}
+		if (entity == m_pOwner)
+			return true;
 
 		auto character = SCR_ChimeraCharacter.Cast(entity);
 		if (!character)
-		{
-			return false;
-		}
+			return true;
 
-		affectedEntities.Insert(character);
-		return false;
+		m_aAffectedEntities.Insert(character);
+		return true;
 	}
 
 	array<SCR_ChimeraCharacter> GetAffectedEntities()
 	{
-		return affectedEntities;
+		return m_aAffectedEntities;
 	}
 }
 
+//------------------------------------------------------------------------------------------------
 class ACE_BackblastDamageFunction : ACE_DrawingDamageFunction
 {
 	private vector m_vBlastDirection;
-
+	
+	//------------------------------------------------------------------------------------------------
 	void ACE_BackblastDamageFunction(vector blastDirection)
 	{
 		m_vBlastDirection = blastDirection;
 	}
-
+	
+	//------------------------------------------------------------------------------------------------
 	override float CalculateDamage(vector origin, vector target)
 	{
 		return ACE_BackblastComponent.CalcDamage(origin, m_vBlastDirection, target);

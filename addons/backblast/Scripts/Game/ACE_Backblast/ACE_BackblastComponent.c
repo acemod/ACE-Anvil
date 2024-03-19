@@ -10,7 +10,6 @@ class ACE_BackblastComponent : ScriptComponent
 	[Attribute(defvalue: "0", desc: "Enable debug mode")]
 	private bool m_bDebugModeEnabled;
 
-	private IEntity m_Owner;
 	private const float INNER_RANGE = 15;
 	private const float OUTER_RANGE = 10;
 	private const float MAX_DAMAGE = 200;
@@ -27,8 +26,6 @@ class ACE_BackblastComponent : ScriptComponent
 		if (!Replication.IsRunning() && !Replication.IsServer())
 			return;
 		
-		m_Owner = owner;
-
 		EventHandlerManagerComponent eventHandlerManager = EventHandlerManagerComponent.Cast(owner.FindComponent(EventHandlerManagerComponent));
 		eventHandlerManager.RegisterScriptHandler("OnProjectileShot", this, OnProjectileShot);
 	}
@@ -61,7 +58,7 @@ class ACE_BackblastComponent : ScriptComponent
 
 		origin = origin.Multiply4(matrix);
 
-		AimingComponent aimingComponent = AimingComponent.Cast(m_Owner.FindComponent(AimingComponent));
+		AimingComponent aimingComponent = AimingComponent.Cast(GetOwner().FindComponent(AimingComponent));
 		vector weaponDir = aimingComponent.GetAimingDirectionWorld();
 		Backblast(origin, weaponDir);
 	}
@@ -69,7 +66,7 @@ class ACE_BackblastComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	private void Backblast(vector origin, vector weaponDir)
 	{
-		ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(m_Owner);
+		ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(GetOwner());
 		GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE, query.QueryCallback, null, EQueryEntitiesFlags.ALL);
 		array<SCR_ChimeraCharacter> affectedEntities = query.GetAffectedEntities();
 
@@ -95,7 +92,7 @@ class ACE_BackblastComponent : ScriptComponent
 			damageContext.damageType = EDamageType.EXPLOSIVE;
 			damageContext.hitEntity = character;
 			damageContext.struckHitZone = damageManager.GetDefaultHitZone();
-			damageContext.instigator = Instigator.CreateInstigator(m_Owner);
+			damageContext.instigator = Instigator.CreateInstigator(GetOwner());
 			damageManager.HandleDamage(damageContext);
 		}
 

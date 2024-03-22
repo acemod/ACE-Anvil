@@ -6,6 +6,9 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	[Attribute(defvalue: "{E14F00C2836CAB68}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_DirtCover_01_long_v1.et", desc: "Prefab name for the buildable trench", params: "et")]
 	protected ResourceName m_sACE_Trenches_TrenchPrefabName;
 	
+	[Attribute(defvalue: "2.5", desc: "Distance in meters from player for placement preview")]
+	protected float m_sACE_Trenches_PlacementDistanceM;
+	
 	protected CameraBase m_pACE_Trenches_CharacterCamera;
 	protected IEntity m_pACE_Trenches_PreviewEntity;
 	
@@ -62,7 +65,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		vectorDir[1] = 0;
 		vectorDir.Normalize();
 		Math3D.AnglesToMatrix(Vector(vectorDir.ToYaw(), 0, 0), transform);
-		transform[3] = m_CharacterOwner.GetOrigin() + 2.5 * vectorDir;
+		transform[3] = m_CharacterOwner.GetOrigin() + m_sACE_Trenches_PlacementDistanceM * vectorDir;
 		SCR_TerrainHelper.SnapAndOrientToTerrain(transform);
 	}
 	

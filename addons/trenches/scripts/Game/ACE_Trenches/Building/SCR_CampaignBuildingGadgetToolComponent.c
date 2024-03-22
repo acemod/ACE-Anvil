@@ -11,11 +11,18 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	
 	protected CameraBase m_pACE_Trenches_CharacterCamera;
 	protected IEntity m_pACE_Trenches_PreviewEntity;
+	protected bool m_bACE_InHand = false;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Building tool taken to hand
 	override void ToolToHand()
 	{
+		// ToolToHand gets triggered twice when changing between crouch and prone stance. We therefore
+		// skip the execution if it was already called
+		if (m_bACE_InHand)
+			return;
+		
+		m_bACE_InHand = true;
 		super.ToolToHand();
 		GetGame().GetInputManager().AddActionListener("CharacterInspect", EActionTrigger.DOWN, ToogleActiveAction);
 	}
@@ -24,6 +31,10 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	//! Building tool out of hands -> end building mode.
 	override void ToolToInventory()
 	{
+		if (!m_bACE_InHand)
+			return;
+		
+		m_bACE_InHand = false;
 		super.ToolToInventory();
 		ToggleActive(false);
 		GetGame().GetInputManager().RemoveActionListener("CharacterInspect", EActionTrigger.DOWN, ToogleActiveAction);

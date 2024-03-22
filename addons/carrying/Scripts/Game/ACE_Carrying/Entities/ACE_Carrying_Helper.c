@@ -26,19 +26,31 @@ class ACE_Carrying_Helper : GenericEntity
 		helper.m_pCarried = carried;
 						
 		carrier.AddChild(helper, carrier.GetAnimation().GetBoneIndex("Spine5"));
-		
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(carried.FindComponent(SCR_CompartmentAccessComponent));
-		if (!compartmentAccess)
-			return;
-		
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		SCR_PlayerController carrierCtrl = SCR_PlayerController.Cast(playerManager.GetPlayerController(playerManager.GetPlayerIdFromControlledEntity(carrier)));
 		RplComponent helperRpl = RplComponent.Cast(helper.FindComponent(RplComponent));
 		RplId carrierCtrlId = carrierCtrl.GetRplIdentity();
 		helperRpl.Give(carrierCtrlId);
+		
+		SCR_CharacterControllerComponent carrierController = SCR_CharacterControllerComponent.Cast(carrier.FindComponent(SCR_CharacterControllerComponent));
+		if (!carrierController)
+			return;
+		
+		carrierController.m_OnLifeStateChanged.Insert(helper.OnCarrierLifeStateChanged);
+		
+		SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(carried.FindComponent(SCR_CharacterControllerComponent));
+		if (!carriedController)
+			return;
+		
+		carriedController.m_OnLifeStateChanged.Insert(helper.OnCarriedLifeStateChanged);
 
 		RplId carriedId = RplComponent.Cast(carried.FindComponent(RplComponent)).Id();
 		helper.Rpc(helper.RpcDo_Owner_Carry, carriedId);
+		
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(carried.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
+			return;
+		
 		compartmentAccess.MoveInVehicle(helper, ECompartmentType.Cargo);
 	}
 
@@ -70,6 +82,20 @@ class ACE_Carrying_Helper : GenericEntity
 	{
 		if (m_CarrierCharCtrl.GetStance() == ECharacterStance.PRONE)
 			m_CarrierCharCtrl.SetStanceChange(ECharacterStanceChange.STANCECHANGE_TOCROUCH);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	// Release from carrier when they get incapacitated or die
+	protected void OnCarrierLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+	{
+		ACE_Carrying_Helper.ReleaseFromCarrier(m_pCarrier);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	// Release carried when they wake up or die
+	protected void OnCarriedLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+	{
+		ACE_Carrying_Helper.ReleaseCarried(m_pCarried);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -106,6 +132,24 @@ class ACE_Carrying_Helper : GenericEntity
 	{
 		m_pCarrier.RemoveChild(this, true);
 		MoveOutCarried();
+		
+		if (m_pCarrier)
+		{
+			SCR_CharacterControllerComponent carrierController = SCR_CharacterControllerComponent.Cast(m_pCarrier.FindComponent(SCR_CharacterControllerComponent));
+			if (!carrierController)
+				return;
+			
+			carrierController.m_OnLifeStateChanged.Insert(OnCarrierLifeStateChanged);
+		}
+
+		if (m_pCarried)
+		{
+			SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(m_pCarried.FindComponent(SCR_CharacterControllerComponent));
+			if (!carriedController)
+				return;
+		
+			carriedController.m_OnLifeStateChanged.Insert(OnCarriedLifeStateChanged);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -1,0 +1,16 @@
+GenericEntity : "{59FF31302266059A}PrefabsEditable/Auto/Props/Military/Compositions/US/E_BuildingService_US.et" {
+ components {
+  SCR_ResourceComponent "{5D7CC617AC1077DD}" {
+   m_aContainers {
+    SCR_ResourceContainer "{60ED256ABF04B1F5}" {
+     m_eResourceRights SELF
+     m_eStorageType STORED
+     m_fResourceValueCurrent 100000
+     m_fResourceValueMax 100000
+    }
+   }
+  }
+ }
+ coords 79.104 4.666 44.254
+ angleY 173.415
+}

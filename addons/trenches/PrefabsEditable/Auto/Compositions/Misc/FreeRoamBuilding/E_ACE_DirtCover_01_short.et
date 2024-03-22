@@ -28,7 +28,7 @@ GenericEntity : "{C81B764F6C5B4064}Prefabs/Compositions/Misc/FreeRoamBuilding/AC
   SCR_EditorLinkComponent "{60EB07446E3E8D99}" {
    m_aEntries {
     SCR_EditorLinkEntry "{60EB07446E3E8D9B}" {
-     m_Prefab "{D7FB89CF21DDA2A3}PrefabsEditable/Auto/Structures/Military/Fortifications/E_DirtCover_01_short.et"
+     m_Prefab "{D062A693B66D2035}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_DirtCover_01_short.et"
      m_vPosition 0 0.3 0
      m_vAngles 0 0 0
      m_fScale 1

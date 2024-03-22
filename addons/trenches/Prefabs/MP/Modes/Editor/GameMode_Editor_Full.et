@@ -1,0 +1,8 @@
+SCR_GameModeEditor : "{D2DE7F43D48A3667}Prefabs/MP/Modes/Editor/GameMode_Editor.et" {
+ ID "56B2B479C6B96951"
+ components {
+  SCR_CampaignBuildingManagerComponent "{60EC2158F48C679A}" {
+   Enabled 0
+  }
+ }
+}

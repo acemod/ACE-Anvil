@@ -1,0 +1,301 @@
+SCR_MapEntity MapEntity_Default1 : "{21C189074DAB7E90}Prefabs/World/DefaultWorld/MapEntity_Default.et" {
+ coords 110.67 1 96.916
+}
+SCR_AIWorld SCR_AIWorld : "{E0A05C76552E7F58}Prefabs/AI/SCR_AIWorld.et" {
+ coords 114.399 1 109.482
+ {
+  CommentEntity {
+   coords 0 1 0
+   m_Comment "SCR_AIWorld: "\
+   "Configure navigation mesh"
+   m_Color 0 0 0
+   m_FaceCamera 1
+   m_TextBackground 1
+   m_BackgroundColor 1 0.6 0
+   m_BackgroundTransparency 0
+  }
+ }
+}
+PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+ coords 114.399 1 108.482
+}
+SCR_GameModeCampaign GameMode_Campaign : "{3B230AAC5252108F}Prefabs/MP/Modes/Conflict/GameMode_Campaign.et" {
+ components {
+  SCR_ArsenalManagerComponent "{5D167A243AC85931}" {
+   m_fLoadoutSpawnSupplyCostMultiplier 1
+  }
+  SCR_CampaignBuildingManagerComponent "{5C6878C4C62529D2}" {
+   m_sFreeRoamBuildingClientTrigger "{5E191CEAF4B95816}Prefabs/MP/FreeRoamBuildingClientTrigger.et"
+   m_BudgetType CAMPAIGN
+   m_iCompositionRefundPercentage 100
+   m_bSameFactionDisassembleOnly 1
+   m_OutlineManager SCR_CampaignBuildingCompositionOutlineManager "{5D7A73031D9A11E1}" : "{96A8B496A076F1C0}scripts/Game/GME/Building/CampaignBuildingCompositionOutline.conf" {
+   }
+   m_sPrefabsToBuildResource "{D2527D9AA5B4A33E}Configs/Editor/PlaceableEntities/Compositions/Compositions_FreeRoamBuilding.conf"
+  }
+  SCR_CommandingManagerComponent "{5D16783AFAE684F8}" {
+   m_sCommandsConfigPath "{54764D4E706F348C}Configs/Commanding/Commands.conf"
+  }
+  SCR_DebriefingScreenComponent "{5D349E302A88E42C}" {
+   m_BaseLayout SCR_DebriefingScreenUnevenFourTiles "{5D349E3023E18896}" {
+    m_TopLeftTile SCR_DebriefingScreenBigImageContent "{5D349E30244A4792}" {
+     m_sContentImage "{62897631F4A6C7F3}UI/Textures/MissionLoadingScreens/Reforger_ConflictArt_UI.edds"
+    }
+    m_TopRightTile SCR_DebriefingScreenFinishedObjectivesContent "{5D349E305DB53338}" {
+     m_bIsInteractible 1
+     m_sTitleText "#AR-DebriefingScreen_Objectives"
+     m_sFinishedObjectivesTileLayout "{B3A6950DF2D34576}UI/layouts/Menus/DeployMenu/DebriefingScreenFinishedObjectivesTile.layout"
+    }
+    m_BottomLeftTile SCR_DebriefingScreenSummaryContent "{5D349E3056A9E455}" {
+     m_sTitleText "#AR-DebriefingScreen_Debriefing"
+     m_sSubtitleText "#AR-DebriefingScreen_Subtitle"
+     m_sSubtitleLostText "#AR-DebriefingScreen_Subtitle_Lost"
+    }
+    m_BottomRightTile SCR_DebriefingScreenStatisticsContent "{5D349E3049CC104E}" {
+     m_sTitleText "#AR-DebriefingScreen_Statistics"
+    }
+   }
+  }
+  SCR_GameModeHealthSettings "{5A22E11F9ACBB1DF}" {
+   m_bPermitUnconsciousVON 1
+  }
+  SCR_GameOverScreenManagerComponent "{56DEC646298AD219}" {
+   m_GameOverScreenConfig SCR_GameOverScreenConfig "{56DEC6462FFDD82D}" {
+    m_aGameOverScreens {
+     SCR_FactionGameOverScreenInfo "{568E79DBAC19013D}" {
+      m_OptionalParams SCR_BaseGameOverScreenInfoOptional "{568E79DBB3E97D11}" {
+       m_sDebriefing "#AR-Campaign_MatchResult_DefeatDetail_Score"
+      }
+     }
+    }
+   }
+  }
+  SCR_MapConfigComponent "{5C669498E250A34B}" {
+   m_sSpawnMapConfigPath "{901F9ED2088BBCA4}Configs/Map/MapSpawnConflict.conf"
+  }
+  SCR_NametagConfigComponent "{571AA9E54FC9210D}" {
+   m_sConfigPath "{09F7AAA14A642683}Configs/NameTags/NametagFriendlies.conf"
+  }
+  SCR_PlayerSpawnPointManagerComponent "{5CDABA98894199D0}" {
+   m_SpawnPointPrefab "{6FC8BA123C919DB3}Prefabs/MP/PlayerRadioSpawnPointCampaign.et"
+   m_bEnablePlayerSpawnPoints 0
+  }
+  SCR_RespawnBriefingComponent "{5B2A94A3CF791D6F}" {
+   m_sJournalConfigPath "{FFB1A12A7BFC4957}Configs/Journal/JournalConflict.conf"
+   m_Info SCR_UIInfo "{5B2A94A66BB56FB3}" {
+    Description "#AR-Campaign_GamemodeTutorial"
+   }
+   m_aGameModeHints {
+    SCR_UIInfo "{5B2A94A72CAF0E18}" {
+     Name "#AR-BriefingCampaign_Hint_Name_01"
+     Description "#AR-BriefingCampaign_Hint_Description_01"
+     Icon "{324E923535DCACF8}UI/Textures/DeployMenu/Briefing/conflict_HintBanner_1_UI.edds"
+    }
+    SCR_UIInfo "{5B2A94A72AB20D65}" {
+     Name "#AR-BriefingCampaign_Hint_Name_02"
+     Description "#AR-BriefingCampaign_Hint_Description_02"
+     Icon "{3C50D67D082BA322}UI/Textures/DeployMenu/Briefing/conflict_HintBanner_2_UI.edds"
+    }
+    SCR_UIInfo "{5B2A94A729D6B272}" {
+     Name "#AR-BriefingCampaign_Hint_Name_03"
+     Description "#AR-BriefingCampaign_Hint_Description_03"
+     Icon "{39A515BAE3795994}UI/Textures/DeployMenu/Briefing/conflict_HintBanner_3_UI.edds"
+    }
+   }
+   m_aWinConditions {
+    SCR_BriefingVictoryCondition "{5B2A94A7531ADD24}" {
+     victoryCondition SEIZE
+     name "Condition_01"
+     description "#AR-BriefingCampaign_VictoryCondition_01"
+    }
+    SCR_BriefingVictoryCondition "{5B2A94A752415E44}" {
+     victoryCondition GUARD
+     name "Condition_02"
+     description "#AR-BriefingCampaign_VictoryCondition_02"
+    }
+    SCR_BriefingVictoryCondition "{5B2A94A75295460F}" {
+     victoryCondition SEIZE_RELAY
+     name "Condition_03"
+     description "#AR-BriefingCampaign_VictoryCondition_03"
+    }
+   }
+  }
+  SCR_RespawnSystemComponent "{56B2B4793051E7C9}" {
+   m_SpawnLogic SCR_AutoSpawnLogic "{5CEAA65B714D5CFF}" {
+    m_sForcedFaction "US"
+    m_sForcedLoadout "#AR-Loadout_Editor_NewArsenalLoadout_Name"
+   }
+  }
+  SCR_SaveLoadComponent "{58FA739CBE3E9FC5}" {
+   m_Struct SCR_MissionStruct "{5C6E86B1D6F0EC89}" {
+    m_Struct0 SCR_CampaignStruct "{5C6E86B1D41E4E2F}" {
+    }
+    m_Struct1 SCR_EditorStruct "{5E2C9BB6F87D9794}" {
+     m_AttributeList SCR_EditorAttributeList "{5E2C9BB656E63FCF}" : "{F3D6C6D25642352C}Configs/Editor/AttributeLists/Edit.conf" {
+     }
+     m_bSaveFactions 0
+     m_bSaveMissionAttributes 0
+     m_eRequiredEntityFlags LINKED_CHILDREN
+    }
+    m_Struct2 SCR_EditorStruct "{604AE588166D0165}" {
+     m_AttributeList SCR_EditorAttributeList "{604AFD87084A5DB6}" {
+     }
+     m_bSaveFactions 0
+     m_bSaveMissionAttributes 0
+     m_eRequiredEntityFlags FREE_ROAM_BUILDING_AI
+    }
+   }
+   m_iAutosavePeriod 120
+  }
+  SCR_SpawnProtectionComponent "{5D167A246026C95B}" {
+   m_fProtectionTime 5
+  }
+  SCR_TimeAndWeatherHandlerComponent "{5CC49B5A1313B84E}" {
+   m_bRandomStartingDaytime 1
+   m_fDayTimeAcceleration 4
+   m_fNightTimeAcceleration 12
+   m_bRandomStartingWeather 1
+   m_bRandomWeatherChanges 1
+   m_bAllowHeaderSettings 1
+  }
+  SCR_WelcomeScreenComponent "{5D349E3E9CC39991}" {
+   m_BaseLayout SCR_WelcomeScreenThreeHorizontalColumns "{5D349E3E90D4315E}" {
+    m_LeftColumn SCR_WelcomeScreenFactionContent "{5D349E3E94785464}" {
+     m_sTitleText "#AR-DeployScreen_AvailableFactionsTitle"
+     m_sBottomTitleText "#AR-DeployScreen_MoreFactions"
+    }
+    m_MiddleColumn SCR_WelcomeScreenMissionObjectivesContent "{5D349E3E8A5CF4C3}" {
+     m_sTitleText "#AR-DebriefingScreen_Objectives"
+     m_aMissionObjectives {
+      SCR_WelcomeScreenMissionObjectives "{5D349E3F455821CC}" {
+       m_sObjectiveQuadName "Defend"
+       m_sDescription "#AR-BriefingCampaign_VictoryCondition_01"
+      }
+      SCR_WelcomeScreenMissionObjectives "{5D349E3F45C63A88}" {
+       m_sObjectiveQuadName "Seize"
+       m_sDescription "#AR-BriefingCampaign_VictoryCondition_02"
+      }
+      SCR_WelcomeScreenMissionObjectives "{5D349E3F45967A8B}" {
+       m_sObjectiveQuadName "Reconfigure"
+       m_sDescription "#AR-BriefingCampaign_VictoryCondition_03"
+      }
+     }
+    }
+    m_RightColumn SCR_WelcomeScreenIntroductionContent "{5D349E3E89289BE9}" {
+     m_bIsInteractible 1
+     m_sTitleText "#AR-FieldManual_Category_Introduction_Title"
+     m_aIntroduction {
+      SCR_WelcomeScreenIntroduction "{5D349E3F6FF705DE}" {
+       m_sContentImage "{F355C5692BEDC1E5}UI/Textures/FieldManual/MPModes/Conflict/Images/Conflict_loadScreen_UI.edds"
+       m_sContentTitleText "#AR-BriefingCampaign_Hint_Name_01"
+       m_sContentDescriptionText "#AR-FieldManual_Page_Conflict_Text_02"
+      }
+      SCR_WelcomeScreenIntroduction "{5D349E3F6C78332F}" {
+       m_sContentImage "{EFF804FB17026599}UI/Textures/FieldManual/MPModes/Conflict/Images/Conflict_service_antenna_UI.edds"
+       m_sContentTitleText "#AR-BriefingCampaign_Hint_Name_02"
+       m_sContentDescriptionText "#AR-BriefingCampaign_Hint_Description_02"
+      }
+      SCR_WelcomeScreenIntroduction "{5D349E3F6C38011F}" {
+       m_sContentImage "{E00CCCF1DB6DE5F3}UI/Textures/FieldManual/MPModes/Conflict/Images/Conflict_service_supply_UI.edds"
+       m_sContentTitleText "#AR-BriefingCampaign_Hint_Name_03"
+       m_sContentDescriptionText "#AR-BriefingCampaign_Hint_Description_03"
+      }
+     }
+    }
+   }
+  }
+  SCR_XPHandlerComponent "{5CAAA397E5408ABF}" {
+   m_sXPRewardsConfig "{8227B4636C73C5B5}Configs/Campaign/CampaignXPRewards.conf"
+  }
+ }
+ coords 114.399 1 107.482
+}
+SCR_CampaignFactionManager CampaignFactionManager : "{F1AC26310BAE3788}Prefabs/MP/Campaign/CampaignFactionManager.et" {
+ coords 114.399 1 110.482
+ {
+  CommentEntity {
+   coords 0 1 0
+   m_Comment "CampaignFactionManager: "\
+   "Make sure one faction is non-playable to use for Independent units."
+   m_Color 0 0 0
+   m_FaceCamera 1
+   m_TextBackground 1
+   m_BackgroundColor 1 0.6 0
+   m_BackgroundTransparency 0
+  }
+ }
+}
+GenericEntity ConflictMilitaryBase : "{1391CE8C0E255636}Prefabs/Systems/MilitaryBase/ConflictMilitaryBase.et" {
+ coords 130.474 1 110.974
+ {
+  CommentEntity {
+   coords 0 1 0
+   m_Comment "ConflictMilitaryBase: "\
+   "At least two bases need \"Can be HQ\" param checked. Place bases and control points wherever you wish."
+   m_Color 0 0 0
+   m_FaceCamera 1
+   m_TextBackground 1
+   m_BackgroundColor 1 0.6 0
+   m_BackgroundTransparency 0
+  }
+  GenericEntity {
+   ID "5CCED514A5908822"
+   Flags 1048579
+  }
+  GenericEntity {
+   ID "606078EE23DE48AC"
+   Flags 1048579
+  }
+  SCR_CampaignSpawnPointGroup {
+   ID "5C6696731466AF36"
+   Flags 1048579
+  }
+ }
+}
+SCR_BaseTaskManager CampaignTaskManager : "{17E3EF2CF455460F}Prefabs/MP/Campaign/CampaignTaskManager.et" {
+ coords 114.399 1 111.482
+}
+SCR_SpawnPoint : "{45225582B358C31A}PrefabsEditable/SpawnPoints/E_SpawnPoint_USSR.et" {
+ coords 106.553 1 109.324
+ angleY 82.182
+}
+GenericEntity : "{473DB1C66CAD5088}Prefabs/Props/Military/Compositions/USSR/BuildingService_USSR.et" {
+ coords 109.351 1 109.854
+ angleY -98.668
+}
+GenericEntity : "{4885DEA01D687DB3}PrefabsEditable/Auto/Compositions/Slotted/SlotFlatSmall/E_Bunker_S_USSR_01.et" {
+ coords 106.732 1 95.566
+}
+StaticModelEntity : "{55A3DA68E58453A1}Prefabs/Structures/Military/Fortifications/DirtCover_01/DirtCover_01_long_v2.et" {
+ coords 106.656 0.3 113.137
+}
+SCR_LoadoutManager CampaignLoadoutManager : "{58FBD035E53D95C1}Prefabs/MP/Campaign/CampaignLoadoutManager.et" {
+ coords 114.399 1 112.482
+}
+GenericEntity : "{59FF31302266059A}PrefabsEditable/Auto/Props/Military/Compositions/US/E_BuildingService_US.et" {
+ components {
+  SCR_CampaignBuildingProviderComponent "{5EBCED04D0321687}" {
+   m_bObstructViewWhenEnemyInRange 0
+  }
+  SCR_ResourceComponent "{5D7CC617AC1077DD}" {
+   m_aContainers {
+    SCR_ResourceContainer "{60EAEAA689400E90}" {
+     m_eResourceRights SELF
+     m_eStorageType STORED
+     m_fResourceValueCurrent 100000
+     m_fResourceValueMax 100000
+    }
+   }
+  }
+ }
+ coords 109.566 1 108.276
+ angleY -105.62
+}
+StaticModelEntity : "{C1576E5555582214}Prefabs/Structures/Military/Fortifications/DirtCover_01/DirtCover_01_short.et" {
+ coords 108.538 0.3 112.378
+ angleY 54.599
+}
+SCR_SpawnPoint : "{CEA2B24051A44525}PrefabsEditable/SpawnPoints/E_SpawnPoint_US.et" {
+ coords 106.823 1 107.69
+ angleY 87.755
+}

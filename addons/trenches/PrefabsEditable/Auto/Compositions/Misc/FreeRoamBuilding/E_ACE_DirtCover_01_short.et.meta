@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{32B0F4CA468D8A56}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_DirtCover_01_short.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

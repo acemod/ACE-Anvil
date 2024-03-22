@@ -1,0 +1,8 @@
+StaticModelEntity : "{B03F9691E961C4CA}Prefabs/Structures/Military/Fortifications/DirtCover_01/DirtCover_01_long_v3.et" {
+ ID "5272E314F01B2DBE"
+ components {
+  SCR_EditableEntityComponent "{5EF0BDF2D0886991}" {
+   m_Flags 257
+  }
+ }
+}

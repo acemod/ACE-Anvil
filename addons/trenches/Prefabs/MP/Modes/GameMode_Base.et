@@ -1,0 +1,13 @@
+SCR_BaseGameMode {
+ ID "56B2B479C6B96951"
+ components {
+  SCR_CampaignBuildingManagerComponent "{60EC2158F48C679A}" {
+   m_sFreeRoamBuildingClientTrigger "{5E191CEAF4B95816}Prefabs/MP/FreeRoamBuildingClientTrigger.et"
+   m_BudgetType CAMPAIGN
+   m_iCompositionRefundPercentage 100
+   m_OutlineManager SCR_CampaignBuildingCompositionOutlineManager "{60EC2158E10CB829}" : "{96A8B496A076F1C0}scripts/Game/ACE_Trenches/Building/CampaignBuildingCompositionOutline.conf" {
+   }
+   m_sPrefabsToBuildResource "{D2527D9AA5B4A33E}Configs/Editor/PlaceableEntities/Compositions/Compositions_FreeRoamBuilding.conf"
+  }
+ }
+}

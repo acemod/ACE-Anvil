@@ -1,0 +1,13 @@
+GenericEntity : "{BB1B3769EB8C290D}Prefabs/Compositions/Misc/FreeRoamBuilding/CompositionLayoutBase.et" {
+ ID "5D6CA46CF033D8B7"
+ components {
+  RigidBody "{5D6CA46CDC94F02B}" {
+   Geometries {
+    PhysicsBoxGeometry FreeRoamBuildingInteraction {
+     Extents 20 0.5 20
+    }
+   }
+  }
+ }
+ coords 1325.453 39.01 2756.153
+}

@@ -1,0 +1,39 @@
+GenericEntity : "{C81B764F6C5B4064}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_DirtCover_01_short.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  SCR_EditableEntityComponent "{5E50727929EC2547}" : "{8B8F72167C615EAA}Prefabs/Editor/Components/Compositions_SCR_EditableEntityComponent.ct" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    Name "#AR-EditableEntity_DirtCover_01_short_Name"
+    m_Image "{E8A18CF05811FA0C}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_DirtCover_01_short.edds"
+    m_sFaction "US"
+    m_aAuthoredLabels {
+     108 11
+    }
+    m_aAutoLabels {
+     1 121
+    }
+    m_EntityBudgetCost {
+     SCR_EntityBudgetValue "{60EB07446E3E8D90}" {
+      m_BudgetType CAMPAIGN
+     }
+    }
+    m_EntityChildrenBudgetCost {
+     SCR_EntityBudgetValue "{60EB07446E3E8D9F}" {
+      m_BudgetType PROPS
+      m_Value 1
+     }
+    }
+   }
+  }
+  SCR_EditorLinkComponent "{60EB07446E3E8D99}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{60EB07446E3E8D9B}" {
+     m_Prefab "{D7FB89CF21DDA2A3}PrefabsEditable/Auto/Structures/Military/Fortifications/E_DirtCover_01_short.et"
+     m_vPosition 0 0.3 0
+     m_vAngles 0 0 0
+     m_fScale 1
+    }
+   }
+  }
+ }
+}

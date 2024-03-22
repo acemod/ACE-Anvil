@@ -13,11 +13,20 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	protected IEntity m_pACE_Trenches_PreviewEntity;
 	
 	//------------------------------------------------------------------------------------------------
+	//! Building tool taken to hand
+	override void ToolToHand()
+	{
+		super.ToolToHand();
+		GetGame().GetInputManager().AddActionListener("CharacterInspect", EActionTrigger.DOWN, ToogleActiveAction);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Building tool out of hands -> end building mode.
 	override void ToolToInventory()
 	{
 		super.ToolToInventory();
 		ToggleActive(false);
+		GetGame().GetInputManager().RemoveActionListener("CharacterInspect", EActionTrigger.DOWN, ToogleActiveAction);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -106,13 +115,16 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	//------------------------------------------------------------------------------------------------
 	//! Callback for GadgetActivate keybind
 	override void ActivateAction()
-	{
-		super.ActivateAction();
-		
-		// Place object if on state is terminated via keybind
+	{		
+		// Place object if placement mode is active
 		if (m_bActivated)
 			ACE_Trenches_RequestPlace();
-		
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Callback for CharacterInspect keybind
+	void ToogleActiveAction()
+	{		
 		ToggleActive(!m_bActivated);
 	}
 }

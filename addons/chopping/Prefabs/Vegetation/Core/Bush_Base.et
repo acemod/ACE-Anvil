@@ -1,0 +1,32 @@
+Tree {
+ ID "2272273384468550"
+ components {
+  RigidBody "{4EFA6762916D17E5}" {
+   LayerPreset "Interaction"
+   Active Active
+  }
+  ActionsManagerComponent "{5D885D759C0910DE}" {
+   ActionContexts {
+    UserActionContext "{5D885D759DC59179}" {
+     ContextName "default"
+     Position PointInfo "{5D885D75A1461471}" {
+      Offset 0 1.25 0
+     }
+     Radius 3
+    }
+   }
+   additionalActions {
+    ACE_Chopping_UserAction "{5D885D7417985410}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{5D885D7413A02C00}" {
+      Name "#ACE_Chopping_RemoveBush"
+     }
+     VisibilityRange -1
+     Duration 2.5
+    }
+   }
+  }
+ }
+}

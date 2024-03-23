@@ -115,21 +115,33 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	//! Toggles building placement preview
 	override void ToggleActive(bool state)
 	{
+		if (m_bActivated == state)
+			return;
+		
 		if (state)
+		{
 			ACE_Trenches_StartPlacementPreview();
+			SCR_UISoundEntity.SoundEvent("SOUND_E_PLACE_GSTART");
+		}
 		else
+		{
 			ACE_Trenches_EndPlacementPreview();
+			SCR_UISoundEntity.SoundEvent("SOUND_HUD_GADGET_CANCEL");
+		}
 		
 		m_bActivated = state;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Callback for GadgetActivate keybind
+	//! Place object if placement mode is active
 	override void ActivateAction()
 	{		
-		// Place object if placement mode is active
-		if (m_bActivated)
-			ACE_Trenches_RequestPlace();
+		if (!m_bActivated)
+			return;
+			
+		ACE_Trenches_RequestPlace();
+		SCR_UISoundEntity.SoundEvent("SOUND_E_ACE_TRENCH_BUILD");
 	}
 	
 	//------------------------------------------------------------------------------------------------

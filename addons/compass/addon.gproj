@@ -1,8 +1,8 @@
 GameProject {
  ID "ACECompass"
  GUID "60C53A9372ED3964"
- TITLE "ACE Compass"
+ TITLE "ACE - Compass"
  Dependencies {
-  "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
  }
 }

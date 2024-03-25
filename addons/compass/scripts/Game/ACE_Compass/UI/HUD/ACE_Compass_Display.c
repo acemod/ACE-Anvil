@@ -54,16 +54,8 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 	//------------------------------------------------------------------------------------------------
 	void UpdateBearing(float needleAngle)
 	{
-		float bearing = needleAngle;
-		Print(needleAngle);
-		if (bearing > 0)
-			bearing -= 360;
-
-		bearing = Math.Round(Math.AbsFloat(bearing));
-		if (bearing == 360)
-			bearing = 0;
-		
-		m_wBearing.SetText(bearing.ToString(3, 0));
+		int bearing = Math.Mod(360 - Math.Round(needleAngle), 360);
+		m_wBearing.SetText(bearing.ToString(3));
 		m_wCardinal.SetText(ACE_CompassTools.GetCardinalFromBearing(bearing));
 	}
 	

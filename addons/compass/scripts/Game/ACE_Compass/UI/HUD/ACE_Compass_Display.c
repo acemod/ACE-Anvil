@@ -3,9 +3,11 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 {
 	const vector SCREEN_POS_OFFSET = "-50 0 0";
 	
-	protected IEntity m_CompassEntity;
+	protected IEntity m_pCompassEntity;
+	protected Animation m_CompassAnimation;
+	protected TNodeId m_iNeedleBone;
 	protected BaseWorld m_World;
-	protected WorkspaceWidget m_Workspace;
+	protected WorkspaceWidget m_wWorkspace;
 	protected TextWidget m_wBearing;
 	protected TextWidget m_wCardinal;
 	
@@ -33,11 +35,12 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 	{
 		super.DisplayUpdate(owner, timeSlice);
 		
-		if (!m_bShown || !m_CompassEntity)
+		if (!m_bShown || !m_pCompassEntity)
 			return;
-
-		vector worldPos = m_CompassEntity.GetOrigin();
-		vector screenPos = m_Workspace.ProjWorldToScreen(worldPos, m_World);
+		
+		vector transform[4];
+		m_CompassAnimation.GetBoneMatrix(m_iNeedleBone, transform);
+		vector screenPos = m_wWorkspace.ProjWorldToScreen(transform[3] + m_pCompassEntity.GetOrigin(), m_World);
 		screenPos += SCREEN_POS_OFFSET;
 				
 		FrameSlot.SetPos(m_wRoot.FindWidget("compassFrame"), screenPos[0], screenPos[1]);
@@ -62,13 +65,15 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 	//------------------------------------------------------------------------------------------------
 	void SetCompassEntity(notnull IEntity compass)
 	{
-		m_CompassEntity = compass;
+		m_pCompassEntity = compass;
+		m_CompassAnimation = compass.GetAnimation();
+		m_iNeedleBone = m_CompassAnimation.GetBoneIndex("i_needle");
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected void OnUserSettingChanged()
 	{
-		m_Workspace = GetGame().GetWorkspace();
+		m_wWorkspace = GetGame().GetWorkspace();
 	}
 	
 }

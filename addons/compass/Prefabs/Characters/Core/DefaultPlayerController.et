@@ -3,9 +3,11 @@ SCR_PlayerController {
  components {
   SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
    InfoDisplays {
-    ACE_Compass "{60C624EA24CF4027}" {
+    ACE_Compass_Display "{60C624EA24CF4027}" {
      m_LayoutPath "{F392EAC9FD9F61D4}UI/layouts/HUD/ACE_Compass.layout"
      m_eLayer MEDIUM
+     m_bShowWhenCreated 0
+     m_eShow 7
     }
    }
   }

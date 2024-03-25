@@ -27,6 +27,9 @@ FrameWidgetClass {
      "Min Font Size" 12
      "Horizontal Alignment" Center
      "No Localization" 1
+     FontProperties FontProperties "{60F22EF6B21F0220}" {
+      OutlineSize 3
+     }
     }
     TextWidgetClass "{60C53C730A2272FD}" {
      Name "bearing"
@@ -42,6 +45,9 @@ FrameWidgetClass {
      Text "000"
      "Horizontal Alignment" Center
      "No Localization" 1
+     FontProperties FontProperties "{60F22EF68864E71D}" {
+      OutlineSize 3
+     }
     }
    }
   }

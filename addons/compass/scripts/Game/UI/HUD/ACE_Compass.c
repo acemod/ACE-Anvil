@@ -35,6 +35,13 @@ class ACE_Compass : SCR_InfoDisplay
 		FrameSlot.SetPos(m_wRoot.FindWidget("compassFrame"), screenPos[0], screenPos[1]);
 	}
 	
+	override protected void OnShownFinished(Widget w, float targetOpacity, WidgetAnimationOpacity anim = null)
+	{
+		// fix the bug where HUD-reappears if fade-in finishes after hud was hidden (quick hud toggles)
+		if (!m_bShown && targetOpacity > 0)
+			Show(false);
+	}
+	
 	void UpdateBearing(float needleAngle)
 	{
 		float bearing = needleAngle;

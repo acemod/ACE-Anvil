@@ -64,7 +64,7 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 			bearing = 0;
 		
 		m_wBearing.SetText(bearing.ToString(3, 0));
-		m_wCardinal.SetText("");
+		m_wCardinal.SetText(ACE_CompassTools.GetCardinalFromBearing(bearing));
 	}
 	
 	//------------------------------------------------------------------------------------------------

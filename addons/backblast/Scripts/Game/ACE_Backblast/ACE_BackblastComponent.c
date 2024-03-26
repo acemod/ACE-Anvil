@@ -61,13 +61,10 @@ class ACE_BackblastComponent : ScriptComponent
 		};
 		origin += minBounds;
 
-		vector matrix[4];
-		weaponEntity.GetWorldTransform(matrix);
-
-		origin = origin.Multiply4(matrix);
-
-		AimingComponent aimingComponent = AimingComponent.Cast(GetOwner().FindComponent(AimingComponent));
-		vector weaponDir = aimingComponent.GetAimingDirectionWorld();
+		vector transform[4];
+		weaponEntity.GetWorldTransform(transform);
+		origin = origin.Multiply4(transform);
+		vector weaponDir = transform[2];
 		Backblast(origin, weaponDir);
 	}
 

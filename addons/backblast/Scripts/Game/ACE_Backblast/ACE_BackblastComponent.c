@@ -109,8 +109,18 @@ class ACE_BackblastComponent : ScriptComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	static float CalcDamage(vector origin, vector blastDir, vector impact)
+	static float CalcDamage(vector origin, vector blastDir, vector impact, array<IEntity> excludedEntities = null)
 	{
+		// Check if there's no obstacle in the path
+		TraceParam trace = new TraceParam();
+		trace.Flags = TraceFlags.ENTS | TraceFlags.WORLD | TraceFlags.OCEAN;
+		trace.Start = origin;
+		trace.End = impact;
+		trace.ExcludeArray = excludedEntities;
+		
+		if (GetGame().GetWorld().TraceMove(trace, null) < 0.999)
+			return 0;
+		
 		vector dirVector = impact - origin;
 		float distance = dirVector.Length();
 		float dotProduct = vector.Dot(dirVector, blastDir);

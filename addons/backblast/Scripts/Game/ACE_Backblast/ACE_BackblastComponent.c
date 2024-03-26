@@ -18,7 +18,8 @@ class ACE_BackblastComponent : ScriptComponent
 	private const float OUTER_RANGE = 10;
 	private const float MAX_DAMAGE = 200;
 	private const float CONE_DEG = 90;
-
+	private const float BLEEDING_FACTOR = 2.0; //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
+	
 	//------------------------------------------------------------------------------------------------
 	protected override void OnPostInit(IEntity owner)
 	{
@@ -72,33 +73,54 @@ class ACE_BackblastComponent : ScriptComponent
 	private void Backblast(vector origin, vector weaponDir)
 	{
 		ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(GetOwner());
-		GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE, query.QueryCallback, null, EQueryEntitiesFlags.ALL);
+		GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE, query.QueryCallback);
 		array<SCR_ChimeraCharacter> affectedEntities = query.GetAffectedEntities();
 
-		if (affectedEntities.Count() == 0)
+		if (affectedEntities.IsEmpty())
 			return;
 
 		foreach (SCR_ChimeraCharacter character : affectedEntities)
 		{
-			BaseDamageContext damageContext = new BaseDamageContext();
-			damageContext.hitPosition = character.AimingPosition();
-			damageContext.damageValue = CalcDamage(origin, weaponDir * -1, damageContext.hitPosition);
-
-			if (damageContext.damageValue <= 0)
-				continue;
-
-			damageContext.hitDirection = origin - damageContext.hitPosition;
-			damageContext.hitNormal = damageContext.hitDirection;
-
 			SCR_DamageManagerComponent damageManager = character.GetDamageManager();
 			if (!damageManager)
 				continue;
+			
+			vector charOrigin = character.GetOrigin();
+			
+			Animation anim = character.GetAnimation();
+			if (!anim)
+				continue;
+			
+			array<HitZone> hitZones = {};
+			damageManager.GetPhysicalHitZones(hitZones);
 
-			damageContext.damageType = EDamageType.EXPLOSIVE;
-			damageContext.hitEntity = character;
-			damageContext.struckHitZone = damageManager.GetDefaultHitZone();
-			damageContext.instigator = Instigator.CreateInstigator(GetOwner());
-			damageManager.HandleDamage(damageContext);
+			foreach (HitZone hitZone : hitZones)
+			{
+				array<int> nodes = {};
+				hitZone.GetColliderIDs(nodes);
+				if (nodes.IsEmpty())
+					continue;
+				
+				vector nodeTransform[4];
+				anim.GetBoneMatrix(nodes[0], nodeTransform);
+				vector hitPosition = charOrigin + nodeTransform[3];
+				float damage = CalcDamage(origin, -weaponDir, hitPosition, {GetOwner().GetRootParent(), character});
+	
+				if (damage <= 0)
+					continue;
+	
+				hitZone.HandleDamage(damage, EDamageType.EXPLOSIVE, GetOwner());
+				
+				// Probability of bleeding scales with percent damage
+				if (Math.RandomFloatInclusive(0, 1) > damage/MAX_DAMAGE)
+					continue;
+				
+				SCR_CharacterHitZone charHitZone = SCR_CharacterHitZone.Cast(hitZone);
+				if (!charHitZone)
+					continue;
+				
+				charHitZone.AddBleeding(nodes[0]);
+			};
 		}
 
 		if (m_bDebugModeEnabled)

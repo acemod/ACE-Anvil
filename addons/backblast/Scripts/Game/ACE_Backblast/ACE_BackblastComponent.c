@@ -16,7 +16,7 @@ class ACE_BackblastComponent : ScriptComponent
 
 	private const float INNER_RANGE = 15;
 	private const float OUTER_RANGE = 10;
-	private const float MAX_DAMAGE = 200;
+	private const float MAX_DAMAGE = 25;
 	private const float CONE_DEG = 90;
 	private const float BLEEDING_FACTOR = 2.0; //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
 	

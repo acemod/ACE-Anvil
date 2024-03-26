@@ -42,7 +42,11 @@ class ACE_BackblastComponent : ScriptComponent
 
 		vector minBounds;
 		vector maxBounds;
+		
 		IEntity weaponEntity = weapon.GetOwner();
+		if (!weaponEntity)
+			return;
+		
 		weaponEntity.GetBounds(minBounds, maxBounds);
 
 		if (m_bDebugModeEnabled)

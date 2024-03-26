@@ -12,13 +12,13 @@ class ACE_BackblastComponentClass : ScriptComponentClass
 class ACE_BackblastComponent : ScriptComponent
 {
 	[Attribute(defvalue: "0", desc: "Enable debug mode")]
-	private bool m_bDebugModeEnabled;
+	protected bool m_bDebugModeEnabled;
 
-	private const float INNER_RANGE = 15;
-	private const float OUTER_RANGE = 10;
-	private const float MAX_DAMAGE = 25;
-	private const float CONE_DEG = 90;
-	private const float BLEEDING_FACTOR = 2.0; //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
+	protected const float INNER_RANGE = 15;
+	protected const float OUTER_RANGE = 10;
+	protected const float MAX_DAMAGE = 25;
+	protected const float CONE_DEG = 90;
+	protected const float BLEEDING_FACTOR = 2.0; //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
 	
 	//------------------------------------------------------------------------------------------------
 	protected override void OnPostInit(IEntity owner)
@@ -36,7 +36,7 @@ class ACE_BackblastComponent : ScriptComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	private void OnProjectileShot(int playerID, BaseWeaponComponent weapon, IEntity entity)
+	protected void OnProjectileShot(int playerID, BaseWeaponComponent weapon, IEntity entity)
 	{
 		if (weapon.GetWeaponType() != EWeaponType.WT_ROCKETLAUNCHER)
 			return;
@@ -70,7 +70,7 @@ class ACE_BackblastComponent : ScriptComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	private void Backblast(vector origin, vector weaponDir)
+	protected void Backblast(vector origin, vector weaponDir)
 	{
 		ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(GetOwner());
 		GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE, query.QueryCallback);
@@ -191,7 +191,7 @@ class ACE_BackblastQueryCollector
 //------------------------------------------------------------------------------------------------
 class ACE_BackblastDamageFunction : ACE_DrawingDamageFunction
 {
-	private vector m_vBlastDirection;
+	protected vector m_vBlastDirection;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_BackblastDamageFunction(vector blastDirection)

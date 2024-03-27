@@ -57,7 +57,15 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 		{
 			failReason = SCR_EConsumableFailReason.IS_BLEEDING;
 			return false;
-		};
+		}
+		
+		// Cannot be applied if critically injured
+		// We also have to check if the character is still healable
+		if (damageManager.ACE_Medical_HasCriticalHealth() && damageManager.ACE_Medical_CanBeHealed())
+		{
+			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
+			return false;
+		}
 		
 		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
 		if (charCtrl.GetLifeState() == ECharacterLifeState.INCAPACITATED)

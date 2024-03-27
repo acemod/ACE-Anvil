@@ -17,6 +17,14 @@ StringTable {
    Author "kexanone"
    LastChanged "kexanone"
   }
+  CustomStringTableItem "{60F61507D00761D0}" {
+   Id "ACE_Medical-FailReason_TooInjured"
+   Target_en_us "Too injured"
+   Target_de_de "Zu verletzt"
+   Modified 1626752371
+   Author "kexanone"
+   LastChanged "kexanone"
+  }
   CustomStringTableItem "{60CF45A17B6601E3}" {
    Id "ACE_Medical-InfoWidget_Epinephrine"
    Target_en_us "Increases wake-up chance"

@@ -7,6 +7,9 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction
 	[Attribute(defvalue: "#AR-Inventory_Bleeding", desc: "String for when target is bleeding")]
 	protected LocalizedString m_sIsBleeding;
 	
+	[Attribute(defvalue: "#ACE_Medical-FailReason_TooInjured", desc: "String for when target is too damaged")]
+	protected LocalizedString m_sTooDamaged;
+	
 	//------------------------------------------------------------------------------------------------
 	//! Same as in SCR_MorphineUserAction, but handle case where target is bleeding
 	override bool CanBePerformedScript(IEntity user)
@@ -29,6 +32,8 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction
 				SetCannotPerformReason(m_sAlreadyApplied);
 			else if (reason == SCR_EConsumableFailReason.IS_BLEEDING)
 				SetCannotPerformReason(m_sIsBleeding);
+			else if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED)
+				SetCannotPerformReason(m_sTooDamaged);
 			
 			return false;
 		}

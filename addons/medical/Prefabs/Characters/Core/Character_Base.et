@@ -5,7 +5,7 @@ SCR_ChimeraCharacter {
    additionalActions {
     ACE_Medical_EpinephrineUserAction "{60CF45A52131AD5A}" {
      ParentContextList {
-      "LeftArm" "RightArm"
+      "LeftArm" "RightArm" "LeftLeg" "RightLeg"
      }
      UIInfo UIInfo "{60CF45A53578811D}" {
       Name "#ACE_Medical-EpinephrineInjectionAction"

@@ -2,12 +2,12 @@
 [BaseContainerProps()]
 class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 {
-	[Attribute(defvalue: "10", desc: "Regeneration speed of related hitzone when consuming this item", category: "Regeneration")]
+	[Attribute(defvalue: "20", desc: "Regeneration speed of related hitzone when consuming this item", category: "Regeneration")]
 	protected float m_fItemRegenerationSpeedDPS;
 
 	[Attribute(defvalue: "10",  desc: "Regeneration duration of related hitzone when consuming this item in seconds", category: "Regeneration")]
 	protected float m_fItemRegenerationDurationS;	
-
+	
 	//------------------------------------------------------------------------------------------------
 	//! Heal resilience hit zone
 	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)

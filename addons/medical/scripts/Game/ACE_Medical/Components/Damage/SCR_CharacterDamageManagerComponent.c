@@ -12,7 +12,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected bool m_bACE_Medical_SecondChanceOnHeadEnabled = false;
 	protected bool m_bACE_Medical_SecondChanceTriggered = false;
 	
-	protected const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT = 1000;
+	protected const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
 
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize ACE medical on a character damage manager
@@ -54,7 +54,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			// Schedule removal of second chance when falling unconscious
 			case ECharacterLifeState.INCAPACITATED:
 			{
-				GetGame().GetCallqueue().CallLater(ACE_Medical_EnableSecondChance, ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT, false, false);
+				GetGame().GetCallqueue().CallLater(ACE_Medical_EnableSecondChance, ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS, false, false);
 				break;
 			}
 			

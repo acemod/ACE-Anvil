@@ -4,6 +4,9 @@ SCR_ChimeraCharacter {
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
     SCR_MorphineUserAction "{5A5CCAE2AF3D6445}" {
+     ParentContextList + {
+      "LeftLeg" "RightLeg"
+     }
      m_sNotDamaged "#ACE_Medical-FailReason_NoPain"
     }
    }

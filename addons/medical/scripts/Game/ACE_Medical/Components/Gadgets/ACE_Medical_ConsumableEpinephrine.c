@@ -50,7 +50,7 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;
-		};
+		}
 		
 		// Cannot be applied while bleeding
 		if (damageManager.IsDamagedOverTime(EDamageType.BLEEDING))
@@ -63,7 +63,7 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 		if (charCtrl.GetLifeState() == ECharacterLifeState.INCAPACITATED)
 			return true;
 
-		failReason = SCR_EConsumableFailReason.UNDAMAGED;
+		failReason = SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED;
 		return false;
 	}
 

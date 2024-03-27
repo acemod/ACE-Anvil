@@ -11,5 +11,7 @@ MetaFileClass {
   }
   CONFResourceClass HEADLESS : PC {
   }
+  CONFResourceClass PS5 : PC {
+  }
  }
 }

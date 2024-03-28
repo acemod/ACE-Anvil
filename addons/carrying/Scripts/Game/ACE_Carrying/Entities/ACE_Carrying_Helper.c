@@ -175,7 +175,7 @@ class ACE_Carrying_Helper : GenericEntity
 		compartmentAccess.MoveOutVehicle(-1, target_transform);
 		
 		// Broadcast teleport on network
-		RplComponent carriedRpl =  RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
+		RplComponent carriedRpl = RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
 		if (carriedRpl)
 			carriedRpl.ForceNodeMovement(GetOrigin());
 	}

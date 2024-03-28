@@ -53,7 +53,7 @@ class ACE_SettingsConfig
 	
 	//------------------------------------------------------------------------------------------------
 	//! Set settings for a mod
-	void SetModSettings(ACE_ModSettings settings)
+	void SetModSettings(notnull ACE_ModSettings settings)
 	{
 		if (!m_mModSettingsMap)
 			InitMap();

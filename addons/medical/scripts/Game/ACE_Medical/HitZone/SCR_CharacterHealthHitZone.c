@@ -14,6 +14,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
+	//! Calculates the amount of damage the health hit zone will receive
 	//! Change damage calculation while second chance is enabled
 	override float ComputeEffectiveDamage(notnull BaseDamageContext damageContext, bool isDOT)
 	{
@@ -24,7 +25,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Computes the effective damage while the character has second chance enabled
+	//! Computes the damage the health hit zone receives while the character has second chance enabled
 	//! Ensures that the hit zone health can never drop below ACE_MEDICAL_SECOND_CHANCE_MIN_HEALTH
 	//! Triggers second chance if damage had to be rescaled
 	protected float ACE_Medical_ComputeSecondChanceEffectiveDamage(notnull BaseDamageContext damageContext, bool isDOT)

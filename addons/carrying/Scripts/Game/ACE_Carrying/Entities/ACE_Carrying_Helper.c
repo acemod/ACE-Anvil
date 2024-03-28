@@ -148,7 +148,7 @@ class ACE_Carrying_Helper : GenericEntity
 			if (!carriedController)
 				return;
 		
-			carriedController.m_OnLifeStateChanged.Insert(OnCarriedLifeStateChanged);
+			carriedController.m_OnLifeStateChanged.Remove(OnCarriedLifeStateChanged);
 		}
 	}
 	

@@ -19,7 +19,7 @@ class ACE_Carrying_Helper : GenericEntity
 	//! Start <carrier> to carry the specified <carried>
 	//! Creates an instance of the helper compartment, attaches it to the <carrier> and moves the <carried>
 	//! in the compartment
-	static void Carry(IEntity carrier, IEntity carried)
+	static void Carry(notnull IEntity carrier, notnull IEntity carried)
 	{
 		ACE_Carrying_Helper helper = ACE_Carrying_Helper.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
 		helper.m_pCarrier = carrier;
@@ -101,7 +101,7 @@ class ACE_Carrying_Helper : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	//! Release the carried player by passing the carrier
 	//! Calls Release method on helper compartment entity
-	static void ReleaseFromCarrier(IEntity carrier)
+	static void ReleaseFromCarrier(notnull IEntity carrier)
 	{
 		ACE_Carrying_Helper helper = GetHelperFromCarrier(carrier);
 		
@@ -114,7 +114,7 @@ class ACE_Carrying_Helper : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	//! Release the carried player
 	//! Calls Release method on helper compartment entity
-	static void ReleaseCarried(IEntity carried)
+	static void ReleaseCarried(notnull IEntity carried)
 	{
 		ACE_Carrying_Helper helper = GetHelperFromCarried(carried);
 		
@@ -226,21 +226,21 @@ class ACE_Carrying_Helper : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! True if the given player is currently a carrier
-	static bool IsCarrier(IEntity carrier)
+	static bool IsCarrier(notnull IEntity carrier)
 	{
 		return GetHelperFromCarrier(carrier);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! True if the given player is currently carried by another player
-	static bool IsCarried(IEntity carried)
+	static bool IsCarried(notnull IEntity carried)
 	{
 		return GetHelperFromCarried(carried);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	//! Get the player that is carried by the given carrier
-	static IEntity GetCarried(IEntity carrier)
+	static IEntity GetCarried(notnull IEntity carrier)
 	{
 		ACE_Carrying_Helper helper = GetHelperFromCarrier(carrier);
 		if (!helper)
@@ -251,7 +251,7 @@ class ACE_Carrying_Helper : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Get the carrier that carries the given player
-	static IEntity GetCarrier(IEntity carried)
+	static IEntity GetCarrier(notnull IEntity carried)
 	{
 		ACE_Carrying_Helper helper = GetHelperFromCarried(carried);
 		if (!helper)
@@ -262,11 +262,8 @@ class ACE_Carrying_Helper : GenericEntity
 
 	//------------------------------------------------------------------------------------------------
 	//! Get the instance of the helper compartment entity for the given carrier
-	protected static ACE_Carrying_Helper GetHelperFromCarrier(IEntity carrier)
+	protected static ACE_Carrying_Helper GetHelperFromCarrier(notnull IEntity carrier)
 	{
-		if (!carrier)
-			return null;
-		
 		ACE_Carrying_Helper helper;
 		IEntity child = carrier.GetChildren();
 		
@@ -285,11 +282,8 @@ class ACE_Carrying_Helper : GenericEntity
 
 	//------------------------------------------------------------------------------------------------
 	//! Get the instance of the helper compartment entity for the given carried player
-	protected static ACE_Carrying_Helper GetHelperFromCarried(IEntity carried)
+	protected static ACE_Carrying_Helper GetHelperFromCarried(notnull IEntity carried)
 	{
-		if (!carried)
-			return null;
-		
 		return ACE_Carrying_Helper.Cast(carried.GetParent());
 	}
 }

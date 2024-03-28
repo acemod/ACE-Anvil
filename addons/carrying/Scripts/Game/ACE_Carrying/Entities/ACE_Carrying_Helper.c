@@ -192,7 +192,7 @@ class ACE_Carrying_Helper : GenericEntity
 			if (compartmentAccess)
 				compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
 			
-			RplComponent carriedRpl =  RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
+			RplComponent carriedRpl = RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
 			carriedId = carriedRpl.Id();
 		};
 		

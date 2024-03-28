@@ -139,7 +139,7 @@ class ACE_Carrying_Helper : GenericEntity
 			if (!carrierController)
 				return;
 			
-			carrierController.m_OnLifeStateChanged.Insert(OnCarrierLifeStateChanged);
+			carrierController.m_OnLifeStateChanged.Remove(OnCarrierLifeStateChanged);
 		}
 
 		if (m_pCarried)

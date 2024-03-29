@@ -8,7 +8,7 @@ modded class ACE_MissionHeaderSettings
 	
 	//------------------------------------------------------------------------------------------------
 	//! Applies settings from mission header to config
-	override void ApplyToSettingsConfig(ACE_SettingsConfig config)
+	override void ApplyToSettingsConfig(notnull ACE_SettingsConfig config)
 	{
 		if (m_ACE_Medical_Settings)
 			config.SetModSettings(m_ACE_Medical_Settings);

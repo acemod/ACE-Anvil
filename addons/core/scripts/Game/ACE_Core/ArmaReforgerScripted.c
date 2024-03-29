@@ -9,7 +9,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 	//! Load settings when starting the game for the first time
 	override bool OnGameStart()
 	{
-		if (!m_ACE_SettingsConfig)
+		if ((!Replication.IsRunning() || Replication.IsServer()) && !m_ACE_SettingsConfig)
 		{
 			// Load settings from config file
 			m_ACE_SettingsConfig = SCR_ConfigHelperT<ACE_SettingsConfig>.GetConfigObject("{A305FEB7400A2965}Configs/ACE/Settings.conf");

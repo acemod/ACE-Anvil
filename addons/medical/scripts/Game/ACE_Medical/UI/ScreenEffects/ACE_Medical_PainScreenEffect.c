@@ -101,7 +101,7 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 		
 		float effectStrength = 0;
 		
-		// Pain can only be fealt when conscious
+		// Pain can only be felt when conscious
 		if (!m_pCharacterCtrl.IsUnconscious())
 			effectStrength = m_pDamageManager.ACE_Medical_GetPainIntensity();
 				

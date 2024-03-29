@@ -20,7 +20,7 @@ class ACE_SettingsHelper
 {
 	//------------------------------------------------------------------------------------------------
 	//! Overrides settings for a mod
-	static void SetModSettings(ACE_ModSettings settings)
+	static void SetModSettings(notnull ACE_ModSettings settings)
 	{
 		ACE_SettingsConfig config = ArmaReforgerScripted.ACE_GetSettingsConfig();
 		if (config)

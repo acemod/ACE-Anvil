@@ -1,0 +1,15 @@
+MetaFileClass {
+ Name "{5B2FD067D70C1E8F}Prefabs/Items/Medicine/MorphineInjection_01/EpinephrineInjection_01.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

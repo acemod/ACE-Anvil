@@ -1,0 +1,22 @@
+SCR_PlayerController {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
+   InfoDisplays {
+    SCR_ScreenEffectsManager "{5AF2CE6B10209B7D}" {
+     InfoDisplays {
+      ACE_Medical_PainScreenEffect "{5E101C4E0A1569CB}" {
+       m_LayoutPath "{BFBCF7C2CF2E36EE}UI/layouts/HUD/ScreenEffects/ScreenEffects.layout"
+       m_eLayer BACKGROUND
+      }
+     }
+     m_aHandlers {
+      SCR_InfoDisplayLayerHandler "{5E101C4E2CAED6E8}" {
+       m_sLayerName "Slot_ScreenEffects"
+      }
+     }
+    }
+   }
+  }
+ }
+}

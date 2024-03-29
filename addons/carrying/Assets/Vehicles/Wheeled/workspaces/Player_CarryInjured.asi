@@ -1,0 +1,79 @@
+AnimSetInstanceSource {
+ Template "{7F633C1C12A72901}Assets/Vehicles/Wheeled/workspaces/Vehicles_Wheeled_Template.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Vehicle.CoDriver.Idle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Driver.Idle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Gunner.Idle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerL.Idle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerR.Idle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.UniqueSeat.Idle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.CoDriver.UnconsciousIdle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Driver.UnconsciousIdle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Gunner.UnconsciousIdle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerL.UnconsciousIdle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerR.UnconsciousIdle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.UniqueSeat.UnconsciousIdle" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.CoDriver.UnconsciousIn" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Driver.UnconsciousIn" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Gunner.UnconsciousIn" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerL.UnconsciousIn" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerR.UnconsciousIn" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.UniqueSeat.UnconsciousIn" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.CoDriver.UnconsciousOut" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Driver.UnconsciousOut" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Gunner.UnconsciousOut" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerL.UnconsciousOut" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerR.UnconsciousOut" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.UniqueSeat.UnconsciousOut" {
+   Resource "{982832E0FF63F1EB}anims/InjuredCarry/p_erc_pose_injuredcarry.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{5DC3656B0EF64C8C}" {
+ }
+}

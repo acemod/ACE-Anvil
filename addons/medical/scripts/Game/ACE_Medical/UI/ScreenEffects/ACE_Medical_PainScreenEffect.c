@@ -138,7 +138,7 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 	//! Clear pain effect over time
 	override void ClearEffects()
 	{
-		m_bHasPainEffect = 0;
+		m_bHasPainEffect = false;
 		
 		if (m_wWhiteFlash)
 		{

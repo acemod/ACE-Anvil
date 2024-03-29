@@ -1,0 +1,23 @@
+GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01_base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Description "#ACE_Medical-Item_Morphine_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{5E04DAAE66DE1E77}" {
+       Name "#ACE_Medical-InfoWidget_Morphine"
+      }
+     }
+    }
+   }
+  }
+  SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
+   m_ConsumableEffect ACE_Medical_ConsumableMorphine "{59E68C74C1F3910E}" {
+    m_fItemRegenerationSpeedDPS 5
+    m_fItemRegenerationDurationS 60
+   }
+  }
+ }
+}

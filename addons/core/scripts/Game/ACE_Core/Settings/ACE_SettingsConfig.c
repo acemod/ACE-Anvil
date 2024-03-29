@@ -4,26 +4,39 @@
 class ACE_SettingsConfig
 {
 	[Attribute(desc: "Definitions of settings for all mods")]
-	protected ref array<ref ACE_ModSettings> m_aModSettings;
-	protected ref map<typename,ACE_ModSettings> m_mModSettingsMap;
+	protected ref array<ref ACE_ModSettings> m_aInitialModSettings;
+	protected ref map<typename,ref ACE_ModSettings> m_mModSettingsMap;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Construct map for faster look-up of settings
+	//! We can't use maps as attribute, so we initialize the settings with an array
 	protected void InitMap()
 	{
-		m_mModSettingsMap = new map<typename,ACE_ModSettings>();
+		m_mModSettingsMap = new map<typename,ref ACE_ModSettings>();
 		
-		foreach (ACE_ModSettings settings : m_aModSettings)
+		foreach (ACE_ModSettings settings : m_aInitialModSettings)
 		{
 			m_mModSettingsMap[settings.Type()] = settings;
-		};
+		}
+		
+		m_aInitialModSettings = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Return settings for all categories
-	array<ref ACE_ModSettings> GetAllModSettings()
+	array<ACE_ModSettings> GetAllModSettings()
 	{
-		return m_aModSettings;
+		if (!m_mModSettingsMap)
+			InitMap();
+		
+		array<ACE_ModSettings> output = {};
+		
+		foreach (ACE_ModSettings settings : m_mModSettingsMap)
+		{
+			output.Insert(settings);
+		}
+		
+		return output;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -40,7 +53,7 @@ class ACE_SettingsConfig
 	
 	//------------------------------------------------------------------------------------------------
 	//! Set settings for a mod
-	void SetModSettings(ACE_ModSettings settings)
+	void SetModSettings(notnull ACE_ModSettings settings)
 	{
 		if (!m_mModSettingsMap)
 			InitMap();

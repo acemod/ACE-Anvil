@@ -61,7 +61,7 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 		// Keep track of changes in pain
 		m_pPainHZ.GetOnDamageStateChanged().Insert(OnPainStateChanged);
 		
-		// In case player started PAIN before invokers were established, check if already PAIN
+		// In case player started PAIN before invokers were established, check if already in PAIN
 		if (m_pDamageManager.ACE_Medical_IsInPain())
 			OnPainStateChanged(m_pPainHZ);
 	}

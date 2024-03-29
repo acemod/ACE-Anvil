@@ -1,0 +1,65 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 2057
+   name "SOUND_E_ACE_TRENCH_BUILD"
+   version 5
+   tl -109.191 -113.316
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 3076
+       port 65
+      }
+     }
+    }
+   }
+   outState 6155
+   outStatePort 26631
+  }
+ }
+ mixers {
+  MixerClass {
+   id 6155
+   name "OutputState"
+   version 4
+   tl 126.364 -111.818
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 26631
+     links {
+      ConnectionClass connection {
+       id 2057
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    67108864
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "ANM_Footsteps" "ANM_Voice" "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialogue" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialogue_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct"
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 3076
+   name "Build"
+   version 7
+   tl -349.893 -112.85
+   Volume -11
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{2CFACE474D360221}Sounds/Editor/BaseBuilding/Samples/Editor_Campaign_Build.wav"
+    }
+   }
+  }
+ }
+ version 1
+}

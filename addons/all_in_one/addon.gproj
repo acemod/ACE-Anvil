@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_AllInOne"
+ GUID "60C4E0B49618CC62"
+ TITLE "ACE - All in One"
+ Dependencies {
+  "60C4C12DAE90727B" "60C4CE4888FF4621" "58D0FB3206B6F859"
+ }
+}

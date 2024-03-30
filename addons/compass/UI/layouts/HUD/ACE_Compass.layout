@@ -1,0 +1,55 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  FrameWidgetClass "{60C8237D0E72FF67}" {
+   Name "compassFrame"
+   Slot FrameWidgetSlot "{60C8237D0E72FE82}" {
+    OffsetLeft 0
+    OffsetTop 0
+    OffsetRight -100
+    OffsetBottom -30
+    SizeToContent 1
+   }
+   {
+    TextWidgetClass "{60C53C757B22F82C}" {
+     Name "cardinal"
+     Slot FrameWidgetSlot "{60C53C730A227203}" {
+      OffsetLeft 0
+      PositionY 30
+      OffsetTop 30
+      SizeX 100
+      OffsetRight -100
+      SizeY 30
+      OffsetBottom -60
+     }
+     Text "N"
+     "Font Size" 18
+     "Min Font Size" 12
+     "Horizontal Alignment" Center
+     "No Localization" 1
+     FontProperties FontProperties "{60F22EF6B21F0220}" {
+      OutlineSize 3
+     }
+    }
+    TextWidgetClass "{60C53C730A2272FD}" {
+     Name "bearing"
+     Slot FrameWidgetSlot "{60C53C730A227203}" {
+      OffsetLeft 0
+      OffsetTop 0
+      SizeX 100
+      OffsetRight -100
+      SizeY 30
+      OffsetBottom -30
+     }
+     style debugUI
+     Text "000"
+     "Horizontal Alignment" Center
+     "No Localization" 1
+     FontProperties FontProperties "{60F22EF68864E71D}" {
+      OutlineSize 3
+     }
+    }
+   }
+  }
+ }
+}

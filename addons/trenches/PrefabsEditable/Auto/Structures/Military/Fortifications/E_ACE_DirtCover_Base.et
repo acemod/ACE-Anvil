@@ -1,0 +1,33 @@
+GenericEntity {
+ ID "60ED25685B736E4E"
+ components {
+  MeshObject "{60ED256B7FE9D171}" {
+   ClutterOccluder 1
+  }
+  RigidBody "{60ED256B781625CF}" {
+   ModelGeometry 1
+   Static 1
+  }
+  SCR_EditableEntityComponent "{60ED256B631A65DC}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{60ED2568D69DDD17}" {
+    m_aAutoLabels {
+     108 1 122
+    }
+   }
+   m_bAutoRegister ALWAYS
+   m_Flags 769
+  }
+  SCR_PreviewEntityComponent "{60ED256B76DEE153}" {
+   m_aEntries {
+    SCR_BasePreviewEntry "{60ED2568E4572001}" {
+     m_iParentID -1
+     m_Shape MESH
+     m_iPivotID ""
+    }
+   }
+  }
+  RplComponent "{60ED256B410E25D6}" {
+  }
+ }
+ coords 73.21 4.679 49.31
+}

@@ -1,0 +1,10 @@
+SCR_EditorPingEntity : "{712601A9A89CA03C}PrefabsEditable/System/E_PingEntity.et" {
+ ID "530682425CCF9B38"
+ components {
+  SCR_EditableEntityComponent "{5306824254A407F1}" {
+   m_UIInfo SCR_UIInfo "{53068242364BD38E}" {
+    Icon "{EF1DC5D8093F6179}UI/Textures/Notifications/ACE_LocationPingIcon.edds"
+   }
+  }
+ }
+}

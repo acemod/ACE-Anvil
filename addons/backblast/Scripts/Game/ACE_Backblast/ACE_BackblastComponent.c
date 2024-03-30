@@ -112,7 +112,7 @@ class ACE_BackblastComponent : ScriptComponent
 				hitZone.HandleDamage(damage, EDamageType.EXPLOSIVE, GetOwner());
 				
 				// Probability of bleeding scales with percent damage
-				if (Math.RandomFloatInclusive(0, 1) > damage/MAX_DAMAGE)
+				if (Math.RandomFloatInclusive(0, 1) > BLEEDING_FACTOR * damage/MAX_DAMAGE)
 					continue;
 				
 				SCR_CharacterHitZone charHitZone = SCR_CharacterHitZone.Cast(hitZone);

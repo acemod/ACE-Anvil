@@ -12,6 +12,16 @@ MetaFileClass {
     MeshParam Object {
     }
    }
+   GeometryParams {
+    GeometryParam UBX_Object {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{63B8E1D41F2C6F98}Common/Materials/Game/rubber.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
    Common TXOCommonClass "{60FD1612120B3C34}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
    }
   }

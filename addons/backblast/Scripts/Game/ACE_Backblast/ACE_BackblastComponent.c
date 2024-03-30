@@ -174,7 +174,7 @@ class ACE_BackblastQueryCollector
 		if (entity == m_pOwner)
 			return true;
 
-		auto character = SCR_ChimeraCharacter.Cast(entity);
+		SCR_ChimeraCharacter character = SCR_ChimeraCharacter.Cast(entity);
 		if (!character)
 			return true;
 

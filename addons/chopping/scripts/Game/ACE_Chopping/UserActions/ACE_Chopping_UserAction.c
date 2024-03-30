@@ -30,8 +30,6 @@ class ACE_Chopping_UserAction : ScriptedUserAction
 			
 			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
 			int itemActionId = pAnimationComponent.BindCommand("CMD_Item_Action");
-			
-
 			ItemUseParameters params = new ItemUseParameters();
 			params.SetEntity(GetBuildingTool(pUserEntity));
 			params.SetAllowMovementDuringAction(false);

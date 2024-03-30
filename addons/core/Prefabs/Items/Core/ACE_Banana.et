@@ -31,4 +31,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    Mass 0.3
   }
  }
+ angleY 56.399
+ angleZ 90
 }

@@ -1,10 +1,34 @@
 GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
  ID "508AB2013EEE1E00"
  components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "Banana"
+     Description "Healthy potassium!"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.1
+     SizeSetupStrategy Manual
+     ItemDimensions 5 5 5
+     ItemVolume 10
+     RestingUP Right
+     RestingAdditiveOffsetLS 0.12 0 0
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{60FD2A2F79950365}" {
+      CameraDistanceToItem 0.4
+      FOV 40
+     }
+    }
+    CommonItemType "FOOD"
+   }
+  }
   MeshObject "{60FD161FC10DE78A}" {
    Object "{DBE32115FB8473C1}Assets/Items/Food/ACE_Banana.xob"
   }
   RigidBody "{60FD26C2F1F95C77}" {
+   Mass 0.3
   }
  }
 }

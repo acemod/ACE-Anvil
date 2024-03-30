@@ -1,7 +1,7 @@
 GameProject {
  ID "ACE_Backblast"
  GUID "60E573C9B04CC408"
- TITLE "ACE - Backblast"
+ TITLE "ACE Backblast"
  Dependencies {
   "58D0FB3206B6F859" "60C4CE4888FF4621"
  }

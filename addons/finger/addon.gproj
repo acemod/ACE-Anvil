@@ -1,9 +1,9 @@
 GameProject {
  ID "ACE_Finger"
  GUID "60EE937191D4E7C7"
- TITLE "ACE - Finger"
+ TITLE "ACE Finger"
  Dependencies {
-  "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
  }
  Configurations {
   GameProjectConfig PC {

@@ -1,0 +1,7 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ACE_BackblastComponent "{5F2165F7A614BE45}" {
+  }
+ }
+}

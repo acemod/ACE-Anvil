@@ -1,0 +1,10 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  MeshObject "{60FD161FC10DE78A}" {
+   Object "{DBE32115FB8473C1}Assets/Items/Food/ACE_Banana.xob"
+  }
+  RigidBody "{60FD26C2F1F95C77}" {
+  }
+ }
+}

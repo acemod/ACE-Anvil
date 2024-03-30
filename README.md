@@ -1,14 +1,27 @@
-# ACE Anvil
+<p align="center">
+    <img src="https://github.com/acemod/ACE-Anvil/raw/master/extras/assets/logo/black/black.png#gh-light-mode-only" width="480" alt="ACE Anvil">
+    <img src="https://github.com/acemod/ACE-Anvil/raw/master/extras/assets/logo/white/white.png#gh-dark-mode-only" width="480" alt="ACE Anvil">
+</p>
 
-Open-source realism mod for Arma Reforger.
+<p align="center">
+    <a href="https://github.com/acemod/ACE-Anvil/releases/latest">
+        <img src="https://img.shields.io/github/release/acemod/ACE-Anvil.svg?style=flat-square&label=Version" alt="ACE Anvil Version">
+    </a>
+    <a href="https://github.com/acemod/ACE-Anvil/issues">
+        <img src="https://img.shields.io/github/issues-raw/acemod/ACE-Anvil.svg?style=flat-square&label=Issues" alt="ACE Anvil Issues">
+    </a>
+    <a href="https://github.com/acemod/ACE-Anvil/blob/master/LICENSE">
+        <img src="https://img.shields.io/badge/License-GPLv2-red.svg?style=flat-square" alt="ACE Anvil License">
+    </a>
+    <a href="https://acemod.org/discord">
+        <img src="https://img.shields.io/badge/Discord-Join-darkviolet.svg?style=flat-square" alt="ACE Anvil Discord">
+    </a>
+</p>
+
+**ACE Anvil** is an experimental realism mod for Arma Reforger, the first Arma game running on the Enfusion engine.
 
 
 ## FAQ
-
-### When will ACE Anvil be released?
-
-We will release an initial version of ACE Anvil once it provides a significant impact on Arma Reforgers gameplay. We cannot provide a timeframe, since this depends on how many people are willing to contribute and how hard it will be to implement the features we want to implement.
-
 
 ### Will ACE Anvil port everything from ACE3 to Arma Reforger?
 

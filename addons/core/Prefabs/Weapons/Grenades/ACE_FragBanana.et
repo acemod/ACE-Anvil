@@ -4,8 +4,8 @@ GenericEntity : "{E8F00BF730225B00}Prefabs/Weapons/Grenades/Grenade_M67.et" {
   InventoryItemComponent "{51FAA3E3CF6F087A}" {
    Attributes SCR_ItemAttributeCollection "{51FAA3E3C2D19BD4}" {
     ItemDisplayName WeaponUIInfo "{56CA88CA3C5E4779}" {
-     Name "Frag Banana"
-     Description "Explosive Potassium!"
+     Name "#ACE-Weapon_FragBanana_Name"
+     Description "#ACE-Weapon_FragBanana_Description"
     }
     ItemPhysAttributes ItemPhysicalAttributes "{56CA88CA367A150F}" {
      Weight 0.3

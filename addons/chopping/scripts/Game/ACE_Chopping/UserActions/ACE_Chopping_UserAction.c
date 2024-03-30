@@ -20,6 +20,8 @@ class ACE_Chopping_UserAction : ScriptedUserAction
 	//! Start E-tool animation
 	override void OnActionStart(IEntity pUserEntity)
 	{
+		super.OnActionStart(pUserEntity);
+		
 		ChimeraCharacter character = ChimeraCharacter.Cast(pUserEntity);
 		if (!character)
 			return;
@@ -41,14 +43,14 @@ class ACE_Chopping_UserAction : ScriptedUserAction
 		}
 		
 		m_pUser = pUserEntity;
-		
-		super.OnActionStart(pUserEntity);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! End E-tool animation
 	override void OnActionCanceled(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		super.OnActionCanceled(pOwnerEntity, pUserEntity);
+		
 		ChimeraCharacter character = ChimeraCharacter.Cast(pUserEntity);
 		if (!character)
 			return;

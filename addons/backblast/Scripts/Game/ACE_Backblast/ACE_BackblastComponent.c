@@ -125,7 +125,7 @@ class ACE_BackblastComponent : ScriptComponent
 
 		if (m_bDebugModeEnabled)
 		{
-			ACE_BackblastDamageFunction damageFunction = new ACE_BackblastDamageFunction(weaponDir * -1);
+			ACE_BackblastDrawDamageFunction damageFunction = new ACE_BackblastDrawDamageFunction(weaponDir * -1);
 			ACE_Drawing.DrawDamageSphere(origin, 1000, damageFunction);
 		}
 	}
@@ -189,12 +189,12 @@ class ACE_BackblastQueryCollector
 }
 
 //------------------------------------------------------------------------------------------------
-class ACE_BackblastDamageFunction : ACE_DrawingDamageFunction
+class ACE_BackblastDrawDamageFunction : ACE_DrawingDamageFunction
 {
 	protected vector m_vBlastDirection;
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_BackblastDamageFunction(vector blastDirection)
+	void ACE_BackblastDrawDamageFunction(vector blastDirection)
 	{
 		m_vBlastDirection = blastDirection;
 	}

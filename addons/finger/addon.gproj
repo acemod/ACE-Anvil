@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Finger"
+ GUID "60EE937191D4E7C7"
+ TITLE "ACE - Finger"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{60EE977DC2B3CF1F}" {
+      StringTableSource "{4345D373EA2906AA}Language/ACE_Finger_localization.st"
+      Languages {
+       LanguageDefinition "{60EE977DC352DE57}" {
+        Code "cs_cz"
+        StringTableRuntime "{8EA13D28E25D2A03}Language/ACE_Finger_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{60EE977DC352DDAA}" {
+        Code "de_de"
+        StringTableRuntime "{5BDF271BF1FE3B23}Language/ACE_Finger_localization.de_de.conf"
+       }
+       LanguageDefinition "{60EE977DC352DD9A}" {
+        Code "en_us"
+        StringTableRuntime "{052FAD509B0D3E22}Language/ACE_Finger_localization.en_us.conf"
+       }
+       LanguageDefinition "{60EE977DC352DD8B}" {
+        Code "es_es"
+        StringTableRuntime "{C063E0D9750F553D}Language/ACE_Finger_localization.es_es.conf"
+       }
+       LanguageDefinition "{60EE977DC352DDFB}" {
+        Code "fr_fr"
+        StringTableRuntime "{7BCB15EE938CB63F}Language/ACE_Finger_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{60EE977DC352DDEF}" {
+        Code "it_it"
+        StringTableRuntime "{FBD79ADA3EAE35C6}Language/ACE_Finger_localization.it_it.conf"
+       }
+       LanguageDefinition "{60EE977DC352DDC3}" {
+        Code "ja_jp"
+        StringTableRuntime "{EBCC274800DF056D}Language/ACE_Finger_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{60EE977DC352DDCE}" {
+        Code "ko_kr"
+        StringTableRuntime "{4B720FE493F20652}Language/ACE_Finger_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{60EE977DC352DD3F}" {
+        Code "pl_pl"
+        StringTableRuntime "{1703A91E2D1D9A2E}Language/ACE_Finger_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{60EE977DC352DD2A}" {
+        Code "pt_br"
+        StringTableRuntime "{C27433D216E35094}Language/ACE_Finger_localization.pt_br.conf"
+       }
+       LanguageDefinition "{60EE977DC352DD1E}" {
+        Code "ru_ru"
+        StringTableRuntime "{9735277A8B9A35E2}Language/ACE_Finger_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{60EE977DC352DCFA}" {
+        Code "uk_ua"
+        StringTableRuntime "{1D6D728CE7B48BB7}Language/ACE_Finger_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{60EE977DC352DCEB}" {
+        Code "zh_cn"
+        StringTableRuntime "{C7DD1CB1DE145BAA}Language/ACE_Finger_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

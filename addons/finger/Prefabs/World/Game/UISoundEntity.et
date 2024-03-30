@@ -1,0 +1,10 @@
+SCR_UISoundEntity {
+ ID "52EAE81F331179B8"
+ components {
+  SimpleSoundComponent "{52EAE81FCD04D30C}" {
+   Filenames + {
+    "{5E4D62959BFCE553}Sounds/UI/ACE_Finger_UI.acp"
+   }
+  }
+ }
+}

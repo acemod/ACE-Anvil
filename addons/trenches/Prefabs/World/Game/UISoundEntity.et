@@ -1,0 +1,10 @@
+SCR_UISoundEntity {
+ ID "52EAE81F331179B8"
+ components {
+  SimpleSoundComponent "{52EAE81FCD04D30C}" {
+   Filenames + {
+    "{2ECE7837A2AFF81A}Sounds/UI/ACE_Trenches_UI.acp"
+   }
+  }
+ }
+}

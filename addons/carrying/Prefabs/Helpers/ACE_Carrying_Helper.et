@@ -1,0 +1,51 @@
+ACE_Carrying_Helper : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
+ ID "4B42E71698F5739C"
+ components {
+  ControllersManagerComponent "{2CD4A765B3F3A3B1}" {
+   Enabled 0
+  }
+  SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   CompartmentSlots {
+    CargoCompartmentSlot Carried {
+     PassengerPositionInfo EntitySlotInfo s1 {
+      Offset -0.1 -0.6 0.05
+     }
+     ForcedFreeLook 1
+     SeatType 1
+     DoorInfoList {
+      CompartmentDoorInfo "{5ED710990552D132}" {
+       EntryPositionInfo PointInfo "{5ED71099005CE831}" {
+       }
+      }
+     }
+     CanOccupantEquipGadget 0
+    }
+   }
+  }
+  SCR_BaseHUDComponent "{59BC55AE2A7F6FE0}" {
+   Enabled 0
+  }
+  SCR_DamageManagerComponent "{3EBB276D48AFFF41}" {
+   Enabled 0
+  }
+  SCR_VehicleCameraDataComponent "{5E0BA784A744A7CE}" {
+   m_fHeight 0.5
+   m_fDist_Max 2
+   m_fDist_Min 1
+   m_fDist_Desired 1.5
+   m_fFOV 74
+  }
+  ActionsManagerComponent "{2CD4A765B4482F53}" {
+   Enabled 0
+  }
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+    AnimInstance "{B241F1D8F215C583}Assets/Vehicles/Wheeled/workspaces/Player_CarryInjured.asi"
+   }
+  }
+  RplComponent "{63136787FD0BCE14}" {
+   "Rpl State Override" Runtime
+  }
+ }
+ coords 70.679 1 90.883
+}

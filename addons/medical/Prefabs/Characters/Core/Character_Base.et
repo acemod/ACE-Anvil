@@ -1,0 +1,24 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_EpinephrineUserAction "{60CF45A52131AD5A}" {
+     ParentContextList {
+      "LeftArm" "RightArm" "LeftLeg" "RightLeg"
+     }
+     UIInfo UIInfo "{60CF45A53578811D}" {
+      Name "#ACE_Medical-EpinephrineInjectionAction"
+     }
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE
+    }
+    SCR_MorphineUserAction "{5A5CCAE2AF3D6445}" {
+     ParentContextList + {
+      "LeftLeg" "RightLeg"
+     }
+     m_sNotDamaged "#ACE_Medical-FailReason_NoPain"
+    }
+   }
+  }
+ }
+}

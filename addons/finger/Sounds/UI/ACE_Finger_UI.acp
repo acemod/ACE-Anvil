@@ -1,0 +1,66 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 2057
+   name "SOUND_ACE_FINGER_PING"
+   version 5
+   tl 2.016 -99.016
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 3076
+       port 65
+      }
+     }
+    }
+   }
+   outState 1035
+   outStatePort 26631
+  }
+ }
+ mixers {
+  MixerClass {
+   id 1035
+   name "OutputState"
+   version 4
+   tl 250 -102
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 26631
+     links {
+      ConnectionClass connection {
+       id 2057
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    67108864
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "ANM_Footsteps" "ANM_Voice" "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialogue" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialogue_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct"
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 3076
+   name "ACE_Finger_Ping"
+   version 7
+   tl -249.016 -96.984
+   Volume -6
+   "Pitch variance" 0.15
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{0CB027CD4D78EA4B}Sounds/UI/Samples/ACE_Finger_Ping.wav"
+    }
+   }
+  }
+ }
+ version 1
+}

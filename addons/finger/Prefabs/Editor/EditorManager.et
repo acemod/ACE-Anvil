@@ -1,0 +1,16 @@
+SCR_EditorManagerEntity {
+ ID "5078954CACA87B8E"
+ components {
+  ACE_Finger_EditorComponent "{606C3698D6820F4F}" {
+   m_PointingEffects {
+    SCR_SoundEditorEffect "{606C3698D589CF12}" {
+     m_sSound "SOUND_ACE_FINGER_PING"
+    }
+    SCR_EntityEditorEffect "{606C3698D38305BE}" {
+     m_Prefab "{744FFD0C5F124A92}PrefabsEditable/System/ACE_Finger_PingEntity.et"
+     m_bNoEntities 1
+    }
+   }
+  }
+ }
+}

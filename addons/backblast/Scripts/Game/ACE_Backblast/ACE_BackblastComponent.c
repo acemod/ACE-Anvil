@@ -14,8 +14,8 @@ class ACE_BackblastComponent : ScriptComponent
 	[Attribute(defvalue: "0", desc: "Enable debug mode")]
 	protected bool m_bDebugModeEnabled;
 
-	protected const float INNER_RANGE = 15;
-	protected const float OUTER_RANGE = 10;
+	protected const float INNER_RANGE_M = 15;
+	protected const float OUTER_RANGE_M = 10;
 	protected const float MAX_DAMAGE = 25;
 	protected const float CONE_DEG = 90;
 	protected const float BLEEDING_FACTOR = 2.0; //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
@@ -73,7 +73,7 @@ class ACE_BackblastComponent : ScriptComponent
 	protected void Backblast(vector origin, vector weaponDir)
 	{
 		ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(GetOwner());
-		GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE, query.QueryCallback);
+		GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE_M, query.QueryCallback);
 		array<SCR_ChimeraCharacter> affectedEntities = query.GetAffectedEntities();
 
 		if (affectedEntities.IsEmpty())
@@ -149,7 +149,7 @@ class ACE_BackblastComponent : ScriptComponent
 		float angle = Math.Acos(dotProduct / distance) * Math.RAD2DEG;
 
 		float angleFactor = Math.Max(0, 1 - angle / (CONE_DEG / 2));
-		float angleRange = OUTER_RANGE + (INNER_RANGE - OUTER_RANGE) * angleFactor;
+		float angleRange = OUTER_RANGE_M + (INNER_RANGE_M - OUTER_RANGE_M) * angleFactor;
 		float rangeFactor = Math.Max(0, 1 - distance / angleRange);
 
 		return MAX_DAMAGE * rangeFactor * angleFactor;

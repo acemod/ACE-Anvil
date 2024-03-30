@@ -71,4 +71,4 @@ modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay
 		inputManager.RemoveActionListener("TacticalPing", EActionTrigger.DOWN, ACE_Finger_SendPingAction);
 		inputManager.RemoveActionListener("TacticalPingHold", EActionTrigger.DOWN, ACE_Finger_SendPingAction);
 	}
-};
+}

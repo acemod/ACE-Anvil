@@ -1,9 +1,9 @@
 GameProject {
  ID "ACE_Carrying"
  GUID "5DBD560C5148E1DA"
- TITLE "ACE - Carrying"
+ TITLE "ACE Carrying"
  Dependencies {
-  "60C4CE4888FF4621" "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
  }
  Configurations {
   GameProjectConfig PC {

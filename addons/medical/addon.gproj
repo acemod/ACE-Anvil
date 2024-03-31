@@ -1,9 +1,9 @@
 GameProject {
  ID "ACE_Medical"
  GUID "60C4C12DAE90727B"
- TITLE "ACE - Medical"
+ TITLE "ACE Medical"
  Dependencies {
-  "60C4CE4888FF4621" "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
  }
  Configurations {
   GameProjectConfig PC {

@@ -1,7 +1,7 @@
 GameProject {
  ID "ACE_Chopping"
  GUID "60EEAB10885B81A2"
- TITLE "ACE - Chopping"
+ TITLE "ACE Chopping"
  Dependencies {
   "58D0FB3206B6F859" "60C4CE4888FF4621"
  }

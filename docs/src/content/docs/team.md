@@ -9,8 +9,8 @@ This page lists all current maintainers for the ACE Anvil project.
 This lists all the maintainers responsible for project management and the overall direction of the ACE Anvil project.
 
 - [BaerMitUmlaut](https://github.com/BaerMitUmlaut)
-- [veteran29](https://github.com/veteran29)
 - [Kex](https://github.com/Kexanone)
+- [veteran29](https://github.com/veteran29)
 
 ### Contributors
 

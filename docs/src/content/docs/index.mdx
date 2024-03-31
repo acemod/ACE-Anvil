@@ -24,19 +24,13 @@ hero:
       variant: secondary
 ---
 
-import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
 
 <CardGrid>
-	<LinkCard
-		title="Contribute on GitHub"
-		description="Latest code, issue reports, feature requests and more."
-		href="https://github.com/acemod/ACE-Anvil"
-		target="_blank"
-	/>
-	<LinkCard
-		title="Join Public Chat"
-		description="Questions concerning ACE Anvil, development or Arma things."
-		href="https://acemod.org/discord"
-		target="_blank"
-	/>
+  <Card title="Contribute" icon="github">
+    <a href="https://github.com/acemod/ACE-Anvil" target="_blank">**Visit our GitHub**</a> for latest code, issue reports, features requests and more.
+  </Card>
+  <Card title="Chat" icon="discord">
+    <a href="https://acemod.org/discord" target="_blank">**Join our public chat**</a> for any questions concerning ACE Anvil or development of it.
+  </Card>
 </CardGrid>

@@ -25,6 +25,11 @@ export default defineConfig({
         youtube: 'https://youtube.com/c/ACE3Mod',
       },
       sidebar: [
+        //{
+        //  label: 'News',
+        //  collapsed: true,
+        //  autogenerate: { directory: 'news' },
+        //},
         {
           label: 'Guides',
           autogenerate: { directory: 'guides' },
@@ -35,12 +40,8 @@ export default defineConfig({
           //],
         },
         {
-          label: 'Features',
-          autogenerate: { directory: 'features' },
-        },
-        {
-          label: 'Reference',
-          autogenerate: { directory: 'reference' },
+          label: 'Components',
+          autogenerate: { directory: 'components' },
         },
       ],
       locales: {

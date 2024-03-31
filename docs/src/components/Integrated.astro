@@ -1,0 +1,12 @@
+---
+import { Aside } from '@astrojs/starlight/components';
+import { config } from './src/utils/config';
+
+interface Props {
+  title: string;
+  author?: string;
+}
+const { title, author = "Unknown" } = Astro.props;
+---
+
+<Aside>Originally {title} by {author}, integrated into {config.site.name}.</Aside>

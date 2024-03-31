@@ -19,15 +19,14 @@ hero:
       icon: right-arrow
       variant: primary
     - text: Read Documentation
-      link: /guides/example
+      link: /general/
       icon: open-book
       variant: secondary
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
-import AceVersion from "~/components/AceVersion.astro";
 
-<AceVersion />
+import Footer from '~/components/Footer.astro';
 
 <CardGrid>
   <Card title="Contribute" icon="github">
@@ -37,3 +36,5 @@ import AceVersion from "~/components/AceVersion.astro";
     <a href="https://acemod.org/discord" target="_blank">**Join our public chat**</a> for any questions concerning ACE Anvil or development of it.
   </Card>
 </CardGrid>
+
+<Footer />

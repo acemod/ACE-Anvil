@@ -6,7 +6,7 @@ import { config } from './src/utils/config'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://anvil.acemod.org',
+  site: config.site.url,
   integrations: [
     starlight({
       title: config.site.name,
@@ -21,12 +21,20 @@ export default defineConfig({
       ],
       social: {
         'discord': 'https://acemod.org/discord',
-        'github': 'https://github.com/acemod/ACE-Anvil',
+        'github': config.ace.githubUrl,
         'x.com': 'https://twitter.com/ACE3Mod',
         'facebook': 'https://facebook.com/ACE3Mod',
         'youtube': 'https://youtube.com/c/ACE3Mod',
       },
       sidebar: [
+        {
+          label: 'Overview',
+          items: [
+            { label: 'General Information', link: '/general/' },
+            { label: 'Frequently Asked Questions', link: '/faq/' },
+            { label: 'Team', link: '/team/' },
+          ],
+        },
         //{
         //  label: 'News',
         //  collapsed: true,
@@ -35,11 +43,6 @@ export default defineConfig({
         {
           label: 'Guides',
           autogenerate: { directory: 'guides' },
-          // items: [
-          //  // Each item here is one entry in the navigation menu.
-          //  { label: 'Example Guide', link: '/guides/example/' },
-          //  { label: 'Development', link: '/guides/development/' },
-          // ],
         },
         {
           label: 'Components',
@@ -53,7 +56,7 @@ export default defineConfig({
         },
       },
       editLink: {
-        baseUrl: 'https://github.com/acemod/ACE-Anvil/edit/master/docs/',
+        baseUrl: config.ace.githubUrl + '/edit/master/docs/',
       },
       lastUpdated: true,
     }),

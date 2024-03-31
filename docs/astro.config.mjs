@@ -2,12 +2,14 @@ import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import tailwind from '@astrojs/tailwind'
 
+import { config } from './src/utils/config'
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://anvil.acemod.org',
   integrations: [
     starlight({
-      title: 'ACE Anvil',
+      title: config.site.name,
       logo: {
         dark: './src/assets/logo-white.webp',
         light: './src/assets/logo-black.webp',
@@ -15,14 +17,14 @@ export default defineConfig({
       },
       customCss: [
         // Path to your Tailwind base styles:
-        './src/tailwind.css',
+        './src/styles/tailwind.css',
       ],
       social: {
-        discord: 'https://acemod.org/discord',
-        github: 'https://github.com/acemod/ACE-Anvil',
+        'discord': 'https://acemod.org/discord',
+        'github': 'https://github.com/acemod/ACE-Anvil',
         'x.com': 'https://twitter.com/ACE3Mod',
-        facebook: 'https://facebook.com/ACE3Mod',
-        youtube: 'https://youtube.com/c/ACE3Mod',
+        'facebook': 'https://facebook.com/ACE3Mod',
+        'youtube': 'https://youtube.com/c/ACE3Mod',
       },
       sidebar: [
         //{
@@ -33,11 +35,11 @@ export default defineConfig({
         {
           label: 'Guides',
           autogenerate: { directory: 'guides' },
-          //items: [
+          // items: [
           //  // Each item here is one entry in the navigation menu.
           //  { label: 'Example Guide', link: '/guides/example/' },
           //  { label: 'Development', link: '/guides/development/' },
-          //],
+          // ],
         },
         {
           label: 'Components',

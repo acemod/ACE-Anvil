@@ -4,9 +4,15 @@ import tailwind from '@astrojs/tailwind'
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://anvil.acemod.org',
   integrations: [
     starlight({
       title: 'ACE Anvil',
+      logo: {
+        dark: './src/assets/logo-white.webp',
+        light: './src/assets/logo-black.webp',
+        replacesTitle: true,
+      },
       customCss: [
         // Path to your Tailwind base styles:
         './src/tailwind.css',
@@ -37,6 +43,16 @@ export default defineConfig({
           autogenerate: { directory: 'reference' },
         },
       ],
+      locales: {
+        root: {
+          label: 'English',
+          lang: 'en',
+        },
+      },
+      editLink: {
+        baseUrl: 'https://github.com/acemod/ACE-Anvil/edit/master/docs/',
+      },
+      lastUpdated: true,
     }),
     tailwind({
       // Disable the default base styles:

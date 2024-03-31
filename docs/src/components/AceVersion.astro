@@ -1,0 +1,9 @@
+---
+import { config } from '~/utils/config'
+
+const version = config.ace.version
+---
+
+  <div>
+    {`ACE-Anvil v${version.major}.${version.minor}.${version.patch}`}
+  </div>

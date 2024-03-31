@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="128" height="128" viewBox="0 0 128 128">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="2325" height="731" viewBox="0 0 2325 731">
   <title>ACE ANVIL Logo</title>
 <metadata><?xpacket begin="﻿" id="W5M0MpCehiHzreSzNTczkc9d"?>
 <x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="Adobe XMP Core 9.1-c002 79.f354efc, 2023/11/09-12:40:27        ">
@@ -56,16 +56,24 @@
 <?xpacket end="w"?></metadata>
 <defs>
     <style>
-      .cls-1 {
+      .cls-1, .cls-2 {
         fill-rule: evenodd;
+      }
+
+      .cls-1 {
         filter: url(#filter);
       }
+
+      .cls-2 {
+        fill: #fff;
+      }
     </style>
-    <filter id="filter" x="3.156" y="11.563" width="121.688" height="105.063" filterUnits="userSpaceOnUse">
-      <feFlood result="flood" flood-color="#ba2619"/>
+    <filter id="filter" x="830" y="60" width="1420" height="600" filterUnits="userSpaceOnUse">
+      <feFlood result="flood" flood-color="#fff"/>
       <feComposite result="composite" operator="in" in2="SourceGraphic"/>
       <feBlend result="blend" in2="SourceGraphic"/>
     </filter>
   </defs>
-  <path id="A_no_Anvil_No_Hammer_copy_2" data-name="A no Anvil No Hammer copy 2" class="cls-1" d="M3.152,116.618V98.058l46.4-86.5h75.294V116.618H3.152Zm88.84,0L79.371,109.49v-5.672c0-13.71,23.785-20.466,24.693-20.579,0.083-1.9.183-6.465,0.183-6.465l-43.533-.548-1.829,3.29H31.631C37.308,93.728,61.08,93.954,61.08,93.954v15.353l-12.8,7.311H91.992ZM73.368,61.111l-5.6-2.451-0.525-1.576,8.755-20.137,5.953-2.276,1.226,0.7,0.876,5.953-2.1,5.428,0.506,1.376s19.105,8.935,19.627,8.968,2.578,0.043,2.526,1.308c-0.508,1.463-2.9,6.255-3.479,6.61a1.527,1.527,0,0,1-1.69-.708c-0.539-.523-20.292-9.5-20.292-9.5H78.271l-3.327,6.129Z"/>
+  <path id="CE_New_Thicker" data-name="CE New Thicker" class="cls-1" d="M1585,60V660h665V510H1765V430h315V300H1765V215h485V60H1585Zm-60,0H830V660h695V510H1010V215h515V60Z"/>
+  <path id="A_no_Anvil_No_Hammer_copy_2" data-name="A no Anvil No Hammer copy 2" class="cls-2" d="M75,660V554L340,60H770V660H75Zm507.359,0-72.077-40.709V586.9c0-78.3,135.834-116.882,141.02-117.524,0.476-10.87,1.044-36.924,1.044-36.924l-248.612-3.131-10.446,18.788H237.645c32.419,81.168,168.178,82.461,168.178,82.461v87.681L332.7,660H582.359ZM476,343l-32-14-3-9,50-115,34-13,7,4,5,34-12,31,2.887,7.859S637,319.885,639.976,320.074s14.725,0.246,14.429,7.468c-2.9,8.356-16.551,35.724-19.867,37.748-5.869.859-6.571-1.057-9.653-4.044S509,307,509,307h-5l-19,35Z"/>
 </svg>

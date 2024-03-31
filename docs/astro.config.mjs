@@ -33,6 +33,7 @@ export default defineConfig({
             { label: 'General Information', link: '/general/' },
             { label: 'Frequently Asked Questions', link: '/faq/' },
             { label: 'Team', link: '/team/' },
+            { label: 'Branding', link: '/branding/' },
           ],
         },
         //{

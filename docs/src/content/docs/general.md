@@ -9,11 +9,11 @@ description: What is ACE Anvil, how to install it and how to find more informati
 
 ### Features
 
-Goal of ACE Anvil is to provide realism and quality of life features. Like the creators of the Arma series, Bohemia Interactive, we want to treat Arma Reforger as a test platform for the Enfusion engine. As such, we are happy to add some features that might not be strictly within ACE's usual scope.
+A goal of ACE Anvil is to provide realism and quality of life features. Like the creators of the Arma series, Bohemia Interactive, we want to treat Arma Reforger as a test platform for the Enfusion engine. As such, we are happy to add some features that might not be strictly within ACE's usual scope.
 
 ### Modularity
 
-Previous ACE projects were already modular in the sense that a user could remove the components they did not want. ACE Anvil takes a step further publishes every component separately on the [Arma Reforger Workshop](https://reforger.armaplatform.com/workshop?search=acemod) along with an **ACE All in One** which provides a one-click solution to subscribing to all of ACE components.
+Previous ACE projects were already modular in the sense that a user could remove the components they did not want. ACE Anvil takes this a step further: every component is published separately on the [Arma Reforger Workshop](https://reforger.armaplatform.com/workshop?search=acemod) along with **ACE All in One**, which provides a one-click solution to subscribing to all of ACE components.
 
 Every component requires at least **ACE Core**, but may require other components as well.
 

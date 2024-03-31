@@ -32,6 +32,7 @@ modded class SCR_AvailableActionsConditionData
 		// Invalidates and clears any data prior to following collection
 		ACE_Carrying_Clear();
 
-		m_ACE_Carrying_bIsCarrier = ACE_Carrying_Helper.IsCarrier(controlledEntity);
+		if (controlledEntity)
+			m_ACE_Carrying_bIsCarrier = ACE_Carrying_Helper.IsCarrier(controlledEntity);
 	}
 }

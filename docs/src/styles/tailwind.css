@@ -6,6 +6,42 @@ body {
   hyphens: auto;
 }
 
+/* No rounded borders */
 * {
   border-radius: 0px !important;
+}
+
+/* Primary Action white text */
+.action.primary {
+  color: #fff;
+}
+
+/* Lighter red hrefs */
+[data-theme='dark'] .sl-markdown-content a:not(:where(.not-content *)) {
+  color: #ec7f75;
+}
+[data-theme='dark'] .right-sidebar-panel a:where(a)[aria-current='true'] {
+  color: #ec7f75;
+}
+
+/* Color boxes */
+.color-box {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 1px solid #aaa;
+}
+.color-box-white {
+  @apply color-box;
+  background-color: #fff;
+}
+.color-box-black {
+  @apply color-box;
+  background-color: #000;
+}
+.color-box-red {
+  @apply color-box;
+  background-color: #ba2619;
 }

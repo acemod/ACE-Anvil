@@ -2,4 +2,38 @@
 title: Medical
 ---
 
-TODO
+ACE Medical in its first iteration tries to address some of the shortcomings of the vanilla medical system: Most notably that players die to easily and get healed too fast. The former is addressed by introducing a second chance that keeps players from dying outright without falling unconscious. The latter is addressed by removing the healing effect of morphine, which in return increases the importance of medical kits.
+
+Other features:
+- Wounds can cause pain, which is visible through a white flash screen effect and can be treated with morphine.
+- Epinephrine injector (yellow cap), which speeds up wake-up of incapacitated units.
+- Supply usage of medical kits and healing power outside of medical facilities can be configured by the server (see Settings)
+
+Note that ACE Medical currently only affects players, but not AI.
+
+### Second Chance
+
+Second chance gets triggered when a player would have been killed without falling unconscious first. Instead of dying, the player will stay alive with 1 HP. On the other hand, natural recovery from this state is very slow (up to 10 minutes without epinephrine). Second chance is deactivated for headshots by default.
+
+## Settings
+
+Certain aspects of the medical system can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
+
+| Field                        | Type  | Default | Description                                                                                          |
+| ---------------------------- | ----- | ------- | ---------------------------------------------------------------------------------------------------- |
+| m_bSecondChanceOnHeadEnabled | bool  | false   | Enables second chance on headshots.                                                                  |
+| m_bHealSupplyUsageEnabled    | bool  | true    | Healing consumes supplies when enabled. Ignored when global supply usage is disabled.                |
+| m_fMedicalKitMaxHealScaled   | float | 0.5     | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities.   |
+
+Example for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Medical_Settings": {
+            "m_bSecondChanceOnHeadEnabled": true,
+            "m_bHealSupplyUsageEnabled": false,
+            "m_fMedicalKitMaxHealScaled": 1.0
+        }
+    }
+}
+```

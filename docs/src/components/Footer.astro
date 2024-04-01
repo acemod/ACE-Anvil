@@ -1,30 +1,18 @@
 ---
-import AceVersion from '~/components/AceVersion.astro';
-import Icon from '~/components/Icon.astro';
 import { config } from './src/utils/config';
 ---
 
 <footer class="footer">
   <p>
     {config.site.name} is free and open-source software.
+    <br/>
+    <a href="https://acemod.org">acemod</a>
   </p>
-
-  <div class="stat">
-    <Icon name="tag" /> <AceVersion />
-  </div>
 </footer>
 
 <style>
   footer.footer {
     padding-block-start: 5rem;
     text-align: center;
-  }
-
-  div.stat {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    justify-content: center
   }
 </style>

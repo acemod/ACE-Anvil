@@ -21,19 +21,23 @@ hero:
     - text: Read Documentation
       link: /general/
       icon: open-book
-      variant: secondary
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+import AceVersion from '~/components/AceVersion.astro';
 import Footer from '~/components/Footer.astro';
+
+import { config } from '~/utils/config';
+
+<AceVersion />
 
 <CardGrid>
   <Card title="Contribute" icon="github">
-    <a href="https://github.com/acemod/ACE-Anvil" target="_blank">**Visit our GitHub**</a> for latest code, issue reports, features requests and more.
+    <a href={config.ace.githubUrl} target="_blank">**Visit our GitHub**</a> for latest code, issue reports, features requests and more.
   </Card>
   <Card title="Chat" icon="discord">
-    <a href="https://acemod.org/discord" target="_blank">**Join our public chat**</a> for any questions concerning ACE Anvil or development of it.
+    <a href={config.ace.discordUrl} target="_blank">**Join our public chat**</a> for any questions concerning ACE Anvil or development of it.
   </Card>
 </CardGrid>
 

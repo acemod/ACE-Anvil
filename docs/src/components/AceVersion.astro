@@ -1,7 +1,11 @@
 ---
+import Icon from '~/components/Icon.astro';
+
 import { config } from '~/utils/config'
 
 const version = config.ace.version
 ---
 
-{`v${version.major}.${version.minor}.${version.patch}`}
+<div class="stat flex flex-row gap-2 justify-center mb-8">
+  <Icon name="tag" /> {`v${version.major}.${version.minor}.${version.patch}`}
+</div>

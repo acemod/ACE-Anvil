@@ -20,7 +20,7 @@ export default defineConfig({
         './src/styles/tailwind.css',
       ],
       social: {
-        'discord': 'https://acemod.org/discord',
+        'discord': config.ace.discordUrl,
         'github': config.ace.githubUrl,
         'x.com': 'https://twitter.com/ACE3Mod',
         'facebook': 'https://facebook.com/ACE3Mod',

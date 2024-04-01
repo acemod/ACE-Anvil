@@ -10,6 +10,7 @@ export interface SiteConfig {
 
 export interface AceConfig {
   githubUrl: string
+  discordUrl: string
   version: AceVersion
 }
 

@@ -5,6 +5,8 @@ site:
   keywords: Advanced Combat Environment, ACE, Anvil, Arma, Arma Reforger, Mod, Modification, Realism, Bohemia, Interactive
 ace:
   projectUrl: https://acemod.org
+  workshopUrl: https://reforger.armaplatform.com/workshop/
+  workshopUrlSearch: https://reforger.armaplatform.com/workshop?search=acemod
   githubUrl: https://github.com/acemod/ACE-Anvil
   discordUrl: https://acemod.org/discord
   version:

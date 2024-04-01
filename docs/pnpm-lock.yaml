@@ -34,6 +34,9 @@ devDependencies:
   '@antfu/eslint-config':
     specifier: ^2.11.6
     version: 2.11.6(@vue/compiler-sfc@3.4.21)(eslint-plugin-astro@0.33.1)(eslint@8.57.0)(typescript@5.4.3)
+  '@types/js-yaml':
+    specifier: ^4.0.9
+    version: 4.0.9
   '@typescript-eslint/parser':
     specifier: ^7.4.0
     version: 7.4.0(eslint@8.57.0)(typescript@5.4.3)
@@ -1729,6 +1732,10 @@ packages:
     dependencies:
       '@types/unist': 3.0.2
     dev: false
+
+  /@types/js-yaml@4.0.9:
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
+    dev: true
 
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}

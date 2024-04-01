@@ -21,6 +21,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.11.6",
+    "@types/js-yaml": "^4.0.9",
     "@typescript-eslint/parser": "^7.4.0",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^0.33.1",

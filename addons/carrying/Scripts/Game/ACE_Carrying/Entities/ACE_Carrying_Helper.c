@@ -226,15 +226,21 @@ class ACE_Carrying_Helper : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! True if the given player is currently a carrier
-	static bool IsCarrier(notnull IEntity carrier)
+	static bool IsCarrier(IEntity carrier)
 	{
+		if (!carrier)
+			return false;
+		
 		return GetHelperFromCarrier(carrier);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! True if the given player is currently carried by another player
-	static bool IsCarried(notnull IEntity carried)
+	static bool IsCarried(IEntity carried)
 	{
+		if (!carried)
+			return false;
+		
 		return GetHelperFromCarried(carried);
 	}
 

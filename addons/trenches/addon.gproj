@@ -1,9 +1,9 @@
 GameProject {
  ID "ACE_Trenches"
  GUID "60EAEA0389DB3CC2"
- TITLE "ACE - Trenches"
+ TITLE "ACE Trenches"
  Dependencies {
-  "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
  }
  Configurations {
   GameProjectConfig PC {

@@ -9,6 +9,7 @@ export interface SiteConfig {
 }
 
 export interface AceConfig {
+  projectUrl: string
   githubUrl: string
   discordUrl: string
   version: AceVersion

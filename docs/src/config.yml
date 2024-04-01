@@ -4,6 +4,7 @@ site:
   description: An experimental realism mod for Arma Reforger.
   keywords: Advanced Combat Environment, ACE, Anvil, Arma, Arma Reforger, Mod, Modification, Realism, Bohemia, Interactive
 ace:
+  projectUrl: https://acemod.org
   githubUrl: https://github.com/acemod/ACE-Anvil
   discordUrl: https://acemod.org/discord
   version:

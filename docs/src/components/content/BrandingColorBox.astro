@@ -1,0 +1,37 @@
+---
+interface Props {
+  colorHex: string
+}
+const { colorHex } = Astro.props
+
+function hexToRgb(hex: string) {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (!result) {
+    throw new Error('hex color invalid')
+  }
+  return {
+    r: Number.parseInt(result[1], 16),
+    g: Number.parseInt(result[2], 16),
+    b: Number.parseInt(result[3], 16),
+  }
+}
+
+const rgb = hexToRgb(colorHex)
+
+---
+
+  <span class="inline-flex flex-row items-center gap-2">
+    <i class="w-4 h-4" aria-hidden="true" />
+    <span>
+      <slot />
+      <code>
+        {`${colorHex}, rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`}
+      </code>
+    </span>
+  </span>
+
+  <style define:vars={{ colorHex }}>
+    i {
+      background-color: var(--colorHex);
+    }
+  </style>

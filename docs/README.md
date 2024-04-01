@@ -1,6 +1,6 @@
 # ACE Anvil Documentation
 
-Install [PNPM](https://pnpm.io/) and run:
+Install [pnpm](https://pnpm.io/) and run:
 
 ```sh
 $ pnpm install

@@ -1,36 +1,44 @@
 ---
-title: Welcome to ACE Anvil
-description: Get started building your docs site with Starlight.
+title: ACE Anvil
+head:
+  - tag: title
+    content: A realism mod for Arma Reforger | ACE Anvil
+description: An experimental realism mod for Arma Reforger.
+editUrl: false
+lastUpdated: false
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: An experimental realism mod for Arma Reforger.
   image:
-    file: ../../assets/houston.webp
+    alt: ACE Anvil Logo
+    dark: ~/assets/logo-white.webp
+    light: ~/assets/logo-black.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Get ACE Anvil
+      link: https://reforger.armaplatform.com/workshop/
       icon: right-arrow
       variant: primary
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
-      icon: external
+    - text: Read Documentation
+      link: /general/
+      icon: open-book
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
-## Next steps
+import AceVersion from '~/components/AceVersion.astro';
+import Footer from '~/components/Footer.astro';
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+import { config } from '~/utils/config';
+
+<AceVersion />
+
+<CardGrid>
+  <Card title="Contribute" icon="github">
+    <a href={config.ace.githubUrl} target="_blank">**Visit our GitHub**</a> for latest code, issue reports, features requests and more.
+  </Card>
+  <Card title="Chat" icon="discord">
+    <a href={config.ace.discordUrl} target="_blank">**Join our public chat**</a> for any questions concerning ACE Anvil or development of it.
+  </Card>
 </CardGrid>
+
+<Footer />

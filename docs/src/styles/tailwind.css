@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  hyphens: auto;
+}
+
+/* No rounded borders */
+* {
+  border-radius: 0 !important;
+}
+
+/* Primary Action white text */
+.action.primary {
+  color: #fff;
+}
+
+/* Lighter red hrefs */
+[data-theme='dark'] .sl-markdown-content a:not(:where(.not-content *)) {
+  color: #ec7f75;
+}
+[data-theme='dark'] .right-sidebar-panel a:where(a)[aria-current='true'] {
+  color: #ec7f75;
+}

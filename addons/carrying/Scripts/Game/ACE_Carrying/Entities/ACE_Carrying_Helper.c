@@ -198,6 +198,7 @@ class ACE_Carrying_Helper : GenericEntity
 		};
 		
 		Rpc(RpcDo_Owner_CleanUp, carriedId);
+		// Deletion of helper has to be delayed or released players stay visibly prone for other players on dedicated
 		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, HELPER_DELETION_DELAY_MS, false, this);
 	}
 	

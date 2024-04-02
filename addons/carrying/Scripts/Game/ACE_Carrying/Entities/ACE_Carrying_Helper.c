@@ -14,6 +14,7 @@ class ACE_Carrying_Helper : GenericEntity
 	private static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et";
 	private static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping carried player
 	private static const float PRONE_CHECK_TIMEOUT_MS = 100; // Timeout for checking whether carrier tries do go prone
+	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>
@@ -197,7 +198,7 @@ class ACE_Carrying_Helper : GenericEntity
 		};
 		
 		Rpc(RpcDo_Owner_CleanUp, carriedId);
-		SCR_EntityHelper.DeleteEntityAndChildren(this);
+		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, HELPER_DELETION_DELAY_MS, false, this);
 	}
 	
 	//------------------------------------------------------------------------------------------------

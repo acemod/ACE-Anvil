@@ -6,18 +6,20 @@ StringTable {
    Target_en_us "Remove Bush"
    Target_fr_fr "Retirer le buisson"
    Target_de_de "Busch entfernen"
-   Modified 1627601310
+   Target_cs_cz "Posekat porost"
+   Modified 1589072860
    Author "kexanone"
-   LastChanged "Cheitan"
+   LastChanged "apollo-jk"
   }
   CustomStringTableItem "{5EB746AAD5FF74DB}" {
    Id "ACE_Chopping_RemoveTree"
    Target_en_us "Remove Tree"
    Target_fr_fr "Retirer l'arbre"
    Target_de_de "Baum entfernen"
-   Modified 1627601302
+   Target_cs_cz "Pokácet strom"
+   Modified 1589072745
    Author "kexanone"
-   LastChanged "Cheitan"
+   LastChanged "apollo-jk"
   }
  }
 }

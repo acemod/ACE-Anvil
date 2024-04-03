@@ -25,36 +25,40 @@ StringTable {
    Target_en_us "Healthy potassium!"
    Target_fr_fr "Potassium bon pour la santé !"
    Target_de_de "Gesundes Kalium!"
-   Modified 1627602034
+   Target_cs_cz "Zdravá dávka draslíku!"
+   Modified 1627220515
    Author "kexanone"
-   LastChanged "Cheitan"
+   LastChanged "apollo-jk"
   }
   CustomStringTableItem "{60FD565E59AC0571}" {
    Id "ACE-Item_Banana_Name"
    Target_en_us "Banana"
    Target_fr_fr "Banane"
    Target_de_de "Banane"
-   Modified 1627602014
+   Target_cs_cz "Banán"
+   Modified 1627220217
    Author "kexanone"
-   LastChanged "Cheitan"
+   LastChanged "apollo-jk"
   }
   CustomStringTableItem "{60FD565E50C080B7}" {
    Id "ACE-Weapon_FragBanana_Description"
    Target_en_us "Explosive Potassium!"
    Target_fr_fr "Potassium explosif !"
    Target_de_de "Explosives Kalium!"
-   Modified 1627602008
+   Target_cs_cz "Výbušná dávka draslíku!"
+   Modified 1627220356
    Author "kexanone"
-   LastChanged "Cheitan"
+   LastChanged "apollo-jk"
   }
   CustomStringTableItem "{60FD565E48F06F03}" {
    Id "ACE-Weapon_FragBanana_Name"
    Target_en_us "Frag Banana"
    Target_fr_fr "Banane à fragmentation"
    Target_de_de "Granat-Banane"
-   Modified 1627601996
+   Target_cs_cz "Výbušný banán"
+   Modified 1627220475
    Author "kexanone"
-   LastChanged "Cheitan"
+   LastChanged "apollo-jk"
   }
  }
 }

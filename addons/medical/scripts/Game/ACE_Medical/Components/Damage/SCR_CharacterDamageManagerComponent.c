@@ -15,6 +15,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected float m_fACE_Medical_ModeratePainThreshold;
 	protected float m_fACE_Medical_SeriousPainThreshold;
 	
+	// We only notify the replication system about change of these members on initialization
+	// After init, each proxy is itself resposible for updating these memebers
+	// Having them as RplProp also ensures that JIPs receive the current state from the server
 	[RplProp()]
 	protected bool m_bACE_Medical_Initialized = false;
 	[RplProp()]

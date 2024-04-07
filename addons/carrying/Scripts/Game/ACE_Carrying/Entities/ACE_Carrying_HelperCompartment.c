@@ -130,14 +130,14 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	// Release from carrier when they get incapacitated or die
 	protected void OnCarrierLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		ACE_CarryingTools.ReleaseFromCarrier(m_pCarrier);
+		ACE_Carrying_Tools.ReleaseFromCarrier(m_pCarrier);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	// Release carried when they wake up or die
 	protected void OnCarriedLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		ACE_CarryingTools.ReleaseCarried(m_pCarried);
+		ACE_Carrying_Tools.ReleaseCarried(m_pCarried);
 	}
 	
 	//------------------------------------------------------------------------------------------------

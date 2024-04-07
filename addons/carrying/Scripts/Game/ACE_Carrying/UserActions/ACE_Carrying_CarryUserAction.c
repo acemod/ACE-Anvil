@@ -31,7 +31,7 @@ class ACE_Carrying_CarryUserAction : ScriptedUserAction
 		};
 		
 		// Check if carrying is already in progress
-		if (ACE_CarryingTools.IsCarrier(user) || ACE_CarryingTools.IsCarried(GetOwner()))
+		if (ACE_Carrying_Tools.IsCarrier(user) || ACE_Carrying_Tools.IsCarried(GetOwner()))
 		{
 			SetCannotPerformReason("#ACE_Carrying-UserAction_Carrying");
 			return false;
@@ -43,7 +43,7 @@ class ACE_Carrying_CarryUserAction : ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		ACE_CarryingTools.Carry(pUserEntity, pOwnerEntity);
+		ACE_Carrying_Tools.Carry(pUserEntity, pOwnerEntity);
 	}
 	
 	//------------------------------------------------------------------------------------------------

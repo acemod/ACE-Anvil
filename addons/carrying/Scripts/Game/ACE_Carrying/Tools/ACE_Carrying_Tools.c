@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 //! Helper methods for carrying
-class ACE_CarryingTools
+class ACE_Carrying_Tools
 {
 	protected static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et";
 	

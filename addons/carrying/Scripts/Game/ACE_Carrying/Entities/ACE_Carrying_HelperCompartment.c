@@ -98,7 +98,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 
 	//------------------------------------------------------------------------------------------------
 	//! Called on carrier's machine
-	//! - Add release action keybindf
+	//! - Add release action keybind
 	//! - Disable physcial interaction between carrier and carried player
 	//! - Add prone prevention handling
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]

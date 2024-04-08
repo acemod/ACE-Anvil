@@ -2,18 +2,19 @@
 //! JSON helper struct for storing vectors in an array
 class ACE_VectorStruct : SCR_JsonApiStruct
 {
-	protected vector m_vVector;
+	// short name for more efficient serialization
+	protected vector v;
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_VectorStruct(vector v)
+	void ACE_VectorStruct(vector vec)
 	{
-		RegV("m_vVector");
-		m_vVector = v;
+		RegV("v");
+		v = vec;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	vector GetVector()
 	{
-		return m_vVector;
+		return v;
 	}
 }

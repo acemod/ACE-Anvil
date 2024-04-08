@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------------------------
 //! Class which carries saved data for the editor.
 //! Managed by SCR_DSSessionCallback.
-[BaseContainerProps()]
 class ACE_EditorStruct : SCR_JsonApiStruct
 {
 	// SCR_JsonApiStruct does not support array of PoD, hence we use ACE_VectorStruct as wrapper
@@ -63,11 +62,5 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 		
 		return true;
 	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Clear cached data.
-	override void ClearCache()
-	{
-		m_aACE_DeletedEntityPositions.Clear();
-	}
+
 }

@@ -63,4 +63,10 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 		return true;
 	}
 
+	//------------------------------------------------------------------------------------------------
+	//! Clear cached data.
+	override void ClearCache()
+	{
+		m_aACE_DeletedEntityPositions.Clear();
+	}
 }

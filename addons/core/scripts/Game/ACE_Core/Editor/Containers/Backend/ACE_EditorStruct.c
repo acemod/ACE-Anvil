@@ -37,7 +37,9 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 		
 		foreach (vector pos : gameMode.ACE_GetDeletedEntityPositions())
 		{
-			m_aACE_DeletedEntityPositions.Insert(new ACE_VectorStruct(pos));
+			ACE_VectorStruct posStruct = new ACE_VectorStruct();
+			posStruct.SetVector(pos);
+			m_aACE_DeletedEntityPositions.Insert(posStruct);
 		}
 
 		return true;

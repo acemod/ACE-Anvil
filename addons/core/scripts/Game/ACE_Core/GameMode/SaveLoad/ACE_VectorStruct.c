@@ -6,9 +6,14 @@ class ACE_VectorStruct : SCR_JsonApiStruct
 	protected vector v;
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_VectorStruct(vector vec)
+	void ACE_VectorStruct()
 	{
 		RegV("v");
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetVector(vector vec)
+	{
 		v = vec;
 	}
 	

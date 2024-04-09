@@ -12,6 +12,13 @@ class ACE_VectorStruct : SCR_JsonApiStruct
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	// Print out contents of saved data.
+	override void Log()
+	{
+		Print(v.ToString());
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void SetVector(vector vec)
 	{
 		v = vec;

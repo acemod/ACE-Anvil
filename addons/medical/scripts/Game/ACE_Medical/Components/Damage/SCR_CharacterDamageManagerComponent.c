@@ -4,8 +4,8 @@
 //! Add methods for interacting with pain hit zone.
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
-	[Attribute(defvalue: "600", desc: "Time to regenerate this hit zone fully in second chance state [s]", category: "ACE Medical")]
-	protected float m_fACE_Medical_SecondChanceFullRegenetationTimeS;
+	[RplProp(), Attribute(defvalue: "0.025", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
+	protected float m_fACE_Medical_SecondChanceRegenScale;
 
 	protected HitZone m_pACE_Medical_HealthHitZone;
 	protected float m_fACE_Medical_CriticalHealth;
@@ -26,7 +26,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected bool m_bACE_Medical_SecondChanceOnHeadEnabled = false;
 	[RplProp()]
 	protected bool m_bACE_Medical_SecondChanceTriggered = false;
-	protected float m_fACE_Medical_SecondChanceRegenScale;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
@@ -40,8 +39,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		
 		m_fACE_Medical_CriticalHealth = m_pACE_Medical_HealthHitZone.GetDamageStateThreshold(ECharacterHealthState.CRITICAL);
 		GetPhysicalHitZones(m_aACE_Medical_PhysicalHitZones);
-		
-		m_fACE_Medical_SecondChanceRegenScale = -GetResilienceHitZone().GetMaxHealth() / m_fACE_Medical_SecondChanceFullRegenetationTimeS;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -53,7 +50,10 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 				
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (settings)
+		{
 			m_bACE_Medical_SecondChanceOnHeadEnabled = settings.m_bSecondChanceOnHeadEnabled;
+			m_fACE_Medical_SecondChanceRegenScale = 1/settings.m_fSecondChanceRegenTimeFactor;
+		}
 		
 		ACE_Medical_EnableSecondChance(true);
 		// Damage calculations are done on all machines, so we have to broadcast the init

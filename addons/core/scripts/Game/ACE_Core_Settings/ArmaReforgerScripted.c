@@ -3,6 +3,7 @@
 //! Created when the game starts (not when a world starts!) and persists until the game is closed.
 modded class ArmaReforgerScripted : ChimeraGame
 {
+	/*
 	static protected ref ACE_SettingsConfig m_ACE_SettingsConfig;
 	
 	//------------------------------------------------------------------------------------------------
@@ -31,4 +32,5 @@ modded class ArmaReforgerScripted : ChimeraGame
 	{
 		return m_ACE_SettingsConfig;
 	}
+	*/
 }

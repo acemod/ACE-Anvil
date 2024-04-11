@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------------
 //! Pain screen effect; Code is based on SCR_BleedingScreenEffect
-class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect {
+class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
+{
     // Play Animation of CreateEffectOverTime()
     protected const int PAIN_REPEAT_DELAY = 1000;
     protected const float PAINEFFECT_OPACITY_FADEOUT_1_DURATION = 0.2;
@@ -30,13 +31,15 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect {
 
     //------------------------------------------------------------------------------------------------
     //! Get effects wiget when starting to draw
-    override void DisplayStartDraw(IEntity owner) {
+    override void DisplayStartDraw(IEntity owner)
+    {
         m_wWhiteFlash = ImageWidget.Cast(m_wRoot.FindAnyWidget("ACE_Medical_WhiteFlash"));
     }
 
     //------------------------------------------------------------------------------------------------
     //! Clear effect and reassign event handlers when controlled entity was changed
-    override void DisplayControlledEntityChanged(IEntity from, IEntity to) {
+    override void DisplayControlledEntityChanged(IEntity from, IEntity to)
+    {
         ClearEffects();
 
         m_pCharacterEntity = ChimeraCharacter.Cast(to);
@@ -64,17 +67,23 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect {
 
     //------------------------------------------------------------------------------------------------
     //! Add/Remove effect when pain state has changed
-    protected void OnPainStateChanged(SCR_HitZone hitZone) {
+    protected void OnPainStateChanged(SCR_HitZone hitZone)
+    {
         m_bIsInPain = m_pDamageManager.ACE_Medical_IsInPain();
-        if (m_bHasPainEffect) {
-            if (!m_bIsInPain || m_pDamageManager.GetState() == EDamageState.DESTROYED) {
+        if (m_bHasPainEffect)
+        {
+            if (!m_bIsInPain || m_pDamageManager.GetState() == EDamageState.DESTROYED)
+            {
                 ClearEffectOverTime();
                 GetGame().GetCallqueue().Remove(CreateEffectOverTime);
                 GetGame().GetCallqueue().Remove(ClearEffectOverTime);
                 m_bHasPainEffect = false;
             };
-        } else {
-            if (m_bIsInPain && m_pDamageManager.GetState() != EDamageState.DESTROYED) {
+        }
+        else
+        {
+            if (m_bIsInPain && m_pDamageManager.GetState() != EDamageState.DESTROYED)
+            {
                 CreateEffectOverTime();
                 m_bHasPainEffect = m_bIsInPain;
             };
@@ -84,7 +93,8 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect {
     //------------------------------------------------------------------------------------------------
     //! Fade in (isFadeIn is true) or out of white flash effects
     //! Alternates with ClearEffectOverTime
-    protected void CreateEffectOverTime(bool isFadeIn = true) {
+    protected void CreateEffectOverTime(bool isFadeIn = true)
+    {
         if (!m_wWhiteFlash || !m_pPainHZ)
             return;
 
@@ -96,10 +106,13 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect {
 
         m_wWhiteFlash.SetSaturation(1);
 
-        if (isFadeIn) {
+        if (isFadeIn)
+        {
             AnimateWidget.Opacity(m_wWhiteFlash, effectStrength, PAINEFFECT_OPACITY_FADEIN_1_DURATION);
             AnimateWidget.AlphaMask(m_wWhiteFlash, effectStrength * 0.5, PAINEFFECT_PROGRESSION_FADEIN_1_DURATION);
-        } else {
+        }
+        else
+        {
             AnimateWidget.Opacity(m_wWhiteFlash, 0, PAINEFFECT_OPACITY_FADEOUT_2_DURATION);
             AnimateWidget.AlphaMask(m_wWhiteFlash, 0, PAINEFFECT_PROGRESSION_FADEOUT_2_DURATION);
         }
@@ -111,7 +124,8 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect {
     //! Fade out pain effect.
     //! Ends white flash effect if repeat is false
     //! If repeat is true, then alternates with CreateEffectOverTime and toggles isFadeIn
-    protected void ClearEffectOverTime(bool repeat = false, bool isFadeIn = false) {
+    protected void ClearEffectOverTime(bool repeat = false, bool isFadeIn = false)
+    {
         AnimateWidget.Opacity(m_wWhiteFlash, 0, PAINEFFECT_PROGRESSION_FADEOUT_1_DURATION);
         AnimateWidget.AlphaMask(m_wWhiteFlash, 0, PAINEFFECT_OPACITY_FADEOUT_1_DURATION);
 
@@ -121,10 +135,12 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect {
 
     //------------------------------------------------------------------------------------------------
     //! Clear pain effect over time
-    override void ClearEffects() {
+    override void ClearEffects()
+    {
         m_bHasPainEffect = false;
 
-        if (m_wWhiteFlash) {
+        if (m_wWhiteFlash)
+        {
             AnimateWidget.StopAllAnimations(m_wWhiteFlash);
             m_wWhiteFlash.SetOpacity(0);
             m_wWhiteFlash.SetMaskProgress(0);

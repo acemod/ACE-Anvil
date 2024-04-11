@@ -1,8 +1,10 @@
 //------------------------------------------------------------------------------------------------
-modded class SCR_PlayerController : PlayerController {
+modded class SCR_PlayerController : PlayerController
+{
     //------------------------------------------------------------------------------------------------
     //! Initialize ACE Medical on player controlled characters
-    override void OnControlledEntityChanged(IEntity from, IEntity to) {
+    override void OnControlledEntityChanged(IEntity from, IEntity to)
+    {
         super.OnControlledEntityChanged(from, to);
 
         //! Do not initialize for GM controlled AI

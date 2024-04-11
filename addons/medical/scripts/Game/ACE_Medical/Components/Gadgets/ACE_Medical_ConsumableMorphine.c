@@ -2,7 +2,8 @@
 //! ACE morphine effect, which replaces SCR_ConsumableMorphine in SCR_ConsumableItemComponent
 //! of MorphineInjection_01.et
 [BaseContainerProps()]
-class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems {
+class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems
+{
     [Attribute(defvalue: "10", desc: "Regeneration speed of related hitzone when consuming this item", category: "Regeneration")]
     protected float m_fItemRegenerationSpeedDPS;
 
@@ -11,7 +12,8 @@ class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems {
 
     //------------------------------------------------------------------------------------------------
     //! Fully heal pain hit zone
-    override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams) {
+    override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
+    {
         super.ApplyEffect(target, user, item, animParams);
 
         ChimeraCharacter char = ChimeraCharacter.Cast(target);
@@ -31,7 +33,8 @@ class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems {
 
     //------------------------------------------------------------------------------------------------
     //! Can be applied when patient is in pain and no morphine is in the system
-    override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason) {
+    override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
+    {
         ChimeraCharacter char = ChimeraCharacter.Cast(target);
         if (!char)
             return false;
@@ -45,7 +48,8 @@ class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems {
             return false;
 
         // Check if morphine is in the system already
-        if (painHZ.GetDamageOverTime(EDamageType.HEALING) < 0) {
+        if (painHZ.GetDamageOverTime(EDamageType.HEALING) < 0)
+        {
             failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
             return false;
         };
@@ -60,13 +64,15 @@ class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems {
     //------------------------------------------------------------------------------------------------
     //! Can be applied to hit zones under same conditions as CanApplyEffect
     override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group,
-                                     out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE) {
+                                     out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
+    {
         return CanApplyEffect(target, user, failReason);
     }
 
     //------------------------------------------------------------------------------------------------
     //! Set consumable type in ctor
-    void ACE_Medical_ConsumableMorphine() {
+    void ACE_Medical_ConsumableMorphine()
+    {
         m_eConsumableType = SCR_EConsumableType.MORPHINE;
     }
 }

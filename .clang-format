@@ -5,5 +5,5 @@ DerivePointerAlignment: false
 PointerAlignment: Left
 NamespaceIndentation: All
 IncludeBlocks: Merge
-
 AllowShortBlocksOnASingleLine: true
+BreakBeforeBraces: Allman

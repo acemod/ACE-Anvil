@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction {
+class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction
+{
     [Attribute(defvalue: "#ACE_Medical-FailReason_NotUnconscious", desc: "String for when target is not incapacitated")]
     protected LocalizedString m_sNotIncapacitated;
 
@@ -11,7 +12,8 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction {
 
     //------------------------------------------------------------------------------------------------
     //! Same as in SCR_MorphineUserAction, but handle case where target is bleeding
-    override bool CanBePerformedScript(IEntity user) {
+    override bool CanBePerformedScript(IEntity user)
+    {
         // Medic character
         ChimeraCharacter userCharacter = ChimeraCharacter.Cast(user);
         if (!userCharacter)
@@ -22,7 +24,8 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction {
             return false;
 
         int reason;
-        if (!consumableComponent.GetConsumableEffect().CanApplyEffect(GetOwner(), userCharacter, reason)) {
+        if (!consumableComponent.GetConsumableEffect().CanApplyEffect(GetOwner(), userCharacter, reason))
+        {
             if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED)
                 SetCannotPerformReason(m_sNotIncapacitated);
             else if (reason == SCR_EConsumableFailReason.ALREADY_APPLIED)

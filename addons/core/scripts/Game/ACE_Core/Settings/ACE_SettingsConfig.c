@@ -1,7 +1,8 @@
 //------------------------------------------------------------------------------------------------
 //! Base container for all settings
 [BaseContainerProps(configRoot: true)]
-class ACE_SettingsConfig {
+class ACE_SettingsConfig
+{
     [Attribute(desc: "Definitions of settings for all mods")]
     protected ref array<ref ACE_ModSettings> m_aInitialModSettings;
     protected ref map<typename, ref ACE_ModSettings> m_mModSettingsMap;
@@ -9,7 +10,8 @@ class ACE_SettingsConfig {
     //------------------------------------------------------------------------------------------------
     //! Construct map for faster look-up of settings
     //! We can't use maps as attribute, so we initialize the settings with an array
-    protected void InitMap() {
+    protected void InitMap()
+    {
         m_mModSettingsMap = new map<typename, ref ACE_ModSettings>();
 
         foreach (ACE_ModSettings settings: m_aInitialModSettings) { m_mModSettingsMap[settings.Type()] = settings; }
@@ -19,7 +21,8 @@ class ACE_SettingsConfig {
 
     //------------------------------------------------------------------------------------------------
     //! Return settings for all categories
-    array<ACE_ModSettings> GetAllModSettings() {
+    array<ACE_ModSettings> GetAllModSettings()
+    {
         if (!m_mModSettingsMap)
             InitMap();
 
@@ -32,7 +35,8 @@ class ACE_SettingsConfig {
 
     //------------------------------------------------------------------------------------------------
     //! Return settings for a mod
-    ACE_ModSettings GetModSettings(typename modSettingsType) {
+    ACE_ModSettings GetModSettings(typename modSettingsType)
+    {
         if (!m_mModSettingsMap)
             InitMap();
 
@@ -43,7 +47,8 @@ class ACE_SettingsConfig {
 
     //------------------------------------------------------------------------------------------------
     //! Set settings for a mod
-    void SetModSettings(notnull ACE_ModSettings settings) {
+    void SetModSettings(notnull ACE_ModSettings settings)
+    {
         if (!m_mModSettingsMap)
             InitMap();
 

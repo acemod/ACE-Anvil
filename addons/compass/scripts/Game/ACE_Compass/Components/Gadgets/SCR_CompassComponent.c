@@ -1,9 +1,11 @@
 //------------------------------------------------------------------------------------------------
-modded class SCR_CompassComponent : SCR_GadgetComponent {
+modded class SCR_CompassComponent : SCR_GadgetComponent
+{
     protected ACE_Compass_Display m_ACE_Compass_Display;
 
     //------------------------------------------------------------------------------------------------
-    override void ActivateGadgetUpdate() {
+    override void ActivateGadgetUpdate()
+    {
         super.ActivateGadgetUpdate();
 
         if (m_CharacterOwner != SCR_PlayerController.GetLocalControlledEntity())
@@ -15,7 +17,8 @@ modded class SCR_CompassComponent : SCR_GadgetComponent {
     }
 
     //------------------------------------------------------------------------------------------------
-    override void Update(float timeSlice) {
+    override void Update(float timeSlice)
+    {
         super.Update(timeSlice);
 
         // Only run on owner
@@ -24,14 +27,16 @@ modded class SCR_CompassComponent : SCR_GadgetComponent {
 
         bool displayShown = m_ACE_Compass_Display.IsShown();
 
-        if (m_bIsInMapMode || !m_bFocused) {
+        if (m_bIsInMapMode || !m_bFocused)
+        {
             if (displayShown)
                 m_ACE_Compass_Display.Show(false);
 
             return;
         }
 
-        if (!displayShown) {
+        if (!displayShown)
+        {
             m_ACE_Compass_Display.SetCompassEntity(GetOwner());
             m_ACE_Compass_Display.Show(true, UIConstants.FADE_RATE_SLOW);
         }
@@ -41,7 +46,8 @@ modded class SCR_CompassComponent : SCR_GadgetComponent {
 
     //------------------------------------------------------------------------------------------------
     //! Handles the cases when a player falls unconscious while having the compass focused
-    override void DeactivateGadgetUpdate() {
+    override void DeactivateGadgetUpdate()
+    {
         super.DeactivateGadgetUpdate();
 
         if (m_CharacterOwner != SCR_PlayerController.GetLocalControlledEntity())

@@ -1,8 +1,10 @@
 //------------------------------------------------------------------------------------------------
-modded class SCR_HealSupportStationComponent : SCR_BaseDamageHealSupportStationComponent {
+modded class SCR_HealSupportStationComponent : SCR_BaseDamageHealSupportStationComponent
+{
     //------------------------------------------------------------------------------------------------
     //! Apply settings
-    override protected void DelayedInit(IEntity owner) {
+    override protected void DelayedInit(IEntity owner)
+    {
         super.DelayedInit(owner);
 
         ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();

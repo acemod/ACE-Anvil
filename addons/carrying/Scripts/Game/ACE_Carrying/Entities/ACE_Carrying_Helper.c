@@ -1,9 +1,12 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Carrying_HelperClass : GenericEntityClass {}
+class ACE_Carrying_HelperClass : GenericEntityClass
+{
+}
 
 //------------------------------------------------------------------------------------------------
 //! Helper compartment entity that dynamically gets created/deleted and attached/detached to carriers
-class ACE_Carrying_Helper : GenericEntity {
+class ACE_Carrying_Helper : GenericEntity
+{
     protected IEntity m_pCarrier;
     protected IEntity m_pCarried;
     protected SCR_CharacterControllerComponent m_CarrierCharCtrl;
@@ -17,7 +20,8 @@ class ACE_Carrying_Helper : GenericEntity {
     //! Start <carrier> to carry the specified <carried>
     //! Creates an instance of the helper compartment, attaches it to the <carrier> and moves the <carried>
     //! in the compartment
-    static void Carry(notnull IEntity carrier, notnull IEntity carried) {
+    static void Carry(notnull IEntity carrier, notnull IEntity carried)
+    {
         ACE_Carrying_Helper helper = ACE_Carrying_Helper.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
         helper.m_pCarrier = carrier;
         helper.m_pCarried = carried;
@@ -57,7 +61,8 @@ class ACE_Carrying_Helper : GenericEntity {
     //! - Disable physcial interaction between carrier and carried player
     //! - Add prone prevention handling
     [RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-    protected void RpcDo_Owner_Carry(RplId carriedId) {
+    protected void RpcDo_Owner_Carry(RplId carriedId)
+    {
         GetGame().GetInputManager().AddActionListener("ACE_Carrying_Release", EActionTrigger.DOWN, ActionReleaseCallback);
         IEntity carried = RplComponent.Cast(Replication.FindItem(carriedId)).GetEntity();
         Physics carriedPhys = carried.GetPhysics();
@@ -74,27 +79,31 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Resets the stance if player attempts to go prone
-    protected void PreventProneCarrier() {
+    protected void PreventProneCarrier()
+    {
         if (m_CarrierCharCtrl.GetStance() == ECharacterStance.PRONE)
             m_CarrierCharCtrl.SetStanceChange(ECharacterStanceChange.STANCECHANGE_TOCROUCH);
     }
 
     //------------------------------------------------------------------------------------------------
     // Release from carrier when they get incapacitated or die
-    protected void OnCarrierLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState) {
+    protected void OnCarrierLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+    {
         ACE_Carrying_Helper.ReleaseFromCarrier(m_pCarrier);
     }
 
     //------------------------------------------------------------------------------------------------
     // Release carried when they wake up or die
-    protected void OnCarriedLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState) {
+    protected void OnCarriedLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+    {
         ACE_Carrying_Helper.ReleaseCarried(m_pCarried);
     }
 
     //------------------------------------------------------------------------------------------------
     //! Release the carried player by passing the carrier
     //! Calls Release method on helper compartment entity
-    static void ReleaseFromCarrier(notnull IEntity carrier) {
+    static void ReleaseFromCarrier(notnull IEntity carrier)
+    {
         ACE_Carrying_Helper helper = GetHelperFromCarrier(carrier);
 
         if (!helper)
@@ -106,7 +115,8 @@ class ACE_Carrying_Helper : GenericEntity {
     //------------------------------------------------------------------------------------------------
     //! Release the carried player
     //! Calls Release method on helper compartment entity
-    static void ReleaseCarried(notnull IEntity carried) {
+    static void ReleaseCarried(notnull IEntity carried)
+    {
         ACE_Carrying_Helper helper = GetHelperFromCarried(carried);
 
         if (!helper)
@@ -119,11 +129,13 @@ class ACE_Carrying_Helper : GenericEntity {
     //! Release method for the helper compartment entity
     //! Moves out the carried player and schedules clean up
     [RplRpc(RplChannel.Reliable, RplRcver.Server)]
-    void Release() {
+    void Release()
+    {
         m_pCarrier.RemoveChild(this, true);
         MoveOutCarried();
 
-        if (m_pCarrier) {
+        if (m_pCarrier)
+        {
             SCR_CharacterControllerComponent carrierController =
                 SCR_CharacterControllerComponent.Cast(m_pCarrier.FindComponent(SCR_CharacterControllerComponent));
             if (!carrierController)
@@ -132,7 +144,8 @@ class ACE_Carrying_Helper : GenericEntity {
             carrierController.m_OnLifeStateChanged.Remove(OnCarrierLifeStateChanged);
         }
 
-        if (m_pCarried) {
+        if (m_pCarried)
+        {
             SCR_CharacterControllerComponent carriedController =
                 SCR_CharacterControllerComponent.Cast(m_pCarried.FindComponent(SCR_CharacterControllerComponent));
             if (!carriedController)
@@ -144,7 +157,8 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Moves the carried player out of the helper compartment
-    protected void MoveOutCarried() {
+    protected void MoveOutCarried()
+    {
         if (!m_pCarried)
             return;
 
@@ -171,10 +185,12 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Clean-up when the carried player has left the compartment
-    protected void OnCompartmentLeft() {
+    protected void OnCompartmentLeft()
+    {
         RplId carriedId = RplId.Invalid();
 
-        if (m_pCarried) {
+        if (m_pCarried)
+        {
             SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
             if (compartmentAccess)
                 compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
@@ -194,7 +210,8 @@ class ACE_Carrying_Helper : GenericEntity {
     //! - Enable physical interaction between carrier and carried player
     //! - Remove prone prevention handling
     [RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-    protected void RpcDo_Owner_CleanUp(RplId carriedId) {
+    protected void RpcDo_Owner_CleanUp(RplId carriedId)
+    {
         GetGame().GetInputManager().RemoveActionListener("ACE_Carrying_Release", EActionTrigger.DOWN, ActionReleaseCallback);
 
         IEntity carried = RplComponent.Cast(Replication.FindItem(carriedId)).GetEntity();
@@ -206,13 +223,15 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Callback for the release keybind
-    protected void ActionReleaseCallback() {
+    protected void ActionReleaseCallback()
+    {
         Rpc(Release);
     }
 
     //------------------------------------------------------------------------------------------------
     //! True if the given player is currently a carrier
-    static bool IsCarrier(IEntity carrier) {
+    static bool IsCarrier(IEntity carrier)
+    {
         if (!carrier)
             return false;
 
@@ -221,7 +240,8 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! True if the given player is currently carried by another player
-    static bool IsCarried(IEntity carried) {
+    static bool IsCarried(IEntity carried)
+    {
         if (!carried)
             return false;
 
@@ -230,7 +250,8 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Get the player that is carried by the given carrier
-    static IEntity GetCarried(notnull IEntity carrier) {
+    static IEntity GetCarried(notnull IEntity carrier)
+    {
         ACE_Carrying_Helper helper = GetHelperFromCarrier(carrier);
         if (!helper)
             return null;
@@ -240,7 +261,8 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Get the carrier that carries the given player
-    static IEntity GetCarrier(notnull IEntity carried) {
+    static IEntity GetCarrier(notnull IEntity carried)
+    {
         ACE_Carrying_Helper helper = GetHelperFromCarried(carried);
         if (!helper)
             return null;
@@ -250,11 +272,13 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Get the instance of the helper compartment entity for the given carrier
-    protected static ACE_Carrying_Helper GetHelperFromCarrier(notnull IEntity carrier) {
+    protected static ACE_Carrying_Helper GetHelperFromCarrier(notnull IEntity carrier)
+    {
         ACE_Carrying_Helper helper;
         IEntity child = carrier.GetChildren();
 
-        while (child) {
+        while (child)
+        {
             helper = ACE_Carrying_Helper.Cast(child);
 
             if (helper)
@@ -268,7 +292,8 @@ class ACE_Carrying_Helper : GenericEntity {
 
     //------------------------------------------------------------------------------------------------
     //! Get the instance of the helper compartment entity for the given carried player
-    protected static ACE_Carrying_Helper GetHelperFromCarried(notnull IEntity carried) {
+    protected static ACE_Carrying_Helper GetHelperFromCarried(notnull IEntity carried)
+    {
         return ACE_Carrying_Helper.Cast(carried.GetParent());
     }
 }

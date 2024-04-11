@@ -1,13 +1,16 @@
 //------------------------------------------------------------------------------------------------
 [ComponentEditorProps(category: "ACE Anvil", description: "ACE Backblast")]
-class ACE_BackblastComponentClass : ScriptComponentClass {
-    static override array<typename> Requires(IEntityComponentSource src) {
+class ACE_BackblastComponentClass : ScriptComponentClass
+{
+    static override array<typename> Requires(IEntityComponentSource src)
+    {
         return { EventHandlerManagerComponent };
     }
 }
 
 //------------------------------------------------------------------------------------------------
-class ACE_BackblastComponent : ScriptComponent {
+class ACE_BackblastComponent : ScriptComponent
+{
     [Attribute(defvalue: "0", desc: "Enable debug mode")]
     protected bool m_bDebugModeEnabled;
 
@@ -18,7 +21,8 @@ class ACE_BackblastComponent : ScriptComponent {
     protected const float BLEEDING_FACTOR = 2.0;  //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
 
     //------------------------------------------------------------------------------------------------
-    protected override void OnPostInit(IEntity owner) {
+    protected override void OnPostInit(IEntity owner)
+    {
         super.OnPostInit(owner);
 
         if (!GetGame().InPlayMode())
@@ -32,7 +36,8 @@ class ACE_BackblastComponent : ScriptComponent {
     }
 
     //------------------------------------------------------------------------------------------------
-    protected void OnProjectileShot(int playerID, BaseWeaponComponent weapon, IEntity entity) {
+    protected void OnProjectileShot(int playerID, BaseWeaponComponent weapon, IEntity entity)
+    {
         if (weapon.GetWeaponType() != EWeaponType.WT_ROCKETLAUNCHER)
             return;
 
@@ -45,7 +50,8 @@ class ACE_BackblastComponent : ScriptComponent {
 
         weaponEntity.GetBounds(minBounds, maxBounds);
 
-        if (m_bDebugModeEnabled) {
+        if (m_bDebugModeEnabled)
+        {
             ACE_Drawing.DrawBounds(weaponEntity);
         }
 
@@ -60,7 +66,8 @@ class ACE_BackblastComponent : ScriptComponent {
     }
 
     //------------------------------------------------------------------------------------------------
-    protected void Backblast(vector origin, vector weaponDir) {
+    protected void Backblast(vector origin, vector weaponDir)
+    {
         ACE_BackblastQueryCollector query = new ACE_BackblastQueryCollector(GetOwner());
         GetGame().GetWorld().QueryEntitiesBySphere(origin, INNER_RANGE_M, query.QueryCallback);
         array<SCR_ChimeraCharacter> affectedEntities = query.GetAffectedEntities();
@@ -68,7 +75,8 @@ class ACE_BackblastComponent : ScriptComponent {
         if (affectedEntities.IsEmpty())
             return;
 
-        foreach (SCR_ChimeraCharacter character: affectedEntities) {
+        foreach (SCR_ChimeraCharacter character: affectedEntities)
+        {
             SCR_DamageManagerComponent damageManager = character.GetDamageManager();
             if (!damageManager)
                 continue;
@@ -82,7 +90,8 @@ class ACE_BackblastComponent : ScriptComponent {
             array<HitZone> hitZones = {};
             damageManager.GetPhysicalHitZones(hitZones);
 
-            foreach (HitZone hitZone: hitZones) {
+            foreach (HitZone hitZone: hitZones)
+            {
                 array<int> nodes = {};
                 hitZone.GetColliderIDs(nodes);
                 if (nodes.IsEmpty())
@@ -110,14 +119,16 @@ class ACE_BackblastComponent : ScriptComponent {
             };
         }
 
-        if (m_bDebugModeEnabled) {
+        if (m_bDebugModeEnabled)
+        {
             ACE_BackblastDrawDamageFunction damageFunction = new ACE_BackblastDrawDamageFunction(weaponDir * -1);
             ACE_Drawing.DrawDamageSphere(origin, 1000, damageFunction);
         }
     }
 
     //------------------------------------------------------------------------------------------------
-    static float CalcDamage(vector origin, vector blastDir, vector impact, array<IEntity> excludedEntities = null) {
+    static float CalcDamage(vector origin, vector blastDir, vector impact, array<IEntity> excludedEntities = null)
+    {
         // Check if there's no obstacle in the path
         TraceParam trace = new TraceParam();
         trace.Flags = TraceFlags.ENTS | TraceFlags.WORLD | TraceFlags.OCEAN;
@@ -142,17 +153,20 @@ class ACE_BackblastComponent : ScriptComponent {
 }
 
 //------------------------------------------------------------------------------------------------
-class ACE_BackblastQueryCollector {
+class ACE_BackblastQueryCollector
+{
     protected IEntity m_pOwner;
     protected ref array<SCR_ChimeraCharacter> m_aAffectedEntities = {};
 
     //------------------------------------------------------------------------------------------------
-    void ACE_BackblastQueryCollector(IEntity owner) {
+    void ACE_BackblastQueryCollector(IEntity owner)
+    {
         m_pOwner = owner;
     }
 
     //------------------------------------------------------------------------------------------------
-    bool QueryCallback(IEntity entity) {
+    bool QueryCallback(IEntity entity)
+    {
         if (entity == m_pOwner)
             return true;
 
@@ -164,22 +178,26 @@ class ACE_BackblastQueryCollector {
         return true;
     }
 
-    array<SCR_ChimeraCharacter> GetAffectedEntities() {
+    array<SCR_ChimeraCharacter> GetAffectedEntities()
+    {
         return m_aAffectedEntities;
     }
 }
 
 //------------------------------------------------------------------------------------------------
-class ACE_BackblastDrawDamageFunction : ACE_DrawingDamageFunction {
+class ACE_BackblastDrawDamageFunction : ACE_DrawingDamageFunction
+{
     protected vector m_vBlastDirection;
 
     //------------------------------------------------------------------------------------------------
-    void ACE_BackblastDrawDamageFunction(vector blastDirection) {
+    void ACE_BackblastDrawDamageFunction(vector blastDirection)
+    {
         m_vBlastDirection = blastDirection;
     }
 
     //------------------------------------------------------------------------------------------------
-    override float CalculateDamage(vector origin, vector target) {
+    override float CalculateDamage(vector origin, vector target)
+    {
         return ACE_BackblastComponent.CalcDamage(origin, m_vBlastDirection, target);
     }
 }

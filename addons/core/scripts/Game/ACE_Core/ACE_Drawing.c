@@ -1,5 +1,7 @@
-class ACE_Drawing {
-    static ref Shape DrawBounds(IEntity entity) {
+class ACE_Drawing
+{
+    static ref Shape DrawBounds(IEntity entity)
+    {
         vector minBounds;
         vector maxBounds;
         entity.GetBounds(minBounds, maxBounds);
@@ -49,23 +51,27 @@ class ACE_Drawing {
         return Shape.CreateLines(0xff0000, ShapeFlags.DEFAULT, pps, 10);
     }
 
-    static array<ref Shape> DrawDamageSphere(vector origin, int count, ACE_DrawingDamageFunction damageFunction) {
+    static array<ref Shape> DrawDamageSphere(vector origin, int count, ACE_DrawingDamageFunction damageFunction)
+    {
         float goldenRatio = 1.618;
         int N = count / 2;
         int counter = 0;
         array<ref Shape> shapes = {};
 
-        for (int n = N * -1; n <= N; n++) {
+        for (int n = N * -1; n <= N; n++)
+        {
             float phi = 2 * Math.PI * n / goldenRatio;
             float theta = Math.PI / 2 + Math.Asin(2 * n / (2 * N + 1));
             float radius = 0.5;
 
-            while (true) {
+            while (true)
+            {
                 vector relPoint = { radius * Math.Sin(theta) * Math.Cos(phi), radius * Math.Sin(theta) * Math.Sin(phi), radius * Math.Cos(theta) };
                 vector point = relPoint + origin;
 
                 float damage = damageFunction.CalculateDamage(origin, point);
-                if (damage <= 0) {
+                if (damage <= 0)
+                {
                     break;
                 }
 
@@ -86,8 +92,10 @@ class ACE_Drawing {
     }
 }
 
-class ACE_DrawingDamageFunction {
-    float CalculateDamage(vector origin, vector target) {
+class ACE_DrawingDamageFunction
+{
+    float CalculateDamage(vector origin, vector target)
+    {
         return 0;
     }
 }

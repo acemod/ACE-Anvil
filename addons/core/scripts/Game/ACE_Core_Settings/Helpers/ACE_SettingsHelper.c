@@ -17,6 +17,9 @@ class ACE_SettingsHelper
 	//------------------------------------------------------------------------------------------------
 	static array<ACE_Setting> GetAll()
 	{
+		if (!m_pGameMode)
+			m_pGameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+		
 		return m_pGameMode.ACE_GetAllSettings();
 	}
 }

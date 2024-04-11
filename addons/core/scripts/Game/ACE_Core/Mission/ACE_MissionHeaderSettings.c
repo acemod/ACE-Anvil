@@ -3,8 +3,8 @@
 [BaseContainerProps()]
 class ACE_MissionHeaderSettings
 {
-    //------------------------------------------------------------------------------------------------
-    //! Override this method to apply the mod settings to the config
-    //! with ACE_SettingsConfig.SetModSettings
-    void ApplyToSettingsConfig(notnull ACE_SettingsConfig config) {}
+	//------------------------------------------------------------------------------------------------
+	//! Override this method to apply the mod settings to the config
+	//! with ACE_SettingsConfig.SetModSettings
+	void ApplyToSettingsConfig(notnull ACE_SettingsConfig config) {}
 }

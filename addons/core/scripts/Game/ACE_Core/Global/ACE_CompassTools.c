@@ -10,7 +10,7 @@ class ACE_CompassTools
     //! \return bearing in degrees
     static float GetBearingFromTransform(vector transform[4])
     {
-        return transform[2].ToYaw();
+	return transform[2].ToYaw();
     }
 
     //------------------------------------------------------------------------------------------------
@@ -19,10 +19,10 @@ class ACE_CompassTools
     //! \return cardinal
     static string GetCardinalFromBearing(float bearing)
     {
-        int i = Math.Round(bearing / 45);
-        if (i > 7)
-            i = 0;
+	int i = Math.Round(bearing / 45);
+	if (i > 7)
+	    i = 0;
 
-        return s_aCardinals[i];
+	return s_aCardinals[i];
     }
 }

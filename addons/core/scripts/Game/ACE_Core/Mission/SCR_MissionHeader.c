@@ -9,7 +9,7 @@ modded class SCR_MissionHeader : MissionHeader
     //! Applies settings from mission header to config
     void ACE_ApplyToSettingsConfig(notnull ACE_SettingsConfig config)
     {
-        if (m_ACE_Settings)
-            m_ACE_Settings.ApplyToSettingsConfig(config);
+	if (m_ACE_Settings)
+	    m_ACE_Settings.ApplyToSettingsConfig(config);
     }
 }

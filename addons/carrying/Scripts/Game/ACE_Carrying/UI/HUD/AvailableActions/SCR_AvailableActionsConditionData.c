@@ -8,14 +8,14 @@ modded class SCR_AvailableActionsConditionData
     //! Also invalidates this data
     protected void ACE_Carrying_Clear()
     {
-        m_ACE_Carrying_bIsCarrier = false;
+	m_ACE_Carrying_bIsCarrier = false;
     }
 
     //------------------------------------------------------------------------------------------------
     //! Returns whether character is carrying
     bool ACE_Carrying_GetIsCharacterCarrier()
     {
-        return m_ACE_Carrying_bIsCarrier;
+	return m_ACE_Carrying_bIsCarrier;
     }
 
     //------------------------------------------------------------------------------------------------
@@ -27,11 +27,11 @@ modded class SCR_AvailableActionsConditionData
     //! Sets the validity of the data which can be received via IsValid()
     override void FetchData(IEntity controlledEntity, float timeSlice)
     {
-        super.FetchData(controlledEntity, timeSlice);
+	super.FetchData(controlledEntity, timeSlice);
 
-        // Invalidates and clears any data prior to following collection
-        ACE_Carrying_Clear();
+	// Invalidates and clears any data prior to following collection
+	ACE_Carrying_Clear();
 
-        m_ACE_Carrying_bIsCarrier = ACE_Carrying_Helper.IsCarrier(controlledEntity);
+	m_ACE_Carrying_bIsCarrier = ACE_Carrying_Helper.IsCarrier(controlledEntity);
     }
 }

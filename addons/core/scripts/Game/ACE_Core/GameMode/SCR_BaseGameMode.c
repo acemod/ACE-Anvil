@@ -9,7 +9,7 @@ modded class SCR_BaseGameMode : BaseGameMode
     //! Ensures that already deleted unreplicated entities are deleted for JIPs
     void ACE_DeleteInitialEntityPositions()
     {
-        ACE_DeleteEntitiesAtPositionsLocal(m_aACE_DeletedEntityPositions);
+	ACE_DeleteEntitiesAtPositionsLocal(m_aACE_DeletedEntityPositions);
     }
 
     //------------------------------------------------------------------------------------------------
@@ -18,9 +18,9 @@ modded class SCR_BaseGameMode : BaseGameMode
     [RplRpc(RplChannel.Reliable, RplRcver.Server)]
     void ACE_DeleteEntitiesAtPositionsGlobal(array<vector> entityPositions)
     {
-        m_aACE_DeletedEntityPositions.InsertAll(entityPositions);
-        ACE_DeleteEntitiesAtPositionsLocal(entityPositions);
-        Rpc(ACE_DeleteEntitiesAtPositionsLocal, entityPositions);
+	m_aACE_DeletedEntityPositions.InsertAll(entityPositions);
+	ACE_DeleteEntitiesAtPositionsLocal(entityPositions);
+	Rpc(ACE_DeleteEntitiesAtPositionsLocal, entityPositions);
     }
 
     //------------------------------------------------------------------------------------------------
@@ -28,14 +28,14 @@ modded class SCR_BaseGameMode : BaseGameMode
     [RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
     void ACE_DeleteEntitiesAtPositionsLocal(array<vector> entityPositions)
     {
-        ACE_QueryNearestEntity query = new ACE_QueryNearestEntity(0.01);
+	ACE_QueryNearestEntity query = new ACE_QueryNearestEntity(0.01);
 
-        foreach (vector pos: entityPositions)
-        {
-            IEntity entity = query.GetEntity(pos);
-            if (entity)
-                SCR_EntityHelper.DeleteEntityAndChildren(entity);
-        }
+	foreach (vector pos: entityPositions)
+	{
+	    IEntity entity = query.GetEntity(pos);
+	    if (entity)
+		SCR_EntityHelper.DeleteEntityAndChildren(entity);
+	}
     }
 
     //------------------------------------------------------------------------------------------------
@@ -43,6 +43,6 @@ modded class SCR_BaseGameMode : BaseGameMode
     //! Can only be called on the server
     array<vector> ACE_GetDeletedEntityPositions()
     {
-        return m_aACE_DeletedEntityPositions;
+	return m_aACE_DeletedEntityPositions;
     }
 }

@@ -6,7 +6,7 @@ modded class SCR_PlayerController : PlayerController
     //! Called from local player
     void ACE_DeleteEntityAtPosition(vector pos)
     {
-        Rpc(RpcAsk_ACE_DeleteEntityAtPosition, pos);
+	Rpc(RpcAsk_ACE_DeleteEntityAtPosition, pos);
     }
 
     //------------------------------------------------------------------------------------------------
@@ -15,10 +15,10 @@ modded class SCR_PlayerController : PlayerController
     [RplRpc(RplChannel.Reliable, RplRcver.Server)]
     void RpcAsk_ACE_DeleteEntityAtPosition(vector pos)
     {
-        SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-        if (!gameMode)
-            return;
+	SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+	if (!gameMode)
+	    return;
 
-        gameMode.ACE_DeleteEntitiesAtPositionsGlobal( { pos });
+	gameMode.ACE_DeleteEntitiesAtPositionsGlobal( { pos });
     }
 }

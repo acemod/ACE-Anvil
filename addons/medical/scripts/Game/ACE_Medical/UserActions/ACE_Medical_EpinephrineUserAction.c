@@ -14,30 +14,30 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction
     //! Same as in SCR_MorphineUserAction, but handle case where target is bleeding
     override bool CanBePerformedScript(IEntity user)
     {
-        // Medic character
-        ChimeraCharacter userCharacter = ChimeraCharacter.Cast(user);
-        if (!userCharacter)
-            return false;
+	// Medic character
+	ChimeraCharacter userCharacter = ChimeraCharacter.Cast(user);
+	if (!userCharacter)
+	    return false;
 
-        SCR_ConsumableItemComponent consumableComponent = GetConsumableComponent(userCharacter);
-        if (!consumableComponent)
-            return false;
+	SCR_ConsumableItemComponent consumableComponent = GetConsumableComponent(userCharacter);
+	if (!consumableComponent)
+	    return false;
 
-        int reason;
-        if (!consumableComponent.GetConsumableEffect().CanApplyEffect(GetOwner(), userCharacter, reason))
-        {
-            if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED)
-                SetCannotPerformReason(m_sNotIncapacitated);
-            else if (reason == SCR_EConsumableFailReason.ALREADY_APPLIED)
-                SetCannotPerformReason(m_sAlreadyApplied);
-            else if (reason == SCR_EConsumableFailReason.IS_BLEEDING)
-                SetCannotPerformReason(m_sIsBleeding);
-            else if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED)
-                SetCannotPerformReason(m_sTooDamaged);
+	int reason;
+	if (!consumableComponent.GetConsumableEffect().CanApplyEffect(GetOwner(), userCharacter, reason))
+	{
+	    if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED)
+		SetCannotPerformReason(m_sNotIncapacitated);
+	    else if (reason == SCR_EConsumableFailReason.ALREADY_APPLIED)
+		SetCannotPerformReason(m_sAlreadyApplied);
+	    else if (reason == SCR_EConsumableFailReason.IS_BLEEDING)
+		SetCannotPerformReason(m_sIsBleeding);
+	    else if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED)
+		SetCannotPerformReason(m_sTooDamaged);
 
-            return false;
-        }
+	    return false;
+	}
 
-        return true;
+	return true;
     }
 }

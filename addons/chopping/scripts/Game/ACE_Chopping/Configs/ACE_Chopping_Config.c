@@ -7,7 +7,7 @@ class ACE_Chopping_Config
 	
 	//----------------------------------------------------------------------------------------
 	//! Spawns chopping helper entity for the corrsponding plant on the local player
-	IEntity CreateHelper(IEntity plant)
+	IEntity SpawnHelper(IEntity plant)
 	{
 		EntityPrefabData prefabData = plant.GetPrefabData();
 		if (!prefabData)
@@ -19,24 +19,24 @@ class ACE_Chopping_Config
 		
 		foreach (ACE_Chopping_ConfigEntry entry: m_aEntries)
 		{
-			if (SCR_BaseContainerTools.IsKindOf(container, entry.m_sPlantPrefabName))
-			{
-				Resource res = Resource.Load(entry.m_sHelperPrefabName);
-				if (!res.IsValid())
-					continue;
+			if (!SCR_BaseContainerTools.IsKindOf(container, entry.m_sPlantPrefabName))
+				continue;
+
+			Resource res = Resource.Load(entry.m_sHelperPrefabName);
+			if (!res.IsValid())
+				continue;
 				
-				EntitySpawnParams params = new EntitySpawnParams();
-				params.TransformMode = ETransformMode.WORLD;
-				plant.GetWorldTransform(params.Transform);
-				params.Transform[3] = params.Transform[3] + entry.m_vOffset;
+			EntitySpawnParams params = new EntitySpawnParams();
+			params.TransformMode = ETransformMode.WORLD;
+			plant.GetWorldTransform(params.Transform);
+			params.Transform[3] = params.Transform[3] + entry.m_vOffset;
 				
-				ACE_Chopping_HelperEntity helper = ACE_Chopping_HelperEntity.Cast(GetGame().SpawnEntityPrefabLocal(res, plant.GetWorld(), params));
-				if (!helper)
-					continue;
+			ACE_Chopping_HelperEntity helper = ACE_Chopping_HelperEntity.Cast(GetGame().SpawnEntityPrefabLocal(res, plant.GetWorld(), params));
+			if (!helper)
+				continue;
 				
-				helper.SetAssociatedPlant(plant);
-				return helper;
-			}
+			helper.SetAssociatedPlant(plant);
+			return helper;
 		}
 		
 		return null;

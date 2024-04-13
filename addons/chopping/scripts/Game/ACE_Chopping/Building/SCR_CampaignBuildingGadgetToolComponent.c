@@ -1,3 +1,5 @@
+//------------------------------------------------------------------------------------------------
+//! Adding dynamic spawning/despawning of chopping helper entities to building preview handlers
 modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 {
 	protected ref ACE_Chopping_Config m_ACE_Chopping_Config;	
@@ -57,7 +59,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		{
 			if (plant && !m_aACE_Chopping_PlantsInRangeOld.Contains(plant))
 			{
-				m_aACE_Chopping_HelperEntities.Insert(m_ACE_Chopping_Config.CreateHelper(plant));
+				m_aACE_Chopping_HelperEntities.Insert(m_ACE_Chopping_Config.SpawnHelper(plant));
 				m_aACE_Chopping_PlantsInRangeOld.Insert(plant);
 			}
 		}

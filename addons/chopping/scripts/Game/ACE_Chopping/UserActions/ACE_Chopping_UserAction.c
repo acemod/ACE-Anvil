@@ -13,7 +13,16 @@ class ACE_Chopping_UserAction : ScriptedUserAction
 		if (!userCtrl)
 			return;
 		
-		userCtrl.ACE_DeleteEntityAtPosition(pOwnerEntity.GetOrigin());
+		ACE_Chopping_HelperEntity helper = ACE_Chopping_HelperEntity.Cast(GetOwner());
+		if (!helper)
+			return;
+		
+		IEntity plant = helper.GetAssociatedPlant();
+		if (!plant)
+			return;
+		
+		userCtrl.ACE_DeleteEntityAtPosition(plant.GetOrigin());
+		SCR_EntityHelper.DeleteEntityAndChildren(helper);
 	}
 	
 	//------------------------------------------------------------------------------------------------

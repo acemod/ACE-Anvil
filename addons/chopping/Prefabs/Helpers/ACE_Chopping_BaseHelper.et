@@ -1,0 +1,32 @@
+ACE_Chopping_HelperEntity {
+ ID "61122D1A94E07FBB"
+ components {
+  MeshObject "{61122D1DB8A9E4AA}" {
+   Object "{2D84074ABE1913A3}Assets/Helpers/ACE_InteractionCube.xob"
+  }
+  RigidBody "{61122D1DB3F40486}" {
+   ModelGeometry 1
+   Static 1
+  }
+  ActionsManagerComponent "{61122D1D87E829CF}" {
+   ActionContexts {
+    UserActionContext "{611A26EB772A7D7C}" {
+     ContextName "default"
+     Position PointInfo "{611A26EB6F0504E5}" {
+     }
+     Radius 3
+    }
+   }
+   additionalActions {
+    ACE_Chopping_UserAction "{611A26EB65D67BCE}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{611A26EA9DC95817}" {
+     }
+    }
+   }
+  }
+ }
+ Flags 0
+}

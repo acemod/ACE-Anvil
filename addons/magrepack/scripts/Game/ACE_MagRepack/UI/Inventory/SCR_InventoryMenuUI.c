@@ -1,7 +1,7 @@
+//------------------------------------------------------------------------------------------------
 modded class SCR_InventoryMenuUI
-{	
-
-		
+{
+	//------------------------------------------------------------------------------------------------
 	override void MoveItemToStorageSlot()
 	{
 		if (!SESOF_MagRepack())
@@ -10,32 +10,28 @@ modded class SCR_InventoryMenuUI
 		}
 	}
 
-	
+	//------------------------------------------------------------------------------------------------
+	//! Checks to ensure we have two magazines that should be repacked, and passes the necessary bits to RplAsk_RepackMags()-function in SCR_PlayerController
+	//! 
+	//! Returns true if repacking occurred 
+	//! Returns true if magwells were incompatible (feels nicer to have them not move.) 					This prevents swapping positions of mags - remove?
+	//! Returns true if magwells are the same, but toMag is full and no repacking can happen. Feels nicer. 	This prevents swapping positions of mags - remove?
+	//! Returns true if dropping on same non-stacked slot. Feels nicer.
+	//! 	
+	//! Returns false if dragging from or dropping on an arsenal.
+	//! Returns false if not dragging a mag onto another mag
 	bool SESOF_MagRepack()
 	{
-		/*
-		Checks to ensure we have two magazines that should be repacked, and passes the necessary bits to RplAsk_RepackMags()-function in SCR_PlayerController
-		
-		Returns true if repacking occurred 
-		Returns true if magwells were incompatible (feels nicer to have them not move.) 					This prevents swapping positions of mags - remove?
-		Returns true if magwells are the same, but toMag is full and no repacking can happen. Feels nicer. 	This prevents swapping positions of mags - remove?
-		Returns true if dropping on same non-stacked slot. Feels nicer.
-			
-		Returns false if dragging from or dropping on an arsenal.
-		Returns false if not dragging a mag onto another mag
-		*/
-		
-			
 		// Make sure we are not repacking arsenals
-		if (IsStorageArsenal(m_pFocusedSlotUI.GetStorageUI().GetCurrentNavigationStorage())) {return false;}
-		if (IsStorageArsenal(m_pSelectedSlotUI.GetStorageUI().GetCurrentNavigationStorage())) {return false;}
-
+		if (IsStorageArsenal(m_pFocusedSlotUI.GetStorageUI().GetCurrentNavigationStorage()))
+			return false;
+		
+		if (IsStorageArsenal(m_pSelectedSlotUI.GetStorageUI().GetCurrentNavigationStorage()))
+			return false;
 		
 		// Make sure we are dragging and dropping a mag onto another mag
 		if (m_pSelectedSlotUI.GetSlotedItemFunction() != ESlotFunction.TYPE_MAGAZINE ||	m_pFocusedSlotUI.GetSlotedItemFunction() != ESlotFunction.TYPE_MAGAZINE)
-			{
-				return false;
-			}								
+			return false;							
 			
 		// Get item components in selected and focused slots, and check they are not the same item
 		InventoryItemComponent fromInventoryItemComponent, toInventoryItemComponent
@@ -44,12 +40,18 @@ modded class SCR_InventoryMenuUI
 		bool repackOnAStack = false;	
 		
 		bool repackFromAStack = m_pSelectedSlotUI.IsStacked();
-		if (repackFromAStack) {Print("Dragged from a stack");}
-		if (!repackFromAStack) {Print("Did not drag from a stack.");}
+		if (repackFromAStack)
+			Print("Dragged from a stack");
+		
+		if (!repackFromAStack)
+			Print("Did not drag from a stack.");
 		
 		bool isToSlotStacked = m_pFocusedSlotUI.IsStacked();
-		if (isToSlotStacked) {Print("Dropped on a stack.");}
-		if (!isToSlotStacked) {Print("Did not drop on a stack.");}
+		if (isToSlotStacked)
+			Print("Dropped on a stack.");
+		
+		if (!isToSlotStacked)
+			Print("Did not drop on a stack.");
 		
 		fromInventoryItemComponent = m_pSelectedSlotUI.GetInventoryItemComponent();
 		fromEntity = fromInventoryItemComponent.GetOwner();
@@ -80,7 +82,6 @@ modded class SCR_InventoryMenuUI
 				return true;																										
 			}																									
 		}
-		
 		// If we are not dragging and dropping onto the same slot, we can just get the item in the focused slot directly
 		else
 		{
@@ -97,18 +98,28 @@ modded class SCR_InventoryMenuUI
 		}																		
 		
 		// If we somehow failed to get two items at this point, no repacking should occur
-		if (!fromEntity){Print("Failed to acquire fromEntity!", LogLevel.ERROR);}
-		if (!toEntity){Print("Failed to acquire toEntity!", LogLevel.ERROR);}
-		if (!fromEntity || !toEntity){return false;}
+		if (!fromEntity)
+			Print("Failed to acquire fromEntity!", LogLevel.ERROR);
+		
+		if (!toEntity)
+			Print("Failed to acquire toEntity!", LogLevel.ERROR);
+		
+		if (!fromEntity || !toEntity)
+			return false;
 		
 		
 		// We now have two mags, and can see if they are compatible to repack
 		MagazineComponent fromMag = MagazineComponent.Cast(fromEntity.FindComponent(MagazineComponent));	
 		MagazineComponent toMag = MagazineComponent.Cast(toEntity.FindComponent(MagazineComponent));
 		
-		if (!fromMag){Print("Failed to acquire fromMag!", LogLevel.ERROR);}
-		if (!toMag){Print("Failed to acquire toMag!", LogLevel.ERROR);}
-		if (!fromMag || !toMag){return false;}
+		if (!fromMag)
+			Print("Failed to acquire fromMag!", LogLevel.ERROR);
+		
+		if (!toMag)
+			Print("Failed to acquire toMag!", LogLevel.ERROR);
+		
+		if (!fromMag || !toMag)
+			return false;
 		
 		if (fromMag.GetMagazineWell().Type() != toMag.GetMagazineWell().Type())							
 		{
@@ -119,7 +130,7 @@ modded class SCR_InventoryMenuUI
 		
 			 
 		// If both magazines are full 
-		if(toMag.GetAmmoCount() == toMag.GetMaxAmmoCount() && fromMag.GetAmmoCount() == fromMag.GetMaxAmmoCount())
+		if (toMag.GetAmmoCount() == toMag.GetMaxAmmoCount() && fromMag.GetAmmoCount() == fromMag.GetMaxAmmoCount())
 		{				
 			Print("toMag & fromMag are both full, so this should be a regular attempted move.");
 			return false;
@@ -127,7 +138,7 @@ modded class SCR_InventoryMenuUI
 		
 		
 		// If we're dragging onto a full mag then there will not be any repacking
-		if(toMag.GetAmmoCount() == toMag.GetMaxAmmoCount())
+		if (toMag.GetAmmoCount() == toMag.GetMaxAmmoCount())
 		{				
 			Print("toMag is full. No repacking.");
 			m_InventoryManager.PlayItemSound(fromEntity, SCR_SoundEvent.SOUND_INV_DROP_ERROR);
@@ -182,4 +193,4 @@ modded class SCR_InventoryMenuUI
 		return true;
 	}
 
-};
+}

@@ -1,5 +1,7 @@
+//------------------------------------------------------------------------------------------------
 modded class SCR_PlayerController
-{	
+{
+	//------------------------------------------------------------------------------------------------
 	void RepackMags(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent managerComp, BaseInventoryStorageComponent storageTo, BaseInventoryStorageComponent storageFrom)
 	{
 		if(!fromMag || !toMag)
@@ -67,13 +69,10 @@ modded class SCR_PlayerController
 				}
 			}
 
-			
-			
 			if(remainder > 0)
 			{
 				fromMag.SetAmmoCount(remainder);
 				
-
 				if(managerComp.TryRemoveItemFromInventory(fromEntity, storageFrom))
 				{
 					if(!managerComp.TryInsertItemInStorage(fromEntity, storageFrom))
@@ -83,11 +82,14 @@ modded class SCR_PlayerController
 				}
 		
 			}				
-			else 
+			else
+			{
 				SCR_EntityHelper.DeleteEntityAndChildren(fromMag.GetOwner());
+			}
 		}	
 	}	
 	
+	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	void RpcAsk_RepackMags(RplId fromMag, RplId toMag, RplId managerComp, RplId storageTo, RplId storageFrom)
 	{
@@ -126,6 +128,6 @@ modded class SCR_PlayerController
 			SCR_InventoryStorageManagerComponent.Cast(Replication.FindItem(managerComp)),
 			BaseInventoryStorageComponent.Cast(Replication.FindItem(storageTo)),
 			BaseInventoryStorageComponent.Cast(Replication.FindItem(storageFrom))
-			);
+		);
 	}	
-};
+}

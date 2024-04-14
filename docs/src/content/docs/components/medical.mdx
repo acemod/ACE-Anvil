@@ -21,17 +21,19 @@ Certain aspects of the medical system can be configured in the mission header se
 
 | Field                        | Type  | Default | Description                                                                                          |
 | ---------------------------- | ----- | ------- | ---------------------------------------------------------------------------------------------------- |
-| m_bSecondChanceOnHeadEnabled | bool  | false   | Enables second chance on headshots.                                                                  |
-| m_bHealSupplyUsageEnabled    | bool  | true    | Healing consumes supplies when enabled. Ignored when global supply usage is disabled.                |
+| m_bSecondChanceOnHeadEnabled | bool* | false   | Enables second chance on headshots.                                                                  |
+| m_bHealSupplyUsageEnabled    | bool* | true    | Healing consumes supplies when enabled. Ignored when global supply usage is disabled.                |
 | m_fMedicalKitMaxHealScaled   | float | 0.5     | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities.   |
+
+\* Note that bool has to be provided as integer in the config: 1 (true) or 0 (false).
 
 Example for the `missionHeader` in a server config:
 ```
 "missionHeader": {
     "m_ACE_Settings": {
         "m_ACE_Medical_Settings": {
-            "m_bSecondChanceOnHeadEnabled": true,
-            "m_bHealSupplyUsageEnabled": false,
+            "m_bSecondChanceOnHeadEnabled": 1,
+            "m_bHealSupplyUsageEnabled": 0,
             "m_fMedicalKitMaxHealScaled": 1.0
         }
     }

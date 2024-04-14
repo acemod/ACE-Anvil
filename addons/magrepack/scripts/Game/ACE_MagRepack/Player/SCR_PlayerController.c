@@ -4,13 +4,13 @@ modded class SCR_PlayerController
 	//------------------------------------------------------------------------------------------------
 	void ACE_MagRepack_Repack(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent managerComp, BaseInventoryStorageComponent storageTo, BaseInventoryStorageComponent storageFrom)
 	{
-		if(!fromMag || !toMag)
+		if (!fromMag || !toMag)
 		{
 			Print("Could not locate magazine components", LogLevel.ERROR);
 			return;
 		}
 		
-		if(!managerComp)
+		if (!managerComp)
 		{
 			Print("Was unable to locate storage or manager components", LogLevel.ERROR);
 			return;
@@ -27,19 +27,19 @@ modded class SCR_PlayerController
 		Print("toMag holds: " + toCount + " rounds.");
 		
 			
-		if(fromCount + toCount <= maxCount)
+		if (fromCount + toCount <= maxCount)
 		{
 			toMag.SetAmmoCount(fromCount + toCount);
 			Print("Added " + fromCount + " rounds to toMag. It now holds " + (fromCount + toCount) + " rounds. fromMag was fully exhausted.");
 			
 			
 			// Reinsert mag in optimal slot to help stacking and updating
-			if(managerComp.TryRemoveItemFromInventory(toEntity, storageTo))
+			if (managerComp.TryRemoveItemFromInventory(toEntity, storageTo))
 			{
 				Print("Underflow situation. Mag removed from inventory. Inserting.");
 				// Just print something if for whatever reason we can't add the magazine back
-				if(!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
-				//if(!managerComp.TryInsertItemInStorage(toEntity, storageTo))
+				if (!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
+				//if (!managerComp.TryInsertItemInStorage(toEntity, storageTo))
 				{
 					Print("Was unable to successfully add packed magazine back into storage. Trying to find new storage for item.", LogLevel.WARNING);
 				}
@@ -61,21 +61,21 @@ modded class SCR_PlayerController
 			toMag.SetAmmoCount(maxCount);
 			
 			// Reinsert mag in optimal slot to help stacking and updating
-			if(managerComp.TryRemoveItemFromInventory(toEntity, storageTo))
+			if (managerComp.TryRemoveItemFromInventory(toEntity, storageTo))
 			{
-				if(!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
+				if (!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
 				{
 					Print("Was unable to successfully add packed magazine back into storage", LogLevel.ERROR);
 				}
 			}
 
-			if(remainder > 0)
+			if (remainder > 0)
 			{
 				fromMag.SetAmmoCount(remainder);
 				
-				if(managerComp.TryRemoveItemFromInventory(fromEntity, storageFrom))
+				if (managerComp.TryRemoveItemFromInventory(fromEntity, storageFrom))
 				{
-					if(!managerComp.TryInsertItemInStorage(fromEntity, storageFrom))
+					if (!managerComp.TryInsertItemInStorage(fromEntity, storageFrom))
 					{
 						Print("Was unable to successfully add packed magazine back into storage", LogLevel.ERROR);
 					}
@@ -94,30 +94,30 @@ modded class SCR_PlayerController
 	void ACE_MagRepack_RpcAsk_Repack(RplId fromMag, RplId toMag, RplId managerComp, RplId storageTo, RplId storageFrom)
 	{
   		// Make sure we have everything
-		if(!fromMag.IsValid())
+		if (!fromMag.IsValid())
 		{
 			Print("Invalid from magazine", LogLevel.ERROR);
 			return;
 		}
 		
-		if(!toMag.IsValid())
+		if (!toMag.IsValid())
 		{
 			Print("Invalid to magazine", LogLevel.ERROR);
 			return;
 		}
 		
-		if(!managerComp.IsValid())
+		if (!managerComp.IsValid())
 		{
 			Print("Invalid manager", LogLevel.ERROR);
 			return;
 		}
 		
-		if(!storageTo.IsValid())
+		if (!storageTo.IsValid())
 		{
 			Print("Invalid storageTo", LogLevel.ERROR);
 		}
 		
-		if(!storageFrom.IsValid())
+		if (!storageFrom.IsValid())
 		{
 			Print("Invalid storageFrom", LogLevel.ERROR);
 		}

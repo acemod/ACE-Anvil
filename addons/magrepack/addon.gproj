@@ -1,7 +1,7 @@
 GameProject {
- ID "SESOF MagRepack"
+ ID "ACE_MagRepack"
  GUID "5ED143120C5465BD"
- TITLE "SESOF MagRepack"
+ TITLE "ACE Magazine Repack"
  Dependencies {
   "58D0FB3206B6F859"
  }

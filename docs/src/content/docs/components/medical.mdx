@@ -13,7 +13,7 @@ Note that ACE Medical currently only affects players, but not AI.
 
 ### Second Chance
 
-Second chance gets triggered when a player would have been killed without falling unconscious first. Instead of dying, the player will stay alive with 1 HP. On the other hand, natural recovery from this state is very slow (up to 10 minutes without epinephrine). Second chance is deactivated for headshots by default.
+Second chance gets triggered when a player would have been killed without falling unconscious first. Instead of dying, the player will stay alive with 1 HP. On the other hand, they can only wake up from this state when epinephrine was administered (Automatic wake-up can be enabled by changing `m_fSecondChanceRegenScale` to a value above zero). Second chance is deactivated for headshots by default.
 
 ## Settings
 
@@ -21,7 +21,7 @@ Certain aspects of the medical system can be configured in the mission header se
 
 | Field                          | Type  | Default | Description                                                                                          |
 | ------------------------------ | ----- | ------- | ---------------------------------------------------------------------------------------------------- |
-| m_fSecondChanceRegenTimeFactor | float | 40      | Determines how many times longer it takes to fully regenerate resilience when second chance was triggered. The default full recovery time is 20 s, which means 800 s when second chance was triggered when set to 40.  |
+| m_fSecondChanceRegenScale      | float | 0.0     | Scales the unconsciousness recovery rate when second chance was triggered. The default recovery rate (full recovery in 20 s) will be multiplied by this factor. Note that recovery only starts 10 s after the last incoming damage. |
 | m_bSecondChanceOnHeadEnabled   | bool  | false   | Enables second chance on headshots.                                                                  |
 | m_bHealSupplyUsageEnabled      | bool  | true    | Healing consumes supplies when enabled. Ignored when global supply usage is disabled.                |
 | m_fMedicalKitMaxHealScaled     | float | 0.5     | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities.   |
@@ -31,6 +31,7 @@ Example for the `missionHeader` in a server config:
 "missionHeader": {
     "m_ACE_Settings": {
         "m_ACE_Medical_Settings": {
+            "m_fSecondChanceRegenScale": 0.025,
             "m_bSecondChanceOnHeadEnabled": true,
             "m_bHealSupplyUsageEnabled": false,
             "m_fMedicalKitMaxHealScaled": 1.0

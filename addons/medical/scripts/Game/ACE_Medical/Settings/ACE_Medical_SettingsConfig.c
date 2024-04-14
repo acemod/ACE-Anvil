@@ -3,8 +3,8 @@
 [BaseContainerProps()]
 class ACE_Medical_Settings : ACE_ModSettings
 {
-	[Attribute(defvalue: "40", desc: "Determines how many times longer it takes to fully regenerate resilience when second chance was triggered", category: "ACE Medical")]
-	float m_fSecondChanceRegenTimeFactor;
+	[Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
+	float m_fSecondChanceRegenScale;
 	
 	[Attribute(defvalue: "false", desc: "Enables second chance on headshots")]
 	bool m_bSecondChanceOnHeadEnabled;

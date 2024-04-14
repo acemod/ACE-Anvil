@@ -4,7 +4,7 @@
 //! Add methods for interacting with pain hit zone.
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
-	[RplProp(), Attribute(defvalue: "0.025", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
+	[RplProp(), Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
 	protected float m_fACE_Medical_SecondChanceRegenScale;
 
 	protected HitZone m_pACE_Medical_HealthHitZone;
@@ -52,7 +52,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (settings)
 		{
 			m_bACE_Medical_SecondChanceOnHeadEnabled = settings.m_bSecondChanceOnHeadEnabled;
-			m_fACE_Medical_SecondChanceRegenScale = 1/settings.m_fSecondChanceRegenTimeFactor;
+			m_fACE_Medical_SecondChanceRegenScale = settings.m_fSecondChanceRegenScale;
 		}
 		
 		ACE_Medical_EnableSecondChance(true);

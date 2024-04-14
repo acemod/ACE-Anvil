@@ -2,7 +2,7 @@
 modded class SCR_PlayerController
 {
 	//------------------------------------------------------------------------------------------------
-	void RepackMags(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent managerComp, BaseInventoryStorageComponent storageTo, BaseInventoryStorageComponent storageFrom)
+	void ACE_MagRepack_Repack(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent managerComp, BaseInventoryStorageComponent storageTo, BaseInventoryStorageComponent storageFrom)
 	{
 		if(!fromMag || !toMag)
 		{
@@ -91,7 +91,7 @@ modded class SCR_PlayerController
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_RepackMags(RplId fromMag, RplId toMag, RplId managerComp, RplId storageTo, RplId storageFrom)
+	void ACE_MagRepack_RpcAsk_Repack(RplId fromMag, RplId toMag, RplId managerComp, RplId storageTo, RplId storageFrom)
 	{
   		// Make sure we have everything
 		if(!fromMag.IsValid())
@@ -122,7 +122,7 @@ modded class SCR_PlayerController
 			Print("Invalid storageFrom", LogLevel.ERROR);
 		}
 		
-		RepackMags(
+		ACE_MagRepack_Repack(
 			MagazineComponent.Cast(Replication.FindItem(fromMag)),
 			MagazineComponent.Cast(Replication.FindItem(toMag)),
 			SCR_InventoryStorageManagerComponent.Cast(Replication.FindItem(managerComp)),

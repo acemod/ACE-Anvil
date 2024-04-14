@@ -4,14 +4,14 @@ modded class SCR_InventoryMenuUI
 	//------------------------------------------------------------------------------------------------
 	override void MoveItemToStorageSlot()
 	{
-		if (!SESOF_MagRepack())
+		if (!ACE_MagRepack_Repack())
 		{
 			super.MoveItemToStorageSlot();
 		}
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Checks to ensure we have two magazines that should be repacked, and passes the necessary bits to RplAsk_RepackMags()-function in SCR_PlayerController
+	//! Checks to ensure we have two magazines that should be repacked, and passes the necessary bits to ACE_MagRepack_RpcAsk_Repack()-function in SCR_PlayerController
 	//! 
 	//! Returns true if repacking occurred 
 	//! Returns true if magwells were incompatible (feels nicer to have them not move.) 					This prevents swapping positions of mags - remove?
@@ -20,7 +20,7 @@ modded class SCR_InventoryMenuUI
 	//! 	
 	//! Returns false if dragging from or dropping on an arsenal.
 	//! Returns false if not dragging a mag onto another mag
-	bool SESOF_MagRepack()
+	bool ACE_MagRepack_Repack()
 	{
 		// Make sure we are not repacking arsenals
 		if (IsStorageArsenal(m_pFocusedSlotUI.GetStorageUI().GetCurrentNavigationStorage()))
@@ -150,7 +150,7 @@ modded class SCR_InventoryMenuUI
 		--------------------------------------------------------------------------------------------------------------------------------
 			REPACK
 			Repacking should indeed occur, but that can only be done on the master ... so rpl time. 
-			We need to pass the inventorymanager along with the storages and mags involved to SESOF_SCR_PlayerController.c
+			We need to pass the inventorymanager along with the storages and mags involved to SCR_PlayerController.c
 			where we can do that.
 		--------------------------------------------------------------------------------------------------------------------------------
 		*/ 
@@ -170,11 +170,11 @@ modded class SCR_InventoryMenuUI
 		
 		if (rpl.IsMaster())
 		{
-			m_PlayerController.RepackMags(fromMag, toMag, m_InventoryManager, toItemStorageComponent, fromItemStorageComponent);
+			m_PlayerController.ACE_MagRepack_Repack(fromMag, toMag, m_InventoryManager, toItemStorageComponent, fromItemStorageComponent);
 		}
 		else
 		{
-			m_PlayerController.Rpc(m_PlayerController.RpcAsk_RepackMags, 
+			m_PlayerController.Rpc(m_PlayerController.ACE_MagRepack_RpcAsk_Repack, 
 				Replication.FindId(fromMag), 
 				Replication.FindId(toMag),
 				Replication.FindId(m_InventoryManager),

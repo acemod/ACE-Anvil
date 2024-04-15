@@ -30,6 +30,7 @@ modded class SCR_PlayerController
 		if (fromCount + toCount <= maxCount)
 		{
 			toMag.SetAmmoCount(fromCount + toCount);
+			fromMag.SetAmmoCount(0);
 			Print("Added " + fromCount + " rounds to toMag. It now holds " + (fromCount + toCount) + " rounds. fromMag was fully exhausted.");
 			
 			
@@ -45,11 +46,11 @@ modded class SCR_PlayerController
 				}
 			}
 
-			// fromMag is exhausted and deleted	
-			//SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);
-			
-			// fromMag is exhausted and dropped on the ground
-			managerComp.TryRemoveItemFromInventory(fromEntity);
+			if (!managerComp.TryRemoveItemFromInventory(fromEntity)) 
+			{
+				Print("Was unable to drop fromMag on the ground. Deleting.");
+				SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);
+			}
 				
 		}
 		else

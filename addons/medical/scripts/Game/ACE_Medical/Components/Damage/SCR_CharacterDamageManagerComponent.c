@@ -20,7 +20,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected bool m_bACE_Medical_SecondChanceOnHeadEnabled = false;
 	protected bool m_bACE_Medical_SecondChanceTriggered = false;
 	protected float m_fACE_Medical_SecondChanceRegenScale;
-	
+
 	protected const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
 
 	//-----------------------------------------------------------------------------------------------------------
@@ -28,11 +28,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	override void OnInit(IEntity owner)
 	{
 		super.OnInit(owner);
-		
+
 		m_pACE_Medical_HealthHitZone = GetHitZoneByName("Health");
 		if (!m_pACE_Medical_HealthHitZone)
 			return;
-		
+
 		m_fACE_Medical_CriticalHealth = m_pACE_Medical_HealthHitZone.GetDamageStateThreshold(ECharacterHealthState.CRITICAL);
 		GetPhysicalHitZones(m_aACE_Medical_PhysicalHitZones);
 	}
@@ -43,22 +43,22 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		if (m_bACE_Medical_Initialized)
 			return;
-		
+
 		ACE_Medical_EnableSecondChance(true);
-		
+
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (settings)
 			m_bACE_Medical_SecondChanceOnHeadEnabled = settings.m_bSecondChanceOnHeadEnabled;
-				
+
 		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(owner.FindComponent(SCR_CharacterControllerComponent));
 		if (!characterController)
 			return;
-		
+
 		characterController.m_OnLifeStateChanged.Insert(ACE_Medical_OnLifeStateChanged);
 		m_fACE_Medical_SecondChanceRegenScale = -GetResilienceHitZone().GetMaxHealth() / m_fACE_Medical_SecondChanceFullRegenetationTimeS;
 		m_bACE_Medical_Initialized = true;
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Add/remove second chance when life state changes
 	protected void ACE_Medical_OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
@@ -73,14 +73,14 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 				ACE_Medical_SetSecondChanceTrigged(false);
 				break;
 			}
-			
+
 			// Schedule removal of second chance when falling unconscious
 			case ECharacterLifeState.INCAPACITATED:
 			{
 				GetGame().GetCallqueue().CallLater(ACE_Medical_EnableSecondChance, ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS, false, false);
 				break;
 			}
-			
+
 			// Remove second chance when dead
 			case ECharacterLifeState.DEAD:
 			{
@@ -90,7 +90,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			}
 		}
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	// Reduce regeneration rate when second chance was triggered
 	override float GetResilienceRegenScale()
@@ -117,12 +117,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Returns true if at least one physical hit zone is injured
 	bool ACE_Medical_CanBeHealed()
 	{
-		foreach (HitZone hitZone : m_aACE_Medical_PhysicalHitZones)
+		foreach (HitZone hitZone: m_aACE_Medical_PhysicalHitZones)
 		{
 			if (hitZone.GetHealthScaled() < 0.999)
 				return true;
 		}
-		
+
 		return false;
 	}
 
@@ -141,21 +141,21 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		return m_pACE_Medical_PainHitZone;
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Returns true if pain hit zone is at least moderately damaged
 	bool ACE_Medical_IsInPain()
 	{
 		return m_pACE_Medical_PainHitZone.GetHealthScaled() <= m_fACE_Medical_ModeratePainThreshold;
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Returns intensity of pain used for ACE_Medical_PainScreenEffect
 	float ACE_Medical_GetPainIntensity()
 	{
 		// Clamp between serious damage and full health
 		float scaledHealth = Math.Clamp(m_pACE_Medical_PainHitZone.GetHealthScaled(), m_fACE_Medical_SeriousPainThreshold, 1);
-		
+
 		if (scaledHealth > m_fACE_Medical_ModeratePainThreshold)
 		{
 			// No effect when less than moderate damage
@@ -174,34 +174,34 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		m_bACE_Medical_HasSecondChance = enable;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Check if second chance is enabled
 	bool ACE_Medical_HasSecondChance()
 	{
 		return m_bACE_Medical_HasSecondChance;
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Returns true if second chance is enabled for the given hit zone
 	bool ACE_Medical_HasSecondChanceOnHitZone(HitZone hitZone)
 	{
 		if (!m_bACE_Medical_HasSecondChance)
 			return false;
-		
+
 		if (m_bACE_Medical_SecondChanceOnHeadEnabled)
 			return true;
-		
+
 		return (hitZone != m_pHeadHitZone);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! To be set true when second chance was used
 	void ACE_Medical_SetSecondChanceTrigged(bool isTriggered)
 	{
 		m_bACE_Medical_SecondChanceTriggered = isTriggered;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Check if second chance was used
 	bool ACE_Medical_WasSecondChanceTrigged()

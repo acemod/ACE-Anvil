@@ -10,7 +10,7 @@ modded class SCR_GetInUserAction : SCR_CompartmentUserAction
 			SetCannotPerformReason("#ACE_Carrying-UserAction_Carrying");
 			return false;
 		};
-		
+
 		return super.CanBePerformedScript(user);
-	}	
+	}
 };

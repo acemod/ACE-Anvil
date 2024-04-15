@@ -4,7 +4,7 @@ class ACE_BackblastComponentClass : ScriptComponentClass
 {
 	static override array<typename> Requires(IEntityComponentSource src)
 	{
-		return {EventHandlerManagerComponent};
+		return { EventHandlerManagerComponent };
 	}
 }
 
@@ -18,19 +18,19 @@ class ACE_BackblastComponent : ScriptComponent
 	protected const float OUTER_RANGE_M = 10;
 	protected const float MAX_DAMAGE = 25;
 	protected const float CONE_DEG = 90;
-	protected const float BLEEDING_FACTOR = 2.0; //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
-	
+	protected const float BLEEDING_FACTOR = 2.0;  //<- Bleeding probability is BLEEDING_FACTOR * damage / MAX_DAMAGE
+
 	//------------------------------------------------------------------------------------------------
 	protected override void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
-		
+
 		if (!GetGame().InPlayMode())
 			return;
-		
+
 		if (!Replication.IsRunning() && !Replication.IsServer())
 			return;
-		
+
 		EventHandlerManagerComponent eventHandlerManager = EventHandlerManagerComponent.Cast(owner.FindComponent(EventHandlerManagerComponent));
 		eventHandlerManager.RegisterScriptHandler("OnProjectileShot", this, OnProjectileShot);
 	}
@@ -43,11 +43,11 @@ class ACE_BackblastComponent : ScriptComponent
 
 		vector minBounds;
 		vector maxBounds;
-		
+
 		IEntity weaponEntity = weapon.GetOwner();
 		if (!weaponEntity)
 			return;
-		
+
 		weaponEntity.GetBounds(minBounds, maxBounds);
 
 		if (m_bDebugModeEnabled)
@@ -55,11 +55,7 @@ class ACE_BackblastComponent : ScriptComponent
 			ACE_Drawing.DrawBounds(weaponEntity);
 		}
 
-		vector origin = {
-			(maxBounds[0] - minBounds[0]) / 2,
-			(maxBounds[1] - minBounds[1]) / 2,
-			0
-		};
+		vector origin = { (maxBounds[0] - minBounds[0]) / 2, (maxBounds[1] - minBounds[1]) / 2, 0 };
 		origin += minBounds;
 
 		vector transform[4];
@@ -79,46 +75,46 @@ class ACE_BackblastComponent : ScriptComponent
 		if (affectedEntities.IsEmpty())
 			return;
 
-		foreach (SCR_ChimeraCharacter character : affectedEntities)
+		foreach (SCR_ChimeraCharacter character: affectedEntities)
 		{
 			SCR_DamageManagerComponent damageManager = character.GetDamageManager();
 			if (!damageManager)
 				continue;
-			
+
 			vector charOrigin = character.GetOrigin();
-			
+
 			Animation anim = character.GetAnimation();
 			if (!anim)
 				continue;
-			
+
 			array<HitZone> hitZones = {};
 			damageManager.GetPhysicalHitZones(hitZones);
 
-			foreach (HitZone hitZone : hitZones)
+			foreach (HitZone hitZone: hitZones)
 			{
 				array<int> nodes = {};
 				hitZone.GetColliderIDs(nodes);
 				if (nodes.IsEmpty())
 					continue;
-				
+
 				vector nodeTransform[4];
 				anim.GetBoneMatrix(nodes[0], nodeTransform);
 				vector hitPosition = charOrigin + nodeTransform[3];
-				float damage = CalcDamage(origin, -weaponDir, hitPosition, {GetOwner().GetRootParent(), character});
-	
+				float damage = CalcDamage(origin, -weaponDir, hitPosition, { GetOwner().GetRootParent(), character });
+
 				if (damage <= 0)
 					continue;
-	
+
 				hitZone.HandleDamage(damage, EDamageType.EXPLOSIVE, GetOwner());
-				
+
 				// Probability of bleeding scales with percent damage
-				if (Math.RandomFloatInclusive(0, 1) > BLEEDING_FACTOR * damage/MAX_DAMAGE)
+				if (Math.RandomFloatInclusive(0, 1) > BLEEDING_FACTOR * damage / MAX_DAMAGE)
 					continue;
-				
+
 				SCR_CharacterHitZone charHitZone = SCR_CharacterHitZone.Cast(hitZone);
 				if (!charHitZone)
 					continue;
-				
+
 				charHitZone.AddBleeding(nodes[0]);
 			};
 		}
@@ -139,10 +135,10 @@ class ACE_BackblastComponent : ScriptComponent
 		trace.Start = origin;
 		trace.End = impact;
 		trace.ExcludeArray = excludedEntities;
-		
+
 		if (GetGame().GetWorld().TraceMove(trace, null) < 0.999)
 			return 0;
-		
+
 		vector dirVector = impact - origin;
 		float distance = dirVector.Length();
 		float dotProduct = vector.Dot(dirVector, blastDir);
@@ -192,13 +188,13 @@ class ACE_BackblastQueryCollector
 class ACE_BackblastDrawDamageFunction : ACE_DrawingDamageFunction
 {
 	protected vector m_vBlastDirection;
-	
+
 	//------------------------------------------------------------------------------------------------
 	void ACE_BackblastDrawDamageFunction(vector blastDirection)
 	{
 		m_vBlastDirection = blastDirection;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	override float CalculateDamage(vector origin, vector target)
 	{

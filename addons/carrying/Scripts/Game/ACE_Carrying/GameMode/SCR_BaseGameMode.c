@@ -17,7 +17,7 @@ modded class SCR_BaseGameMode : BaseGameMode
 				ACE_Carrying_Helper.ReleaseCarried(char);
 			}
 		}
-		
+
 		super.OnPlayerDisconnected(playerId, cause, timeout);
 	};
 };

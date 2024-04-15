@@ -8,7 +8,7 @@ modded class SCR_PlayerController : PlayerController
 	{
 		Rpc(RpcAsk_ACE_DeleteEntityAtPosition, pos);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of unreplicated entity from all machines
 	//! Called from server
@@ -18,7 +18,7 @@ modded class SCR_PlayerController : PlayerController
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		if (!gameMode)
 			return;
-		
-		gameMode.ACE_DeleteEntitiesAtPositionsGlobal({pos});
+
+		gameMode.ACE_DeleteEntitiesAtPositionsGlobal( { pos });
 	}
 }

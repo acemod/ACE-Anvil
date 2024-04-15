@@ -9,7 +9,7 @@ class ACE_SettingsHelperT<Class T>
 		ACE_SettingsConfig config = ArmaReforgerScripted.ACE_GetSettingsConfig();
 		if (config)
 			return T.Cast(config.GetModSettings(T));
-		
+
 		return null;
 	}
 }

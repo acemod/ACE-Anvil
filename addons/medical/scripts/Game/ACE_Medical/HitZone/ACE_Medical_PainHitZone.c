@@ -11,7 +11,7 @@ class ACE_Medical_PainHitZone : SCR_RegeneratingHitZone
 		if (characterDamageManager)
 			characterDamageManager.ACE_Medical_SetPainHitZone(this);
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Suppress passive regeneration while bleeding
 	override float CalculatePassiveRegeneration()

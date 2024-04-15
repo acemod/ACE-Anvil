@@ -17,7 +17,7 @@ modded class SCR_AvailableActionsConditionData
 	{
 		return m_ACE_Carrying_bIsCarrier;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	// Fetch data
 	//------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ modded class SCR_AvailableActionsConditionData
 	override void FetchData(IEntity controlledEntity, float timeSlice)
 	{
 		super.FetchData(controlledEntity, timeSlice);
-		
+
 		// Invalidates and clears any data prior to following collection
 		ACE_Carrying_Clear();
 

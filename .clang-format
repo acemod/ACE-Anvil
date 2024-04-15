@@ -1,0 +1,11 @@
+BasedOnStyle: Google
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+ColumnLimit: 160
+DerivePointerAlignment: false
+PointerAlignment: Left
+NamespaceIndentation: All
+IncludeBlocks: Merge
+AllowShortBlocksOnASingleLine: true
+BreakBeforeBraces: Allman

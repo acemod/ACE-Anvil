@@ -1,0 +1,22 @@
+GameProject {
+ ID "ACE_Testing"
+ GUID "61203C3473415FCF"
+ TITLE "AXX Testing"
+ Dependencies {
+  "60C4CE4888FF4621" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

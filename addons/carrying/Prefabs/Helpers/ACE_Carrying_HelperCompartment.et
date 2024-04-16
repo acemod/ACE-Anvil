@@ -1,4 +1,4 @@
-ACE_Carrying_Helper : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
+ACE_Carrying_HelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
  ID "4B42E71698F5739C"
  components {
   ControllersManagerComponent "{2CD4A765B3F3A3B1}" {
@@ -26,6 +26,9 @@ ACE_Carrying_Helper : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Bas
    Enabled 0
   }
   SCR_DamageManagerComponent "{3EBB276D48AFFF41}" {
+   Enabled 0
+  }
+  SCR_UniversalInventoryStorageComponent "{5E58C207959A9200}" {
    Enabled 0
   }
   SCR_VehicleCameraDataComponent "{5E0BA784A744A7CE}" {

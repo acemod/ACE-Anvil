@@ -1,32 +1,45 @@
 //------------------------------------------------------------------------------------------------
 //! Class which carries saved data for the editor.
 //! Managed by SCR_DSSessionCallback.
-[BaseContainerProps()]
-modded class SCR_EditorStruct : SCR_JsonApiStruct
+class ACE_EditorStruct : SCR_JsonApiStruct
 {
 	// SCR_JsonApiStruct does not support array of PoD, hence we use ACE_VectorStruct as wrapper
 	protected ref array<ref ACE_VectorStruct> m_aACE_DeletedEntityPositions = {};
 	
 	//------------------------------------------------------------------------------------------------
-	void SCR_EditorStruct()
+	void ACE_EditorStruct()
 	{
 		RegV("m_aACE_DeletedEntityPositions");
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	// Print out contents of saved data.
+	override void Log()
+	{
+		Print("--- ACE_EditorStruct ------------------------");
+		for (int i = 0, count = m_aACE_DeletedEntityPositions.Count(); i < count; i++)
+		{
+			Print("Removed entity position: " + m_aACE_DeletedEntityPositions[i]);
+		}
+		Print("---------------------------------------------");
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Write world data into the struct.
 	override bool Serialize()
 	{
-		if (!super.Serialize())
-			return false;
 		
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		if (!gameMode)
 			return false;
 		
+		m_aACE_DeletedEntityPositions.Clear();
+		
 		foreach (vector pos : gameMode.ACE_GetDeletedEntityPositions())
 		{
-			m_aACE_DeletedEntityPositions.Insert(new ACE_VectorStruct(pos));
+			ACE_VectorStruct posStruct = new ACE_VectorStruct();
+			posStruct.SetVector(pos);
+			m_aACE_DeletedEntityPositions.Insert(posStruct);
 		}
 
 		return true;
@@ -35,10 +48,7 @@ modded class SCR_EditorStruct : SCR_JsonApiStruct
 	//------------------------------------------------------------------------------------------------
 	//! Read data from the struct and apply them in the world.
 	override bool Deserialize()
-	{
-		if (!super.Deserialize())
-			return false;
-		
+	{	
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		if (!gameMode)
 			return false;
@@ -54,12 +64,11 @@ modded class SCR_EditorStruct : SCR_JsonApiStruct
 		
 		return true;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Clear cached data.
 	override void ClearCache()
 	{
-		super.ClearCache();
 		m_aACE_DeletedEntityPositions.Clear();
 	}
 }

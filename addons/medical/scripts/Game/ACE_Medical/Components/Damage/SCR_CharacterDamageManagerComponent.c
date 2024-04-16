@@ -39,6 +39,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		
 		m_fACE_Medical_CriticalHealth = m_pACE_Medical_HealthHitZone.GetDamageStateThreshold(ECharacterHealthState.CRITICAL);
 		GetPhysicalHitZones(m_aACE_Medical_PhysicalHitZones);
+		
+		m_fACE_Medical_SecondChanceRegenScale = -GetResilienceHitZone().GetMaxHealth() / m_fACE_Medical_SecondChanceFullRegenetationTimeS;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

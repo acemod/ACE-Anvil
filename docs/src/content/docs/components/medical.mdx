@@ -19,12 +19,14 @@ Second chance gets triggered when a player would have been killed without fallin
 
 Certain aspects of the medical system can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
 
-| Field                          | Type  | Default | Description                                                                                          |
-| ------------------------------ | ----- | ------- | ---------------------------------------------------------------------------------------------------- |
+| Field                        | Type  | Default | Description                                                                                          |
+| ---------------------------- | ----- | ------- | ---------------------------------------------------------------------------------------------------- |
 | m_fSecondChanceRegenScale      | float | 0.0     | Scales the unconsciousness recovery rate when second chance was triggered. The default recovery rate (full recovery in 20 s) will be multiplied by this factor. Note that recovery only starts 10 s after the last incoming damage. |
-| m_bSecondChanceOnHeadEnabled   | bool  | false   | Enables second chance on headshots.                                                                  |
-| m_bHealSupplyUsageEnabled      | bool  | true    | Healing consumes supplies when enabled. Ignored when global supply usage is disabled.                |
-| m_fMedicalKitMaxHealScaled     | float | 0.5     | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities.   |
+| m_bSecondChanceOnHeadEnabled | bool* | false   | Enables second chance on headshots.                                                                  |
+| m_bHealSupplyUsageEnabled    | bool* | true    | Healing consumes supplies when enabled. Ignored when global supply usage is disabled.                |
+| m_fMedicalKitMaxHealScaled   | float | 0.5     | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities.   |
+
+\* Note that bool has to be provided as integer in the config: 1 (true) or 0 (false).
 
 Example for the `missionHeader` in a server config:
 ```
@@ -32,8 +34,8 @@ Example for the `missionHeader` in a server config:
     "m_ACE_Settings": {
         "m_ACE_Medical_Settings": {
             "m_fSecondChanceRegenScale": 0.025,
-            "m_bSecondChanceOnHeadEnabled": true,
-            "m_bHealSupplyUsageEnabled": false,
+            "m_bSecondChanceOnHeadEnabled": 1,
+            "m_bHealSupplyUsageEnabled": 0,
             "m_fMedicalKitMaxHealScaled": 1.0
         }
     }

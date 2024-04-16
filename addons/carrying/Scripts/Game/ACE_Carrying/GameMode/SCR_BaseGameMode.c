@@ -8,13 +8,13 @@ modded class SCR_BaseGameMode : BaseGameMode
 		IEntity char = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		if (char)
 		{
-			if (ACE_Carrying_Helper.IsCarrier(char))
+			if (ACE_Carrying_Tools.IsCarrier(char))
 			{
-				ACE_Carrying_Helper.ReleaseFromCarrier(char);
+				ACE_Carrying_Tools.ReleaseFromCarrier(char);
 			}
-			else if (ACE_Carrying_Helper.IsCarried(char))
+			else if (ACE_Carrying_Tools.IsCarried(char))
 			{
-				ACE_Carrying_Helper.ReleaseCarried(char);
+				ACE_Carrying_Tools.ReleaseCarried(char);
 			}
 		}
 		

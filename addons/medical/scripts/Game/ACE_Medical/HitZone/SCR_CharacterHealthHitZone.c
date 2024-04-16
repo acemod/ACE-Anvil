@@ -7,6 +7,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	protected float ACE_MEDICAL_SECOND_CHANCE_MIN_HEALTH = 1;
 	
 	//-----------------------------------------------------------------------------------------------------------
+	//! Initialize variables on init
 	override void OnInit(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		super.OnInit(pOwnerEntity, pManagerComponent);
@@ -16,6 +17,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	//-----------------------------------------------------------------------------------------------------------
 	//! Calculates the amount of damage the health hit zone will receive
 	//! Change damage calculation while second chance is enabled
+	//! Executed on all server and all clients
 	override float ComputeEffectiveDamage(notnull BaseDamageContext damageContext, bool isDOT)
 	{
 		if (m_pACE_Medical_DamageManager.ACE_Medical_HasSecondChanceOnHitZone(damageContext.struckHitZone))
@@ -39,7 +41,9 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 		{
 			m_pACE_Medical_DamageManager.ACE_Medical_SetSecondChanceTrigged(true);
 			// Add bleeding to the hit zone that triggered second chance
-			hitZone.AddBleeding(damageContext.colliderID);
+			// Only call AddBleeding on the authority, since it does a broadcast itself
+			if (!IsProxy())
+				hitZone.AddBleeding(damageContext.colliderID);
 		}
 		
 		return GetHealth() - ACE_MEDICAL_SECOND_CHANCE_MIN_HEALTH;

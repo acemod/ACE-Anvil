@@ -23,13 +23,8 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		m_pCarrier = carrier;
 		m_pCarried = carried;
 		
-		RplComponent carrierRpl = RplComponent.Cast(carrier.FindComponent(RplComponent));
-		if (!carrierRpl)
-			return;
-		
-		RpcDo_AttachToCarrier(carrierRpl.Id());
-		Rpc(RpcDo_AttachToCarrier, carrierRpl.Id());
-				
+		carrier.AddChild(this, carrier.GetAnimation().GetBoneIndex("Spine5"));
+
 		PlayerManager playerManager = GetGame().GetPlayerManager();
 		SCR_PlayerController carrierPlayerController = SCR_PlayerController.Cast(playerManager.GetPlayerController(playerManager.GetPlayerIdFromControlledEntity(carrier)));
 		
@@ -62,38 +57,6 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 			return;
 		
 		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Broadcast attaching of helper to carrier
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RpcDo_AttachToCarrier(RplId carrierId)
-	{
-		RplComponent carrierRpl = RplComponent.Cast(Replication.FindItem(carrierId));
-		if (!carrierRpl)
-			return;
-				
-		IEntity carrier = carrierRpl.GetEntity();
-		if (!carrier)
-			return;
-		
-		carrier.AddChild(this, carrier.GetAnimation().GetBoneIndex("Spine5"));
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Broadcast detaching of helper from carrier
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RpcDo_DetachFromCarrier(RplId carrierId)
-	{
-		RplComponent carrierRpl = RplComponent.Cast(Replication.FindItem(carrierId));
-		if (!carrierRpl)
-			return;
-				
-		IEntity carrier = carrierRpl.GetEntity();
-		if (!carrier)
-			return;
-		
-		carrier.RemoveChild(this);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -147,12 +110,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	{
 		if (m_pCarrier)
 		{
-			RplComponent carrierRpl = RplComponent.Cast(m_pCarrier.FindComponent(RplComponent));
-			if (carrierRpl)
-			{
-				RpcDo_DetachFromCarrier(carrierRpl.Id());
-				Rpc(RpcDo_DetachFromCarrier, carrierRpl.Id());
-			}
+			m_pCarrier.RemoveChild(this, true);
 			
 			SCR_CharacterControllerComponent carrierController = SCR_CharacterControllerComponent.Cast(m_pCarrier.FindComponent(SCR_CharacterControllerComponent));
 			if (!carrierController)

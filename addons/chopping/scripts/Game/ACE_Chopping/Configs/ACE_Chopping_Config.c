@@ -45,13 +45,9 @@ class ACE_Chopping_Config
 		if (m_mResourceNameCache.Find(resName, cachedEntry))
 			return cachedEntry;
 		
-		BaseContainer container = prefabData.GetPrefab();
-		if (!container)
-			return null;
-		
 		foreach (ACE_Chopping_ConfigEntry entry : m_aEntries)
 		{
-			if (SCR_BaseContainerTools.IsKindOf(container, entry.m_sPlantPrefabName))
+			if (SCR_BaseContainerTools.IsKindOf(resName, entry.m_sPlantPrefabName))
 			{
 				m_mResourceNameCache.Insert(resName, entry);
 				return entry;

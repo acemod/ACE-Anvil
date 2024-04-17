@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{388AE316D09D0680}Prefabs/Vegetation/Core/Tree_Base.et"
+ Name "{063A4F879AC2DBBB}Prefabs/Helpers/ACE_Chopping_TreeHelper.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }
@@ -8,6 +8,8 @@ MetaFileClass {
   EntityTemplateResourceClass XBOX_SERIES : PC {
   }
   EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
   }
   EntityTemplateResourceClass HEADLESS : PC {
   }

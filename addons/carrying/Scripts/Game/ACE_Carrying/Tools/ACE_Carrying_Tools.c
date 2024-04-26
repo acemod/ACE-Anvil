@@ -15,14 +15,14 @@ class ACE_Carrying_Tools
 	//------------------------------------------------------------------------------------------------
 	//! Release the carried player by passing the carrier
 	//! Calls Release method on helper compartment entity
-	static void ReleaseFromCarrier(notnull IEntity carrier)
+	static void ReleaseFromCarrier(notnull IEntity carrier, array<vector> placementPos = null)
 	{
 		ACE_Carrying_HelperCompartment helper = GetHelperCompartmentFromCarrier(carrier);
 		
 		if (!helper)
 			return;
 		
-		helper.Terminate();
+		helper.Terminate(placementPos);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class ACE_Carrying_Tools
 		if (!helper)
 			return;
 		
-		helper.Terminate();
+		helper.Terminate(null);
 	}
 	
 	//------------------------------------------------------------------------------------------------

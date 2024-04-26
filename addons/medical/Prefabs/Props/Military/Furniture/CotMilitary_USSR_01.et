@@ -1,0 +1,30 @@
+StaticModelEntity : "{5EC6836A5694F691}Prefabs/Props/Military/Furniture/FurnitureMilitary_base.et" {
+ ID "5272E314F01B2DBE"
+ components {
+  ActionsManagerComponent "{6134DC9906AC249B}" {
+   ActionContexts {
+    UserActionContext "{6134DC99055BF0FB}" {
+     ContextName "default"
+     Position PointInfo "{6134DC991F3E2EC8}" {
+      Offset 0 0.54 0
+     }
+     Radius 0.5
+    }
+   }
+   additionalActions {
+    ACE_Carrying_PlaceOnEntityUserAction "{6134DC992974CC40}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6134DC99F2B42E43}" {
+      Name "Place carried"
+     }
+     Duration 0.7
+     m_ACE_Carrying_PointInfo PointInfo "{6135218E4CEE71C6}" {
+      Offset 0 0.54 0
+     }
+    }
+   }
+  }
+ }
+}

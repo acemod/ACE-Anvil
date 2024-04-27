@@ -56,7 +56,11 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (!compartmentAccess)
 			return;
 		
+		// Clean-up when carried has left the comparment
+		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
+		
 		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
+		
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -141,9 +145,6 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccess)
 			return;
-		
-		// Clean-up when carried has left the comparment
-		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
 		
 		vector target_transform[4];
 		if (!placementPos)

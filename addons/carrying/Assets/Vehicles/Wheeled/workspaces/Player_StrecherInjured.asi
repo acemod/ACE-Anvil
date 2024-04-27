@@ -73,6 +73,24 @@ AnimSetInstanceSource "{6136A0C37DBB6595}" {
   AnimSetInstanceSource_Line "Vehicle.UniqueSeat.UnconsciousOut" {
    Resource "{0CEDDDC58B74041F}anims/anm/player/vehicles/Ambulances/anm/p_ambulance_patient_unconscious_out.anm"
   }
+  AnimSetInstanceSource_Line "Vehicle.CoDriver.Death" {
+   Resource "{2A948FDF4AD9B65E}anims/anm/player/vehicles/Ambulances/anm/p_ambulance_patient_death_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Driver.Death" {
+   Resource "{2A948FDF4AD9B65E}anims/anm/player/vehicles/Ambulances/anm/p_ambulance_patient_death_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.Gunner.Death" {
+   Resource "{2A948FDF4AD9B65E}anims/anm/player/vehicles/Ambulances/anm/p_ambulance_patient_death_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerL.Death" {
+   Resource "{2A948FDF4AD9B65E}anims/anm/player/vehicles/Ambulances/anm/p_ambulance_patient_death_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.PassengerR.Death" {
+   Resource "{2A948FDF4AD9B65E}anims/anm/player/vehicles/Ambulances/anm/p_ambulance_patient_death_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Vehicle.UniqueSeat.Death" {
+   Resource "{2A948FDF4AD9B65E}anims/anm/player/vehicles/Ambulances/anm/p_ambulance_patient_death_idle.anm"
+  }
  }
  RBF AnimSetInstanceSourceRBFArray "{5DC3656B0EF64C8C}" {
  }

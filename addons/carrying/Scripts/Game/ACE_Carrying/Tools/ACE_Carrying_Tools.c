@@ -3,7 +3,7 @@
 class ACE_Carrying_Tools
 {
 	protected static const ResourceName HELPER_CARRY_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et";
-	protected static const ResourceName HELPER_STRECHER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_StrecherHelperCompartment.et";
+	protected static const ResourceName HELPER_STRECHER_PREFAB_NAME = "{F9861A601F934DE7}Prefabs/Helpers/ACE_Carrying_StrecherHelperCompartment.et";
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>

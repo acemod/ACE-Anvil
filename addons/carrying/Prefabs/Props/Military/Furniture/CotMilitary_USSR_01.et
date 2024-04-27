@@ -17,7 +17,7 @@ StaticModelEntity : "{5EC6836A5694F691}Prefabs/Props/Military/Furniture/Furnitur
       "default"
      }
      UIInfo UIInfo "{6134DC99F2B42E43}" {
-      Name "Place carried"
+      Name "#ACE_Carrying-UserAction_PlaceCasualty"
      }
      Duration 0.5
      m_ACE_Carrying_PointInfo PointInfo "{6135218E4CEE71C6}" {

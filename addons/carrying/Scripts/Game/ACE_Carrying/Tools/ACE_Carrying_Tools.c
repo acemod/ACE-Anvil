@@ -16,14 +16,14 @@ class ACE_Carrying_Tools
 	//------------------------------------------------------------------------------------------------
 	//! Release the carried player by passing the carrier
 	//! Calls Release method on helper compartment entity
-	static void ReleaseFromCarrier(notnull IEntity carrier, array<vector> placementPos = null)
+	static void ReleaseFromCarrier(notnull IEntity carrier)
 	{
 		ACE_Carrying_HelperCompartment helper = GetHelperCompartmentFromCarrier(carrier);
 		
 		if (!helper)
 			return;
 		
-		helper.Terminate(placementPos);
+		helper.Terminate();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -36,15 +36,16 @@ class ACE_Carrying_Tools
 		if (!helper)
 			return;
 		
-		helper.Terminate(null);
+		helper.Terminate();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Place the carried player on entity
 	static void PlaceOnEntity(notnull IEntity entity, notnull IEntity carried, notnull PointInfo placementInfo)
 	{
-		ACE_Carrying_HelperCompartment helper = ACE_Carrying_HelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_STRECHER_PREFAB_NAME), null, EntitySpawnParams()));
-		GetGame().GetCallqueue().Call(helper.InitEntity, entity, carried, placementInfo);
+		ACE_Carrying_StrecherHelperCompartment helper = ACE_Carrying_StrecherHelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_STRECHER_PREFAB_NAME), null, EntitySpawnParams()));
+		helper.Init(entity, carried);
+		helper.SetTransformPoint(placementInfo);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -64,7 +65,11 @@ class ACE_Carrying_Tools
 		if (!carried)
 			return false;
 		
-		return GetHelperCompartmentFromCarried(carried);
+		ACE_Carrying_HelperCompartment compartment = GetHelperCompartmentFromCarried(carried);
+		if (!compartment)
+			return false;
+		
+		return compartment.IsCarrierPlayer();
 	}
 	
 	//------------------------------------------------------------------------------------------------

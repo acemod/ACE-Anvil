@@ -1,4 +1,4 @@
-ACE_Carrying_HelperCompartment : "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et" {
+ACE_Carrying_StrecherHelperCompartment : "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et" {
  ID "4B42E71698F5739C"
  components {
   VehicleAnimationComponent "{50B812962B17E60B}" {

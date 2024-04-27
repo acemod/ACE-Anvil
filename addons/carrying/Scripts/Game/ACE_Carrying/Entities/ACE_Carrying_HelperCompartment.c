@@ -60,52 +60,6 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
 		
 		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
-		
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Place <carried> on the specified <entity>
-	//! This helper compartment is attached to the <entity> and the <carried> moves inside
-	void InitEntity(notnull IEntity entity, notnull IEntity carried, notnull PointInfo placementInfo)
-	{
-		m_pCarrier = entity;
-		m_pCarried = carried;
-		
-		PrintFormat("placement node id %1", placementInfo.GetNodeId()); // TODO remove
-		
-		// TODO carried disappears for some reason
-		entity.AddChild(this, placementInfo.GetNodeId());
-		vector transform[4];
-		placementInfo.GetLocalTransform(transform);
-		SetLocalTransform(transform);
-
-		RplComponent rplParent = RplComponent.Cast(entity.FindComponent(RplComponent));
-		if (!rplParent)
-			return;
-
-		RplComponent rpl = RplComponent.Cast(FindComponent(RplComponent));
-		if (!rpl)
-			return;
-		
-		// TODO this errors, I guess we need Identity not Id?
-		// rpl.Give(rplParent.Id()); // do we even need this for static objects?
-		PrintFormat("Helper role is %1", rpl.Role());
-		
-		SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(carried.FindComponent(SCR_CharacterControllerComponent));
-		if (!carriedController)
-			return;
-		
-		carriedController.m_OnLifeStateChanged.Insert(OnCarriedLifeStateChanged);
-		
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(carried.FindComponent(SCR_CompartmentAccessComponent));
-		if (!compartmentAccess)
-			return;
-		
-		// Clean-up when carried has left the comparment
-		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
-		
-		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
-		
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -204,6 +158,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (carriedRpl)
 			carriedRpl.ForceNodeMovement(GetOrigin());
 	}
+
 	
 	//------------------------------------------------------------------------------------------------
 	//! Clean-up when the carried player has left the compartment
@@ -250,7 +205,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	//! Callback for the release keybind
 	protected void ActionTerminateCallback()
 	{
-		Rpc(Terminate, null);
+		Rpc(Terminate);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -265,5 +220,12 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	IEntity GetCarried()
 	{
 		return m_pCarried;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns the carried unit
+	bool IsCarrierPlayer()
+	{
+		return m_pCarrier.Type() == ChimeraCharacter;
 	}
 }

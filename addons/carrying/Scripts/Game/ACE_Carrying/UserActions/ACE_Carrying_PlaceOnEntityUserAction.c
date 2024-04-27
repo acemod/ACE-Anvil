@@ -25,7 +25,9 @@ class ACE_Carrying_PlaceOnEntityUserAction: ScriptedUserAction
 		vector placementTransform[4];
 		m_ACE_Carrying_PointInfo.GetWorldTransform(placementTransform);
 		
-		array<vector> placementPos = {placementTransform};
+		array<vector> placementPos = {};
+		foreach (vector v : placementTransform)
+			placementPos.Insert(v);
 			
 		ACE_Carrying_Tools.ReleaseFromCarrier(pUserEntity, placementPos);
 	}

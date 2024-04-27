@@ -133,7 +133,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Moves the carried player out of the helper compartment
-	protected void MoveOutCarried(array<vector> placementPos = null)
+	protected void MoveOutCarried(array<vector> placementPos)
 	{
 		if (!m_pCarried)
 			return;
@@ -145,16 +145,21 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		// Clean-up when carried has left the comparment
 		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
 		
+		vector target_transform[4];
 		if (!placementPos)
 		{
 			vector target_pos;
-			vector target_transform[4];
 			m_pCarrier.GetWorldTransform(target_transform);
 			// target_transform[2] is vectorDir in Arma 3
 			SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS_M);
 			target_transform[3] = target_pos;
-			compartmentAccess.MoveOutVehicle(-1, target_transform);
 		}
+		else
+		{
+			target_transform = {placementPos[0], placementPos[1], placementPos[2], placementPos[3]};
+		}
+		
+		compartmentAccess.MoveOutVehicle(-1, target_transform);
 		
 		// Broadcast teleport on network
 		RplComponent carriedRpl = RplComponent.Cast(m_pCarried.FindComponent(RplComponent));

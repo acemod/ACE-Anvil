@@ -66,7 +66,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	//! Place <carried> on the specified <entity>
 	//! This helper compartment is attached to the <entity> and the <carried> moves inside
-	void InitEntity(IEntity entity, IEntity carried, PointInfo placementInfo)
+	void InitEntity(notnull IEntity entity, notnull IEntity carried, notnull PointInfo placementInfo)
 	{
 		m_pCarrier = entity;
 		m_pCarried = carried;
@@ -75,7 +75,9 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		
 		// TODO carried disappears for some reason
 		entity.AddChild(this, placementInfo.GetNodeId());
-		SetLocalTransform(placementInfo.GetLocalTransform());
+		vector transform[4];
+		placementInfo.GetLocalTransform(transform);
+		SetLocalTransform(transform);
 
 		RplComponent rplParent = RplComponent.Cast(entity.FindComponent(RplComponent));
 		if (!rplParent)
@@ -86,7 +88,8 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 			return;
 		
 		// TODO this errors, I guess we need Identity not Id?
-		rpl.Give(rplParent.Id());
+		// rpl.Give(rplParent.Id()); // do we even need this for static objects?
+		PrintFormat("Helper role is %1", rpl.Role());
 		
 		SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(carried.FindComponent(SCR_CharacterControllerComponent));
 		if (!carriedController)
@@ -152,7 +155,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	//! Terminates carrying: Moves out the carried player and schedules clean up
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void Terminate(array<vector> placementPos)
+	void Terminate()
 	{
 		if (m_pCarrier)
 		{
@@ -167,7 +170,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 
 		if (m_pCarried)
 		{
-			MoveOutCarried(placementPos);
+			MoveOutCarried();
 			
 			SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(m_pCarried.FindComponent(SCR_CharacterControllerComponent));
 			if (!carriedController)
@@ -179,7 +182,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Moves the carried player out of the helper compartment
-	protected void MoveOutCarried(array<vector> placementPos)
+	protected void MoveOutCarried()
 	{
 		if (!m_pCarried)
 			return;
@@ -188,20 +191,12 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (!compartmentAccess)
 			return;
 		
+		vector target_pos;
 		vector target_transform[4];
-		if (!placementPos)
-		{
-			vector target_pos;
-			m_pCarrier.GetWorldTransform(target_transform);
-			// target_transform[2] is vectorDir in Arma 3
-			SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS_M);
-			target_transform[3] = target_pos;
-		}
-		else
-		{
-			target_transform = {placementPos[0], placementPos[1], placementPos[2], placementPos[3]};
-		}
-		
+		m_pCarrier.GetWorldTransform(target_transform);
+		// target_transform[2] is vectorDir in Arma 3
+		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS_M);
+		target_transform[3] = target_pos;
 		compartmentAccess.MoveOutVehicle(-1, target_transform);
 		
 		// Broadcast teleport on network
@@ -212,8 +207,11 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Clean-up when the carried player has left the compartment
-	protected void OnCompartmentLeft()
+	protected void OnCompartmentLeft(IEntity compartment)
 	{
+		if (compartment != this)
+			return;
+		
 		RplId carriedId = RplId.Invalid();
 		
 		if (m_pCarried)

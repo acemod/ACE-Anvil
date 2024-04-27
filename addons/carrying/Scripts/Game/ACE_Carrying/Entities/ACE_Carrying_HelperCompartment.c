@@ -62,6 +62,48 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
 		
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Place <carried> on the specified <entity>
+	//! This helper compartment is attached to the <entity> and the <carried> moves inside
+	void InitEntity(IEntity entity, IEntity carried, PointInfo placementInfo)
+	{
+		m_pCarrier = entity;
+		m_pCarried = carried;
+		
+		PrintFormat("placement node id %1", placementInfo.GetNodeId()); // TODO remove
+		
+		// TODO carried disappears for some reason
+		entity.AddChild(this, placementInfo.GetNodeId());
+		SetLocalTransform(placementInfo.GetLocalTransform());
+
+		RplComponent rplParent = RplComponent.Cast(entity.FindComponent(RplComponent));
+		if (!rplParent)
+			return;
+
+		RplComponent rpl = RplComponent.Cast(FindComponent(RplComponent));
+		if (!rpl)
+			return;
+		
+		// TODO this errors, I guess we need Identity not Id?
+		rpl.Give(rplParent.Id());
+		
+		SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(carried.FindComponent(SCR_CharacterControllerComponent));
+		if (!carriedController)
+			return;
+		
+		carriedController.m_OnLifeStateChanged.Insert(OnCarriedLifeStateChanged);
+		
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(carried.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
+			return;
+		
+		// Clean-up when carried has left the comparment
+		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
+		
+		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
+		
+	}
 
 	//------------------------------------------------------------------------------------------------
 	//! Called on carrier's machine

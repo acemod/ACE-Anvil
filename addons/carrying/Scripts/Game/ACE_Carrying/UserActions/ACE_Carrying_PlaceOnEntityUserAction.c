@@ -22,14 +22,11 @@ class ACE_Carrying_PlaceOnEntityUserAction: ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		vector placementTransform[4];
-		m_ACE_Carrying_PointInfo.GetWorldTransform(placementTransform);
-		
-		array<vector> placementPos = {};
-		foreach (vector v : placementTransform)
-			placementPos.Insert(v);
-			
-		ACE_Carrying_Tools.ReleaseFromCarrier(pUserEntity, placementPos);
+		IEntity carried = ACE_Carrying_Tools.GetCarried(pUserEntity);
+		if (!carried)
+			return;
+					
+		ACE_Carrying_Tools.PlaceOnEntity(pOwnerEntity, carried, m_ACE_Carrying_PointInfo);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -21,7 +21,8 @@ StaticModelEntity : "{5EC6836A5694F691}Prefabs/Props/Military/Furniture/Furnitur
      }
      Duration 0.5
      m_ACE_Carrying_PointInfo PointInfo "{613521899ADD7A0F}" {
-      Offset 0 0.54 0
+      Offset 0 1 0.052
+      Angles 0 -90 0
      }
     }
    }

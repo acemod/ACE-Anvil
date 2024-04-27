@@ -1,0 +1,10 @@
+ACE_Carrying_HelperCompartment : "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et" {
+ ID "4B42E71698F5739C"
+ components {
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+    AnimInstance "{3DB68DDD9D578EB6}Assets/Vehicles/Wheeled/workspaces/Player_StrecherInjured.asi"
+   }
+  }
+ }
+}

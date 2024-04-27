@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{3DB68DDD9D578EB6}Assets/Vehicles/Wheeled/workspaces/Player_StrecherInjured.asi"
+ Configurations {
+  AnimSetInstanceResourceClass PC {
+  }
+  AnimSetInstanceResourceClass XBOX_ONE : PC {
+  }
+  AnimSetInstanceResourceClass XBOX_SERIES : PC {
+  }
+  AnimSetInstanceResourceClass PS4 : PC {
+  }
+  AnimSetInstanceResourceClass HEADLESS : PC {
+  }
+  AnimSetInstanceResourceClass PS5 : PC {
+  }
+ }
+}

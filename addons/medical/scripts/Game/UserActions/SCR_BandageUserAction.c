@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------------------------
 //! Hard-override of SCR_BandageUserAction
 class SCR_BandageUserAction : SCR_HealingUserAction
-{
-	
+{	
 	//------------------------------------------------------------------------------------------------
 	//! Copy of vanilla method
 	override void OnActionCanceled(IEntity pOwnerEntity, IEntity pUserEntity)

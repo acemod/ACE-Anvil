@@ -31,24 +31,23 @@ modded class SCR_PlayerController
 		{
 			toMag.SetAmmoCount(fromCount + toCount);
 			fromMag.SetAmmoCount(0);
-			Print("Added " + fromCount + " rounds to toMag. It now holds " + (fromCount + toCount) + " rounds. fromMag was fully exhausted.");
-			
-			
-			// Reinsert mag in optimal slot to help stacking and updating
+			Print("Repacking exhausted fromMag.");
+			Print("Added " + (fromCount) + " rounds to toMag. It now holds " + toMag.GetAmmoCount() + ". The remainder in fromMag is " + fromMag.GetAmmoCount() + ".");
+						
+			// Reinsert toMag in optimal slot so things stack correctly
 			if (managerComp.TryRemoveItemFromInventory(toEntity, storageTo))
 			{
-				Print("Underflow situation. Mag removed from inventory. Inserting.");
-				// Just print something if for whatever reason we can't add the magazine back
 				if (!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
-				//if (!managerComp.TryInsertItemInStorage(toEntity, storageTo))
 				{
-					Print("Was unable to successfully add packed magazine back into storage. Trying to find new storage for item.", LogLevel.WARNING);
+					Print("Was unable to successfully add toMag back into storage. If it could not be dropped on the ground, it was deleted.", LogLevel.WARNING);
+					if (!managerComp.TryRemoveItemFromInventory(toEntity)) {SCR_EntityHelper.DeleteEntityAndChildren(toEntity);}
 				}
 			}
 
+			// fromMag is exhausted. It it cannot be dropped on the ground it is deleted.
 			if (!managerComp.TryRemoveItemFromInventory(fromEntity)) 
 			{
-				Print("Was unable to drop fromMag on the ground. Deleting.");
+				Print("Was unable to drop fromMag on the ground. It was deleted.");
 				SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);
 			}
 				
@@ -56,17 +55,19 @@ modded class SCR_PlayerController
 		else
 		{		
 			
+			Print("Repacking did not exhaust fromMag.");
 			int remainder = (fromCount + toCount) % maxCount;
 			Print("Added " + (maxCount - toCount) + " rounds to toMag. It is now full. The remainder in fromMag is " + remainder);
 			
 			toMag.SetAmmoCount(maxCount);
 			
-			// Reinsert mag in optimal slot to help stacking and updating
+			// Reinsert toMag in optimal slot to help stacking and updating
 			if (managerComp.TryRemoveItemFromInventory(toEntity, storageTo))
 			{
 				if (!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
 				{
-					Print("Was unable to successfully add packed magazine back into storage", LogLevel.ERROR);
+					Print("Was unable to successfully toMag back into storage. If it could not be droppeed on the ground, it was deleted.", LogLevel.WARNING);
+					if (!managerComp.TryRemoveItemFromInventory(toEntity)) {SCR_EntityHelper.DeleteEntityAndChildren(toEntity);}
 				}
 			}
 
@@ -74,21 +75,23 @@ modded class SCR_PlayerController
 			{
 				fromMag.SetAmmoCount(remainder);
 				
+				// Reinsert fromMag in optimal slot to help stacking and updating
 				if (managerComp.TryRemoveItemFromInventory(fromEntity, storageFrom))
 				{
-					if (!managerComp.TryInsertItemInStorage(fromEntity, storageFrom))
+					if (!managerComp.TryInsertItemInStorage(fromEntity, managerComp.FindStorageForItem(fromEntity, EStoragePurpose.PURPOSE_ANY)))
 					{
-						Print("Was unable to successfully add packed magazine back into storage", LogLevel.ERROR);
+						Print("Was unable to successfully fromMag back into storage. If it could not be droppeed on the ground, it was deleted.", LogLevel.WARNING);
+						if (!managerComp.TryRemoveItemFromInventory(fromEntity)) {SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);}
 					}
 				}
 		
 			}				
 			else
 			{
-				SCR_EntityHelper.DeleteEntityAndChildren(fromMag.GetOwner());
+				SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);
 			}
 		}	
-	}	
+	}		
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]

@@ -12,16 +12,10 @@ modded class SCR_InventoryMenuUI
 
 	//------------------------------------------------------------------------------------------------
 	//! Checks to ensure we have two magazines that should be repacked, and passes the necessary bits to ACE_MagRepack_RpcAsk_Repack()-function in SCR_PlayerController
-	//! 
-	//! Returns true if repacking occurred 
-	//! Returns true if magwells were incompatible (feels nicer to have them not move.) 					This prevents swapping positions of mags - remove?
-	//! Returns true if magwells are the same, but toMag is full and no repacking can happen. Feels nicer. 	This prevents swapping positions of mags - remove?
-	//! Returns true if dropping on same non-stacked slot. Feels nicer.
-	//! 	
-	//! Returns false if dragging from or dropping on an arsenal.
-	//! Returns false if not dragging a mag onto another mag
 	bool ACE_MagRepack_Repack()
 	{
+		Print("------- Attempting to repack magazines. -------", LogLevel.NORMAL);
+		
 		// Make sure we are not repacking arsenals
 		if (IsStorageArsenal(m_pFocusedSlotUI.GetStorageUI().GetCurrentNavigationStorage()))
 			return false;
@@ -78,8 +72,7 @@ modded class SCR_InventoryMenuUI
 			else
 			{
 				Print("Dragged and dropped onto the same mag. No repacking.");
-				m_InventoryManager.PlayItemSound(fromEntity, SCR_SoundEvent.SOUND_INV_DROP_ERROR);
-				return true;																										
+				return false;																										
 			}																									
 		}
 		// If we are not dragging and dropping onto the same slot, we can just get the item in the focused slot directly
@@ -124,7 +117,6 @@ modded class SCR_InventoryMenuUI
 		if (fromMag.GetMagazineWell().Type() != toMag.GetMagazineWell().Type())							
 		{
 			Print("Incompatible MagazineWells.");
-			SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_INV_DROP_ERROR);
 			return false;
 		}
 		
@@ -132,7 +124,7 @@ modded class SCR_InventoryMenuUI
 		// If both magazines are full 
 		if (toMag.GetAmmoCount() == toMag.GetMaxAmmoCount() && fromMag.GetAmmoCount() == fromMag.GetMaxAmmoCount())
 		{				
-			Print("toMag & fromMag are both full, so this should be a regular attempted move.");
+			Print("toMag & fromMag are both full. No repacking.");
 			return false;
 		}
 		
@@ -141,7 +133,6 @@ modded class SCR_InventoryMenuUI
 		if (toMag.GetAmmoCount() == toMag.GetMaxAmmoCount())
 		{				
 			Print("toMag is full. No repacking.");
-			m_InventoryManager.PlayItemSound(fromEntity, SCR_SoundEvent.SOUND_INV_DROP_ERROR);
 			return false;
 		}
 		
@@ -184,7 +175,7 @@ modded class SCR_InventoryMenuUI
 		}
 		
 		// Repacking complete. Refresh visuals and play sound to indicate success.
-		
+
 		m_pCallBack.m_pStorageTo.Refresh();
 		m_pCallBack.m_pStorageFrom.Refresh();
 
@@ -192,5 +183,4 @@ modded class SCR_InventoryMenuUI
 		
 		return true;
 	}
-
 }

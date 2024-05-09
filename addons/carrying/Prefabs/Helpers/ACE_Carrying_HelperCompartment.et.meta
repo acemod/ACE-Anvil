@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{D7163D1B571F4C0C}Prefabs/Vegetation/Core/Bush_Base.et"
+ Name "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_Helper.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }
@@ -10,6 +10,8 @@ MetaFileClass {
   EntityTemplateResourceClass PS4 : PC {
   }
   EntityTemplateResourceClass HEADLESS : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
   }
  }
 }

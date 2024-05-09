@@ -28,25 +28,36 @@ class ACE_Carrying_CarryUserAction : ScriptedUserAction
 		{
 			SetCannotPerformReason("#AR-Keybind_StanceProne");
 			return false;
-		};
+		}
+		
+		ChimeraCharacter ownerChar = ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return false;
 		
 		// Check if carrying is already in progress
-		if (ACE_Carrying_Helper.IsCarrier(user) || ACE_Carrying_Helper.IsCarried(GetOwner()))
+		if (ACE_Carrying_Tools.IsCarrier(user) || ACE_Carrying_Tools.IsCarried(ownerChar))
 		{
 			SetCannotPerformReason("#ACE_Carrying-UserAction_Carrying");
 			return false;
-		};
-			
+		}
+		
+		// Trying to carry while unit is ragdolling will break things
+		if (ownerChar.GetAnimationComponent().IsRagdollActive())
+		{
+			SetCannotPerformReason(ActionMenuFailReason.DEFAULT);
+			return false;
+		}
+
 		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		ACE_Carrying_Helper.Carry(pUserEntity, pOwnerEntity);
+		ACE_Carrying_Tools.Carry(pUserEntity, pOwnerEntity);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Methods are executed on the local player
 	override bool CanBroadcastScript() { return false; };
-};
+}

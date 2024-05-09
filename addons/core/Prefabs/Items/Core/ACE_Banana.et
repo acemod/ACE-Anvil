@@ -8,10 +8,10 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      Description "#ACE-Item_Banana_Description"
     }
     ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
-     Weight 0.1
+     Weight 0.175
      SizeSetupStrategy Manual
      ItemDimensions 5 5 5
-     ItemVolume 10
+     ItemVolume 100
      RestingUP Right
      RestingAdditiveOffsetLS 0.12 0 0
     }

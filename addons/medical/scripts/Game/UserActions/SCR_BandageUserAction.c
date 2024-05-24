@@ -40,17 +40,18 @@ class SCR_BandageUserAction : SCR_HealingUserAction
 		if (!damageManager)
 			return false;
 		
-		array<HitZone> bleedingHitZones = {};
-		damageManager.GetBleedingHitZones(bleedingHitZones);
-		
-		foreach (HitZone hitZone : bleedingHitZones)
+		array<HitZone> hitZones = damageManager.GetBleedingHitZones();
+		if (hitZones)
 		{
-			SCR_CharacterHitZone charHitZone = SCR_CharacterHitZone.Cast(hitZone);
-			if (!charHitZone)
-				continue;
-			
-			if (charHitZone.GetHitZoneGroup() == m_eHitZoneGroup)
-				return true;
+			foreach (HitZone hitZone : hitZones)
+			{
+				SCR_CharacterHitZone charHitZone = SCR_CharacterHitZone.Cast(hitZone);
+				if (!charHitZone)
+					continue;
+				
+				if (charHitZone.GetHitZoneGroup() == m_eHitZoneGroup)
+					return true;
+			}
 		}
 
 		SetCannotPerformReason(m_sNotBleeding);

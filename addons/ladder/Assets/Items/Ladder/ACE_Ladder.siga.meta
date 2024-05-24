@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{0569F8A5D313656F}Assets/Items/Ladder/ACE_Ladder.siga"
+ Configurations {
+  ProcAnimSignalResourceClass PC {
+  }
+  ProcAnimSignalResourceClass XBOX_ONE : PC {
+  }
+  ProcAnimSignalResourceClass XBOX_SERIES : PC {
+  }
+  ProcAnimSignalResourceClass PS4 : PC {
+  }
+  ProcAnimSignalResourceClass PS5 : PC {
+  }
+  ProcAnimSignalResourceClass HEADLESS : PC {
+  }
+ }
+}

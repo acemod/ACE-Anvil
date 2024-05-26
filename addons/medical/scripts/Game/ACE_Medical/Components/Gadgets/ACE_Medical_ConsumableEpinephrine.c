@@ -2,33 +2,6 @@
 [BaseContainerProps()]
 class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 {
-	[Attribute(defvalue: "20", desc: "Regeneration speed of related hitzone when consuming this item", category: "Regeneration")]
-	protected float m_fItemRegenerationSpeedDPS;
-
-	[Attribute(defvalue: "10",  desc: "Regeneration duration of related hitzone when consuming this item in seconds", category: "Regeneration")]
-	protected float m_fItemRegenerationDurationS;	
-	
-	//------------------------------------------------------------------------------------------------
-	//! Heal resilience hit zone
-	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
-	{
-		super.ApplyEffect(target, user, item, animParams);
-
-		ChimeraCharacter char = ChimeraCharacter.Cast(target);
-		if (!char)
-			return;
-
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
-		if (!damageManager)
-			return;
-
-		SCR_HitZone resilienceHZ = SCR_HitZone.Cast(damageManager.GetResilienceHitZone());
-		if (!resilienceHZ)
-			return;
-
-		resilienceHZ.CustomRegeneration(target, m_fItemRegenerationDurationS, m_fItemRegenerationSpeedDPS);
-	}
-
 	//------------------------------------------------------------------------------------------------
 	//! Can be applied when patient is unconscious and no epinephrine is in the system
 	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
@@ -46,14 +19,15 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 			return false;
 
 		// Check if epinephrine is in the system already
-		if (resilienceHZ.GetDamageOverTime(EDamageType.HEALING) < 0)
+		array<ref PersistentDamageEffect> effects = damageManager.GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
+		if (!effects.IsEmpty())
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;
 		}
 		
 		// Cannot be applied while bleeding
-		if (damageManager.IsDamagedOverTime(EDamageType.BLEEDING))
+		if (damageManager.IsBleeding())
 		{
 			failReason = SCR_EConsumableFailReason.IS_BLEEDING;
 			return false;

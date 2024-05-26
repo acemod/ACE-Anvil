@@ -38,6 +38,11 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      ACE_Medical_EpinephrineDamageEffect "{6122D60861B541E7}" {
      }
     }
+<<<<<<< HEAD
+=======
+    m_fItemRegenerationSpeedDPS 5
+    m_fItemRegenerationDurationS 30
+>>>>>>> d078121 (Medical - Fixes for experimental (#67))
    }
   }
  }

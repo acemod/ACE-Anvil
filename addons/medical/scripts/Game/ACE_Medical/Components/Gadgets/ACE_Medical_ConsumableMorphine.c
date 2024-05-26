@@ -4,33 +4,6 @@
 [BaseContainerProps()]
 class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems
 {
-	[Attribute(defvalue: "10", desc: "Regeneration speed of related hitzone when consuming this item", category: "Regeneration")]
-	protected float m_fItemRegenerationSpeedDPS;
-	
-	[Attribute(defvalue: "10",  desc: "Regeneration duration of related hitzone when consuming this item in seconds", category: "Regeneration")]
-	protected float m_fItemRegenerationDurationS;	
-	
-	//------------------------------------------------------------------------------------------------
-	//! Fully heal pain hit zone
-	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
-	{
-		super.ApplyEffect(target, user, item, animParams);
-
-		ChimeraCharacter char = ChimeraCharacter.Cast(target);
-		if (!char)
-			return;
-		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
-		if (!damageManager)
-			return;
-		
-		ACE_Medical_PainHitZone painHZ = damageManager.ACE_Medical_GetPainHitZone();
-		if (!painHZ)
-			return;
-		
-		painHZ.CustomRegeneration(target, m_fItemRegenerationDurationS, m_fItemRegenerationSpeedDPS);
-	}
-
 	//------------------------------------------------------------------------------------------------
 	//! Can be applied when patient is in pain and no morphine is in the system
 	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
@@ -48,7 +21,8 @@ class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems
 			return false;
 		
 		// Check if morphine is in the system already
-		if (painHZ.GetDamageOverTime(EDamageType.HEALING) < 0)
+		array<ref PersistentDamageEffect> effects = damageManager.GetAllPersistentEffectsOfType(ACE_Medical_MorphineDamageEffect);
+		if (!effects.IsEmpty())
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;

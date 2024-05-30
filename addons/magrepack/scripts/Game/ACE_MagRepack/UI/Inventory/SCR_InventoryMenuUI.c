@@ -153,9 +153,7 @@ modded class SCR_InventoryMenuUI
 		BaseInventoryStorageComponent fromItemStorageComponent = m_pCallBack.m_pStorageFrom.GetCurrentNavigationStorage();
 		BaseInventoryStorageComponent toItemStorageComponent = m_pFocusedSlotUI.GetAsStorage();	
 		
-		IEntity playerEntity = SCR_PlayerController.GetLocalControlledEntity();
-		int playerId = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(playerEntity);
-		protected SCR_PlayerController m_PlayerController = SCR_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
+		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		
 		RplComponent rpl = RplComponent.Cast(fromMag.GetOwner().FindComponent(RplComponent));
 		

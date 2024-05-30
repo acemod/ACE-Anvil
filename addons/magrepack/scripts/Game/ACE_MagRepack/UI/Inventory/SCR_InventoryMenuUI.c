@@ -163,7 +163,7 @@ modded class SCR_InventoryMenuUI
 		}
 		else
 		{
-			m_PlayerController.Rpc(m_PlayerController.ACE_MagRepack_RpcAsk_Repack, 
+			playerController.Rpc(playerController.ACE_MagRepack_RpcAsk_Repack, 
 				Replication.FindId(fromMag), 
 				Replication.FindId(toMag),
 				Replication.FindId(m_InventoryManager),

@@ -2,9 +2,11 @@
 //! Introduce a second chance, which gets triggered when the character would have died without
 //! falling unconscious.
 //! Add methods for interacting with pain hit zone.
-modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
+modded class SCR_CharacterDamageManagerComponent
 {
-	[RplProp(), Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
+	private static const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
+	
+	[Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
 	protected float m_fACE_Medical_SecondChanceRegenScale;
 
 	protected HitZone m_pACE_Medical_HealthHitZone;
@@ -14,18 +16,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected ACE_Medical_PainHitZone m_pACE_Medical_PainHitZone;
 	protected float m_fACE_Medical_ModeratePainThreshold;
 	protected float m_fACE_Medical_SeriousPainThreshold;
-	
-	// We only notify the replication system about changes of these members on initialization
-	// After init, each proxy is itself responsible for updating these members
-	// Having them as RplProp also ensures that JIPs receive the current state from the server
-	[RplProp()]
-	protected bool m_bACE_Medical_Initialized = false;
-	[RplProp()]
+
 	protected bool m_bACE_Medical_HasSecondChance = false;
-	[RplProp()]
 	protected bool m_bACE_Medical_SecondChanceOnHeadEnabled = false;
-	[RplProp()]
 	protected bool m_bACE_Medical_SecondChanceTriggered = false;
+	
+	private RplComponent m_RplComponent;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
@@ -33,22 +29,27 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.OnInit(owner);
 		
+		m_RplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		
 		m_pACE_Medical_HealthHitZone = GetHitZoneByName("Health");
 		if (!m_pACE_Medical_HealthHitZone)
 			return;
 		
 		m_fACE_Medical_CriticalHealth = m_pACE_Medical_HealthHitZone.GetDamageStateThreshold(ECharacterHealthState.CRITICAL);
+	
 		GetPhysicalHitZones(m_aACE_Medical_PhysicalHitZones);
+		
+		if (ACE_Medical_IsProxy())
+			return;
+		
+		ACE_Medical_Initialize();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize ACE medical on a character damage manager (Called on the server)
 	void ACE_Medical_Initialize()
 	{
-		if (m_bACE_Medical_Initialized)
-			return;
-				
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		const ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (settings)
 		{
 			m_bACE_Medical_SecondChanceOnHeadEnabled = settings.m_bSecondChanceOnHeadEnabled;
@@ -56,24 +57,17 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 		
 		ACE_Medical_EnableSecondChance(true);
-		// Damage calculations are done on all machines, so we have to broadcast the init
-		m_bACE_Medical_Initialized = true;
-		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	// Reduce regeneration rate when second chance was triggered
 	override float GetResilienceRegenScale()
 	{
-		float scale = super.GetResilienceRegenScale();
+		const float scale = super.GetResilienceRegenScale();
 		if (m_bACE_Medical_SecondChanceTriggered && scale > 0)
-		{
 			return m_fACE_Medical_SecondChanceRegenScale;
-		}
 		else
-		{
 			return scale;
-		}
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -124,7 +118,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	float ACE_Medical_GetPainIntensity()
 	{
 		// Clamp between serious damage and full health
-		float scaledHealth = Math.Clamp(m_pACE_Medical_PainHitZone.GetHealthScaled(), m_fACE_Medical_SeriousPainThreshold, 1);
+		const float scaledHealth = Math.Clamp(m_pACE_Medical_PainHitZone.GetHealthScaled(), m_fACE_Medical_SeriousPainThreshold, 1);
 		
 		if (scaledHealth > m_fACE_Medical_ModeratePainThreshold)
 		{
@@ -136,13 +130,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			// Linear response from full health -> 0 to serious damage -> 1
 			return Math.InverseLerp(1, m_fACE_Medical_SeriousPainThreshold, scaledHealth);
 		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Returns true if ACE Medical has been initialized
-	bool ACE_Medical_IsInitialized()
-	{
-		return m_bACE_Medical_Initialized;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -184,5 +171,46 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	bool ACE_Medical_WasSecondChanceTrigged()
 	{
 		return m_bACE_Medical_SecondChanceTriggered;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+	{
+		super.OnLifeStateChanged(previousLifeState, newLifeState);
+		
+		if (previousLifeState == newLifeState)
+			return;
+		
+		switch (newLifeState)
+		{
+			// Add second chance when revived
+			case ECharacterLifeState.ALIVE:
+			{
+				GetGame().GetCallqueue().Remove(ACE_Medical_EnableSecondChance);
+				ACE_Medical_EnableSecondChance(true);
+				ACE_Medical_SetSecondChanceTrigged(false);
+				break;
+			}
+				
+			// Schedule removal of second chance when falling unconscious
+			case ECharacterLifeState.INCAPACITATED:
+			{
+				GetGame().GetCallqueue().CallLater(ACE_Medical_EnableSecondChance, ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS, false, false);
+				break;
+			}
+				
+			// Remove second chance when dead
+			case ECharacterLifeState.DEAD:
+			{
+				GetGame().GetCallqueue().Remove(ACE_Medical_EnableSecondChance);
+				ACE_Medical_EnableSecondChance(false);
+				break;
+			}
+		}
+	}
+	
+	private bool ACE_Medical_IsProxy()
+	{
+		return m_RplComponent && m_RplComponent.IsProxy();
 	}
 }

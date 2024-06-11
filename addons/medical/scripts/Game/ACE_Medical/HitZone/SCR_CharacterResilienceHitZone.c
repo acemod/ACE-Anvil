@@ -7,7 +7,7 @@ modded class SCR_CharacterResilienceHitZone : SCR_RegeneratingHitZone
 	{
 		float regenDPS = super.CalculatePassiveRegenDPS(considerRegenScale);
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(GetHitZoneContainer());
+		const SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(GetHitZoneContainer());
 		if (damageManager)
 			regenDPS *= damageManager.GetResilienceRegenScale();	
 		

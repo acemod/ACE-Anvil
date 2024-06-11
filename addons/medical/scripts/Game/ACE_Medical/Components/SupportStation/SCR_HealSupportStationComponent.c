@@ -7,11 +7,11 @@ modded class SCR_HealSupportStationComponent : SCR_BaseDamageHealSupportStationC
 	{
 		super.DelayedInit(owner);
 		
-		ACE_Medical_Settings settings =	ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		const ACE_Medical_Settings settings =	ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (!settings)
 			return;
 		
-		SCR_ResourceComponent resource = SCR_ResourceComponent.Cast(GetOwner().FindComponent(SCR_ResourceComponent));
+		const SCR_ResourceComponent resource = SCR_ResourceComponent.Cast(GetOwner().FindComponent(SCR_ResourceComponent));
 		if (!resource)
 			return;
 		

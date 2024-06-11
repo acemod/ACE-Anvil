@@ -15,11 +15,11 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction
 	override bool CanBePerformedScript(IEntity user)
 	{
 		// Medic character
-		ChimeraCharacter userCharacter = ChimeraCharacter.Cast(user);
+		const ChimeraCharacter userCharacter = ChimeraCharacter.Cast(user);
 		if (!userCharacter)
 			return false;
 		
-		SCR_ConsumableItemComponent consumableComponent = GetConsumableComponent(userCharacter);
+		const SCR_ConsumableItemComponent consumableComponent = GetConsumableComponent(userCharacter);
 		if (!consumableComponent)
 			return false;
 		

@@ -9,6 +9,13 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 		ChimeraCharacter char = ChimeraCharacter.Cast(target);
 		if (!char)
 			return false;
+		
+		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
+		if (charCtrl.GetLifeState() != ECharacterLifeState.INCAPACITATED)
+		{
+			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED;
+			return false;
+		}
 
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
 		if (!damageManager)
@@ -41,12 +48,7 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 			return false;
 		}
 		
-		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
-		if (charCtrl.GetLifeState() == ECharacterLifeState.INCAPACITATED)
-			return true;
-
-		failReason = SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED;
-		return false;
+		return true;
 	}
 
 	//------------------------------------------------------------------------------------------------

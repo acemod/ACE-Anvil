@@ -1,5 +1,4 @@
-//------------------------------------------------------------------------------------------------
-modded class SCR_HealSupportStationComponent : SCR_BaseDamageHealSupportStationComponent
+modded class SCR_HealSupportStationComponent
 {	
 	//------------------------------------------------------------------------------------------------
 	//! Apply settings

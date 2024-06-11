@@ -5,9 +5,6 @@
 modded class SCR_CharacterDamageManagerComponent
 {
 	private static const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
-	
-	[RplProp(), Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
-	protected float m_fACE_Medical_SecondChanceRegenScale;
 
 	protected HitZone m_pACE_Medical_HealthHitZone;
 	protected float m_fACE_Medical_CriticalHealth;
@@ -16,6 +13,8 @@ modded class SCR_CharacterDamageManagerComponent
 	protected float m_fACE_Medical_ModeratePainThreshold;
 	protected float m_fACE_Medical_SeriousPainThreshold;
 
+	[RplProp()]
+	protected float m_fACE_Medical_SecondChanceRegenScale;
 	[RplProp()]
 	protected bool m_bACE_Medical_HasSecondChance = false;
 	[RplProp()]

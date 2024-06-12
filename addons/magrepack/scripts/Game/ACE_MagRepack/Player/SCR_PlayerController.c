@@ -83,7 +83,8 @@ modded class SCR_PlayerController : PlayerControllerClass
 					if (!managerComp.TryInsertItemInStorage(fromEntity, managerComp.FindStorageForItem(fromEntity, EStoragePurpose.PURPOSE_ANY)))
 					{
 						Print("Was unable to successfully fromMag back into storage. If it could not be droppeed on the ground, it was deleted.", LogLevel.DEBUG);
-						if (!managerComp.TryRemoveItemFromInventory(fromEntity)) {SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);}
+						if (!managerComp.TryRemoveItemFromInventory(fromEntity)) 
+							SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);
 					}
 				}
 		

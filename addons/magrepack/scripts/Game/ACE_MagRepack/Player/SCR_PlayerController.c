@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-modded class SCR_PlayerController
+modded class SCR_PlayerController : PlayerControllerClass
 {
 	//------------------------------------------------------------------------------------------------
 	void ACE_MagRepack_Repack(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent managerComp, BaseInventoryStorageComponent storageTo, BaseInventoryStorageComponent storageFrom)
@@ -23,23 +23,23 @@ modded class SCR_PlayerController
 		IEntity fromEntity = fromMag.GetOwner();
 		IEntity toEntity = toMag.GetOwner();
 
-		Print("fromMag holds: " + fromCount + " rounds.");
-		Print("toMag holds: " + toCount + " rounds.");
+		Print("fromMag holds: " + fromCount + " rounds.", LogLevel.DEBUG);
+		Print("toMag holds: " + toCount + " rounds.", LogLevel.DEBUG);
 		
 			
 		if (fromCount + toCount <= maxCount)
 		{
 			toMag.SetAmmoCount(fromCount + toCount);
 			fromMag.SetAmmoCount(0);
-			Print("Repacking exhausted fromMag.");
-			Print("Added " + (fromCount) + " rounds to toMag. It now holds " + toMag.GetAmmoCount() + ". The remainder in fromMag is " + fromMag.GetAmmoCount() + ".");
+			Print("Repacking exhausted fromMag.", LogLevel.DEBUG);
+			Print("Added " + (fromCount) + " rounds to toMag. It now holds " + toMag.GetAmmoCount() + ". The remainder in fromMag is " + fromMag.GetAmmoCount() + ".", LogLevel.DEBUG);
 						
 			// Reinsert toMag in optimal slot so things stack correctly
 			if (managerComp.TryRemoveItemFromInventory(toEntity, storageTo))
 			{
 				if (!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
 				{
-					Print("Was unable to successfully add toMag back into storage. If it could not be dropped on the ground, it was deleted.", LogLevel.WARNING);
+					Print("Was unable to successfully add toMag back into storage. If it could not be dropped on the ground, it was deleted.", LogLevel.DEBUG);
 					if (!managerComp.TryRemoveItemFromInventory(toEntity))
 						SCR_EntityHelper.DeleteEntityAndChildren(toEntity);
 				}
@@ -48,7 +48,7 @@ modded class SCR_PlayerController
 			// fromMag is exhausted. It it cannot be dropped on the ground it is deleted.
 			if (!managerComp.TryRemoveItemFromInventory(fromEntity)) 
 			{
-				Print("Was unable to drop fromMag on the ground. It was deleted.");
+				Print("Was unable to drop fromMag on the ground. It was deleted.", LogLevel.DEBUG);
 				SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);
 			}
 				
@@ -56,9 +56,9 @@ modded class SCR_PlayerController
 		else
 		{		
 			
-			Print("Repacking did not exhaust fromMag.");
+			Print("Repacking did not exhaust fromMag.", LogLevel.DEBUG);
 			int remainder = (fromCount + toCount) % maxCount;
-			Print("Added " + (maxCount - toCount) + " rounds to toMag. It is now full. The remainder in fromMag is " + remainder);
+			Print("Added " + (maxCount - toCount) + " rounds to toMag. It is now full. The remainder in fromMag is " + remainder, LogLevel.DEBUG);
 			
 			toMag.SetAmmoCount(maxCount);
 			
@@ -67,7 +67,7 @@ modded class SCR_PlayerController
 			{
 				if (!managerComp.TryInsertItemInStorage(toEntity, managerComp.FindStorageForItem(toEntity, EStoragePurpose.PURPOSE_ANY)))
 				{
-					Print("Was unable to successfully toMag back into storage. If it could not be droppeed on the ground, it was deleted.", LogLevel.WARNING);
+					Print("Was unable to successfully toMag back into storage. If it could not be droppeed on the ground, it was deleted.", LogLevel.DEBUG);
 					if (!managerComp.TryRemoveItemFromInventory(toEntity)) 
 						SCR_EntityHelper.DeleteEntityAndChildren(toEntity);
 				}
@@ -82,7 +82,7 @@ modded class SCR_PlayerController
 				{
 					if (!managerComp.TryInsertItemInStorage(fromEntity, managerComp.FindStorageForItem(fromEntity, EStoragePurpose.PURPOSE_ANY)))
 					{
-						Print("Was unable to successfully fromMag back into storage. If it could not be droppeed on the ground, it was deleted.", LogLevel.WARNING);
+						Print("Was unable to successfully fromMag back into storage. If it could not be droppeed on the ground, it was deleted.", LogLevel.DEBUG);
 						if (!managerComp.TryRemoveItemFromInventory(fromEntity)) {SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);}
 					}
 				}

@@ -121,11 +121,13 @@ modded class SCR_PlayerController : PlayerControllerClass
 		if (!storageTo.IsValid())
 		{
 			Print("Invalid storageTo", LogLevel.ERROR);
+			return;
 		}
 		
 		if (!storageFrom.IsValid())
 		{
 			Print("Invalid storageFrom", LogLevel.ERROR);
+			return;
 		}
 		
 		ACE_MagRepack_Repack(

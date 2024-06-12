@@ -6,10 +6,10 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 	//! Can be applied when patient is unconscious and no epinephrine is in the system
 	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
 	{
-		ChimeraCharacter char = ChimeraCharacter.Cast(target);
+		const ChimeraCharacter char = ChimeraCharacter.Cast(target);
 		if (!char)
 			return false;
-		
+
 		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
 		if (charCtrl.GetLifeState() != ECharacterLifeState.INCAPACITATED)
 		{
@@ -17,11 +17,11 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 			return false;
 		}
 
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
+		const SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
 		if (!damageManager)
 			return false;
 
-		SCR_HitZone resilienceHZ = SCR_HitZone.Cast(damageManager.GetResilienceHitZone());
+		const SCR_HitZone resilienceHZ = SCR_HitZone.Cast(damageManager.GetResilienceHitZone());
 		if (!resilienceHZ)
 			return false;
 
@@ -32,14 +32,14 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;
 		}
-		
+
 		// Cannot be applied while bleeding
 		if (damageManager.IsBleeding())
 		{
 			failReason = SCR_EConsumableFailReason.IS_BLEEDING;
 			return false;
 		}
-		
+
 		// Cannot be applied if critically injured
 		// We also have to check if the character is still healable
 		if (damageManager.ACE_Medical_HasCriticalHealth() && damageManager.ACE_Medical_CanBeHealed())
@@ -47,7 +47,7 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
 			return false;
 		}
-		
+
 		return true;
 	}
 

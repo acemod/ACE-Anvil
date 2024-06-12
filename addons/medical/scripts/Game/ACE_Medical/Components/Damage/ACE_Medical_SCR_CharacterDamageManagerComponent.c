@@ -13,6 +13,11 @@ modded class SCR_CharacterDamageManagerComponent
 	protected float m_fACE_Medical_ModeratePainThreshold;
 	protected float m_fACE_Medical_SeriousPainThreshold;
 
+	// We only notify the replication system about changes of these members on initialization
+	// After init, each proxy is itself responsible for updating these members
+	// Having them as RplProp also ensures that JIPs receive the current state from the server
+	[RplProp()]
+	protected bool m_bACE_Medical_Initialized = false;
 	[RplProp()]
 	protected float m_fACE_Medical_SecondChanceRegenScale;
 	[RplProp()]
@@ -22,16 +27,12 @@ modded class SCR_CharacterDamageManagerComponent
 	[RplProp()]
 	protected bool m_bACE_Medical_SecondChanceTriggered = false;
 
-	private RplComponent m_RplComponent;
-
 
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
-	override void OnPostInit(IEntity owner)
+	override void OnInit(IEntity owner)
 	{
-		super.OnPostInit(owner);
-
-		m_RplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		super.OnInit(owner);
 
 		m_pACE_Medical_HealthHitZone = GetHitZoneByName("Health");
 		if (!m_pACE_Medical_HealthHitZone)
@@ -44,7 +45,7 @@ modded class SCR_CharacterDamageManagerComponent
 	//! Initialize ACE medical on a character damage manager (Called on the server)
 	void ACE_Medical_Initialize()
 	{
-		if (ACE_Medical_IsProxy())
+		if (m_bACE_Medical_Initialized)
 			return;
 
 		const ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
@@ -52,10 +53,12 @@ modded class SCR_CharacterDamageManagerComponent
 		{
 			m_bACE_Medical_SecondChanceOnHeadEnabled = settings.m_bSecondChanceOnHeadEnabled;
 			m_fACE_Medical_SecondChanceRegenScale = settings.m_fSecondChanceRegenScale;
-			Replication.BumpMe();
 		}
 
 		ACE_Medical_EnableSecondChance(true);
+		// Damage calculations are done on all machines, so we have to broadcast the init
+		m_bACE_Medical_Initialized = true;
+		Replication.BumpMe();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -138,11 +141,7 @@ modded class SCR_CharacterDamageManagerComponent
 	//! Enable/disable second chance
 	void ACE_Medical_EnableSecondChance(bool enable)
 	{
-		if (ACE_Medical_IsProxy())
-			return;
-
 		m_bACE_Medical_HasSecondChance = enable;
-		Replication.BumpMe();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -169,11 +168,7 @@ modded class SCR_CharacterDamageManagerComponent
 	//! To be set true when second chance was used
 	void ACE_Medical_SetSecondChanceTrigged(bool isTriggered)
 	{
-		if (ACE_Medical_IsProxy())
-			return;
-
 		m_bACE_Medical_SecondChanceTriggered = isTriggered;
-		Replication.BumpMe();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -187,9 +182,6 @@ modded class SCR_CharacterDamageManagerComponent
 	override void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
 		super.OnLifeStateChanged(previousLifeState, newLifeState);
-
-		if (ACE_Medical_IsProxy())
-			return;
 
 		if (previousLifeState == newLifeState)
 			return;
@@ -221,12 +213,6 @@ modded class SCR_CharacterDamageManagerComponent
 				break;
 			}
 		}
-	}
-
-	//------------------------------------------------------------------------------------------------
-	private bool ACE_Medical_IsProxy()
-	{
-		return m_RplComponent && m_RplComponent.IsProxy();
 	}
 
 	//------------------------------------------------------------------------------------------------

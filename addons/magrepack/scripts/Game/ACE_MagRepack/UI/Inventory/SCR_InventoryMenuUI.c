@@ -55,7 +55,7 @@ modded class SCR_InventoryMenuUI : ChimeraMenuBase
 		{
 			if (m_pFocusedSlotUI.IsStacked())
 			{	
-				ref array<IEntity> items = {};
+				array<IEntity> items = {};
 				
 				// The array will fill with items in order
 				GetInventoryStorageManager().GetItems(items);

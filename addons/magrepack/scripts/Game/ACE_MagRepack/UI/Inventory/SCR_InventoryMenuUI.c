@@ -14,7 +14,7 @@ modded class SCR_InventoryMenuUI : ChimeraMenuBase
 	//! Checks to ensure we have two magazines that should be repacked, and passes the necessary bits to ACE_MagRepack_RpcAsk_Repack()-function in SCR_PlayerController
 	bool ACE_MagRepack_Repack()
 	{
-		Print("------- Attempting to repack magazines. -------", LogLevel.NORMAL);
+		Print("------- Attempting to repack magazines. -------", LogLevel.DEBUG);
 		
 		// Make sure we are not repacking arsenals
 		if (IsStorageArsenal(m_pFocusedSlotUI.GetStorageUI().GetCurrentNavigationStorage()))

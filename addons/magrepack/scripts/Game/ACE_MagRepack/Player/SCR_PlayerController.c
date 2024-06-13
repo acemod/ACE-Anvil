@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-modded class SCR_PlayerController : PlayerControllerClass
+modded class SCR_PlayerController : PlayerController
 {
 	//------------------------------------------------------------------------------------------------
 	void ACE_MagRepack_Repack(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent managerComp, BaseInventoryStorageComponent storageTo, BaseInventoryStorageComponent storageFrom)

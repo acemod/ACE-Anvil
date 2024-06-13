@@ -159,7 +159,7 @@ modded class SCR_InventoryMenuUI : ChimeraMenuBase
 		
 		if (rpl.IsMaster())
 		{
-			m_PlayerController.ACE_MagRepack_Repack(fromMag, toMag, m_InventoryManager, toItemStorageComponent, fromItemStorageComponent);
+			playerController.ACE_MagRepack_Repack(fromMag, toMag, m_InventoryManager, toItemStorageComponent, fromItemStorageComponent);
 		}
 		else
 		{

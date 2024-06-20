@@ -14,7 +14,6 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
     }
     CustomAttributes {
      PreviewRenderAttributes "{5A5AEE4B8FF125F0}" {
-      CameraOrbitAngles 0 0 -45
       CameraDistanceToItem 0.5
      }
      SCR_SelectionMenuPreviewAttributes "{5EC2E10565C06A53}" {
@@ -39,8 +38,6 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      ACE_Medical_EpinephrineDamageEffect "{6122D60861B541E7}" {
      }
     }
-    m_fItemRegenerationSpeedDPS 5
-    m_fItemRegenerationDurationS 30
    }
   }
  }

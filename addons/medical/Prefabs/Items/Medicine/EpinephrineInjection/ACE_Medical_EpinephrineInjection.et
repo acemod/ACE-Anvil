@@ -39,10 +39,13 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      }
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     m_fItemRegenerationSpeedDPS 5
     m_fItemRegenerationDurationS 30
 >>>>>>> d078121 (Medical - Fixes for experimental (#67))
+=======
+>>>>>>> c270bda (Medical - Fix preview orientation of epinephrine injector (#70))
    }
   }
  }

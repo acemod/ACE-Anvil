@@ -7,15 +7,9 @@ MetaFileClass {
      SourceMaterial "ace_banana"
      AssignedMaterial "{A8CC18415D637D0B}Assets/Items/Food/Data/ACE_Banana.emat"
     }
-    MaterialAssignClass "{619CF554D9BE2B40}" {
-     SourceMaterial "Material"
-     AssignedMaterial "{FE80151315285386}Assets/Items/Food/Data/Material.emat"
-    }
    }
    MeshParams {
     MeshParam ace_banana {
-    }
-    MeshParam Cube {
     }
    }
    GeometryParams {

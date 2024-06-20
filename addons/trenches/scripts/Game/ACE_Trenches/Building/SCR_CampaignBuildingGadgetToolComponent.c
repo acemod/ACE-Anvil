@@ -107,13 +107,6 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Enable gadget to have on/off states
-	override bool CanBeToggled()
-	{
-		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Toggles building placement preview
 	override void ToggleActive(bool state, SCR_EUseContext context)
 	{

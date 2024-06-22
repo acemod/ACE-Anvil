@@ -66,19 +66,19 @@ $$E = \mathrm{Hill}\Bigg(\sum_i \mathcal{X}_i \Bigg)$$
 
 $$\mathcal{X}_i = 
 \begin{dcases}
-    \Big(\frac{\mathcal{S}_i}{\mathcal{A}_i} \cdot \frac{\mathrm{[X]}_i}{K_{ii}}\Big)^{\gamma_i} & \Big|\ K_{ii} > 0 \\
+    \Big(\frac{\mathcal{S}_i}{\mathcal{A}_i} \cdot \frac{\mathrm{[X]}_i}{K\_{ii}}\Big)^{\gamma_i} & \Big|\ K\_{ii} > 0 \\
      0 & \text{| otherwise}
 \end{dcases}$$
 
-$$\mathcal{S}_i = 1 + \sum_{j \neq i}
+$$\mathcal{S}_i = 1 + \sum\_{j \neq i}
 \begin{dcases}
-    \frac{\mathrm{[X]}_j}{K_{ij}} & \Big|\ K_{ij} > 0 \\
+    \frac{\mathrm{[X]}_j}{K\_{ij}} & \Big|\ K\_{ij} > 0 \\
     0 & \text{| otherwise}
 \end{dcases}$$
 
-$$\mathcal{A}_i = 1 - \sum_{j \neq i}
+$$\mathcal{A}_i = 1 - \sum\_{j \neq i}
 \begin{dcases}
-    \frac{\mathrm{[X]}_j}{K_{ij}} & \Big|\ K_{ij} < 0 \\
+    \frac{\mathrm{[X]}_j}{K\_{ij}} & \Big|\ K\_{ij} < 0 \\
     0 & \text{| otherwise}
 \end{dcases}$$
 
@@ -87,9 +87,9 @@ $$\mathcal{A}_i = 1 - \sum_{j \neq i}
 - $\mathcal{S}_i\ [\cdot]$: Synergistic interactions for drug $\mathrm{X}_i$
 - $\mathcal{A}_i\ [\cdot]$: Antagonistic interactions for drug $\mathrm{X}_i$
 - $\mathrm{[X]}_i\ [\mathrm{nM}]$: Concentration of drug $\mathrm{X}_i$
-- $K_{ii}\ [\mathrm{nM}]$: Concentration of drug $\mathrm{X}_i$ for 50% effect (EC50) in absence of others
+- $K\_{ii}\ [\mathrm{nM}]$: Concentration of drug $\mathrm{X}_i$ for 50% effect (EC50) in absence of others
 - $\gamma_i\ [\cdot]$: Hill coefficient of drug $\mathrm{X}_i$
-- $K_{ij}\ [\mathrm{nM}]$: Interaction constant for drug $\mathrm{X}_j$ to enhance (if positive) or inhibit (if negative) the effect of drug $\mathrm{X}_i$
+- $K\_{ij}\ [\mathrm{nM}]$: Interaction constant for drug $\mathrm{X}_j$ to enhance (if positive) or inhibit (if negative) the effect of drug $\mathrm{X}_i$
 
 #### Version 4 (Same as version 3, but with negative effects):
 
@@ -98,76 +98,76 @@ $$E = \mathrm{AbsHill}\Bigg(\sum_i \mathcal{X}_i \Bigg)$$
 
 $$\mathcal{X}_i = 
 \begin{dcases}
-    \Big(\frac{\mathcal{S}_i}{\mathcal{A}_i} \cdot \frac{\mathrm{[X]}_i}{K_{ii}}\Big)^{\gamma_i} & \Big|\ K_{ii} \neq 0 \\
+    \Big(\frac{\mathcal{S}_i}{\mathcal{A}_i} \cdot \frac{\mathrm{[X]}_i}{K\_{ii}}\Big)^{\gamma_i} & \Big|\ K\_{ii} \neq 0 \\
      0 & \text{| otherwise}
 \end{dcases}$$
 
 #### Version 5:
 
-$$Q = \mathrm{AceHill}\big(\mathrm{\underline{x}};\ \mathrm{\underline{\underline{K}}},\ \mathrm{\underline{\underline{L}}},\ Q_{min},\ Q_0,\ Q_{max}\big) = (Q_{max} - Q_{min}) \cdot \ \mathrm{Hill}\Bigg(C_0 \cdot \frac{\big(1 + \sum_i \mathcal{X}^+_i \big)^{n^+}}{\big(1 + \sum_i \mathcal{X}^-_i \big)^{n^-}} \Bigg) + Q_{min}$$
+$$Q = \mathrm{AceHill}\big(\mathrm{\underline{x}};\ \mathrm{\underline{\underline{K}}},\ \mathrm{\underline{\underline{L}}},\ Q_{min},\ Q_0,\ Q_{max}\big) = (Q_{max} - Q_{min}) \cdot \ \mathrm{Hill}\Bigg(C_0 \cdot \frac{\big(1 + \sum_i \mathcal{X}^+\_i \big)^{n^+}}{\big(1 + \sum_i \mathcal{X}^-\_i \big)^{n^-}} \Bigg) + Q_{min}$$
 
 $$C_0 = \frac{Q_0 + Q_{min}}{Q_{max} - Q_0 - 2 \cdot Q_{min}}$$
 
-$$\mathcal{X}^+_i =
+$$\mathcal{X}^+\_i =
 \begin{dcases}
-    \bigg(\frac{\mathcal{J}^+_i}{\mathcal{J}^-_i} \cdot \frac{\mathrm{[X]}_i}{K_{ii}}\bigg)^{\gamma_i} & \bigg|\ K_{ii} > 0 \land L_{ii} = 0 \\
+    \bigg(\frac{\mathcal{J}^+\_i}{\mathcal{J}^-\_i} \cdot \frac{\mathrm{[X]}_i}{K\_{ii}}\bigg)^{\gamma_i} & \bigg|\ K\_{ii} > 0 \land L\_{ii} = 0 \\
     \\
-    L_{ii} \cdot \frac{\mathcal{A}^+_i}{\mathcal{A}^-_i} \cdot\mathrm{Hill}\Bigg(\bigg(\frac{\mathcal{J}^+_i}{\mathcal{J}^-_i} \cdot \frac{\mathrm{[X]}_i}{K_{ii}}\bigg)^{\gamma_i}\Bigg) & \Bigg|\ K_{ii} > 0 \land L_{ii} > 0 \\
-    \\
-     0 & \text{| otherwise}
-\end{dcases}$$
-
-$$\mathcal{X}^-_i =
-\begin{dcases}
-    \bigg(-\frac{\mathcal{J}^+_i}{\mathcal{J}^-_i} \cdot \frac{\mathrm{[X]}_i}{K_{ii}}\bigg)^{\gamma_i} & \bigg|\ K_{ii} < 0 \land L_{ii} = 0 \\
-    \\
-    L_{ii} \cdot \frac{\mathcal{A}^+_i}{\mathcal{A}^-_i} \cdot\mathrm{Hill}\Bigg(\bigg(-\frac{\mathcal{J}^+_i}{\mathcal{J}^-_i} \cdot \frac{\mathrm{[X]}_i}{K_{ii}}\bigg)^{\gamma_i}\Bigg) & \Bigg|\ K_{ii} < 0 \land L_{ii} > 0 \\
+    L\_{ii} \cdot \frac{\mathcal{A}^+\_i}{\mathcal{A}^-\_i} \cdot\mathrm{Hill}\Bigg(\bigg(\frac{\mathcal{J}^+\_i}{\mathcal{J}^-\_i} \cdot \frac{\mathrm{[X]}_i}{K\_{ii}}\bigg)^{\gamma_i}\Bigg) & \Bigg|\ K\_{ii} > 0 \land L\_{ii} > 0 \\
     \\
      0 & \text{| otherwise}
 \end{dcases}$$
 
-$$\mathcal{J}^+_i = 1 + \sum_{j \neq i}
+$$\mathcal{X}^-\_i =
 \begin{dcases}
-    \frac{\mathrm{[X]}_j}{K_{ij}} & \bigg|\ K_{ij} > 0 \\
+    \bigg(-\frac{\mathcal{J}^+\_i}{\mathcal{J}^-\_i} \cdot \frac{\mathrm{[X]}_i}{K\_{ii}}\bigg)^{\gamma_i} & \bigg|\ K\_{ii} < 0 \land L\_{ii} = 0 \\
+    \\
+    L\_{ii} \cdot \frac{\mathcal{A}^+\_i}{\mathcal{A}^-\_i} \cdot\mathrm{Hill}\Bigg(\bigg(-\frac{\mathcal{J}^+\_i}{\mathcal{J}^-\_i} \cdot \frac{\mathrm{[X]}_i}{K\_{ii}}\bigg)^{\gamma_i}\Bigg) & \Bigg|\ K\_{ii} < 0 \land L\_{ii} > 0 \\
+    \\
+     0 & \text{| otherwise}
+\end{dcases}$$
+
+$$\mathcal{J}^+\_i = 1 + \sum\_{j \neq i}
+\begin{dcases}
+    \frac{\mathrm{[X]}_j}{K\_{ij}} & \bigg|\ K\_{ij} > 0 \\
     0 & \text{| otherwise}
 \end{dcases}$$
 
-$$\mathcal{J}^-_i = 1 - \sum_{j \neq i}
+$$\mathcal{J}^-\_i = 1 - \sum\_{j \neq i}
 \begin{dcases}
-    \frac{\mathrm{[X]}_j}{K_{ij}} & \bigg|\ K_{ij} < 0 \\
+    \frac{\mathrm{[X]}_j}{K\_{ij}} & \bigg|\ K\_{ij} < 0 \\
     0 & \text{| otherwise}
 \end{dcases}$$
 
-$$\mathcal{A}^+_i = 1 + \sum_{j \neq i}
+$$\mathcal{A}^+\_i = 1 + \sum\_{j \neq i}
 \begin{dcases}
-    \frac{\mathrm{[X]}_j}{L_{ij}} & \bigg|\ L_{ij} > 0 \\
+    \frac{\mathrm{[X]}_j}{L\_{ij}} & \bigg|\ L\_{ij} > 0 \\
     0 & \text{| otherwise}
 \end{dcases}$$
 
-$$\mathcal{A}^-_i = 1 - \sum_{j \neq i}
+$$\mathcal{A}^-\_i = 1 - \sum\_{j \neq i}
 \begin{dcases}
-    \frac{\mathrm{[X]}_j}{L_{ij}} & \bigg|\ L_{ij} < 0 \\
+    \frac{\mathrm{[X]}_j}{L\_{ij}} & \bigg|\ L\_{ij} < 0 \\
     0 & \text{| otherwise}
 \end{dcases}$$
 
 - $Q$: Some quantity $\big(Q \in [Q_{min}, Q_{max}]\big)$
 - $Q_0$: Quantity's value in absence of drugs $\big(Q_0 \in (Q_{min}, Q_{max})\big)$
-- $\mathcal{X}_i\ [\cdot]$: Term for drug $\mathrm{X}_i$ with either positive $(\mathcal{X}^+_i)$ or negative effect $(\mathcal{X}^-_i)$ on $Q$
-- $\mathcal{J}_i\ [\cdot]$: Orthosterically synergistic $(\mathcal{J}^+_i)$ and antagonistic interactions $(\mathcal{J}^-_i)$ for drug $\mathrm{X}_i$
-- $\mathcal{A}_i\ [\cdot]$: Allosterically synergistic $(\mathcal{A}^+_i)$ and antagonistic interactions $(\mathcal{A}^-_i)$ for drug $\mathrm{X}_i$
+- $\mathcal{X}_i\ [\cdot]$: Term for drug $\mathrm{X}_i$ with either positive $(\mathcal{X}^+\_i)$ or negative effect $(\mathcal{X}^-\_i)$ on $Q$
+- $\mathcal{J}_i\ [\cdot]$: Orthosterically synergistic $(\mathcal{J}^+\_i)$ and antagonistic interactions $(\mathcal{J}^-\_i)$ for drug $\mathrm{X}_i$
+- $\mathcal{A}_i\ [\cdot]$: Allosterically synergistic $(\mathcal{A}^+\_i)$ and antagonistic interactions $(\mathcal{A}^-\_i)$ for drug $\mathrm{X}_i$
 - $n\ [\cdot]$: Global Hill coefficients for positive ($n^+$) and negative effects ($n^-$)
 - $\gamma_i\ [\cdot]$: Hill coefficient of drug $\mathrm{X}_i$
 - $\mathrm{\underline{x}}\ [\mathrm{nM}]$: Vector containing drug concentrations $\big(x_i = \mathrm{[X]}_i\big)$
 - $\mathrm{[X]}_i\ [\mathrm{nM}]$: Concentration of drug $\mathrm{X}_i$
 - $\mathrm{\underline{\underline{K}}}\ [\mathrm{nM}]$: Matrix containing dissociation constants on diagonal and orthosteric interaction constants on off-diagonals
-- $K_{ii}\ [\mathrm{nM}]$: Dissociation constant of drug $\mathrm{X}_i$ for $Q$-altering receptor
-- $K_{ij}\ [\mathrm{nM}]$: Orthosteric interaction constant for drug $\mathrm{X}_j$ to enhance (if positive) or inhibit (if negative) the effect of drug $\mathrm{X}_i$
+- $K\_{ii}\ [\mathrm{nM}]$: Dissociation constant of drug $\mathrm{X}_i$ for $Q$-altering receptor
+- $K\_{ij}\ [\mathrm{nM}]$: Orthosteric interaction constant for drug $\mathrm{X}_j$ to enhance (if positive) or inhibit (if negative) the effect of drug $\mathrm{X}_i$
 - $\mathrm{\underline{\underline{L}}}\ [\mathrm{nM}]$: Matrix containing effect limit on diagonals and allosteric interaction constants on off-diagonals
-- $L_{ii}\ [\mathrm{nM}]$: Limit of $\mathcal{X}_i$ (Optional parameter to limit effect of drug $\mathrm{X}_i$)
-- $L_{ij}\ [\mathrm{nM}]$: Allosteric interaction constant for drug $\mathrm{X}_j$ to enhance (if positive) or inhibit (if negative) the effect of drug $\mathrm{X}_i$
+- $L\_{ii}\ [\mathrm{nM}]$: Limit of $\mathcal{X}_i$ (Optional parameter to limit effect of drug $\mathrm{X}_i$)
+- $L\_{ij}\ [\mathrm{nM}]$: Allosteric interaction constant for drug $\mathrm{X}_j$ to enhance (if positive) or inhibit (if negative) the effect of drug $\mathrm{X}_i$
 
 <!--
-$$K_{ii} = EC_{50,\ i} \cdot
+$$K\_{ii} = EC_{50,\ i} \cdot
 \begin{dcases}
     \frac{C_0 \cdot (Q_{max} - Q_{min})}{(1 - C_0) \cdot Q_{max} + (1 + C_0) \cdot Q_0 - 2 \cdot Q_{min}} & \bigg|\text{ positive effect} \\
     \\

@@ -1,0 +1,4 @@
+﻿Name,EC50 [nM],γ,Effect,Administration,References
+Morphine,259,2.7,Increases pain tollerance,IV,https://go.drugbank.com/drugs/DB00295; https://doi.org/10.1016/j.jpainsymman.2005.01.012
+Fentanyl,24.2,4.95,Increases pain tollerance,IV,https://go.drugbank.com/drugs/DB00295; https://doi.org/10.1016/j.jpainsymman.2005.01.012
+Naloxone,,,Competitive inhibition of morphine and fentanyl,,

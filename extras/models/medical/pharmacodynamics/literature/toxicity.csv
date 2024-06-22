@@ -1,0 +1,7 @@
+﻿Name,LD50 [nM],t_1/2 [s],Administration,Reference
+Morphine,2730,9000,IV,https://go.drugbank.com/drugs/DB00295; https://pubmed.ncbi.nlm.nih.gov/17370507/
+Epinephrine,29500,180,subcutaneous,"https://derangedphysiology.com/main/cicm-primary-exam/required-reading/cardiovascular-system/Chapter%20973/adrenaline#:~:text=Studies%20of%20adrenaline%20distribution%20are,has%20a%20pKa%20of%209.69.; https://cdn.caymanchem.com/cdn/msds/18626m.pdf"
+Adenosine,218,10,subcutaneous,https://cdn.caymanchem.com/cdn/msds/21232m.pdf
+Atropine,15550,10800,IV,https://go.drugbank.com/drugs/DB00572
+Fentanyl,350.3,25200,IV,https://go.drugbank.com/drugs/DB00813
+Naloxone,99000,4320,IV,

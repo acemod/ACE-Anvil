@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------------------------------------
 //! health hitzone - Receives damage from physical hitzones
-modded class SCR_CharacterHealthHitZone : SCR_HitZone
+modded class SCR_CharacterHealthHitZone
 {
 	protected SCR_CharacterDamageManagerComponent m_pACE_Medical_DamageManager;
 	protected bool m_bACE_Medical_HasSecondChanceOnHead;
@@ -32,18 +32,16 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	//! Triggers second chance if damage had to be rescaled
 	protected float ACE_Medical_ComputeSecondChanceEffectiveDamage(notnull BaseDamageContext damageContext, bool isDOT)
 	{
-		float effectiveDamage = super.ComputeEffectiveDamage(damageContext, isDOT);
+		const float effectiveDamage = super.ComputeEffectiveDamage(damageContext, isDOT);
 		if (GetHealth() - effectiveDamage >= ACE_MEDICAL_SECOND_CHANCE_MIN_HEALTH)
 			return effectiveDamage;
 		
-		SCR_CharacterHitZone hitZone = SCR_CharacterHitZone.Cast(damageContext.struckHitZone);
+		const SCR_CharacterHitZone hitZone = SCR_CharacterHitZone.Cast(damageContext.struckHitZone);
 		if (hitZone && !m_pACE_Medical_DamageManager.ACE_Medical_WasSecondChanceTrigged())
 		{
 			m_pACE_Medical_DamageManager.ACE_Medical_SetSecondChanceTrigged(true);
 			// Add bleeding to the hit zone that triggered second chance
-			// Only call AddBleeding on the authority, since it does a broadcast itself
-			if (!IsProxy())
-				hitZone.AddBleeding(damageContext.colliderID);
+			m_pACE_Medical_DamageManager.AddBleedingEffectOnHitZone(hitZone, damageContext.colliderID);
 		}
 		
 		return GetHealth() - ACE_MEDICAL_SECOND_CHANCE_MIN_HEALTH;

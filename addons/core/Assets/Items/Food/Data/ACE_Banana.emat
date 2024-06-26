@@ -1,3 +1,4 @@
 MatPBRBasic {
- BCRMap "{10B6987BD1252A5D}Assets/Items/Food/ACE_Banana.edds"
+ BCRMap "{8F253C81FFC15E42}Assets/Items/Food/ACE_Banana_BCR.edds"
+ NMOMap "{B7FD871326B60CDC}Assets/Items/Food/ACE_Banana_NMO.edds"
 }

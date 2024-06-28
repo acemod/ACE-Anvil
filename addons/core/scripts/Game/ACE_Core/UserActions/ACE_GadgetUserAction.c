@@ -2,6 +2,9 @@
 //! Gadget Entity user action
 class ACE_GadgetUserAction : ScriptedUserAction
 {
+	[Attribute(defvalue: "1", desc: "Index of the gadget animation to play")]
+	protected int m_iAnimationIndex;
+	
 	protected SCR_GadgetManagerComponent m_GadgetManager;
 	protected IEntity m_pUser;
 	
@@ -18,15 +21,14 @@ class ACE_GadgetUserAction : ScriptedUserAction
 		CharacterControllerComponent charController = character.GetCharacterController();
 		if (charController)
 		{
-			
 			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
 			int itemActionId = pAnimationComponent.BindCommand("CMD_Item_Action");
 			ItemUseParameters params = new ItemUseParameters();
-			params.SetEntity(GetBuildingTool(pUserEntity));
+			params.SetEntity(m_GadgetManager.GetHeldGadget());
 			params.SetAllowMovementDuringAction(false);
 			params.SetKeepInHandAfterSuccess(true);
 			params.SetCommandID(itemActionId);
-			params.SetCommandIntArg(1);
+			params.SetCommandIntArg(m_iAnimationIndex);
 			
 			charController.TryUseItemOverrideParams(params);
 		}
@@ -76,17 +78,6 @@ class ACE_GadgetUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Get gadget entity
-	IEntity GetBuildingTool(notnull IEntity ent)
-	{
-		SCR_GadgetManagerComponent gadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(ent);
-		if (!gadgetManager)
-			return null;
-		
-		return gadgetManager.GetHeldGadget();
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Sets a new gadget manager. Controlled by an event when the controlled entity has changed.
 	void SetNewGadgetManager(IEntity from, IEntity to)
 	{
@@ -106,10 +97,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 				playerController.m_OnControlledEntityChanged.Insert(SetNewGadgetManager);
 			
 			return false;
-		};
-					
-		if (!SCR_CampaignBuildingGadgetToolComponent.Cast(m_GadgetManager.GetHeldGadgetComponent()))
-			return false;
+		}
 		
 		return true;
 	}

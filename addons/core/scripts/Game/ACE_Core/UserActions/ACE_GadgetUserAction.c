@@ -5,8 +5,14 @@ class ACE_GadgetUserAction : ScriptedUserAction
 	[Attribute(defvalue: "1", desc: "Index of the gadget animation to play")]
 	protected int m_iAnimationIndex;
 	
-	protected SCR_GadgetManagerComponent m_GadgetManager;
 	protected IEntity m_pUser;
+	
+	//------------------------------------------------------------------------------------------------
+	//! Stop animation when action is completed
+	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity) 
+	{
+		CancelPlayerAnimation(pUserEntity);
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start gadget animation
@@ -24,7 +30,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
 			int itemActionId = pAnimationComponent.BindCommand("CMD_Item_Action");
 			ItemUseParameters params = new ItemUseParameters();
-			params.SetEntity(m_GadgetManager.GetHeldGadget());
+			params.SetEntity(GetHeldGadget(pUserEntity));
 			params.SetAllowMovementDuringAction(false);
 			params.SetKeepInHandAfterSuccess(true);
 			params.SetCommandID(itemActionId);
@@ -78,28 +84,14 @@ class ACE_GadgetUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Sets a new gadget manager. Controlled by an event when the controlled entity has changed.
-	void SetNewGadgetManager(IEntity from, IEntity to)
+	//! Get gadget entity
+	IEntity GetHeldGadget(notnull IEntity ent)
 	{
-		m_GadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(to);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! User needs to equip the gadget for the action to show up
-	override bool CanBeShownScript(IEntity user)
-	{
-		if (!m_GadgetManager)
-		{
-			m_GadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(user);
-			
-			SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
-			if (playerController)
-				playerController.m_OnControlledEntityChanged.Insert(SetNewGadgetManager);
-			
-			return false;
-		}
+		SCR_GadgetManagerComponent gadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(ent);
+		if (!gadgetManager)
+			return null;
 		
-		return true;
+		return gadgetManager.GetHeldGadget();
 	}
 	
 	//------------------------------------------------------------------------------------------------

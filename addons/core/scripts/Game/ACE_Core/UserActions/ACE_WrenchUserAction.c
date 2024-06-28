@@ -1,10 +1,7 @@
 //------------------------------------------------------------------------------------------------
 //! Wrench Entity user action
 class ACE_WrenchUserAction : ACE_GadgetUserAction
-{
-	protected SCR_GadgetManagerComponent m_GadgetManager;
-	protected IEntity m_pUser;
-	
+{	
 	//------------------------------------------------------------------------------------------------
 	//! User needs to equip the Wrench for the action to show up
 	override bool CanBeShownScript(IEntity user)
@@ -32,7 +29,7 @@ class ACE_WrenchUserAction : ACE_GadgetUserAction
 	
 	//------------------------------------------------------------------------------------------------
 	//! Destructor - End Wrench animation
-	void ~ACE_WrenchDestroyUserAction()
+	void ~ACE_WrenchUserAction()
 	{
 		CancelPlayerAnimation(m_pUser);
 	}

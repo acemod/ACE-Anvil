@@ -2,9 +2,6 @@
 //! Shovel Entity user action
 class ACE_ShovelUserAction : ACE_GadgetUserAction
 {
-	protected SCR_GadgetManagerComponent m_GadgetManager;
-	protected IEntity m_pUser;
-	
 	//------------------------------------------------------------------------------------------------
 	//! User needs to equip the shovel for the action to show up
 	override bool CanBeShownScript(IEntity user)
@@ -28,7 +25,7 @@ class ACE_ShovelUserAction : ACE_GadgetUserAction
 	
 	//------------------------------------------------------------------------------------------------
 	//! Destructor - End E-tool animation
-	void ~ACE_ShovelDestroyUserAction()
+	void ~ACE_ShovelUserAction()
 	{
 		CancelPlayerAnimation(m_pUser);
 	}

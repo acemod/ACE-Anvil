@@ -116,7 +116,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 	
 	//------------------------------------------------------------------------------------------------
 	//! Destructor - End Gadget animation
-	void ~ACE_ShovelDestroyUserAction()
+	void ~ACE_GadgetUserAction()
 	{
 		CancelPlayerAnimation(m_pUser);
 	}

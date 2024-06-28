@@ -4,5 +4,18 @@ GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
   SCR_MineDamageManager "{5A187C4DB2CF86F2}" {
    Enabled 0
   }
+  ActionsManagerComponent "{59E4E6938E65C2ED}" {
+   additionalActions {
+    ACE_Explosives_DeminingUserAction "{61B77855355025F3}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{61B7785556CD0A18}" {
+      Name "Disarm"
+     }
+     VisibilityRange 1
+    }
+   }
+  }
  }
 }

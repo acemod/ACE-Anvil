@@ -150,8 +150,8 @@ modded class SCR_InventoryMenuUI : ChimeraMenuBase
 		m_pCallBack.m_pStorageFrom = m_pSelectedSlotUI.GetStorageUI();
 		m_pCallBack.m_pStorageTo = m_pFocusedSlotUI.GetStorageUI();
 
-		BaseInventoryStorageComponent fromItemStorageComponent = m_pCallBack.m_pStorageFrom.GetCurrentNavigationStorage();
-		BaseInventoryStorageComponent toItemStorageComponent = m_pFocusedSlotUI.GetAsStorage();	
+		BaseInventoryStorageComponent fromItemStorageComponent = m_pCallBack.m_pStorageFrom.GetStorage();
+		BaseInventoryStorageComponent toItemStorageComponent = m_pCallBack.m_pStorageTo.GetStorage();
 		
 		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		

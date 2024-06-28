@@ -11,7 +11,7 @@ GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
       "default"
      }
      UIInfo UIInfo "{61B846BBC1A7E295}" {
-      Name "#ACE-Explosives_DeminingUserAction_Name"
+      Name "#ACE-Explosives_DisarmUserAction_Name"
      }
      Duration 6
     }

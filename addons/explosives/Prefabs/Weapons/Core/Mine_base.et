@@ -6,11 +6,11 @@ GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
   }
   ActionsManagerComponent "{59E4E6938E65C2ED}" {
    additionalActions {
-    ACE_Explosives_DeminingUserAction "{61B77855355025F3}" {
+    ACE_Explosives_DeminingUserAction "{61B82460734EEF61}" {
      ParentContextList {
       "default"
      }
-     UIInfo UIInfo "{61B7785556CD0A18}" {
+     UIInfo UIInfo "{61B824606B6A2B03}" {
       Name "#ACE-Explosives_DeminingUserAction_Name"
      }
      VisibilityRange 1

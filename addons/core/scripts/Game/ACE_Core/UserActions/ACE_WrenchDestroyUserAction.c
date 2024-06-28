@@ -112,7 +112,7 @@ class ACE_WrenchDestroyUserAction : ScriptedUserAction
 		if (!gadget)
             return false;
 		
-         if (!gadget.FindComponent(SCR_RepairSupportStationComponent))
+         if (!gadget.GetOwner().FindComponent(SCR_RepairSupportStationComponent))
             return false;
 		
 		 return true;

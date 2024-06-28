@@ -1,0 +1,32 @@
+SCR_DestructibleEntity : "{8BF398DB6CA80A3E}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_base.et" {
+ ID "528AA556DAA3B23C"
+ components {
+  ActionsManagerComponent "{617454DDD56AF03E}" {
+   ActionContexts {
+    UserActionContext "{617454DDD13F1001}" {
+     ContextName "Cut Fence"
+     Position PointInfo "{617454DDDF890828}" {
+      Offset 1.7 0.7 0
+     }
+    }
+   }
+   additionalActions {
+    RON_CutFence "{617454DDE1A86D2B}" {
+     ParentContextList {
+      "Cut Fence"
+     }
+     Duration 5
+     m_prefabPath "{B0692A9A67445206}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_4m_D.et"
+     actionName "Cut Fence"
+     m_AudioSourceConfiguration SCR_AudioSourceConfiguration "{617454DD90A2D401}" {
+      m_sSoundProject "{5B79C73C52E6A74A}Sounds/Destruction/Multiphase/Destruction_Multiphase.acp"
+      m_sSoundEventName "SOUND_MPD_BREAK_METAL_NETFENCE"
+     }
+    }
+   }
+  }
+  RplComponent "{617454DDC989FC56}" {
+  }
+ }
+ coords 7.548 -3.496 1.104
+}

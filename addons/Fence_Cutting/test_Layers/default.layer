@@ -1,0 +1,78 @@
+SCR_FactionManager FactionManager_USxUSSR1 : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
+ coords 123.902 0.97 132.882
+ Factions {
+  SCR_Faction "{56B2B46E999BF3BF}" {
+   m_aEntityCatalogs {
+    SCR_EntityCatalogMultiList "{5C68A0EEB3F124F9}" {
+     m_aMultiLists {
+      SCR_EntityCatalogMultiListEntry "{5C68AD59AB9FBDDC}" {
+       m_aEntities {
+        SCR_EntityCatalogInventoryItem "{606084A3E362E9A4}" {
+         m_aEntityDataList {
+          SCR_ArsenalItem "{606084A2ED9ACBA2}" {
+           m_ItemChanceToSpawn 100
+          }
+         }
+        }
+        SCR_EntityCatalogInventoryItem "{5C62F7D8128DB218}" {
+         m_aEntityDataList {
+          SCR_ArsenalItem "{5C62F7D860F26C5A}" {
+           m_ItemChanceToSpawn 50
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
+$grp GenericEntity {
+ {
+  coords 126.77 1 133.612
+ }
+ {
+  coords 126.77 1 139.838
+ }
+}
+$grp SCR_DestructibleEntity : "{4FAF3428D562EB44}Prefabs/Structures/Walls/Net/NetFence_04/NetFence_04_2m.et" {
+ {
+  coords 122.309 -0 128.433
+ }
+ {
+  coords 125.84 -0 112.48
+ }
+}
+SCR_DestructibleEntity : "{7B75DBCC0EDB5EE3}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_8m.et" {
+ coords 133.656 0 120.865
+}
+SCR_DestructibleEntity : "{9AEEFE7F2A93F585}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_4m.et" {
+ coords 127.536 0 120.95
+}
+$grp SCR_DestructibleEntity : "{A67C1F685AA18F67}Prefabs/Structures/Walls/Net/NetFence_04/NetFence_04_4m.et" {
+ {
+  coords 125.667 0 129.415
+ }
+ {
+  coords 130.448 -0 112.177
+ }
+}
+$grp SCR_DestructibleEntity : "{DEF98342630E1591}Prefabs/Structures/Walls/Net/NetFence_04/NetFence_04_8m.et" {
+ {
+  coords 132.441 -0 129.733
+ }
+ {
+  coords 137.998 0 112.899
+ }
+}
+SCR_DestructibleEntity : "{EA236CA6B8B7A036}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_2m.et" {
+ coords 123.681 0 120.323
+}
+SCR_DestructibleEntity : "{F118DE44157D7C27}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_Corner.et" {
+ coords 143.251 -0 120.806
+}
+Vehicle M151A1 : "{F649585ABB3706C4}Prefabs/Vehicles/Wheeled/M151A2/M151A2.et" {
+ coords 130.189 1 105.107
+}

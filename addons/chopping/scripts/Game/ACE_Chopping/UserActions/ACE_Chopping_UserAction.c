@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 //! Tree deletion user action
-class ACE_Chopping_UserAction : ACE_ShovelDestroyUserAction
+class ACE_Chopping_UserAction : ACE_ShovelUserAction
 {
     
     //------------------------------------------------------------------------------------------------

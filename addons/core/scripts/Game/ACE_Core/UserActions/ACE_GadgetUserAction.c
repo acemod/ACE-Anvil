@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------------------------
-//! Base Entity deletion user action
-class ACE_WrenchDestroyUserAction : ScriptedUserAction
+//! Gadget Entity user action
+class ACE_GadgetUserAction : ScriptedUserAction
 {
 	protected SCR_GadgetManagerComponent m_GadgetManager;
 	protected IEntity m_pUser;
 	
 	//------------------------------------------------------------------------------------------------
-	//! Start Wrench animation
+	//! Start gadget animation
 	override void OnActionStart(IEntity pUserEntity)
 	{
 		super.OnActionStart(pUserEntity);
@@ -35,7 +35,7 @@ class ACE_WrenchDestroyUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! End Wrench animation
+	//! End gadget animation
 	override void OnActionCanceled(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
 		super.OnActionCanceled(pOwnerEntity, pUserEntity);
@@ -56,7 +56,7 @@ class ACE_WrenchDestroyUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! End Wrench animation
+	//! End gadget animation
 	void CancelPlayerAnimation(IEntity entity)
 	{
 		if (!entity)
@@ -76,7 +76,7 @@ class ACE_WrenchDestroyUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Get Wrench entity
+	//! Get gadget entity
 	IEntity GetBuildingTool(notnull IEntity ent)
 	{
 		SCR_GadgetManagerComponent gadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(ent);
@@ -94,7 +94,7 @@ class ACE_WrenchDestroyUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! User needs to equip the Wrench for the action to show up
+	//! User needs to equip the gadget for the action to show up
 	override bool CanBeShownScript(IEntity user)
 	{
 		if (!m_GadgetManager)
@@ -108,19 +108,15 @@ class ACE_WrenchDestroyUserAction : ScriptedUserAction
 			return false;
 		};
 					
-		SCR_GadgetComponent gadget = m_GadgetManager.GetHeldGadgetComponent();
-		if (!gadget)
-            return false;
+		if (!SCR_CampaignBuildingGadgetToolComponent.Cast(m_GadgetManager.GetHeldGadgetComponent()))
+			return false;
 		
-         if (!gadget.GetOwner().FindComponent(SCR_RepairSupportStationComponent))
-            return false;
-		
-		 return true;
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Destructor - End Wrench animation
-	void ~ACE_WrenchDestroyUserAction()
+	//! Destructor - End Gadget animation
+	void ~ACE_ShovelDestroyUserAction()
 	{
 		CancelPlayerAnimation(m_pUser);
 	}

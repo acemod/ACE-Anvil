@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 //! Explosive deletion user action
-class ACE_Explosives_DeminingUserAction : ACE_WrenchDestroyUserAction
+class ACE_Explosives_DisarmingUserAction : ACE_WrenchUserAction
 {
 	
 	//------------------------------------------------------------------------------------------------

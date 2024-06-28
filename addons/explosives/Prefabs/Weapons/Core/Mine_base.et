@@ -11,7 +11,7 @@ GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
       "default"
      }
      UIInfo UIInfo "{61B7785556CD0A18}" {
-      Name "Disarm"
+      Name "#ACE-Explosives_DeminingUserAction_Name"
      }
      VisibilityRange 1
     }

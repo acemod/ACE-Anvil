@@ -1,5 +1,5 @@
 GameProject {
- ID "ACEExplosives"
+ ID "ACE_Explosives"
  GUID "61B7763A8AEB53B7"
  TITLE "ACE_Explosives"
  Dependencies {

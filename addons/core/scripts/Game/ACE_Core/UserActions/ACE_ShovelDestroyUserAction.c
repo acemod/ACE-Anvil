@@ -115,13 +115,6 @@ class ACE_ShovelDestroyUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! For entities that have no RplComponent, only local scripts will work
-	override bool HasLocalEffectOnlyScript()
-	{
-		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Destructor - End E-tool animation
 	void ~ACE_ShovelDestroyUserAction()
 	{

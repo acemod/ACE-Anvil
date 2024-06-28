@@ -2,7 +2,6 @@
 //! Tree deletion user action
 class ACE_Chopping_UserAction : ACE_ShovelUserAction
 {
-    
     //------------------------------------------------------------------------------------------------
     //! Request deletion of the tree
     override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity) 

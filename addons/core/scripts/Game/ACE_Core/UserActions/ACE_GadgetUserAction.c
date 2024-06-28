@@ -26,7 +26,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 			params.SetAllowMovementDuringAction(false);
 			params.SetKeepInHandAfterSuccess(true);
 			params.SetCommandID(itemActionId);
-			params.SetCommandIntArg(2);
+			params.SetCommandIntArg(1);
 			
 			charController.TryUseItemOverrideParams(params);
 		}

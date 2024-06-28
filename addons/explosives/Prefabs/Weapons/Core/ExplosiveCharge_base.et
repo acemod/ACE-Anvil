@@ -17,14 +17,15 @@ GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
      }
      ActionTitle ""
     }
-    ACE_Explosives_DeminingUserAction "{61B8246250D78F21}" {
+    ACE_Explosives_DisarmingUserAction "{61B846BBF7BB2FA4}" {
      ParentContextList {
       "default"
      }
-     UIInfo UIInfo "{61B82462489B738B}" {
+     UIInfo UIInfo "{61B846BBEFB92765}" {
       Name "#ACE-Explosives_DeminingUserAction_Name"
      }
      VisibilityRange 1
+     Duration 6
     }
    }
   }

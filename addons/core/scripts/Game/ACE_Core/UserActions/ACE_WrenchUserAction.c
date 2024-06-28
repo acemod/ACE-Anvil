@@ -2,6 +2,32 @@
 //! Wrench Entity user action
 class ACE_WrenchUserAction : ACE_GadgetUserAction
 {	
+	override void OnActionStart(IEntity pUserEntity)
+	{
+		super.OnActionStart(pUserEntity);
+		
+		ChimeraCharacter character = ChimeraCharacter.Cast(pUserEntity);
+		if (!character)
+			return;
+		
+		CharacterControllerComponent charController = character.GetCharacterController();
+		if (charController)
+		{
+			
+			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
+			int itemActionId = pAnimationComponent.BindCommand("CMD_Item_Action");
+			ItemUseParameters params = new ItemUseParameters();
+			params.SetEntity(GetBuildingTool(pUserEntity));
+			params.SetAllowMovementDuringAction(false);
+			params.SetKeepInHandAfterSuccess(true);
+			params.SetCommandID(itemActionId);
+			params.SetCommandIntArg(1);
+			
+			charController.TryUseItemOverrideParams(params);
+		}
+		
+		m_pUser = pUserEntity;
+	}
 	//------------------------------------------------------------------------------------------------
 	//! User needs to equip the Wrench for the action to show up
 	override bool CanBeShownScript(IEntity user)

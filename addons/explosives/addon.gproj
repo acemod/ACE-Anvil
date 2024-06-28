@@ -10,7 +10,7 @@ GameProject {
    WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
     StringTables {
      StringTableDefinition "{61B80DDC6ED33EB8}" {
-      StringTableSource "{9B266FF64D566220}Language/ACEExplosivesLocalization.st"
+      StringTableSource "{AB4674C708AC6E13}Language/ACE_Explosives_Localization.st"
       Languages {
        LanguageDefinition "{61B80DDC60A0B696}" {
         Code "cs_cz"

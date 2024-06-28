@@ -4,9 +4,10 @@ StringTable {
   CustomStringTableItem "{61B80DDD1907B555}" {
    Id "ACE-Explosives_DeminingUserAction_Name"
    Target_en_us "Disarm"
-   Modified 1639453108
+   Target_de_de "Entschärfen"
+   Modified 1639514797
    Author "mikia"
-   LastChanged "mikia"
+   LastChanged "sebas"
   }
  }
 }

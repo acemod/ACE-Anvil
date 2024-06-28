@@ -1,4 +1,4 @@
-AnimSetInstanceSource {
+AnimSetInstanceSource "{613764EA923CF6C4}" {
  Template "{7F633C1C12A72901}Assets/Vehicles/Wheeled/workspaces/Vehicles_Wheeled_Template.ast"
  Lines {
   AnimSetInstanceSource_Line "Vehicle.CoDriver.Idle" {

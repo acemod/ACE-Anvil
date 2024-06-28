@@ -56,6 +56,9 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (!compartmentAccess)
 			return;
 		
+		// Clean-up when carried has left the comparment
+		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
+		
 		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
 	}
 
@@ -142,9 +145,6 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (!compartmentAccess)
 			return;
 		
-		// Clean-up when carried has left the comparment
-		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
-		
 		vector target_pos;
 		vector target_transform[4];
 		m_pCarrier.GetWorldTransform(target_transform);
@@ -158,11 +158,15 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (carriedRpl)
 			carriedRpl.ForceNodeMovement(GetOrigin());
 	}
+
 	
 	//------------------------------------------------------------------------------------------------
 	//! Clean-up when the carried player has left the compartment
-	protected void OnCompartmentLeft()
+	protected void OnCompartmentLeft(IEntity compartment)
 	{
+		if (compartment != this)
+			return;
+		
 		RplId carriedId = RplId.Invalid();
 		
 		if (m_pCarried)
@@ -216,5 +220,12 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	IEntity GetCarried()
 	{
 		return m_pCarried;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns the carried unit
+	bool IsCarrierPlayer()
+	{
+		return m_pCarrier.Type() == ChimeraCharacter;
 	}
 }

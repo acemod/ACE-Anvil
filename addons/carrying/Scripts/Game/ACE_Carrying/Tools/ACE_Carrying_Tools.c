@@ -2,13 +2,14 @@
 //! Helper methods for carrying
 class ACE_Carrying_Tools
 {
-	protected static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et";
+	protected static const ResourceName HELPER_CARRY_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et";
+	protected static const ResourceName HELPER_STRECHER_PREFAB_NAME = "{F9861A601F934DE7}Prefabs/Helpers/ACE_Carrying_StrecherHelperCompartment.et";
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>
 	static void Carry(notnull IEntity carrier, notnull IEntity carried)
 	{
-		ACE_Carrying_HelperCompartment helper = ACE_Carrying_HelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
+		ACE_Carrying_HelperCompartment helper = ACE_Carrying_HelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_CARRY_PREFAB_NAME), null, EntitySpawnParams()));
 		helper.Init(carrier, carried);
 	}
 	
@@ -39,6 +40,15 @@ class ACE_Carrying_Tools
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Place the carried player on entity
+	static void PlaceOnEntity(notnull IEntity entity, notnull IEntity carried, notnull PointInfo placementInfo)
+	{
+		ACE_Carrying_StrecherHelperCompartment helper = ACE_Carrying_StrecherHelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_STRECHER_PREFAB_NAME), null, EntitySpawnParams()));
+		helper.Init(entity, carried);
+		helper.SetTransformPoint(placementInfo);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! True if the given player is currently a carrier
 	static bool IsCarrier(IEntity carrier)
 	{
@@ -55,7 +65,11 @@ class ACE_Carrying_Tools
 		if (!carried)
 			return false;
 		
-		return GetHelperCompartmentFromCarried(carried);
+		ACE_Carrying_HelperCompartment compartment = GetHelperCompartmentFromCarried(carried);
+		if (!compartment)
+			return false;
+		
+		return compartment.IsCarrierPlayer();
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -14,6 +14,7 @@ BaseSource {
   "{C1CCA4C15DEF005F}Assets/Vehicles/Wheeled/workspaces/Player_Wheeled_M998.asi"
   "{741E6D13EB6C6205}Assets/Vehicles/Wheeled/workspaces/Vehicles_Wheeled_M998.asi"
   "{B241F1D8F215C583}Assets/Vehicles/Wheeled/workspaces/Player_CarryInjured.asi"
+  "{3DB68DDD9D578EB6}Assets/Vehicles/Wheeled/workspaces/Player_StrecherInjured.asi"
  }
  AnimGraph "{66618A6A119CAD93}Assets/Vehicles/Wheeled/workspaces/Vehicles_Wheeled_Graph.agr"
  PreviewModels {

@@ -3,11 +3,13 @@
 class ACE_Explosives_DisarmUserAction : ACE_WrenchUserAction
 {	
 	protected SCR_ExplosiveChargeComponent m_pChargeComponent;
+	protected SCR_PressureTriggerComponent m_pTriggerComponent;
 	
 	//------------------------------------------------------------------------------------------------
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		m_pChargeComponent = SCR_ExplosiveChargeComponent.Cast(pOwnerEntity.FindComponent(SCR_ExplosiveChargeComponent));
+		m_pTriggerComponent = SCR_PressureTriggerComponent.Cast(pOwnerEntity.FindComponent(SCR_PressureTriggerComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -35,6 +37,9 @@ class ACE_Explosives_DisarmUserAction : ACE_WrenchUserAction
 			return false;
 		
 		if (m_pChargeComponent && m_pChargeComponent.GetUsedFuzeType() == SCR_EFuzeType.NONE)
+			return false;
+		
+		if (m_pTriggerComponent && !m_pTriggerComponent.IsActivated())
 			return false;
 
 		return true;

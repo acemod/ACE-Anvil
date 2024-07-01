@@ -12,12 +12,6 @@ ACE_Carrying_HelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
      }
      ForcedFreeLook 1
      SeatType 1
-     DoorInfoList {
-      CompartmentDoorInfo "{5ED710990552D132}" {
-       EntryPositionInfo PointInfo "{5ED71099005CE831}" {
-       }
-      }
-     }
      CanOccupantEquipGadget 0
     }
    }

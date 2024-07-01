@@ -38,7 +38,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			return;
 		
 		m_bACE_InHand = false;
-		ToggleActive(false);
+		ToggleActive(false, SCR_EUseContext.FROM_INVENTORY);
 		GetGame().GetInputManager().RemoveActionListener("CharacterInspect", EActionTrigger.DOWN, ToogleActiveAction);
 	}
 	
@@ -107,15 +107,8 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Enable gadget to have on/off states
-	override bool CanBeToggled()
-	{
-		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Toggles building placement preview
-	override void ToggleActive(bool state)
+	override void ToggleActive(bool state, SCR_EUseContext context)
 	{
 		if (m_bActivated == state)
 			return;
@@ -150,6 +143,6 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	//! Callback for CharacterInspect keybind
 	void ToogleActiveAction()
 	{		
-		ToggleActive(!m_bActivated);
+		ToggleActive(!m_bActivated, SCR_EUseContext.FROM_ACTION);
 	}
 }

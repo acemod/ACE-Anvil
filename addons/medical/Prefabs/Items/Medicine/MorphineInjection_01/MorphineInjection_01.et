@@ -15,8 +15,12 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
   }
   SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
    m_ConsumableEffect ACE_Medical_ConsumableMorphine "{59E68C74C1F3910E}" {
-    m_fItemRegenerationSpeedDPS 5
-    m_fItemRegenerationDurationS 60
+    m_fItemRegenerationSpeed 5
+    m_fItemRegenerationDuration 60
+    m_aDamageEffectsToLoad {
+     ACE_Medical_MorphineDamageEffect "{6122D60861B541E7}" {
+     }
+    }
    }
   }
  }

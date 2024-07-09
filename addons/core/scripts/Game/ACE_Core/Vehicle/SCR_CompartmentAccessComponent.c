@@ -12,6 +12,6 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void ACE_MoveOutVehicle_Owner(vector target_transform[4], bool sendIntoRagdoll, bool performWhenPaused)
 	{
-		this.GetOutVehicle_NoDoor(target_transform, false, false);
+		GetOutVehicle_NoDoor(target_transform, false, false);
 	}
 }

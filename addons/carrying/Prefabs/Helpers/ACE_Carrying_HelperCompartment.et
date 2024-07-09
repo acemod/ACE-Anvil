@@ -12,6 +12,10 @@ ACE_Carrying_HelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
      }
      ForcedFreeLook 1
      SeatType 1
+     OverrideEntryPositionInfo PointInfo "{61D2CA8A14132241}" {
+     }
+     OverrideExitPositionInfo PointInfo "{61D2CA8A18570AAB}" {
+     }
      CanOccupantEquipGadget 0
     }
    }

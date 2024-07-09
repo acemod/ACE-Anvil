@@ -151,7 +151,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		// target_transform[2] is vectorDir in Arma 3
 		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS_M);
 		target_transform[3] = target_pos;
-		compartmentAccess.ACE_MoveOutVehicle(target_transform, false, false);
+		compartmentAccess.ACE_MoveOutVehicle(target_transform);
 		
 		// Broadcast teleport on network
 		RplComponent carriedRpl = RplComponent.Cast(m_pCarried.FindComponent(RplComponent));

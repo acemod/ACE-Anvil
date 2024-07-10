@@ -32,18 +32,17 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 			failReason = SCR_EConsumableFailReason.IS_BLEEDING;
 			return false;
 		}
-		
-		// We also have to check if the character is still healable
-		if (damageManager.ACE_Medical_MedkitUsable())
+
+		// In the event the patient is critically injured, we don't allow epi
+		if (damageManager.ACE_Medical_HasCriticalHealth() && damageManager.ACE_Medical_CanBeHealed())
 		{
-			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
-			return false;
-		}
-		
-		// If the medical kit is not usable, and they have critical health, they must visit a medical facility, so we give them another message
-		if (damageManager.ACE_Medical_HasCriticalHealth())
-		{
-			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_CRITICALLY_INJURED;
+			// If the patient can still be healed with the medkit, we'll just say that the patient is too injured
+			if (damageManager.ACE_Medical_MedkitUsable())
+				failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
+			// Otherwise, we'll display a seperate message showing the patient as critically injured
+			else
+				failReason = SCR_EConsumableFailReason.ACE_MEDICAL_CRITICALLY_INJURED;
+
 			return false;
 		}
 		

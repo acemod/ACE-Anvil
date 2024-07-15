@@ -1,0 +1,19 @@
+FrameWidgetClass : "{BF5FA7B21D658280}UI/layouts/HUD/InteractionSystem/ContextBasicInteractionBlip.layout" {
+ {
+  ImageWidgetClass "{608A8ABBCDF8CA30}" {
+   Prefab "{608A8ABBCDF8CA30}"
+   Color 1 1 1 1
+   Texture "{00FE3DBDFD15227B}UI/Textures/Icons/icons_wrapperUI-glow.imageset"
+   Image "plus"
+   Size 32 32
+   "Blend Mode" Additive
+  }
+  ImageWidgetClass "{607C81319D5DFC45}" {
+   Prefab "{607C81319D5DFC45}"
+   Opacity 0.85
+   Color 0.006 0.29 0.035 1
+   Image "plus"
+   Size 32 32
+  }
+ }
+}

@@ -13,8 +13,8 @@ StringTable {
   }
   CustomStringTableItem "{61D51487241F1A28}" {
    Id "ACE_Medical-FailReason_CriticallyInjured"
-   Target_en_us "Critically injured"
-   Modified 1641354450
+   Target_en_us "Too injured - Requires medical facility"
+   Modified 1641677954
    Author "AleX"
    LastChanged "AleX"
   }

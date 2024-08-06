@@ -37,7 +37,7 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction
 				SetCannotPerformReason(m_sIsBleeding);
 			else if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED)
 				SetCannotPerformReason(m_sTooDamaged);
-			else if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_CRITICALLY_INJURED)
+			else if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED_MEDICAL_FACILITY_REQUIRED)
 				SetCannotPerformReason(m_sTooInjured_MedicalFacilityRequired);
 			
 			return false;

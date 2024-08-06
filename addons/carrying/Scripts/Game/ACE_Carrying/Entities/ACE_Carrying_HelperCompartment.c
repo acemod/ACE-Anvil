@@ -92,7 +92,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		float rightInput = GetGame().GetInputManager().GetActionValue("CharacterRight");
 		float inputMagnitude = Vector(forwardInput, 0, rightInput).Length();
 		
-		if (inputMagnitude > 0)
+		if (inputMagnitude > WALKING_INPUT_ACTION_LIMIT)
 		{
 			GetGame().GetInputManager().SetActionValue("CharacterForward", forwardInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);
 			GetGame().GetInputManager().SetActionValue("CharacterRight", rightInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);

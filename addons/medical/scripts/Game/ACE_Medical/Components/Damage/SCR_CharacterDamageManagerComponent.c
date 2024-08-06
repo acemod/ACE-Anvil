@@ -86,17 +86,18 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Returns true if at least one physical hit zone is below the provided scaled health. Defaults to 99% health (Any damage to any limb).
-	bool ACE_Medical_CanBeHealed(float maxHealth = -1)
+	//! Returns true if at least one physical hit zone is below the provided scaled health.
+	//! maxHeal defaults to any damage (0.999), and any negative number will be replaced with the medical kit's max heal value.
+	bool ACE_Medical_CanBeHealed(float maxHeal = 0.999)
 	{
 		// Checking default argument
-		if (maxHealth < 0)
-			maxHealth = m_fACE_Medical_MedicalKitMaxHeal;
+		if (maxHeal < 0)
+			maxHeal = m_fACE_Medical_MedicalKitMaxHeal;
 		
 		// Iterating hitzones and checking max health
 		foreach (HitZone hitZone : m_aACE_Medical_PhysicalHitZones)
 		{
-			if (hitZone.GetHealthScaled() < maxHealth)
+			if (hitZone.GetHealthScaled() < maxHeal)
 				return true;
 		}
 		

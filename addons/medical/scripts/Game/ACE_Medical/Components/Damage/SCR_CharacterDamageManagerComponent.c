@@ -86,13 +86,16 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Returns true if at least one physical hit zone is below the provided scaled health.
-	//! maxHeal defaults to any damage (0.999), and any negative number will be replaced with the medical kit's max heal value.
-	bool ACE_Medical_CanBeHealed(float maxHeal = 0.999)
+	//! Returns true if at least one physical hit zone is below the provided max scaled health.
+	//! When atMedicalFacility is true, it will check for any damage (scaled health of 0.999), otherwise it will compare against the max scaled heal with a medical kit.
+	bool ACE_Medical_CanBeHealed(bool atMedicalFacility = false)
 	{
-		// Checking default argument
-		if (maxHeal < 0)
-			maxHeal = m_fACE_Medical_MedicalKitMaxHeal;
+		// Calculating the maxHeal to check against
+		float maxHeal = 0;
+		if (atMedicalFacility)
+			maxHeal = 0.999;
+		else
+			m_fACE_Medical_MedicalKitMaxHeal;
 		
 		// Iterating hitzones and checking max health
 		foreach (HitZone hitZone : m_aACE_Medical_PhysicalHitZones)

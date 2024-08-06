@@ -13,7 +13,7 @@ StringTable {
   }
   CustomStringTableItem "{61D51487241F1A28}" {
    Id "ACE_Medical-FailReason_CriticallyInjured"
-   Target_en_us "Too injured - Requires medical facility"
+   Target_en_us "Too injured (Requires a field hospital or ambulance)"
    Modified 1641677954
    Author "AleX"
    LastChanged "AleX"
@@ -85,6 +85,16 @@ StringTable {
    Target_de_de "Epinephrin"
    Target_cs_cz "Epinefrin"
    Modified 1624202844
+   Author "kexanone"
+   LastChanged "apollo-jk"
+  }
+  CustomStringTableItem "{5E101C5589E004EE}" {
+   Id "ACE_Medical-Item_Morphine_Description"
+   Target_en_us "Administered to patients in severe pain."
+   Target_fr_fr "Administrée à des patients ressentant une douleur violente."
+   Target_de_de "Verabreicht an Patienten mit akuten Schmerzen."
+   Target_cs_cz "Aplikováno pacientům v silných bolestech."
+   Modified 1623770742
    Author "kexanone"
    LastChanged "apollo-jk"
   }

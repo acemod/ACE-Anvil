@@ -97,6 +97,10 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 			GetGame().GetInputManager().SetActionValue("CharacterForward", forwardInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);
 			GetGame().GetInputManager().SetActionValue("CharacterRight", rightInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);
 		}
+
+		// Prevent jumping
+		GetGame().GetInputManager().SetActionValue("CharacterJump", 0);
+		
 		// Reset the stance if player attempts to go prone
 		if (m_CarrierCharCtrl.GetStance() == ECharacterStance.PRONE)
 			m_CarrierCharCtrl.SetStanceChange(ECharacterStanceChange.STANCECHANGE_TOCROUCH);

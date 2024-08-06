@@ -12,7 +12,7 @@ StringTable {
    LastChanged "apollo-jk"
   }
   CustomStringTableItem "{61D51487241F1A28}" {
-   Id "ACE_Medical-FailReason_CriticallyInjured"
+   Id "ACE_Medical-FailReason_TooInjured_MedicalFacilityRequired"
    Target_en_us "Too injured (Requires a field hospital or ambulance)"
    Modified 1641677954
    Author "AleX"

@@ -13,7 +13,6 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping carried player
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
-	protected static const ref array<string> WALKING_INPUT_ACTION_NAMES = {"CharacterForward", "CharacterRight"};
 	protected static const float WALKING_INPUT_ACTION_LIMIT = 0.5;
 	
 	//------------------------------------------------------------------------------------------------
@@ -88,12 +87,16 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	{
 		super.EOnFrame(owner, timeSlice);
 		
-		foreach (string actionName : WALKING_INPUT_ACTION_NAMES)
-		{
-			float value = GetGame().GetInputManager().GetActionValue(actionName);
-			GetGame().GetInputManager().SetActionValue(actionName, Math.Clamp(value, -WALKING_INPUT_ACTION_LIMIT, WALKING_INPUT_ACTION_LIMIT));
-		}
+		// Limit walking inputs to a magnitude of WALKING_INPUT_ACTION_LIMIT
+		float forwardInput = GetGame().GetInputManager().GetActionValue("CharacterForward");
+		float rightInput = GetGame().GetInputManager().GetActionValue("CharacterRight");
+		float inputMagnitude = Vector(forwardInput, 0, rightInput).Length();
 		
+		if (inputMagnitude > 0)
+		{
+			GetGame().GetInputManager().SetActionValue("CharacterForward", forwardInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);
+			GetGame().GetInputManager().SetActionValue("CharacterRight", rightInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);
+		}
 		// Reset the stance if player attempts to go prone
 		if (m_CarrierCharCtrl.GetStance() == ECharacterStance.PRONE)
 			m_CarrierCharCtrl.SetStanceChange(ECharacterStanceChange.STANCECHANGE_TOCROUCH);

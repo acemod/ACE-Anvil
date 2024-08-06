@@ -34,10 +34,10 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 		}
 
 		// In the event the patient is critically injured, we don't allow epi
-		if (damageManager.ACE_Medical_HasCriticalHealth() && damageManager.ACE_Medical_CanBeHealed())
+		if (damageManager.ACE_Medical_HasCriticalHealth() && damageManager.ACE_Medical_CanBeHealed(0.999))
 		{
-			// If the patient can still be healed with the medkit, we'll just say that the patient is too injured
-			if (damageManager.ACE_Medical_MedkitUsable())
+			// If the patient can still be healed with the medicalkit, we'll just say that the patient is too injured
+			if (damageManager.ACE_Medical_CanBeHealed())
 				failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
 			// Otherwise, we'll display a seperate message showing the patient as critically injured
 			else

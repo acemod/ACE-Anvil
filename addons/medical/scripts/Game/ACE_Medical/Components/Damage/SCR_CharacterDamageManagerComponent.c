@@ -91,11 +91,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	bool ACE_Medical_CanBeHealed(bool atMedicalFacility = false)
 	{
 		// Calculating the maxHeal to check against
-		float maxHeal = 0;
-		if (atMedicalFacility)
-			maxHeal = 0.999;
-		else
-			m_fACE_Medical_MedicalKitMaxHeal;
+		float maxHeal = 0.999;
+		if (!atMedicalFacility)
+			maxHeal = m_fACE_Medical_MedicalKitMaxHeal;
 		
 		// Iterating hitzones and checking max health
 		foreach (HitZone hitZone : m_aACE_Medical_PhysicalHitZones)

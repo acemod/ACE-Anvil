@@ -12,11 +12,9 @@ ACE_Carrying_HelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
      }
      ForcedFreeLook 1
      SeatType 1
-     DoorInfoList {
-      CompartmentDoorInfo "{5ED710990552D132}" {
-       EntryPositionInfo PointInfo "{5ED71099005CE831}" {
-       }
-      }
+     OverrideEntryPositionInfo PointInfo "{61D2CA8A14132241}" {
+     }
+     OverrideExitPositionInfo PointInfo "{61D2CA8A18570AAB}" {
      }
      CanOccupantEquipGadget 0
     }
@@ -42,8 +40,11 @@ ACE_Carrying_HelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
    Enabled 0
   }
   VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimGraph "{6F4F0DD8F315F336}Assets/Helpers/workspaces/ACE_Carrying_HelperCompartment.agr"
+   AnimInstance "{82255803EF1CA1D8}Assets/Helpers/workspaces/ACE_Carrying_HelperCompartment.asi"
    AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
-    AnimInstance "{B241F1D8F215C583}Assets/Vehicles/Wheeled/workspaces/Player_CarryInjured.asi"
+    AnimGraph "{6F4F0DD8F315F336}Assets/Helpers/workspaces/ACE_Carrying_HelperCompartment.agr"
+    AnimInstance "{82255803EF1CA1D8}Assets/Helpers/workspaces/ACE_Carrying_HelperCompartment.asi"
    }
   }
   RplComponent "{63136787FD0BCE14}" {

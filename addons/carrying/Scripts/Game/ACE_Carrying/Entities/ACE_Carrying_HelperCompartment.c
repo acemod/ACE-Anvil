@@ -12,8 +12,9 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	protected SCR_CharacterControllerComponent m_CarrierCharCtrl;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping carried player
-	protected static const float PRONE_CHECK_TIMEOUT_MS = 100; // Timeout for checking whether carrier tries do go prone
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
+	protected static const ref array<string> WALKING_INPUT_ACTION_NAMES = {"CharacterForward", "CharacterRight"};
+	protected static const float WALKING_INPUT_ACTION_LIMIT = 0.5;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>
@@ -56,7 +57,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (!compartmentAccess)
 			return;
 		
-		compartmentAccess.MoveInVehicle(this, ECompartmentType.Cargo);
+		compartmentAccess.MoveInVehicle(this, ECompartmentType.CARGO);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -78,13 +79,22 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		SCR_PlayerController carrierCtrl = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		ChimeraCharacter carrier = ChimeraCharacter.Cast(carrierCtrl.GetControlledEntity());
 		m_CarrierCharCtrl = SCR_CharacterControllerComponent.Cast(carrier.GetCharacterController());
-		GetGame().GetCallqueue().CallLater(PreventProneCarrier, PRONE_CHECK_TIMEOUT_MS, true);
+		SetEventMask(EntityEvent.FRAME);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Resets the stance if player attempts to go prone
-	protected void PreventProneCarrier()
+	//! Limit walking speed and prevent prone stance
+	override protected void EOnFrame(IEntity owner, float timeSlice)
 	{
+		super.EOnFrame(owner, timeSlice);
+		
+		foreach (string actionName : WALKING_INPUT_ACTION_NAMES)
+		{
+			float value = GetGame().GetInputManager().GetActionValue(actionName);
+			GetGame().GetInputManager().SetActionValue(actionName, Math.Clamp(value, -WALKING_INPUT_ACTION_LIMIT, WALKING_INPUT_ACTION_LIMIT));
+		}
+		
+		// Reset the stance if player attempts to go prone
 		if (m_CarrierCharCtrl.GetStance() == ECharacterStance.PRONE)
 			m_CarrierCharCtrl.SetStanceChange(ECharacterStanceChange.STANCECHANGE_TOCROUCH);
 	}
@@ -151,7 +161,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		// target_transform[2] is vectorDir in Arma 3
 		SCR_WorldTools.FindEmptyTerrainPosition(target_pos, target_transform[3] + target_transform[2], SEARCH_POS_RADIUS_M);
 		target_transform[3] = target_pos;
-		compartmentAccess.MoveOutVehicle(-1, target_transform);
+		compartmentAccess.ACE_MoveOutVehicle(target_transform);
 		
 		// Broadcast teleport on network
 		RplComponent carriedRpl = RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
@@ -194,7 +204,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (carried)
 			carried.GetPhysics().SetInteractionLayer(m_iPhysicsLayerPreset);
 		
-		GetGame().GetCallqueue().Remove(PreventProneCarrier);
+		ClearEventMask(EntityEvent.FRAME);
 	}
 	
 	//------------------------------------------------------------------------------------------------

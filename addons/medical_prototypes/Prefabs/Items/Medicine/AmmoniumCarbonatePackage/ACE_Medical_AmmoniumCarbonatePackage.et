@@ -1,0 +1,59 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     SizeSetupStrategy Manual
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{62150A64C480907E}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{62150A64E44E7555}" {
+       AnimGraph "{25B5CD66792F60F4}Assets/Items/Medicine/Workspaces/MorphineInjection_01.agr"
+       AnimInstance "{B900F61FD4D7F1DA}Assets/Items/Medicine/Workspaces/morphine_injection_player.asi"
+       BindingName "Gadget"
+      }
+     }
+     HandAdditiveRotation 180 -90 0
+     HandAdditiveTranslation 0 0.005 0
+    }
+    CustomAttributes {
+     SCR_ItemOfInterestAttribute "{6214F8E614CF74A2}" {
+      m_InterestType MORPHINE
+     }
+     ItemActionAnimAttributes "{6214F8E6B0CA383B}" {
+      AnimationGraphTemplate "{DFFC0A34A77ADCB4}anims/workspaces/player/player_main.agr"
+      ActionAnimationCommandName "CMD_HealSelf"
+      ActionAnimDuration 10
+      AllowMovementDuringAction 1
+     }
+     PreviewRenderAttributes "{6214F8E99145C88E}" {
+      CameraPreset Top
+      CameraOrbitAngles 0 0 -45
+      CameraDistanceToItem 0.05
+      LodModel 0
+     }
+    }
+    CommonItemType "MORPHINE"
+   }
+  }
+  MeshObject "{6214F8E90D1F3C47}" {
+   Object "{66A319321561B93E}Assets/Items/Medicine/AmmoniumCarbonate/Data/ACE_Medical_AmmoniumCarbonatePackage.xob"
+  }
+  RigidBody "{6214F8E90359578D}" {
+  }
+  SCR_ConsumableItemComponent "{6214F8ED50695075}" {
+   m_eAnimVariable ADRIANOV
+   m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{6214F8ED57615E05}" {
+    m_fItemRegenerationSpeed 30
+    m_fItemRegenerationDuration 5
+    m_aDamageEffectsToLoad {
+     ACE_Medical_AmmoniumCarbonateDamageEffect "{6214F8ED4A130B32}" {
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,3 +1,4 @@
+/*
 //------------------------------------------------------------------------------------------------
 class ACE_Medical_CardiovascularSystemComponentClass : ScriptComponentClass
 {
@@ -275,7 +276,7 @@ class ACE_Medical_CardiovascularSystemComponent : ScriptComponent
 				m_fCheckCriticalHeartRateTimerS = 0;
 				
 				if (Math.RandomFloat01() < (0.4 + 0.6  * (m_fMeanCriticalCardiacArrestHeartRateThresholdLowBPM - m_fHeartRateBPM) / 10))
-					enterCardiacArrest = true;	
+					enterCardiacArrest = true;
 			}
 
 			if (enterCardiacArrest)
@@ -299,7 +300,6 @@ class ACE_Medical_CardiovascularSystemComponent : ScriptComponent
 		{
 			vitalState = ACE_Medical_EVitalState.LOWERED;
 		}
-		*/
 				
 		SetVitalState(vitalState);
 	}
@@ -540,3 +540,4 @@ enum ACE_Medical_EVitalState
 	CRITICAL,
 	CARDIAC_ARREST
 }
+*/

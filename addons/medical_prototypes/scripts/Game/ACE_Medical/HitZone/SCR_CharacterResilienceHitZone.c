@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterResilienceHitZone : SCR_RegeneratingHitZone
 {
-	protected ACE_Medical_CardiovascularSystemComponent m_pACE_Medical_CardiovascularSystem;
+	protected ACE_Medical_CardiovascularComponent m_pACE_Medical_CardiovascularComponent;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
 	override void OnInit(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		super.OnInit(pOwnerEntity, pManagerComponent);
-		m_pACE_Medical_CardiovascularSystem = ACE_Medical_CardiovascularSystemComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularSystemComponent));
+		m_pACE_Medical_CardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -18,7 +18,7 @@ modded class SCR_CharacterResilienceHitZone : SCR_RegeneratingHitZone
 		float damage = super.ComputeEffectiveDamage(damageContext, isDOT);
 		
 		if (damageContext.damageType == EDamageType.REGENERATION)
-			damage *= m_pACE_Medical_CardiovascularSystem.GetResilienceRecoveryScale();
+			damage *= m_pACE_Medical_CardiovascularComponent.GetResilienceRecoveryScale();
 
 		return damage;
 	}

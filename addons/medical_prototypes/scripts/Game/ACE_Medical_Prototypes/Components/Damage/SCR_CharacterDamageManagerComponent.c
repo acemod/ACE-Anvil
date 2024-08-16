@@ -5,7 +5,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	[Attribute(defvalue: "20", desc: "Maximum total bleeding rate at cardiac arrest due to gravity  [ml/s]", category: "ACE Medical")]
 	protected float m_fACE_Medical_CardiacArrestMaxTotalBleedingRate;
 	
-	protected ACE_Medical_CardiovascularSystemComponent m_pACE_Medical_CardiovascularSystem;
+	protected ACE_Medical_CardiovascularComponent m_pACE_Medical_CardiovascularComponent;
 	protected ACE_Medical_MedicationManagerComponent m_pACE_Medical_MedicationManager;
 	protected ACE_Medical_BrainHitZone m_pACE_Medical_BrainHitZone;
 	
@@ -16,16 +16,41 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	override void OnInit(IEntity owner)
 	{
 		super.OnInit(owner);
-		m_pACE_Medical_CardiovascularSystem = ACE_Medical_CardiovascularSystemComponent.Cast(owner.FindComponent(ACE_Medical_CardiovascularSystemComponent));
-		m_pACE_Medical_MedicationManager = ACE_Medical_MedicationManagerComponent.Cast(owner.FindComponent(ACE_Medical_MedicationManagerComponent));
+		m_pACE_Medical_CardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(owner.FindComponent(ACE_Medical_CardiovascularComponent));
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	override void FullHeal(bool ignoreHealingDOT = true)
 	{
 		super.FullHeal(ignoreHealingDOT);
-		m_pACE_Medical_CardiovascularSystem.ResetVitalsToDefault();
-		m_pACE_Medical_MedicationManager.Clear();
+		
+		//-----------------------------------------------------------------------------------------------------------
+		//! TO DO: Replace solution once systems support inheritance
+		/*
+		IEntity owner = GetOwner();
+		array<Managed> components = {};
+		owner.FindComponents(ACE_Medical_BaseComponent, components);
+		
+		foreach (Managed component : components)
+		{
+			ACE_Medical_BaseComponent medicalComponent = ACE_Medical_BaseComponent.Cast(component);
+			
+			ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(medicalComponent.GetAssociatedSystemType());
+			if (system)
+				system.OnFullHeal(owner);
+		}
+		*/
+		
+		IEntity owner = GetOwner();
+		
+		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(ACE_Medical_CardiovascularSystem);
+		if (system)
+			system.OnFullHeal(owner);
+		
+		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationComponent);
+		if (system2)
+			system2.OnFullHeal(owner);
+		//-----------------------------------------------------------------------------------------------------------
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -35,17 +60,17 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (super.ShouldBeUnconscious())
 			return true;
 		
-		if (!m_pACE_Medical_CardiovascularSystem)
+		if (!m_pACE_Medical_CardiovascularComponent)
 			return false;
 		
-		return (m_pACE_Medical_CardiovascularSystem.GetVitalState() >= ACE_Medical_EVitalState.CRITICAL);
+		return (m_pACE_Medical_CardiovascularComponent.GetVitalState() >= ACE_Medical_EVitalState.CRITICAL);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Maximum total bleeding rate in ml/s
 	float ACE_Medical_GetMaxTotalBleedingRate()
 	{
-		return GetBleedingScale() * Math.Max(m_fACE_Medical_CardiacArrestMaxTotalBleedingRate, m_pACE_Medical_CardiovascularSystem.GetCardiacOutput() / 60);
+		return GetBleedingScale() * Math.Max(m_fACE_Medical_CardiacArrestMaxTotalBleedingRate, m_pACE_Medical_CardiovascularComponent.GetCardiacOutput() / 60);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

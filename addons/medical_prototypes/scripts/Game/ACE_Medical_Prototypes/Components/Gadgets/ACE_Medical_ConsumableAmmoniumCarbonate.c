@@ -5,7 +5,7 @@ class ACE_Medical_ConsumableAmmoniumCarbonate : SCR_ConsumableEffectHealthItems
 	[Attribute(defvalue: "0.2", desc: "Probability for applying effect when resilience recovery scale is close to 0")]
 	protected float m_fSuccessChanceMin;
 	
-	[Attribute(defvalue: "1", desc: "Probability for applying effect when resilience recovery scale is at ACE_Medical_CardiovascularSystemComponent.m_fMaxRevivalResilienceRecoveryScale or above")]
+	[Attribute(defvalue: "1", desc: "Probability for applying effect when resilience recovery scale is at ACE_Medical_CardiovascularComponent.m_fMaxRevivalResilienceRecoveryScale or above")]
 	protected float m_fSuccessChanceMax;
 	
 	//------------------------------------------------------------------------------------------------
@@ -26,16 +26,20 @@ class ACE_Medical_ConsumableAmmoniumCarbonate : SCR_ConsumableEffectHealthItems
 	//! Add chance for applying effect
 	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
 	{
-		ACE_Medical_CardiovascularSystemComponent cardiovascularSystem = ACE_Medical_CardiovascularSystemComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularSystemComponent));
-		if (!cardiovascularSystem)
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!cardiovascularComponent)
 			return;
 		
-		float scale = cardiovascularSystem.GetResilienceRecoveryScale();
+		float scale = cardiovascularComponent.GetResilienceRecoveryScale();
 		if (scale <= 0)
 			return;
 		
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();;
+		if (!settings || !settings.m_CardiovascularSystem)
+			return;
+		
 		// TO DO: Add time of last attempt as a factor to prevent spamming to become meta
-		if (Math.RandomFloat01() > Math.Map(scale, 0, cardiovascularSystem.GetMaxRevivalResilienceRecoveryScale(), m_fSuccessChanceMin, m_fSuccessChanceMax))
+		if (Math.RandomFloat01() > Math.Map(scale, 0, settings.m_CardiovascularSystem.m_fMaxRevivalResilienceRecoveryScale, m_fSuccessChanceMin, m_fSuccessChanceMax))
 			return;
 		
 		super.ApplyEffect(target, user, item, animParams);

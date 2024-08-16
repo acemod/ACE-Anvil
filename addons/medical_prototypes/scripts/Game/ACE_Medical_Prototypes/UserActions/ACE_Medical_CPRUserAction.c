@@ -4,7 +4,7 @@ class ACE_Medical_CPRUserAction : SCR_ScriptedUserAction
 	protected SCR_ChimeraCharacter m_pOwner;
 	protected IEntity m_pCurrentUser;
 	
-	protected ACE_Medical_CardiovascularSystemComponent m_pCardiovascularSystem;
+	protected ACE_Medical_CardiovascularComponent m_pCardiovascularComponent;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Called when object is initialized and registered to actions manager
@@ -17,7 +17,7 @@ class ACE_Medical_CPRUserAction : SCR_ScriptedUserAction
 	protected void DelayedInit(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		m_pOwner = SCR_ChimeraCharacter.Cast(pOwnerEntity);
-		m_pCardiovascularSystem = ACE_Medical_CardiovascularSystemComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularSystemComponent));
+		m_pCardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ class ACE_Medical_CPRUserAction : SCR_ScriptedUserAction
 			return false;
 		
 		// Lock this action: We can only see it when no one else is performing it or when we are already performing it
-		if (m_pCardiovascularSystem.IsCPRPerformed() && (user != m_pCurrentUser))
+		if (m_pCardiovascularComponent.IsCPRPerformed() && (user != m_pCurrentUser))
 			return false;
 		
 		return true;
@@ -71,7 +71,7 @@ class ACE_Medical_CPRUserAction : SCR_ScriptedUserAction
 		m_pCurrentUser = pUserEntity;
 		
 		if (Replication.IsServer())
-			m_pCardiovascularSystem.SetIsCPRPerformed(true);
+			m_pCardiovascularComponent.SetIsCPRPerformed(true);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -83,7 +83,7 @@ class ACE_Medical_CPRUserAction : SCR_ScriptedUserAction
 		m_pCurrentUser = null;
 		
 		if (Replication.IsServer())
-			m_pCardiovascularSystem.SetIsCPRPerformed(false);
+			m_pCardiovascularComponent.SetIsCPRPerformed(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------

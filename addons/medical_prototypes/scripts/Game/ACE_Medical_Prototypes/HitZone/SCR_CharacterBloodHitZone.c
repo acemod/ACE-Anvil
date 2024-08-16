@@ -3,7 +3,6 @@
 modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 {
 	protected SCR_CharacterDamageManagerComponent m_pACE_Medical_DamageManager;
-	protected ACE_Medical_CardiovascularSystemComponent m_pACE_Medical_CardiovascularSystem;
 	
 	protected float m_fACE_Medical_LastHealth;
 	protected float m_iACE_Medical_LastTickCount;
@@ -16,7 +15,6 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 	{
 		super.OnInit(pOwnerEntity, pManagerComponent);
 		m_pACE_Medical_DamageManager = SCR_CharacterDamageManagerComponent.Cast(pManagerComponent);
-		m_pACE_Medical_CardiovascularSystem = ACE_Medical_CardiovascularSystemComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularSystemComponent));
 		m_fACE_Medical_LastHealth = GetMaxHealth();
 		m_fACE_Medical_CurrentHealth = GetMaxHealth();
 		m_iACE_Medical_LastTickCount = System.GetTickCount();

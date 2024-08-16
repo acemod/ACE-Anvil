@@ -1,8 +1,18 @@
 SCR_ChimeraCharacter {
  ID "520EC961A090B1EE"
  components {
-  ACE_Medical_CardiovascularSystemComponent "{62150A516340AED8}" {
-   m_CardiacArrestDamageEffect ACE_Medical_CardiacArrestDamageEffect "{6216C8DDD321E2DF}" {
+  ACE_Medical_CardiovascularComponent "{6220003330350BC2}" {
+  }
+  ACE_Medical_MedicationManagerComponent "{621B2BABDAF5867E}" {
+   m_aDrugHandlers {
+    ACE_Medical_DrugHandler "{621B2BAF9F36A0CB}" {
+    }
+    ACE_Medical_DrugHandler "{621B2BAF90AC26B9}" {
+     m_eType EPINEPHRINE
+    }
+    ACE_Medical_DrugHandler "{621B2BAF962CFA36}" {
+     m_eType MORPHINE
+    }
    }
   }
   SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {

@@ -30,22 +30,22 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 		if (!patient)
 			return;
 		
-		ACE_Medical_CardiovascularSystemComponent cardiovascularSystem = ACE_Medical_CardiovascularSystemComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularSystemComponent));
-		if (!cardiovascularSystem)
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!cardiovascularComponent)
 			return;
 		
 		switch (type)
 		{
 			case ENotification.ACE_MEDICAL_PULSE_RESULT:
 			{
-				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, cardiovascularSystem.GetHeartRate());
+				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, cardiovascularComponent.GetHeartRate());
 				break;
 			}
 			
 			case ENotification.ACE_MEDICAL_BLOOD_PRESSURE_RESULT:
 			{
-				Tuple2<float, float> pressures = cardiovascularSystem.GetBloodPressures();
-				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, pressures.param2 * ACE_Medical_CardiovascularSystemComponent.KPA2MMHG, pressures.param1 * ACE_Medical_CardiovascularSystemComponent.KPA2MMHG);
+				Tuple2<float, float> pressures = cardiovascularComponent.GetBloodPressures();
+				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, pressures.param2 * ACE_Medical_CardiovascularComponent.KPA2MMHG, pressures.param1 * ACE_Medical_CardiovascularComponent.KPA2MMHG);
 				break;
 			}
 		}

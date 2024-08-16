@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------------------------------------
 class ACE_Medical_BrainHitZone : SCR_RegeneratingHitZone
 {
-	protected ACE_Medical_CardiovascularSystemComponent m_pCardiovascularSystem;
+	protected ACE_Medical_CardiovascularComponent m_pCardiovascularComponent;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Store instance on SCR_CharacterDamageManagerComponent on init
@@ -13,7 +13,7 @@ class ACE_Medical_BrainHitZone : SCR_RegeneratingHitZone
 		if (damageManager)
 			damageManager.ACE_Medical_SetBrainHitZone(this);
 		
-		m_pCardiovascularSystem = ACE_Medical_CardiovascularSystemComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularSystemComponent));
+		m_pCardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ class ACE_Medical_BrainHitZone : SCR_RegeneratingHitZone
 	{
 		float damage = super.ComputeEffectiveDamage(damageContext, isDOT);
 		
-		if (damage < 0 && m_pCardiovascularSystem.IsInCardiacArrest())
+		if (damage < 0 && m_pCardiovascularComponent.IsInCardiacArrest())
 			return 0;
 		
 		return damage;

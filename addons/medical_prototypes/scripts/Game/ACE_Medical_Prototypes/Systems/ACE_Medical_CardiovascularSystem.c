@@ -268,19 +268,25 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		ACE_Medical_ECardiacRhythmState rhythmState = component.GetCardiacRhythmState();
 		int diffTime = component.GetArrestTimeCurrent();
 		int shockAmount = component.GetShocksDelivered();
+		int hasBeenShocked = component.HasBeenShocked();
 		
-		switch (rhythmState)
+		if (rhythmState == ACE_Medical_ECardiacRhythmState.ASYSTOLE)
+			return m_Settings.m_fCardiacRhythmsSuccessChanceAsystole;
+		
+		if (rhythmState == ACE_Medical_ECardiacRhythmState.VF)
 		{
-			case ACE_Medical_ECardiacRhythmState.ASYSTOLE:
-				return m_Settings.m_fCardiacRhythmsSuccessChanceAsystole;
-			case ACE_Medical_ECardiacRhythmState.VF:
+			if (hasBeenShocked)
+			{
 				return Math.Map(diffTime, 3*60*1000,
 								m_Settings.m_fCardiacRhythmsSuccessChanceAsystole,
 								m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationDelayed,
 								m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationImmediate);
-			default:
-				return 1;
+			}
+			// default to asystole chance if no shock 
+			return m_Settings.m_fCardiacRhythmsSuccessChanceAsystole;
 		}
+		
+		// no penalty if reached 
 		return 1;
 	}
 	

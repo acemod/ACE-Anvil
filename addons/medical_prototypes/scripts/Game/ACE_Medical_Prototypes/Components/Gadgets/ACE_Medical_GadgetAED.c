@@ -45,6 +45,7 @@ class ACE_Medical_GadgetAED : GenericEntity
 		if (IsAEDCharged() &&
 			IsShockableRhythm(component))
 		{
+			component.AddShocksDelivered();
 			return true;
 		}
 		

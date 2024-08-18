@@ -26,6 +26,8 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected ACE_Medical_ECardiacRhythmState m_eCardiacRhythmState = ACE_Medical_ECardiacRhythmState.SINUS;
 	protected int m_iShocksDelivered = 0;
 	protected int m_iTimeArrestStarted;
+	protected int m_iTimeLastShock;
+	protected int m_iTimeSinceLastShock;
 	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
 	protected ACE_Medical_CardiacArrestDamageEffect m_CardiacArrestDamageEffect;
@@ -297,14 +299,15 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void TryDefibrillation()
+	int GetTimeLastShock()
 	{
-		ACE_Medical_ECardiacRhythmState rhythmState = GetCardiacRhythmState();
-		
-		if (rhythmState != ACE_Medical_ECardiacRhythmState.VF)
-			return;
-		
-		m_iShocksDelivered++;
+		return System.GetTickCount(m_iTimeLastShock);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetTimeLastShock()
+	{
+		m_iTimeLastShock = System.GetTickCount();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -314,8 +317,14 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void ResetArrestTimeStart()
+	{
+		m_iTimeArrestStarted = System.GetTickCount();
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	int GetArrestTimeCurrent()
 	{
-		return System.GetTickCount(GetArrestTimeStart());
+		return System.GetTickCount(m_iTimeArrestStarted);
 	}
 }

@@ -65,11 +65,14 @@ class ACE_Medical_DefibrillationUserAction : SCR_ScriptedUserAction
 	//! Called when someone tries to perform the action, user entity is typically character
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		// TODO: Integrate the perform action when player has the AED, and get that AED entity
+		/*
 		super.PerformAction(pOwnerEntity, pUserEntity);
 		m_pCurrentUser = pUserEntity;
 		
 		if (Replication.IsServer())
-			m_pCardiovascularComponent.TryDefibrillation();
+			AED.Defibrillate(m_pCardiovascularComponent);
+		*/
 	}
 
 	//------------------------------------------------------------------------------------------------

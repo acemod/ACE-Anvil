@@ -154,20 +154,8 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 				
 				m_fCPRSuccessCheckTimerS = 0;
 				
-				float successChanceCPR = ComputeCPRSuccess(component, damageManager);
-				float successChanceDefibrillation = ComputeDefibrillationSuccess(component);
-				float finalSuccess;
-				
-				if (m_Settings.m_bCardiacArrestRhythmEnabled)
-				{
-					finalSuccess = successChanceCPR * successChanceDefibrillation;
-				}
-				else
-				{
-					finalSuccess = successChanceCPR;
-				}
-				
-				if (Math.RandomFloat01() < finalSuccess)
+				float reviveChance = ComputeReviveChance(component, damageManager);				
+				if (Math.RandomFloat01() < reviveChance)
 					Revive(component);
 			}
 			
@@ -270,12 +258,12 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateArrestCardiacRhythmState(ACE_Medical_CardiovascularComponent component)
 	{
-		if (component.GetArrestTimeCurrent() >= 5*60*1000)
+		if (component.GetArrestTimeCurrent() >= 3*60*1000)
 			component.SetCardiacRhythmState(ACE_Medical_ECardiacRhythmState.ASYSTOLE)
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float ComputeDefibrillationSuccess(ACE_Medical_CardiovascularComponent component)
+	protected float ComputeRhythmPenalty(ACE_Medical_CardiovascularComponent component)
 	{
 		ACE_Medical_ECardiacRhythmState rhythmState = component.GetCardiacRhythmState();
 		int diffTime = component.GetArrestTimeCurrent();
@@ -283,21 +271,31 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		
 		switch (rhythmState)
 		{
-			case ACE_Medical_ECardiacRhythmState.SINUS:
-				return 0;
-			case ACE_Medical_ECardiacRhythmState.VF:
-				break;
 			case ACE_Medical_ECardiacRhythmState.ASYSTOLE:
 				return m_Settings.m_fCardiacRhythmsSuccessChanceAsystole;
+			case ACE_Medical_ECardiacRhythmState.VF:
+				return Math.Map(diffTime, 3*60*1000,
+								m_Settings.m_fCardiacRhythmsSuccessChanceAsystole,
+								m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationDelayed,
+								m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationImmediate);
+			default:
+				return 1;
 		}
 		
-		float successChance = Math.Map(diffTime, 5*60*1000, m_Settings.m_fCardiacRhythmsSuccessChanceAsystole, m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationDelayed, m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationImmediate);
+		return 1;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeShockCountPenalty(ACE_Medical_CardiovascularComponent component)
+	{
+		int shockAmount = component.GetShocksDelivered();
+		
 		if (shockAmount > 0)
 		{
-			successChance = successChance - (shockAmount * m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationReduction);
+			return shockAmount * m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationReduction;
 		}
 		
-		return successChance;
+		return 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -311,6 +309,19 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		float scale = Math.Clamp(bloodHZ.GetHealthScaled(), minScale, maxScale);
 		
 		return Math.Map(scale, minScale, maxScale, m_Settings.m_fCPRSuccessChanceMin, m_Settings.m_fCPRSuccessChanceMax);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeReviveChance(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager)
+	{
+		float cprSuccess = ComputeCPRSuccess(component, damageManager);
+		float rhythmPenalty = ComputeRhythmPenalty(component);
+		float shockPenalty = ComputeShockCountPenalty(component);
+		
+		if (m_Settings.m_bCardiacArrestRhythmEnabled)
+			return cprSuccess * rhythmPenalty * shockPenalty;
+		
+		return cprSuccess;
 	}
 	
 	//------------------------------------------------------------------------------------------------

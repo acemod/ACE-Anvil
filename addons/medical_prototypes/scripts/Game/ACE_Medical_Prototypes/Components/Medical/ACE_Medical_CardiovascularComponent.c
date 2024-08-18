@@ -298,6 +298,12 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void SetHasBeenShocked(bool value)
+	{
+		m_iShocksDelivered = value;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	int GetTimeLastShock()
 	{
 		return System.GetTickCount(m_iTimeLastShock);

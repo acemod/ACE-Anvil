@@ -61,6 +61,22 @@ class ACE_Medical_CardiovascularSystemSettings : ScriptAndConfig
 	[Attribute(defvalue: "0.2", desc: "Maximum resilience recovery scale applied after getting revived. This scale gets multiplied by the scaled health of the brain and will be removed once the patient becomes conscious", category: "Resilience")]
 	float m_fMaxRevivalResilienceRecoveryScale;
 	
+	// Cardiac rhythms settings
+	[Attribute(defvalue: "false", desc: "Enables cardiac rhythm and AED systems", category: "Cardiac Rhythms")]
+	bool m_bCardiacArrestRhythmEnabled;
+		
+	[Attribute(defvalue: "0.9", desc: "Defines the likelihood of successful immediate defibrillation, assuming CPR is successfully performed.", category: "Cardiac Rhythms")]
+	float m_fCardiacRhythmsSuccessChanceDefibrillationImmediate;
+		
+	[Attribute(defvalue: "0.5", desc: "Defines the likelihood of successful delayed defibrillation, assuming CPR is successfully performed.", category: "Cardiac Rhythms")]
+	float m_fCardiacRhythmsSuccessChanceDefibrillationDelayed;
+		
+	[Attribute(defvalue: "0.1", desc: "Defines the likelihood of successful revive if in Asystole, assuming CPR is successfully performed.", category: "Cardiac Rhythms")]
+	float m_fCardiacRhythmsSuccessChanceAsystole;
+	
+	[Attribute(defvalue: "0.1", desc: "Reduction in success with subsequent unsuccessful defibrillations", category: "Cardiac Rhythms")]
+	float m_fCardiacRhythmsSuccessChanceDefibrillationReduction;
+	
 	// Values derived from others
 	float m_fDefaultSystemicVascularResistance;
 	float m_fPulsePressureScale;

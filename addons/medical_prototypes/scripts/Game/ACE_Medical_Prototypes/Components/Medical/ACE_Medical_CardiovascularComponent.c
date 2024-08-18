@@ -22,6 +22,11 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fPulsePressureKPA;
 	protected float m_fResilienceRecoveryScale = 1;
 	
+	// TO DO: Impliment simple cardiac rhythms + AED 
+	protected ACE_Medical_ECardiacRhythmState m_eCardiacRhythmState = ACE_Medical_ECardiacRhythmState.SINUS;
+	protected int m_iShocksDelivered = 0;
+	protected int m_iTimeArrestStarted;
+	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
 	protected ACE_Medical_CardiacArrestDamageEffect m_CardiacArrestDamageEffect;
 	
@@ -78,6 +83,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 			m_pDamageManager.GetResilienceHitZone().SetHealth(0);
 			m_pDamageManager.AddDamageEffect(m_CardiacArrestDamageEffect);
 			m_bWasInCardiacArrest = true;
+			m_iTimeArrestStarted = System.GetTickCount();
 		}
 		else
 		{
@@ -252,5 +258,64 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	ScriptInvokerInt2 GetOnVitalStateChanged()
 	{
 		return m_OnVitalStateChanged;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetCardiacRhythmState(ACE_Medical_ECardiacRhythmState rhythmState)
+	{
+		m_eCardiacRhythmState = rhythmState;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_ECardiacRhythmState GetCardiacRhythmState()
+	{
+		return m_eCardiacRhythmState;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetShocksDelivered()
+	{
+		return m_iShocksDelivered;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void AddShocksDelivered()
+	{
+		m_iShocksDelivered++;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetShocksDelivered()
+	{
+		m_iShocksDelivered = 0;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool HasBeenShocked()
+	{
+		return m_iShocksDelivered > 0;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void TryDefibrillation()
+	{
+		ACE_Medical_ECardiacRhythmState rhythmState = GetCardiacRhythmState();
+		
+		if (rhythmState != ACE_Medical_ECardiacRhythmState.VF)
+			return;
+		
+		m_iShocksDelivered++;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetArrestTimeStart()
+	{
+		return m_iTimeArrestStarted;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetArrestTimeCurrent()
+	{
+		return System.GetTickCount(GetArrestTimeStart());
 	}
 }

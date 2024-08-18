@@ -352,6 +352,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		component.SetVitalState(ACE_Medical_EVitalState.CRITICAL);
 		component.SetCardiacRhythmState(ACE_Medical_ECardiacRhythmState.SINUS);
 		component.ResetShocksDelivered();
+		component.SetHasBeenShocked(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------

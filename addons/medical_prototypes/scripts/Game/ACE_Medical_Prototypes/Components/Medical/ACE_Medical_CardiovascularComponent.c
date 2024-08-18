@@ -27,7 +27,6 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected int m_iShocksDelivered = 0;
 	protected int m_iTimeArrestStarted;
 	protected int m_iTimeLastShock;
-	protected int m_iTimeSinceLastShock;
 	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
 	protected ACE_Medical_CardiacArrestDamageEffect m_CardiacArrestDamageEffect;

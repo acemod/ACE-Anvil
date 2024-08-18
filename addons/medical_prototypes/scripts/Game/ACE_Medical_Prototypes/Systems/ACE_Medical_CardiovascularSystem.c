@@ -281,7 +281,6 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 			default:
 				return 1;
 		}
-		
 		return 1;
 	}
 	
@@ -289,12 +288,18 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	protected float ComputeShockCountPenalty(ACE_Medical_CardiovascularComponent component)
 	{
 		int shockAmount = component.GetShocksDelivered();
+		int timeLastShock = component.GetTimeLastShock();
 		
-		if (shockAmount > 0)
+		if (shockAmount > 0 && timeLastShock < 2*1000)
 		{
-			return shockAmount * m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationReduction;
+			return 1 - (shockAmount * m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationReduction);
 		}
 		
+		if (shockAmount > 0 && timeLastShock > 2*1000)
+		{
+			component.ResetTimeLastShock();
+			component.ResetShocksDelivered();
+		}		
 		return 1;
 	}
 	

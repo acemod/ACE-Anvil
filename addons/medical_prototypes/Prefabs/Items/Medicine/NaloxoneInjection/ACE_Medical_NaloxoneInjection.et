@@ -39,6 +39,7 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
     m_eDeviceType ACE_MEDICAL_NALOXONE_INJECTOR
     m_eDrugType NALOXONE
     m_Dose ACE_Medical_Bolus "{62211753E2C04DB9}" {
+     m_fConcentrationNM 650
     }
    }
   }

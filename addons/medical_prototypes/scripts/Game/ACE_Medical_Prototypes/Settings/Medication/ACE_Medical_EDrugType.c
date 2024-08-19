@@ -1,4 +1,9 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_MetoprololUserAction : SCR_MorphineUserAction
+enum ACE_Medical_EDrugType
 {
+	EPINEPHRINE,
+	METOPROLOL,
+	MORPHINE,
+	NALOXONE,
+	PHENYLEPHRINE
 }

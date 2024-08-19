@@ -48,7 +48,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (system)
 			system.OnFullHeal(owner);
 		
-		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationComponent);
+		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);
 		if (system2)
 			system2.OnFullHeal(owner);
 		//-----------------------------------------------------------------------------------------------------------
@@ -75,7 +75,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Called alpha factor
+	//! Called alpha factor in KAM
 	void ACE_Medical_SetBloodFlowScale(float scale)
 	{
 		m_fACE_Medical_BloodFlowScale = scale;

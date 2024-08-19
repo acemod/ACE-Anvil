@@ -36,7 +36,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		// Clamp between serious damage and full health
 		float scaledHealth = Math.Clamp(m_pACE_Medical_PainHitZone.GetHealthScaled(), m_fACE_Medical_SeriousPainThreshold, 1);
 		// Subtract analgesic effects
-		scaledHealth = Math.Max(0, scaledHealth - m_fACE_Medical_PainSuppression);
+		scaledHealth = Math.Min(1, scaledHealth + m_fACE_Medical_PainSuppression);
 		
 		if (scaledHealth > m_fACE_Medical_ModeratePainThreshold)
 		{
@@ -54,5 +54,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	void ACE_Medical_SetPainSuppression(float percentage)
 	{
 		m_fACE_Medical_PainSuppression = percentage;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	float ACE_Medical_GetPainSuppression()
+	{
+		return m_fACE_Medical_PainSuppression;
 	}
 }

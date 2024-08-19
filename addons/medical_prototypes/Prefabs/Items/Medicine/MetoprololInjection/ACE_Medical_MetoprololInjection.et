@@ -37,7 +37,9 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      }
     }
     m_eDeviceType ACE_MEDICAL_METOPROLOL_INJECTOR
+    m_eDrugType METOPROLOL
     m_Dose ACE_Medical_Bolus "{6221174C139FA6F7}" {
+     m_fConcentrationNM 650
     }
    }
   }

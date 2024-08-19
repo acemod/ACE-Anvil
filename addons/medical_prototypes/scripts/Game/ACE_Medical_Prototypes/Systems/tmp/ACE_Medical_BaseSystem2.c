@@ -92,4 +92,33 @@ class ACE_Medical_BaseSystem2 : GameSystem
 		if (m_aQueue.IsEmpty())
 			Enable(false);
 	}
+	
+#ifdef WORKBENCH
+	//------------------------------------------------------------------------------------------------
+	//! Get target for diag menu and string for printing which target it is
+	//! Return true if a target was found
+	protected bool GetDiagTarget(out IEntity target, out string targetType)
+	{
+		CameraBase camera = GetGame().GetCameraManager().CurrentCamera();
+		if (!camera)
+			return false;
+				
+		target = SCR_ChimeraCharacter.Cast(camera.GetCursorTarget());
+		if (target)
+		{
+			targetType = "Target";
+			return true;
+		}
+		
+		target = SCR_ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
+		if (target)
+		{
+			
+			targetType = "Self";
+			return true;
+		}
+		
+		return false;
+	}
+#endif
 }

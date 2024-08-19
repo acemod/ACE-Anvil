@@ -3,17 +3,7 @@ SCR_ChimeraCharacter {
  components {
   ACE_Medical_CardiovascularComponent "{6220003330350BC2}" {
   }
-  ACE_Medical_MedicationManagerComponent "{621B2BABDAF5867E}" {
-   m_aDrugHandlers {
-    ACE_Medical_DrugHandler "{621B2BAF9F36A0CB}" {
-    }
-    ACE_Medical_DrugHandler "{621B2BAF90AC26B9}" {
-     m_eType EPINEPHRINE
-    }
-    ACE_Medical_DrugHandler "{621B2BAF962CFA36}" {
-     m_eType MORPHINE
-    }
-   }
+  ACE_Medical_MedicationComponent "{621B2BABDAF5867E}" {
   }
   SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
    "Additional hit zones" {
@@ -199,17 +189,39 @@ SCR_ChimeraCharacter {
       "Head"
      }
      UIInfo UIInfo "{62150A66E8D34DA5}" {
-      Name "Test"
+      Name "Use Ammonium Carbonate"
      }
      m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
     }
-    ACE_Medical_MetoprololUserAction "{62150A6C41D53656}" {
+    SCR_MorphineUserAction "{62150A6C41D53656}" {
      ParentContextList {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
      UIInfo UIInfo "{62150A6C71EFEF99}" {
+      Name "Inject Metoprolol"
      }
-     m_eConsumableType ACE_MEDICAL_METOPROLOL
+     ActionTitle "Inject Metoprolol"
+     m_eConsumableType ACE_MEDICAL_METOPROLOL_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEC7ACB618B}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{6226EDEC7241F1E1}" {
+      Name "Inject Naloxone"
+     }
+     ActionTitle "Inject Naloxone"
+     m_eConsumableType ACE_MEDICAL_NALOXONE_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEDB4F10C69}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{6226EDEDA11A533D}" {
+      Name "Inject Phenylephrine"
+     }
+     ActionTitle "Inject Phenylephrine"
+     m_eConsumableType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
     }
     ACE_Medical_CPRUserAction "{6216F73FC7EBD067}" {
      ParentContextList {

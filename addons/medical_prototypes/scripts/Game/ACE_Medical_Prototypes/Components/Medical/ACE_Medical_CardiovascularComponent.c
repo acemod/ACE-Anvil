@@ -64,6 +64,10 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		if (IsInCardiacArrest() && !SCR_EntityHelper.IsAPlayer(GetOwner()))
 			m_pDamageManager.Kill(m_pDamageManager.GetInstigator());
 		
+		// Resilience falls to zero and cannot recover while vitals are critical
+		if (m_eVitalState >= ACE_Medical_EVitalState.CRITICAL)
+			m_pDamageManager.GetResilienceHitZone().SetHealth(0);
+		
 		if (newState == ACE_Medical_EVitalState.CARDIAC_ARREST)
 			OnCardiacArrestStateChanged(true);
 		else if (prevState == ACE_Medical_EVitalState.CARDIAC_ARREST)
@@ -78,7 +82,6 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		// Add/remove damage effect for cardiac arrest state
 		if (inCardiacArrest)
 		{
-			m_pDamageManager.GetResilienceHitZone().SetHealth(0);
 			m_pDamageManager.AddDamageEffect(m_CardiacArrestDamageEffect);
 			m_bWasInCardiacArrest = true;
 		}

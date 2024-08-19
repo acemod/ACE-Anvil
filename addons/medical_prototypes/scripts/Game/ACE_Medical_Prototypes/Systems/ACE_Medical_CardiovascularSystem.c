@@ -52,7 +52,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	override protected void Update(IEntity entity, float timeSlice)
 	{
 		super.Update(entity, timeSlice);
-		
+			
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
 			return;
@@ -66,14 +66,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		UpdateSystemicVascularResistance(component, damageManager, timeSlice);
 		UpdateBloodPressures(component, damageManager, timeSlice);
 		UpdateVitalState(component, damageManager, timeSlice);
-		UpdateResilienceRecoveryScale(component, damageManager, timeSlice);
-		
-		if (component.GetOwner() == SCR_PlayerController.GetLocalMainEntity())
-		{
-			float heartRate = component.GetHeartRate();
-			Tuple2<float, float> pressures = component.GetBloodPressures();
-			PrintFormat("| %1 BPM | %2 mmHg | %3 mmHg |", heartRate, pressures.param1 * KPA2MMHG, pressures.param2 * KPA2MMHG);
-		}
+		UpdateResilienceRecoveryScale(component, damageManager, timeSlice);	
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -212,8 +205,8 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		SCR_CharacterBloodHitZone bloodHZ = damageManager.GetBloodHitZone();
 		ACE_Medical_BrainHitZone brainHZ = damageManager.ACE_Medical_GetBrainHitZone();
 		
-		// Resilience cannot recover while in cardiac arrest or when blood level is too low
-		if (component.IsInCardiacArrest() || (bloodHZ.GetHealthScaled() < bloodHZ.GetDamageStateThreshold(m_Settings.m_eMinBloodLevelForResilienceRecovery)))
+		// Resilience cannot recover while in vital state is critical or when blood level is too low
+		if (component.GetVitalState() >= ACE_Medical_EVitalState.CRITICAL || (bloodHZ.GetHealthScaled() < bloodHZ.GetDamageStateThreshold(m_Settings.m_eMinBloodLevelForResilienceRecovery)))
 			component.SetResilienceRecoveryScale(0);
 		// Reduced resilience rate after revival. Recovery is harder the lower the brain's health is.
 		else if (component.WasInCardiacArrest())
@@ -304,4 +297,30 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		
 		ResetVitalsToDefault(component, damageManager);
 	}
+
+#ifdef WORKBENCH
+	//------------------------------------------------------------------------------------------------
+	//! Show vitals for target entity
+	override protected void OnDiag(float timeSlice)
+	{
+		super.OnDiag(timeSlice);
+		
+		IEntity target;
+		string targetType;
+		if (!GetDiagTarget(target, targetType))
+			return;
+		
+		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!component)
+			return;
+
+		DbgUI.Begin(string.Format("ACE_Medical_CardiovascularSystem (%1)", targetType), 0, 700);
+		DbgUI.Text(string.Format("Vital state:                  %1", SCR_Enum.GetEnumName(ACE_Medical_EVitalState, component.GetVitalState())));
+		DbgUI.Text(string.Format("Heart rate:                   %1 BPM", Math.Round(component.GetHeartRate())));
+		Tuple2<float, float> pressures = component.GetBloodPressures();
+		DbgUI.Text(string.Format("Blood pressure:               %1/%2 mmHg", Math.Round(pressures.param2 * KPA2MMHG), Math.Round(pressures.param1 * KPA2MMHG)));
+		DbgUI.Text(string.Format("Resilience recovery scale:    %1", component.GetResilienceRecoveryScale()));
+		DbgUI.End();
+	}
+#endif
 }

@@ -7,6 +7,9 @@ modded class SCR_EditableCharacterComponent : SCR_EditableEntityComponent
 	{
 		super.OnDelete(owner);
 		
+		if (!GetGame().InPlayMode())
+			return;
+		
 		//-----------------------------------------------------------------------------------------------------------
 		//! TO DO: Replace solution once systems support inheritance
 		/*

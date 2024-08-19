@@ -5,6 +5,8 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
     ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
      SizeSetupStrategy Manual
+     ItemDimensions 5 5 5
+     ItemVolume 10
     }
     ItemAnimationAttributes ItemAnimationAttributes "{62150A64C480907E}" {
      AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"

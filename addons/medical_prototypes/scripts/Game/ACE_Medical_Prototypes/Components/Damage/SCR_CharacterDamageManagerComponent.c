@@ -10,6 +10,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected ACE_Medical_BrainHitZone m_pACE_Medical_BrainHitZone;
 	
 	protected int m_iACE_Medical_LastSecondChanceTickCount;
+	protected float m_fACE_Medical_BloodFlowScale = 1;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
@@ -70,7 +71,20 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Maximum total bleeding rate in ml/s
 	float ACE_Medical_GetMaxTotalBleedingRate()
 	{
-		return GetBleedingScale() * Math.Max(m_fACE_Medical_CardiacArrestMaxTotalBleedingRate, m_pACE_Medical_CardiovascularComponent.GetCardiacOutput() / 60);
+		return GetBleedingScale() * m_fACE_Medical_BloodFlowScale * Math.Max(m_fACE_Medical_CardiacArrestMaxTotalBleedingRate, m_pACE_Medical_CardiovascularComponent.GetCardiacOutput() / 60);
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Called alpha factor
+	void ACE_Medical_SetBloodFlowScale(float scale)
+	{
+		m_fACE_Medical_BloodFlowScale = scale;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	float ACE_Medical_GetBloodFlowScale()
+	{
+		return m_fACE_Medical_BloodFlowScale;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

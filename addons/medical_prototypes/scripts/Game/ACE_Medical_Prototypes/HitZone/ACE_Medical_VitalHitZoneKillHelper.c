@@ -35,10 +35,10 @@ class ACE_Medical_VitalHitZoneHelper : Managed
 				m_bSecondChanceEnabled = settings.m_bSecondChanceOnHeadEnabled;
 				m_fSecondChanceRescaledHealth = SECOND_CHANCE_RESCALED_HEALTH;
 			}
-			// Settings for other physical hit zones
+			// Settings for other physical hit zones (i.e. torso)
 			else
 			{
-				m_bSecondChanceEnabled = settings.m_bSecondChanceEnabled;
+				m_bSecondChanceEnabled = settings.m_bSecondChanceOnTorsoEnabled;
 				m_fSecondChanceRescaledHealth = SECOND_CHANCE_RESCALED_HEALTH;
 			}
 		}

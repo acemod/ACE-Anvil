@@ -22,6 +22,9 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fPulsePressureKPA;
 	protected float m_fResilienceRecoveryScale = 1;
 	
+	protected float m_fHeartRateMedicationAdjustment = 0;
+	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
+	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
 	protected ACE_Medical_CardiacArrestDamageEffect m_CardiacArrestDamageEffect;
 	
@@ -246,6 +249,30 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 			m_fMeanArterialPressureKPA - 1/3 * m_fPulsePressureKPA,
 			m_fMeanArterialPressureKPA + 2/3 * m_fPulsePressureKPA
 		);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetHeartRateMedicationAdjustment(float adjustment)
+	{
+		m_fHeartRateMedicationAdjustment = adjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetHeartRateMedicationAdjustment()
+	{
+		return m_fHeartRateMedicationAdjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetSystemicVascularResistenceMedicationAdjustment(float adjustment)
+	{
+		m_fSystemicVascularResistanceMedicationAdjustment = adjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetSystemicVascularResistenceMedicationAdjustment()
+	{
+		return m_fSystemicVascularResistanceMedicationAdjustment;
 	}
 	
 	//------------------------------------------------------------------------------------------------

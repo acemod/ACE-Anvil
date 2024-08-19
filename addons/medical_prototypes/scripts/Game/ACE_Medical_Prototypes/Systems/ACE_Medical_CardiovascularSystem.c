@@ -118,7 +118,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateSystemicVascularResistance(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
 	{
-		component.SetSystemicVascularResistance(m_Settings.m_fDefaultSystemicVascularResistance); // TO DO: medication
+		component.SetSystemicVascularResistance(m_Settings.m_fDefaultSystemicVascularResistance + component.GetSystemicVascularResistenceMedicationAdjustment());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -243,8 +243,8 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 			target = component.GetHeartRate() * 14.3 * Math.Lerp(0.5, 1, bloodHZ.GetHealthScaled()) / Math.Max(6, component.GetMeanArterialPressure());
 		
 		target = Math.Max(target, m_Settings.m_fDefaultHeartRateBPM + 50 * damageManager.ACE_Medical_GetPainIntensity());
-				
-		// TO DO: Do SpO2 and medication
+		target += component.GetHeartRateMedicationAdjustment();
+		// TO DO: Do SpO2
 
 		
 		return Math.Max(0, target);

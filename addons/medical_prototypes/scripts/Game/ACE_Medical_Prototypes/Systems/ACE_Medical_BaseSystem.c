@@ -72,6 +72,9 @@ class ACE_Medical_BaseSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	void Register(notnull IEntity entity)
 	{
+		if (m_aQueue.Contains(entity))
+			return;
+		
 		if (!IsEnabled())
 			Enable(true);
 		

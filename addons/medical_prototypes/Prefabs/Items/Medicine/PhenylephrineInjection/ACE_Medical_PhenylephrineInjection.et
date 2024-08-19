@@ -24,9 +24,9 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
   }
   MeshObject "{59CE87DB17B6B1C5}" {
    Materials {
-    MaterialAssignClass "{6214E80A70A62246}" {
+    MaterialAssignClass "{62211755A9EE015E}" {
      SourceMaterial "MorphineInjection_01"
-     AssignedMaterial "{0F544FAC67C0A39E}Assets/Items/Medicine/AdenosineInjection/Data/ACE_Medical_AdenosineInjection.emat"
+     AssignedMaterial "{646DB64448CDBDA5}Assets/Items/Medicine/PhenylephrineInjection/Data/ACE_Medical_PhenylephrineInjection.emat"
     }
    }
   }
@@ -36,8 +36,9 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      UnknownDamageEffect "{6122D60861B541E7}" {
      }
     }
-    m_eDeviceType ACE_MEDICAL_ADENOSINE_INJECTOR
-    m_Dose ACE_Medical_Bolus "{6221174C139FA6F7}" {
+    m_eDeviceType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
+    m_eDrugType PHENYLEPHRINE
+    m_Dose ACE_Medical_Bolus "{622117566CC6EFEE}" {
     }
    }
   }

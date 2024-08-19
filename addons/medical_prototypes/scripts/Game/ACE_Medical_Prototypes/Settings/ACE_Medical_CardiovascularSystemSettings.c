@@ -25,7 +25,7 @@ class ACE_Medical_CardiovascularSystemSettings : ScriptAndConfig
 	[Attribute(defvalue: "29.5", desc: "An arterial pressure above this will result in critical state [kPa]", category: "Critical State")]
 	float m_fCriticalMeanArterialPressureThresholdHighKPA;
 	
-	[Attribute(defvalue: "CLASS_4_HEMORRHAGE", uiwidget: UIWidgets.SearchComboBox, desc: "A blood level below this will result in critical state", enums: ParamEnumArray.FromEnum(ACE_Medical_EBloodState), category: "Critical State")]
+	[Attribute(defvalue: "CLASS_3_HEMORRHAGE", uiwidget: UIWidgets.SearchComboBox, desc: "A blood level below this will result in critical state", enums: ParamEnumArray.FromEnum(ACE_Medical_EBloodState), category: "Critical State")]
 	ACE_Medical_EBloodState m_eCriticalBloodLevelThreshold;
 	
 	[Attribute(desc: "Damage effects caused by cardiac arrest", category: "Cardiac Arrest")]

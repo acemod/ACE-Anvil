@@ -5,5 +5,5 @@ MatPBRBasic {
  RoughnessScale 0.5
  MetalnessScale 0
  DielectricReflectance 0.16
- BCRMap "{69EFE14998583293}Assets/Items/Medicine/AdenosineInjection/Data/ACE_Medical_AdenosineInjection.edds"
+ BCRMap "{69EFE14998583293}Assets/Items/Medicine/MetoprololInjection/Data/ACE_Medical_MetoprololInjection.edds"
 }

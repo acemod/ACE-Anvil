@@ -1,4 +1,4 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_AdenosineUserAction : SCR_MorphineUserAction
+class ACE_Medical_MetoprololUserAction : SCR_MorphineUserAction
 {
 }

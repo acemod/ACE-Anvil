@@ -29,7 +29,7 @@ $grp GenericEntity : "{58CF3AB87C441295}Prefabs/Items/Medicine/AmmoniumCarbonate
 GenericEntity : "{5B2FD067D70C1E8F}Prefabs/Items/Medicine/EpinephrineInjection/ACE_Medical_EpinephrineInjection.et" {
  coords 78.026 3.848 23.38
 }
-$grp GenericEntity : "{D0434D5215B54181}Prefabs/Items/Medicine/AdenosineInjection/ACE_Medical_AdenosineInjection.et" {
+$grp GenericEntity : "{D0434D5215B54181}Prefabs/Items/Medicine/MetoprololInjection/ACE_Medical_MetoprololInjection.et" {
  {
   coords 78.287 3.81 23.377
  }

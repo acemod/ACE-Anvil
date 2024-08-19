@@ -203,13 +203,13 @@ SCR_ChimeraCharacter {
      }
      m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
     }
-    ACE_Medical_AdenosineUserAction "{62150A6C41D53656}" {
+    ACE_Medical_MetoprololUserAction "{62150A6C41D53656}" {
      ParentContextList {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
      UIInfo UIInfo "{62150A6C71EFEF99}" {
      }
-     m_eConsumableType ACE_MEDICAL_ADENOSINE
+     m_eConsumableType ACE_MEDICAL_METOPROLOL
     }
     ACE_Medical_CPRUserAction "{6216F73FC7EBD067}" {
      ParentContextList {

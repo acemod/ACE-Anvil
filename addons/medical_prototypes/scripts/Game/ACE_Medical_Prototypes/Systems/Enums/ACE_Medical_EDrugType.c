@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 enum ACE_Medical_EDrugType
 {
-	ADENOSINE,
+	METOPROLOL,
 	EPINEPHRINE,
 	MORPHINE,
 	NALOXONE,

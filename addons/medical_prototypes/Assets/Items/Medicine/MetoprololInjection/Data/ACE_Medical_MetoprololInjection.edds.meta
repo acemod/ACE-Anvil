@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{69EFE14998583293}Assets/Items/Medicine/AdenosineInjection/Data/ACE_Medical_AdenosineInjection.edds"
+ Name "{69EFE14998583293}Assets/Items/Medicine/MetoprololInjection/Data/ACE_Medical_MetoprololInjection.edds"
  Configurations {
   PNGResourceClass PC : "{DC555BD399D92412}Configs/System/ResourceTypes/PC/TextureUnspecified.conf" {
   }

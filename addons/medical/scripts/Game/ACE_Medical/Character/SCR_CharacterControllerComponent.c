@@ -7,7 +7,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	protected const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
 
 	//------------------------------------------------------------------------------------------------
-	//! Initialize member variables
+	//! Initialize member variables.
 	override void OnInit(IEntity owner)
 	{
 		super.OnInit(owner);

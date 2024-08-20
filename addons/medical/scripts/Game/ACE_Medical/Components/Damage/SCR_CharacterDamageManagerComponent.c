@@ -25,7 +25,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected bool m_bACE_Medical_SecondChanceTriggered = false;
 
 	//-----------------------------------------------------------------------------------------------------------
-	//! Initialize member variables
+	//! Initialize member variables.
 	override void OnInit(IEntity owner)
 	{
 		super.OnInit(owner);

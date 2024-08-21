@@ -4,11 +4,11 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
     ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
-     Name "#ACE_Medical-Item_Epinephrine_Name"
-     Description "#ACE_Medical-Item_Epinephrine_Description"
+     Name "#ACE_Medical-Item_Phenylephrine_Name"
+     Description "#ACE_Medical-Item_Phenylephrine_Description"
      m_aItemHints {
       SCR_InventoryItemHintUIInfo "{5E04DAAE66DE1E77}" {
-       Name "#ACE_Medical-InfoWidget_Epinephrine"
+       Name "#ACE_Medical-InfoWidget_Phenylephrine"
       }
      }
     }

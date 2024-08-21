@@ -184,12 +184,16 @@ SCR_ChimeraCharacter {
     SCR_HealSupportStationAction "{5E14966CF597F6B3}" {
      "Sort Priority" 0
     }
+    SCR_MorphineUserAction "{60CF45A52131AD5A}" {
+     ActionTitle "Inject Epinephrine"
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
+    }
     ACE_Medical_AmmoniumCarbonateUserAction "{62150A66FC4875D8}" {
      ParentContextList {
       "Head"
      }
      UIInfo UIInfo "{62150A66E8D34DA5}" {
-      Name "Use Ammonium Carbonate"
+      Name "#ACE_Medical-AmmoniumCarbonatePackageAction"
      }
      m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
     }
@@ -198,7 +202,7 @@ SCR_ChimeraCharacter {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
      UIInfo UIInfo "{62150A6C71EFEF99}" {
-      Name "Inject Metoprolol"
+      Name "#ACE_Medical-MetoprololInjectionAction"
      }
      ActionTitle "Inject Metoprolol"
      m_eConsumableType ACE_MEDICAL_METOPROLOL_INJECTOR
@@ -208,7 +212,7 @@ SCR_ChimeraCharacter {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
      UIInfo UIInfo "{6226EDEC7241F1E1}" {
-      Name "Inject Naloxone"
+      Name "#ACE_Medical-NaloxoneInjectionAction"
      }
      ActionTitle "Inject Naloxone"
      m_eConsumableType ACE_MEDICAL_NALOXONE_INJECTOR
@@ -218,7 +222,7 @@ SCR_ChimeraCharacter {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
      UIInfo UIInfo "{6226EDEDA11A533D}" {
-      Name "Inject Phenylephrine"
+      Name "#ACE_Medical-PhenylephrineInjectionAction"
      }
      ActionTitle "Inject Phenylephrine"
      m_eConsumableType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
@@ -228,15 +232,12 @@ SCR_ChimeraCharacter {
       "Chest"
      }
      UIInfo UIInfo "{6216F73FFFACAE56}" {
-      Name "Perfrom CPR"
+      Name "#ACE_Medical-CPRAction"
      }
      ActionTitle "Perfrom CPR"
      VisibilityRange 2
-     Duration -1
-     PerformPerFrame 1
+     Duration 1
      "Sort Priority" 10
-     m_bLowerWeaponOnUse 1
-     m_eShownInVehicleState NOT_IN_VEHICLE
     }
     ACE_Medical_CheckVitalsUserAction "{621737D0C7C00B68}" {
      ParentContextList {

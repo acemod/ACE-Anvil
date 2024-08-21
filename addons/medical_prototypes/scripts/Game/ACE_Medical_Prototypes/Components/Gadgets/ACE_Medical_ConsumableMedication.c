@@ -36,6 +36,12 @@ class ACE_Medical_ConsumableMedication : SCR_ConsumableEffectHealthItems
 			return;
 		
 		medicationComponent.AddMedication(m_eDrugType, m_Dose);
+		
+		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
+		if (!itemComponent)
+			return;
+		
+		medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName());
 	}
 	
 	//------------------------------------------------------------------------------------------------

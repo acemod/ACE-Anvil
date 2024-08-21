@@ -10,7 +10,7 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
     m_eDeviceType MORPHINE
     m_eDrugType MORPHINE
     m_Dose ACE_Medical_Bolus "{62211753DEE3BAC9}" {
-     m_fConcentrationNM 650
+     m_fConcentrationNM 600
     }
    }
   }

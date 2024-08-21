@@ -43,6 +43,17 @@ class ACE_Medical_ConsumableAmmoniumCarbonate : SCR_ConsumableEffectHealthItems
 			return;
 		
 		super.ApplyEffect(target, user, item, animParams);
+		
+		ACE_Medical_MedicationComponent medicationComponent = ACE_Medical_MedicationComponent.Cast(target.FindComponent(ACE_Medical_MedicationComponent));
+		if (!medicationComponent)
+			return;
+		
+		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
+		if (!itemComponent)
+			return;
+		
+		if (Replication.IsServer())
+			medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName());
 	}
 
 	//------------------------------------------------------------------------------------------------

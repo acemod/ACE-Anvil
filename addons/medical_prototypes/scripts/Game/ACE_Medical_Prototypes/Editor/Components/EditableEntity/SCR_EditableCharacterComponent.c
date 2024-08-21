@@ -30,7 +30,7 @@ modded class SCR_EditableCharacterComponent : SCR_EditableEntityComponent
 		if (system)
 			system.Unregister(owner);
 		
-		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationComponent);
+		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);
 		if (system2)
 			system2.Unregister(owner);
 		//-----------------------------------------------------------------------------------------------------------

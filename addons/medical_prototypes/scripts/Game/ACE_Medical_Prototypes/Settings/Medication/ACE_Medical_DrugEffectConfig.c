@@ -6,7 +6,16 @@ class ACE_Medical_DrugEffectConfig : ScriptAndConfig
 	
 	//------------------------------------------------------------------------------------------------
 	void ApplyEffect(IEntity target, map<ACE_Medical_EDrugType, float> concentrations);
+	
+	//------------------------------------------------------------------------------------------------
+	//! Remove effect from target
+	void ClearEffect(IEntity target);
 
 	//------------------------------------------------------------------------------------------------
 	float ComputeEffect(map<ACE_Medical_EDrugType, float> concentrations);
+	
+#ifdef WORKBENCH
+	//------------------------------------------------------------------------------------------------
+	void OnDiag(IEntity target, float timeSlice);
+#endif
 }

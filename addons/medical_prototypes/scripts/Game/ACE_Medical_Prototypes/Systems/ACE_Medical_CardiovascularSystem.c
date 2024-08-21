@@ -6,7 +6,6 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	protected float m_fCPRSuccessCheckTimerS = 0;
 	protected float m_fCheckCriticalHeartRateTimeoutS = 5;
 	protected float m_fCheckCriticalHeartRateTimerS = 0;
-	protected bool m_bInitDone = false;
 	
 	static const float KPA2MMHG = 7.50062;
 	
@@ -136,7 +135,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		{
 			if (component.IsCPRPerformed())
 			{
-				m_fCPRSuccessCheckTimerS += timeSlice;
+				m_fCPRSuccessCheckTimerS += timeSlice * component.GetReviveSuccessCheckTimerScale();
 				
 				if (m_fCPRSuccessCheckTimerS < m_Settings.m_fCPRSuccessCheckTimeoutS)
 					return;
@@ -144,7 +143,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 				m_fCPRSuccessCheckTimerS = 0;
 				
 				if (ComputeCPRSuccess(component, damageManager))
-					Revive(component);
+					component.Revive();
 			}
 			
 			// Skip the rest, since we either stay in cardiac arrest or the revival will update the vital state already
@@ -238,7 +237,6 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		target = Math.Max(target, m_Settings.m_fDefaultHeartRateBPM + 50 * damageManager.ACE_Medical_GetPainIntensity());
 		target += component.GetHeartRateMedicationAdjustment();
 		// TO DO: Do SpO2
-
 		
 		return Math.Max(0, target);
 	}
@@ -248,28 +246,10 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	{
 		SCR_CharacterBloodHitZone bloodHZ = damageManager.GetBloodHitZone();
 		
-		// TO DO: Scale success based on HR medication
 		float minScale = bloodHZ.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_4_HEMORRHAGE);
 		float maxScale = bloodHZ.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_2_HEMORRHAGE);
 		float scale = Math.Clamp(bloodHZ.GetHealthScaled(), minScale, maxScale);
 		return (Math.RandomFloat01() < Math.Map(scale, minScale, maxScale, m_Settings.m_fCPRSuccessChanceMin, m_Settings.m_fCPRSuccessChanceMax));
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void Revive(IEntity entity)
-	{
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
-		if (!component)
-			return;
-		
-		Revive(component);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected void Revive(ACE_Medical_CardiovascularComponent component)
-	{
-		component.SetHeartRate(m_Settings.m_fCriticalHeartRateThresholdLowBPM);
-		component.SetVitalState(ACE_Medical_EVitalState.CRITICAL);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -313,12 +293,17 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
 			return;
+		
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(target.FindComponent(SCR_CharacterDamageManagerComponent));
+		if (!damageManager)
+			return;
 
 		DbgUI.Begin(string.Format("ACE_Medical_CardiovascularSystem (%1)", targetType), 0, 700);
 		DbgUI.Text(string.Format("Vital state:                  %1", SCR_Enum.GetEnumName(ACE_Medical_EVitalState, component.GetVitalState())));
 		DbgUI.Text(string.Format("Heart rate:                   %1 BPM", Math.Round(component.GetHeartRate())));
 		Tuple2<float, float> pressures = component.GetBloodPressures();
 		DbgUI.Text(string.Format("Blood pressure:               %1/%2 mmHg", Math.Round(pressures.param2 * KPA2MMHG), Math.Round(pressures.param1 * KPA2MMHG)));
+		DbgUI.Text(string.Format("Blood state:                  %1", SCR_Enum.GetEnumName(ACE_Medical_EBloodState, damageManager.GetBloodHitZone().GetDamageState())));
 		DbgUI.Text(string.Format("Resilience recovery scale:    %1", component.GetResilienceRecoveryScale()));
 		DbgUI.End();
 	}

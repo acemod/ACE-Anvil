@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Medical_Dose : ScriptAndConfig
 {
+	// TO DO: Sample concentration from a gaussian distribution for randomization
 	[Attribute(desc: "Administered concentration [nM]")]
 	protected float m_fConcentrationNM;
 	

@@ -21,6 +21,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fMeanArterialPressureKPA;
 	protected float m_fPulsePressureKPA;
 	protected float m_fResilienceRecoveryScale = 1;
+	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
 	protected float m_fHeartRateMedicationAdjustment = 0;
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
@@ -97,6 +98,16 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	{
 		if ((previousLifeState == ECharacterLifeState.INCAPACITATED) && (newLifeState == ECharacterLifeState.ALIVE))
 			m_bWasInCardiacArrest = false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void Revive()
+	{
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		if (settings && settings.m_CardiovascularSystem)
+			SetHeartRate(settings.m_CardiovascularSystem.m_fCriticalHeartRateThresholdLowBPM);
+		
+		SetVitalState(ACE_Medical_EVitalState.CRITICAL);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -276,6 +287,19 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	float GetSystemicVascularResistenceMedicationAdjustment()
 	{
 		return m_fSystemicVascularResistanceMedicationAdjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Set scale for accelerating the revive success check timer
+	void SetReviveSuccessCheckTimerScale(float scale)
+	{
+		m_fReviveSuccessCheckTimerScale = scale;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetReviveSuccessCheckTimerScale()
+	{
+		return m_fReviveSuccessCheckTimerScale;
 	}
 	
 	//------------------------------------------------------------------------------------------------

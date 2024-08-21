@@ -54,19 +54,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		//-----------------------------------------------------------------------------------------------------------
 	}
 	
-	//-----------------------------------------------------------------------------------------------------------
-	//! Add vitals as additional condition for unconsciousness
-	override protected bool ShouldBeUnconscious()
-	{
-		if (super.ShouldBeUnconscious())
-			return true;
-		
-		if (!m_pACE_Medical_CardiovascularComponent)
-			return false;
-		
-		return (m_pACE_Medical_CardiovascularComponent.GetVitalState() >= ACE_Medical_EVitalState.CRITICAL);
-	}
-	
 	//------------------------------------------------------------------------------------------------
 	//! Maximum total bleeding rate in ml/s
 	float ACE_Medical_GetMaxTotalBleedingRate()

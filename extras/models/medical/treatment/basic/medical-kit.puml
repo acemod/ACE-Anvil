@@ -1,0 +1,20 @@
+@startuml
+partition "Heal wounds with\nmedical kit" {
+  start
+  if (Can be used\nwithout supplies?) then (yes)
+  else (no)
+    if (Supplies in range) then (yes)
+    else (no)
+      :Carry/Transport to\nnearest supplies;
+    endif
+  endif
+  :Partially heal wounds;
+  if (Still too injured\nfor epinephrine?) then (yes)
+    :Carry/Transport to\nmedical facility;
+    :Heal wounds;
+    end
+  else (no)
+    end
+  endif
+}
+@enduml

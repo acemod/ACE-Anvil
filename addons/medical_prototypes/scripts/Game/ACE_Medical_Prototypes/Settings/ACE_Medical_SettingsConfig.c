@@ -3,8 +3,8 @@
 [BaseContainerProps()]
 modded class ACE_Medical_Settings : ACE_ModSettings
 {
-	[Attribute(defvalue: "true", desc: "Enables second chance for shots to the chest")]
-	bool m_bSecondChanceEnabled;
+	[Attribute(defvalue: "true", desc: "Enables second chance for shots to the torso")]
+	bool m_bSecondChanceOnTorsoEnabled;
 	
 	[Attribute(desc: "Settings for medication system")]
 	ref ACE_Medical_MedicationSystemSettings m_MedicationSystem;

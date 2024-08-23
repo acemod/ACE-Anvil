@@ -1,0 +1,10 @@
+AnimSetInstanceSource "{61D139725AB5C05E}" {
+ Template "{3E340D5A880A821B}Assets/Helpers/workspaces/ACE_Medical_CPRHelperCompartment.ast"
+ Lines {
+  AnimSetInstanceSource_Line "CPR.Default.Loop" {
+   Resource "{0CCED80870DD8150}anims/anm/player/injury/p_cro_revive_CPR_loop.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{61D13972214BF5DA}" {
+ }
+}

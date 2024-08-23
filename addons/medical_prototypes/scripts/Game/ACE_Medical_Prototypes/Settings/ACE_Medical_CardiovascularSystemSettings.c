@@ -25,7 +25,7 @@ class ACE_Medical_CardiovascularSystemSettings : ScriptAndConfig
 	[Attribute(defvalue: "29.5", desc: "An arterial pressure above this will result in critical state [kPa]", category: "Critical State")]
 	float m_fCriticalMeanArterialPressureThresholdHighKPA;
 	
-	[Attribute(defvalue: "CLASS_4_HEMORRHAGE", uiwidget: UIWidgets.SearchComboBox, desc: "A blood level below this will result in critical state", enums: ParamEnumArray.FromEnum(ACE_Medical_EBloodState), category: "Critical State")]
+	[Attribute(defvalue: "CLASS_3_HEMORRHAGE", uiwidget: UIWidgets.SearchComboBox, desc: "A blood level below this will result in critical state", enums: ParamEnumArray.FromEnum(ACE_Medical_EBloodState), category: "Critical State")]
 	ACE_Medical_EBloodState m_eCriticalBloodLevelThreshold;
 	
 	[Attribute(desc: "Damage effects caused by cardiac arrest", category: "Cardiac Arrest")]
@@ -46,7 +46,7 @@ class ACE_Medical_CardiovascularSystemSettings : ScriptAndConfig
 	[Attribute(defvalue: "CLASS_4_HEMORRHAGE", uiwidget: UIWidgets.SearchComboBox, desc: "A blood level below this will result in cardiac arrest", enums: ParamEnumArray.FromEnum(ACE_Medical_EBloodState), category: "Cardiac Arrest")]
 	ACE_Medical_EBloodState m_eCardiacArrestBloodLevelThreshold;
 	
-	[Attribute(defvalue: "15", desc: "Default delay between check for successful CPR [s]", category: "CPR")]
+	[Attribute(defvalue: "22", desc: "Default delay between check for successful CPR [s]", category: "CPR")]
 	float m_fCPRSuccessCheckTimeoutS;
 	
 	[Attribute(defvalue: "0", desc: "Chance for exiting cardiac arrest while performing CPR at class IV hemorrhage", category: "CPR")]

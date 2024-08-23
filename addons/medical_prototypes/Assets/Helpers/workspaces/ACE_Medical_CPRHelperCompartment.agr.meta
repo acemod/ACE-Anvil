@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{2CC66B5ABFCF56E8}Assets/Helpers/workspaces/ACE_Medical_CPRHelperCompartment.agr"
+ Configurations {
+  AnimGraphResourceClass PC {
+  }
+  AnimGraphResourceClass XBOX_ONE : PC {
+  }
+  AnimGraphResourceClass XBOX_SERIES : PC {
+  }
+  AnimGraphResourceClass PS4 : PC {
+  }
+  AnimGraphResourceClass PS5 : PC {
+  }
+  AnimGraphResourceClass HEADLESS : PC {
+  }
+ }
+}

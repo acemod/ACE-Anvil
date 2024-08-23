@@ -1,9 +1,0 @@
-MatPBRBasic {
- SpecularIBL 0.479 0.479 0.479 1
- Specular 0.913 0.879 0.865 1
- SpecularMul 0.821
- RoughnessScale 0.5
- MetalnessScale 0
- DielectricReflectance 0.16
- BCRMap "{69EFE14998583293}Assets/Items/Medicine/AdenosineInjection/Data/ACE_Medical_AdenosineInjection.edds"
-}

@@ -27,6 +27,10 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 	override float ComputeEffectiveDamage(notnull BaseDamageContext damageContext, bool isDOT)
 	{
 		float damage = super.ComputeEffectiveDamage(damageContext, isDOT);
+		// TO DO: Directly apply this scale to bleeding and saline damage effects?
+		// TO DO: Ensure that saline still delivers same total volume
+		damage *= m_pACE_Medical_DamageManager.ACE_Medical_GetBloodFlowScale();
+		
 		if (damage < 0 || !isDOT)
 			return damage;
 		

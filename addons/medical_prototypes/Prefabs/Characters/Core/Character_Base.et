@@ -3,17 +3,7 @@ SCR_ChimeraCharacter {
  components {
   ACE_Medical_CardiovascularComponent "{6220003330350BC2}" {
   }
-  ACE_Medical_MedicationManagerComponent "{621B2BABDAF5867E}" {
-   m_aDrugHandlers {
-    ACE_Medical_DrugHandler "{621B2BAF9F36A0CB}" {
-    }
-    ACE_Medical_DrugHandler "{621B2BAF90AC26B9}" {
-     m_eType EPINEPHRINE
-    }
-    ACE_Medical_DrugHandler "{621B2BAF962CFA36}" {
-     m_eType MORPHINE
-    }
-   }
+  ACE_Medical_MedicationComponent "{621B2BABDAF5867E}" {
   }
   SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
    "Additional hit zones" {
@@ -194,37 +184,60 @@ SCR_ChimeraCharacter {
     SCR_HealSupportStationAction "{5E14966CF597F6B3}" {
      "Sort Priority" 0
     }
+    SCR_MorphineUserAction "{60CF45A52131AD5A}" {
+     ActionTitle "Inject Epinephrine"
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
+    }
     ACE_Medical_AmmoniumCarbonateUserAction "{62150A66FC4875D8}" {
      ParentContextList {
       "Head"
      }
      UIInfo UIInfo "{62150A66E8D34DA5}" {
-      Name "Test"
+      Name "#ACE_Medical-AmmoniumCarbonatePackageAction"
      }
      m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
     }
-    ACE_Medical_AdenosineUserAction "{62150A6C41D53656}" {
+    SCR_MorphineUserAction "{62150A6C41D53656}" {
      ParentContextList {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
      UIInfo UIInfo "{62150A6C71EFEF99}" {
+      Name "#ACE_Medical-MetoprololInjectionAction"
      }
-     m_eConsumableType ACE_MEDICAL_ADENOSINE
+     ActionTitle "Inject Metoprolol"
+     m_eConsumableType ACE_MEDICAL_METOPROLOL_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEC7ACB618B}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{6226EDEC7241F1E1}" {
+      Name "#ACE_Medical-NaloxoneInjectionAction"
+     }
+     ActionTitle "Inject Naloxone"
+     m_eConsumableType ACE_MEDICAL_NALOXONE_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEDB4F10C69}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{6226EDEDA11A533D}" {
+      Name "#ACE_Medical-PhenylephrineInjectionAction"
+     }
+     ActionTitle "Inject Phenylephrine"
+     m_eConsumableType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
     }
     ACE_Medical_CPRUserAction "{6216F73FC7EBD067}" {
      ParentContextList {
       "Chest"
      }
      UIInfo UIInfo "{6216F73FFFACAE56}" {
-      Name "Perfrom CPR"
+      Name "#ACE_Medical-CPRAction"
      }
      ActionTitle "Perfrom CPR"
      VisibilityRange 2
-     Duration -1
-     PerformPerFrame 1
+     Duration 1
      "Sort Priority" 10
-     m_bLowerWeaponOnUse 1
-     m_eShownInVehicleState NOT_IN_VEHICLE
     }
     ACE_Medical_CheckVitalsUserAction "{621737D0C7C00B68}" {
      ParentContextList {

@@ -10,6 +10,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected ACE_Medical_BrainHitZone m_pACE_Medical_BrainHitZone;
 	
 	protected int m_iACE_Medical_LastSecondChanceTickCount;
+	protected float m_fACE_Medical_BloodFlowScale = 1;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
@@ -47,30 +48,30 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (system)
 			system.OnFullHeal(owner);
 		
-		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationComponent);
+		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);
 		if (system2)
 			system2.OnFullHeal(owner);
 		//-----------------------------------------------------------------------------------------------------------
-	}
-	
-	//-----------------------------------------------------------------------------------------------------------
-	//! Add vitals as additional condition for unconsciousness
-	override protected bool ShouldBeUnconscious()
-	{
-		if (super.ShouldBeUnconscious())
-			return true;
-		
-		if (!m_pACE_Medical_CardiovascularComponent)
-			return false;
-		
-		return (m_pACE_Medical_CardiovascularComponent.GetVitalState() >= ACE_Medical_EVitalState.CRITICAL);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Maximum total bleeding rate in ml/s
 	float ACE_Medical_GetMaxTotalBleedingRate()
 	{
-		return GetBleedingScale() * Math.Max(m_fACE_Medical_CardiacArrestMaxTotalBleedingRate, m_pACE_Medical_CardiovascularComponent.GetCardiacOutput() / 60);
+		return GetBleedingScale() * m_fACE_Medical_BloodFlowScale * Math.Max(m_fACE_Medical_CardiacArrestMaxTotalBleedingRate, m_pACE_Medical_CardiovascularComponent.GetCardiacOutput() / 60);
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Called alpha factor in KAM
+	void ACE_Medical_SetBloodFlowScale(float scale)
+	{
+		m_fACE_Medical_BloodFlowScale = scale;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	float ACE_Medical_GetBloodFlowScale()
+	{
+		return m_fACE_Medical_BloodFlowScale;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

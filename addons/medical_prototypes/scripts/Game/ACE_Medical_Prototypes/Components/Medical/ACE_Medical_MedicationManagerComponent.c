@@ -99,14 +99,6 @@ class ACE_Medical_MedicationManagerComponent : ScriptComponent
 }
 
 //------------------------------------------------------------------------------------------------
-enum ACE_Medical_EDrugType
-{
-	ADENOSINE,
-	EPINEPHRINE,
-	MORPHINE
-}
-
-//------------------------------------------------------------------------------------------------
 [BaseContainerProps(), SCR_BaseContainerCustomTitleEnum(ACE_Medical_EDrugType, "m_eType")]
 class ACE_Medical_DrugHandler : Managed
 {
@@ -120,7 +112,7 @@ class ACE_Medical_DrugHandler : Managed
 	protected float m_fDeactivationRateConstant;
 	
 	[Attribute(desc: "Effects this drug has")]
-	protected ref array<ref ACE_Medical_DrugEffect> m_aEffects;
+	protected ref array<ref ACE_Medical_DrugEffectConfig> m_aEffects;
 	
 	protected ref array<ref ACE_Medical_Dose> m_aDoses;
 	protected bool m_bActive;
@@ -196,95 +188,3 @@ class ACE_Medical_DrugHandler : Managed
 	
 	
 }
-
-//------------------------------------------------------------------------------------------------
-class ACE_Medical_MedicationAdjustments : Managed
-{
-	float m_fHeartRate;
-	float m_fSystemicVascularResistence;
-	float m_fPain;
-}
-
-//------------------------------------------------------------------------------------------------
-class ACE_Medical_DrugEffect : ScriptAndConfig
-{
-	//------------------------------------------------------------------------------------------------
-	void ApplyEffect(float concentration, inout ACE_Medical_MedicationAdjustments adjustments)
-}
-
-//------------------------------------------------------------------------------------------------
-class ACE_Medical_HillTypeDrugEffect : ACE_Medical_DrugEffect
-{
-	[Attribute(defvalue: "1", desc: "Maximum possible effect of this drug")]
-	protected float m_fMaxEffect;
-	
-	[Attribute(desc: "Concentration at which the half maximum effect is reached [nM]")]
-	protected float m_fEC50;
-	
-	//------------------------------------------------------------------------------------------------
-	float ComputeEfficency(float concentration)
-	{
-		return m_fMaxEffect * ACE_Math.Hill(concentration / m_fEC50);
-	}
-}
-
-//------------------------------------------------------------------------------------------------
-class ACE_Medical_AnalgesicDrugEffect : ACE_Medical_HillTypeDrugEffect
-{
-	//------------------------------------------------------------------------------------------------
-	override void ApplyEffect(float concentration, inout ACE_Medical_MedicationAdjustments adjustments)
-	{
-		adjustments.m_fPain += ComputeEfficency(concentration);
-	}
-}
-
-//------------------------------------------------------------------------------------------------
-class ACE_Medical_Dose : ScriptAndConfig
-{
-	[Attribute(desc: "Administered concentration [nM]")]
-	protected float m_fConcentrationNM;
-	
-	protected float m_fTimeMS;
-	
-	//------------------------------------------------------------------------------------------------
-	void ACE_Medical_Dose(float concentration)
-	{
-		m_fConcentrationNM = concentration;
-		m_fTimeMS = System.GetTickCount();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Administered concentration
-	float GetConcentration()
-	{
-		return m_fConcentrationNM;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Time passed since dose was administered [s]
-	float GetElapsedTime()
-	{
-		return System.GetTickCount(m_fTimeMS) / 1000;
-	}
-}
-
-// Maybe later if we want to distinguish between bolus and IV
-/*
-//------------------------------------------------------------------------------------------------
-class ACE_Medical_Bolus : ACE_Medical_Dose
-{
-}
-
-//------------------------------------------------------------------------------------------------
-class ACE_Medical_Infusion : ACE_Medical_Dose
-{
-	protected float m_fInfusionDurationS;
-	
-	//------------------------------------------------------------------------------------------------
-	void ACE_Medical_Infusion(float concentration, float infusionDuration)
-	{
-		ACE_Medical_Dose(concentration);
-		m_fInfusionDurationS = infusionDuration;
-	}
-}
-*/

@@ -15,6 +15,13 @@ class ACE_Medical_BaseComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Should register at the associated system during EOnInit
+	protected bool ShouldRegisterAtSystemOnInit()
+	{
+		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
@@ -32,7 +39,7 @@ class ACE_Medical_BaseComponent : ScriptComponent
 		super.EOnInit(owner);
 		
 		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(GetAssociatedSystemType());
-		if (system)
+		if (ShouldRegisterAtSystemOnInit() && system)
 			system.Register(owner);
 		
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(owner.FindComponent(SCR_CharacterDamageManagerComponent));

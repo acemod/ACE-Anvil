@@ -4,6 +4,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected ACE_Medical_PainHitZone m_pACE_Medical_PainHitZone;
 	protected float m_fACE_Medical_ModeratePainThreshold;
 	protected float m_fACE_Medical_SeriousPainThreshold;
+	protected float m_fACE_Medical_PainSuppression = 0;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Called by ACE_Medical_PainHitZone.OnInit to initialize the hit zone
@@ -34,6 +35,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		// Clamp between serious damage and full health
 		float scaledHealth = Math.Clamp(m_pACE_Medical_PainHitZone.GetHealthScaled(), m_fACE_Medical_SeriousPainThreshold, 1);
+		// Subtract analgesic effects
+		scaledHealth = Math.Min(1, scaledHealth + m_fACE_Medical_PainSuppression);
 		
 		if (scaledHealth > m_fACE_Medical_ModeratePainThreshold)
 		{
@@ -45,5 +48,17 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			// Linear response from full health -> 0 to serious damage -> 1
 			return Math.InverseLerp(1, m_fACE_Medical_SeriousPainThreshold, scaledHealth);
 		}
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	void ACE_Medical_SetPainSuppression(float percentage)
+	{
+		m_fACE_Medical_PainSuppression = percentage;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	float ACE_Medical_GetPainSuppression()
+	{
+		return m_fACE_Medical_PainSuppression;
 	}
 }

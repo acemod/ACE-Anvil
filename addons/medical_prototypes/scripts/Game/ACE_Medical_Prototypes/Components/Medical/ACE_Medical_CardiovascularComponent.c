@@ -21,6 +21,10 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fMeanArterialPressureKPA;
 	protected float m_fPulsePressureKPA;
 	protected float m_fResilienceRecoveryScale = 1;
+	protected float m_fReviveSuccessCheckTimerScale = 1;
+	
+	protected float m_fHeartRateMedicationAdjustment = 0;
+	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	
 	// TO DO: Impliment simple cardiac rhythms + AED 
 	protected ACE_Medical_ECardiacRhythmState m_eCardiacRhythmState = ACE_Medical_ECardiacRhythmState.SINUS;
@@ -67,6 +71,10 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		if (IsInCardiacArrest() && !SCR_EntityHelper.IsAPlayer(GetOwner()))
 			m_pDamageManager.Kill(m_pDamageManager.GetInstigator());
 		
+		// Resilience falls to zero and cannot recover while vitals are critical
+		if (m_eVitalState >= ACE_Medical_EVitalState.CRITICAL)
+			m_pDamageManager.GetResilienceHitZone().SetHealth(0);
+		
 		if (newState == ACE_Medical_EVitalState.CARDIAC_ARREST)
 			OnCardiacArrestStateChanged(true);
 		else if (prevState == ACE_Medical_EVitalState.CARDIAC_ARREST)
@@ -81,7 +89,6 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		// Add/remove damage effect for cardiac arrest state
 		if (inCardiacArrest)
 		{
-			m_pDamageManager.GetResilienceHitZone().SetHealth(0);
 			m_pDamageManager.AddDamageEffect(m_CardiacArrestDamageEffect);
 			m_bWasInCardiacArrest = true;
 			m_iTimeArrestStarted = System.GetTickCount();
@@ -98,6 +105,16 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	{
 		if ((previousLifeState == ECharacterLifeState.INCAPACITATED) && (newLifeState == ECharacterLifeState.ALIVE))
 			m_bWasInCardiacArrest = false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void Revive()
+	{
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		if (settings && settings.m_CardiovascularSystem)
+			SetHeartRate(settings.m_CardiovascularSystem.m_fCriticalHeartRateThresholdLowBPM);
+		
+		SetVitalState(ACE_Medical_EVitalState.CRITICAL);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -253,6 +270,43 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 			m_fMeanArterialPressureKPA - 1/3 * m_fPulsePressureKPA,
 			m_fMeanArterialPressureKPA + 2/3 * m_fPulsePressureKPA
 		);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetHeartRateMedicationAdjustment(float adjustment)
+	{
+		m_fHeartRateMedicationAdjustment = adjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetHeartRateMedicationAdjustment()
+	{
+		return m_fHeartRateMedicationAdjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetSystemicVascularResistenceMedicationAdjustment(float adjustment)
+	{
+		m_fSystemicVascularResistanceMedicationAdjustment = adjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetSystemicVascularResistenceMedicationAdjustment()
+	{
+		return m_fSystemicVascularResistanceMedicationAdjustment;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Set scale for accelerating the revive success check timer
+	void SetReviveSuccessCheckTimerScale(float scale)
+	{
+		m_fReviveSuccessCheckTimerScale = scale;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetReviveSuccessCheckTimerScale()
+	{
+		return m_fReviveSuccessCheckTimerScale;
 	}
 	
 	//------------------------------------------------------------------------------------------------

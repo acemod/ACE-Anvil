@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_MedicationSystemSettings : ScriptAndConfig
+[BaseContainerProps(configRoot: true)]
+class ACE_Medical_MedicationSystemSettings
 {
 	[Attribute(desc: "Configurations for all drugs")]
 	ref array<ref ACE_Medical_PharmacokineticsConfig> m_aPharmacokineticsConfigs;

@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_CardiovascularSystemSettings : ScriptAndConfig
+[BaseContainerProps(configRoot: true)]
+class ACE_Medical_CardiovascularSystemSettings
 {
 	[Attribute(defvalue: "80", desc: "Default heart rate [BPM]", category: "Default Vitals")]
 	float m_fDefaultHeartRateBPM;
@@ -70,6 +71,10 @@ class ACE_Medical_CardiovascularSystemSettings : ScriptAndConfig
 	//! Calculate derived values
 	void ACE_Medical_CardiovascularSystemSettings()
 	{
+		// Make sure we retain the default settings for subconfigs when left empty
+		if (!m_CardiacArrestDamageEffect)
+			m_CardiacArrestDamageEffect = new ACE_Medical_CardiacArrestDamageEffect();
+		
 		// Derive default SVR from other values
 		m_fDefaultSystemicVascularResistance = m_fDefaultMeanArterialPressureKPA / (m_fDefaultHeartRateBPM * m_fDefaultStrokeVolumeML);
 		// MAP multiplied by this value yields PP

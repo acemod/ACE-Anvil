@@ -14,7 +14,7 @@ partition "Advanced Medical Treatment (excluding OD)" {
                         else (no)
                         endif
                     fork again
-                        if (Has at most class III\nhemorrhage and\nlast epinephrine\ninjection > 1 min?) then (yes)
+                        if (Has at most class II\nhemorrhage and\nlast epinephrine\ninjection > 1 min?) then (yes)
                             :Inject epinephrine;
                         else (no)
                         endif

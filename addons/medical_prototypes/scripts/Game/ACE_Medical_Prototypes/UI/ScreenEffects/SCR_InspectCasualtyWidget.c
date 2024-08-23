@@ -50,14 +50,15 @@ modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 		{
 			array<float> times;
 			array<string> messages;
-			medicationComponent.GetLogData(times, messages);
+			array<string> authors;
+			medicationComponent.GetLogData(times, messages, authors);
 			medicationTexts.Reserve(times.Count());
 			
 			for (int i = times.Count() - 1; i >= 0; i--)
 			{
 				int hours = Math.Floor(times[i]);
 				int minutes = Math.Round(60 * (times[i] - hours));
-				medicationTexts.Insert(string.Format("%1:%2 %3", hours, minutes, messages[i]));
+				medicationTexts.Insert(string.Format("%1:%2 %3 (%4)", hours, minutes, messages[i], authors[i]));
 			}
 		}
 		

@@ -41,7 +41,7 @@ class ACE_Medical_ConsumableMedication : SCR_ConsumableEffectHealthItems
 		if (!itemComponent)
 			return;
 		
-		medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName());
+		medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName(), GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(user));
 	}
 	
 	//------------------------------------------------------------------------------------------------

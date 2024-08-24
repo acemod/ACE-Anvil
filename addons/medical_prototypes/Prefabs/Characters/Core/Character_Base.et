@@ -21,7 +21,6 @@ SCR_ChimeraCharacter {
     SCR_CharacterHeadHitZone Head {
      ParentHZs {
       ParentHitZone "{60F48ADCA47D7F72}" {
-       Parent "ACE_Medical_Brain"
        DamageMultiplier 0
        HealingMultiplier 0
       }
@@ -141,6 +140,9 @@ SCR_ChimeraCharacter {
       ParentHitZone "{60F48ADCA47D7F72}" {
        DamageMultiplier 0
        HealingMultiplier 0
+      }
+      ParentHitZone "{5E101C420414E7EB}" {
+       Parent "ACE_Medical_Pain"
       }
      }
      m_fBleedingRateScale 0.325

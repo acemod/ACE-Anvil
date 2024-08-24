@@ -27,7 +27,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
-	protected ACE_Medical_CardiacArrestDamageEffect m_CardiacArrestDamageEffect;
+	protected ACE_Medical_CardiovascularSystemSettings m_Settings;
 	
 	protected ref ScriptInvokerInt2 m_OnVitalStateChanged = new ScriptInvokerInt2();
 	
@@ -46,8 +46,8 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		super.EOnInit(owner);
 		
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
-		if (settings && settings.m_CardiovascularSystem)
-			m_CardiacArrestDamageEffect = settings.m_CardiovascularSystem.m_CardiacArrestDamageEffect;
+		if (settings)
+			m_Settings = settings.m_CardiovascularSystem;
 				
 		m_pDamageManager = SCR_CharacterDamageManagerComponent.Cast(owner.FindComponent(SCR_CharacterDamageManagerComponent));
 		
@@ -62,7 +62,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		m_pDamageManager.UpdateConsciousness();
 		
 		// Kill AI that enters cardiac arrest
-		if (IsInCardiacArrest() && !SCR_EntityHelper.IsAPlayer(GetOwner()))
+		if (IsInCardiacArrest() && !SCR_EntityHelper.IsAPlayer(GetOwner()) && !m_Settings.m_bCardiacArrestForAIEnabled)
 			m_pDamageManager.Kill(m_pDamageManager.GetInstigator());
 		
 		// Resilience falls to zero and cannot recover while vitals are critical
@@ -83,12 +83,12 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		// Add/remove damage effect for cardiac arrest state
 		if (inCardiacArrest)
 		{
-			m_pDamageManager.AddDamageEffect(m_CardiacArrestDamageEffect);
+			m_pDamageManager.AddDamageEffect(m_Settings.m_CardiacArrestDamageEffect);
 			m_bWasInCardiacArrest = true;
 		}
 		else
 		{
-			m_pDamageManager.TerminateDamageEffectsOfType(m_CardiacArrestDamageEffect.Type());
+			m_pDamageManager.TerminateDamageEffectsOfType(m_Settings.m_CardiacArrestDamageEffect.Type());
 		}
 	}
 	
@@ -103,10 +103,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	void Revive()
 	{
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
-		if (settings && settings.m_CardiovascularSystem)
-			SetHeartRate(settings.m_CardiovascularSystem.m_fCriticalHeartRateThresholdLowBPM);
-		
+		SetHeartRate(m_Settings.m_fCriticalHeartRateThresholdLowBPM);
 		SetVitalState(ACE_Medical_EVitalState.CRITICAL);
 	}
 	
@@ -164,9 +161,9 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 			return;
 		
 		if (isPerformed)
-			m_pDamageManager.TerminateDamageEffectsOfType(m_CardiacArrestDamageEffect.Type());
+			m_pDamageManager.TerminateDamageEffectsOfType(m_Settings.m_CardiacArrestDamageEffect.Type());
 		else
-			m_pDamageManager.AddDamageEffect(m_CardiacArrestDamageEffect);
+			m_pDamageManager.AddDamageEffect(m_Settings.m_CardiacArrestDamageEffect);
 		
 	}
 	

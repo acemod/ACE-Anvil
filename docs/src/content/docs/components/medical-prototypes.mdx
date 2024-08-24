@@ -95,12 +95,13 @@ Certain aspects of the medical system can be configured in the mission header se
 | `m_fCriticalMeanArterialPressureThresholdLowKPA` | `float` | `7.11` | An arterial pressure below this will result in critical state [kPa] |
 | `m_fCriticalMeanArterialPressureThresholdHighKPA` | `float` | `29.5` | An arterial pressure above this will result in critical state [kPa]|
 | `m_eCriticalBloodLevelThreshold` | `enum` | `CLASS_3_HEMORRHAGE` | A blood level below this will result in critical state |
-| `ACE_Medical_CardiacArrestDamageEffect` | `object` | --- | Damage effects caused by cardiac arrest |
+| `m_CardiacArrestDamageEffect` | `object` | --- | Damage effects caused by cardiac arrest |
 | `m_fCardiacArrestHeartRateThresholdLowBPM` | `float` | `20` | A heart rate below this will results in cardiac arrest [BPM] |
 | `m_fCardiacArrestHeartRateThresholdHighBPM` | `float` | `220` | A heart rate above this will results in cardiac arrest [BPM] |
 | `m_fCardiacArrestMeanArterialPressureThresholdLowKPA` | `float` | `5.21` | An arterial pressure below this will result in cardiac arrest when the heart rate is critical [kPa] |
 | `m_fCardiacArrestMeanArterialPressureThresholdHighKPA` | `float` | `29.5` | n arterial pressure above this will result in cardiac arrest [kPa] |
 | `m_eCardiacArrestBloodLevelThreshold` | `enum` | `CLASS_4_HEMORRHAGE` | A blood level below this will result in cardiac arrest |
+| `m_bCardiacArrestForAIEnabled` | `bool`* | `false` | AI will die instead of entering cardiac arrest if false |
 | `m_fCPRSuccessCheckTimeoutS` | `float` | `22` | Default delay between check for successful CPR [s] |
 | `m_fCPRSuccessChanceMin` | `float` | `0` | Chance for exiting cardiac arrest while performing CPR at class IV hemorrhage |
 | `m_fCPRSuccessChanceMax` | `float` | `0.4` | Chance for exiting cardiac arrest while performing CPR at above class II hemorrhage |

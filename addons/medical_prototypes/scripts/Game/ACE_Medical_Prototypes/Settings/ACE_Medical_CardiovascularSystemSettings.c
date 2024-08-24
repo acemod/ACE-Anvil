@@ -47,6 +47,9 @@ class ACE_Medical_CardiovascularSystemSettings
 	[Attribute(defvalue: "CLASS_4_HEMORRHAGE", uiwidget: UIWidgets.SearchComboBox, desc: "A blood level below this will result in cardiac arrest", enums: ParamEnumArray.FromEnum(ACE_Medical_EBloodState), category: "Cardiac Arrest")]
 	ACE_Medical_EBloodState m_eCardiacArrestBloodLevelThreshold;
 	
+	[Attribute(defvalue: "false", desc: "AI will die instead of entering cardiac arrest if false", category: "Cardiac Arrest")]
+	bool m_bCardiacArrestForAIEnabled;
+	
 	[Attribute(defvalue: "22", desc: "Default delay between check for successful CPR [s]", category: "CPR")]
 	float m_fCPRSuccessCheckTimeoutS;
 	

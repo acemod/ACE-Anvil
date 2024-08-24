@@ -13,10 +13,13 @@ class ACE_Medical_MedicationComponent : ACE_Medical_BaseComponent2
 	protected ref array<ref array<ref ACE_Medical_Dose>> m_aDoses = {};
 	
 	[RplProp()]
+	protected ref array<float> m_aLogMessageTimes = {};
+	[RplProp()]
 	protected ref array<string> m_aLogMessages = {};
 	[RplProp()]
-	protected ref array<float> m_aLogDoseTimes = {};
+	protected ref array<string> m_aLogMessageAuthors = {};
 	protected const int MAX_NUM_LOG_ENTRIES = 8;
+
 	
 	//------------------------------------------------------------------------------------------------
 	//! Register this component at ACE_Medical_CardiovascularSystem
@@ -61,32 +64,40 @@ class ACE_Medical_MedicationComponent : ACE_Medical_BaseComponent2
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void AddLogEntry(string message)
+	void AddLogEntry(string message, int authorID = -1)
 	{
 		float timeOfDay = 24 * GetGame().GetClock().GetTimeOfDay();
-		RplDo_AddLogEntryBroadcast(message, timeOfDay);
-		Rpc(RplDo_AddLogEntryBroadcast, message, timeOfDay);
+		RplDo_AddLogEntryBroadcast(timeOfDay, message, authorID);
+		Rpc(RplDo_AddLogEntryBroadcast, timeOfDay, message, authorID);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RplDo_AddLogEntryBroadcast(string message, float time)
+	protected void RplDo_AddLogEntryBroadcast(float time, string message, int authorID)
 	{
 		if (m_aLogMessages.Count() >= MAX_NUM_LOG_ENTRIES)
 		{
+			m_aLogMessageTimes.RemoveOrdered(0);
 			m_aLogMessages.RemoveOrdered(0);
-			m_aLogDoseTimes.RemoveOrdered(0);
+			m_aLogMessageAuthors.RemoveOrdered(0);
 		}
 		
+		m_aLogMessageTimes.Insert(time);
 		m_aLogMessages.Insert(message);
-		m_aLogDoseTimes.Insert(time);
+		
+		string authorName = GetGame().GetPlayerManager().GetPlayerName(authorID);
+		if (authorName.IsEmpty())
+			authorName = "N/A";
+		
+		m_aLogMessageAuthors.Insert(authorName);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void GetLogData(out array<float> times, out array<string> messages)
+	void GetLogData(out array<float> times, out array<string> messages, out array<string> authors)
 	{
-		times = m_aLogDoseTimes;
+		times = m_aLogMessageTimes;
 		messages = m_aLogMessages;
+		authors = m_aLogMessageAuthors
 	}
 	
 	//------------------------------------------------------------------------------------------------

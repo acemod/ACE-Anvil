@@ -53,7 +53,7 @@ class ACE_Medical_ConsumableAmmoniumCarbonate : SCR_ConsumableEffectHealthItems
 			return;
 		
 		if (Replication.IsServer())
-			medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName());
+			medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName(), GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(user));
 	}
 
 	//------------------------------------------------------------------------------------------------

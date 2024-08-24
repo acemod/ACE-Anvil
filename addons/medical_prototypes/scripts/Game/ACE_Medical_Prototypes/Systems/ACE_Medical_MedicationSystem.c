@@ -5,6 +5,7 @@
 class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 {
 	protected ACE_Medical_MedicationSystemSettings m_Settings;
+	protected static const float EXPIRED_DOSE_PERCENTAGE = 0.01; // Concentration at which dose is considered expired [percentage of initial]
 
 	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()
@@ -37,7 +38,7 @@ class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	map<ACE_Medical_EDrugType, float> ComputeConcentrations(array<ACE_Medical_EDrugType> drugs, inout array<ref array<ref ACE_Medical_Dose>> allDoses, bool deleteExpiredDoses = true)
+	map<ACE_Medical_EDrugType, float> ComputeConcentrations(inout array<ACE_Medical_EDrugType> drugs, inout array<ref array<ref ACE_Medical_Dose>> allDoses, bool deleteExpiredDoses = true)
 	{
 		map<ACE_Medical_EDrugType, float> concentrations = new map<ACE_Medical_EDrugType, float>();
 		
@@ -50,8 +51,8 @@ class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 			// Remove drugs that have no doses left
 			if (deleteExpiredDoses && doses.IsEmpty())
 			{
-				drugs.RemoveOrdered(i);
-				allDoses.RemoveOrdered(i);
+				drugs.Remove(i);
+				allDoses.Remove(i);
 			}
 		}
 		
@@ -75,9 +76,10 @@ class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 			//concentration += ACE_Medical_PharmacokineticsConfig.CONCENTRATION_OFFSET_NM;
 			
 			// Remove doses that have expired
-			if (deleteExpiredDoses && concentration < 0.001 * dose.GetConcentration() && time > 1 / config.m_fActivationRateConstant)
+			// 1 / k_a is the mean lifetime of the precursor state
+			if (deleteExpiredDoses && time > 1 / config.m_fActivationRateConstant && concentration < EXPIRED_DOSE_PERCENTAGE * dose.GetConcentration())
 			{
-				doses.RemoveOrdered(i);
+				doses.Remove(i);
 				continue;
 			}
 			

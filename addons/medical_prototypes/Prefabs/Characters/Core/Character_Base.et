@@ -7,7 +7,8 @@ SCR_ChimeraCharacter {
   }
   SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
    "Additional hit zones" {
-    SCR_CharacterHealthHitZone Health {
+    ACE_Medical_BrainHitZone Health {
+     m_fFullRegenerationTime 600
     }
     SCR_CharacterBloodHitZone Blood {
      MaxHealth 3000
@@ -172,10 +173,6 @@ SCR_ChimeraCharacter {
      m_fBleedingRateScale 5
     }
     ACE_Medical_PainHitZone ACE_Medical_Pain {
-    }
-    ACE_Medical_BrainHitZone ACE_Medical_Brain {
-     MaxHealth 100
-     m_fFullRegenerationTime 600
     }
    }
   }

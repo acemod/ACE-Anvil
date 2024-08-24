@@ -50,4 +50,43 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 			}
 		}
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Allows clients to request an update of the vitals data
+	void RequestUpdateVitalsData(SCR_ChimeraCharacter patient)
+	{
+		Rpc(RpcAsk_UpdateVitalsData, Replication.FindId(patient));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_UpdateVitalsData(RplId patientId)
+	{
+		SCR_ChimeraCharacter patient = SCR_ChimeraCharacter.Cast(Replication.FindItem(patientId));
+		if (!patient)
+			return;
+		
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!cardiovascularComponent)
+			return;
+		
+		Rpc(RpcDo_UpdateVitalsDataOwner, patientId, cardiovascularComponent.GetHeartRate(), cardiovascularComponent.GetMeanArterialPressure(), cardiovascularComponent.GetPulsePressure());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RpcDo_UpdateVitalsDataOwner(RplId patientId, float heartRate, float meanArterialPressure, float pulsePressure)
+	{
+		SCR_ChimeraCharacter patient = SCR_ChimeraCharacter.Cast(Replication.FindItem(patientId));
+		if (!patient)
+			return;
+		
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!cardiovascularComponent)
+			return;
+		
+		cardiovascularComponent.SetHeartRate(heartRate);
+		cardiovascularComponent.SetMeanArterialPressure(meanArterialPressure);
+		cardiovascularComponent.SetPulsePressure(pulsePressure);
+	}
 }

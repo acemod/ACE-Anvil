@@ -65,6 +65,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{6230E5C2DA63508A}" {
+   Id "ACE_Medical-Editor_TooltipDetail_VitalSigns_Name"
+   Target_en_us "Vital signs"
+   Target_de_de "Vitaldaten"
+   Modified 1647372787
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6228B55BAA8F501D}" {
    Id "ACE_Medical-InfoWidget_AmmoniumCarbonate"
    Target_en_us "Increases wake-up chance"

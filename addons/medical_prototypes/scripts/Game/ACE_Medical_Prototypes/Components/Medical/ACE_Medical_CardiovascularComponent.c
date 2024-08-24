@@ -26,6 +26,12 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fHeartRateMedicationAdjustment = 0;
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	
+	// TO DO: Impliment simple cardiac rhythms + AED 
+	protected ACE_Medical_ECardiacRhythmState m_eCardiacRhythmState = ACE_Medical_ECardiacRhythmState.SINUS;
+	protected int m_iShocksDelivered = 0;
+	protected int m_iTimeArrestStarted;
+	protected int m_iTimeLastShock;
+	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
 	protected ACE_Medical_CardiovascularSystemSettings m_Settings;
 	
@@ -85,6 +91,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		{
 			m_pDamageManager.AddDamageEffect(m_Settings.m_CardiacArrestDamageEffect);
 			m_bWasInCardiacArrest = true;
+			m_iTimeArrestStarted = System.GetTickCount();
 		}
 		else
 		{
@@ -303,5 +310,77 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	ScriptInvokerInt2 GetOnVitalStateChanged()
 	{
 		return m_OnVitalStateChanged;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetCardiacRhythmState(ACE_Medical_ECardiacRhythmState rhythmState)
+	{
+		m_eCardiacRhythmState = rhythmState;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_ECardiacRhythmState GetCardiacRhythmState()
+	{
+		return m_eCardiacRhythmState;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetShocksDelivered()
+	{
+		return m_iShocksDelivered;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void AddShocksDelivered()
+	{
+		m_iShocksDelivered++;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetShocksDelivered()
+	{
+		m_iShocksDelivered = 0;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool HasBeenShocked()
+	{
+		return m_iShocksDelivered > 0;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetHasBeenShocked(bool value)
+	{
+		m_iShocksDelivered = value;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetTimeLastShock()
+	{
+		return System.GetTickCount(m_iTimeLastShock);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetTimeLastShock()
+	{
+		m_iTimeLastShock = System.GetTickCount();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetArrestTimeStart()
+	{
+		return m_iTimeArrestStarted;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetArrestTimeStart()
+	{
+		m_iTimeArrestStarted = System.GetTickCount();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetArrestTimeCurrent()
+	{
+		return System.GetTickCount(m_iTimeArrestStarted);
 	}
 }

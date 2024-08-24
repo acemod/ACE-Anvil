@@ -133,6 +133,10 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		// Check for CPR success in case we are in cardiac arrest
 		if (component.IsInCardiacArrest())
 		{
+			// Check time spent in cardiac arrest so far + change rhythm 
+			UpdateArrestCardiacRhythmState(component);
+			
+			// Process revive chance
 			if (component.IsCPRPerformed())
 			{
 				m_fCPRSuccessCheckTimerS += timeSlice * component.GetReviveSuccessCheckTimerScale();
@@ -242,14 +246,82 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected bool ComputeCPRSuccess(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager)
+	protected void UpdateArrestCardiacRhythmState(ACE_Medical_CardiovascularComponent component)
+	{
+		if (component.GetArrestTimeCurrent() >= 3*60*1000)
+			component.SetCardiacRhythmState(ACE_Medical_ECardiacRhythmState.ASYSTOLE)
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeRhythmPenalty(ACE_Medical_CardiovascularComponent component)
+	{
+		ACE_Medical_ECardiacRhythmState rhythmState = component.GetCardiacRhythmState();
+		int diffTime = component.GetArrestTimeCurrent();
+		int shockAmount = component.GetShocksDelivered();
+		int hasBeenShocked = component.HasBeenShocked();
+		
+		if (rhythmState == ACE_Medical_ECardiacRhythmState.ASYSTOLE)
+			return m_Settings.m_fCardiacRhythmsSuccessChanceAsystole;
+		
+		if (rhythmState == ACE_Medical_ECardiacRhythmState.VF)
+		{
+			if (hasBeenShocked)
+			{
+				return Math.Map(diffTime, 3*60*1000,
+								m_Settings.m_fCardiacRhythmsSuccessChanceAsystole,
+								m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationDelayed,
+								m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationImmediate);
+			}
+			// default to asystole chance if no shock 
+			return m_Settings.m_fCardiacRhythmsSuccessChanceAsystole;
+		}
+		
+		// no penalty if reached 
+		return 1;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeShockCountPenalty(ACE_Medical_CardiovascularComponent component)
+	{
+		int shockAmount = component.GetShocksDelivered();
+		int timeLastShock = component.GetTimeLastShock();
+		
+		if (shockAmount > 0 && timeLastShock < 2*1000)
+		{
+			return 1 - (shockAmount * m_Settings.m_fCardiacRhythmsSuccessChanceDefibrillationReduction);
+		}
+		
+		if (shockAmount > 0 && timeLastShock > 2*1000)
+		{
+			component.ResetTimeLastShock();
+			component.ResetShocksDelivered();
+		}		
+		return 1;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeCPRSuccess(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager)
 	{
 		SCR_CharacterBloodHitZone bloodHZ = damageManager.GetBloodHitZone();
 		
 		float minScale = bloodHZ.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_4_HEMORRHAGE);
 		float maxScale = bloodHZ.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_2_HEMORRHAGE);
 		float scale = Math.Clamp(bloodHZ.GetHealthScaled(), minScale, maxScale);
-		return (Math.RandomFloat01() < Math.Map(scale, minScale, maxScale, m_Settings.m_fCPRSuccessChanceMin, m_Settings.m_fCPRSuccessChanceMax));
+		
+		return Math.Map(scale, minScale, maxScale, m_Settings.m_fCPRSuccessChanceMin, m_Settings.m_fCPRSuccessChanceMax);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeReviveChance(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager)
+	{
+		float cprSuccess = ComputeCPRSuccess(component, damageManager);
+		float rhythmPenalty = ComputeRhythmPenalty(component);
+		float shockPenalty = ComputeShockCountPenalty(component);
+		
+		if (m_Settings.m_bCardiacArrestRhythmEnabled)
+			return cprSuccess * rhythmPenalty * shockPenalty;
+		
+		return cprSuccess;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -260,6 +332,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		UpdateSystemicVascularResistance(component, damageManager, 0);
 		UpdateBloodPressures(component, damageManager, 0);
 		component.SetVitalState(ACE_Medical_EVitalState.NORMAL);
+		component.SetCardiacRhythmState(ACE_Medical_ECardiacRhythmState.SINUS);
 	}
 	
 	//------------------------------------------------------------------------------------------------

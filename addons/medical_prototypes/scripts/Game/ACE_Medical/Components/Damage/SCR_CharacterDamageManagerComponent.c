@@ -4,6 +4,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected ACE_Medical_PainHitZone m_pACE_Medical_PainHitZone;
 	protected float m_fACE_Medical_ModeratePainThreshold;
 	protected float m_fACE_Medical_SeriousPainThreshold;
+	
+	[RplProp(condition: RplCondition.OwnerOnly)]
 	protected float m_fACE_Medical_PainSuppression = 0;
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -54,6 +56,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	void ACE_Medical_SetPainSuppression(float percentage)
 	{
 		m_fACE_Medical_PainSuppression = percentage;
+		Replication.BumpMe();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

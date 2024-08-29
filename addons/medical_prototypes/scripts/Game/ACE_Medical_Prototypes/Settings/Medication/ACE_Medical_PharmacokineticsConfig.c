@@ -10,8 +10,4 @@ class ACE_Medical_PharmacokineticsConfig
 	
 	[Attribute(desc: "Rate constant for the deactivation of the drug [1/s]", precision: 8)]
 	float m_fDeactivationRateConstant;
-		
-	// We need to slightly offset the curve so the exponential tail will pass through zero
-	// TO DO: Determine an appropriate value for this
-	static const float CONCENTRATION_OFFSET_NM = -0.5;
 }

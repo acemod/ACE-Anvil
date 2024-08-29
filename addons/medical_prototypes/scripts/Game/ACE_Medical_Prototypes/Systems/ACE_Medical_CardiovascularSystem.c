@@ -4,8 +4,6 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	protected ACE_Medical_CardiovascularSystemSettings m_Settings;
 	
 	protected float m_fCPRSuccessCheckTimerS = 0;
-	protected float m_fCheckCriticalHeartRateTimeoutS = 5;
-	protected float m_fCheckCriticalHeartRateTimerS = 0;
 	
 	static const float KPA2MMHG = 7.50062;
 	
@@ -157,25 +155,6 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		)
 		{
 			vitalState = ACE_Medical_EVitalState.CARDIAC_ARREST;
-		}
-		// Random chance to enter cardiac arrest when heart rate is below the mean of critical and cardiac arrest threshold
-		else if (heartRate < m_Settings.m_fMeanCriticalCardiacArrestHeartRateThresholdLowBPM)
-		{
-			bool enterCardiacArrest = false;
-			m_fCheckCriticalHeartRateTimerS += timeSlice;
-			
-			if (m_fCheckCriticalHeartRateTimerS >= m_fCheckCriticalHeartRateTimeoutS)
-			{
-				m_fCheckCriticalHeartRateTimerS = 0;
-				
-				if (Math.RandomFloat01() < (0.4 + 0.6  * (m_Settings.m_fMeanCriticalCardiacArrestHeartRateThresholdLowBPM - heartRate) / 10))
-					enterCardiacArrest = true;
-			}
-
-			if (enterCardiacArrest)
-				vitalState = ACE_Medical_EVitalState.CARDIAC_ARREST;
-			else
-				vitalState = ACE_Medical_EVitalState.CRITICAL;
 		}
 		// Check for vitals that lead to critical vital state
 		// TO DO: Also handle the case of knockout bleeding rate

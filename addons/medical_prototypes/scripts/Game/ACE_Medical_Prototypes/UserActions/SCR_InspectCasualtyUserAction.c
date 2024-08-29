@@ -21,7 +21,7 @@ modded class SCR_InspectCasualtyUserAction : ScriptedUserAction
 			return true;
 		
 		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(ownerChar.FindComponent(ACE_Medical_CardiovascularComponent));
-		if (cardiovascularComponent && cardiovascularComponent.GetVitalState() > ACE_Medical_EVitalState.NORMAL)
+		if (cardiovascularComponent && cardiovascularComponent.GetVitalState() > ACE_Medical_EVitalState.STABLE)
 			return true;
 		
 		return false;

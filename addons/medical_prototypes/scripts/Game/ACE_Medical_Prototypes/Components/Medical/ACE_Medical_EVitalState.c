@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------------------------
 enum ACE_Medical_EVitalState
 {
-	NORMAL,
-	LOWERED,
+	STABLE,
+	UNSTABLE,
 	CRITICAL,
 	CARDIAC_ARREST
 }

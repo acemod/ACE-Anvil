@@ -9,7 +9,7 @@ class ACE_Medical_CardiovascularComponentClass : ACE_Medical_BaseComponentClass
 class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 {	
 	[RplProp()]
-	protected ACE_Medical_EVitalState m_eVitalState = ACE_Medical_EVitalState.NORMAL;
+	protected ACE_Medical_EVitalState m_eVitalState = ACE_Medical_EVitalState.STABLE;
 	[RplProp()]
 	protected bool m_bIsCPRPerformed = false;
 	protected bool m_bWasInCardiacArrest = false;
@@ -59,15 +59,16 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnVitalStateChanged(ACE_Medical_EVitalState newState, ACE_Medical_EVitalState prevState)
 	{
-		m_pDamageManager.UpdateConsciousness();
-		
 		// Kill AI that enters cardiac arrest
 		if (IsInCardiacArrest() && !SCR_EntityHelper.IsAPlayer(GetOwner()) && !m_Settings.m_bCardiacArrestForAIEnabled)
 			m_pDamageManager.Kill(m_pDamageManager.GetInstigator());
 		
-		// Resilience falls to zero and cannot recover while vitals are critical
+		// Resilience falls to zero and cannot recover while vitals are at critical vital state
 		if (m_eVitalState >= ACE_Medical_EVitalState.CRITICAL)
+		{
 			m_pDamageManager.GetResilienceHitZone().SetHealth(0);
+			m_pDamageManager.UpdateConsciousness();
+		}
 		
 		if (newState == ACE_Medical_EVitalState.CARDIAC_ARREST)
 			OnCardiacArrestStateChanged(true);
@@ -103,7 +104,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	void Revive()
 	{
-		SetHeartRate(m_Settings.m_fCriticalHeartRateThresholdLowBPM);
+		SetHeartRate(m_Settings.m_CriticalThresholds.m_fHeartRateLowBPM);
 		SetVitalState(ACE_Medical_EVitalState.CRITICAL);
 	}
 	

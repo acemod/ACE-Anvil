@@ -124,11 +124,10 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateVitalState(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
 	{
-		ACE_Medical_EVitalState vitalState = ACE_Medical_EVitalState.NORMAL;
+		ACE_Medical_EVitalState vitalState = ACE_Medical_EVitalState.STABLE;
 		SCR_CharacterBloodHitZone bloodHZ = damageManager.GetBloodHitZone();
 		float heartRate = component.GetHeartRate();
 		float meanArterialPressure = component.GetMeanArterialPressure();
-		
 		
 		// Check for CPR success in case we are in cardiac arrest
 		if (component.IsInCardiacArrest())
@@ -150,10 +149,11 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 			return;
 		}
 		// Check for vitals that lead to cardiac arrest
-		if ((heartRate < m_Settings.m_fCardiacArrestHeartRateThresholdLowBPM || heartRate > m_Settings.m_fCardiacArrestHeartRateThresholdHighBPM) ||
-			(meanArterialPressure < m_Settings.m_fCardiacArrestMeanArterialPressureThresholdLowKPA && heartRate < m_Settings.m_fCriticalHeartRateThresholdLowBPM) ||
-			(meanArterialPressure > m_Settings.m_fCardiacArrestMeanArterialPressureThresholdHighKPA) ||
-			bloodHZ.GetHealthScaled() < bloodHZ.GetDamageStateThreshold(m_Settings.m_eCardiacArrestBloodLevelThreshold)
+		if ((heartRate < m_Settings.m_CardiacArrestThresholds.m_fHeartRateLowBPM) ||
+			(heartRate > m_Settings.m_CardiacArrestThresholds.m_fHeartRateHighBPM) ||
+			(meanArterialPressure < m_Settings.m_CardiacArrestThresholds.m_fMeanArterialPressureLowKPA && heartRate < m_Settings.m_CriticalThresholds.m_fHeartRateLowBPM) ||
+			(meanArterialPressure > m_Settings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA) ||
+			bloodHZ.GetHealthScaled() <= bloodHZ.GetDamageStateThreshold(m_Settings.m_CardiacArrestThresholds.m_eBloodState)
 		)
 		{
 			vitalState = ACE_Medical_EVitalState.CARDIAC_ARREST;
@@ -177,23 +177,27 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 			else
 				vitalState = ACE_Medical_EVitalState.CRITICAL;
 		}
-		// Check for vitals that lead to critical state (causes fainting)
+		// Check for vitals that lead to critical vital state
 		// TO DO: Also handle the case of knockout bleeding rate
-		else if ((heartRate < m_Settings.m_fCriticalHeartRateThresholdLowBPM) || (heartRate > m_Settings.m_fCriticalHeartRateThresholdHighBPM) ||
-			(meanArterialPressure < m_Settings.m_fCriticalMeanArterialPressureThresholdLowKPA) || (meanArterialPressure > m_Settings.m_fCriticalMeanArterialPressureThresholdHighKPA) ||
-			bloodHZ.GetHealthScaled() < bloodHZ.GetDamageStateThreshold(m_Settings.m_eCriticalBloodLevelThreshold)
+		else if ((heartRate < m_Settings.m_CriticalThresholds.m_fHeartRateLowBPM) ||
+				(heartRate > m_Settings.m_CriticalThresholds.m_fHeartRateHighBPM) ||
+				(meanArterialPressure < m_Settings.m_CriticalThresholds.m_fMeanArterialPressureLowKPA) ||
+				(meanArterialPressure > m_Settings.m_CriticalThresholds.m_fMeanArterialPressureHighKPA) ||
+				bloodHZ.GetHealthScaled() <= bloodHZ.GetDamageStateThreshold(m_Settings.m_CriticalThresholds.m_eBloodState)
 		)
 		{
 			vitalState = ACE_Medical_EVitalState.CRITICAL;
 		}
-		/*
-		// TO DO: Decide whether we even have any use for ACE_Medical_EVitalState.LOWERED
-		// Check for vitals that lead to lowered vital state
-		else if (m_pDamageManager.ACE_Medical_GetPainIntensity() > 0 || m_pDamageManager.IsBleeding())
+		// Check for vitals that lead to unstable state (suppresses resilience recovery)
+		else if ((heartRate < m_Settings.m_UnstableThresholds.m_fHeartRateLowBPM) ||
+				(heartRate > m_Settings.m_UnstableThresholds.m_fHeartRateHighBPM) ||
+				(meanArterialPressure < m_Settings.m_UnstableThresholds.m_fMeanArterialPressureLowKPA) ||
+				(meanArterialPressure > m_Settings.m_UnstableThresholds.m_fMeanArterialPressureHighKPA) ||
+				bloodHZ.GetHealthScaled() <= bloodHZ.GetDamageStateThreshold(m_Settings.m_UnstableThresholds.m_eBloodState)
+		)
 		{
-			vitalState = ACE_Medical_EVitalState.LOWERED;
+			vitalState = ACE_Medical_EVitalState.UNSTABLE;
 		}
-		*/
 				
 		component.SetVitalState(vitalState);
 	}
@@ -204,8 +208,8 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		SCR_CharacterBloodHitZone bloodHZ = damageManager.GetBloodHitZone();
 		ACE_Medical_BrainHitZone brainHZ = damageManager.ACE_Medical_GetBrainHitZone();
 		
-		// Resilience cannot recover while in vital state is critical or when blood level is too low
-		if (component.GetVitalState() >= ACE_Medical_EVitalState.CRITICAL || (bloodHZ.GetHealthScaled() < bloodHZ.GetDamageStateThreshold(m_Settings.m_eMinBloodLevelForResilienceRecovery)))
+		// Resilience cannot recover while in vital state is unstable
+		if (component.GetVitalState() >= ACE_Medical_EVitalState.UNSTABLE)
 			component.SetResilienceRecoveryScale(0);
 		// Reduced resilience rate after revival. Recovery is harder the lower the brain's health is.
 		else if (component.WasInCardiacArrest())
@@ -259,7 +263,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		UpdateCardiacOutput(component, damageManager, 0);
 		UpdateSystemicVascularResistance(component, damageManager, 0);
 		UpdateBloodPressures(component, damageManager, 0);
-		component.SetVitalState(ACE_Medical_EVitalState.NORMAL);
+		component.SetVitalState(ACE_Medical_EVitalState.STABLE);
 	}
 	
 	//------------------------------------------------------------------------------------------------

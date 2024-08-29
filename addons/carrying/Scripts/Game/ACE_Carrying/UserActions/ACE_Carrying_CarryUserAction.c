@@ -54,6 +54,11 @@ class ACE_Carrying_CarryUserAction : ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		// CanBePerformedScript runs on user's machine, so we have to
+		// double-check that the owner is in fact not already carried
+		if (ACE_Carrying_Tools.IsCarried(pOwnerEntity))
+			return;
+		
 		ACE_Carrying_Tools.Carry(pUserEntity, pOwnerEntity);
 	}
 	

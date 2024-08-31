@@ -39,12 +39,14 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		if (!carrierController)
 			return;
 		
+		carrierController.ACE_Carrying_SetIsCarrier(true);
 		carrierController.m_OnLifeStateChanged.Insert(OnCarrierLifeStateChanged);
 		
 		SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(carried.FindComponent(SCR_CharacterControllerComponent));
 		if (!carriedController)
 			return;
 		
+		carriedController.ACE_Carrying_SetIsCarried(true);
 		carriedController.m_OnLifeStateChanged.Insert(OnCarriedLifeStateChanged);
 
 		RplComponent carriedRpl = RplComponent.Cast(carried.FindComponent(RplComponent));
@@ -126,6 +128,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 			if (!carrierController)
 				return;
 			
+			carrierController.ACE_Carrying_SetIsCarrier(false);
 			carrierController.m_OnLifeStateChanged.Remove(OnCarrierLifeStateChanged);
 		}
 
@@ -136,7 +139,8 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 			SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(m_pCarried.FindComponent(SCR_CharacterControllerComponent));
 			if (!carriedController)
 				return;
-		
+			
+			carriedController.ACE_Carrying_SetIsCarried(false);
 			carriedController.m_OnLifeStateChanged.Remove(OnCarriedLifeStateChanged);
 		}
 	}

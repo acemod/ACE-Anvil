@@ -132,6 +132,15 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		{
 			if (component.IsCPRPerformed())
 			{
+				// Cannot revive when MAP is too high
+				if (meanArterialPressure > m_Settings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA)
+				{
+					// Prevent BP from getting absurdly high through medication
+					component.SetMeanArterialPressure(m_Settings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA);
+					component.SetPulsePressure(m_Settings.m_fPulsePressureScale * m_Settings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA);
+					return;
+				}
+				
 				m_fCPRSuccessCheckTimerS += timeSlice * component.GetReviveSuccessCheckTimerScale();
 				
 				if (m_fCPRSuccessCheckTimerS < m_Settings.m_fCPRSuccessCheckTimeoutS)

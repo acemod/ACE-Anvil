@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Medical_VitalsStateThresholdsConfig : ScriptAndConfig
 {
-	[Attribute(desc: "A heart rate below this will trigger a transition to this state [BPM]")]
+	[Attribute(desc: "A heart rate below this will trigger a transition to this state [bpm]")]
 	float m_fHeartRateLowBPM;
 	
-	[Attribute(desc: "A heart rate above this will trigger a transition to this state [BPM]")]
+	[Attribute(desc: "A heart rate above this will trigger a transition to this state [bpm]")]
 	float m_fHeartRateHighBPM;
 	
 	[Attribute(desc: "A mean arterial pressure below this will trigger a transition to this state [kPa]")]

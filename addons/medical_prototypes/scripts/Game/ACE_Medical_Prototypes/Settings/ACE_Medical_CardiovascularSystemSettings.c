@@ -2,7 +2,7 @@
 [BaseContainerProps(configRoot: true)]
 class ACE_Medical_CardiovascularSystemSettings
 {
-	[Attribute(defvalue: "80", desc: "Default heart rate [BPM]", category: "Default Vitals")]
+	[Attribute(defvalue: "80", desc: "Default heart rate [bpm]", category: "Default Vitals")]
 	float m_fDefaultHeartRateBPM;
 	
 	[Attribute(defvalue: "95", desc: "Default stroke volume [ml]", category: "Default Vitals")]

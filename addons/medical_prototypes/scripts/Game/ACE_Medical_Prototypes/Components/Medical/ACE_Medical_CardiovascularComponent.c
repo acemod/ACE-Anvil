@@ -190,7 +190,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Returns heart rate in BPM
+	//! Returns heart rate in bpm
 	float GetHeartRate()
 	{
 		return m_fHeartRateBPM;

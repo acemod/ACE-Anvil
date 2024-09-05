@@ -32,7 +32,7 @@ class ACE_Medical_VitalSignsTooltipDetail : SCR_EntityTooltipDetail
 	{
 		m_pNetworkComponent.RequestUpdateVitalsData(SCR_ChimeraCharacter.Cast(entity.GetOwner()));
 		Tuple2<float, float> pressures = m_pCardiovascularComponent.GetBloodPressures();
-		m_Text.SetTextFormat("%1 BPM\n%2/%3 mmHg",
+		m_Text.SetTextFormat("%1 bpm\n%2/%3 mmHg",
 			Math.Round(m_pCardiovascularComponent.GetHeartRate()),
 			Math.Round(pressures.param2 * ACE_Medical_CardiovascularComponent.KPA2MMHG),
 			Math.Round(pressures.param1 * ACE_Medical_CardiovascularComponent.KPA2MMHG)

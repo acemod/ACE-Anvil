@@ -9,6 +9,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 {
 	protected IEntity m_pCarrier;
 	protected IEntity m_pCarried;
+	protected BaseCompartmentSlot m_pTargetVehicleCompartmentSlot;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping carried player
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
@@ -123,46 +124,27 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Terminates carrying: Moves out the carried player and schedules clean up
+	//! Terminates carrying: Moves out the carried and schedules clean up
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void Terminate()
+	void ReleaseCarried()
 	{
-		if (m_pCarrier)
-		{
-			m_pCarrier.RemoveChild(this, true);
-			
-			SCR_CharacterControllerComponent carrierController = SCR_CharacterControllerComponent.Cast(m_pCarrier.FindComponent(SCR_CharacterControllerComponent));
-			if (!carrierController)
-				return;
-			
-			carrierController.m_OnLifeStateChanged.Remove(OnCarrierLifeStateChanged);
-		}
-
-		if (m_pCarried)
-		{
-			MoveOutCarried();
-			
-			SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(m_pCarried.FindComponent(SCR_CharacterControllerComponent));
-			if (!carriedController)
-				return;
+		DetachHandlers();
 		
-			carriedController.m_OnLifeStateChanged.Remove(OnCarriedLifeStateChanged);
-		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Moves the carried player out of the helper compartment
-	protected void MoveOutCarried()
-	{
 		if (!m_pCarried)
+		{
+			CleanUp();
 			return;
+		}
 		
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccess)
+		{
+			CleanUp();
 			return;
+		}
 		
 		// Clean-up when carried has left the comparment
-		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
+		compartmentAccess.GetOnCompartmentLeft().Insert(CleanUp);
 		
 		vector target_pos;
 		vector target_transform[4];
@@ -179,8 +161,75 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Terminates carrying: Moves carried to a vehicle compartment and schedules clean up
+	void LoadCarriedInVehicle(BaseCompartmentSlot compartment, int doorIdx)
+	{
+		DetachHandlers();
+		
+		if (!m_pCarried)
+		{
+			CleanUp();
+			return;
+		}
+		
+		SCR_CompartmentAccessComponent carriedCompartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
+		if (!carriedCompartmentAccess)
+		{
+			CleanUp();
+			return;
+		}
+		
+		m_pTargetVehicleCompartmentSlot = compartment;
+		carriedCompartmentAccess.KickFromVehicle(-1);
+		carriedCompartmentAccess.GetOnCompartmentLeft().Insert(MoveCarriedInVehicle);
+		
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void MoveCarriedInVehicle()
+	{
+		if (m_pCarried)
+		{
+			SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
+			if (compartmentAccess)
+			{
+				compartmentAccess.GetOnCompartmentLeft().Remove(MoveCarriedInVehicle);
+				
+				if (m_pTargetVehicleCompartmentSlot)
+					compartmentAccess.MoveInVehicle(m_pTargetVehicleCompartmentSlot.GetVehicle(), m_pTargetVehicleCompartmentSlot.GetType(), false, m_pTargetVehicleCompartmentSlot);
+			}
+		}
+		
+		CleanUp();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void DetachHandlers()
+	{
+		if (m_pCarrier)
+		{
+			m_pCarrier.RemoveChild(this, true);
+			
+			SCR_CharacterControllerComponent carrierController = SCR_CharacterControllerComponent.Cast(m_pCarrier.FindComponent(SCR_CharacterControllerComponent));
+			if (!carrierController)
+				return;
+			
+			carrierController.m_OnLifeStateChanged.Remove(OnCarrierLifeStateChanged);
+		}
+
+		if (m_pCarried)
+		{
+			SCR_CharacterControllerComponent carriedController = SCR_CharacterControllerComponent.Cast(m_pCarried.FindComponent(SCR_CharacterControllerComponent));
+			if (!carriedController)
+				return;
+		
+			carriedController.m_OnLifeStateChanged.Remove(OnCarriedLifeStateChanged);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Clean-up when the carried player has left the compartment
-	protected void OnCompartmentLeft()
+	protected void CleanUp()
 	{
 		RplId carriedId = RplId.Invalid();
 		
@@ -188,11 +237,11 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		{
 			SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pCarried.FindComponent(SCR_CompartmentAccessComponent));
 			if (compartmentAccess)
-				compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
+				compartmentAccess.GetOnCompartmentLeft().Remove(CleanUp);
 			
 			RplComponent carriedRpl = RplComponent.Cast(m_pCarried.FindComponent(RplComponent));
 			carriedId = carriedRpl.Id();
-		};
+		}
 		
 		Rpc(RpcDo_Owner_CleanUp, carriedId);
 		// Deletion of helper has to be delayed or released players stay visibly prone for other players on dedicated
@@ -220,7 +269,7 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	//! Callback for the release keybind
 	protected void ActionTerminateCallback()
 	{
-		Rpc(Terminate);
+		Rpc(ReleaseCarried);
 	}
 	
 	//------------------------------------------------------------------------------------------------

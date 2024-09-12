@@ -9,11 +9,9 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 {
 	protected IEntity m_pCarrier;
 	protected IEntity m_pCarried;
-	protected SCR_CharacterControllerComponent m_CarrierCharCtrl;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping carried player
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
-	protected static const ref array<string> WALKING_INPUT_ACTION_NAMES = {"CharacterForward", "CharacterRight"};
 	protected static const float WALKING_INPUT_ACTION_LIMIT = 0.5;
 	
 	//------------------------------------------------------------------------------------------------
@@ -78,7 +76,12 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 		carriedPhys.SetInteractionLayer(EPhysicsLayerPresets.FireGeo);
 		SCR_PlayerController carrierCtrl = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		ChimeraCharacter carrier = ChimeraCharacter.Cast(carrierCtrl.GetControlledEntity());
-		m_CarrierCharCtrl = SCR_CharacterControllerComponent.Cast(carrier.GetCharacterController());
+		SCR_CharacterControllerComponent characterCtrl = SCR_CharacterControllerComponent.Cast(carrier.GetCharacterController());
+		
+		// Change stance to crouch when player initiates carrying from prone
+		if (characterCtrl && characterCtrl.GetStance() == ECharacterStance.PRONE)
+			characterCtrl.SetStanceChange(ECharacterStanceChange.STANCECHANGE_TOCROUCH);
+		
 		SetEventMask(EntityEvent.FRAME);
 	}
 	
@@ -88,15 +91,21 @@ class ACE_Carrying_HelperCompartment : GenericEntity
 	{
 		super.EOnFrame(owner, timeSlice);
 		
-		foreach (string actionName : WALKING_INPUT_ACTION_NAMES)
-		{
-			float value = GetGame().GetInputManager().GetActionValue(actionName);
-			GetGame().GetInputManager().SetActionValue(actionName, Math.Clamp(value, -WALKING_INPUT_ACTION_LIMIT, WALKING_INPUT_ACTION_LIMIT));
-		}
+		// Limit walking inputs to a magnitude of WALKING_INPUT_ACTION_LIMIT
+		float forwardInput = GetGame().GetInputManager().GetActionValue("CharacterForward");
+		float rightInput = GetGame().GetInputManager().GetActionValue("CharacterRight");
+		float inputMagnitude = Vector(forwardInput, 0, rightInput).Length();
 		
-		// Reset the stance if player attempts to go prone
-		if (m_CarrierCharCtrl.GetStance() == ECharacterStance.PRONE)
-			m_CarrierCharCtrl.SetStanceChange(ECharacterStanceChange.STANCECHANGE_TOCROUCH);
+		if (inputMagnitude > WALKING_INPUT_ACTION_LIMIT)
+		{
+			GetGame().GetInputManager().SetActionValue("CharacterForward", forwardInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);
+			GetGame().GetInputManager().SetActionValue("CharacterRight", rightInput * WALKING_INPUT_ACTION_LIMIT / inputMagnitude);
+		}
+
+		// Prevent jumping and prone stance
+		GetGame().GetInputManager().SetActionValue("CharacterJump", 0);
+		GetGame().GetInputManager().SetActionValue("CharacterProne", 0);
+		GetGame().GetInputManager().SetActionValue("CharacterStandProneToggle", 0);
 	}
 	
 	//------------------------------------------------------------------------------------------------

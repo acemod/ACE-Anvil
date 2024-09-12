@@ -121,7 +121,7 @@ SCR_CharacterDamageManagerComponent {
   SCR_CharacterHitZone LCalf {
    ParentHZs {
     ParentHitZone "{5E101C420414E7EB}" {
-     Parent "Neck"
+     Parent "ACE_Medical_Pain"
      HealingMultiplier 0
      Overkill 1
     }

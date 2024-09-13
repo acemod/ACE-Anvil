@@ -54,6 +54,10 @@ class ACE_Carrying_CarryUserAction : ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		// Check on server if they are in faction not yet carried
+		if (ACE_Carrying_Tools.IsCarried(pOwnerEntity))
+			return;
+		
 		ACE_Carrying_Tools.Carry(pUserEntity, pOwnerEntity);
 	}
 	

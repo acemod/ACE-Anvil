@@ -60,7 +60,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected void OnVitalStateChanged(ACE_Medical_EVitalState newState, ACE_Medical_EVitalState prevState)
 	{
 		// Kill AI that enters cardiac arrest
-		if (IsInCardiacArrest() && !SCR_EntityHelper.IsAPlayer(GetOwner()) && !m_Settings.m_bCardiacArrestForAIEnabled)
+		if (IsInCardiacArrest() && !EntityUtils.IsPlayer(GetOwner()) && !m_Settings.m_bCardiacArrestForAIEnabled)
 			m_pDamageManager.Kill(m_pDamageManager.GetInstigator());
 		
 		// Resilience falls to zero and cannot recover while vitals are at critical vital state

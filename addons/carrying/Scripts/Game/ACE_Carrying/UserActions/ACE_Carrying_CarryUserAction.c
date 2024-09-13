@@ -58,6 +58,6 @@ class ACE_Carrying_CarryUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Methods are executed on the local player
+	//! Only run PerformAction on server
 	override bool CanBroadcastScript() { return false; };
 }

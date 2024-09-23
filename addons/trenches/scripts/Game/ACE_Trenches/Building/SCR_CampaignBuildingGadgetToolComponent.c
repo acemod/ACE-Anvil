@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------------
 //! Extend E-tool for placing trenches outside of building editor mode
-//! First use of GadgetActivate keybind will start the preview, a second will place it
+//! Open placement radial menu with CharacterInspect action
+//! Place with GadgetActivate action
 modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 {
 	[Attribute(defvalue: "{9D44ED260F5BBBE0}Configs/ACE/Trenches.conf", desc: "Placement mode configurations", params: "conf")]
@@ -25,6 +26,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	protected int m_iACE_Trenches_TmpSelectedPrefabIdx = 0;
 	protected int m_iACE_Trenches_CurrentPrefabIdx = 0;
 	
+	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
@@ -316,7 +318,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Update the current prefab when entry has is performed
+	//! Update the current prefab when entry is performed
 	protected void ACE_Trenches_OnRadialMenuEntryPerformed(SCR_RadialMenu menu, SCR_SelectionMenuEntry entry)
 	{
 		m_iACE_Trenches_CurrentPrefabIdx = m_iACE_Trenches_TmpSelectedPrefabIdx;

@@ -9,6 +9,9 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	[Attribute(defvalue: "2.5", desc: "Distance in meters from player for placement preview")]
 	protected float m_sACE_Trenches_PlacementDistanceM;
 	
+	[Attribute(defvalue: "1", desc: "Cooldown in seconds until placing action can be used again")]
+	protected float m_fACE_Trenches_ActionCooldownS;
+	protected float m_fACE_Trenches_LastActionTime = 0;
 	protected CameraBase m_pACE_Trenches_CharacterCamera;
 	protected IEntity m_pACE_Trenches_PreviewEntity;
 	protected bool m_bACE_InHand = false;
@@ -136,6 +139,15 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			return;
 			
 		ACE_Trenches_RequestPlace();
+		
+		float cooldown = m_fACE_Trenches_ActionCooldownS - System.GetTickCount(m_fACE_Trenches_LastActionTime) / 1000;
+		if (m_fACE_Trenches_ActionCooldownS > 0 && cooldown > 0)
+		{
+			SCR_NotificationsComponent.SendLocal(ENotification.ACTION_ON_COOLDOWN, cooldown * 100);
+			return;
+		}
+		
+		m_fACE_Trenches_LastActionTime = System.GetTickCount();
 		SCR_UISoundEntity.SoundEvent("SOUND_E_ACE_TRENCH_BUILD");
 	}
 	

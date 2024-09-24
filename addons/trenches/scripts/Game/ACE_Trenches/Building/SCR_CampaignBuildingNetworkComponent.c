@@ -22,7 +22,6 @@ modded class SCR_CampaignBuildingNetworkComponent : ScriptComponent
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		params.Transform = transform;
-		SCR_TerrainHelper.SnapAndOrientToTerrain(params.Transform);
 		// Forces to spawn as buildable
 		SCR_EditorLinkComponent.IgnoreSpawning(true);
 		

@@ -3,7 +3,7 @@ GenericEntity : "{0619993AE6CDBF85}Prefabs/Items/Equipment/Accessories/ETool_ALI
  components {
   SCR_CampaignBuildingGadgetToolComponent "{5D60B36CF6E1B018}" {
    m_eUseMask FROM_ACTION
-   m_ACE_Trenches_RadialMenuController SCR_RadialMenuController "{626E47E36F436CC0}" : "{D1E71CD4DFF381FC}Configs/ACE/EToolRadialController.conf" {
+   m_ACE_Trenches_RadialMenuController SCR_RadialMenuController "{626E47E36F436CC0}" : "{D1E71CD4DFF381FC}Configs/ACE/TrenchesRadialController.conf" {
    }
   }
  }

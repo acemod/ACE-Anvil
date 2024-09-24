@@ -8,7 +8,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	protected ResourceName m_sACE_Trenches_ConfigName;
 	protected ref ACE_Trenches_Config m_ACE_Trenches_Config;
 	
-	[Attribute(defvalue: "2.5", desc: "Distance in meters from player for E-tool placement preview")]
+	[Attribute(defvalue: "2", desc: "Distance in meters from player for E-tool placement preview")]
 	protected float m_sACE_Trenches_PlacementDistanceM;
 	
 	[Attribute(defvalue: "1", desc: "Cooldown in seconds until placing action can be used again")]
@@ -22,6 +22,8 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	protected IEntity m_pACE_Trenches_PreviewEntity;
 	protected bool m_bACE_Trenches_InHand = false;
 	protected bool m_bACE_Trenches_CanPlace;
+	protected bool m_eACE_Trenches_SnappedOnTerrain;
+	protected bool m_bACE_Trenches_IsTerrainObject;
 	protected ref array<vector> m_aACE_Trenches_RelPositionsToCheck = {};
 	protected int m_iACE_Trenches_TmpSelectedPrefabIdx = 0;
 	protected int m_iACE_Trenches_CurrentPrefabIdx = 0;
@@ -82,8 +84,9 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			return;
 			
 		vector transform[4];
-		ACE_Trenches_GetPlacementTransform(transform);
-		buildingNetworkComponent.ACE_Trenches_RequestPlace(m_ACE_Trenches_Config.m_aPlaceablePrefabNames[prefabIdx], transform);
+		m_pACE_Trenches_PreviewEntity.GetWorldTransform(transform);
+		ACE_Trenches_PlaceablePrefabConfig prefabConfig = m_ACE_Trenches_Config.m_aPlaceablePrefabConfigs[prefabIdx];
+		buildingNetworkComponent.ACE_Trenches_RequestPlace(prefabConfig.m_sPrefabName, transform);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -101,7 +104,9 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (m_pACE_Trenches_PreviewEntity)
 			SCR_EntityHelper.DeleteEntityAndChildren(m_pACE_Trenches_PreviewEntity);
 		
-		Resource res = Resource.Load(m_ACE_Trenches_Config.m_aPlaceablePrefabNames[prefabIdx]);
+		ACE_Trenches_PlaceablePrefabConfig prefabConfig = m_ACE_Trenches_Config.m_aPlaceablePrefabConfigs[prefabIdx];
+		
+		Resource res = Resource.Load(prefabConfig.m_sPrefabName);
 		if (!res)
 			return;
 		
@@ -109,6 +114,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		m_pACE_Trenches_PreviewEntity = SCR_PrefabPreviewEntity.SpawnPreviewFromPrefab(res, "SCR_PrefabPreviewEntity", null, null, m_ACE_Trenches_Config.m_sCanPlacePreviewMaterial);
 		
 		m_bACE_Trenches_CanPlace = true;
+		m_bACE_Trenches_IsTerrainObject = prefabConfig.m_bIsTerrainObject;
 		// Compile center and bounding box edges for future placement checks
 		m_aACE_Trenches_RelPositionsToCheck = {vector.Zero};
 		array<IEntity> children = {};
@@ -140,19 +146,6 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Get transform for placement in front of the player
-	protected void ACE_Trenches_GetPlacementTransform(out vector transform[4])
-	{
-		m_pACE_Trenches_CharacterCamera.GetWorldTransform(transform);
-		vector vectorDir = transform[2];
-		vectorDir[1] = 0;
-		vectorDir.Normalize();
-		Math3D.AnglesToMatrix(Vector(vectorDir.ToYaw(), 0, 0), transform);
-		transform[3] = m_CharacterOwner.GetOrigin() + m_sACE_Trenches_PlacementDistanceM * vectorDir;
-		SCR_TerrainHelper.SnapAndOrientToTerrain(transform);
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Update transform of preview entity
 	override void Update(float timeSlice)
 	{
@@ -161,17 +154,59 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (!m_pACE_Trenches_PreviewEntity)
 			return;
 		
-		vector transform[4];
-		ACE_Trenches_GetPlacementTransform(transform);
-		m_pACE_Trenches_PreviewEntity.SetWorldTransform(transform);
-		m_pACE_Trenches_PreviewEntity.Update();
+		ACE_Trenches_UpdatePlacementTransform();
 		ACE_Trenches_UpdateCanPlace();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Determines whether trench can be placed based on the terrain surface
+	//! Updates transform of the preview entity
+	protected void ACE_Trenches_UpdatePlacementTransform()
+	{
+		vector transform[4];
+		m_pACE_Trenches_CharacterCamera.GetWorldTransform(transform);
+		vector vectorDir = transform[2];
+		vectorDir[1] = 0;
+		vectorDir.Normalize();
+		Math3D.AnglesToMatrix(Vector(vectorDir.ToYaw(), 0, 0), transform);
+		transform[3] = m_CharacterOwner.GetOrigin() + m_sACE_Trenches_PlacementDistanceM * vectorDir + 1.5 * vector.Up;
+		TraceParam params = new TraceParam();
+		params.TargetLayers = EPhysicsLayerPresets.Building;
+		SCR_TerrainHelper.SnapAndOrientToTerrain(transform, trace: params);
+		m_eACE_Trenches_SnappedOnTerrain = GenericTerrainEntity.Cast(params.TraceEnt);
+		m_pACE_Trenches_PreviewEntity.SetWorldTransform(transform);
+		m_pACE_Trenches_PreviewEntity.Update();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Updates whether the entity can be placed
 	protected void ACE_Trenches_UpdateCanPlace()
 	{
+		bool canPlace = ACE_Trenches_ComputeCanPlace();
+		if (canPlace != m_bACE_Trenches_CanPlace)
+		{
+			m_bACE_Trenches_CanPlace = canPlace;
+			
+			ResourceName material = m_ACE_Trenches_Config.m_sCanPlacePreviewMaterial;
+			if (!m_bACE_Trenches_CanPlace)
+				material = m_ACE_Trenches_Config.m_sCannotPlacePreviewMaterial;
+			
+			SCR_Global.SetMaterial(m_pACE_Trenches_PreviewEntity, material);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Determines whether entity can be placed
+	protected bool ACE_Trenches_ComputeCanPlace()
+	{
+		// Non-terrain objects can always be placed for now
+		if (!m_bACE_Trenches_IsTerrainObject)
+			return true;
+		
+		// Terrain object can only be placed when snapped on terrain
+		if (!m_eACE_Trenches_SnappedOnTerrain)
+			return false;
+		
+		// Check if placed on valid surface
 		foreach (vector relPos : m_aACE_Trenches_RelPositionsToCheck)
 		{
 			SurfaceProperties props = ACE_TerrainHelper.GetSurfaceProperties(m_pACE_Trenches_PreviewEntity.CoordToParent(relPos));
@@ -183,22 +218,11 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			foreach (ResourceName surface : m_ACE_Trenches_Config.m_aBlacklistedSurfaces)
 			{
 				if (currentSurface == surface)
-				{
-					if (!m_bACE_Trenches_CanPlace)
-						return;
-	
-					m_bACE_Trenches_CanPlace = false;
-					SCR_Global.SetMaterial(m_pACE_Trenches_PreviewEntity, m_ACE_Trenches_Config.m_sCannotPlacePreviewMaterial);
-					return;
-				}
+					return false;
 			}
 		}
 		
-		if (m_bACE_Trenches_CanPlace)
-			return;
-		
-		m_bACE_Trenches_CanPlace = true;
-		SCR_Global.SetMaterial(m_pACE_Trenches_PreviewEntity, m_ACE_Trenches_Config.m_sCanPlacePreviewMaterial);
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -271,9 +295,9 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		
 		controller.UpdateMenuData();
 		
-		foreach (int idx, ResourceName resName : m_ACE_Trenches_Config.m_aPlaceablePrefabNames)
+		foreach (int idx, ACE_Trenches_PlaceablePrefabConfig config : m_ACE_Trenches_Config.m_aPlaceablePrefabConfigs)
 		{
-			Resource res = Resource.Load(resName);
+			Resource res = Resource.Load(config.m_sPrefabName);
 			if (!res.IsValid())
 				continue;
 			

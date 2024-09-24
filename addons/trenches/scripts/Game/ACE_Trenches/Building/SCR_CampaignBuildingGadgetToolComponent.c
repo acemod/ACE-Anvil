@@ -11,6 +11,9 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	[Attribute(defvalue: "2", desc: "Distance in meters from player for E-tool placement preview")]
 	protected float m_sACE_Trenches_PlacementDistanceM;
 	
+	[Attribute(defvalue: "1.5", desc: "Maximum height in meters relative to player for E-tool placement preview")]
+	protected float m_sACE_Trenches_MaxPlacementHeightM;
+	
 	[Attribute(defvalue: "1", desc: "Cooldown in seconds until placing action can be used again")]
 	protected float m_fACE_Trenches_ActionCooldownS;
 	protected float m_fACE_Trenches_LastActionTime = 0;
@@ -167,7 +170,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		vectorDir[1] = 0;
 		vectorDir.Normalize();
 		Math3D.AnglesToMatrix(Vector(vectorDir.ToYaw(), 0, 0), transform);
-		transform[3] = m_CharacterOwner.GetOrigin() + m_sACE_Trenches_PlacementDistanceM * vectorDir + 1.5 * vector.Up;
+		transform[3] = m_CharacterOwner.GetOrigin() + m_sACE_Trenches_PlacementDistanceM * vectorDir + m_sACE_Trenches_MaxPlacementHeightM * vector.Up;
 		TraceParam params = new TraceParam();
 		params.TargetLayers = EPhysicsLayerPresets.Building;
 		SCR_TerrainHelper.SnapAndOrientToTerrain(transform, trace: params);

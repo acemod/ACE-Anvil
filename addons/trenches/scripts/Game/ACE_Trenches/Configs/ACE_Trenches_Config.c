@@ -22,7 +22,7 @@ class ACE_Trenches_PlaceablePrefabConfig
 	[Attribute(desc: "Prefab names of structures that can be placed with the E-tool", uiwidget: UIWidgets.ResourcePickerThumbnail, params: "et")]
 	ResourceName m_sPrefabName;
 	
-	[Attribute(defvalue: "true", desc: "Terrain objects can only built on terrain surfaces that are not blacklisted.")]
+	[Attribute(defvalue: "true", desc: "Terrain objects can only be placed on terrain surfaces that are not blacklisted.")]
 	bool m_bIsTerrainObject;
 	
 	[Attribute(defvalue: "true")]

@@ -146,7 +146,6 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Update transform of preview entity
 	override void Update(float timeSlice)
 	{
 		super.Update(timeSlice);
@@ -243,7 +242,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		}
 		
 		// Canceling of placement is done via radial menu (= SCR_EUseContext.CUSTOM) or
-		// putting the E-tool to away (= SCR_EUseContext.FROM_INVENTORY)
+		// putting the E-tool away (= SCR_EUseContext.FROM_INVENTORY)
 		if (context != SCR_EUseContext.CUSTOM)
 		{
 			m_ACE_Trenches_RadialMenuController.CloseMenu();

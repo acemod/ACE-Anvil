@@ -214,7 +214,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			
 			ResourceName currentSurface = props.GetResourceName();
 			
-			foreach (ResourceName surface : m_ACE_Trenches_Config.m_aBlacklistedSurfaces)
+			foreach (ResourceName surface : m_ACE_Trenches_Config.m_aBlacklistedTerrainSurfaces)
 			{
 				if (currentSurface == surface)
 					return false;

@@ -12,7 +12,7 @@ class ACE_Trenches_Config
 	ref array<ref ACE_Trenches_PlaceablePrefabConfig> m_aPlaceablePrefabConfigs;
 	
 	[Attribute(desc: "Surface game materials on which placement of terrain objects is not possible", uiwidget: UIWidgets.ResourceNamePicker, params: "gamemat")]
-	ref array<ResourceName> m_aBlacklistedSurfaces;
+	ref array<ResourceName> m_aBlacklistedTerrainSurfaces;
 }
 
 //----------------------------------------------------------------------------------------

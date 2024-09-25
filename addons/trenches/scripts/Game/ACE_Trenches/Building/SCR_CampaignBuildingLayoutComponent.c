@@ -24,4 +24,11 @@ modded class SCR_CampaignBuildingLayoutComponent : ScriptComponent
 		ent.AddChild(m_PreviewEntity, -1, EAddChildFlags.RECALC_LOCAL_TRANSFORM);
 		m_PreviewEntity.Update();
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_Trenches_SetToBuildValue(int value)
+	{
+		m_iToBuildValue = value;
+		Replication.BumpMe();
+	}
 }

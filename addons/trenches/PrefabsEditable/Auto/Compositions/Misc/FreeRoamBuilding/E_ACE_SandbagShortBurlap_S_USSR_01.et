@@ -5,6 +5,11 @@ GenericEntity : "{977FF11A13375BEB}PrefabsEditable/Auto/Compositions/Misc/FreeRo
    m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
     Name "#AR-EditableEntity_Sandbag_01_short_burlap_Name"
     m_Image "{87F0417F42B41BC5}UI/Textures/EditorPreviews/Auto/Props/Military/Sandbags/E_Sandbag_01_short_burlap.edds"
+    m_EntityBudgetCost {
+     SCR_EntityBudgetValue "{5E989B6CAD9D65F2}" {
+      m_Value 7
+     }
+    }
    }
   }
   SCR_EditorLinkComponent "{5E989B6CAD9C0DDC}" {

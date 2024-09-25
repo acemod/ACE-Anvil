@@ -9,10 +9,48 @@ class ACE_Trenches_Config
 	ResourceName m_sCannotPlacePreviewMaterial;
 	
 	[Attribute(desc: "Structures that can be placed with the E-tool")]
-	ref array<ref ACE_Trenches_PlaceablePrefabConfig> m_aPlaceablePrefabConfigs;
+	protected ref array<ref ACE_Trenches_PlaceablePrefabConfig> m_aPlaceablePrefabConfigs;
 	
 	[Attribute(desc: "Surface game materials on which placement of terrain objects is not possible", uiwidget: UIWidgets.ResourceNamePicker, params: "gamemat")]
-	ref array<ResourceName> m_aBlacklistedTerrainSurfaces;
+	protected ref array<ResourceName> m_aBlacklistedTerrainSurfaces;
+	
+	//----------------------------------------------------------------------------------------
+	void ACE_Trenches_Config()
+	{
+		foreach (int id, ACE_Trenches_PlaceablePrefabConfig entry : m_aPlaceablePrefabConfigs)
+		{
+			entry.SetID(id);
+		}
+	}
+	
+	//----------------------------------------------------------------------------------------
+	ACE_Trenches_PlaceablePrefabConfig GetPlaceablePrefabConfig(int prefabID)
+	{
+		if (!m_aPlaceablePrefabConfigs.IsIndexValid(prefabID))
+			return null;
+		
+		return m_aPlaceablePrefabConfigs[prefabID];
+	}
+	
+	//----------------------------------------------------------------------------------------
+	array<ref ACE_Trenches_PlaceablePrefabConfig> GetPlaceablePrefabConfigs()
+	{
+		return m_aPlaceablePrefabConfigs;
+	}
+	
+	//----------------------------------------------------------------------------------------
+	bool IsTerrainSurfaceValid(SurfaceProperties props)
+	{
+		ResourceName currentSurface = props.GetResourceName();
+		
+		foreach (ResourceName surface : m_aBlacklistedTerrainSurfaces)
+		{
+			if (currentSurface == surface)
+				return false;
+		}
+		
+		return true;
+	}
 }
 
 //----------------------------------------------------------------------------------------
@@ -20,11 +58,74 @@ class ACE_Trenches_Config
 class ACE_Trenches_PlaceablePrefabConfig
 {
 	[Attribute(desc: "Prefab names of structures that can be placed with the E-tool", uiwidget: UIWidgets.ResourcePickerThumbnail, params: "et")]
-	ResourceName m_sPrefabName;
+	protected ResourceName m_sPrefabName;
 	
 	[Attribute(defvalue: "true", desc: "Terrain objects can only be placed on terrain surfaces that are not blacklisted.")]
-	bool m_bIsTerrainObject;
+	protected bool m_bIsTerrainObject;
 	
 	[Attribute(defvalue: "true")]
-	bool m_bEnabled;
+	protected bool m_bEnabled;
+	
+	protected int m_iSupplyCost;
+	protected int m_iID;
+	
+	//----------------------------------------------------------------------------------------
+	void ACE_Trenches_PlaceablePrefabConfig()
+	{
+		Resource res = Resource.Load(m_sPrefabName);
+		if (!res.IsValid())
+			return;
+		
+		SCR_EditableEntityUIInfo info = ACE_BaseContainerTools.GetEditableEntityUIInfo(res.GetResource());
+		if (!info)
+			return;
+		
+		array<ref SCR_EntityBudgetValue> budgets = {};
+		info.GetEntityBudgetCost(budgets);
+		
+		foreach (SCR_EntityBudgetValue budget : budgets)
+		{
+			if (budget.GetBudgetType() == EEditableEntityBudget.CAMPAIGN)
+			{
+				m_iSupplyCost = budget.GetBudgetValue();
+				return;
+			}
+		}
+	}
+	
+	//----------------------------------------------------------------------------------------
+	ResourceName GetPrefabName()
+	{
+		return m_sPrefabName;
+	}
+	
+	//----------------------------------------------------------------------------------------
+	bool IsTerrainObject()
+	{
+		return m_bIsTerrainObject;
+	}
+	
+	//----------------------------------------------------------------------------------------
+	bool IsEnabled()
+	{
+		return m_bEnabled;
+	}
+	
+	//----------------------------------------------------------------------------------------
+	int GetSupplyCost()
+	{
+		return m_iSupplyCost;
+	}
+	
+	//----------------------------------------------------------------------------------------
+	void SetID(int id)
+	{
+		m_iID = id;
+	}
+	
+	//----------------------------------------------------------------------------------------
+	int GetID()
+	{
+		return m_iID;
+	}
 }

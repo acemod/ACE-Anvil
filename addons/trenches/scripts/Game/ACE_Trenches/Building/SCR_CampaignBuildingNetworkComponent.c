@@ -3,19 +3,48 @@
 //! Attached to the player controller
 modded class SCR_CampaignBuildingNetworkComponent : ScriptComponent
 {
+	protected ACE_Trenches_Config m_ACE_Trenches_Config;
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void OnPostInit(IEntity owner)
+	{
+		if (!GetGame().InPlayMode())
+			return;
+		
+		SCR_CampaignBuildingManagerComponent manager = SCR_CampaignBuildingManagerComponent.Cast(GetGame().GetGameMode().FindComponent(SCR_CampaignBuildingManagerComponent));
+		if (!manager)
+			return;
+		
+		m_ACE_Trenches_Config = manager.ACE_Trenches_GetConfig();
+	}
+	
 	//------------------------------------------------------------------------------------------------
 	//! Local player can request the placement of a buildable prefab
-	void ACE_Trenches_RequestPlace(ResourceName prefabName, vector transform[4])
+	void ACE_Trenches_RequestPlace(int prefabID, vector transform[4], IEntity provider)
 	{
-		Rpc(RpcAsk_ACE_Trenches_RequestPlace, prefabName, transform);
+		RplId providerID = RplId.Invalid();
+		
+		RplComponent providerRpl = RplComponent.Cast(provider.FindComponent(RplComponent));
+		if (providerRpl)
+			providerID = providerRpl.Id();
+		
+		Rpc(RpcAsk_ACE_Trenches_RequestPlace, prefabID, transform, providerID);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	//! Spawn buildable prefab on the server
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_ACE_Trenches_RequestPlace(ResourceName prefabName, vector transform[4])
+	void RpcAsk_ACE_Trenches_RequestPlace(int prefabID, vector transform[4], RplId providerID)
 	{
-		Resource res = Resource.Load(prefabName);
+		ACE_Trenches_PlaceablePrefabConfig prefabConfig = m_ACE_Trenches_Config.GetPlaceablePrefabConfig(prefabID);
+		if (!prefabConfig)
+			return;
+		
+		SCR_ResourceConsumer consumer = ACE_Trenches_GetSupplyConsumerFromProviderID(providerID);
+		if (consumer && consumer.RequestConsumtion(prefabConfig.GetSupplyCost()).GetReason() != EResourceReason.SUFFICIENT)
+			return;
+		
+		Resource res = Resource.Load(prefabConfig.GetPrefabName());
 		if (!res.IsValid())
 			return;
 		
@@ -38,5 +67,23 @@ modded class SCR_CampaignBuildingNetworkComponent : ScriptComponent
 			return;
 		
 		compositionComponent.SetBuilderId(playerController.GetPlayerId());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected SCR_ResourceConsumer ACE_Trenches_GetSupplyConsumerFromProviderID(RplId providerID)
+	{
+		RplComponent providerRpl = RplComponent.Cast(Replication.FindItem(providerID));
+		if (!providerRpl)
+			return null;
+		
+		IEntity provider = providerRpl.GetEntity();
+		if (!provider)
+			return null;
+		
+		SCR_ResourceComponent resourceComponent = SCR_ResourceComponent.Cast(provider.FindComponent(SCR_ResourceComponent));
+		if (!resourceComponent || !resourceComponent.IsResourceTypeEnabled(EResourceType.SUPPLIES))
+			return null;
+		
+		return resourceComponent.GetConsumer(EResourceGeneratorID.DEFAULT, EResourceType.SUPPLIES);
 	}
 }

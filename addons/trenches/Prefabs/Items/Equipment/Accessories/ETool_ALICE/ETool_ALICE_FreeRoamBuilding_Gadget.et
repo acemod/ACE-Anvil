@@ -1,9 +1,17 @@
 GenericEntity : "{0619993AE6CDBF85}Prefabs/Items/Equipment/Accessories/ETool_ALICE/ETool_ALICE.et" {
  ID "5DACB1595562B84F"
  components {
+  ACE_Trenches_SupportStationComponent "{627144EDC95F846A}" {
+  }
   SCR_CampaignBuildingGadgetToolComponent "{5D60B36CF6E1B018}" {
    m_eUseMask FROM_ACTION
    m_ACE_Trenches_RadialMenuController SCR_RadialMenuController "{626E47E36F436CC0}" : "{D1E71CD4DFF381FC}Configs/ACE/TrenchesRadialController.conf" {
+   }
+  }
+  SCR_ResourceComponent "{627144F03F401D99}" {
+   m_aConsumers {
+    SCR_ResourceConsumer "{627144F03DC1328E}" : "{68639073C2937EE6}Configs/Resources/Supplies/Consumers/Generic/Consumer_Gadget.conf" {
+    }
    }
   }
  }

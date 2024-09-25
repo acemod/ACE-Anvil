@@ -4,10 +4,6 @@
 //! Place with GadgetActivate action
 modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 {
-	[Attribute(defvalue: "{9D44ED260F5BBBE0}Configs/ACE/Trenches.conf", desc: "Placement mode configurations", params: "conf")]
-	protected ResourceName m_sACE_Trenches_ConfigName;
-	protected ref ACE_Trenches_Config m_ACE_Trenches_Config;
-	
 	[Attribute(defvalue: "2", desc: "Distance in meters from player for E-tool placement preview")]
 	protected float m_sACE_Trenches_PlacementDistanceM;
 	
@@ -21,15 +17,17 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	[Attribute()]
 	protected ref SCR_RadialMenuController m_ACE_Trenches_RadialMenuController;
 		
+	protected ACE_Trenches_Config m_ACE_Trenches_Config;
 	protected CameraBase m_pACE_Trenches_CharacterCamera;
 	protected IEntity m_pACE_Trenches_PreviewEntity;
 	protected bool m_bACE_Trenches_InHand = false;
 	protected bool m_bACE_Trenches_CanPlace;
 	protected bool m_eACE_Trenches_SnappedOnTerrain;
-	protected bool m_bACE_Trenches_IsTerrainObject;
 	protected ref array<vector> m_aACE_Trenches_RelPositionsToCheck = {};
-	protected int m_iACE_Trenches_TmpSelectedPrefabIdx = 0;
-	protected int m_iACE_Trenches_CurrentPrefabIdx = 0;
+	protected int m_iACE_Trenches_PrevSelPrefabIdx = 0;
+	protected int m_iACE_Trenches_CurSelPrefabIdx = 0;
+	protected ACE_Trenches_PlaceablePrefabConfig m_ACE_Trenches_CurrentPrefabConfig;
+	protected SCR_BaseSupportStationComponent m_pACE_Trenches_SupportStation;
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
@@ -39,7 +37,12 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (!GetGame().InPlayMode())
 			return;
 		
-		m_ACE_Trenches_Config = SCR_ConfigHelperT<ACE_Trenches_Config>.GetConfigObject(m_sACE_Trenches_ConfigName);
+		SCR_CampaignBuildingManagerComponent manager = SCR_CampaignBuildingManagerComponent.Cast(GetGame().GetGameMode().FindComponent(SCR_CampaignBuildingManagerComponent));
+		if (!manager)
+			return;
+		
+		m_ACE_Trenches_Config = manager.ACE_Trenches_GetConfig();
+		m_pACE_Trenches_SupportStation = SCR_BaseSupportStationComponent.Cast(owner.FindComponent(SCR_BaseSupportStationComponent));		
 		
 		m_ACE_Trenches_RadialMenuController.GetOnTakeControl().Insert(ACE_Trenches_OnTakeRadialMenuControl);
 		m_ACE_Trenches_RadialMenuController.GetOnControllerChanged().Insert(ACE_Trenches_OnLostRadialMenuControl);
@@ -76,7 +79,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	
 	//------------------------------------------------------------------------------------------------
 	//! Send request for placing trench 
-	void ACE_Trenches_RequestPlace(int prefabIdx)
+	protected void ACE_Trenches_RequestPlace(int prefabIdx)
 	{
 		PlayerController playerController = GetGame().GetPlayerController();
 		if (!playerController)
@@ -88,8 +91,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			
 		vector transform[4];
 		m_pACE_Trenches_PreviewEntity.GetWorldTransform(transform);
-		ACE_Trenches_PlaceablePrefabConfig prefabConfig = m_ACE_Trenches_Config.m_aPlaceablePrefabConfigs[prefabIdx];
-		buildingNetworkComponent.ACE_Trenches_RequestPlace(prefabConfig.m_sPrefabName, transform);
+		buildingNetworkComponent.ACE_Trenches_RequestPlace(m_ACE_Trenches_CurrentPrefabConfig.GetID(), transform, GetOwner());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -107,9 +109,9 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (m_pACE_Trenches_PreviewEntity)
 			SCR_EntityHelper.DeleteEntityAndChildren(m_pACE_Trenches_PreviewEntity);
 		
-		ACE_Trenches_PlaceablePrefabConfig prefabConfig = m_ACE_Trenches_Config.m_aPlaceablePrefabConfigs[prefabIdx];
+		m_ACE_Trenches_CurrentPrefabConfig = m_ACE_Trenches_Config.GetPlaceablePrefabConfig(prefabIdx);
 		
-		Resource res = Resource.Load(prefabConfig.m_sPrefabName);
+		Resource res = Resource.Load(m_ACE_Trenches_CurrentPrefabConfig.GetPrefabName());
 		if (!res)
 			return;
 		
@@ -117,7 +119,6 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		m_pACE_Trenches_PreviewEntity = SCR_PrefabPreviewEntity.SpawnPreviewFromPrefab(res, "SCR_PrefabPreviewEntity", null, null, m_ACE_Trenches_Config.m_sCanPlacePreviewMaterial);
 		
 		m_bACE_Trenches_CanPlace = true;
-		m_bACE_Trenches_IsTerrainObject = prefabConfig.m_bIsTerrainObject;
 		// Compile center and bounding box edges for future placement checks
 		m_aACE_Trenches_RelPositionsToCheck = {vector.Zero};
 		array<IEntity> children = {};
@@ -144,6 +145,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	//! Deletes preview entity
 	protected void ACE_Trenches_EndPlacementPreview()
 	{
+		m_ACE_Trenches_CurrentPrefabConfig = null;
 		SCR_EntityHelper.DeleteEntityAndChildren(m_pACE_Trenches_PreviewEntity);
 		SCR_UISoundEntity.SoundEvent("SOUND_HUD_GADGET_CANCEL");
 	}
@@ -200,8 +202,12 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	//! Determines whether entity can be placed
 	protected bool ACE_Trenches_ComputeCanPlace()
 	{
+		string cannotSelectReason;
+		if (!ACE_Trenches_CanSelectPrefabConfig(m_ACE_Trenches_CurrentPrefabConfig, cannotSelectReason))
+			return false;
+		
 		// Non-terrain objects can always be placed for now
-		if (!m_bACE_Trenches_IsTerrainObject)
+		if (!m_ACE_Trenches_CurrentPrefabConfig.IsTerrainObject())
 			return true;
 		
 		// Terrain object can only be placed when snapped on terrain
@@ -214,14 +220,22 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			SurfaceProperties props = ACE_TerrainHelper.GetSurfaceProperties(m_pACE_Trenches_PreviewEntity.CoordToParent(relPos));
 			if (!props)
 				continue;
-			
-			ResourceName currentSurface = props.GetResourceName();
-			
-			foreach (ResourceName surface : m_ACE_Trenches_Config.m_aBlacklistedTerrainSurfaces)
-			{
-				if (currentSurface == surface)
-					return false;
-			}
+						
+			if (!m_ACE_Trenches_Config.IsTerrainSurfaceValid(props))
+				return false;
+		}
+		
+		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Determines whether entity can be selected based on supply costs
+	protected bool ACE_Trenches_CanSelectPrefabConfig(ACE_Trenches_PlaceablePrefabConfig prefabConfig, out string cannotSelectReason)
+	{
+		if (m_pACE_Trenches_SupportStation.GetMaxAvailableSupplies() < prefabConfig.GetSupplyCost())
+		{
+			cannotSelectReason = "#AR-SupportStation_ActionInvalid_Supplies";
+			return false;
 		}
 		
 		return true;
@@ -276,13 +290,13 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		}
 		
 		m_fACE_Trenches_LastActionTime = System.GetTickCount();
-		ACE_Trenches_RequestPlace(m_iACE_Trenches_CurrentPrefabIdx);
+		ACE_Trenches_RequestPlace(m_ACE_Trenches_CurrentPrefabConfig.GetID());
 		SCR_UISoundEntity.SoundEvent("SOUND_E_ACE_TRENCH_BUILD");
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Callback for CharacterInspect keybind
-	void ToogleActiveAction()
+	protected void ToogleActiveAction()
 	{		
 		ToggleActive(!m_bActivated, SCR_EUseContext.FROM_ACTION);
 	}
@@ -297,26 +311,54 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		
 		controller.UpdateMenuData();
 		
-		foreach (int idx, ACE_Trenches_PlaceablePrefabConfig config : m_ACE_Trenches_Config.m_aPlaceablePrefabConfigs)
+		foreach (int idx, ACE_Trenches_PlaceablePrefabConfig config : m_ACE_Trenches_Config.GetPlaceablePrefabConfigs())
 		{
-			Resource res = Resource.Load(config.m_sPrefabName);
+			if (!config.IsEnabled())
+				continue;
+			
+			Resource res = Resource.Load(config.GetPrefabName());
 			if (!res.IsValid())
 				continue;
 			
 			SCR_EditableEntityUIInfo info = ACE_BaseContainerTools.GetEditableEntityUIInfo(res.GetResource());
 			if (!info)
 				continue;
-				
+						
 			SCR_SelectionMenuEntry entry = new SCR_SelectionMenuEntry();
-			entry.SetName(info.GetName());
 			entry.SetIcon(info.GetImage());
 			entry.SetId(idx.ToString());
+			string cannotSelectReason;
+			entry.Enable(ACE_Trenches_CanSelectPrefabConfig(config, cannotSelectReason));
+			entry.SetName(ACE_Trenches_CompileRadialMenuEntryName(config, cannotSelectReason));
 			menu.AddEntry(entry);
 		}
 		
+		menu.GetOnOpen().Insert(ACE_Trenches_OnRadialMenuOpen);
 		menu.GetOnSelect().Insert(ACE_Trenches_OnRadialMenuEntrySelected);
 		menu.GetOnPerform().Insert(ACE_Trenches_OnRadialMenuEntryPerformed);
 		menu.ACE_GetOnBackInputClose().Insert(ACE_Trenches_OnRadialMenuBackInputClosed);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected string ACE_Trenches_CompileRadialMenuEntryName(ACE_Trenches_PlaceablePrefabConfig config, string cannotSelectReason)
+	{
+		Resource res = Resource.Load(config.GetPrefabName());
+		if (!res.IsValid())
+			return "";
+		
+		SCR_EditableEntityUIInfo info = ACE_BaseContainerTools.GetEditableEntityUIInfo(res.GetResource());
+		if (!info)
+			return "";
+		
+		string name = info.GetName();
+		
+		if (m_pACE_Trenches_SupportStation.AreSuppliesEnabled())
+			name += string.Format("\n[%1/%2]", config.GetSupplyCost(), m_pACE_Trenches_SupportStation.GetMaxAvailableSupplies());
+		
+		if (!cannotSelectReason.IsEmpty())
+			name += string.Format(" (%1)", cannotSelectReason);
+			
+		return name;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -327,9 +369,25 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (!menu || hasControl)
 			return;
 		
+		menu.GetOnOpen().Remove(ACE_Trenches_OnRadialMenuOpen);
 		menu.GetOnSelect().Remove(ACE_Trenches_OnRadialMenuEntrySelected);
 		menu.GetOnPerform().Remove(ACE_Trenches_OnRadialMenuEntryPerformed);
 		menu.ACE_GetOnBackInputClose().Remove(ACE_Trenches_OnRadialMenuBackInputClosed);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void ACE_Trenches_OnRadialMenuOpen(SCR_RadialMenu menu)
+	{
+		foreach (SCR_SelectionMenuEntry entry : menu.GetEntries())
+		{
+			ACE_Trenches_PlaceablePrefabConfig config = m_ACE_Trenches_Config.GetPlaceablePrefabConfig(entry.GetId().ToInt());
+			if (!config)
+				continue;
+			
+			string cannotSelectReason;
+			entry.Enable(ACE_Trenches_CanSelectPrefabConfig(config, cannotSelectReason));			
+			entry.SetName(ACE_Trenches_CompileRadialMenuEntryName(config, cannotSelectReason));
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -339,18 +397,18 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (!entry)
 			return;
 		
-		m_iACE_Trenches_TmpSelectedPrefabIdx = entry.GetId().ToInt();
-		ACE_Trenches_StartPlacementPreview(m_iACE_Trenches_TmpSelectedPrefabIdx);
+		m_iACE_Trenches_CurSelPrefabIdx = entry.GetId().ToInt();
+		ACE_Trenches_StartPlacementPreview(m_iACE_Trenches_CurSelPrefabIdx);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Update the current prefab when entry is performed
 	protected void ACE_Trenches_OnRadialMenuEntryPerformed(SCR_RadialMenu menu, SCR_SelectionMenuEntry entry)
 	{
-		m_iACE_Trenches_CurrentPrefabIdx = m_iACE_Trenches_TmpSelectedPrefabIdx;
+		m_iACE_Trenches_PrevSelPrefabIdx = m_iACE_Trenches_CurSelPrefabIdx;
 		
 		//! Cancel placement when no prefab was selected
-		if (m_iACE_Trenches_CurrentPrefabIdx < 0)
+		if (m_iACE_Trenches_CurSelPrefabIdx < 0)
 			ToggleActive(false, SCR_EUseContext.CUSTOM);
 	}
 	
@@ -359,14 +417,14 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	protected void ACE_Trenches_OnRadialMenuBackInputClosed(SCR_RadialMenu menu)
 	{
 		// Revert back to previewing old prefab if no entry was performed
-		if (m_iACE_Trenches_CurrentPrefabIdx != m_iACE_Trenches_TmpSelectedPrefabIdx)
+		if (m_iACE_Trenches_PrevSelPrefabIdx != m_iACE_Trenches_CurSelPrefabIdx)
 		{
-			m_iACE_Trenches_TmpSelectedPrefabIdx = m_iACE_Trenches_CurrentPrefabIdx;
-			ACE_Trenches_StartPlacementPreview(m_iACE_Trenches_CurrentPrefabIdx);
+			m_iACE_Trenches_CurSelPrefabIdx = m_iACE_Trenches_PrevSelPrefabIdx;
+			ACE_Trenches_StartPlacementPreview(m_iACE_Trenches_CurSelPrefabIdx);
 		}
 		
 		//! Cancel placement when no prefab was selected
-		if (m_iACE_Trenches_CurrentPrefabIdx < 0)
+		if (m_iACE_Trenches_CurSelPrefabIdx < 0)
 			ToggleActive(false, SCR_EUseContext.CUSTOM);
 	}
 }

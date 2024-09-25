@@ -1,9 +1,17 @@
 GenericEntity : "{8A89D3F70713E55B}Prefabs/Items/Equipment/Accessories/ETool_MPL50/ETool_MPL50.et" {
  ID "5DACB1594629547A"
  components {
+  ACE_Trenches_SupportStationComponent "{627144EDE39B92F3}" {
+  }
   SCR_CampaignBuildingGadgetToolComponent "{5D9C6E85CC9796B7}" {
    m_eUseMask FROM_ACTION
-   m_ACE_Trenches_RadialMenuController SCR_RadialMenuController "{626E47E378699515}" : "{D1E71CD4DFF381FC}Configs/ACE/EToolRadialController.conf" {
+   m_ACE_Trenches_RadialMenuController SCR_RadialMenuController "{626E47E378699515}" : "{D1E71CD4DFF381FC}Configs/ACE/TrenchesRadialController.conf" {
+   }
+  }
+  SCR_ResourceComponent "{627144F07F4EEF3F}" {
+   m_aConsumers {
+    SCR_ResourceConsumer "{627144F07DFF3D44}" : "{68639073C2937EE6}Configs/Resources/Supplies/Consumers/Generic/Consumer_Gadget.conf" {
+    }
    }
   }
  }

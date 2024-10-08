@@ -814,8 +814,8 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@pagefind/default-ui@1.0.4':
-    resolution: {integrity: sha512-edkcaPSKq67C49Vehjo+LQCpT615v4d7JRhfGzFPccePvdklaL+VXrfghN/uIfsdoG+HoLI1PcYy2iFcB9CTkw==}
+  '@pagefind/default-ui@1.1.1':
+    resolution: {integrity: sha512-ZM0zDatWDnac/VGHhQCiM7UgA4ca8jpjA+VfuTJyHJBaxGqZMQnm4WoTz9E0KFcue1Bh9kxpu7uWFZfwpZZk0A==}
 
   '@pagefind/linux-arm64@1.0.4':
     resolution: {integrity: sha512-jGBrcCzIrMnNxLKVtogaQyajVfTAXM59KlBEwg6vTn8NW4fQ6nuFbbhlG4dTIsaamjEM5e8ZBEAKZfTB/qd9xw==}
@@ -3907,7 +3907,7 @@ snapshots:
     dependencies:
       '@astrojs/mdx': 2.2.2(astro@4.5.12(lightningcss@1.24.1)(typescript@5.4.5))
       '@astrojs/sitemap': 3.1.2
-      '@pagefind/default-ui': 1.0.4
+      '@pagefind/default-ui': 1.1.1
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.3
       astro: 4.5.12(lightningcss@1.24.1)(typescript@5.4.5)
@@ -4507,7 +4507,7 @@ snapshots:
   '@pagefind/darwin-x64@1.0.4':
     optional: true
 
-  '@pagefind/default-ui@1.0.4': {}
+  '@pagefind/default-ui@1.1.1': {}
 
   '@pagefind/linux-arm64@1.0.4':
     optional: true

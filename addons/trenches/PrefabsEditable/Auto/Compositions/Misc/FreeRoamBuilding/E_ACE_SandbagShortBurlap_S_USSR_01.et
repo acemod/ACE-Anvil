@@ -1,0 +1,35 @@
+GenericEntity : "{977FF11A13375BEB}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_SandbagLongBurlap_S_USSR_01.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  SCR_EditableEntityComponent "{5E989B6CAD9CF01A}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    Name "#AR-EditableEntity_Sandbag_01_short_burlap_Name"
+    m_Image "{87F0417F42B41BC5}UI/Textures/EditorPreviews/Auto/Props/Military/Sandbags/E_Sandbag_01_short_burlap.edds"
+   }
+  }
+  SCR_EditorLinkComponent "{5E989B6CAD9C0DDC}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{5E989B6CAD9C0AE7}" {
+     m_Prefab "{D8C2B968F3C757C0}PrefabsEditable/Auto/Props/Military/Sandbags/E_Sandbag_01_short_burlap.et"
+    }
+   }
+  }
+ }
+ coords 0.377 -0.213 1.842
+ {
+  GenericEntity {
+   ID "5D66ED107747B9FD"
+   components {
+    MeshObject "{5872F0EB7FA40561}" {
+     Object "{268DBDABB3C94AD7}Assets/Props/Military/Sandbags/Sandbag_01_short.xob"
+     Materials {
+      MaterialAssignClass "{62710C4C466434E0}" {
+       SourceMaterial "Sandbags_01_Short"
+       AssignedMaterial "{31529E064AA7C917}Assets/Props/Military/Sandbags/Data/Sandbags_01_short_Burlap.emat"
+      }
+     }
+    }
+   }
+  }
+ }
+}

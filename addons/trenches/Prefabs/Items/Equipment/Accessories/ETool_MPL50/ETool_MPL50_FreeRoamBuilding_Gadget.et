@@ -3,6 +3,8 @@ GenericEntity : "{8A89D3F70713E55B}Prefabs/Items/Equipment/Accessories/ETool_MPL
  components {
   SCR_CampaignBuildingGadgetToolComponent "{5D9C6E85CC9796B7}" {
    m_eUseMask FROM_ACTION
+   m_ACE_Trenches_RadialMenuController SCR_RadialMenuController "{626E47E378699515}" : "{D1E71CD4DFF381FC}Configs/ACE/EToolRadialController.conf" {
+   }
   }
  }
 }

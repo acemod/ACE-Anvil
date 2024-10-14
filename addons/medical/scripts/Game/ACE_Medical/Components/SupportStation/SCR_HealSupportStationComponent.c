@@ -7,7 +7,7 @@ modded class SCR_HealSupportStationComponent : SCR_BaseDamageHealSupportStationC
 	{
 		super.DelayedInit(owner);
 		
-		ACE_Medical_Settings settings =	ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (!settings)
 			return;
 		
@@ -18,11 +18,11 @@ modded class SCR_HealSupportStationComponent : SCR_BaseDamageHealSupportStationC
 		resource.SetResourceTypeEnabled(settings.m_bHealSupplyUsageEnabled);
 		
 		// Set how much medical kits can heal
-		if (InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent)) && m_fMaxHealScaled != settings.m_fMedicalKitMaxHealScaled)
+		if (owner && InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent)) && m_fMaxHealScaled != settings.m_fMedicalKitMaxHealScaled)
 		{
 			m_fMaxHealScaled = settings.m_fMedicalKitMaxHealScaled;
 			Rpc(RpcDo_ACE_Medical_SetMaxHealScaledBroadcast, settings.m_fMedicalKitMaxHealScaled);
-		}	
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{A3BCF474BBC4F5D7}Prefabs/Compositions/Misc/FreeRoamBuilding/Layouts/FRB_Sandbag_Solid_Short.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

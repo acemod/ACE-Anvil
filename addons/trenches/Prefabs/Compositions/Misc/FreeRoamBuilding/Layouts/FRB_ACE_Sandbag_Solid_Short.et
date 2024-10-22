@@ -1,0 +1,21 @@
+GenericEntity : "{F470194B53F2A4F2}Prefabs/Compositions/Misc/FreeRoamBuilding/Layouts/FRB_Sandbag_Solid.et" {
+ ID "5D6CA46CF033D8B7"
+ {
+  StaticModelEntity {
+   ID "5D70BCAD933F3438"
+   coords -1 -0.5 0.484
+  }
+  StaticModelEntity {
+   ID "5D70BCAD933F3491"
+   coords 1 -0.5 -0.523
+  }
+  StaticModelEntity {
+   ID "5D70BCAD933F34E3"
+   coords -1 -0.5 -0.544
+  }
+  StaticModelEntity {
+   ID "5D70BCAD933F34FB"
+   coords 1 -0.684 0.585
+  }
+ }
+}

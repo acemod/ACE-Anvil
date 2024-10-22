@@ -24,6 +24,14 @@ GenericEntity : "{6E9190BC2713551D}Prefabs/Compositions/Slotted/BuildableComposi
   StaticModelEntity : "{39F7EE885940DC8F}Prefabs/Structures/Military/Fortifications/DirtCover_01/DirtCover_01_long_v1.et" {
    ID "60EB074D530F62D9"
    components {
+    MeshObject "{5272E314F6439B95}" {
+     Materials {
+      MaterialAssignClass "{626E47EC8BEE44D1}" {
+       SourceMaterial "DirtCover_01"
+       AssignedMaterial "{30369C94C941BE87}Common/Materials/ACE_Trenches_MatTerrainObj.emat"
+      }
+     }
+    }
     RplComponent "{60EB074D699B9E03}" {
     }
     Hierarchy "{60EB074D6AE72E0A}" {

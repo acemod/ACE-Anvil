@@ -97,5 +97,17 @@ StringTable {
    Author "kexanone"
    LastChanged "Smith"
   }
+  CustomStringTableItem "{5E101C5589E004EE}" {
+   Id "ACE_Medical-Item_Morphine_Description"
+   Target_en_us "Administered to patients in severe pain."
+   Target_fr_fr "Administrée à des patients ressentant une douleur violente."
+   Target_de_de "Verabreicht an Patienten mit akuten Schmerzen."
+   Target_cs_cz "Aplikováno pacientům v silných bolestech."
+   Target_ru_ru "Назначают пациентам с сильной болью."
+   Target_uk_ua "Призначають пацієнтам із сильним болем."
+   Modified 1655484454
+   Author "kexanone"
+   LastChanged "Smith"
+  }
  }
 }

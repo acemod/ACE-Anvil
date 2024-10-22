@@ -7,8 +7,8 @@ StringTable {
    Target_fr_fr "Injecter de l'adrénaline"
    Target_de_de "Epinephrin injizieren"
    Target_cs_cz "Aplikovat epinefrin"
-   Target_ru_ru "Ввести адреналин"
-   Target_uk_ua "Ввести адреналін"
+   Target_ru_ru "Вколоть адреналин"
+   Target_uk_ua "Вколоти адреналін"
    Modified 1655484699
    Author "kexanone"
    LastChanged "Smith"
@@ -91,8 +91,8 @@ StringTable {
    Target_fr_fr "Adrénaline"
    Target_de_de "Epinephrin"
    Target_cs_cz "Epinefrin"
-   Target_ru_ru "Адреналин"
-   Target_uk_ua "Адреналін"
+   Target_ru_ru "Инъекция адреналина"
+   Target_uk_ua "Ін'єкція адреналіну"
    Modified 1655484454
    Author "kexanone"
    LastChanged "Smith"

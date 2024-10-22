@@ -8,7 +8,7 @@ class ACE_Carrying_Tools
 	//! Start <carrier> to carry the specified <carried>
 	static void Carry(notnull IEntity carrier, notnull IEntity carried)
 	{
-		ACE_Carrying_HelperCompartment helper = ACE_Carrying_HelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
+		ACE_Carrying_HelperCompartment helper = ACE_Carrying_HelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME)));
 		helper.Init(carrier, carried);
 	}
 	
@@ -22,7 +22,7 @@ class ACE_Carrying_Tools
 		if (!helper)
 			return;
 		
-		helper.Terminate();
+		helper.ReleaseCarried();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -35,7 +35,19 @@ class ACE_Carrying_Tools
 		if (!helper)
 			return;
 		
-		helper.Terminate();
+		helper.ReleaseCarried();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Carried gets loaded into specified vehicle compartment via the given door index
+	static void LoadCarriedInVehicle(notnull IEntity carried, notnull BaseCompartmentSlot compartment, int doorIdx)
+	{
+		ACE_Carrying_HelperCompartment helper = GetHelperCompartmentFromCarried(carried);
+		
+		if (!helper)
+			return;
+		
+		helper.LoadCarriedInVehicle(compartment, doorIdx);
 	}
 	
 	//------------------------------------------------------------------------------------------------

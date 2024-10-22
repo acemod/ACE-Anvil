@@ -28,6 +28,14 @@ StringTable {
    Author "kexanone"
    LastChanged "apollo-jk"
   }
+  CustomStringTableItem "{624D268660B46CAB}" {
+   Id "ACE_Carrying-UserAction_LoadCasualty"
+   Target_en_us "Load casualty:"
+   Target_de_de "Kampfunfähigen laden:"
+   Modified 1649232163
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{5E0EB8A9BCC4201E}" {
    Id "ACE_Carrying-UserAction_Release"
    Target_en_us "Release"

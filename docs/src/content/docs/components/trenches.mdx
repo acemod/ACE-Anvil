@@ -10,3 +10,22 @@ ACE Trenches extends the E-tool with the ability to place dirt covers.
 
 - Toggle building mode while having the E-tool in hand with the `Inspect` keybind in `Equipment` category (Default: Hold <kbd>R</kbd>).
 - Place dirt cover while in building mode with the `Use Item` keybind in `Equipment` category (Default: <kbd>R</kbd>).
+
+## Settings
+
+Certain aspects of this mod can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
+
+| Field                  | Type  | Default | Description                                                             |
+| ---------------------- | ----- | ------- | ----------------------------------------------------------------------- |
+| m_fBuildTimeScale      | float | 2.0     | How much more time it takes to build structures placed with the E-tool. |
+
+Example for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Treches_Settings": {
+            "m_fBuildTimeScale": 2.0
+        }
+    }
+}
+```

@@ -33,13 +33,20 @@ StringTable {
   }
   CustomStringTableItem "{60F61507D00761D0}" {
    Id "ACE_Medical-FailReason_TooInjured"
-   Target_en_us "Too injured"
+   Target_en_us "Requires healing"
    Target_fr_fr "Trop grièvement blessé"
    Target_de_de "Zu verletzt"
    Target_cs_cz "Příliš zraněný"
-   Modified 1626752371
+   Modified 1645048824
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "AleX"
+  }
+  CustomStringTableItem "{61D51487241F1A28}" {
+   Id "ACE_Medical-FailReason_TooInjured_MedicalFacilityRequired"
+   Target_en_us "Requires healing at hospital or ambulance"
+   Modified 1645048841
+   Author "AleX"
+   LastChanged "AleX"
   }
   CustomStringTableItem "{60CF45A17B6601E3}" {
    Id "ACE_Medical-InfoWidget_Epinephrine"
@@ -80,7 +87,6 @@ StringTable {
    Modified 1624202844
    Author "kexanone"
    LastChanged "apollo-jk"
-  }
   }
   CustomStringTableItem "{5E101C5589E004EE}" {
    Id "ACE_Medical-Item_Morphine_Description"

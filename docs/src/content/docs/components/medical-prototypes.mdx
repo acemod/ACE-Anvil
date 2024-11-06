@@ -14,6 +14,9 @@ ACE Medical Prototypes builds on top of ACE Medical and serves as a testbed for 
 - Damage system overhaul:
     - Death is no longer determined by a virtual health hit zone, but by the health of individual "vital" hit zones (_i.e_ torso and head). Second chance can be enabled for going to cardiac arrest instead of dying outright from deadly blows to vital hit zones. Second chance is enabled for torso and disabled for head by default.
     - New brain hit zone that takes continuously damage while in cardiac arrest and no CPR is performed. Runs out of health in approximately 5 minutes.
+- Bandages:
+    - Bandaging action takes 1.6 times longer
+    - Limbs may need multiple bandages to stop bleedings
 
 The changes are also applied to AI, but they will currently directly die when they enter cardiac arrest.
 

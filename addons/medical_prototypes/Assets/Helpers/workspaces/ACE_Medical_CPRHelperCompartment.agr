@@ -1,10 +1,24 @@
 AnimSrcGraph {
  AnimSetTemplate "{3E340D5A880A821B}Assets/Helpers/workspaces/ACE_Medical_CPRHelperCompartment.ast"
  ControlTemplate AnimSrcGCT "{61D13972778F82CA}" {
+  Commands {
+   AnimSrcGCTCmd CMD_Vehicle_GetIn {
+   }
+   AnimSrcGCTCmd CMD_Vehicle_GetOut {
+   }
+   AnimSrcGCTCmd CMD_Vehicle_FinishActionQueue {
+   }
+  }
+  GlobalTags {
+   "VEHICLE"
+   "TagVehicle"
+   "TagVehicleIdle"
+  }
  }
  Debug AnimSrcGD "{61D13972778F82B2}" {
  }
  GraphFilesResourceNames {
   "{03C875E0216C3FD8}Assets/Helpers/workspaces/ACE_Medical_CPRHelperCompartment.agf"
  }
+ DefaultRunNode "MasterControl"
 }

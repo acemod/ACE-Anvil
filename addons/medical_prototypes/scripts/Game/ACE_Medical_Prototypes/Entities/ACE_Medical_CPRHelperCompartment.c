@@ -23,18 +23,15 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		
 		AttachHandlers();
 
-		SCR_CompartmentAccessComponent performerCompartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
-		if (!performerCompartmentAccess)
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
 			return;
 		
-		performerCompartmentAccess.MoveInVehicle(this, ECompartmentType.CARGO);
+		SCR_BaseCompartmentManagerComponent compartmentManager = SCR_BaseCompartmentManagerComponent.Cast(FindComponent(SCR_BaseCompartmentManagerComponent));
+		if (!compartmentManager)
+			return;
 		
-		if (patient)
-		{
-			ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
-			if (cardiovascularComponent)
-				cardiovascularComponent.SetIsCPRPerformed(true);
-		}
+		compartmentAccess.GetInVehicle(this, compartmentManager.FindCompartment(0), false, 0, ECloseDoorAfterActions.INVALID, false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -60,14 +57,16 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		if (gameMode)
 			gameMode.GetOnPlayerDisconnected().Insert(OnPlayerDisconnected);
 		
-		Rpc(RpcDo_AttachHandlersOwner);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_AttachHandlersOwner()
-	{
-		GetGame().GetInputManager().AddActionListener("GetOut", EActionTrigger.DOWN, ActionTerminateCallback);
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
+		if (compartmentAccess)
+			compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
+		
+		if (m_pPatient)
+		{
+			ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(m_pPatient.FindComponent(ACE_Medical_CardiovascularComponent));
+			if (cardiovascularComponent)
+				cardiovascularComponent.SetIsCPRPerformed(true);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -91,22 +90,10 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		if (gameMode)
 			gameMode.GetOnPlayerDisconnected().Remove(OnPlayerDisconnected);
 		
-		Rpc(RpcDo_DetachHandlersOwner);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_DetachHandlersOwner()
-	{
-		GetGame().GetInputManager().RemoveActionListener("GetOut", EActionTrigger.DOWN, ActionTerminateCallback);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Terminates CPR
-	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void Terminate()
-	{
-		MoveOutPerformer();
+		// Clean-up when carried has left the compartment
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
+		if (compartmentAccess)
+			compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
 		
 		if (m_pPatient)
 		{
@@ -117,8 +104,20 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Moves the performer out of the helper compartment and schedule clean-up
-	protected void MoveOutPerformer()
+	//! Terminates CPR
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	void Terminate()
+	{
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
+			return;
+		
+		compartmentAccess.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Eject the performer out of the helper compartment
+	protected void EjectPerformer()
 	{
 		if (!m_pPerformer)
 			return;
@@ -126,10 +125,7 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccess)
 			return;
-		
-		// Clean-up when carried has left the comparment
-		compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
-		
+				
 		vector transform[4];
 		GetWorldTransform(transform);
 		vector pos;
@@ -147,13 +143,6 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	//! Clean-up when the peformer has left the compartment
 	protected void OnCompartmentLeft()
 	{
-		if (m_pPerformer)
-		{
-			SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
-			if (compartmentAccess)
-				compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
-		}
-		
 		DetachHandlers();
 		// Deletion of helper has to be delayed or released players stay visibly prone for other players on dedicated
 		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, HELPER_DELETION_DELAY_MS, false, this);
@@ -163,7 +152,7 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	// Release from performer when they get incapacitated or die
 	protected void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		Terminate();
+		EjectPerformer();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -171,13 +160,6 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	{
 		IEntity player = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		if (player == m_pPerformer)
-			Terminate();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Callback for the release keybind
-	protected void ActionTerminateCallback()
-	{
-		Rpc(Terminate);
+			EjectPerformer();
 	}
 }

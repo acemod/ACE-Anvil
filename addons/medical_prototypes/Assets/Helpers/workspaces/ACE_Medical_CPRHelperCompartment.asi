@@ -4,6 +4,12 @@ AnimSetInstanceSource "{61D139725AB5C05E}" {
   AnimSetInstanceSource_Line "CPR.Default.Loop" {
    Resource "{0CCED80870DD8150}anims/anm/player/injury/p_cro_revive_CPR_loop.anm"
   }
+  AnimSetInstanceSource_Line "CPR.Default.In" {
+   Resource "{53DD1932ED812D70}anims/anm/player/injury/p_cro_revive_CPR_in.anm"
+  }
+  AnimSetInstanceSource_Line "CPR.Default.Out" {
+   Resource "{226002617FC7B0AB}anims/anm/player/injury/p_cro_revive_CPR_out.anm"
+  }
  }
  RBF AnimSetInstanceSourceRBFArray "{61D13972214BF5DA}" {
  }

@@ -3,7 +3,8 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 {
 	protected static const ResourceName HELPER_PREFAB_NAME = "{604E93B236B19A29}Prefabs/Helpers/ACE_Medical_CPRHelperCompartment.et";
 	protected static const ref array<float> CPR_PERFORMER_ANGLES = {90, -90};
-	protected static const ref array<vector> CPR_PERFORMER_OFFSETS = {{-0.2, 0.6, -0.85}, {0.35, 0.6, -0.85}};
+	protected static const ref array<vector> CPR_PERFORMER_OFFSETS = {{-0.3, 0, -0.8}, {0.3, 0, -0.8}};
+	protected static const vector CPR_PERFORMER_BB_HALF_EXTENDS = {0.15, 0.15, 0.005};
 	
 	//------------------------------------------------------------------------------------------------
 	//! Can this action be shown in the UI to the provided user entity?
@@ -58,20 +59,51 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! TO DO: Move helper compartment creation to a tool class like ACE_Carrying_Tools
-	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
+	//! Block action if position is obstructed
+	override bool CanBePerformedScript(IEntity user)
 	{
-		vector userPos = pUserEntity.GetOrigin();
-		EntitySpawnParams params = new EntitySpawnParams();
-		params.TransformMode = ETransformMode.WORLD;
-		pOwnerEntity.GetWorldTransform(params.Transform);
+		if (!super.CanBePerformedScript(user))
+			return false;
+		
+		IEntity owner = GetOwner();
+		if (!owner)
+			return false;
+		
+		TraceOBB tracer = new TraceOBB();
+		tracer.Exclude = user;
+		vector transform[4];
+		GetEntryTransform(transform, owner, user);
+		
+		for (int i = 0; i < 3; i++)
+		{
+			tracer.Mat[i] = transform[i];
+		}
+		
+		tracer.Maxs = CPR_PERFORMER_BB_HALF_EXTENDS;
+		tracer.Mins = -CPR_PERFORMER_BB_HALF_EXTENDS;
+		tracer.Start = transform[3];
+		
+		if (GetGame().GetWorld().TracePosition(tracer, null) < 0)
+		{
+			SetCannotPerformReason("#AR-UserAction_SeatObstructed");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Return the transform for where the user will do CPR from
+	protected void GetEntryTransform(out vector transform[4], IEntity owner, IEntity user)
+	{
+		vector userPos = user.GetOrigin();
 		vector bestTransform[4];
 		
 		// Get best orientation to perform CPR
 		for (int i = 0; i < CPR_PERFORMER_ANGLES.Count(); i++)
 		{
-			vector transform[4] = params.Transform;
-			vector angles = Math3D.MatrixToAngles(params.Transform);
+			owner.GetWorldTransform(transform);
+			vector angles = Math3D.MatrixToAngles(transform);
 			angles[0] = angles[0] + CPR_PERFORMER_ANGLES[i];
 			Math3D.AnglesToMatrix(angles, transform);
 			transform[3] = transform[3] + CPR_PERFORMER_OFFSETS[i].Multiply3(transform);
@@ -80,7 +112,22 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 				bestTransform = transform;
 		}
 		
-		params.Transform = bestTransform;
+		transform = bestTransform;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! TO DO: Move helper compartment creation to a tool class like ACE_Carrying_Tools
+	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
+	{
+		// Check on server that in fact no one is performing CPR
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!cardiovascularComponent || cardiovascularComponent.IsCPRPerformed())
+			return;
+				
+		vector userPos = pUserEntity.GetOrigin();
+		EntitySpawnParams params = new EntitySpawnParams();
+		params.TransformMode = ETransformMode.WORLD;
+		GetEntryTransform(params.Transform, pOwnerEntity, pUserEntity);
 		
 		Resource res = Resource.Load(HELPER_PREFAB_NAME);
 		if (!res.IsValid())

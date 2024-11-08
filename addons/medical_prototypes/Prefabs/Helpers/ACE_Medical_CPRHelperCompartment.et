@@ -5,16 +5,29 @@ ACE_Medical_CPRHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehi
    Enabled 0
   }
   SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   DoorInfoList {
+    CompartmentDoorInfo "{62CF60C6D92648FD}" {
+     ContextName "default"
+     EntryPositionInfo PointInfo "{62CF60C7F96B6351}" {
+     }
+     ExitPositionInfo PointInfo "{62CF60C7FA82A8CF}" {
+     }
+     FakeDoor 1
+     StanceChangeOnExit Crouch
+     AccessibilitySettings CompartmentAccessibilityContext "{62D0D91D5FAC92EF}" {
+      BBHalfExtents 0 0 0
+      TraceOffset 0 0 0
+      TraceLength 0
+     }
+    }
+   }
    CompartmentSlots {
     CargoCompartmentSlot Carried {
      PassengerPositionInfo EntitySlotInfo s1 {
-      Offset -0.1 -0.6 0.05
      }
      ForcedFreeLook 1
-     SeatType 1
-     OverrideEntryPositionInfo PointInfo "{622AE496E86318D5}" {
-     }
-     OverrideExitPositionInfo PointInfo "{622AE496E8631831}" {
+     DoorInfoList {
+      0
      }
      CanOccupantEquipGadget 0
     }
@@ -46,6 +59,8 @@ ACE_Medical_CPRHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehi
     AnimGraph "{2CC66B5ABFCF56E8}Assets/Helpers/workspaces/ACE_Medical_CPRHelperCompartment.agr"
     AnimInstance "{C1AC3E81A3C60406}Assets/Helpers/workspaces/ACE_Medical_CPRHelperCompartment.asi"
    }
+   AutoVariablesBind 1
+   DeactivationDelay 2
   }
   RplComponent "{63136787FD0BCE14}" {
    "Rpl State Override" Runtime

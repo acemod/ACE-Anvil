@@ -3,7 +3,9 @@ AnimSetTemplateSource {
   AnimSetTemplateSource_AnimationGroup "{61D14564A92E1CE0}" {
    Name "CPR"
    Animations {
+    "In"
     "Loop"
+    "Out"
    }
    Columns {
     "Default"

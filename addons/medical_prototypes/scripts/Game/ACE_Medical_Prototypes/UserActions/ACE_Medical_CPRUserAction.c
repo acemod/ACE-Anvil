@@ -4,7 +4,8 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 	protected static const ResourceName HELPER_PREFAB_NAME = "{604E93B236B19A29}Prefabs/Helpers/ACE_Medical_CPRHelperCompartment.et";
 	protected static const ref array<float> CPR_PERFORMER_ANGLES = {90, -90};
 	protected static const ref array<vector> CPR_PERFORMER_OFFSETS = {{-0.3, 0, -0.8}, {0.3, 0, -0.8}};
-	protected static const vector CPR_PERFORMER_BB_HALF_EXTENDS = {0.15, 0.15, 0.005};
+	protected static const vector CPR_PERFORMER_BB_OFFSET = {0, 0.45, 0};
+	protected static const vector CPR_PERFORMER_BB_HALF_EXTENDS = {0.15, 0.15, 0.15};
 	
 	//------------------------------------------------------------------------------------------------
 	//! Can this action be shown in the UI to the provided user entity?
@@ -69,21 +70,21 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 		if (!owner)
 			return false;
 		
-		TraceOBB tracer = new TraceOBB();
-		tracer.Exclude = user;
+		TraceOBB trace = new TraceOBB();
+		trace.Exclude = user;
 		vector transform[4];
 		GetEntryTransform(transform, owner, user);
 		
 		for (int i = 0; i < 3; i++)
 		{
-			tracer.Mat[i] = transform[i];
+			trace.Mat[i] = transform[i];
 		}
 		
-		tracer.Maxs = CPR_PERFORMER_BB_HALF_EXTENDS;
-		tracer.Mins = -CPR_PERFORMER_BB_HALF_EXTENDS;
-		tracer.Start = transform[3];
+		trace.Maxs = CPR_PERFORMER_BB_HALF_EXTENDS;
+		trace.Mins = -CPR_PERFORMER_BB_HALF_EXTENDS;
+		trace.Start = transform[3] + CPR_PERFORMER_BB_OFFSET;
 		
-		if (GetGame().GetWorld().TracePosition(tracer, null) < 0)
+		if (GetGame().GetWorld().TracePosition(trace, TraceObstructionCallback) < 0)
 		{
 			SetCannotPerformReason("#AR-UserAction_SeatObstructed");
 			return false;
@@ -113,6 +114,13 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 		}
 		
 		transform = bestTransform;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Ignore inventory items
+	protected bool TraceObstructionCallback(IEntity entity)
+	{
+		return !InventoryItemComponent.Cast(entity.FindComponent(InventoryItemComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------

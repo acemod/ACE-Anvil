@@ -1,7 +1,7 @@
 # ACE3 Medical
 ## Mathematical Functions
 
-$$\mathrm{Clamp}(x\ x_{min},\ x_{max}) :=
+$$\mathrm{Clamp}(x,\ x_{min},\ x_{max}) :=
 \begin{cases}
     x_{max} & \text{for } x \ge x_{max} \\
     x_{min} & \text{for } x_{min} \ge x \\

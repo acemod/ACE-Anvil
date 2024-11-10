@@ -84,11 +84,11 @@ $$PaCO2(t + \Delta t) =
 
 $$\frac{dPaCO2}{dt}(t) =
 \begin{cases}
-    \mathrm{Clamp}\Big(PaCO2_0 - PaCO2(t) + 150 \cdot \max(ANP - 1,\ 0),\ -\big[\frac{dPaCO2}{dt}\big]_{max},\ +\big[\frac{dPaCO2}{dt}\big]_{max}\Big) & \Big|\ \frac{V_D}{V_A} \approx 1
+    \mathrm{Clamp}\Big(PaCO2_0 - PaCO2(t) + 150 \cdot \max(ANP - 1,\ 0),\ -\big[\frac{dPaCO2}{dt}\big]\_{max},\ +\big[\frac{dPaCO2}{dt}\big]\_{max}\Big) & \Big|\ \frac{V_D}{V_A} \approx 1
     \\
-    + \big[\frac{dPaCO2}{dt}\big]_{max} & \big|\ \frac{V_D}{V_A} > 1
+    + \big[\frac{dPaCO2}{dt}\big]\_{max} & \big|\ \frac{V_D}{V_A} > 1
     \\
-    - \big[\frac{dPaCO2}{dt}\big]_{max} & \text{| otherwise}
+    - \big[\frac{dPaCO2}{dt}\big]\_{max} & \text{| otherwise}
 \end{cases}$$
 
 - $\frac{dPaCO2}{dt}\ [\mathrm{mmHg/s}]$: Rate of change of partial pressure of $\mathrm{CO_2}$
@@ -176,9 +176,9 @@ $$PaO2(t + \Delta t) = PaO2(t) + \frac{dPaO2}{dt}(t) \cdot \Delta t$$
 
 $$\frac{dPaO2}{dt}(t) = 
 \begin{cases}
-    \big[\frac{dPaO2}{dt}\big]_{max}^+ & |\ PaO2_{tgt.}(t + \Delta t) > PaO2(t)
+    \big[\frac{dPaO2}{dt}\big]\_{max}^+ & |\ PaO2_{tgt.}(t + \Delta t) > PaO2(t)
     \\
-    \big[\frac{dPaO2}{dt}\big]_{max}^- & |\ PaO2_{tgt.}(t + \Delta t) < PaO2(t)
+    \big[\frac{dPaO2}{dt}\big]\_{max}^- & |\ PaO2_{tgt.}(t + \Delta t) < PaO2(t)
     \\
     0 & \text{| otherwise}
 \end{cases}$$

@@ -4,7 +4,7 @@
 $$\mathrm{Hill}(x) := \frac{x}{1 + x}$$
 
 
-## Vitals
+## Cardiovascular Vitals
 ### Mean arterial pressure (MAP):
 
 $$MAP = CO \cdot SVR$$

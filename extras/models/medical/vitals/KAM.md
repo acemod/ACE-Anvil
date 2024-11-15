@@ -64,6 +64,8 @@ $$f(V_D,\ TV,\ med.) =
 
 $$f\big(PaCO2(t)\big) =
 \begin{cases}
+    0 & \text{| cardiac arrest}
+    \\
     \min\big(0.2 \cdot (PaCO2(t) - 50),\ RR_{max}\big) & \big|\ PaCO2(t) > 50
     \\
     0 & \text{| otherwise}

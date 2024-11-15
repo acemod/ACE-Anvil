@@ -54,13 +54,13 @@ Blood volumes are categorized into six classes:
 
 The values of the vitals (_e.g._ HR and BP) are essential for getting a patient back up. While in cardiac arrest, only CPR may get the patient back up, but the success chance can be increased with epinephrine. A patient falls unconscious if either their resilience falls below 34/100 or their vital state is at least critical. Resilience will automatically recover if the vitals are stable, but can be speeded up with ammonium carbonate (_i.e._ like epinephrine in ACE Medical). Ammonium carbonate has no effect as long as the vitals aren't stable.
 
-| State | HR [BPM] | BP [mmHg] | Hemorrhage class |
-| --- | --- | --- | --- |
-| Cardiac arrest | > 220 | > 284/189 | --- |
-| Stable | 40 - 220 | 69/46 - 284/189 | < II |
-| Unstable | < 40 | < 69/46 | II |
-| Critical | < 30 | < 51/34 | III |
-| Cardiac arrest | < 20 | < 51/34* | IV |
+| State | HR [BPM] | BP [mmHg] SpO2 [%] | | Hemorrhage class |
+| --- | --- | --- | --- | --- |
+| Cardiac arrest | > 220 | > 284/189 | --- | --- |
+| Stable | 40 - 220 | 69/46 - 284/189 | ≥ 85 | < II |
+| Unstable | < 40 | < 69/46 | < 85 | II |
+| Critical | < 30 | < 51/34 | < 75 | III |
+| Cardiac arrest | < 20 | < 51/34* | < 65 | IV |
 
 \* BP below 51/34 mmHg only leads to cardiac arrest if the heart rate is at least critical (_i.e._ < 30 BPM).
 

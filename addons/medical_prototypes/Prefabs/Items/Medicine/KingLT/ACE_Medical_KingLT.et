@@ -1,0 +1,64 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Medical-Item_KingLT_Name"
+     Description "#ACE_Medical-Item_KingLT_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{62D6FBE3F984D61D}" {
+       Name "#ACE_Medical-InfoWidget_KingLT"
+       Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+       IconSetName "Morphine_l_UI"
+      }
+     }
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     SizeSetupStrategy Manual
+     ItemDimensions 5 5 5
+     ItemVolume 10
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{62D6FBE3F984D673}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{62D6FBE3F984D676}" {
+       AnimGraph "{25B5CD66792F60F4}Assets/Items/Medicine/Workspaces/MorphineInjection_01.agr"
+       AnimInstance "{B900F61FD4D7F1DA}Assets/Items/Medicine/Workspaces/morphine_injection_player.asi"
+       BindingName "Gadget"
+      }
+     }
+     HandAdditiveRotation 170 110 20
+     HandAdditiveTranslation 0 0.03 -0.05
+    }
+    CustomAttributes {
+     SCR_ItemOfInterestAttribute "{62D6FBE3F984D67D}" {
+      m_InterestType MORPHINE
+     }
+     ItemActionAnimAttributes "{62D6FBE3F984D663}" {
+      AnimationGraphTemplate "{DFFC0A34A77ADCB4}anims/workspaces/player/player_main.agr"
+      ActionAnimationCommandName "CMD_HealSelf"
+      ActionAnimDuration 10
+      AllowMovementDuringAction 1
+     }
+     PreviewRenderAttributes "{62D6FBE3F984D661}" {
+      CameraPreset Top
+      CameraOrbitAngles 90 180 -45
+      CameraDistanceToItem 0.2
+      LodModel 1
+     }
+    }
+    CommonItemType "MORPHINE"
+   }
+  }
+  MeshObject "{62D6FBE3F984D664}" {
+   Object "{C111ED61F81374EE}Assets/Items/Medicine/KingLT/ACE_Medical_KingLT.xob"
+  }
+  RigidBody "{62D6FBE3F984D668}" {
+  }
+  SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
+   m_eAnimVariable ADRIANOV
+  }
+ }
+}

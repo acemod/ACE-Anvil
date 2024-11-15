@@ -47,11 +47,11 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		
 		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
 		if (charController)
-			charController.m_OnLifeStateChanged.Insert(OnLifeStateChanged);
+			charController.m_OnLifeStateChanged.Insert(OnPerformerLifeStateChanged);
 		
 		charController = SCR_CharacterControllerComponent.Cast(m_pPatient.FindComponent(SCR_CharacterControllerComponent));
 		if (charController)
-			charController.m_OnLifeStateChanged.Insert(OnLifeStateChanged);
+			charController.m_OnLifeStateChanged.Insert(OnPatientLifeStateChanged);
 		
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
 		if (gameMode)
@@ -76,14 +76,14 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		{
 			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
 			if (charController)
-				charController.m_OnLifeStateChanged.Remove(OnLifeStateChanged);
+				charController.m_OnLifeStateChanged.Remove(OnPerformerLifeStateChanged);
 		}
 		
 		if (m_pPatient)
 		{
 			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPatient.FindComponent(SCR_CharacterControllerComponent));
 			if (charController)
-				charController.m_OnLifeStateChanged.Remove(OnLifeStateChanged);
+				charController.m_OnLifeStateChanged.Remove(OnPatientLifeStateChanged);
 		}
 		
 		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
@@ -106,13 +106,16 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	//! Terminates CPR
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void Terminate()
+	void Terminate(EGetOutType getOutType)
 	{
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccess)
 			return;
 		
-		compartmentAccess.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
+		if (getOutType == EGetOutType.ANIMATED)
+			compartmentAccess.GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
+		else
+			EjectPerformer();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -149,17 +152,28 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	// Release from performer when they get incapacitated or die
-	protected void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+	//! Terminate when performer gets incapacitated or dies
+	protected void OnPerformerLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		EjectPerformer();
+		Terminate(EGetOutType.TELEPORT);
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Terminate when patient wakes up
+	protected void OnPatientLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+	{
+		if (newLifeState == ECharacterLifeState.ALIVE)
+			Terminate(EGetOutType.ANIMATED);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Terminate when performer or patient disconnects
 	protected void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
 	{
 		IEntity player = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		if (player == m_pPerformer)
-			EjectPerformer();
+			Terminate(EGetOutType.TELEPORT);
+		else if (player == m_pPatient)
+			Terminate(EGetOutType.ANIMATED);
 	}
 }

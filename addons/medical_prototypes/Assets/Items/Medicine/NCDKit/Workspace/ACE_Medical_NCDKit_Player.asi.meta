@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6AAE8E7E01AD7A0B}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit_Player.asi"
+ Configurations {
+  AnimSetInstanceResourceClass PC {
+  }
+  AnimSetInstanceResourceClass XBOX_ONE : PC {
+  }
+  AnimSetInstanceResourceClass XBOX_SERIES : PC {
+  }
+  AnimSetInstanceResourceClass PS4 : PC {
+  }
+  AnimSetInstanceResourceClass PS5 : PC {
+  }
+  AnimSetInstanceResourceClass HEADLESS : PC {
+  }
+ }
+}

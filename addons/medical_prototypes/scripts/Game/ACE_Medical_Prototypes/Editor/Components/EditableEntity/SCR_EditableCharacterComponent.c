@@ -33,6 +33,10 @@ modded class SCR_EditableCharacterComponent : SCR_EditableEntityComponent
 		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);
 		if (system2)
 			system2.Unregister(owner);
+		
+		ACE_Medical_BaseSystem3 system3 = ACE_Medical_BaseSystem3.GetInstance(ACE_Medical_RespiratorySystem);
+		if (system3)
+			system3.Unregister(owner);
 		//-----------------------------------------------------------------------------------------------------------
 	}
 }

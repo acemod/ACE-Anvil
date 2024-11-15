@@ -20,6 +20,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fSystemicVascularResistance;
 	protected float m_fMeanArterialPressureKPA;
 	protected float m_fPulsePressureKPA;
+	protected float m_fSpO2;
 	protected float m_fResilienceRecoveryScale = 1;
 	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
@@ -261,6 +262,20 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 			m_fMeanArterialPressureKPA - 1/3 * m_fPulsePressureKPA,
 			m_fMeanArterialPressureKPA + 2/3 * m_fPulsePressureKPA
 		);
+	}
+		
+	//------------------------------------------------------------------------------------------------
+	//! Set peripheral oxygenated saturation
+	void SetSpO2(float spo2)
+	{
+		m_fSpO2 = spo2;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns peripheral oxygenated saturation
+	float GetSpO2()
+	{
+		return m_fSpO2;
 	}
 	
 	//------------------------------------------------------------------------------------------------

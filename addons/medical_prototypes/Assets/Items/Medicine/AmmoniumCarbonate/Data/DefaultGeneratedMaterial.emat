@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{B1C1C9155B2DF82F}Assets/Items/Medicine/AmmoniumCarbonate/ACE_Medical_AmmoniumCarbonatePackage_BCR.edds"
+ NMOMap "{89197287825AAAB1}Assets/Items/Medicine/AmmoniumCarbonate/ACE_Medical_AmmoniumCarbonatePackage_NMO.edds"
+}

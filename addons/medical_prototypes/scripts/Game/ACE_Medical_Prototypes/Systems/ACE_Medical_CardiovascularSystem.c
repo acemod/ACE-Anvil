@@ -42,6 +42,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		component.SetCardiacOutput(0);
 		component.SetMeanArterialPressure(0);
 		component.SetPulsePressure(0);
+		component.SetSpO2(0);
 		component.SetVitalState(ACE_Medical_EVitalState.CARDIAC_ARREST);
 	}
 	
@@ -126,6 +127,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		SCR_CharacterBloodHitZone bloodHZ = damageManager.GetBloodHitZone();
 		float heartRate = component.GetHeartRate();
 		float meanArterialPressure = component.GetMeanArterialPressure();
+		float spO2 = component.GetSpO2();
 		
 		// Check for CPR success in case we are in cardiac arrest
 		if (component.IsInCardiacArrest())
@@ -160,6 +162,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 			(heartRate > m_Settings.m_CardiacArrestThresholds.m_fHeartRateHighBPM) ||
 			(meanArterialPressure < m_Settings.m_CardiacArrestThresholds.m_fMeanArterialPressureLowKPA && heartRate < m_Settings.m_CriticalThresholds.m_fHeartRateLowBPM) ||
 			(meanArterialPressure > m_Settings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA) ||
+			(spO2 < m_Settings.m_CardiacArrestThresholds.m_fSpO2) ||
 			bloodHZ.GetHealthScaled() <= bloodHZ.GetDamageStateThreshold(m_Settings.m_CardiacArrestThresholds.m_eBloodState)
 		)
 		{
@@ -171,6 +174,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 				(heartRate > m_Settings.m_CriticalThresholds.m_fHeartRateHighBPM) ||
 				(meanArterialPressure < m_Settings.m_CriticalThresholds.m_fMeanArterialPressureLowKPA) ||
 				(meanArterialPressure > m_Settings.m_CriticalThresholds.m_fMeanArterialPressureHighKPA) ||
+				(spO2 < m_Settings.m_CriticalThresholds.m_fSpO2) ||
 				bloodHZ.GetHealthScaled() <= bloodHZ.GetDamageStateThreshold(m_Settings.m_CriticalThresholds.m_eBloodState)
 		)
 		{
@@ -181,6 +185,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 				(heartRate > m_Settings.m_UnstableThresholds.m_fHeartRateHighBPM) ||
 				(meanArterialPressure < m_Settings.m_UnstableThresholds.m_fMeanArterialPressureLowKPA) ||
 				(meanArterialPressure > m_Settings.m_UnstableThresholds.m_fMeanArterialPressureHighKPA) ||
+				(spO2 < m_Settings.m_UnstableThresholds.m_fSpO2) ||
 				bloodHZ.GetHealthScaled() <= bloodHZ.GetDamageStateThreshold(m_Settings.m_UnstableThresholds.m_eBloodState)
 		)
 		{
@@ -251,6 +256,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		UpdateCardiacOutput(component, damageManager, 0);
 		UpdateSystemicVascularResistance(component, damageManager, 0);
 		UpdateBloodPressures(component, damageManager, 0);
+		component.SetSpO2(m_Settings.m_fDefaultSpO2);
 		component.SetVitalState(ACE_Medical_EVitalState.STABLE);
 	}
 	
@@ -296,6 +302,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		Tuple2<float, float> pressures = component.GetBloodPressures();
 		DbgUI.Text(string.Format("Blood pressure:               %1/%2 mmHg", Math.Round(pressures.param2 * KPA2MMHG), Math.Round(pressures.param1 * KPA2MMHG)));
 		DbgUI.Text(string.Format("Blood state:                  %1", SCR_Enum.GetEnumName(ACE_Medical_EBloodState, damageManager.GetBloodHitZone().GetDamageState())));
+		DbgUI.Text(string.Format("SpO2:                         %1 %", component.GetSpO2()));
 		DbgUI.Text(string.Format("Resilience recovery scale:    %1", component.GetResilienceRecoveryScale()));
 		DbgUI.End();
 	}

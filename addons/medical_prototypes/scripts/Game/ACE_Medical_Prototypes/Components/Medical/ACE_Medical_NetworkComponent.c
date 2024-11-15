@@ -41,11 +41,15 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, cardiovascularComponent.GetHeartRate());
 				break;
 			}
-			
 			case ENotification.ACE_MEDICAL_BLOOD_PRESSURE_RESULT:
 			{
 				Tuple2<float, float> pressures = cardiovascularComponent.GetBloodPressures();
 				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, pressures.param2 * ACE_Medical_CardiovascularComponent.KPA2MMHG, pressures.param1 * ACE_Medical_CardiovascularComponent.KPA2MMHG);
+				break;
+			}
+			case ENotification.ACE_MEDICAL_SPO2_RESULT:
+			{
+				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, cardiovascularComponent.GetSpO2());
 				break;
 			}
 		}
@@ -70,12 +74,12 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 		if (!cardiovascularComponent)
 			return;
 		
-		Rpc(RpcDo_UpdateVitalsDataOwner, patientId, cardiovascularComponent.GetHeartRate(), cardiovascularComponent.GetMeanArterialPressure(), cardiovascularComponent.GetPulsePressure());
+		Rpc(RpcDo_UpdateVitalsDataOwner, patientId, cardiovascularComponent.GetHeartRate(), cardiovascularComponent.GetMeanArterialPressure(), cardiovascularComponent.GetPulsePressure(), cardiovascularComponent.GetSpO2());
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_UpdateVitalsDataOwner(RplId patientId, float heartRate, float meanArterialPressure, float pulsePressure)
+	protected void RpcDo_UpdateVitalsDataOwner(RplId patientId, float heartRate, float meanArterialPressure, float pulsePressure, float spO2)
 	{
 		SCR_ChimeraCharacter patient = SCR_ChimeraCharacter.Cast(Replication.FindItem(patientId));
 		if (!patient)
@@ -88,5 +92,6 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 		cardiovascularComponent.SetHeartRate(heartRate);
 		cardiovascularComponent.SetMeanArterialPressure(meanArterialPressure);
 		cardiovascularComponent.SetPulsePressure(pulsePressure);
+		cardiovascularComponent.SetSpO2(spO2);
 	}
 }

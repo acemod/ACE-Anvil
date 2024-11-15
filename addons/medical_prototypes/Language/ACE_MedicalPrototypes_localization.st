@@ -99,6 +99,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{62D754F3A2AFEA00}" {
+   Id "ACE_Medical-InfoWidget_KingLT"
+   Target_en_us "Prevents obstruction and occlusion of airways"
+   Target_de_de "Verhindert Obstruktion und Okklusion der Atemwege"
+   Modified 1658280043
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6228B55BA0A3E335}" {
    Id "ACE_Medical-InfoWidget_Metoprolol"
    Target_en_us "Decreases heart rate"
@@ -150,6 +158,22 @@ StringTable {
    Target_de_de "Verabreicht an Patienten mit Herzstillstand"
    Target_pt_br "Administrado a pacientes em parada cardíaca"
    Modified 1646852903
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{62D754F3AABB4BEF}" {
+   Id "ACE_Medical-Item_KingLT_Description"
+   Target_en_us "Airway management device inserted into throat"
+   Target_de_de "Hilfsmittel zur Atemwegssicherung"
+   Modified 1658286267
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{62D754F3B0E7DA62}" {
+   Id "ACE_Medical-Item_KingLT_Name"
+   Target_en_us "King LT"
+   Target_de_de "Larynxtubus"
+   Modified 1658279424
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -243,12 +267,44 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{62D754FA15390F40}" {
+   Id "ACE_Medical-Notification_SPO2_RESULT"
+   Target_en_us "You find a SpO2 of %1%"
+   Target_de_de " SpO2 ist %1%"
+   Modified 1658284253
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6228B55ED9DB4B14}" {
    Id "ACE_Medical-PhenylephrineInjectionAction"
    Target_en_us "Inject phenylephrine"
    Target_de_de "Phenylephrin injizieren"
    Target_pt_br "Injetar fenilefrina"
    Modified 1646856204
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{62D754F97D23F840}" {
+   Id "ACE_Medical-UserAction_CheckBloodPressure"
+   Target_en_us "Check blood pressure"
+   Target_de_de "Blutdruck bestimmen"
+   Modified 1658284424
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{62D754F92539C689}" {
+   Id "ACE_Medical-UserAction_CheckPulse"
+   Target_en_us "Check pulse"
+   Target_de_de "Puls bestimmen"
+   Modified 1658284435
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{62D754F96369C7F7}" {
+   Id "ACE_Medical-UserAction_CheckSpO2"
+   Target_en_us "Check SpO2"
+   Target_de_de "SpO2 bestimmen"
+   Modified 1658284451
    Author "Kexanone"
    LastChanged "Kexanone"
   }

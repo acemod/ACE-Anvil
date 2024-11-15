@@ -14,6 +14,9 @@ class ACE_Medical_CardiovascularSystemSettings
 	[Attribute(defvalue: "5.3329", desc: "Default pulse pressure [kPa]", category: "Default Vitals")]
 	float m_fDefaultPulsePressureKPA;
 	
+	[Attribute(defvalue: "97", desc: "Default SpO2", category: "Default Vitals")]
+	float m_fDefaultSpO2;
+	
 	[Attribute(desc: "Thresholds that lead to unstable vital state")]
 	ref ACE_Medical_VitalsStateThresholdsConfig m_UnstableThresholds;
 	

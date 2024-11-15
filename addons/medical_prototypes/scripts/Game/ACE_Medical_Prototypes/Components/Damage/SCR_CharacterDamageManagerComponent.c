@@ -6,7 +6,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected float m_fACE_Medical_CardiacArrestMaxTotalBleedingRate;
 	
 	protected ACE_Medical_CardiovascularComponent m_pACE_Medical_CardiovascularComponent;
-	protected ACE_Medical_MedicationManagerComponent m_pACE_Medical_MedicationManager;
 	protected ACE_Medical_BrainHitZone m_pACE_Medical_BrainHitZone;
 	
 	protected int m_iACE_Medical_LastSecondChanceTickCount;
@@ -51,6 +50,10 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);
 		if (system2)
 			system2.OnFullHeal(owner);
+		
+		ACE_Medical_BaseSystem3 system3 = ACE_Medical_BaseSystem3.GetInstance(ACE_Medical_RespiratorySystem);
+		if (system3)
+			system3.OnFullHeal(owner);
 		//-----------------------------------------------------------------------------------------------------------
 	}
 	

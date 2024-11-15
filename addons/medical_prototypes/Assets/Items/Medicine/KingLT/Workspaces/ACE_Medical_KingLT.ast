@@ -1,0 +1,29 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup {
+   Name "CroStance"
+   Animations {
+    "Idle"
+    "In"
+    "Out"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{62DAF0668905978C}" {
+   Name "KingLT"
+   Animations {
+    "HealOther"
+    "Idle"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+ }
+}

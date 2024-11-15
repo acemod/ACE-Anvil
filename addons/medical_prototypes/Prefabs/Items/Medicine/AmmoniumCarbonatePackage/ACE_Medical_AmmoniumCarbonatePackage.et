@@ -46,14 +46,13 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
       CameraPreset Top
       CameraOrbitAngles 0 0 -45
       CameraDistanceToItem 0.05
-      LodModel 0
      }
     }
     CommonItemType "MORPHINE"
    }
   }
   MeshObject "{6214F8E90D1F3C47}" {
-   Object "{66A319321561B93E}Assets/Items/Medicine/AmmoniumCarbonate/Data/ACE_Medical_AmmoniumCarbonatePackage.xob"
+   Object "{66A319321561B93E}Assets/Items/Medicine/AmmoniumCarbonate/ACE_Medical_AmmoniumCarbonatePackage.xob"
   }
   RigidBody "{6214F8E90359578D}" {
   }

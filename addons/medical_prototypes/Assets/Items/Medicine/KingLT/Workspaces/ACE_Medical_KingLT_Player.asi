@@ -1,4 +1,4 @@
-AnimSetInstanceSource "{62DEB9594620DDC3}" {
+AnimSetInstanceSource {
  Template "{158184EF3000FB7D}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.ast"
  Lines {
   AnimSetInstanceSource_Line "KingLT.Erc.Idle" {

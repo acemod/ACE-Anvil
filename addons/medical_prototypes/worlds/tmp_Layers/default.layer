@@ -15,21 +15,6 @@ $grp GenericEntity {
   }
   coords 77.03 4.007 23.28
  }
- {
-  components {
-   MeshObject "{62DEB94A95F1E8AE}" {
-    Object "{DC6A627D67D78EA1}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit.xob"
-    Materials {
-     MaterialAssignClass "{62DEB94D2A4D99A9}" {
-      SourceMaterial "ACE_Medical_NCDKit_Casing"
-      AssignedMaterial "{8FBC3A6E946F056E}Common/Materials/Default_Transparent.emat"
-     }
-    }
-   }
-  }
-  coords 76.971 4.236 23.529
-  scale 10
- }
 }
 $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et" {
  {
@@ -211,6 +196,46 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
    }
   }
   coords 77.424 3.704 23.212
+ }
+}
+$grp GenericEntity : "{661744F5F88B401C}Prefabs/Items/Medicine/NCDKit/ACE_Medical_NCDKit.et" {
+ {
+  coords 77.491 3.753 23.597
+ }
+ {
+  coords 77.298 3.717 23.595
+ }
+ {
+  components {
+   InventoryItemComponent "{5222EB4D0C73006B}" {
+    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+     CustomAttributes {
+      PreviewRenderAttributes "{62DF7A9D73F3AAA4}" {
+       LodModel 0
+      }
+     }
+    }
+   }
+  }
+  coords 77.419 3.758 23.797
+ }
+ {
+  coords 77.217 3.724 23.837
+ }
+ {
+  coords 77.14 3.686 23.579
+ }
+ {
+  coords 77.056 3.691 23.804
+ }
+ {
+  coords 77.109 3.719 23.998
+ }
+ {
+  coords 77.185 3.731 23.972
+ }
+ {
+  coords 77.192 3.74 23.965
  }
 }
 SCR_AIGroup : "{84E5BBAB25EA23E5}Prefabs/Groups/BLUFOR/Group_US_FireTeam.et" {

@@ -1,20 +1,34 @@
-$grp GenericEntity {
- {
-  components {
-   MeshObject "{62DD7BA6BE618038}" {
-    Object "{AD3E7679F8E106D3}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Casing.xob"
+GenericEntity {
+ components {
+  MeshObject "{62E122CF5D8F7E95}" {
+   Object "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
+  }
+  RplComponent "{62E122CF57795098}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+ }
+ coords 76.814 3.634 23.68
+}
+GenericEntity : "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et" {
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemAnimationAttributes ItemAnimationAttributes "{59ECB1453144E05D}" {
+     ExcludeBonesBlend {
+     }
+    }
    }
   }
-  coords 76.927 4.083 23.485
- }
- {
-  components {
-   MeshObject "{62DE1B80B5F69932}" {
-    Object "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
-   }
+  SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
+   m_bAlternativeModelOnAction 0
   }
-  coords 77.03 4.007 23.28
+  BaseItemAnimationComponent "{62E0016A57FA9896}" {
+   AnimGraph "{25B5CD66792F60F4}Assets/Items/Medicine/Workspaces/MorphineInjection_01.agr"
+   AnimInstance "{E481FEA9A94877F7}Assets/Items/Medicine/Workspaces/morphine_injection_item.asi"
+  }
  }
+ coords 76.964 3.655 23.609
 }
 $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et" {
  {
@@ -24,19 +38,10 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
      ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
       m_aItemHints {
        SCR_InventoryItemHintUIInfo "{62D6FBE3F984D61D}" {
-        IconSetName "Unconscious_UI"
        }
       }
      }
      ItemAnimationAttributes ItemAnimationAttributes "{62D6FBE3F984D673}" {
-      AnimationAttachments {
-       AnimationAttachmentInfo "{62D6FBE3F984D676}" {
-        AnimGraph "{0773E2EF07C52F8E}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.agr"
-        AnimInstance "{950D4F36D7D8ADB5}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT_Player.asi"
-       }
-      }
-      HandAdditiveRotation 0 0 0
-      HandAdditiveTranslation 0 0 0
      }
     }
    }
@@ -45,10 +50,6 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
    }
    SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
     m_eAnimVariable ADRIANOV
-    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62D6FBE3F984D66C}" {
-     m_fItemRegenerationSpeed 30
-     m_fItemRegenerationDuration 5
-    }
    }
   }
   coords 77.287 3.753 23.301
@@ -60,19 +61,10 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
      ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
       m_aItemHints {
        SCR_InventoryItemHintUIInfo "{62D6FBE3F984D61D}" {
-        IconSetName "Unconscious_UI"
        }
       }
      }
      ItemAnimationAttributes ItemAnimationAttributes "{62D6FBE3F984D673}" {
-      AnimationAttachments {
-       AnimationAttachmentInfo "{62D6FBE3F984D676}" {
-        AnimGraph "{0773E2EF07C52F8E}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.agr"
-        AnimInstance "{950D4F36D7D8ADB5}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT_Player.asi"
-       }
-      }
-      HandAdditiveRotation 0 0 0
-      HandAdditiveTranslation 0 0 0
      }
     }
    }
@@ -81,10 +73,6 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
    }
    SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
     m_eAnimVariable ADRIANOV
-    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62D6FBE3F984D66C}" {
-     m_fItemRegenerationSpeed 30
-     m_fItemRegenerationDuration 5
-    }
    }
   }
   coords 77.19 3.665 23.26
@@ -96,19 +84,10 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
      ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
       m_aItemHints {
        SCR_InventoryItemHintUIInfo "{62D6FBE3F984D61D}" {
-        IconSetName "Unconscious_UI"
        }
       }
      }
      ItemAnimationAttributes ItemAnimationAttributes "{62D6FBE3F984D673}" {
-      AnimationAttachments {
-       AnimationAttachmentInfo "{62D6FBE3F984D676}" {
-        AnimGraph "{0773E2EF07C52F8E}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.agr"
-        AnimInstance "{950D4F36D7D8ADB5}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT_Player.asi"
-       }
-      }
-      HandAdditiveRotation 0 0 0
-      HandAdditiveTranslation 0 0 0
      }
     }
    }
@@ -117,10 +96,6 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
    }
    SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
     m_eAnimVariable ADRIANOV
-    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62D6FBE3F984D66C}" {
-     m_fItemRegenerationSpeed 30
-     m_fItemRegenerationDuration 5
-    }
    }
   }
   coords 77.029 3.631 23.222
@@ -132,19 +107,10 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
      ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
       m_aItemHints {
        SCR_InventoryItemHintUIInfo "{62D6FBE3F984D61D}" {
-        IconSetName "Unconscious_UI"
        }
       }
      }
      ItemAnimationAttributes ItemAnimationAttributes "{62D6FBE3F984D673}" {
-      AnimationAttachments {
-       AnimationAttachmentInfo "{62D6FBE3F984D676}" {
-        AnimGraph "{0773E2EF07C52F8E}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.agr"
-        AnimInstance "{950D4F36D7D8ADB5}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT_Player.asi"
-       }
-      }
-      HandAdditiveRotation 0 0 0
-      HandAdditiveTranslation 0 0 0
      }
     }
    }
@@ -153,10 +119,6 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
    }
    SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
     m_eAnimVariable ADRIANOV
-    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62D6FBE3F984D66C}" {
-     m_fItemRegenerationSpeed 30
-     m_fItemRegenerationDuration 5
-    }
    }
   }
   coords 77.212 3.662 23.184
@@ -168,19 +130,10 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
      ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
       m_aItemHints {
        SCR_InventoryItemHintUIInfo "{62D6FBE3F984D61D}" {
-        IconSetName "Unconscious_UI"
        }
       }
      }
      ItemAnimationAttributes ItemAnimationAttributes "{62D6FBE3F984D673}" {
-      AnimationAttachments {
-       AnimationAttachmentInfo "{62D6FBE3F984D676}" {
-        AnimGraph "{0773E2EF07C52F8E}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.agr"
-        AnimInstance "{950D4F36D7D8ADB5}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT_Player.asi"
-       }
-      }
-      HandAdditiveRotation 0 0 0
-      HandAdditiveTranslation 0 0 0
      }
     }
    }
@@ -189,10 +142,6 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
    }
    SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
     m_eAnimVariable ADRIANOV
-    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62D6FBE3F984D66C}" {
-     m_fItemRegenerationSpeed 30
-     m_fItemRegenerationDuration 5
-    }
    }
   }
   coords 77.424 3.704 23.212
@@ -200,6 +149,19 @@ $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medica
 }
 $grp GenericEntity : "{661744F5F88B401C}Prefabs/Items/Medicine/NCDKit/ACE_Medical_NCDKit.et" {
  {
+  components {
+   InventoryItemComponent "{5222EB4D0C73006B}" {
+    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    }
+   }
+   MeshObject "{62DF7A9D73F3AA93}" {
+    Object "{DC6A627D67D78EA1}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit.xob"
+   }
+   SCR_ConsumableItemComponent "{62DF7A9D73F3869E}" {
+    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62E00175D836AD92}" {
+    }
+   }
+  }
   coords 77.491 3.753 23.597
  }
  {
@@ -210,10 +172,30 @@ $grp GenericEntity : "{661744F5F88B401C}Prefabs/Items/Medicine/NCDKit/ACE_Medica
    InventoryItemComponent "{5222EB4D0C73006B}" {
     Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
      CustomAttributes {
+      SCR_ItemOfInterestAttribute "{62DF7A9D73F3AABE}" {
+       m_InterestType MORPHINE
+      }
+      ItemActionAnimAttributes "{62DF7A9D73F3AAA2}" {
+       AnimationGraphTemplate "{DFFC0A34A77ADCB4}anims/workspaces/player/player_main.agr"
+       ActionAnimationCommandName "CMD_HealSelf"
+       ActionAnimDuration 10
+       AllowMovementDuringAction 1
+      }
       PreviewRenderAttributes "{62DF7A9D73F3AAA4}" {
        LodModel 0
       }
+      SCR_AlternativeModel "{62E0017644ED4D64}" {
+       m_sAlternativeModel "{DC889A505131E567}Assets/Items/Medicine/MorphineInjection_01/MorphineInjection_01_full_open.xob"
+      }
      }
+    }
+   }
+   MeshObject "{62DF7A9D73F3AA93}" {
+    Object "{DC6A627D67D78EA1}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit.xob"
+   }
+   SCR_ConsumableItemComponent "{62DF7A9D73F3869E}" {
+    m_eAnimVariable ADRIANOV
+    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62E00175D2A2F145}" {
     }
    }
   }
@@ -241,4 +223,11 @@ $grp GenericEntity : "{661744F5F88B401C}Prefabs/Items/Medicine/NCDKit/ACE_Medica
 SCR_AIGroup : "{84E5BBAB25EA23E5}Prefabs/Groups/BLUFOR/Group_US_FireTeam.et" {
  coords 77.748 3.69 25.563
  angleY -178.248
+}
+GenericEntity : "{C687D937CA92EF2A}Prefabs/Items/Medicine/NCDKit/ACE_medical_NCDKit_Needle.et" {
+ coords 76.869 3.654 23.783
+ {
+  GenericEntity : "{1323E0ADD9389CFD}Prefabs/Items/Medicine/NCDKit/ACE_medical_NCDKit_Hose.et" {
+  }
+ }
 }

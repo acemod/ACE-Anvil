@@ -1,0 +1,23 @@
+$animation "" {
+ #version 1.0
+ #fps 30
+ #numFrames 170
+ $node "i_hose" {
+  $keys t q {
+   $frame 0 170 {
+    #t 0 0.029 0.007
+   }
+  }
+  $node "i_needle" {
+   $keys t q {
+    $frame 0 170 {
+     #t 0 0.023 0
+    }
+   }
+  }
+ }
+ $events {
+  #event 43 "ACE_MEDICAL_EVENT_SPAWN_NEEDLE" "" -1 0 "" 0
+  #event 140 "ACE_MEDICAL_EVENT_DETACH_HOSE" "" -1 0 "" 0
+ }
+}

@@ -1,3 +1,22 @@
-AnimSetInstanceSource "{62DEB91BAEA68451}" {
- Template "{8913D09D0ABE40B6}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.ast"
+AnimSetInstanceSource "{62DF7A9FEDEE004C}" {
+ Template "{B6451147C76BFE53}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.ast"
+ Lines {
+  AnimSetInstanceSource_Line "NCDKit.Erc.Idle" {
+   Resource "{669D84C399D02797}Assets/Items/Medicine/NCDKit/Workspace/p_erc_ndckit_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "NCDKit.Erc.FingerAnim" {
+   Resource "{197544D5F5C08B77}Assets/Items/Medicine/NCDKit/Workspace/p_ncdkit_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "NCDKit.Cro.ReviveOther" {
+   Resource "{3CEB8E492701C3F2}Assets/Items/Medicine/NCDKit/Workspace/p_cro_ncdkit_revive.anm"
+  }
+  AnimSetInstanceSource_Line "NCDKit.Cro.Idle" {
+   Resource "{0FD77936C746BD72}Assets/Items/Medicine/NCDKit/Workspace/p_cro_ncdkit_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "NCDKit.Pne.Idle" {
+   Resource "{F0C9C5052F43B57B}Assets/Items/Medicine/NCDKit/Workspace/p_pne_ncdkit_holdpose.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{62DF7A9FE5874DBB}" {
+ }
 }

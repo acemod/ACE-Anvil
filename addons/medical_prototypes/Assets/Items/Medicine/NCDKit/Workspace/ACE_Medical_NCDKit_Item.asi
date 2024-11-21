@@ -1,3 +1,10 @@
-AnimSetInstanceSource "{62DEB91BABDDDBD7}" {
- Template "{8913D09D0ABE40B6}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.ast"
+AnimSetInstanceSource "{62E122DA9214A71E}" {
+ Template "{B6451147C76BFE53}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.ast"
+ Lines {
+  AnimSetInstanceSource_Line "NCDKit.Cro.ReviveOther" {
+   Resource "{7C0B26D38E36B3BA}Assets/Items/Medicine/NCDKit/Workspace/i_cro_ncdkit_revive.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{62DF7A9FA45C690F}" {
+ }
 }

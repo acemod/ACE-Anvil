@@ -1,5 +1,5 @@
 AnimSrcGraph {
- AnimSetTemplate "{158184EF3000FB7D}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.ast"
+ AnimSetTemplate "{B6451147C76BFE53}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.ast"
  ControlTemplate AnimSrcGCT "{62DAF04941656164}" {
   Variables {
    AnimSrcGCTVarInt Stance {
@@ -23,7 +23,7 @@ AnimSrcGraph {
  Debug AnimSrcGD "{62DAF0494165616E}" {
  }
  GraphFilesResourceNames {
-  "{8BB969FD6E0D4391}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.agf"
+  "{8BB969FD6E0D4390}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.agf"
  }
  DefaultRunNode "MasterControl"
 }

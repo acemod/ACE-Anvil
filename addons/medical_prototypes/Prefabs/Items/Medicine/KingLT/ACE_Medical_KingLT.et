@@ -10,7 +10,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
       SCR_InventoryItemHintUIInfo "{62D6FBE3F984D61D}" {
        Name "#ACE_Medical-InfoWidget_KingLT"
        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
-       IconSetName "Morphine_l_UI"
+       IconSetName "Unconscious_UI"
       }
      }
     }
@@ -24,13 +24,11 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
      AnimationAttachments {
       AnimationAttachmentInfo "{62D6FBE3F984D676}" {
-       AnimGraph "{25B5CD66792F60F4}Assets/Items/Medicine/Workspaces/MorphineInjection_01.agr"
-       AnimInstance "{B900F61FD4D7F1DA}Assets/Items/Medicine/Workspaces/morphine_injection_player.asi"
+       AnimGraph "{0773E2EF07C52F8E}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.agr"
+       AnimInstance "{950D4F36D7D8ADB5}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT_Player.asi"
        BindingName "Gadget"
       }
      }
-     HandAdditiveRotation 170 110 20
-     HandAdditiveTranslation 0 0.03 -0.05
     }
     CustomAttributes {
      SCR_ItemOfInterestAttribute "{62D6FBE3F984D67D}" {
@@ -59,6 +57,8 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
    m_eAnimVariable ADRIANOV
+   m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{62E122EB7DB74BD0}" {
+   }
   }
  }
 }

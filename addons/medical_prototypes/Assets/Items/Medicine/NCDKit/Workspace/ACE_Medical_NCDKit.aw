@@ -1,12 +1,12 @@
 BaseSource {
- AnimSetTemplate "{8913D09D0ABE40B6}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.ast"
+ AnimSetTemplate "{B6451147C76BFE53}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.ast"
  AnimSetInstances {
-  "{475FB2EDF17A09DF}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit_Item.asi"
-  "{6AAE8E7E01AD7A0B}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit_Player.asi"
+  "{4A75174A637EADE8}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit_Item.asi"
+  "{F459860B013C54F8}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit_Player.asi"
  }
- AnimGraph "{9BE1B69D3D7B9445}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.agr"
+ AnimGraph "{A4B77747F0AE2AA0}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.agr"
  PreviewModels {
-  AnimSrcWorkspacePreviewModel "{62DEB91BBF93CA4B}" {
+  AnimSrcWorkspacePreviewModel "{62E0015307690AB5}" {
    Model "{DC6A627D67D78EA1}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit.xob"
   }
   AnimSrcWorkspacePreviewModel "{62DAF04ABE8352E5}" {
@@ -14,11 +14,18 @@ BaseSource {
   }
  }
  ChildPreviewModels {
-  AnimSrcWorkspaceChildPreviewModel "{62DEB91B808B535E}" {
+  AnimSrcWorkspaceChildPreviewModel "{62DAF04A22B089F8}" {
    Enabled 1
    Model "{DC6A627D67D78EA1}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit.xob"
    Bone "LeftHandProp"
    Parent "{62DAF04ABE8352E5}"
+  }
+  AnimSrcWorkspaceChildPreviewModel "{62E122C49A9E0B49}" {
+   Enabled 1
+   Model "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
+   Bone "RightHandProp"
+   Parent "{62DAF04ABE8352E5}"
+   OffsetRotation 0 0 0
   }
  }
  AudioTesting AnimSrcWorkspaceAudioTesting "{62DAF049DCF0B4CF}" {

@@ -1,23 +1,11 @@
 AnimSetTemplateSource {
  Groups {
-  AnimSetTemplateSource_AnimationGroup "{62DEB91B992B3F17}" {
-   Name "CroStance"
-   Animations {
-    "Idle"
-    "In"
-    "Out"
-   }
-   Columns {
-    "Cro"
-    "Erc"
-    "Pne"
-   }
-  }
   AnimSetTemplateSource_AnimationGroup "{62DAF0668905978C}" {
-   Name "KingLT"
+   Name "NCDKit"
    Animations {
-    "HealOther"
+    "FingerAnim"
     "Idle"
+    "ReviveOther"
    }
    Columns {
     "Cro"

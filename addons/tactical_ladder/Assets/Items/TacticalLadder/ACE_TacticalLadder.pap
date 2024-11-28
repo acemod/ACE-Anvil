@@ -3,8 +3,8 @@ ProcAnimProjectClass {
   SignalClass {
    id 2052
    name "Signal"
-   tl -520.008 935.687
-   res "{0569F8A5D313656F}Assets/Items/Ladder/ACE_Ladder.siga"
+   tl -518.341 935.687
+   res "{0569F8A5D313656F}Assets/Items/TacticalLadder/ACE_TacticalLadder.siga"
    inputsport {
     1
    }
@@ -805,7 +805,7 @@ ProcAnimProjectClass {
    }
   }
  }
- model "{5EA6603E9AFAD4FC}Assets/Items/Ladder/ACE_Ladder_v3.xob"
+ model "{5EA6603E9AFAD4FC}Assets/Items/TacticalLadder/ACE_TacticalLadder.xob"
  version 1
  compiled ProcAnimCompiledClass {
   visited {

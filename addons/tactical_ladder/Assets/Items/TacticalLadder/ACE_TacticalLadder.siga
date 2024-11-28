@@ -12,7 +12,7 @@ ProcAnimSignalResClass {
   IOPInputValueClass {
    id 21
    name "Max Translation"
-   tl -657.667 35.556
+   tl -659.334 37.223
    children {
     20 28 33 38 44 47 53 54 60 63 68
    }

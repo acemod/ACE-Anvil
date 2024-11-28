@@ -1,0 +1,157 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 7177
+   name "SOUND_FENCE_RATTLE"
+   version 5
+   tl -109 -311.333
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 5138
+       port 65
+      }
+     }
+    }
+   }
+   outState 8203
+   outStatePort 79879
+  }
+ }
+ mixers {
+  MixerClass {
+   id 8203
+   name "OutputState 8"
+   version 4
+   tl 100 -75
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 79879
+     links {
+      ConnectionClass connection {
+       id 7177
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    16384 0
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialogue" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialogue_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large"
+   }
+  }
+ }
+ shaders {
+  ShaderClass {
+   id 5138
+   name "Shader 5"
+   version 5
+   tl -312 -312.333
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 6172
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 3091
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 4117
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 4
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 1028
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    23 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass {
+   id 3091
+   name "Amplitude 3"
+   version 5
+   tl -559 -477.333
+   curve Linear
+   outerRange 14
+   EnableDirectivity 1
+   DirectivityCurve {
+    CurvePoint "1" {
+     X 0.01402
+     Y 0.01159
+    }
+    CurvePoint "2" {
+     X 0.2952
+     Y 1.0398
+    }
+   }
+  }
+ }
+ frequency {
+  FrequencyClass {
+   id 4117
+   name "Frequency 4"
+   version 5
+   tl -558 -400.333
+   enableDirectivity 1
+   directivityFactor 0.55
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 1028
+   name "Bank 1"
+   version 7
+   tl -744 -330.333
+   "Pitch variance" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{123CAC4F752ACA69}Sounds/wirecutting_03.wav"
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass {
+   id 6172
+   name "Spatiality 6"
+   version 5
+   tl -556 -547.333
+   spatialFactor 1
+  }
+ }
+ version 1
+}

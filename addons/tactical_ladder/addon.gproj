@@ -1,7 +1,7 @@
 GameProject {
- ID "ACE_Ladder"
+ ID "ACE_TacticalLadder"
  GUID "61226BB18D360BDD"
- TITLE "ACE Ladder"
+ TITLE "ACE Tactical Ladder"
  Dependencies {
   "60C4CE4888FF4621" "58D0FB3206B6F859"
  }

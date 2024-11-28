@@ -1,0 +1,246 @@
+ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M15AT/Mine_M15AT.et" {
+ ID "5968D2B6A82C6019"
+ components {
+  BaseTriggerComponent "{59E4E69D8E9B4323}" {
+   Enabled 0
+  }
+  LadderComponent "{6122901B59DBBE78}" {
+   BottomFrontPositionInfo PointInfo "{6122901B77EC0381}" {
+    PivotID "Scene_Root"
+    Offset 0 0.18 0
+    Angles 0 180 0
+   }
+   TopFrontPositionInfo PointInfo "{6122901A8A8AEF32}" {
+    PivotID "Scene_Root"
+    Offset 0 2.5758 0
+   }
+   LadderStepLength 0.33
+  }
+  LadderComponent "{62F2B83A55F708E0}" {
+   BottomFrontPositionInfo PointInfo "{6122901B77EC0381}" {
+    PivotID "Scene_Root"
+    Offset 0 0.18 0
+    Angles 0 180 0
+   }
+   TopFrontPositionInfo PointInfo "{6122901A8A8AEF32}" {
+    PivotID "Scene_Root"
+    Offset 0 2.9058 0
+   }
+   LadderStepLength 0.33
+  }
+  LadderComponent "{62F2B83D907FA1DC}" {
+   BottomFrontPositionInfo PointInfo "{6122901B77EC0381}" {
+    PivotID "Scene_Root"
+    Offset 0 0.18 0
+    Angles 0 180 0
+   }
+   TopFrontPositionInfo PointInfo "{6122901A8A8AEF32}" {
+    PivotID "Scene_Root"
+    Offset 0 3.2358 0
+   }
+   LadderStepLength 0.33
+  }
+  LadderComponent "{62F2B83D929EB096}" {
+   BottomFrontPositionInfo PointInfo "{6122901B77EC0381}" {
+    PivotID "Scene_Root"
+    Offset 0 0.18 0
+    Angles 0 180 0
+   }
+   TopFrontPositionInfo PointInfo "{6122901A8A8AEF32}" {
+    PivotID "Scene_Root"
+    Offset 0 3.4945 0
+   }
+   LadderStepLength 0.33
+  }
+  LadderComponent "{62F2B83D98559B5E}" {
+   BottomFrontPositionInfo PointInfo "{6122901B77EC0381}" {
+    PivotID "Scene_Root"
+    Offset 0 0.18 0
+    Angles 0 180 0
+   }
+   TopFrontPositionInfo PointInfo "{6122901A8A8AEF32}" {
+    PivotID "Scene_Root"
+    Offset 0 3.7677 0
+   }
+   LadderStepLength 0.33
+  }
+  LadderComponent "{62F2B83D9CC4C458}" {
+   BottomFrontPositionInfo PointInfo "{6122901B77EC0381}" {
+    PivotID "Scene_Root"
+    Offset 0 0.18 0
+    Angles 0 180 0
+   }
+   TopFrontPositionInfo PointInfo "{6122901A8A8AEF32}" {
+    PivotID "Scene_Root"
+    Offset 0 4.0701 0
+   }
+   LadderStepLength 0.33
+  }
+  MeshObject "{5968D9C73C08706E}" {
+   Object "{5EA6603E9AFAD4FC}Assets/Items/TacticalLadder/ACE_TacticalLadder.xob"
+  }
+  ProcAnimComponent "{62F3046F303B9F56}" {
+   Parameters {
+    ProcAnimParams "{62F3046F362A055E}" {
+     ResourceName "{2D0EB372903042B2}Assets/Items/TacticalLadder/ACE_TacticalLadder.pap"
+    }
+   }
+  }
+  SCR_MineDamageManager "{5A187C4DB2CF86F2}" {
+   Enabled 0
+  }
+  SCR_MineInventoryItemComponent "{59E4E694B93DC656}" {
+   Attributes SCR_ItemAttributeCollection "{5A10B8E3F1D55606}" {
+    ItemAnimationAttributes ItemAnimationAttributes "{5A10B8E3C98BD0A4}" {
+     IkSettings {
+      ItemIKSettings "{59E4E696CE54F34A}" {
+      }
+     }
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{5A12A52945DC707E}" {
+      CameraPreset Front
+      CameraOrbitAngles 0 0 0
+      CameraDistanceToItem 0.8
+      CameraOffset 0 0 0
+     }
+     CharacterModifierAttributes "{5A4CB6450DEB8E32}" {
+      CanBeEquippedInVehicle 0
+     }
+    }
+   }
+  }
+  SCR_PressureTriggerComponent "{59E6BE151DCC9953}" {
+   Enabled 0
+  }
+  WeaponComponent "{59F2DC2C202D1AFB}" {
+   UIInfo GrenadeUIInfo "{5CDCD73FE938D67D}" {
+    m_MagIndicator SCR_MagazineIndicatorConfiguration "{5CDCD73FF80278AD}" {
+     m_sImagesetIcons "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+     m_sImagesetGlows "{00FE3DBDFD15227B}UI/Textures/Icons/icons_wrapperUI-glow.imageset"
+     m_sOutline "bipod"
+    }
+    m_eAmmoTypeFlags 0
+   }
+  }
+  ActionsManagerComponent "{59E4E6938E65C2ED}" {
+   ActionContexts {
+    UserActionContext "{59E4E6938105F844}" {
+     Position PointInfo "{59E4E693875D0164}" {
+      PivotID "1"
+     }
+     Radius 1.25
+    }
+    UserActionContext "{62F3045DFD2B3C28}" {
+     ContextName "top05"
+     Position PointInfo "{6122901D91AEEE04}" {
+      PivotID "Scene_Root"
+      Offset 0 4.2886 0
+     }
+     Radius 2.5
+    }
+    UserActionContext "{62F3045DE8B82B8A}" {
+     ContextName "top04"
+     Position PointInfo "{6122901D91AEEE04}" {
+      PivotID "Scene_Root"
+      Offset 0 3.9862 0
+     }
+     Radius 2.5
+    }
+    UserActionContext "{62F3045DF09FE6CD}" {
+     ContextName "top03"
+     Position PointInfo "{6122901D91AEEE04}" {
+      PivotID "Scene_Root"
+      Offset 0 3.713 0
+     }
+     Radius 2.5
+    }
+    UserActionContext "{62F3045DF07F3922}" {
+     ContextName "top02"
+     Position PointInfo "{6122901D91AEEE04}" {
+      PivotID "Scene_Root"
+      Offset 0 3.4543 0
+     }
+     Radius 2.5
+    }
+    UserActionContext "{62F3045DF132130F}" {
+     ContextName "top01"
+     Position PointInfo "{6122901D91AEEE04}" {
+      PivotID "Scene_Root"
+      Offset 0 3.1243 0
+     }
+     Radius 2.5
+    }
+    UserActionContext "{6122901D9E1DB140}" {
+     ContextName "top00"
+     Position PointInfo "{6122901D91AEEE04}" {
+      PivotID "Scene_Root"
+      Offset 0 2.7943 0
+     }
+     Radius 2.5
+    }
+    UserActionContext "{62F3046E92C70995}" {
+     ContextName "bottom"
+     Position PointInfo "{62F3046E8BBDE3BC}" {
+      PivotID "Scene_Root"
+      Offset 0 1.2726 0
+     }
+     Radius 1.25
+    }
+   }
+   additionalActions {
+    SCR_MinePickUpItemAction "{59E4E69368FB23DB}" {
+     ParentContextList + {
+      "top05" "top04" "top03" "top02" "top01" "top00"
+     }
+    }
+    SCR_MineEquipWeaponAction "{59E4E69349194C2B}" {
+     ParentContextList + {
+      "top05" "top04" "top03" "top02" "top01" "top00"
+     }
+    }
+    SCR_MineEquipHolsterAction "{5A78F5000397EFB7}" {
+     ParentContextList + {
+      "top05" "top04" "top03" "top02" "top01" "top00"
+     }
+     UIInfo UIInfo "{5A78F50007E6463F}" {
+     }
+    }
+    ACE_TacticalLadder_LadderUserAction "{62F3046EB1A49DD9}" {
+     ParentContextList {
+      "top05" "top04" "top03" "top02" "top01" "top00" "bottom"
+     }
+     UIInfo UIInfo "{62F3046EAEB6920B}" {
+      Name "#AR-UserAction_ClimbLadder"
+     }
+     VisibilityRange 3.5
+     m_iLadderComponentIndex 5
+    }
+    ACE_TacticalLadder_ExtendLadderAction "{62F3046EDFEC0E4C}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{62F3046EC2EC8BEB}" {
+      Name "Adjust ladder"
+     }
+     Duration -1
+     PerformPerFrame 1
+     "Sort Priority" -1
+     "Signal name" "extend"
+     "Max value" 11
+     m_fAdjustmentStep 0.5
+     m_bManualAdjustment 1
+    }
+   }
+  }
+  SCR_MineAnimationComponent "{5A20C367C4B111CC}" {
+   Enabled 1
+   AnimInjection AnimationAttachmentInfo "{5A20C367C3FC2F2D}" {
+    AnimGraph "{01EED353ADD9CB79}Assets/Items/TacticalLadder/Workspaces/ACE_TacticalLadder.agr"
+    AnimInstance "{8B87722FE53DD3AE}Assets/Items/TacticalLadder/Workspaces/ACE_TacticalLadder_Player.asi"
+    BindingName "Heavy"
+   }
+  }
+ }
+ coords 3154.437 13.071 2729.032
+}

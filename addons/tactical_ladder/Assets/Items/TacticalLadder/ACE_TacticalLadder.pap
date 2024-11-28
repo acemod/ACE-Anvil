@@ -1,0 +1,984 @@
+ProcAnimProjectClass {
+ signals {
+  SignalClass {
+   id 2052
+   name "Signal"
+   tl -520.008 935.687
+   res "{0569F8A5D313656F}Assets/Items/Ladder/ACE_Ladder.siga"
+   inputsport {
+    1
+   }
+   outputsport {
+    2 30 34 39 41 48 55 56 59 61 67
+   }
+   inputvalues {
+    0
+   }
+   inputvaluesmin {
+    0
+   }
+   inputvaluesmax {
+    11
+   }
+  }
+ }
+ funcs {
+  TranslateMakeClass {
+   id 17414
+   name "TranslateMake"
+   tl -106.667 -31.111
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 2
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    20486
+   }
+  }
+  TranslateMakeClass {
+   id 18438
+   name "TranslateMake"
+   tl -104.444 167.778
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 30
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    19462
+   }
+  }
+  TranslateSetClass {
+   id 19462
+   name "TranslateSet"
+   tl 139.583 95.278
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 21510
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 18438
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 20486
+   name "TranslateSet"
+   tl 140 -85.873
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 22534
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 17414
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  BoneClass {
+   id 21510
+   name "Bone 3"
+   version 0
+   tl -106.806 92.778
+   outs {
+    19462
+   }
+   bone "3"
+   updatebbox 1
+  }
+  BoneClass {
+   id 22534
+   name "Bone 2"
+   version 0
+   tl -103.889 -102.083
+   outs {
+    20486
+   }
+   bone "2"
+   updatebbox 1
+  }
+  BoneClass {
+   id 23558
+   name "Bone 11"
+   version 0
+   tl -100.952 1700.337
+   outs {
+    39942
+   }
+   bone "11"
+   updatebbox 1
+  }
+  BoneClass {
+   id 24582
+   name "Bone 10"
+   version 0
+   tl -103.016 1504.127
+   outs {
+    40966
+   }
+   bone "10"
+   updatebbox 1
+  }
+  BoneClass {
+   id 25606
+   name "Bone 9"
+   version 0
+   tl -97.837 1301.627
+   outs {
+    41990
+   }
+   bone "9"
+   updatebbox 1
+  }
+  BoneClass {
+   id 26630
+   name "Bone 8"
+   version 0
+   tl -97.639 1095.456
+   outs {
+    43014
+   }
+   bone "8"
+   updatebbox 1
+  }
+  BoneClass {
+   id 27654
+   name "Bone 7"
+   version 0
+   tl -100.159 908.571
+   outs {
+    44038
+   }
+   bone "7"
+   updatebbox 1
+  }
+  BoneClass {
+   id 28678
+   name "Bone 6"
+   version 0
+   tl -101.27 703.81
+   outs {
+    45062
+   }
+   bone "6"
+   updatebbox 1
+  }
+  BoneClass {
+   id 29702
+   name "Bone 5"
+   version 0
+   tl -102.857 499.524
+   outs {
+    46086
+   }
+   bone "5"
+   updatebbox 1
+  }
+  BoneClass {
+   id 30726
+   name "Bone 4"
+   version 0
+   tl -108.413 293.492
+   outs {
+    47110
+   }
+   bone "4"
+   updatebbox 1
+  }
+  TranslateMakeClass {
+   id 31750
+   name "TranslateMake"
+   tl -100 1178.572
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 55
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    43014
+   }
+  }
+  TranslateMakeClass {
+   id 32774
+   name "TranslateMake"
+   tl -101.429 1575.714
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 59
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    40966
+   }
+  }
+  TranslateMakeClass {
+   id 33798
+   name "TranslateMake"
+   tl -101.429 1378.572
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 56
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    41990
+   }
+  }
+  TranslateMakeClass {
+   id 34822
+   name "TranslateMake"
+   tl -100 981.429
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 48
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    44038
+   }
+  }
+  TranslateMakeClass {
+   id 35846
+   name "TranslateMake"
+   tl -98.571 781.429
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 41
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    45062
+   }
+  }
+  TranslateMakeClass {
+   id 36870
+   name "TranslateMake"
+   tl -100 577.143
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 39
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    46086
+   }
+  }
+  TranslateMakeClass {
+   id 37894
+   name "TranslateMake"
+   tl -104.286 372.857
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 34
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    47110
+   }
+  }
+  TranslateMakeClass {
+   id 38918
+   name "TranslateMake"
+   tl -102.857 1787.143
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 61
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    39942
+   }
+  }
+  TranslateSetClass {
+   id 39942
+   name "TranslateSet"
+   tl 104.286 1747.143
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 23558
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 38918
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 40966
+   name "TranslateSet"
+   tl 105.714 1527.143
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 24582
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 32774
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 41990
+   name "TranslateSet"
+   tl 120 1341.429
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 25606
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 33798
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 43014
+   name "TranslateSet"
+   tl 120 1138.572
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 26630
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 31750
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 44038
+   name "TranslateSet"
+   tl 118.571 917.143
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 27654
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 34822
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 45062
+   name "TranslateSet"
+   tl 111.429 730
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 28678
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 35846
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 46086
+   name "TranslateSet"
+   tl 110 518.571
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 29702
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 36870
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateSetClass {
+   id 47110
+   name "TranslateSet"
+   tl 111.429 328.571
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 30726
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 37894
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  BoneClass {
+   id 48134
+   name "Bone 12"
+   version 0
+   tl -104.286 1920
+   outs {
+    50182
+   }
+   bone "12"
+   updatebbox 1
+  }
+  TranslateSetClass {
+   id 50182
+   name "TranslateSet"
+   tl 108.571 1948.572
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 48134
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 51206
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+   UpdateCollider 1
+  }
+  TranslateMakeClass {
+   id 51206
+   name "TranslateMake"
+   tl -104.286 2004.286
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 2052
+         port 67
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    50182
+   }
+  }
+ }
+ model "{5EA6603E9AFAD4FC}Assets/Items/Ladder/ACE_Ladder_v3.xob"
+ version 1
+ compiled ProcAnimCompiledClass {
+  visited {
+   4097 3841 3969 2689 2561 2433 2305 2177 2049 1921 1793 1665 3713 1537 3585 1409 3457 1281 3329 1153 3201 1025 3073 897 2945 769 2817 641 513 129 257 1 385
+  }
+  ops {
+   ProcAnimCompiledOp {
+    data {
+     1 196608 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 131072 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 262144 0 65536 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 327680 0 0 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 131072 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 196608 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1441792 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1507328 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1572864 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1638400 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1703936 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1769472 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1835008 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1900544 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1638400 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1507328 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1572864 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1703936 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1769472 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1835008 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1900544 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 1441792 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 393216 0 1376256 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 458752 0 983040 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 524288 0 1048576 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 589824 0 917504 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 655360 0 1114112 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 720896 0 1179648 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 786432 0 1245184 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 851968 0 1310720 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 2031616 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 1966080 0 2097152 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 2031616 0
+    }
+   }
+  }
+  version 2
+  argsize 55
+ }
+}

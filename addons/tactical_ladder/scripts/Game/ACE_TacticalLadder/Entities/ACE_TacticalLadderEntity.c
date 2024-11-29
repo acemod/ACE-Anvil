@@ -63,7 +63,6 @@ class ACE_TacticalLadderEntity : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Workaround: Replace instance, since procedural animation gets broken when placing the ladder
-	//! Has to called later, since
 	protected void OnItemPlacedOnGroundDelayed()
 	{
 		EntitySpawnParams params = new EntitySpawnParams();

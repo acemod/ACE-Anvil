@@ -91,6 +91,15 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
   }
   SCR_MineInventoryItemComponent "{59E4E694B93DC656}" {
    Attributes SCR_ItemAttributeCollection "{5A10B8E3F1D55606}" {
+    ItemDisplayName WeaponUIInfo "{5A10B8E3F31D239B}" {
+     Name "#ACE_TacticalLadder-Item_Name"
+     Description "#ACE_TacticalLadder-Item_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{5A10B8E3E50A16D2}" {
+     Weight 10.4
+     ItemDimensions 46 78 7
+     ItemVolume 8000
+    }
     ItemAnimationAttributes ItemAnimationAttributes "{5A10B8E3C98BD0A4}" {
      IkSettings {
       ItemIKSettings "{59E4E696CE54F34A}" {
@@ -113,12 +122,13 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
   SCR_PressureTriggerComponent "{59E6BE151DCC9953}" {
    Enabled 0
   }
-  WeaponComponent "{59F2DC2C202D1AFB}" {
+  SCR_MineWeaponComponent "{59F2DC2C202D1AFB}" {
    UIInfo GrenadeUIInfo "{5CDCD73FE938D67D}" {
     m_MagIndicator SCR_MagazineIndicatorConfiguration "{5CDCD73FF80278AD}" {
      m_sImagesetIcons "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
      m_sImagesetGlows "{00FE3DBDFD15227B}UI/Textures/Icons/icons_wrapperUI-glow.imageset"
      m_sOutline "bipod"
+     m_bProgressBar 0
     }
     m_eAmmoTypeFlags 0
    }
@@ -221,7 +231,7 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
       "default"
      }
      UIInfo UIInfo "{62F3046EC2EC8BEB}" {
-      Name "Adjust ladder"
+      Name "#ACE_TacticalLadder-UserAction_Extend"
      }
      Duration -1
      PerformPerFrame 1

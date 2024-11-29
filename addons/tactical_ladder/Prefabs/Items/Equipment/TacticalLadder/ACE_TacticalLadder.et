@@ -78,11 +78,15 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
   }
   MeshObject "{5968D9C73C08706E}" {
    Object "{5EA6603E9AFAD4FC}Assets/Items/TacticalLadder/ACE_TacticalLadder.xob"
+   LODFactors {
+    0.002 0.004 0.004
+   }
   }
   ProcAnimComponent "{62F3046F303B9F56}" {
    Parameters {
     ProcAnimParams "{62F3046F362A055E}" {
      ResourceName "{2D0EB372903042B2}Assets/Items/TacticalLadder/ACE_TacticalLadder.pap"
+     SimulationDistance 0
     }
    }
   }

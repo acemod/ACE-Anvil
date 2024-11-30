@@ -1,0 +1,37 @@
+MetaFileClass {
+ Name "{832822FF5ED56BCB}Assets/Items/Medicine/ChestSeal/ACE_Medical_ChestSealDressing.xob"
+ Configurations {
+  FBXResourceClass PC {
+   MaterialAssigns {
+    MaterialAssignClass "{62FC05E2EDE86C95}" {
+     SourceMaterial "ACE_Medical_ChestSeal"
+     AssignedMaterial "{D812CBFEB313745C}Assets/Items/Medicine/ChestSeal/Data/ACE_Medical_ChestSeal.emat"
+    }
+   }
+   MeshParams {
+    MeshParam ChestSealDressing {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_ChestSealDressing {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass PS5 : PC {
+  }
+  FBXResourceClass HEADLESS : PC {
+  }
+ }
+}

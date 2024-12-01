@@ -4,21 +4,21 @@ modded class SCR_PlayerController : PlayerController
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of unreplicated entity from all machines
 	//! Called from local player
-	void ACE_DeleteEntityAtPosition(vector pos)
+	void ACE_RequestDeleteEntity(IEntity entity)
 	{
-		Rpc(RpcAsk_ACE_DeleteEntityAtPosition, pos);
+		Rpc(RpcAsk_ACE_DeleteEntityByID, entity.GetID());
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of unreplicated entity from all machines
 	//! Called from server
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_ACE_DeleteEntityAtPosition(vector pos)
+	void RpcAsk_ACE_DeleteEntityByID(EntityID entityID)
 	{
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-		if (!gameMode)
+		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
+		if (!manager)
 			return;
 		
-		gameMode.ACE_DeleteEntitiesAtPositionsGlobal({pos});
+		manager.DeleteEntityByIdGlobal(entityID);
 	}
 }

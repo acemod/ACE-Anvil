@@ -7,8 +7,10 @@ class ACE_LoadtimeEntityManagerClass : SCR_BaseGameModeComponentClass
 //! Methods for manipulating unreplicated loadtime entities
 class ACE_LoadtimeEntityManager : SCR_BaseGameModeComponent
 {
+	// EntityID can't be properly replicated, so we use ints instead
+	// One EntityID (64 bit) consists of two ints (32 bit each)
 	[RplProp(onRplName: "DeleteInitialEntities")]
-	protected ref array<EntityID> m_aDeletedEntities = {};
+	protected ref array<int> m_aDeletedEntitiesBits = {};
 	
 	protected static ACE_LoadtimeEntityManager s_pInstance;
 	
@@ -28,26 +30,45 @@ class ACE_LoadtimeEntityManager : SCR_BaseGameModeComponent
 	//! Ensures that already deleted unreplicated entities are deleted for JIPs
 	void DeleteInitialEntities()
 	{
-		foreach (EntityID entityID : m_aDeletedEntities)
+		for (int i = 0; i < m_aDeletedEntitiesBits.Count(); i += 2)
 		{
-			DeleteEntityByIdLocal(entityID);
+			DeleteEntityByIdLocal(EntityID.FromInt(m_aDeletedEntitiesBits[i], m_aDeletedEntitiesBits[i + 1]));
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Deletes unreplicated entity by ID for all machines
+	//! Deletes unreplicated entities by ID for all machines
 	//! Can only be called on the server
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void DeleteEntityByIdGlobal(EntityID entityID)
+	void DeleteEntitiesByIdGlobal(notnull array<EntityID> entityIDs)
 	{
-		Rpc(DeleteEntityByIdLocal, entityID);
-		DeleteEntityByIdLocal(entityID);
-		m_aDeletedEntities.Insert(entityID);
+		array<int> newBits = {};
+		newBits.Reserve(2 * entityIDs.Count());
+		
+		foreach (EntityID entityID : entityIDs)
+		{
+			newBits.InsertAll(ACE_EntityIdHelper.ToInt(entityID));
+		}
+		
+		m_aDeletedEntitiesBits.Reserve(m_aDeletedEntitiesBits.Count() + newBits.Count());
+		m_aDeletedEntitiesBits.InsertAll(newBits);
+		
+		Rpc(RpcDo_DeleteEntityByBitsBroadcast, newBits);
+		RpcDo_DeleteEntityByBitsBroadcast(newBits);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Deletes unreplicated entities by position on a local machine
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_DeleteEntityByBitsBroadcast(array<int> newBits)
+	{
+		for (int i = 0; i < newBits.Count(); i += 2)
+		{
+			DeleteEntityByIdLocal(EntityID.FromInt(newBits[i], newBits[i + 1]))
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Deletes unreplicated entity by ID on a local machine
 	void DeleteEntityByIdLocal(EntityID entityID)
 	{
 		IEntity entity = GetGame().GetWorld().FindEntityByID(entityID);
@@ -56,10 +77,18 @@ class ACE_LoadtimeEntityManager : SCR_BaseGameModeComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Return all deleted unreplicated entity positions
+	//! Return all deleted unreplicated entity IDs
 	//! Can only be called on the server
-	array<EntityID> GetDeletedEntities()
+	array<EntityID> GetDeletedEntityIDs()
 	{
-		return m_aDeletedEntities;
+		array<EntityID> entityIDs = {};
+		entityIDs.Reserve(m_aDeletedEntitiesBits.Count() / 2);
+		
+		for (int i = 0; i < m_aDeletedEntitiesBits.Count(); i += 2)
+		{
+			entityIDs.Insert(EntityID.FromInt(m_aDeletedEntitiesBits[i], m_aDeletedEntitiesBits[i + 1]))
+		}
+		
+		return entityIDs;
 	}
 }

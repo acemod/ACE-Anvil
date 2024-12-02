@@ -6,19 +6,17 @@ modded class SCR_PlayerController : PlayerController
 	//! Called from local player
 	void ACE_RequestDeleteEntity(IEntity entity)
 	{
-		Rpc(RpcAsk_ACE_DeleteEntityByID, entity.GetID());
+		Rpc(RpcAsk_ACE_DeleteEntityByBits, ACE_EntityIdHelper.ToInt(entity.GetID()));
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Request deletion of unreplicated entity from all machines
-	//! Called from server
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void RpcAsk_ACE_DeleteEntityByID(EntityID entityID)
+	protected void RpcAsk_ACE_DeleteEntityByBits(array<int> bits)
 	{
 		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
 		if (!manager)
 			return;
 		
-		manager.DeleteEntityByIdGlobal(entityID);
+		manager.DeleteEntitiesByIdGlobal({EntityID.FromInt(bits[0], bits[1])});
 	}
 }

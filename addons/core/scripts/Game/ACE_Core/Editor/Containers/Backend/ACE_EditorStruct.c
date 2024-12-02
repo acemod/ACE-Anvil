@@ -31,13 +31,13 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 		if (!manager)
 			return false;
 		
-		array<EntityID> entityIDs = manager.GetDeletedEntities();
+		array<EntityID> entityIDs = manager.GetDeletedEntityIDs();
 		m_aACE_DeletedEntityIDs.Clear();
 		m_aACE_DeletedEntityIDs.Reserve(entityIDs.Count());
 		
 		foreach (EntityID entityID : entityIDs)
 		{
-			m_aACE_DeletedEntityIDs.Insert(ACE_EntityHelper.EntityIdToString(entityID));
+			m_aACE_DeletedEntityIDs.Insert(ACE_EntityIdHelper.ToString(entityID));
 		}
 		
 		return true;
@@ -56,9 +56,10 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 		
 		foreach (string str : m_aACE_DeletedEntityIDs)
 		{
-			manager.DeleteEntityByIdGlobal(ACE_EntityHelper.EntityIdFromString(str));
+			entityIDs.Insert(ACE_EntityIdHelper.FromString(str));
 		}
 		
+		manager.DeleteEntitiesByIdGlobal(entityIDs);
 		return true;
 	}
 

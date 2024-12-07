@@ -21,8 +21,8 @@ class ACE_Chopping_UserAction : ScriptedUserAction
 		if (!plant)
 			return;
 		
-		userCtrl.ACE_DeleteEntityAtPosition(plant.GetOrigin());
-		SCR_EntityHelper.DeleteEntityAndChildren(helper);
+		userCtrl.ACE_RequestDeleteEntity(plant);
+		delete helper;
 	}
 	
 	//------------------------------------------------------------------------------------------------

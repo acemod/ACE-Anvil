@@ -1,0 +1,7 @@
+SCR_BaseGameMode {
+ ID "56B2B479C6B96951"
+ components {
+  ACE_LoadtimeEntityManager "{62FC19C3B5BE2C5F}" {
+  }
+ }
+}

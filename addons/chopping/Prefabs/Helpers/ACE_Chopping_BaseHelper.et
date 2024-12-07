@@ -15,6 +15,7 @@ ACE_Chopping_HelperEntity {
      Position PointInfo "{611A26EB6F0504E5}" {
      }
      Radius 3
+     "Display UI At Reference Point" 1
     }
    }
    additionalActions {

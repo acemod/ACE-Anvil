@@ -14,6 +14,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected ACE_Medical_PainHitZone m_pACE_Medical_PainHitZone;
 	protected float m_fACE_Medical_ModeratePainThreshold;
 	protected float m_fACE_Medical_SeriousPainThreshold;
+	protected float m_fACE_Medical_MedicalKitMaxHeal;
 	
 	// We only notify the replication system about changes of these members on initialization
 	// After init, each proxy is itself responsible for updating these members
@@ -53,6 +54,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		{
 			m_bACE_Medical_SecondChanceOnHeadEnabled = settings.m_bSecondChanceOnHeadEnabled;
 			m_fACE_Medical_SecondChanceRegenScale = settings.m_fSecondChanceRegenScale;
+			m_fACE_Medical_MedicalKitMaxHeal = settings.m_fMedicalKitMaxHealScaled;
 		}
 		
 		ACE_Medical_EnableSecondChance(true);
@@ -84,12 +86,19 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Returns true if at least one physical hit zone is injured
-	bool ACE_Medical_CanBeHealed()
+	//! Returns true if at least one physical hit zone is below the provided max scaled health.
+	//! When atMedicalFacility is true, it will check for any damage (scaled health of 0.999), otherwise it will compare against the max scaled heal with a medical kit.
+	bool ACE_Medical_CanBeHealed(bool atMedicalFacility = false)
 	{
+		// Calculating the maxHeal to check against
+		float maxHeal = 0.999;
+		if (!atMedicalFacility)
+			maxHeal = m_fACE_Medical_MedicalKitMaxHeal;
+		
+		// Iterating hitzones and checking max health
 		foreach (HitZone hitZone : m_aACE_Medical_PhysicalHitZones)
 		{
-			if (hitZone.GetHealthScaled() < 0.999)
+			if (hitZone.GetHealthScaled() < maxHeal)
 				return true;
 		}
 		

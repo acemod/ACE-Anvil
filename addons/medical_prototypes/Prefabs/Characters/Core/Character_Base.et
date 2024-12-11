@@ -5,8 +5,6 @@ SCR_ChimeraCharacter {
   }
   ACE_Medical_MedicationComponent "{621B2BABDAF5867E}" {
   }
-  ACE_Medical_RespiratoryComponent "{62D754C175771569}" {
-  }
   SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
    "Additional hit zones" {
     ACE_Medical_BrainHitZone Health {
@@ -185,10 +183,6 @@ SCR_ChimeraCharacter {
     SCR_HealSupportStationAction "{5E14966CF597F6B3}" {
      "Sort Priority" 0
     }
-    SCR_MorphineUserAction "{60CF45A52131AD5A}" {
-     ActionTitle "Inject Epinephrine"
-     m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
-    }
     ACE_Medical_AmmoniumCarbonateUserAction "{62150A66FC4875D8}" {
      ParentContextList {
       "Head"
@@ -196,7 +190,12 @@ SCR_ChimeraCharacter {
      UIInfo UIInfo "{62150A66E8D34DA5}" {
       Name "#ACE_Medical-AmmoniumCarbonatePackageAction"
      }
+     ActionTitle "Ammonium Carbonate"
      m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
+    }
+    SCR_MorphineUserAction "{60CF45A52131AD5A}" {
+     ActionTitle "Inject Epinephrine"
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
     }
     SCR_MorphineUserAction "{62150A6C41D53656}" {
      ParentContextList {
@@ -258,9 +257,9 @@ SCR_ChimeraCharacter {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
      UIInfo UIInfo "{621737D025B25341}" {
-      Name "Check blood pressure"
+      Name "#ACE_Medical-UserAction_CheckBloodPressure"
      }
-     ActionTitle "#ACE_Medical-UserAction_CheckBloodPressure"
+     ActionTitle "Check Blood Pressure"
      VisibilityRange 2
      Duration 3
      "Sort Priority" 11
@@ -278,6 +277,32 @@ SCR_ChimeraCharacter {
      Duration 1
      "Sort Priority" 12
      m_eNotificationType ACE_MEDICAL_SPO2_RESULT
+    }
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo UIInfo "{630C214BCA7A937E}" {
+      Name "#ACE_Medical-UserAction_RecoveryPosition"
+     }
+     ActionTitle "Recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 101
+     m_eUnconsciousPose RECOVERY
+    }
+    ACE_Medical_RepositionUserAction "{630C32646482C8E5}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo UIInfo "{630C32679F8D254B}" {
+      Name "#ACE_Medical-UserAction_BackPosition"
+     }
+     ActionTitle "Back position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 102
+     m_eUnconsciousPose BACK
     }
    }
   }

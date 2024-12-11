@@ -1,0 +1,119 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Unconscious {
+   Nodes {
+    AnimSrcNodeStateMachine UnconsciousLoopSTM {
+     states {
+      AnimSrcNodeState UnconsciousBack : UnkonsciousBack {
+       Tags {
+        "ACE_Medical_TagBackPosition"
+       }
+       Child "UnconsciousPoseBackEvent"
+       StartCondition "UnconsciousPose == 4"
+      }
+      AnimSrcNodeState UnconsciousBellyUp {
+       StartCondition "false"
+      }
+      AnimSrcNodeState UnconsciousRightSide {
+       Tags {
+        "ACE_Medical_TagRecoveryPosition"
+       }
+       Child "UnconsciousPoseRecoveryEvent"
+       StartCondition "UnconsciousPose == 5"
+      }
+      AnimSrcNodeState UnconsciousLeftSide {
+       StartCondition "false"
+      }
+      AnimSrcNodeState UnconsciousBelly {
+       Child "UnconsciousPoseNoneEvent"
+       StartCondition "UnconsciousPose < 4"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{A3D4B8F27C1E9056}" {
+       FromState "UnconsciousBelly"
+       ToState "UnconsciousBack"
+       Duration "1"
+       Condition "UnconsciousPose == 4"
+       BlendFn S
+      }
+      AnimSrcNodeTransition "{1ABED42F98376C5E}" {
+       FromState "UnconsciousRightSide"
+       ToState "UnconsciousBack"
+       Duration "1"
+       Condition "UnconsciousPose == 4"
+       BlendFn S
+      }
+      AnimSrcNodeTransition "{6B31E84CFA95720D}" {
+       FromState "UnconsciousBack"
+       ToState "UnconsciousRightSide"
+       Duration "1"
+       Condition "UnconsciousPose == 5"
+       BlendFn S
+      }
+      AnimSrcNodeTransition "{F45D2E7893B16C0A}" {
+       FromState "UnconsciousBelly"
+       ToState "UnconsciousRightSide"
+       Duration "1"
+       Condition "UnconsciousPose == 5"
+       BlendFn S
+      }
+     }
+    }
+    AnimSrcNodeStateMachine UnconsciousOutSTM {
+     EditorPos 25.8 4.5
+     states {
+      AnimSrcNodeState UnconsciousOut {
+       StartCondition "UnconsciousPose == 4"
+      }
+      AnimSrcNodeState UnconsciousOutBelly {
+       StartCondition "UnconsciousPose < 4"
+      }
+      AnimSrcNodeState UnconsciousOutBellyUp {
+       StartCondition "false"
+      }
+      AnimSrcNodeState UnconsciousOutLeft {
+       StartCondition "false"
+      }
+      AnimSrcNodeState UnconsciousOutRight {
+       StartCondition "UnconsciousPose == 5"
+      }
+     }
+    }
+    AnimSrcNodeEvent UnconsciousPoseNoneEvent {
+     EditorPos -13.9 0.8
+     Child "UnkonsciousBellySrc"
+     Events {
+      AnimSrcEvent "{630D4126BA21D190}" {
+       Name "ACE_Medical_Event_UnconsciousPoseChange"
+       UserInt 0
+       MainPathOnly 1
+      }
+     }
+    }
+    AnimSrcNodeEvent UnconsciousPoseBackEvent {
+     EditorPos -16.7 0.8
+     Child "UnconsciousBackSrc"
+     Events {
+      AnimSrcEvent "{630D4126BA21D190}" {
+       Name "ACE_Medical_Event_UnconsciousPoseChange"
+       UserInt 4
+       MainPathOnly 1
+      }
+     }
+    }
+    AnimSrcNodeEvent UnconsciousPoseRecoveryEvent {
+     EditorPos -5.7 0.8
+     Child "UnkonsciousRightSrc"
+     Events {
+      AnimSrcEvent "{630D4126BA21D190}" {
+       Name "ACE_Medical_Event_UnconsciousPoseChange"
+       UserInt 5
+       MainPathOnly 1
+      }
+     }
+    }
+   }
+  }
+ }
+}

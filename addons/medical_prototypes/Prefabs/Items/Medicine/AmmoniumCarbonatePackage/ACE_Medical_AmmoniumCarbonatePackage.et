@@ -47,6 +47,12 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
       CameraOrbitAngles 0 0 -45
       CameraDistanceToItem 0.05
      }
+     CharacterModifierAttributes "{6315339DD6C8D186}" {
+      SpeedLimit 4
+      ADSSpeedLimit 4
+      SpeedLimitItemPrimaryAction 4
+      SpeedLimitHighready 4
+     }
     }
     CommonItemType "MORPHINE"
    }

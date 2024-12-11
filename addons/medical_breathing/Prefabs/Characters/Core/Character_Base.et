@@ -1,0 +1,84 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  SCR_CharacterInventoryStorageComponent "{520EA1D2DB118DAC}" {
+   components {
+    ACE_EquipmentStorageComponent "{631533A088E42BE9}" {
+     StoragePurpose 0
+     SaveInLoadout 0
+     UseVirtualInventoryReplication 0
+     InitialStorageSlots {
+      SCR_EquipmentStorageSlot LaryngealTubeSlot {
+       PivotID "FacialLipLowerMiddle"
+       Offset -0.0028 0.0145 0.047
+       Angles 0 90 178.25211
+       Enabled 0
+       Prefab "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et"
+       AllowedItemTypes {
+        "MORPHINE" "SALINE"
+       }
+       AnimatedMeshRefference "{C111ED61F81374EE}Assets/Items/Medicine/KingLT/ACE_Medical_KingLT.xob"
+      }
+     }
+    }
+    SCR_EquipmentStorageComponent "{56B49DA9722B635D}" {
+     InitialStorageSlots {
+      SCR_EquipmentStorageSlot BinocularSlot {
+      }
+     }
+    }
+    SCR_SalineStorageComponent "{5C82B07DFE223090}" {
+     InitialStorageSlots {
+      SCR_SalineBagStorageSlot SalineBagSlot {
+      }
+     }
+    }
+   }
+  }
+  ACE_Medical_RespiratoryComponent "{62D754C175771569}" {
+  }
+  SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
+   "Additional hit zones" {
+    ACE_Medical_ChestHitZone Chest {
+    }
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    SCR_MorphineUserAction "{63112655F652950E}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{63112655E941BA1D}" {
+      Name "#ACE_Medical-UserAction_NeedleDecompression"
+     }
+     ActionTitle "Needle Decompression"
+     m_eHitZoneGroup UPPERTORSO
+     m_eConsumableType ACE_MEDICAL_NCD_KIT
+    }
+    SCR_MorphineUserAction "{63162326FC92EC82}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo UIInfo "{63162326F18A331B}" {
+      Name "Insert King LT"
+     }
+     ActionTitle "King LZ"
+     m_eHitZoneGroup HEAD
+     m_eConsumableType ACE_MEDICAL_LARYNGEAL_TUBE
+    }
+    ACE_Medical_ChestSealUserAction "{631348EDB9E985D9}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{631348EDB256F161}" {
+      Name "#ACE_Medical-UserAction_ChestSeal"
+     }
+     ActionTitle "Chest Seal"
+     m_eHitZoneGroup UPPERTORSO
+     m_eConsumableType ACE_MEDICAL_CHEST_SEAL
+    }
+   }
+  }
+ }
+}

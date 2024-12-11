@@ -1,0 +1,9 @@
+$animExportProfile {
+ $tracks {
+   "Scene_Root" ""           "TRA"
+   "Armature"   "Scene_Root" "RA"
+   "i_root"     "Armature"   "RA"
+   "i_sheet_r"  "i_root"     "RA"
+   "i_sheet_l"  "i_root"     "RA"
+ }
+}

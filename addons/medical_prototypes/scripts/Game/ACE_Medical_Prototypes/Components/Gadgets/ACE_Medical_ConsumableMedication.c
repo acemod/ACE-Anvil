@@ -1,29 +1,12 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-class ACE_Medical_ConsumableMedication : SCR_ConsumableEffectHealthItems
+class ACE_Medical_ConsumableMedication : ACE_Medical_ConsumableEffectHealthItems
 {
-	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of device thad delivers the drug", enums: ParamEnumArray.FromEnum(SCR_EConsumableType))]
-	protected SCR_EConsumableType m_eDeviceType;
-	
 	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of administered drug", enums: ParamEnumArray.FromEnum(ACE_Medical_EDrugType))]
 	protected ACE_Medical_EDrugType m_eDrugType;
 	
 	[Attribute(desc: "Configuration of the dose that gets administered")]
 	protected ref ACE_Medical_Dose m_Dose;
-	
-	//------------------------------------------------------------------------------------------------
-	//! Can always be applied in advanced medical
-	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
-	{
-		return true;
-	}
-
-	//------------------------------------------------------------------------------------------------
-	//! Can always be applied in advanced medical
-	override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group, out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
-	{
-		return true;
-	}
 
 	//------------------------------------------------------------------------------------------------
 	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
@@ -42,11 +25,5 @@ class ACE_Medical_ConsumableMedication : SCR_ConsumableEffectHealthItems
 			return;
 		
 		medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName(), GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(user));
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void ACE_Medical_ConsumableMedication()
-	{
-		m_eConsumableType = m_eDeviceType;
 	}
 }

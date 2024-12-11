@@ -9,14 +9,10 @@ modded class ACE_Medical_Settings : ACE_ModSettings
 	[Attribute(desc: "Settings for cardiovascular system")]
 	ref ACE_Medical_CardiovascularSystemSettings m_CardiovascularSystem;
 	
-	[Attribute(desc: "Settings for respiratory system")]
-	ref ACE_Medical_RespiratorySystemSettings m_RespiratorySystem;
-	
 	[Attribute(desc: "Settings for medication system")]
 	ref ACE_Medical_MedicationSystemSettings m_MedicationSystem;
 	
 	protected static const ResourceName DEFAULT_CARDIOVASCULAR_SYSTEM_CONFIG = "{D207395D91237C8A}Configs/Systems/ACE_Medical_CardiovascularSystemSettings.conf";
-	protected static const ResourceName DEFAULT_RESPIRATORY_SYSTEM_CONFIG = "{D207395D91237C8A}Configs/Systems/ACE_Medical_CardiovascularSystemSettings.conf";
 	protected static const ResourceName DEFAULT_MEDICATION_SYSTEM_CONFIG = "{D60A24D9276A24DF}Configs/Systems/ACE_Medical_MedicationSystemSettings.conf";
 		
 	//------------------------------------------------------------------------------------------------
@@ -25,9 +21,6 @@ modded class ACE_Medical_Settings : ACE_ModSettings
 	{		
 		if (!m_CardiovascularSystem)
 			m_CardiovascularSystem = SCR_ConfigHelperT<ACE_Medical_CardiovascularSystemSettings>.GetConfigObject(DEFAULT_CARDIOVASCULAR_SYSTEM_CONFIG);
-		
-		if (!m_RespiratorySystem)
-			m_RespiratorySystem = SCR_ConfigHelperT<ACE_Medical_RespiratorySystemSettings>.GetConfigObject(DEFAULT_RESPIRATORY_SYSTEM_CONFIG);
 		
 		if (!m_MedicationSystem)
 			m_MedicationSystem = SCR_ConfigHelperT<ACE_Medical_MedicationSystemSettings>.GetConfigObject(DEFAULT_MEDICATION_SYSTEM_CONFIG);

@@ -1,0 +1,8 @@
+AnimSetInstanceSource "{5D8A86AE4C4C6D94}" {
+ Template "{CD0E6C3490BF0847}anims/workspaces/player/player_main.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Unconscious.Default.UnconsciousFront" {
+   Resource ""
+  }
+ }
+}

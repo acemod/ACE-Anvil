@@ -35,11 +35,11 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 		if (ownerChar.IsInVehicle())
 			return false;
 		
-		CharacterControllerComponent ownerController = ownerChar.GetCharacterController();
+		SCR_CharacterControllerComponent ownerController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
 		if (!ownerController)
 			return false;
 		
-		if (!ownerController.IsUnconscious())
+		if (!ownerController.IsUnconscious() || ownerController.ACE_Medical_GetUnconsciousPose() != ACE_Medical_EUnconsciousPose.BACK)
 			return false;
 		
 		CharacterAnimationComponent ownerAnimation = ownerChar.GetAnimationComponent();

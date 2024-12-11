@@ -163,10 +163,13 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 			return;
 		
 		if (isPerformed)
+		{
 			m_pDamageManager.TerminateDamageEffectsOfType(m_Settings.m_CardiacArrestDamageEffect.Type());
+		}
 		else
+		{
 			m_pDamageManager.AddDamageEffect(m_Settings.m_CardiacArrestDamageEffect);
-		
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

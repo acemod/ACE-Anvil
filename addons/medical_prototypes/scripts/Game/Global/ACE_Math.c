@@ -18,9 +18,4 @@ class ACE_Math
 	{
 		return x / (1 + Math.AbsFloat(x));
 	}
-	
-	static bool IsClose(float a, float b, float rtol = 1e5, float atol = 1e-8)
-	{
-		return Math.AbsFloat(a - b) <= atol + rtol * Math.AbsFloat(b);
-	}
 }

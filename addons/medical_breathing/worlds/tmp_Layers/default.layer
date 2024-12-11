@@ -1,0 +1,227 @@
+GenericEntity {
+ components {
+  MeshObject "{62E122CF5D8F7E95}" {
+   Object "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
+  }
+  RplComponent "{62E122CF57795098}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+ }
+ coords 76.814 3.634 23.68
+}
+$grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et" {
+ {
+  coords 77.19 3.667 23.278
+ }
+ {
+  coords 77.223 3.662 23.163
+ }
+ {
+  coords 77.242 3.656 23.059
+ }
+ {
+  coords 76.915 3.62 23.327
+ }
+ {
+  coords 76.929 3.61 23.194
+ }
+ {
+  coords 76.949 3.598 23.03
+ }
+ LT {
+  coords 77.312 3.622 22.507
+ }
+ LT2 {
+  coords 77.311 3.615 22.395
+ }
+ {
+  coords 76.923 3.585 22.885
+ }
+ {
+  coords 77.25 3.645 22.925
+ }
+ {
+  coords 77.255 3.636 22.821
+ }
+ {
+  coords 76.971 3.585 22.765
+ }
+}
+$grp GenericEntity : "{527D7C5D2E476BDC}Prefabs/Items/Medicine/SalineBag_01/SalineBag_USSR_01.et" {
+ {
+  coords 79.79 3.67 23.089
+ }
+ SB {
+  coords 77.258 3.682 22.733
+ }
+}
+GenericEntity : "{58CF3AB87C441295}Prefabs/Items/Medicine/AmmoniumCarbonatePackage/ACE_Medical_AmmoniumCarbonatePackage.et" {
+ coords 77.623 3.784 23.666
+}
+$grp GenericEntity : "{661744F5F88B401C}Prefabs/Items/Medicine/NCDKit/ACE_Medical_NCDKit.et" {
+ {
+  coords 77.281 3.72 23.662
+ }
+ {
+  coords 77.144 3.692 23.639
+ }
+ {
+  coords 77.087 3.689 23.728
+ }
+ {
+  coords 77.207 3.724 23.853
+ }
+ {
+  coords 77.403 3.766 23.908
+ }
+ {
+  coords 77.383 3.749 23.774
+ }
+ {
+  coords 77.465 3.759 23.716
+ }
+ {
+  coords 77.333 3.722 23.578
+ }
+ {
+  coords 77.278 3.741 23.894
+ }
+ {
+  coords 77.148 3.723 23.967
+ }
+ {
+  coords 77.048 3.701 23.927
+ }
+}
+$grp GenericEntity : "{79379D4E43B29B88}Prefabs/Items/Medicine/ChestSeal/ACE_Medical_ChestSeal.et" {
+ {
+  coords 78.329 3.832 23.33
+  angleX 5.344
+  angleY 0.251
+  angleZ 2.695
+ }
+ {
+  coords 78.34 3.855 23.587
+  angleX 5.344
+  angleY 0.251
+  angleZ 2.695
+ }
+ {
+  coords 78.777 3.827 23.787
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 78.99 3.8 23.648
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 79.114 3.776 23.373
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 78.743 3.809 23.358
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 78.769 3.806 23.341
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 78.355 3.829 23.313
+  angleX 5.344
+  angleY 0.251
+  angleZ 2.695
+ }
+ {
+  coords 78.366 3.852 23.57
+  angleX 5.344
+  angleY 0.251
+  angleZ 2.695
+ }
+ {
+  coords 78.803 3.823 23.77
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 79.016 3.797 23.631
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 79.14 3.772 23.356
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 78.842 3.8 23.343
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 78.428 3.826 23.315
+  angleX 5.344
+  angleY 0.251
+  angleZ 2.695
+ }
+ {
+  coords 78.439 3.848 23.572
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 78.876 3.816 23.772
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 79.089 3.79 23.633
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+ {
+  coords 79.213 3.765 23.358
+  angleX 2.66
+  angleY 0.25
+  angleZ 5.362
+ }
+}
+SCR_AIGroup : "{84E5BBAB25EA23E5}Prefabs/Groups/BLUFOR/Group_US_FireTeam.et" {
+ coords 77.748 3.69 25.563
+ angleY -178.248
+}
+GenericEntity : "{C1AB654F77ABA58B}PrefabsEditable/Auto/Props/Military/Compositions/US/E_ArsenalBox_US.et" {
+ components {
+  SCR_ResourceComponent "{5D7D07D2F7A252D2}" {
+   m_aDisabledResourceTypes {
+    0
+   }
+  }
+ }
+ coords 77.292 3.463 20.272
+}
+GenericEntity : "{C687D937CA92EF2A}Prefabs/Items/Medicine/NCDKit/ACE_medical_NCDKit_Needle.et" {
+ coords 76.869 3.654 23.783
+ {
+  GenericEntity : "{1323E0ADD9389CFD}Prefabs/Items/Medicine/NCDKit/ACE_medical_NCDKit_Hose.et" {
+  }
+ }
+}

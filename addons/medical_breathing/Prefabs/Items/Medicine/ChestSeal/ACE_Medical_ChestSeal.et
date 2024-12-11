@@ -1,0 +1,83 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Medical-Item_ChestSeal_Name"
+     Description "#ACE_Medical-Item_ChestSeal_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{631348EAC4135DE1}" {
+       Name "#ACE_Medical-InfoWidget_ChestSeal"
+       Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+       IconSetName "Unconscious_UI"
+      }
+     }
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.03
+     SizeSetupStrategy Manual
+     ItemDimensions 10 1 10
+     ItemVolume 250
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{631348EAC4135D23}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{631348EAC4135D2F}" {
+       AnimGraph "{B23B0C47BBF684DD}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal.agr"
+       AnimInstance "{0339188E414B1FBA}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal_Player.asi"
+       BindingName "Gadget"
+      }
+     }
+    }
+    CustomAttributes {
+     SCR_ItemOfInterestAttribute "{631348EAC4135D1A}" {
+      m_InterestType BANDAGE
+     }
+     ItemActionAnimAttributes "{631348EAC4135D1D}" {
+      AnimationGraphTemplate "{DFFC0A34A77ADCB4}anims/workspaces/player/player_main.agr"
+      ActionAnimationCommandName "CMD_HealSelf"
+      ActionAnimDuration 10
+      AllowMovementDuringAction 1
+     }
+     PreviewRenderAttributes "{631348EAC4135D00}" {
+      CameraPreset Top
+      CameraOrbitAngles 0 0 180
+      CameraDistanceToItem 0.25
+      LodModel 1
+     }
+     CharacterModifierAttributes "{631348EB8F175EA0}" {
+      SpeedLimit 4
+      ADSSpeedLimit 4
+      SpeedLimitItemPrimaryAction 4
+      SpeedLimitHighready 4
+     }
+     SCR_AlternativeModel "{631533955885ED08}" {
+      m_sAlternativeModel "{2C4FFBF34CD60067}Assets/Items/Medicine/ChestSeal/ACE_Medical_ChestSealPackage.xob"
+     }
+    }
+    CommonItemType "BANDAGE"
+   }
+  }
+  MeshObject "{631348EAC4135D73}" {
+   Object "{832822FF5ED56BCB}Assets/Items/Medicine/ChestSeal/ACE_Medical_ChestSealDressing.xob"
+  }
+  RigidBody "{631348EAC4135D78}" {
+  }
+  SCR_ConsumableItemComponent "{631348EAC4135D63}" {
+   m_eAnimVariable ADRIANOV
+   m_ConsumableEffect ACE_Medical_ConsumableChestSeal "{631348EAC4135D64}" {
+    m_aDamageEffectsToLoad {
+     ACE_Medical_ChestSealDamageEffect "{631348EDD7BDA5AF}" {
+     }
+    }
+   }
+  }
+  BaseItemAnimationComponent "{63135530982A4526}" {
+   AnimGraph "{B23B0C47BBF684DD}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal.agr"
+   AnimInstance "{361A127C782C3F13}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal_Item.asi"
+   DeactivationDelay 0
+  }
+ }
+}

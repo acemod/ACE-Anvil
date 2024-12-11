@@ -51,9 +51,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (system2)
 			system2.OnFullHeal(owner);
 		
-		ACE_Medical_BaseSystem3 system3 = ACE_Medical_BaseSystem3.GetInstance(ACE_Medical_RespiratorySystem);
-		if (system3)
-			system3.OnFullHeal(owner);
 		//-----------------------------------------------------------------------------------------------------------
 	}
 	

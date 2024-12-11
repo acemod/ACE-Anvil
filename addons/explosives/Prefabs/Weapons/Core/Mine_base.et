@@ -1,0 +1,21 @@
+GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
+ ID "5968D2B6A82C6019"
+ components {
+  SCR_MineDamageManager "{5A187C4DB2CF86F2}" {
+   Enabled 0
+  }
+  ActionsManagerComponent "{59E4E6938E65C2ED}" {
+   additionalActions {
+    ACE_Explosives_DisarmUserAction "{61B846BBCADE61D1}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{61B846BBC1A7E295}" {
+      Name "#ACE-Explosives_DisarmUserAction_Name"
+     }
+     Duration 6
+    }
+   }
+  }
+ }
+}

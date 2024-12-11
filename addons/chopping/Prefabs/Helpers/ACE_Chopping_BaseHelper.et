@@ -25,6 +25,7 @@ ACE_Chopping_HelperEntity {
      }
      UIInfo UIInfo "{611A26EA9DC95817}" {
      }
+     m_iAnimationIndex 2
     }
    }
   }

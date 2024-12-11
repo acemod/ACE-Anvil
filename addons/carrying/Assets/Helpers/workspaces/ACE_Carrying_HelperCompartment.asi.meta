@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{B241F1D8F215C583}Assets/Vehicles/Wheeled/workspaces/Player_CarryInjured.asi"
+ Name "{82255803EF1CA1D8}Prefabs/workspaces/ACE_Carrying_HelperCompartment.asi"
  Configurations {
   AnimSetInstanceResourceClass PC {
   }
@@ -8,6 +8,8 @@ MetaFileClass {
   AnimSetInstanceResourceClass XBOX_SERIES : PC {
   }
   AnimSetInstanceResourceClass PS4 : PC {
+  }
+  AnimSetInstanceResourceClass PS5 : PC {
   }
   AnimSetInstanceResourceClass HEADLESS : PC {
   }

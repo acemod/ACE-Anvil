@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{8029A12EB049201B}Assets/Vehicles/Wheeled/workspaces/Vehicles_Wheeled.aw"
+ Name "{8DA4AA9146C29FF9}Prefabs/Helpers/ACE_Carrying_HelperCompartment.aw"
  Configurations {
   AnimWorkspaceResourceClass PC {
   }
@@ -8,6 +8,8 @@ MetaFileClass {
   AnimWorkspaceResourceClass XBOX_SERIES : PC {
   }
   AnimWorkspaceResourceClass PS4 : PC {
+  }
+  AnimWorkspaceResourceClass PS5 : PC {
   }
   AnimWorkspaceResourceClass HEADLESS : PC {
   }

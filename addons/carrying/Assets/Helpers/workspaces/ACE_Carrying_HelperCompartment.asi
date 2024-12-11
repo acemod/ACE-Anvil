@@ -1,0 +1,10 @@
+AnimSetInstanceSource "{61D139725AB5C05E}" {
+ Template "{7DBD6BD8C4D027C5}Prefabs/Helpers/workspaces/ACE_Carrying_HelperCompartment.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Carried.Default.Idle" {
+   Resource "{3709499189B2B959}anims/InjuredCarry/InjuredCarry.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{61D13972214BF5DA}" {
+ }
+}

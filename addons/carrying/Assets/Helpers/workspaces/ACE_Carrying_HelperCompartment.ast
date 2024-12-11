@@ -1,0 +1,13 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{61D14564A92E1CE0}" {
+   Name "Carried"
+   Animations {
+    "Idle"
+   }
+   Columns {
+    "Default"
+   }
+  }
+ }
+}

@@ -45,7 +45,11 @@ class ACE_Carrying_Tools
 		if (!carrier)
 			return false;
 		
-		return GetHelperCompartmentFromCarrier(carrier);
+		SCR_CharacterControllerComponent controller = SCR_CharacterControllerComponent.Cast(carrier.FindComponent(SCR_CharacterControllerComponent));
+		if (!controller)
+			return false;
+		
+		return controller.ACE_Carrying_IsCarrier();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -55,7 +59,11 @@ class ACE_Carrying_Tools
 		if (!carried)
 			return false;
 		
-		return GetHelperCompartmentFromCarried(carried);
+		SCR_CharacterControllerComponent controller = SCR_CharacterControllerComponent.Cast(carried.FindComponent(SCR_CharacterControllerComponent));
+		if (!controller)
+			return false;
+		
+		return controller.ACE_Carrying_IsCarried();
 	}
 	
 	//------------------------------------------------------------------------------------------------

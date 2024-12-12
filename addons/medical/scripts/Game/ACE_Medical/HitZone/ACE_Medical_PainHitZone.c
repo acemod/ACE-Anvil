@@ -14,12 +14,12 @@ class ACE_Medical_PainHitZone : SCR_RegeneratingHitZone
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Suppress passive regeneration while bleeding
-	override float CalculatePassiveRegeneration()
+	override float CalculatePassiveRegenDPS(bool considerRegenScale = true)
 	{
-		SCR_CharacterDamageManagerComponent manager = SCR_CharacterDamageManagerComponent.Cast(GetHitZoneContainer());
-		if (manager && manager.IsDamagedOverTime(EDamageType.BLEEDING))
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(GetHitZoneContainer());
+		if (damageManager && damageManager.IsBleeding())
 			return 0;
 
-		return super.CalculatePassiveRegeneration();
+		return super.CalculatePassiveRegenDPS(considerRegenScale);
 	}
 }

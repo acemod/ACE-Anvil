@@ -1,0 +1,4 @@
+MatTerrainObject : "{E0078B932EB17D27}Common/Materials/default_MatTerrainObj.emat" {
+ NoDecals 1
+ EnableClutter 0
+}

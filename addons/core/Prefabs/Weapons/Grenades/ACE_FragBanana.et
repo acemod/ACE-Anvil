@@ -16,8 +16,8 @@ GenericEntity : "{E8F00BF730225B00}Prefabs/Weapons/Grenades/Grenade_M67.et" {
     CustomAttributes {
      PreviewRenderAttributes "{52D2D341931DB0B8}" {
       CameraPreset Back
-      CameraOrbitAngles 0 0 0
-      CameraDistanceToItem 0.4
+      CameraOrbitAngles 180 90 45
+      CameraDistanceToItem 0.3
       FOV 40
      }
     }

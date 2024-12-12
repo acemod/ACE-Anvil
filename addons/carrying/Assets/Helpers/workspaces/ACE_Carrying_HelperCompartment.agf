@@ -1,0 +1,31 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Default {
+   Nodes {
+    AnimSrcNodeStateMachine Carried {
+     EditorPos 2.3 -22.3
+     NodeGroup "Carried"
+     states {
+      AnimSrcNodeState Idle {
+       EditorPos 1.1 -21
+       Child "Idle Source"
+      }
+     }
+    }
+    AnimSrcNodeSource "Idle Source" {
+     EditorPos 0.9 -24.3
+     Source "Carried.Default.Idle"
+    }
+    AnimSrcNodeQueue MasterControl {
+     EditorPos 1.9 -25.6
+     Child "Carried"
+    }
+   }
+   NodeGroups {
+    AnimSrcGraphNodeGroup Carried {
+     EditorColor 0.333 0.392 0.275 255
+    }
+   }
+  }
+ }
+}

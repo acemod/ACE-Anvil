@@ -68,7 +68,7 @@ class ACE_TacticalLadderEntity : GenericEntity
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		GetWorldTransform(params.Transform);
-		GetGame().SpawnEntityPrefab(GetPrefabData().GetPrefabName(), false, GetWorld(), params);
+		GetGame().SpawnEntityPrefab(Resource.Load(GetPrefabData().GetPrefabName()), GetWorld(), params);
 		SCR_EntityHelper.DeleteEntityAndChildren(this);
 	}
 	

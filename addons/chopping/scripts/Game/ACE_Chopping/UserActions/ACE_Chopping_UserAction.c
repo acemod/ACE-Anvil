@@ -18,8 +18,8 @@ class ACE_Chopping_UserAction : ACE_ShovelUserAction
         if (!plant)
             return;
         
-        userCtrl.ACE_DeleteEntityAtPosition(plant.GetOrigin());
-        SCR_EntityHelper.DeleteEntityAndChildren(helper);
+		userCtrl.ACE_RequestDeleteEntity(plant);
+		delete helper;
     }
 
     //------------------------------------------------------------------------------------------------

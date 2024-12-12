@@ -116,6 +116,7 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
       CameraOrbitAngles 0 0 0
       CameraDistanceToItem 0.8
       CameraOffset 0 0 0
+      LodModel 1
      }
      CharacterModifierAttributes "{5A4CB6450DEB8E32}" {
       CanBeEquippedInVehicle 0

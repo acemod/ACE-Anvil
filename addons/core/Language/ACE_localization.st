@@ -26,9 +26,11 @@ StringTable {
    Target_fr_fr "Potassium bon pour la santé !"
    Target_de_de "Gesundes Kalium!"
    Target_cs_cz "Zdravá dávka draslíku!"
-   Modified 1627220515
+   Target_ru_ru "Здоровый калий!"
+   Target_uk_ua "Здоровий калій!"
+   Modified 1655483874
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60FD565E59AC0571}" {
    Id "ACE-Item_Banana_Name"
@@ -36,9 +38,11 @@ StringTable {
    Target_fr_fr "Banane"
    Target_de_de "Banane"
    Target_cs_cz "Banán"
-   Modified 1627220217
+   Target_ru_ru "Банан"
+   Target_uk_ua "Банан"
+   Modified 1655483813
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60FD565E50C080B7}" {
    Id "ACE-Weapon_FragBanana_Description"
@@ -46,9 +50,11 @@ StringTable {
    Target_fr_fr "Potassium explosif !"
    Target_de_de "Explosives Kalium!"
    Target_cs_cz "Výbušná dávka draslíku!"
-   Modified 1627220356
+   Target_ru_ru "Взрывной калий!"
+   Target_uk_ua "Вибуховий калій!"
+   Modified 1655483802
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60FD565E48F06F03}" {
    Id "ACE-Weapon_FragBanana_Name"
@@ -56,9 +62,11 @@ StringTable {
    Target_fr_fr "Banane à fragmentation"
    Target_de_de "Granat-Banane"
    Target_cs_cz "Výbušný banán"
-   Modified 1627220475
+   Target_ru_ru "Осколочный банан"
+   Target_uk_ua "Осколковий банан"
+   Modified 1655483765
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
  }
 }

@@ -29,7 +29,7 @@ modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay
 		trace.End = startPos + outDir;
 		trace.Flags = TraceFlags.WORLD | TraceFlags.OCEAN | TraceFlags.ENTS;
 		trace.LayerMask = TRACE_LAYER_CAMERA;
-		trace.Exclude = SCR_PlayerController.GetLocalMainEntity();
+		trace.Exclude = SCR_PlayerController.GetLocalControlledEntity().GetRootParent();
 		float traceDis = world.TraceMove(trace, null);
 		SCR_EditableEntityComponent	target = SCR_EditableEntityComponent.GetEditableEntity(trace.TraceEnt);
 			

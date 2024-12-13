@@ -17,3 +17,27 @@ Allows players to point in a direction with their fingers, when they do so peopl
 
 - Use the `Point with finger briefly` keybind in `Character` category (Default: <kbd>Ctrl</kbd>+<kbd>~</kbd>)
 
+## Settings
+
+Certain aspects of this mod can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
+
+| Field                   | Type  | Default | Description                                                                                    |
+| ----------------------- | ----- | ------- | ---------------------------------------------------------------------------------------------- |
+| m_fMaxPointingDistanceM | float | 1000    | Maximum pointing distance in meters.                                                           |
+| m_bCanPingAttach        | bool* | true    | Whether the ping can attach to entities.                                                       |
+| m_fPingRangeM           | float | 10      | Range of the ping in meters. Only players in range will see it. Anyone can see it if negative. |
+
+\* Note that bool has to be provided as integer in the config: 1 (true) or 0 (false).
+
+Example for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Finger_Settings": {
+            "m_fMaxPointingDistanceM": 1000,
+            "m_bCanPingAttach": 1,
+            "m_fPingRangeM": 10
+        }
+    }
+}
+```

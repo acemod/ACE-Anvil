@@ -29,9 +29,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
-	override void OnInit(IEntity owner)
+	override void OnPostInit(IEntity owner)
 	{
-		super.OnInit(owner);
+		super.OnPostInit(owner);
 		
 		m_pACE_Medical_HealthHitZone = GetHitZoneByName("Health");
 		if (!m_pACE_Medical_HealthHitZone)

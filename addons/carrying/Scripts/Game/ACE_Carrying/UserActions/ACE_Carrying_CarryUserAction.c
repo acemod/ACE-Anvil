@@ -44,7 +44,7 @@ class ACE_Carrying_CarryUserAction : ScriptedUserAction
 		// Trying to carry while unit is ragdolling will break things
 		if (ownerChar.GetAnimationComponent().IsRagdollActive())
 		{
-			SetCannotPerformReason(ActionMenuFailReason.DEFAULT);
+			SetCannotPerformReason("#AR-UserActionUnavailable");
 			return false;
 		}
 

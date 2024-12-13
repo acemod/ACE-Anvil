@@ -59,7 +59,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 			int itemActionId = pAnimationComponent.BindCommand("CMD_Item_Action");
 			CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(pAnimationComponent.GetCommandHandler());
 			if (cmdHandler)
-				cmdHandler.FinishItemUse();
+				cmdHandler.FinishItemUse(true);
 		}
 	}
 	
@@ -79,7 +79,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 		{
 			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
 			CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(pAnimationComponent.GetCommandHandler());
-			cmdHandler.FinishItemUse();
+			cmdHandler.FinishItemUse(true);
 		}
 	}
 	

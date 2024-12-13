@@ -19,7 +19,7 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 			return false;
 
 		// Check if epinephrine is in the system already
-		array<ref PersistentDamageEffect> effects = damageManager.GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
+		array<ref SCR_PersistentDamageEffect> effects = damageManager.GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
 		if (!effects.IsEmpty())
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;

@@ -9,9 +9,9 @@ SCR_ChimeraCharacter {
      UseVirtualInventoryReplication 0
      InitialStorageSlots {
       SCR_EquipmentStorageSlot LaryngealTubeSlot {
-       PivotID "FacialLipLowerMiddle"
-       Offset -0.0028 0.0145 0.047
-       Angles 0 90 178.25211
+       PivotID "Orbicularis_bottomCenterLips"
+       Offset -0.0028 -0.0062 0.0452
+       Angles 0 -90 -5
        Enabled 0
        Prefab "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et"
        AllowedItemTypes {
@@ -63,7 +63,7 @@ SCR_ChimeraCharacter {
      UIInfo UIInfo "{63162326F18A331B}" {
       Name "Insert King LT"
      }
-     ActionTitle "King LZ"
+     ActionTitle "King LT"
      m_eHitZoneGroup HEAD
      m_eConsumableType ACE_MEDICAL_LARYNGEAL_TUBE
     }

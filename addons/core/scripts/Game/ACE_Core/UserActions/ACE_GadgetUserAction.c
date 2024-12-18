@@ -79,7 +79,8 @@ class ACE_GadgetUserAction : ScriptedUserAction
 		{
 			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
 			CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(pAnimationComponent.GetCommandHandler());
-			cmdHandler.FinishItemUse(true);
+			if (cmdHandler)
+				cmdHandler.FinishItemUse(true);
 		}
 	}
 	

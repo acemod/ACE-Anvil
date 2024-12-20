@@ -1,0 +1,49 @@
+MetaFileClass {
+ Name "{2DF3BF7B29A93115}Assets/wirecuttermodel2.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   ExportMorphs 1
+   MaterialAssigns {
+    MaterialAssignClass "{62F7634662163561}" {
+     SourceMaterial "DefaultGeneratedMaterial"
+     AssignedMaterial "{24C74A9E7CFC388D}Assets/Data/DefaultGeneratedMaterial.emat"
+    }
+    MaterialAssignClass "{62F7634662163573}" {
+     SourceMaterial "Material"
+     AssignedMaterial "{214B721DCDBFB106}Assets/Wirecutter.emat"
+    }
+   }
+   MeshParams {
+    MeshParam Cube {
+    }
+    MeshParam wirecutterL {
+    }
+    MeshParam wirecutterR {
+    }
+   }
+   Common TXOCommonClass "{62F76346676A1D5C}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+   Common TXOCommonClass "{62F76346676A0EBC}" : "{9D5B6207F7628CE2}Configs/System/ResourceTypes/XBOX_ONE/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+   Common TXOCommonClass "{62F76346676A0994}" : "{DD9F02115C764647}Configs/System/ResourceTypes/XBOX_SERIES/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS4 : PC {
+   Common TXOCommonClass "{62F76346676A085B}" : "{53EC476BC921D99A}Configs/System/ResourceTypes/PS4/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS5 : PC {
+   Common TXOCommonClass "{62F76346676A08D8}" : "{F62AA8E7B8EA9D26}configs/ResourceTypes/PS5/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass HEADLESS : PC {
+   Common TXOCommonClass "{62F76346676A0B11}" : "{3A5B3356978039E8}Configs/System/ResourceTypes/HEADLESS/MeshObjectCommon.conf" {
+   }
+  }
+ }
+}

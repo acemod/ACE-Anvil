@@ -210,6 +210,52 @@ $$OS = \min\Bigg(\frac{\max\big((PaO2)^{2.7},\ 1\big)}{\Big(25 - 150 \cdot \big(
 
 - $OS_{max} = 0.999$
 
+## Respiratory Vitals
+### Heart rate (HR)
+
+$$HR(t + \Delta t) =
+\begin{cases}
+    \begin{cases}
+        \mathrm{Clamp}\big(\mathcal{N}(110,\ ?),\ 100,\ 120 \big) & \text{| CPR} \\
+        0 & \text{| otherwise}
+    \end{cases} & \bigg|\text{ cardiac arrest} \\
+    \\
+    \begin{cases}
+        \min\big(HR_{tgt.},\ HR(t) + \big[\frac{dHR}{dt}\big]\_{max} \cdot \Delta t \big) & |\ HR_{tgt.}(t + \Delta t) \ge HR(t) \\
+        \max\big(HR_{tgt.},\ HR(t) -  \big[\frac{dHR}{dt}\big]\_{max} \cdot \Delta t \big) & |\ HR_{tgt.}(t + \Delta t) < HR(t)
+    \end{cases} & \bigg|\text{ otherwise}
+\end{cases}$$
+
+- $HR\ [\mathrm{min^{-1}}]$: Heart rate
+- $HR_{tgt.}\ [\mathrm{min^{-1}}]$: Target heart rate
+- $\big[\frac{dHR}{dt}\big]_{max} = 1\ \mathrm{min^{-1}s^{-1}}$ : Maximum heart rate acceleration
+
+$$HR_{tgt.}(t + \Delta t) = 40 + \Delta f\big(SV(t + \Delta t)\big) + \Delta f(PL) + \Delta f(med.)$$
+
+$$\Delta f(SV) = \frac{DR}{2 \cdot SV} + HR_0 \cdot (SVD - 1)$$
+
+$$\Delta f(PL) = 10 \cdot PL$$
+
+- $SV\ [\mathrm{l}]$: Stroke volume
+- $DR\ [\cdot]$: Demand return
+- $SVD\ [\cdot]$: Stroke volume difference
+- $PL\ [\cdot]$: Pain level
+
+
+$$DR(t + \Delta t) = 0.00002638888 \cdot PaCO2(t)$$
+
+$$PaCO2(t) = 60 \cdot \Big(40 + \Delta f\big(SV(t)\big)\Big)$$
+
+$$SVD(t + \Delta t) = \begin{cases}
+    \frac{SV_0}{SV(t)} & \Big|\ \frac{SV_0}{SV(t)} < 1.22 \\
+    \frac{SV(t)}{0.66 \cdot SV_0} & \Big|\text{ otherwise}
+\end{cases}$$
+
+- $SV_0 = 0.001583333323\ \mathrm{l}$ : Default stroke volume
+
+$$SV(t + \Delta t) = 0.00026388888 \cdot SVD(t + \Delta t) \cdot BV$$
+
+- $BV\ [\mathrm{l}]$: Blood volume
 
 ## State Machine
 ### Events

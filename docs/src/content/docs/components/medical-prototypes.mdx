@@ -79,68 +79,69 @@ Certain aspects of the medical system can be configured in the mission header se
 | `m_bSecondChanceOnHeadEnabled` | `bool`* | `false` | Enables second chance on headshots |
 | `m_bSecondChanceOnTorsoEnabled` | `bool`* | `true` | Enables second chance on torso |
 | `m_bHealSupplyUsageEnabled` | `bool`* | `true` | Healing consumes supplies when enabled Ignored when global supply usage is disabled |
-| `m_fMedicalKitMaxHealScaled` | `float` | `0.5` | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities |
+| `m_fMedicalKitMaxHealScaled` | `float`** | `0.5` | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities |
 | `m_CardiovascularSystem` | `object` | --- | Settings for cardiovascular system (see below) |
 | `m_MedicationSystem` | `object` | --- | Settings for medication. Modify at your own risk |
 
-\* Note that bool has to be provided as integer in the config: `1` (`true`) or 0 (`false`).
+\* `bool` has to be provided as integer in the config: `1` (`true`) or `0` (`false`).<br>
+\*\* `float` need a decimal point to get properly read.
 
 ### `m_CardiovascularSystem`
 
 | Field | Type | Default | Description |
 | --- | --- | --- | --- |
-| `m_fDefaultHeartRateBPM` | `float` | `80` | Default heart rate [BPM] |
-| `m_fDefaultStrokeVolumeML` | `float` | `95` | Default stroke volume [ml] |
-| `m_fDefaultMeanArterialPressureKPA` | `float` | `12.443` | Default mean arterial pressure [kPa] |
-| `m_fDefaultPulsePressureKPA` | `float` | `5.3329` | Default pulse pressure [kPa] |
+| `m_fDefaultHeartRateBPM` | `float`** | `80.0` | Default heart rate [BPM] |
+| `m_fDefaultStrokeVolumeML` | `float`** | `95.0` | Default stroke volume [ml] |
+| `m_fDefaultMeanArterialPressureKPA` | `float`** | `12.443` | Default mean arterial pressure [kPa] |
+| `m_fDefaultPulsePressureKPA` | `float`** | `5.3329` | Default pulse pressure [kPa] |
 | `m_UnstableThresholds` | `object` | --- | Thresholds that lead to unstable vital state |
 | `m_CriticalThresholds` | `object` | --- | Thresholds that lead to critical vital state |
 | `m_CardiacArrestThresholds` | `object` | --- | Thresholds that lead to cardiac arrest state |
 | `m_CardiacArrestDamageEffect` | `object` | --- | Damage effects caused by cardiac arrest |
 | `m_bCardiacArrestForAIEnabled` | `bool`* | `false` | AI will die instead of entering cardiac arrest if false |
-| `m_fCPRSuccessCheckTimeoutS` | `float` | `22` | Default delay between check for successful CPR [s] |
-| `m_fCPRSuccessChanceMin` | `float` | `0` | Chance for reviving while performing CPR at class IV hemorrhage |
-| `m_fCPRSuccessChanceMax` | `float` | `0.4` | Chance for reviving while performing CPR at above class II hemorrhage |
-| `m_fMaxRevivalResilienceRecoveryScale` | `float` | `0.2` | Maximum resilience recovery scale applied after getting revived. This scale gets multiplied by the scaled health of the brain and will be removed once the patient becomes conscious. |
+| `m_fCPRSuccessCheckTimeoutS` | `float`** | `22.0` | Default delay between check for successful CPR [s] |
+| `m_fCPRSuccessChanceMin` | `float`** | `0.0` | Chance for reviving while performing CPR at class IV hemorrhage |
+| `m_fCPRSuccessChanceMax` | `float`** | `0.4` | Chance for reviving while performing CPR at above class II hemorrhage |
+| `m_fMaxRevivalResilienceRecoveryScale` | `float`** | `0.2` | Maximum resilience recovery scale applied after getting revived. This scale gets multiplied by the scaled health of the brain and will be removed once the patient becomes conscious. |
 
 ### `m_UnstableThresholds`
 
 | Field | Type | Default | Description |
 | --- | --- | --- | --- |
-| `m_fHeartRateLowBPM` | `float` | `40` | A heart rate below this will trigger a transition to this state [BPM] |
-| `m_fHeartRateHighBPM` | `float` | `220` | A heart rate above this will trigger a transition to this state [BPM] |
-| `m_fMeanArterialPressureLowKPA` | `float` | `7.11` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
-| `m_fMeanArterialPressureHighKPA` | `float` | `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
-| `m_eBloodState` | `int`** | `CLASS_2_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+| `m_fHeartRateLowBPM` | `float`** | `40.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | `float`** | `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | `float`** | `7.11` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | `float`** | `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_eBloodState` | `int`*** | `CLASS_2_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
 
-** Note that enums have to be provided as integers in the config: `0` (`NORMAL`), `1` (`CLASS_1_HEMORRHAGE`), `2` (`FATAL`), `3` (`CLASS_2_HEMORRHAGE`), `4` (`CLASS_3_HEMORRHAGE`) or `5` (`CLASS_4_HEMORRHAGE`).
+\*\*\* Note that enums have to be provided as integers in the config: `0` (`NORMAL`), `1` (`CLASS_1_HEMORRHAGE`), `2` (`FATAL`), `3` (`CLASS_2_HEMORRHAGE`), `4` (`CLASS_3_HEMORRHAGE`) or `5` (`CLASS_4_HEMORRHAGE`).
 
 ### `m_CriticalThresholds`
 
 | Field | Type | Default | Description |
 | --- | --- | --- | --- |
-| `m_fHeartRateLowBPM` | `float` | `30` | A heart rate below this will trigger a transition to this state [BPM] |
-| `m_fHeartRateHighBPM` | `float` | `220` | A heart rate above this will trigger a transition to this state [BPM] |
-| `m_fMeanArterialPressureLowKPA` | `float` | `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
-| `m_fMeanArterialPressureHighKPA` | `float` | `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
-| `m_eBloodState` | `int`** | `CLASS_3_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+| `m_fHeartRateLowBPM` | `float`** | `30.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | `float`** | `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | `float`** | `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | `float`** | `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_eBloodState` | `int`*** | `CLASS_3_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
 
 ### `m_CardiacArrestThresholds`
 
 | Field | Type | Default | Description |
 | --- | --- | --- | --- |
-| `m_fHeartRateLowBPM` | `float` | `20` | A heart rate below this will trigger a transition to this state [BPM] |
-| `m_fHeartRateHighBPM` | `float` | `220` | A heart rate above this will trigger a transition to this state [BPM] |
-| `m_fMeanArterialPressureLowKPA` | `float` | `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
-| `m_fMeanArterialPressureHighKPA` | `float` | `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
-| `m_eBloodState` | `int`** | `CLASS_4_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+| `m_fHeartRateLowBPM` | `float`** | `20.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | `float`** | `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | `float`** | `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | `float`** | `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_eBloodState` | `int`*** | `CLASS_4_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
 
 ### `m_CardiacArrestDamageEffect`
 
 | Field | Type | Default | Description |
 | --- | --- | --- | --- |
-| `m_fBrainDamageRate` | `float` | `0.333` | Damage the brain takes per second |
-| `m_fEffectStartDelayS` | `float` | `10` | Delay in seconds before the effect starts [s] |
+| `m_fBrainDamageRate` | `float`** | `0.333` | Damage the brain takes per second |
+| `m_fEffectStartDelayS` | `float`** | `10.0` | Delay in seconds before the effect starts [s] |
 
 ### Template
 
@@ -154,38 +155,38 @@ The template for the `missionHeader` in a server config is given below:
             "m_bHealSupplyUsageEnabled": 1,
             "m_fMedicalKitMaxHealScaled": 0.5,
             "m_CardiovascularSystem": {
-                "m_fDefaultHeartRateBPM": 80,
-                "m_fDefaultStrokeVolumeML": 95,
+                "m_fDefaultHeartRateBPM": 80.0,
+                "m_fDefaultStrokeVolumeML": 95.0,
                 "m_fDefaultMeanArterialPressureKPA": 12.443,
                 "m_fDefaultPulsePressureKPA": 5.3329,
                 "m_UnstableThresholds": {
-                    "m_fHeartRateLowBPM": 40,
-                    "m_fHeartRateHighBPM": 220,
+                    "m_fHeartRateLowBPM": 40.0,
+                    "m_fHeartRateHighBPM": 220.0,
                     "m_fMeanArterialPressureLowKPA": 7.11,
                     "m_fMeanArterialPressureHighKPA": 29.5,
                     "m_eBloodState": 3
                 },
                 "m_CriticalThresholds": {
-                    "m_fHeartRateLowBPM": 30,
-                    "m_fHeartRateHighBPM": 220,
+                    "m_fHeartRateLowBPM": 30.0,
+                    "m_fHeartRateHighBPM": 220.0,
                     "m_fMeanArterialPressureLowKPA": 5.21,
                     "m_fMeanArterialPressureHighKPA": 29.5,
                     "m_eBloodState": 4
                 },
                 "m_CardiacArrestThresholds": {
-                    "m_fHeartRateLowBPM": 20,
-                    "m_fHeartRateHighBPM": 220,
+                    "m_fHeartRateLowBPM": 20.0,
+                    "m_fHeartRateHighBPM": 220.0,
                     "m_fMeanArterialPressureLowKPA": 5.21,
                     "m_fMeanArterialPressureHighKPA": 29.5,
                     "m_eBloodState": 5
                 },
                 "m_CardiacArrestDamageEffect": {
                     "m_fBrainDamageRate": 0.333,
-                    "m_fEffectStartDelayS": 10
+                    "m_fEffectStartDelayS": 10.0
                 },
                 "m_bCardiacArrestForAIEnabled": 0,
-                "m_fCPRSuccessCheckTimeoutS": 22,
-                "m_fCPRSuccessChanceMin": 0,
+                "m_fCPRSuccessCheckTimeoutS": 22.0,
+                "m_fCPRSuccessChanceMin": 0.0,
                 "m_fCPRSuccessChanceMax": 0.4,
                 "m_fMaxRevivalResilienceRecoveryScale": 0.2
             }

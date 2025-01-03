@@ -1,0 +1,38 @@
+FrameWidgetClass {
+ {
+  OverlayWidgetClass "{5DF6773A8D2D810B}" {
+   Prefab "{5DF6773A8D2D810B}"
+   {
+    SizeLayoutWidgetClass "{5DF4AD634C312B7D}" {
+     Prefab "{5DF4AD634C312B7D}"
+     {
+      VerticalLayoutWidgetClass "{5DF4AD634C312B71}" {
+       Prefab "{5DF4AD634C312B71}"
+       {
+        OverlayWidgetClass "{5DF4AD634C312B8B}" {
+         Prefab "{5DF4AD634C312B8B}"
+         {
+          VerticalLayoutWidgetClass "{5DF4AD6212638B9A}" {
+           Prefab "{5DF4AD6212638B9A}"
+           components {
+            SCR_TabViewComponent "{546B27D01CA8A38D}" {
+             m_aElements {
+              SCR_TabViewContent "{64475E8B3FBE157D}" {
+               m_sTabButtonContent "ACE"
+               m_sTabIdentifier "ace-anvil"
+               m_bEnabled 0
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

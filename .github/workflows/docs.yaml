@@ -3,9 +3,9 @@ name: Build docs
 on:
   push:
     branches: [master, release]
-    paths: [/docs]
+    paths: ['docs/**']
   pull_request:
-    paths: [/docs]
+    paths: ['docs/**']
 
 # Allow this job to clone the repo and create a page deployment
 permissions:

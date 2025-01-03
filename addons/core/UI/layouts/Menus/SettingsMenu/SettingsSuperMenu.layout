@@ -18,6 +18,7 @@ FrameWidgetClass {
             SCR_TabViewComponent "{546B27D01CA8A38D}" {
              m_aElements {
               SCR_TabViewContent "{64475E8B3FBE157D}" {
+               m_ElementLayout "{399F81816ADDA45B}UI/layouts/Menus/SettingsMenu/ACE_SettingsSubMenu.layout"
                m_sTabButtonContent "ACE"
                m_sTabIdentifier "ace-anvil"
                m_bEnabled 0

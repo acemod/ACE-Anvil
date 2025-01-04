@@ -6,6 +6,7 @@ modded class SCR_VONController: ScriptComponent
 
 	protected ACE_ERadioBeep m_eBeepTypeCh1;
 	protected ACE_ERadioBeep m_eBeepTypeCh2;
+	protected bool m_bBeepCycle;
 
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
@@ -23,12 +24,13 @@ modded class SCR_VONController: ScriptComponent
 
 		settings.Get(ACE_RadioSettingsModule.BEEPCH1, m_eBeepTypeCh1);
 		settings.Get(ACE_RadioSettingsModule.BEEPCH2, m_eBeepTypeCh2);
+		settings.Get(ACE_RadioSettingsModule.BEEPCYCLE, m_bBeepCycle);
 
 		PrintFormat("SCR_VONController.AFM_LoadSettings: %1, %2", m_eBeepTypeCh1, m_eBeepTypeCh2, level: LogLevel.DEBUG);
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected string AFM_GetBeepSound(int transreceiverNumber)
+	protected string ACE_GetBeepSound(int transreceiverNumber)
 	{
 		ACE_ERadioBeep beepType;
 		if (transreceiverNumber == 1)
@@ -49,13 +51,19 @@ modded class SCR_VONController: ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	override void SetActiveTransmit(notnull SCR_VONEntry entry)
 	{
+		if (m_ActiveEntry != entry && !m_bBeepCycle)
+		{
+			super.SetActiveTransmit(entry);
+			return;
+		}
+		
 		super.SetActiveTransmit(entry);
 
 		SCR_VONEntryRadio radioEntry = SCR_VONEntryRadio.Cast(entry);
 		if (!radioEntry)
 			return;
 
-		string beep = AFM_GetBeepSound(radioEntry.GetTransceiverNumber());
+		string beep = ACE_GetBeepSound(radioEntry.GetTransceiverNumber());
 		if (beep != "")
 			// TODO use sound event SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_RADIO_TURN_OFF);
 			AudioSystem.PlaySound(beep);

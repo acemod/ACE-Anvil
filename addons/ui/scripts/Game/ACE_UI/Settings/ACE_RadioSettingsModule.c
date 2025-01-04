@@ -9,12 +9,16 @@ class ACE_RadioSettingsModule: ModuleGameSettings
 {
 	const string BEEPCH1 = "m_eBeepCh1";
 	const string BEEPCH2 = "m_eBeepCh2";
+	const string BEEPCYCLE = "m_bBeepCycle";
 	
 	[Attribute(ACE_ERadioBeep.NORMAL.ToString(), uiwidget: UIWidgets.ComboBox, desc: "Sound to play when activating VoN Ch1", enums: ParamEnumArray.FromEnum(ACE_ERadioBeep))]
 	ACE_ERadioBeep m_eBeepCh1;
 
 	[Attribute(ACE_ERadioBeep.LOW.ToString(), uiwidget: UIWidgets.ComboBox, desc: "Sound to play when activating VoN Ch2", enums: ParamEnumArray.FromEnum(ACE_ERadioBeep))]
 	ACE_ERadioBeep m_eBeepCh2;
+	
+	[Attribute("1", desc: "Should radio channel beep sound play when cycling transreceivers")]
+	bool m_bBeepCycle;
 	
 	//------------------------------------------------------------------------------------------------
 	static BaseContainer GetInstance()

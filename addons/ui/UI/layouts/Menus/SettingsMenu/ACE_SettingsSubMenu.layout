@@ -54,6 +54,23 @@ HorizontalLayoutWidgetClass {
           }
          }
         }
+        ButtonWidgetClass "{64481AA16C28CDC6}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+         Name "Beep_Cycle"
+         Slot LayoutSlot "{64481AA16C28CD32}" {
+          HorizontalAlign 3
+          Padding 4 4 4 4
+         }
+         components {
+          SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+           m_sLabel "#ACE_UI-Settings_Beep_Cycle"
+           m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+           m_aElementNames {
+            "#AR-UI_No" "#AR-UI_Yes"
+           }
+           m_bCycleMode 1
+          }
+         }
+        }
        }
       }
      }

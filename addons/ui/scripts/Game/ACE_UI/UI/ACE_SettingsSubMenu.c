@@ -1,12 +1,9 @@
 modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
-{
-	const string ACE_BEEPCH1_PROP = "m_eBeepCh1";
-	const string ACE_BEEPCH2_PROP = "m_eBeepCh2";
-	
+{	
 	//------------------------------------------------------------------------------------------------
 	override void OnTabCreate(Widget menuRoot, ResourceName buttonsLayout, int index)
 	{
-		BaseContainer radioSettings = GetRadioSettings();
+		BaseContainer radioSettings = ACE_RadioSettingsModule.GetInstance();
 		VerticalLayoutWidget wRadioRoot = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ACE_UI_Radio"));
 
 		super.OnTabCreate(menuRoot, buttonsLayout, index);
@@ -22,7 +19,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		if (checkBoxBeep1)
 		{
 			int value;
-			radioSettings.Get(ACE_BEEPCH1_PROP, value);
+			radioSettings.Get(ACE_RadioSettingsModule.BEEPCH1, value);
 
 			checkBoxBeep1.SetCurrentItem(value >> 1, false, false); //--- Shift the value, because it's a flag
 			checkBoxBeep1.m_OnChanged.Insert(SetBeepCh1);
@@ -37,7 +34,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		if (checkBoxBeep2)
 		{
 			int value;
-			radioSettings.Get(ACE_BEEPCH2_PROP, value);
+			radioSettings.Get(ACE_RadioSettingsModule.BEEPCH2, value);
 
 			checkBoxBeep2.SetCurrentItem(value >> 1, false, false); //--- Shift the value, because it's a flag
 			checkBoxBeep2.m_OnChanged.Insert(SetBeepCh2);
@@ -51,13 +48,13 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 	//------------------------------------------------------------------------------------------------
 	protected void SetBeepCh1(SCR_SelectionWidgetComponent checkBox, int state)
 	{
-		SetBeepProp(checkBox, state, ACE_BEEPCH1_PROP);
+		SetBeepProp(checkBox, state, ACE_RadioSettingsModule.BEEPCH1);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void SetBeepCh2(SCR_SelectionWidgetComponent checkBox, int state)
 	{
-		SetBeepProp(checkBox, state, ACE_BEEPCH2_PROP);
+		SetBeepProp(checkBox, state, ACE_RadioSettingsModule.BEEPCH2);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -67,13 +64,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		
 		state = 1 << state; //--- Shift the value, because it's a flag
 
-		GetRadioSettings().Set(prop, state);
+		ACE_RadioSettingsModule.GetInstance().Set(prop, state);
 		GetGame().UserSettingsChanged();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected BaseContainer GetRadioSettings()
-	{
-		return GetGame().GetGameUserSettings().GetModule("ACE_RadioSettingsModule");
 	}
 }

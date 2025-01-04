@@ -1,0 +1,69 @@
+HorizontalLayoutWidgetClass {
+ Name "ACE_Settings"
+ components {
+  ACE_SettingsSubMenu "{644764DB50F2EEFA}" {
+  }
+ }
+ {
+  ScrollLayoutWidgetClass "{64475E8865185276}" {
+   Name "ScrollLayout0"
+   Slot LayoutSlot "{54890CCF086F1BB3}" {
+    Padding -2 72 2 0
+    SizeMode Fill
+    FillWeight 1.433
+   }
+   Color 0.761 0.392 0.078 1
+   style Small
+   {
+    VerticalLayoutWidgetClass "{64475E8865185274}" {
+     Name "Content"
+     Slot AlignableSlot "{54890CCE26EF3FDE}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding -4 0 10 0
+     }
+     {
+      VerticalLayoutWidgetClass "{64475E883295DD06}" {
+       Name "ExampleGroup"
+       Slot LayoutSlot "{64475E883295DD3F}" {
+        Padding 4 4 4 4
+       }
+       "Is Enabled" 0
+       "Is Visible" 0
+       {
+        VerticalLayoutWidgetClass "{64476640F1F8FB45}" : "{FEEEB639F2735BA1}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsTitle.layout" {
+         Name "SettingsTitle0"
+         Slot LayoutSlot "{64476640F1F8FB60}" {
+         }
+        }
+        ButtonWidgetClass "{64475E8865185267}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+         Name "HorizontalCameraSpeed"
+         Slot LayoutSlot "{54890CCD613ED416}" {
+          Padding 4 4 4 4
+         }
+         components {
+          SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+           m_sLabel "#AR-Editor_Attribute_CameraATL_Name"
+           m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+           m_aElementNames {
+            "#AR-UI_No" "#AR-UI_Yes"
+           }
+           m_bUseLightArrows 1
+           m_bCycleMode 1
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  VerticalLayoutWidgetClass "{64475E8865185264}" {
+   Name "Description"
+   Slot LayoutSlot "{54890CCD7A457969}" {
+    SizeMode Fill
+   }
+  }
+ }
+}

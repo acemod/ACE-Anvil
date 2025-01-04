@@ -29,7 +29,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 			Print("Radio setting 'Beep_Ch1' not found", LogLevel.WARNING);
 		}
 
-		// Radio beep Ch1
+		// Radio beep Ch2
 		SCR_SelectionWidgetComponent checkBoxBeep2 = SCR_SelectionWidgetComponent.GetSelectionComponent("Beep_Ch2", wRadioRoot);
 		if (checkBoxBeep2)
 		{

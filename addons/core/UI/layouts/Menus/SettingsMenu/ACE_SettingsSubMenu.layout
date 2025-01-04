@@ -28,23 +28,12 @@ HorizontalLayoutWidgetClass {
        Slot LayoutSlot "{64475E883295DD3F}" {
         Padding 4 4 4 4
        }
+       "Is Enabled" 0
        "Is Visible" 0
        {
-        VerticalLayoutWidgetClass "{64475E8865185260}" : "{FEEEB639F2735BA1}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsTitle.layout" {
-         Name "Title0"
-         Slot LayoutSlot "{58B3227F5665E050}" {
-         }
-         components {
-          SCR_LabelComponent "{58B30C1A8E56F0FF}" {
-           m_sLabel "Title second category"
-          }
-         }
-         {
-          TextWidgetClass "{58B30C1F77EC7B4E}" {
-           Prefab "{58B30C1F77EC7B4E}"
-           Slot LayoutSlot "{58B30C1F77EC7B76}" {
-           }
-          }
+        VerticalLayoutWidgetClass "{64476640F1F8FB45}" : "{FEEEB639F2735BA1}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsTitle.layout" {
+         Name "SettingsTitle0"
+         Slot LayoutSlot "{64476640F1F8FB60}" {
          }
         }
         ButtonWidgetClass "{64475E8865185267}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {

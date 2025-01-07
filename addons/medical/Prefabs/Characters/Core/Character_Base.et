@@ -2,21 +2,474 @@ SCR_ChimeraCharacter {
  ID "520EC961A090B1EE"
  components {
   ActionsManagerComponent "{520EA1D2F659CE02}" {
+   ActionContexts {
+    UserActionContext "{5A26F8E7D24ECC4F}" {
+    }
+    UserActionContext "{61DD27FE10BC17E4}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27FE2603346C}" {
+      m_sLayoutName "{084B1DFFBEFA9555}UI/layouts/HUD/InteractionSystem/ContextBleedingInteractionBlip.layout"
+     }
+     ContextName "HeadBleeding"
+     Position PointInfo "{61DD27F9D631F1CB}" {
+      PivotID "Head"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27CF88DEAF61}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27CF9942B52C}" {
+      m_sLayoutName "{7C1C535E08C5F282}UI/layouts/HUD/InteractionSystem/ContextHealInteractionBlip.layout"
+     }
+     ContextName "HeadHeal"
+     Position PointInfo "{61DD27CF93F496FC}" {
+      PivotID "Head"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F94D7CC578}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F932464EAD}" {
+      m_sLayoutName "{084B1DFFBEFA9555}UI/layouts/HUD/InteractionSystem/ContextBleedingInteractionBlip.layout"
+     }
+     ContextName "ChestBleeding"
+     Position PointInfo "{61DD27F95C86684D}" {
+      PivotID "Spine5"
+      Offset 0.1 0.15 0
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27CF8E11D95F}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27CF77DAA241}" {
+      m_sLayoutName "{7C1C535E08C5F282}UI/layouts/HUD/InteractionSystem/ContextHealInteractionBlip.layout"
+     }
+     ContextName " ChestHeal"
+     Position PointInfo "{61DD27CF537D4849}" {
+      PivotID "Spine5"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27FB10CD659F}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27FB245A7486}" {
+      m_sLayoutName "{084B1DFFBEFA9555}UI/layouts/HUD/InteractionSystem/ContextBleedingInteractionBlip.layout"
+     }
+     ContextName "LeftLegBleeding"
+     Position PointInfo "{61DD27FB2EB0EE8E}" {
+      PivotID "LeftKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27FB3936B546}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27FAC1B55570}" {
+      m_sLayoutName "{EB07AE52BDF7BF71}UI/layouts/HUD/InteractionSystem/ContextMorphineInteractionBlip.layout"
+     }
+     ContextName "LeftLegMorphine"
+     Position PointInfo "{61DD27FAFE02341B}" {
+      PivotID "LeftKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27FA85489976}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27FA944BF8AC}" {
+      m_sLayoutName "{855F7FDD15C3CFE7}UI/layouts/HUD/InteractionSystem/ContextEpinepheraneInteractionBlip.layout"
+     }
+     ContextName "LeftLegEpinephrine"
+     Position PointInfo "{61DD27FA8EFBAF67}" {
+      PivotID "LeftKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27FA5CEF3BDD}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27FA63E76918}" {
+      m_sLayoutName "{7C1C535E08C5F282}UI/layouts/HUD/InteractionSystem/ContextHealInteractionBlip.layout"
+     }
+     ContextName "LeftLegHeal"
+     Position PointInfo "{61DD27FA71AED9EA}" {
+      PivotID "LeftKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DB6AB4DBFDDE86}" {
+     UIInfo SCR_ActionContextUIInfo "{61DB6AB4A4AE25F4}" {
+      m_sLayoutName "{084B1DFFBEFA9555}UI/layouts/HUD/InteractionSystem/ContextBleedingInteractionBlip.layout"
+     }
+     ContextName "RightLegBleeding"
+     Position PointInfo "{61DB6AB494C365F3}" {
+      PivotID "RightKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DB6AAB7F9A08C0}" {
+     UIInfo SCR_ActionContextUIInfo "{61DB6AAB7B7AAB4A}" {
+      m_sLayoutName "{EB07AE52BDF7BF71}UI/layouts/HUD/InteractionSystem/ContextMorphineInteractionBlip.layout"
+     }
+     ContextName "RightLegMorphine"
+     Position PointInfo "{61DB6AAB372DAFD9}" {
+      PivotID "RightKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DB6AA9EBFC70E2}" {
+     UIInfo SCR_ActionContextUIInfo "{61DB6AA992C737F7}" {
+      m_sLayoutName "{855F7FDD15C3CFE7}UI/layouts/HUD/InteractionSystem/ContextEpinepheraneInteractionBlip.layout"
+     }
+     ContextName "RightLegEpinephrine"
+     Position PointInfo "{61DB6AA90F2B0645}" {
+      PivotID "RightKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DB6AAE92687710}" {
+     UIInfo SCR_ActionContextUIInfo "{61DB6AAE1CF6672E}" {
+      m_sLayoutName "{7C1C535E08C5F282}UI/layouts/HUD/InteractionSystem/ContextHealInteractionBlip.layout"
+     }
+     ContextName "RightLegHeal"
+     Position PointInfo "{61DB6AAF5669F789}" {
+      PivotID "RightKnee"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F5F376CCD5}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F5A841D03D}" {
+      m_sLayoutName "{084B1DFFBEFA9555}UI/layouts/HUD/InteractionSystem/ContextBleedingInteractionBlip.layout"
+     }
+     ContextName "LowerTorsoBleeding"
+     Position PointInfo "{61DD27F592930A88}" {
+      PivotID "Spine5"
+      Offset -0.1 0.15 0
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27CF8A83A89C}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27CF1AD58B96}" {
+      m_sLayoutName "{7C1C535E08C5F282}UI/layouts/HUD/InteractionSystem/ContextHealInteractionBlip.layout"
+     }
+     ContextName "LowerTorsoHeal"
+     Position PointInfo "{61DD27CF1569932D}" {
+      PivotID "Spine4"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F5562B0935}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F561A68ED7}" {
+      m_sLayoutName "{084B1DFFBEFA9555}UI/layouts/HUD/InteractionSystem/ContextBleedingInteractionBlip.layout"
+     }
+     ContextName "LeftArmBleeding"
+     Position PointInfo "{61DD27F55E9D97F6}" {
+      PivotID "LeftForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F508DC9F52}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F4D278DF89}" {
+      m_sLayoutName "{EB07AE52BDF7BF71}UI/layouts/HUD/InteractionSystem/ContextMorphineInteractionBlip.layout"
+     }
+     ContextName "LeftArmMorphine"
+     Position PointInfo "{61DD27F4CAEA810A}" {
+      PivotID "LeftForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F4E376778B}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F49E0CD3AF}" {
+      m_sLayoutName "{855F7FDD15C3CFE7}UI/layouts/HUD/InteractionSystem/ContextEpinepheraneInteractionBlip.layout"
+     }
+     ContextName "LeftArmEpinephrine"
+     Position PointInfo "{61DD27F4F3085AAE}" {
+      PivotID "LeftForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F4AC83E567}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F4BFBAE106}" {
+      m_sLayoutName "{7C1C535E08C5F282}UI/layouts/HUD/InteractionSystem/ContextHealInteractionBlip.layout"
+     }
+     ContextName "LeftArmHeal"
+     Position PointInfo "{61DD27F4B7CF0F82}" {
+      PivotID "LeftForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F4572B07C5}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F411EA2EBE}" {
+      m_sLayoutName "{B048FF287F0DC469}UI/layouts/HUD/InteractionSystem/ContextSalineInteractionBlip.layout"
+     }
+     ContextName "LeftArmSaline"
+     Position PointInfo "{61DD27F40A80B9F7}" {
+      PivotID "LeftForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F4235A367C}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F7C81BD205}" {
+      m_sLayoutName "{084B1DFFBEFA9555}UI/layouts/HUD/InteractionSystem/ContextBleedingInteractionBlip.layout"
+     }
+     ContextName "RightArmBleeding"
+     Position PointInfo "{61DD27F7C1A9072B}" {
+      PivotID "RightForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F7D8C7BFDD}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F7EAB711B2}" {
+      m_sLayoutName "{EB07AE52BDF7BF71}UI/layouts/HUD/InteractionSystem/ContextMorphineInteractionBlip.layout"
+     }
+     ContextName "RightArmMorphine"
+     Position PointInfo "{61DD27F7ED2A3775}" {
+      PivotID "RightForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F781913E5B}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F7B30FE4DF}" {
+      m_sLayoutName "{855F7FDD15C3CFE7}UI/layouts/HUD/InteractionSystem/ContextEpinepheraneInteractionBlip.layout"
+     }
+     ContextName "RightArmEpinephrine"
+     Position PointInfo "{61DD27F799B28C0F}" {
+      PivotID "RightForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F76304489E}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F770876E36}" {
+      m_sLayoutName "{7C1C535E08C5F282}UI/layouts/HUD/InteractionSystem/ContextHealInteractionBlip.layout"
+     }
+     ContextName "RightArmHeal"
+     Position PointInfo "{61DD27F76BB2F09E}" {
+      PivotID "RightForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+    UserActionContext "{61DD27F77BEF3CB9}" {
+     UIInfo SCR_ActionContextUIInfo "{61DD27F72572D66D}" {
+      m_sLayoutName "{B048FF287F0DC469}UI/layouts/HUD/InteractionSystem/ContextSalineInteractionBlip.layout"
+     }
+     ContextName "RightArmSaline"
+     Position PointInfo "{61DD27F70A88E337}" {
+      PivotID "RightForeArmTwist"
+     }
+     LineOfSightCheck 1
+    }
+   }
    additionalActions {
-    ACE_Medical_EpinephrineUserAction "{60CF45A52131AD5A}" {
+    SCR_BandageUserAction "{520EA1D2F659CE03}" {
+     UIInfo SCR_ActionUIInfo "{520EA1D2F659CE00}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_BandageUserAction Head"
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E67741AC1E}" {
      ParentContextList {
-      "LeftArm" "RightArm" "LeftLeg" "RightLeg"
+      "ChestBleeding"
      }
-     UIInfo UIInfo "{60CF45A53578811D}" {
-      Name "#ACE_Medical-EpinephrineInjectionAction"
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
      }
-     m_eConsumableType ACE_MEDICAL_EPINEPHRINE
+     ActionTitle "SCR_BandageUserAction Chest"
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E460F2D5F7}" {
+     ParentContextList {
+      "LeftLegBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_BandageUserAction LeftLeg"
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E47D6EE240}" {
+     ParentContextList {
+      "RightLegBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{61DB6AB7308ED2D3}" {
+      Name "#AR-BandageAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_BandageUserAction RightLeg"
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E203EF1E0C}" {
+     ParentContextList {
+      "LeftArmBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_BandageUserAction LeftArm"
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E21E230D0D}" {
+     ParentContextList {
+      "RightArmBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_BandageUserAction RightArm"
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E218841208}" {
+     ParentContextList {
+      "LowerTorsoBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_BandageUserAction LowerTorso"
+     "Sort Priority" -1
     }
     SCR_MorphineUserAction "{5A5CCAE2AF3D6445}" {
-     ParentContextList + {
-      "LeftLeg" "RightLeg"
+     ParentContextList {
+      "LeftArmMorphine" "RightArmMorphine" "LeftLegMorphine" "RightLegMorphine"
      }
+     UIInfo SCR_ActionUIInfo "{5A5CCAE2BF554957}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Morphine_UI"
+     }
+     "Sort Priority" -1
      m_sNotDamaged "#ACE_Medical-FailReason_NoPain"
+    }
+    SCR_SalineBagUserAction "{5A5CCAE248697020}" {
+     ParentContextList {
+      "LeftArmSaline" "RightArmSaline"
+     }
+     UIInfo SCR_ActionUIInfo "{5A5CCAE25BF08D86}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Saline-bag_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_TourniquetUserAction "{5C68A05F8836889D}" {
+     ParentContextList {
+      "RightLegBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5C68A05F9AB47F24}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_TourniquetUserAction_RightLeg"
+     "Sort Priority" -1
+    }
+    SCR_TourniquetUserAction "{5C68FB4586880C5E}" {
+     ParentContextList {
+      "LeftLegBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5C68FB4597F6E228}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_TourniquetUserAction LeftLeg"
+     "Sort Priority" -1
+    }
+    SCR_TourniquetUserAction "{5C68FB458180EF70}" {
+     ParentContextList {
+      "RightArmBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5C68FB45A6769C40}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_TourniquetUserAction RightArm"
+     "Sort Priority" -1
+    }
+    SCR_TourniquetUserAction "{5C68FB459CB30804}" {
+     ParentContextList {
+      "LeftArmBleeding"
+     }
+     UIInfo SCR_ActionUIInfo "{5C68FB45BC7B6A22}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Blood_UI"
+     }
+     ActionTitle "SCR_TourniquetUserAction LeftArm"
+     "Sort Priority" -1
+    }
+    SCR_HealSupportStationAction "{5E14966CF282A3BA}" {
+     ParentContextList {
+      "HeadHeal"
+     }
+     UIInfo SCR_ActionUIInfo "{5E14966C0D73CD5C}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "SCR_HealSupportStationAction Head"
+     "Sort Priority" -1
+    }
+    SCR_HealSupportStationAction "{5E14966CF597F6B3}" {
+     ParentContextList {
+      "ChestHeal"
+     }
+     UIInfo SCR_ActionUIInfo "{5E14966C2BD9BCF7}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "SCR_HealSupportStationAction Chest"
+     "Sort Priority" -1
+    }
+    SCR_HealSupportStationAction "{5E14966C08522B0C}" {
+     ParentContextList {
+      "LeftLegHeal"
+     }
+     UIInfo SCR_ActionUIInfo "{5E14966FBECEC4CE}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "SCR_HealSupportStationAction LeftLeg"
+     "Sort Priority" -1
+    }
+    SCR_HealSupportStationAction "{5E14966FAD3FC9A6}" {
+     ParentContextList {
+      "RightLegHeal"
+     }
+     UIInfo SCR_ActionUIInfo "{5E14966F3A5303BB}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "SCR_HealSupportStationAction_RightLeg"
+     "Sort Priority" -1
+    }
+    SCR_HealSupportStationAction "{5E14966FAFF46C89}" {
+     ParentContextList {
+      "LeftArmHeal"
+     }
+     UIInfo SCR_ActionUIInfo "{5E14966F315076CC}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "SCR_HealSupportStationAction LeftArm"
+     "Sort Priority" -1
+    }
+    SCR_HealSupportStationAction "{5E14966FA1ED9E23}" {
+     ParentContextList {
+      "RightArmHeal"
+     }
+     UIInfo SCR_ActionUIInfo "{5E14966F3441FED6}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "SCR_HealSupportStationAction RightArm"
+     "Sort Priority" -1
+    }
+    SCR_HealSupportStationAction "{5E14966FA41B012C}" {
+     ParentContextList {
+      "LowerTorsoHeal"
+     }
+     UIInfo SCR_ActionUIInfo "{5E14966F4F500868}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "SCR_HealSupportStationAction LowerTorso"
+     "Sort Priority" -1
+    }
+    ACE_Medical_EpinephrineUserAction "{60CF45A52131AD5A}" {
+     ParentContextList {
+      "LeftArmEpinephrine" "RightArmEpinephrine" "LeftLegEpinephrine" "RightLegEpinephrine"
+     }
+     UIInfo SCR_ActionUIInfo "{61DB6AA93D551079}" {
+      Name "#ACE_Medical-EpinephrineInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sIconName "Morphine_UI"
+     }
+     "Sort Priority" -1
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE
     }
    }
   }

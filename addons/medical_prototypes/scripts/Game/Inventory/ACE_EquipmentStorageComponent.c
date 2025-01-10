@@ -41,10 +41,3 @@ class ACE_EquipmentStorageComponent : SCR_EquipmentStorageComponent
 		return true;
 	}
 }
-
-//------------------------------------------------------------------------------------------------
-enum ACE_EEquipementSlot
-{
-	NONE = -1,
-	LARYNGEAL_TUBE
-}

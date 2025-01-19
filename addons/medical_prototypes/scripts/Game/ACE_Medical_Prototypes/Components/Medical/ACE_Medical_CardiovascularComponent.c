@@ -84,7 +84,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		// Add/remove damage effect for cardiac arrest state
 		if (inCardiacArrest)
 		{
-			m_pDamageManager.AddDamageEffect(m_Settings.m_CardiacArrestDamageEffect);
+			m_pDamageManager.AddDamageEffect(ACE_Medical_CardiacArrestDamageEffect.Cast(m_Settings.m_CardiacArrestDamageEffect.Clone()));
 			m_bWasInCardiacArrest = true;
 		}
 		else
@@ -164,7 +164,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		if (isPerformed)
 			m_pDamageManager.TerminateDamageEffectsOfType(m_Settings.m_CardiacArrestDamageEffect.Type());
 		else
-			m_pDamageManager.AddDamageEffect(m_Settings.m_CardiacArrestDamageEffect);
+			m_pDamageManager.AddDamageEffect(ACE_Medical_CardiacArrestDamageEffect.Cast(m_Settings.m_CardiacArrestDamageEffect.Clone()));
 		
 	}
 	

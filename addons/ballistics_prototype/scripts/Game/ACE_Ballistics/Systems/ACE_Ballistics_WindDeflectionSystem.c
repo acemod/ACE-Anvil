@@ -61,7 +61,7 @@ class ACE_Ballistics_WindDeflectionSystem : GameSystem
 		
 		float timeSlice = GetGame().GetWorld().GetTimeSlice();
 		vector windVelocity = m_pWeatherManager.GetWindSpeed() * vector.FromYaw(m_pWeatherManager.GetWindDirection());
-		float airFriction = 0.0012588;
+		float airFriction = 0.0012588; // --- To Do: Calculate from attributes in ProjectileMoveComponent
 		
 		for (int i = m_aProjectiles.Count() - 1; i >= 0; i--)
 		{
@@ -80,7 +80,7 @@ class ACE_Ballistics_WindDeflectionSystem : GameSystem
 			}
 			
 			vector relVelocity = velocity - windVelocity;
-			vector dragForce = 0.5 * airFriction * relVelocity.LengthSq() * relVelocity.Normalized();
+			vector dragForce = -0.5 * airFriction * relVelocity.LengthSq() * relVelocity.Normalized();
 			//projectile.SetVelocity(velocity + timeSlice * dragForce / mass);
 		}
 		

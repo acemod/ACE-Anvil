@@ -19,4 +19,24 @@ modded class SCR_PlayerController : PlayerController
 		
 		manager.DeleteEntitiesByIdGlobal({EntityID.FromInt(bits[0], bits[1])});
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_RequestAnimateWithHelperCompartment(ResourceName helperCompatmentPrefabName)
+	{
+		Rpc(RpcAsk_ACE_AnimateWithHelperCompartment, helperCompatmentPrefabName);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_ACE_AnimateWithHelperCompartment(ResourceName helperCompatmentPrefabName)
+	{
+		IEntity char = GetControlledEntity();
+		// Skip if no character or character inside something else
+		if (!char || char.GetParent())
+			return;
+		
+		vector transform[4];
+		char.GetWorldTransform(transform);
+		ACE_AnimationTools.AnimateWithHelperCompartment(char, transform, helperCompatmentPrefabName);
+	}
 }

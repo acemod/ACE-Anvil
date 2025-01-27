@@ -1,0 +1,65 @@
+ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
+ ID "4B42E71698F5739C"
+ components {
+  ControllersManagerComponent "{2CD4A765B3F3A3B1}" {
+   Enabled 0
+  }
+  SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   DoorInfoList {
+    CompartmentDoorInfo "{62CF60C6D92648FD}" {
+     ContextName "default"
+     EntryPositionInfo PointInfo "{62CF60C7F96B6351}" {
+     }
+     ExitPositionInfo PointInfo "{62CF60C7FA82A8CF}" {
+     }
+     FakeDoor 1
+     AccessibilitySettings CompartmentAccessibilityContext "{62D0D91D5FAC92EF}" {
+      BBHalfExtents 0 0 0
+      TraceOffset 0 0 0
+      TraceLength 0
+     }
+    }
+   }
+   CompartmentSlots {
+    CargoCompartmentSlot Performer {
+     PassengerPositionInfo EntitySlotInfo s1 {
+     }
+     ForcedFreeLook 1
+     DoorInfoList {
+      0
+     }
+     CanOccupantEquipGadget 0
+    }
+   }
+  }
+  SCR_BaseHUDComponent "{59BC55AE2A7F6FE0}" {
+   Enabled 0
+  }
+  SCR_DamageManagerComponent "{3EBB276D48AFFF41}" {
+   Enabled 0
+  }
+  SCR_UniversalInventoryStorageComponent "{5E58C207959A9200}" {
+   Enabled 0
+  }
+  SCR_VehicleCameraDataComponent "{5E0BA784A744A7CE}" {
+   m_fHeight 1.5
+   m_fDist_Max 1.5
+   m_fDist_Min 0.5
+   m_fDist_Desired 1
+   m_fFOV 74
+  }
+  ActionsManagerComponent "{2CD4A765B4482F53}" {
+   Enabled 0
+  }
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+   }
+   AutoVariablesBind 1
+   DeactivationDelay 2
+  }
+  RplComponent "{63136787FD0BCE14}" {
+   "Rpl State Override" Runtime
+  }
+ }
+ coords 70.679 1 90.883
+}

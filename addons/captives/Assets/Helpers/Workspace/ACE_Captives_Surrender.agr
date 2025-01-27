@@ -1,0 +1,24 @@
+AnimSrcGraph {
+ AnimSetTemplate "{10E9ECE28D514347}Assets/Helpers/Workspace/ACE_Captives_Surrender.ast"
+ ControlTemplate AnimSrcGCT "{61D13972778F82CA}" {
+  Commands {
+   AnimSrcGCTCmd CMD_Vehicle_GetIn {
+   }
+   AnimSrcGCTCmd CMD_Vehicle_GetOut {
+   }
+   AnimSrcGCTCmd CMD_Vehicle_FinishActionQueue {
+   }
+  }
+  GlobalTags {
+   "VEHICLE"
+   "TagVehicle"
+   "TagVehicleIdle"
+  }
+ }
+ Debug AnimSrcGD "{61D13972778F82B2}" {
+ }
+ GraphFilesResourceNames {
+  "{2D1594582437FE84}Assets/Helpers/Workspace/ACE_Captives_Surrender.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

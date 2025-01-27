@@ -1,0 +1,21 @@
+ACE_Captives_TiedHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
+ ID "4B42E71698F5739C"
+ components {
+  SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   CompartmentSlots {
+    CargoCompartmentSlot Performer {
+     GetOutAction CompartmentUserAction "{64771541B779685D}" {
+     }
+    }
+   }
+  }
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_Captives_Tied.agr"
+   AnimInstance "{DDCDD9DFF9310378}Assets/Helpers/Workspace/ACE_Captives_Tied.asi"
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+    AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_Captives_Tied.agr"
+    AnimInstance "{DDCDD9DFF9310378}Assets/Helpers/Workspace/ACE_Captives_Tied.asi"
+   }
+  }
+ }
+}

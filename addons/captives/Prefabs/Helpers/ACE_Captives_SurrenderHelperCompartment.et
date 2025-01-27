@@ -1,0 +1,13 @@
+ACE_Captives_SurrenderHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
+ ID "4B42E71698F5739C"
+ components {
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimGraph "{021B8AE2BA9497B4}Assets/Helpers/Workspace/ACE_Captives_Surrender.agr"
+   AnimInstance "{EF71DF39A69DC55A}Assets/Helpers/Workspace/ACE_Captives_Surrender.asi"
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+    AnimGraph "{021B8AE2BA9497B4}Assets/Helpers/Workspace/ACE_Captives_Surrender.agr"
+    AnimInstance "{EF71DF39A69DC55A}Assets/Helpers/Workspace/ACE_Captives_Surrender.asi"
+   }
+  }
+ }
+}

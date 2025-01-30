@@ -56,7 +56,9 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 		
 		foreach (string str : m_aACE_DeletedEntityIDs)
 		{
-			entityIDs.Insert(ACE_EntityIdHelper.FromString(str));
+			EntityID entity = ACE_EntityIdHelper.FromString(str);
+			if (entity != EntityID.INVALID)
+				entityIDs.Insert(entity);
 		}
 		
 		manager.DeleteEntitiesByIdGlobal(entityIDs);

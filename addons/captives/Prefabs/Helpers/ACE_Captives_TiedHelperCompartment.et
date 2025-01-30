@@ -1,6 +1,11 @@
 ACE_Captives_TiedHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
  ID "4B42E71698F5739C"
  components {
+  ACE_CarriableEntityComponent "{647772B15CC42F09}" {
+   m_AttachmentPoint PointInfo "{647772B153CAFDD6}" {
+    Offset 0 0 1
+   }
+  }
   SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
    CompartmentSlots {
     CargoCompartmentSlot Performer {

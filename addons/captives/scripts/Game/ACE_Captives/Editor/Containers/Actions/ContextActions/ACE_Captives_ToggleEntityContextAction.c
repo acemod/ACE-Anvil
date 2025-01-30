@@ -38,14 +38,8 @@ class ACE_Captives_ToggleEntityContextAction : SCR_SelectedEntitiesContextAction
 		
 		ACE_AnimationHelperCompartment helper = ACE_AnimationHelperCompartment.Cast(char.GetParent());
 		if (helper && helper.GetPrefabData().GetPrefabName() == m_sHelperCompartmentPrefabName)
-		{
 			helper.Terminate(EGetOutType.ANIMATED);
-		}
 		else
-		{
-			vector transform[4];
-			char.GetWorldTransform(transform);
-			ACE_AnimationTools.AnimateWithHelperCompartment(char, transform, m_sHelperCompartmentPrefabName);
-		}
+			ACE_AnimationTools.AnimateWithHelperCompartment(char, m_sHelperCompartmentPrefabName);
 	}
 }

@@ -35,8 +35,6 @@ modded class SCR_PlayerController : PlayerController
 		if (!char || char.GetParent())
 			return;
 		
-		vector transform[4];
-		char.GetWorldTransform(transform);
-		ACE_AnimationTools.AnimateWithHelperCompartment(char, transform, helperCompatmentPrefabName);
+		ACE_AnimationTools.AnimateWithHelperCompartment(char, helperCompatmentPrefabName);
 	}
 }

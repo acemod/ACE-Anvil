@@ -17,44 +17,36 @@ class ACE_HexTools
 			return {};
 
 		array<int> result = {};
-		int nibbles = hexString.Length() - 2;
-		int values  = ((nibbles + 7) & ~7) / 8;
-		result.Reserve(values);
+		int numNibbles = hexString.Length() - 2;
+		// Calculate how many 32 bit integers are needed to store the hex
+		int numValues  = ((numNibbles + 7) & ~7) / 8;
+		result.Reserve(numValues);
 		
-		int byte  = 0;
 		int value = 0;
-		int count = 0;
-		while(nibbles > 0)
+		int outIdx = 0;
+		
+		for (int inpIdx = numNibbles - 1; inpIdx >= 0; --inpIdx)
 		{
-			int nibble = hexString.Get(nibbles + 1).ToAscii();
+			int nibble = hexString.ToAscii(inpIdx + 2);
 			
 			if (nibble >= s_iAscii0 && nibble <= s_iAscii9)
 				nibble -= s_iAscii0;
+			else if (nibble >= s_iAsciiA && nibble <= s_iAsciiF)
+				nibble -= s_iAsciiA - 10;
 			else
-				if (nibble >= s_iAsciiA && nibble <= s_iAsciiF)
-					nibble -= s_iAsciiA - 10;
-				else
-					return {}; //invalid character in string
-
-			value <<= 4;
-			value |= nibble;			
-			--nibbles;
+				return {}; //invalid character in string
 			
-			if (++count == 8 || nibbles == 0)
+			// Add the nibble to the correct position in the 32 bit integer
+			value |= nibble << 4 * outIdx;
+			
+			if (++outIdx == 8 || inpIdx == 0)
 			{
-				int rev = 0;
-				for(int i = 0; i < count; ++i)
-				{
-					rev = (rev << 4) + (value & 0xf);
-					value >>= 4;
-				}
-				
-				result.InsertAt(rev, --values);
+				result.InsertAt(value, --numValues);
 				value = 0;
-				count = 0;
-			}			
+				outIdx = 0;
+			}		
 		}
-						
+		
 		return result;
 	}
 }

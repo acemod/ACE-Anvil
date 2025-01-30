@@ -9,7 +9,6 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 class ACE_AnimationHelperCompartment : GenericEntity
 {
 	protected IEntity m_pPerformer;
-	protected ref ScriptInvoker m_OnCompartmentLeft;
 
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping performer
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
@@ -128,9 +127,6 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	{
 		DetachHandlers();
 		
-		if (m_OnCompartmentLeft)
-			m_OnCompartmentLeft.Invoke(m_pPerformer);
-		
 		// Deletion of helper has to be delayed or released players stay visibly prone for other players on dedicated
 		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, HELPER_DELETION_DELAY_MS, false, this);
 	}
@@ -157,14 +153,5 @@ class ACE_AnimationHelperCompartment : GenericEntity
 		IEntity player = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		if (player == m_pPerformer)
 			Terminate(EGetOutType.TELEPORT);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	ScriptInvoker GetOnCompartmentLeft()
-	{
-		if (!m_OnCompartmentLeft)
-			m_OnCompartmentLeft = new ScriptInvoker();
-		
-		return m_OnCompartmentLeft;
 	}
 }

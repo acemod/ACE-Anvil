@@ -1,0 +1,8 @@
+MatPBRBasic {
+ Color 0 0 0 1
+ SpecularIBL 0.462 0.462 0.462 1
+ Specular 0.462 0.462 0.462 1
+ MetalnessScale 0
+ DielectricReflectance 0.16
+ BCRMap "{1FF3D4512BD0FA09}Assets/Items/TacticalLadder/ACE_TacticalLadder_BCR.edds"
+}

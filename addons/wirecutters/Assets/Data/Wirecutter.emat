@@ -1,0 +1,5 @@
+MatPBRBasic {
+ BCRMap "{80D82704DF6633A4}Assets/Tang_C.edds"
+ NormalPower 1.667
+ NMOMap "{4D8024798567557F}Assets/Tang_n.edds"
+}

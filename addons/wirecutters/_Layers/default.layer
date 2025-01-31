@@ -1,0 +1,15 @@
+GenericEntity : "{0C923757B8B8306B}Prefabs/Compositions/Misc/FreeRoamBuilding/BarbedTapeTriple_S_USSR_01.et" {
+ coords 3242.808 11.878 2777.427
+}
+GenericEntity : "{5519B339E041781E}Prefabs/Compositions/Misc/SubCompositions/Fortifications/Sandbag_Wall_BarbedWire_US_01.et" {
+ coords 3245.414 11.582 2779.767
+}
+GenericEntity : "{8554ED3F088BADA6}Prefabs/Items/Core/wirecutters.et" {
+ coords 3238.572 11.424 2780.488
+}
+GenericEntity : "{9721D32C8E5CDE9C}Prefabs/Compositions/Misc/FreeRoamBuilding/Layouts/FRB_BarbedTapeKnifeRest.et" {
+ coords 3242.928 12.668 2771.769
+}
+GenericEntity : "{A0A4E4587FEABF83}Prefabs/Compositions/Misc/FreeRoamBuilding/BarbedTapeKnifeRest_S_US_01.et" {
+ coords 3242.537 11.103 2783.71
+}

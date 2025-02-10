@@ -65,7 +65,7 @@ class ACE_Explosives_ToggleBuryUserAction : ACE_ShovelUserAction
 			params.End = pos - 0.01 * vector.Up;
 			params.Exclude = GetOwner();
 			GetGame().GetWorld().TraceMove(params, null);
-			m_bOnDiggableSurface = ACE_SurfaceHelper.IsDiggableSurface(params.SurfaceProps);
+			m_bOnDiggableSurface = ACE_SurfaceHelper.HasLabel(params.SurfaceProps, ACE_ESurfaceLabel.DIGGABLE);
 			m_vOwnerPos = pos;
 		}
 		

@@ -62,7 +62,7 @@ jobs:
         run: |
           $AddonsDir = "C:/reforger/addons/,${{ github.workspace }}/ACE-Anvil/addons/"
           $AddonGuid = "60C4E0B49618CC62"
-          $proc = Start-Process -PassThru -Wait -FilePath "c:/tools/Workbench/ArmaReforgerWorkbenchSteamDiag.exe" -ArgumentList "$env:WORKBENCH_COMMON_ARGS -wbModule=ScriptEditor -addonsDir ""$AddonsDir"" -addons ""$AddonGuid"" -validate"
+          $proc = Start-Process -PassThru -Wait -FilePath "c:/tools/Workbench/ArmaReforgerWorkbenchSteamDiag.exe" -ArgumentList "-wbSilent $env:WORKBENCH_COMMON_ARGS -wbModule=ScriptEditor -addonsDir ""$AddonsDir"" -addons ""$AddonGuid"" -validate"
 
           if ($proc.ExitCode -ne 0) {
             echo "Script validation failed"

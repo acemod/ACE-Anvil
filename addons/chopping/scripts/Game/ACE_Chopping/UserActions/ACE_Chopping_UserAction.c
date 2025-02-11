@@ -2,7 +2,7 @@
 //! Tree deletion user action
 class ACE_Chopping_UserAction : ACE_ShovelUserAction
 {
-	protected static const int DELETE_FALLING_TREE_DELAY_MS = 10000;
+	protected static const int DELETE_FALLING_TREE_DELAY_MS = 3000;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of the tree

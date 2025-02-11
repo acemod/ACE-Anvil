@@ -25,10 +25,9 @@ class ACE_Chopping_UserAction : ACE_ShovelUserAction
 		
 		if (container && container.Get("Enabled", enabled) && enabled)
 		{
-			vector transform[4];
-			pUserEntity.GetWorldTransform(transform);
-			userCtrl.ACE_RequestDestroyEntity(plant, EDamageType.MELEE, transform);
-			GetGame().GetCallqueue().CallLater(userCtrl.ACE_RequestDeleteEntity, DELETE_FALLING_TREE_DELAY_MS, false, plant);
+			vector hitPosDirNorm[3];
+			hitPosDirNorm[0] = pOwnerEntity.GetOrigin();
+			userCtrl.ACE_RequestDestroyEntity(plant, EDamageType.MELEE, hitPosDirNorm, DELETE_FALLING_TREE_DELAY_MS);
 		}
 		else
 		{

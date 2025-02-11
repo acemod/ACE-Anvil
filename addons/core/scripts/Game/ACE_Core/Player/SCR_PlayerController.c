@@ -26,19 +26,34 @@ modded class SCR_PlayerController : PlayerController
 	//------------------------------------------------------------------------------------------------
 	//! Request destruction of SCR_DestructibleEntity
 	//! Called from local player
-	void ACE_RequestDestroyEntity(SCR_DestructibleEntity entity, EDamageType damageType, vector hitPosDirNorm[4])
+	void ACE_RequestDestroyEntity(SCR_DestructibleEntity entity, EDamageType damageType, vector hitPosDirNorm[3], int deletionDelayMS = -1)
 	{
-		Rpc(RpcAsk_ACE_DestroyEntity, entity.GetID(), damageType, hitPosDirNorm);
+		Rpc(RpcAsk_ACE_DestroyEntity, entity.GetID(), damageType, hitPosDirNorm, deletionDelayMS);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_DestroyEntity(EntityID entityID, EDamageType damageType, vector hitPosDirNorm[4])
+	protected void RpcAsk_ACE_DestroyEntity(EntityID entityID, EDamageType damageType, vector hitPosDirNorm[3], int deletionDelayMS)
 	{
 		SCR_DestructibleEntity entity = SCR_DestructibleEntity.Cast(GetGame().GetWorld().FindEntityByID(entityID));
 		if (!entity)
 			return;
 		
-		entity.HandleDamage(damageType, entity.GetCurrentHealth(), hitPosDirNorm);
+		float health = entity.GetCurrentHealth();
+		if (health > 0)
+			entity.HandleDamage(damageType, health, hitPosDirNorm);
+		
+		if (deletionDelayMS <= 0)
+			return;
+		
+		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
+		if (!manager)
+			return;
+		
+		// Delete immediately if it was already destroyed
+		if (health <= 0)
+			manager.DeleteEntitiesByIdGlobal({entity.GetID()});
+		else
+			GetGame().GetCallqueue().CallLater(manager.DeleteEntitiesByIdGlobal, deletionDelayMS, false, {entity.GetID()});
 	}
 }

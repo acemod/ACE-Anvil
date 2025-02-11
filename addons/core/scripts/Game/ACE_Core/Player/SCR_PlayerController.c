@@ -9,18 +9,18 @@ modded class SCR_PlayerController : PlayerController
 		if (!entity)
 			return;
 		
-		Rpc(RpcAsk_ACE_DeleteEntityByBits, ACE_EntityIdHelper.ToInt(entity.GetID()));
+		Rpc(RpcAsk_ACE_DeleteEntityByID, entity.GetID());
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_DeleteEntityByBits(array<int> bits)
+	protected void RpcAsk_ACE_DeleteEntityByID(EntityID entityID)
 	{
 		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
 		if (!manager)
 			return;
 		
-		manager.DeleteEntitiesByIdGlobal({EntityID.FromInt(bits[0], bits[1])});
+		manager.DeleteEntitiesByIdGlobal({entityID});
 	}
 	
 	//------------------------------------------------------------------------------------------------

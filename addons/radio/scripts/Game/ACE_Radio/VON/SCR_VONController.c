@@ -1,8 +1,8 @@
 modded class SCR_VONController: ScriptComponent
 {
-	const string ACE_SOUND_START_HIGH = "Sounds/ACE_UI/beep_high.wav";
-	const string ACE_SOUND_START_LOW = "Sounds/ACE_UI/beep_low.wav";
-	const string ACE_SOUND_END = "Sounds/ACE_UI/click_off.wav";
+	const string ACE_SOUND_START_HIGH = "Sounds/ACE_Radio/beep_high.wav";
+	const string ACE_SOUND_START_LOW = "Sounds/ACE_Radio/beep_low.wav";
+	const string ACE_SOUND_END = "Sounds/ACE_Radio/click_off.wav";
 
 	protected ACE_ERadioBeep m_eBeepTypeCh1;
 	protected ACE_ERadioBeep m_eBeepTypeCh2;
@@ -20,11 +20,11 @@ modded class SCR_VONController: ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_LoadSettings()
 	{
-		BaseContainer settings = ACE_RadioSettingsModule.GetInstance();
+		BaseContainer settings = ACE_Radio_SettingsModule.GetInstance();
 
-		settings.Get(ACE_RadioSettingsModule.BEEPCH1, m_eBeepTypeCh1);
-		settings.Get(ACE_RadioSettingsModule.BEEPCH2, m_eBeepTypeCh2);
-		settings.Get(ACE_RadioSettingsModule.BEEPCYCLE, m_bBeepCycle);
+		settings.Get(ACE_Radio_SettingsModule.BEEPCH1, m_eBeepTypeCh1);
+		settings.Get(ACE_Radio_SettingsModule.BEEPCH2, m_eBeepTypeCh2);
+		settings.Get(ACE_Radio_SettingsModule.BEEPCYCLE, m_bBeepCycle);
 
 		PrintFormat("SCR_VONController.ACE_LoadSettings: %1, %2, %3", m_eBeepTypeCh1, m_eBeepTypeCh2, m_bBeepCycle, level: LogLevel.DEBUG);
 	}

@@ -3,14 +3,14 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 	//------------------------------------------------------------------------------------------------
 	override void OnTabCreate(Widget menuRoot, ResourceName buttonsLayout, int index)
 	{
-		BaseContainer radioSettings = ACE_RadioSettingsModule.GetInstance();
-		VerticalLayoutWidget wRadioRoot = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ACE_UI_Radio"));
+		BaseContainer radioSettings = ACE_Radio_SettingsModule.GetInstance();
+		VerticalLayoutWidget wRadioRoot = VerticalLayoutWidget.Cast(m_wRoot.FindAnyWidget("ACE_Radio"));
 
 		super.OnTabCreate(menuRoot, buttonsLayout, index);
 
 		if (!radioSettings || !wRadioRoot)
 		{
-			PrintFormat("Unable to load ACE_UI Radio settings: %1, %2", radioSettings, wRadioRoot, level: LogLevel.ERROR);
+			PrintFormat("Unable to load ACE_Radio Radio settings: %1, %2", radioSettings, wRadioRoot, level: LogLevel.ERROR);
 			return;
 		}
 
@@ -19,7 +19,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		if (checkBoxBeep1)
 		{
 			int value;
-			radioSettings.Get(ACE_RadioSettingsModule.BEEPCH1, value);
+			radioSettings.Get(ACE_Radio_SettingsModule.BEEPCH1, value);
 
 			checkBoxBeep1.SetCurrentItem(value >> 1, false, false); //--- Shift the value, because it's a flag
 			checkBoxBeep1.m_OnChanged.Insert(SetBeepCh1);
@@ -34,7 +34,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		if (checkBoxBeep2)
 		{
 			int value;
-			radioSettings.Get(ACE_RadioSettingsModule.BEEPCH2, value);
+			radioSettings.Get(ACE_Radio_SettingsModule.BEEPCH2, value);
 
 			checkBoxBeep2.SetCurrentItem(value >> 1, false, false); //--- Shift the value, because it's a flag
 			checkBoxBeep2.m_OnChanged.Insert(SetBeepCh2);
@@ -49,7 +49,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		if (checkBoxCycle)
 		{
 			bool value;
-			radioSettings.Get(ACE_RadioSettingsModule.BEEPCYCLE, value);
+			radioSettings.Get(ACE_Radio_SettingsModule.BEEPCYCLE, value);
 
 			checkBoxCycle.SetCurrentItem(value, false, false);
 			checkBoxCycle.m_OnChanged.Insert(SetBeepCycle);
@@ -63,13 +63,13 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 	//------------------------------------------------------------------------------------------------
 	protected void SetBeepCh1(SCR_SelectionWidgetComponent checkBox, int state)
 	{
-		SetBeepProp(checkBox, state, ACE_RadioSettingsModule.BEEPCH1);
+		SetBeepProp(checkBox, state, ACE_Radio_SettingsModule.BEEPCH1);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void SetBeepCh2(SCR_SelectionWidgetComponent checkBox, int state)
 	{
-		SetBeepProp(checkBox, state, ACE_RadioSettingsModule.BEEPCH2);
+		SetBeepProp(checkBox, state, ACE_Radio_SettingsModule.BEEPCH2);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -79,7 +79,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		
 		state = 1 << state; //--- Shift the value, because it's a flag
 
-		ACE_RadioSettingsModule.GetInstance().Set(prop, state);
+		ACE_Radio_SettingsModule.GetInstance().Set(prop, state);
 		GetGame().UserSettingsChanged();
 	}
 	
@@ -88,7 +88,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 	{
 		PrintFormat("SetBeepCycle: %1", state, level: LogLevel.NORMAL);
 
-		ACE_RadioSettingsModule.GetInstance().Set(ACE_RadioSettingsModule.BEEPCYCLE, state);
+		ACE_Radio_SettingsModule.GetInstance().Set(ACE_Radio_SettingsModule.BEEPCYCLE, state);
 		GetGame().UserSettingsChanged();
 	}
 }

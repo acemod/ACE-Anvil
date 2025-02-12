@@ -5,7 +5,7 @@ enum ACE_ERadioBeep
 	LOW		= 1 << 2,
 }
 
-class ACE_RadioSettingsModule: ModuleGameSettings
+class ACE_Radio_SettingsModule: ModuleGameSettings
 {
 	const string BEEPCH1 = "m_eBeepCh1";
 	const string BEEPCH2 = "m_eBeepCh2";
@@ -23,6 +23,6 @@ class ACE_RadioSettingsModule: ModuleGameSettings
 	//------------------------------------------------------------------------------------------------
 	static BaseContainer GetInstance()
 	{
-		return GetGame().GetGameUserSettings().GetModule("ACE_RadioSettingsModule");
+		return GetGame().GetGameUserSettings().GetModule("ACE_Radio_SettingsModule");
 	}
 }

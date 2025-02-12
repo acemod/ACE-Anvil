@@ -10,59 +10,59 @@ GameProject {
    WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
     StringTables {
      StringTableDefinition "{64482648F88CE023}" {
-      StringTableSource "{C4D719716B02B0B1}Language/ACE_UI_language.st"
+      StringTableSource "{C4D719716B02B0B1}Language/ACE_Radio_language.st"
       Languages {
        LanguageDefinition "{64482648FE8E786E}" {
         Code "cs_cz"
-        StringTableRuntime "{BF1E2012E3DEE9C1}Language/ACE_UI_language.cs_cz.conf"
+        StringTableRuntime "{BF1E2012E3DEE9C1}Language/ACE_Radio_language.cs_cz.conf"
        }
        LanguageDefinition "{64482648FE8987CB}" {
         Code "de_de"
-        StringTableRuntime "{6A603A21F07DF8E1}Language/ACE_UI_language.de_de.conf"
+        StringTableRuntime "{6A603A21F07DF8E1}Language/ACE_Radio_language.de_de.conf"
        }
        LanguageDefinition "{64482648FE8987EF}" {
         Code "en_us"
-        StringTableRuntime "{3490B06A9A8EFDE0}Language/ACE_UI_language.en_us.conf"
+        StringTableRuntime "{3490B06A9A8EFDE0}Language/ACE_Radio_language.en_us.conf"
        }
        LanguageDefinition "{64482648FE89870D}" {
         Code "es_es"
-        StringTableRuntime "{F1DCFDE3748C96FF}Language/ACE_UI_language.es_es.conf"
+        StringTableRuntime "{F1DCFDE3748C96FF}Language/ACE_Radio_language.es_es.conf"
        }
        LanguageDefinition "{64482648FE898729}" {
         Code "fr_fr"
-        StringTableRuntime "{4A7408D4920F75FD}Language/ACE_UI_language.fr_fr.conf"
+        StringTableRuntime "{4A7408D4920F75FD}Language/ACE_Radio_language.fr_fr.conf"
        }
        LanguageDefinition "{64482648FE89877F}" {
         Code "it_it"
-        StringTableRuntime "{CA6887E03F2DF604}Language/ACE_UI_language.it_it.conf"
+        StringTableRuntime "{CA6887E03F2DF604}Language/ACE_Radio_language.it_it.conf"
        }
        LanguageDefinition "{64482648FE89869A}" {
         Code "ja_jp"
-        StringTableRuntime "{DA733A72015CC6AF}Language/ACE_UI_language.ja_jp.conf"
+        StringTableRuntime "{DA733A72015CC6AF}Language/ACE_Radio_language.ja_jp.conf"
        }
        LanguageDefinition "{64482648FE8986B6}" {
         Code "ko_kr"
-        StringTableRuntime "{7ACD12DE9271C590}Language/ACE_UI_language.ko_kr.conf"
+        StringTableRuntime "{7ACD12DE9271C590}Language/ACE_Radio_language.ko_kr.conf"
        }
        LanguageDefinition "{64482648FE8986D3}" {
         Code "pl_pl"
-        StringTableRuntime "{26BCB4242C9E59EC}Language/ACE_UI_language.pl_pl.conf"
+        StringTableRuntime "{26BCB4242C9E59EC}Language/ACE_Radio_language.pl_pl.conf"
        }
        LanguageDefinition "{64482648FE8986CF}" {
         Code "pt_br"
-        StringTableRuntime "{F3CB2EE817609356}Language/ACE_UI_language.pt_br.conf"
+        StringTableRuntime "{F3CB2EE817609356}Language/ACE_Radio_language.pt_br.conf"
        }
        LanguageDefinition "{64482648FE89861A}" {
         Code "ru_ru"
-        StringTableRuntime "{A68A3A408A19F620}Language/ACE_UI_language.ru_ru.conf"
+        StringTableRuntime "{A68A3A408A19F620}Language/ACE_Radio_language.ru_ru.conf"
        }
        LanguageDefinition "{64482648FE89863A}" {
         Code "uk_ua"
-        StringTableRuntime "{2CD26FB6E6374875}Language/ACE_UI_language.uk_ua.conf"
+        StringTableRuntime "{2CD26FB6E6374875}Language/ACE_Radio_language.uk_ua.conf"
        }
        LanguageDefinition "{64482648FE8985B6}" {
         Code "zh_cn"
-        StringTableRuntime "{F662018BDF979868}Language/ACE_UI_language.zh_cn.conf"
+        StringTableRuntime "{F662018BDF979868}Language/ACE_Radio_language.zh_cn.conf"
        }
       }
      }

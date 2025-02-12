@@ -7,7 +7,7 @@ HorizontalLayoutWidgetClass {
      Prefab "{64475E8865185274}"
      {
       VerticalLayoutWidgetClass "{64476516122ABAC4}" {
-       Name "ACE_UI_Radio"
+       Name "ACE_Radio"
        Slot LayoutSlot "{64476516122ABAFD}" {
        }
        {
@@ -17,7 +17,7 @@ HorizontalLayoutWidgetClass {
          }
          components {
           SCR_LabelComponent "{58B30C1A8E56F0FF}" {
-           m_sLabel "#ACE_UI-Settings-Radio"
+           m_sLabel "#ACE_Radio-Settings-Radio"
           }
          }
         }
@@ -28,10 +28,10 @@ HorizontalLayoutWidgetClass {
          }
          components {
           SCR_SpinBoxComponent "{5472C6CBC0640458}" {
-           m_sLabel "#ACE_UI-Settings-Radio_Beep_Ch1"
+           m_sLabel "#ACE_Radio-Settings-Radio_Beep_Ch1"
            m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
            m_aElementNames {
-            "#ACE_UI-Settings-Radio_Beep_Off" "#ACE_UI-Settings-Radio_Beep_High" "#ACE_UI-Settings-Radio_Beep_Low"
+            "#ACE_Radio-Settings-Radio_Beep_Off" "#ACE_Radio-Settings-Radio_Beep_High" "#ACE_Radio-Settings-Radio_Beep_Low"
            }
            m_bUseLightArrows 1
            m_bCycleMode 1
@@ -45,10 +45,10 @@ HorizontalLayoutWidgetClass {
          }
          components {
           SCR_SpinBoxComponent "{5472C6CBC0640458}" {
-           m_sLabel "#ACE_UI-Settings-Radio_Beep_Ch2"
+           m_sLabel "#ACE_Radio-Settings-Radio_Beep_Ch2"
            m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
            m_aElementNames {
-            "#ACE_UI-Settings-Radio_Beep_Off" "#ACE_UI-Settings-Radio_Beep_High" "#ACE_UI-Settings-Radio_Beep_Low"
+            "#ACE_Radio-Settings-Radio_Beep_Off" "#ACE_Radio-Settings-Radio_Beep_High" "#ACE_Radio-Settings-Radio_Beep_Low"
            }
            m_bCycleMode 1
           }
@@ -62,7 +62,7 @@ HorizontalLayoutWidgetClass {
          }
          components {
           SCR_SpinBoxComponent "{5472C6CBC0640458}" {
-           m_sLabel "#ACE_UI-Settings_Beep_Cycle"
+           m_sLabel "#ACE_Radio-Settings_Beep_Cycle"
            m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
            m_aElementNames {
             "#AR-UI_No" "#AR-UI_Yes"

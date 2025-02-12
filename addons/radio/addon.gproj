@@ -1,7 +1,7 @@
 GameProject {
- ID "ACE_UI"
+ ID "ACE_Radio"
  GUID "64475DC102F2BDA4"
- TITLE "ACE UI"
+ TITLE "ACE Radio"
  Dependencies {
   "60C4CE4888FF4621" "58D0FB3206B6F859"
  }

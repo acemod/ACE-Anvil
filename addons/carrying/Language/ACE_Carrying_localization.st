@@ -14,9 +14,11 @@ StringTable {
    Target_fr_fr "Porter"
    Target_de_de "Tragen"
    Target_cs_cz "Nést"
-   Modified 1574895272
+   Target_ru_ru "Перенести"
+   Target_uk_ua "Перенести"
+   Modified 1655483297
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{5E0C2A71118B03B7}" {
    Id "ACE_Carrying-UserAction_Carrying"
@@ -24,9 +26,11 @@ StringTable {
    Target_fr_fr "Porter"
    Target_de_de "Am Tragen"
    Target_cs_cz "Nošení"
-   Modified 1577870149
+   Target_ru_ru "Перенос"
+   Target_uk_ua "Перенесення"
+   Modified 1655483287
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{5E0EB8A9BCC4201E}" {
    Id "ACE_Carrying-UserAction_Release"
@@ -34,9 +38,11 @@ StringTable {
    Target_fr_fr "Déposer"
    Target_de_de "Ablegen"
    Target_cs_cz "Položit"
-   Modified 1578028452
+   Target_ru_ru "Отпустить"
+   Target_uk_ua "Відпустити"
+   Modified 1655483234
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
  }
 }

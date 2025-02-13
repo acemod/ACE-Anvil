@@ -21,7 +21,7 @@ class ACE_Medical_ConsumableMorphine : SCR_ConsumableEffectHealthItems
 			return false;
 		
 		// Check if morphine is in the system already
-		array<ref PersistentDamageEffect> effects = damageManager.GetAllPersistentEffectsOfType(ACE_Medical_MorphineDamageEffect);
+		array<ref SCR_PersistentDamageEffect> effects = damageManager.GetAllPersistentEffectsOfType(ACE_Medical_MorphineDamageEffect);
 		if (!effects.IsEmpty())
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;

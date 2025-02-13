@@ -3,13 +3,12 @@
 //! Managed by SCR_DSSessionCallback.
 class ACE_EditorStruct : SCR_JsonApiStruct
 {
-	// SCR_JsonApiStruct does not support array of PoD, hence we use ACE_VectorStruct as wrapper
-	protected ref array<ref ACE_VectorStruct> m_aACE_DeletedEntityPositions = {};
+	protected ref array<string> m_aACE_DeletedEntityIDs = {};
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_EditorStruct()
 	{
-		RegV("m_aACE_DeletedEntityPositions");
+		RegV("m_aACE_DeletedEntityIDs");
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -17,9 +16,9 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 	override void Log()
 	{
 		Print("--- ACE_EditorStruct ------------------------");
-		for (int i = 0, count = m_aACE_DeletedEntityPositions.Count(); i < count; i++)
+		for (int i = 0, count = m_aACE_DeletedEntityIDs.Count(); i < count; i++)
 		{
-			Print("Removed entity position: " + m_aACE_DeletedEntityPositions[i]);
+			Print("Removed entity with ID: " + m_aACE_DeletedEntityIDs[i]);
 		}
 		Print("---------------------------------------------");
 	}
@@ -28,40 +27,41 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 	//! Write world data into the struct.
 	override bool Serialize()
 	{
-		
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-		if (!gameMode)
+		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
+		if (!manager)
 			return false;
 		
-		m_aACE_DeletedEntityPositions.Clear();
+		array<EntityID> entityIDs = manager.GetDeletedEntityIDs();
+		m_aACE_DeletedEntityIDs.Clear();
+		m_aACE_DeletedEntityIDs.Reserve(entityIDs.Count());
 		
-		foreach (vector pos : gameMode.ACE_GetDeletedEntityPositions())
+		foreach (EntityID entityID : entityIDs)
 		{
-			ACE_VectorStruct posStruct = new ACE_VectorStruct();
-			posStruct.SetVector(pos);
-			m_aACE_DeletedEntityPositions.Insert(posStruct);
+			m_aACE_DeletedEntityIDs.Insert(ACE_EntityIdHelper.ToString(entityID));
 		}
-
+		
 		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Read data from the struct and apply them in the world.
+	//! Read data from the struct and apply them to the world.
 	override bool Deserialize()
 	{	
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-		if (!gameMode)
+		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
+		if (!manager)
 			return false;
 		
-		array<vector> deletedEntityPositions = {};
+		array<EntityID> entityIDs = {};
+		entityIDs.Reserve(m_aACE_DeletedEntityIDs.Count());
 		
-		foreach (ACE_VectorStruct posStruct : m_aACE_DeletedEntityPositions)
+		foreach (string str : m_aACE_DeletedEntityIDs)
 		{
-			deletedEntityPositions.Insert(posStruct.GetVector());
-		};
+			EntityID entity = ACE_EntityIdHelper.FromString(str);
+			if (entity != EntityID.INVALID)
+				entityIDs.Insert(entity);
+		}
 		
-		gameMode.ACE_DeleteEntitiesAtPositionsGlobal(deletedEntityPositions);
-		
+		manager.DeleteEntitiesByIdGlobal(entityIDs);
 		return true;
 	}
 
@@ -69,6 +69,6 @@ class ACE_EditorStruct : SCR_JsonApiStruct
 	//! Clear cached data.
 	override void ClearCache()
 	{
-		m_aACE_DeletedEntityPositions.Clear();
+		m_aACE_DeletedEntityIDs.Clear();
 	}
 }

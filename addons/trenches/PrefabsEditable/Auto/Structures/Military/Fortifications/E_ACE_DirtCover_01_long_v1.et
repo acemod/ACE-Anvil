@@ -3,6 +3,12 @@ GenericEntity : "{3B9D178DEB635AFD}PrefabsEditable/Auto/Structures/Military/Fort
  components {
   MeshObject "{60ED256B7FE9D171}" {
    Object "{B119EC6E3C59AF3B}Assets/Structures/Military/Fortifications/DirtMounds/DirtCover_01_long_01.xob"
+   Materials {
+    MaterialAssignClass "{626E47F33C8B73DA}" {
+     SourceMaterial "DirtCover_01"
+     AssignedMaterial "{30369C94C941BE87}Common/Materials/ACE_Trenches_MatTerrainObj.emat"
+    }
+   }
   }
   SCR_EditableEntityComponent "{60ED256B631A65DC}" {
    m_UIInfo SCR_EditableEntityUIInfo "{60ED2568D69DDD17}" {

@@ -12,6 +12,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	protected ACE_EAnimationHelperID m_eID;
 	
 	protected IEntity m_pPerformer;
+	protected ref ScriptInvokerVoid m_OnTerminated;
 
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping performer
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
@@ -44,14 +45,6 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	protected void AttachHandlers()
 	{
-		// Set owner to performer
-		PlayerManager playerManager = GetGame().GetPlayerManager();
-		SCR_PlayerController performerPlayerController = SCR_PlayerController.Cast(playerManager.GetPlayerController(playerManager.GetPlayerIdFromControlledEntity(m_pPerformer)));
-		
-		RplComponent rpl = RplComponent.Cast(FindComponent(RplComponent));
-		if (performerPlayerController && rpl)
-			rpl.Give(performerPlayerController.GetRplIdentity());
-		
 		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
 		if (charController)
 			charController.m_OnLifeStateChanged.Insert(OnPerformerLifeStateChanged);
@@ -86,8 +79,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Terminates CPR
-	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	//! Terminates animation
 	void Terminate(EGetOutType getOutType)
 	{
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
@@ -130,6 +122,9 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	{
 		DetachHandlers();
 		
+		if (m_OnTerminated)
+			m_OnTerminated.Invoke();
+		
 		// Deletion of helper has to be delayed or released players stay visibly prone for other players on dedicated
 		GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, HELPER_DELETION_DELAY_MS, false, this);
 	}
@@ -142,20 +137,27 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Terminate when patient wakes up
-	protected void OnPatientLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
-	{
-		if (newLifeState == ECharacterLifeState.ALIVE)
-			Terminate(EGetOutType.ANIMATED);
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Terminate when performer or patient disconnects
 	protected void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
 	{
 		IEntity player = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		if (player == m_pPerformer)
 			Terminate(EGetOutType.TELEPORT);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	IEntity GetPerformer()
+	{
+		return m_pPerformer;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ScriptInvokerVoid GetOnTerminated()
+	{
+		if (!m_OnTerminated)
+			m_OnTerminated = new ScriptInvokerVoid();
+		
+		return m_OnTerminated;
 	}
 	
 	//------------------------------------------------------------------------------------------------

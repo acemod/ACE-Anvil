@@ -44,6 +44,18 @@ StringTable {
    Author "kexanone"
    LastChanged "Smith"
   }
+  CustomStringTableItem "{649D4AEF943234F2}" {
+   Id "ACE-UserAction_Release"
+   Target_en_us "Release"
+   Target_fr_fr "Déposer"
+   Target_de_de "Ablegen"
+   Target_cs_cz "Položit"
+   Target_ru_ru "Отпустить"
+   Target_uk_ua "Відпустити"
+   Modified 1655483234
+   Author "kexanone"
+   LastChanged "Smith"
+  }
   CustomStringTableItem "{60FD565E50C080B7}" {
    Id "ACE-Weapon_FragBanana_Description"
    Target_en_us "Explosive Potassium!"
@@ -67,6 +79,13 @@ StringTable {
    Modified 1655483765
    Author "kexanone"
    LastChanged "Smith"
+  }
+  CustomStringTableItem "{649D4AEE400FD73C}" {
+   Id "ACE_Core-AddonName"
+   Target_en_us "Core"
+   Modified 1688030694
+   Author "Kex"
+   LastChanged "Kex"
   }
  }
 }

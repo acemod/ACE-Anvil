@@ -1,0 +1,25 @@
+StaticModelEntity : "{C289F5D866F0E46E}Prefabs/Structures/Walls/BarbedWire/BarbedTape_01/BarbedTape_01_base.et" {
+ ID "51E2F0F0E96F07CE"
+ components {
+  ActionsManagerComponent "{62F7138ECD3B128A}" {
+   ActionContexts {
+    UserActionContext "{62F7138ECAC5B7DB}" {
+     UIInfo UIInfo "{62F3757643FDA885}" {
+     }
+     Position PointInfo "{62F3757673BBD7DA}" {
+      Offset 0.0711 0.5883 0
+     }
+    }
+   }
+   additionalActions {
+    Wirecutter_UserAction "{62F7138E9A63AA3F}" {
+     UIInfo SCR_ActionUIInfo "{62F3757618B40C7E}" {
+     }
+     VisibilityRange 2
+     m_AudioSourceConfiguration SCR_AudioSourceConfiguration "{62F7042158164306}" {
+     }
+    }
+   }
+  }
+ }
+}

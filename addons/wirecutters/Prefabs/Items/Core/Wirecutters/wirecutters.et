@@ -1,0 +1,92 @@
+GenericEntity {
+ ID "62F35B4168194668"
+ components {
+  InventoryItemComponent "{62F35B416819467A}" {
+   Attributes SCR_ItemAttributeCollection "{62F35B4168194675}" {
+    ItemDisplayName UIInfo "{62F35B4168194649}" {
+     Name "Wirecutters"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{62F35B4168194640}" {
+     Weight 0.01
+     SizeSetupStrategy Manual
+     ItemVolume 10
+     RestingAdditiveRotationLS 0 0 0
+     RestingAdditiveOffsetLS 0 0 0
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{62F35B4119C1B546}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{62F35B4107169A7E}" {
+       AnimGraph "{82906ACD75DF8523}Assets/Items/Equipment/workspaces/Flashlight_MX991.agr"
+       AnimInstance "{903E4A0B96B34B8F}Assets/Items/Equipment/workspaces/MX991_player.asi"
+       BindingName "Gadget"
+      }
+     }
+     HandAdditiveRotation 270 16 98.1
+     HandAdditiveTranslation -0.005 0.12 0
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{62F35B41089C2A0A}" {
+      CameraPreset Top
+      CameraDistanceToItem 0.34
+     }
+     CharacterModifierAttributes "{62F35B41347CC711}" {
+      Supress1hShooting 0
+     }
+    }
+    m_Size SLOT_1x1
+    m_SlotType SLOT_LOADOUT_STORAGE
+   }
+  }
+  MeshObject "{62F35B411275726A}" {
+   Object "{2DF3BF7B29A93115}Assets/wirecuttermodel2.xob"
+  }
+  SCR_GadgetManagerComponent "{62F35B4086F40A25}" {
+  }
+  SCR_SoundDataComponent "{62F35B4168194646}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{62F35B416819465A}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_PICK_UP"
+    }
+    SCR_AudioSourceConfiguration "{62F35B416819465F}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_EQUIP"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{62F35B4168194651}" {
+     m_sSoundProject "{CC0E5A1324E761C1}Sounds/Items/_SharedData/Drop/Items_Drop_Generic.acp"
+     m_sSoundEventName "SOUND_DROP"
+    }
+   }
+  }
+  SCR_WirecutterComponent "{62F370D8F0288483}" {
+   m_eAnimVariable ADRIANOV
+   m_eUseMask 7
+  }
+  ActionsManagerComponent "{62F35B4168194654}" {
+   ActionContexts {
+    UserActionContext "{62F35B4168194656}" {
+     ContextName "default"
+     Position PointInfo "{62F35B4168194657}" {
+     }
+    }
+   }
+   additionalActions {
+    SCR_PickUpItemAction "{62F35B41681946AA}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{62F35B41681946AB}" {
+      Name "#AR-Inventory_PickUp"
+     }
+    }
+   }
+  }
+  RplComponent "{62F35B41681946A7}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{62F35B41681946B9}" {
+  }
+ }
+}

@@ -2,8 +2,8 @@
 [BaseContainerProps(), SCR_BaseContainerCustomTitleUIInfo("m_Info")]
 class ACE_Captives_ToggleEntityContextAction : SCR_SelectedEntitiesContextAction
 {
-	[Attribute(uiwidget: UIWidgets.ResourceNamePicker, desc: "Prefab name of the helper compartment", params: "et")]
-	protected ResourceName m_sHelperCompartmentPrefabName;
+	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "ID of the animation helper",  enums: ParamEnumArray.FromEnum(ACE_EAnimationHelperID))]
+	protected ACE_EAnimationHelperID m_eAnimationHelperID;
 	
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShown(SCR_EditableEntityComponent selectedEntity, vector cursorWorldPosition, int flags)
@@ -37,9 +37,9 @@ class ACE_Captives_ToggleEntityContextAction : SCR_SelectedEntitiesContextAction
 			return;
 		
 		ACE_AnimationHelperCompartment helper = ACE_AnimationHelperCompartment.Cast(char.GetParent());
-		if (helper && helper.GetPrefabData().GetPrefabName() == m_sHelperCompartmentPrefabName)
+		if (helper && helper.GetHelperID() == m_eAnimationHelperID)
 			helper.Terminate(EGetOutType.ANIMATED);
 		else
-			ACE_AnimationTools.AnimateWithHelperCompartment(char, m_sHelperCompartmentPrefabName);
+			ACE_AnimationTools.AnimateWithHelperCompartment(m_eAnimationHelperID, char);
 	}
 }

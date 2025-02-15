@@ -13,7 +13,7 @@ SCR_ChimeraCharacter {
       m_sIconName "connection"
      }
     }
-    ACE_Captives_TakePrisonerUserAction "{6479252F50FE822F}" {
+    ACE_Captives_TogglePrisonerUserAction "{6479252F50FE822F}" {
      ParentContextList {
       "LeftWrist" "RightWrist"
      }
@@ -22,6 +22,7 @@ SCR_ChimeraCharacter {
       m_sInteractionIcon "{2EFEA2AF1F38E7F0}UI/Textures/Icons/icons_wrapperUI-64.imageset"
       m_sIconName "connection"
      }
+     "Sort Priority" 1
     }
    }
   }

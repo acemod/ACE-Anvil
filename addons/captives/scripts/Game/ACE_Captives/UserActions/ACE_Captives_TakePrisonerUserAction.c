@@ -1,6 +1,12 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Captives_TakePrisonerUserAction : ScriptedUserAction
+class ACE_Captives_TogglePrisonerUserAction : ScriptedUserAction
 {
+	[Attribute(defvalue: "#ACE_Captives-UserName_TakeAsPrisoner", desc: "String shown for taking as prisoner")]
+	protected LocalizedString m_sTakePrisoner;
+	
+	[Attribute(defvalue: "#ACE_Captives-UserName_ReleasePrisoner", desc: "String shown for releasing prisoner")]
+	protected LocalizedString m_sReleasePrisoner;
+	
 	protected SCR_CharacterControllerComponent m_pOwnerCharCtrl;
 	
 	//------------------------------------------------------------------------------------------------
@@ -16,20 +22,41 @@ class ACE_Captives_TakePrisonerUserAction : ScriptedUserAction
 		if (!super.CanBeShownScript(user))
 			return false;
 		
-		if (!m_pOwnerCharCtrl.ACE_Captives_HasSurrendered())
+		if (m_pOwnerCharCtrl.ACE_IsCarried())
 			return false;
 		
 		if (m_pOwnerCharCtrl.ACE_Captives_IsCaptive())
-			return false;
+			return true;
 		
-		return true;
+		return m_pOwnerCharCtrl.ACE_Captives_HasSurrendered();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
 		super.PerformAction(pOwnerEntity, pUserEntity);
-		ACE_AnimationTools.AnimateWithHelperCompartment(pOwnerEntity, "{5E23E43ED54785D0}Prefabs/Helpers/ACE_Captives_TiedHelperCompartment.et");
+		
+		if (m_pOwnerCharCtrl.ACE_Captives_IsCaptive())
+		{
+			ACE_AnimationHelperCompartment helper = ACE_AnimationHelperCompartment.Cast(pOwnerEntity.GetParent());
+			if (helper)
+				helper.Terminate(EGetOutType.ANIMATED);
+		}
+		else
+		{
+			ACE_AnimationTools.AnimateWithHelperCompartment(ACE_EAnimationHelperID.TIED, pOwnerEntity);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool GetActionNameScript(out string outName)
+	{
+		if (m_pOwnerCharCtrl.ACE_Captives_IsCaptive())
+			outName = m_sReleasePrisoner;
+		else
+			outName = m_sTakePrisoner;
+		
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------

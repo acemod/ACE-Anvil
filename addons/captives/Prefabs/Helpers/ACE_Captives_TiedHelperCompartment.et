@@ -1,7 +1,7 @@
 ACE_Captives_TiedHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
  ID "4B42E71698F5739C"
  components {
-  ACE_CarriableEntityComponent "{647772B15CC42F09}" {
+  ACE_CarriableAnimationHelperComponent "{647772B15CC42F09}" {
    m_AttachmentPoint PointInfo "{647772B153CAFDD6}" {
     Offset 0 0 1
    }
@@ -22,5 +22,9 @@ ACE_Captives_TiedHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_Anim
     AnimInstance "{DDCDD9DFF9310378}Assets/Helpers/Workspace/ACE_Captives_Tied.asi"
    }
   }
+  RplComponent "{63136787FD0BCE14}" {
+   AutoHierarchy 1
+  }
  }
+ m_eID TIED
 }

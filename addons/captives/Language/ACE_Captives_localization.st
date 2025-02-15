@@ -25,5 +25,21 @@ StringTable {
    Author "Kex"
    LastChanged "Kex"
   }
+  CustomStringTableItem "{649D4AECDC295B8D}" {
+   Id "ACE_Captives-UserName_ReleasePrisoner"
+   Target_en_us "Release prisoner"
+   Target_de_de "Gefangener freilassen"
+   Modified 1688031937
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{649D4AEC8449241E}" {
+   Id "ACE_Captives-UserName_TakeAsPrisoner"
+   Target_en_us "Take as prisoner"
+   Target_de_de "Gefangen nehmen"
+   Modified 1688031250
+   Author "Kex"
+   LastChanged "Kex"
+  }
  }
 }

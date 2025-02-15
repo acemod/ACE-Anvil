@@ -19,6 +19,9 @@ class ACE_Captives_EscortCaptiveUserAction : ScriptedUserAction
 		if (!m_pOwnerCharCtrl.ACE_Captives_IsCaptive())
 			return false;
 		
+		if (m_pOwnerCharCtrl.ACE_IsCarried())
+			return false;
+		
 		return true;
 	}
 	

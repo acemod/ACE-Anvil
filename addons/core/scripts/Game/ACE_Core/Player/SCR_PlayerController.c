@@ -21,20 +21,20 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_RequestAnimateWithHelperCompartment(ResourceName helperCompatmentPrefabName)
+	void ACE_RequestAnimateWithHelperCompartment(ACE_EAnimationHelperID helperID)
 	{
-		Rpc(RpcAsk_ACE_AnimateWithHelperCompartment, helperCompatmentPrefabName);
+		Rpc(RpcAsk_ACE_AnimateWithHelperCompartment, helperID);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_AnimateWithHelperCompartment(ResourceName helperCompatmentPrefabName)
+	protected void RpcAsk_ACE_AnimateWithHelperCompartment(ACE_EAnimationHelperID helperID)
 	{
 		IEntity char = GetControlledEntity();
 		// Skip if no character or character inside something else
 		if (!char || char.GetParent())
 			return;
 		
-		ACE_AnimationTools.AnimateWithHelperCompartment(char, helperCompatmentPrefabName);
+		ACE_AnimationTools.AnimateWithHelperCompartment(helperID, char);
 	}
 }

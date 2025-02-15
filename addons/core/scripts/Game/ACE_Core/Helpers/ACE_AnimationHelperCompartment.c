@@ -8,6 +8,9 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 //! --- To Do: Create derived classes of this for carrying and CPR
 class ACE_AnimationHelperCompartment : GenericEntity
 {
+	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "ID of the animation helper",  enums: ParamEnumArray.FromEnum(ACE_EAnimationHelperID))]
+	protected ACE_EAnimationHelperID m_eID;
+	
 	protected IEntity m_pPerformer;
 
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping performer
@@ -153,5 +156,11 @@ class ACE_AnimationHelperCompartment : GenericEntity
 		IEntity player = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
 		if (player == m_pPerformer)
 			Terminate(EGetOutType.TELEPORT);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_EAnimationHelperID GetHelperID()
+	{
+		return m_eID;
 	}
 }

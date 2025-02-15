@@ -1,18 +1,30 @@
 //------------------------------------------------------------------------------------------------
 class ACE_AnimationTools
 {
+	protected static ref ACE_AnimationHelpersConfig s_AnimationHelpersConfig;
+	protected static const ResourceName ANIMATION_HELPERS_CONFIG_NAME = "{49EB6E775F6E8519}Configs/ACE/ACE_AnimationHelpers.conf";
+	
 	//------------------------------------------------------------------------------------------------
-	static ACE_AnimationHelperCompartment AnimateWithHelperCompartment(notnull IEntity performer, ResourceName helperPrefabName)
+	protected static void Init()
 	{
-		vector transform[4];
-		performer.GetWorldTransform(transform);
-		return AnimateWithHelperCompartment(performer, transform, helperPrefabName);
+		s_AnimationHelpersConfig = SCR_ConfigHelperT<ACE_AnimationHelpersConfig>.GetConfigObject(ANIMATION_HELPERS_CONFIG_NAME);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_AnimationHelperCompartment AnimateWithHelperCompartment(notnull IEntity performer, vector transform[4], ResourceName helperPrefabName)
+	static ACE_AnimationHelperCompartment AnimateWithHelperCompartment(ACE_EAnimationHelperID helperID, notnull IEntity performer)
 	{
-		Resource res = Resource.Load(helperPrefabName);
+		vector transform[4];
+		performer.GetWorldTransform(transform);
+		return AnimateWithHelperCompartment(helperID, performer, transform);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static ACE_AnimationHelperCompartment AnimateWithHelperCompartment(ACE_EAnimationHelperID helperID, notnull IEntity performer, vector transform[4])
+	{
+		if (!s_AnimationHelpersConfig)
+			Init();
+		
+		Resource res = Resource.Load(s_AnimationHelpersConfig.GetPrefabName(helperID));
 		if (!res.IsValid())
 			return null;
 		

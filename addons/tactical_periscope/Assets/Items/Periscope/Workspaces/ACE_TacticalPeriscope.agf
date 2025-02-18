@@ -1,0 +1,176 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Master {
+   Nodes {
+    AnimSrcNodeStateMachine GadgetSTM {
+     Tags {
+      "TagGadget"
+     }
+     EditorPos 318.4 171.4
+     states {
+      AnimSrcNodeState Idle {
+       EditorPos 317 172.3
+       Child "Idle Anim"
+      }
+      AnimSrcNodeState Focused {
+       Tags {
+        "TagFocused"
+       }
+       EditorPos 321.9 172.3
+       Child "Focused Anim"
+       StartCondition "Focused"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{51AE94D4B6B1E1EB}" {
+       FromState ""
+       ToState "Idle"
+       Duration "0.2"
+       Condition ""
+      }
+      AnimSrcNodeTransition "{52AAC387BD7DA0A4}" {
+       FromState "Idle"
+       ToState "Focused"
+       Duration "0.3"
+       Condition "Focused && HasVariableChanged(Focused)"
+       BlendFn S
+       PostEval 1
+       Events {
+        AnimSrcEventGeneric "{5C8C8549CB981428}" {
+         Name "Sound"
+         UserString "SOUND_CHAR_MOVEMENT.leftarm"
+         UserInt 7
+        }
+       }
+      }
+      AnimSrcNodeTransition "{52AAC387BD7DA0D2}" {
+       FromState "Focused"
+       ToState "Idle"
+       Duration "0.3"
+       Condition "!Focused && HasVariableChanged(Focused)"
+       BlendFn S
+       PostEval 1
+       Events {
+        AnimSrcEventGeneric "{5C8C8549C5887CFF}" {
+         Name "Sound"
+         UserString "SOUND_CHAR_MOVEMENT.leftarm"
+         UserInt 7
+        }
+       }
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect Pne {
+     EditorPos 321.2 168.7
+     Child "GadgetSTM"
+     Group "Gadget"
+     Column "Pne"
+    }
+    AnimSrcNodeStateMachine MasterControl {
+     Tags {
+      "TagGadget"
+     }
+     EditorPos 318.1 165.7
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos 315.7 166.9
+       Child "Erc"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 318.2 166.3
+       Child "Cro"
+       StartCondition "Stance == 1"
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 320.7 166.9
+       Child "Pne"
+       StartCondition "Stance == 2"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5496D127EC9B478A}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5496D127EC9B47BB}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F05}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F30}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F3F}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F2D}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect Cro {
+     EditorPos 318.421 168.708
+     Child "GadgetSTM"
+     Group "Gadget"
+     Column "Cro"
+    }
+    AnimSrcNodeGroupSelect Erc {
+     EditorPos 315.8 168.6
+     Child "GadgetSTM"
+     Group "Gadget"
+     Column "Erc"
+    }
+    AnimSrcNodeBlend "Focused Anim" {
+     EditorPos 321.9 173.7
+     BlendWeight "0.9"
+     Child0 "Idle Finger Pose"
+     Child1 "Focused Pose"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodePose "Idle Finger Pose" {
+     EditorPos 319.4 174.8
+     Source "Gadget.Erc.FingerAnim"
+    }
+    AnimSrcNodePose "Focused Pose" {
+     EditorPos 323.2 174.7
+     Source "Gadget.Focused"
+    }
+    AnimSrcNodeBlend "Idle Anim" {
+     EditorPos 317 173.6
+     Child0 "Idle Pose"
+     Child1 "Idle Finger Pose"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodePose "Idle Pose" {
+     EditorPos 315.8 174.7
+     Source "Gadget.Idle"
+    }
+   }
+  }
+ }
+}

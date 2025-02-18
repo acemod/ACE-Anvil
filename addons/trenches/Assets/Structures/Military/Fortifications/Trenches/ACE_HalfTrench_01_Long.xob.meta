@@ -1,0 +1,36 @@
+MetaFileClass {
+ Name "{378B78363D168172}Assets/Structures/Military/Fortifications/Trenches/ACE_HalfTrench_01_Long.xob"
+ Configurations {
+  FBXResourceClass PC {
+   MaterialAssigns {
+    MaterialAssignClass "{64973CCD11DDDD2D}" {
+     SourceMaterial "TerrainMat"
+     AssignedMaterial "{30369C94C941BE87}Common/Materials/ACE_Trenches_MatTerrainObj.emat"
+    }
+   }
+   MeshParams {
+    MeshParam HalfTrench {
+    }
+   }
+   GeometryParams {
+    GeometryParam UTM_HalfTrench {
+     SurfaceProperties {
+      "{C3691F2D8FE0234F}Common/Materials/Game/dirt.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass PS5 : PC {
+  }
+  FBXResourceClass HEADLESS : PC {
+  }
+ }
+}

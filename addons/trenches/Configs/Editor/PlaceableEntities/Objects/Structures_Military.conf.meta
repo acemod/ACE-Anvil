@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{28ACD0C845BE4967}Configs/Editor/PlaceableEntities/Objects/Structures_Military.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

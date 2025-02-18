@@ -9,60 +9,60 @@ GameProject {
   GameProjectConfig PC {
    WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
     StringTables {
-     StringTableDefinition "{61B80DDC6ED33EB8}" {
+     StringTableDefinition "{6494F6254129D69A}" {
       StringTableSource "{AB4674C708AC6E13}Language/ACE_Explosives_Localization.st"
       Languages {
-       LanguageDefinition "{61B80DDC60A0B696}" {
+       LanguageDefinition "{6494F6254670F382}" {
         Code "cs_cz"
-        StringTableRuntime "{D40B97B841EA0481}Language/ACEExplosivesLocalization.cs_cz.conf"
+        StringTableRuntime "{01CEF1C177795397}Language/ACE_Explosives_Localization.cs_cz.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B648}" {
+       LanguageDefinition "{6494F6254670F3C0}" {
         Code "de_de"
-        StringTableRuntime "{01758D8B524915A1}Language/ACEExplosivesLocalization.de_de.conf"
+        StringTableRuntime "{D4B0EBF264DA42B7}Language/ACE_Explosives_Localization.de_de.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B678}" {
+       LanguageDefinition "{6494F6254670F330}" {
         Code "en_us"
-        StringTableRuntime "{5F8507C038BA10A0}Language/ACEExplosivesLocalization.en_us.conf"
+        StringTableRuntime "{8A4061B90E2947B6}Language/ACE_Explosives_Localization.en_us.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B669}" {
+       LanguageDefinition "{6494F6254670F321}" {
         Code "es_es"
-        StringTableRuntime "{9AC94A49D6B87BBF}Language/ACEExplosivesLocalization.es_es.conf"
+        StringTableRuntime "{4F0C2C30E02B2CA9}Language/ACE_Explosives_Localization.es_es.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B618}" {
+       LanguageDefinition "{6494F6254670F171}" {
         Code "fr_fr"
-        StringTableRuntime "{2161BF7E303B98BD}Language/ACEExplosivesLocalization.fr_fr.conf"
+        StringTableRuntime "{F4A4D90706A8CFAB}Language/ACE_Explosives_Localization.fr_fr.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B608}" {
+       LanguageDefinition "{6494F6254670F163}" {
         Code "it_it"
-        StringTableRuntime "{A17D304A9D191B44}Language/ACEExplosivesLocalization.it_it.conf"
+        StringTableRuntime "{74B85633AB8A4C52}Language/ACE_Explosives_Localization.it_it.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B638}" {
+       LanguageDefinition "{6494F6254670F16E}" {
         Code "ja_jp"
-        StringTableRuntime "{B1668DD8A3682BEF}Language/ACEExplosivesLocalization.ja_jp.conf"
+        StringTableRuntime "{64A3EBA195FB7CF9}Language/ACE_Explosives_Localization.ja_jp.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B636}" {
+       LanguageDefinition "{6494F6254670F159}" {
         Code "ko_kr"
-        StringTableRuntime "{11D8A574304528D0}Language/ACEExplosivesLocalization.ko_kr.conf"
+        StringTableRuntime "{C41DC30D06D67FC6}Language/ACE_Explosives_Localization.ko_kr.conf"
        }
-       LanguageDefinition "{61B80DDC60A0B627}" {
+       LanguageDefinition "{6494F6254670F144}" {
         Code "pl_pl"
-        StringTableRuntime "{4DA9038E8EAAB4AC}Language/ACEExplosivesLocalization.pl_pl.conf"
+        StringTableRuntime "{986C65F7B839E3BA}Language/ACE_Explosives_Localization.pl_pl.conf"
        }
-       LanguageDefinition "{61B80DDC60A0A9D5}" {
+       LanguageDefinition "{6494F6254670F0B5}" {
         Code "pt_br"
-        StringTableRuntime "{98DE9942B5547E16}Language/ACEExplosivesLocalization.pt_br.conf"
+        StringTableRuntime "{4D1BFF3B83C72900}Language/ACE_Explosives_Localization.pt_br.conf"
        }
-       LanguageDefinition "{61B80DDC60A0A95A}" {
+       LanguageDefinition "{6494F6254670F0AE}" {
         Code "ru_ru"
-        StringTableRuntime "{CD9F8DEA282D1B60}Language/ACEExplosivesLocalization.ru_ru.conf"
+        StringTableRuntime "{185AEB931EBE4C76}Language/ACE_Explosives_Localization.ru_ru.conf"
        }
-       LanguageDefinition "{61B80DDC60A0A940}" {
+       LanguageDefinition "{6494F6254670F09C}" {
         Code "uk_ua"
-        StringTableRuntime "{47C7D81C4403A535}Language/ACEExplosivesLocalization.uk_ua.conf"
+        StringTableRuntime "{9202BE657290F223}Language/ACE_Explosives_Localization.uk_ua.conf"
        }
-       LanguageDefinition "{61B80DDC60A0A97E}" {
+       LanguageDefinition "{6494F6254670F088}" {
         Code "zh_cn"
-        StringTableRuntime "{9D77B6217DA37528}Language/ACEExplosivesLocalization.zh_cn.conf"
+        StringTableRuntime "{48B2D0584B30223E}Language/ACE_Explosives_Localization.zh_cn.conf"
        }
       }
      }

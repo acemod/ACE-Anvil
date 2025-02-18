@@ -15,10 +15,22 @@ GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
      ParentContextList {
       "default"
      }
-     UIInfo UIInfo "{61B846BBC1A7E295}" {
-      Name "#ACE-Explosives_DisarmUserAction_Name"
+     UIInfo SCR_ActionUIInfo "{61B846BBC1A7E295}" {
+      Name "#ACE-Explosives_UserAction_Disarm_Name"
+      m_sIconName "repair"
      }
      Duration 6
+     "Sort Priority" -3
+    }
+    ACE_Explosives_ToggleBuryUserAction "{64933B9AAC846215}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{64933B9A1108ED2E}" {
+      m_sIconName "building-construction"
+     }
+     Duration 6
+     "Sort Priority" -3
     }
    }
   }

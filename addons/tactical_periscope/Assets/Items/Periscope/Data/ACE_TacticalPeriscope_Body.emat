@@ -1,0 +1,7 @@
+MatPBRBasic {
+ Color 0.188 0.188 0.188 1
+ BlendMode AlphaBlend
+ BCRMap "{2A4C0F4382091F8E}Assets/Items/Periscope/ACE_Periscope_Body_BCR.edds"
+ OpacityMap "{9CFC96E8B6F9CD52}Assets/Items/Periscope/ACE_Periscope_Body_OPM.edds"
+ NMOMap "{1F68C28A2852FCFB}Assets/Items/Periscope/ACE_Periscope_NMO.edds"
+}

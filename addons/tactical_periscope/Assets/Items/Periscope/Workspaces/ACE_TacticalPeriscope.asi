@@ -1,0 +1,28 @@
+AnimSetInstanceSource "{62FA2AE213AB9BD0}" {
+ Template "{22EE81BD8ADE9FB2}Assets/Items/Periscope/Workspaces/ACE_TacticalPeriscope.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Gadget.Erc.Focused" {
+   Resource "{8665B0CCC75E4A55}Assets/Items/Periscope/Workspaces/p_erc_tacticalperiscope_focused_pose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Erc.FingerAnim" {
+   Resource "{18E77E11DAFD8191}Assets/Items/Periscope/Workspaces/p_erc_tacticalperiscope_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Erc.Idle" {
+   Resource "{EEE74236E65DD60B}Assets/Items/Periscope/Workspaces/p_erc_tacticalperiscope_idle_pose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Cro.Focused" {
+   Resource "{1CFDE74F0697FC04}Assets/Items/Periscope/Workspaces/p_cro_tacticalperiscope_focused_pose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Pne.Focused" {
+   Resource "{434E3345C211FDC4}Assets/Items/Periscope/Workspaces/p_pne_tacticalperiscope_focused_pose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Cro.Idle" {
+   Resource "{BFBF649195C046B3}Assets/Items/Periscope/Workspaces/p_cro_tacticalperiscope_idle_pose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Pne.Idle" {
+   Resource "{646EF3480C427412}Assets/Items/Periscope/Workspaces/p_pne_tacticalperiscope_idle_pose.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{62FA2AE22C8ADE45}" {
+ }
+}

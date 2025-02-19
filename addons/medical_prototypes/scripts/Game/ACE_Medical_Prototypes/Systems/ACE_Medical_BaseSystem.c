@@ -24,6 +24,16 @@ class ACE_Medical_BaseSystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(true)
+			.SetUnique(false)
+			.SetLocation(ESystemLocation.Server)
+			.AddPoint(ESystemPoint.Frame);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()
 	{
 		super.OnInit();

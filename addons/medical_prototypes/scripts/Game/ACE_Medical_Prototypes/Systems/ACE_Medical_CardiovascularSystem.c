@@ -8,6 +8,13 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	static const float KPA2MMHG = 7.50062;
 	
 	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()
 	{
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();

@@ -5,6 +5,13 @@
 class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 {
 	protected ACE_Medical_MedicationSystemSettings m_Settings;
+	
+	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false);
+	}
 
 	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()

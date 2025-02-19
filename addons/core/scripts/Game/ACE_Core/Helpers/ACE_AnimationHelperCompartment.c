@@ -43,15 +43,13 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Note that we do not need to handle OnPlayerDisconnected, since a disconnected occupant automatically
+	//! triggers OnCompartmentLeft when they get deleted
 	protected void AttachHandlers()
 	{
 		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
 		if (charController)
 			charController.m_OnLifeStateChanged.Insert(OnPerformerLifeStateChanged);
-				
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-		if (gameMode)
-			gameMode.GetOnPlayerDisconnected().Insert(OnPlayerDisconnected);
 		
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
 		if (compartmentAccess)
@@ -67,10 +65,6 @@ class ACE_AnimationHelperCompartment : GenericEntity
 			if (charController)
 				charController.m_OnLifeStateChanged.Remove(OnPerformerLifeStateChanged);
 		}
-		
-		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
-		if (gameMode)
-			gameMode.GetOnPlayerDisconnected().Remove(OnPlayerDisconnected);
 		
 		// Clean-up when carried has left the compartment
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
@@ -134,15 +128,6 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	protected void OnPerformerLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
 		Terminate(EGetOutType.TELEPORT);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Terminate when performer or patient disconnects
-	protected void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
-	{
-		IEntity player = GetGame().GetPlayerManager().GetPlayerControlledEntity(playerId);
-		if (player == m_pPerformer)
-			Terminate(EGetOutType.TELEPORT);
 	}
 	
 	//------------------------------------------------------------------------------------------------

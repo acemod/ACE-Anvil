@@ -37,12 +37,13 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      }
     }
     m_eDeviceType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
-    m_eDrugType PHENYLEPHRINE
-    m_Dose ACE_Medical_Bolus "{622117566CC6EFEE}" {
-     m_fConcentrationNM 650
+    m_Doses {
+     ACE_Medical_Bolus "{622117566CC6EFEE}" {
+      m_eDrugType PHENYLEPHRINE
+      m_fConcentrationNM 650
+     }
     }
    }
   }
  }
- coords 0 0 -0.055
 }

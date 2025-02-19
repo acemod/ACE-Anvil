@@ -36,8 +36,9 @@ class ACE_Medical_MedicationComponent : ACE_Medical_BaseComponent2
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void AddMedication(ACE_Medical_EDrugType drug, ACE_Medical_Dose dose)
+	void AddMedication(ACE_Medical_Dose dose)
 	{
+		ACE_Medical_EDrugType drug = dose.GetDrugType();
 		dose.SetAdministrationTime();
 		
 		ACE_Medical_BaseSystem2 system = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);

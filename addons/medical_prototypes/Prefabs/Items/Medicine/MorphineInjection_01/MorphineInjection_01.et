@@ -1,5 +1,5 @@
 GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01_base.et" {
- ID "508AB2013EEE1E00"
+ ID "0000000000000001"
  components {
   SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
    m_ConsumableEffect ACE_Medical_ConsumableMedication "{59E68C74C1F3910E}" {
@@ -8,9 +8,11 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      }
     }
     m_eDeviceType MORPHINE
-    m_eDrugType MORPHINE
-    m_Dose ACE_Medical_Bolus "{62211753DEE3BAC9}" {
-     m_fConcentrationNM 600
+    m_Doses {
+     ACE_Medical_Bolus "{62211753DEE3BAC9}" {
+      m_eDrugType MORPHINE
+      m_fConcentrationNM 600
+     }
     }
    }
   }

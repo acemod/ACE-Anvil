@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{02DD34077F51F65E}Prefabs/Items/Medicine/MetoprololInjection/ACE_Medical_NaloxoneInjection.et"
+ Name "{02DD34077F51F65E}Prefabs/Items/Medicine/NaloxoneInjection/ACE_Medical_NaloxoneInjection.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

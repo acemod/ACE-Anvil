@@ -5,11 +5,8 @@ class ACE_Medical_ConsumableMedication : SCR_ConsumableEffectHealthItems
 	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of device thad delivers the drug", enums: ParamEnumArray.FromEnum(SCR_EConsumableType))]
 	protected SCR_EConsumableType m_eDeviceType;
 	
-	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of administered drug", enums: ParamEnumArray.FromEnum(ACE_Medical_EDrugType))]
-	protected ACE_Medical_EDrugType m_eDrugType;
-	
-	[Attribute(desc: "Configuration of the dose that gets administered")]
-	protected ref ACE_Medical_Dose m_Dose;
+	[Attribute(desc: "Configuration of the doses that gets administered")]
+	protected ref array<ref ACE_Medical_Dose> m_Doses;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Can always be applied in advanced medical
@@ -35,7 +32,10 @@ class ACE_Medical_ConsumableMedication : SCR_ConsumableEffectHealthItems
 		if (!medicationComponent)
 			return;
 		
-		medicationComponent.AddMedication(m_eDrugType, m_Dose);
+		foreach (ACE_Medical_Dose dose : m_Doses)
+		{
+			medicationComponent.AddMedication(dose);
+		}
 		
 		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
 		if (!itemComponent)

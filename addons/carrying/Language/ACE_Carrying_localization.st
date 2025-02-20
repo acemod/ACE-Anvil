@@ -3,10 +3,10 @@ StringTable {
  Items {
   CustomStringTableItem "{5DDEFB516A0DA608}" {
    Id "ACE_Carrying-AddonName"
-   Target_en_us "ACE - Carrying"
-   Modified 1578023399
+   Target_en_us "Carrying"
+   Modified 1688030723
    Author "kexanone"
-   LastChanged "kexanone"
+   LastChanged "Kex"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
    Id "ACE_Carrying-UserAction_Carry"

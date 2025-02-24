@@ -1,15 +1,21 @@
+/*
 //------------------------------------------------------------------------------------------------
 //! Helper methods for carrying
 class ACE_Carrying_Tools
 {
-	protected static const ResourceName HELPER_PREFAB_NAME = "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_HelperCompartment.et";
-	
 	//------------------------------------------------------------------------------------------------
 	//! Start <carrier> to carry the specified <carried>
-	static void Carry(notnull IEntity carrier, notnull IEntity carried)
+	static void Carry(notnull SCR_ChimeraCharacter carrier, notnull SCR_ChimeraCharacter carried, ACE_EAnimationHelperID type = ACE_EAnimationHelperID.CARRIED)
 	{
-		ACE_Carrying_HelperCompartment helper = ACE_Carrying_HelperCompartment.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_PREFAB_NAME), null, EntitySpawnParams()));
-		helper.Init(carrier, carried);
+		ACE_AnimationHelperCompartment helper = ACE_AnimationTools.AnimateWithHelperCompartment(type, carried);
+		if (!helper)
+			return;
+		
+		ACE_CarriableAnimationHelperComponent carriable = ACE_CarriableAnimationHelperComponent.Cast(helper.FindComponent(ACE_CarriableAnimationHelperComponent));
+		if (!carriable)
+			return;
+		
+		carriable.Carry(carrier);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -49,7 +55,7 @@ class ACE_Carrying_Tools
 		if (!controller)
 			return false;
 		
-		return controller.ACE_Carrying_IsCarrier();
+		return controller.ACE_IsCarrier();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -63,7 +69,7 @@ class ACE_Carrying_Tools
 		if (!controller)
 			return false;
 		
-		return controller.ACE_Carrying_IsCarried();
+		return controller.ACE_IsCarried();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -74,7 +80,11 @@ class ACE_Carrying_Tools
 		if (!helper)
 			return null;
 		
-		return helper.GetCarrier();
+		ACE_CarriableAnimationHelperComponent carriable = ACE_CarriableAnimationHelperComponent.Cast(helper.FindComponent(ACE_CarriableAnimationHelperComponent));
+		if (!carriable)
+			return null;
+		
+		return carriable.GetCarrier();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -85,7 +95,7 @@ class ACE_Carrying_Tools
 		if (!helper)
 			return null;
 		
-		return helper.GetCarried();
+		return helper.GetPerformer();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -112,6 +122,7 @@ class ACE_Carrying_Tools
 	//! Get the instance of the helper compartment entity for the given carried player
 	protected static ACE_Carrying_HelperCompartment GetHelperCompartmentFromCarried(notnull IEntity carried)
 	{
-		return ACE_Carrying_HelperCompartment.Cast(carried.GetParent());
+		return ACE_Carrying_HelperCompartment.Cast(ACE_AnimationTools.GetHelperCompartment(carried));
 	}
 }
+*/

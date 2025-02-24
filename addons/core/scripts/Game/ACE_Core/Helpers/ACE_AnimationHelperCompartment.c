@@ -8,9 +8,6 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 //! --- To Do: Create derived classes of this for carrying and CPR
 class ACE_AnimationHelperCompartment : GenericEntity
 {
-	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "ID of the animation helper",  enums: ParamEnumArray.FromEnum(ACE_EAnimationHelperID))]
-	protected ACE_EAnimationHelperID m_eID;
-	
 	[RplProp(onRplName: "SetPerformerOnProxy")]
 	protected RplId m_iPerformerID;
 	protected SCR_ChimeraCharacter m_pPerformer;
@@ -164,11 +161,5 @@ class ACE_AnimationHelperCompartment : GenericEntity
 			m_OnTerminated = new ScriptInvokerVoid();
 		
 		return m_OnTerminated;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	ACE_EAnimationHelperID GetHelperID()
-	{
-		return m_eID;
 	}
 }

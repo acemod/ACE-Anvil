@@ -19,27 +19,18 @@ class ACE_AnimationHelpersConfig
 }
 
 //----------------------------------------------------------------------------------------
-[BaseContainerProps(), ACE_BaseContainerCustomTitlePrefabEnum("m_sPrefabName", ACE_EAnimationHelperID, "m_eID")]
+[BaseContainerProps(), SCR_BaseContainerCustomTitleEnum(ACE_EAnimationHelperID, "m_eID")]
 class ACE_AnimationHelperConfigEntry
 {
+	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "ID of the animation helper",  enums: ParamEnumArray.FromEnum(ACE_EAnimationHelperID))]
+	protected ACE_EAnimationHelperID m_eID;
+		
 	[Attribute(desc: "Prefab name of the animation helper", params: "et")]
 	protected ResourceName m_sPrefabName;
-	
-	protected ACE_EAnimationHelperID m_eID;
-	
+		
 	//----------------------------------------------------------------------------------------
 	ACE_EAnimationHelperID GetID()
 	{
-		if (m_eID == ACE_EAnimationHelperID.NONE)
-		{
-			Resource res = Resource.Load(m_sPrefabName);
-			if (!res.IsValid())
-				return m_eID;
-			
-			BaseContainer container = res.GetResource();
-			container.Get("m_eID", m_eID);
-		}
-		
 		return m_eID;
 	}
 	

@@ -2,19 +2,6 @@
 class ACE_Carrying_DragUserAction : ACE_Carrying_BaseUserAction
 {
 	//------------------------------------------------------------------------------------------------
-	override bool CanBeShownScript(IEntity user)
-	{
-		if (!super.CanBeShownScript(user))
-			return false;
-		
-		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
-		if (!ownerChar)
-			return false;
-		
-		return !ownerChar.IsInVehicle();
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	override bool CanBePerformedScript(IEntity user)
 	{
 		if (!super.CanBePerformedScript(user))

@@ -8,7 +8,7 @@ class ACE_Carrying_BaseUserAction : ScriptedUserAction
 			return false;
 		
 		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
-		if (!ownerChar)
+		if (!ownerChar || ownerChar.IsInVehicle())
 			return false;
 		
 		SCR_CharacterControllerComponent ownerCharController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());

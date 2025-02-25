@@ -90,8 +90,8 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!userCharController)
 			return false;
 		
-		//! SCR_CharacterControllerComponent::ACE_IsCarrier would also be true if we carried other things than characters
-		return ACE_AnimationHelperCompartment.Cast(userCharController.ACE_GetCarried());
+		// Think about handling carrying other than characters
+		return userCharController.ACE_IsCarrier();
 	}
 	
 	//------------------------------------------------------------------------------------------------

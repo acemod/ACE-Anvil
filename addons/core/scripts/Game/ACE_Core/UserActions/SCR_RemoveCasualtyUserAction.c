@@ -46,7 +46,7 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!carriedCompartmentAccess)
 			return;
 		
-		carriedCompartmentAccess.MoveInVehicle(compartment.GetVehicle(), compartment.GetType(), false, compartment);
+		carriedCompartmentAccess.ACE_GetInVehicle(compartment.GetVehicle(), compartment);
 	}
 		
 	//------------------------------------------------------------------------------------------------

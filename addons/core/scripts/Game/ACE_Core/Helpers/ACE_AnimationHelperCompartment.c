@@ -8,6 +8,9 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 //! --- To Do: Create derived classes of this for carrying and CPR
 class ACE_AnimationHelperCompartment : GenericEntity
 {
+	[Attribute(defvalue: "ANIMATED", uiwidget: UIWidgets.SearchComboBox, desc: "Get out type when life state has changed", enums: ParamEnumArray.FromEnum(EGetOutType))]
+	protected EGetOutType m_eLifeStateChangedGetOutType;
+	
 	[RplProp(onRplName: "SetPerformerOnProxy")]
 	protected RplId m_iPerformerID;
 	protected SCR_ChimeraCharacter m_pPerformer;
@@ -139,7 +142,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//! Terminate when performer gets incapacitated or dies
 	protected void OnPerformerLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		Terminate(EGetOutType.ANIMATED);
+		Terminate(m_eLifeStateChangedGetOutType);
 	}
 	
 	//------------------------------------------------------------------------------------------------

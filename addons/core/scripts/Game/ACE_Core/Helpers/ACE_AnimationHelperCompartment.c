@@ -8,7 +8,10 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 //! --- To Do: Create derived classes of this for carrying and CPR
 class ACE_AnimationHelperCompartment : GenericEntity
 {
-	[RplProp(onRplName: "SetPerformerOnProxy")]
+	[Attribute(defvalue: "ANIMATED", uiwidget: UIWidgets.SearchComboBox, desc: "Get out type when life state has changed", enums: ParamEnumArray.FromEnum(EGetOutType))]
+	protected EGetOutType m_eLifeStateChangedGetOutType;
+	
+	[RplProp(onRplName: "OnPerformerChanged")]
 	protected RplId m_iPerformerID;
 	protected SCR_ChimeraCharacter m_pPerformer;
 	
@@ -22,16 +25,14 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//! Move performer into compartment and attach handlers
 	void Init(SCR_ChimeraCharacter performer)
 	{
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
+		if (compartmentAccess)
+			compartmentAccess.GetOnCompartmentEntered().Insert(OnCompartmentEntered);
+		
 		m_pPerformer = performer;
 		m_iPerformerID = Replication.FindItemId(m_pPerformer);
+		OnPerformerChanged();
 		Replication.BumpMe();
-		
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
-		if (!compartmentAccess)
-			return;
-		
-		compartmentAccess.GetOnCompartmentEntered().Insert(OnCompartmentEntered);
-		compartmentAccess.MoveInVehicle(this, ECompartmentType.CARGO);
 	}
 		
 	//------------------------------------------------------------------------------------------------
@@ -139,13 +140,25 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//! Terminate when performer gets incapacitated or dies
 	protected void OnPerformerLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		Terminate(EGetOutType.ANIMATED);
+		Terminate(m_eLifeStateChangedGetOutType);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void SetPerformerOnProxy()
+	protected void OnPerformerChanged()
 	{
 		m_pPerformer = SCR_ChimeraCharacter.Cast(Replication.FindItem(m_iPerformerID));
+		if (!m_pPerformer)
+			return;
+		
+		RplComponent performerRpl = m_pPerformer.GetRplComponent();
+		if (!performerRpl || !performerRpl.IsOwner())
+			return;
+		
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess)
+			return;
+		
+		compartmentAccess.ACE_GetInVehicle(this);
 	}
 	
 	//------------------------------------------------------------------------------------------------

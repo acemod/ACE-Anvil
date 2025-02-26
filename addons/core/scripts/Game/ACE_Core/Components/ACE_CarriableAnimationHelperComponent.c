@@ -10,6 +10,7 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	protected bool m_bTerminateWhenReleased;
 	
 	protected ACE_AnimationHelperCompartment m_pOwner;
+	protected bool m_bHasParentTerminated = false;
 	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
 	
 	//------------------------------------------------------------------------------------------------
@@ -17,7 +18,7 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	{
 		super.OnPostInit(owner);
 		m_pOwner = ACE_AnimationHelperCompartment.Cast(GetOwner());
-		m_pOwner.GetOnTerminated().Insert(Release);
+		m_pOwner.GetOnTerminated().Insert(OnParentTerminated);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -47,7 +48,7 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 		if (charCtrl)
 			charCtrl.ACE_SetCarrier(null);
 		
-		if (m_bTerminateWhenReleased)
+		if (m_bTerminateWhenReleased && !m_bHasParentTerminated)
 			m_pOwner.Terminate(EGetOutType.ANIMATED);
 	}
 	
@@ -78,5 +79,12 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 		IEntity carried = GetOwner().GetChildren();
 		if (carried)
 			carried.GetPhysics().SetInteractionLayer(m_iPhysicsLayerPreset);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnParentTerminated()
+	{
+		m_bHasParentTerminated = true;
+		Release();
 	}
 }

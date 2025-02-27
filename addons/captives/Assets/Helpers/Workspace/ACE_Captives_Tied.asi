@@ -1,0 +1,14 @@
+AnimSetInstanceSource "{64AB46D2DA3098FB}" {
+ Template "{2255EA04D2FD8565}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Animation.Default.In" {
+   Resource "{171DF12DBD047A5C}Assets/Helpers/Workspace/p_erc_captives_tied_in.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Loop" {
+   Resource "{A99C80BF898F8E25}Assets/Helpers/Workspace/p_erc_captives_tied_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Out" {
+   Resource "{71BE79611EBE515B}Assets/Helpers/Workspace/p_erc_captives_tied_out.anm"
+  }
+ }
+}

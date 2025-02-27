@@ -1,0 +1,23 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   ActionContexts {
+    UserActionContext "{647772A5736E4459}" {
+     ContextName "LeftWrist"
+     Position PointInfo "{647772A56D2690FD}" {
+      PivotID "LeftHand"
+     }
+     Radius 0.35
+    }
+    UserActionContext "{647772A57009298D}" {
+     ContextName "RightWrist"
+     Position PointInfo "{647772A56764D64B}" {
+      PivotID "RightHand"
+     }
+     Radius 0.35
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,16 @@
+AnimSetInstanceSource "{64AB46D2DA3098FB}" {
+ Template "{2255EA04D2FD8565}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Animation.Default.In" {
+   Resource "{F8867C8BA7155302}Assets/Helpers/Workspace/p_carried_in.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Loop" {
+   Resource "{7DF9F463FB32FBBE}Assets/Helpers/Workspace/p_carried_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Out" {
+   Resource "{16F241A251F33FB3}Assets/Helpers/Workspace/p_carried_out.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{64AB46D1DF6B2A62}" {
+ }
+}

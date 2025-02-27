@@ -16,12 +16,12 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 		if (!vehicleRpl)
 			return;
 		
-		Rpc(RpcDo_ACE_GetInVehicle_Owner, vehicleRpl.Id(), compartment.GetCompartmentSlotID(), forceTeleport, doorInfoIndex, closeDoor, performWhenPaused, 0);
+		Rpc(RpcDo_ACE_GetInVehicle_Owner, vehicleRpl.Id(), compartment.GetCompartmentSlotID(), compartment.GetCompartmentMgrID(), forceTeleport, doorInfoIndex, closeDoor, performWhenPaused, 0);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_ACE_GetInVehicle_Owner(RplId vehicleID, int slotID, bool forceTeleport, int doorInfoIndex, ECloseDoorAfterActions closeDoor, bool performWhenPaused, int iAttempt)
+	protected void RpcDo_ACE_GetInVehicle_Owner(RplId vehicleID, int slotID, int mgrID, bool forceTeleport, int doorInfoIndex, ECloseDoorAfterActions closeDoor, bool performWhenPaused, int iAttempt)
 	{
 
 		RplComponent vehicleRpl = RplComponent.Cast(Replication.FindItem(vehicleID));
@@ -36,7 +36,7 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 		if (!compartmentManager)
 			return;
 		
-		BaseCompartmentSlot compartment = compartmentManager.FindCompartment(slotID);
+		BaseCompartmentSlot compartment = compartmentManager.FindCompartment(slotID, mgrID);
 		if (!compartment)
 			return;
 		
@@ -53,7 +53,7 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 		}
 		
 		// Reschedule moving out if it failed, for instance, when called while moving out
-		GetGame().GetCallqueue().CallLater(RpcDo_ACE_GetInVehicle_Owner, ATTEMPT_TIMEOUT, false, vehicleID, slotID, forceTeleport, doorInfoIndex, closeDoor, performWhenPaused, iAttempt);
+		GetGame().GetCallqueue().CallLater(RpcDo_ACE_GetInVehicle_Owner, ATTEMPT_TIMEOUT, false, vehicleID, slotID, mgrID, forceTeleport, doorInfoIndex, closeDoor, performWhenPaused, iAttempt);
 	}
 	
 	//------------------------------------------------------------------------------------------------

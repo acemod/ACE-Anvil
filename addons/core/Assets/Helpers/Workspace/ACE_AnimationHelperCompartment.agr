@@ -1,0 +1,24 @@
+AnimSrcGraph {
+ AnimSetTemplate "{2255EA04D2FD8565}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.ast"
+ ControlTemplate AnimSrcGCT "{61D13972778F82CA}" {
+  Commands {
+   AnimSrcGCTCmd CMD_Vehicle_GetIn {
+   }
+   AnimSrcGCTCmd CMD_Vehicle_GetOut {
+   }
+   AnimSrcGCTCmd CMD_Vehicle_FinishActionQueue {
+   }
+  }
+  GlobalTags {
+   "VEHICLE"
+   "TagVehicle"
+   "TagVehicleIdle"
+  }
+ }
+ Debug AnimSrcGD "{61D13972778F82B2}" {
+ }
+ GraphFilesResourceNames {
+  "{1FA992BE7B9B38A6}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

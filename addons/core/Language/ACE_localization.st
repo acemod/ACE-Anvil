@@ -44,6 +44,64 @@ StringTable {
    Author "kexanone"
    LastChanged "Smith"
   }
+  CustomStringTableItem "{5DDEFB51C773DDD9}" {
+   Id "ACE-UserAction_Carry"
+   Target_en_us "Carry"
+   Target_fr_fr "Porter"
+   Target_it_it "Trasporta"
+   Target_de_de "Tragen"
+   Target_es_es "Portar"
+   Target_cs_cz "Nést"
+   Target_pl_pl "Nieś"
+   Target_ru_ru "Перенести"
+   Target_ja_jp "運ぶ"
+   Target_ko_kr "업기"
+   Target_pt_br "Carregar"
+   Target_zh_cn "背起"
+   Target_uk_ua "Перенести"
+   Modified 1689077928
+   Author "kexanone"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{5E0C2A71118B03B7}" {
+   Id "ACE-UserAction_Carrying"
+   Target_en_us "Carrying"
+   Target_fr_fr "Porter"
+   Target_de_de "Am Tragen"
+   Target_cs_cz "Nošení"
+   Target_ru_ru "Перенос"
+   Target_uk_ua "Перенесення"
+   Modified 1655483287
+   Author "kexanone"
+   LastChanged "Smith"
+  }
+  CustomStringTableItem "{64AD6AAED7334824}" {
+   Id "ACE-UserAction_LoadCarried"
+   Target_en_us "Load carried:"
+   Target_de_de "Getragener laden:"
+   Modified 1689127000
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{649D4AEF943234F2}" {
+   Id "ACE-UserAction_Release"
+   Target_en_us "Release"
+   Target_fr_fr "Déposer"
+   Target_it_it "Lascia"
+   Target_de_de "Ablegen"
+   Target_es_es "Soltar"
+   Target_cs_cz "Položit"
+   Target_pl_pl "Puść"
+   Target_ru_ru "Отпустить"
+   Target_ja_jp "離す"
+   Target_ko_kr "놓기"
+   Target_pt_br "Soltar"
+   Target_zh_cn "放開"
+   Target_uk_ua "Відпустити"
+   Modified 1689078128
+   Author "kexanone"
+   LastChanged "Kex"
+  }
   CustomStringTableItem "{60FD565E50C080B7}" {
    Id "ACE-Weapon_FragBanana_Description"
    Target_en_us "Explosive Potassium!"
@@ -67,6 +125,13 @@ StringTable {
    Modified 1655483765
    Author "kexanone"
    LastChanged "Smith"
+  }
+  CustomStringTableItem "{649D4AEE400FD73C}" {
+   Id "ACE_Core-AddonName"
+   Target_en_us "Core"
+   Modified 1688030694
+   Author "Kex"
+   LastChanged "Kex"
   }
  }
 }

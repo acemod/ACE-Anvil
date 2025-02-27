@@ -1,0 +1,226 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Default {
+   Nodes {
+    AnimSrcNodeStateMachine "In/Out STM" {
+     EditorPos 2.3 -23.8
+     NodeGroup "Surrender"
+     states {
+      AnimSrcNodeState In {
+       Tags {
+        "TagVehicleGetIn"
+       }
+       EditorPos 2.6 -22.5
+       Child "Get In Enter Event"
+       StartCondition "IsCommand(CMD_Vehicle_GetIn)"
+       TimeStorage "Real Time"
+      }
+      AnimSrcNodeState Out {
+       Tags {
+        "TagGetOut"
+       }
+       EditorPos 9.9 -22.5
+       Child "Out Source"
+       StartCondition "IsCommand(CMD_Vehicle_GetOut)"
+       TimeStorage "Real Time"
+      }
+      AnimSrcNodeState "Can Finish Out 1" {
+       Tags {
+        "TagGetOut"
+       }
+       EditorPos 12.3 -22.5
+       Child "Can Finish Out Event 1"
+      }
+      AnimSrcNodeState "Can Finish In 1" {
+       Tags {
+        "TagVehicleGetIn"
+       }
+       EditorPos 4.9 -22.5
+       Child "Can Finish Action In 1"
+      }
+      AnimSrcNodeState "Can Finish In 0" {
+       Tags {
+        "TagVehicleGetIn"
+       }
+       EditorPos 7.2 -22.5
+       Child "Can Finish Action In 0"
+       IsExit 1
+      }
+      AnimSrcNodeState "Can Finish Out 0" {
+       Tags {
+        "TagGetOut"
+       }
+       EditorPos 14.7 -22.5
+       Child "Can Finish Action Out 0"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{62CF60EFFBDAAAA4}" {
+       FromState ""
+       ToState "Out"
+       Duration "0.3"
+       Condition "IsCommand(CMD_Vehicle_GetOut)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62D0D291DB0C344D}" {
+       FromState "Out"
+       ToState "Can Finish Out 1"
+       Duration "0.1"
+       Condition "RemainingTimeLess(0.3)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62D0D90DF934A446}" {
+       FromState "In"
+       ToState "Can Finish In 1"
+       Duration "0.1"
+       Condition "RemainingTimeLess(0.3)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62D0D90FAA9E1E73}" {
+       FromState ""
+       ToState "In"
+       Duration "0.3"
+       Condition "IsCommand(CMD_Vehicle_GetIn)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62D0D90E85437AEC}" {
+       FromState "Can Finish In 1"
+       ToState "Can Finish In 0"
+       Duration "0.1"
+       Condition "RemainingTimeLess(0.1)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62D0D9096CCCCBF5}" {
+       FromState "Can Finish Out 1"
+       ToState "Can Finish Out 0"
+       Duration "0.1"
+       Condition "RemainingTimeLess(0.1)"
+       BlendFn S
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeSource "Loop Source" {
+     EditorPos -1.6 -20.4
+     Source "Animation.Default.Loop"
+     Looptype Loop
+    }
+    AnimSrcNodeQueue MasterControl {
+     EditorPos 0.1 -25.7
+     Child "Loop STM"
+     QueueItems {
+      AnimSrcNodeQueueItem "{62CF60EE518A337D}" {
+       Child "In/Out STM"
+       StartExpr "IsCommand(CMD_Vehicle_GetIn) "\
+       "||"\
+       "IsCommand(CMD_Vehicle_GetOut)"
+       InterruptExpr "IsCommand(CMD_Vehicle_FinishActionQueue) && "\
+       "GetCommandIa(CMD_Vehicle_FinishActionQueue) == 0"\
+       ""
+       BlendInTime 0.3
+       BlendOutTime 0.3
+       EnqueueMethod Ignore
+       TagMainPath "TagCharacterInVehicleDoorSTM"
+      }
+     }
+    }
+    AnimSrcNodeSource "In Source" {
+     EditorPos 4.9 -20.3
+     Source "Animation.Default.In"
+     Predictions {
+      AnimSrcNodePrediction PredictionVehicleGetIn {
+       Name "PredictionVehicleGetIn"
+       Bone "EntityPosition"
+       PercentTime 1
+       MainPath 1
+      }
+     }
+    }
+    AnimSrcNodeSource "Out Source" {
+     EditorPos 12.3 -20.4
+     Source "Animation.Default.Out"
+     Predictions {
+      AnimSrcNodePrediction PredictionVehicleGetIn {
+       Name "PredictionVehicleGetIn"
+       Bone "EntityPosition"
+       PercentTime 1
+       MainPath 1
+      }
+     }
+    }
+    AnimSrcNodeStateMachine "Loop STM" {
+     EditorPos -1.6 -23.6
+     NodeGroup "Surrender"
+     states {
+      AnimSrcNodeState Loop {
+       EditorPos -1.7 -22.7
+       Child "Loop Source"
+       TimeStorage "Real Time"
+      }
+     }
+    }
+    AnimSrcNodeEvent "Can Finish Out Event 1" {
+     EditorPos 12.3 -21.5
+     Child "Out Source"
+     Events {
+      AnimSrcEventGeneric "{62D0D291D5CF11FC}" {
+       Name "Event_Vehicle_CanFinishAction"
+       UserInt 1
+      }
+     }
+    }
+    AnimSrcNodeEvent "Can Finish Action In 1" {
+     EditorPos 4.9 -21.5
+     Child "In Source"
+     Events {
+      AnimSrcEventGeneric "{62D0D291D5CF11FC}" {
+       Name "Event_Vehicle_CanFinishAction"
+       MainPathOnly 1
+       UserInt 1
+      }
+     }
+    }
+    AnimSrcNodeEvent "Get In Enter Event" {
+     EditorPos 2.6 -21.5
+     Child "In Source"
+     Events {
+      AnimSrcEventGeneric "{62D0D291D5CF11FC}" {
+       Name "Event_VehicleGetInEnter"
+       MainPathOnly 1
+      }
+     }
+    }
+    AnimSrcNodeEvent "Can Finish Action In 0" {
+     EditorPos 7.2 -21.5
+     Child "In Source"
+     Events {
+      AnimSrcEventGeneric "{62D0D291D5CF11FC}" {
+       Name "Event_Vehicle_CanFinishAction"
+       MainPathOnly 1
+       UserInt 0
+      }
+     }
+    }
+    AnimSrcNodeEvent "Can Finish Action Out 0" {
+     EditorPos 14.7 -21.5
+     Child "Out Source"
+     Events {
+      AnimSrcEventGeneric "{62D0D291D5CF11FC}" {
+       Name "Event_Vehicle_CanFinishAction"
+       UserInt 0
+      }
+     }
+    }
+   }
+   NodeGroups {
+    AnimSrcGraphNodeGroup Surrender {
+     EditorColor 0.333 0.392 0.275 255
+    }
+   }
+  }
+ }
+}

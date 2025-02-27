@@ -65,7 +65,7 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!compartmentInfo)
 			return false;
 				
-		outName = "#ACE-UserAction_LoadCarried" + "%CTX_HACK%" + compartmentInfo.GetName();
+		outName = "#ACE_Captives-UserAction_UnloadCaptive" + "%CTX_HACK%" + compartmentInfo.GetName();
 		return true;
 	}
 	

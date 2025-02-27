@@ -41,5 +41,13 @@ StringTable {
    Author "Kex"
    LastChanged "Kex"
   }
+  CustomStringTableItem "{64B57CB33881E17B}" {
+   Id "ACE_Captives-UserAction_UnloadCaptive"
+   Target_en_us "Unload prisoner:"
+   Target_de_de "Gefangener ausladen:"
+   Modified 1689649333
+   Author "Kex"
+   LastChanged "Kex"
+  }
  }
 }

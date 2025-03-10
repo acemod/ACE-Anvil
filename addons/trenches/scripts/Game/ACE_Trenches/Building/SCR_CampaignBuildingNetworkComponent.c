@@ -67,6 +67,16 @@ modded class SCR_CampaignBuildingNetworkComponent : ScriptComponent
 			return;
 		
 		compositionComponent.SetBuilderId(playerController.GetPlayerId());
+		
+		SCR_CampaignBuildingLayoutComponent layoutComponent = SCR_CampaignBuildingLayoutComponent.Cast(asset.GetChildren().FindComponent(SCR_CampaignBuildingLayoutComponent));
+		if (!layoutComponent)
+			return;
+		
+		ACE_Treches_Settings settings = ACE_SettingsHelperT<ACE_Treches_Settings>.GetModSettings();
+		if (!settings)
+			return;
+		
+		layoutComponent.ACE_Trenches_SetToBuildValue(settings.m_fBuildTimeScale * layoutComponent.GetToBuildValue());
 	}
 	
 	//------------------------------------------------------------------------------------------------

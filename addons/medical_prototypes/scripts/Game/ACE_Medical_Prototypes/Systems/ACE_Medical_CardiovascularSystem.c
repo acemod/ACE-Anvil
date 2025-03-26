@@ -54,6 +54,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 			return;
 		
 		component.SetHeartRate(0);
+		component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Asystole);
 		component.SetCardiacOutput(0);
 		component.SetMeanArterialPressure(0);
 		component.SetPulsePressure(0);
@@ -74,6 +75,7 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 			return;
 		
 		UpdateHeartRate(component, damageManager, timeSlice);
+		UpdateCardiacRhythm(component, damageManager, timeSlice);
 		UpdateCardiacOutput(component, damageManager, timeSlice);
 		UpdateSystemicVascularResistance(component, damageManager, timeSlice);
 		UpdateBloodPressures(component, damageManager, timeSlice);
@@ -111,6 +113,31 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		else
 		{
 			component.SetHeartRate(Math.Max(targetHeartRate, prevHeartRate + heartRateAcceleration * timeSlice));
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void UpdateCardiacRhythm(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
+	{
+		ACE_Medical_EVitalState vitalState = component.GetVitalState();
+		
+		if (component.IsInCardiacArrest())
+		{
+			// Check conditions for VF
+			if (vitalState == ACE_Medical_EVitalState.UNSTABLE ||
+				vitalState == ACE_Medical_EVitalState.CRITICAL)
+			{
+				component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.VF);
+			}
+			// Or set PEA - View OnStop() for Asystole
+			else
+			{
+				component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.PEA);
+			}
+		}
+		else
+		{
+			component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Sinus);
 		}
 	}
 	

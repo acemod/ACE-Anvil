@@ -26,6 +26,11 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected float m_fHeartRateMedicationAdjustment = 0;
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	
+	// Cardiac Rhythms
+	protected ACE_Medical_ECardiacRhythm m_eCardiacRhythm = ACE_Medical_ECardiacRhythm.Sinus;
+	protected static const array<ACE_Medical_ECardiacRhythm> pulselessRhythms = { ACE_Medical_ECardiacRhythm.VF, ACE_Medical_ECardiacRhythm.PEA };
+	protected int m_iShocksDelivered = 0;
+	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
 	protected ACE_Medical_CardiovascularSystemSettings m_Settings;
 	
@@ -304,5 +309,30 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	ScriptInvokerInt2 GetOnVitalStateChanged()
 	{
 		return m_OnVitalStateChanged;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_ECardiacRhythm GetCardiacRhythm()
+	{
+		return m_eCardiacRhythm;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetCardiacRhythm(ACE_Medical_ECardiacRhythm rhythm)
+	{
+		m_eCardiacRhythm = rhythm;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetShocksDelivered()
+	{
+		return m_iShocksDelivered;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int AddShocksDelivered(int value)
+	{
+		m_iShocksDelivered = m_iShocksDelivered + 1;
+		return m_iShocksDelivered;
 	}
 }

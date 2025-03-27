@@ -123,17 +123,8 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		
 		if (component.IsInCardiacArrest())
 		{
-			// Check conditions for VF
-			if (vitalState == ACE_Medical_EVitalState.UNSTABLE ||
-				vitalState == ACE_Medical_EVitalState.CRITICAL)
-			{
-				component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.VF);
-			}
-			// Or set PEA - View OnStop() for Asystole
-			else
-			{
-				component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.PEA);
-			}
+			component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.VF);
+			// TODO: impliment system for deterioration to PEA - we need two cardiac arrest states?
 		}
 		else
 		{
@@ -335,6 +326,8 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		DbgUI.Begin(string.Format("ACE_Medical_CardiovascularSystem (%1)", targetType), 0, 700);
 		DbgUI.Text(string.Format("Vital state:                  %1", SCR_Enum.GetEnumName(ACE_Medical_EVitalState, component.GetVitalState())));
 		DbgUI.Text(string.Format("Heart rate:                   %1 bpm", Math.Round(component.GetHeartRate())));
+		DbgUI.Text(string.Format("Rhythm:                       %1", SCR_Enum.GetEnumName(ACE_Medical_ECardiacRhythm, component.GetCardiacRhythm())));
+		DbgUI.Text(string.Format("Arrest:                       %1", component.IsInCardiacArrest().ToString()));
 		Tuple2<float, float> pressures = component.GetBloodPressures();
 		DbgUI.Text(string.Format("Blood pressure:               %1/%2 mmHg", Math.Round(pressures.param2 * KPA2MMHG), Math.Round(pressures.param1 * KPA2MMHG)));
 		DbgUI.Text(string.Format("Blood state:                  %1", SCR_Enum.GetEnumName(ACE_Medical_EBloodState, damageManager.GetBloodHitZone().GetDamageState())));

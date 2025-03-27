@@ -28,7 +28,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	
 	// Cardiac Rhythms
 	protected ACE_Medical_ECardiacRhythm m_eCardiacRhythm = ACE_Medical_ECardiacRhythm.Sinus;
-	protected static const array<ACE_Medical_ECardiacRhythm> pulselessRhythms = { ACE_Medical_ECardiacRhythm.VF, ACE_Medical_ECardiacRhythm.PEA };
+	protected static const ref array<ACE_Medical_ECardiacRhythm> pulselessRhythms = { ACE_Medical_ECardiacRhythm.VF, ACE_Medical_ECardiacRhythm.PEA };
 	protected int m_iShocksDelivered = 0;
 	
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;

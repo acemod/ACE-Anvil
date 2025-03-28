@@ -27,13 +27,15 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	//------------------------------------------------------------------------------------------------
 	override void OnStart(IEntity entity)
 	{
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
-		if (!component)
+		Managed m = entity.FindComponent(ACE_Medical_CardiovascularComponent);
+		if (!m)
 			return;
-		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.FindComponent(SCR_CharacterDamageManagerComponent));
-		if (!damageManager)
+		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(m);
+
+		m = entity.FindComponent(SCR_CharacterDamageManagerComponent);
+		if (!m)
 			return;
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(m);
 		
 		ResetVitalsToDefault(component, damageManager);
 	}

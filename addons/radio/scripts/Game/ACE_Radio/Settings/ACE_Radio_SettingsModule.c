@@ -1,8 +1,9 @@
+[EnumBitFlag()]
 enum ACE_ERadioBeep
 {
-	OFF		= 1 << 0,
-	NORMAL	= 1 << 1,
-	LOW		= 1 << 2,
+	OFF,
+	NORMAL,
+	LOW,
 }
 
 class ACE_Radio_SettingsModule: ModuleGameSettings

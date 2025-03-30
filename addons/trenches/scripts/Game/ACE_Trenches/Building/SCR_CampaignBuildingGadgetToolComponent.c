@@ -3,7 +3,7 @@
 //! First use of GadgetActivate keybind will start the preview, a second will place it
 modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 {
-	[Attribute(defvalue: "{E14F00C2836CAB68}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_DirtCover_01_long_v1.et", desc: "Prefab name for the buildable trench", params: "et")]
+	[Attribute(defvalue: "{39438D0364234231}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_TrenchHalf_01_long.et", desc: "Prefab name for the buildable trench", params: "et")]
 	protected ResourceName m_sACE_Trenches_TrenchPrefabName;
 	
 	[Attribute(defvalue: "2.5", desc: "Distance in meters from player for placement preview")]

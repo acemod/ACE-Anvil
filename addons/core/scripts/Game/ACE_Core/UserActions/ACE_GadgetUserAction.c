@@ -9,8 +9,9 @@ class ACE_GadgetUserAction : ScriptedUserAction
 	
 	//------------------------------------------------------------------------------------------------
 	//! Stop animation when action is completed
-	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity) 
+	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		super.PerformAction(pOwnerEntity, pUserEntity);
 		CancelPlayerAnimation(pUserEntity);
 	}
 	
@@ -34,7 +35,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 			params.SetAllowMovementDuringAction(false);
 			params.SetKeepInHandAfterSuccess(true);
 			params.SetCommandID(itemActionId);
-			params.SetCommandIntArg(m_iAnimationIndex);
+			params.SetCommandIntArg(GetAnimationIndex());
 			
 			charController.TryUseItemOverrideParams(params);
 		}
@@ -47,20 +48,7 @@ class ACE_GadgetUserAction : ScriptedUserAction
 	override void OnActionCanceled(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
 		super.OnActionCanceled(pOwnerEntity, pUserEntity);
-		
-		ChimeraCharacter character = ChimeraCharacter.Cast(pUserEntity);
-		if (!character)
-			return;
-		
-		CharacterControllerComponent charController = character.GetCharacterController();
-		if (charController)
-		{
-			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
-			int itemActionId = pAnimationComponent.BindCommand("CMD_Item_Action");
-			CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(pAnimationComponent.GetCommandHandler());
-			if (cmdHandler)
-				cmdHandler.FinishItemUse(true);
-		}
+		CancelPlayerAnimation(pUserEntity);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -75,12 +63,15 @@ class ACE_GadgetUserAction : ScriptedUserAction
 			return;
 		
 		CharacterControllerComponent charController = character.GetCharacterController();
-		if (charController)
-		{
-			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
-			CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(pAnimationComponent.GetCommandHandler());
+		if (!charController)
+			return;
+		CharacterAnimationComponent animationComponent = charController.GetAnimationComponent();
+		if (!animationComponent)
+			return;
+		
+		CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(animationComponent.GetCommandHandler());
+		if (cmdHandler)
 			cmdHandler.FinishItemUse(true);
-		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -92,6 +83,12 @@ class ACE_GadgetUserAction : ScriptedUserAction
 			return null;
 		
 		return gadgetManager.GetHeldGadget();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetAnimationIndex()
+	{
+		return m_iAnimationIndex;
 	}
 	
 	//------------------------------------------------------------------------------------------------

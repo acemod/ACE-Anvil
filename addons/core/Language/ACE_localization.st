@@ -20,6 +20,30 @@ StringTable {
    Author "kexanone"
    LastChanged "kexanone"
   }
+  CustomStringTableItem "{64771570B1AFAB10}" {
+   Id "ACE-Emotes_Emote_Pushups_Name"
+   Target_en_us "Push-ups"
+   Target_de_de "Liegestützen"
+   Modified 1685539176
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{64771570304E885F}" {
+   Id "ACE-Emotes_Emote_Salute_Name"
+   Target_en_us "Salute"
+   Target_de_de "Salutieren"
+   Modified 1685538873
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{64771570B4AF7606}" {
+   Id "ACE-Emotes_Emote_SitOnFloor_Name"
+   Target_en_us "Sit on the floor"
+   Target_de_de "Auf den Boden sitzen"
+   Modified 1685538829
+   Author "Kex"
+   LastChanged "Kex"
+  }
   CustomStringTableItem "{60FD565E5C4D775C}" {
    Id "ACE-Item_Banana_Description"
    Target_en_us "Healthy potassium!"

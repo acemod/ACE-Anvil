@@ -74,4 +74,22 @@ modded class SCR_PlayerController : PlayerController
 		
 		ACE_AnimationTools.AnimateWithHelperCompartment(helperID, char);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_RequestAnimateWithHelperCompartment(ACE_EAnimationHelperID helperID)
+	{
+		Rpc(RpcAsk_ACE_AnimateWithHelperCompartment, helperID);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_ACE_AnimateWithHelperCompartment(ACE_EAnimationHelperID helperID)
+	{
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(GetControlledEntity());
+		// Skip if no character or character inside something else
+		if (!char || char.GetParent())
+			return;
+		
+		ACE_AnimationTools.AnimateWithHelperCompartment(helperID, char);
+	}
 }

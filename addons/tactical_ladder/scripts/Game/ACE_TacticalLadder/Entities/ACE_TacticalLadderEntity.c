@@ -79,7 +79,7 @@ class ACE_TacticalLadderEntity : GenericEntity
 	{
 		// Retract ladder
 		m_pSignalsManager.SetSignalValue(m_iExtendSignalID, 0);
-		UpdateScriptedServer();
+		UpdateScriptedLocal();
 	}
 	
 	//------------------------------------------------------------------------------------------------

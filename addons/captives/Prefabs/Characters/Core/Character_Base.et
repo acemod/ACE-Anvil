@@ -13,14 +13,23 @@ SCR_ChimeraCharacter {
       m_sIconName "connection"
      }
     }
-    ACE_Captives_ToggleCaptiveUserAction "{6479252F50FE822F}" {
+    ACE_Captives_TakeCaptiveUserAction "{6479252F50FE822F}" {
      ParentContextList {
       "LeftWrist" "RightWrist"
      }
      UIInfo SCR_ActionUIInfo "{6479252F4FE2C3E7}" {
-      Name "Take as prisoner"
+      Name "#ACE_Captives-UserAction_TakeAsPrisoner"
       m_sInteractionIcon "{2EFEA2AF1F38E7F0}UI/Textures/Icons/icons_wrapperUI-64.imageset"
       m_sIconName "connection"
+     }
+     "Sort Priority" 1
+    }
+    ACE_Captives_ReleaseCaptiveUserAction "{64D908D36A98FF2D}" {
+     ParentContextList {
+      "LeftWrist" "RightWrist"
+     }
+     UIInfo SCR_ActionContextUIInfo "{64D908D299781BB6}" {
+      Name "#ACE_Captives-UserAction_ReleasePrisoner"
      }
      "Sort Priority" 1
     }

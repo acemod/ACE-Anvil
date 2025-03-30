@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Captives_ToggleCaptiveUserAction : ScriptedUserAction
+class ACE_Captives_ReleaseCaptiveUserAction : ScriptedUserAction
 {
 	[Attribute(defvalue: "#ACE_Captives-UserAction_TakeAsPrisoner", desc: "String shown for taking as captive")]
 	protected LocalizedString m_sTakeCaptive;
@@ -27,14 +27,7 @@ class ACE_Captives_ToggleCaptiveUserAction : ScriptedUserAction
 		if (ownerCharController.ACE_IsCarried())
 			return false;
 		
-		if (ownerCharController.ACE_Captives_IsCaptive())
-			return true;
-		
-		// Incapacitated characters can be tied
-		if (ownerCharController.GetLifeState() == ECharacterLifeState.INCAPACITATED)
-			return true;
-				
-		return ownerCharController.ACE_Captives_HasSurrendered();
+		return ownerCharController.ACE_Captives_IsCaptive();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -48,26 +41,7 @@ class ACE_Captives_ToggleCaptiveUserAction : ScriptedUserAction
 		if (!ownerCharController)
 			return;
 		
-		ownerCharController.ACE_Captives_SetCaptive(!ownerCharController.ACE_Captives_IsCaptive());
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override bool GetActionNameScript(out string outName)
-	{
-		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
-		if (!ownerChar)
-			return false;
-		
-		SCR_CharacterControllerComponent ownerCharController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
-		if (!ownerCharController)
-			return false;
-		
-		if (ownerCharController.ACE_Captives_IsCaptive())
-			outName = m_sReleaseCaptive;
-		else
-			outName = m_sTakeCaptive;
-		
-		return true;
+		ownerCharController.ACE_Captives_SetCaptive(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------

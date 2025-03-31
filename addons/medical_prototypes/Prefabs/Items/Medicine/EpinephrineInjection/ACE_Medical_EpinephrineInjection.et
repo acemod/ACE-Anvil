@@ -8,9 +8,11 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      }
     }
     m_eDeviceType ACE_MEDICAL_EPINEPHRINE_INJECTOR
-    m_eDrugType EPINEPHRINE
-    m_Dose ACE_Medical_Bolus "{62211753B58C0FAA}" {
-     m_fConcentrationNM 550
+    m_Doses {
+     ACE_Medical_Bolus "{62211753B58C0FAA}" {
+      m_eDrugType EPINEPHRINE
+      m_fConcentrationNM 550
+     }
     }
    }
   }

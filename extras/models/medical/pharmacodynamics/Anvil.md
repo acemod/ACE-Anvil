@@ -19,7 +19,7 @@ $$\mathrm{[A]}(t) = \frac{k_a}{k_a-k_d} \cdot \Big(\exp\big(-k_d \cdot t \big) -
 
 $$\mathrm{[A]}(t) = \frac{v_{IV,0}}{k_d} \cdot
 \begin{dcases}
-    \Big( 1 + \exp\big(-k_d \cdot t \big) \Big) & \Big|\ t \le \Delta t_{IV} \\
+    \Big( 1 - \exp\big(-k_d \cdot t \big) \Big) & \Big|\ t \le \Delta t_{IV} \\
     \exp\big(-k_d \cdot t \big) & \big|\ t > \Delta t_{IV} \\
 \end{dcases}$$
 

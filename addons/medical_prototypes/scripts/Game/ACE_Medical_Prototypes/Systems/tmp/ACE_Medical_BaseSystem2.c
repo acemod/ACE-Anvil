@@ -44,6 +44,8 @@ class ACE_Medical_BaseSystem2 : GameSystem
 	void OnStart(IEntity entity);
 	
 	//------------------------------------------------------------------------------------------------
+	//! Make sure to handle the case where entity is null, as it can already be deleted by the time
+	//! the queue update takes place that calls OnStop
 	void OnStop(IEntity entity);
 	
 	//------------------------------------------------------------------------------------------------
@@ -122,7 +124,7 @@ class ACE_Medical_BaseSystem2 : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Unregister(notnull IEntity entity)
+	void Unregister(IEntity entity)
 	{
 		// Only directly touch m_aQueue while no updating is going on
 		if (m_bIsUpdating)

@@ -8,6 +8,13 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	static const float KPA2MMHG = 7.50062;
 	
 	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()
 	{
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
@@ -34,8 +41,16 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	//------------------------------------------------------------------------------------------------
 	override void OnStop(IEntity entity)
 	{
+		if (!entity)
+			return;
+		
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
+			return;
+		
+		SCR_EditableEntityComponent editableEntity = SCR_EditableEntityComponent.GetEditableEntity(entity);
+		// Don't handle entities that are about to get deleted
+		if (!editableEntity || !editableEntity.IsRegistered())
 			return;
 		
 		component.SetHeartRate(0);

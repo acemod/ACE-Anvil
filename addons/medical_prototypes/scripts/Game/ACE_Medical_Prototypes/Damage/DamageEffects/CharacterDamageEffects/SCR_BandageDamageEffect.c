@@ -16,10 +16,10 @@ modded class SCR_BandageDamageEffect: SCR_InstantDamageEffect
 		SCR_BleedingDamageEffect strongestBleedingEffect;
 		float largestBleedingRate = 0;
 		
-		array<ref PersistentDamageEffect> effects = {};
-		dmgManager.GetPersistentEffects(effects);
+		array<ref SCR_PersistentDamageEffect> effects = {};
+		dmgManager.FindAllDamageEffectsOfType(SCR_BleedingDamageEffect, effects);
 		
-		foreach (PersistentDamageEffect effect : effects)
+		foreach (SCR_PersistentDamageEffect effect : effects)
 		{
 			SCR_BleedingDamageEffect bleedingEffect = SCR_BleedingDamageEffect.Cast(effect);
 			if (!bleedingEffect)

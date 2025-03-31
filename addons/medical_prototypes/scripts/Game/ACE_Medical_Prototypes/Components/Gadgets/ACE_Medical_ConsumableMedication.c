@@ -2,11 +2,25 @@
 [BaseContainerProps()]
 class ACE_Medical_ConsumableMedication : ACE_Medical_ConsumableEffectHealthItems
 {
-	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of administered drug", enums: ParamEnumArray.FromEnum(ACE_Medical_EDrugType))]
-	protected ACE_Medical_EDrugType m_eDrugType;
+	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of device thad delivers the drug", enums: ParamEnumArray.FromEnum(SCR_EConsumableType))]
+	protected SCR_EConsumableType m_eDeviceType;
 	
-	[Attribute(desc: "Configuration of the dose that gets administered")]
-	protected ref ACE_Medical_Dose m_Dose;
+	[Attribute(desc: "Configuration of the doses that gets administered")]
+	protected ref array<ref ACE_Medical_Dose> m_Doses;
+	
+	//------------------------------------------------------------------------------------------------
+	//! Can always be applied in advanced medical
+	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Can always be applied in advanced medical
+	override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group, out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
+	{
+		return true;
+	}
 
 	//------------------------------------------------------------------------------------------------
 	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
@@ -18,7 +32,10 @@ class ACE_Medical_ConsumableMedication : ACE_Medical_ConsumableEffectHealthItems
 		if (!medicationComponent)
 			return;
 		
-		medicationComponent.AddMedication(m_eDrugType, m_Dose);
+		foreach (ACE_Medical_Dose dose : m_Doses)
+		{
+			medicationComponent.AddMedication(dose);
+		}
 		
 		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
 		if (!itemComponent)

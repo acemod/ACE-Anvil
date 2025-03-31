@@ -29,8 +29,8 @@ class ACE_Medical_CardiacArrestDamageEffect: SCR_DotDamageEffect
 			return true;
 		
 		SetAffectedHitZone(hitZone);
-		array<ref PersistentDamageEffect> effects = charDamageManager.GetAllPersistentEffectsOnHitZone(hitZone);
-		effects = charDamageManager.FilterEffectsByType(effects, ACE_Medical_CardiacArrestDamageEffect);
+		array<ref SCR_PersistentDamageEffect> effects = {};
+		charDamageManager.FindAllDamageEffectsOfTypeOnHitZone(ACE_Medical_CardiacArrestDamageEffect, hitZone, effects);
 		return !effects.IsEmpty();
 	}
 	
@@ -44,12 +44,13 @@ class ACE_Medical_CardiacArrestDamageEffect: SCR_DotDamageEffect
 		SetDPS(m_fBrainDamageRate);
 		SetMaxDuration(0);
 		SetInstigator(charDamageManager.GetInstigator());
-		
+
 		// Terminate any regeneration
-		foreach (PersistentDamageEffect effect : charDamageManager.GetAllPersistentEffectsOnHitZone(GetAffectedHitZone()))
+		array<ref SCR_PersistentDamageEffect> effects = {};
+		charDamageManager.FindAllDamageEffectsOfTypeOnHitZone(SCR_PassiveHitZoneRegenDamageEffect, GetAffectedHitZone(), effects);
+		foreach (SCR_PersistentDamageEffect effect : effects)
 		{
-			if (SCR_PassiveHitZoneRegenDamageEffect.Cast(effect))
-				effect.Terminate();
+			effect.Terminate();
 		}
 	}
 	

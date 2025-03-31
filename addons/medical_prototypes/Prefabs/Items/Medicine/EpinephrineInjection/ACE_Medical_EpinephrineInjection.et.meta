@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{5B2FD067D70C1E8F}Prefabs/Items/Medicine/MorphineInjection_01/EpinephrineInjection_01.et"
+ Name "{5B2FD067D70C1E8F}Prefabs/Items/Medicine/EpinephrineInjection/ACE_Medical_EpinephrineInjection.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }
@@ -10,6 +10,8 @@ MetaFileClass {
   EntityTemplateResourceClass PS4 : PC {
   }
   EntityTemplateResourceClass HEADLESS : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
   }
  }
 }

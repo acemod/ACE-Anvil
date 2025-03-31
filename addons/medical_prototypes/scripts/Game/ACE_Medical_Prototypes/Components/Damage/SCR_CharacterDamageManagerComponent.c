@@ -13,9 +13,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
-	override void OnInit(IEntity owner)
+	override void OnPostInit(IEntity owner)
 	{
-		super.OnInit(owner);
+		super.OnPostInit(owner);
 		m_pACE_Medical_CardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(owner.FindComponent(ACE_Medical_CardiovascularComponent));
 	}
 	

@@ -55,7 +55,7 @@ class ACE_BaseGadgetUserAction : ScriptedUserAction
 		params.SetAllowMovementDuringAction(false);
 		params.SetKeepInHandAfterSuccess(true);
 		params.SetCommandID(animationComponent.BindCommand("CMD_Item_Action"));
-		params.SetCommandIntArg(m_iAnimationIndex);
+		params.SetCommandIntArg(GetAnimationIndex());
 		return params;
 	}
 	
@@ -95,6 +95,12 @@ class ACE_BaseGadgetUserAction : ScriptedUserAction
 			return null;
 		
 		return gadgetManager.GetHeldGadget();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetAnimationIndex()
+	{
+		return m_iAnimationIndex;
 	}
 	
 	//------------------------------------------------------------------------------------------------

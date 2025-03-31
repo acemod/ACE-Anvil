@@ -3,7 +3,7 @@
 modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 {
 	[RplProp(onRplName: "ACE_Medical_OnUnconsciousPoseChanged")]
-	protected ACE_Medical_EUnconsciousPose m_eUnconsciousPose;
+	protected ACE_Medical_EUnconsciousPose m_eACE_Medical_UnconsciousPose;
 	
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Medical_OnUnconsciousPoseChanged()
@@ -21,7 +21,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		if (!animComponent)
 			return;
 		
-		animComponent.SetVariableInt(animComponent.BindVariableInt("UnconsciousPose"), m_eUnconsciousPose);
+		animComponent.SetVariableInt(animComponent.BindVariableInt("UnconsciousPose"), m_eACE_Medical_UnconsciousPose);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		if (animEventType != animComponent.BindEvent("ACE_Medical_Event_UnconsciousPoseChange"))
 			return;
 		
-		if (intParam == m_eUnconsciousPose)
+		if (intParam == m_eACE_Medical_UnconsciousPose)
 			return;
 		
 		ACE_Medical_Reposition(intParam);
@@ -54,7 +54,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	void ACE_Medical_Reposition(ACE_Medical_EUnconsciousPose pose)
 	{
-		m_eUnconsciousPose = pose;
+		m_eACE_Medical_UnconsciousPose = pose;
 		Replication.BumpMe();
 		ACE_Medical_OnUnconsciousPoseChanged();
 	}
@@ -62,14 +62,6 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	ACE_Medical_EUnconsciousPose ACE_Medical_GetUnconsciousPose()
 	{
-		return m_eUnconsciousPose;
+		return m_eACE_Medical_UnconsciousPose;
 	}
-}
-
-//------------------------------------------------------------------------------------------------
-enum ACE_Medical_EUnconsciousPose
-{
-	NONE = 0,
-	BACK = 4,
-	RECOVERY = 5
 }

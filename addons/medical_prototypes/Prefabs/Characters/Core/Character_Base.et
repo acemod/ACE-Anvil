@@ -278,32 +278,6 @@ SCR_ChimeraCharacter {
      "Sort Priority" 12
      m_eNotificationType ACE_MEDICAL_SPO2_RESULT
     }
-    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
-     ParentContextList {
-      "LowerTorso"
-     }
-     UIInfo UIInfo "{630C214BCA7A937E}" {
-      Name "#ACE_Medical-UserAction_RecoveryPosition"
-     }
-     ActionTitle "Recovery position"
-     VisibilityRange 2
-     Duration 1
-     "Sort Priority" 101
-     m_eUnconsciousPose RECOVERY
-    }
-    ACE_Medical_RepositionUserAction "{630C32646482C8E5}" {
-     ParentContextList {
-      "LowerTorso"
-     }
-     UIInfo UIInfo "{630C32679F8D254B}" {
-      Name "#ACE_Medical-UserAction_BackPosition"
-     }
-     ActionTitle "Back position"
-     VisibilityRange 2
-     Duration 1
-     "Sort Priority" 102
-     m_eUnconsciousPose BACK
-    }
    }
   }
  }

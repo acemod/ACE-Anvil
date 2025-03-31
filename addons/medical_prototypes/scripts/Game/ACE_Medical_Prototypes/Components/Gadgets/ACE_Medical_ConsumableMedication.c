@@ -2,9 +2,6 @@
 [BaseContainerProps()]
 class ACE_Medical_ConsumableMedication : ACE_Medical_ConsumableEffectHealthItems
 {
-	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of device thad delivers the drug", enums: ParamEnumArray.FromEnum(SCR_EConsumableType))]
-	protected SCR_EConsumableType m_eDeviceType;
-	
 	[Attribute(desc: "Configuration of the doses that gets administered")]
 	protected ref array<ref ACE_Medical_Dose> m_Doses;
 	

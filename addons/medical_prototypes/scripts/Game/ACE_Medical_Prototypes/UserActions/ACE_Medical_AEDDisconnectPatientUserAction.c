@@ -1,0 +1,3 @@
+class ACE_Medical_AEDDisconnectPatientUserAction : ACE_Medical_AEDBaseUserAction
+{
+}

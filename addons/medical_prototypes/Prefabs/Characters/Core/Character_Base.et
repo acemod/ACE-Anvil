@@ -264,6 +264,17 @@ SCR_ChimeraCharacter {
      "Sort Priority" 11
      m_eNotificationType ACE_MEDICAL_BLOOD_PRESSURE_RESULT
     }
+    ACE_Medical_AEDConnectPatientUserAction "{64FC042120CE5440}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64FC042124F3055C}" {
+      Name "AED - Connect Patient"
+     }
+     ActionTitle "AED - Connect Patient"
+     VisibilityRange 3
+     Duration 1
+    }
    }
   }
  }

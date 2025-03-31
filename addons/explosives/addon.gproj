@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Explosives"
+ GUID "61B7763A8AEB53B7"
+ TITLE "ACE Explosives"
+ Dependencies {
+  "60C4CE4888FF4621" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{6494F6254129D69A}" {
+      StringTableSource "{AB4674C708AC6E13}Language/ACE_Explosives_Localization.st"
+      Languages {
+       LanguageDefinition "{6494F6254670F382}" {
+        Code "cs_cz"
+        StringTableRuntime "{01CEF1C177795397}Language/ACE_Explosives_Localization.cs_cz.conf"
+       }
+       LanguageDefinition "{6494F6254670F3C0}" {
+        Code "de_de"
+        StringTableRuntime "{D4B0EBF264DA42B7}Language/ACE_Explosives_Localization.de_de.conf"
+       }
+       LanguageDefinition "{6494F6254670F330}" {
+        Code "en_us"
+        StringTableRuntime "{8A4061B90E2947B6}Language/ACE_Explosives_Localization.en_us.conf"
+       }
+       LanguageDefinition "{6494F6254670F321}" {
+        Code "es_es"
+        StringTableRuntime "{4F0C2C30E02B2CA9}Language/ACE_Explosives_Localization.es_es.conf"
+       }
+       LanguageDefinition "{6494F6254670F171}" {
+        Code "fr_fr"
+        StringTableRuntime "{F4A4D90706A8CFAB}Language/ACE_Explosives_Localization.fr_fr.conf"
+       }
+       LanguageDefinition "{6494F6254670F163}" {
+        Code "it_it"
+        StringTableRuntime "{74B85633AB8A4C52}Language/ACE_Explosives_Localization.it_it.conf"
+       }
+       LanguageDefinition "{6494F6254670F16E}" {
+        Code "ja_jp"
+        StringTableRuntime "{64A3EBA195FB7CF9}Language/ACE_Explosives_Localization.ja_jp.conf"
+       }
+       LanguageDefinition "{6494F6254670F159}" {
+        Code "ko_kr"
+        StringTableRuntime "{C41DC30D06D67FC6}Language/ACE_Explosives_Localization.ko_kr.conf"
+       }
+       LanguageDefinition "{6494F6254670F144}" {
+        Code "pl_pl"
+        StringTableRuntime "{986C65F7B839E3BA}Language/ACE_Explosives_Localization.pl_pl.conf"
+       }
+       LanguageDefinition "{6494F6254670F0B5}" {
+        Code "pt_br"
+        StringTableRuntime "{4D1BFF3B83C72900}Language/ACE_Explosives_Localization.pt_br.conf"
+       }
+       LanguageDefinition "{6494F6254670F0AE}" {
+        Code "ru_ru"
+        StringTableRuntime "{185AEB931EBE4C76}Language/ACE_Explosives_Localization.ru_ru.conf"
+       }
+       LanguageDefinition "{6494F6254670F09C}" {
+        Code "uk_ua"
+        StringTableRuntime "{9202BE657290F223}Language/ACE_Explosives_Localization.uk_ua.conf"
+       }
+       LanguageDefinition "{6494F6254670F088}" {
+        Code "zh_cn"
+        StringTableRuntime "{48B2D0584B30223E}Language/ACE_Explosives_Localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

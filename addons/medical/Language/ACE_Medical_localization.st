@@ -7,9 +7,11 @@ StringTable {
    Target_fr_fr "Injecter de l'adrénaline"
    Target_de_de "Epinephrin injizieren"
    Target_cs_cz "Aplikovat epinefrin"
-   Modified 1624203691
+   Target_ru_ru "Вколоть адреналин"
+   Target_uk_ua "Вколоти адреналін"
+   Modified 1655484699
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60C8CE8D36767C39}" {
    Id "ACE_Medical-FailReason_NoPain"
@@ -17,9 +19,11 @@ StringTable {
    Target_fr_fr "Ne ressent pas de douleur"
    Target_de_de "Kein Schmerz"
    Target_cs_cz "Bez bolestí"
-   Modified 1623778230
+   Target_ru_ru "Не чувствует боли"
+   Target_uk_ua "Не відчуває болю"
+   Modified 1655484680
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60CF45A099EA2D99}" {
    Id "ACE_Medical-FailReason_NotUnconscious"
@@ -27,9 +31,11 @@ StringTable {
    Target_fr_fr "Pas inconscient"
    Target_de_de "Nicht bewusstlos"
    Target_cs_cz "Při vědomí"
-   Modified 1624202974
+   Target_ru_ru "В сознании"
+   Target_uk_ua "У свідомості"
+   Modified 1655484622
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60F61507D00761D0}" {
    Id "ACE_Medical-FailReason_TooInjured"
@@ -37,9 +43,11 @@ StringTable {
    Target_fr_fr "Trop grièvement blessé"
    Target_de_de "Zu verletzt"
    Target_cs_cz "Příliš zraněný"
-   Modified 1626752371
+   Target_ru_ru "Слишком раненый"
+   Target_uk_ua "Надто поранений"
+   Modified 1655484557
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60CF45A17B6601E3}" {
    Id "ACE_Medical-InfoWidget_Epinephrine"
@@ -47,9 +55,11 @@ StringTable {
    Target_fr_fr "Augmente les chances de reprise de connaissance"
    Target_de_de "Erhöht die Wahrscheinlichkeit des Aufwachens"
    Target_cs_cz "Zvyšuje pravděpodobnost probuzení se z bezvědomí"
-   Modified 1624203522
+   Target_ru_ru "Увеличивает вероятность пробуждения"
+   Target_uk_ua "Збільшує ймовірність пробудження"
+   Modified 1655484538
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60C8F66C4889FFD9}" {
    Id "ACE_Medical-InfoWidget_Morphine"
@@ -57,9 +67,11 @@ StringTable {
    Target_fr_fr "Allège une douleur violente"
    Target_de_de "Lindert starke Schmerzen"
    Target_cs_cz "Zmírňuje silné bolesti"
-   Modified 1623786532
+   Target_ru_ru "Снимает сильную боль"
+   Target_uk_ua "Знімає сильний біль"
+   Modified 1655484517
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60CF45A0A9B86435}" {
    Id "ACE_Medical-Item_Epinephrine_Description"
@@ -67,9 +79,11 @@ StringTable {
    Target_fr_fr "Administrée à des patients inconscients."
    Target_de_de "Verabreicht an bewusstlose Patienten."
    Target_cs_cz "Aplikováno pacientům v bezvědomí."
-   Modified 1624203609
+   Target_ru_ru "Назначают пациентам без сознания."
+   Target_uk_ua "Призначають пацієнтам без свідомості."
+   Modified 1655484501
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
   }
   CustomStringTableItem "{60CF45A0B47E9549}" {
    Id "ACE_Medical-Item_Epinephrine_Name"
@@ -77,10 +91,11 @@ StringTable {
    Target_fr_fr "Adrénaline"
    Target_de_de "Epinephrin"
    Target_cs_cz "Epinefrin"
-   Modified 1624202844
+   Target_ru_ru "Инъекция адреналина"
+   Target_uk_ua "Ін'єкція адреналіну"
+   Modified 1655484454
    Author "kexanone"
-   LastChanged "apollo-jk"
-  }
+   LastChanged "Smith"
   }
   CustomStringTableItem "{5E101C5589E004EE}" {
    Id "ACE_Medical-Item_Morphine_Description"
@@ -88,9 +103,35 @@ StringTable {
    Target_fr_fr "Administrée à des patients ressentant une douleur violente."
    Target_de_de "Verabreicht an Patienten mit akuten Schmerzen."
    Target_cs_cz "Aplikováno pacientům v silných bolestech."
-   Modified 1623770742
+   Target_ru_ru "Назначают пациентам с сильной болью."
+   Target_uk_ua "Призначають пацієнтам із сильним болем."
+   Modified 1655484454
    Author "kexanone"
-   LastChanged "apollo-jk"
+   LastChanged "Smith"
+  }
+  CustomStringTableItem "{630D4CCE326184CA}" {
+   Id "ACE_Medical-UserAction_BackPosition"
+   Target_en_us "Put on back"
+   Target_de_de "Auf den Rücken drehen"
+   Modified 1661817144
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{630D4CCE36458E06}" {
+   Id "ACE_Medical-UserAction_LeftRecoveryPosition"
+   Target_en_us "Put in left recovery position"
+   Target_de_de "In linke Bewusstlosenlagerung bringen"
+   Modified 1694200390
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FB538E9326BF80}" {
+   Id "ACE_Medical-UserAction_RightRecoveryPosition"
+   Target_en_us "Put in right recovery position"
+   Target_de_de "In rechte Bewusstlosenlagerung bringen"
+   Modified 1694200417
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
  }
 }

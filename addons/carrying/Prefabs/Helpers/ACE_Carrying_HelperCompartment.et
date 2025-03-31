@@ -49,6 +49,7 @@ ACE_Carrying_HelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
   }
   RplComponent "{63136787FD0BCE14}" {
    "Rpl State Override" Runtime
+   AutoHierarchy 1
   }
  }
  coords 70.679 1 90.883

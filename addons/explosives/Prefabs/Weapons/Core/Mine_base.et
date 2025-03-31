@@ -1,0 +1,38 @@
+GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
+ ID "5968D2B6A82C6019"
+ components {
+  SCR_MineDamageManager "{5A187C4DB2CF86F2}" {
+   "Additional hit zones" {
+    SCR_MineHitZone Main {
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+    }
+   }
+  }
+  ActionsManagerComponent "{59E4E6938E65C2ED}" {
+   additionalActions {
+    ACE_Explosives_DisarmUserAction "{61B846BBCADE61D1}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{61B846BBC1A7E295}" {
+      Name "#ACE-Explosives_UserAction_Disarm_Name"
+      m_sIconName "repair"
+     }
+     Duration 6
+     "Sort Priority" -3
+    }
+    ACE_Explosives_ToggleBuryUserAction "{64933B9AAC846215}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{64933B9A1108ED2E}" {
+      m_sIconName "building-construction"
+     }
+     Duration 6
+     "Sort Priority" -3
+    }
+   }
+  }
+ }
+}

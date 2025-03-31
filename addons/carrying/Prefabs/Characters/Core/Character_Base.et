@@ -3,17 +3,31 @@ SCR_ChimeraCharacter {
  components {
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
-    ACE_Carrying_CarryUserAction "{5DDEFB529A8EBB97}" {
+    ACE_Carrying_DragUserAction "{5DDEFB529A8EBB97}" {
      ParentContextList {
       "LowerTorso"
      }
-     UIInfo UIInfo "{5DDEFB52A5D867D8}" {
-      Name "#ACE_Carrying-UserAction_Carry"
+     UIInfo SCR_ActionUIInfo "{5DDEFB52A5D867D8}" {
+      Name "#ACE_Carrying-UserAction_Drag"
      }
+     ActionTitle "Drag"
      VisibilityRange 2
      Duration 1
      CanAggregate 1
      "Sort Priority" 11
+    }
+    ACE_Carrying_CarryUserAction "{64AD3741DFD505F8}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo SCR_ActionUIInfo "{64AD3741CDC4D03E}" {
+      Name "#ACE-UserAction_Carry"
+     }
+     ActionTitle "Carry"
+     VisibilityRange 2
+     Duration 3
+     CanAggregate 1
+     "Sort Priority" 12
     }
    }
   }

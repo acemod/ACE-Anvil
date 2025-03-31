@@ -21,6 +21,7 @@ GenericEntity {
    m_aEntries {
     SCR_BasePreviewEntry "{60ED2568E4572001}" {
      m_iParentID -1
+     m_Flags EDITABLE
      m_Shape MESH
      m_iPivotID ""
     }
@@ -29,5 +30,4 @@ GenericEntity {
   RplComponent "{60ED256B410E25D6}" {
   }
  }
- coords 73.21 4.679 49.31
 }

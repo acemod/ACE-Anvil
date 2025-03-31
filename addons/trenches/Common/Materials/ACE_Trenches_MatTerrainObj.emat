@@ -1,0 +1,3 @@
+MatTerrainObject : "{E0078B932EB17D27}Common/Materials/default_MatTerrainObj.emat" {
+ ClutterThresholdAngle 0
+}

@@ -1,6 +1,7 @@
 {
   "name": "docs",
   "type": "module",
+  "packageManager": "pnpm@9.15.2",
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
@@ -14,7 +15,7 @@
     "@astrojs/starlight": "^0.21.2",
     "@astrojs/starlight-tailwind": "^2.0.1",
     "@astrojs/tailwind": "^5.1.0",
-    "astro": "^4.3.5",
+    "astro": "^4.16.18",
     "eslint-plugin-astro": "^1.2.0",
     "sharp": "^0.33.3",
     "tailwindcss": "^3.4.3",

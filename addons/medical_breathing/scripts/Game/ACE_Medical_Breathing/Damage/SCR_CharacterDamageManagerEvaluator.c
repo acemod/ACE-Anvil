@@ -22,8 +22,22 @@ modded class SCR_CharacterDamageManagerEvaluator : DamageEffectEvaluator
 		if (!affectedHitZone)
 			return;
 		
-		if (effect.GetTotalDamage() < affectedHitZone.GetCriticalDamageThreshold() * affectedHitZone.GetMaxHealth())
-			return;
+		vector hitPosDirNorm[3];
+		SCR_DamageContext context = new SCR_DamageContext(
+			effect.GetDamageType(), 
+			effect.GetTotalDamage(), 
+			hitPosDirNorm,
+			dmgManager.GetOwner(), 
+			affectedHitZone, 
+			effect.GetInstigator(),
+			null,
+			-1,
+			-1
+		);
+		
+		float var = affectedHitZone.ComputeEffectiveDamage(context, false);
+		if (var < affectedHitZone.GetCriticalHealthThreshold())
+			return; 
 		
 		ACE_Medical_RespiratoryComponent respiratoryComponent = ACE_Medical_RespiratoryComponent.Cast(dmgManager.GetOwner().FindComponent(ACE_Medical_RespiratoryComponent));
 		if (!respiratoryComponent)

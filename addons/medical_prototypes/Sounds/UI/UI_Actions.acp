@@ -1,0 +1,456 @@
+AudioClass {
+ signals {
+  SignalClass {
+   id 52237
+   name "Signal 45"
+   tl 676.665 -516.091
+   res "{3C4126CF7BFD7368}Sounds/_SharedData/Signals/OneSignal/BloodLoss.sig"
+   inputsport {
+    1
+   }
+   outputsport {
+    2
+   }
+   inputvalues {
+    0
+   }
+   inputvaluesmin {
+    0
+   }
+   inputvaluesmax {
+    1
+   }
+   path "{3C4126CF7BFD7368}Sounds/_SharedData/Signals/OneSignal/BloodLoss.sig"
+  }
+  SignalClass {
+   id 69645
+   name "ACE_Medical_CardiacArrestSignal"
+   tl 676 -601
+   res "{9F097893B8596923}Sounds/_SharedData/Signals/OneSignal/ACE_Medical_CardiacArrest.sig"
+   inputsport {
+    1
+   }
+   outputsport {
+    2
+   }
+   inputvalues {
+    0
+   }
+   inputvaluesmin {
+    0
+   }
+   inputvaluesmax {
+    1
+   }
+   path "{9F097893B8596923}Sounds/_SharedData/Signals/OneSignal/ACE_Medical_CardiacArrest.sig"
+  }
+ }
+ sounds {
+  SoundClass {
+   id 55305
+   name "SOUND_SIREN"
+   version 5
+   tl 959.582 558.492
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 66564
+       port 65
+      }
+     }
+    }
+   }
+   outState 57355
+   outStatePort 26631
+  }
+  SoundClass {
+   id 56329
+   name "SOUND_INJURED_PLAYERCHARACTER"
+   version 5
+   tl 1039.094 -431.189
+   ctl 0 -21
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 87046
+       port 65
+      }
+     }
+    }
+   }
+   priority 100
+   outState 57355
+   outStatePort 26631
+  }
+  SoundClass {
+   id 58377
+   name "SOUND_LOADSUPPLIES"
+   version 5
+   tl 941.844 9.326
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 65540
+       port 65
+      }
+     }
+    }
+   }
+   outState 57355
+   outStatePort 26631
+  }
+  SoundClass {
+   id 62473
+   name "SOUND_RADIO_ROGERBEEP"
+   version 5
+   tl 960.772 386.111
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 60420
+       port 65
+      }
+     }
+    }
+   }
+   outState 57355
+   outStatePort 26631
+  }
+  SoundClass {
+   id 64521
+   name "SOUND_UNLOADSUPPLIES"
+   version 5
+   tl 941.844 -168.674
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 59396
+       port 65
+      }
+     }
+    }
+   }
+   outState 57355
+   outStatePort 26631
+  }
+  SoundClass {
+   id 67593
+   name "SOUND_DISASSEMBLY"
+   version 5
+   tl 957.677 167.381
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 53252
+       port 65
+      }
+     }
+    }
+   }
+   outState 57355
+   outStatePort 26631
+  }
+ }
+ selectors {
+  SelectorClass {
+   id 61446
+   name "Selector 46"
+   version 5
+   tl 675.127 -416.706
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 52237
+       port 2
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 932527375
+     links {
+      ConnectionClass connection {
+       id 63492
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1733352493
+     links {
+      ConnectionClass connection {
+       id 54276
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1795165494
+     links {
+      ConnectionClass connection {
+       id 68612
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    1 0
+   }
+   ports {
+    PortClass LowBloodLoss {
+     max 0.4
+     default 1
+    }
+    PortClass MidBloosLoss {
+     min 0.4
+     max 0.7
+    }
+    PortClass HighBloodLoss {
+     min 0.7
+     max 1
+    }
+   }
+  }
+  SelectorClass {
+   id 87046
+   name "ACE_Medical_Selector"
+   version 5
+   tl 866 -432
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 69645
+       port 2
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 665139527
+     links {
+      ConnectionClass connection {
+       id 61446
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1847335848
+     links {
+      ConnectionClass connection {
+       id 61446
+       port 65
+      }
+     }
+    }
+   }
+   ports {
+    PortClass enabled {
+     max 1
+    }
+    PortClass disabled {
+     min 1
+     max 2
+     volume_dB -60
+    }
+   }
+  }
+ }
+ mixers {
+  MixerClass {
+   id 57355
+   name "OutputState 20"
+   version 4
+   tl 1347.221 -184.71
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 26631
+     links {
+      ConnectionClass connection {
+       id 56329
+       port 65
+      }
+      ConnectionClass connection {
+       id 64521
+       port 65
+      }
+      ConnectionClass connection {
+       id 58377
+       port 65
+      }
+      ConnectionClass connection {
+       id 67593
+       port 65
+      }
+      ConnectionClass connection {
+       id 62473
+       port 65
+      }
+      ConnectionClass connection {
+       id 55305
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    16777216 0
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialogue" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialogue_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large"
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 53252
+   name "Disassembly"
+   version 7
+   tl 368.748 166.714
+   Volume -11
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{D5D7C4745AF70B22}Sounds/UI/Samples/Campaign/UI_Campaign_Disassembly.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 54276
+   name "Heartbeat_Fast"
+   version 7
+   tl 348.396 -325.365
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{93F9F242DC3E0E1C}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Fast_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{0AE74BDBC1D93F8C}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Fast_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{7DED2353357BD0FC}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Fast_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{7A2AD90253FD6A3F}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Fast_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{0D20B18AA75F854F}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Fast_05.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 59396
+   name "UnloadSupplies"
+   version 7
+   tl 352.915 -169.341
+   Volume -8
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{2CBF9835039200D6}Sounds/UI/Samples/Campaign/UI_Campaign_Unload_Supplies.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 60420
+   name "RogerBeep"
+   version 7
+   tl 368.629 390.873
+   Volume -11
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{F3A4CAD9F63AAED8}Sounds/RadioProtocol/Samples/RogerBeep/Radio_RogerBeep_A_3.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 63492
+   name "Heartbeat_Slow"
+   version 7
+   tl 349.165 -530.304
+   Volume -8
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{9A36B88CB586AA8C}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Slow_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{03280115A8619B1C}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Slow_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{7422699D5CC3746C}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Slow_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{73E593CC3A45CEAF}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Slow_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{04EFFB44CEE721DF}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Slow_05.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 65540
+   name "LoadSupplies"
+   version 7
+   tl 352.915 8.659
+   Volume -8
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{E19EA4AD29C9A8DE}Sounds/UI/Samples/Campaign/UI_Campaign_Load_Supplies.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 66564
+   name "Siren"
+   version 7
+   tl 371.248 560.159
+   Volume -6
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{03D87648DB8A7641}Sounds/UI/Samples/Campaign/UI_Campaign_Siren.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 68612
+   name "Heartbeat_Mid"
+   version 7
+   tl 349.165 -430.332
+   Volume -2
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{7795DA13D207A2B1}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Mid_01.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{EE8B638ACFE09321}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Mid_02.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{99810B023B427C51}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Mid_03.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{9E46F1535DC4C692}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Mid_04.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{E94C99DBA96629E2}Sounds/Character/Voice/Samples/Heartbeat/Character_Voice_Heartbeat_Mid_05.wav"
+    }
+   }
+  }
+ }
+ version 1
+ sourcesLimit 1
+}

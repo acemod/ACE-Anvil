@@ -1,0 +1,11 @@
+GenericEntity : "{0845FCD5D1E53541}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_01_Base.et" {
+ ID "51F66EC33748B84D"
+ components {
+  SCR_ConsumableItemComponent "{5943631460899505}" {
+   m_ConsumableEffect SCR_ConsumableBandage "{594363147CC4C6BE}" {
+    m_fApplyToSelfDuration 12
+    m_fApplyToOtherDuration 10
+   }
+  }
+ }
+}

@@ -1,0 +1,35 @@
+@startuml
+
+Default : OnState
+[*] --> Default
+Default --> Injured : Injured\nLoweredVitals
+Default --> Unconscious : CriticalInjury\nCriticalVitals\nKnockOut
+Default --> CardiacArrest : FatalVials\nBleedout
+Default --> FatalInjury : FatalInjury
+
+Injured : OnState
+Injured --> Default : FullHeal
+Injured --> Unconscious : CriticalInjury\nCriticalVitals\nKnockOut
+Injured --> CardiacArrest : FatalVitals\nBleedout
+Injured  --> FatalInjury : FatalInjury
+
+Unconscious : OnEnter
+Unconscious : OnState
+Unconscious --> Dead : DeathAI
+Unconscious --> Injured : WakeUp
+Unconscious --> CardiacArrest : FatalVitals\nBleedout
+Unconscious --> FatalInjury : FatalInjury 
+
+FatalInjury : OnEnter
+FatalInjury --> CardiacArrest : SecondChance
+FatalInjury --> Dead : Death
+
+CardiacArrest : OnEnter
+CardiacArrest : OnState
+CardiacArrest : OnExit
+CardiacArrest --> Dead : DeathAI\nTimeout\nFatalInjury\nBleedout
+CardiacArrest --> Unconscious : CPRSucceeded
+
+Dead : OnEnter
+Dead --> [*]
+@enduml

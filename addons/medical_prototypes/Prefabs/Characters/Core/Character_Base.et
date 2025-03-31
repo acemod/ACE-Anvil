@@ -1,0 +1,270 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ACE_Medical_CardiovascularComponent "{6220003330350BC2}" {
+  }
+  ACE_Medical_MedicationComponent "{621B2BABDAF5867E}" {
+  }
+  SCR_CharacterDamageManagerComponent "{55872AD7B4E959F2}" {
+   "Additional hit zones" {
+    ACE_Medical_BrainHitZone Health {
+     m_fFullRegenerationTime 600
+    }
+    SCR_CharacterBloodHitZone Blood {
+     MaxHealth 3000
+     "DamageState threshold" {
+      0.7 0.4 0.2
+     }
+    }
+    SCR_CharacterResilienceHitZone Resilience {
+    }
+    SCR_CharacterHeadHitZone Head {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    ACE_Medical_VitalCharacterHitZone Chest {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    ACE_Medical_VitalCharacterHitZone Abdomen {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone Hips {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone RArm {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone LArm {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone RForearm {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone LForearm {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone RHand {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone LHand {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone RThigh {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone LThigh {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone RCalf {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone LCalf {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+      ParentHitZone "{5E101C420414E7EB}" {
+       Parent "ACE_Medical_Pain"
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone RFoot {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone LFoot {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 0.325
+    }
+    SCR_CharacterHitZone Neck {
+     ParentHZs {
+      ParentHitZone "{60F48ADCA47D7F72}" {
+       DamageMultiplier 0
+       HealingMultiplier 0
+      }
+     }
+     m_fBleedingRateScale 5
+    }
+    ACE_Medical_PainHitZone ACE_Medical_Pain {
+    }
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    SCR_HealSupportStationAction "{5E14966CF597F6B3}" {
+     "Sort Priority" 0
+    }
+    SCR_MorphineUserAction "{60CF45A52131AD5A}" {
+     ActionTitle "Inject Epinephrine"
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
+    }
+    ACE_Medical_AmmoniumCarbonateUserAction "{62150A66FC4875D8}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo UIInfo "{62150A66E8D34DA5}" {
+      Name "#ACE_Medical-AmmoniumCarbonatePackageAction"
+     }
+     m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
+    }
+    SCR_MorphineUserAction "{62150A6C41D53656}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{62150A6C71EFEF99}" {
+      Name "#ACE_Medical-MetoprololInjectionAction"
+     }
+     ActionTitle "Inject Metoprolol"
+     m_eConsumableType ACE_MEDICAL_METOPROLOL_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEC7ACB618B}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{6226EDEC7241F1E1}" {
+      Name "#ACE_Medical-NaloxoneInjectionAction"
+     }
+     ActionTitle "Inject Naloxone"
+     m_eConsumableType ACE_MEDICAL_NALOXONE_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEDB4F10C69}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{6226EDEDA11A533D}" {
+      Name "#ACE_Medical-PhenylephrineInjectionAction"
+     }
+     ActionTitle "Inject Phenylephrine"
+     m_eConsumableType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
+    }
+    ACE_Medical_CPRUserAction "{6216F73FC7EBD067}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{6216F73FFFACAE56}" {
+      Name "#ACE_Medical-CPRAction"
+     }
+     ActionTitle "Perfrom CPR"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 10
+    }
+    ACE_Medical_CheckVitalsUserAction "{621737D0C7C00B68}" {
+     ParentContextList {
+      "Head" "Chest" "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{621737D0F7FF3B55}" {
+      Name "Check pulse"
+     }
+     ActionTitle "Check Pulse"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 10
+     m_eNotificationType ACE_MEDICAL_PULSE_RESULT
+    }
+    ACE_Medical_CheckVitalsUserAction "{621737D02A688589}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo UIInfo "{621737D025B25341}" {
+      Name "Check blood pressure"
+     }
+     ActionTitle "Check Blood Pressure"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 11
+     m_eNotificationType ACE_MEDICAL_BLOOD_PRESSURE_RESULT
+    }
+   }
+  }
+ }
+}

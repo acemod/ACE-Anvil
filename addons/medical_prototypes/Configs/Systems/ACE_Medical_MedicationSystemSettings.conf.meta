@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{D60A24D9276A24DF}Configs/Systems/ACE_Medical_MedicationSystemSettings.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

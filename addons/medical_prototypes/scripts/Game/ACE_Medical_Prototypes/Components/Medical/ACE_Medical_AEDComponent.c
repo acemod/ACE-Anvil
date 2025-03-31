@@ -1,22 +1,69 @@
+class ACE_Medical_AEDComponentClass : ScriptComponentClass
+{
+}
+
 class ACE_Medical_AEDComponent : ScriptComponent
 {
-	static const array<ACE_Medical_ECardiacRhythm> shockableRhythms = { ACE_Medical_ECardiacRhythm.VF };
-	
+	[Attribute(defvalue: "5", desc: "AED Charge Time [s]", category: "ACE AED Settings")]
 	float m_fChargeTime;
+	
+	[Attribute(defvalue: "1", desc: "AED Analysis Time [s]", category: "ACE AED Settings")]
+	protected float m_fAnalysisTime;
+	
+	static const ref array<ACE_Medical_ECardiacRhythm> shockableRhythms = { ACE_Medical_ECardiacRhythm.VF };
+	
 	float m_fCharge = 0.0;
 	protected bool m_bIsCharged = false;
 	protected bool m_bIsCharging = false;
-	protected float m_fChargeTimer = 0.0;
 	
-	IEntity m_AED;
+	float m_fAnalysis = 0.0;
+	protected bool m_bIsAnalysing = false;
+	protected bool m_bIsAnalysed = false;
+	
 	IEntity m_patient;
 	ACE_Medical_CardiovascularComponent m_component;
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnPostInit(IEntity owner)
+	{
+		RegisterToSystem(this);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void RegisterToSystem(ACE_Medical_AEDComponent component)
+	{
+		ChimeraWorld world = GetGame().GetWorld();
+		if (!world)
+			return;
 		
+		ACE_Medical_AEDSystem system = ACE_Medical_AEDSystem.Cast(world.FindSystem(ACE_Medical_AEDSystem));
+		
+		if (!system)
+			return;
+		
+		system.Register(component);
+	}
+		
+	//------------------------------------------------------------------------------------------------
+	void AnalyzeRhythm()
+	{
+		ResetAnalysis();
+		Print("ACE_AED.AnalyzeRhythm:: Starting rhythm analysis...");
+		m_bIsAnalysing = true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void Charge()
+	{
+		ResetCharge();
+		Print("ACE_AED.Charge:: Starting charging sequence...");
+		m_bIsCharging = true;
+	}
+	
 	//------------------------------------------------------------------------------------------------
 	bool ConnectPatient(IEntity patient)
 	{
-		// reset patient and component
-		m_patient = null; m_component = null;
+		ResetPatient();
 		
 		if (!patient)
 			return false;
@@ -27,17 +74,93 @@ class ACE_Medical_AEDComponent : ScriptComponent
 		
 		m_patient = patient;
 		m_component = component;
-		
-		return true;
+				
+		return true; 
+	}
+	
+	//------------------------------------------------------------------------------------------------	
+	void ResetPatient()
+	{
+		m_patient = null;
+		m_component = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	bool PatientConnected()
+	void DeliverShock()
 	{
-		if (!m_patient || !m_component)
-			return false;
+		if (!IsReadyToShock())
+			return;
 		
-		return true;
+		m_component.AddShocksDelivered(1);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void EnableCharging(bool state)
+	{
+		m_bIsCharging = state;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool IsCharging()
+	{
+		return m_bIsCharging;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetAnalysis()
+	{
+		return m_fAnalysis;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetAnalysisTime()
+	{
+		return m_fAnalysisTime;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool IsAnalysing()
+	{
+		return m_bIsAnalysing;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetCharge()
+	{
+		return m_fCharge;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetChargePercent()
+	{
+		return m_fCharge;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetChargeTime()
+	{
+		return m_fChargeTime;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	IEntity GetConnectedPatient()
+	{
+		return m_patient;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_CardiovascularComponent GetPatientCardiovascularComponent()
+	{
+		return m_component;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool IsCharged()
+	{
+		if (m_fCharge >= 1.0)
+			return true;
+		
+		return false;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -49,15 +172,6 @@ class ACE_Medical_AEDComponent : ScriptComponent
 		}
 		
 		return false;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void DeliverShock()
-	{
-		if (!IsReadyToShock())
-			return;
-		
-		m_component.AddShocksDelivered(1);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -74,57 +188,18 @@ class ACE_Medical_AEDComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void EOnInit(IEntity AED)
+	bool PatientConnected()
 	{
-		m_AED = AED;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override void EOnFrame(IEntity AED, float timeSlice)
-	{
-		super.EOnFrame(AED, timeSlice);
+		if (!m_patient || !m_component)
+			return false;
 		
-		// Charging system 
-		if (m_bIsCharging)
-		{
-			m_fCharge += timeSlice / m_fChargeTime;
-			
-			if (m_fCharge >= 1.0)
-			{
-				m_fCharge = 1.0;
-				m_bIsCharging = false;
-				m_bIsCharged = true;
-			}
-		}
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void EOnActivate(IEntity AED)
+	void ResetAnalysis()
 	{
-		super.EOnActivate(AED);
-		
-		SetEventMask(AED, EntityEvent.FRAME);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override void EOnDeactivate(IEntity AED)
-	{
-		super.EOnDeactivate(AED);
-		
-		ClearEventMask(AED, EntityEvent.FRAME);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected void Charge()
-	{
-		ResetCharge();
-		m_bIsCharging = true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	bool IsCharged()
-	{
-		return m_bIsCharged;
+		m_fAnalysis = 0.0;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -134,20 +209,20 @@ class ACE_Medical_AEDComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	float GetChargePercent()
+	void SetAnalysis(float value)
 	{
-		return m_fCharge;
+		m_fAnalysis = value;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	IEntity GetConnectedPatient()
+	void SetCharge(float charge)
 	{
-		return m_patient;
+		m_fCharge = charge;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Medical_CardiovascularComponent GetPatientCardiovascularComponent()
+	void EnableAnalysis(bool state)
 	{
-		return m_component;
+		m_bIsAnalysing = state;
 	}
 }

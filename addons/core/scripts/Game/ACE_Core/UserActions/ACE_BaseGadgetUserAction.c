@@ -66,7 +66,7 @@ class ACE_BaseGadgetUserAction : ScriptedUserAction
 		if (m_iSoundEventID != animEventType)
 			return;
 		
-		if (!m_pItemSoundComponent)
+		if (m_pItemSoundComponent)
 			m_pItemSoundComponent.SoundEvent(GameAnimationUtils.GetEventString(animUserString));
 	}
 	

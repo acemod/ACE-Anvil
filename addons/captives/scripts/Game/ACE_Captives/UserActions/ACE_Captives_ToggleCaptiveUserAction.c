@@ -1,12 +1,6 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Captives_ReleaseCaptiveUserAction : ScriptedUserAction
 {
-	[Attribute(defvalue: "#ACE_Captives-UserAction_TakeAsPrisoner", desc: "String shown for taking as captive")]
-	protected LocalizedString m_sTakeCaptive;
-	
-	[Attribute(defvalue: "#ACE_Captives-UserAction_ReleasePrisoner", desc: "String shown for releasing captive")]
-	protected LocalizedString m_sReleaseCaptive;
-
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{

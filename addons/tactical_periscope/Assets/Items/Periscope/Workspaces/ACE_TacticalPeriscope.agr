@@ -1,0 +1,23 @@
+AnimSrcGraph {
+ AnimSetTemplate "{22EE81BD8ADE9FB2}Assets/Items/Periscope/Workspaces/ACE_TacticalPeriscope.ast"
+ ControlTemplate AnimSrcGCT "{62FA2AE213A8D05C}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+   AnimSrcGCTVarBool Focused {
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "GADGET"
+   "BINOCULAR"
+  }
+ }
+ Debug AnimSrcGD "{62FA2AE213A8DFB3}" {
+ }
+ GraphFilesResourceNames {
+  "{1F12F90723B82271}Assets/Items/Periscope/Workspaces/ACE_TacticalPeriscope.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

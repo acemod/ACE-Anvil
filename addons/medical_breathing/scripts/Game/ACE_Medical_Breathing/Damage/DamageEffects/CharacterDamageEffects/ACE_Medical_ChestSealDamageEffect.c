@@ -16,7 +16,7 @@ class ACE_Medical_ChestSealDamageEffect : SCR_InstantDamageEffect
 		if (!char)
 			return;
 		
-		ACE_Medical_RespiratoryComponent respiratoryComponent = ACE_Medical_RespiratoryComponent.Cast(char.FindComponent(ACE_Medical_RespiratoryComponent));
+		ACE_Medical_RespiratoryComponent respiratoryComponent = char.ACE_Medical_GetRespiratoryComponent();
 		if (!respiratoryComponent)
 			return;
 		

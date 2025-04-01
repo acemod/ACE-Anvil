@@ -38,11 +38,15 @@ class ACE_Medical_BaseComponent : ScriptComponent
 	{
 		super.EOnInit(owner);
 		
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(owner);
+		if (!ownerChar)
+			return;
+		
 		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(GetAssociatedSystemType());
 		if (ShouldRegisterAtSystemOnInit() && system)
-			system.Register(owner);
+			system.Register(ownerChar);
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(owner.FindComponent(SCR_CharacterDamageManagerComponent));
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(ownerChar.GetDamageManager());
 		if (damageManager)
 			damageManager.GetOnDamageStateChanged().Insert(OnDamageStateChanged);
 	}
@@ -56,7 +60,7 @@ class ACE_Medical_BaseComponent : ScriptComponent
 		
 		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(GetAssociatedSystemType());
 		if (system)
-			system.Unregister(GetOwner());
+			system.Unregister(SCR_ChimeraCharacter.Cast(GetOwner()));
 	}
 	
 	//------------------------------------------------------------------------------------------------

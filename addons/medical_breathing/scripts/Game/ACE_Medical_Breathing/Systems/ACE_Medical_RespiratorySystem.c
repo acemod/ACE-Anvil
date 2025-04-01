@@ -17,9 +17,9 @@ class ACE_Medical_RespiratorySystem : ACE_Medical_BaseSystem3
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnStart(IEntity entity)
+	override void OnStart(SCR_ChimeraCharacter entity)
 	{
-		ACE_Medical_RespiratoryComponent component = ACE_Medical_RespiratoryComponent.Cast(entity.FindComponent(ACE_Medical_RespiratoryComponent));
+		ACE_Medical_RespiratoryComponent component = entity.ACE_Medical_GetRespiratoryComponent();
 		if (!component)
 			return;
 		
@@ -27,27 +27,27 @@ class ACE_Medical_RespiratorySystem : ACE_Medical_BaseSystem3
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnStop(IEntity entity)
+	override void OnStop(SCR_ChimeraCharacter entity)
 	{
-		ACE_Medical_RespiratoryComponent component = ACE_Medical_RespiratoryComponent.Cast(entity.FindComponent(ACE_Medical_RespiratoryComponent));
+		ACE_Medical_RespiratoryComponent component = entity.ACE_Medical_GetRespiratoryComponent();
 		if (!component)
 			return;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override protected void Update(IEntity entity, float timeSlice)
+	override protected void Update(SCR_ChimeraCharacter entity, float timeSlice)
 	{
 		super.Update(entity, timeSlice);
 		
-		ACE_Medical_RespiratoryComponent component = ACE_Medical_RespiratoryComponent.Cast(entity.FindComponent(ACE_Medical_RespiratoryComponent));
+		ACE_Medical_RespiratoryComponent component = entity.ACE_Medical_GetRespiratoryComponent();
 		if (!component)
 			return;
 		
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = entity.ACE_Medical_GetCardiovascularComponent();
 		if (!cardiovascularComponent)
 			return;
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.FindComponent(SCR_CharacterDamageManagerComponent));
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.GetDamageManager());
 		if (!damageManager)
 			return;	
 		
@@ -148,11 +148,11 @@ class ACE_Medical_RespiratorySystem : ACE_Medical_BaseSystem3
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnFullHeal(IEntity entity)
+	override void OnFullHeal(SCR_ChimeraCharacter entity)
 	{
 		super.OnFullHeal(entity);
 		
-		ACE_Medical_RespiratoryComponent component = ACE_Medical_RespiratoryComponent.Cast(entity.FindComponent(ACE_Medical_RespiratoryComponent));
+		ACE_Medical_RespiratoryComponent component = entity.ACE_Medical_GetRespiratoryComponent();
 		if (!component)
 			return;
 		
@@ -179,12 +179,12 @@ class ACE_Medical_RespiratorySystem : ACE_Medical_BaseSystem3
 	{
 		super.OnDiag(timeSlice);
 		
-		IEntity target;
+		SCR_ChimeraCharacter target;
 		string targetType;
 		if (!GetDiagTarget(target, targetType))
 			return;
 		
-		ACE_Medical_RespiratoryComponent component = ACE_Medical_RespiratoryComponent.Cast(target.FindComponent(ACE_Medical_RespiratoryComponent));
+		ACE_Medical_RespiratoryComponent component = target.ACE_Medical_GetRespiratoryComponent();
 		if (!component)
 			return;
 

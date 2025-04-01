@@ -25,13 +25,13 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnStart(IEntity entity)
+	override void OnStart(SCR_ChimeraCharacter entity)
 	{
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent component = entity.ACE_Medical_GetCardiovascularComponent();
 		if (!component)
 			return;
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.FindComponent(SCR_CharacterDamageManagerComponent));
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.GetDamageManager());
 		if (!damageManager)
 			return;
 		
@@ -39,12 +39,12 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnStop(IEntity entity)
+	override void OnStop(SCR_ChimeraCharacter entity)
 	{
 		if (!entity)
 			return;
 		
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent component = entity.ACE_Medical_GetCardiovascularComponent();
 		if (!component)
 			return;
 		
@@ -62,15 +62,15 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override protected void Update(IEntity entity, float timeSlice)
+	override protected void Update(SCR_ChimeraCharacter entity, float timeSlice)
 	{
 		super.Update(entity, timeSlice);
 			
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent component = entity.ACE_Medical_GetCardiovascularComponent();
 		if (!component)
 			return;
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.FindComponent(SCR_CharacterDamageManagerComponent));
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.GetDamageManager());
 		if (!damageManager)
 			return;
 		
@@ -276,15 +276,15 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnFullHeal(IEntity entity)
+	override void OnFullHeal(SCR_ChimeraCharacter entity)
 	{
 		super.OnFullHeal(entity);
 		
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent component = entity.ACE_Medical_GetCardiovascularComponent();
 		if (!component)
 			return;
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.FindComponent(SCR_CharacterDamageManagerComponent));
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.GetDamageManager());
 		if (!damageManager)
 			return;
 		
@@ -298,16 +298,16 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	{
 		super.OnDiag(timeSlice);
 		
-		IEntity target;
+		SCR_ChimeraCharacter target;
 		string targetType;
 		if (!GetDiagTarget(target, targetType))
 			return;
 		
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent component = target.ACE_Medical_GetCardiovascularComponent();
 		if (!component)
 			return;
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(target.FindComponent(SCR_CharacterDamageManagerComponent));
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(target.GetDamageManager());
 		if (!damageManager)
 			return;
 

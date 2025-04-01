@@ -24,11 +24,11 @@ class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void Update(IEntity entity, float timeSlice)
+	override void Update(SCR_ChimeraCharacter entity, float timeSlice)
 	{
 		super.Update(entity, timeSlice);
 		
-		ACE_Medical_MedicationComponent component = ACE_Medical_MedicationComponent.Cast(entity.FindComponent(ACE_Medical_MedicationComponent));
+		ACE_Medical_MedicationComponent component = entity.ACE_Medical_GetMedicationComponent();
 		if (!component)
 			return;
 				
@@ -88,7 +88,7 @@ class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ApplyEffects(IEntity target, map<ACE_Medical_EDrugType, float> concentrations)
+	void ApplyEffects(SCR_ChimeraCharacter target, map<ACE_Medical_EDrugType, float> concentrations)
 	{
 		foreach (ACE_Medical_DrugEffectConfig config : m_Settings.m_aPharmacodynamicsConfigs)
 		{
@@ -98,11 +98,11 @@ class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 	
 	//------------------------------------------------------------------------------------------------
 	//! Clear body of all drugs and effects
-	override void OnFullHeal(IEntity entity)
+	override void OnFullHeal(SCR_ChimeraCharacter entity)
 	{
 		super.OnFullHeal(entity);
 		
-		ACE_Medical_MedicationComponent component = ACE_Medical_MedicationComponent.Cast(entity.FindComponent(ACE_Medical_MedicationComponent));
+		ACE_Medical_MedicationComponent component = entity.ACE_Medical_GetMedicationComponent();
 		if (component)
 			component.Clear();
 		
@@ -116,12 +116,12 @@ class ACE_Medical_MedicationSystem : ACE_Medical_BaseSystem2
 	{
 		super.OnDiag(timeSlice);
 		
-		IEntity target;
+		SCR_ChimeraCharacter target;
 		string targetType;
 		if (!GetDiagTarget(target, targetType))
 			return;
 		
-		ACE_Medical_MedicationComponent component = ACE_Medical_MedicationComponent.Cast(target.FindComponent(ACE_Medical_MedicationComponent));
+		ACE_Medical_MedicationComponent component = target.ACE_Medical_GetMedicationComponent();
 		if (!component)
 			return;
 

@@ -37,9 +37,13 @@ modded class SCR_CharacterDamageManagerEvaluator : DamageEffectEvaluator
 		
 		float var = affectedHitZone.ComputeEffectiveDamage(context, false);
 		if (var < affectedHitZone.GetCriticalHealthThreshold())
-			return; 
+			return;
 		
-		ACE_Medical_RespiratoryComponent respiratoryComponent = ACE_Medical_RespiratoryComponent.Cast(dmgManager.GetOwner().FindComponent(ACE_Medical_RespiratoryComponent));
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(dmgManager.GetOwner());
+		if (!ownerChar)
+			return;
+		
+		ACE_Medical_RespiratoryComponent respiratoryComponent = ownerChar.ACE_Medical_GetRespiratoryComponent();
 		if (!respiratoryComponent)
 			return;
 		

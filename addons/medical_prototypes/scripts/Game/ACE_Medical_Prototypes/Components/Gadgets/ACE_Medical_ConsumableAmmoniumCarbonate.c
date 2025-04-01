@@ -26,7 +26,11 @@ class ACE_Medical_ConsumableAmmoniumCarbonate : SCR_ConsumableEffectHealthItems
 	//! Add chance for applying effect
 	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
 	{
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
+		SCR_ChimeraCharacter targetChar = SCR_ChimeraCharacter.Cast(target);
+		if (!targetChar)
+			return;
+		
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = targetChar.ACE_Medical_GetCardiovascularComponent();
 		if (!cardiovascularComponent)
 			return;
 		
@@ -44,7 +48,7 @@ class ACE_Medical_ConsumableAmmoniumCarbonate : SCR_ConsumableEffectHealthItems
 		
 		super.ApplyEffect(target, user, item, animParams);
 		
-		ACE_Medical_MedicationComponent medicationComponent = ACE_Medical_MedicationComponent.Cast(target.FindComponent(ACE_Medical_MedicationComponent));
+		ACE_Medical_MedicationComponent medicationComponent = targetChar.ACE_Medical_GetMedicationComponent();
 		if (!medicationComponent)
 			return;
 		

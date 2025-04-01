@@ -49,10 +49,14 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (settings)
 			m_Settings = settings.m_CardiovascularSystem;
-				
-		m_pDamageManager = SCR_CharacterDamageManagerComponent.Cast(owner.FindComponent(SCR_CharacterDamageManagerComponent));
 		
-		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(owner.FindComponent(SCR_CharacterControllerComponent));
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(owner);
+		if (!ownerChar)
+			return;
+				
+		m_pDamageManager = SCR_CharacterDamageManagerComponent.Cast(ownerChar.GetDamageManager());
+		
+		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
 		if (characterController)
 			characterController.m_OnLifeStateChanged.Insert(OnLifeStateChanged);		
 	}

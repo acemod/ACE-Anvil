@@ -16,7 +16,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	override void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
-		m_pACE_Medical_CardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(owner.FindComponent(ACE_Medical_CardiovascularComponent));
+		
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(owner);
+		if (!ownerChar)
+			return;
+		
+		m_pACE_Medical_CardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -27,7 +32,10 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		//-----------------------------------------------------------------------------------------------------------
 		//! TO DO: Replace solution once systems support inheritance
 		/*
-		IEntity owner = GetOwner();
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return;
+		
 		array<Managed> components = {};
 		owner.FindComponents(ACE_Medical_BaseComponent, components);
 		
@@ -37,19 +45,21 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			
 			ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(medicalComponent.GetAssociatedSystemType());
 			if (system)
-				system.OnFullHeal(owner);
+				system.OnFullHeal(ownerChar);
 		}
 		*/
 		
-		IEntity owner = GetOwner();
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return;
 		
 		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(ACE_Medical_CardiovascularSystem);
 		if (system)
-			system.OnFullHeal(owner);
+			system.OnFullHeal(ownerChar);
 		
 		ACE_Medical_BaseSystem2 system2 = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);
 		if (system2)
-			system2.OnFullHeal(owner);
+			system2.OnFullHeal(ownerChar);
 		
 		//-----------------------------------------------------------------------------------------------------------
 	}

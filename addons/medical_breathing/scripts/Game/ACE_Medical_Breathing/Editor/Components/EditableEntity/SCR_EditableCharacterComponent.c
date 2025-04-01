@@ -12,7 +12,7 @@ modded class SCR_EditableCharacterComponent : SCR_EditableEntityComponent
 		
 		ACE_Medical_BaseSystem3 system3 = ACE_Medical_BaseSystem3.GetInstance(ACE_Medical_RespiratorySystem);
 		if (system3)
-			system3.Unregister(owner);
+			system3.Unregister(SCR_ChimeraCharacter.Cast(owner));
 	}
 	//-----------------------------------------------------------------------------------------------------------
 }

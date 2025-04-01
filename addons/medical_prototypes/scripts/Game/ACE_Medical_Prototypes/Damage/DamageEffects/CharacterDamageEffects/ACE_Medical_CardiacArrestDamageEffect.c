@@ -60,12 +60,12 @@ class ACE_Medical_CardiacArrestDamageEffect: SCR_DotDamageEffect
 		super.OnEffectAdded(dmgManager);
 		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
 		
-		IEntity target = charDamageManager.GetOwner();
-		if (!target)
+		SCR_ChimeraCharacter targetChar = SCR_ChimeraCharacter.Cast(charDamageManager.GetOwner());
+		if (!targetChar)
 			return;
 		
 		// Add regneration when no longer in cardiac arrest
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = targetChar.ACE_Medical_GetCardiovascularComponent();
 		if (cardiovascularComponent && !cardiovascularComponent.IsInCardiacArrest())
 			charDamageManager.RegenVirtualHitZone(SCR_RegeneratingHitZone.Cast(GetAffectedHitZone()));
 	}

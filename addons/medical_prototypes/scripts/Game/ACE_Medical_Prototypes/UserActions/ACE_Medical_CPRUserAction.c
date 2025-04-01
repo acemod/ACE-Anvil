@@ -49,7 +49,7 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 		if (ownerAnimation.IsRagdollActive())
 			return false;
 		
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(ownerChar.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 		if (!cardiovascularComponent)
 			false;
 		
@@ -127,8 +127,12 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 	//! TO DO: Move helper compartment creation to a tool class like ACE_Carrying_Tools
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(pOwnerEntity);
+		if (!ownerChar)
+			return;
+		
 		// Check on server that in fact no one is performing CPR
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 		if (!cardiovascularComponent || cardiovascularComponent.IsCPRPerformed())
 			return;
 				
@@ -145,9 +149,13 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 		if (!helper)
 			return;
 		
-		helper.Init(pUserEntity, pOwnerEntity);
+		SCR_ChimeraCharacter userChar = SCR_ChimeraCharacter.Cast(pUserEntity);
+		if (!userChar)
+			return;
 		
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(pUserEntity.FindComponent(SCR_CompartmentAccessComponent));
+		helper.Init(userChar, ownerChar);
+		
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(userChar.GetCompartmentAccessComponent());
 		if (compartmentAccess)
 			compartmentAccess.MoveInVehicle(helper, ECompartmentType.CARGO);
 	}

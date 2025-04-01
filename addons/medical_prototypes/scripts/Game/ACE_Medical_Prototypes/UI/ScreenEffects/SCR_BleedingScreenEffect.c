@@ -11,8 +11,15 @@ modded class SCR_BleedingScreenEffect : SCR_BaseScreenEffect
 	{
 		super.DisplayControlledEntityChanged(from, to);
 		
+		if (!to)
+			return;
+		
+		SCR_ChimeraCharacter toChar = SCR_ChimeraCharacter.Cast(to);
+		if (!toChar)
+			return;
+		
 		if (to)
-			m_pACE_Medical_CardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(to.FindComponent(ACE_Medical_CardiovascularComponent));
+			m_pACE_Medical_CardiovascularComponent = toChar.ACE_Medical_GetCardiovascularComponent();
 	}
 	
 	//------------------------------------------------------------------------------------------------

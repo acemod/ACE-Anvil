@@ -12,8 +12,12 @@ modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 		if (!m_Target || !m_wCasualtyInspectWidget)
 			return;
 		
+		SCR_ChimeraCharacter targetChar = SCR_ChimeraCharacter.Cast(m_Target);
+		if (!targetChar)
+			return;
+		
 		string sName;
-		GetCasualtyName(sName, m_Target);
+		GetCasualtyName(sName, targetChar);
 	
 		float bleedingRate;
 		int groupDamageIntensity;
@@ -22,10 +26,10 @@ modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 		array <bool> hZGroupsBleeding = {};
 		
 		SCR_InventoryHitZonePointUI hitZonePointUI = new SCR_InventoryHitZonePointUI();
-		GetDamageInfo(hitZonePointUI, m_Target, bleedingRate, hZGroupsBleeding, groupDamageIntensity, regenerating, isTourniquetted, isSalineBagged, isMorphined);
+		GetDamageInfo(hitZonePointUI, targetChar, bleedingRate, hZGroupsBleeding, groupDamageIntensity, regenerating, isTourniquetted, isSalineBagged, isMorphined);
 		hitZonePointUI.GetDamageInfoTexts(EHitZoneGroup.VIRTUAL, groupDamageIntensity, bleedingRate, damageIntensity, damageIntensityText, bleedingIntensityText);
 		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(m_Target.FindComponent(SCR_CharacterDamageManagerComponent));
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(targetChar.GetDamageManager());
 		ACE_Medical_EBloodState bloodState = damageManager.GetBloodHitZone().GetDamageState();
 		string bloodText;
 		
@@ -45,7 +49,7 @@ modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 		
 		array<string> medicationTexts = {};
 		
-		ACE_Medical_MedicationComponent medicationComponent = ACE_Medical_MedicationComponent.Cast(m_Target.FindComponent(ACE_Medical_MedicationComponent));
+		ACE_Medical_MedicationComponent medicationComponent = ACE_Medical_MedicationComponent.Cast(targetChar.ACE_Medical_GetMedicationComponent());
 		if (medicationComponent)
 		{
 			array<float> times;

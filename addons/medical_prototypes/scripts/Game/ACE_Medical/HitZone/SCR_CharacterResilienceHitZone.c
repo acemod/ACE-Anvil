@@ -8,7 +8,12 @@ modded class SCR_CharacterResilienceHitZone : SCR_RegeneratingHitZone
 	override void OnInit(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		super.OnInit(pOwnerEntity, pManagerComponent);
-		m_pACE_Medical_CardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
+		
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(pOwnerEntity);
+		if (!ownerChar)
+			return;
+		
+		m_pACE_Medical_CardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 	}
 	
 	//------------------------------------------------------------------------------------------------

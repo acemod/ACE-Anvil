@@ -43,7 +43,7 @@ class ACE_Medical_MedicationComponent : ACE_Medical_BaseComponent2
 		
 		ACE_Medical_BaseSystem2 system = ACE_Medical_BaseSystem2.GetInstance(ACE_Medical_MedicationSystem);
 		if (system && m_aDrugs.IsEmpty())
-			system.Register(GetOwner());
+			system.Register(SCR_ChimeraCharacter.Cast(GetOwner()));
 		
 		int idx = m_aDrugs.Find(drug);
 		if (idx >= 0)
@@ -112,9 +112,13 @@ class ACE_Medical_MedicationComponent : ACE_Medical_BaseComponent2
 		if (!settings || !settings.m_MedicationSystem)
 			return;
 		
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return;
+		
 		foreach (ACE_Medical_DrugEffectConfig effect : settings.m_MedicationSystem.m_aPharmacodynamicsConfigs)
 		{
-			effect.ClearEffect(GetOwner());
+			effect.ClearEffect(ownerChar);
 		}
 	}
 }

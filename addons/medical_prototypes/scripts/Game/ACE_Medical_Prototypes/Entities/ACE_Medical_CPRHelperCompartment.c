@@ -7,8 +7,8 @@ class ACE_Medical_CPRHelperCompartmentClass : GenericEntityClass
 //! TO DO: Refactor common code with ACE_Carrying_HelperCompartment to a ACE Core parent class
 class ACE_Medical_CPRHelperCompartment : GenericEntity
 {
-	protected IEntity m_pPerformer;
-	protected IEntity m_pPatient;
+	protected SCR_ChimeraCharacter m_pPerformer;
+	protected SCR_ChimeraCharacter m_pPatient;
 
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping carried player
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
@@ -16,7 +16,7 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Move performer into compartment and attach handlers
-	void Init(IEntity performer, IEntity patient)
+	void Init(SCR_ChimeraCharacter performer, SCR_ChimeraCharacter patient)
 	{
 		m_pPerformer = performer;
 		m_pPatient = patient;
@@ -45,11 +45,11 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		if (performerPlayerController && rpl)
 			rpl.Give(performerPlayerController.GetRplIdentity());
 		
-		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
+		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.GetCharacterController());
 		if (charController)
 			charController.m_OnLifeStateChanged.Insert(OnPerformerLifeStateChanged);
 		
-		charController = SCR_CharacterControllerComponent.Cast(m_pPatient.FindComponent(SCR_CharacterControllerComponent));
+		charController = SCR_CharacterControllerComponent.Cast(m_pPatient.GetCharacterController());
 		if (charController)
 			charController.m_OnLifeStateChanged.Insert(OnPatientLifeStateChanged);
 		
@@ -57,13 +57,13 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		if (gameMode)
 			gameMode.GetOnPlayerDisconnected().Insert(OnPlayerDisconnected);
 		
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.GetCompartmentAccessComponent());
 		if (compartmentAccess)
 			compartmentAccess.GetOnCompartmentLeft().Insert(OnCompartmentLeft);
 		
 		if (m_pPatient)
 		{
-			ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(m_pPatient.FindComponent(ACE_Medical_CardiovascularComponent));
+			ACE_Medical_CardiovascularComponent cardiovascularComponent = m_pPatient.ACE_Medical_GetCardiovascularComponent();
 			if (cardiovascularComponent)
 				cardiovascularComponent.SetIsCPRPerformed(true);
 		}
@@ -74,14 +74,14 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 	{
 		if (m_pPerformer)
 		{
-			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
+			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.GetCharacterController());
 			if (charController)
 				charController.m_OnLifeStateChanged.Remove(OnPerformerLifeStateChanged);
 		}
 		
 		if (m_pPatient)
 		{
-			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPatient.FindComponent(SCR_CharacterControllerComponent));
+			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPatient.GetCharacterController());
 			if (charController)
 				charController.m_OnLifeStateChanged.Remove(OnPatientLifeStateChanged);
 		}
@@ -91,13 +91,13 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 			gameMode.GetOnPlayerDisconnected().Remove(OnPlayerDisconnected);
 		
 		// Clean-up when carried has left the compartment
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.GetCompartmentAccessComponent());
 		if (compartmentAccess)
 			compartmentAccess.GetOnCompartmentLeft().Remove(OnCompartmentLeft);
 		
 		if (m_pPatient)
 		{
-			ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(m_pPatient.FindComponent(ACE_Medical_CardiovascularComponent));
+			ACE_Medical_CardiovascularComponent cardiovascularComponent = m_pPatient.ACE_Medical_GetCardiovascularComponent();
 			if (cardiovascularComponent)
 				cardiovascularComponent.SetIsCPRPerformed(false);
 		}

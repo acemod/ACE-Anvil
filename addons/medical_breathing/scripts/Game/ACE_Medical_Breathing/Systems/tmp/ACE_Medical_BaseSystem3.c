@@ -9,9 +9,9 @@ class ACE_Medical_BaseSystem3 : GameSystem
 	[Attribute(defvalue: "10", desc: "Maximum number of entities to process in an update")]
 	protected int m_iMaxIterationsPerUpdate;
 	
-	protected ref SCR_SortedArray<IEntity> m_aQueue = new SCR_SortedArray<IEntity>();
-	protected ref array<IEntity> m_aEntitiesToRegister = {};
-	protected ref array<IEntity> m_aEntitiesToUnregister = {};
+	protected ref SCR_SortedArray<SCR_ChimeraCharacter> m_aQueue = new SCR_SortedArray<SCR_ChimeraCharacter>();
+	protected ref array<SCR_ChimeraCharacter> m_aEntitiesToRegister = {};
+	protected ref array<SCR_ChimeraCharacter> m_aEntitiesToUnregister = {};
 	protected bool m_bInitDone = false;
 	protected bool m_bIsUpdating = false;
 	protected bool m_bScheduledQueueUpdate = false;
@@ -41,10 +41,10 @@ class ACE_Medical_BaseSystem3 : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void OnStart(IEntity entity);
+	void OnStart(SCR_ChimeraCharacter entity);
 	
 	//------------------------------------------------------------------------------------------------
-	void OnStop(IEntity entity);
+	void OnStop(SCR_ChimeraCharacter entity);
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnUpdate(ESystemPoint point)
@@ -65,7 +65,7 @@ class ACE_Medical_BaseSystem3 : GameSystem
 				return;
 			}
 			
-			IEntity entity = m_aQueue.GetValue(0);
+			SCR_ChimeraCharacter entity = m_aQueue.GetValue(0);
 			Update(entity, System.GetTickCount(lastUpdateTime) / 1000);
 			m_aQueue.Remove(0);
 			m_aQueue.Insert(currentTime, entity);
@@ -77,12 +77,12 @@ class ACE_Medical_BaseSystem3 : GameSystem
 		// Process entities scheduled for registering/unregistering from the queue
 		if (m_bScheduledQueueUpdate)
 		{
-			foreach (IEntity entity : m_aEntitiesToRegister)
+			foreach (SCR_ChimeraCharacter entity : m_aEntitiesToRegister)
 			{
 				Register(entity);
 			}
 	
-			foreach (IEntity entity : m_aEntitiesToUnregister)
+			foreach (SCR_ChimeraCharacter entity : m_aEntitiesToUnregister)
 			{
 				Unregister(entity);
 			}		
@@ -94,13 +94,13 @@ class ACE_Medical_BaseSystem3 : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void Update(IEntity entity, float timeSlice);
+	protected void Update(SCR_ChimeraCharacter entity, float timeSlice);
 	
 	//------------------------------------------------------------------------------------------------
-	void OnFullHeal(IEntity entity);
+	void OnFullHeal(SCR_ChimeraCharacter entity);
 	
 	//------------------------------------------------------------------------------------------------
-	void Register(notnull IEntity entity)
+	void Register(notnull SCR_ChimeraCharacter entity)
 	{
 		// Only directly touch m_aQueue while no updating is going on
 		if (m_bIsUpdating)
@@ -122,7 +122,7 @@ class ACE_Medical_BaseSystem3 : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Unregister(notnull IEntity entity)
+	void Unregister(notnull SCR_ChimeraCharacter entity)
 	{
 		// Only directly touch m_aQueue while no updating is going on
 		if (m_bIsUpdating)
@@ -145,7 +145,7 @@ class ACE_Medical_BaseSystem3 : GameSystem
 	//------------------------------------------------------------------------------------------------
 	//! Get target for diag menu and string for printing which target it is
 	//! Return true if a target was found
-	protected bool GetDiagTarget(out IEntity target, out string targetType)
+	protected bool GetDiagTarget(out SCR_ChimeraCharacter target, out string targetType)
 	{
 		CameraBase camera = GetGame().GetCameraManager().CurrentCamera();
 		if (!camera)

@@ -30,7 +30,7 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 		if (!patient)
 			return;
 		
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = patient.ACE_Medical_GetCardiovascularComponent();
 		if (!cardiovascularComponent)
 			return;
 		
@@ -70,7 +70,7 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 		if (!patient)
 			return;
 		
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = patient.ACE_Medical_GetCardiovascularComponent();
 		if (!cardiovascularComponent)
 			return;
 		
@@ -85,7 +85,7 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 		if (!patient)
 			return;
 		
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = patient.ACE_Medical_GetCardiovascularComponent();
 		if (!cardiovascularComponent)
 			return;
 		

@@ -25,7 +25,11 @@ class ACE_Medical_ConsumableMedication : ACE_Medical_ConsumableEffectHealthItems
 		if (!Replication.IsServer())
 			return;
 		
-		ACE_Medical_MedicationComponent medicationComponent = ACE_Medical_MedicationComponent.Cast(target.FindComponent(ACE_Medical_MedicationComponent));
+		SCR_ChimeraCharacter targetChar = SCR_ChimeraCharacter.Cast(target);
+		if (!targetChar)
+			return;
+		
+		ACE_Medical_MedicationComponent medicationComponent = targetChar.ACE_Medical_GetMedicationComponent();
 		if (!medicationComponent)
 			return;
 		

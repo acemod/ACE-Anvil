@@ -8,7 +8,7 @@ modded class SCR_InspectCasualtyUserAction : ScriptedUserAction
 		if (super.CanBeShownScript(user))
 			return true;
 		
-		ChimeraCharacter ownerChar = ChimeraCharacter.Cast(GetOwner());
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
 		if (!ownerChar)
 			return false;
 		
@@ -20,7 +20,7 @@ modded class SCR_InspectCasualtyUserAction : ScriptedUserAction
 		if (painHZ && painHZ.GetDamageState() != EDamageState.UNDAMAGED)
 			return true;
 		
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(ownerChar.FindComponent(ACE_Medical_CardiovascularComponent));
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 		if (cardiovascularComponent && cardiovascularComponent.GetVitalState() > ACE_Medical_EVitalState.STABLE)
 			return true;
 		

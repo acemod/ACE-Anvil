@@ -9,11 +9,15 @@ class ACE_Medical_BrainHitZone : SCR_RegeneratingHitZone
 	{
 		super.OnInit(pOwnerEntity, pManagerComponent);
 		
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(pOwnerEntity);
+		if (!ownerChar)
+			return;
+		
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(pManagerComponent);
 		if (damageManager)
 			damageManager.ACE_Medical_SetBrainHitZone(this);
 		
-		m_pCardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
+		m_pCardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -17,8 +17,12 @@ class ACE_Medical_VitalHitZoneHelper : Managed
 	//! Initialize member variables
 	void ACE_Medical_VitalHitZoneHelper(IEntity ownerEntity, GenericComponent managerComponent, SCR_HitZone hitZone)
 	{
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(ownerEntity);
+		if (!ownerChar)
+			return;
+		
 		m_pDamageManager = SCR_CharacterDamageManagerComponent.Cast(managerComponent);
-		m_pCardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(ownerEntity.FindComponent(ACE_Medical_CardiovascularComponent));
+		m_pCardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 		
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (settings)

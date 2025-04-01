@@ -46,11 +46,11 @@ class ACE_Medical_VitalSignsTooltipDetail : SCR_EntityTooltipDetail
 		if (!m_Text)
 			return false;
 		
-		IEntity owner = entity.GetOwner();
-		if (!owner)
-			false;
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(entity.GetOwner());
+		if (!ownerChar)
+			return false;
 		
-		m_pCardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(owner.FindComponent(ACE_Medical_CardiovascularComponent));
+		m_pCardiovascularComponent = ownerChar.ACE_Medical_GetCardiovascularComponent();
 		if (!m_pCardiovascularComponent)
 			return false;
 		

@@ -1,11 +1,50 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{64FF4A203D8FE526}" {
+   Id "ACE_Medical-InfoWidget_ChestSeal"
+   Target_en_us "Prevents tension pneumothorax"
+   Target_de_de "Verhindert die Bildung einer Spannungspneumothorax"
+   Modified 1694634449
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{62D754F3A2AFEA00}" {
    Id "ACE_Medical-InfoWidget_KingLT"
    Target_en_us "Prevents obstruction and occlusion of airways"
    Target_de_de "Verhindert Obstruktion und Okklusion der Atemwege"
    Modified 1658280043
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A2623C65D0D}" {
+   Id "ACE_Medical-InfoWidget_NCDKit"
+   Target_en_us "Used for treating tension pneumothorax"
+   Target_de_de "Zum Behandeln von Spannungspneumothorax"
+   Modified 1694634480
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A23ED61E92B}" {
+   Id "ACE_Medical-InfoWidget_OxygenMask"
+   Target_en_us "Provides supplemental oxygen"
+   Modified 1694632474
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A20D0C03B3A}" {
+   Id "ACE_Medical-Item_ChestSeal_Description"
+   Target_en_us "Special dressing for open chest wounds"
+   Target_de_de "Spezialverband für offenen Brustkorbverletzungen"
+   Modified 1694633389
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A20DDF8616D}" {
+   Id "ACE_Medical-Item_ChestSeal_Name"
+   Target_en_us "Chest Seal"
+   Target_de_de "Thorax Pflaster"
+   Modified 1694633304
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -22,6 +61,38 @@ StringTable {
    Target_en_us "King LT"
    Target_de_de "Larynxtubus"
    Modified 1658279424
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A2633C94C03}" {
+   Id "ACE_Medical-Item_NCDKit_Description"
+   Target_en_us "Kit for performing needle decompression"
+   Target_de_de "Set zur Durchführung von Nadeldekompression"
+   Modified 1694634678
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A263E864FA9}" {
+   Id "ACE_Medical-Item_NCDKit_Name"
+   Target_en_us "NCD Kit"
+   Target_de_de "Dekompressionsnadelset"
+   Modified 1694634641
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A23362FB915}" {
+   Id "ACE_Medical-Item_OxygenMask_Description"
+   Target_en_us "Mask for oxygen therapy"
+   Target_de_de "Maske für Sauerstofftherapie"
+   Modified 1694633716
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A2335B51A2F}" {
+   Id "ACE_Medical-Item_OxygenMask_Name"
+   Target_en_us "Oxygen Mask"
+   Target_de_de "Sauerstoffmaske"
+   Modified 1694633611
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -46,6 +117,14 @@ StringTable {
    Target_en_us "Perform needle decompression"
    Target_de_de "Nadeldekompression durchführen"
    Modified 1662077408
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{64FF4A2320445A13}" {
+   Id "ACE_Medical-UserAction_OxygenMask"
+   Target_en_us "Put on oxygen mask"
+   Target_de_de "Sauerstoffmaske anziehen"
+   Modified 1694632641
    Author "Kexanone"
    LastChanged "Kexanone"
   }

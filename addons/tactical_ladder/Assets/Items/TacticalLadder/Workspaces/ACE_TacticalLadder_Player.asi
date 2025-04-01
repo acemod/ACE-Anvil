@@ -1,0 +1,13 @@
+AnimSetInstanceSource "{5E0488B38C6E59E6}" {
+ Template "{131CB5539A1C1F8A}Assets/Items/TacticalLadder/Workspaces/ACE_TacticalLadder.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Deploy.Default.LadderIn" {
+   Resource "{FE625F2F459C7059}Assets/Weapons/Explosives/Mine_M15AT/anims/p_mine_in.anm"
+  }
+  AnimSetInstanceSource_Line "Deploy.Default.Idle" {
+   Resource "{2C334ACB52F81AF7}Assets/Weapons/Explosives/Mine_M15AT/anims/p_mine_us_M15_idle.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{5A088EA281F1FB7F}" {
+ }
+}

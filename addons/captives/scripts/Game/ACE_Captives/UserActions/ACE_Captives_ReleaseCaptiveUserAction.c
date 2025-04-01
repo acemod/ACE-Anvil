@@ -1,12 +1,6 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Captives_ReleaseCaptiveUserAction : ScriptedUserAction
 {
-	[Attribute(defvalue: "#ACE_Captives-UserAction_TakeAsPrisoner", desc: "String shown for taking as captive")]
-	protected LocalizedString m_sTakeCaptive;
-	
-	[Attribute(defvalue: "#ACE_Captives-UserAction_ReleasePrisoner", desc: "String shown for releasing captive")]
-	protected LocalizedString m_sReleaseCaptive;
-
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
@@ -15,6 +9,9 @@ class ACE_Captives_ReleaseCaptiveUserAction : ScriptedUserAction
 		
 		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
 		if (!ownerChar)
+			return false;
+		
+		if (ownerChar == user)
 			return false;
 		
 		if (ownerChar.IsInVehicle() && !ACE_AnimationTools.GetHelperCompartment(ownerChar))

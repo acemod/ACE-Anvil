@@ -1,25 +1,3 @@
-$grp GenericEntity {
- {
-  components {
-   MeshObject "{62E122CF5D8F7E95}" {
-    Object "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
-   }
-   RplComponent "{62E122CF57795098}" {
-    "Rpl State Override" Runtime
-    "Parent Node From Parent Entity" 0
-   }
-  }
-  coords 76.814 3.634 23.68
- }
- {
-  components {
-   MeshObject "{64FF4A1502AC8319}" {
-    Object "{F880E60E75B74C5F}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.xob"
-   }
-  }
-  coords 78.187 3.745 22.636
- }
-}
 $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et" {
  {
   coords 77.19 3.667 23.278

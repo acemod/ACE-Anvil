@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{18E77E11DAFD8191}Assets/Items/Periscope/Workspaces/p_erc_tacticalperiscope_idle_fingerAnim.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

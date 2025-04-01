@@ -1,0 +1,64 @@
+AnimSrcGraph {
+ AnimSetTemplate "{131CB5539A1C1F8A}Assets/Items/TacticalLadder/Workspaces/ACE_TacticalLadder.ast"
+ ControlTemplate AnimSrcGCT "{5A0886306CA43762}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_Item_Action {
+   }
+   AnimSrcGCTCmd CMD_PickUp {
+   }
+  }
+  IkChains {
+   AnimSrcGCTIkChain LeftArm {
+    Joints {
+     "leftarm"
+     "leftarmtwist"
+     "leftforearm"
+     "leftforearmtwist"
+     "lefthand"
+    }
+    MiddleJoint "leftforearm"
+    ChainAxis "+y"
+   }
+   AnimSrcGCTIkChain RightArmProp {
+    Joints {
+     "rightarm"
+     "rightarmtwist"
+     "rightforearm"
+     "rightforearmtwist"
+     "righthand"
+     "righthandprop"
+    }
+    MiddleJoint "rightforearm"
+    ChainAxis "-y"
+   }
+   AnimSrcGCTIkChain RightArm {
+    Joints {
+     "rightarm"
+     "rightarmtwist"
+     "rightforearm"
+     "rightforearmtwist"
+     "righthand"
+    }
+    MiddleJoint "rightforearm"
+    ChainAxis "-y"
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "HEAVY"
+   "MINE"
+   "M15AT"
+  }
+ }
+ Debug AnimSrcGD "{5A0886306CA436BD}" {
+ }
+ GraphFilesResourceNames {
+  "{2EE0CDE9337AA249}Assets/Items/TacticalLadder/Workspaces/ACE_TacticalLadder.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

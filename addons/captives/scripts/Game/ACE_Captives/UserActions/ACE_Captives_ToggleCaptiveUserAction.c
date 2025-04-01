@@ -17,6 +17,9 @@ class ACE_Captives_ReleaseCaptiveUserAction : ScriptedUserAction
 		if (!ownerChar)
 			return false;
 		
+		if (ownerChar == user)
+			return false;
+		
 		if (ownerChar.IsInVehicle() && !ACE_AnimationTools.GetHelperCompartment(ownerChar))
 			return false;
 		

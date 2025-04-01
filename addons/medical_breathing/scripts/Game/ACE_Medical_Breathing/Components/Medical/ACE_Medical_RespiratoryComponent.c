@@ -19,7 +19,9 @@ class ACE_Medical_RespiratoryComponent : ACE_Medical_BaseComponent3
 	protected float m_fHemoglobinKd;
 	
 	[RplProp()]
-	protected bool m_bAreAirwaysBlocked = false;
+	protected bool m_bAreAirwaysObstructed = false;
+	[RplProp()]
+	protected bool m_bAreAirwaysOccluded = false;
 	[RplProp()]
 	protected float m_fPneumothoraxVolumeML = 0;
 	[RplProp()]
@@ -159,16 +161,33 @@ class ACE_Medical_RespiratoryComponent : ACE_Medical_BaseComponent3
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetAreAirwayBlocked(bool areBlocked)
+	//! Set tongue-based obstruction fo airways
+	void SetAreAirwaysObstructed(bool areObstructed)
 	{
-		m_bAreAirwaysBlocked = areBlocked;
+		m_bAreAirwaysObstructed = areObstructed;
 		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	bool AreAirwaysBlocked()
+	//! Are airways obstructed by tongue
+	bool AreAirwaysObstructed()
 	{
-		return m_bAreAirwaysBlocked;
+		return m_bAreAirwaysObstructed;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Set vomit-based occlusion fo airways
+	void SetAreAirwaysOccluded(bool areOccluded)
+	{
+		m_bAreAirwaysOccluded = areOccluded;
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Are airways occluded by vomit
+	bool AreAirwaysOccluded()
+	{
+		return m_bAreAirwaysOccluded;
 	}
 	
 	//------------------------------------------------------------------------------------------------

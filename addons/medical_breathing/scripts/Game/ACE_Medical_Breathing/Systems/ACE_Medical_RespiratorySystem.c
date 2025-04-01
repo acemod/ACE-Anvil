@@ -126,7 +126,7 @@ class ACE_Medical_RespiratorySystem : ACE_Medical_BaseSystem3
 	{
 		float fiO2 = m_Settings.m_fDefaultFiO2;
 		// TO DO: Handle oxygen tank
-		if (component.HasTensionPneumothorax() || component.HasHemothorax() || component.AreAirwaysBlocked())
+		if (component.HasTensionPneumothorax() || component.HasHemothorax() || component.AreAirwaysObstructed() || component.AreAirwaysOccluded())
 			fiO2 = 0;
 		
 		// TO DO: Get atmospheric pressure from an external source
@@ -166,7 +166,8 @@ class ACE_Medical_RespiratorySystem : ACE_Medical_BaseSystem3
 		component.SetPaO2(m_Settings.m_fDefaultPaO2KPA);
 		component.SetPH(m_Settings.m_fDefaultpH);
 		component.SetHemoglobinKd(m_Settings.m_fDefaultHemoglobinKd);
-		component.SetAreAirwayBlocked(false);
+		component.SetAreAirwaysObstructed(false);
+		component.SetAreAirwaysOccluded(false);
 		component.SetPneumothoraxVolume(0);
 		component.SetHasTensionPneumothorax(false);
 		component.SetHasHemothorax(false);
@@ -191,11 +192,12 @@ class ACE_Medical_RespiratorySystem : ACE_Medical_BaseSystem3
 		DbgUI.Begin(string.Format("ACE_Medical_RespiratoryComponent (%1)", targetType), 0, 700);
 		DbgUI.Text(string.Format("Target ventilation:           %1 ml/min", component.GetTargetVentilation()));
 		DbgUI.Text(string.Format("Actual ventilation:           %1 ml/min", component.GetVentilation()));
-		DbgUI.Text(string.Format("Respiratory rate:              %1 1/min", component.GetRespiratoryRate()));
+		DbgUI.Text(string.Format("Respiratory rate:             %1 1/min", component.GetRespiratoryRate()));
 		DbgUI.Text(string.Format("PaCO2:                        %1 kPa", component.GetPaCO2()));
 		DbgUI.Text(string.Format("PaO2:                         %1 kPa", component.GetPaO2()));
 		DbgUI.Text(string.Format("pH:                           %1", component.GetPH()));
-		DbgUI.Text(string.Format("Airways blocked:              %1", component.AreAirwaysBlocked().ToString()));
+		DbgUI.Text(string.Format("Airways obstructed:           %1", component.AreAirwaysObstructed().ToString()));
+		DbgUI.Text(string.Format("Airways occluded:             %1", component.AreAirwaysOccluded().ToString()));
 		DbgUI.Text(string.Format("Pneumothorax volume:          %1 ml", component.GetPneumothoraxVolume()));
 		DbgUI.Text(string.Format("Tension pneumothorax:         %1", component.HasTensionPneumothorax().ToString()));
 		DbgUI.Text(string.Format("Hemothorax:                   %1", component.HasHemothorax().ToString()));

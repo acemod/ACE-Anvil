@@ -8,7 +8,7 @@ SCR_ChimeraCharacter {
       "LeftWrist" "RightWrist"
      }
      UIInfo SCR_ActionUIInfo "{647772A4AD8E87DB}" {
-      Name "Escort Captive"
+      Name "#ACE_Captives-UserAction_EscortCaptive"
       m_sInteractionIcon "{2EFEA2AF1F38E7F0}UI/Textures/Icons/icons_wrapperUI-64.imageset"
       m_sIconName "connection"
      }

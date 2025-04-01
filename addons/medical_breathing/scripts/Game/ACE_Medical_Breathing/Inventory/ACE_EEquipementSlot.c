@@ -1,5 +1,6 @@
 //------------------------------------------------------------------------------------------------
 modded enum ACE_EEquipementSlot
 {
-	LARYNGEAL_TUBE
+	LARYNGEAL_TUBE,
+	OXYGEN_MASK
 }

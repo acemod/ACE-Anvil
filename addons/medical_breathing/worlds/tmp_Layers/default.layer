@@ -1,14 +1,24 @@
-GenericEntity {
- components {
-  MeshObject "{62E122CF5D8F7E95}" {
-   Object "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
+$grp GenericEntity {
+ {
+  components {
+   MeshObject "{62E122CF5D8F7E95}" {
+    Object "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
+   }
+   RplComponent "{62E122CF57795098}" {
+    "Rpl State Override" Runtime
+    "Parent Node From Parent Entity" 0
+   }
   }
-  RplComponent "{62E122CF57795098}" {
-   "Rpl State Override" Runtime
-   "Parent Node From Parent Entity" 0
-  }
+  coords 76.814 3.634 23.68
  }
- coords 76.814 3.634 23.68
+ {
+  components {
+   MeshObject "{64FF4A1502AC8319}" {
+    Object "{F880E60E75B74C5F}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.xob"
+   }
+  }
+  coords 78.187 3.745 22.636
+ }
 }
 $grp GenericEntity : "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et" {
  {
@@ -223,5 +233,19 @@ GenericEntity : "{C687D937CA92EF2A}Prefabs/Items/Medicine/NCDKit/ACE_medical_NCD
  {
   GenericEntity : "{1323E0ADD9389CFD}Prefabs/Items/Medicine/NCDKit/ACE_medical_NCDKit_Hose.et" {
   }
+ }
+}
+$grp GenericEntity : "{FDFA3EAC0D60C65F}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.et" {
+ {
+  coords 78.39 3.731 22.589
+ }
+ {
+  coords 78.726 3.727 22.719
+ }
+ {
+  coords 78.482 3.744 22.775
+ }
+ {
+  coords 78.701 3.985 22.541
  }
 }

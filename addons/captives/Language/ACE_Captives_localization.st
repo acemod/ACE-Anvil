@@ -25,6 +25,14 @@ StringTable {
    Author "Kex"
    LastChanged "Kex"
   }
+  CustomStringTableItem "{65030ADCC0783838}" {
+   Id "ACE_Captives-UserAction_EscortCaptive"
+   Target_en_us "Escort prisoner"
+   Target_de_de "Gefangener eskortieren"
+   Modified 1694698960
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{649D4AECDC295B8D}" {
    Id "ACE_Captives-UserAction_ReleasePrisoner"
    Target_en_us "Release prisoner"

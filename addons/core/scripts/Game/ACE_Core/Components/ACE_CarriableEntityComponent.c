@@ -228,6 +228,9 @@ class ACE_CarriableEntityComponent : ScriptComponent
 		GetGame().GetInputManager().RemoveActionListener("ACE_StopCarrying", EActionTrigger.DOWN, ActionReleaseCallback);
 		ClearEventMask(GetOwner(), EntityEvent.FRAME);
 		
+		if (!m_pCarrier)
+			return;
+		
 		BaseWeaponManagerComponent weaponManager = m_pCarrier.GetWeaponManager();
 		if (!m_bCarrierAllowWeapon && weaponManager)
 			weaponManager.m_OnWeaponChangeStartedInvoker.Remove(OnCarrierWeaponSelected);

@@ -1,0 +1,14 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{5A08BEA99B5809C5}" {
+   Name "Deploy"
+   Animations {
+    "Idle"
+    "LadderIn"
+   }
+   Columns {
+    "Default"
+   }
+  }
+ }
+}

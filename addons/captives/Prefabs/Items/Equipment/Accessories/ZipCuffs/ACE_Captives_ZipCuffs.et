@@ -1,0 +1,66 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SoundComponent "{64CF42A02F77014B}" {
+   Filenames {
+    "{8316CFDF522BC9FC}Sounds/Items/Equipment/ZipCuffs/ACE_Captives_ZipCuffs.acp"
+   }
+  }
+  ACE_Captives_HandcuffsGadgetComponent "{64D738E0F87F324B}" {
+   m_eAnimVariable ADRIANOV
+   m_eUseMask 7
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "Zip Cuffs"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.02
+     SizeSetupStrategy Manual
+     ItemDimensions 5 5 5
+     ItemVolume 10
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{64C9466ABF6C9E37}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{DF96CCB6ADFD8139}Assets/Weapons/Grenades/RDG2/anims/anm/p_rdg2_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{64C9467D12E547DA}" {
+       AnimGraph "{16551D7D112602B1}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/ACE_Captives_ZipCuffs.agr"
+       AnimInstance "{F514AE88EE7A6984}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/ACE_Captives_ZipCuffs_Player.asi"
+       BindingName "Gadget"
+      }
+     }
+    }
+    CustomAttributes {
+     CharacterModifierAttributes "{64C9466C000AC3B0}" {
+      CanBeEquippedInVehicle 0
+     }
+     PreviewRenderAttributes "{64C94664DCC1C825}" {
+      CameraPreset Top
+      CameraOrbitAngles 0 0 230
+      CameraDistanceToItem 0.275
+      CameraOffset 0.04 0.03 0
+     }
+    }
+    CommonItemType "AMMO"
+   }
+  }
+  MeshObject "{64C9466C000AC3A2}" {
+   Object "{8D29CE583DCAF587}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/ACE_Captives_ZipCuffs.xob"
+  }
+  RigidBody "{64C9466C000AC3A4}" {
+   Mass 1.5
+   ModelGeometry 1
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   ActionContexts {
+    UserActionContext "{508AC2ABEC97066C}" {
+     ContextName "default"
+     Position PointInfo "{508AC2ABEAC4A0F5}" {
+     }
+    }
+   }
+  }
+ }
+}

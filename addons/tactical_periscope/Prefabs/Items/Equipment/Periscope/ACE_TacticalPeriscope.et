@@ -71,12 +71,6 @@ GenericEntity : "{243948B23D90BECB}Prefabs/Items/Equipment/Binoculars/Binoculars
    m_fObjectiveFov 20
    m_iAnimationActivationDelay 0
   }
-  BaseLoadoutClothComponent "{5D0CB09DD1352E5B}" {
-   Animate 0
-   WornModel "{8838D0FE9D8142AE}Assets/Items/Equipment/Binoculars/Binoculars_B8/Binoculars_B8.xob"
-   ItemModel "{5607E18D1BC7ED06}Assets/Items/Periscope/ACE_TacticalPeriscope.xob"
-   VisibleInVehicle 0
-  }
  }
  coords 127.122 1 127.966
 }

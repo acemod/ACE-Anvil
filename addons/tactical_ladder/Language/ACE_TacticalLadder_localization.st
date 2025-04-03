@@ -45,5 +45,21 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{650728115F9B1510}" {
+   Id "ACE_TacticalLadder-UserAction_TooShort"
+   Target_en_us "Too short"
+   Target_de_de "Zu kurz"
+   Modified 1694973490
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{6507280146ED7892}" {
+   Id "ACE_TacticalLadder-UserAction_TopExitObstructed"
+   Target_en_us "Top exit obstructed"
+   Target_de_de "Oberste Sprosse nicht zugänglich"
+   Modified 1694981878
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
  }
 }

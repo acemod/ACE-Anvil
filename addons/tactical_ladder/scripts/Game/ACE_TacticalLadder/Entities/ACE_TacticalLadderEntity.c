@@ -15,8 +15,14 @@ class ACE_TacticalLadderEntity : GenericEntity
 	
 	protected SignalsManagerComponent m_pSignalsManager;
 	protected ref array<Managed> m_aLadderComponents = {};
+	protected ref array<ref PointInfo> m_aLadderTopPoints = {};
 	protected int m_iExtendSignalID;
 	protected int m_iCurrentLadderComponentIdx = -1;
+	protected bool m_bIsTopExitObstructed = false;
+	
+#ifdef WORKBENCH
+	protected ref Shape m_pDebugLine;
+#endif
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_TacticalLadderEntity(IEntitySource src, IEntity parent)
@@ -36,6 +42,15 @@ class ACE_TacticalLadderEntity : GenericEntity
 		m_iExtendSignalID = m_pSignalsManager.FindSignal("extend");
 		
 		FindComponents(LadderComponent, m_aLadderComponents);
+		
+		array<IEntityComponentSource> ladderComponentSources = {};
+		SCR_BaseContainerTools.FindComponentSourcesOfClass(GetPrefabData().GetPrefab().ToEntitySource(), LadderComponent, false, ladderComponentSources);
+		foreach (IEntityComponentSource ladderComponentSource : ladderComponentSources)
+		{
+			PointInfo point = new PointInfo();
+			ladderComponentSource.Get("TopFrontPositionInfo", point);
+			m_aLadderTopPoints.Insert(point);
+		}
 		
 		if (Replication.IsServer())
 		{
@@ -98,9 +113,20 @@ class ACE_TacticalLadderEntity : GenericEntity
 		// Update colliders
 		GetGame().GetCallqueue().CallLater(Update, m_iUpdateDelayMS);
 		
-		// Update active ladder component and drop all players that are climbing it
-		m_iCurrentLadderComponentIdx = Math.Round(m_pSignalsManager.GetSignalValue(m_iExtendSignalID) - m_iFirstLadderComponentSignalValue);
+		// Update active ladder component
+		int newLadderComponentIdx = Math.Round(m_pSignalsManager.GetSignalValue(m_iExtendSignalID) - m_iFirstLadderComponentSignalValue);
+		if (newLadderComponentIdx == m_iCurrentLadderComponentIdx)
+			return;
 		
+		m_iCurrentLadderComponentIdx = newLadderComponentIdx;
+		CheckAndDropLocalPlayer();
+		UpdateIsTopExitObstructed();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Drop local player from the ladder if they are climbing and the active ladder component has changed
+	void CheckAndDropLocalPlayer()
+	{
 		ChimeraCharacter player = ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
 		if (!player)
 			return;
@@ -117,8 +143,58 @@ class ACE_TacticalLadderEntity : GenericEntity
 		if (ladderIdx < 0 || ladderIdx == m_iCurrentLadderComponentIdx)
 			return;
 		
-		// Drop player
+		// Drop local player
 		handler.StartCommand_Ladder(null);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Considered obstructed when top entry of ladder doesn't have enough space
+	void UpdateIsTopExitObstructed()
+	{
+		if (m_iCurrentLadderComponentIdx < 0)
+			return;
+		
+		PointInfo currentTopPoint = m_aLadderTopPoints[m_iCurrentLadderComponentIdx];
+		currentTopPoint.Init(this);
+		TraceParam params = new TraceParam();
+		params.Flags = TraceFlags.ENTS;
+		params.Exclude = SCR_PlayerController.GetLocalControlledEntity();
+		
+		// Trace for ceiling that block the top exit
+		params.Start = currentTopPoint.GetWorldTransformAxis(3) + 0.25 * currentTopPoint.GetWorldTransformAxis(2);
+		params.End = params.Start + 2 * currentTopPoint.GetWorldTransformAxis(1);
+		m_bIsTopExitObstructed = (GetWorld().TraceMove(params, null) < 1);
+		
+	#ifdef WORKBENCH
+		vector debugPoints[4];
+		debugPoints[0] = params.Start;
+		debugPoints[1] = params.End;
+	#endif
+			
+		if (m_bIsTopExitObstructed)
+		{
+		#ifdef WORKBENCH
+			m_pDebugLine = Shape.CreateLines(0xff0000, ShapeFlags.DEFAULT, debugPoints, 2);
+		#endif
+			
+			return;
+		}
+		
+		// Trace for walls that block the top exit
+		params.Start += currentTopPoint.GetWorldTransformAxis(1);
+		params.End = params.Start - 1.25 * currentTopPoint.GetWorldTransformAxis(2);
+		m_bIsTopExitObstructed = (GetWorld().TraceMove(params, null) < 1);
+		
+	#ifdef WORKBENCH
+		debugPoints[2] = params.Start;
+		debugPoints[3] = params.End;
+		
+		int color = 0x00ff00;
+		if (m_bIsTopExitObstructed)
+		    color = 0xff0000;; // Red if true
+		
+		m_pDebugLine = Shape.CreateLines(color, ShapeFlags.DEFAULT, debugPoints, 4);
+	#endif
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -126,5 +202,11 @@ class ACE_TacticalLadderEntity : GenericEntity
 	int GetCurrentLadderComponentIdx()
 	{
 		return m_iCurrentLadderComponentIdx;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool IsTopExitObstructed()
+	{
+		return m_bIsTopExitObstructed;
 	}
 }

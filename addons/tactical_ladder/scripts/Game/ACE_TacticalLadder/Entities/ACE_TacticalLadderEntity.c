@@ -163,7 +163,7 @@ class ACE_TacticalLadderEntity : GenericEntity
 		// Trace for ceiling that block the top exit
 		params.Start = currentTopPoint.GetWorldTransformAxis(3) + 0.25 * currentTopPoint.GetWorldTransformAxis(2);
 		params.End = params.Start + 2 * currentTopPoint.GetWorldTransformAxis(1);
-		m_bIsTopExitObstructed = (GetWorld().TraceMove(params, null) < 1);
+		m_bIsTopExitObstructed = (GetWorld().TraceMove(params, null) < 1) && Building.Cast(params.TraceEnt);
 		
 	#ifdef WORKBENCH
 		vector debugPoints[4];
@@ -183,7 +183,7 @@ class ACE_TacticalLadderEntity : GenericEntity
 		// Trace for walls that block the top exit
 		params.Start += currentTopPoint.GetWorldTransformAxis(1);
 		params.End = params.Start - 1.25 * currentTopPoint.GetWorldTransformAxis(2);
-		m_bIsTopExitObstructed = (GetWorld().TraceMove(params, null) < 1);
+		m_bIsTopExitObstructed = (GetWorld().TraceMove(params, null) < 1) && Building.Cast(params.TraceEnt);
 		
 	#ifdef WORKBENCH
 		debugPoints[2] = params.Start;

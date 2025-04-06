@@ -1,0 +1,128 @@
+GenericEntity {
+ ID "64FB47CDCCA18EE0"
+ components {
+  SoundComponent "{64FB47C97CAF9F9C}" {
+   Filenames {
+    "{0340D00A7674D634}Sounds/AEDSoundEffects.acp"
+   }
+  }
+  ACE_Medical_AEDComponent "{64FC042A9D1DBC68}" {
+  }
+  InventoryItemComponent "{64FB47CDCCA18EFF}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47CDCCA18EC0}" {
+    ItemDisplayName UIInfo "{64FB47CDCCA18EC4}" {
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47CDCCA18EDA}" {
+     Weight 3.2
+     SizeSetupStrategy Size
+     ItemDimensions 23.4 27.7 8.7
+    }
+    CommonItemType "HAND_SLOT_ITEM"
+    m_Size SLOT_1x1
+    m_SlotType SLOT_GADGETS_STORAGE
+   }
+  }
+  MeshObject "{64FB47CE0046FB12}" {
+   Object "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_Medical_AED.xob"
+  }
+  SCR_BaseDeployableInventoryItemComponent "{64FB47C94BF8E95F}" {
+   m_sReplacementPrefab "{1BE3AC5A76F84398}Prefabs/Items/Equipment/Detonators/BlastingMachine_M34/DeployableDetonatorReplacementUS.et"
+  }
+  SCR_DeployableInventoryItemInventoryComponent "{64FB47C975E9E4C6}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "AED"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
+     Weight 1.7
+    }
+    m_Size SLOT_1x1
+    m_SlotType SLOT_GADGETS_STORAGE
+    m_bStackable 0
+   }
+  }
+  SCR_SoundDataComponent "{64FB47CDCCA18EDC}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{64FB47CDCCA18ED4}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_PICK_UP"
+    }
+    SCR_AudioSourceConfiguration "{64FB47CDCCA18F2F}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_EQUIP"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{64FB47CDCCA18F2C}" {
+     m_sSoundProject "{CC0E5A1324E761C1}Sounds/Items/_SharedData/Drop/Items_Drop_Generic.acp"
+     m_sSoundEventName "SOUND_DROP"
+    }
+   }
+  }
+  ActionsManagerComponent "{64FB47CDCCA18F20}" {
+   ActionContexts {
+    UserActionContext "{64FB47CDCCA18F25}" {
+     ContextName "default"
+     Position PointInfo "{64FB47CDCCA18F39}" {
+     }
+     Radius 0.2
+    }
+   }
+   additionalActions {
+    SCR_PickUpItemAction "{64FB47CDCCA18F3D}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64FB47CDCCA18F3C}" {
+      Name "#AR-Inventory_PickUp"
+     }
+     "Sort Priority" 1000
+    }
+    ACE_Medical_AEDAnalyzeUserAction "{64FC0428CEF407B2}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64FC0428C258B98C}" {
+      Name "Analyze Rhythm"
+     }
+     "Sort Priority" 1
+    }
+    ACE_Medical_AEDDeliverShockUserAction "{64FC0428D147B31D}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64FC0428AADF5307}" {
+      Name "Deliver Shock"
+     }
+     "Sort Priority" 3
+    }
+    ACE_Medical_AEDChargeUserAction "{64FE019F126512D5}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{64FE019CE8D80128}" {
+      Name "Charge"
+     }
+     "Sort Priority" 2
+    }
+   }
+  }
+  GadgetAnimationComponent "{64FC042FA738F687}" {
+   AnimGraph "{8462461570E623A5}Assets/Weapons/Explosives/workspace/M34.agr"
+   AnimInstance "{67A3E465A8D20576}Assets/Weapons/Explosives/workspace/M34_weapon.asi"
+  }
+  GadgetGamepadEffectsManagerComponent "{64FB47CDCCA18F0F}" {
+   OwnedEffects {
+    GamepadTriggerEffect "{61E294244C3DAAFF}" : "{7D39CAE0A72D6C51}Prefabs/Weapons/Core/Configs/TriggerEffects/ADS/TriggerEffect_ADSGadget.conf" {
+    }
+    GamepadTriggerEffect "{61E29424EE08E95B}" : "{F518B28F67EC05AD}Prefabs/Weapons/Core/Configs/TriggerEffects/Charged/TriggerEffect_ChargedGadget.conf" {
+    }
+   }
+  }
+  RplComponent "{64FB47CDCCA18F01}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{64FB47CDCCA18F07}" {
+  }
+ }
+}

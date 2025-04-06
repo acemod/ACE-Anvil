@@ -36,8 +36,8 @@ class ACE_Medical_RepositionUserAction : ScriptedUserAction
 		if (!ownerController)
 			return false;
 		
-		if (!ownerController.IsUnconscious() || ownerController.ACE_Medical_GetUnconsciousPose() == m_eUnconsciousPose)
-			return false;
+		//if (!ownerController.IsUnconscious() || ownerController.ACE_Medical_GetUnconsciousPose() == m_eUnconsciousPose)
+			//return false;
 		
 		CharacterAnimationComponent ownerAnimComponent = ownerChar.GetAnimationComponent();
 		if (!ownerAnimComponent)
@@ -60,7 +60,7 @@ class ACE_Medical_RepositionUserAction : ScriptedUserAction
 		if (!ownerController)
 			return;
 		
-		ownerController.ACE_Medical_Reposition(m_eUnconsciousPose);
+		//ownerController.ACE_Medical_Reposition(m_eUnconsciousPose);
 	}
 	
 	//------------------------------------------------------------------------------------------------

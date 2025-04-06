@@ -1,0 +1,24 @@
+SCR_ChimeraCharacter : "{37578B1666981FCE}Prefabs/Characters/Core/Character_Base.et" {
+ ID "520EC961A090B1EE"
+ components {
+  CharacterSoundComponent "{520EA1D2F659CF84}" {
+   Filenames + {
+    "{0340D00A7674D634}Sounds/AEDSoundEffects.acp"
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_AEDConnectPatientUserAction "{64FF19FACDE33461}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{64FF19FADC14DFFC}" {
+      Name "AED - Connect Patient"
+     }
+     ActionTitle "AED - Connect Patient"
+     Duration 1
+    }
+   }
+  }
+ }
+}

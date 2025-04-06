@@ -66,7 +66,7 @@ class ACE_Medical_BaseSystem3 : GameSystem
 			}
 			
 			SCR_ChimeraCharacter entity = m_aQueue.GetValue(0);
-			Update(entity, System.GetTickCount(lastUpdateTime) / 1000);
+			Update(entity, (float)System.GetTickCount(lastUpdateTime) / 1000);
 			m_aQueue.Remove(0);
 			m_aQueue.Insert(currentTime, entity);
 		}

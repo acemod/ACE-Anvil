@@ -1,4 +1,4 @@
-class ACE_Medical_AEDAnalyzeUserAction : ACE_Medical_AEDBaseUserAction
+class ACE_Medical_AEDAnalyseUserAction : ACE_Medical_AEDBaseUserAction
 {
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)

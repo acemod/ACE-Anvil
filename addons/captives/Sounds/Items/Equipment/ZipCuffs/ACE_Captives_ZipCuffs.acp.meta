@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{8316CFDF522BC9FC}Sounds/Items/Equipment/ZipCuffs/ACE_Captives_ZipCuffs.acp"
+ Configurations {
+  AudioProjectResourceClass PC {
+  }
+  AudioProjectResourceClass XBOX_ONE : PC {
+  }
+  AudioProjectResourceClass XBOX_SERIES : PC {
+  }
+  AudioProjectResourceClass PS4 : PC {
+  }
+  AudioProjectResourceClass PS5 : PC {
+  }
+  AudioProjectResourceClass HEADLESS : PC {
+  }
+ }
+}

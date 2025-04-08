@@ -1,0 +1,16 @@
+AnimSetInstanceSource "{64CF42AB972B937D}" {
+ Template "{04A77B7D26E3D642}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/ACE_Captives_ZipCuffs.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Boltcutter.Erc.Action" {
+   Resource "{B5F0A226D2BB6C68}Assets/Items/Equipment/Accessories/ACE_Boltcutter/Workspace/i_cro_boltcutter_action.anm"
+  }
+  AnimSetInstanceSource_Line "Boltcutter.Cro.Action" {
+   Resource "{B5F0A226D2BB6C68}Assets/Items/Equipment/Accessories/ACE_Boltcutter/Workspace/i_cro_boltcutter_action.anm"
+  }
+  AnimSetInstanceSource_Line "Boltcutter.Pne.Action" {
+   Resource "{B5F0A226D2BB6C68}Assets/Items/Equipment/Accessories/ACE_Boltcutter/Workspace/i_cro_boltcutter_action.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{64CF4216AAD051CB}" {
+ }
+}

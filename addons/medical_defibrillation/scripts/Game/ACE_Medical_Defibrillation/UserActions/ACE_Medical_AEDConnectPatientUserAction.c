@@ -27,6 +27,11 @@ class ACE_Medical_AEDConnectPatientUserAction: ScriptedUserAction
 		// Query to find the nearest AED
 		m_pNearestAED = null;
 		m_fShortestDistance = m_fSearchDistance;
+		
+		// Crashes here if patient is dead... need a fix. How to bind to body?
+		// Temp fix
+		if (!IsAlive(patient))
+			return false;
 		GetGame().GetWorld().QueryEntitiesBySphere(m_vSearchPos, m_fSearchDistance, Callback);
 		
 		if (!m_pNearestAED)

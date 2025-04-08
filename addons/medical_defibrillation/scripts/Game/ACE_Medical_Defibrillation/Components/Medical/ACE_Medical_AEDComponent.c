@@ -15,8 +15,10 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	protected float m_fChargeAmount = 0.0;
 	
 	// Needs replication
+	[RplProp()]
 	protected bool m_bIsCharging = false;
 	// Needs replication
+	[RplProp()]
 	protected bool m_bIsCharged = false;
 	
 	// Analysis variables
@@ -24,8 +26,10 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	protected float m_fAnalysisTime;
 	protected float m_fAnalysisAmount = 0.0;
 	// Needs replication
+	[RplProp()]
 	protected bool m_bIsAnalysing = false;
 	// Needs replication
+	[RplProp()]
 	protected bool m_bIsAnalysed = false;
 	
 	const static string SOUNDCHARGED = "ACE_MEDICAL_AED_SOUNDCHARGED";
@@ -40,9 +44,8 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	protected AudioHandle m_currentSound;
 	
 	// Needs replication
+	//[RplProp()]
 	IEntity m_patient;
-	// Needs replication
-	ACE_Medical_CardiovascularComponent m_patientCardiovascularComponent;
 	
 	SoundComponent m_soundComp;
 	
@@ -111,6 +114,8 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 		m_fChargeAmount = 0.0;
 		SetIsCharged(false);
 		
+		Replication.BumpMe();
+		
 		PrintFormat("ACE_Medical_AEDComponent.ResetAnalysisAndCharge:: Reset AED [Analysis = %1, Charge = %1]", m_fAnalysisAmount, m_fChargeAmount);
 	}
 	
@@ -118,7 +123,8 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	void ResetPatient()
 	{
 		m_patient = null;
-		m_patientCardiovascularComponent = null;
+		PlaySound(SOUNDDISCONNECTED, true);
+		ResetAnalysisAndCharge();
 	}
 		
 	//------------------------------------------------------------------------------------------------
@@ -186,8 +192,6 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 			return false;	
 		
 		m_patient = patient;
-		m_patientCardiovascularComponent = component;
-		Replication.BumpMe();
 				
 		return true; 
 	}
@@ -206,7 +210,7 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 		if (soundComp)
 			PlaySound(SOUNDSHOCKTHUMP, true);
 		
-		m_patientCardiovascularComponent.AddShocksDelivered(1);
+		GetConnectedPatientCardiovascularComponent().AddShocksDelivered(1);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -224,10 +228,10 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected bool IsShockableRhythm()
 	{
-		if (!m_patientCardiovascularComponent)
+		if (!GetConnectedPatientCardiovascularComponent())
 			return false;
 		
-		ACE_Medical_ECardiacRhythm rhythm = m_patientCardiovascularComponent.GetCardiacRhythm();
+		ACE_Medical_ECardiacRhythm rhythm = GetConnectedPatientCardiovascularComponent().GetCardiacRhythm();
 		if (shockableRhythms.Contains(rhythm))
 			return true;
 		
@@ -279,12 +283,14 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	void SetIsCharged(bool state)
 	{
 		m_bIsCharged = state;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void SetCharging(bool state) 
 	{
 	    m_bIsCharging = state;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -315,6 +321,7 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	void SetIsAnalysed(bool state)
 	{
 		m_bIsAnalysed = state;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -327,6 +334,7 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	void SetAnalysing(bool state) 
 	{
 	    m_bIsAnalysing = state;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -338,6 +346,6 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	ACE_Medical_CardiovascularComponent GetConnectedPatientCardiovascularComponent()
 	{
-		return m_patientCardiovascularComponent;
+		return ACE_Medical_CardiovascularComponent.Cast(m_patient.FindComponent(ACE_Medical_CardiovascularComponent));
 	}
 }

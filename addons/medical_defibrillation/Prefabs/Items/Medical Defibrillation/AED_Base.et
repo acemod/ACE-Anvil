@@ -77,15 +77,6 @@ GenericEntity {
      }
      "Sort Priority" 1000
     }
-    ACE_Medical_AEDAnalyzeUserAction "{64FC0428CEF407B2}" {
-     ParentContextList {
-      "default"
-     }
-     UIInfo UIInfo "{64FC0428C258B98C}" {
-      Name "Analyze Rhythm"
-     }
-     "Sort Priority" 1
-    }
     ACE_Medical_AEDDeliverShockUserAction "{64FC0428D147B31D}" {
      ParentContextList {
       "default"
@@ -93,6 +84,7 @@ GenericEntity {
      UIInfo UIInfo "{64FC0428AADF5307}" {
       Name "Deliver Shock"
      }
+     Duration 1
      "Sort Priority" 3
     }
     ACE_Medical_AEDChargeUserAction "{64FE019F126512D5}" {
@@ -102,7 +94,27 @@ GenericEntity {
      UIInfo UIInfo "{64FE019CE8D80128}" {
       Name "Charge"
      }
+     Duration 1
      "Sort Priority" 2
+    }
+    ACE_Medical_AEDAnalyseUserAction "{65103487D91AECBC}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{65103487DBAEACF0}" {
+      Name "Analyse"
+     }
+     Duration 1
+    }
+    ACE_Medical_AEDDisconnectPatientUserAction "{65103998CC82D28C}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{65103998C077156A}" {
+      Name "Disconnect Patient"
+     }
+     Duration 3
+     "Sort Priority" 99
     }
    }
   }

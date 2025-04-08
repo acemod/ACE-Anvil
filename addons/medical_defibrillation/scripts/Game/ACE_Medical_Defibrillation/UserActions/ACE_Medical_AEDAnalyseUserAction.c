@@ -16,10 +16,10 @@ class ACE_Medical_AEDAnalyseUserAction : ACE_Medical_AEDBaseUserAction
 		if (AEDComp.IsCharging())
 			return false;
 		
-		if (AEDComp.GetAnalysisAmount() >= 1.0)
+		if (AEDComp.IsAnalysed())
 			return false;
 		
-		if (AEDComp.GetChargeAmount() >= 1.0)
+		if (AEDComp.IsCharged())
 			return false;
 		
 		return true;

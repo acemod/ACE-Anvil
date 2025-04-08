@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{1F07ABA168DE6F66}Prefabs/Characters/Core/Character_Base.et"
+ Name "{37578B1666981FCE}Prefabs/Characters/Core/Character_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }
@@ -9,9 +9,9 @@ MetaFileClass {
   }
   EntityTemplateResourceClass PS4 : PC {
   }
-  EntityTemplateResourceClass PS5 : PC {
-  }
   EntityTemplateResourceClass HEADLESS : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
   }
  }
 }

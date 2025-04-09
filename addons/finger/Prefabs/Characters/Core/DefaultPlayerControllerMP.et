@@ -1,0 +1,7 @@
+SCR_PlayerController : "{6E2BB64764E3BE9B}Prefabs/Characters/Core/DefaultPlayerController.et" {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  ACE_Finger_MapPointer "{646C05C52E28540D}" {
+  }
+ }
+}

@@ -62,10 +62,7 @@ class ACE_Medical_BaseSystem2 : GameSystem
 			float lastUpdateTime = m_aQueue.GetOrder(0);
 			
 			if (lastUpdateTime + m_fMinEntityUpdateTimeoutMS > currentTime)
-			{
-				m_bIsUpdating = false;
-				return;
-			}
+				break;
 			
 			SCR_ChimeraCharacter entity = m_aQueue.GetValue(0);
 			Update(entity, (GetWorld().GetWorldTime() - lastUpdateTime) / 1000);

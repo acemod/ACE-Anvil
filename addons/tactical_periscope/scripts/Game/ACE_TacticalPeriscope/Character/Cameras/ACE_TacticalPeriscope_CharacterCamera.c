@@ -27,11 +27,16 @@ class ACE_TacticalPeriscope_CharacterCamera : CharacterCameraBinoculars
 		
 		vector playerTransform[4];
 		m_ePlayer.GetWorldTransform(playerTransform);
+		vector playerTransformT[4];
+		Math3D.MatrixGetInverse4(playerTransform, playerTransformT);
+		
 		vector gadgetTransform[4];
 		m_pGadgetEntity.GetWorldTransform(gadgetTransform);
-		vector playerToGadgetTransform[4];
-		Math3D.MatrixInvMultiply3(playerTransform, gadgetTransform, playerToGadgetTransform);
+		
+		vector gadgetToPlayerTransform[4];
+		Math3D.MatrixMultiply4(playerTransformT, gadgetTransform, gadgetToPlayerTransform);
 		vector offset = m_Optics.GetSightsOffset();
-		pOutResult.m_CameraTM[3] = pOutResult.m_CameraTM[3] + offset.InvMultiply3(playerToGadgetTransform);
+		pOutResult.m_CameraTM[3] = offset.Multiply4(gadgetToPlayerTransform);
+		pOutResult.m_iDirectBone = -1; // Offset is caclulated from the root of the character
 	}
 }

@@ -126,6 +126,7 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
   }
   SCR_PlaceableItemComponent "{5A127CDA1D1B58E6}" {
    m_ePlacementType ACE_XYZ_UP
+   m_bACE_CanBeStacked 0
   }
   SCR_PressureTriggerComponent "{59E6BE151DCC9953}" {
    Enabled 0

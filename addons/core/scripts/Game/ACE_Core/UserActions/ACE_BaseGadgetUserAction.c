@@ -84,7 +84,7 @@ class ACE_BaseGadgetUserAction : ScriptedUserAction
 		if (m_pItemSoundComponent)			
 			userCharController.GetOnAnimationEvent().Remove(HandleItemSoundEvent);
 		
-		userCharController.m_OnItemUseFinishedInvoker.Remove(OnGadgetUseEnded);
+		userCharController.m_OnItemUseEndedInvoker.Remove(OnGadgetUseEnded);
 	}
 	
 	//------------------------------------------------------------------------------------------------

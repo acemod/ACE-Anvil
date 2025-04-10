@@ -10,7 +10,7 @@ MetaFileClass {
     }
     MaterialAssignClass "{64693D00464C5BBB}" {
      SourceMaterial "PIP"
-     AssignedMaterial "{0091FAECFC169506}Assets/Weapons/Attachments/Optics/ARTII/Data/Optic_ARTII_PIPMaterial.emat"
+     AssignedMaterial "{FB090EAE3F82535E}Assets/Items/Equipment/Binoculars/Binoculars_B8/data/Binoculars_B8_PIPMaterial.emat"
     }
    }
    MeshParams {

@@ -35,4 +35,17 @@ modded class SCR_ItemPlacementComponent : ScriptComponent
 		else
 			SCR_Global.SetMaterial(m_PreviewEntity, m_sCannotBuildMaterial);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Add check for entities that cannot be stacked
+	override protected bool ValidateEntity(notnull IEntity entity)
+	{
+		if (!super.ValidateEntity(entity))
+			return false;
+		
+		if (m_PlaceableItem.ACE_CanBeStacked())
+			return true;
+		
+		return (entity.GetPrefabData() != m_PlaceableItem.GetOwner().GetPrefabData());
+	}
 }

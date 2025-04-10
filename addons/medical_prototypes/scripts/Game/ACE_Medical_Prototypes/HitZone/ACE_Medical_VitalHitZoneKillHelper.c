@@ -57,7 +57,7 @@ class ACE_Medical_VitalHitZoneHelper : Managed
 		if (hitZone.GetDamageState() != ECharacterDamageState.DESTROYED)
 			return;
 		
-		bool hasLastSecondChanceExpired = System.GetTickCount(m_pDamageManager.ACE_Medical_GetLastSecondChanceTickCount()) >= SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS;
+		bool hasLastSecondChanceExpired = (GetGame().GetWorld().GetWorldTime() - m_pDamageManager.ACE_Medical_GetLastSecondChanceTime()) >= SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS;
 		
 		if (!m_bSecondChanceEnabled || (m_pCardiovascularComponent.IsInCardiacArrest() && hasLastSecondChanceExpired))
 		{

@@ -4,7 +4,7 @@ class ACE_Medical_Dose : ScriptAndConfig
 	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of administered drug", enums: ParamEnumArray.FromEnum(ACE_Medical_EDrugType))]
 	protected ACE_Medical_EDrugType m_eDrugType;
 	
-	protected int m_iAdministrationTimeMS;
+	protected float m_fAdministrationTimeMS;
 	protected bool m_bIsExpired = false;
 	
 	protected static const float EXPIRED_DOSE_PERCENTAGE = 0.01; // Concentration at which dose is considered expired [percentage of initial]
@@ -25,14 +25,14 @@ class ACE_Medical_Dose : ScriptAndConfig
 	//! Sets administration time to current time
 	void SetAdministrationTime()
 	{
-		m_iAdministrationTimeMS = System.GetTickCount();
+		m_fAdministrationTimeMS = GetGame().GetWorld().GetWorldTime();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Time passed since dose was administered [s]
 	float GetElapsedTime()
 	{
-		return System.GetTickCount(m_iAdministrationTimeMS) / 1000;
+		return (GetGame().GetWorld().GetWorldTime() - m_fAdministrationTimeMS) / 1000;
 	}
 	
 	//------------------------------------------------------------------------------------------------

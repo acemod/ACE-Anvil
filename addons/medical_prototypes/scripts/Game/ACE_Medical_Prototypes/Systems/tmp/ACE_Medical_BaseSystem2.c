@@ -55,11 +55,11 @@ class ACE_Medical_BaseSystem2 : GameSystem
 		
 		// Set updating lock such that m_aQueue is left untouched by Register/Unregister
 		m_bIsUpdating = true;
-		int currentTime = System.GetTickCount();
+		float currentTime = GetWorld().GetWorldTime();
 		
 		for (int i = 0; i < m_iMaxIterationsPerUpdate; i++)
 		{
-			int lastUpdateTime = m_aQueue.GetOrder(0);
+			float lastUpdateTime = m_aQueue.GetOrder(0);
 			
 			if (lastUpdateTime + m_fMinEntityUpdateTimeoutMS > currentTime)
 			{
@@ -68,7 +68,7 @@ class ACE_Medical_BaseSystem2 : GameSystem
 			}
 			
 			SCR_ChimeraCharacter entity = m_aQueue.GetValue(0);
-			Update(entity, (float)System.GetTickCount(lastUpdateTime) / 1000);
+			Update(entity, (GetWorld().GetWorldTime() - lastUpdateTime) / 1000);
 			m_aQueue.Remove(0);
 			m_aQueue.Insert(currentTime, entity);
 		}
@@ -113,7 +113,7 @@ class ACE_Medical_BaseSystem2 : GameSystem
 		}
 		else
 		{
-			m_aQueue.Insert(System.GetTickCount(), entity);
+			m_aQueue.Insert(GetWorld().GetWorldTime(), entity);
 		
 			if (m_bInitDone)
 				OnStart(entity);

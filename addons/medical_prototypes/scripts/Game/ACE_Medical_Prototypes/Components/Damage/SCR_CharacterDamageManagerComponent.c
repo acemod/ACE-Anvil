@@ -8,7 +8,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected ACE_Medical_CardiovascularComponent m_pACE_Medical_CardiovascularComponent;
 	protected ACE_Medical_BrainHitZone m_pACE_Medical_BrainHitZone;
 	
-	protected int m_iACE_Medical_LastSecondChanceTickCount;
+	protected float m_fACE_Medical_LastSecondChanceTimeMS;
 	protected float m_fACE_Medical_BloodFlowScale = 1;
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -101,12 +101,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//-----------------------------------------------------------------------------------------------------------
 	void ACE_Medical_OnSecondChanceTriggered(SCR_HitZone hitZone)
 	{
-		m_iACE_Medical_LastSecondChanceTickCount = System.GetTickCount();
+		m_fACE_Medical_LastSecondChanceTimeMS = GetGame().GetWorld().GetWorldTime();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	int ACE_Medical_GetLastSecondChanceTickCount()
+	float ACE_Medical_GetLastSecondChanceTime()
 	{
-		return m_iACE_Medical_LastSecondChanceTickCount;
+		return m_fACE_Medical_LastSecondChanceTimeMS;
 	}
 }

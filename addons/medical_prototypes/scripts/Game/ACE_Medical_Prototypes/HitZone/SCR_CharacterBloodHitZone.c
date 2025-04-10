@@ -5,9 +5,9 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 	protected SCR_CharacterDamageManagerComponent m_pACE_Medical_DamageManager;
 	
 	protected float m_fACE_Medical_LastHealth;
-	protected float m_iACE_Medical_LastTickCount;
+	protected float m_fACE_Medical_LastTimeMS;
 	protected float m_fACE_Medical_CurrentHealth;
-	protected float m_iACE_Medical_CurrentTickCount;
+	protected float m_fACE_Medical_CurrentTimeMS;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize member variables
@@ -17,8 +17,8 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 		m_pACE_Medical_DamageManager = SCR_CharacterDamageManagerComponent.Cast(pManagerComponent);
 		m_fACE_Medical_LastHealth = GetMaxHealth();
 		m_fACE_Medical_CurrentHealth = GetMaxHealth();
-		m_iACE_Medical_LastTickCount = System.GetTickCount();
-		m_iACE_Medical_CurrentTickCount = System.GetTickCount();
+		m_fACE_Medical_LastTimeMS = GetGame().GetWorld().GetWorldTime();
+		m_fACE_Medical_CurrentTimeMS = m_fACE_Medical_LastTimeMS;
 	}
 
 	//-----------------------------------------------------------------------------------------------------------
@@ -34,15 +34,15 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 		if (damage < 0 || !isDOT)
 			return damage;
 		
-		if (System.GetTickCount() > m_iACE_Medical_CurrentTickCount)
+		if (GetGame().GetWorld().GetWorldTime() > m_fACE_Medical_CurrentTimeMS)
 		{
-			m_iACE_Medical_LastTickCount = m_iACE_Medical_CurrentTickCount;
-			m_iACE_Medical_CurrentTickCount = System.GetTickCount();
+			m_fACE_Medical_LastTimeMS = m_fACE_Medical_CurrentTimeMS;
+			m_fACE_Medical_CurrentTimeMS = GetGame().GetWorld().GetWorldTime();
 			m_fACE_Medical_LastHealth = m_fACE_Medical_CurrentHealth;
 		}
 		
 		m_fACE_Medical_CurrentHealth = GetHealth();
-		float timeSlice = (m_iACE_Medical_CurrentTickCount - m_iACE_Medical_LastTickCount) / 1000;
+		float timeSlice = (m_fACE_Medical_CurrentTimeMS- m_fACE_Medical_LastTimeMS) / 1000;
 		float maxDamage = m_pACE_Medical_DamageManager.ACE_Medical_GetMaxTotalBleedingRate() * timeSlice;
 		// Subtract already lost health
 		maxDamage -= m_fACE_Medical_LastHealth - m_fACE_Medical_CurrentHealth;

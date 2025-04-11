@@ -1,0 +1,18 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_AEDConnectPatientUserAction "{651034863DB7F4A0}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{6510348636B83176}" {
+      Name "AED - Connect Patient"
+     }
+     Duration 1
+    }
+   }
+  }
+ }
+}

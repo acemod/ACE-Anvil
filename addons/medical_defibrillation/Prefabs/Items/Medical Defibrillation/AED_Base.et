@@ -8,38 +8,22 @@ GenericEntity {
   }
   ACE_Medical_AEDComponent "{64FC042A9D1DBC68}" {
   }
-  InventoryItemComponent "{64FB47CDCCA18EFF}" {
-   Attributes SCR_ItemAttributeCollection "{64FB47CDCCA18EC0}" {
-    ItemDisplayName UIInfo "{64FB47CDCCA18EC4}" {
+  InventoryItemComponent "{64FB47C975E9E4C6}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "Automated External Defibrillator (AED)"
     }
-    ItemPhysAttributes ItemPhysicalAttributes "{64FB47CDCCA18EDA}" {
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
      Weight 3.2
-     SizeSetupStrategy Size
-     ItemDimensions 23.4 27.7 8.7
     }
-    CommonItemType "HAND_SLOT_ITEM"
     m_Size SLOT_1x1
+    m_eQuickSlotSize SLOT_1x1
     m_SlotType SLOT_GADGETS_STORAGE
+    m_bStackable 0
    }
   }
   MeshObject "{64FB47CE0046FB12}" {
    Object "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_Medical_AED.xob"
-  }
-  SCR_BaseDeployableInventoryItemComponent "{64FB47C94BF8E95F}" {
-   m_sReplacementPrefab "{1BE3AC5A76F84398}Prefabs/Items/Equipment/Detonators/BlastingMachine_M34/DeployableDetonatorReplacementUS.et"
-  }
-  SCR_DeployableInventoryItemInventoryComponent "{64FB47C975E9E4C6}" {
-   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
-    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
-     Name "AED"
-    }
-    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
-     Weight 1.7
-    }
-    m_Size SLOT_1x1
-    m_SlotType SLOT_GADGETS_STORAGE
-    m_bStackable 0
-   }
   }
   SCR_SoundDataComponent "{64FB47CDCCA18EDC}" {
    m_aAudioSourceConfiguration {
@@ -68,13 +52,14 @@ GenericEntity {
     }
    }
    additionalActions {
-    SCR_PickUpItemAction "{64FB47CDCCA18F3D}" {
+    ACE_Medical_AEDPickUpItemAction "{64FB47CDCCA18F3D}" {
      ParentContextList {
       "default"
      }
      UIInfo UIInfo "{64FB47CDCCA18F3C}" {
       Name "#AR-Inventory_PickUp"
      }
+     Duration 1
      "Sort Priority" 1000
     }
     ACE_Medical_AEDDeliverShockUserAction "{64FC0428D147B31D}" {
@@ -115,6 +100,14 @@ GenericEntity {
      }
      Duration 3
      "Sort Priority" 99
+    }
+    ACE_Medical_AEDContinueCPRUserAction "{651400E988FF55BD}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{651400E98CC00369}" {
+      Name "Analyse Disabled - Continue CPR"
+     }
     }
    }
   }

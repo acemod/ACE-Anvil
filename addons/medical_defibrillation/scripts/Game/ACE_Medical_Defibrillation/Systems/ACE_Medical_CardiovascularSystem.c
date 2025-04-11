@@ -28,6 +28,8 @@ modded class ACE_Medical_CardiovascularSystem
 		{
 			component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.VF);
 			// TODO: impliment system for deterioration to PEA - we need two cardiac arrest states?
+			if (damageManager.GetState() == EDamageState.DESTROYED)
+				component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Asystole);
 		}
 		else
 		{

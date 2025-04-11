@@ -6,6 +6,8 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 {
 	static const ref array<ACE_Medical_ECardiacRhythm> shockableRhythms = { ACE_Medical_ECardiacRhythm.VF };
 	
+	protected ACE_Medical_DefibrillationSystemSettings m_Settings;
+	
 	// Offset variables
 	protected float m_fAnalysisTimeOffset = 1;
 	protected float m_fChargeTimeOffset = 0.0;
@@ -52,12 +54,47 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------	
 	override protected void EOnInit(IEntity owner)
 	{
-		RegisterToSystem(owner);
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		if (settings && settings.m_DefibrillationSystem)
+			m_Settings = settings.m_DefibrillationSystem;
+
 		m_soundComp = SoundComponent.Cast(owner.FindComponent(SoundComponent));
+		
+		// import settings
+		if (m_Settings)
+		{
+			if (m_Settings.m_bAEDAnalysisTimeOverride)
+				m_fAnalysisTime = m_Settings.m_fAEDAnalysisTimeOverrideValue;
+			
+			if (m_Settings.m_bAEDChargeTimeOverride)
+				m_fChargeTime = m_Settings.m_fAEDChargeTimeOverrideValue;
+		}
 		
 		// add offsets to charge and analysis times to sync with sounds
 		m_fAnalysisTime += m_fAnalysisTimeOffset;
 		m_fChargeTime += m_fChargeTimeOffset;
+		
+		// subscribe to inventoryitemcomponent OnParentSlotChanged
+		InventoryItemComponent invComp = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
+		if (invComp)
+		{
+			invComp.m_OnParentSlotChangedInvoker.Insert(OnParentSlotChanged);
+			if (!invComp.GetParentSlot())
+				RegisterToSystem(owner);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void OnParentSlotChanged(InventoryStorageSlot oldSlot, InventoryStorageSlot newSlot)
+	{
+		if (!newSlot)
+		{
+			RegisterToSystem(this.GetOwner());
+		}
+		else
+		{
+			UnregisterFromSystem(this.GetOwner());
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -107,6 +144,20 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void UnregisterFromSystem(IEntity entity)
+	{
+		ACE_Medical_DefibrillationSystem system;
+		if (GetDefibrillationSystem(system))
+		{
+			system.Unregister(entity);
+		}
+		else
+		{
+			Print("ACE_Medical_AEDComponent.RegisterToSystem:: Cannot unregister from defibrillation system", level: LogLevel.ERROR);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void ResetAnalysisAndCharge()
 	{
 		m_fAnalysisAmount = 0.0;
@@ -122,8 +173,10 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	void ResetPatient()
 	{
+		if (m_patient)
+			PlaySound(SOUNDDISCONNECTED, true);
+		
 		m_patient = null;
-		PlaySound(SOUNDDISCONNECTED, true);
 		ResetAnalysisAndCharge();
 	}
 		
@@ -210,7 +263,9 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 		if (soundComp)
 			PlaySound(SOUNDSHOCKTHUMP, true);
 		
-		GetConnectedPatientCardiovascularComponent().AddShocksDelivered(1);
+		ACE_Medical_CardiovascularComponent comp = GetConnectedPatientCardiovascularComponent();
+		comp.AddShocksDelivered(1);
+		comp.SetShockCooldown(comp.GetShockCooldownTime());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -219,14 +274,14 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 		if (!GetConnectedPatient() || !GetConnectedPatientCardiovascularComponent())
 			return false;
 		
-		if (GetChargeAmount() < 1.0)
+		if (!IsCharged())
 			return false;
 	
 		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected bool IsShockableRhythm()
+	bool IsShockableRhythm()
 	{
 		if (!GetConnectedPatientCardiovascularComponent())
 			return false;

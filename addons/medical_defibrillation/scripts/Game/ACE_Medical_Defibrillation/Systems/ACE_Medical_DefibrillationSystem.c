@@ -108,7 +108,15 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 				component.SetIsAnalysed(true);
 				component.SetAnalysing(false);
 				// Testing - need to impliment rhythm check
-				component.PlaySound(ACE_Medical_AEDComponent.SOUNDSHOCKADVISED, true);
+				if (component.IsShockableRhythm())
+				{
+					component.PlaySound(ACE_Medical_AEDComponent.SOUNDSHOCKADVISED, true);
+				}
+				else
+				{
+					component.PlaySound(ACE_Medical_AEDComponent.SOUNDNOSHOCKADVISED, true);
+					component.ResetAnalysisAndCharge();
+				}
 			}
 		}
 	}

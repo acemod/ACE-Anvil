@@ -9,6 +9,15 @@ modded class ACE_Medical_CardiovascularComponent
 	// Needs replication
 	[RplProp()]
 	protected int m_iShocksDelivered = 0;
+	protected float m_fShockChanceIncrease = 0.25;
+	[RplProp()]
+	protected float m_fShockCooldown = 0;
+	protected float m_fShockCooldownTime = 120;
+	
+	override void Revive()
+	{
+		super.Revive();
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	ACE_Medical_ECardiacRhythm GetCardiacRhythm()
@@ -24,16 +33,47 @@ modded class ACE_Medical_CardiovascularComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	float GetShockCooldownTime()
+	{
+		return m_fShockCooldownTime;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetShockCooldown()
+	{
+		return m_fShockCooldown;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetShockCooldown(float value, bool replicate = false)
+	{
+		m_fShockCooldown = value;
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetShockChanceIncrease()
+	{
+		return m_fShockChanceIncrease;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	int GetShocksDelivered()
 	{
 		return m_iShocksDelivered;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	int AddShocksDelivered(int value)
+	void AddShocksDelivered(int value)
 	{
 		m_iShocksDelivered = m_iShocksDelivered + 1;
 		Replication.BumpMe();
-		return m_iShocksDelivered;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetShocksDelivered()
+	{
+		m_iShocksDelivered = 0;
+		Replication.BumpMe();
 	}
 }

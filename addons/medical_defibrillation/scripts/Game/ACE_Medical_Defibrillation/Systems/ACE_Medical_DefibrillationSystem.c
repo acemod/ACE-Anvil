@@ -159,7 +159,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	{
 		return ACE_Medical_AEDComponent.Cast(entity.FindComponent(ACE_Medical_AEDComponent));
 	}
-	
+
 #ifdef WORKBENCH
 	//------------------------------------------------------------------------------------------------
 	override protected void OnDiag(float timeSlice)

@@ -88,13 +88,9 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	void OnParentSlotChanged(InventoryStorageSlot oldSlot, InventoryStorageSlot newSlot)
 	{
 		if (!newSlot)
-		{
 			RegisterToSystem(this.GetOwner());
-		}
 		else
-		{
 			UnregisterFromSystem(this.GetOwner());
-		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -104,22 +100,21 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	bool GetDefibrillationSystem(out ACE_Medical_DefibrillationSystem systemOut)
+	ACE_Medical_DefibrillationSystem GetDefibrillationSystem()
 	{
 		ChimeraWorld world = GetGame().GetWorld();
 		if (!world)
-			return false;
+			return null;
 		
 		ACE_Medical_DefibrillationSystem system = ACE_Medical_DefibrillationSystem.Cast(world.FindSystem(ACE_Medical_DefibrillationSystem));
 		
 		if (!system)
 		{
 			Print("ACE_Medical_AEDComponent.GetDefibrillationSystem:: No system found.", level: LogLevel.ERROR);
-			return false;
+			return null;
 		}
 		
-		systemOut = system;
-		return true;
+		return system;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -132,37 +127,30 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected void RegisterToSystem(IEntity entity)
 	{
-		ACE_Medical_DefibrillationSystem system;
-		if (GetDefibrillationSystem(system))
-		{
+		ACE_Medical_DefibrillationSystem system = GetDefibrillationSystem();
+		if (system)
 			system.Register(entity);
-		}
 		else
-		{
 			Print("ACE_Medical_AEDComponent.RegisterToSystem:: Cannot register to defibrillation system", level: LogLevel.ERROR);
-		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void UnregisterFromSystem(IEntity entity)
 	{
-		ACE_Medical_DefibrillationSystem system;
-		if (GetDefibrillationSystem(system))
-		{
+		ACE_Medical_DefibrillationSystem system = GetDefibrillationSystem();
+		if (system)
 			system.Unregister(entity);
-		}
 		else
-		{
 			Print("ACE_Medical_AEDComponent.RegisterToSystem:: Cannot unregister from defibrillation system", level: LogLevel.ERROR);
-		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void ResetAnalysisAndCharge()
 	{
 		m_fAnalysisAmount = 0.0;
-		SetIsAnalysed(false);
 		m_fChargeAmount = 0.0;
+		
+		SetIsAnalysed(false);
 		SetIsCharged(false);
 		
 		Replication.BumpMe();
@@ -183,26 +171,20 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	void AnalyzeRhythm()
 	{
+		Print("ACE_AED.AnalyzeRhythm:: Starting rhythm analysis...", level: LogLevel.DEBUG);
+		
 		ResetAnalysisAndCharge();
-		
-		Print("ACE_AED.AnalyzeRhythm:: Starting rhythm analysis...");
-		
-		// Register to defib system for analysis rate frame handler
-		PlaySound(SOUNDANALYSING, true);
 		SetAnalysing(true);
+		PlaySound(SOUNDANALYSING, true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void Charge()
-	{
+	{		
+		Print("ACE_AED.Charge:: Starting charging sequence...", level: LogLevel.DEBUG);
+		
 		ResetAnalysisAndCharge();
-		
-		Print("ACE_AED.Charge:: Starting charging sequence...");
 		SetCharging(true);
-		
-		if (!m_soundComp)
-			return;
-		
 		PlaySound(SOUNDCHARGING, true);
 	}
 	
@@ -233,20 +215,19 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	bool ConnectPatient(IEntity patient)
+	void ConnectPatient(IEntity patient)
 	{
 		ResetPatient();
 		
 		if (!patient)
-			return false;
+			return;
 		
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
-			return false;	
+			return;	
 		
 		m_patient = patient;
-				
-		return true; 
+		return;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -261,7 +242,7 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 		// Shock thump sound effect - played on patient
 		CharacterSoundComponent soundComp = CharacterSoundComponent.Cast(m_patient.FindComponent(CharacterSoundComponent));
 		if (soundComp)
-			PlaySound(SOUNDSHOCKTHUMP, true);
+			soundComp.SoundEvent(SOUNDSHOCKTHUMP);
 		
 		ACE_Medical_CardiovascularComponent comp = GetConnectedPatientCardiovascularComponent();
 		comp.AddShocksDelivered(1);
@@ -271,10 +252,9 @@ class ACE_Medical_AEDComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	bool IsReadyToShock()
 	{
-		if (!GetConnectedPatient() || !GetConnectedPatientCardiovascularComponent())
-			return false;
-		
-		if (!IsCharged())
+		if (!GetConnectedPatient() ||
+			!GetConnectedPatientCardiovascularComponent() ||
+			!IsCharged())
 			return false;
 	
 		return true;

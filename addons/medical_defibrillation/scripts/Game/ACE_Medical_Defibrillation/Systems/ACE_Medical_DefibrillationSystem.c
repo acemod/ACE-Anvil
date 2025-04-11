@@ -54,6 +54,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 		UpdateCharge(entity, timeSlice);
 		UpdateAnalysis(entity, timeSlice);
 		UpdateSoundEffects(entity, timeSlice);
+		CheckPatientPosition(entity, timeSlice);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -132,6 +133,25 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 		{
 			component.PlaySound(ACE_Medical_AEDComponent.SOUNDCHARGED, isLoop: true);
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void CheckPatientPosition(IEntity entity, float timeSlice)
+	{
+		ACE_Medical_AEDComponent component = GetAEDComponent(entity);
+		if (!component)
+			return;
+		
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(component.GetConnectedPatient());
+		if (!char)
+			return;
+		
+		vector charPos = char.GetOrigin();
+		vector AEDPos = entity.GetOrigin();
+		
+		float distance = vector.Distance(charPos, AEDPos);
+		if (distance >= 3)
+			component.ResetPatient();
 	}
 	
 	//------------------------------------------------------------------------------------------------

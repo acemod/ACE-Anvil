@@ -19,6 +19,9 @@ class ACE_Medical_AEDChargeUserAction : ACE_Medical_AEDBaseUserAction
 		if (AEDComp.IsCharging())
 			return false;
 		
+		if (!AEDComp.IsShockableRhythm())
+			return false;
+		
 		return true;
 	}
 	

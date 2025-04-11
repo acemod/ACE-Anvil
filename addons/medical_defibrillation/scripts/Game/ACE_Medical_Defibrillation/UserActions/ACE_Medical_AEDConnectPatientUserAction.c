@@ -4,6 +4,11 @@ class ACE_Medical_AEDConnectPatientUserAction: ScriptedUserAction
 	protected float m_fShortestDistance;
 	protected vector m_vSearchPos;
 	
+	protected float m_fLastUpdateTime;
+	protected const float m_fUpdateRate = 500;
+	
+	protected bool m_bNameFound = false;
+	
 	protected IEntity m_pNearestAED;
 	
 	//------------------------------------------------------------------------------------------------
@@ -11,8 +16,11 @@ class ACE_Medical_AEDConnectPatientUserAction: ScriptedUserAction
 	{
 		super.Init(pOwnerEntity, pManagerComponent);
 		
-		UIInfo uiInfo = GetUIInfo();
-		uiInfo.SetName(string.Format("AED - Connect Patient: %1", "Insert Name Here"));
+		World world = GetGame().GetWorld();
+		if (!world)
+			return;
+		
+		m_fLastUpdateTime = world.GetWorldTime();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -22,22 +30,50 @@ class ACE_Medical_AEDConnectPatientUserAction: ScriptedUserAction
 		if (!patient)
 			return false;
 		
+		// slow down tick rate
+		float currentTime = GetGame().GetWorld().GetWorldTime();
+		if (m_fLastUpdateTime + m_fUpdateRate > currentTime)
+		{
+			if (m_pNearestAED)
+			{
+				ACE_Medical_AEDComponent component = ACE_Medical_AEDComponent.Cast(m_pNearestAED.FindComponent(ACE_Medical_AEDComponent));
+				if (component)
+				{
+					if (component.GetConnectedPatient())
+						return false;
+				}
+			}
+			
+			return m_pNearestAED != null;
+		}
+		
+		m_fLastUpdateTime = currentTime;
+		
+		PrintFormat("Checking for near AED (time: %1)", currentTime);
+		
 		m_vSearchPos = patient.GetOrigin();
 		
 		// Query to find the nearest AED
 		m_pNearestAED = null;
 		m_fShortestDistance = m_fSearchDistance;
-		
-		// Crashes here if patient is dead... need a fix. How to bind to body?
-		// Temp fix
-		if (!IsAlive(patient))
-			return false;
 		GetGame().GetWorld().QueryEntitiesBySphere(m_vSearchPos, m_fSearchDistance, Callback);
 		
 		if (!m_pNearestAED)
 		{
 			Print("No near AED found!");
 			return false;
+		}
+		
+		// Add name to action - once
+		if (!m_bNameFound)
+		{
+			UIInfo uiInfo = GetUIInfo();
+			string name = GetCharacterName(patient);
+			if (!SCR_StringHelper.IsEmptyOrWhiteSpace(name))
+			{
+				uiInfo.SetName(string.Format("AED Connect Patient: %1", name));
+				m_bNameFound = true;	
+			}
 		}
 		
 		ACE_Medical_AEDComponent component = ACE_Medical_AEDComponent.Cast(m_pNearestAED.FindComponent(ACE_Medical_AEDComponent));
@@ -55,6 +91,9 @@ class ACE_Medical_AEDConnectPatientUserAction: ScriptedUserAction
 	{
 		super.PerformAction(pOwnerEntity, pUserEntity);
 		
+		if (!m_pNearestAED)
+			return;
+		
 		ACE_Medical_AEDComponent component = ACE_Medical_AEDComponent.Cast(m_pNearestAED.FindComponent(ACE_Medical_AEDComponent));
 		if (!component)
 			return;
@@ -69,8 +108,11 @@ class ACE_Medical_AEDConnectPatientUserAction: ScriptedUserAction
 		if (!entity)
 			return true;
 		
-		// Bug here - exception if the patient is dead dead - how to fix?
-		ResourceName prefab = entity.GetPrefabData().GetPrefabName();
+		EntityPrefabData prefabData = entity.GetPrefabData();
+		if (!prefabData)
+			return true;
+		
+		ResourceName prefab = prefabData.GetPrefabName();
 		if (!(prefab == "{7E096143E0A4363E}Prefabs/Items/Medical Defibrillation/AED_Base.et"))
 			return true;
 		
@@ -83,6 +125,23 @@ class ACE_Medical_AEDConnectPatientUserAction: ScriptedUserAction
 		}
 		
 		return (m_fShortestDistance != 0);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	string GetCharacterName(IEntity entity)
+	{
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		if (!playerManager)
+			return "";
+		
+		string name;
+		int id = playerManager.GetPlayerIdFromControlledEntity(entity);
+		if (id != 0)
+		{
+			name = playerManager.GetPlayerName(id);
+		}
+		
+		return name;
 	}
 	
 	//------------------------------------------------------------------------------------------------

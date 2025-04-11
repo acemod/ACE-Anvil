@@ -16,11 +16,18 @@ class ACE_Medical_AEDAnalyseUserAction : ACE_Medical_AEDBaseUserAction
 		if (AEDComp.IsCharging())
 			return false;
 		
-		if (AEDComp.IsAnalysed())
+		if (AEDComp.IsAnalysed() && AEDComp.IsShockableRhythm())
 			return false;
 		
 		if (AEDComp.IsCharged())
 			return false;
+		
+		ACE_Medical_CardiovascularComponent component = AEDComp.GetConnectedPatientCardiovascularComponent();
+		if (component)
+		{
+			if (component.GetShockCooldown() > 0)
+				return false;
+		}
 		
 		return true;
 	}

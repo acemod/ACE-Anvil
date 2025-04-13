@@ -27,6 +27,9 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 	//------------------------------------------------------------------------------------------------
 	override void OnStart(IEntity entity)
 	{
+		if (!entity)
+			return;
+		
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
 			return;

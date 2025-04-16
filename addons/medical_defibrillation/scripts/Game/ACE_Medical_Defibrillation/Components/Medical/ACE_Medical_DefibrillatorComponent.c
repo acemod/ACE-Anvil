@@ -235,7 +235,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 			return false;
 		
 		ACE_Medical_CardiovascularComponent cardiovascularComponent;
-		if (!GetConnectedPatientCardiovascularComponent(cardiovascularComponent));
+		if (!GetConnectedPatientCardiovascularComponent(cardiovascularComponent))
 			return false;
 		
 		if (!IsCharged())

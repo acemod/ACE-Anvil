@@ -216,9 +216,8 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 		ResetAnalysisAndCharge();
 		
 		// Shock thump sound effect - played on patient
-		CharacterSoundComponent soundComponent = CharacterSoundComponent.Cast(m_patient.FindComponent(CharacterSoundComponent));
-		if (soundComponent)
-			soundComponent.SoundEvent(SOUNDSHOCKTHUMP);
+		RPC_PlaySoundOnPatient(ACE_Medical_DefibrillatorComponent.SOUNDSHOCKTHUMP);
+		Rpc(RPC_PlaySoundOnPatient, ACE_Medical_DefibrillatorComponent.SOUNDSHOCKTHUMP);
 		
 		ACE_Medical_CardiovascularComponent cardiovascularComponent;
 		if (!GetConnectedPatientCardiovascularComponent(cardiovascularComponent))
@@ -328,6 +327,19 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 			TerminateSound();
 		
 		m_currentSound = soundComponent.SoundEvent(soundName);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RPC_PlaySoundOnPatient(string soundName)
+	{
+		if (!m_patient)
+			return;
+		
+		SoundComponent soundComponent = SoundComponent.Cast(m_patient.FindComponent(SoundComponent));
+		if (!soundComponent)
+			return;
+		
+		soundComponent.SoundEvent(soundName);
 	}
 	
 	//------------------------------------------------------------------------------------------------

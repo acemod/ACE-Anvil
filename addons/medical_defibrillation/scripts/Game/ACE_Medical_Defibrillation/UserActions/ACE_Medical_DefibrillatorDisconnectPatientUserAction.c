@@ -21,6 +21,8 @@ class ACE_Medical_DefibrillatorDisconnectPatientUserAction : ACE_Medical_Defibri
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
+		super.PerformAction(pOwnerEntity, pUserEntity);
+		
 		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_Medical_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;

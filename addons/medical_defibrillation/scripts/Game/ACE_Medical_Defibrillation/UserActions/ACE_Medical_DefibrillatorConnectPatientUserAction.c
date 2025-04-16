@@ -86,10 +86,6 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 	{
 		super.PerformAction(pOwnerEntity, pUserEntity);
 		
-		// server check
-		if (!Replication.IsServer())
-			return;
-		
 		// check for neabyAED
 		QueryForAEDPerform(pOwnerEntity.GetOrigin(), 3);
 		if (!m_pNearestAEDPerform)

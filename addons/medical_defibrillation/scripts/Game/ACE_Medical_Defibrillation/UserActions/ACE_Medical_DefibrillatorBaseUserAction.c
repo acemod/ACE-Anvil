@@ -17,6 +17,8 @@ class ACE_Medical_DefibrillatorBaseUserAction : ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		PrintFormat("%1.PerformAction:: NOT IMPLIMENTED", this, level: LogLevel.ERROR);
+		// keep action on server for replication
+		if (!Replication.IsServer())
+			return;
 	}
 }

@@ -151,7 +151,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	void ResetPatient()
 	{
 		if (m_patient)
-			PlaySound(SOUNDCONNECTED, true);
+			PlaySound(SOUNDDISCONNECTED, true);
 		
 		m_iPatientRplId = RplId.Invalid();
 		m_patient = null;

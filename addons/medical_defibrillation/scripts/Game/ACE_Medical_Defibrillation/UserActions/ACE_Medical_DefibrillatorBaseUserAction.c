@@ -1,6 +1,6 @@
-class ACE_Medical_AEDBaseUserAction : ScriptedUserAction
+class ACE_Medical_DefibrillatorBaseUserAction : ScriptedUserAction
 {
-	protected ACE_Medical_AEDComponent m_AEDComp;
+	protected ACE_Medical_DefibrillatorComponent m_defibrillatorComponent;
 	
 	//------------------------------------------------------------------------------------------------	
 	override bool CanBeShownScript(IEntity user)
@@ -11,7 +11,7 @@ class ACE_Medical_AEDBaseUserAction : ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
-		m_AEDComp = ACE_Medical_AEDComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_AEDComponent));
+		m_defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_DefibrillatorComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------

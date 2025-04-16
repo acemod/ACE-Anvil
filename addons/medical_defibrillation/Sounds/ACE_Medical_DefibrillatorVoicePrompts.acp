@@ -1,46 +1,10 @@
 AudioClass {
  sounds {
   SoundClass {
-   id 6153
-   name "ACE_MEDICAL_AED_SOUNDCHARGING"
-   version 5
-   tl 203.159 3.822
-   ins {
-    ConnectionsClass connections {
-     id 64
-     links {
-      ConnectionClass connection {
-       id 2066
-       port 65
-      }
-     }
-    }
-   }
-   volume_dB 6
-  }
-  SoundClass {
-   id 14345
-   name "ACE_MEDICAL_AED_SOUNDCHARGED"
-   version 5
-   tl 217.403 419.759
-   ins {
-    ConnectionsClass connections {
-     id 64
-     links {
-      ConnectionClass connection {
-       id 12306
-       port 65
-      }
-     }
-    }
-   }
-   volume_dB 3
-  }
-  SoundClass {
    id 18441
-   name "ACE_MEDICAL_AED_SOUNDSHOCKADVISED"
+   name "ACE_DefibrillatorVoicePrompt_ShockAdvised"
    version 5
-   tl 202.37 796.626
+   tl 218.951 798.913
    ins {
     ConnectionsClass connections {
      id 64
@@ -56,7 +20,7 @@ AudioClass {
   }
   SoundClass {
    id 26633
-   name "ACE_MEDICAL_AED_SOUNDNOSHOCKADVISED"
+   name "ACE_DefibrillatorVoicePrompt_NoShockAdvised"
    version 5
    tl 215.02 1192.226
    ins {
@@ -74,7 +38,7 @@ AudioClass {
   }
   SoundClass {
    id 28681
-   name "ACE_MEDICAL_AED_SOUNDANALYSING"
+   name "ACE_DefibrillatorVoicePrompt_Analysing"
    version 5
    tl 215.893 1577.426
    ins {
@@ -91,27 +55,10 @@ AudioClass {
    volume_dB -8
   }
   SoundClass {
-   id 38921
-   name "ACE_MEDICAL_AED_SOUNDSHOCKTHUMP"
-   version 5
-   tl 205.222 1963.861
-   ins {
-    ConnectionsClass connections {
-     id 64
-     links {
-      ConnectionClass connection {
-       id 34834
-       port 65
-      }
-     }
-    }
-   }
-  }
-  SoundClass {
    id 43017
-   name "ACE_MEDICAL_AED_SOUNDCONNECTED"
+   name "ACE_DefibrillatorVoicePrompt_Connected"
    version 5
-   tl 198.57 2376.426
+   tl 208.92 1950.926
    ins {
     ConnectionsClass connections {
      id 64
@@ -127,9 +74,9 @@ AudioClass {
   }
   SoundClass {
    id 50185
-   name "ACE_MEDICAL_AED_SOUNDDISCONNECTED"
+   name "ACE_DefibrillatorVoicePrompt_Disconnected"
    version 5
-   tl 209.148 2753.944
+   tl 219.498 2328.444
    ins {
     ConnectionsClass connections {
      id 64
@@ -145,100 +92,6 @@ AudioClass {
   }
  }
  shaders {
-  ShaderClass {
-   id 2066
-   name "Shader 2"
-   version 5
-   tl -21.727 2.287
-   ins {
-    ConnectionsClass connections {
-     id 0
-     links {
-      ConnectionClass connection {
-       id 3100
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 1
-     links {
-      ConnectionClass connection {
-       id 4115
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 2
-     links {
-      ConnectionClass connection {
-       id 5141
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 64
-     links {
-      ConnectionClass connection {
-       id 1028
-       port 65
-      }
-     }
-    }
-   }
-   pi {
-    7 0
-   }
-  }
-  ShaderClass {
-   id 12306
-   name "Shader 2"
-   version 5
-   tl -16.483 418.903
-   ins {
-    ConnectionsClass connections {
-     id 0
-     links {
-      ConnectionClass connection {
-       id 10268
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 1
-     links {
-      ConnectionClass connection {
-       id 9235
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 2
-     links {
-      ConnectionClass connection {
-       id 13333
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 64
-     links {
-      ConnectionClass connection {
-       id 11268
-       port 65
-      }
-     }
-    }
-   }
-   pi {
-    7 0
-   }
-  }
   ShaderClass {
    id 16402
    name "Shader 2"
@@ -381,57 +234,10 @@ AudioClass {
    }
   }
   ShaderClass {
-   id 34834
-   name "Shader 2"
-   version 5
-   tl -28.664 1963.005
-   ins {
-    ConnectionsClass connections {
-     id 0
-     links {
-      ConnectionClass connection {
-       id 37916
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 1
-     links {
-      ConnectionClass connection {
-       id 35859
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 2
-     links {
-      ConnectionClass connection {
-       id 33813
-       port 65
-      }
-     }
-    }
-    ConnectionsClass connections {
-     id 64
-     links {
-      ConnectionClass connection {
-       id 36868
-       port 65
-      }
-     }
-    }
-   }
-   pi {
-    7 0
-   }
-  }
-  ShaderClass {
    id 42002
    name "Shader 2"
    version 5
-   tl -35.316 2375.57
+   tl -24.966 1950.07
    ins {
     ConnectionsClass connections {
      id 0
@@ -478,7 +284,7 @@ AudioClass {
    id 51218
    name "Shader 2"
    version 5
-   tl -23.416 2755.733
+   tl -13.066 2330.233
    ins {
     ConnectionsClass connections {
      id 0
@@ -524,22 +330,6 @@ AudioClass {
  }
  amplitudes {
   AmplitudeClass {
-   id 4115
-   name "Amplitude 4"
-   version 5
-   tl -255.574 179.531
-   curve "1/r"
-   outerRange 50
-  }
-  AmplitudeClass {
-   id 9235
-   name "Amplitude 4"
-   version 5
-   tl -250.33 596.146
-   curve "1/r"
-   outerRange 50
-  }
-  AmplitudeClass {
    id 20499
    name "Amplitude 4"
    version 5
@@ -564,18 +354,10 @@ AudioClass {
    outerRange 50
   }
   AmplitudeClass {
-   id 35859
-   name "Amplitude 4"
-   version 5
-   tl -262.511 2140.248
-   curve "1/r"
-   outerRange 50
-  }
-  AmplitudeClass {
    id 44051
    name "Amplitude 4"
    version 5
-   tl -269.163 2552.813
+   tl -258.813 2127.313
    curve "1/r"
    outerRange 50
   }
@@ -583,26 +365,12 @@ AudioClass {
    id 47123
    name "Amplitude 4"
    version 5
-   tl -257.263 2932.976
+   tl -246.913 2507.476
    curve "1/r"
    outerRange 50
   }
  }
  frequency {
-  FrequencyClass {
-   id 5141
-   name "Frequency 5"
-   version 5
-   tl -253.858 259.004
-   enableDistanceAtt 1
-  }
-  FrequencyClass {
-   id 13333
-   name "Frequency 5"
-   version 5
-   tl -248.615 675.62
-   enableDistanceAtt 1
-  }
   FrequencyClass {
    id 17429
    name "Frequency 5"
@@ -625,52 +393,21 @@ AudioClass {
    enableDistanceAtt 1
   }
   FrequencyClass {
-   id 33813
-   name "Frequency 5"
-   version 5
-   tl -260.796 2219.722
-   enableDistanceAtt 1
-  }
-  FrequencyClass {
    id 39957
    name "Frequency 5"
    version 5
-   tl -267.448 2632.287
+   tl -257.098 2206.787
    enableDistanceAtt 1
   }
   FrequencyClass {
    id 46101
    name "Frequency 5"
    version 5
-   tl -255.548 3012.45
+   tl -245.198 2586.95
    enableDistanceAtt 1
   }
  }
  banks_local {
-  BankLocalClass {
-   id 1028
-   name "Charging"
-   version 7
-   tl -253.892 1.715
-   Samples {
-    AudioBankSampleClass Sample {
-     Filename "{D0B7ABE445409970}Sounds/DefibCharge.wav"
-    }
-   }
-  }
-  BankLocalClass {
-   id 11268
-   name "Charged"
-   version 7
-   tl -248.648 417.008
-   "Loop count" 255
-   "Infinite loop" 1
-   Samples {
-    AudioBankSampleClass Sample {
-     Filename "{496A55EAAAD3C099}Sounds/DefibCharged.wav"
-    }
-   }
-  }
   BankLocalClass {
    id 15364
    name "Shock Advised"
@@ -705,21 +442,10 @@ AudioClass {
    }
   }
   BankLocalClass {
-   id 36868
-   name "Shock Thump"
-   version 7
-   tl -260.829 1962.433
-   Samples {
-    AudioBankSampleClass Sample {
-     Filename "{A9F7DB0FF2EE8CC5}Sounds/AEDShockThump.wav"
-    }
-   }
-  }
-  BankLocalClass {
    id 45060
    name "Connected"
    version 7
-   tl -267.481 2374.998
+   tl -257.131 1949.498
    Samples {
     AudioBankSampleClass Sample {
      Filename "{B5C11AB72AC005FA}Sounds/AEDConnected.wav"
@@ -730,7 +456,7 @@ AudioClass {
    id 48132
    name "Disconnected"
    version 7
-   tl -255.581 2755.161
+   tl -245.231 2329.661
    Samples {
     AudioBankSampleClass Sample {
      Filename "{738508CCEC10793E}Sounds/AEDDisconnected.wav"
@@ -739,20 +465,6 @@ AudioClass {
   }
  }
  spatialities {
-  SpatialityClass {
-   id 3100
-   name "Spatiality 3"
-   version 5
-   tl -251.571 92.624
-   spatialFactor 1
-  }
-  SpatialityClass {
-   id 10268
-   name "Spatiality 3"
-   version 5
-   tl -246.328 509.24
-   spatialFactor 1
-  }
   SpatialityClass {
    id 19484
    name "Spatiality 3"
@@ -775,24 +487,17 @@ AudioClass {
    spatialFactor 1
   }
   SpatialityClass {
-   id 37916
-   name "Spatiality 3"
-   version 5
-   tl -258.509 2053.342
-   spatialFactor 1
-  }
-  SpatialityClass {
    id 40988
    name "Spatiality 3"
    version 5
-   tl -265.161 2465.907
+   tl -254.811 2040.407
    spatialFactor 1
   }
   SpatialityClass {
    id 49180
    name "Spatiality 3"
    version 5
-   tl -253.261 2846.07
+   tl -242.911 2420.57
    spatialFactor 1
   }
  }

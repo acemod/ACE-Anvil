@@ -29,11 +29,17 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	{
 		super.Update(entity, timeSlice);
 		
-		ACE_Medical_AEDComponent component = GetAEDComponent(entity);
-		if (!component)
+		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		if (!defibrillatorComponent)
 			return;
 		
-		UpdateAED(entity, timeSlice);
+		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_Medical_EDefibrillatorEmulation.Automated)
+			UpdateAED(entity, timeSlice);
+		
+		// TODO: Impliment manual defibrillator
+		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_Medical_EDefibrillatorEmulation.Manual)
+		{
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -47,8 +53,8 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateAED(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_AEDComponent component = GetAEDComponent(entity);
-		if (!component)
+		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		if (!defibrillatorComponent)
 			return;
 		
 		UpdateCharge(entity, timeSlice);
@@ -60,27 +66,27 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateCharge(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_AEDComponent component = GetAEDComponent(entity);
-		if (!component)
+		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		if (!defibrillatorComponent)
 			return;
 		
-		float charge = component.GetChargeAmount();
-		float chargeTime = component.GetChargeTime();
+		float charge = defibrillatorComponent.GetChargeAmount();
+		float chargeTime = defibrillatorComponent.GetChargeTime();
 		
-		if (component.IsCharging())
+		if (defibrillatorComponent.IsCharging())
 		{
 			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Amount to add to charge = %1", timeSlice / chargeTime);
 			charge += timeSlice / chargeTime;
-			component.SetChargeAmount(charge);
+			defibrillatorComponent.SetChargeAmount(charge);
 			
-			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Current charge percent = %1", component.GetChargeAmount());
+			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Current charge percent = %1", defibrillatorComponent.GetChargeAmount());
 			
 			if (charge >= 1.0)
 			{
-				component.SetChargeAmount(1.0);
-				component.SetIsCharged(true);
-				component.SetCharging(false);
-				component.TerminateSound();
+				defibrillatorComponent.SetChargeAmount(1.0);
+				defibrillatorComponent.SetIsCharged(true);
+				defibrillatorComponent.SetCharging(false);
+				defibrillatorComponent.TerminateSound();
 			}
 		}
 	}
@@ -88,35 +94,36 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateAnalysis(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_AEDComponent component = GetAEDComponent(entity);
-		if (!component)
+		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		if (!defibrillatorComponent)
 			return;
 		
-		float analysis = component.GetAnalysisAmount();
-		float analysisTime = component.GetAnalysisTime();
+		float analysis = defibrillatorComponent.GetAnalysisAmount();
+		float analysisTime = defibrillatorComponent.GetAnalysisTime();
 		
-		if (component.IsAnalysing())
+		if (defibrillatorComponent.IsAnalysing())
 		{
 			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Amount to add to analysis = %1", timeSlice / analysisTime);
 			analysis += timeSlice / analysisTime;
-			component.SetAnalysisAmount(analysis);
+			defibrillatorComponent.SetAnalysisAmount(analysis);
 
-			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Current analysis percent = %1", component.GetAnalysisAmount());
+			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Current analysis percent = %1", defibrillatorComponent.GetAnalysisAmount());
 			
 			if (analysis >= 1.0)
 			{
-				component.SetAnalysisAmount(1.0);
-				component.SetIsAnalysed(true);
-				component.SetAnalysing(false);
+				defibrillatorComponent.SetAnalysisAmount(1.0);
+				defibrillatorComponent.SetIsAnalysed(true);
+				defibrillatorComponent.SetAnalysing(false);
 				// Testing - need to impliment rhythm check
-				if (component.IsShockableRhythm())
+				if (defibrillatorComponent.IsShockableRhythm())
 				{
-					component.PlaySound(ACE_Medical_AEDComponent.SOUNDSHOCKADVISED, true);
+					defibrillatorComponent.PlaySound(defibrillatorComponent.SOUNDSHOCKADVISED, true);
 				}
 				else
 				{
-					component.PlaySound(ACE_Medical_AEDComponent.SOUNDNOSHOCKADVISED, true);
-					component.ResetAnalysisAndCharge();
+					defibrillatorComponent.PlaySound(defibrillatorComponent.SOUNDNOSHOCKADVISED, true);
+					
+					defibrillatorComponent.ResetAnalysisAndCharge();
 				}
 			}
 		}
@@ -125,24 +132,24 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateSoundEffects(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_AEDComponent component = GetAEDComponent(entity);
-		if (!component)
+		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		if (!defibrillatorComponent)
 			return;
 		
-		if (component.GetChargeAmount() >= 1.0 && !component.IsCharging())
+		if (defibrillatorComponent.GetChargeAmount() >= 1.0 && !defibrillatorComponent.IsCharging())
 		{
-			component.PlaySound(ACE_Medical_AEDComponent.SOUNDCHARGED, isLoop: true);
+			defibrillatorComponent.PlaySound(defibrillatorComponent.SOUNDCHARGED, true, true);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected void CheckPatientPosition(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_AEDComponent component = GetAEDComponent(entity);
-		if (!component)
+		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		if (!defibrillatorComponent)
 			return;
 		
-		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(component.GetConnectedPatient());
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient());
 		if (!char)
 			return;
 		
@@ -151,13 +158,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 		
 		float distance = vector.Distance(charPos, AEDPos);
 		if (distance >= 3)
-			component.ResetPatient();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	static ACE_Medical_AEDComponent GetAEDComponent(IEntity entity)
-	{
-		return ACE_Medical_AEDComponent.Cast(entity.FindComponent(ACE_Medical_AEDComponent));
+			defibrillatorComponent.ResetPatient();
 	}
 
 #ifdef WORKBENCH

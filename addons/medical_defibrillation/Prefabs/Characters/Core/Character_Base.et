@@ -3,19 +3,18 @@ SCR_ChimeraCharacter {
  components {
   CharacterSoundComponent "{520EA1D2F659CF84}" {
    Filenames + {
-    "{0340D00A7674D634}Sounds/AEDSoundEffects.acp"
+    "{561CB411D5D8E866}Sounds/ACE_Medical_DefibrillatorSounds.acp"
    }
   }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
-    ACE_Medical_AEDConnectPatientUserAction "{651034863DB7F4A0}" {
+    ACE_Medical_DefibrillationConnectPatientUserAction "{651E0400BB6819C4}" {
      ParentContextList {
       "Chest"
      }
-     UIInfo UIInfo "{6510348636B83176}" {
-      Name "AED - Connect Patient"
+     UIInfo UIInfo "{651E0400B08C1311}" {
+      Name "#ACE_Medical_DefibrillatorConnectPatientUserAction_Name"
      }
-     Duration 1
     }
    }
   }

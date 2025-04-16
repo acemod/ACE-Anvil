@@ -6,41 +6,41 @@ modded class ACE_Medical_CardiovascularSystem
 	{
 		super.Update(entity, timeSlice);
 
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
-		if (!component)
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(entity.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!cardiovascularComponent)
 			return;
 		
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(entity.FindComponent(SCR_CharacterDamageManagerComponent));
 		if (!damageManager)
 			return;
 		
-		UpdateCardiacRhythm(component, damageManager, timeSlice);
-		UpdateShockCooldown(component, damageManager, timeSlice);
-		UpdateShockAmount(component, damageManager, timeSlice);
+		UpdateCardiacRhythm(cardiovascularComponent, damageManager, timeSlice);
+		UpdateShockCooldown(cardiovascularComponent, damageManager, timeSlice);
+		UpdateShockAmount(cardiovascularComponent, damageManager, timeSlice);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void UpdateCardiacRhythm(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
+	protected void UpdateCardiacRhythm(ACE_Medical_CardiovascularComponent cardiovascularComponent, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
 	{
-		ACE_Medical_EVitalState vitalState = component.GetVitalState();
+		ACE_Medical_EVitalState vitalState = cardiovascularComponent.GetVitalState();
 		
-		if (component.IsInCardiacArrest())
+		if (cardiovascularComponent.IsInCardiacArrest())
 		{
-			component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.VF);
+			cardiovascularComponent.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.VF);
 			// TODO: impliment system for deterioration to PEA - we need two cardiac arrest states?
 			if (damageManager.GetState() == EDamageState.DESTROYED)
-				component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Asystole);
+				cardiovascularComponent.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Asystole);
 		}
 		else
 		{
-			component.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Sinus);
+			cardiovascularComponent.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Sinus);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void UpdateShockCooldown(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
+	protected void UpdateShockCooldown(ACE_Medical_CardiovascularComponent cardiovascularComponent, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
 	{
-		float current = component.GetShockCooldown();
+		float current = cardiovascularComponent.GetShockCooldown();
 		
 		if (current <= 0)
 			return;
@@ -49,18 +49,18 @@ modded class ACE_Medical_CardiovascularSystem
 		
 		if (newCooldown <= 0)
 		{
-			component.SetShockCooldown(0, true);
+			cardiovascularComponent.SetShockCooldown(0, true);
 		}
 		else
 		{
-			component.SetShockCooldown(newCooldown);
+			cardiovascularComponent.SetShockCooldown(newCooldown);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void UpdateShockAmount(ACE_Medical_CardiovascularComponent component, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
+	protected void UpdateShockAmount(ACE_Medical_CardiovascularComponent cardiovascularComponent, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
 	{
-		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(component.GetOwner());
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(cardiovascularComponent.GetOwner());
 		if (!ownerChar)
 			return;
 		
@@ -70,8 +70,8 @@ modded class ACE_Medical_CardiovascularSystem
 		
 		if (!ownerController.IsUnconscious())
 		{
-			if (component.GetShocksDelivered() > 0)
-				component.ResetShocksDelivered();
+			if (cardiovascularComponent.GetShocksDelivered() > 0)
+				cardiovascularComponent.ResetShocksDelivered();
 		}
 	}
 	
@@ -100,17 +100,17 @@ modded class ACE_Medical_CardiovascularSystem
 		if (!GetDiagTarget(target, targetType))
 			return;
 		
-		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
-		if (!component)
+		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
+		if (!cardiovascularComponent)
 			return;
 
-		ACE_Medical_ECardiacRhythm rhythm = component.GetCardiacRhythm();
+		ACE_Medical_ECardiacRhythm rhythm = cardiovascularComponent.GetCardiacRhythm();
 		string rhythmName = SCR_Enum.GetEnumName(ACE_Medical_ECardiacRhythm, rhythm);
 		
 		DbgUI.Begin(string.Format("ACE_Medical_DefibrillationSystem (%1)", targetType), 0, 700);
 		DbgUI.Text(string.Format("Cardiac rhythm:                  %1", rhythmName));
-		DbgUI.Text(string.Format("# of Shocks:                  %1", component.GetShocksDelivered()));
-		DbgUI.Text(string.Format("Shock cooldown:                  %1", component.GetShockCooldown()));
+		DbgUI.Text(string.Format("# of Shocks:                  %1", cardiovascularComponent.GetShocksDelivered()));
+		DbgUI.Text(string.Format("Shock cooldown:                  %1", cardiovascularComponent.GetShockCooldown()));
 		DbgUI.End();
 	}
 #endif

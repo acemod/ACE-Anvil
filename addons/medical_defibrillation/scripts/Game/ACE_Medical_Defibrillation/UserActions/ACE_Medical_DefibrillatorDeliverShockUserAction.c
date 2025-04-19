@@ -18,6 +18,8 @@ class ACE_Medical_DefibrillatorDeliverShockUserAction : ACE_Medical_Defibrillato
 	{
 		super.PerformAction(pOwnerEntity, pUserEntity);
 		
+		PrintFormat("ACE_Medical_DefibrillatorDeliverShockUserAction::Perform Action | Server Execution: %1", Replication.IsServer());
+		
 		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_Medical_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
@@ -27,10 +29,10 @@ class ACE_Medical_DefibrillatorDeliverShockUserAction : ACE_Medical_Defibrillato
 		
 		defibrillatorComponent.DeliverShock();
 		
-		ACE_Medical_DefibrillatorNetworkComponent networkComponent = ACE_Medical_DefibrillatorNetworkComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_DefibrillatorNetworkComponent));
-		if (!networkComponent)
+		ACE_Medical_DefibrillatorNetworkComponent networkComponent;
+		if (!GetDefibrillatorNetworkComponent(pUserEntity, networkComponent))
 			return;
 		
-		//networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICAL_SHOCKDELIVERED, GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
+		networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_SHOCKDELIVERED, GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
 	}
 }

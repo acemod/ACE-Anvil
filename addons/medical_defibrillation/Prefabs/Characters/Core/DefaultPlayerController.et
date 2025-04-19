@@ -1,0 +1,7 @@
+SCR_PlayerController {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  ACE_Medical_DefibrillatorNetworkComponent "{65256EA67D71A717}" {
+  }
+ }
+}

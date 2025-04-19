@@ -13,8 +13,6 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 	protected float m_fLastUpdateTime;
 	protected const float m_fUpdateRate = 500;
 	
-	protected bool m_bNameFound = false;
-	
 	//------------------------------------------------------------------------------------------------
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
@@ -35,26 +33,17 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 	
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
-	{
+	{	
+		super.CanBeShownScript(user);
+		
 		IEntity patient = IEntity.Cast(GetOwner());
 		if (!patient)
 			return false;
 		
-		bool previousAEDFoundAndConnected = AEDAlreadyFoundAndConnected();
 		// slow down tick rate
 		if (!CanExecuteThisTick())
-			return !previousAEDFoundAndConnected;
-		
-		// add name to action - once
-		if (!m_bNameFound)
 		{
-			UIInfo uiInfo = GetUIInfo();
-			string name = GetCharacterName(patient);
-			if (!SCR_StringHelper.IsEmptyOrWhiteSpace(name))
-			{
-				uiInfo.SetName(string.Format("AED Connect Patient: %1", name));
-				m_bNameFound = true;	
-			}
+			return (m_pNearestAEDShown && !AEDAlreadyFoundAndConnected());
 		}
 		
 		// check for nearby AED
@@ -78,6 +67,7 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 		}
 		
 		Print("ACE_Medical_AEDConnectPatientUserAction::CanBeShownScript | AED found and ready for patient");
+
 		return true;
 	}
 	
@@ -86,11 +76,13 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 	{
 		super.PerformAction(pOwnerEntity, pUserEntity);
 		
+		PrintFormat("ACE_Medical_DefibrillationConnectPatientUserAction::Perform Action | Server Execution: %1", Replication.IsServer());
+		
 		// check for neabyAED
 		QueryForAEDPerform(pOwnerEntity.GetOrigin(), 3);
 		if (!m_pNearestAEDPerform)
 		{
-			Print("ACE_Medical_AEDConnectPatientUserAction::PerformAction | No AED Found!", LogLevel.WARNING);
+			Print("ACE_Medical_AEDConnectPatientUserAction::PerformAction | No Defibrillator Found!", LogLevel.WARNING);
 			return;
 		}
 		
@@ -100,6 +92,16 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 			return;
 		
 		defibrillatorComponent.ConnectPatient(pOwnerEntity);
+		
+		ACE_Medical_DefibrillatorNetworkComponent networkComponent;
+		if (!ACE_Medical_DefibrillatorBaseUserAction.GetDefibrillatorNetworkComponent(pUserEntity, networkComponent))
+			return;
+		
+		if (EntityUtils.IsPlayer(pOwnerEntity))
+			networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED, defibrillatorComponent.GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
+		else
+			networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED_AI, defibrillatorComponent.GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
+		
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -128,23 +130,6 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 			return false;
 		
 		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	string GetCharacterName(IEntity entity)
-	{
-		PlayerManager playerManager = GetGame().GetPlayerManager();
-		if (!playerManager)
-			return "";
-		
-		string name;
-		int id = playerManager.GetPlayerIdFromControlledEntity(entity);
-		if (id != 0)
-		{
-			name = playerManager.GetPlayerName(id);
-		}
-		
-		return name;
 	}
 	
 	//------------------------------------------------------------------------------------------------

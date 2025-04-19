@@ -59,7 +59,7 @@ GenericEntity {
       "default"
      }
      UIInfo UIInfo "{651E0413F593541B}" {
-      Name "#ACE_Medical_DefibrillatorAnalyseUserAction_Name"
+      Name "#ACE_MedicalDefibrillation-AnalyseUserAction_Name"
      }
      Duration 1
      "Sort Priority" 1
@@ -69,7 +69,7 @@ GenericEntity {
       "default"
      }
      UIInfo UIInfo "{651E04169D6E7F88}" {
-      Name "#ACE_Medical_DefibrillatorChargeUserAction_Name"
+      Name "#ACE_MedicalDefibrillation-ChargeUserAction_Name"
      }
      Duration 1
      "Sort Priority" 2
@@ -79,7 +79,7 @@ GenericEntity {
       "default"
      }
      UIInfo UIInfo "{651E040E69003EFA}" {
-      Name "#ACE_Medical_DefibrillatorDeliverShockUserAction_Name"
+      Name "#ACE_MedicalDefibrillation-DeliverShockUserAction_Name"
      }
      Duration 1
      "Sort Priority" 3
@@ -89,7 +89,7 @@ GenericEntity {
       "default"
      }
      UIInfo UIInfo "{651E040E63100229}" {
-      Name "#ACE_Medical_DefibrillatorDisconnectUserAction_Name"
+      Name "#ACE_MedicalDefibrillation-DisconnectUserAction_Name"
      }
      Duration 3
      "Sort Priority" 4
@@ -99,7 +99,7 @@ GenericEntity {
       "default"
      }
      UIInfo UIInfo "{651E040E435C3557}" {
-      Name "#ACE_Medical_DefibrillatorPickUpUserAction_Name"
+      Name "#ACE_MedicalDefibrillation-PickUpUserAction_Name"
      }
      Duration 3
      "Sort Priority" 5

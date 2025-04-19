@@ -21,4 +21,29 @@ class ACE_Medical_DefibrillatorBaseUserAction : ScriptedUserAction
 		if (!Replication.IsServer())
 			return;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	static bool GetDefibrillatorNetworkComponent(IEntity user, out ACE_Medical_DefibrillatorNetworkComponent networkComponent)
+	{
+		if (!user)
+			return false;
+		
+		PlayerManager playerMgr = GetGame().GetPlayerManager();
+		if (!playerMgr)
+			return false;
+		
+		int userId = playerMgr.GetPlayerIdFromControlledEntity(user);
+		if (userId == 0)
+			return false;
+		
+		SCR_PlayerController userController = SCR_PlayerController.Cast(playerMgr.GetPlayerController(userId));
+		if (!userController)
+			return false;
+		
+		networkComponent = ACE_Medical_DefibrillatorNetworkComponent.Cast(userController.FindComponent(ACE_Medical_DefibrillatorNetworkComponent));
+		if (!networkComponent)
+			return false;
+		
+		return true;
+	}
 }

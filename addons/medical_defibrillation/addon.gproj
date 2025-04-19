@@ -15,57 +15,9 @@ GameProject {
      StringTableDefinition "{651E36C4817A033E}" {
       StringTableSource "{FA3E82493E1C4163}Language/ACE_MedicalDefibrillation_localization.st"
       Languages {
-       LanguageDefinition "{651E36C482A0B37C}" {
-        Code "cs_cz"
-        StringTableRuntime "{526DFC19A6F42051}Language/ACE_MedicalDefibrillation_localization.cs_cz.conf"
-       }
-       LanguageDefinition "{651E36C482A0B3BB}" {
-        Code "de_de"
-        StringTableRuntime "{8713E62AB5573171}Language/ACE_MedicalDefibrillation_localization.de_de.conf"
-       }
        LanguageDefinition "{651E36C482A0B38A}" {
         Code "en_us"
         StringTableRuntime "{D9E36C61DFA43470}Language/ACE_MedicalDefibrillation_localization.en_us.conf"
-       }
-       LanguageDefinition "{651E36C482A0B399}" {
-        Code "es_es"
-        StringTableRuntime "{1CAF21E831A65F6F}Language/ACE_MedicalDefibrillation_localization.es_es.conf"
-       }
-       LanguageDefinition "{651E36C482A0B3EB}" {
-        Code "fr_fr"
-        StringTableRuntime "{A707D4DFD725BC6D}Language/ACE_MedicalDefibrillation_localization.fr_fr.conf"
-       }
-       LanguageDefinition "{651E36C482A0B3F8}" {
-        Code "it_it"
-        StringTableRuntime "{271B5BEB7A073F94}Language/ACE_MedicalDefibrillation_localization.it_it.conf"
-       }
-       LanguageDefinition "{651E36C482A0B3C9}" {
-        Code "ja_jp"
-        StringTableRuntime "{3700E67944760F3F}Language/ACE_MedicalDefibrillation_localization.ja_jp.conf"
-       }
-       LanguageDefinition "{651E36C482A0B3C5}" {
-        Code "ko_kr"
-        StringTableRuntime "{97BECED5D75B0C00}Language/ACE_MedicalDefibrillation_localization.ko_kr.conf"
-       }
-       LanguageDefinition "{651E36C482A0B3D4}" {
-        Code "pl_pl"
-        StringTableRuntime "{CBCF682F69B4907C}Language/ACE_MedicalDefibrillation_localization.pl_pl.conf"
-       }
-       LanguageDefinition "{651E36C482A0AC25}" {
-        Code "pt_br"
-        StringTableRuntime "{1EB8F2E3524A5AC6}Language/ACE_MedicalDefibrillation_localization.pt_br.conf"
-       }
-       LanguageDefinition "{651E36C482A0ACC1}" {
-        Code "ru_ru"
-        StringTableRuntime "{4BF9E64BCF333FB0}Language/ACE_MedicalDefibrillation_localization.ru_ru.conf"
-       }
-       LanguageDefinition "{651E36C482A0AD28}" {
-        Code "uk_ua"
-        StringTableRuntime "{C1A1B3BDA31D81E5}Language/ACE_MedicalDefibrillation_localization.uk_ua.conf"
-       }
-       LanguageDefinition "{651E36C482A0AD3A}" {
-        Code "zh_cn"
-        StringTableRuntime "{1B11DD809ABD51F8}Language/ACE_MedicalDefibrillation_localization.zh_cn.conf"
        }
       }
      }

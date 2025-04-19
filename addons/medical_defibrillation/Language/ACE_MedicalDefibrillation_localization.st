@@ -1,62 +1,70 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
-  CustomStringTableItem "{651955123012A595}" {
-   Id "#ACE_Medical-Notification_DefibrillatorShockDelivered"
-   Target_en_us "Shock Delivered - Total Shocks This Arrest: %1"
-   Modified 1696615833
-   Author "Anthony"
-   LastChanged "Anthony"
-  }
   CustomStringTableItem "{651E040D20FF922B}" {
-   Id "#ACE_Medical_DefibrillatorAnalyseUserAction_Name"
+   Id "ACE_MedicalDefibrillation-AnalyseUserAction_Name"
    Target_en_us "Analyse"
-   Modified 1696615836
+   ActorGender NONE
+   Modified 1696996447
    Author "Anthony"
    LastChanged "Anthony"
   }
   CustomStringTableItem "{651E040D97FE59E2}" {
-   Id "#ACE_Medical_DefibrillatorChargeUserAction_Name"
+   Id "ACE_MedicalDefibrillation-ChargeUserAction_Name"
    Target_en_us "Charge"
-   ActorGender NONE
+   ActorGender 2147483647
    Terminology NONE
-   Modified 1696615839
+   Modified 1696996463
    Author "Anthony"
    LastChanged "Anthony"
   }
   CustomStringTableItem "{651E040FF6C2CEBF}" {
-   Id "#ACE_Medical_DefibrillatorConnectPatientUserAction_Name"
+   Id "ACE_MedicalDefibrillation-ConnectPatientUserAction_Name"
    Target_en_us "Connect Patient"
-   Modified 1696615844
-   Author "Anthony"
-   LastChanged "Anthony"
-  }
-  CustomStringTableItem "{651E040150B7DA8A}" {
-   Id "#ACE_Medical_DefibrillatorConnectPatientUserAction_UserName"
-   Target_en_us "Connect Patient: %1"
-   Modified 1696615847
+   Modified 1696996466
    Author "Anthony"
    LastChanged "Anthony"
   }
   CustomStringTableItem "{651E040D31A8CD27}" {
-   Id "#ACE_Medical_DefibrillatorDeliverShockUserAction_Name"
+   Id "ACE_MedicalDefibrillation-DeliverShockUserAction_Name"
    Target_en_us "Deliver Shock"
-   Modified 1696615851
+   Modified 1696996471
    Author "Anthony"
    LastChanged "Anthony"
   }
   CustomStringTableItem "{651E040E3A1518BC}" {
-   Id "#ACE_Medical_DefibrillatorDisconnectUserAction_Name"
+   Id "ACE_MedicalDefibrillation-DisconnectUserAction_Name"
    Target_en_us "Disconnect"
-   Modified 1696615049
+   Modified 1696996473
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
+  CustomStringTableItem "{652411C6AD044D73}" {
+   Id "ACE_MedicalDefibrillation-Notification_PatientConnected"
+   Target_en_us "Defibrillator | Patient Connected: %1"
+   Modified 1697001761
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
+  CustomStringTableItem "{6526268C6ABAB194}" {
+   Id "ACE_MedicalDefibrillation-Notification_PatientConnected_AI"
+   Target_en_us "Defibrillator | Patient Connected: %1 | AI"
+   Modified 1697001763
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
+  CustomStringTableItem "{651955123012A595}" {
+   Id "ACE_MedicalDefibrillation-Notification_ShockDelivered"
+   Target_en_us "Defibrillator | Shock Delivered - Total Shocks This Arrest: %1"
+   Modified 1697001766
    Author "Anthony"
    LastChanged "Anthony"
   }
   CustomStringTableItem "{651E040E5F66A5A1}" {
-   Id "#ACE_Medical_DefibrillatorPickUpUserAction_Name"
+   Id "ACE_MedicalDefibrillation-PickUpUserAction_Name"
    Target_en_us "Pickup & Disconnect"
-   Modified 1696478942
-   Author "Hypoxic"
+   Modified 1696996486
+   Author "Anthony"
    LastChanged "Anthony"
   }
  }

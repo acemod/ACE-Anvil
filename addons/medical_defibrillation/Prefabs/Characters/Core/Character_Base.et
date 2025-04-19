@@ -8,13 +8,51 @@ SCR_ChimeraCharacter {
   }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
-    ACE_Medical_DefibrillationConnectPatientUserAction "{651E0400BB6819C4}" {
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList +{
+     }
+     UIInfo UIInfo "{630C214BCA7A937E}" {
+      Name "#ACE_Medical-UserAction_LeftRecoveryPosition"
+     }
+     ActionTitle "Recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 102
+     m_eUnconsciousPose LEFT_SIDE
+    }
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList +{
+     }
+     UIInfo UIInfo "{630C214BCA7A937E}" {
+      Name "#ACE_Medical-UserAction_LeftRecoveryPosition"
+     }
+     ActionTitle "Recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 102
+     m_eUnconsciousPose LEFT_SIDE
+    }
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList +{
+     }
+     UIInfo UIInfo "{630C214BCA7A937E}" {
+      Name "#ACE_Medical-UserAction_LeftRecoveryPosition"
+     }
+     ActionTitle "Recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 102
+     m_eUnconsciousPose LEFT_SIDE
+    }
+    ACE_Medical_DefibrillationConnectPatientUserAction "{65256EA788AF8C13}" {
      ParentContextList {
       "Chest"
      }
-     UIInfo UIInfo "{651E0400B08C1311}" {
-      Name "#ACE_Medical_DefibrillatorConnectPatientUserAction_Name"
+     UIInfo UIInfo "{65256EA79B5A3C99}" {
+      Name "#ACE_MedicalDefibrillation-ConnectPatientUserAction_Name"
+      Icon "{B547588B1CEBEC1D}UI/Textures/DamageState/damageState-unconscious.edds"
      }
+     Duration 1
     }
    }
   }

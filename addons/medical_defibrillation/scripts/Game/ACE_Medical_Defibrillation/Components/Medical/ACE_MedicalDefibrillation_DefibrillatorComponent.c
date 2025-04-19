@@ -1,20 +1,20 @@
-enum ACE_Medical_EDefibrillatorEmulation
+enum ACE_MedicalDefibrillation_EDefibrillatorEmulation
 {
 	Manual,
 	Automated
 }
 
-class ACE_Medical_DefibrillatorComponentClass : ACE_Medical_BaseComponentClass
+class ACE_MedicalDefibrillation_DefibrillatorComponentClass : ACE_Medical_BaseComponentClass
 {
 }
 
-class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
+class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseComponent
 {
-	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_Medical_EDefibrillatorEmulation))]
-	protected ACE_Medical_EDefibrillatorEmulation m_EDefibrillatorEmulation;
+	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_MedicalDefibrillation_EDefibrillatorEmulation))]
+	protected ACE_MedicalDefibrillation_EDefibrillatorEmulation m_EDefibrillatorEmulation;
 	
-	ACE_Medical_DefibrillationSystemSettings m_Settings;
-	static const ref array<ACE_Medical_ECardiacRhythm> shockableRhythms = { ACE_Medical_ECardiacRhythm.VF };
+	ACE_MedicalDefibrillation_DefibrillationSystemSettings m_Settings;
+	static const ref array<ACE_MedicalDefibrillation_ECardiacRhythm> shockableRhythms = { ACE_MedicalDefibrillation_ECardiacRhythm.VF };
 	
 	// Offset variables
 	protected float m_fAnalysisTimeOffset = 1;
@@ -42,15 +42,15 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	[RplProp(onRplName : "OnPatientReplicated")]
 	protected RplId m_iPatientRplId;
 	
-	const static string SOUNDCHARGED = "ACE_Medical_DefibrillatorSound_Charged";
-	const static string SOUNDCHARGING = "ACE_Medical_DefibrillatorSound_Charging";
-	const static string SOUNDSHOCKTHUMP = "ACE_Medical_DefibrillatorSound_Thump";
+	const static string SOUNDCHARGED = "ACE_MedicalDefibrillationSound_Charged";
+	const static string SOUNDCHARGING = "ACE_MedicalDefibrillationSound_Charging";
+	const static string SOUNDSHOCKTHUMP = "ACE_MedicalDefibrillationSound_Thump";
 	
-	const static string SOUNDSHOCKADVISED = "ACE_DefibrillatorVoicePrompt_ShockAdvised";
-	const static string SOUNDNOSHOCKADVISED = "ACE_DefibrillatorVoicePrompt_NoShockAdvised";
-	const static string SOUNDANALYSING = "ACE_DefibrillatorVoicePrompt_Analysing";
-	const static string SOUNDCONNECTED = "ACE_DefibrillatorVoicePrompt_Connected";
-	const static string SOUNDDISCONNECTED = "ACE_DefibrillatorVoicePrompt_Disconnected";
+	const static string SOUNDSHOCKADVISED = "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_ShockAdvised";
+	const static string SOUNDNOSHOCKADVISED = "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_NoShockAdvised";
+	const static string SOUNDANALYSING = "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Analysing";
+	const static string SOUNDCONNECTED = "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Connected";
+	const static string SOUNDDISCONNECTED = "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Disconnected";
 	
 	//------------------------------------------------------------------------------------------------	
 	override protected void EOnInit(IEntity owner)
@@ -88,7 +88,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	override typename GetAssociatedSystemType()
 	{
-		return ACE_Medical_DefibrillationSystem;
+		return ACE_MedicalDefibrillation_DefibrillationSystem;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -98,17 +98,17 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Medical_DefibrillationSystem GetDefibrillationSystem()
+	ACE_MedicalDefibrillation_DefibrillationSystem GetDefibrillationSystem()
 	{
 		ChimeraWorld world = GetGame().GetWorld();
 		if (!world)
 			return null;
 		
-		ACE_Medical_DefibrillationSystem system = ACE_Medical_DefibrillationSystem.Cast(world.FindSystem(ACE_Medical_DefibrillationSystem));
+		ACE_MedicalDefibrillation_DefibrillationSystem system = ACE_MedicalDefibrillation_DefibrillationSystem.Cast(world.FindSystem(ACE_MedicalDefibrillation_DefibrillationSystem));
 		
 		if (!system)
 		{
-			Print("ACE_Medical_DefibrillatorComponent::GetDefibrillationSystem | No system found.", level: LogLevel.ERROR);
+			Print("ACE_MedicalDefibrillation_DefibrillatorComponent::GetDefibrillationSystem | No system found.", level: LogLevel.ERROR);
 			return null;
 		}
 		
@@ -118,21 +118,21 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected void RegisterToSystem(IEntity entity)
 	{
-		ACE_Medical_DefibrillationSystem system = GetDefibrillationSystem();
+		ACE_MedicalDefibrillation_DefibrillationSystem system = GetDefibrillationSystem();
 		if (system)
 			system.Register(entity);
 		else
-			Print("ACE_Medical_DefibrillatorComponent::RegisterToSystem | Cannot register to defibrillation system", level: LogLevel.ERROR);
+			Print("ACE_MedicalDefibrillation_DefibrillatorComponent::RegisterToSystem | Cannot register to defibrillation system", level: LogLevel.ERROR);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void UnregisterFromSystem(IEntity entity)
 	{
-		ACE_Medical_DefibrillationSystem system = GetDefibrillationSystem();
+		ACE_MedicalDefibrillation_DefibrillationSystem system = GetDefibrillationSystem();
 		if (system)
 			system.Unregister(entity);
 		else
-			Print("ACE_Medical_DefibrillatorComponent::RegisterToSystem | Cannot unregister from defibrillation system", level: LogLevel.ERROR);
+			Print("ACE_MedicalDefibrillation_DefibrillatorComponent::RegisterToSystem | Cannot unregister from defibrillation system", level: LogLevel.ERROR);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -144,7 +144,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 		SetIsAnalysed(false);
 		SetIsCharged(false);
 		
-		PrintFormat("ACE_Medical_DefibrillatorComponent::ResetAnalysisAndCharge | Reset Defibrillator [Analysis = %1, Charge = %1]", m_fAnalysisAmount, m_fChargeAmount);
+		PrintFormat("ACE_MedicalDefibrillation_DefibrillatorComponent::ResetAnalysisAndCharge | Reset Defibrillator [Analysis = %1, Charge = %1]", m_fAnalysisAmount, m_fChargeAmount);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	void AnalyzeRhythm()
 	{
-		Print("ACE_Medical_DefibrillatorComponent::AnalyzeRhythm | Starting rhythm analysis...", level: LogLevel.DEBUG);
+		Print("ACE_MedicalDefibrillation_DefibrillatorComponent::AnalyzeRhythm | Starting rhythm analysis...", level: LogLevel.DEBUG);
 		
 		ResetAnalysisAndCharge();
 		SetAnalysing(true);
@@ -174,7 +174,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	void Charge()
 	{		
-		Print("ACE_Medical_DefibrillatorComponent::Charge | Starting charging sequence...", level: LogLevel.DEBUG);
+		Print("ACE_MedicalDefibrillation_DefibrillatorComponent::Charge | Starting charging sequence...", level: LogLevel.DEBUG);
 		
 		ResetAnalysisAndCharge();
 		SetCharging(true);
@@ -183,48 +183,50 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ConnectPatient(IEntity patient)
+	bool ConnectPatient(IEntity patient)
 	{		
 		ResetPatient();
 		
 		if (!patient)
-			return;
+			return false;
 		
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
-			return;	
+			return false;	
 		
 		PlaySound(SOUNDCONNECTED, true);
 		
-		m_iPatientRplId = ACE_Medical_DefibrillationReplicationHelper.GetRplIdByEntity(patient);
+		m_iPatientRplId = ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(patient);
 		m_patient = patient;
 		Replication.BumpMe();
 		
-		PrintFormat("ACE_Medical_DefibrillatorComponent::ConnectPatient | Connected Patient: %1", patient.ClassName());
-		PrintFormat("ACE_Medical_DefibrillatorComponent::ConnectPatient | Connected PatientID: %1", m_iPatientRplId);
-		return;
+		PrintFormat("ACE_MedicalDefibrillation_DefibrillatorComponent::ConnectPatient | Connected Patient: %1", patient.ClassName());
+		PrintFormat("ACE_MedicalDefibrillation_DefibrillatorComponent::ConnectPatient | Connected PatientID: %1", m_iPatientRplId);
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void DeliverShock()
+	bool DeliverShock()
 	{
 		if (!IsReadyToShock())
-			return;
+			return false;
 		
 		TerminateSound();
 		
 		ResetAnalysisAndCharge();
 		
 		// Shock thump sound effect - played on patient
-		RPC_PlaySoundOnPatient(ACE_Medical_DefibrillatorComponent.SOUNDSHOCKTHUMP);
-		Rpc(RPC_PlaySoundOnPatient, ACE_Medical_DefibrillatorComponent.SOUNDSHOCKTHUMP);
+		RPC_PlaySoundOnPatient(ACE_MedicalDefibrillation_DefibrillatorComponent.SOUNDSHOCKTHUMP);
+		Rpc(RPC_PlaySoundOnPatient, ACE_MedicalDefibrillation_DefibrillatorComponent.SOUNDSHOCKTHUMP);
 		
 		ACE_Medical_CardiovascularComponent cardiovascularComponent;
 		if (!GetConnectedPatientCardiovascularComponent(cardiovascularComponent))
-			return;
+			return false;
 
 		cardiovascularComponent.AddShocksDelivered(1);
 		cardiovascularComponent.SetShockCooldown(cardiovascularComponent.GetShockCooldownTime());
+		
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -250,7 +252,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 		if (!GetConnectedPatientCardiovascularComponent(cardiovascularComponent))
 			return false;
 		
-		ACE_Medical_ECardiacRhythm rhythm = cardiovascularComponent.GetCardiacRhythm();
+		ACE_MedicalDefibrillation_ECardiacRhythm rhythm = cardiovascularComponent.GetCardiacRhythm();
 		if (shockableRhythms.Contains(rhythm))
 			return true;
 		
@@ -295,7 +297,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnPatientReplicated()
 	{
-		m_patient = ACE_Medical_DefibrillationReplicationHelper.GetEntityByRplId(m_iPatientRplId);
+		m_patient = ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
 	}
 	
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
@@ -345,7 +347,7 @@ class ACE_Medical_DefibrillatorComponent : ACE_Medical_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	// GETTERS AND SETTERS
 	//------------------------------------------------------------------------------------------------
-	ACE_Medical_EDefibrillatorEmulation GetDefibrillationEmulation()
+	ACE_MedicalDefibrillation_EDefibrillatorEmulation GetDefibrillationEmulation()
 	{
 		return m_EDefibrillatorEmulation;
 	}

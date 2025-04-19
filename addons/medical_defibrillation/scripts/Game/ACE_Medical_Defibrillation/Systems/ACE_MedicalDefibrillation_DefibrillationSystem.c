@@ -2,9 +2,9 @@
 	Will need to extend/modify this system if manual defibs are added. Will need a manual defib component.
 */
 
-class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
+class ACE_MedicalDefibrillation_DefibrillationSystem : ACE_Medical_BaseSystem3
 {
-	protected ACE_Medical_DefibrillationSystemSettings m_Settings;
+	protected ACE_MedicalDefibrillation_DefibrillationSystemSettings m_Settings;
 	
 	//------------------------------------------------------------------------------------------------
 	override static void InitInfo(WorldSystemInfo outInfo)
@@ -20,7 +20,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 		if (settings && settings.m_DefibrillationSystem)
 			m_Settings = settings.m_DefibrillationSystem;
 		
-		Print("ACE_Medical_DefibrillationSystem.OnInit:: Defib system starting...");
+		Print("ACE_MedicalDefibrillation_DefibrillationSystem.OnInit:: Defib system starting...");
 		super.OnInit();
 	}
 
@@ -29,15 +29,15 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	{
 		super.Update(entity, timeSlice);
 		
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
-		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_Medical_EDefibrillatorEmulation.Automated)
+		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_MedicalDefibrillation_EDefibrillatorEmulation.Automated)
 			UpdateAED(entity, timeSlice);
 		
 		// TODO: Impliment manual defibrillator
-		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_Medical_EDefibrillatorEmulation.Manual)
+		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_MedicalDefibrillation_EDefibrillatorEmulation.Manual)
 		{
 		}
 	}
@@ -47,13 +47,13 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	{
 		super.Register(entity);
 		
-		PrintFormat("ACE_Medical_DefibrillationSystem.Register:: Entity <%1> Registered", entity.ClassName());
+		PrintFormat("ACE_MedicalDefibrillation_DefibrillationSystem.Register:: Entity <%1> Registered", entity.ClassName());
 	}
 		
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateAED(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
@@ -66,7 +66,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateCharge(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
@@ -75,11 +75,11 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 		
 		if (defibrillatorComponent.IsCharging())
 		{
-			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Amount to add to charge = %1", timeSlice / chargeTime);
+			PrintFormat("ACE_MedicalDefibrillation_DefibrillationSystem.UpdateAnalysis:: Amount to add to charge = %1", timeSlice / chargeTime);
 			charge += timeSlice / chargeTime;
 			defibrillatorComponent.SetChargeAmount(charge);
 			
-			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Current charge percent = %1", defibrillatorComponent.GetChargeAmount());
+			PrintFormat("ACE_MedicalDefibrillation_DefibrillationSystem.UpdateAnalysis:: Current charge percent = %1", defibrillatorComponent.GetChargeAmount());
 			
 			if (charge >= 1.0)
 			{
@@ -94,7 +94,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateAnalysis(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
@@ -103,11 +103,11 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 		
 		if (defibrillatorComponent.IsAnalysing())
 		{
-			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Amount to add to analysis = %1", timeSlice / analysisTime);
+			PrintFormat("ACE_MedicalDefibrillation_DefibrillationSystem.UpdateAnalysis:: Amount to add to analysis = %1", timeSlice / analysisTime);
 			analysis += timeSlice / analysisTime;
 			defibrillatorComponent.SetAnalysisAmount(analysis);
 
-			PrintFormat("ACE_Medical_DefibrillationSystem.UpdateAnalysis:: Current analysis percent = %1", defibrillatorComponent.GetAnalysisAmount());
+			PrintFormat("ACE_MedicalDefibrillation_DefibrillationSystem.UpdateAnalysis:: Current analysis percent = %1", defibrillatorComponent.GetAnalysisAmount());
 			
 			if (analysis >= 1.0)
 			{
@@ -132,7 +132,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateSoundEffects(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
@@ -145,7 +145,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	//------------------------------------------------------------------------------------------------
 	protected void CheckPatientPosition(IEntity entity, float timeSlice)
 	{
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
@@ -167,7 +167,7 @@ class ACE_Medical_DefibrillationSystem : ACE_Medical_BaseSystem3
 	{
 		super.OnDiag(timeSlice);
 		
-		DbgUI.Begin("ACE_Medical_DefibrillationSystem");
+		DbgUI.Begin("ACE_MedicalDefibrillation_DefibrillationSystem");
 		
 		DbgUI.Text("AEDs: " + m_aQueue.Count());
 		

@@ -2,7 +2,7 @@ AudioClass {
  sounds {
   SoundClass {
    id 3081
-   name "ACE_Medical_DefibrillatorSound_Charging"
+   name "ACE_MedicalDefibrillationSound_Charging"
    version 5
    tl 203.07 -242.009
    ins {
@@ -20,7 +20,7 @@ AudioClass {
   }
   SoundClass {
    id 8201
-   name "ACE_Medical_DefibrillatorSound_Charged"
+   name "ACE_MedicalDefibrillationSound_Charged"
    version 5
    tl 208.57 132.646
    ins {
@@ -38,7 +38,7 @@ AudioClass {
   }
   SoundClass {
    id 14345
-   name "ACE_Medical_DefibrillatorSound_Thump"
+   name "ACE_MedicalDefibrillationSound_Thump"
    version 5
    tl 209.57 530.426
    ins {
@@ -254,7 +254,7 @@ AudioClass {
    tl -258.982 -249.116
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{D0B7ABE445409970}Sounds/DefibCharge.wav"
+     Filename "{D0B7ABE445409970}Sounds/ACE_DefibrillatorSound_Charging.wav"
     }
    }
   }
@@ -267,7 +267,7 @@ AudioClass {
    "Infinite loop" 1
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{496A55EAAAD3C099}Sounds/DefibCharged.wav"
+     Filename "{496A55EAAAD3C099}Sounds/ACE_DefibrillatorSound_Charged.wav"
     }
    }
   }
@@ -278,7 +278,7 @@ AudioClass {
    tl -256.481 528.998
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{A9F7DB0FF2EE8CC5}Sounds/AEDShockThump.wav"
+     Filename "{A9F7DB0FF2EE8CC5}Sounds/ACE_DefibrillatorSound_ShockThump.wav"
     }
    }
   }

@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_DefibrillatorNetworkComponentClass: ScriptComponentClass
+class ACE_MedicalDefibrillation_NetworkComponentClass: ScriptComponentClass
 {
 }
 
 //------------------------------------------------------------------------------------------------
 //! Class attached to player controller 
-class ACE_Medical_DefibrillatorNetworkComponent : ScriptComponent
+class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 {
 	protected SCR_PlayerController m_pPlayerController;
 	
@@ -17,33 +17,25 @@ class ACE_Medical_DefibrillatorNetworkComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void RequestDefibrillatorNotification(ENotification type, IEntity defibrillator, SCR_ChimeraCharacter patient)
+	void RequestDefibrillatorNotification(ENotification type, IEntity defibrillator, SCR_ChimeraCharacter patient = null)
 	{
 		Rpc(RpcAsk_GetDefibrillatorNotification,
 			type,
-			ACE_Medical_DefibrillationReplicationHelper.GetRplIdByEntity(defibrillator),
-			ACE_Medical_DefibrillationReplicationHelper.GetRplIdByEntity(patient));
+			ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(defibrillator),
+			ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(patient));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void RpcAsk_GetDefibrillatorNotification(ENotification type, RplId defibrillatorID, RplId patientID)
 	{
-		PrintFormat("ACE_Medical_DefibrillatorNetworkComponent::RpcAsk_GetDefibrillatorNotification | Server Execution: %1", Replication.IsServer());
+		PrintFormat("ACE_MedicalDefibrillation_NetworkComponent::RpcAsk_GetDefibrillatorNotification | Server Execution: %1", Replication.IsServer());
 		
-		SCR_ChimeraCharacter patient = SCR_ChimeraCharacter.Cast(ACE_Medical_DefibrillationReplicationHelper.GetEntityByRplId(patientID));
-		if (!patient)
-			return;
-		
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
-		if (!cardiovascularComponent)
-			return;
-		
-		IEntity defibrillator = IEntity.Cast(ACE_Medical_DefibrillationReplicationHelper.GetEntityByRplId(defibrillatorID));
+		IEntity defibrillator = IEntity.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(defibrillatorID));
 		if (!defibrillator)
 			return;
 		
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(defibrillator.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(defibrillator.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
@@ -60,9 +52,29 @@ class ACE_Medical_DefibrillatorNetworkComponent : ScriptComponent
 				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, playerID);
 				break;
 			}
+			case ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTDISCONNECTED:
+			{
+				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type);
+				break;
+			}
 			case ENotification.ACE_MEDICALDEFIBRILLATION_SHOCKDELIVERED:
 			{
+				ACE_Medical_CardiovascularComponent cardiovascularComponent;
+				if(!defibrillatorComponent.GetConnectedPatientCardiovascularComponent(cardiovascularComponent))
+					break;
+				if (!cardiovascularComponent)
+					break;
 				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, cardiovascularComponent.GetShocksDelivered());
+				break;
+			}
+			case ENotification.ACE_MEDICALDEFIBRILLATION_ANALYSED:
+			{
+				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type);
+				break;
+			}
+			case ENotification.ACE_MEDICALDEFIBRILLATION_CHARGED:
+			{
+				SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type);
 				break;
 			}
 		}

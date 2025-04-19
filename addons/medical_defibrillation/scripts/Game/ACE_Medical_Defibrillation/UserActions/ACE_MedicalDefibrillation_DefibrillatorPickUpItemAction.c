@@ -1,11 +1,12 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_DefibrillatorPickUpItemAction : SCR_PickUpItemAction
+class ACE_MedicalDefibrillation_DefibrillatorPickUpItemAction : SCR_PickUpItemAction
 {
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		super.PerformAction(pOwnerEntity, pUserEntity);
+		if (!Replication.IsServer())
+			return;
 		
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		

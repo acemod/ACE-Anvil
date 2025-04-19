@@ -2,9 +2,9 @@ modded class ACE_Medical_CardiovascularComponent
 {
 	// Needs replication
 	[RplProp()]
-	protected ACE_Medical_ECardiacRhythm m_eCardiacRhythm = ACE_Medical_ECardiacRhythm.Sinus;
+	protected ACE_MedicalDefibrillation_ECardiacRhythm m_eCardiacRhythm = ACE_MedicalDefibrillation_ECardiacRhythm.Sinus;
 	
-	protected static const ref array<ACE_Medical_ECardiacRhythm> pulselessRhythms = { ACE_Medical_ECardiacRhythm.VF, ACE_Medical_ECardiacRhythm.PEA };
+	protected static const ref array<ACE_MedicalDefibrillation_ECardiacRhythm> pulselessRhythms = { ACE_MedicalDefibrillation_ECardiacRhythm.VF, ACE_MedicalDefibrillation_ECardiacRhythm.PEA };
 	
 	// Needs replication
 	[RplProp()]
@@ -20,13 +20,13 @@ modded class ACE_Medical_CardiovascularComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Medical_ECardiacRhythm GetCardiacRhythm()
+	ACE_MedicalDefibrillation_ECardiacRhythm GetCardiacRhythm()
 	{
 		return m_eCardiacRhythm;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetCardiacRhythm(ACE_Medical_ECardiacRhythm rhythm)
+	void SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm rhythm)
 	{
 		m_eCardiacRhythm = rhythm;
 		Replication.BumpMe();

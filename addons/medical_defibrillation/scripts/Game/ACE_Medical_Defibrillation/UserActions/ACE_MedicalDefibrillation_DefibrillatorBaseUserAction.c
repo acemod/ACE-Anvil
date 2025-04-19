@@ -1,6 +1,6 @@
-class ACE_Medical_DefibrillatorBaseUserAction : ScriptedUserAction
+class ACE_MedicalDefibrillator_DefibrillatorBaseUserAction : ScriptedUserAction
 {
-	protected ACE_Medical_DefibrillatorComponent m_defibrillatorComponent;
+	protected ACE_MedicalDefibrillation_DefibrillatorComponent m_defibrillatorComponent;
 	
 	//------------------------------------------------------------------------------------------------	
 	override bool CanBeShownScript(IEntity user)
@@ -11,7 +11,7 @@ class ACE_Medical_DefibrillatorBaseUserAction : ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
-		m_defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(pOwnerEntity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		m_defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(pOwnerEntity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ class ACE_Medical_DefibrillatorBaseUserAction : ScriptedUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static bool GetDefibrillatorNetworkComponent(IEntity user, out ACE_Medical_DefibrillatorNetworkComponent networkComponent)
+	static bool GetDefibrillatorNetworkComponent(IEntity user, out ACE_MedicalDefibrillation_NetworkComponent networkComponent)
 	{
 		if (!user)
 			return false;
@@ -40,7 +40,7 @@ class ACE_Medical_DefibrillatorBaseUserAction : ScriptedUserAction
 		if (!userController)
 			return false;
 		
-		networkComponent = ACE_Medical_DefibrillatorNetworkComponent.Cast(userController.FindComponent(ACE_Medical_DefibrillatorNetworkComponent));
+		networkComponent = ACE_MedicalDefibrillation_NetworkComponent.Cast(userController.FindComponent(ACE_MedicalDefibrillation_NetworkComponent));
 		if (!networkComponent)
 			return false;
 		

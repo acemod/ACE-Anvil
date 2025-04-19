@@ -1,4 +1,4 @@
-class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
+class ACE_MedicalDefibrillation_DefibrillationConnectPatientUserAction: ScriptedUserAction
 {
 	float m_fSearchDistanceShown = 3;
 	float m_fShortestDistanceShown;
@@ -55,7 +55,7 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 		}
 		
 		// check for defib component
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(m_pNearestAEDShown.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(m_pNearestAEDShown.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return false;
 		
@@ -74,9 +74,10 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		super.PerformAction(pOwnerEntity, pUserEntity);
+		if (!Replication.IsServer())
+			return;
 		
-		PrintFormat("ACE_Medical_DefibrillationConnectPatientUserAction::Perform Action | Server Execution: %1", Replication.IsServer());
+		PrintFormat("ACE_MedicalDefibrillation_DefibrillationConnectPatientUserAction::Perform Action | Server Execution: %1", Replication.IsServer());
 		
 		// check for neabyAED
 		QueryForAEDPerform(pOwnerEntity.GetOrigin(), 3);
@@ -87,21 +88,22 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 		}
 		
 		// check for defib compponent
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(m_pNearestAEDPerform.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(m_pNearestAEDPerform.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
-		defibrillatorComponent.ConnectPatient(pOwnerEntity);
-		
-		ACE_Medical_DefibrillatorNetworkComponent networkComponent;
-		if (!ACE_Medical_DefibrillatorBaseUserAction.GetDefibrillatorNetworkComponent(pUserEntity, networkComponent))
-			return;
-		
-		if (EntityUtils.IsPlayer(pOwnerEntity))
-			networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED, defibrillatorComponent.GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
-		else
-			networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED_AI, defibrillatorComponent.GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
-		
+		// connect and notify
+		if (defibrillatorComponent.ConnectPatient(pOwnerEntity))
+		{
+			ACE_MedicalDefibrillation_NetworkComponent networkComponent;
+			if (!ACE_MedicalDefibrillator_DefibrillatorBaseUserAction.GetDefibrillatorNetworkComponent(pUserEntity, networkComponent))
+				return;
+			
+			if (EntityUtils.IsPlayer(pOwnerEntity))
+				networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED, defibrillatorComponent.GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
+			else
+				networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED_AI, defibrillatorComponent.GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -122,7 +124,7 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 		if (!m_pNearestAEDShown)
 			return false;
 		
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(m_pNearestAEDShown.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(m_pNearestAEDShown.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return false;
 		
@@ -183,7 +185,7 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 		if (!entity)
 			return true;
 		
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return true;
 		
@@ -204,7 +206,7 @@ class ACE_Medical_DefibrillationConnectPatientUserAction: ScriptedUserAction
 		if (!entity)
 			return true;
 		
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(entity.FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(entity.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return true;
 		

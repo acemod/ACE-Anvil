@@ -26,14 +26,14 @@ modded class ACE_Medical_CardiovascularSystem
 		
 		if (cardiovascularComponent.IsInCardiacArrest())
 		{
-			cardiovascularComponent.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.VF);
+			cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.VF);
 			// TODO: impliment system for deterioration to PEA - we need two cardiac arrest states?
 			if (damageManager.GetState() == EDamageState.DESTROYED)
-				cardiovascularComponent.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Asystole);
+				cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Asystole);
 		}
 		else
 		{
-			cardiovascularComponent.SetCardiacRhythm(ACE_Medical_ECardiacRhythm.Sinus);
+			cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Sinus);
 		}
 	}
 	
@@ -104,10 +104,10 @@ modded class ACE_Medical_CardiovascularSystem
 		if (!cardiovascularComponent)
 			return;
 
-		ACE_Medical_ECardiacRhythm rhythm = cardiovascularComponent.GetCardiacRhythm();
-		string rhythmName = SCR_Enum.GetEnumName(ACE_Medical_ECardiacRhythm, rhythm);
+		ACE_MedicalDefibrillation_ECardiacRhythm rhythm = cardiovascularComponent.GetCardiacRhythm();
+		string rhythmName = SCR_Enum.GetEnumName(ACE_MedicalDefibrillation_ECardiacRhythm, rhythm);
 		
-		DbgUI.Begin(string.Format("ACE_Medical_DefibrillationSystem (%1)", targetType), 0, 700);
+		DbgUI.Begin(string.Format("ACE_MedicalDefibrillation_DefibrillationSystem (%1)", targetType), 0, 700);
 		DbgUI.Text(string.Format("Cardiac rhythm:                  %1", rhythmName));
 		DbgUI.Text(string.Format("# of Shocks:                  %1", cardiovascularComponent.GetShocksDelivered()));
 		DbgUI.Text(string.Format("Shock cooldown:                  %1", cardiovascularComponent.GetShockCooldown()));

@@ -20,8 +20,8 @@ StringTable {
   }
   CustomStringTableItem "{651E040FF6C2CEBF}" {
    Id "ACE_MedicalDefibrillation-ConnectPatientUserAction_Name"
-   Target_en_us "Connect Patient"
-   Modified 1696996466
+   Target_en_us "Defibrillator | Connect Patient"
+   Modified 1697056457
    Author "Anthony"
    LastChanged "Anthony"
   }
@@ -39,6 +39,20 @@ StringTable {
    Author "Anthony"
    LastChanged "Anthony"
   }
+  CustomStringTableItem "{65270650C2EC361E}" {
+   Id "ACE_MedicalDefibrillation-Notification_DefibrillatorAnalysed"
+   Target_en_us "Defibrillator | Analysis: 100%"
+   Modified 1697056883
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
+  CustomStringTableItem "{65270650E430C64F}" {
+   Id "ACE_MedicalDefibrillation-Notification_DefibrillatorCharged"
+   Target_en_us "Defibrillator | Charge: 100%"
+   Modified 1697056839
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
   CustomStringTableItem "{652411C6AD044D73}" {
    Id "ACE_MedicalDefibrillation-Notification_PatientConnected"
    Target_en_us "Defibrillator | Patient Connected: %1"
@@ -50,6 +64,13 @@ StringTable {
    Id "ACE_MedicalDefibrillation-Notification_PatientConnected_AI"
    Target_en_us "Defibrillator | Patient Connected: %1 | AI"
    Modified 1697001763
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
+  CustomStringTableItem "{65270651F0DD45D7}" {
+   Id "ACE_MedicalDefibrillation-Notification_PatientDisconnected"
+   Target_en_us "Defibrillator | Patient Disconnected"
+   Modified 1697056429
    Author "Anthony"
    LastChanged "Anthony"
   }

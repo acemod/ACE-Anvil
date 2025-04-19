@@ -1,13 +1,13 @@
-class ACE_Medical_DefibrillatorAnalyseUserAction : ACE_Medical_DefibrillatorBaseUserAction
+class ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction : ACE_MedicalDefibrillator_DefibrillatorBaseUserAction
 {
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return false; 
 		
-		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_Medical_EDefibrillatorEmulation.Manual)
+		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_MedicalDefibrillation_EDefibrillatorEmulation.Manual)
 			return false;
 		
 		if (!defibrillatorComponent.GetConnectedPatient())
@@ -31,7 +31,7 @@ class ACE_Medical_DefibrillatorAnalyseUserAction : ACE_Medical_DefibrillatorBase
 	//------------------------------------------------------------------------------------------------
 	override bool CanBePerformedScript(IEntity user)
 	{
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return false; 
 		
@@ -51,9 +51,10 @@ class ACE_Medical_DefibrillatorAnalyseUserAction : ACE_Medical_DefibrillatorBase
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
-		super.PerformAction(pOwnerEntity, pUserEntity);
+		if (!Replication.IsServer())
+			return;
 		
-		ACE_Medical_DefibrillatorComponent defibrillatorComponent = ACE_Medical_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_Medical_DefibrillatorComponent));
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		

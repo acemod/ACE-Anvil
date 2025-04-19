@@ -2,7 +2,7 @@ AudioClass {
  sounds {
   SoundClass {
    id 18441
-   name "ACE_DefibrillatorVoicePrompt_ShockAdvised"
+   name "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_ShockAdvised"
    version 5
    tl 218.951 798.913
    ins {
@@ -20,7 +20,7 @@ AudioClass {
   }
   SoundClass {
    id 26633
-   name "ACE_DefibrillatorVoicePrompt_NoShockAdvised"
+   name "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_NoShockAdvised"
    version 5
    tl 215.02 1192.226
    ins {
@@ -38,7 +38,7 @@ AudioClass {
   }
   SoundClass {
    id 28681
-   name "ACE_DefibrillatorVoicePrompt_Analysing"
+   name "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Analysing"
    version 5
    tl 215.893 1577.426
    ins {
@@ -56,7 +56,7 @@ AudioClass {
   }
   SoundClass {
    id 43017
-   name "ACE_DefibrillatorVoicePrompt_Connected"
+   name "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Connected"
    version 5
    tl 208.92 1950.926
    ins {
@@ -74,7 +74,7 @@ AudioClass {
   }
   SoundClass {
    id 50185
-   name "ACE_DefibrillatorVoicePrompt_Disconnected"
+   name "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Disconnected"
    version 5
    tl 219.498 2328.444
    ins {
@@ -415,7 +415,7 @@ AudioClass {
    tl -263.681 795.198
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{B947101D98B22D7C}Sounds/AEDShockAdvised.wav"
+     Filename "{B947101D98B22D7C}Sounds/ACE_DefibrillatorVoicePrompt_ShockAdvised.wav"
     }
    }
   }
@@ -426,7 +426,7 @@ AudioClass {
    tl -251.031 1190.798
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{1FA0148AF1CCD1DD}Sounds/AEDNoShockAdvised.wav"
+     Filename "{1FA0148AF1CCD1DD}Sounds/ACE_DefibrillatorVoicePrompt_NoShockAdvised.wav"
     }
    }
   }
@@ -437,7 +437,7 @@ AudioClass {
    tl -251.481 1575.998
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{8E2A822D6B05EBBE}Sounds/AEDAnalysing.wav"
+     Filename "{8E2A822D6B05EBBE}Sounds/ACE_DefibrillatorVoicePrompt_Analysing.wav"
     }
    }
   }
@@ -448,7 +448,7 @@ AudioClass {
    tl -257.131 1949.498
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{B5C11AB72AC005FA}Sounds/AEDConnected.wav"
+     Filename "{B5C11AB72AC005FA}Sounds/ACE_DefibrillatorVoicePrompt_Connected.wav"
     }
    }
   }
@@ -459,7 +459,7 @@ AudioClass {
    tl -245.231 2329.661
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{738508CCEC10793E}Sounds/AEDDisconnected.wav"
+     Filename "{738508CCEC10793E}Sounds/ACE_DefibrillatorVoicePrompt_Disconnected.wav"
     }
    }
   }

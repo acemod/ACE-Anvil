@@ -1,4 +1,4 @@
-class ACE_Medical_DefibrillationReplicationHelper
+class ACE_MedicalDefibrillation_ReplicationHelper
 {
 	static IEntity GetEntityByRplId(RplId id)
 	{

@@ -1,3 +1,21 @@
 GenericEntity : "{7E096143E0A4363E}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorBase.et" {
  ID "64FB47CDCCA18EE0"
+ components {
+  ActionsManagerComponent "{64FB47CDCCA18F20}" {
+   additionalActions {
+    ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction "{652723B8A735E8A7}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{652723B8BA8D3E94}" {
+      Name "#ACE_MedicalDefibrillation-AnalyseUserAction_Name"
+      Icon "{B547588B1CEBEC1D}UI/Textures/DamageState/damageState-unconscious.edds"
+     }
+     ActionTitle "Analyse"
+     Duration 1
+     "Sort Priority" 1
+    }
+   }
+  }
+ }
 }

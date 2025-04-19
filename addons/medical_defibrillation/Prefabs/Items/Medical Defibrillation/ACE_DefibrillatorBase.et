@@ -1,0 +1,128 @@
+GenericEntity {
+ ID "64FB47CDCCA18EE0"
+ components {
+  SignalsManagerComponent "{651E4D02BBFA2D4D}" {
+  }
+  SoundComponent "{651E578A097357B0}" {
+   Filenames {
+    "{561CB411D5D8E866}Sounds/ACE_Medical_DefibrillatorSounds.acp" "{0340D00A7674D634}Sounds/ACE_Medical_DefibrillatorVoicePrompts.acp"
+   }
+  }
+  ACE_Medical_DefibrillatorComponent "{65185A75B2096E60}" {
+  }
+  InventoryItemComponent "{64FB47C975E9E4C6}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "Automated External Defibrillator (AED)"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
+     Weight 3.2
+    }
+    m_Size SLOT_1x1
+    m_eQuickSlotSize SLOT_1x1
+    m_SlotType SLOT_GADGETS_STORAGE
+    m_bStackable 0
+   }
+  }
+  MeshObject "{64FB47CE0046FB12}" {
+   Object "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.xob"
+  }
+  SCR_SoundDataComponent "{64FB47CDCCA18EDC}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{64FB47CDCCA18ED4}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_PICK_UP"
+    }
+    SCR_AudioSourceConfiguration "{64FB47CDCCA18F2F}" {
+     m_sSoundProject "{12A94705DF2BFD25}Sounds/Items/_SharedData/PickUp/Items_PickUp_Generic.acp"
+     m_sSoundEventName "SOUND_EQUIP"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{64FB47CDCCA18F2C}" {
+     m_sSoundProject "{CC0E5A1324E761C1}Sounds/Items/_SharedData/Drop/Items_Drop_Generic.acp"
+     m_sSoundEventName "SOUND_DROP"
+    }
+   }
+  }
+  ActionsManagerComponent "{64FB47CDCCA18F20}" {
+   ActionContexts {
+    UserActionContext "{64FB47CDCCA18F25}" {
+     ContextName "default"
+     Position PointInfo "{64FB47CDCCA18F39}" {
+     }
+     Radius 0.2
+    }
+   }
+   additionalActions {
+    ACE_Medical_DefibrillatorAnalyseUserAction "{651E0413F2C462EB}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{651E0413F593541B}" {
+      Name "#ACE_MedicalDefibrillation-AnalyseUserAction_Name"
+     }
+     Duration 1
+     "Sort Priority" 1
+    }
+    ACE_Medical_DefibrillatorChargeUserAction "{651E0416818490D6}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{651E04169D6E7F88}" {
+      Name "#ACE_MedicalDefibrillation-ChargeUserAction_Name"
+     }
+     Duration 1
+     "Sort Priority" 2
+    }
+    ACE_Medical_DefibrillatorDeliverShockUserAction "{651E041684C230FA}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{651E040E69003EFA}" {
+      Name "#ACE_MedicalDefibrillation-DeliverShockUserAction_Name"
+     }
+     Duration 1
+     "Sort Priority" 3
+    }
+    ACE_Medical_DefibrillatorDisconnectPatientUserAction "{651E0416877CFE6D}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{651E040E63100229}" {
+      Name "#ACE_MedicalDefibrillation-DisconnectUserAction_Name"
+     }
+     Duration 3
+     "Sort Priority" 4
+    }
+    ACE_Medical_DefibrillatorPickUpItemAction "{651E041699278D70}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{651E040E435C3557}" {
+      Name "#ACE_MedicalDefibrillation-PickUpUserAction_Name"
+     }
+     Duration 3
+     "Sort Priority" 5
+    }
+   }
+  }
+  GadgetAnimationComponent "{64FC042FA738F687}" {
+   AnimGraph "{8462461570E623A5}Assets/Weapons/Explosives/workspace/M34.agr"
+   AnimInstance "{67A3E465A8D20576}Assets/Weapons/Explosives/workspace/M34_weapon.asi"
+  }
+  GadgetGamepadEffectsManagerComponent "{64FB47CDCCA18F0F}" {
+   OwnedEffects {
+    GamepadTriggerEffect "{61E294244C3DAAFF}" : "{7D39CAE0A72D6C51}Prefabs/Weapons/Core/Configs/TriggerEffects/ADS/TriggerEffect_ADSGadget.conf" {
+    }
+    GamepadTriggerEffect "{61E29424EE08E95B}" : "{F518B28F67EC05AD}Prefabs/Weapons/Core/Configs/TriggerEffects/Charged/TriggerEffect_ChargedGadget.conf" {
+    }
+   }
+  }
+  RplComponent "{64FB47CDCCA18F01}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{64FB47CDCCA18F07}" {
+  }
+ }
+}

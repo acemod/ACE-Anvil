@@ -1,0 +1,310 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 3081
+   name "ACE_Medical_DefibrillatorSound_Charging"
+   version 5
+   tl 203.07 -242.009
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 5138
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB 6
+  }
+  SoundClass {
+   id 8201
+   name "ACE_Medical_DefibrillatorSound_Charged"
+   version 5
+   tl 208.57 132.646
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 12306
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB 3
+  }
+  SoundClass {
+   id 14345
+   name "ACE_Medical_DefibrillatorSound_Thump"
+   version 5
+   tl 209.57 530.426
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 16402
+       port 65
+      }
+     }
+    }
+   }
+  }
+ }
+ shaders {
+  ShaderClass {
+   id 5138
+   name "Shader 2"
+   version 5
+   tl -21.816 -243.544
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 6172
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 2067
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 4117
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 1028
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 12306
+   name "Shader 2"
+   version 5
+   tl -25.316 131.79
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 11292
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 10259
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 9237
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 7172
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 16402
+   name "Shader 2"
+   version 5
+   tl -24.316 529.57
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 15388
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 18451
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 13333
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 17412
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass {
+   id 2067
+   name "Amplitude 4"
+   version 5
+   tl -255.664 -66.299
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass {
+   id 10259
+   name "Amplitude 4"
+   version 5
+   tl -259.163 309.033
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass {
+   id 18451
+   name "Amplitude 4"
+   version 5
+   tl -258.163 706.813
+   curve "1/r"
+   outerRange 50
+  }
+ }
+ frequency {
+  FrequencyClass {
+   id 4117
+   name "Frequency 5"
+   version 5
+   tl -253.948 13.173
+   enableDistanceAtt 1
+  }
+  FrequencyClass {
+   id 9237
+   name "Frequency 5"
+   version 5
+   tl -257.448 388.507
+   enableDistanceAtt 1
+  }
+  FrequencyClass {
+   id 13333
+   name "Frequency 5"
+   version 5
+   tl -256.448 786.287
+   enableDistanceAtt 1
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 1028
+   name "Charging"
+   version 7
+   tl -258.982 -249.116
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{D0B7ABE445409970}Sounds/DefibCharge.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 7172
+   name "Charged"
+   version 7
+   tl -257.481 129.895
+   "Loop count" 255
+   "Infinite loop" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{496A55EAAAD3C099}Sounds/DefibCharged.wav"
+    }
+   }
+  }
+  BankLocalClass {
+   id 17412
+   name "Shock Thump"
+   version 7
+   tl -256.481 528.998
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{A9F7DB0FF2EE8CC5}Sounds/AEDShockThump.wav"
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass {
+   id 6172
+   name "Spatiality 3"
+   version 5
+   tl -251.66 -153.207
+   spatialFactor 1
+  }
+  SpatialityClass {
+   id 11292
+   name "Spatiality 3"
+   version 5
+   tl -255.161 222.127
+   spatialFactor 1
+  }
+  SpatialityClass {
+   id 15388
+   name "Spatiality 3"
+   version 5
+   tl -254.161 619.907
+   spatialFactor 1
+  }
+ }
+ version 1
+}

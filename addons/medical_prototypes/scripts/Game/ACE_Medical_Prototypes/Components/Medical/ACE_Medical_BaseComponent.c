@@ -71,6 +71,6 @@ class ACE_Medical_BaseComponent : ScriptComponent
 		
 		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(GetAssociatedSystemType());
 		if (system)
-			system.Unregister(owner);
+			system.Unregister(SCR_ChimeraCharacter.Cast(owner));
 	}
 }

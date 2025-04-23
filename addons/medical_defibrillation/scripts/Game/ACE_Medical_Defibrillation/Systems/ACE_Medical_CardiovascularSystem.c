@@ -49,7 +49,7 @@ modded class ACE_Medical_CardiovascularSystem
 		
 		if (newCooldown <= 0)
 		{
-			cardiovascularComponent.SetShockCooldown(0, true);
+			cardiovascularComponent.SetShockCooldown(0);
 		}
 		else
 		{
@@ -86,7 +86,7 @@ modded class ACE_Medical_CardiovascularSystem
 		float chance = Math.Map(scale, minScale, maxScale, m_Settings.m_fCPRSuccessChanceMin, m_Settings.m_fCPRSuccessChanceMax);
 		float diceRoll = Math.RandomFloat01();
 		
-		return diceRoll < chance + (component.GetShockChanceIncrease() * component.GetShocksDelivered());
+		return diceRoll < chance * (1 + (component.GetShockChanceIncrease() * component.GetShocksDelivered()));
 	}
 
 #ifdef WORKBENCH

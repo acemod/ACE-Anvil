@@ -69,6 +69,9 @@ class ACE_Medical_BaseComponent : ScriptComponent
 	{
 		super.OnDelete(owner);
 		
+		if (!GetGame().InPlayMode() || !Replication.IsServer())
+			return;
+		
 		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(GetAssociatedSystemType());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(owner));

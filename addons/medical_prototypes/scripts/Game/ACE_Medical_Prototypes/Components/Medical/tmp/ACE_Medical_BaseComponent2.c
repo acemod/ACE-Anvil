@@ -70,8 +70,8 @@ class ACE_Medical_BaseComponent2 : ScriptComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 		
-		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(GetAssociatedSystemType());
+		ACE_Medical_BaseSystem2 system = ACE_Medical_BaseSystem2.GetInstance(GetAssociatedSystemType());
 		if (system)
-			system.Unregister(owner);
+			system.Unregister(GetOwner());
 	}
 }

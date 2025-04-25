@@ -4,3 +4,4 @@ CHANGELOG.md
 
 # Enfusion files
 *.rdb
+/addons/medical_defibrillation/worlds

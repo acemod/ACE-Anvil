@@ -4,7 +4,7 @@ AudioClass {
    id 3081
    name "ACE_MedicalDefibrillationSound_Charging"
    version 5
-   tl 203.07 -242.009
+   tl 197.823 -290.924
    ins {
     ConnectionsClass connections {
      id 64
@@ -59,7 +59,7 @@ AudioClass {
    id 5138
    name "Shader 2"
    version 5
-   tl -21.816 -243.544
+   tl -27.063 -292.459
    ins {
     ConnectionsClass connections {
      id 0
@@ -202,7 +202,7 @@ AudioClass {
    id 2067
    name "Amplitude 4"
    version 5
-   tl -255.664 -66.299
+   tl -260.911 -115.214
    curve "1/r"
    outerRange 50
   }
@@ -228,7 +228,7 @@ AudioClass {
    id 4117
    name "Frequency 5"
    version 5
-   tl -253.948 13.173
+   tl -259.195 -35.742
    enableDistanceAtt 1
   }
   FrequencyClass {
@@ -251,10 +251,10 @@ AudioClass {
    id 1028
    name "Charging"
    version 7
-   tl -258.982 -249.116
+   tl -258.969 -295.401
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{D0B7ABE445409970}Sounds/ACE_DefibrillatorSound_Charging.wav"
+     Filename "{D0B7ABE445409970}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_Charging.wav"
     }
    }
   }
@@ -267,7 +267,7 @@ AudioClass {
    "Infinite loop" 1
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{496A55EAAAD3C099}Sounds/ACE_DefibrillatorSound_Charged.wav"
+     Filename "{496A55EAAAD3C099}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_Charged.wav"
     }
    }
   }
@@ -278,7 +278,7 @@ AudioClass {
    tl -256.481 528.998
    Samples {
     AudioBankSampleClass Sample {
-     Filename "{A9F7DB0FF2EE8CC5}Sounds/ACE_DefibrillatorSound_ShockThump.wav"
+     Filename "{A9F7DB0FF2EE8CC5}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_ShockThump.wav"
     }
    }
   }
@@ -288,7 +288,7 @@ AudioClass {
    id 6172
    name "Spatiality 3"
    version 5
-   tl -251.66 -153.207
+   tl -256.907 -203.437
    spatialFactor 1
   }
   SpatialityClass {

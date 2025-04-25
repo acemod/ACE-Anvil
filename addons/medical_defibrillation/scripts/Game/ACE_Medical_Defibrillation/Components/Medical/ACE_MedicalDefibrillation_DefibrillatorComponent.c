@@ -1,6 +1,6 @@
 enum ACE_MedicalDefibrillation_EDefibrillatorEmulation
 {
-	Manual,
+	Manual_NotImplimented,
 	Automated
 }
 
@@ -11,9 +11,8 @@ class ACE_MedicalDefibrillation_DefibrillatorComponentClass : ACE_Medical_BaseCo
 class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseComponent
 {
 	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_MedicalDefibrillation_EDefibrillatorEmulation))]
-	protected ACE_MedicalDefibrillation_EDefibrillatorEmulation m_EDefibrillatorEmulation;
+	protected ACE_MedicalDefibrillation_EDefibrillatorEmulation m_DefibrillatorEmulation;
 	
-	ACE_MedicalDefibrillation_DefibrillationSystemSettings m_Settings;
 	static const ref array<ACE_MedicalDefibrillation_ECardiacRhythm> shockableRhythms = { ACE_MedicalDefibrillation_ECardiacRhythm.VF };
 	
 	// Offset variables
@@ -21,7 +20,8 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	protected float m_fChargeTimeOffset = 0.0;
 	
 	// Analysis variables
-	protected float m_fAnalysisTime = 1;
+	[Attribute(defvalue: "1", params: "0 inf 0.1", desc: "Time (s) it takes for the defibrillator to analyse cardiac rhythm.")]
+	protected float m_fAnalysisTime;
 	protected float m_fAnalysisAmount = 0.0;
 	[RplProp()]
 	protected bool m_bIsAnalysing = false;
@@ -29,14 +29,15 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	protected bool m_bIsAnalysed = false;
 	
 	// Charge variables
-	protected float m_fChargeTime = 5.5;
+	[Attribute(defvalue: "5.5", params: "0 inf 0.1", desc: "Time (s) it takes for the defibrillator to fully charge.")]
+	protected float m_fChargeTime;
 	protected float m_fChargeAmount = 0.0;
 	[RplProp()]
 	protected bool m_bIsCharging = false;
 	[RplProp()]
 	protected bool m_bIsCharged = false;
 
-	AudioHandle m_currentSound;
+	protected AudioHandle m_currentSound;
 	
 	protected IEntity m_patient;
 	[RplProp(onRplName : "OnPatientReplicated")]
@@ -59,7 +60,8 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		
 		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
 		if (settings && settings.m_DefibrillationSystem)
-			m_Settings = settings.m_DefibrillationSystem;
+		{
+		}
 		// TODO: Do something with settings
 		
 		// add offsets to charge and analysis times to sync with sounds
@@ -73,6 +75,13 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 			invComp.m_OnParentSlotChangedInvoker.Insert(OnParentSlotChanged);
 			if (!invComp.GetParentSlot())
 				RegisterToSystem(owner);
+		}
+		
+		// get signals component and register the charge time for audio modulation
+		SignalsManagerComponent signalsManagerComponent;
+		if (GetSignalsComponent(signalsManagerComponent))
+		{
+			signalsManagerComponent.AddOrFindSignal("ACE_MedicalDefibrillation_ChargeSoundModulator", GetChargeTime());
 		}
 	}
 	
@@ -349,7 +358,7 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	//------------------------------------------------------------------------------------------------
 	ACE_MedicalDefibrillation_EDefibrillatorEmulation GetDefibrillationEmulation()
 	{
-		return m_EDefibrillatorEmulation;
+		return m_DefibrillatorEmulation;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -452,6 +461,7 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		if (!m_patient)
 			return false;
 		
+		componentOut = null;
 		componentOut = ACE_Medical_CardiovascularComponent.Cast(m_patient.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!componentOut)
 			return false;
@@ -462,7 +472,19 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	//------------------------------------------------------------------------------------------------
 	bool GetSoundComponent(out SoundComponent componentOut)
 	{
+		componentOut = null;
 		componentOut = SoundComponent.Cast(GetOwner().FindComponent(SoundComponent));
+		if (!componentOut)
+			return false;
+		
+		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool GetSignalsComponent(out SignalsManagerComponent componentOut)
+	{
+		componentOut = null;
+		componentOut = SignalsManagerComponent.Cast(GetOwner().FindComponent(SignalsManagerComponent));
 		if (!componentOut)
 			return false;
 		

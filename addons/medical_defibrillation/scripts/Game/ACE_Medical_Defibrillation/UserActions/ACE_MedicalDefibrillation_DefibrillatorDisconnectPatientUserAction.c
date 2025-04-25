@@ -1,11 +1,6 @@
 class ACE_MedicalDefibrillation_DefibrillatorDisconnectPatientUserAction : ACE_MedicalDefibrillator_DefibrillatorBaseUserAction
 {
 	//------------------------------------------------------------------------------------------------
-	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
-	{
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
 		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));

@@ -1,0 +1,194 @@
+@startuml
+
+allowmixing
+
+' ===== Base Objects =====
+object Character_Base
+component [SoundComponent]
+component [SignalsManagerComponent]
+object IEntity
+
+' ===== Action Classes =====
+class ScriptedUserAction
+class SCR_PickUpItemAction
+
+' ===== Medical Base Systems =====
+class ACE_Medical_BaseSystem
+class ACE_Medical_CardiovascularSystem {
+  + ComputeCPRSuccess(): void
+  # Update(): void
+  # UpdateCardiacRhythm(): void
+  # UpdateShockCooldown(): void
+  # UpdateShockAmount(): void
+}
+
+' ===== Defibrillation System =====
+class ACE_MedicalDefibrillation_DefibrillationSystem {
+  # m_Settings: ACE_MedicalDefibrillation_DefibrillationSystemSettings
+  + Register(): void
+  # Update(): void
+  # UpdateAED(): void
+  # UpdateCharge(): void
+  # UpdateAnalysis(): void
+  # UpdateSoundEffects(): void
+  # CheckPatientPosition(): void
+  + {static} InitInfo(): WorldSystemInfo
+}
+
+' ===== Components =====
+class ACE_MedicalDefibrillation_ReplicationHelper {
+  + {static} GetEntityByRplId(): IEntity
+  + {static} GetPrlIdByEntity(): RplId
+}
+
+class ACE_Medical_CardiovascularComponent {
+  # m_ECardiacRhythm: ACE_MedicalDefibrillation_ECardiacRhythm
+  # m_iShocksDelivered: int
+  # m_fShockChanceIncrease: float
+  # m_fShockCooldown: float
+  # m_iShockCooldownTime: int
+  # {static} pulselessRhythms: array
+  + GetCardiacRhythm(): ACE_MedicalDefibrillation_ECardiacRhythm
+  + SetCardiacRhythm(): void
+  + GetShockCooldownTime(): float
+  + GetShockCooldown(): float
+  + SetShockCooldown(): void
+  + GetShockChanceIncrease(): float
+  + GetShocksDelievered(): int
+  + AddShocksDelivered(): void
+  + ResetShocksDelivered(): void
+  # EOnInit(): void
+  # Revive(): void
+}
+
+class ACE_MedicalDefibrillation_DefibrillatorComponent {
+  # m_DefibrillatorEmulation: ACE_MedicalDefibrillation_EDefibrillatorEmulation
+  # m_fAnalysisTimeOffset: float
+  # m_fChargeTimeOffset: float
+  # m_fAnalysisTime: float
+  # m_fAnalysisAmount: float
+  # m_bIsAnalysing: bool
+  # m_bIsAnalysed: bool
+  # m_fChargeTime: float
+  # m_fChargeAmount: float
+  # m_bIsCharging: bool
+  # m_bIsCharged: bool
+  # m_currentSound: AudioHandle
+  # m_patient: IEntity
+  # m_iPatientRplId: RplId
+  + {static} SOUNDCHARGED: string
+  + {static} SOUNDCHARGING: string
+  + {static} SOUNDSHOCKTHUMP: string
+  + {static} SOUNDSHOCKADVISED: string
+  + {static} SOUNDNOSHOCKADVISED: string
+  + {static} SOUNDANALYSING: string
+  + {static} SOUNDCONNECTED: string
+  + {static} SOUNDDISCONNECTED: string
+  + OnParentSlotChanged(): void
+  + GetAssociatedSystemType(): typename
+  + ShouldRegisterAtSystemOnInit(): bool
+  + GetDefibrillationSystem(): ACE_MedicalDefibrillation_DefibrillationSystem
+  + UnregisterFromSystem(): void
+  + ResetAnalysisAndCharge(): void
+  + ResetPatient(): void
+  + AnalyseRhythm(): void
+  + Charge(): void
+  + ConnectPatient(): bool
+  + DeliverShock(): bool
+  + IsReadyToShock(): bool
+  + IsShockableRhythm(): bool
+  + IsPSatientConnected(): bool
+  + PlaySound(): void
+  + TerminateSound(): void
+  + RPC_PlaySound(): void
+  + RPC_PlaySoundOnPatient(): void
+  + GetDefibrillationEmulation(): ACE_MedicalDefibrillation_EDefibrillatorEmulation
+  + GetChargeTime(): float
+  + GetChargeAmount(): float
+  + SetChargeAmount(): void
+  + IsCharging(): bool
+  + IsCharged(): bool
+  + SetIsCharged(): void
+  + SetCharging(): void
+  + GetAnalysisTime(): float
+  + GetAnalysisAmount(): float
+  + SetAnalysisAmount(): void
+  + IsAnalysed(): bool
+  + SetIsAnalysed(): void
+  + IsAnalysing(): bool
+  + SetAnalysing(): void
+  + GetConnectedPatient(): IEntity
+  + GetConnectedPatientCardiovascularComponent(): bool
+  + GetSoundComponent(): bool
+  + GetSignalsComponent(): bool
+  # EOnInit(): void
+  # RegisterToSystem(): void
+  # OnPatientReplicated(): void
+}
+
+class ACE_MedicalDefibrillation_NetworkComponent {
+  # m_pPlayerController: SCR_PlayerController
+  + {static} GetCharacterName(): string
+  + RequestDefibrillatorNotification(): void
+  # OnPostInit(): void
+  # RpcAsk_GetDefibrillatorNotification(): void
+}
+
+' ===== User Actions =====
+class ACE_MedicalDefibrillator_DefibrillatorBaseUserAction {
+  + {static} GetDefibrillatorNetworkComponent(): ACE_MedicalDefibrillation_NetworkComponent
+  + CanBeShownScript(): bool
+  + Init(): void
+  + PerformAction(): void
+}
+
+class ACE_MedicalDefirillation_DefibrillatorConnectPatientUserAction {
+  # m_fSearchDistanceShown: float
+  # m_fShortestDistanceShown: float
+  # m_vSearchPosShown: vector
+  # m_pNearestAEDShown: IEntity
+  # m_fSearchDistancePerform: float
+  # m_fShortestDistancePerform: float
+  # m_vSearchPosPerform: vector
+  # m_pNearestAEDPerform: IEntity
+  # m_fLastUpdateTime: float
+  # m_fUpdateTime: float
+  + Init(): void
+  + CanBroadcastScript(): bool
+  + HasLocalEffectOnlyScript(): bool
+  + CanBeShownScript(): bool
+  + PerformAction(): void
+  # CanExecuteThisTick(): bool
+  # AEDAlreadyFouindAndConnected(): bool
+  # QueryForAEDShown(): void
+  # QueryForAEDPerform(): void
+  # QueryForAEDShownCallback(): void
+  # QueryForAEDPerformCallback(): void
+  + {static} IsAlive(): bool
+}
+
+class ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction
+class ACE_MedicalDefibrillation_DefibrillatorChargeUserAction
+class ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction
+class ACE_MedicalDefibrillation_DefibrillatorDisconnectPatientUserAction
+class ACE_MedicalDefibrillation_DefibrillatorPickUpItemAction
+
+' ===== Relationships =====
+ACE_MedicalDefibrillation_DefibrillatorComponent ..> ACE_Medical_CardiovascularComponent : "Uses"
+ACE_MedicalDefibrillation_DefibrillatorComponent .up.> SoundComponent : "Uses"
+Character_Base *-- SoundComponent
+Character_Base *-- ACE_Medical_CardiovascularComponent
+ACE_MedicalDefibrillation_DefibrillatorComponent .up.> SignalsManagerComponent : "Uses"
+ACE_MedicalDefibrillation_DefibrillatorComponent -up-> IEntity : "References"
+
+ACE_MedicalDefibrillator_DefibrillatorBaseUserAction .up.> ACE_MedicalDefibrillation_NetworkComponent : "Uses"
+ACE_MedicalDefirillation_DefibrillatorConnectPatientUserAction -up-|> ScriptedUserAction
+ACE_MedicalDefibrillator_DefibrillatorBaseUserAction -up-|> ScriptedUserAction
+ACE_MedicalDefibrillation_DefibrillatorPickUpItemAction -up-|> SCR_PickUpItemAction
+ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction -up-|> ACE_MedicalDefibrillator_DefibrillatorBaseUserAction
+ACE_MedicalDefibrillation_DefibrillatorChargeUserAction -up-|> ACE_MedicalDefibrillator_DefibrillatorBaseUserAction
+ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction -up-|> ACE_MedicalDefibrillator_DefibrillatorBaseUserAction
+ACE_MedicalDefibrillation_DefibrillatorDisconnectPatientUserAction -up-|> ACE_MedicalDefibrillator_DefibrillatorBaseUserAction
+ACE_MedicalDefibrillation_DefibrillationSystem -up-|> ACE_Medical_BaseSystem
+
+@enduml

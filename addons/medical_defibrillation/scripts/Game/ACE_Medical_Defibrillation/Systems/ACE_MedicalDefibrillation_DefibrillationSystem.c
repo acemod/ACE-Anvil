@@ -37,7 +37,7 @@ class ACE_MedicalDefibrillation_DefibrillationSystem : ACE_Medical_BaseSystem3
 			UpdateAED(entity, timeSlice);
 		
 		// TODO: Impliment manual defibrillator
-		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_MedicalDefibrillation_EDefibrillatorEmulation.Manual)
+		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_MedicalDefibrillation_EDefibrillatorEmulation.Manual_NotImplimented)
 		{
 		}
 	}

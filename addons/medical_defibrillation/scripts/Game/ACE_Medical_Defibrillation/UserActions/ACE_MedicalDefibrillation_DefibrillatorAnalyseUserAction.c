@@ -7,7 +7,7 @@ class ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction : ACE_MedicalDefi
 		if (!defibrillatorComponent)
 			return false; 
 		
-		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_MedicalDefibrillation_EDefibrillatorEmulation.Manual)
+		if (defibrillatorComponent.GetDefibrillationEmulation() == ACE_MedicalDefibrillation_EDefibrillatorEmulation.Manual_NotImplimented)
 			return false;
 		
 		if (!defibrillatorComponent.GetConnectedPatient())

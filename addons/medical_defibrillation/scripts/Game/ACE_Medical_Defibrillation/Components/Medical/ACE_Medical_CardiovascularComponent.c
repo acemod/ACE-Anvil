@@ -1,39 +1,19 @@
 modded class ACE_Medical_CardiovascularComponent
 {
 	protected ACE_MedicalDefibrillation_DefibrillationSystemSettings m_DefibrillationSettings;
+	protected float m_fShockChanceIncrease = 0.25;
+	protected int m_iShockCooldownTime = 120;
 	
-	// Needs replication
 	[RplProp()]
 	protected ACE_MedicalDefibrillation_ECardiacRhythm m_eCardiacRhythm = ACE_MedicalDefibrillation_ECardiacRhythm.Sinus;
 	
-	protected static const ref array<ACE_MedicalDefibrillation_ECardiacRhythm> pulselessRhythms = { ACE_MedicalDefibrillation_ECardiacRhythm.VF, ACE_MedicalDefibrillation_ECardiacRhythm.PEA };
-	
-	// Needs replication
-	[RplProp()]
-	protected int m_iShocksDelivered = 0;
-	protected float m_fShockChanceIncrease = 0.25;
 	[RplProp()]
 	protected float m_fShockCooldown = 0;
-	protected int m_iShockCooldownTime = 120;
 	
-	//------------------------------------------------------------------------------------------------
-	override protected void EOnInit(IEntity owner)
-	{
-		super.EOnInit(owner);
-		
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
-		if (settings)
-		{
-			m_DefibrillationSettings = settings.m_DefibrillationSystem;
-			m_iShockCooldownTime = m_DefibrillationSettings.m_iShockCooldown;
-		}
-	}
+	[RplProp()]
+	protected int m_iShocksDelivered = 0;
 	
-	//------------------------------------------------------------------------------------------------
-	override void Revive()
-	{
-		super.Revive();
-	}
+	protected static const ref array<ACE_MedicalDefibrillation_ECardiacRhythm> s_aPulselessRhythms = { ACE_MedicalDefibrillation_ECardiacRhythm.VF, ACE_MedicalDefibrillation_ECardiacRhythm.PEA };
 	
 	//------------------------------------------------------------------------------------------------
 	ACE_MedicalDefibrillation_ECardiacRhythm GetCardiacRhythm()
@@ -55,6 +35,12 @@ modded class ACE_Medical_CardiovascularComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	float GetShockChanceIncrease()
+	{
+		return m_fShockChanceIncrease;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	float GetShockCooldown()
 	{
 		return m_fShockCooldown;
@@ -65,12 +51,6 @@ modded class ACE_Medical_CardiovascularComponent
 	{
 		m_fShockCooldown = value;
 		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	float GetShockChanceIncrease()
-	{
-		return m_fShockChanceIncrease;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -91,5 +71,24 @@ modded class ACE_Medical_CardiovascularComponent
 	{
 		m_iShocksDelivered = 0;
 		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void Revive()
+	{
+		super.Revive();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void EOnInit(IEntity owner)
+	{
+		super.EOnInit(owner);
+		
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		if (settings)
+		{
+			m_DefibrillationSettings = settings.m_DefibrillationSystem;
+			m_iShockCooldownTime = m_DefibrillationSettings.m_iShockCooldown;
+		}
 	}
 }

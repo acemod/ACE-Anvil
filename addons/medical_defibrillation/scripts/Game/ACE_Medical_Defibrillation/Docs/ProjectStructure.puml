@@ -42,7 +42,7 @@ class ACE_MedicalDefibrillation_ReplicationHelper {
 }
 
 class ACE_Medical_CardiovascularComponent {
-  # m_ECardiacRhythm: ACE_MedicalDefibrillation_ECardiacRhythm
+  # m_eCardiacRhythm: ACE_MedicalDefibrillation_ECardiacRhythm
   # m_iShocksDelivered: int
   # m_fShockChanceIncrease: float
   # m_fShockCooldown: float
@@ -73,8 +73,8 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent {
   # m_fChargeAmount: float
   # m_bIsCharging: bool
   # m_bIsCharged: bool
-  # m_currentSound: AudioHandle
-  # m_patient: IEntity
+  # m_CurrentSound: AudioHandle
+  # m_Patient: IEntity
   # m_iPatientRplId: RplId
   + {static} SOUNDCHARGED: string
   + {static} SOUNDCHARGING: string
@@ -118,7 +118,6 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent {
   + IsAnalysing(): bool
   + SetAnalysing(): void
   + GetConnectedPatient(): IEntity
-  + GetConnectedPatientCardiovascularComponent(): bool
   + GetSoundComponent(): bool
   + GetSignalsComponent(): bool
   # EOnInit(): void
@@ -127,7 +126,7 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent {
 }
 
 class ACE_MedicalDefibrillation_NetworkComponent {
-  # m_pPlayerController: SCR_PlayerController
+  # m_PlayerController: SCR_PlayerController
   + {static} GetCharacterName(): string
   + RequestDefibrillatorNotification(): void
   # OnPostInit(): void
@@ -146,13 +145,13 @@ class ACE_MedicalDefirillation_DefibrillatorConnectPatientUserAction {
   # m_fSearchDistanceShown: float
   # m_fShortestDistanceShown: float
   # m_vSearchPosShown: vector
-  # m_pNearestAEDShown: IEntity
+  # m_NearestAEDShown: IEntity
   # m_fSearchDistancePerform: float
   # m_fShortestDistancePerform: float
   # m_vSearchPosPerform: vector
-  # m_pNearestAEDPerform: IEntity
+  # m_NearestAEDPerform: IEntity
   # m_fLastUpdateTime: float
-  # m_fUpdateTime: float
+  # UPDATERATE: float
   + Init(): void
   + CanBroadcastScript(): bool
   + HasLocalEffectOnlyScript(): bool

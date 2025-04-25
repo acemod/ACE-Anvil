@@ -35,8 +35,9 @@ class ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction : ACE_MedicalDefi
 		if (!defibrillatorComponent)
 			return false; 
 		
+		IEntity patient;
 		ACE_Medical_CardiovascularComponent cardiovascularComponent;
-		if (!defibrillatorComponent.GetConnectedPatientCardiovascularComponent(cardiovascularComponent))
+		if (!defibrillatorComponent.GetConnectedPatient(patient, cardiovascularComponent))
 			return false;
 		
 		if (cardiovascularComponent.GetShockCooldown() > 0)
@@ -61,6 +62,6 @@ class ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction : ACE_MedicalDefi
 		if (!defibrillatorComponent.GetConnectedPatient())
 			return;
 		
-		defibrillatorComponent.AnalyzeRhythm();
+		defibrillatorComponent.Analyse();
 	}
 }

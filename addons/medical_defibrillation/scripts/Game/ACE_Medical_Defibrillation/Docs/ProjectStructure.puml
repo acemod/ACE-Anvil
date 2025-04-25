@@ -7,6 +7,7 @@ object Character_Base
 component [SoundComponent]
 component [SignalsManagerComponent]
 object IEntity
+object ACE_Defibrillator
 
 ' ===== Action Classes =====
 class ScriptedUserAction
@@ -175,6 +176,7 @@ class ACE_MedicalDefibrillation_DefibrillatorPickUpItemAction
 ' ===== Relationships =====
 ACE_MedicalDefibrillation_DefibrillatorComponent ..> ACE_Medical_CardiovascularComponent : "Uses"
 ACE_MedicalDefibrillation_DefibrillatorComponent .up.> SoundComponent : "Uses"
+ACE_Defibrillator *-- ACE_MedicalDefibrillation_DefibrillatorComponent
 Character_Base *-- SoundComponent
 Character_Base *-- ACE_Medical_CardiovascularComponent
 ACE_MedicalDefibrillation_DefibrillatorComponent .up.> SignalsManagerComponent : "Uses"

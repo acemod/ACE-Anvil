@@ -71,6 +71,11 @@ class ACE_Captives_CaptiveSystem : GameSystem
 		if (factionAffiliation)
 			factionAffiliation.SetAffiliatedFactionByKey("CIV");
 		
+		// Remove last instigator, as they would otherwise get punished when the captive respawns
+		SCR_DamageManagerComponent damageManager = char.GetDamageManager();
+		if (damageManager)
+			damageManager.SetInstigatorEntity(null);
+		
 		charController.ACE_Captives_SetIsCaptive(true);
 		
 		// Put in tied animation when not unconscious and not in a vehicle

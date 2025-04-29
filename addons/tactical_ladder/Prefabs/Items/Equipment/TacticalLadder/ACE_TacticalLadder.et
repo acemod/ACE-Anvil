@@ -133,6 +133,8 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
   }
   SCR_MineWeaponComponent "{59F2DC2C202D1AFB}" {
    UIInfo GrenadeUIInfo "{5CDCD73FE938D67D}" {
+    Name "#ACE_TacticalLadder-Item_Name"
+    Description "#ACE_TacticalLadder-Item_Description"
     m_MagIndicator SCR_MagazineIndicatorConfiguration "{5CDCD73FF80278AD}" {
      m_sImagesetIcons "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
      m_sImagesetGlows "{00FE3DBDFD15227B}UI/Textures/Icons/icons_wrapperUI-glow.imageset"
@@ -216,6 +218,9 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
     SCR_MineEquipWeaponAction "{59E4E69349194C2B}" {
      ParentContextList + {
       "top05" "top04" "top03" "top02" "top01" "top00"
+     }
+     UIInfo UIInfo "{59E4E6934E3F3C43}" {
+      Name "#AR-Inventory_Equip"
      }
     }
     SCR_MineEquipHolsterAction "{5A78F5000397EFB7}" {

@@ -13,16 +13,20 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "LeftArm" "RightArm" "LeftLeg" "RightLeg"
      }
-     UIInfo UIInfo "{60CF45A53578811D}" {
+     UIInfo SCR_ActionUIInfo "{60CF45A53578811D}" {
       Name "#ACE_Medical-EpinephrineInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
      }
+     ActionTitle "Inject Epinephrine"
      m_eConsumableType ACE_MEDICAL_EPINEPHRINE
     }
     ACE_Medical_RepositionUserAction "{630C32646482C8E5}" {
      ParentContextList {
       "LowerTorso"
      }
-     UIInfo UIInfo "{630C32679F8D254B}" {
+     UIInfo SCR_ActionUIInfo "{630C32679F8D254B}" {
       Name "#ACE_Medical-UserAction_BackPosition"
      }
      ActionTitle "Back position"
@@ -35,7 +39,7 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "LowerTorso"
      }
-     UIInfo UIInfo "{630C214BCA7A937E}" {
+     UIInfo SCR_ActionUIInfo "{630C214BCA7A937E}" {
       Name "#ACE_Medical-UserAction_RightRecoveryPosition"
      }
      ActionTitle "Right recovery position"
@@ -48,10 +52,10 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "LowerTorso"
      }
-     UIInfo UIInfo "{630C214BCA7A937E}" {
+     UIInfo SCR_ActionUIInfo "{630C214BCA7A937F}" {
       Name "#ACE_Medical-UserAction_LeftRecoveryPosition"
      }
-     ActionTitle "Recovery position"
+     ActionTitle "Left recovery position"
      VisibilityRange 2
      Duration 1
      "Sort Priority" 102

@@ -12,14 +12,6 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
       }
      }
     }
-    CustomAttributes {
-     PreviewRenderAttributes "{5A5AEE4B8FF125F0}" {
-      CameraDistanceToItem 0.5
-     }
-     SCR_SelectionMenuPreviewAttributes "{5EC2E10565C06A53}" {
-      m_fIconSizeXMultiplier 0.5
-     }
-    }
    }
   }
   MeshObject "{59CE87DB17B6B1C5}" {

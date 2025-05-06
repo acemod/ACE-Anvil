@@ -25,6 +25,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Blood_UI"
      }
+     "Sort Priority" -1
     }
     SCR_BandageUserAction "{5A26F8E67741AC1E}" {
      UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
@@ -32,6 +33,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Blood_UI"
      }
+     "Sort Priority" -1
     }
     SCR_BandageUserAction "{5A26F8E460F2D5F7}" {
      UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
@@ -39,6 +41,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Blood_UI"
      }
+     "Sort Priority" -1
     }
     SCR_BandageUserAction "{5A26F8E47D6EE240}" {
      UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
@@ -46,6 +49,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Blood_UI"
      }
+     "Sort Priority" -1
     }
     SCR_BandageUserAction "{5A26F8E203EF1E0C}" {
      UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
@@ -53,6 +57,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Blood_UI"
      }
+     "Sort Priority" -1
     }
     SCR_BandageUserAction "{5A26F8E21E230D0D}" {
      UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
@@ -60,6 +65,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Blood_UI"
      }
+     "Sort Priority" -1
     }
     SCR_BandageUserAction "{5A26F8E218841208}" {
      UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
@@ -67,6 +73,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Blood_UI"
      }
+     "Sort Priority" -1
     }
     SCR_MorphineUserAction "{5A5CCAE2AF3D6445}" {
      UIInfo SCR_ActionUIInfo "{5A5CCAE2BF554957}" {

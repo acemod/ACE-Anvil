@@ -18,6 +18,170 @@ SCR_ChimeraCharacter {
      Radius 0.35
     }
    }
+   additionalActions {
+    SCR_BandageUserAction "{520EA1D2F659CE03}" {
+     UIInfo SCR_ActionUIInfo "{520EA1D2F659CE00}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bandage_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E67741AC1E}" {
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bandage_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E460F2D5F7}" {
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bandage_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E47D6EE240}" {
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bandage_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E203EF1E0C}" {
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bandage_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E21E230D0D}" {
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bandage_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_BandageUserAction "{5A26F8E218841208}" {
+     UIInfo SCR_ActionUIInfo "{5A26F8E5870EFCC8}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bandage_UI"
+     }
+     "Sort Priority" -1
+    }
+    SCR_MorphineUserAction "{5A5CCAE2AF3D6445}" {
+     UIInfo SCR_ActionUIInfo "{5A5CCAE2BF554957}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
+     }
+    }
+    SCR_SalineBagUserAction "{5A5CCAE248697020}" {
+     UIInfo SCR_ActionUIInfo "{5A5CCAE25BF08D86}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Saline-bag_UI"
+     }
+    }
+    SCR_TourniquetUserAction "{5C68A05F8836889D}" {
+     UIInfo SCR_ActionUIInfo "{5C68A05F9AB47F24}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Tourniquet_UI"
+     }
+    }
+    SCR_TourniquetUserAction "{5C68FB4586880C5E}" {
+     UIInfo SCR_ActionUIInfo "{5C68FB4597F6E228}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Tourniquet_UI"
+     }
+    }
+    SCR_TourniquetUserAction "{5C68FB458180EF70}" {
+     UIInfo SCR_ActionUIInfo "{5C68FB45A6769C40}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Tourniquet_UI"
+     }
+    }
+    SCR_TourniquetUserAction "{5C68FB459CB30804}" {
+     UIInfo SCR_ActionUIInfo "{5C68FB45BC7B6A22}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Tourniquet_UI"
+     }
+    }
+    SCR_InspectCasualtyUserAction "{5D8CD8E6AA772324}" {
+     UIInfo SCR_ActionUIInfo "{5D8CD8E6B5E1FE92}" {
+      m_sIconName "search"
+     }
+    }
+    SCR_HealSupportStationAction "{5E14966CF282A3BA}" {
+     UIInfo SCR_ActionUIInfo "{5E14966C0D73CD5C}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bone-Fracture_UI"
+     }
+    }
+    SCR_HealSupportStationAction "{5E14966CF597F6B3}" {
+     UIInfo SCR_ActionUIInfo "{5E14966C2BD9BCF7}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bone-Fracture_UI"
+     }
+    }
+    SCR_HealSupportStationAction "{5E14966C08522B0C}" {
+     UIInfo SCR_ActionUIInfo "{5E14966FBECEC4CE}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bone-Fracture_UI"
+     }
+    }
+    SCR_HealSupportStationAction "{5E14966FAD3FC9A6}" {
+     UIInfo SCR_ActionUIInfo "{5E14966F3A5303BB}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bone-Fracture_UI"
+     }
+    }
+    SCR_HealSupportStationAction "{5E14966FAFF46C89}" {
+     UIInfo SCR_ActionUIInfo "{5E14966F315076CC}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bone-Fracture_UI"
+     }
+    }
+    SCR_HealSupportStationAction "{5E14966FA1ED9E23}" {
+     UIInfo SCR_ActionUIInfo "{5E14966F3441FED6}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bone-Fracture_UI"
+     }
+    }
+    SCR_HealSupportStationAction "{5E14966FA41B012C}" {
+     UIInfo SCR_ActionUIInfo "{5E14966F4F500868}" {
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Bone-Fracture_UI"
+     }
+    }
+    ACE_NoUserAction "{654B38F5A633B894}" {
+     ParentContextList {
+      "Head" "Chest" "LeftLeg" "RightLeg" "LowerTorso" "LeftArm" "RightArm"
+     }
+     UIInfo SCR_ActionUIInfo "{654B38F5DA3BFFED}" {
+      m_sIconName "plus"
+     }
+     ActionTitle "TOP CONTEXT ICON"
+     "Sort Priority" -100
+    }
+   }
   }
  }
 }

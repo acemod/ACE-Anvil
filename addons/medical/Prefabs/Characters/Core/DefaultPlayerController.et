@@ -14,7 +14,7 @@ SCR_PlayerController {
      m_Data SCR_SelectionMenuData "{654944919C4B07CF}" {
       m_aEntries {
        ACE_Medical_ExamineCasualtyRadialMenuCategoryEntry "{654944954316FDE9}" {
-        Name "Examine Patient"
+        Name "#ACE_Medical-RadialMenu_ExaminePatient"
         Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
         IconSetName "search"
         m_sId "Examine"
@@ -27,14 +27,14 @@ SCR_PlayerController {
         }
        }
        ACE_SelectItemRadialMenuCategoryEntry "{654A2120424DD75C}" {
-        Name "Fracture Management"
+        Name "#ACE_Medical-RadialMenu_FractureManagement"
         Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
         IconSetName "Bone-Fracture_UI"
         m_pItemSearchPredicate ACE_HealItemPredicate "{654A212DE452116E}" {
         }
        }
        ACE_SelectItemRadialMenuCategoryEntry "{654944964B95CE9B}" {
-        Name "Medication"
+        Name "#ACE_Medical-RadialMenu_Medication"
         Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
         IconSetName "Morphine_UI"
         m_sId "SelectMedication"
@@ -45,7 +45,7 @@ SCR_PlayerController {
         }
        }
        ACE_SelectItemRadialMenuCategoryEntry "{654A212CF44A6F8E}" {
-        Name "Fluid Replacement "
+        Name "#ACE_Medical-RadialMenu_FluidReplacement"
         Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
         IconSetName "Saline-bag_UI"
         m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212C307419D3}" {
@@ -55,7 +55,7 @@ SCR_PlayerController {
         }
        }
        ACE_SelectItemRadialMenuCategoryEntry "{65494496C105E4AB}" {
-        Name "Hemorrhage Control"
+        Name "#ACE_Medical-RadialMenu_HemorrhageControl"
         Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
         IconSetName "Blood_UI"
         m_sId "SelectBandage"

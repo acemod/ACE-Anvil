@@ -124,6 +124,46 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{65516A9625D01268}" {
+   Id "ACE_Medical-RadialMenu_ExaminePatient"
+   Target_en_us "Examine patient"
+   Target_de_de "Patient untersuchen"
+   Modified 1699834887
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A94855EB699}" {
+   Id "ACE_Medical-RadialMenu_FluidReplacement"
+   Target_en_us "Fluid Replacement"
+   Target_de_de "Volumentherapie"
+   Modified 1699835500
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A967A9EA7B6}" {
+   Id "ACE_Medical-RadialMenu_FractureManagement"
+   Target_en_us "Fracture management"
+   Target_de_de "Frakturbehandlung"
+   Modified 1699835013
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A94A58D1608}" {
+   Id "ACE_Medical-RadialMenu_HemorrhageControl"
+   Target_en_us "Hemorrhage control"
+   Target_de_de "Blutstillung"
+   Modified 1699836091
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A97B16C0831}" {
+   Id "ACE_Medical-RadialMenu_Medication"
+   Target_en_us "Medication"
+   Target_de_de "Medikation"
+   Modified 1699835120
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{630D4CCE326184CA}" {
    Id "ACE_Medical-UserAction_BackPosition"
    Target_en_us "Put on back"

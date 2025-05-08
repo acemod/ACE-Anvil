@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_Interaction"
+ GUID "654B6CEF8F26B1F9"
+ TITLE "ACE Interaction"
+ Dependencies {
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
+ }
+}

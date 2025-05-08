@@ -5,7 +5,7 @@ SCR_PlayerController {
    m_aRadialMenuControllers {
     ACE_RadialMenuController "{65494490457B367E}" {
      m_RMControls SCR_RadialMenuControllerInputs "{654944919FB5198A}" {
-      m_sOpenAction "HintToggle"
+      m_sOpenAction "ACE_Medical_OpenRadialMenu"
       m_bCloseOnReleaseOpen 0
       m_bPerformOnClose 0
       m_bCloseOnPerform 1

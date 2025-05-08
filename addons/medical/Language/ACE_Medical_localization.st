@@ -1,6 +1,13 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{65515E0D98453E42}" {
+   Id "ACE_Medical-AddonName"
+   Target_en_us "Medical"
+   Modified 1699833891
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{60CF45A3ED3C6951}" {
    Id "ACE_Medical-EpinephrineInjectionAction"
    Target_en_us "Inject epinephrine"
@@ -108,6 +115,14 @@ StringTable {
    Modified 1655484454
    Author "kexanone"
    LastChanged "Smith"
+  }
+  CustomStringTableItem "{65515E08A4E02C61}" {
+   Id "ACE_Medical-KeyBind_OpenRadialMenu"
+   Target_en_us "Open medical radial menu"
+   Target_de_de "Öffne medizinisches Kreismenü"
+   Modified 1699833171
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{630D4CCE326184CA}" {
    Id "ACE_Medical-UserAction_BackPosition"

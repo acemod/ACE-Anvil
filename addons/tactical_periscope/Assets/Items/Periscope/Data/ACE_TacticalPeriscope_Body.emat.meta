@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{3A68831FE91A97F7}Assets/Items/Periscope/Data/ACE_TacticalPeriscope_Body.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -191,8 +191,11 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "Head"
      }
-     UIInfo UIInfo "{62150A66E8D34DA5}" {
+     UIInfo SCR_ActionUIInfo "{62150A66E8D34DA5}" {
       Name "#ACE_Medical-AmmoniumCarbonatePackageAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
      }
      m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
     }
@@ -200,8 +203,11 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
-     UIInfo UIInfo "{62150A6C71EFEF99}" {
+     UIInfo SCR_ActionUIInfo "{62150A6C71EFEF99}" {
       Name "#ACE_Medical-MetoprololInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
      }
      ActionTitle "Inject Metoprolol"
      m_eConsumableType ACE_MEDICAL_METOPROLOL_INJECTOR
@@ -210,8 +216,11 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
-     UIInfo UIInfo "{6226EDEC7241F1E1}" {
+     UIInfo SCR_ActionUIInfo "{6226EDEC7241F1E1}" {
       Name "#ACE_Medical-NaloxoneInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
      }
      ActionTitle "Inject Naloxone"
      m_eConsumableType ACE_MEDICAL_NALOXONE_INJECTOR
@@ -220,8 +229,11 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
-     UIInfo UIInfo "{6226EDEDA11A533D}" {
+     UIInfo SCR_ActionUIInfo "{6226EDEDA11A533D}" {
       Name "#ACE_Medical-PhenylephrineInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
      }
      ActionTitle "Inject Phenylephrine"
      m_eConsumableType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
@@ -230,7 +242,7 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "Chest"
      }
-     UIInfo UIInfo "{6216F73FFFACAE56}" {
+     UIInfo SCR_ActionUIInfo "{6216F73FFFACAE56}" {
       Name "#ACE_Medical-CPRAction"
      }
      ActionTitle "Perfrom CPR"
@@ -242,8 +254,9 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "Head" "Chest" "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
-     UIInfo UIInfo "{621737D0F7FF3B55}" {
-      Name "Check pulse"
+     UIInfo SCR_ActionUIInfo "{621737D0F7FF3B55}" {
+      Name "#ACE_Medical-CheckPulseAction"
+      m_sIconName "search"
      }
      ActionTitle "Check Pulse"
      VisibilityRange 2
@@ -255,8 +268,9 @@ SCR_ChimeraCharacter {
      ParentContextList {
       "RightArm" "LeftArm" "RightLeg" "LeftLeg"
      }
-     UIInfo UIInfo "{621737D025B25341}" {
-      Name "Check blood pressure"
+     UIInfo SCR_ActionUIInfo "{621737D025B25341}" {
+      Name "#ACE_Medical-CheckBloodPressureAction"
+      m_sIconName "search"
      }
      ActionTitle "Check Blood Pressure"
      VisibilityRange 2

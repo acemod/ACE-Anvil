@@ -83,6 +83,14 @@ class ACE_TacticalLadderEntity : GenericEntity
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		GetWorldTransform(params.Transform);
+		
+		// Enforce vertical placement
+		Math3D.AnglesToMatrix(Vector(params.Transform[2].ToYaw(), 0, 0), params.Transform);
+		TraceParam traceParams = new TraceParam();
+		traceParams.Exclude = this;
+		traceParams.TargetLayers = EPhysicsLayerPresets.Building;
+		SCR_TerrainHelper.SnapToTerrain(params.Transform, GetWorld(), false, traceParams);
+		
 		GetGame().SpawnEntityPrefab(Resource.Load(GetPrefabData().GetPrefabName()), GetWorld(), params);
 		SCR_EntityHelper.DeleteEntityAndChildren(this);
 	}

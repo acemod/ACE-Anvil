@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{5CE3E84267E2DB91}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask_A.edds"
+ Name "{5CE3E84267E2DB91}Assets/Items/Medicine/OxygenMask/Data/ACE_Medical_OxygenMask_A.edds"
  Configurations {
   TIFFResourceClass PC : "{6B149ECE3A72EF45}Configs/System/ResourceTypes/PC/TextureOneChannel.conf" {
   }

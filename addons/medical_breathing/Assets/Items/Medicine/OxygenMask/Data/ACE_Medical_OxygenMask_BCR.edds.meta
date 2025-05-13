@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{3BE1554FDACBDF50}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask_BCR.edds"
+ Name "{3BE1554FDACBDF50}Assets/Items/Medicine/OxygenMask/Data/ACE_Medical_OxygenMask_BCR.edds"
  Configurations {
   TIFFResourceClass PC : "{EAB5DE3219F9CBA8}Configs/System/ResourceTypes/PC/TextureColorMap.conf" {
   }

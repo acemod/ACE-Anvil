@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{0339EEDD03BC8DCE}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask_NMO.edds"
+ Name "{0339EEDD03BC8DCE}Assets/Items/Medicine/OxygenMask/Data/ACE_Medical_OxygenMask_NMO.edds"
  Configurations {
   TIFFResourceClass PC : "{A968DA7F9A1E3A3E}Configs/System/ResourceTypes/PC/TextureNType.conf" {
   }

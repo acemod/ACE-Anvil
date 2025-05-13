@@ -10,17 +10,17 @@ SCR_PlayerController {
       m_aEntries {
        ACE_Medical_ExamineCasualtyRadialMenuCategoryEntry "{654944954316FDE9}" {
         m_aEntries {
-         ACE_Medical_CheckVitalsRadialMenuEntry "{654A2126F37B8121}" {
-          Name "#ACE_Medical-CheckBloodPressureAction"
-          Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
-          IconSetName "Unconscious_UI"
-          m_eNotificationType ACE_MEDICAL_BLOOD_PRESSURE_RESULT
-         }
          ACE_Medical_CheckVitalsRadialMenuEntry "{654A2126FF3B00EE}" {
           Name "#ACE_Medical-CheckPulseAction"
           Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
           IconSetName "Unconscious_UI"
           m_eNotificationType ACE_MEDICAL_PULSE_RESULT
+         }
+         ACE_Medical_CheckVitalsRadialMenuEntry "{654A2126F37B8121}" {
+          Name "#ACE_Medical-CheckBloodPressureAction"
+          Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+          IconSetName "Unconscious_UI"
+          m_eNotificationType ACE_MEDICAL_BLOOD_PRESSURE_RESULT
          }
         }
        }

@@ -14,6 +14,10 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 	override void OnInit(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		super.OnInit(pOwnerEntity, pManagerComponent);
+		
+		if (!GetGame().InPlayMode())
+			return;
+		
 		m_pACE_Medical_DamageManager = SCR_CharacterDamageManagerComponent.Cast(pManagerComponent);
 		m_fACE_Medical_LastHealth = GetMaxHealth();
 		m_fACE_Medical_CurrentHealth = GetMaxHealth();

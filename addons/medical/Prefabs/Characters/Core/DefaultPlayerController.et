@@ -26,21 +26,14 @@ SCR_PlayerController {
          }
         }
        }
-       ACE_SelectItemRadialMenuCategoryEntry "{654A2120424DD75C}" {
-        Name "#ACE_Medical-RadialMenu_FractureManagement"
+       ACE_SelectItemRadialMenuCategoryEntry "{65494496C105E4AB}" {
+        Name "#ACE_Medical-RadialMenu_HemorrhageControl"
         Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
-        IconSetName "Bone-Fracture_UI"
-        m_pItemSearchPredicate ACE_HealItemPredicate "{654A212DE452116E}" {
-        }
-       }
-       ACE_SelectItemRadialMenuCategoryEntry "{654944964B95CE9B}" {
-        Name "#ACE_Medical-RadialMenu_Medication"
-        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
-        IconSetName "Morphine_UI"
-        m_sId "SelectMedication"
-        m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212DB02201E2}" {
+        IconSetName "Blood_UI"
+        m_sId "SelectBandage"
+        m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212D9F719FA8}" {
          m_aWhitelist {
-          2
+          1 4
          }
         }
        }
@@ -54,15 +47,22 @@ SCR_PlayerController {
          }
         }
        }
-       ACE_SelectItemRadialMenuCategoryEntry "{65494496C105E4AB}" {
-        Name "#ACE_Medical-RadialMenu_HemorrhageControl"
+       ACE_SelectItemRadialMenuCategoryEntry "{654944964B95CE9B}" {
+        Name "#ACE_Medical-RadialMenu_Medication"
         Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
-        IconSetName "Blood_UI"
-        m_sId "SelectBandage"
-        m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212D9F719FA8}" {
+        IconSetName "Morphine_UI"
+        m_sId "SelectMedication"
+        m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212DB02201E2}" {
          m_aWhitelist {
-          1 4
+          2
          }
+        }
+       }
+       ACE_SelectItemRadialMenuCategoryEntry "{654A2120424DD75C}" {
+        Name "#ACE_Medical-RadialMenu_FractureManagement"
+        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+        IconSetName "Bone-Fracture_UI"
+        m_pItemSearchPredicate ACE_HealItemPredicate "{654A212DE452116E}" {
         }
        }
       }

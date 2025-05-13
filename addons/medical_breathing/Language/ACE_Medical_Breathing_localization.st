@@ -28,7 +28,8 @@ StringTable {
   CustomStringTableItem "{64FF4A23ED61E92B}" {
    Id "ACE_Medical-InfoWidget_OxygenMask"
    Target_en_us "Provides supplemental oxygen"
-   Modified 1694632474
+   Target_de_de "Sauerstoff zuführen"
+   Modified 1700362805
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -93,6 +94,14 @@ StringTable {
    Target_en_us "Oxygen Mask"
    Target_de_de "Sauerstoffmaske"
    Modified 1694633611
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{6559386744A11E53}" {
+   Id "ACE_Medical-RadialMenu_AirwayThoraxManagement"
+   Target_en_us "Airway/Thorax management"
+   Target_de_de "Atemweg/Brustkorb Versorgung"
+   Modified 1700362756
    Author "Kexanone"
    LastChanged "Kexanone"
   }

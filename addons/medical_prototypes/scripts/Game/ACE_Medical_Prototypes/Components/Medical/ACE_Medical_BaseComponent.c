@@ -60,6 +60,16 @@ class ACE_Medical_BaseComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Unregister from system in destructor is too late, hence we do it in SCR_EditableCharacterComponent.OnDelete instead
-	void ~ACE_Medical_BaseComponent();
+	//! Unregister from system when deleted
+	override protected void OnDelete(IEntity owner)
+	{
+		super.OnDelete(owner);
+		
+		if (!GetGame().InPlayMode() || !Replication.IsServer())
+			return;
+		
+		ACE_Medical_BaseSystem system = ACE_Medical_BaseSystem.GetInstance(GetAssociatedSystemType());
+		if (system)
+			system.Unregister(owner);
+	}
 }

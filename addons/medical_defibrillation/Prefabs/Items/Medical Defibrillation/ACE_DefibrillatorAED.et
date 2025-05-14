@@ -1,7 +1,10 @@
-GenericEntity : "{7E096143E0A4363E}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorBase.et" {
- ID "64FB47CDCCA18EE0"
+GenericEntity : "{039D069A46C6501E}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorBase.et" {
+ ID "508AB2013EEE1E00"
  components {
-  ActionsManagerComponent "{64FB47CDCCA18F20}" {
+  ACE_MedicalDefibrillation_DefibrillatorComponent "{655C16E1F7265C60}" {
+   m_eDefibrillatorEmulation Automated
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
    additionalActions {
     ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction "{652723B8A735E8A7}" {
      ParentContextList {

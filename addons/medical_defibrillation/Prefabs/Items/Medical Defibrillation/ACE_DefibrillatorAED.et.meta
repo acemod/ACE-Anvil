@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{F991AF63F8CF0016}Prefabs/Items/Medical Defibrillation/ACE_AED.et"
+ Name "{60DAD76C48BD7054}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

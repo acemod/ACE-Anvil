@@ -175,9 +175,12 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	bool GetConnectedPatient(out IEntity patient, out ACE_Medical_CardiovascularComponent componentOut)
 	{
 		patient = GetConnectedPatient();
+		if (!patient)
+			return false;
+		
 		componentOut = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
 		
-		if (!patient || !componentOut)
+		if (!componentOut)
 			return false;
 		
 		return true;

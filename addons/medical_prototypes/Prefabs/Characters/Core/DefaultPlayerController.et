@@ -3,5 +3,31 @@ SCR_PlayerController {
  components {
   ACE_Medical_NetworkComponent "{621737D1BE405EF0}" {
   }
+  ACE_RadialMenuComponent "{654944904311E33E}" {
+   m_aRadialMenuControllers {
+    ACE_RadialMenuController "{65494490457B367E}" {
+     m_Data SCR_SelectionMenuData "{654944919C4B07CF}" {
+      m_aEntries {
+       ACE_Medical_ExamineCasualtyRadialMenuCategoryEntry "{654944954316FDE9}" {
+        m_aEntries {
+         ACE_Medical_CheckVitalsRadialMenuEntry "{654A2126FF3B00EE}" {
+          Name "#ACE_Medical-CheckPulseAction"
+          Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+          IconSetName "Unconscious_UI"
+          m_eNotificationType ACE_MEDICAL_PULSE_RESULT
+         }
+         ACE_Medical_CheckVitalsRadialMenuEntry "{654A2126F37B8121}" {
+          Name "#ACE_Medical-CheckBloodPressureAction"
+          Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+          IconSetName "Unconscious_UI"
+          m_eNotificationType ACE_MEDICAL_BLOOD_PRESSURE_RESULT
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
  }
 }

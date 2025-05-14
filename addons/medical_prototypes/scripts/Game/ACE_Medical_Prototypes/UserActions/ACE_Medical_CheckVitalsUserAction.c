@@ -27,8 +27,8 @@ class ACE_Medical_CheckVitalsUserAction : ScriptedUserAction
 		CharacterControllerComponent userController = userChar.GetCharacterController();
 		if (!userController)
 			return false;
-
-		if (userController.IsSwimming() || userController.IsFalling())
+		
+		if (userController.IsSwimming() || userController.IsFalling() || userController.IsGadgetInHands())
 			return false;
 		
 		CharacterControllerComponent ownerController = m_pOwner.GetCharacterController();

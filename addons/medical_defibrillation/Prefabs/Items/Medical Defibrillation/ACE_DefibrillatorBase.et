@@ -14,7 +14,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
     ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
-     Name "Automated External Defibrillator (AED)"
+     Name "#ACE_MedicalDefibrillation-Defibrillator_DisplayName"
     }
     ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
      Weight 3.2

@@ -15,5 +15,7 @@ class ACE_MedicalDefibrillation_DefibrillatorPickUpItemAction : SCR_PickUpItemAc
 		
 		// Unsubscribe from system
 		defibrillatorComponent.UnregisterFromSystem(GetOwner());
+		
+		super.PerformAction(pOwnerEntity, pUserEntity);
 	}
 }

@@ -1,6 +1,13 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{655C16F84C044F7B}" {
+   Id "ACE_MedicalDefibrillation-AED_DisplayName"
+   Target_en_us "Automated External Defibrillator (AED)"
+   Modified 1700545608
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
   CustomStringTableItem "{651E040D20FF922B}" {
    Id "ACE_MedicalDefibrillation-AnalyseUserAction_Name"
    Target_en_us "Analyse"
@@ -22,6 +29,13 @@ StringTable {
    Id "ACE_MedicalDefibrillation-ConnectPatientUserAction_Name"
    Target_en_us "Defibrillator | Connect Patient"
    Modified 1697056457
+   Author "Anthony"
+   LastChanged "Anthony"
+  }
+  CustomStringTableItem "{655C16F824E4D201}" {
+   Id "ACE_MedicalDefibrillation-Defibrillator_DisplayName"
+   Target_en_us "Manual Defibrillator"
+   Modified 1700545687
    Author "Anthony"
    LastChanged "Anthony"
   }

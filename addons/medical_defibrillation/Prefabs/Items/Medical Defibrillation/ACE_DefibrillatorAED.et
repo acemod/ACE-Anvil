@@ -4,6 +4,13 @@ GenericEntity : "{039D069A46C6501E}Prefabs/Items/Medical Defibrillation/ACE_Defi
   ACE_MedicalDefibrillation_DefibrillatorComponent "{655C16E1F7265C60}" {
    m_eDefibrillatorEmulation Automated
   }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "#ACE_MedicalDefibrillation-AED_DisplayName"
+    }
+   }
+  }
   ActionsManagerComponent "{508AB5952B584B2E}" {
    additionalActions {
     ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction "{652723B8A735E8A7}" {

@@ -111,4 +111,26 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 				
 		return false;
 	}
+		
+	//------------------------------------------------------------------------------------------------
+	//! Force ragdoll for given duration in seconds
+	void ACE_ForceRagdoll(float duration)
+	{
+		Rpc(RpcDo_ACE_ForceRagdoll_Owner, duration)
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RpcDo_ACE_ForceRagdoll_Owner(float duration)
+	{
+		ChimeraCharacter ownerChar = ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return;
+		
+		CharacterAnimationComponent ownerCharAnim = ownerChar.GetAnimationComponent();
+		if (!ownerCharAnim)
+			return;
+		
+		ownerCharAnim.SetCurrentCommand(new ACE_CharacterCommandRagdoll(ownerCharAnim, ownerChar, duration));
+	}
 }

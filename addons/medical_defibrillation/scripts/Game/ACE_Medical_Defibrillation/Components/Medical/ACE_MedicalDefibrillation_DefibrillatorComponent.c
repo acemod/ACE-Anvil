@@ -19,6 +19,9 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	[Attribute(defvalue: "5.5", params: "0 inf 0.1", desc: "Time (s) it takes for the defibrillator to fully charge.")]
 	protected float m_fChargeTime;
 	
+	[Attribute(defvalue: "10", params: "0 inf 0.1", desc: "Stun duration (s) for a character that touches the patient while a shock is delivered.")]
+	protected float m_fContactShockStunDuration;
+	
 	protected float m_fAnalysisAmount = 0.0;
 	protected float m_fAnalysisTimeOffset = 1;
 	protected float m_fChargeAmount = 0.0;
@@ -440,8 +443,24 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	
 		cardiovascularComponent.AddShocksDelivered(1);
 		cardiovascularComponent.SetShockCooldown(cardiovascularComponent.GetShockCooldownTime());
+		HandleContactShockStun(cardiovascularComponent);
 		
 		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Stun characters that touch the patient while a shock is delivered
+	protected void HandleContactShockStun(ACE_Medical_CardiovascularComponent patientCardiovascularComponent)
+	{
+		SCR_ChimeraCharacter performerChar = patientCardiovascularComponent.GetCPRPreformer();
+		if (!performerChar)
+			return;
+		
+		SCR_CharacterControllerComponent performerCharController = SCR_CharacterControllerComponent.Cast(performerChar.GetCharacterController());
+		if (!performerCharController)
+			return;
+		
+		performerCharController.ACE_ForceRagdoll(m_fContactShockStunDuration);
 	}
 	
 	//------------------------------------------------------------------------------------------------

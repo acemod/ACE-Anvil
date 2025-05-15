@@ -12,6 +12,7 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	protected ACE_Medical_EVitalState m_eVitalState = ACE_Medical_EVitalState.STABLE;
 	[RplProp()]
 	protected bool m_bIsCPRPerformed = false;
+	protected SCR_ChimeraCharacter m_pCPRPerformer;
 	protected bool m_bWasInCardiacArrest = false;
 	
 	// TO DO: Think about whether we want to replicate vitals and how often
@@ -142,12 +143,20 @@ class ACE_Medical_CardiovascularComponent : ACE_Medical_BaseComponent
 	
 	
 	//------------------------------------------------------------------------------------------------
-	void SetIsCPRPerformed(bool isPerformed)
+	void SetCPRPreformer(SCR_ChimeraCharacter performer)
 	{
-		m_bIsCPRPerformed = isPerformed;
+		m_pCPRPerformer = performer;
+		m_bIsCPRPerformed = (performer != null);
 		Replication.BumpMe();
-		OnCPRPerformedChanged(isPerformed);
+		OnCPRPerformedChanged(m_bIsCPRPerformed);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	SCR_ChimeraCharacter GetCPRPreformer()
+	{
+		return m_pCPRPerformer;
+	}
+	
 	//------------------------------------------------------------------------------------------------
 	//! Returns true when in someone is peforming CPR on this system. Can also be called by clients.
 	bool IsCPRPerformed()

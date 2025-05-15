@@ -65,7 +65,7 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		{
 			ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(m_pPatient.FindComponent(ACE_Medical_CardiovascularComponent));
 			if (cardiovascularComponent)
-				cardiovascularComponent.SetIsCPRPerformed(true);
+				cardiovascularComponent.SetCPRPreformer(SCR_ChimeraCharacter.Cast(m_pPerformer));
 		}
 	}
 	
@@ -99,7 +99,7 @@ class ACE_Medical_CPRHelperCompartment : GenericEntity
 		{
 			ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(m_pPatient.FindComponent(ACE_Medical_CardiovascularComponent));
 			if (cardiovascularComponent)
-				cardiovascularComponent.SetIsCPRPerformed(false);
+				cardiovascularComponent.SetCPRPreformer(null);
 		}
 	}
 	

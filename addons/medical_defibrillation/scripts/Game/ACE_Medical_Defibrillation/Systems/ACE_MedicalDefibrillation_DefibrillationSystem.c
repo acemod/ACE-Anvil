@@ -81,7 +81,17 @@ class ACE_MedicalDefibrillation_DefibrillationSystem : ACE_Medical_BaseSystem3
 		
 		DbgUI.Begin("ACE_MedicalDefibrillation_DefibrillationSystem");
 		
-		DbgUI.Text("AEDs: " + m_aQueue.Count());
+		DbgUI.Text("Defibrillators: " + m_aQueue.Count());
+		
+		for (int index = 0; index < m_aQueue.Count(); index++)
+		{
+			IEntity defib = m_aQueue.Get(index);
+			ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(defib.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
+			if (!defibrillatorComponent)
+				continue;
+			
+			DbgUI.Text(string.Format("Defib_%1::CurrentState | %2", index, defibrillatorComponent.GetState().ClassName()));
+		}
 		
 		DbgUI.End();
 	}

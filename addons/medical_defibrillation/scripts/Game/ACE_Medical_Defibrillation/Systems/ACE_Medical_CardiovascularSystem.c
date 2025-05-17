@@ -31,9 +31,13 @@ modded class ACE_Medical_CardiovascularSystem
 			if (damageManager.GetState() == EDamageState.DESTROYED)
 				cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Asystole);
 		}
-		else
+		else if (ACE_MedicalDefibrillation_DefibrillationConnectPatientUserAction.IsAlive(cardiovascularComponent.GetOwner()))
 		{
 			cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Sinus);
+		}
+		else
+		{
+			cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Asystole);
 		}
 	}
 	

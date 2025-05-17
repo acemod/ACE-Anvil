@@ -32,18 +32,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    additionalActions {
     ACE_NoUserAction "{51EC842E3A187379}" {
     }
-    ACE_MedicalDefibrillation_DefibrillatorChargeUserAction "{652723B2ACD49D25}" {
-     ParentContextList {
-      "default"
-     }
-     UIInfo UIInfo "{652723B2ACD49D7E}" {
-      Name "#ACE_MedicalDefibrillation-ChargeUserAction_Name"
-      Icon "{B547588B1CEBEC1D}UI/Textures/DamageState/damageState-unconscious.edds"
-     }
-     ActionTitle "Charge"
-     Duration 1
-     "Sort Priority" 2
-    }
     ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction "{652723B2B2AC9315}" {
      ParentContextList {
       "default"

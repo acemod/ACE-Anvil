@@ -3,11 +3,13 @@ class ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction : ACE_Medica
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
+		super.CanBeShownScript(user);
+		
 		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return false;
 		
-		if (!defibrillatorComponent.IsReadyToShock())
+		if (defibrillatorComponent.GetStateEnum() != ACE_MedicalDefibrillation_EDefibrillatorState.Charged)
 			return false;
 		
 		return true;
@@ -19,16 +21,13 @@ class ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction : ACE_Medica
 		if (!Replication.IsServer())
 			return;
 		
-		PrintFormat("ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction::Perform Action | Server Execution: %1", Replication.IsServer());
-		
 		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(GetOwner().FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
 		if (!defibrillatorComponent)
 			return;
 		
-		if (!defibrillatorComponent.IsReadyToShock())
+		if (defibrillatorComponent.GetStateEnum() != ACE_MedicalDefibrillation_EDefibrillatorState.Charged)
 			return;
 		
-		// shock and notify
 		if(defibrillatorComponent.DeliverShock())
 		{
 			ACE_MedicalDefibrillation_NetworkComponent networkComponent;

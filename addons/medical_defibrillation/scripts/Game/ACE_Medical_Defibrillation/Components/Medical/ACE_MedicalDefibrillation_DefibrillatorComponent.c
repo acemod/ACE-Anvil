@@ -8,6 +8,17 @@ class ACE_MedicalDefibrillation_DefibrillatorComponentClass : ACE_Medical_BaseCo
 {
 }
 
+enum ACE_MedicalDefibrillation_EDefibrillatorState
+{
+	Invalid = -1,
+	Disconnected,
+	Connected,
+	Analysing,
+	Analysed,
+	Charging,
+	Charged
+}
+
 class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseComponent
 {
 	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_MedicalDefibrillation_EDefibrillatorEmulation))]
@@ -19,27 +30,38 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	[Attribute(defvalue: "5.5", params: "0 inf 0.1", desc: "Time (s) it takes for the defibrillator to fully charge.")]
 	protected float m_fChargeTime;
 	
+	[Attribute(defvalue: "120", params: "0 inf 1", desc: "Time (s) between analysis events where players should perform CPR.")]
+	protected float m_fCPRCooldownTime;
+	
 	[Attribute(defvalue: "10", params: "0 inf 0.1", desc: "Stun duration (s) for a character that touches the patient while a shock is delivered.")]
 	protected float m_fContactShockStunDuration;
 	
-	protected float m_fAnalysisAmount = 0.0;
-	protected float m_fAnalysisTimeOffset = 1;
-	protected float m_fChargeAmount = 0.0;
-	protected float m_fChargeTimeOffset = 0.0;
+	// Percent from 0 to 1 of analysis completion
+	// Prop'd for UI in future
+	[RplProp()]
+	protected float m_fAnalysisPercent;
+	
+	// Percent from 0 to 1 of charge completion
+	// Prop'd for UI in future
+	[RplProp()]
+	protected float m_fChargePercent;
+	
+	// Time left between next analysis event.
+	// Prop'd for UI in future
+	[RplProp()]
+	protected float m_fCPRCooldown;	
+	
 	protected AudioHandle m_CurrentSound;
 	protected IEntity m_Patient;
 	
+	// Current enum equivalent of the current state on server. Use for UI or actions on client
+	// Can replace if someone wants to build a RplProp encoder for ACE_MedicalDefibrillation_DefibrillatorState_Base
 	[RplProp()]
-	protected bool m_bIsAnalysed = false;
+	ACE_MedicalDefibrillation_EDefibrillatorState m_eDefibrillatorState;
 	
-	[RplProp()]
-	protected bool m_bIsAnalysing = false;
-	
-	[RplProp()]
-	protected bool m_bIsCharged = false;
-	
-	[RplProp()]
-	protected bool m_bIsCharging = false;
+	protected ref ACE_MedicalDefibrillation_DefibrillatorState_Base m_DefibrillatorState;
+	bool m_fInitialAnalysisPerformed;
+	bool m_bIsChangingState = false;
 	
 	[RplProp(onRplName: "OnPatientReplicated")]
 	protected RplId m_iPatientRplId;
@@ -56,91 +78,152 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	const static string SOUNDSHOCKTHUMP = "ACE_MedicalDefibrillationSound_Thump";
 	
 	//------------------------------------------------------------------------------------------------
-	float GetChargeTime()
+	override protected void EOnInit(IEntity owner)
 	{
-		return m_fChargeTime;
+		super.EOnInit(owner);
+		
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		if (settings && settings.m_DefibrillationSystem)
+		{
+		}
+		// TODO: Do something with settings
+		
+		// Set properties
+		SetAnalysisPercent(0);
+		SetChargePercent(0);
+		SetCPRCooldown(m_fCPRCooldownTime);
+		ResetPatient();
+		
+		// Manual changing of state - avoids null errors if using internal method
+		m_DefibrillatorState = new ACE_MedicalDefibrillation_DefibrillatorState_Disconnected(GetOwner());
+		m_DefibrillatorState.Enter();
+		ChangeStateEnum(m_DefibrillatorState);
+		Replication.BumpMe();
+		
+		// subscribe to inventoryitemcomponent OnParentSlotChanged
+		InventoryItemComponent invComp = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
+		if (invComp)
+		{
+			invComp.m_OnParentSlotChangedInvoker.Insert(OnParentSlotChanged);
+			if (!invComp.GetParentSlot())
+				RegisterToSystem(owner);
+		}
+		
+		// get signals component and register the charge time for audio modulation
+		SignalsManagerComponent signalsManagerComponent;
+		if (GetSignalsComponent(signalsManagerComponent))
+		{
+			signalsManagerComponent.AddOrFindSignal("ACE_MedicalDefibrillation_ChargeSoundModulator", m_fChargeTime);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	float GetChargeAmount() 
+	ACE_MedicalDefibrillation_DefibrillatorState_Base GetState() { return m_DefibrillatorState; }
+	
+	//------------------------------------------------------------------------------------------------
+	float GetChargePercent() { return m_fChargePercent; }
+	
+	void SetChargePercent(float value)
 	{
-	    return m_fChargeAmount;
+		if (m_fChargePercent == value)
+			return;
+		
+		m_fChargePercent = value;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetChargeAmount(float chargeAmount) 
+	float GetAnalysisPercent() { return m_fAnalysisPercent; }
+	
+	void SetAnalysisPercent(float value)
 	{
-	    m_fChargeAmount = chargeAmount;
+		if (m_fAnalysisPercent == value)
+			return;
+		
+		m_fAnalysisPercent = value;
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetCPRCooldown() { return m_fCPRCooldown; }
+	float GetCPRCooldownTime() { return m_fCPRCooldownTime; }
+	
+	void SetCPRCooldown(float value)
+	{
+		if (m_fCPRCooldown == value)
+			return;
+		
+		m_fCPRCooldown = value;
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetAnalysisTime() { return m_fAnalysisTime; }
+	float GetChargeTime() { return m_fChargeTime; }
+	
+	//------------------------------------------------------------------------------------------------
+	bool GetInitialAnalysisPerformed() { return m_fInitialAnalysisPerformed; }
+	
+	void SetInitialAnalysisPerformed(bool value)
+	{
+		m_fInitialAnalysisPerformed = value;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ChangeState(ACE_MedicalDefibrillation_DefibrillatorState_Base newState)
+	{
+		if (m_DefibrillatorState.Type() == newState.Type())
+			return;
+		
+		m_bIsChangingState = true;
+		
+		m_DefibrillatorState.Exit();
+		m_DefibrillatorState = newState;
+		m_eDefibrillatorState = ChangeStateEnum(newState);
+		Replication.BumpMe();
+		m_DefibrillatorState.Enter();
+		
+		m_bIsChangingState = false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_MedicalDefibrillation_EDefibrillatorState GetStateEnum()
+	{
+		return m_eDefibrillatorState;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	private ACE_MedicalDefibrillation_EDefibrillatorState ChangeStateEnum(ACE_MedicalDefibrillation_DefibrillatorState_Base newState)
+	{
+		switch (newState.ClassName())
+		{
+			case "ACE_MedicalDefibrillation_DefibrillatorState_Disconnected":
+				return ACE_MedicalDefibrillation_EDefibrillatorState.Disconnected;
+			case "ACE_MedicalDefibrillation_DefibrillatorState_Connected":
+				return ACE_MedicalDefibrillation_EDefibrillatorState.Connected;
+			case "ACE_MedicalDefibrillation_DefibrillatorState_Analysing":
+				return ACE_MedicalDefibrillation_EDefibrillatorState.Analysing;
+			case "ACE_MedicalDefibrillation_DefibrillatorState_Analysed":
+				return ACE_MedicalDefibrillation_EDefibrillatorState.Analysed;
+			case "ACE_MedicalDefibrillation_DefibrillatorState_Charging":
+				return ACE_MedicalDefibrillation_EDefibrillatorState.Charging;
+			case "ACE_MedicalDefibrillation_DefibrillatorState_Charged":
+				return ACE_MedicalDefibrillation_EDefibrillatorState.Charged;				
+		}
+		
+		return ACE_MedicalDefibrillation_EDefibrillatorState.Invalid;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	bool IsCharged()
 	{
-		return m_bIsCharged;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void SetIsCharged(bool state)
-	{
-		m_bIsCharged = state;
-		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	float GetAnalysisTime()
-	{
-		return m_fAnalysisTime;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	float GetAnalysisAmount() 
-	{
-	    return m_fAnalysisAmount;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void SetAnalysisAmount(float analysisAmount) 
-	{
-	    m_fAnalysisAmount = analysisAmount;
+		return m_fChargePercent >= 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------	
 	bool IsAnalysed()
 	{
-		return m_bIsAnalysed;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void SetIsAnalysed(bool state)
-	{
-		m_bIsAnalysed = state;
-		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	bool IsAnalysing() 
-	{
-	    return m_bIsAnalysing;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void SetAnalysing(bool state) 
-	{
-	    m_bIsAnalysing = state;
-		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	bool IsCharging() 
-	{
-	    return m_bIsCharging;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void SetCharging(bool state) 
-	{
-	    m_bIsCharging = state;
-		Replication.BumpMe();
+		return m_fAnalysisPercent >= 1;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -175,6 +258,7 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		return m_Patient;
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	bool GetConnectedPatient(out IEntity patient, out ACE_Medical_CardiovascularComponent componentOut)
 	{
 		patient = GetConnectedPatient();
@@ -216,23 +300,6 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 			return true;
 		
 		return false;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	bool IsReadyToShock()
-	{
-		if (!GetConnectedPatient())
-			return false;
-		
-		IEntity patient;
-		ACE_Medical_CardiovascularComponent cardiovascularComponent;
-		if (!GetConnectedPatient(patient, cardiovascularComponent))
-			return false;
-		
-		if (!IsCharged())
-			return false;
-	
-		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -353,40 +420,6 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Charge()
-	{		
-		Print("ACE_MedicalDefibrillation_DefibrillatorComponent::Charge | Starting charging sequence...", level: LogLevel.DEBUG);
-		
-		ResetAnalysisAndCharge();
-		SetCharging(true);
-		
-		PlaySound(SOUNDCHARGING, true);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void Analyse()
-	{
-		Print("ACE_MedicalDefibrillation_DefibrillatorComponent::AnalyzeRhythm | Starting rhythm analysis...", level: LogLevel.DEBUG);
-		
-		ResetAnalysisAndCharge();
-		SetAnalysing(true);
-		
-		PlaySound(SOUNDANALYSING, true);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void ResetAnalysisAndCharge()
-	{
-		m_fAnalysisAmount = 0.0;
-		m_fChargeAmount = 0.0;
-		
-		SetIsAnalysed(false);
-		SetIsCharged(false);
-		
-		PrintFormat("ACE_MedicalDefibrillation_DefibrillatorComponent::ResetAnalysisAndCharge | Reset Defibrillator [Analysis = %1, Charge = %1]", m_fAnalysisAmount, m_fChargeAmount);
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	void ResetPatient()
 	{
 		if (m_Patient)
@@ -395,8 +428,14 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		m_iPatientRplId = RplId.Invalid();
 		m_Patient = null;
 		Replication.BumpMe();
-		
-		ResetAnalysisAndCharge();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetDefibrillator()
+	{
+		m_fAnalysisPercent = 0;
+		m_fChargePercent = 0;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -425,12 +464,10 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	//------------------------------------------------------------------------------------------------
 	bool DeliverShock()
 	{
-		if (!IsReadyToShock())
+		if (m_eDefibrillatorState != ACE_MedicalDefibrillation_EDefibrillatorState.Charged)
 			return false;
 		
 		TerminateSound();
-		
-		ResetAnalysisAndCharge();
 		
 		// Shock thump sound effect - played on patient
 		RPC_PlaySoundOnPatient(ACE_MedicalDefibrillation_DefibrillatorComponent.SOUNDSHOCKTHUMP);
@@ -444,6 +481,9 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		cardiovascularComponent.AddShocksDelivered(1);
 		cardiovascularComponent.SetShockCooldown(cardiovascularComponent.GetShockCooldownTime());
 		HandleContactShockStun(cardiovascularComponent);
+		
+		// Set defib back to connected state
+		ChangeState(new ACE_MedicalDefibrillation_DefibrillatorState_Connected(GetOwner()));
 		
 		return true;
 	}
@@ -464,44 +504,18 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override protected void EOnInit(IEntity owner)
-	{
-		super.EOnInit(owner);
-		
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
-		if (settings && settings.m_DefibrillationSystem)
-		{
-		}
-		// TODO: Do something with settings
-		
-		// add offsets to charge and analysis times to sync with sounds
-		m_fAnalysisTime += m_fAnalysisTimeOffset;
-		m_fChargeTime += m_fChargeTimeOffset;
-		
-		// subscribe to inventoryitemcomponent OnParentSlotChanged
-		InventoryItemComponent invComp = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
-		if (invComp)
-		{
-			invComp.m_OnParentSlotChangedInvoker.Insert(OnParentSlotChanged);
-			if (!invComp.GetParentSlot())
-				RegisterToSystem(owner);
-		}
-		
-		// get signals component and register the charge time for audio modulation
-		SignalsManagerComponent signalsManagerComponent;
-		if (GetSignalsComponent(signalsManagerComponent))
-		{
-			signalsManagerComponent.AddOrFindSignal("ACE_MedicalDefibrillation_ChargeSoundModulator", GetChargeTime());
-		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	void OnParentSlotChanged(InventoryStorageSlot oldSlot, InventoryStorageSlot newSlot)
 	{
 		if (!newSlot)
 			RegisterToSystem(this.GetOwner());
 		else
 			UnregisterFromSystem(this.GetOwner());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void RplState()
+	{
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------

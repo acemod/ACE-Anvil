@@ -26,8 +26,9 @@ SCR_ChimeraCharacter {
       }
      }
      m_fBleedingRateScale 0.325
+     m_bACE_Medical_IsVital 1
     }
-    ACE_Medical_VitalCharacterHitZone Chest {
+    ACE_Medical_CharacterTorsoHitZone Chest {
      ParentHZs {
       ParentHitZone "{60F48ADCA47D7F72}" {
        DamageMultiplier 0
@@ -35,8 +36,10 @@ SCR_ChimeraCharacter {
       }
      }
      m_fBleedingRateScale 0.325
+     m_bACE_Medical_IsVital 1
+     m_bACE_Medical_SecondChanceEnabled 1
     }
-    ACE_Medical_VitalCharacterHitZone Abdomen {
+    ACE_Medical_CharacterTorsoHitZone Abdomen {
      ParentHZs {
       ParentHitZone "{60F48ADCA47D7F72}" {
        DamageMultiplier 0
@@ -44,6 +47,8 @@ SCR_ChimeraCharacter {
       }
      }
      m_fBleedingRateScale 0.325
+     m_bACE_Medical_IsVital 1
+     m_bACE_Medical_SecondChanceEnabled 1
     }
     SCR_CharacterHitZone Hips {
      ParentHZs {

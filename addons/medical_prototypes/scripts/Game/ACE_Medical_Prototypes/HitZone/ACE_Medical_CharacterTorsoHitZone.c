@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------------------------------------
 //! Apply second chance setting
-modded class SCR_CharacterHeadHitZone : SCR_CharacterHitZone
+class ACE_Medical_CharacterTorsoHitZone : SCR_CharacterHitZone
 {
 	//-----------------------------------------------------------------------------------------------------------
 	override void OnInit(IEntity pOwnerEntity, GenericComponent pManagerComponent)
@@ -14,6 +14,6 @@ modded class SCR_CharacterHeadHitZone : SCR_CharacterHitZone
 		if (!settings)
 			return;
 		
-		m_bACE_Medical_SecondChanceEnabled = settings.m_bSecondChanceOnHeadEnabled;
+		m_bACE_Medical_SecondChanceEnabled = settings.m_bSecondChanceOnTorsoEnabled;
 	}
 }

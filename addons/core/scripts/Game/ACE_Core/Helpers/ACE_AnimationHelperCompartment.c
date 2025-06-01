@@ -30,7 +30,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 			compartmentAccess.GetOnCompartmentEntered().Insert(OnCompartmentEntered);
 		
 		m_pPerformer = performer;
-		m_iPerformerID = Replication.FindItemId(m_pPerformer);
+		m_iPerformerID = Replication.FindItemId(performer);
 		OnPerformerChanged();
 		Replication.BumpMe();
 	}

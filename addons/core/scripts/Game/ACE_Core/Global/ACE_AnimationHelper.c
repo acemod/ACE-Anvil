@@ -32,9 +32,6 @@ class ACE_AnimationTools
 		if (!compartmentAccess || compartmentAccess.ACE_IsGettingIn())
 			return null;
 		
-		// Already signal the access component that we are about to move into the helper compartment
-		compartmentAccess.ACE_SetIsRequestingGettingIn(true);
-		
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		params.Transform = transform;

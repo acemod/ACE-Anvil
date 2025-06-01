@@ -27,7 +27,11 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	{
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
 		if (compartmentAccess)
+		{
+			// Already signal the access component that we are about to move into the helper compartment
+			compartmentAccess.ACE_SetIsRequestingGettingIn(true);
 			compartmentAccess.GetOnCompartmentEntered().Insert(OnCompartmentEntered);
+		}
 		
 		m_pPerformer = performer;
 		m_iPerformerID = Replication.FindItemId(m_pPerformer);

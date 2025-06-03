@@ -1,0 +1,18 @@
+SCR_CharacterDamageManagerComponent {
+ "Additional hit zones" {
+  SCR_CharacterHealthHitZone Health {
+   HZDefault 0
+  }
+  SCR_CharacterHeadHitZone Head {
+   m_fACE_Medical_SecondChance 0
+  }
+  ACE_Medical_CharacterChestHitZone Chest {
+  }
+  ACE_Medical_CharacterAbdomenHitZone Abdomen {
+  }
+  SCR_HitZone ACE_Medical_Default {
+   HZDefault 1
+   IgnoreExplosions 1
+  }
+ }
+}

@@ -1,0 +1,48 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_RepositionUserAction "{630C32646482C8E5}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo UIInfo "{630C32679F8D254B}" {
+      Name "#ACE_Medical-UserAction_BackPosition"
+     }
+     ActionTitle "Back position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 101
+     m_eUnconsciousPose BACK
+    }
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo UIInfo "{630C214BCA7A937E}" {
+      Name "#ACE_Medical-UserAction_RightRecoveryPosition"
+     }
+     ActionTitle "Right recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 103
+     m_eUnconsciousPose RIGHT_SIDE
+    }
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo UIInfo "{630C214BCA7A937E}" {
+      Name "#ACE_Medical-UserAction_LeftRecoveryPosition"
+     }
+     ActionTitle "Recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 102
+     m_eUnconsciousPose LEFT_SIDE
+    }
+   }
+  }
+ }
+}

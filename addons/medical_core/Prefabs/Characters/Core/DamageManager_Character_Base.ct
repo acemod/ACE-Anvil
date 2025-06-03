@@ -13,6 +13,7 @@ SCR_CharacterDamageManagerComponent {
   SCR_HitZone ACE_Medical_Default {
    HZDefault 1
    IgnoreExplosions 1
+   MaxHealth 100
   }
  }
 }

@@ -1,0 +1,17 @@
+SCR_PlayerController {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
+   InfoDisplays {
+    SCR_ScreenEffectsManager "{5AF2CE6B10209B7D}" {
+     InfoDisplays {
+      ACE_Medical_PainScreenEffect "{6588D54E6078F4C9}" {
+       m_eLayer BACKGROUND
+       m_eShow 47
+      }
+     }
+    }
+   }
+  }
+ }
+}

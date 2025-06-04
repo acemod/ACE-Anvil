@@ -3,7 +3,7 @@
 modded class ACE_Medical_Settings : ACE_ModSettings
 {
 	[Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
-	float m_fSecondChanceRegenScale;
+	float m_fSecondChanceResilienceRegenScale;
 	
 	[Attribute(defvalue: "1", desc: "Default probability for second chance for killing blows", uiwidget: UIWidgets.Slider, params: "0 1")]
 	float m_fDefaultSecondChance;

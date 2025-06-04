@@ -11,18 +11,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
 	protected float m_bACE_Medical_WasSecondChanceGranted = false;
 	protected float m_fACE_Medical_FirstSecondChanceTimeMS = -1;
-	protected SCR_CharacterHitZone m_pACE_Medical_LastStruckPhysicalHitZone;
-	protected ACE_Medical_Settings m_pACE_Medical_Settings;
 	
 	protected static const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
-	
-	//-----------------------------------------------------------------------------------------------------------
-	//! Initialize members
-	override void OnPostInit(IEntity owner)
-	{
-		super.OnPostInit(owner);
-		m_pACE_Medical_Settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
-	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Friend method for SCR_CharacterHitZone and SCR_CharacterHealthHitZone
@@ -32,7 +22,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (m_bACE_Medical_WasSecondChanceGranted)
 			return;
 		
-		m_bACE_Medical_WasSecondChanceGranted = true;
+		ACE_Medical_SetWasSecondChanceGranted(true);
 		m_fACE_Medical_FirstSecondChanceTimeMS = GetGame().GetWorld().GetWorldTime();
 		m_pResilienceHitZone.SetHealthScaled(0);
 	}
@@ -41,7 +31,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Unsets previously granted second chance
 	void ACE_Medical_ClearSecondChanceHistory()
 	{
-		m_bACE_Medical_WasSecondChanceGranted = false;
+		ACE_Medical_SetWasSecondChanceGranted(false);
+		ACE_Medical_UpdateResilienceRegenScale();
 		m_fACE_Medical_FirstSecondChanceTimeMS = -1;
 		
 		array<HitZone> hitZones = {};
@@ -68,6 +59,13 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
+	protected void ACE_Medical_SetWasSecondChanceGranted(bool wasGranted)
+	{
+		m_bACE_Medical_WasSecondChanceGranted = wasGranted;
+		ACE_Medical_UpdateResilienceRegenScale();
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
 	//! Whether second chance was granted at least one time
 	//! Gets reset when character wakes up
 	bool ACE_Medical_WasSecondChanceGranted()
@@ -75,24 +73,13 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		return m_bACE_Medical_WasSecondChanceGranted;
 	}
 	
-	//-----------------------------------------------------------------------------------------------------------
-	//! Update last struck physical hit zone
-	override void OnDamage(notnull BaseDamageContext damageContext)
+	//------------------------------------------------------------------------------------------------
+	//! Override recovery scale when second chance was granted and its scale is smaller than the current
+	override void ACE_Medical_UpdateResilienceRegenScale()
 	{
-		super.OnDamage(damageContext);
+		super.ACE_Medical_UpdateResilienceRegenScale();
 		
-		if (!Replication.IsServer())
-			return;
-		
-		SCR_CharacterHitZone struckPhysicalHitZone = SCR_CharacterHitZone.Cast(damageContext.struckHitZone);
-		if (struckPhysicalHitZone)
-			m_pACE_Medical_LastStruckPhysicalHitZone = struckPhysicalHitZone;
-	}
-	
-	//-----------------------------------------------------------------------------------------------------------
-	//! Returns last stuck physical hit zone
-	SCR_CharacterHitZone ACE_Medical_GetLastStruckPhysicalHitZone()
-	{
-		return m_pACE_Medical_LastStruckPhysicalHitZone;
+		if (m_bACE_Medical_WasSecondChanceGranted && m_fACE_Medical_ResilienceRegenScale > m_pACE_Medical_Settings.m_fSecondChanceResilienceRegenScale)
+			m_fACE_Medical_ResilienceRegenScale = m_pACE_Medical_Settings.m_fSecondChanceResilienceRegenScale;
 	}
 }

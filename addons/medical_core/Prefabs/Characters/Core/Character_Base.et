@@ -3,6 +3,15 @@ SCR_ChimeraCharacter {
  components {
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
+    ACE_Medical_EpinephrineUserAction "{60CF45A52131AD5A}" {
+     ParentContextList {
+      "LeftArm" "RightArm" "LeftLeg" "RightLeg"
+     }
+     UIInfo UIInfo "{60CF45A53578811D}" {
+      Name "#ACE_Medical-EpinephrineInjectionAction"
+     }
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE
+    }
     ACE_Medical_RepositionUserAction "{630C32646482C8E5}" {
      ParentContextList {
       "LowerTorso"

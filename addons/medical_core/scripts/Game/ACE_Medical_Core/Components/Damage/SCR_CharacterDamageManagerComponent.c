@@ -3,7 +3,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
 	protected ACE_Medical_Settings m_pACE_Medical_Settings;
 	protected SCR_CharacterHitZone m_pACE_Medical_LastStruckPhysicalHitZone;
+	protected SCR_CharacterHealthHitZone m_pACE_Medical_HealthHitZone;
 	protected float m_fACE_Medical_ResilienceRegenScale = 1;
+	
+	[RplProp()]
+	protected float m_fACE_Medical_MinHealthScaledForEpinephrine = 0.33;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize members
@@ -11,11 +15,18 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.OnPostInit(owner);
 		
-		if (!GetGame().InPlayMode() || !Replication.IsServer())
+		if (!GetGame().InPlayMode())
 			return;
 		
+		m_pACE_Medical_HealthHitZone = SCR_CharacterHealthHitZone.Cast(GetHitZoneByName("Health"));
+		
 		m_pACE_Medical_Settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
-		m_fACE_Medical_ResilienceRegenScale = m_pACE_Medical_Settings.m_fDefaultResilienceRegenScale;
+		if (m_pACE_Medical_Settings)
+		{
+			m_fACE_Medical_ResilienceRegenScale = m_pACE_Medical_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_MinHealthScaledForEpinephrine = m_pACE_Medical_Settings.m_fMinHealthScaledForEpinephrine;
+			Replication.BumpMe();
+		}
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -52,5 +63,45 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	float ACE_Medical_GetResilienceRegenScale()
 	{
 		return m_fACE_Medical_ResilienceRegenScale;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Check if epinephrine can be applied to this character
+	bool ACE_Medical_CanApplyEpinephrine(out SCR_EConsumableFailReason failReason)
+	{
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return false;
+		
+		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
+		if (charController.GetLifeState() != ECharacterLifeState.INCAPACITATED)
+		{
+			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED;
+			return false;
+		}
+		
+		// Check if epinephrine is in the system already
+		array<ref SCR_PersistentDamageEffect> effects = GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
+		if (!effects.IsEmpty())
+		{
+			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
+			return false;
+		}
+		
+		// Cannot be applied while bleeding
+		if (IsBleeding())
+		{
+			failReason = SCR_EConsumableFailReason.IS_BLEEDING;
+			return false;
+		}
+		
+		// Check if too injured
+		if (m_pACE_Medical_HealthHitZone.GetHealthScaled() < m_fACE_Medical_MinHealthScaledForEpinephrine)
+		{
+			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
+			return false;
+		}
+		
+		return true;
 	}
 }

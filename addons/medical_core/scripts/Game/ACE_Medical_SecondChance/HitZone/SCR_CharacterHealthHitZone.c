@@ -3,9 +3,9 @@
 modded class SCR_CharacterHealthHitZone : SCR_HitZone
 {
 	protected SCR_CharacterDamageManagerComponent m_pACE_Medical_DamageManager;
+	protected ref SCR_DamageContext m_pACE_Medical_SecondChanceDamageContext;
 	
-	protected static const float ACE_MEDICAL_SECOND_CHANCE_RESCALED_HEALTH = 0.01;
-	protected static const float ACE_MEDICAL_SECOND_CHANCE_RESCALED_STRUCK_HITZONE_HEALTH = 0.1;
+	protected static const float ACE_MEDICAL_SECOND_CHANCE_SCALED_RECOVERED_HEALTH = 0.01;
 
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize members
@@ -13,6 +13,9 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	{
 		super.OnInit(pOwnerEntity, pManagerComponent);
 		m_pACE_Medical_DamageManager = SCR_CharacterDamageManagerComponent.Cast(pManagerComponent);
+		vector hitPosDirNorm[3];
+		m_pACE_Medical_SecondChanceDamageContext = new SCR_DamageContext(EDamageType.REGENERATION, 0, hitPosDirNorm, GetOwner(), null, null, null, -1, -1);
+		m_pACE_Medical_SecondChanceDamageContext.damageEffect = new InstantDamageEffect();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -50,13 +53,15 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	//-----------------------------------------------------------------------------------------------------------
 	protected void ACE_Medical_GrantSecondChance(SCR_CharacterHitZone struckHitZone)
 	{
-		SetHealthScaled(ACE_MEDICAL_SECOND_CHANCE_RESCALED_HEALTH);
 		m_pACE_Medical_DamageManager.ACE_Medical_OnSecondChanceGranted();
 		
-		if (struckHitZone)
-		{
-			struckHitZone.SetHealthScaled(ACE_MEDICAL_SECOND_CHANCE_RESCALED_STRUCK_HITZONE_HEALTH);
-			struckHitZone.ACE_Medical_SetWasSecondChanceGranted(true);
-		}
+		if (!struckHitZone)
+			return;
+		
+		m_pACE_Medical_SecondChanceDamageContext.struckHitZone = struckHitZone;
+		m_pACE_Medical_SecondChanceDamageContext.damageValue = -struckHitZone.GetMaxHealth() * ACE_MEDICAL_SECOND_CHANCE_SCALED_RECOVERED_HEALTH;
+		// Health recovery has to be handled later, as otherwise replication to client fails
+		GetGame().GetCallqueue().Call(m_pACE_Medical_DamageManager.HandleDamage, m_pACE_Medical_SecondChanceDamageContext);
+		struckHitZone.ACE_Medical_SetWasSecondChanceGranted(true);
 	}
 }

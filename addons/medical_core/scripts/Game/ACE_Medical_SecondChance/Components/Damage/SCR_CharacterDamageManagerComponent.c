@@ -10,7 +10,7 @@
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
 	protected float m_bACE_Medical_WasSecondChanceGranted = false;
-	protected float m_fACE_Medical_FirstSecondChanceTimeMS = -1;
+	protected float m_fACE_Medical_SecondChanceDeactivationTimeMS = -1;
 	
 	protected static const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
 	
@@ -23,8 +23,14 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			return;
 		
 		ACE_Medical_SetWasSecondChanceGranted(true);
-		m_fACE_Medical_FirstSecondChanceTimeMS = GetGame().GetWorld().GetWorldTime();
 		m_pResilienceHitZone.SetHealthScaled(0);
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Second chance will be deactivated after ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS
+	void ACE_Medical_ScheduleSecondChanceDeactivation()
+	{
+		m_fACE_Medical_SecondChanceDeactivationTimeMS = GetGame().GetWorld().GetWorldTime() + ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -33,7 +39,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		ACE_Medical_SetWasSecondChanceGranted(false);
 		ACE_Medical_UpdateResilienceRegenScale();
-		m_fACE_Medical_FirstSecondChanceTimeMS = -1;
+		m_fACE_Medical_SecondChanceDeactivationTimeMS = -1;
 		
 		array<HitZone> hitZones = {};
 		GetPhysicalHitZones(hitZones);
@@ -51,11 +57,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (!m_pACE_Medical_Settings.m_bSecondChanceForAIEnabled && !EntityUtils.IsPlayer(GetOwner()))
 			return false;
 		
-		if (!m_bACE_Medical_WasSecondChanceGranted)
+		if (m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
 			return true;
 		
 		// Check if second chance has expired
-		return GetGame().GetWorld().GetWorldTime() - m_fACE_Medical_FirstSecondChanceTimeMS < ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS;
+		return GetGame().GetWorld().GetWorldTime() < m_fACE_Medical_SecondChanceDeactivationTimeMS;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

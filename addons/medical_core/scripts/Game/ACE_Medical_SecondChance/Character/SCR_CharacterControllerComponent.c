@@ -17,12 +17,23 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	{
 		super.OnLifeStateChanged(previousLifeState, newLifeState);
 		
-		if (!Replication.IsServer())
+		// OnLifeStateChanged sometimes gets triggered without a change in state
+		if (!Replication.IsServer() || previousLifeState == newLifeState)
 			return;
 		
-		if (previousLifeState != ECharacterLifeState.INCAPACITATED || newLifeState != ECharacterLifeState.ALIVE)
-			return;
-		
-		m_pACE_Medical_DamageManager.ACE_Medical_ClearSecondChanceHistory();
+		switch (newLifeState)
+		{
+			case ECharacterLifeState.INCAPACITATED:
+			{
+				m_pACE_Medical_DamageManager.ACE_Medical_ScheduleSecondChanceDeactivation();
+				return;
+			}
+			
+			case ECharacterLifeState.ALIVE:
+			{
+				m_pACE_Medical_DamageManager.ACE_Medical_ClearSecondChanceHistory();
+				return;
+			}
+		}
 	}
 }

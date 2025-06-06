@@ -5,7 +5,7 @@
 //! If second chance is granted, the character survives, but gets knocked out.
 //! The character will stay alive for ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS.
 //! After that all destroyed physical hit zones get checked if they grant second chance.
-//! If they grant it, they'll heal by ACE_MEDICAL_SECOND_CHANCE_SCALED_RECOVERED_HEALTH.
+//! If they grant it, they'll heal by SECOND_CHANCE_SCALED_RECOVERED_HEALTH.
 //! If they don't grant it, the character gets killed.
 //! Finally, the character's damage manager gets unregistered.
 //! ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS, after which no more second chances are granted
@@ -18,7 +18,7 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	protected bool m_bIsUpdating = false;
 	protected bool m_bScheduledQueueUpdate = false;
 	
-	protected static const float ACE_MEDICAL_SECOND_CHANCE_SCALED_RECOVERED_HEALTH = 0.01;
+	protected static const float SECOND_CHANCE_SCALED_RECOVERED_HEALTH = 0.01;
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Medical_SecondChanceSystem GetInstance()
@@ -110,37 +110,37 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 				break;
 			}
 			
-			HealHitZone(damageManager, charHitZone);
+			ApplySecondChanceRegenToHitZone(damageManager, charHitZone);
 		}
 		
 		Unregister(damageManager);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Heals the hit zone by ACE_MEDICAL_SECOND_CHANCE_SCALED_RECOVERED_HEALTH
-	protected void HealHitZone(SCR_CharacterDamageManagerComponent damageManager, SCR_CharacterHitZone hitZone)
+	//! Heals the hit zone by SECOND_CHANCE_SCALED_RECOVERED_HEALTH
+	protected void ApplySecondChanceRegenToHitZone(SCR_CharacterDamageManagerComponent damageManager, SCR_CharacterHitZone hitZone)
 	{
 		if (!hitZone)
 			return;
 		
 		vector hitPosDirNorm[3];
-		SCR_DamageContext secondChanceDamageContext = new SCR_DamageContext(
+		SCR_DamageContext regenContext = new SCR_DamageContext(
 			EDamageType.REGENERATION,
-			-hitZone.GetMaxHealth() * ACE_MEDICAL_SECOND_CHANCE_SCALED_RECOVERED_HEALTH,
+			-hitZone.GetMaxHealth() * SECOND_CHANCE_SCALED_RECOVERED_HEALTH,
 			hitPosDirNorm,
 			damageManager.GetOwner(),
 			hitZone,
 			null, null, -1, -1
 		);
-		secondChanceDamageContext.damageEffect = new InstantDamageEffect();
-		damageManager.HandleDamage(secondChanceDamageContext);
+		regenContext.damageEffect = new InstantDamageEffect();
+		damageManager.HandleDamage(regenContext);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! struckHitZone is the hit zone that caused the registration and is evaluated for second chance
 	void Register(notnull SCR_CharacterDamageManagerComponent damageManager, SCR_CharacterHitZone struckHitZone)
 	{
-		// Refuse registration if second chance is not granted on the struck hit zone
+		// Refuse registration and kill character if second chance is not granted
 		if (!struckHitZone || !damageManager.ACE_Medical_IsSecondChanceEnabled() || damageManager.ACE_Medical_ShouldDeactivateSecondChance() || !struckHitZone.ACE_Medical_ShouldGrantSecondChance())
 		{
 			damageManager.Kill(damageManager.GetInstigator());

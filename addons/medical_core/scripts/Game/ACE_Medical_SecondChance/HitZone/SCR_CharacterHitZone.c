@@ -21,20 +21,24 @@ modded class SCR_CharacterHitZone : SCR_RegeneratingHitZone
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Returns true when second chance is granted
+	//! Returns true when second chance is granted by this hit zone
 	bool ACE_Medical_ShouldGrantSecondChance()
 	{
 		//! Always regrant when previously granted
-		if (m_fACE_Medical_SecondChance == 1 || m_bACE_Medical_WasSecondChanceGranted)
+		if (m_bACE_Medical_WasSecondChanceGranted)
 			return true;
 		
-		return m_fACE_Medical_SecondChance > Math.RandomFloat(0, 1);
+		if (m_fACE_Medical_SecondChance < 1 && m_fACE_Medical_SecondChance <= Math.RandomFloat(0, 1))
+			return false;
+		
+		m_bACE_Medical_WasSecondChanceGranted = true;
+		return true;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Friend method of SCR_CharacterHealthHitZone and SCR_CharacterDamageManagerComponent
-	void ACE_Medical_SetWasSecondChanceGranted(bool wasGranted)
+	//! Unsets previously granted second chance
+	void ACE_Medical_ClearSecondChanceHistory()
 	{
-		m_bACE_Medical_WasSecondChanceGranted = wasGranted;
+		m_bACE_Medical_WasSecondChanceGranted = false;
 	}
 }

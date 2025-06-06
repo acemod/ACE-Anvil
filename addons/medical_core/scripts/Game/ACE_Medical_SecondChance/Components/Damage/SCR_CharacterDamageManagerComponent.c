@@ -1,12 +1,5 @@
 //------------------------------------------------------------------------------------------------
-//! Second Chance
-//! -------------
-//! Second chance is evaluated when a killing blow is dealt to the character.
-//! If second chance is granted, the character survives, but gets knocked out.
-//! After the first second chance got granted, it is possible to regrant second chance up to
-//! ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS, after which no more second chances are granted
-//! until the character wakes up.
-//! Regranting is evaluated per hit zone. A hit zone that once granted, will always regrant.
+//! Add second chance data
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
 	protected float m_bACE_Medical_WasSecondChanceGranted = false;
@@ -34,21 +27,13 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Unsets previously granted second chance
-	void ACE_Medical_ClearSecondChanceHistory()
+	bool ACE_Medical_ShouldDeactivateSecondChance()
 	{
-		ACE_Medical_SetWasSecondChanceGranted(false);
-		ACE_Medical_UpdateResilienceRegenScale();
-		m_fACE_Medical_SecondChanceDeactivationTimeMS = -1;
+		if (m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
+			return false;
 		
-		array<HitZone> hitZones = {};
-		GetPhysicalHitZones(hitZones);
-		foreach (HitZone hitZone : hitZones)
-		{
-			SCR_CharacterHitZone physicalHitZone = SCR_CharacterHitZone.Cast(hitZone);
-			if (physicalHitZone)
-				physicalHitZone.ACE_Medical_SetWasSecondChanceGranted(false);
-		}
+		// Check if second chance has expired
+		return GetGame().GetWorld().GetWorldTime() >= m_fACE_Medical_SecondChanceDeactivationTimeMS;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -57,11 +42,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (!m_pACE_Medical_Settings.m_bSecondChanceForAIEnabled && !EntityUtils.IsPlayer(GetOwner()))
 			return false;
 		
-		if (m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
-			return true;
-		
-		// Check if second chance has expired
-		return GetGame().GetWorld().GetWorldTime() < m_fACE_Medical_SecondChanceDeactivationTimeMS;
+		return true;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -77,6 +58,24 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	bool ACE_Medical_WasSecondChanceGranted()
 	{
 		return m_bACE_Medical_WasSecondChanceGranted;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Unsets previously granted second chance
+	void ACE_Medical_ClearSecondChanceHistory()
+	{
+		ACE_Medical_SetWasSecondChanceGranted(false);
+		ACE_Medical_UpdateResilienceRegenScale();
+		m_fACE_Medical_SecondChanceDeactivationTimeMS = -1;
+		
+		array<HitZone> hitZones = {};
+		GetPhysicalHitZones(hitZones);
+		foreach (HitZone hitZone : hitZones)
+		{
+			SCR_CharacterHitZone physicalHitZone = SCR_CharacterHitZone.Cast(hitZone);
+			if (physicalHitZone)
+				physicalHitZone.ACE_Medical_ClearSecondChanceHistory();
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

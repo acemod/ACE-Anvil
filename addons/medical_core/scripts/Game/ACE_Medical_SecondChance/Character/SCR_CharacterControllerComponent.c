@@ -8,11 +8,14 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	override void OnInit(IEntity owner)
 	{
 		super.OnInit(owner);
+		
+		if (!GetGame().InPlayMode() || !Replication.IsServer())
+			return;
+		
 		m_pACE_Medical_DamageManager = SCR_CharacterDamageManagerComponent.Cast(owner.FindComponent(SCR_CharacterDamageManagerComponent));
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Reset second chance when waking up
 	override void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
 		super.OnLifeStateChanged(previousLifeState, newLifeState);
@@ -26,13 +29,13 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 			case ECharacterLifeState.INCAPACITATED:
 			{
 				m_pACE_Medical_DamageManager.ACE_Medical_ScheduleSecondChanceDeactivation();
-				return;
+				break;
 			}
 			
 			case ECharacterLifeState.ALIVE:
 			{
 				m_pACE_Medical_DamageManager.ACE_Medical_ClearSecondChanceHistory();
-				return;
+				break;
 			}
 		}
 	}

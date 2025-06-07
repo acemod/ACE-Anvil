@@ -15,7 +15,11 @@ modded class SCR_BleedingDamageEffect : SCR_DotDamageEffect
 		if (!bloodLossDamageEffect)
 		{
 			// Add ACE_Medical_BloodLossDamageEffect if none is present
-			dmgManager.AddDamageEffect(new ACE_Medical_BloodLossDamageEffect());
+			bloodLossDamageEffect = new ACE_Medical_BloodLossDamageEffect();
+			bloodLossDamageEffect.SetMaxDuration(0);
+			bloodLossDamageEffect.SetInstigator(GetInstigator());
+			dmgManager.AddDamageEffect(bloodLossDamageEffect);
+			// Get the actual instance, as ExtendedDamageManagerComponent::AddDamageEffect makes a clone
 			bloodLossDamageEffect = ACE_Medical_BloodLossDamageEffect.Cast(dmgManager.FindDamageEffectOfType(ACE_Medical_BloodLossDamageEffect));
 		}
 		

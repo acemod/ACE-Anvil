@@ -17,6 +17,9 @@ modded class ACE_Medical_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1", desc: "Probability for second chance for killing blows to the abdomen", uiwidget: UIWidgets.Slider, params: "0 1")]
 	float m_fSecondChanceOnAbdomen;
 	
+	[Attribute(defvalue: "false", desc: "Whether second chance can be triggered when falling from great heights")]
+	bool m_bSecondChanceForFallDamageEnabled;
+	
 	[Attribute(defvalue: "false", desc: "Whether AI can have second chance")]
 	bool m_bSecondChanceForAIEnabled
 }

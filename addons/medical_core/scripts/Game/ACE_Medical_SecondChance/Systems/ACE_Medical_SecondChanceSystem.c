@@ -93,6 +93,11 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	//! If not, kill the character
 	protected void HandleSecondChanceDeactivation(SCR_CharacterDamageManagerComponent damageManager)
 	{
+		Unregister(damageManager);
+		
+		if (!damageManager.ACE_Medical_IsSecondChanceEnabled())
+			return damageManager.Kill(damageManager.GetInstigator());
+		
 		array<HitZone> hitZones = {};
 		damageManager.GetPhysicalHitZones(hitZones);
 		foreach (HitZone hitZone : hitZones)
@@ -112,8 +117,6 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 			
 			ApplySecondChanceRegenToHitZone(damageManager, charHitZone);
 		}
-		
-		Unregister(damageManager);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

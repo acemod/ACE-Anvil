@@ -11,6 +11,8 @@ class ACE_Medical_PostProcessPainScreenEffectMode : ACE_Medical_BasePainScreenEf
 	
 	protected ref Material m_pEffectMaterial;
 	protected static const int POST_PROCESS_EFFECT_PRIORITY = 7;
+	protected static const float POWER_FADEIN_SPEED = 2;
+	protected static const float POWER_FADEOUT_SPEED = 6;
 	
 	//------------------------------------------------------------------------------------------------
 	override void InitEffect(SCR_ChimeraCharacter char, Widget root)
@@ -37,9 +39,9 @@ class ACE_Medical_PostProcessPainScreenEffectMode : ACE_Medical_BasePainScreenEf
 		
 		float strength;
 		if (progress < 0.5)
-			strength = Math.Min(m_fMaxStrength, 2 * progress);
+			strength = Math.Min(m_fMaxStrength, POWER_FADEIN_SPEED * progress);
 		else
-			strength = Math.Max(0, m_fMaxStrength - 6 * (progress - 0.5));
+			strength = Math.Max(0, m_fMaxStrength - POWER_FADEOUT_SPEED * (progress - 0.5));
 		
 		strength *=  m_fStrengthScale;
 		m_pEffectMaterial.SetParam("PowerX", strength);

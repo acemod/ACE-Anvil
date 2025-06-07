@@ -1,7 +1,7 @@
 FrameWidgetClass {
  {
   ImageWidgetClass "{5E101C4F4DF051FE}" {
-   Name "ACE_Medical_SimplePainEffect"
+   Name "ACE_Medical_WhiteFlash"
    Slot FrameWidgetSlot "{5E101C4F4DF0512B}" {
     Anchor 0 0 1 1
     PositionX 0
@@ -11,6 +11,8 @@ FrameWidgetClass {
     SizeY -1050
     OffsetBottom 0
    }
+   "Is Enabled" 0
+   "Is Visible" 0
    Opacity 0
    Size 1920 1080
    Mask "{CA1F7652B536AA21}UI/Textures/ScreenEffects/Suppression/supressionVignette4.edds"

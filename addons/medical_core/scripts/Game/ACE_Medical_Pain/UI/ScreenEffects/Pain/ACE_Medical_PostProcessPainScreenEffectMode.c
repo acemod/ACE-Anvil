@@ -1,0 +1,48 @@
+//------------------------------------------------------------------------------------------------
+//! Class for chromatic aberration and radial blur effects 
+[BaseContainerProps(), SCR_BaseContainerCustomTitleEnum(ACE_Medical_EPainEffectType, "m_eEffectType")]
+class ACE_Medical_PostProcessPainScreenEffectMode : ACE_Medical_BasePainScreenEffectMode
+{
+	[Attribute(uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(PostProcessEffectType))]
+	protected PostProcessEffectType m_ePPType;
+	
+	[Attribute(params: "emat")]
+	protected ResourceName m_sMaterialName;
+	
+	protected ref Material m_pEffectMaterial;
+	protected static const int POST_PROCESS_EFFECT_PRIORITY = 7;
+	
+	//------------------------------------------------------------------------------------------------
+	override void InitEffect(SCR_ChimeraCharacter char, Widget root)
+	{
+		super.InitEffect(char, root);
+		char.GetWorld().SetCameraPostProcessEffect(char.GetWorld().GetCurrentCameraId(), POST_PROCESS_EFFECT_PRIORITY, m_ePPType, m_sMaterialName);
+		m_pEffectMaterial = Material.GetMaterial(m_sMaterialName);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void EnableEffect(bool enable)
+	{
+		super.EnableEffect(enable);
+		
+		if (m_pEffectMaterial)
+			m_pEffectMaterial.SetParam("Enabled", enable);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void UpdateEffect(float timeSlice)
+	{
+		super.UpdateEffect(timeSlice);
+		float progress = m_fTimer / m_fPeriod;
+		
+		float strength;
+		if (progress < 0.5)
+			strength = Math.Min(m_fMaxStrength, 2 * progress);
+		else
+			strength = Math.Max(0, m_fMaxStrength - 6 * (progress - 0.5));
+		
+		strength *=  m_fStrengthScale;
+		m_pEffectMaterial.SetParam("PowerX", strength);
+		m_pEffectMaterial.SetParam("PowerY", strength);
+	}
+}

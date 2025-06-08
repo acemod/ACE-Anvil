@@ -121,7 +121,7 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Heals the hit zone by SECOND_CHANCE_SCALED_RECOVERED_HEALTH
-	protected void ApplySecondChanceRegenToHitZone(SCR_CharacterDamageManagerComponent damageManager, SCR_CharacterHitZone hitZone)
+	protected void ApplySecondChanceRegenToHitZone(SCR_CharacterDamageManagerComponent damageManager, SCR_HitZone hitZone)
 	{
 		if (!hitZone)
 			return;

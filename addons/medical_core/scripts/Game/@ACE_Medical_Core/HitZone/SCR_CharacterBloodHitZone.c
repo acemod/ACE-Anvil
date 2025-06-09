@@ -1,15 +1,6 @@
 //-----------------------------------------------------------------------------------------------------------
 modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 {
-	protected SCR_CharacterDamageManagerComponent m_pACE_Medical_DamageManager;
-	
-	//-----------------------------------------------------------------------------------------------------------
-	override void OnInit(IEntity pOwnerEntity, GenericComponent pManagerComponent)
-	{
-		super.OnInit(pOwnerEntity, pManagerComponent);
-		m_pACE_Medical_DamageManager = SCR_CharacterDamageManagerComponent.Cast(pManagerComponent);
-	}
-	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Update resilience recovery scale when transitioning from and to unconscious state
 	override protected void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
@@ -19,7 +10,13 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 		if (!Replication.IsServer())
 			return;
 		
-		if (newState == ECharacterBloodState.UNCONSCIOUS || previousDamageState == ECharacterBloodState.UNCONSCIOUS)
-			m_pACE_Medical_DamageManager.ACE_Medical_UpdateResilienceRegenScale();
+		if (newState != ECharacterBloodState.UNCONSCIOUS && previousDamageState != ECharacterBloodState.UNCONSCIOUS)
+			return;
+		
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(GetHitZoneContainer());
+		if (!damageManager)
+			return;
+		
+		damageManager.ACE_Medical_UpdateResilienceRegenScale();
 	}
 }

@@ -55,4 +55,18 @@ modded class SCR_BleedingDamageEffect : SCR_DotDamageEffect
 		
 		return true;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Refactored calculation to SCR_CharacterHitZone::CalculateBleedingRate
+	override float CalculateBleedingRate()
+	{
+		SCR_CharacterHitZone affectedHitZone = SCR_CharacterHitZone.Cast(GetAffectedHitZone());
+		if (!affectedHitZone)
+		{
+			Print("SCR_BleedingDamageEffect instance without hitZone exists", LogLevel.ERROR);
+			return 0;
+		}
+
+		return affectedHitZone.ACE_Medical_CalculateBleedingRate();
+	}
 }

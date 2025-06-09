@@ -33,4 +33,41 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 		
 		return settings.m_bBleedOutForPlayersEnabled;
 	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Should be called whenever the total bleeding rate should be recalculated
+	void ACE_Medical_UpdateTotalBleedingAmount()
+	{
+		m_fACE_Medical_TotalBleedingAmount = 0;
+		
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(GetHitZoneContainer());
+		if (!damageManager)
+			return;
+		
+		array<ref SCR_PersistentDamageEffect> effects = {};
+		damageManager.FindAllDamageEffectsOfType(SCR_BleedingDamageEffect, effects);
+		
+		foreach (SCR_PersistentDamageEffect effect : effects)
+		{
+			m_fACE_Medical_TotalBleedingAmount += ACE_Medical_ComputeBleedingRateForDamageEffect(damageManager,  SCR_BleedingDamageEffect.Cast(effect));
+		}
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	protected float ACE_Medical_ComputeBleedingRateForDamageEffect(SCR_CharacterDamageManagerComponent damageManager, SCR_BleedingDamageEffect bleedingEffect)
+	{
+		float rate = bleedingEffect.GetDPS();
+		
+		SCR_CharacterHitZone affectedHitZone = SCR_CharacterHitZone.Cast(bleedingEffect.GetAffectedHitZone());
+		if (affectedHitZone && damageManager.GetGroupTourniquetted(affectedHitZone.GetHitZoneGroup()))
+			rate *= damageManager.GetTourniquetStrengthMultiplier();
+		
+		return rate;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	override float GetTotalBleedingAmount()
+	{
+		return m_fACE_Medical_TotalBleedingAmount;
+	}
 }

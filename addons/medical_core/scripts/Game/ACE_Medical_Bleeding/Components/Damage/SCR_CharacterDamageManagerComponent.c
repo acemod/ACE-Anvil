@@ -15,4 +15,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 
 		controller.SetUnconscious(ShouldBeUnconscious());
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void SetTourniquettedGroup(ECharacterHitZoneGroup hitZoneGroup, bool setTourniquetted)
+	{
+		super.SetTourniquettedGroup(hitZoneGroup, setTourniquetted);
+		m_pBloodHitZone.ACE_Medical_UpdateTotalBleedingAmount();
+	}
 }

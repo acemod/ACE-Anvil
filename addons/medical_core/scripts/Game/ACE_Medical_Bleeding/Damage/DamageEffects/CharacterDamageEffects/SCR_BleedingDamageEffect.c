@@ -3,47 +3,56 @@
 modded class SCR_BleedingDamageEffect : SCR_DotDamageEffect
 {
 	//------------------------------------------------------------------------------------------------
-	//! Register to ACE_Medical_BloodLossDamageEffect
+	//! Start ACE_Medical_BloodLossDamageEffect if none is present
 	override void OnEffectAdded(SCR_ExtendedDamageManagerComponent dmgManager)
 	{
 		super.OnEffectAdded(dmgManager);
 		
-		if (!Replication.IsServer())
+		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
+		if (charDamageManager)
+			charDamageManager.GetBloodHitZone().ACE_Medical_UpdateTotalBleedingAmount();
+		
+		if (dmgManager.FindDamageEffectOfType(ACE_Medical_BloodLossDamageEffect))
 			return;
 		
-		ACE_Medical_BloodLossDamageEffect bloodLossDamageEffect = ACE_Medical_BloodLossDamageEffect.Cast(dmgManager.FindDamageEffectOfType(ACE_Medical_BloodLossDamageEffect));
-		if (!bloodLossDamageEffect)
-		{
-			// Add ACE_Medical_BloodLossDamageEffect if none is present
-			bloodLossDamageEffect = new ACE_Medical_BloodLossDamageEffect();
-			bloodLossDamageEffect.SetMaxDuration(0);
-			bloodLossDamageEffect.SetInstigator(GetInstigator());
-			dmgManager.AddDamageEffect(bloodLossDamageEffect);
-			// Get the actual instance, as ExtendedDamageManagerComponent::AddDamageEffect makes a clone
-			bloodLossDamageEffect = ACE_Medical_BloodLossDamageEffect.Cast(dmgManager.FindDamageEffectOfType(ACE_Medical_BloodLossDamageEffect));
-		}
-		
-		if (bloodLossDamageEffect)
-			bloodLossDamageEffect.RegisterDamageEffect(dmgManager, this);
+		ACE_Medical_BloodLossDamageEffect bloodLossDamageEffect = new ACE_Medical_BloodLossDamageEffect();
+		bloodLossDamageEffect.SetMaxDuration(0);
+		bloodLossDamageEffect.SetInstigator(GetInstigator());
+		dmgManager.AddDamageEffect(bloodLossDamageEffect);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Unregister from ACE_Medical_BloodLossDamageEffect
+	//! Terminate ACE_Medical_BloodLossDamageEffect if no bleedings are left
 	override void OnEffectRemoved(SCR_ExtendedDamageManagerComponent dmgManager)
 	{
 		super.OnEffectRemoved(dmgManager);
 		
-		if (!Replication.IsServer())
-			return;
+		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
+		if (charDamageManager)
+			charDamageManager.GetBloodHitZone().ACE_Medical_UpdateTotalBleedingAmount();
 		
-		ACE_Medical_BloodLossDamageEffect bloodLossDamageEffect = ACE_Medical_BloodLossDamageEffect.Cast(dmgManager.FindDamageEffectOfType(ACE_Medical_BloodLossDamageEffect));
-		if (bloodLossDamageEffect)
-			bloodLossDamageEffect.UnregisterDamageEffect(dmgManager, this);
+		if (!dmgManager.FindDamageEffectOfType(SCR_BleedingDamageEffect))
+			dmgManager.TerminateDamageEffectsOfType(ACE_Medical_BloodLossDamageEffect);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Disable damage over time, as ACE_Medical_BloodLossDamageEffect is responsible for it
 	protected override void EOnFrame(float timeSlice, SCR_ExtendedDamageManagerComponent dmgManager)
 	{
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! We update bleeding amount here as well, since when the hit zone already has a bleeding effect,
+	//! adding another one gets hijacked and the DPS gets updated instead.
+	override bool HijackDamageEffect(SCR_ExtendedDamageManagerComponent dmgManager)
+	{
+		if (!super.HijackDamageEffect(dmgManager))
+			return false;
+		
+		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
+		if (charDamageManager)
+			charDamageManager.GetBloodHitZone().ACE_Medical_UpdateTotalBleedingAmount();
+		
+		return true;
 	}
 }

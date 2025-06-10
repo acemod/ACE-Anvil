@@ -18,11 +18,11 @@ class ACE_Medical_BloodLossDamageEffect : SCR_DotDamageEffect
 	protected override void EOnFrame(float timeSlice, SCR_ExtendedDamageManagerComponent dmgManager)
 	{
 		DotDamageEffectTimerToken token = UpdateTimer(timeSlice, dmgManager);
-		DealCustomDot(GetAffectedHitZone(), ComputeTotalBloodLoss(timeSlice, dmgManager), token, dmgManager);
+		DealCustomDot(GetAffectedHitZone(), ComputeEffectiveTotalBloodLoss(timeSlice, dmgManager), token, dmgManager);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float ComputeTotalBloodLoss(float timeSlice, SCR_ExtendedDamageManagerComponent dmgManager)
+	protected float ComputeEffectiveTotalBloodLoss(float timeSlice, SCR_ExtendedDamageManagerComponent dmgManager)
 	{
 		SCR_CharacterBloodHitZone bloodHitZone = SCR_CharacterBloodHitZone.Cast(GetAffectedHitZone());
 		if (!bloodHitZone)

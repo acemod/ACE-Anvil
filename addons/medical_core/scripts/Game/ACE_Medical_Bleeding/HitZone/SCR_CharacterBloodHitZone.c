@@ -52,8 +52,9 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 			m_fACE_Medical_TotalBleedingAmount += ACE_Medical_ComputeBleedingRateForDamageEffect(damageManager,  SCR_BleedingDamageEffect.Cast(effect));
 		}
 		
-		if (damageManager.s_HealthSettings.ACE_Medical_GetMaxTotalBleedingRate() >= 0)
-			m_fACE_Medical_TotalBleedingAmount = Math.Min(m_fACE_Medical_TotalBleedingAmount, damageManager.s_HealthSettings.ACE_Medical_GetMaxTotalBleedingRate())
+		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		if (settings && settings.m_fMaxTotalBleedingRate >= 0 && m_fACE_Medical_TotalBleedingAmount > settings.m_fMaxTotalBleedingRate)
+			m_fACE_Medical_TotalBleedingAmount = settings.m_fMaxTotalBleedingRate;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

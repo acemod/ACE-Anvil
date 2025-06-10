@@ -8,7 +8,7 @@
 //! If they grant it, they'll heal by SECOND_CHANCE_SCALED_RECOVERED_HEALTH.
 //! If they don't grant it, the character gets killed.
 //! Finally, the character's damage manager gets unregistered.
-//! ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS, after which no more second chances are granted
+//! After ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS has passed, no more second chances are granted
 //! until the character wakes up.
 class ACE_Medical_SecondChanceSystem : GameSystem
 {
@@ -157,7 +157,7 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	protected void Register(SCR_CharacterDamageManagerComponent damageManager)
 	{
-		// Only directly touch m_aQueue while no updating is going on
+		// Only directly touch queue while no updating is going on
 		if (m_bIsUpdating)
 		{
 			m_aDamageManagersToRegister.Insert(damageManager);
@@ -177,7 +177,7 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	void Unregister(SCR_CharacterDamageManagerComponent damageManager)
 	{
-		// Only directly touch m_aQueue while no updating is going on
+		// Only directly touch queue while no updating is going on
 		if (m_bIsUpdating)
 		{
 			m_aDamageManagersToUnregister.Insert(damageManager);

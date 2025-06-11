@@ -18,6 +18,7 @@ class ACE_Medical_BasePainScreenEffectMode
 	protected float m_fMaxStrength;
 	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
 	
+	//------------------------------------------------------------------------------------------------
 	void InitEffect(SCR_ChimeraCharacter char, Widget root)
 	{
 		m_fPeriod = 1 / m_fFrequency;

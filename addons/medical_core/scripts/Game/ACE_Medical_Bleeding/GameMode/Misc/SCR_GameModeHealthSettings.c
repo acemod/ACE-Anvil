@@ -13,7 +13,7 @@ modded class SCR_GameModeHealthSettings : ScriptComponent
 		if (!settings)
 			return;
 		
-		m_fDOTScale = settings.m_fBleedRateScale;
+		m_fDOTScale = settings.m_fBleedingRateScale;
 		m_fRegenScale = settings.m_fBloodRegenScale;
 	}
 }

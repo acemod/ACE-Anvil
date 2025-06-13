@@ -55,6 +55,23 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 	}
 	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Remove bleeding particle effects when character is dead
+	override void OnDamageStateChanged(EDamageState state)
+	{
+		super.OnDamageStateChanged(state);
+		
+		if (state != EDamageState.DESTROYED || !m_mBleedingParticles)
+			return;
+		
+		foreach (ParticleEffectEntity effect : m_mBleedingParticles)
+		{
+			effect.StopEmission();
+		}
+		
+		m_mBleedingParticles = null;
+	}
+	
 #ifdef WORKBENCH
 	[Attribute(defvalue: "false", desc: "Should draw debug shapes for hit zones")]
 	protected bool m_bACE_Medical_DrawHitZoneDebug;

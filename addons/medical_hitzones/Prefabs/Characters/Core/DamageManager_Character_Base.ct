@@ -17,6 +17,9 @@ SCR_CharacterDamageManagerComponent {
     }
    }
    m_bACE_Medical_IsVital 1
+   m_aACE_Medical_OrganHitZoneNames {
+    "ACE_Medical_Heart"
+   }
   }
   ACE_Medical_CharacterAbdomenHitZone Abdomen {
    ParentHZs {
@@ -138,6 +141,17 @@ SCR_CharacterDamageManagerComponent {
      HealingMultiplier 0
     }
    }
+  }
+  ACE_Medical_HeartHitZone ACE_Medical_Heart {
+   MaxHealth 30
+   "Melee multiplier" 3
+   "Kinetic multiplier" 15
+   "Explosive multiplier" 3
+   m_pPointInfo PointInfo "{658D58745FEFAE88}" {
+    PivotID "Spine5"
+    Offset -0.0311 0.1496 0.05
+   }
+   m_rRadius 0.04
   }
  }
 }

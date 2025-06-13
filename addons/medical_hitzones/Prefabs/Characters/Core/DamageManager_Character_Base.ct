@@ -134,7 +134,7 @@ SCR_CharacterDamageManagerComponent {
     }
    }
   }
-  SCR_CharacterHitZone Neck {
+  ACE_Medical_NeckHitZone Neck {
    ParentHZs {
     ParentHitZone "{60F48ADCA47D7F72}" {
      DamageMultiplier 0

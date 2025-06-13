@@ -1,0 +1,143 @@
+SCR_CharacterDamageManagerComponent {
+ "Additional hit zones" {
+  SCR_CharacterHeadHitZone Head {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+   m_bACE_Medical_IsVital 1
+  }
+  ACE_Medical_CharacterChestHitZone Chest {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+   m_bACE_Medical_IsVital 1
+  }
+  ACE_Medical_CharacterAbdomenHitZone Abdomen {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+   m_bACE_Medical_IsVital 1
+  }
+  SCR_CharacterHitZone Hips {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone RArm {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone LArm {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone RForearm {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone LForearm {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone RHand {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone LHand {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone RThigh {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone LThigh {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone RCalf {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone LCalf {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone RFoot {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone LFoot {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+  SCR_CharacterHitZone Neck {
+   ParentHZs {
+    ParentHitZone "{60F48ADCA47D7F72}" {
+     DamageMultiplier 0
+     HealingMultiplier 0
+    }
+   }
+  }
+ }
+}

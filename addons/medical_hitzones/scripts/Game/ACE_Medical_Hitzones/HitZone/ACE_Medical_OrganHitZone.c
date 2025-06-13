@@ -71,4 +71,13 @@ class ACE_Medical_OrganHitZone: SCR_HitZone
 	{
 		return m_pPointInfo;
 	}
+	
+#ifdef WORKBENCH
+	//------------------------------------------------------------------------------------------------
+	override void DrawDebug()
+	{
+		if (m_pPointInfo)
+			Shape.CreateSphere(Color.RED, ShapeFlags.WIREFRAME | ShapeFlags.NOZBUFFER | ShapeFlags.ONCE, m_pPointInfo.GetWorldTransformAxis(3), m_rRadius);
+	}
+#endif
 }

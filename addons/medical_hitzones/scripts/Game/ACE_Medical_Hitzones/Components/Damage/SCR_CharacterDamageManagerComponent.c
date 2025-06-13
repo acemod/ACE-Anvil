@@ -22,4 +22,25 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 				charHitZone.ACE_Medical_InitOrganHitZones(this);
 		}
 	}
+	
+#ifdef WORKBENCH
+	[Attribute(defvalue: "false", desc: "Should draw debug shapes for hit zones")]
+	protected bool m_bACE_Medical_DrawHitZoneDebug;
+	
+	//-----------------------------------------------------------------------------------------------------------
+	override void OnDiag(IEntity owner, float timeSlice)
+	{
+		if (!m_bACE_Medical_DrawHitZoneDebug)
+			return;
+		
+		array<HitZone> hitZones = {};
+		GetAllHitZones(hitZones);
+		foreach (HitZone hitZone : hitZones)
+		{
+			SCR_HitZone scriptedHitZone = SCR_HitZone.Cast(hitZone);
+			if (scriptedHitZone)
+				scriptedHitZone.DrawDebug();
+		}
+	}
+#endif
 }

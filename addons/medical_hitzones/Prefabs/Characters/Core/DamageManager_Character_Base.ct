@@ -154,4 +154,5 @@ SCR_CharacterDamageManagerComponent {
    m_rRadius 0.04
   }
  }
+ m_fBleedingParticleRateScale 1
 }

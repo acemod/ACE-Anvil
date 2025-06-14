@@ -47,11 +47,68 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.CreateBleedingParticleEffect(hitZone, colliderDescriptorIndex);
 		
-		if (ACE_Medical_NeckHitZone.Cast(hitZone) && m_mBleedingParticles && m_mBleedingParticles.Contains(hitZone))
+		ACE_Medical_HipsHitZone hipsHitZone = ACE_Medical_HipsHitZone.Cast(hitZone);
+		if (hipsHitZone)
+		{
+			array<HitZone> hitZones = {};
+			GetAllHitZones(hitZones);
+			
+			foreach (HitZone otherHitZone : hitZones)
+			{
+				ACE_Medical_FemoralArteryHitZone artery = ACE_Medical_FemoralArteryHitZone.Cast(otherHitZone);
+				if (artery && artery.GetHealthScaled() < 1)
+					ACE_Medical_CreateFemoralBleedingParticleEffect(artery);
+			}
+		}
+		else if (ACE_Medical_NeckHitZone.Cast(hitZone) && m_mBleedingParticles && m_mBleedingParticles.Contains(hitZone))
 		{
 			SCR_CharacterDamageManagerComponentClass componentData = SCR_CharacterDamageManagerComponentClass.Cast(GetComponentData(GetOwner()));
 			if (componentData)
 				componentData.ACE_Medical_UpgradeToMassiveBleeding(m_mBleedingParticles[hitZone].GetParticles());
+		}
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	void ACE_Medical_CreateFemoralBleedingParticleEffect(notnull ACE_Medical_FemoralArteryHitZone hitZone)
+	{
+		RemoveBleedingParticleEffect(hitZone);
+		
+		ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
+		spawnParams.Parent = GetOwner();
+		PointInfo pointInfo = hitZone.GetPointInfo();
+		spawnParams.PivotID = pointInfo.GetNodeId();
+		pointInfo.GetLocalTransform(spawnParams.Transform);
+		ParticleEffectEntity effect = ParticleEffectEntity.SpawnParticleEffect(m_sBleedingParticle, spawnParams);
+		Particles particles = effect.GetParticles();
+		
+		SCR_CharacterDamageManagerComponentClass componentData = SCR_CharacterDamageManagerComponentClass.Cast(GetComponentData(GetOwner()));
+		if (componentData)
+			componentData.ACE_Medical_UpgradeToMassiveBleeding(particles);
+		
+		if (!m_mBleedingParticles)
+			m_mBleedingParticles = new map<HitZone, ParticleEffectEntity>();
+		
+		m_mBleedingParticles[hitZone] = effect;
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Remove femoral bleedings when hips are bandaged
+	override void RemoveBleedingParticleEffect(HitZone hitZone)
+	{
+		super.RemoveBleedingParticleEffect(hitZone);
+		
+		ACE_Medical_HipsHitZone hipsHitZone = ACE_Medical_HipsHitZone.Cast(hitZone);
+		if (hipsHitZone)
+		{
+			array<HitZone> hitZones = {};
+			GetAllHitZones(hitZones);
+			
+			foreach (HitZone otherHitZone : hitZones)
+			{
+				ACE_Medical_FemoralArteryHitZone artery = ACE_Medical_FemoralArteryHitZone.Cast(otherHitZone);
+				if (artery)
+					RemoveBleedingParticleEffect(artery);
+			}
 		}
 	}
 	

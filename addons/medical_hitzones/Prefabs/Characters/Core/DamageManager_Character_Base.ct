@@ -30,7 +30,7 @@ SCR_CharacterDamageManagerComponent {
    }
    m_bACE_Medical_IsVital 1
   }
-  SCR_CharacterHitZone Hips {
+  ACE_Medical_HipsHitZone Hips {
    ParentHZs {
     ParentHitZone "{60F48ADCA47D7F72}" {
      DamageMultiplier 0
@@ -93,6 +93,9 @@ SCR_CharacterDamageManagerComponent {
      HealingMultiplier 0
     }
    }
+   m_aACE_Medical_OrganHitZoneNames {
+    "ACE_Medical_RFemoralArtery"
+   }
   }
   SCR_CharacterHitZone LThigh {
    ParentHZs {
@@ -100,6 +103,9 @@ SCR_CharacterDamageManagerComponent {
      DamageMultiplier 0
      HealingMultiplier 0
     }
+   }
+   m_aACE_Medical_OrganHitZoneNames {
+    "ACE_Medical_LFemoralArtery"
    }
   }
   SCR_CharacterHitZone RCalf {
@@ -152,6 +158,36 @@ SCR_CharacterDamageManagerComponent {
     Offset -0.0311 0.1496 0.05
    }
    m_rRadius 0.04
+  }
+  ACE_Medical_FemoralArteryHitZone ACE_Medical_RFemoralArtery {
+   IgnoreExplosions 1
+   MaxHealth 25
+   "Kinetic multiplier" 6
+   "DamageState threshold" {
+    0.6
+   }
+   m_pPointInfo PointInfo "{658F405B4D514C37}" {
+    PivotID "RightLeg"
+    Offset 0.0388 -0.0735 -0.0285
+   }
+   m_rRadius 0.02
+   m_fACE_Medical_SecondChance 1
+   m_bACE_Medical_IsVital 0
+  }
+  ACE_Medical_FemoralArteryHitZone ACE_Medical_LFemoralArtery {
+   IgnoreExplosions 1
+   MaxHealth 25
+   "Kinetic multiplier" 6
+   "DamageState threshold" {
+    0.6
+   }
+   m_pPointInfo PointInfo "{658F405FF12A4669}" {
+    PivotID "LeftLeg"
+    Offset -0.0388 0.0735 0.0285
+   }
+   m_rRadius 0.02
+   m_fACE_Medical_SecondChance 1
+   m_bACE_Medical_IsVital 0
   }
  }
  m_fBleedingParticleRateScale 1

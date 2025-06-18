@@ -10,7 +10,7 @@ import enum
 # GLOBALS
 PROJECT_DIR_PATH = Path(__file__).resolve().parent.parent
 PROJECT_ADDONS_DIRS = [PROJECT_DIR_PATH / 'addons', PROJECT_DIR_PATH / 'optionals']
-BLACKLISTED_ADDON_IDS = ['ACE_Medical_Core', 'ACE_Medical_Hitzones', 'ACE_Medical_Circulation', 'ACE_Explosives']
+BLACKLISTED_ADDON_IDS = []
 WORKBENCH_EXTRA_ARGS = ['-enableWARP', '-noThrow', '-noSound', '-scriptAuthorizeAll', '-silentCrashReport', '-VMErrorMode', 'fatal']
 LOGGER_FORMAT = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 

@@ -2,7 +2,7 @@
 [BaseContainerProps()]
 modded class ACE_Medical_Settings : ACE_ModSettings
 {
-	[Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", category: "ACE Medical")]
+	[Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", params: "0 inf")]
 	float m_fSecondChanceResilienceRegenScale;
 	
 	[Attribute(defvalue: "1", desc: "Default probability for second chance for killing blows", uiwidget: UIWidgets.Slider, params: "0 1")]
@@ -21,5 +21,5 @@ modded class ACE_Medical_Settings : ACE_ModSettings
 	bool m_bSecondChanceForFallDamageEnabled;
 	
 	[Attribute(defvalue: "false", desc: "Whether AI can have second chance")]
-	bool m_bSecondChanceForAIEnabled
+	bool m_bSecondChanceForAIEnabled;
 }

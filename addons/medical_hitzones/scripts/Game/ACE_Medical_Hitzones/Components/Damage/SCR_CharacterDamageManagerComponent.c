@@ -28,7 +28,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 		
-		if (!m_pACE_Medical_Settings || !m_pACE_Medical_Settings.m_bOrganHitZonesEnabled)
+		ACE_Medical_Hitzones_Settings settings = ACE_SettingsHelperT<ACE_Medical_Hitzones_Settings>.GetModSettings();
+		if (!settings || !settings.m_bOrganHitZonesEnabled)
 			return;
 		
 		array<HitZone> hitZones = {};

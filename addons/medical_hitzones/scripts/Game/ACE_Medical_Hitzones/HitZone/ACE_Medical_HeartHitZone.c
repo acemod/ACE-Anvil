@@ -10,7 +10,7 @@ class ACE_Medical_HeartHitZone : ACE_Medical_OrganHitZone
 		if (!Replication.IsServer())
 			return;
 		
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		ACE_Medical_Hitzones_Settings settings = ACE_SettingsHelperT<ACE_Medical_Hitzones_Settings>.GetModSettings();
 		if (settings)
 			m_fACE_Medical_SecondChance = settings.m_fSecondChanceOnHeart;
 	}

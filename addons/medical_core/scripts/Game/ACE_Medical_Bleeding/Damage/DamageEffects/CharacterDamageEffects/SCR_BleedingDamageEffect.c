@@ -6,8 +6,8 @@ modded class SCR_BleedingDamageEffect : SCR_DotDamageEffect
 	//! Start ACE_Medical_BloodLossDamageEffect if none is present
 	override void OnEffectAdded(SCR_ExtendedDamageManagerComponent dmgManager)
 	{
-		super.OnEffectAdded(dmgManager);
 		SetDPS(CalculateBleedingRate());
+		super.OnEffectAdded(dmgManager);
 		
 		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
 		if (charDamageManager)

@@ -9,11 +9,11 @@ modded class SCR_GameModeHealthSettings : ScriptComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 		
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		ACE_Medical_Core_Settings settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
 		if (!settings)
 			return;
 		
-		m_fDOTScale = settings.m_fBleedRateScale;
+		m_fDOTScale = settings.m_fBleedingRateScale;
 		m_fRegenScale = settings.m_fBloodRegenScale;
 	}
 }

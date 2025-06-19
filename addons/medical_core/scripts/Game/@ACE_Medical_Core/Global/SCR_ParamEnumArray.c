@@ -12,8 +12,7 @@ modded class SCR_ParamEnumArray : ParamEnumArray
 		
 		ParamEnumArray params = new ParamEnumArray();
 		int cnt = list.Count();
-		int val;
-	
+		
 		for (int i = 0; i < cnt; ++i)
 		{
 			string hitZoneName = list.Get(i).GetName();

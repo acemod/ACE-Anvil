@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-modded class ACE_Medical_Settings : ACE_ModSettings
+modded class ACE_Medical_Core_Settings : ACE_ModSettings
 {
 	[Attribute(defvalue: "true", desc: "Healing consumes supplies when enabled. Ignored when global supply usage is disabled.")]
 	bool m_bHealSupplyUsageEnabled;

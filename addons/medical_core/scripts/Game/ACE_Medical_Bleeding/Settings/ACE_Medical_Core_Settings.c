@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-modded class ACE_Medical_Settings : ACE_ModSettings
+modded class ACE_Medical_Core_Settings : ACE_ModSettings
 {
 	[Attribute(defvalue: "true", desc: "Whether players can bleed out")]
 	bool m_bBleedOutForPlayersEnabled;
 	
 	[Attribute(defvalue: "1", desc: "Character bleeding rate multiplier")]
-	float m_fBleedRateScale;
+	float m_fBleedingRateScale;
 	
 	[Attribute(defvalue: "-1", desc: "Maximum possibe bleeding rate in ml/s (Negative value means unlimited)")]
 	float m_fMaxTotalBleedingRate;

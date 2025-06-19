@@ -4,7 +4,7 @@
 modded class ACE_MissionHeaderSettings
 {
 	[Attribute()]
-	protected ref ACE_Medical_Settings m_ACE_Medical_Settings;
+	protected ref ACE_Medical_Core_Settings m_ACE_Medical_Core;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Applies settings from mission header to config
@@ -12,7 +12,7 @@ modded class ACE_MissionHeaderSettings
 	{
 		super.ApplyToSettingsConfig(config);
 		
-		if (m_ACE_Medical_Settings)
-			config.SetModSettings(m_ACE_Medical_Settings);
+		if (m_ACE_Medical_Core)
+			config.SetModSettings(m_ACE_Medical_Core);
 	}
 }

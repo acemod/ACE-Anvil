@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
-	protected ACE_Medical_Settings m_pACE_Medical_Settings;
+	protected ACE_Medical_Core_Settings m_pACE_Medical_Core_Settings;
 	protected SCR_CharacterHitZone m_pACE_Medical_LastStruckPhysicalHitZone;
 	protected SCR_CharacterHealthHitZone m_pACE_Medical_HealthHitZone;
 	protected float m_fACE_Medical_ResilienceRegenScale = 1;
@@ -20,11 +20,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		
 		m_pACE_Medical_HealthHitZone = SCR_CharacterHealthHitZone.Cast(GetHitZoneByName("Health"));
 		
-		m_pACE_Medical_Settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
-		if (m_pACE_Medical_Settings)
+		m_pACE_Medical_Core_Settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
+		if (m_pACE_Medical_Core_Settings)
 		{
-			m_fACE_Medical_ResilienceRegenScale = m_pACE_Medical_Settings.m_fDefaultResilienceRegenScale;
-			m_fACE_Medical_MinHealthScaledForEpinephrine = m_pACE_Medical_Settings.m_fMinHealthScaledForEpinephrine;
+			m_fACE_Medical_ResilienceRegenScale = m_pACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_MinHealthScaledForEpinephrine = m_pACE_Medical_Core_Settings.m_fMinHealthScaledForEpinephrine;
 			Replication.BumpMe();
 		}
 	}
@@ -56,7 +56,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (m_pBloodHitZone.GetDamageState() == ECharacterBloodState.UNCONSCIOUS)
 			m_fACE_Medical_ResilienceRegenScale = 0;
 		else
-			m_fACE_Medical_ResilienceRegenScale = m_pACE_Medical_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_ResilienceRegenScale = m_pACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
 	}
 	
 	//------------------------------------------------------------------------------------------------

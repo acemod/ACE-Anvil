@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-modded class ACE_Medical_Settings : ACE_ModSettings
+modded class ACE_Medical_Core_Settings : ACE_ModSettings
 {
 	[Attribute(defvalue: "0", desc: "Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor.", params: "0 inf")]
 	float m_fSecondChanceResilienceRegenScale;

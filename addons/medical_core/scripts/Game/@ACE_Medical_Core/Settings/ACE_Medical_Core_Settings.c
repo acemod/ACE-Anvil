@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-class ACE_Medical_Settings : ACE_ModSettings
+class ACE_Medical_Core_Settings : ACE_ModSettings
 {
 	[Attribute(defvalue: "0.3", desc: "Default resilience regeneration scale. The default regeneration rate (5 HP/s) will be multiplied by this factor.", params: "0 inf")]
 	float m_fDefaultResilienceRegenScale;

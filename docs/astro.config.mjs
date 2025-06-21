@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
-import mdx from '@astrojs/mdx'
 import remarkMath from 'remark-math'
 import rehypeKatex from 'rehype-katex'
 
@@ -10,6 +9,11 @@ import { config } from './src/utils/config'
 // https://astro.build/config
 export default defineConfig({
   site: config.site.url,
+
+  markdown: {
+    remarkPlugins: [remarkMath],
+    rehypePlugins: [rehypeKatex],
+  },
 
   integrations: [
     starlight({
@@ -64,10 +68,6 @@ export default defineConfig({
         baseUrl: `${config.ace.githubUrl}/edit/master/docs/`,
       },
       lastUpdated: true,
-    }),
-    mdx({
-      remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
     }),
   ],
 

@@ -44,3 +44,9 @@ code {
   color: #ec7f75;
 }
 
+.sl-markdown-content kbd {
+  @apply inline-block px-1 bg-gray-100 text-gray-800 border border-gray-300 shadow-sm;
+}
+[data-theme='dark'] .sl-markdown-content kbd {
+  @apply bg-gray-800 text-gray-100 border-gray-600;
+}

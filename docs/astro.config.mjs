@@ -1,12 +1,16 @@
 import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
-import tailwind from '@astrojs/tailwind'
+import tailwindcss from '@tailwindcss/vite'
+import mdx from '@astrojs/mdx'
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 import { config } from './src/utils/config'
 
 // https://astro.build/config
 export default defineConfig({
   site: config.site.url,
+
   integrations: [
     starlight({
       title: config.site.name,
@@ -19,13 +23,13 @@ export default defineConfig({
         // Path to your Tailwind base styles:
         './src/styles/tailwind.css',
       ],
-      social: {
-        'discord': config.ace.discordUrl,
-        'github': config.ace.githubUrl,
-        'x.com': 'https://twitter.com/ACE3Mod',
-        'facebook': 'https://facebook.com/ACE3Mod',
-        'youtube': 'https://youtube.com/c/ACE3Mod',
-      },
+      social: [
+        { icon: 'discord', label: 'Discord', href: config.ace.discordUrl },
+        { icon: 'github', label: 'GitHub', href: config.ace.githubUrl },
+        { icon: 'x.com', label: 'X', href: 'https://x.com/ACE3Mod' },
+        { icon: 'facebook', label: 'Facebook', href: 'https://facebook.com/ACE3Mod' },
+        { icon: 'youtube', label: 'YouTube', href: 'https://youtube.com/c/ACE3Mod' },
+      ],
       sidebar: [
         {
           label: 'Overview',
@@ -36,11 +40,11 @@ export default defineConfig({
             { label: 'Branding', link: '/branding/' },
           ],
         },
-        //{
+        // {
         //  label: 'News',
         //  collapsed: true,
         //  autogenerate: { directory: 'news' },
-        //},
+        // },
         {
           label: 'Guides',
           autogenerate: { directory: 'guides' },
@@ -57,13 +61,25 @@ export default defineConfig({
         },
       },
       editLink: {
-        baseUrl: config.ace.githubUrl + '/edit/master/docs/',
+        baseUrl: `${config.ace.githubUrl}/edit/master/docs/`,
       },
       lastUpdated: true,
     }),
-    tailwind({
-      // Disable the default base styles:
-      applyBaseStyles: false,
+    mdx({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeKatex],
     }),
   ],
+
+  vite: {
+    plugins: [tailwindcss({
+      // Disable the default base styles:
+      applyBaseStyles: false,
+    })],
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
+  },
 })

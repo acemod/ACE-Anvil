@@ -2,43 +2,250 @@
 title: Medical
 ---
 
-ACE Medical in its first iteration tries to address some of the shortcomings of the vanilla medical system: Most notably that players die too easily and get healed too fast. The former is addressed by introducing a second chance that keeps players from dying outright without falling unconscious. The latter is addressed by removing the healing effect of morphine, which in return increases the importance of medical kits.
+import LatexLayout from '~/layouts/latex.astro';
 
-Other features:
-- Wounds can cause pain, which is visible through a white flash screen effect and can be treated with morphine.
-- Epinephrine injector (yellow cap), which speeds up wake-up of incapacitated units.
-- Supply usage of medical kits and healing power outside of medical facilities can be configured by the server (see Settings)
+<LatexLayout>
+**ACE Medical** overhauls the medical system with the aim to make it more engaging for medics. It is highly configurable, allowing communities to tailor the experience from casual to realistic. ACE Medical is split into multiple mods for increased modularity:
 
-Note that ACE Medical currently only affects players, but not AI.
+- [ACE Medical Core](#ace-medical-core)
+- [ACE Medical Hitzones](#ace-medical-hitzones)
+- ~~[ACE Medical Circulation](#ace-medical-circulation)~~
+- ~~[ACE Medical Defibrillation](#ace-medical-defibrillation)~~
+- ~~[ACE Medical Breathing](#ace-medical-breathing)~~
 
-### Second Chance
+## ACE Medical Core
 
-Second chance gets triggered when a player would have been killed without falling unconscious first. Instead of dying, the player will stay alive with 1 HP. On the other hand, they can only wake up from this state when epinephrine is administered (Automatic wake-up can be enabled by changing `m_fSecondChanceRegenScale` to a value above zero). Second chance is deactivated for headshots by default.
+### Overview
 
-## Settings
+**ACE Medical Core** provides the backbone for all medical mods and comes with the following features:
 
-Certain aspects of the medical system can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
+- **Second Chance**: Increases survivability by ensuring that players fall unconscious instead of getting killed outright.
+- **Pain**: Injuries cause pain screen effects and can be treated with morphine
+- Medication:
+    - Changed: Morphine can only used for treating pain and has no longer healing effects
+    - Added: Epinephrine for speeding up wake-up of unconscious patients
+- **Repositioning**: Allows to put patients on their back or in recovery position
+- Medical radial menu for putting medical items to hand
+- Additional settings for configuring medical kits, bleedings, _etc._
 
-| Field                        | Type    | Default | Description                                                                                          |
-| ---------------------------- | ------- | ------- | ---------------------------------------------------------------------------------------------------- |
-| m_fSecondChanceRegenScale    | float** | 0.0     | Scales the unconsciousness recovery rate when second chance was triggered. The default recovery rate (full recovery in 20 s) will be multiplied by this factor. Note that recovery only starts 10 s after the last incoming damage. |
-| m_bSecondChanceOnHeadEnabled | bool*   | false   | Enables second chance on headshots.                                                                  |
-| m_bHealSupplyUsageEnabled    | bool*   | true    | Healing consumes supplies when enabled. Ignored when global supply usage is disabled.                |
-| m_fMedicalKitMaxHealScaled   | float** | 0.5     | Maximum scaled health (from 0.0 to 1.0) that a medical kit can heal outside of medical facilities.   |
+### Details
 
-\* bool has to be provided as integer in the config: 1 (true) or 0 (false).<br />
-\*\* float need a decimal point to get properly read.
+#### Resiliencepn
 
-Example for the `missionHeader` in a server config:
+Resilience is a health pool from vanilla with 100 HP that is closely linked to consciousness. It takes indirectly damage passed from body parts and armor. A player falls unconscious when HP < 33 and wakes up when HP > 75. HP is either recovered through passive regeneration or with epinephrine. The passive recovery rate is +5 HP/s and can be scaled with `m_fDefaultResilienceRegenScale` respective `m_fSecondChanceResilienceRegenScale` (see [Settings](#settings)). Note that passive recovery only starts when no damage was taken for 10 seconds.
+
+#### Second Chance
+
+Second chance gets evaluated when a player would have been killed in vanilla without falling unconscious first. If granted, the player will survive, but falls unconscious with a distinct recovery rate (see `m_fSecondChanceResilienceRegenScale` in [Settings](#settings)). Depending on the settings, epinephrine is mandatory to wake up patients that got second chance granted. The evaluation of second chance is probabilistic and can be configured per body part.
+
+#### Medical Kit
+
+While a vanilla feature, newcomers might not be aware that it can be put in hand for healing body parts of patients. Depending on the settings, healing requires supplies and full healing can only be done near ambulances and medical facilities. Unlike vanilla, it is the only way to actively heal body parts. It is therefore crucial for treating arm and leg injuries, which can make aiming and walking difficult otherwise. Depending on the settings, it may also be required to heal up players before being able to apply epinephrine.
+
+### Treatments
+
+Below is a proposed activity diagram for treating patients:
+
+<div class="grid grid-cols-3">
+    <img src="/images/components/medical/core-treatment-1.svg"/>
+    <img src="/images/components/medical/core-treatment-2.svg"/>
+</div>
+
+
+### Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_fDefaultResilienceRegenScale`      | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.3` | Default resilience regeneration scale. The default regeneration rate (5 HP/s) will be multiplied by this factor. |
+| `m_fMinHealthScaledForEpinephrine`    | Type: `float`**<br />Range: 0 to 1<br />Default: `0.33` | Can only apply epinephrine when patient has at least this health (ignored in advanced medication). |
+| `m_bBleedOutForPlayersEnabled`        | Type: `bool`*<br />Default: `true` | Whether players can bleed out |
+| `m_fBleedingRateScale`                | Type: `float`**<br />Default: `1.0` | Character bleeding rate multiplier |
+| `m_fMaxTotalBleedingRate`             | Type: `float`**<br />Default: `-1.0` | Maximum possibe bleeding rate in ml/s (Negative value means unlimited) |
+| `m_fBloodRegenScale`                  | Type: `float`**<br />Default: `1.0` | Character blood regeneration rate multiplier |
+| `m_bHealSupplyUsageEnabled`           | Type: `bool`*<br />Default: `true` | Healing consumes supplies when enabled. Ignored when global supply usage is disabled. |
+| `m_fMedicalKitMaxHealScaled`          | Type: `float`**<br />Range: 0 to 1<br />Default: `0.5` | Maximum scaled health (from 0 to 1) that a medical kit can heal to outside of medical facilities |
+| `m_ePainScreenEffectType`             | Type: `int`***<br />Default: `WHITE_FLASH`<br />Options:<br />`0` (`NONE`)<br />`1` (`WHITE_FLASH`)<br />`2` (`GREY_FLASH`)<br />`3` (`CHROMATIC_ABERRATION`)<br />`4` (`RADIAL_BLUR`) | What kind of pain screen effect is used |
+| `m_fSecondChanceResilienceRegenScale` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.0` | Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor. |
+| `m_fDefaultSecondChance`              | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Default probability for second chance for killing blows |
+| `m_fSecondChanceOnHead`               | Type: `float`**<br />Range: 0 to 1<br />Default: `0.0` | Probability for second chance for killing blows to the head |
+| `m_fSecondChanceOnChest`              | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Probability for second chance for killing blows to the chest |
+| `m_fSecondChanceOnAbdomen`            | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Probability for second chance for killing blows to the abdomen |
+| `m_bSecondChanceForFallDamageEnabled` | Type: `bool`*<br />Default: `false` | Whether second chance can be triggered when falling from great heights |
+| `m_bSecondChanceForAIEnabled`         | Type: `bool`*<br />Default: `false` | Whether AI can have second chance |
+
+\* `bool` has to be provided as integer in the config: `1` (`true`) or `0` (`false`).<br />
+\*\* `float` need a decimal point to get properly read.<br />
+\*\*\* Note that enums have to be provided as integers.<br />
+
+<br />
+
+Template for the `missionHeader` in a server config:
 ```
 "missionHeader": {
     "m_ACE_Settings": {
-        "m_ACE_Medical_Settings": {
-            "m_fSecondChanceRegenScale": 0.025,
-            "m_bSecondChanceOnHeadEnabled": 1,
-            "m_bHealSupplyUsageEnabled": 0,
-            "m_fMedicalKitMaxHealScaled": 1.0
+        "m_ACE_Medical_Core": {
+            "m_fDefaultResilienceRegenScale": 0.3,
+            "m_fMinHealthScaledForEpinephrine": 0.33,
+            "m_bBleedOutForPlayersEnabled": 1,
+            "m_fBleedingRateScale": 1.0,
+            "m_fMaxTotalBleedingRate": -1.0,
+            "m_fBloodRegenScale": 1.0,
+            "m_bHealSupplyUsageEnabled": 1,
+            "m_fMedicalKitMaxHealScaled": 0.5,
+            "m_ePainScreenEffectType": 1,
+            "m_fSecondChanceResilienceRegenScale": 0.0,
+            "m_fDefaultSecondChance": 1.0,
+            "m_fSecondChanceOnHead": 0.0,
+            "m_fSecondChanceOnChest": 1.0,
+            "m_fSecondChanceOnAbdomen": 1.0,
+            "m_bSecondChanceForFallDamageEnabled": 0,
+            "m_bSecondChanceForAIEnabled": 0
         }
     }
 }
 ```
+
+## ACE Medical Hitzones
+
+### Overview
+
+<img src="/images/components/medical/organic-hit-zones.png" style="width:250px;" align="right" />
+
+**ACE Medical Hitzones** overhauls hit zones and has the following features:
+
+- **Organ Hit Zones**: New hit zones that can only be hit with melee and projectiles:
+    
+        
+
+    - **Heart**: Evaluated for second chance
+    - **Femoral arteries**: Cause massive bleedings
+
+
+
+- Removes global health in favor of evaluating second chance on destruction of vital body parts (head and torso)
+- Improves bleeding effect of massive bleedings
+
+
+### Details
+
+#### Removal of Global Health
+
+In vanilla there is a global health pool that takes damage passed from body parts. If HP of this health pool drops to 0, second chance gets evaluated. ACE Medical Hitzones gets completely rid of this health pool and evaluates second chance instead when HP of a vital body part drops to 0.
+
+
+### Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_bOrganHitZonesEnabled`             | Type: `bool`*<br />Default: `true` | Whether organ hit zones should be enabled |
+| `m_fSecondChanceOnHeart`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.0` | Probability for second chance for killing blows to the heart |
+
+<br />
+
+Template for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Medical_Hitzones": {
+            "m_bOrganHitZonesEnabled": 1,
+            "m_fSecondChanceOnHeart": 0.0
+        }
+    }
+}
+```
+
+## ACE Medical Circulation
+
+### Overview
+
+ACE Medical Prototypes builds on top of ACE Medical and serves as a testbed for more advanced features to be added to ACE Medical in future. Current prototypes:
+- Cardiovascular system:
+    - Simulation of heart rate and blood pressure
+    - Cardiac arrest state and CPR for revival
+- Medication system
+    - Removes all "training wheels", _i.e._ drugs can always be administered and overdosed
+    - Exchanges epinephrine with ammonium carbonate. Epinephrine has now a different role.
+    - New types of drugs
+    - Advanced simulation of drug effects and their evolution over time
+- Damage system overhaul:
+    - Death is no longer determined by a virtual health hit zone, but by the health of individual "vital" hit zones (_i.e_ torso and head). Second chance can be enabled for going to cardiac arrest instead of dying outright from deadly blows to vital hit zones. Second chance is enabled for torso and disabled for head by default.
+    - New brain hit zone that takes continuously damage while in cardiac arrest and no CPR is performed. Runs out of health in approximately 5 minutes.
+- Bandages:
+    - Bandaging action takes 1.6 times longer
+    - Limbs may need multiple bandages to stop bleedings
+
+The changes are also applied to AI, but they will currently directly die when they enter cardiac arrest.
+
+### Details
+
+#### Glossary
+
+- BP: Blood pressure
+- HR: Heart rate
+- OD: Overdose
+- $t_{max}$: Time until maximum effect
+- $t_{½}$: Time until effect diminishes to 50% of maximum effect (relative to administration time, not $t_{max}$)
+- $TD_{50}$: Number of doses at which 50% of patients fall unconscious
+- $LD_{50}$: Number of doses at which 50% of patients experience cardiac arrest
+
+#### Medications
+
+All currently available forms of medications are summarized in the table below:
+
+| Name | Effects | $t_{max}$	| $t_{½}$ | $TD_{50}$ | $LD_{50}$ |
+| --- | --- | --- | --- | --- | --- |
+| Ammonium carbonate package | <ul><li>Wakes up stable unconscious patients</li></ul> | 2-3 s | 3-4 s | --- | --- |
+| Epinephrine injector | <ul><li>Increases revive chance</li><li>Increases HR</li><li>Increases BP</li></ul> | 23 s | 1 min 3 s | --- | 4.4 |
+| Metoprolol injector | <ul><li>Decreases HR</li><li>Decreases BP</li></ul> | 25 s | 1 min 9 s | 2.8 | > 3 |
+| Morphine injector | <ul><li>Suppresses pain</li><li>Decreases HR</li><li>Decreases BP</li></ul> | 1 min 57 s | 15 min 20 s | 3.1 | 3.8 |
+| Naloxone injector | <ul><li>Treats morphine OD</li></ul> | 1 min 35 s | 7 min 26 s | --- | --- |
+| Phenylephrine injector | <ul><li>Slows down bleeding and transfusion</li><li>Increases BP</li></ul> | 29 s | 1 min 18 s | --- | 2.9 |
+
+#### Vital Ranges
+
+Blood volumes are categorized into six classes:
+- Normal
+- Class I hemorrhage (lost < 30%)
+- Class II hemorrhage (lost 30%)
+- Class III hemorrhage (lost 60%)
+- Class IV hemorrhage (lost 80%)
+- Fatal (lost 100%)
+
+The values of the vitals (_e.g._ HR and BP) are essential for getting a patient back up. While in cardiac arrest, only CPR may get the patient back up, but the success chance can be increased with epinephrine. A patient falls unconscious if either their resilience falls below 34/100 or their vital state is at least critical. Resilience will automatically recover if the vitals are stable, but can be speeded up with ammonium carbonate (_i.e._ like epinephrine in ACE Medical). Ammonium carbonate has no effect as long as the vitals aren't stable.
+
+| State | HR [BPM] | BP [mmHg] | Hemorrhage class |
+| --- | --- | --- | --- |
+| Cardiac arrest | > 220 | > 284/189 | --- |
+| Stable | 40 - 220 | 69/46 - 284/189 | < II |
+| Unstable | < 40 | < 69/46 | II |
+| Critical | < 30 | < 51/34 | III |
+| Cardiac arrest | < 20 | < 51/34* | IV |
+
+\* BP below 51/34 mmHg only leads to cardiac arrest if the heart rate is at least critical (_i.e._ < 30 BPM).
+
+### Treatments
+
+Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Core:
+
+![](/images/components/medical/circulation-treatment-1.svg)
+
+## ACE Medical Breathing
+
+### Overview
+
+_TBD_
+
+### Details
+
+_TBD_
+
+### Treatments
+
+Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Circulation:
+
+![](/images/components/medical/breathing-treatment-1.svg)
+</LatexLayout>

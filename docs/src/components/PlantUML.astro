@@ -22,17 +22,7 @@ interface Props {
 }
 
 const { src, alt = '', format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
-let content: string | undefined
-
-if (src.startsWith('data:')) {
-  const match = src.match(/^data:.*;base64,(.*)$/)
-  content = Buffer.from(match[1], 'base64').toString('utf-8')
-}
-else {
-  const plantUmlPath = path.resolve(`./${src}`)
-  content = preprocessPlantUmlFile(plantUmlPath)
-}
-
+const content = preprocessPlantUmlFile(path.resolve(`./public/${src}`))
 const themes = {
   light: `!$DARK_THEME=0\n${content}`,
   dark: `!$DARK_THEME=1\n${content}`,

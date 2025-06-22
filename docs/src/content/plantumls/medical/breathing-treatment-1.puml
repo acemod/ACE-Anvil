@@ -1,5 +1,5 @@
 @startuml
-!include ../../theme-selector.iuml
+!include ../theme-selector.iuml
 package "== Advanced Medical Treatment (excluding OD)" {
     start
     group "**M**assive hemorrhage" {

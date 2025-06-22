@@ -1,5 +1,5 @@
 @startuml
-!include ../../theme-selector.iuml
+!include ../theme-selector.iuml
 partition "Advanced Medical Treatment (excluding OD)" {
     start
     :Stop bleedings;

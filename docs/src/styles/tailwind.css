@@ -1,7 +1,8 @@
 @layer base, starlight, theme, components, utilities;
-@import "@astrojs/starlight-tailwind";
+@import '@astrojs/starlight-tailwind';
 @import 'tailwindcss/theme.css' layer(theme);
 @import 'tailwindcss/utilities.css' layer(utilities);
+@import 'temml/dist/Temml-Local.css';
 
 @theme {
   --color-accent-200: #ba2619;
@@ -49,4 +50,9 @@ code {
 }
 [data-theme='dark'] .sl-markdown-content kbd {
   @apply bg-gray-800 text-gray-100 border-gray-600;
+}
+
+/* Remove layer margin from starlight in math mode */
+math * {
+  margin-top: 0px;
 }

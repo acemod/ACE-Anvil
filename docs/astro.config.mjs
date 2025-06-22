@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import tailwindcss from '@tailwindcss/vite'
 import remarkMath from 'remark-math'
-import rehypeMathjax from 'rehype-mathjax'
+import rehypeMathML from '@daiji256/rehype-mathml'
 
 import { config } from './src/utils/config'
 
@@ -12,7 +12,7 @@ export default defineConfig({
 
   markdown: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeMathjax],
+    rehypePlugins: [rehypeMathML],
   },
 
   integrations: [

@@ -2,6 +2,8 @@
 title: Medical
 ---
 
+import PlantUML from '~/components/PlantUML.astro';
+
 **ACE Medical** overhauls the medical system with the aim to make it more engaging for medics. It is highly configurable, allowing communities to tailor the experience from casual to realistic. ACE Medical is split into multiple mods for increased modularity:
 
 - [ACE Medical Core](#ace-medical-core)
@@ -44,8 +46,8 @@ While a vanilla feature, newcomers might not be aware that it can be put in hand
 Below is a proposed activity diagram for treating patients:
 
 <div class="grid grid-cols-3">
-    <img src="/images/components/medical/core-treatment-1.svg"/>
-    <img src="/images/components/medical/core-treatment-2.svg"/>
+    <PlantUML src="/plantumls/components/medical/core-treatment-1.puml"/>
+    <PlantUML src="/plantumls/components/medical/core-treatment-2.puml"/>
 </div>
 
 ### Usage
@@ -231,7 +233,7 @@ The values of the vitals (_e.g._ HR and BP) are essential for getting a patient 
 
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Core:
 
-![](/images/components/medical/circulation-treatment-1.svg)
+<PlantUML src="/plantumls/components/medical/circulation-treatment-1.puml"/>
 
 ## ACE Medical Breathing
 
@@ -247,4 +249,4 @@ _TBD_
 
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Circulation:
 
-![](/images/components/medical/breathing-treatment-1.svg)
+<PlantUML src="/plantumls/components/medical/breathing-treatment-1.puml"/>

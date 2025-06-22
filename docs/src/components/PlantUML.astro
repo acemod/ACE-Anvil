@@ -16,14 +16,13 @@ function preprocessPlantUmlFile(filePath: string) {
 
 interface Props {
   src: string
+  alt?: string
   format?: string
   server?: string
 }
 
-const { src, format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
-const plantUmlPath = path.resolve(`./${src}`)
-const plantUmlName = path.basename(plantUmlPath)
-const content = preprocessPlantUmlFile(plantUmlPath)
+const { src, alt = '', format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
+const content = preprocessPlantUmlFile(path.resolve(`./public/${src}`))
 const themes = {
   light: `!$DARK_THEME=0\n${content}`,
   dark: `!$DARK_THEME=1\n${content}`,
@@ -37,6 +36,6 @@ for (const [theme, content] of Object.entries(themes)) {
 ---
 
 <span>
-  <Image class="dark:sl-hidden" src={urls.light} alt={plantUmlName} inferSize />
-  <Image class="light:sl-hidden" src={urls.dark} alt={plantUmlName} inferSize />
+  <Image class="dark:sl-hidden" src={urls.light} alt={alt} inferSize />
+  <Image class="light:sl-hidden" src={urls.dark} alt={alt} inferSize />
 </span>

@@ -76,7 +76,6 @@ export default defineConfig({
       // Disable the default base styles:
       applyBaseStyles: false,
     })],
-    assetsInclude: ['**/*.puml'],
     server: {
       watch: {
         usePolling: false,

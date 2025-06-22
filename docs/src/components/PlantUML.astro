@@ -1,10 +1,11 @@
 ---
 import fs from 'node:fs'
 import path from 'node:path'
+import { Image } from 'astro:assets'
 import plantUmlEncoder from 'plantuml-encoder'
 
-// Post processes plantuml files's !include statement
-function postprocessFile(filePath: string) {
+// Preprocesses plantuml files's !include statement
+function preprocessPlantUmlFile(filePath: string) {
   const content = fs.readFileSync(filePath, 'utf-8')
   const baseDir = path.dirname(filePath)
   return content.replace(/^!include(.+)$/gm, (_match, includePath) => {
@@ -20,7 +21,9 @@ interface Props {
 }
 
 const { src, format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
-const content = postprocessFile(path.resolve(`public/${src}`))
+const plantUmlPath = path.resolve(`./${src}`)
+const plantUmlName = path.basename(plantUmlPath)
+const content = preprocessPlantUmlFile(plantUmlPath)
 const themes = {
   light: `!$DARK_THEME=0\n${content}`,
   dark: `!$DARK_THEME=1\n${content}`,
@@ -34,6 +37,6 @@ for (const [theme, content] of Object.entries(themes)) {
 ---
 
 <span>
-  <img class="dark:sl-hidden" src={urls.light} />
-  <img class="light:sl-hidden" src={urls.dark} />
+  <Image class="dark:sl-hidden" src={urls.light} alt={plantUmlName} inferSize />
+  <Image class="light:sl-hidden" src={urls.dark} alt={plantUmlName} inferSize />
 </span>

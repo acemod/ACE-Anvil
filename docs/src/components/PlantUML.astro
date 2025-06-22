@@ -16,14 +16,23 @@ function preprocessPlantUmlFile(filePath: string) {
 
 interface Props {
   src: string
+  alt?: string
   format?: string
   server?: string
 }
 
-const { src, format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
-const plantUmlPath = path.resolve(`./${src}`)
-const plantUmlName = path.basename(plantUmlPath)
-const content = preprocessPlantUmlFile(plantUmlPath)
+const { src, alt = '', format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
+let content: string | undefined
+
+if (src.startsWith('data:')) {
+  const match = src.match(/^data:.*;base64,(.*)$/)
+  content = Buffer.from(match[1], 'base64').toString('utf-8')
+}
+else {
+  const plantUmlPath = path.resolve(`./${src}`)
+  content = preprocessPlantUmlFile(plantUmlPath)
+}
+
 const themes = {
   light: `!$DARK_THEME=0\n${content}`,
   dark: `!$DARK_THEME=1\n${content}`,
@@ -37,6 +46,6 @@ for (const [theme, content] of Object.entries(themes)) {
 ---
 
 <span>
-  <Image class="dark:sl-hidden" src={urls.light} alt={plantUmlName} inferSize />
-  <Image class="light:sl-hidden" src={urls.dark} alt={plantUmlName} inferSize />
+  <Image class="dark:sl-hidden" src={urls.light} alt={alt} inferSize />
+  <Image class="light:sl-hidden" src={urls.dark} alt={alt} inferSize />
 </span>

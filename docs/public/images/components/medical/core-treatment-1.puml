@@ -1,0 +1,33 @@
+@startuml
+partition "Basic Medical Treatment" {
+  start
+
+  if (Is bleeding?) then (yes)
+    :Bandage/Tourniquet\nwounds;
+  else (no)
+  endif
+
+  if (Lost blood?) then (yes)
+    :Administer saline;
+  else (no)
+  endif
+
+  if (Is in pain?) then (yes)
+    :Inject morhpine;
+  else (no)
+  endif
+
+  if (Is awake?) then (yes)
+    end
+  else (no)
+  endif
+
+  if (Too injured for\nepinephrine?) then (yes)
+    :Heal wounds with\nmedical kit;
+  else (no)
+  endif
+
+  :Inject epinephrine;
+  end
+}
+@enduml

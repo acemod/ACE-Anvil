@@ -1,11 +1,12 @@
 @startuml
+!include ../../theme-selector.iuml
 partition "Advanced Medical Treatment (excluding OD)" {
     start
     :Stop bleedings;
-    partition "Unconscious" #LightYellow {
+    partition "Unconscious" $theme_selector("#LightYellow") {
         while (Is unconscious?) is (yes)
             while (In cardiac arrest?) is (yes)
-                partition "Cardiac arrest" #LightSalmon {
+                partition "Cardiac arrest" $theme_selector("#LightSalmon") {
                     fork
                         :Perform CPR;
                     fork again

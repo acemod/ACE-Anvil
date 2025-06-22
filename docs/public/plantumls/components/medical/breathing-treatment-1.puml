@@ -1,11 +1,12 @@
 @startuml
+!include ../../theme-selector.iuml
 package "== Advanced Medical Treatment (excluding OD)" {
     start
     group "**M**assive hemorrhage" {
         :Stop bleedings;
     }
     while (Is unconscious?) is (yes)
-        package "=== Unconscious" #LightYellow {
+        package "=== Unconscious" $theme_selector("#LightYellow") {
             group "**A**irway" {
                 if (Airway blocked?) then (yes)
                     :Remove occlusions and\nobstructions;
@@ -24,7 +25,7 @@ package "== Advanced Medical Treatment (excluding OD)" {
                 endif
             }
             while (In cardiac arrest?) is (yes)
-                package "=== Cardiac arrest" #LightSalmon {
+                package "=== Cardiac arrest"  $theme_selector("#LightSalmon") {
                     group "**C**irculation" {
                         fork
                             :Put in supine\nposition;

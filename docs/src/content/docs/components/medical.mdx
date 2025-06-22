@@ -3,10 +3,6 @@ title: Medical
 ---
 import { Image } from 'astro:assets';
 import PlantUML from '~/components/PlantUML.astro';
-import coreTreatmentPlantUML1 from '../../plantumls/medical/core-treatment-1.puml';
-import coreTreatmentPlantUML2 from '../../plantumls/medical/core-treatment-2.puml';
-import circulationTreatmentPlantUML1 from '../../plantumls/medical/circulation-treatment-1.puml';
-import breathingTreatmentPlantUML1 from '../../plantumls/medical/breathing-treatment-1.puml';
 
 **ACE Medical** overhauls the medical system with the aim to make it more engaging for medics. It is highly configurable, allowing communities to tailor the experience from casual to realistic. ACE Medical is split into multiple mods for increased modularity:
 
@@ -50,8 +46,8 @@ While a vanilla feature, newcomers might not be aware that it can be put in hand
 Below is a proposed activity diagram for treating patients:
 
 <div class="grid grid-cols-3">
-    <PlantUML src={coreTreatmentPlantUML1} />
-    <PlantUML src={coreTreatmentPlantUML2} />
+    <PlantUML src="/plantumls/medical/core-treatment-1.puml" />
+    <PlantUML src="/plantumls/medical/core-treatment-2.puml" />
 </div>
 
 ### Usage
@@ -237,7 +233,7 @@ The values of the vitals (_e.g._ HR and BP) are essential for getting a patient 
 
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Core:
 
-<PlantUML src={circulationTreatmentPlantUML1} />
+<PlantUML src="/plantumls/medical/circulation-treatment-1.puml" />
 
 ## ACE Medical Breathing
 
@@ -253,4 +249,4 @@ _TBD_
 
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Circulation:
 
-<PlantUML src={breathingTreatmentPlantUML1} />
+<PlantUML src="/plantumls/medical/breathing-treatment-1.puml" />

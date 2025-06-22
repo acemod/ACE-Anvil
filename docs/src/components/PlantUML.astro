@@ -1,13 +1,13 @@
 ---
 import fs from 'node:fs'
 import path from 'node:path'
-import plantumlEncoder from 'plantuml-encoder'
+import plantUmlEncoder from 'plantuml-encoder'
 
 // Post processes plantuml files's !include statement
 function postprocessFile(filePath: string) {
   const content = fs.readFileSync(filePath, 'utf-8')
   const baseDir = path.dirname(filePath)
-  return content.replace(/^!include(.+)$/gm, (match, includePath) => {
+  return content.replace(/^!include(.+)$/gm, (_match, includePath) => {
     const resolvedPath = path.resolve(`${baseDir}/${includePath.trim()}`)
     return fs.readFileSync(resolvedPath, 'utf-8')
   })
@@ -28,7 +28,7 @@ const themes = {
 const urls: Record<string, string> = {}
 
 for (const [theme, content] of Object.entries(themes)) {
-  const encoded = plantumlEncoder.encode(content)
+  const encoded = plantUmlEncoder.encode(content)
   urls[theme] = `${server}/${format}/${encoded}`
 }
 ---

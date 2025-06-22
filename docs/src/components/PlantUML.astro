@@ -1,0 +1,39 @@
+---
+import fs from 'node:fs'
+import path from 'node:path'
+import plantumlEncoder from 'plantuml-encoder'
+
+// Post processes plantuml files's !include statement
+function postprocessFile(filePath: string) {
+  const content = fs.readFileSync(filePath, 'utf-8')
+  const baseDir = path.dirname(filePath)
+  return content.replace(/^!include(.+)$/gm, (match, includePath) => {
+    const resolvedPath = path.resolve(`${baseDir}/${includePath.trim()}`)
+    return fs.readFileSync(resolvedPath, 'utf-8')
+  })
+}
+
+interface Props {
+  src: string
+  format?: string
+  server?: string
+}
+
+const { src, format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
+const content = postprocessFile(path.resolve(`public/${src}`))
+const themes = {
+  light: `!$DARK_THEME=0\n${content}`,
+  dark: `!$DARK_THEME=1\n${content}`,
+}
+const urls: Record<string, string> = {}
+
+for (const [theme, content] of Object.entries(themes)) {
+  const encoded = plantumlEncoder.encode(content)
+  urls[theme] = `${server}/${format}/${encoded}`
+}
+---
+
+<span>
+  <img class="dark:sl-hidden" src={urls.light} />
+  <img class="light:sl-hidden" src={urls.dark} />
+</span>

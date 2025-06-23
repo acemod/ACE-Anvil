@@ -1,0 +1,35 @@
+---
+import Select from '@astrojs/starlight/components/Select.astro'
+import { config } from '~/utils/config'
+
+const versions = config.ace.docsVersions
+const currentVersion = versions.find(v => import.meta.env.BASE_URL === v.baseUrl)?.baseUrl || versions[0].baseUrl;
+---
+
+<ace-version-select>
+  <Select
+    icon="seti:clock"
+    value={currentVersion}
+    options={versions.map(v => ({
+      label: v.name,
+      value: v.baseUrl,
+      selected: v.value === currentVersion,
+    }))}
+  />
+</ace-version-select>
+
+<script define:vars={{ currentVersion }}>
+class ACE_VersionSelect extends HTMLElement {
+  constructor() {
+    super()
+    this.querySelector('select')?.addEventListener('change', (e) => {
+      if (e.currentTarget instanceof HTMLSelectElement) {
+        if (e.currentTarget.value) {
+          window.location.href = window.location.pathname.replace(currentVersion, e.currentTarget.value)
+        }
+      }
+    })
+  }
+}
+customElements.get('ace-version-select') || customElements.define('ace-version-select', ACE_VersionSelect)
+</script>

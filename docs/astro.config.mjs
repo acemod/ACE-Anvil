@@ -1,6 +1,6 @@
-import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
 import tailwind from '@astrojs/tailwind'
+import { defineConfig } from 'astro/config'
 
 import { config } from './src/utils/config'
 
@@ -36,11 +36,11 @@ export default defineConfig({
             { label: 'Branding', link: '/branding/' },
           ],
         },
-        //{
+        // {
         //  label: 'News',
         //  collapsed: true,
         //  autogenerate: { directory: 'news' },
-        //},
+        // },
         {
           label: 'Guides',
           autogenerate: { directory: 'guides' },
@@ -57,7 +57,7 @@ export default defineConfig({
         },
       },
       editLink: {
-        baseUrl: config.ace.githubUrl + '/edit/master/docs/',
+        baseUrl: `${config.ace.githubUrl}/edit/master/docs/`,
       },
       lastUpdated: true,
     }),

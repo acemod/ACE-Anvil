@@ -23,7 +23,12 @@ const currentBaseUrl = versions.find(v => import.meta.env.BASE_URL === v.baseUrl
 class ACE_VersionSelect extends HTMLElement {
   constructor() {
     super()
-    this.querySelector('select')?.addEventListener('change', (e) => {
+    const select = this.querySelector('select')
+    if (!select) {
+      return
+    }
+    select.value = currentBaseUrl
+    select.addEventListener('change', (e) => {
       if (e.currentTarget instanceof HTMLSelectElement) {
         if (e.currentTarget.value) {
           window.location.href = window.location.pathname.replace(currentBaseUrl, e.currentTarget.value)

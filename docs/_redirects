@@ -1,3 +1,0 @@
-# Netlify redirects
-/dev/*  https://dev--ace-anvil.netlify.app/:splat  200
-/manw/*  https://manw--ace-anvil.netlify.app/:splat  200

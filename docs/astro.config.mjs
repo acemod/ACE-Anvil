@@ -9,7 +9,7 @@ import { config } from './src/utils/config'
 // https://astro.build/config
 export default defineConfig({
   site: config.site.url,
-
+  base: process.env.BASE_URL || '',
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeMathML],

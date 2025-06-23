@@ -8,6 +8,7 @@ const currentBaseUrl = versions.find(v => import.meta.env.BASE_URL === v.baseUrl
 
 <ace-version-select>
   <Select
+    lable="Select Version"
     icon="seti:clock"
     value={currentBaseUrl}
     options={versions.map(v => ({

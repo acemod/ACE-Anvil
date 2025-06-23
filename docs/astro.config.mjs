@@ -1,8 +1,8 @@
-import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
-import tailwindcss from '@tailwindcss/vite'
-import remarkMath from 'remark-math'
 import rehypeMathML from '@daiji256/rehype-mathml'
+import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'astro/config'
+import remarkMath from 'remark-math'
 
 import { config } from './src/utils/config'
 
@@ -27,6 +27,9 @@ export default defineConfig({
         // Path to your Tailwind base styles:
         './src/styles/tailwind.css',
       ],
+      components: {
+        ThemeSelect: './src/components/ThemeSelect.astro',
+      },
       social: [
         { icon: 'discord', label: 'Discord', href: config.ace.discordUrl },
         { icon: 'github', label: 'GitHub', href: config.ace.githubUrl },

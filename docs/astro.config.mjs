@@ -66,7 +66,4 @@ export default defineConfig({
       applyBaseStyles: false,
     }),
   ],
-  redirects: {
-    "components/medical_breathing/": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
-  }
 })

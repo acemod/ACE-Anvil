@@ -3,29 +3,30 @@ import Select from '@astrojs/starlight/components/Select.astro'
 import { config } from '~/utils/config'
 
 const versions = config.ace.docsVersions
-const currentVersion = versions.find(v => import.meta.env.BASE_URL === v.baseUrl)?.baseUrl || versions[0].baseUrl;
+const currentBaseUrl = versions.find(v => import.meta.env.BASE_URL === v.baseUrl)?.baseUrl || versions[0].baseUrl;
 ---
 
 <ace-version-select>
   <Select
+    label="Select Version"
     icon="seti:clock"
-    value={currentVersion}
+    value={currentBaseUrl}
     options={versions.map(v => ({
       label: v.name,
       value: v.baseUrl,
-      selected: v.value === currentVersion,
+      selected: v.baseUrl === currentBaseUrl,
     }))}
   />
 </ace-version-select>
 
-<script define:vars={{ currentVersion }}>
+<script define:vars={{ currentBaseUrl }}>
 class ACE_VersionSelect extends HTMLElement {
   constructor() {
     super()
     this.querySelector('select')?.addEventListener('change', (e) => {
       if (e.currentTarget instanceof HTMLSelectElement) {
         if (e.currentTarget.value) {
-          window.location.href = window.location.pathname.replace(currentVersion, e.currentTarget.value)
+          window.location.href = window.location.pathname.replace(currentBaseUrl, e.currentTarget.value)
         }
       }
     })

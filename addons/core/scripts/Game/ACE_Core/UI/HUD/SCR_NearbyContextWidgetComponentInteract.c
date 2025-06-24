@@ -3,7 +3,7 @@
 modded class SCR_NearbyContextWidgetComponentInteract : SCR_ScriptedWidgetComponent
 {
 	//------------------------------------------------------------------------------------------------
-	override protected bool IsHealingAction(BaseUserAction userAct, out bool showOuterBackground, out int nearbyColorState)
+	override static bool IsHealingAction(BaseUserAction userAct, out bool showOuterBackground, out int nearbyColorState)
 	{
 		if (super.IsHealingAction(userAct, showOuterBackground, nearbyColorState))
 			return true;

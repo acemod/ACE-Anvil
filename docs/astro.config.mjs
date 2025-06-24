@@ -28,6 +28,7 @@ export default defineConfig({
         './src/styles/tailwind.css',
       ],
       components: {
+        Hero: './src/components/Hero.astro',
         ThemeSelect: './src/components/ThemeSelect.astro',
       },
       social: [

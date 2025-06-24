@@ -33,7 +33,7 @@ code {
 }
 
 /* Primary Action white text */
-.action.primary {
+.actions > .primary {
   color: #fff;
 }
 

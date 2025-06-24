@@ -23,30 +23,26 @@ const currentBaseUrl = versions.find(v => import.meta.env.BASE_URL === v.baseUrl
 class ACE_VersionSelect extends HTMLElement {
   constructor() {
     super()
-    this.initSelectValue()
-    this.querySelector('select')?.addEventListener('change', (e) => {
-      if (e.currentTarget instanceof HTMLSelectElement) {
-        if (e.currentTarget.value) {
-          window.location.href = window.location.pathname.replace(currentBaseUrl, e.currentTarget.value)
-        }
+
+    const select = this.querySelector('select')
+    if (!select) {
+      return
+    }
+
+    select.addEventListener('change', (e) => {
+      if (e.currentTarget instanceof HTMLSelectElement && e.currentTarget.value !== currentBaseUrl) {
+        window.location.href = window.location.pathname.replace(currentBaseUrl, e.currentTarget.value)
+      }
+    })
+
+    // Fix incorrect state in bfcache
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted && select.value !== currentBaseUrl) {
+        select.value = currentBaseUrl
       }
     })
   }
-
-  connectedCallback() {
-    window.addEventListener('popstate', this.initSelectValue)
-  }
-
-  disconnectedCallback() {
-    window.removeEventListener('popstate', this.initSelectValue)
-  }
-
-  initSelectValue() {
-    const select = this.querySelector('select')
-    if (select) {
-      select.value = currentBaseUrl
-    }
-  }
 }
+
 customElements.get('ace-version-select') || customElements.define('ace-version-select', ACE_VersionSelect)
 </script>

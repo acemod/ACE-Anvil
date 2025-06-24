@@ -19,6 +19,10 @@ export default defineConfig({
         // Path to your Tailwind base styles:
         './src/styles/tailwind.css',
       ],
+      components: {
+        Hero: './src/components/Hero.astro',
+        ThemeSelect: './src/components/ThemeSelect.astro',
+      },
       social: {
         'discord': config.ace.discordUrl,
         'github': config.ace.githubUrl,

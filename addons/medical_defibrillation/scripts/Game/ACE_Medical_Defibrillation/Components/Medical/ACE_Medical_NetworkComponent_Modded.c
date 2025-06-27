@@ -5,10 +5,8 @@ class ACE_MedicalDefibrillation_NetworkComponentClass: ScriptComponentClass
 
 //------------------------------------------------------------------------------------------------
 //! Class attached to player controller 
-class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
+modded class ACE_Medical_NetworkComponent
 {
-	protected SCR_PlayerController m_PlayerController;
-	
 	//------------------------------------------------------------------------------------------------
 	static string GetCharacterName(IEntity entity)
 	{
@@ -27,10 +25,56 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override protected void OnPostInit(IEntity owner)
+	void RequestDefibrillatorConnectPatient(GameEntity defibrillator, SCR_ChimeraCharacter patient, SCR_ChimeraCharacter user)
 	{
-	    super.OnPostInit(owner);
-	    m_PlayerController = SCR_PlayerController.Cast(GetOwner());
+		RplId defibrillatorId = ACE_ReplicationHelper.GetRplIdByEntity(defibrillator); // TODO: Keeps returning -1
+		RplId patientId = ACE_ReplicationHelper.GetRplIdByEntity(patient);
+		RplId userId = ACE_ReplicationHelper.GetRplIdByEntity(user);
+		
+		if (!defibrillatorId.IsValid())
+			return;
+		if (!patientId.IsValid())
+			return;
+		if (!userId.IsValid())
+			return;
+		
+		Rpc(Rpc_ConnectPatient, defibrillatorId, patientId, userId);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void Rpc_ConnectPatient(RplId defibrillatorId, RplId patientId, RplId userId)
+	{
+		IEntity defibrillator = IEntity.Cast(Replication.FindItem(defibrillatorId));
+		if (!defibrillator)
+			return;
+		
+		ACE_MedicalDefibrillation_DefibrillatorComponent defibComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(defibrillator.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
+		if (!defibComponent)
+			return;
+		
+		IEntity patient = IEntity.Cast(Replication.FindItem(patientId));
+		if (!patient)
+			return;
+		
+		IEntity user = IEntity.Cast(Replication.FindItem(userId));
+		if (!user)
+			return;
+		
+		if(defibComponent.ConnectPatient(patient))
+		{
+			ENotification notification;
+			if (EntityUtils.IsPlayer(patient))
+				notification = ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED;
+			else
+				notification = ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED_AI;
+			
+			RequestDefibrillatorNotification(
+				notification,
+				GetOwner(),
+				SCR_ChimeraCharacter.Cast(patient)
+			);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -38,8 +82,8 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	{
 	    Rpc(RpcAsk_GetDefibrillatorNotification,
 	        type,
-	        ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(defibrillator),
-	        ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(patient));
+	        ACE_ReplicationHelper.GetRplIdByEntity(defibrillator),
+	        ACE_ReplicationHelper.GetRplIdByEntity(patient));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -48,7 +92,7 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	{
 	    // PrintFormat("ACE_MedicalDefibrillation_NetworkComponent::RpcAsk_GetDefibrillatorNotification | Server Execution: %1", Replication.IsServer());
 	    
-	    IEntity defibrillator = IEntity.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(defibrillatorID));
+	    IEntity defibrillator = IEntity.Cast(ACE_ReplicationHelper.GetEntityByRplId(defibrillatorID));
 	    if (!defibrillator)
 	        return;
 	    
@@ -60,18 +104,18 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	    {
 	        case ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED_AI:
 	        {
-	            SCR_NotificationsComponent.SendToPlayer(m_PlayerController.GetPlayerId(), type, patientID);
+	            SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, patientID);
 	            break;
 	        }
 	        case ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED:
 	        {
 	            int playerID = GetGame().GetPlayerManager().GetPlayerIdFromEntityRplId(patientID);
-	            SCR_NotificationsComponent.SendToPlayer(m_PlayerController.GetPlayerId(), type, playerID);
+	            SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, playerID);
 	            break;
 	        }
 	        case ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTDISCONNECTED:
 	        {
-	            SCR_NotificationsComponent.SendToPlayer(m_PlayerController.GetPlayerId(), type);
+	            SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type);
 	            break;
 	        }
 	        case ENotification.ACE_MEDICALDEFIBRILLATION_SHOCKDELIVERED:
@@ -82,17 +126,17 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	                break;
 	            if (!cardiovascularComponent)
 	                break;
-	            SCR_NotificationsComponent.SendToPlayer(m_PlayerController.GetPlayerId(), type, cardiovascularComponent.GetShocksDelivered());
+	            SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type, cardiovascularComponent.GetShocksDelivered());
 	            break;
 	        }
 	        case ENotification.ACE_MEDICALDEFIBRILLATION_ANALYSED:
 	        {
-	            SCR_NotificationsComponent.SendToPlayer(m_PlayerController.GetPlayerId(), type);
+	            SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type);
 	            break;
 	        }
 	        case ENotification.ACE_MEDICALDEFIBRILLATION_CHARGED:
 	        {
-	            SCR_NotificationsComponent.SendToPlayer(m_PlayerController.GetPlayerId(), type);
+	            SCR_NotificationsComponent.SendToPlayer(m_pPlayerController.GetPlayerId(), type);
 	            break;
 	        }
 	    }

@@ -17,6 +17,27 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	static ACE_Medical_NetworkComponent GetACEMedicalNetworkComponent(IEntity user)
+	{
+		if (!user)
+			return null;
+		
+		PlayerManager playerMgr = GetGame().GetPlayerManager();
+		if (!playerMgr)
+			return null;
+		
+		int userId = playerMgr.GetPlayerIdFromControlledEntity(user);
+		if (userId == 0)
+			return null;
+		
+		SCR_PlayerController userController = SCR_PlayerController.Cast(playerMgr.GetPlayerController(userId));
+		if (!userController)
+			return null;
+		
+		return ACE_Medical_NetworkComponent.Cast(userController.FindComponent(ACE_Medical_NetworkComponent));
+	}
+		
+	//------------------------------------------------------------------------------------------------
 	void RequestVitalsNotification(ENotification type, SCR_ChimeraCharacter patient)
 	{
 		Rpc(RpcAsk_GetVitalsNotification, type, Replication.FindId(patient));

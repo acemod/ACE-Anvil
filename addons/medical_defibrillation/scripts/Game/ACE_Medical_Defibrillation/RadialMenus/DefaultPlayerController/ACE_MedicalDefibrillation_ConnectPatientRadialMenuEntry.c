@@ -13,7 +13,7 @@ class ACE_Medical_ConnectPatientMenuEntry : ACE_SelectionMenuEntry
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPerform()
-	{
+	{			
 		SCR_ChimeraCharacter player = SCR_ChimeraCharacter.Cast(GetGame().GetPlayerController().GetControlledEntity());
 		if (!player)
 			return;
@@ -34,12 +34,12 @@ class ACE_Medical_ConnectPatientMenuEntry : ACE_SelectionMenuEntry
 		if (!m_NearestDefibPerform)
 			return;
 		
-		ACE_MedicalDefibrillation_DefibrillatorComponent defibrillatorComponent = ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(m_NearestDefibPerform.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent));
-		if (!defibrillatorComponent)
+		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_NetworkComponent.GetACEMedicalNetworkComponent(player);
+		if (!networkComponent)
 			return;
 		
-		defibrillatorComponent.RequestConnectPatient(targetChar, player);
-	}	
+		networkComponent.RequestDefibrillatorConnectPatient(GameEntity.Cast(m_NearestDefibPerform), targetChar, player);
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	override bool CanBePerformed()

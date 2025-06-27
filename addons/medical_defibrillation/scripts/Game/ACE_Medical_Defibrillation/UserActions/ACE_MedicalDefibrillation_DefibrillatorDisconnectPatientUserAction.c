@@ -28,8 +28,8 @@ class ACE_MedicalDefibrillation_DefibrillatorDisconnectPatientUserAction : ACE_M
 		
 		defibrillatorComponent.ResetPatient();
 		
-		ACE_MedicalDefibrillation_NetworkComponent networkComponent;
-		if (!ACE_MedicalDefibrillator_DefibrillatorBaseUserAction.GetDefibrillatorNetworkComponent(pUserEntity, networkComponent))
+		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_NetworkComponent.GetACEMedicalNetworkComponent(pUserEntity);
+		if (!networkComponent)	
 			return;
 		
 		networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTDISCONNECTED, defibrillatorComponent.GetOwner());

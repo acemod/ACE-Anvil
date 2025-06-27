@@ -30,8 +30,8 @@ class ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction : ACE_Medica
 		
 		if(defibrillatorComponent.DeliverShock())
 		{
-			ACE_MedicalDefibrillation_NetworkComponent networkComponent;
-			if (!GetDefibrillatorNetworkComponent(pUserEntity, networkComponent))
+			ACE_Medical_NetworkComponent networkComponent = ACE_Medical_NetworkComponent.GetACEMedicalNetworkComponent(pUserEntity);
+			if (!networkComponent)	
 				return;
 			
 			networkComponent.RequestDefibrillatorNotification(ENotification.ACE_MEDICALDEFIBRILLATION_SHOCKDELIVERED, GetOwner(), SCR_ChimeraCharacter.Cast(defibrillatorComponent.GetConnectedPatient()));

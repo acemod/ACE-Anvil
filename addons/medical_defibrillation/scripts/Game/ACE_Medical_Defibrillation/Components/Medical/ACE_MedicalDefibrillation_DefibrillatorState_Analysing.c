@@ -16,7 +16,7 @@ class ACE_MedicalDefibrillation_DefibrillatorState_Analysing : ACE_MedicalDefibr
 		analysisPercent += updateRate / analysisTime / 1000;
 		m_DefibComponent.SetAnalysisPercent(analysisPercent);
 		
-		PrintFormat("%1::Update | Current Analysis Percent: %2", this.ClassName(), analysisPercent);
+		// PrintFormat("%1::Update | Current Analysis Percent: %2", this.ClassName(), analysisPercent);
 		
 		if (analysisPercent >= 1.0)
 		{

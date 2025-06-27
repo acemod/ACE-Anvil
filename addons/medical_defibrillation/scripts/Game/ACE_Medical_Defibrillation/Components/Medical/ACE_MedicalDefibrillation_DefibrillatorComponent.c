@@ -402,6 +402,7 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		if (terminatePrevious)
 			TerminateSound();
 		
+		PrintFormat("RPC_Playsound | Attempting to play sound: %1",soundName);
 		m_CurrentSound = soundComponent.SoundEvent(soundName);
 	}
 	
@@ -439,16 +440,23 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	bool ConnectPatient(IEntity patient)
-	{		
+	void RequestConnectPatient(SCR_ChimeraCharacter patient, SCR_ChimeraCharacter medic)
+	{
+		Rpc(Rpc_ConnectPatient, Replication.FindId(patient), Replication.FindId(medic));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	void Rpc_ConnectPatient(RplId patientId, RplId medicId)
+	{
 		ResetPatient();
 		
-		if (!patient)
-			return false;
+		SCR_ChimeraCharacter patient = SCR_ChimeraCharacter.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(patientId));
+		SCR_ChimeraCharacter medic = SCR_ChimeraCharacter.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(medicId));
 		
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
-			return false;	
+			return;
 		
 		PlaySound(SOUNDCONNECTED, true);
 		
@@ -456,9 +464,25 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		m_Patient = patient;
 		Replication.BumpMe();
 		
-		PrintFormat("ACE_MedicalDefibrillation_DefibrillatorComponent::ConnectPatient | Connected Patient: %1", patient.ClassName());
-		PrintFormat("ACE_MedicalDefibrillation_DefibrillatorComponent::ConnectPatient | Connected PatientID: %1", m_iPatientRplId);
-		return true;
+		// Notify
+		if (!m_Patient)
+			return;
+		
+		ACE_MedicalDefibrillation_NetworkComponent networkComponent;
+		if (!ACE_MedicalDefibrillator_DefibrillatorBaseUserAction.GetDefibrillatorNetworkComponent(medic, networkComponent))
+			return;
+		
+		ENotification notification;
+		if (EntityUtils.IsPlayer(m_Patient))
+			notification = ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED;
+		else
+			notification = ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED_AI;
+		
+		networkComponent.RequestDefibrillatorNotification(
+			notification,
+			GetOwner(),
+			SCR_ChimeraCharacter.Cast(m_Patient)
+		);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -479,7 +503,6 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 			return false;
 	
 		cardiovascularComponent.AddShocksDelivered(1);
-		cardiovascularComponent.SetShockCooldown(cardiovascularComponent.GetShockCooldownTime());
 		HandleContactShockStun(cardiovascularComponent);
 		
 		// Set defib back to connected state
@@ -522,5 +545,24 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	protected void OnPatientReplicated()
 	{
 		m_Patient = ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static bool IsAlive(IEntity entity)
+	{
+		if (!entity)
+			return false;
+		
+		DamageManagerComponent damageManager;
+		ChimeraCharacter character = ChimeraCharacter.Cast(entity);
+		if (character)
+			damageManager = character.GetDamageManager();
+		else
+			damageManager = DamageManagerComponent.Cast(entity.FindComponent(DamageManagerComponent));
+		
+		if (!damageManager)
+			return true;
+		
+		return damageManager.GetState() != EDamageState.DESTROYED;
 	}
 }

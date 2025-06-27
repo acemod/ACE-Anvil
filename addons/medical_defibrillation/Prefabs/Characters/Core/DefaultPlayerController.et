@@ -3,5 +3,20 @@ SCR_PlayerController {
  components {
   ACE_MedicalDefibrillation_NetworkComponent "{652723B336F5C150}" {
   }
+  ACE_RadialMenuComponent "{654944904311E33E}" {
+   m_aRadialMenuControllers {
+    ACE_RadialMenuController "{65494490457B367E}" {
+     m_Data SCR_SelectionMenuData "{654944919C4B07CF}" {
+      m_aEntries {
+       ACE_Medical_ConnectPatientMenuEntry "{65B71CECE17242A9}" {
+        Name "#ACE_MedicalDefibrillation-ConnectPatientUserAction_Name"
+        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+        IconSetName "Unconscious_UI"
+       }
+      }
+     }
+    }
+   }
+  }
  }
 }

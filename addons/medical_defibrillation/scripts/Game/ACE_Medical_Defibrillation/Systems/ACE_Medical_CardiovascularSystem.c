@@ -15,6 +15,7 @@ modded class ACE_Medical_CardiovascularSystem
 			return;
 		
 		UpdateCardiacRhythm(cardiovascularComponent, damageManager, timeSlice);
+		UpdateShockCooldown(cardiovascularComponent, damageManager, timeSlice);
 		UpdateShockAmount(cardiovascularComponent, damageManager, timeSlice);
 	}
 	
@@ -30,13 +31,33 @@ modded class ACE_Medical_CardiovascularSystem
 			if (damageManager.GetState() == EDamageState.DESTROYED)
 				cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Asystole);
 		}
-		else if (ACE_MedicalDefibrillation_DefibrillatorComponent.IsAlive(cardiovascularComponent.GetOwner()))
+		else if (ACE_MedicalDefibrillation_DefibrillationConnectPatientUserAction.IsAlive(cardiovascularComponent.GetOwner()))
 		{
 			cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Sinus);
 		}
 		else
 		{
 			cardiovascularComponent.SetCardiacRhythm(ACE_MedicalDefibrillation_ECardiacRhythm.Asystole);
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void UpdateShockCooldown(ACE_Medical_CardiovascularComponent cardiovascularComponent, SCR_CharacterDamageManagerComponent damageManager, float timeSlice)
+	{
+		float current = cardiovascularComponent.GetShockCooldown();
+		
+		if (current <= 0)
+			return;
+		
+		float newCooldown = current - (m_fMinEntityUpdateTimeoutMS / 1000);
+		
+		if (newCooldown <= 0)
+		{
+			cardiovascularComponent.SetShockCooldown(0);
+		}
+		else
+		{
+			cardiovascularComponent.SetShockCooldown(newCooldown);
 		}
 	}
 	
@@ -93,6 +114,7 @@ modded class ACE_Medical_CardiovascularSystem
 		DbgUI.Begin(string.Format("ACE_MedicalDefibrillation_DefibrillationSystem (%1)", targetType), 0, 700);
 		DbgUI.Text(string.Format("Cardiac rhythm:                  %1", rhythmName));
 		DbgUI.Text(string.Format("# of Shocks:                  %1", cardiovascularComponent.GetShocksDelivered()));
+		DbgUI.Text(string.Format("Shock cooldown:                  %1", cardiovascularComponent.GetShockCooldown()));
 		DbgUI.End();
 	}
 #endif

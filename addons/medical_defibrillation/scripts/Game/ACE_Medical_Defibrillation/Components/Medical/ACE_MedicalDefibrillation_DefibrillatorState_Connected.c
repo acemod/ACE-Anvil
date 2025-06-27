@@ -31,7 +31,7 @@ class ACE_MedicalDefibrillation_DefibrillatorState_Connected : ACE_MedicalDefibr
 			m_DefibComponent.SetCPRCooldown(CPRCooldown);
 		}
 		
-		// PrintFormat("%1::Update | Current CPR Cooldown: %2", this.ClassName(), CPRCooldown);
+		PrintFormat("%1::Update | Current CPR Cooldown: %2", this.ClassName(), CPRCooldown);
 		
 		if (CPRCooldown <= 0)
 		{

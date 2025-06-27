@@ -46,7 +46,7 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void RpcAsk_GetDefibrillatorNotification(ENotification type, RplId defibrillatorID, RplId patientID)
 	{
-	    // PrintFormat("ACE_MedicalDefibrillation_NetworkComponent::RpcAsk_GetDefibrillatorNotification | Server Execution: %1", Replication.IsServer());
+	    PrintFormat("ACE_MedicalDefibrillation_NetworkComponent::RpcAsk_GetDefibrillatorNotification | Server Execution: %1", Replication.IsServer());
 	    
 	    IEntity defibrillator = IEntity.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(defibrillatorID));
 	    if (!defibrillator)

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.xob"
+ Name "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_Medical_AED.xob"
  Configurations {
   FBXResourceClass PC {
    MaterialAssigns {

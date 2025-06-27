@@ -1,6 +1,5 @@
 //------------------------------------------------------------------------------------------------
 //! Colorize SCR_HealingUserAction
-/*
 modded class SCR_NearbyContextWidgetComponentInteract : SCR_ScriptedWidgetComponent
 {
 	//------------------------------------------------------------------------------------------------
@@ -18,4 +17,3 @@ modded class SCR_NearbyContextWidgetComponentInteract : SCR_ScriptedWidgetCompon
 		return true;
 	}
 }
-*/

@@ -452,7 +452,7 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 		
 		PlaySound(SOUNDCONNECTED, true);
 		
-		m_iPatientRplId = ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(patient);
+		m_iPatientRplId = ACE_ReplicationHelper.GetRplIdByEntity(patient);
 		m_Patient = patient;
 		Replication.BumpMe();
 		
@@ -479,7 +479,6 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 			return false;
 	
 		cardiovascularComponent.AddShocksDelivered(1);
-		cardiovascularComponent.SetShockCooldown(cardiovascularComponent.GetShockCooldownTime());
 		HandleContactShockStun(cardiovascularComponent);
 		
 		// Set defib back to connected state
@@ -521,6 +520,6 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	//------------------------------------------------------------------------------------------------
 	protected void OnPatientReplicated()
 	{
-		m_Patient = ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
+		m_Patient = ACE_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
 	}
 }

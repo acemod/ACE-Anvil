@@ -1,4 +1,4 @@
-class ACE_MedicalDefibrillation_ReplicationHelper
+class ACE_ReplicationHelper
 {
 	static IEntity GetEntityByRplId(RplId id)
 	{
@@ -22,9 +22,9 @@ class ACE_MedicalDefibrillation_ReplicationHelper
 			return RplId.Invalid();
 		
 		RplComponent rplComponent = RplComponent.Cast(entity.FindComponent(RplComponent));
-		if (rplComponent)
-			return rplComponent.Id();
+		if (!rplComponent)
+			return RplId.Invalid();
 		
-		return Replication.FindItemId(entity);
+		return rplComponent.Id();
 	}
 }

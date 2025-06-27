@@ -38,8 +38,8 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	{
 	    Rpc(RpcAsk_GetDefibrillatorNotification,
 	        type,
-	        ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(defibrillator),
-	        ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(patient));
+	        ACE_ReplicationHelper.GetRplIdByEntity(defibrillator),
+	        ACE_ReplicationHelper.GetRplIdByEntity(patient));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ class ACE_MedicalDefibrillation_NetworkComponent : ScriptComponent
 	{
 	    PrintFormat("ACE_MedicalDefibrillation_NetworkComponent::RpcAsk_GetDefibrillatorNotification | Server Execution: %1", Replication.IsServer());
 	    
-	    IEntity defibrillator = IEntity.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(defibrillatorID));
+	    IEntity defibrillator = IEntity.Cast(ACE_ReplicationHelper.GetEntityByRplId(defibrillatorID));
 	    if (!defibrillator)
 	        return;
 	    

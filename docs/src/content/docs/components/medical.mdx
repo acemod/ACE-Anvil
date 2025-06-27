@@ -244,7 +244,18 @@ Below is a proposed activity diagram for treating patients, which supersedes the
 
 ### Overview
 
-_TBD_
+ACE Medical Defibrillation extends ACE Medical Circulation with basic electrophysiology. This serves as the test bed for more advanced electrophysicology to be added in the future. Current prototypes:
+
+- Defibrillation System
+    - Automated External Defibrillator
+        - Self manages defibrillator state.
+        - Determines if patient is in shockable rhythm.
+        - Automatically charges when shockable rhythm is found.
+        - Will automatically perform rhythm checks over time. Players only need to continue CPR and shock when advised.
+        - If shock is delivered to patient while CPR is being performed, CPR performer will be stunned.
+        - AED does not stop and will continue to cycle, well after patient is fully dead.
+
+When shocks are delivered, a modifier is added to the unconscious check within the Cardiovascular System to increase chances of awakening. Players can simply choose to do nothing and not interact with an AED and still revive players, only slower.
 
 ## ACE Medical Breathing
 

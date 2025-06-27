@@ -1,0 +1,79 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SignalsManagerComponent "{655C16EC9DB5136B}" {
+  }
+  SoundComponent "{655C16ECB615B046}" {
+   Filenames {
+    "{561CB411D5D8E866}Sounds/ACE_MedicalDefibrillation_DefibrillatorSounds.acp" "{0340D00A7674D634}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompts.acp"
+   }
+  }
+  ACE_MedicalDefibrillation_DefibrillatorComponent "{655C16E1F7265C60}" {
+   m_eDefibrillatorEmulation Manual_NotImplimented
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "#ACE_MedicalDefibrillation-Defibrillator_DisplayName"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
+     Weight 3.2
+    }
+    m_Size SLOT_1x1
+    m_eQuickSlotSize SLOT_1x1
+    m_SlotType SLOT_GADGETS_STORAGE
+    m_bStackable 0
+   }
+  }
+  MeshObject "{64FB47CE0046FB12}" {
+   Object "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.xob"
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    ACE_NoUserAction "{51EC842E3A187379}" {
+    }
+    ACE_MedicalDefibrillation_DefibrillatorDeliverShockUserAction "{652723B2B2AC9315}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{652723B2B2AC93AE}" {
+      Name "#ACE_MedicalDefibrillation-DeliverShockUserAction_Name"
+      Icon "{B547588B1CEBEC1D}UI/Textures/DamageState/damageState-unconscious.edds"
+     }
+     ActionTitle "Deliver Shock"
+     Duration 1
+     "Sort Priority" 3
+    }
+    ACE_MedicalDefibrillation_DefibrillatorDisconnectPatientUserAction "{652723B8289BFB62}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{652723B8289BFBBB}" {
+      Name "#ACE_MedicalDefibrillation-DisconnectUserAction_Name"
+      Icon "{B547588B1CEBEC1D}UI/Textures/DamageState/damageState-unconscious.edds"
+     }
+     ActionTitle "Disconnect Patient"
+     Duration 1
+     "Sort Priority" 4
+    }
+    ACE_MedicalDefibrillation_DefibrillatorPickUpItemAction "{652723B80229EAA3}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{652723B80229EAE4}" {
+      Name "#ACE_MedicalDefibrillation-PickUpUserAction_Name"
+      Icon "{B547588B1CEBEC1D}UI/Textures/DamageState/damageState-unconscious.edds"
+     }
+     ActionTitle "Disconnect & Pickup"
+     Duration 1
+     "Sort Priority" 5
+    }
+   }
+  }
+  GadgetAnimationComponent "{64FC042FA738F687}" {
+   AnimGraph "{8462461570E623A5}Assets/Weapons/Explosives/workspace/M34.agr"
+   AnimInstance "{67A3E465A8D20576}Assets/Weapons/Explosives/workspace/M34_weapon.asi"
+  }
+ }
+ coords 0 0 0
+}

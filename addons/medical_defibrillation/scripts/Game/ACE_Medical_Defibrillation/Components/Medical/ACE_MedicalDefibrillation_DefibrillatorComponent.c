@@ -440,21 +440,49 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	bool ConnectPatient(IEntity patient)
+	void RequestConnectPatient(SCR_ChimeraCharacter patient, SCR_ChimeraCharacter medic)
+	{
+		Rpc(Rpc_ConnectPatient, Replication.FindId(patient), Replication.FindId(medic));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	void Rpc_ConnectPatient(RplId patientId, RplId medicId)
 	{
 		ResetPatient();
 		
+		SCR_ChimeraCharacter patient = SCR_ChimeraCharacter.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(patientId));
+		SCR_ChimeraCharacter medic = SCR_ChimeraCharacter.Cast(ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(medicId));
+		
 		ACE_Medical_CardiovascularComponent component = ACE_Medical_CardiovascularComponent.Cast(patient.FindComponent(ACE_Medical_CardiovascularComponent));
 		if (!component)
-			return false;
+			return;
 		
 		PlaySound(SOUNDCONNECTED, true);
 		
-		m_iPatientRplId = ACE_ReplicationHelper.GetRplIdByEntity(patient);
+		m_iPatientRplId = ACE_MedicalDefibrillation_ReplicationHelper.GetRplIdByEntity(patient);
 		m_Patient = patient;
 		Replication.BumpMe();
 		
-		return true;
+		// Notify
+		if (!m_Patient)
+			return;
+		
+		ACE_MedicalDefibrillation_NetworkComponent networkComponent;
+		if (!ACE_MedicalDefibrillator_DefibrillatorBaseUserAction.GetDefibrillatorNetworkComponent(medic, networkComponent))
+			return;
+		
+		ENotification notification;
+		if (EntityUtils.IsPlayer(m_Patient))
+			notification = ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED;
+		else
+			notification = ENotification.ACE_MEDICALDEFIBRILLATION_PATIENTCONNECTED_AI;
+		
+		networkComponent.RequestDefibrillatorNotification(
+			notification,
+			GetOwner(),
+			SCR_ChimeraCharacter.Cast(m_Patient)
+		);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -516,7 +544,7 @@ class ACE_MedicalDefibrillation_DefibrillatorComponent : ACE_Medical_BaseCompone
 	//------------------------------------------------------------------------------------------------
 	protected void OnPatientReplicated()
 	{
-		m_Patient = ACE_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
+		m_Patient = ACE_MedicalDefibrillation_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
 	}
 	
 	//------------------------------------------------------------------------------------------------

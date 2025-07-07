@@ -1,0 +1,15 @@
+GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{CA6BE4D6B867541F}" {
+     components {
+      ACE_Overheating_MuzzleJamComponent "{65B9755B8CB25ED7}" {
+      }
+     }
+    }
+   }
+  }
+ }
+}

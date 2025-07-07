@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_Overheating_Dev"
+ GUID "65B8EA178A3E94E3"
+ TITLE "ACE Overheating Dev"
+ Dependencies {
+  "65AD7D0D9941A380" "58D0FB3206B6F859"
+ }
+}

@@ -135,7 +135,7 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 		}
 		
 		if (!newStateID)
-			ScheduleStop();
+			Stop();
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -10,7 +10,7 @@ modded class SCR_CharacterHeadHitZone : SCR_CharacterHitZone
 		if (!Replication.IsServer())
 			return;
 		
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		ACE_Medical_Core_Settings settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
 		if (settings)
 			m_fACE_Medical_SecondChance = settings.m_fSecondChanceOnHead;
 	}

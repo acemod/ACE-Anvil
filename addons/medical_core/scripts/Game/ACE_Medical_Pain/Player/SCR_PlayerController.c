@@ -1,5 +1,7 @@
 //------------------------------------------------------------------------------------------------
-modded class SCR_HUDManagerComponent : HUDManagerComponent
+//! Apply setting of pain HUD effect
+//! Note that SCR_HUDManagerComponent does not support RplProp, so we do it here!
+modded class SCR_PlayerController : PlayerController
 {
 	[RplProp(condition: RplCondition.OwnerOnly, onRplName: "ACE_Medical_OnPainEffectTypeChanged")]
 	protected ACE_Medical_EPainEffectType m_fACE_Medical_PainEffectType;
@@ -12,7 +14,7 @@ modded class SCR_HUDManagerComponent : HUDManagerComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 
-		ACE_Medical_Settings settings = ACE_SettingsHelperT<ACE_Medical_Settings>.GetModSettings();
+		ACE_Medical_Core_Settings settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
 		if (settings)
 		{
 			m_fACE_Medical_PainEffectType = settings.m_ePainScreenEffectType;
@@ -24,8 +26,12 @@ modded class SCR_HUDManagerComponent : HUDManagerComponent
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Medical_OnPainEffectTypeChanged()
 	{
+		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.Cast(FindComponent(SCR_HUDManagerComponent));
+		if (!hudManager)
+			return;
+		
 		array<BaseInfoDisplay> displays = {};
-		GetInfoDisplays(displays);
+		hudManager.GetInfoDisplays(displays);
 		
 		SCR_ScreenEffectsManager effectsManager;
 		foreach (BaseInfoDisplay display : displays)

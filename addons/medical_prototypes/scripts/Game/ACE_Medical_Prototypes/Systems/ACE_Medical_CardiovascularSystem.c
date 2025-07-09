@@ -48,9 +48,8 @@ class ACE_Medical_CardiovascularSystem : ACE_Medical_BaseSystem
 		if (!component)
 			return;
 		
-		SCR_EditableEntityComponent editableEntity = SCR_EditableEntityComponent.GetEditableEntity(entity);
 		// Don't handle entities that are about to get deleted
-		if (!editableEntity || !editableEntity.IsRegistered())
+		if (entity.IsDeleted())
 			return;
 		
 		component.SetHeartRate(0);

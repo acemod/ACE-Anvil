@@ -9,7 +9,7 @@ class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObject
 	[Attribute(defvalue: "10", desc: "Maximum number of entities to be updated per frame")]
 	protected int m_iMaxIterationsPerFrame;
 	
-	protected ref TJob m_pJobTemplate;
+	protected ref TJob m_pTemplateJob;
 	protected ref array<ref TJob> m_aJobs = {};
 	protected ref array<TObject> m_aInitialObjectsToRegister = {};
 	protected ACE_FrameJobScheduler_EState m_eState = ACE_FrameJobScheduler_EState.UPDATE_QUEUE;
@@ -19,9 +19,9 @@ class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObject
 	
 	//------------------------------------------------------------------------------------------------
 	//! Template is passed here rather than in ctor for usage of ACE_TemplateFrameJobScheduler in attributes
-	void OnInit(TJob jobTemplate)
+	void OnInit(TJob templateJob)
 	{
-		m_pJobTemplate = jobTemplate;
+		m_pTemplateJob = templateJob;
 		
 		foreach (TObject object : m_aInitialObjectsToRegister)
 		{
@@ -99,7 +99,7 @@ class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObject
 	//------------------------------------------------------------------------------------------------
 	void Register(TObject object)
 	{
-		if (!m_pJobTemplate)
+		if (!m_pTemplateJob)
 		{
 			m_aInitialObjectsToRegister.Insert(object);
 			return;
@@ -144,7 +144,7 @@ class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObject
 	protected TJob CreateJob()
 	{
 		TJob instance = new TJob();
-		instance.CopyFrom(m_pJobTemplate);
+		instance.CopyFrom(m_pTemplateJob);
 		return instance;
 	}
 }

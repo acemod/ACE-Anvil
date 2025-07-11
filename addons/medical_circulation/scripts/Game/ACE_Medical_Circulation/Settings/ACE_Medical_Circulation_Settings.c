@@ -15,13 +15,13 @@ class ACE_Medical_Circulation_Settings : ACE_ModSettings
 	float m_fDefaultPulsePressureKPA;
 	
 	[Attribute(desc: "Thresholds that lead to unstable vital state")]
-	ref ACE_Medical_VitalsStateThresholdsConfig m_UnstableThresholds;
+	ref ACE_Medical_VitalStateThresholdsConfig m_UnstableThresholds;
 	
 	[Attribute(desc: "Thresholds that lead to critical vital state")]
-	ref ACE_Medical_VitalsStateThresholdsConfig m_CriticalThresholds;
+	ref ACE_Medical_VitalStateThresholdsConfig m_CriticalThresholds;
 	
 	[Attribute(desc: "Thresholds that lead to cardiac arrest state")]
-	ref ACE_Medical_VitalsStateThresholdsConfig m_CardiacArrestThresholds;
+	ref ACE_Medical_VitalStateThresholdsConfig m_CardiacArrestThresholds;
 	
 	[Attribute(desc: "Damage effects caused by cardiac arrest")]
 	ref ACE_Medical_CardiacArrestDamageEffect m_CardiacArrestDamageEffect;

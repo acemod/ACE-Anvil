@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
-//! Composite job that manages FSMs based on a template for a set of objects
+//! Composite job that manages jobs based on a template for a set of objects
 [BaseContainerProps()]
-class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext, ACE_FSM_Machine TMachine> : ACE_IFrameJob
+class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObjectContext TContext, ACE_IFrameJob TJob> : ACE_IFrameJob
 {
 	[Attribute(defvalue: "1000", desc: "Approximate update timeout for a particular object [s]")]
 	protected int m_fObjectUpdateTimeoutMS;
@@ -9,19 +9,19 @@ class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext
 	[Attribute(defvalue: "10", desc: "Maximum number of entities to be updated per frame")]
 	protected int m_iMaxIterationsPerFrame;
 	
-	protected ref TMachine m_pTemplateFSM;
-	protected ref array<ref TMachine> m_aMachines = {};
+	protected ref TJob m_pTemplateJob;
+	protected ref array<ref TJob> m_aJobs = {};
 	protected ref array<TObject> m_aInitialObjectsToRegister = {};
-	protected ACE_FSM_Scheduler_EState m_eState = ACE_FSM_Scheduler_EState.UPDATE_QUEUE;
+	protected ACE_FrameJobScheduler_EState m_eState = ACE_FrameJobScheduler_EState.UPDATE_QUEUE;
 	protected float m_fNextUpdateStartTime = 0;
-	protected int m_iCurrentMachineIdx = 0;
+	protected int m_iCurrentJobIdx = 0;
 	protected int m_iNumMachines = 0;
 	
 	//------------------------------------------------------------------------------------------------
-	//! Template is passed here rather than in ctor for usage of ACE_FSM_SchedulerJob in attributes
-	void OnInit(TMachine templateFSM)
+	//! Template is passed here rather than in ctor for usage of ACE_TemplateFrameJobScheduler in attributes
+	void OnInit(TJob templateJob)
 	{
-		m_pTemplateFSM = templateFSM;
+		m_pTemplateJob = templateJob;
 		
 		foreach (TObject object : m_aInitialObjectsToRegister)
 		{
@@ -39,32 +39,32 @@ class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext
 		
 		switch (m_eState)
 		{
-			case ACE_FSM_Scheduler_EState.UPDATE_QUEUE: return UpdateQueueStep(currentTime);
-			case ACE_FSM_Scheduler_EState.UPDATE_OBJECTS: return UpdateObjectsStep(currentTime);
-			case ACE_FSM_Scheduler_EState.TIMEOUT: return TimeoutStep(currentTime);
+			case ACE_FrameJobScheduler_EState.UPDATE_QUEUE: return UpdateQueueStep(currentTime);
+			case ACE_FrameJobScheduler_EState.UPDATE_OBJECTS: return UpdateObjectsStep(currentTime);
+			case ACE_FrameJobScheduler_EState.TIMEOUT: return TimeoutStep(currentTime);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateQueueStep(float currentTime)
 	{
-		m_iNumMachines = m_aMachines.Count();
+		m_iNumMachines = m_aJobs.Count();
 		
 		for (int i = m_iNumMachines - 1; i >= 0; --i)
 		{
-			TMachine machine = m_aMachines[i];
-			if (machine.ShouldBeStopped())
+			TJob job = m_aJobs[i];
+			if (job.ShouldBeStopped())
 				UnregisterNow(i);
 		}
 		
-		m_iCurrentMachineIdx = 0;
-		m_iNumMachines = m_aMachines.Count();
+		m_iCurrentJobIdx = 0;
+		m_iNumMachines = m_aJobs.Count();
 		
 		if (m_iNumMachines == 0)
 			return ToggleUpdate(false);
 		
 		m_fNextUpdateStartTime = currentTime + m_fObjectUpdateTimeoutMS;
-		ChangeState(ACE_FSM_Scheduler_EState.UPDATE_OBJECTS);
+		ChangeState(ACE_FrameJobScheduler_EState.UPDATE_OBJECTS);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -72,14 +72,14 @@ class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext
 	{
 		for (int i = 0; i < m_iMaxIterationsPerFrame; ++i)
 		{
-			TMachine machine = m_aMachines[m_iCurrentMachineIdx];
-			TContext context = machine.GetContext();
-			machine.OnUpdate((currentTime - context.m_fLastUpdateTime) / 1000);
+			TJob job = m_aJobs[m_iCurrentJobIdx];
+			TContext context = job.GetContext();
+			job.OnUpdate((currentTime - context.m_fLastUpdateTime) / 1000);
 			context.m_fLastUpdateTime = currentTime;
-			++m_iCurrentMachineIdx;
+			++m_iCurrentJobIdx;
 			
-			if (m_iCurrentMachineIdx >= m_iNumMachines)
-				return ChangeState(ACE_FSM_Scheduler_EState.TIMEOUT);
+			if (m_iCurrentJobIdx >= m_iNumMachines)
+				return ChangeState(ACE_FrameJobScheduler_EState.TIMEOUT);
 		}
 	}
 	
@@ -87,11 +87,11 @@ class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext
 	protected void TimeoutStep(float currentTime)
 	{
 		if (currentTime >= m_fNextUpdateStartTime)
-			ChangeState(ACE_FSM_Scheduler_EState.UPDATE_QUEUE);
+			ChangeState(ACE_FrameJobScheduler_EState.UPDATE_QUEUE);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void ChangeState(ACE_FSM_Scheduler_EState newState)
+	protected void ChangeState(ACE_FrameJobScheduler_EState newState)
 	{
 		m_eState = newState;
 	}
@@ -99,16 +99,16 @@ class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext
 	//------------------------------------------------------------------------------------------------
 	void Register(TObject object)
 	{
-		if (!m_pTemplateFSM)
+		if (!m_pTemplateJob)
 		{
 			m_aInitialObjectsToRegister.Insert(object);
 			return;
 		}
 		
-		TMachine machine = CreateFSM();
-		machine.SetContext(new TContext(object));
-		machine.OnStart();
-		m_aMachines.Insert(machine);
+		TJob job = CreateJob();
+		job.SetContext(new TContext(object));
+		job.OnStart();
+		m_aJobs.Insert(job);
 		
 		if (!ShouldBeUpdated())
 			ToggleUpdate(true);
@@ -117,15 +117,15 @@ class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext
 	//------------------------------------------------------------------------------------------------
 	void Unregister(TObject object)
 	{
-		foreach (int i, TMachine machine : m_aMachines)
+		foreach (int i, TJob job : m_aJobs)
 		{
-			if (machine.GetContext().m_pObject == object)
+			if (job.GetContext().m_pObject == object)
 			{
 				// Delay unregistration, unless the queue isn't touched (e.g. during timeout)
-				if (m_eState == ACE_FSM_Scheduler_EState.TIMEOUT)
+				if (m_eState == ACE_FrameJobScheduler_EState.TIMEOUT)
 					UnregisterNow(i);
 				else
-					machine.Stop();
+					job.Stop();
 				
 				return;
 			}
@@ -135,38 +135,16 @@ class ACE_FSM_SchedulerJob<Class TObject, ACE_FSM_System_IObjectContext TContext
 	//------------------------------------------------------------------------------------------------
 	protected void UnregisterNow(int machineIdx)
 	{
-		TMachine machine = m_aMachines[machineIdx];
-		m_aMachines.Remove(machineIdx);
-		machine.OnStop();
+		TJob job = m_aJobs[machineIdx];
+		m_aJobs.Remove(machineIdx);
+		job.OnStop();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected TMachine CreateFSM()
+	protected TJob CreateJob()
 	{
-		TMachine instance = new TMachine();
-		instance.CopyFrom(m_pTemplateFSM);
+		TJob instance = new TJob();
+		instance.CopyFrom(m_pTemplateJob);
 		return instance;
-	}
-}
-
-//------------------------------------------------------------------------------------------------
-enum ACE_FSM_Scheduler_EState
-{
-	UPDATE_QUEUE,
-	UPDATE_OBJECTS,
-	TIMEOUT
-}
-
-//------------------------------------------------------------------------------------------------
-class ACE_FSM_System_IObjectContext<Class TObject>
-{
-	TObject m_pObject;
-	float m_fLastUpdateTime;
-	
-	//------------------------------------------------------------------------------------------------
-	void ACE_FSM_System_IObjectContext(TObject object)
-	{
-		m_pObject = object;
-		m_fLastUpdateTime = GetGame().GetWorld().GetWorldTime();
 	}
 }

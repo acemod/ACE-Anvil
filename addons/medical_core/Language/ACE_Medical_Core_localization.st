@@ -1,6 +1,13 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{65515E0D98453E42}" {
+   Id "ACE_Medical-AddonName"
+   Target_en_us "Medical"
+   Modified 1699833891
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{60CF45A3ED3C6951}" {
    Id "ACE_Medical-EpinephrineInjectionAction"
    Target_en_us "Inject epinephrine"
@@ -108,6 +115,54 @@ StringTable {
    Modified 1655484454
    Author "kexanone"
    LastChanged "Smith"
+  }
+  CustomStringTableItem "{65515E08A4E02C61}" {
+   Id "ACE_Medical-KeyBind_OpenRadialMenu"
+   Target_en_us "Open medical radial menu"
+   Target_de_de "Öffne medizinisches Kreismenü"
+   Modified 1699833171
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A9625D01268}" {
+   Id "ACE_Medical-RadialMenu_ExaminePatient"
+   Target_en_us "Examine patient"
+   Target_de_de "Patient untersuchen"
+   Modified 1699834887
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A94855EB699}" {
+   Id "ACE_Medical-RadialMenu_FluidReplacement"
+   Target_en_us "Fluid Replacement"
+   Target_de_de "Volumentherapie"
+   Modified 1699835500
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A967A9EA7B6}" {
+   Id "ACE_Medical-RadialMenu_FractureManagement"
+   Target_en_us "Fracture management"
+   Target_de_de "Frakturbehandlung"
+   Modified 1699835013
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A94A58D1608}" {
+   Id "ACE_Medical-RadialMenu_HemorrhageControl"
+   Target_en_us "Hemorrhage control"
+   Target_de_de "Blutstillung"
+   Modified 1699836091
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65516A97B16C0831}" {
+   Id "ACE_Medical-RadialMenu_Medication"
+   Target_en_us "Medication"
+   Target_de_de "Medikation"
+   Modified 1699835120
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{630D4CCE326184CA}" {
    Id "ACE_Medical-UserAction_BackPosition"

@@ -32,6 +32,8 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 		
 		if (IsRunning())
 			UpdateTransitionTable();
+		else
+			m_aTransitionTable = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------

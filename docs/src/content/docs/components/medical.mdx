@@ -21,10 +21,10 @@ import UnpublishedModWarning from '~/components/UnpublishedModWarning.astro';
 
 - **Second Chance**: Increases survivability by ensuring that players fall unconscious instead of getting killed outright.
 - **Pain**: Injuries cause pain screen effects and can be treated with morphine
-- Medication:
-    - Changed: Morphine can only used for treating pain and has no longer healing effects
+- **Medication**:
+    - Changed: Morphine can only be used for treating pain and has no longer healing effects
     - Added: Epinephrine for speeding up wake-up of unconscious patients
-- **Repositioning**: Allows to put patients on their back or in recovery position
+- **Repositioning**: Allows putting patients on their back or in recovery position
 - Medical radial menu for putting medical items to hand
 - Additional settings for configuring medical kits, bleedings, _etc._
 
@@ -52,6 +52,12 @@ Below is a proposed activity diagram for treating patients:
 </div>
 
 ### Usage
+
+#### Reposition Patient
+
+- Unconscious patients have a user interaction on their abdomen for changing to back or recovery position.
+
+#### Medical Radial Menu
 
 - Open medical radial menu with <kbd>Ctrl</kbd>+<kbd>H</kbd> (ACE default)
 
@@ -135,7 +141,7 @@ Template for the `missionHeader` in a server config:
 
 #### Removal of Global Health
 
-In vanilla there is a global health pool that takes damage passed from body parts. If HP of this health pool drops to 0, second chance gets evaluated. ACE Medical Hitzones gets completely rid of this health pool and evaluates second chance instead when HP of a vital body part drops to 0.
+In vanilla, there is a global health pool that takes damage passed from body parts. If HP of this health pool drops to 0, second chance gets evaluated. ACE Medical Hitzones gets completely rid of this health pool and evaluates second chance instead when HP of a vital body part drops to 0.
 
 
 ### Settings

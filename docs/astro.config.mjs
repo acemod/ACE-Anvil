@@ -10,7 +10,6 @@ import { config } from './src/utils/config'
 export default defineConfig({
   site: config.site.url,
   base: process.env.BASE_URL || '',
-
   markdown: {
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeMathML],

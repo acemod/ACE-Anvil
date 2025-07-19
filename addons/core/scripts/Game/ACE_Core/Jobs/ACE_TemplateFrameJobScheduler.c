@@ -3,7 +3,7 @@
 [BaseContainerProps()]
 class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObjectContext TContext, ACE_IFrameJob TJob> : ACE_IFrameJob
 {
-	[Attribute(defvalue: "1000", desc: "Approximate update timeout for a particular object [s]")]
+	[Attribute(defvalue: "1000", desc: "Approximate update timeout for a particular object [ms]")]
 	protected int m_fObjectUpdateTimeoutMS;
 
 	[Attribute(defvalue: "10", desc: "Maximum number of entities to be updated per frame")]

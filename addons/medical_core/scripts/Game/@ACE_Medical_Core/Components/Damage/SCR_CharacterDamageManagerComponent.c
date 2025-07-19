@@ -44,6 +44,18 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
+	protected override void OnDamageStateChanged(EDamageState state)
+	{
+		super.OnDamageStateChanged(state);
+		
+		if (Replication.IsServer() && (state == EDamageState.DESTROYED))
+			ACE_Medical_OnKilled();
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	protected void ACE_Medical_OnKilled();
+	
+	//-----------------------------------------------------------------------------------------------------------
 	//! Returns last stuck physical hit zone
 	SCR_CharacterHitZone ACE_Medical_GetLastStruckPhysicalHitZone()
 	{

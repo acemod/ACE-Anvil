@@ -42,7 +42,8 @@ modded class SCR_CharacterHitZone : SCR_RegeneratingHitZone
 		if (system)
 			system.Register(damageManager, this);
 		else
-			damageManager.Kill(damageManager.GetInstigator());
+			// Put kill on callqueue to avoid potential crash (e.g. when called from HitZone::OnDamageStateChanged)
+			GetGame().GetCallqueue().Call(damageManager.Kill, damageManager.GetInstigator());
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

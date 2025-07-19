@@ -1,9 +1,9 @@
 GameProject {
  ID "ACE_Carrying_MANW"
- GUID "65E6D70B9727A05C"
+ GUID "65E6D7F099E86EB4"
  TITLE "ACE Carrying MANW"
  Dependencies {
-  "58D0FB3206B6F859" "65E6D74F99029F4B"
+  "58D0FB3206B6F859" "65E6D80299046768"
  }
  Configurations {
   GameProjectConfig PC {

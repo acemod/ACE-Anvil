@@ -3,7 +3,7 @@ GameProject {
  GUID "65E6D74199308763"
  TITLE "ACE Chopping MANW"
  Dependencies {
-  "58D0FB3206B6F859" "65E6D74F99029F4B"
+  "58D0FB3206B6F859" "65E6D80299046768"
  }
  Configurations {
   GameProjectConfig PC {

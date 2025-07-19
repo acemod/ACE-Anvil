@@ -3,7 +3,7 @@ GameProject {
  GUID "65E6D79799A3A4A8"
  TITLE "ACE Tactical Ladder MANW"
  Dependencies {
-  "65E6D74F99029F4B" "58D0FB3206B6F859"
+  "65E6D80299046768" "58D0FB3206B6F859"
  }
  Configurations {
   GameProjectConfig PC {

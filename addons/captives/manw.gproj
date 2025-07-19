@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Captives_MANW"
+ GUID "65E6D7299CF309FD"
+ TITLE "ACE Captives MANW"
+ Dependencies {
+  "58D0FB3206B6F859" "65E6D74F99029F4B"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{64771573F670185F}" {
+      StringTableSource "{7DD20CE9F835645B}Language/ACE_Captives_localization.st"
+      Languages {
+       LanguageDefinition "{64771573F4558F85}" {
+        Code "cs_cz"
+        StringTableRuntime "{B027074B1F92BF49}Language/ACE_Captives_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{64771573F4558FC6}" {
+        Code "de_de"
+        StringTableRuntime "{65591D780C31AE69}Language/ACE_Captives_localization.de_de.conf"
+       }
+       LanguageDefinition "{64771573F4558FDB}" {
+        Code "en_us"
+        StringTableRuntime "{3BA9973366C2AB68}Language/ACE_Captives_localization.en_us.conf"
+       }
+       LanguageDefinition "{64771573F4558FED}" {
+        Code "es_es"
+        StringTableRuntime "{FEE5DABA88C0C077}Language/ACE_Captives_localization.es_es.conf"
+       }
+       LanguageDefinition "{64771573F4558E01}" {
+        Code "fr_fr"
+        StringTableRuntime "{454D2F8D6E432375}Language/ACE_Captives_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{64771573F4558E17}" {
+        Code "it_it"
+        StringTableRuntime "{C551A0B9C361A08C}Language/ACE_Captives_localization.it_it.conf"
+       }
+       LanguageDefinition "{64771573F4558E2A}" {
+        Code "ja_jp"
+        StringTableRuntime "{D54A1D2BFD109027}Language/ACE_Captives_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{64771573F4558E3B}" {
+        Code "ko_kr"
+        StringTableRuntime "{75F435876E3D9318}Language/ACE_Captives_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{64771573F4558E4E}" {
+        Code "pl_pl"
+        StringTableRuntime "{2985937DD0D20F64}Language/ACE_Captives_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{64771573F4558E5F}" {
+        Code "pt_br"
+        StringTableRuntime "{FCF209B1EB2CC5DE}Language/ACE_Captives_localization.pt_br.conf"
+       }
+       LanguageDefinition "{64771573F4558924}" {
+        Code "ru_ru"
+        StringTableRuntime "{A9B31D197655A0A8}Language/ACE_Captives_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{64771573F455893F}" {
+        Code "uk_ua"
+        StringTableRuntime "{23EB48EF1A7B1EFD}Language/ACE_Captives_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{64771573F455894F}" {
+        Code "zh_cn"
+        StringTableRuntime "{F95B26D223DBCEE0}Language/ACE_Captives_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

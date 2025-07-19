@@ -1,0 +1,22 @@
+GameProject {
+ ID "ACE_Trenches_MANW"
+ GUID "65E6D7C49EE13331"
+ TITLE "ACE Trenches MANW"
+ Dependencies {
+  "58D0FB3206B6F859" "65E6D74F99029F4B"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

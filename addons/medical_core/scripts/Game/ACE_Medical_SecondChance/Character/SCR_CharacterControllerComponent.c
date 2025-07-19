@@ -1,20 +1,6 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 {
-	protected SCR_CharacterDamageManagerComponent m_pACE_Medical_DamageManager;
-	
-	//------------------------------------------------------------------------------------------------
-	//! Initialize member variables
-	override void OnInit(IEntity owner)
-	{
-		super.OnInit(owner);
-		
-		if (!GetGame().InPlayMode() || !Replication.IsServer())
-			return;
-		
-		m_pACE_Medical_DamageManager = SCR_CharacterDamageManagerComponent.Cast(owner.FindComponent(SCR_CharacterDamageManagerComponent));
-	}
-	
 	//-----------------------------------------------------------------------------------------------------------
 	override void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
@@ -24,17 +10,25 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		if (!Replication.IsServer() || previousLifeState == newLifeState)
 			return;
 		
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return;
+		
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(ownerChar.GetDamageManager());
+		if (!damageManager)
+			return;
+		
 		switch (newLifeState)
 		{
 			case ECharacterLifeState.INCAPACITATED:
 			{
-				m_pACE_Medical_DamageManager.ACE_Medical_ScheduleSecondChanceDeactivation();
+				damageManager.ACE_Medical_ScheduleSecondChanceDeactivation();
 				break;
 			}
 			
 			case ECharacterLifeState.ALIVE:
 			{
-				m_pACE_Medical_DamageManager.ACE_Medical_ClearSecondChanceHistory();
+				damageManager.ACE_Medical_ClearSecondChanceHistory();
 				break;
 			}
 		}

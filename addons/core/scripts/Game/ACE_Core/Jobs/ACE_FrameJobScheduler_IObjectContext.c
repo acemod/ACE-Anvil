@@ -10,4 +10,11 @@ class ACE_FrameJobScheduler_IObjectContext<Class TObject>
 		m_pObject = object;
 		m_fLastUpdateTime = GetGame().GetWorld().GetWorldTime();
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Used for validating the context
+	bool IsValid()
+	{
+		return m_pObject;
+	}
 }

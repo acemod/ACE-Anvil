@@ -74,7 +74,12 @@ class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObject
 		{
 			TJob job = m_aJobs[m_iCurrentJobIdx];
 			TContext context = job.GetContext();
-			job.OnUpdate((currentTime - context.m_fLastUpdateTime) / 1000);
+			
+			if (context.IsValid())
+				job.OnUpdate((currentTime - context.m_fLastUpdateTime) / 1000);
+			else
+				job.Stop();
+			
 			context.m_fLastUpdateTime = currentTime;
 			++m_iCurrentJobIdx;
 			
@@ -105,8 +110,12 @@ class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObject
 			return;
 		}
 		
+		TContext context = new TContext(object);
+		if (!context.IsValid())
+			return;
+		
 		TJob job = CreateJob();
-		job.SetContext(new TContext(object));
+		job.SetContext(context);
 		job.OnStart();
 		m_aJobs.Insert(job);
 		
@@ -131,7 +140,7 @@ class ACE_TemplateFrameJobScheduler<Class TObject, ACE_FrameJobScheduler_IObject
 			}
 		}
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	protected void UnregisterNow(int machineIdx)
 	{

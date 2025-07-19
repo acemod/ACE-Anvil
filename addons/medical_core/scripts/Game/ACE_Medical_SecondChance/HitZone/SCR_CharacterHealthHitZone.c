@@ -20,8 +20,15 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 		
 		ACE_Medical_SecondChanceSystem system = ACE_Medical_SecondChanceSystem.GetInstance();
 		if (system)
-			system.Register(damageManager, damageManager.ACE_Medical_GetLastStruckPhysicalHitZone());
+		{
+			SCR_CharacterHitZone struckHitZone = damageManager.ACE_Medical_GetLastStruckPhysicalHitZone();
+			damageManager.AddBleedingEffectOnHitZone(struckHitZone);
+			system.Register(damageManager, struckHitZone);
+		}
 		else
-			damageManager.Kill(damageManager.GetInstigator());
+		{
+			// Put kill on callqueue to avoid potential crash (e.g. when called from HitZone::OnDamageStateChanged)
+			GetGame().GetCallqueue().Call(damageManager.Kill, damageManager.GetInstigator());
+		}
 	}
 }

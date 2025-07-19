@@ -146,7 +146,8 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 		// Refuse registration and kill character if second chance is not granted
 		if (!struckHitZone || !damageManager.ACE_Medical_IsSecondChanceEnabled() || damageManager.ACE_Medical_ShouldDeactivateSecondChance() || !struckHitZone.ACE_Medical_ShouldGrantSecondChance())
 		{
-			damageManager.Kill(damageManager.GetInstigator());
+			// Put kill on callqueue to avoid potential crash (e.g. when called from HitZone::OnDamageStateChanged)
+			GetGame().GetCallqueue().Call(damageManager.Kill, damageManager.GetInstigator());
 			return;
 		}
 		

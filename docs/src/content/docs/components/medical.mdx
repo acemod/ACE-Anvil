@@ -9,7 +9,7 @@ import UnpublishedModWarning from '~/components/UnpublishedModWarning.astro';
 
 - [ACE Medical Core](#ace-medical-core)
 - [ACE Medical Hitzones](#ace-medical-hitzones)
-- ~~[ACE Medical Circulation](#ace-medical-circulation)~~
+- [ACE Medical Circulation](#ace-medical-circulation)
 - ~~[ACE Medical Defibrillation](#ace-medical-defibrillation)~~
 - ~~[ACE Medical Breathing](#ace-medical-breathing)~~
 
@@ -264,12 +264,12 @@ Summary of settings that can be modified in the server config:
 
 | Field | Value | Description |
 | --- | --- | --- | --- |
-| `m_fHeartRateLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `40.0` | A heart rate below this will trigger a transition to this state [BPM] |
-| `m_fHeartRateHighBPM` | `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
-| `m_fMeanArterialPressureLowKPA` | `float`**<br />Range: 0 to ∞<br />Default: `7.11` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
-| `m_fMeanArterialPressureHighKPA` | `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
-| `m_fMaxHeartForMeanArterialPressureLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `80.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
-| `m_eBloodState` | `int`****<br />Range: 0 to ∞<br />Default: `CLASS_2_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+| `m_fHeartRateLowBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `40.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | Type: `float`**<br />Range: 0 to ∞<br />Default: `7.11` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | Type: `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_fMaxHeartForMeanArterialPressureLowBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `80.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
+| `m_eBloodState` | Type: `int`****<br />Range: 0 to ∞<br />Default: `CLASS_2_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
 
 \*\*\*\* Note that blood states have to be provided as integers in the config: `0` (`NORMAL`), `1` (`CLASS_1_HEMORRHAGE`), `2` (`FATAL`), `3` (`CLASS_2_HEMORRHAGE`), `4` (`CLASS_3_HEMORRHAGE`) or `5` (`CLASS_4_HEMORRHAGE`).<br />
 
@@ -277,30 +277,30 @@ Summary of settings that can be modified in the server config:
 
 | Field | Value | Description |
 | --- | --- | --- | --- |
-| `m_fHeartRateLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `30.0` | A heart rate below this will trigger a transition to this state [BPM] |
-| `m_fHeartRateHighBPM` | `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
-| `m_fMeanArterialPressureLowKPA` | `float`**<br />Range: 0 to ∞<br />Default: `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
-| `m_fMeanArterialPressureHighKPA` | `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
-| `m_fMaxHeartForMeanArterialPressureLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `40.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
-| `m_eBloodState` | `int`****<br />Range: 0 to ∞<br />Default: `CLASS_3_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+| `m_fHeartRateLowBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `30.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | Type: `float`**<br />Range: 0 to ∞<br />Default: `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | Type: `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_fMaxHeartForMeanArterialPressureLowBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `40.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
+| `m_eBloodState` | Type: `int`****<br />Range: 0 to ∞<br />Default: `CLASS_3_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
 
 `m_CardiacArrestThresholds`
 
 | Field | Value | Description |
 | --- | --- | --- | --- |
-| `m_fHeartRateLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `20.0` | A heart rate below this will trigger a transition to this state [BPM] |
-| `m_fHeartRateHighBPM` | `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
-| `m_fMeanArterialPressureLowKPA` | `float`**<br />Range: 0 to ∞<br />Default: `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
-| `m_fMeanArterialPressureHighKPA` | `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
-| `m_fMaxHeartForMeanArterialPressureLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `30.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
-| `m_eBloodState` | `int`****<br />Range: 0 to ∞<br />Default: `CLASS_4_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+| `m_fHeartRateLowBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `20.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | Type: `float`**<br />Range: 0 to ∞<br />Default: `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | Type: `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_fMaxHeartForMeanArterialPressureLowBPM` | Type: `float`**<br />Range: 0 to ∞<br />Default: `30.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
+| `m_eBloodState` | Type: `int`****<br />Range: 0 to ∞<br />Default: `CLASS_4_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
 
 #### `m_CardiacArrestDamageEffect`
 
 | Field | Value | Description |
 | --- | --- | --- | --- |
-| `m_fBrainDamageRate` | `float`**<br />Range: 0 to ∞<br />Default: `0.333` | Damage the brain takes per second |
-| `m_fEffectStartDelayS` | `float`**<br />Range: 0 to ∞<br />Default: `10.0` | Delay in seconds before the effect starts [s] |
+| `m_fBrainDamageRate` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.333` | Damage the brain takes per second |
+| `m_fEffectStartDelayS` | Type: `float`**<br />Range: 0 to ∞<br />Default: `10.0` | Delay in seconds before the effect starts [s] |
 <br />
 
 Template for the `missionHeader` in a server config:

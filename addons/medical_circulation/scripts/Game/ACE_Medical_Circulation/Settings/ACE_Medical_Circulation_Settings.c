@@ -2,16 +2,16 @@
 [BaseContainerProps()]
 class ACE_Medical_Circulation_Settings : ACE_ModSettings
 {
-	[Attribute(defvalue: "80", desc: "Default heart rate [bpm]", category: "Default Vitals")]
+	[Attribute(defvalue: "80", desc: "Default heart rate [bpm]", params: "0 inf")]
 	float m_fDefaultHeartRateBPM;
 	
-	[Attribute(defvalue: "95", desc: "Default stroke volume [ml]", category: "Default Vitals")]
+	[Attribute(defvalue: "95", desc: "Default stroke volume [ml]", params: "0 inf")]
 	float m_fDefaultStrokeVolumeML;
 	
-	[Attribute(defvalue: "12.443", desc: "Default mean arterial pressure [kPa]", category: "Default Vitals")]
+	[Attribute(defvalue: "12.443", desc: "Default mean arterial pressure [kPa]", params: "0 inf")]
 	float m_fDefaultMeanArterialPressureKPA;
 	
-	[Attribute(defvalue: "5.3329", desc: "Default pulse pressure [kPa]", category: "Default Vitals")]
+	[Attribute(defvalue: "5.3329", desc: "Default pulse pressure [kPa]", params: "0 inf")]
 	float m_fDefaultPulsePressureKPA;
 	
 	[Attribute(desc: "Thresholds that lead to unstable vital state")]
@@ -29,16 +29,16 @@ class ACE_Medical_Circulation_Settings : ACE_ModSettings
 	[Attribute(defvalue: "false", desc: "AI will die instead of entering cardiac arrest if false")]
 	bool m_bCardiacArrestForAIEnabled;
 	
-	[Attribute(defvalue: "22", desc: "Default delay between check for successful CPR [s]")]
+	[Attribute(defvalue: "22", desc: "Default delay between check for successful CPR [s]", params: "0 inf")]
 	float m_fCPRSuccessCheckTimeoutS;
 	
-	[Attribute(defvalue: "0", desc: "Chance for exiting cardiac arrest while performing CPR at class IV hemorrhage")]
+	[Attribute(defvalue: "0", desc: "Chance for exiting cardiac arrest while performing CPR at class IV hemorrhage", params: "0 1")]
 	float m_fCPRSuccessChanceMin;
 	
-	[Attribute(defvalue: "0.4", desc: "Chance for exiting cardiac arrest while performing CPR at above class II hemorrhage")]
+	[Attribute(defvalue: "0.4", desc: "Chance for exiting cardiac arrest while performing CPR at above class II hemorrhage", params: "0 1")]
 	float m_fCPRSuccessChanceMax;
 	
-	[Attribute(defvalue: "0.2", desc: "Maximum resilience recovery scale applied after getting revived. This scale gets multiplied by the scaled health of the brain and will be removed once the patient becomes conscious")]
+	[Attribute(defvalue: "0.2", desc: "Maximum resilience recovery scale applied after getting revived. This scale gets multiplied by the scaled health of the brain and will be removed once the patient becomes conscious", params: "0 inf")]
 	float m_fMaxRevivalResilienceRecoveryScale;
 	
 	// Values derived from others

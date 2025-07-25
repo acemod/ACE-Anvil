@@ -38,8 +38,18 @@ class ACE_Medical_Circulation_Settings : ACE_ModSettings
 	[Attribute(defvalue: "0.4", desc: "Chance for exiting cardiac arrest while performing CPR at above class II hemorrhage", params: "0 1")]
 	float m_fCPRSuccessChanceMax;
 	
+	[Attribute(defvalue: "0.2", desc: "Chance for waking up from ammonium carbonate when resilience recovery scale is close to 0", params: "0 1")]
+	float m_fAmmoniumCarbonateSuccessChanceMin;
+	
+	[Attribute(defvalue: "1", desc: "Chance for waking up from ammonium carbonate when resilience recovery scale is at `m_fMaxRevivalResilienceRecoveryScale` or above", params: "0 1")]
+	float m_fAmmoniumCarbonateSuccessChanceMax;
+	
 	[Attribute(defvalue: "0.2", desc: "Maximum resilience recovery scale applied after getting revived. This scale gets multiplied by the scaled health of the brain and will be removed once the patient becomes conscious", params: "0 inf")]
 	float m_fMaxRevivalResilienceRecoveryScale;
+	
+	// ACE3 has this set to 50, but we lowered so minimum bleedout in cardiac arrest is about 30 instead of 12 seconds
+	[Attribute(defvalue: "20", desc: "Maximum total bleeding rate at cardiac arrest due to gravity  [ml/s]", params: "0 inf")]
+	float m_fCardiacArrestMaxTotalBleedingRate;
 	
 	// Values derived from others
 	float m_fDefaultSystemicVascularResistance;

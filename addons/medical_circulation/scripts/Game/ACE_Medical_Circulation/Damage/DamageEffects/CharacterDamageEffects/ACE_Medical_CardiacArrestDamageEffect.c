@@ -20,7 +20,6 @@ class ACE_Medical_CardiacArrestDamageEffect: SCR_DotDamageEffect
 	//! Make sure this effect can only be added once
 	event override bool HijackDamageEffect(SCR_ExtendedDamageManagerComponent dmgManager)
 	{
-		/*****
 		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
 		if (!dmgManager)
 			return true;
@@ -33,7 +32,6 @@ class ACE_Medical_CardiacArrestDamageEffect: SCR_DotDamageEffect
 		array<ref SCR_PersistentDamageEffect> effects = {};
 		charDamageManager.FindAllDamageEffectsOfTypeOnHitZone(ACE_Medical_CardiacArrestDamageEffect, hitZone, effects);
 		return !effects.IsEmpty();
-		*****/
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -54,24 +52,6 @@ class ACE_Medical_CardiacArrestDamageEffect: SCR_DotDamageEffect
 		{
 			effect.Terminate();
 		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override void OnEffectRemoved(SCR_ExtendedDamageManagerComponent dmgManager)
-	{
-		/*****
-		super.OnEffectAdded(dmgManager);
-		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
-		
-		IEntity target = charDamageManager.GetOwner();
-		if (!target)
-			return;
-		
-		// Add regneration when no longer in cardiac arrest
-		ACE_Medical_CardiovascularComponent cardiovascularComponent = ACE_Medical_CardiovascularComponent.Cast(target.FindComponent(ACE_Medical_CardiovascularComponent));
-		if (cardiovascularComponent && !cardiovascularComponent.IsInCardiacArrest())
-			charDamageManager.RegenVirtualHitZone(SCR_RegeneratingHitZone.Cast(GetAffectedHitZone()));
-		*****/
 	}
 	
 	//------------------------------------------------------------------------------------------------

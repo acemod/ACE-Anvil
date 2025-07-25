@@ -130,14 +130,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		m_mBleedingParticles = null;
 	}
 	
-#ifdef WORKBENCH
-	[Attribute(defvalue: "false", desc: "Should draw debug shapes for hit zones")]
-	protected bool m_bACE_Medical_DrawHitZoneDebug;
-	
+#ifdef ENABLE_DIAG
 	//-----------------------------------------------------------------------------------------------------------
 	override void OnDiag(IEntity owner, float timeSlice)
 	{
-		if (!m_bACE_Medical_DrawHitZoneDebug)
+		if (!DiagMenu.GetBool(SCR_DebugMenuID.ACE_MEDICAL_DEBUGUI_MENU_ORGAN_HITZONES_DEBUG))
 			return;
 		
 		array<HitZone> hitZones = {};

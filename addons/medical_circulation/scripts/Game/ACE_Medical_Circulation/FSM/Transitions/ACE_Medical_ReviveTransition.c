@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_ReviveTransition : ACE_FSM_ITransition<ACE_Medical_VitalStates_CharacterContext>
+class ACE_Medical_ReviveTransition : ACE_FSM_ITransition<ACE_Medical_CharacterContext>
 {
 	protected static ACE_Medical_Circulation_Settings s_pCirculationSettings;
 	
@@ -11,13 +11,22 @@ class ACE_Medical_ReviveTransition : ACE_FSM_ITransition<ACE_Medical_VitalStates
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override bool ShouldBePerformed(ACE_Medical_VitalStates_CharacterContext context, float timeSlice)
+	override void OnPerform(ACE_Medical_CharacterContext context)
+	{
+		context.m_pVitals.OnRevived();
+		context.m_pVitals.SetHeartRate(s_pCirculationSettings.m_CriticalThresholds.m_fHeartRateLowBPM);
+		// Add regneration when no longer in cardiac arrest
+		context.m_pDamageManager.RegenVirtualHitZone(context.m_pDamageManager.ACE_Medical_GetBrainHitZone());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool ShouldBePerformed(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		// Cannot revive when MAP is too high
-		if (context.m_pComponent.GetMeanArterialPressure() > s_pCirculationSettings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA)
+		if (context.m_pVitals.GetMeanArterialPressure() > s_pCirculationSettings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA)
 			return false;
 		
-		/***** context.m_fCPRSuccessCheckTimerS += timeSlice * context.m_pComponent.GetReviveSuccessCheckTimerScale(); *****/
+		context.m_fCPRSuccessCheckTimerS += timeSlice * context.m_pVitals.GetReviveSuccessCheckTimerScale();
 		
 		if (context.m_fCPRSuccessCheckTimerS < s_pCirculationSettings.m_fCPRSuccessCheckTimeoutS)
 			return false;
@@ -27,7 +36,7 @@ class ACE_Medical_ReviveTransition : ACE_FSM_ITransition<ACE_Medical_VitalStates
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float ComputeReviveChance(ACE_Medical_VitalStates_CharacterContext context)
+	protected float ComputeReviveChance(ACE_Medical_CharacterContext context)
 	{
 		float minScale = context.m_pBloodHitZone.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_4_HEMORRHAGE);
 		float maxScale = context.m_pBloodHitZone.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_2_HEMORRHAGE);

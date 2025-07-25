@@ -3,7 +3,7 @@
 class ACE_Medical_VitalStateInverseThresholdTransition : ACE_Medical_VitalStateThresholdTransition
 {
 	//------------------------------------------------------------------------------------------------
-	override bool ShouldBePerformed(ACE_Medical_VitalStates_CharacterContext context, float timeSlice)
+	override bool ShouldBePerformed(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		return !super.ShouldBePerformed(context, timeSlice);
 	}

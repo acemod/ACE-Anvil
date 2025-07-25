@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_VitalStateThresholdTransition : ACE_FSM_ITransition<ACE_Medical_VitalStates_CharacterContext>
+class ACE_Medical_VitalStateThresholdTransition : ACE_FSM_ITransition<ACE_Medical_CharacterContext>
 {
 	protected ref ACE_Medical_VitalStateThresholdsConfig m_pThresholds;
 	
@@ -10,13 +10,13 @@ class ACE_Medical_VitalStateThresholdTransition : ACE_FSM_ITransition<ACE_Medica
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override bool ShouldBePerformed(ACE_Medical_VitalStates_CharacterContext context, float timeSlice)
+	override bool ShouldBePerformed(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float heartRate = context.m_pComponent.GetHeartRate();
+		float heartRate = context.m_pVitals.GetHeartRate();
 		if ((heartRate < m_pThresholds.m_fHeartRateLowBPM) || (heartRate > m_pThresholds.m_fHeartRateHighBPM))
 			return true;
 		
-		float meanArterialPressure = context.m_pComponent.GetMeanArterialPressure();
+		float meanArterialPressure = context.m_pVitals.GetMeanArterialPressure();
 		if ((meanArterialPressure < m_pThresholds.m_fMeanArterialPressureLowKPA) && (heartRate <= m_pThresholds.m_fMaxHeartForMeanArterialPressureLowBPM))
 			return true;
 		

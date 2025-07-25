@@ -125,14 +125,8 @@ Template for the `missionHeader` in a server config:
 **ACE Medical Hitzones** overhauls hit zones and has the following features:
 
 - **Organ Hit Zones**: New hit zones that can only be hit with melee and projectiles:
-    
-        
-
     - **Heart**: Evaluated for second chance
     - **Femoral arteries**: Cause massive bleedings
-
-
-
 - Removes global health in favor of evaluating second chance on destruction of vital body parts (head and torso)
 - Improves bleeding effect of massive bleedings
 
@@ -173,23 +167,21 @@ Template for the `missionHeader` in a server config:
 
 ### Overview
 
-ACE Medical Prototypes builds on top of ACE Medical and serves as a testbed for more advanced features to be added to ACE Medical in future. Current prototypes:
-- Cardiovascular system:
+**ACE Medical Circulation** adds the following features:
+- **Vitals**:
     - Simulation of heart rate and blood pressure
     - Cardiac arrest state and CPR for revival
-- Medication system
+- **Medication**:
     - Removes all "training wheels", _i.e._ drugs can always be administered and overdosed
     - Exchanges epinephrine with ammonium carbonate. Epinephrine has now a different role.
     - New types of drugs
     - Advanced simulation of drug effects and their evolution over time
-- Damage system overhaul:
-    - Death is no longer determined by a virtual health hit zone, but by the health of individual "vital" hit zones (_i.e_ torso and head). Second chance can be enabled for going to cardiac arrest instead of dying outright from deadly blows to vital hit zones. Second chance is enabled for torso and disabled for head by default.
+- **Second chance**:
+    - When second chance is granted, the patient goes into cardiac arrest
+- Hit Zones:
     - New brain hit zone that takes continuously damage while in cardiac arrest and no CPR is performed. Runs out of health in approximately 5 minutes.
-- Bandages:
-    - Bandaging action takes 1.6 times longer
-    - Limbs may need multiple bandages to stop bleedings
 
-The changes are also applied to AI, but they will currently directly die when they enter cardiac arrest.
+The changes are also applied to AI, but they will directly die when they enter cardiac arrest (see `m_bCardiacArrestForAIEnabled` in [Settings](#settings-3)).
 
 ### Details
 
@@ -243,6 +235,123 @@ The values of the vitals (_e.g._ HR and BP) are essential for getting a patient 
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Core:
 
 <PlantUML src="/plantumls/medical/circulation-treatment-1.puml" alt="circulation-treatment-1.puml" />
+
+### Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_fDefaultHeartRateBPM`              | Type: `float`**<br />Range: 0 to ∞<br />Default: `80.0` | Default heart rate [bpm] |
+| `m_fDefaultStrokeVolumeML`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `95.0` | Default stroke volume [ml] |
+| `m_fDefaultMeanArterialPressureKPA`   | Type: `float`**<br />Range: 0 to ∞<br />Default: `12.443` | Default mean arterial pressure [kPa] |
+| `m_fDefaultPulsePressureKPA`          | Type: `float`**<br />Range: 0 to ∞<br />Default: `5.3329` | Default pulse pressure [kPa] |
+| `m_UnstableThresholds`                | Type: `object` | Thresholds that lead to unstable vital state |
+| `m_CriticalThresholds`                | Type: `object` | Thresholds that lead to critical vital state |
+| `m_CardiacArrestThresholds`           | Type: `object` | Thresholds that lead to cardiac arrest state |
+| `m_CardiacArrestDamageEffect`         | Type: `object` | Damage effects caused by cardiac arrest |
+| `m_bCardiacArrestForAIEnabled`        | Type: `bool`*<br />Default: `false` | AI will die instead of entering cardiac arrest if false |
+| `m_fCPRSuccessCheckTimeoutS`          | Type: `float`**<br />Range: 0 to ∞<br />Default: `22.0` | Default delay between check for successful CPR [s] |
+| `m_fCPRSuccessChanceMin`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.0` | Chance for exiting cardiac arrest while performing CPR at class IV hemorrhage |
+| `m_fCPRSuccessChanceMax`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.4` | Chance for exiting cardiac arrest while performing CPR at above class II hemorrhage |
+| `m_fAmmoniumCarbonateSuccessChanceMin` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.2` | Chance for waking up from ammonium carbonate when resilience recovery scale is close to 0 |
+| `m_fAmmoniumCarbonateSuccessChanceMax` | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Chance for waking up from ammonium carbonate when resilience recovery scale is at `m_fMaxRevivalResilienceRecoveryScale` or above |
+| `m_fMaxRevivalResilienceRecoveryScale` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.2` | Maximum resilience recovery scale applied after getting revived. This scale gets multiplied by the scaled health of the brain and will be removed once the patient becomes conscious |
+| `m_fCardiacArrestMaxTotalBleedingRate` | Type: `float`**<br />Range: 0 to ∞<br />Default: `20.0` | Maximum total bleeding rate at cardiac arrest due to gravity  [ml/s] |
+<br />
+
+`m_UnstableThresholds`
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `m_fHeartRateLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `40.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | `float`**<br />Range: 0 to ∞<br />Default: `7.11` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_fMaxHeartForMeanArterialPressureLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `80.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
+| `m_eBloodState` | `int`****<br />Range: 0 to ∞<br />Default: `CLASS_2_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+
+\*\*\*\* Note that blood states have to be provided as integers in the config: `0` (`NORMAL`), `1` (`CLASS_1_HEMORRHAGE`), `2` (`FATAL`), `3` (`CLASS_2_HEMORRHAGE`), `4` (`CLASS_3_HEMORRHAGE`) or `5` (`CLASS_4_HEMORRHAGE`).<br />
+
+`m_CriticalThresholds`
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `m_fHeartRateLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `30.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | `float`**<br />Range: 0 to ∞<br />Default: `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_fMaxHeartForMeanArterialPressureLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `40.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
+| `m_eBloodState` | `int`****<br />Range: 0 to ∞<br />Default: `CLASS_3_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+
+`m_CardiacArrestThresholds`
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `m_fHeartRateLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `20.0` | A heart rate below this will trigger a transition to this state [BPM] |
+| `m_fHeartRateHighBPM` | `float`**<br />Range: 0 to ∞<br />Default: `220.0` | A heart rate above this will trigger a transition to this state [BPM] |
+| `m_fMeanArterialPressureLowKPA` | `float`**<br />Range: 0 to ∞<br />Default: `5.21` | A mean arterial pressure below this will trigger a transition to this state [kPa] |
+| `m_fMeanArterialPressureHighKPA` | `float`**<br />Range: 0 to ∞<br />Default: `29.5` | A mean arterial pressure above this will trigger a transition to this state [kPa] |
+| `m_fMaxHeartForMeanArterialPressureLowBPM` | `float`**<br />Range: 0 to ∞<br />Default: `30.0` | Maximum heart rate for trigger due to low mean arterial pressure [bpm] |
+| `m_eBloodState` | `int`****<br />Range: 0 to ∞<br />Default: `CLASS_4_HEMORRHAGE` | Blood volume at this level will trigger a transition to this state |
+
+#### `m_CardiacArrestDamageEffect`
+
+| Field | Type | Default | Description |
+| --- | --- | --- | --- |
+| `m_fBrainDamageRate` | `float`**<br />Range: 0 to ∞<br />Default: `0.333` | Damage the brain takes per second |
+| `m_fEffectStartDelayS` | `float`**<br />Range: 0 to ∞<br />Default: `10.0` | Delay in seconds before the effect starts [s] |
+<br />
+
+Template for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Medical_Circulation": {
+            "m_fDefaultHeartRateBPM": 80.0,
+            "m_fDefaultStrokeVolumeML": 95.0,
+            "m_fDefaultMeanArterialPressureKPA": 12.443,
+            "m_fDefaultPulsePressureKPA": 5.3329,
+            "m_UnstableThresholds": {
+                "m_fHeartRateLowBPM": 40.0,
+                "m_fHeartRateHighBPM": 220.0,
+                "m_fMeanArterialPressureLowKPA": 7.11,
+                "m_fMeanArterialPressureHighKPA": 29.5,
+                "m_fMaxHeartForMeanArterialPressureLowBPM": 80,
+                "m_eBloodState": 3
+            },
+            "m_CriticalThresholds": {
+                "m_fHeartRateLowBPM": 30.0,
+                "m_fHeartRateHighBPM": 220.0,
+                "m_fMeanArterialPressureLowKPA": 5.21,
+                "m_fMeanArterialPressureHighKPA": 29.5,
+                "m_fMaxHeartForMeanArterialPressureLowBPM": 40,
+                "m_eBloodState": 4
+            },
+            "m_CardiacArrestThresholds": {
+                "m_fHeartRateLowBPM": 20.0,
+                "m_fHeartRateHighBPM": 220.0,
+                "m_fMeanArterialPressureLowKPA": 5.21,
+                "m_fMeanArterialPressureHighKPA": 29.5,
+                "m_fMaxHeartForMeanArterialPressureLowBPM": 30,
+                "m_eBloodState": 5
+            },
+            "m_CardiacArrestDamageEffect": {
+                "m_fBrainDamageRate": 0.333,
+                "m_fEffectStartDelayS": 10.0
+            },
+            "m_bCardiacArrestForAIEnabled": 0,
+            "m_fCPRSuccessCheckTimeoutS": 22.0,
+            "m_fCPRSuccessChanceMin": 0.0,
+            "m_fCPRSuccessChanceMax": 0.4,
+            "m_fAmmoniumCarbonateSuccessChanceMin": 0.2,
+            "m_fAmmoniumCarbonateSuccessChanceMax": 1.0,
+            "m_fMaxRevivalResilienceRecoveryScale": 0.2,
+            "m_fCardiacArrestMaxTotalBleedingRate": 20.0
+        }
+    }
+}
+```
 
 ## ACE Medical Defibrillation
 

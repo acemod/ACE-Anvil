@@ -5,6 +5,7 @@
 class ACE_IFrameJob : Managed
 {
 	private bool m_bShouldBeStopped = false;
+	private bool m_bShouldBeUpdated = true;
 	private bool m_bIsRunning = false;
 	
 	//------------------------------------------------------------------------------------------------
@@ -24,15 +25,31 @@ class ACE_IFrameJob : Managed
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ScheduleStop()
+	//! To turn on/off OnUpdate
+	void ToggleUpdate(bool enable)
 	{
-		m_bShouldBeStopped = true;
+		m_bShouldBeUpdated = enable;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void CancelStop()
+	//! Method for job manager to check whether it should call OnUpdate
+	bool ShouldBeUpdated()
 	{
-		m_bShouldBeStopped = false;
+		return m_bShouldBeUpdated;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns true when the job is running. Is independent of `ShouldBeUpdated`.
+	bool IsRunning()
+	{
+		return m_bIsRunning;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Forces termination of job
+	void Stop()
+	{
+		m_bShouldBeStopped = true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -40,12 +57,6 @@ class ACE_IFrameJob : Managed
 	bool ShouldBeStopped()
 	{
 		return m_bShouldBeStopped;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	bool IsRunning()
-	{
-		return m_bIsRunning;
 	}
 	
 	//------------------------------------------------------------------------------------------------

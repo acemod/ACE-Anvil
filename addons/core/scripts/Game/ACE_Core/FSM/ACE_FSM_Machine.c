@@ -32,6 +32,8 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 		
 		if (IsRunning())
 			UpdateTransitionTable();
+		else
+			m_aTransitionTable = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -66,7 +68,7 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 	{
 		super.OnUpdate();
 		m_aStates[m_iCurrentStateIdx].OnUpdate(m_pContext, timeSlice);
-		HandleTransitions();
+		HandleTransitions(timeSlice);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -112,11 +114,11 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 	
 	//------------------------------------------------------------------------------------------------
 	//! Checks transition conditions and performs the first eligible transition
-	protected void HandleTransitions()
+	protected void HandleTransitions(float timeSlice)
 	{
 		foreach (ACE_FSM_ITransition<TContext> transition : m_aTransitionTable[m_iCurrentStateIdx])
 		{
-			if (transition.ShouldBePerformed(m_pContext))
+			if (transition.ShouldBePerformed(m_pContext, timeSlice))
 			{
 				transition.OnPerform(m_pContext);
 				ChangeState(transition.GetToStateID());
@@ -135,7 +137,7 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 		}
 		
 		if (!newStateID)
-			ScheduleStop();
+			Stop();
 	}
 	
 	//------------------------------------------------------------------------------------------------

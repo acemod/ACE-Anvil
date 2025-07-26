@@ -20,7 +20,7 @@ class ACE_FSM_ITransition<Managed TContext> : Managed
 	
 	//------------------------------------------------------------------------------------------------
 	//! Add condition for the transition here
-	bool ShouldBePerformed(TContext context);
+	bool ShouldBePerformed(TContext context, float timeSlice);
 	
 	//------------------------------------------------------------------------------------------------
 	ACE_FSM_EStateID GetFromStateIDs()

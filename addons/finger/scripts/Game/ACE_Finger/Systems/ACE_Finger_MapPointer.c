@@ -32,7 +32,7 @@ class ACE_Finger_MapPointer : GenericEntity
 	{
 		ACE_Finger_Settings settings = ACE_SettingsHelperT<ACE_Finger_Settings>.GetModSettings();
 		if (settings)
-			m_fPointerRangeM = settings.m_fPointingRangeM;
+			m_fPointerRangeM = settings.m_fMapPointingRangeM;
 		
 		m_iOwnerPlayerID = ownerPlayerID;
 		OnOwnerSet();

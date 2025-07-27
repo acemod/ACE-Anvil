@@ -43,7 +43,7 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 		{
 			m_fMaxPointingDistanceM = settings.m_fMaxPointingDistanceM;
 			m_bCanPingAttach = settings.m_bCanPingAttach;
-			m_fPingRangeM = settings.m_fPointingRangeM;
+			m_fPingRangeM = settings.m_fPingRangeM;
 		}
 	}
 	

@@ -10,17 +10,13 @@ class ACE_Finger_MapPointingSystem : GameSystem
 	{
 		super.InitInfo(outInfo);
 		outInfo.SetAbstract(false)
-			.SetLocation(ESystemLocation.Client)
-            .AddController(ACE_Finger_MapPointer);
+			.SetLocation(ESystemLocation.Client);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Finger_MapPointingSystem GetInstance()
 	{
-		World world = GetGame().GetWorld();
-		if (!world)
-			return null;
-
+		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Finger_MapPointingSystem.Cast(world.FindSystem(ACE_Finger_MapPointingSystem));
 	}
 	

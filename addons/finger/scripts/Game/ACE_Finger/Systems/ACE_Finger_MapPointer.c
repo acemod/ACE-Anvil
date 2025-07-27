@@ -1,35 +1,49 @@
 //------------------------------------------------------------------------------------------------
-/*
-class ACE_Finger_MapPointer : WorldController
+class ACE_Finger_MapPointerClass : GenericEntityClass
 {
+}
+
+//------------------------------------------------------------------------------------------------
+//! TO DO: Replace with public WorldController when new systems are available
+class ACE_Finger_MapPointer : GenericEntity
+{
+	[RplProp(), Attribute(defvalue: "10", desc: "Range of the pointer in meters. Only players in range will see it. Anyone can see it if negative.")]
+	protected float m_fPointerRangeM;
+	
+	[RplProp(onRplName: "OnOwnerSet")]
+	protected int m_iOwnerPlayerID;
+	
 	[RplProp(onRplName: "OnToggleActive")]
 	protected bool m_bState;
 	
 	[RplProp()]
 	protected vector m_vPos;
 	
-	[RplProp()]
-	protected int m_iPlayerID;
-	
-	//------------------------------------------------------------------------------------------------
-    override static void InitInfo(WorldControllerInfo outInfo)
-    {
-		super.InitInfo(outInfo);
-		Print(1313);
-        outInfo.SetPublic(true);
-    }
+	protected static ACE_Finger_MapPointer s_pLocalInstance;
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Finger_MapPointer GetLocalInstance()
 	{
-		return ACE_Finger_MapPointer.Cast(WorldController.FindMyController(GetGame().GetWorld(), ACE_Finger_MapPointer));
+		return s_pLocalInstance;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override protected void OnAuthorityReady()
+	void InitServer(int ownerPlayerID)
 	{
-		super.OnAuthorityReady();
-		Print(11111);
+		ACE_Finger_Settings settings = ACE_SettingsHelperT<ACE_Finger_Settings>.GetModSettings();
+		if (settings)
+			m_fPointerRangeM = settings.m_fPingRangeM;
+		
+		m_iOwnerPlayerID = ownerPlayerID;
+		OnOwnerSet();
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnOwnerSet()
+	{
+		if (m_iOwnerPlayerID == SCR_PlayerController.GetLocalPlayerId())
+			s_pLocalInstance = this;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -48,6 +62,13 @@ class ACE_Finger_MapPointer : WorldController
     }
 	
 	//------------------------------------------------------------------------------------------------
+	bool IsToggleOn()
+	{
+		return m_bState;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Register/Unregister pointer
 	protected void OnToggleActive()
 	{
 		ACE_Finger_MapPointingSystem manager = ACE_Finger_MapPointingSystem.GetInstance();
@@ -55,9 +76,9 @@ class ACE_Finger_MapPointer : WorldController
 			return;
 		
 		if (m_bState)
-			manager.RegisterActivePointerLocal(this);
+			manager.RegisterActivePointer(this);
 		else
-			manager.UnregisterActivePointerLocal(this);
+			manager.UnregisterActivePointer(this);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -66,11 +87,29 @@ class ACE_Finger_MapPointer : WorldController
 		Rpc(RpcAsk_SetPos, pos);
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void RpcAsk_SetPos(vector pos)
 	{
 		m_vPos = pos;
 		Replication.BumpMe();
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	vector GetPos()
+	{
+		return m_vPos;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetOwnerPlayerID()
+	{
+		return m_iOwnerPlayerID;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetPointerRange()
+	{
+		return m_fPointerRangeM;
+	}
 }
-*/

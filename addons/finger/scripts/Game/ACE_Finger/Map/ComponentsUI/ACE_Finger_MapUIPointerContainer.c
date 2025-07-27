@@ -14,11 +14,14 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	[Attribute(defvalue: "0.1", desc: "Pointer update timer [s]")]
 	protected float m_fPointerUpdateTimeout;
 	protected float m_fPointerUpdateTimer = 0;
+	
+	protected IEntity m_pLocalPlayerChar;
 		
 	//------------------------------------------------------------------------------------------------
 	override protected void OnMapOpen(MapConfiguration config)
 	{
 		super.OnMapOpen(config);
+		m_pLocalPlayerChar = SCR_PlayerController.GetLocalControlledEntity();
 		
 		ACE_Finger_MapPointingSystem manager = ACE_Finger_MapPointingSystem.GetInstance();
 		if (manager)
@@ -54,11 +57,37 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		
 		foreach (int i, ACE_Finger_MapPointer otherPtr: m_aPointers)
 		{
-			vector pos = otherPtr.GetPos();
-			float x, y;
-			m_MapEntity.WorldToScreen(pos[0], pos[2], x, y, true);
-			FrameSlot.SetPos(m_aWidgets[i], GetGame().GetWorkspace().DPIUnscale(x), GetGame().GetWorkspace().DPIUnscale(y));
+			UpdatePointerMarker(m_aWidgets[i], otherPtr);
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void UpdatePointerMarker(Widget ptrWidget, ACE_Finger_MapPointer ptr)
+	{
+		bool visible = ShouldPointerBeVisible(ptr);
+		ptrWidget.SetVisible(visible);
+		if (!visible)
+			return;
+		
+		vector pos = ptr.GetPos();
+		float x, y;
+		m_MapEntity.WorldToScreen(pos[0], pos[2], x, y, true);
+		FrameSlot.SetPos(ptrWidget, GetGame().GetWorkspace().DPIUnscale(x), GetGame().GetWorkspace().DPIUnscale(y));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Should only be visible if the player that points is nearby
+	protected bool ShouldPointerBeVisible(ACE_Finger_MapPointer ptr)
+	{
+		if (!m_pLocalPlayerChar)
+			return false;
+		
+		IEntity ptrPlayer = GetGame().GetPlayerManager().GetPlayerControlledEntity(ptr.GetOwnerPlayerID());
+		if (!ptrPlayer)
+			return false;
+		
+		float range = ptr.GetPointerRange();
+		return (range < 0 || vector.Distance(m_pLocalPlayerChar.GetOrigin(), ptrPlayer.GetOrigin()) <= range);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -69,8 +98,6 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		ACE_Finger_MapPointingSystem manager = ACE_Finger_MapPointingSystem.GetInstance();
 		if (manager)
 			manager.UnregisterContainer(this);
-		
-		
 		
 		GetGame().GetInputManager().RemoveActionListener("ACE_Finger_MapPointing", EActionTrigger.DOWN, PointerOnAction);
 		GetGame().GetInputManager().RemoveActionListener("ACE_Finger_MapPointing", EActionTrigger.UP, PointerOffAction);
@@ -121,10 +148,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		
 		Widget w = workspace.CreateWidgets(m_sPointerElementName, m_wIconsContainer);
 		FrameSlot.SetAlignment(w, 0.5, 0.2);
-		vector pos = ptr.GetPos();
-		float x, y;
-		m_MapEntity.WorldToScreen(pos[0], pos[2], x, y, true);
-		FrameSlot.SetPos(w, workspace.DPIUnscale(x), workspace.DPIUnscale(y));
+		UpdatePointerMarker(w, ptr);
 		
 		SCR_MapMarkerWidgetComponent handler = SCR_MapMarkerWidgetComponent.Cast(w.FindHandler(SCR_MapMarkerWidgetComponent));
 		if (!handler)
@@ -133,10 +157,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		handler.SetImage("{4020BDDA0BA7D5CF}UI/Textures/Icons/icons_gamepad/icons_gamepad.imageset", "stick_hold");
 		handler.ACE_ResizeImage(0.6, 0.6);
 		handler.SetColor(Color.Orange);
-		
-		PlayerController ctrl = PlayerController.Cast(ptr.GetOwner());
-		if (ctrl && ctrl != GetGame().GetPlayerController())
-			handler.SetAuthor(GetGame().GetPlayerManager().GetPlayerName(ctrl.GetPlayerId()));
+		handler.SetAuthor(GetGame().GetPlayerManager().GetPlayerName(ptr.GetOwnerPlayerID()));
 		
 		m_aPointers.Insert(ptr);
 		m_aWidgets.Insert(w);

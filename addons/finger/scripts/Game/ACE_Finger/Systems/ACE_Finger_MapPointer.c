@@ -112,4 +112,12 @@ class ACE_Finger_MapPointer : GenericEntity
 	{
 		return m_fPointerRangeM;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ~ACE_Finger_MapPointer()
+	{
+		ACE_Finger_MapPointingSystem manager = ACE_Finger_MapPointingSystem.GetInstance();
+		if (manager)
+			manager.UnregisterActivePointer(this);
+	}
 }

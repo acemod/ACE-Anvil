@@ -47,7 +47,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		if (!system)
 			return;
 		
-		ACE_FSM_Machine<ACE_Overheating_WeaponAnimContext> stateMachine = new ACE_FSM_Machine<ACE_Overheating_WeaponAnimContext>();
+		ACE_Overheating_WeaponAnimMachine stateMachine = new ACE_Overheating_WeaponAnimMachine();
 		stateMachine.SetContext(context);
 		stateMachine.AddState(new ACE_Overheating_RemoveMagState(ACE_Overheating_EWeaponAnimStateID.REMOVE_MAGAZINE));
 		stateMachine.AddState(new ACE_Overheating_RackBoltState(ACE_Overheating_EWeaponAnimStateID.RACK_BOLT));
@@ -56,4 +56,9 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		stateMachine.AddTransition(new ACE_Overheating_RackBoltCompleted(ACE_Overheating_EWeaponAnimStateID.RACK_BOLT, ACE_Overheating_EWeaponAnimStateID.STOP));
 		system.Register(stateMachine, ESystemPoint.PostFixedFrame);
 	}
+}
+
+//------------------------------------------------------------------------------------------------
+class ACE_Overheating_WeaponAnimMachine : ACE_FSM_Machine<ACE_Overheating_WeaponAnimContext>
+{
 }

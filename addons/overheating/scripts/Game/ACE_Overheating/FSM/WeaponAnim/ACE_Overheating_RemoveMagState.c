@@ -13,11 +13,19 @@ class ACE_Overheating_RemoveMagState : ACE_FSM_IState<ACE_Overheating_WeaponAnim
 			InventoryItemComponent magInventory = InventoryItemComponent.Cast(currentMag.FindComponent(InventoryItemComponent));
 			BaseInventoryStorageComponent magStorage = magInventory.GetParentSlot().GetStorage();
 			
+			bool result;
+			
+			// Trying to move magazine to storage is broken in MP
+			// See (1) in https://feedback.bistudio.com/T193647
+			/*
 			BaseInventoryStorageComponent suitableStorage = context.m_pInventoryManager.FindStorageForItem(currentMag);
 			if (suitableStorage)
-				context.m_bIsStartRemovingMag = context.m_pInventoryManager.TryMoveItemToStorage(currentMag, suitableStorage);
+				result = context.m_pInventoryManager.TryMoveItemToStorage(currentMag, suitableStorage);
 			else
-				context.m_bIsStartRemovingMag = context.m_pInventoryManager.TryRemoveItemFromStorage(currentMag, magStorage);
+			*/
+				result = context.m_pInventoryManager.TryRemoveItemFromStorage(currentMag, magStorage);
+			
+			context.m_bIsStartRemovingMag = result;
 		}
 	}
 	
@@ -31,5 +39,8 @@ class ACE_Overheating_RemoveMagState : ACE_FSM_IState<ACE_Overheating_WeaponAnim
 	override void OnUpdate(ACE_Overheating_WeaponAnimContext context, float timeSlice)
 	{
 		context.m_pCharController.SetWeaponADS(false);
+		
+		if (context.m_bIsStartRemovingMag && context.IsReloading())
+			context.m_bIsStartRemovingMag = false;
 	}
 }

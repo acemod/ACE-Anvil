@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Overheating_JammingSystem  : GameSystem
+class ACE_Overheating_JammingSystem : GameSystem
 {
 	protected ACE_Overheating_MuzzleJamComponent m_pLocalActiveJamComponent = null;
 	
@@ -11,7 +11,7 @@ class ACE_Overheating_JammingSystem  : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void RegisterCharacter(notnull ChimeraCharacter char, bool isOwner)
+	void Register(notnull ChimeraCharacter char, bool isOwner)
 	{
 		EventHandlerManagerComponent eventHandlerManager = EventHandlerManagerComponent.Cast(char.FindComponent(EventHandlerManagerComponent));
 		if (!eventHandlerManager)
@@ -32,7 +32,7 @@ class ACE_Overheating_JammingSystem  : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void UnregisterCharacter(notnull ChimeraCharacter char, bool isOwner)
+	void Unregister(notnull ChimeraCharacter char, bool isOwner)
 	{
 		EventHandlerManagerComponent eventHandlerManager = EventHandlerManagerComponent.Cast(char.FindComponent(EventHandlerManagerComponent));
 		if (!eventHandlerManager)
@@ -53,10 +53,16 @@ class ACE_Overheating_JammingSystem  : GameSystem
 	//------------------------------------------------------------------------------------------------
 	protected void OnProjectileShot(int playerID, BaseWeaponComponent weapon, IEntity entity)
 	{
-		if (!m_pLocalActiveJamComponent)
+		ACE_Overheating_MuzzleJamComponent jamComponent = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
+		if (!jamComponent)
 			return;
 		
-		//jamComponent.SetState(true);
+		// TO DO: Move to temperature systems
+		jamComponent.IncremenHeatCounter();
+		jamComponent.SetAmmoTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+		
+		if (Math.RandomFloat(0, 1) < jamComponent.GetJamChance())
+			jamComponent.SetState(true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -134,5 +140,11 @@ class ACE_Overheating_JammingSystem  : GameSystem
 		WeaponSoundComponent soundComponent = WeaponSoundComponent.Cast(weapon.FindComponent(WeaponSoundComponent));
 		if (soundComponent)
 			soundComponent.SoundEvent(soundEvent);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Overheating_MuzzleJamComponent GetLocalActiveJamComponent()
+	{
+		return m_pLocalActiveJamComponent;
 	}
 }

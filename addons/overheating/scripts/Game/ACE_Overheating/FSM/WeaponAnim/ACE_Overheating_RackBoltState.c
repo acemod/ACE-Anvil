@@ -43,19 +43,17 @@ class ACE_Overheating_RackBoltState : ACE_FSM_IState<ACE_Overheating_WeaponAnimC
 	{
 		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		if (playerController)
-			playerController.ACE_Overheating_RequestClearJam(context.m_pJamComponent);
+			playerController.ACE_Overheating_RequestSetJamState(context.m_pJamComponent, false);
 		
-		BaseContainer weaponSource = context.m_pWeapon.GetOwner().GetPrefabData().GetPrefab();
-	
-		IEntityComponentSource weaponComponentSource = ACE_BaseContainerTools.FindComponentSource(weaponSource, WeaponComponent);
-		if (!weaponComponentSource)
+		IEntity weapon = context.m_pWeapon.GetOwner();
+		if (!weapon)
 			return;
 		
-		IEntityComponentSource muzzleComponentSource =  ACE_BaseContainerTools.FindComponentSource(weaponComponentSource, MuzzleComponent);
-		if (!muzzleComponentSource)
+		CaseEjectingEffectComponent caseEjection = CaseEjectingEffectComponent.Cast(weapon.FindComponent(CaseEjectingEffectComponent));
+		if (!caseEjection)
 			return;
 		
-		IEntityComponentSource caseEjectionSource = ACE_BaseContainerTools.FindComponentSource(muzzleComponentSource, CaseEjectingEffectComponent);
+		IEntityComponentSource caseEjectionSource = caseEjection.GetComponentSource(weapon);
 		if (!caseEjectionSource)
 			return;
 		

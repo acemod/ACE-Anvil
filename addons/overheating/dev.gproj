@@ -5,4 +5,79 @@ GameProject {
  Dependencies {
   "65AD7D0D9941A380" "58D0FB3206B6F859"
  }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{65F8ED3634DB0237}" {
+      StringTableSource "{BE8A6751C19A49EC}Language/ACE_Overheating_localization.st"
+      Languages {
+       LanguageDefinition "{65F8ED362AAB8E4D}" {
+        Code "cs_cz"
+        StringTableRuntime "{F730DD92BED7819F}Language/ACE_Overheating_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8DF3}" {
+        Code "de_de"
+        StringTableRuntime "{224EC7A1AD7490BF}Language/ACE_Overheating_localization.de_de.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8DE2}" {
+        Code "en_us"
+        StringTableRuntime "{7CBE4DEAC78795BE}Language/ACE_Overheating_localization.en_us.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8DD3}" {
+        Code "es_es"
+        StringTableRuntime "{B9F200632985FEA1}Language/ACE_Overheating_localization.es_es.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8DC2}" {
+        Code "fr_fr"
+        StringTableRuntime "{025AF554CF061DA3}Language/ACE_Overheating_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8D37}" {
+        Code "it_it"
+        StringTableRuntime "{82467A6062249E5A}Language/ACE_Overheating_localization.it_it.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8D21}" {
+        Code "ja_jp"
+        StringTableRuntime "{925DC7F25C55AEF1}Language/ACE_Overheating_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8D10}" {
+        Code "ko_kr"
+        StringTableRuntime "{32E3EF5ECF78ADCE}Language/ACE_Overheating_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8D01}" {
+        Code "pl_pl"
+        StringTableRuntime "{6E9249A4719731B2}Language/ACE_Overheating_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8D0D}" {
+        Code "pt_br"
+        StringTableRuntime "{BBE5D3684A69FB08}Language/ACE_Overheating_localization.pt_br.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8CDF}" {
+        Code "ru_ru"
+        StringTableRuntime "{EEA4C7C0D7109E7E}Language/ACE_Overheating_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8C32}" {
+        Code "uk_ua"
+        StringTableRuntime "{64FC9236BB3E202B}Language/ACE_Overheating_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{65F8ED362AAB8C3C}" {
+        Code "zh_cn"
+        StringTableRuntime "{BE4CFC0B829EF036}Language/ACE_Overheating_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
 }

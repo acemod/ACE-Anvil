@@ -55,7 +55,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		nextTemperature += (ComputeHeating(timeSlice) + ComputeCooling(timeSlice, currentTemperature, externalTemperature)) / m_pContext.m_pObject.GetData().GetBarrelHeatCapacity();		
 		nextTemperature = Math.Max(nextTemperature, externalTemperature);
 		m_pContext.m_pObject.SetBarrelTemperature(nextTemperature);
-		m_pContext.m_pObject.SetJamChance(m_pContext.m_pObject.GetData().ComputeJamChance(nextTemperature));
+		m_pContext.m_pObject.SetJamChance(s_pSettings.m_fJamChanceScale * m_pContext.m_pObject.GetData().ComputeJamChance(nextTemperature));
 	}
 	
 	//------------------------------------------------------------------------------------------------

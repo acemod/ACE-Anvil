@@ -73,7 +73,7 @@ class ACE_Medical_OrganHitZone: SCR_HitZone
 		return m_pPointInfo;
 	}
 	
-#ifdef WORKBENCH
+#ifdef ENABLE_DIAG
 	//------------------------------------------------------------------------------------------------
 	override void DrawDebug()
 	{

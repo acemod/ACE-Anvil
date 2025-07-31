@@ -1,0 +1,133 @@
+//------------------------------------------------------------------------------------------------
+class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
+{
+	protected static ACE_Overheating_Settings s_pSettings;
+	protected static BaseWeatherManagerEntity s_pWeathermManager;
+	protected ref ACE_Overheating_MuzzleContext m_pContext = null;
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_Overheating_BarrelTemperatureJob()
+	{
+		if (!s_pSettings)
+			s_pSettings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
+		
+		if (!s_pWeathermManager)
+		{
+			ChimeraWorld world = GetGame().GetWorld();
+			s_pWeathermManager = world.GetTimeAndWeatherManager();
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnStart()
+	{
+		super.OnStart();
+		
+		if (!m_pContext.IsValid())
+			return;
+		
+		OnUpdate((GetGame().GetWorld().GetWorldTime() - m_pContext.m_pObject.GetLastTemperatureTimestamp()) / 1000);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnStop()
+	{
+		super.OnStop();
+		
+		if (!m_pContext.IsValid())
+			return;
+		
+		m_pContext.m_pObject.SetLastTemperatureTimestamp(GetGame().GetWorld().GetWorldTime());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnUpdate(float timeSlice)
+	{
+		super.OnUpdate(timeSlice);
+		
+		if (!m_pContext.IsValid())
+			return;
+				
+		// Temporary solution: Use standard ambient temperature until we got a proper weather system
+		float externalTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
+		float currentTemperature = m_pContext.m_pObject.GetBarrelTemperature();
+		float nextTemperature = currentTemperature;
+		nextTemperature += (ComputeHeating(timeSlice) + ComputeCooling(timeSlice, currentTemperature, externalTemperature)) / m_pContext.m_pObject.GetData().GetBarrelHeatCapacity();		
+		nextTemperature = Math.Max(nextTemperature, externalTemperature);
+		m_pContext.m_pObject.SetBarrelTemperature(nextTemperature);
+		m_pContext.m_pObject.SetJamChance(s_pSettings.m_fJamChanceScale * m_pContext.m_pObject.GetData().ComputeJamChance(nextTemperature));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns the accumulated heat by fired projectiles
+	protected float ComputeHeating(float timeSlice)
+	{
+		return s_pSettings.m_fHeatingScale * m_pContext.m_pObject.PopAccumulatedHeat();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns the heat loss of the barrel through convection and radiation
+	protected float ComputeCooling(float timeSlice, float currentTemperature, float externalTemperature)
+	{
+		// Convective heat flux (Newton's law of cooling)
+		float heatFlux = -ComputeConvectiveHeatTransferCoefficient() * (currentTemperature - externalTemperature);
+		// Radidative heat flux (Stefan-Boltzmann law)
+		heatFlux -= m_pContext.m_pObject.GetData().GetBarrelEmissivity() * ACE_PhysicalConstants.STEFAN_BOLTZMANN * (Math.Pow(currentTemperature, 4) - Math.Pow(externalTemperature, 4));
+		float heat = heatFlux * m_pContext.m_pObject.GetData().GetBarrelSurfaceArea() * timeSlice;
+		
+		if (m_pContext.m_bIsChamberingPossible)
+			heat *= s_pSettings.m_fDefaultCoolingScale;
+		else
+			heat *= s_pSettings.m_fOpenBoltCoolingScale;
+		
+		return heat;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns heat transfer coefficient in W / (m^2 * K)
+	//------------------------------------------------------------------------------------------------
+	//! Equation (1):  Nu = 0.26 * Re^0.6 * Pr^0.37 for Re in [1000, 20000]
+	//! Reference: A. Žukauskas, Adv. Heat Transfer 1972, 8, 131.
+	//------------------------------------------------------------------------------------------------
+	//! AIR
+	//! ---
+	//! Relation: h = 4.5908 * v^0.6 / d^0.4
+	//!
+	//! Derived from equation (1) with
+	//! - Pr(air) = 0.714672
+	//! - k(air) = 0.02614 W/(m*K)
+	//! - η(air) = 1.846e-5 kg/(m*s)
+	//! - ρ(air) = 1.1839 kg/m^3
+	//------------------------------------------------------------------------------------------------
+	//! RAIN
+	//! ----
+	//! Relation: h = RI * 9.3198 / d^0.4
+	//!
+	//! Derived from equation (1), such that h = 50 for rain intensity (RI) = 1 and d = 0.015 m
+	//------------------------------------------------------------------------------------------------
+	//! TO DO: Account for water and better relation for rain
+	protected float ComputeConvectiveHeatTransferCoefficient()
+	{
+		float h = 4.5908 * Math.Pow(s_pWeathermManager.GetWindSpeed(), 0.6) + 9.3198 * s_pWeathermManager.GetRainIntensity();
+		h /= Math.Pow(m_pContext.m_pObject.GetData().GetBarrelDiameter(), 0.4);
+		h = Math.Max(12.5, h);
+		
+	#ifdef ENABLE_DIAG
+		m_pContext.m_pObject.SetHeatTransferCoefficient(h);
+	#endif
+		
+		return h;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetContext(ACE_Overheating_MuzzleContext context)
+	{
+		m_pContext = context;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Overheating_MuzzleContext GetContext()
+	{
+		return m_pContext;
+	}
+}

@@ -1,6 +1,21 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{65F731D7B66D8118}" {
+   Id "ACE_Finger-AddonName"
+   Target_en_us "Finger"
+   Modified 1710699968
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{65F731D70B186056}" {
+   Id "ACE_Finger-Keybind_PointOnMap"
+   Target_en_us "Point on map"
+   Target_de_de "Zeige auf der Karte"
+   Modified 1710700228
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{60EE977D3F616C5F}" {
    Id "ACE_Finger-Notification_PlayerPointsAtEntity"
    Target_en_us "%1 points at %2"

@@ -82,7 +82,7 @@ Summary of settings that can be modified in the server config:
 | `m_fSecondChanceOnChest`              | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Probability for second chance for killing blows to the chest |
 | `m_fSecondChanceOnAbdomen`            | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Probability for second chance for killing blows to the abdomen |
 | `m_bSecondChanceForFallDamageEnabled` | Type: `bool`*<br />Default: `false` | Whether second chance can be triggered when falling from great heights |
-| `m_bSecondChanceForAIEnabled`         | Type: `bool`*<br />Default: `false` | Whether AI can have second chance |
+| `m_bSecondChanceForAIEnabled`         | Type: `bool`*<br />Default: `true` | Whether AI can have second chance |
 
 \* `bool` has to be provided as integer in the config: `1` (`true`) or `0` (`false`).<br />
 \*\* `float` need a decimal point to get properly read.<br />
@@ -179,7 +179,7 @@ Template for the `missionHeader` in a server config:
 - Hit Zones:
     - New brain hit zone that takes continuously damage while in cardiac arrest and no CPR is performed. Runs out of health in approximately 5 minutes.
 
-The changes are also applied to AI, but they will directly die when they enter cardiac arrest (see `m_bCardiacArrestForAIEnabled` in [Settings](#settings-2)).
+The changes are also applied to AI, but cardiac arrest can be turned off for them, such that they directly die when entering it (see `m_bCardiacArrestForAIEnabled` in [Settings](#settings-2)).
 
 ### Details
 
@@ -248,7 +248,7 @@ Summary of settings that can be modified in the server config:
 | `m_CriticalThresholds`                | Type: `object` | Thresholds that lead to critical vital state |
 | `m_CardiacArrestThresholds`           | Type: `object` | Thresholds that lead to cardiac arrest state |
 | `m_CardiacArrestDamageEffect`         | Type: `object` | Damage effects caused by cardiac arrest |
-| `m_bCardiacArrestForAIEnabled`        | Type: `bool`*<br />Default: `false` | AI will die instead of entering cardiac arrest if false |
+| `m_bCardiacArrestForAIEnabled`        | Type: `bool`*<br />Default: `true` | AI will die instead of entering cardiac arrest if false |
 | `m_fCPRSuccessCheckTimeoutS`          | Type: `float`**<br />Range: 0 to ∞<br />Default: `22.0` | Default delay between check for successful CPR [s] |
 | `m_fCPRSuccessChanceMin`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.0` | Chance for exiting cardiac arrest while performing CPR at class IV hemorrhage |
 | `m_fCPRSuccessChanceMax`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.4` | Chance for exiting cardiac arrest while performing CPR at above class II hemorrhage |

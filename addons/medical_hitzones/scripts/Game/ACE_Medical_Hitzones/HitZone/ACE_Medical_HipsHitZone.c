@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------------------------------------
-class ACE_Medical_HipsHitZone : SCR_CharacterHitZone
+modded class ACE_Medical_HipsHitZone : SCR_CharacterHitZone
 {
 	protected ref array<ACE_Medical_FemoralArteryHitZone> m_aFemoralArteries = {};
 	

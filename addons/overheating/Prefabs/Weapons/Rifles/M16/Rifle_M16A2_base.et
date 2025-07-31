@@ -1,0 +1,16 @@
+GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{CA6BE4D6B867541F}" {
+     components {
+      ACE_Overheating_MuzzleJamComponent "{65B9755B8CB25ED7}" {
+       m_fBarrelDiameter 0.01799
+      }
+     }
+    }
+   }
+  }
+ }
+}

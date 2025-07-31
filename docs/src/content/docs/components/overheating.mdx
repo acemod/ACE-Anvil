@@ -1,0 +1,59 @@
+---
+title: Overheating
+---
+
+Simulates heating of weapons when firing. The hotter a weapon gets, the more likely a jam occurs. Ammo can cook-off when exceeding `m_fGunpowderAutoignitionTemperature` (see [Settings](#Settings)).
+
+## Usage
+
+### Try Clearing Jam
+
+- Try clearing jam with <kbd>LShift</kbd>+<kbd>R</kbd> (ACE default)
+
+### Check Temperature of Barrel
+
+- An interaction for checking the temperature is visible on the barrel in weapon inspection mode.
+
+### Swap Barrel
+
+- An interaction for swapping the barrel is visible on the barrel in weapon inspection mode.
+- Swapping barrels is only available for machine guns.
+- Barrel is not an inventory item yet, so you currently don't need to carry anything to execute the action.
+
+### Cool Barrel in Water
+
+- An interaction for cooling the barrel is available in weapon inspection mode when standing in water.
+
+## Settings
+
+Certain aspects of this mod can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_fHeatingScale`                     | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Scales the heat transferred to the barrel by a shot. The larger, the faster the temperature of the barrel increases. |
+| `m_fDefaultCoolingScale`              | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Scale for how quickly a weapon cools down. Cooling rate is multiplied by this scale. |
+| `m_fOpenBoltCoolingScale`             | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.3` | Scale for how quickly a weapon cools down for open bolt weapons. |
+| `m_fWaterCoolingScale`                | Type: `float`**<br />Range: 0 to ∞<br />Default: `20.0` | Scale for how quickly a weapon cools down in water. |
+| `m_fJamChanceScale`                   | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Scale for how likely a weapon jams. |
+| `m_fGunpowderAutoignitionTemperature` | Type: `float`**<br />Range: 0 to ∞<br />Default: `723.15` | Temperature at which ammo cooks off [K]. |
+| `m_fBarrel2BulletMassScaledTemperatureRateConstant` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.52863` | Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature. |
+
+\*\* Note that floats need a decimal point to get properly read.
+
+Example for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Overheating_Settings": {
+            "m_fHeatingScale": 1.0,
+            "m_fDefaultCoolingScale": 1.0,
+            "m_fOpenBoltCoolingScale": 1.3,
+            "m_fWaterCoolingScale": 20.0,
+            "m_fJamChanceScale": 1.0,
+            "m_fGunpowderAutoignitionTemperature": 723.15,
+            "m_fBarrel2BulletMassScaledTemperatureRateConstant": 0.52863,
+            "m_fClearJamFailureChance": 0.1
+        }
+    }
+}
+```

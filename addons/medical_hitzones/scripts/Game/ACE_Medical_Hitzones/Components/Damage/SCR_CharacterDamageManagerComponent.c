@@ -141,9 +141,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		GetAllHitZones(hitZones);
 		foreach (HitZone hitZone : hitZones)
 		{
-			SCR_HitZone scriptedHitZone = SCR_HitZone.Cast(hitZone);
-			if (scriptedHitZone)
-				scriptedHitZone.DrawDebug();
+			ACE_Medical_OrganHitZone organHitZone = ACE_Medical_OrganHitZone.Cast(hitZone);
+			if (organHitZone)
+				organHitZone.OnDiag(timeSlice);
 		}
 	}
 #endif

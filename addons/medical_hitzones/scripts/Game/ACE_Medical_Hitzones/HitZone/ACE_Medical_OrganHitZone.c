@@ -75,7 +75,7 @@ class ACE_Medical_OrganHitZone: SCR_HitZone
 	
 #ifdef ENABLE_DIAG
 	//------------------------------------------------------------------------------------------------
-	override void DrawDebug()
+	void OnDiag(float timeSlice)
 	{
 		if (m_pPointInfo)
 			Shape.CreateSphere(Color.RED, ShapeFlags.WIREFRAME | ShapeFlags.NOZBUFFER | ShapeFlags.ONCE, m_pPointInfo.GetWorldTransformAxis(3), m_rRadius);

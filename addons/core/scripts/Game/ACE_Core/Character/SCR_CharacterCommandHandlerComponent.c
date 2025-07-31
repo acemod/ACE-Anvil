@@ -25,11 +25,25 @@ modded class SCR_CharacterCommandHandlerComponent : CharacterCommandHandlerCompo
 	//------------------------------------------------------------------------------------------------
 	void ACE_SetCanHandleWeaponFire(bool canHandle)
 	{
+		Rpc(RplDo_ACE_SetCanHandleWeaponFireOwner, canHandle);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RplDo_ACE_SetCanHandleWeaponFireOwner(bool canHandle)
+	{
 		m_bACE_CanHandleWeaponFire = canHandle;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_ForceWeaponFire()
+	{
+		Rpc(RplDo_ACE_ForceWeaponFireOwner);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
+	protected void RplDo_ACE_ForceWeaponFireOwner()
 	{
 		m_bACE_ForceWeaponFire = true;
 	}

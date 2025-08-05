@@ -46,11 +46,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	protected override void OnDamageStateChanged(EDamageState state)
+	protected override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
-		super.OnDamageStateChanged(state);
+		super.OnDamageStateChanged(newState, previousDamageState, isJIP);
 		
-		if (Replication.IsServer() && (state == EDamageState.DESTROYED))
+		if (Replication.IsServer() && (newState == EDamageState.DESTROYED))
 			ACE_Medical_OnKilled();
 	}
 	

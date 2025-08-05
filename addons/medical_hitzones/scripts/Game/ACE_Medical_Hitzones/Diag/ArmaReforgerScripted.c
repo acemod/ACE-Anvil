@@ -1,3 +1,4 @@
+/*****
 #ifdef ENABLE_DIAG
 //------------------------------------------------------------------------------------------------
 modded class ArmaReforgerScripted : ChimeraGame
@@ -10,3 +11,4 @@ modded class ArmaReforgerScripted : ChimeraGame
 	}
 }
 #endif
+*****/

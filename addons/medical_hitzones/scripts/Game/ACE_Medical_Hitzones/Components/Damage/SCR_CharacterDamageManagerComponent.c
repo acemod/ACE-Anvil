@@ -129,7 +129,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		
 		m_mBleedingParticles = null;
 	}
-	
+
+/*****
 #ifdef ENABLE_DIAG
 	//-----------------------------------------------------------------------------------------------------------
 	override void OnDiag(IEntity owner, float timeSlice)
@@ -147,4 +148,5 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 	}
 #endif
+*****/
 }

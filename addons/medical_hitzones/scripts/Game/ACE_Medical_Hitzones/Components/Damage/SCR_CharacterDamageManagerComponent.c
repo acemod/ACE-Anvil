@@ -115,11 +115,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Remove bleeding particle effects when character is dead
-	override void OnDamageStateChanged(EDamageState state)
+	protected override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
-		super.OnDamageStateChanged(state);
+		super.OnDamageStateChanged(newState, previousDamageState, isJIP);
 		
-		if (state != EDamageState.DESTROYED || !m_mBleedingParticles)
+		if (newState != EDamageState.DESTROYED || !m_mBleedingParticles)
 			return;
 		
 		foreach (ParticleEffectEntity effect : m_mBleedingParticles)

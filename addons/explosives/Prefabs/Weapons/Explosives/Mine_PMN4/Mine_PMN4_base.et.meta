@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{7D968AE11F63B3F6}Prefabs/Weapons/Core/ExplosiveCharge_base.et"
+ Name "{20EFA9ACB024108F}Prefabs/Weapons/Explosives/Mine_PMN4/Mine_PMN4_base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

@@ -48,6 +48,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.CreateBleedingParticleEffect(hitZone, colliderDescriptorIndex);
 		
+		if (System.IsConsoleApp())
+			return;
+		
 		ACE_Medical_HipsHitZone hipsHitZone = ACE_Medical_HipsHitZone.Cast(hitZone);
 		if (hipsHitZone)
 		{
@@ -97,6 +100,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	override void RemoveBleedingParticleEffect(HitZone hitZone)
 	{
 		super.RemoveBleedingParticleEffect(hitZone);
+		
+		if (System.IsConsoleApp())
+			return;
 		
 		ACE_Medical_HipsHitZone hipsHitZone = ACE_Medical_HipsHitZone.Cast(hitZone);
 		if (hipsHitZone)

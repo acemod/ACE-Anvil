@@ -17,7 +17,8 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1.0", desc: "Scale for how likely a weapon jams.", params: "0 inf")]
 	float m_fJamChanceScale;
 	
-	[Attribute(defvalue: "723.15", desc: "Temperature at which ammo cooks off [K].", params: "0 inf")]
+	// The reference data (A. Hameed et al., Defence Technology 2014, 10, 86–91) with which our model was fitted used Bullseye propellant (433.15 K), but for ACE, we take the upper limit of Ball propellant (473.15 K)
+	[Attribute(defvalue: "473.15", desc: "Temperature at which ammo can cook off [K].", params: "0 inf")]
 	float m_fGunpowderAutoignitionTemperature;
 	
 	// MassScaledTemperatureRateConstant [g/s] = HeatTransferCoefficient [J/(s*m^2*K)] * SurfaceArea [m^2] / SpecificHeat [J/(g*K)]

@@ -17,11 +17,14 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1.0", desc: "Scale for how likely a weapon jams.", params: "0 inf")]
 	float m_fJamChanceScale;
 	
-	[Attribute(defvalue: "723.15", desc: "Temperature at which ammo cooks off [K].", params: "0 inf")]
+	// The reference data (A. Hameed et al., Defence Technology 2014, 10, 86–91) with which our model was fitted used Bullseye propellant (433.15 K), but for ACE, we take the upper limit of Ball propellant (473.15 K)
+	[Attribute(defvalue: "473.15", desc: "Temperature at which ammo can cook off [K].", params: "0 inf")]
 	float m_fGunpowderAutoignitionTemperature;
 	
 	// MassScaledTemperatureRateConstant [g/s] = HeatTransferCoefficient [J/(s*m^2*K)] * SurfaceArea [m^2] / SpecificHeat [J/(g*K)]
-	[Attribute(defvalue: "0.52863", desc: "Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature.", params: "0 inf")]
+	// The fit of reference data (A. Hameed et al., Defence Technology 2014, 10, 86–91) would be 30.4587377 g/s, but we assume that heat transfer from barrel to bullet is far less efficient than in the experimental configuration of the paper
+	// "*1/15" is closer to the tail at high T of ACE3's cook-off time vs barrel temperature
+  	[Attribute(defvalue: "2.031", desc: "Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature.", params: "0 inf")]
 	float m_fBarrel2BulletMassScaledTemperatureRateConstant;
 	
 	/*****

@@ -19,7 +19,8 @@ class ACE_Overheating_MuzzleJamComponentClass : ScriptComponentClass
 	[Attribute(defvalue: "0.01476", desc: "Outer diameter of the barrel [m]. ", precision: 5, category: "Barrel")]
 	protected float m_fBarrelDiameter;
 	
-	[Attribute(defvalue: "1.5", desc: "Heat transferred to the barrel is given by this scale times the kinetic energy of the bullet.")]
+	// MachineGun_Base.et has 0.8 to matches the 200 Rnd <2 min reported in M60 manual: https://upload.wikimedia.org/wikipedia/commons/c/c7/TM-9-1005-224-10.pdf
+	[Attribute(defvalue: "1", desc: "Heat transferred to the barrel is given by this scale times the kinetic energy of the bullet.")]
 	protected float m_fHeatingScale;
 	
 	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Probability to jam vs temperature [K]", params: "1300 0.1 0 0")]

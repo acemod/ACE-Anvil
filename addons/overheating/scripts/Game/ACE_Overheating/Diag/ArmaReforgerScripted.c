@@ -112,7 +112,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 			return;
 		
 		DbgUI.Begin(string.Format("ACE Overheating Diag (%1)", targetType), 0, 700);
-		DbgUI.Text(string.Format("Heat Transfer Coefficient:    %1 W/m^2", barrel.GetHeatTransferCoefficient()));
+		DbgUI.Text(string.Format("Heat Transfer Coefficient:    %1 W/(m^2*K)", barrel.GetHeatTransferCoefficient()));
 		DbgUI.Text(string.Format("Jam Chance:                   %1", barrel.GetJamChance()));
 		DbgUI.Text(string.Format("Is Jammed:                    %1", barrel.IsJammed().ToString()));
 		DbgUI.Text(string.Format("Barrel Temperature:           %1 K", barrel.GetBarrelTemperature()));

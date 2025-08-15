@@ -60,6 +60,7 @@ class ACE_Overheating_JammingSystem : GameSystem
 		// TO DO: Move to temperature systems
 		jamComponent.IncremenHeatCounter();
 		jamComponent.SetAmmoTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+		jamComponent.SetCookOffProgress(0);
 		
 		if (Math.RandomFloat(0, 1) < jamComponent.GetJamChance())
 			jamComponent.SetState(true);

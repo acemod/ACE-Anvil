@@ -181,6 +181,8 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	
 	protected float m_fBarrelTemperature;
 	protected float m_fAmmoTemperature;
+	protected float m_fCookOffProgress;
+	protected float m_fCookOffProgressScale;
 	protected float m_fLastTemperatureTimestamp;
 	protected int m_iHeatCounter;
 	protected float m_fJamChance;
@@ -244,6 +246,7 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 		m_fBarrelTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fAmmoTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fJamChance = m_pData.ComputeJamChance(m_fBarrelTemperature);
+		InitCookOffCookOffProgressScale();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -299,6 +302,30 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	float GetAmmoTemperature()
 	{
 		return m_fAmmoTemperature;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetCookOffProgress()
+	{
+		return m_fCookOffProgress;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetCookOffProgress(float value)
+	{
+		m_fCookOffProgress = value;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void InitCookOffCookOffProgressScale()
+	{
+		m_fCookOffProgressScale = Math.RandomGaussFloat(0.078541632, 1);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetCookOffProgressScale()
+	{
+		return m_fCookOffProgressScale;
 	}
 	
 	//------------------------------------------------------------------------------------------------

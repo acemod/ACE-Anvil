@@ -9,6 +9,12 @@ class ACE_Medical_ResuscitationState : ACE_Medical_IVitalState
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	override protected float ComputeStrokeVolume(ACE_Medical_CharacterContext context, float timeSlice)
+	{
+		return s_pCirculationSettings.m_fCPRStrokeVolumeScale * super.ComputeStrokeVolume(context, timeSlice);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Prevent BP from getting absurdly high through medication
 	override protected float ComputeMeanArterialPressure(ACE_Medical_CharacterContext context, float timeSlice)
 	{

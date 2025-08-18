@@ -35,8 +35,8 @@ Certain aspects of this mod can be configured in the mission header section of a
 | `m_fOpenBoltCoolingScale`             | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.3` | Scale for how quickly a weapon cools down for open bolt weapons. |
 | `m_fWaterCoolingScale`                | Type: `float`**<br />Range: 0 to ∞<br />Default: `20.0` | Scale for how quickly a weapon cools down in water. |
 | `m_fJamChanceScale`                   | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Scale for how likely a weapon jams. |
-| `m_fGunpowderAutoignitionTemperature` | Type: `float`**<br />Range: 0 to ∞<br />Default: `723.15` | Temperature at which ammo cooks off [K]. |
-| `m_fBarrel2BulletMassScaledTemperatureRateConstant` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.52863` | Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature. |
+| `m_fGunpowderAutoignitionTemperature` | Type: `float`**<br />Range: 0 to ∞<br />Default: `473.15` | Temperature at which ammo can cook off [K]. |
+| `m_fBarrel2BulletMassScaledTemperatureRateConstant` | Type: `float`**<br />Range: 0 to ∞<br />Default: `2.031` | Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature. |
 
 \*\* Note that floats need a decimal point to get properly read.
 
@@ -50,9 +50,8 @@ Example for the `missionHeader` in a server config:
             "m_fOpenBoltCoolingScale": 1.3,
             "m_fWaterCoolingScale": 20.0,
             "m_fJamChanceScale": 1.0,
-            "m_fGunpowderAutoignitionTemperature": 723.15,
-            "m_fBarrel2BulletMassScaledTemperatureRateConstant": 0.52863,
-            "m_fClearJamFailureChance": 0.1
+            "m_fGunpowderAutoignitionTemperature": 473.15,
+            "m_fBarrel2BulletMassScaledTemperatureRateConstant": 2.031
         }
     }
 }

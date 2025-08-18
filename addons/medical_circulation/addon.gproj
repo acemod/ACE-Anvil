@@ -1,6 +1,6 @@
 GameProject {
  ID "ACE_Medical_Circulation"
- GUID "659C18718FB25AD9"
+ GUID "6214CEA5DA92BFF3"
  TITLE "ACE Medical Circulation"
  Dependencies {
   "60C4C12DAE90727B" "58D0FB3206B6F859"

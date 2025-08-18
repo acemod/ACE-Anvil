@@ -118,4 +118,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		
 		return true;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns overall scaled health of the character
+	//! Should be used instead of GetHealthScaled
+	float ACE_Medical_GetHealthScaled()
+	{
+		return m_pACE_Medical_HealthHitZone.GetHealthScaled();
+	}
 }

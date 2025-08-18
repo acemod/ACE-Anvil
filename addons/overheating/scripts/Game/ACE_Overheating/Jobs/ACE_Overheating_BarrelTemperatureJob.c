@@ -2,7 +2,7 @@
 class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 {
 	protected static ACE_Overheating_Settings s_pSettings;
-	protected static BaseWeatherManagerEntity s_pWeathermManager;
+	protected static BaseWeatherManagerEntity s_pWeatherManager;
 	protected ref ACE_Overheating_MuzzleContext m_pContext = null;
 	
 	//------------------------------------------------------------------------------------------------
@@ -11,10 +11,10 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		if (!s_pSettings)
 			s_pSettings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
 		
-		if (!s_pWeathermManager)
+		if (!s_pWeatherManager)
 		{
 			ChimeraWorld world = GetGame().GetWorld();
-			s_pWeathermManager = world.GetTimeAndWeatherManager();
+			s_pWeatherManager = world.GetTimeAndWeatherManager();
 		}
 	}
 	
@@ -108,7 +108,12 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	//! TO DO: Account for water and better relation for rain
 	protected float ComputeConvectiveHeatTransferCoefficient()
 	{
-		float h = 4.5908 * Math.Pow(s_pWeathermManager.GetWindSpeed(), 0.6) + 9.3198 * s_pWeathermManager.GetRainIntensity();
+		vector airVelocity = s_pWeatherManager.GetWindSpeed() * vector.FromYaw(s_pWeatherManager.GetWindDirection());
+		
+		if (m_pContext.m_pOwnerChar && !m_pContext.m_pOwnerChar.IsInVehicle())
+			airVelocity += m_pContext.m_pOwnerChar.GetPhysics().GetVelocity();
+		
+		float h = 4.5908 * Math.Pow(airVelocity.LengthSq(), 3.0 / 10.0) + 9.3198 * s_pWeatherManager.GetRainIntensity();
 		h /= Math.Pow(m_pContext.m_pObject.GetData().GetBarrelDiameter(), 0.4);
 		h = Math.Max(12.5, h);
 		

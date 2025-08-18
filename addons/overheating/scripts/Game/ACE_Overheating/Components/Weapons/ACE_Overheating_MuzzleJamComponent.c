@@ -19,7 +19,8 @@ class ACE_Overheating_MuzzleJamComponentClass : ScriptComponentClass
 	[Attribute(defvalue: "0.01476", desc: "Outer diameter of the barrel [m]. ", precision: 5, category: "Barrel")]
 	protected float m_fBarrelDiameter;
 	
-	[Attribute(defvalue: "1.5", desc: "Heat transferred to the barrel is given by this scale times the kinetic energy of the bullet.")]
+	// MachineGun_Base.et has 0.8 to matches the 200 Rnd <2 min reported in M60 manual: https://upload.wikimedia.org/wikipedia/commons/c/c7/TM-9-1005-224-10.pdf
+	[Attribute(defvalue: "1", desc: "Heat transferred to the barrel is given by this scale times the kinetic energy of the bullet.")]
 	protected float m_fHeatingScale;
 	
 	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Probability to jam vs temperature [K]", params: "1300 0.1 0 0")]
@@ -180,6 +181,8 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	
 	protected float m_fBarrelTemperature;
 	protected float m_fAmmoTemperature;
+	protected float m_fCookOffProgress;
+	protected float m_fCookOffProgressScale;
 	protected float m_fLastTemperatureTimestamp;
 	protected int m_iHeatCounter;
 	protected float m_fJamChance;
@@ -243,6 +246,7 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 		m_fBarrelTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fAmmoTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fJamChance = m_pData.ComputeJamChance(m_fBarrelTemperature);
+		InitCookOffCookOffProgressScale();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -298,6 +302,30 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	float GetAmmoTemperature()
 	{
 		return m_fAmmoTemperature;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetCookOffProgress()
+	{
+		return m_fCookOffProgress;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetCookOffProgress(float value)
+	{
+		m_fCookOffProgress = value;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void InitCookOffCookOffProgressScale()
+	{
+		m_fCookOffProgressScale = Math.RandomGaussFloat(0.078541632, 1);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetCookOffProgressScale()
+	{
+		return m_fCookOffProgressScale;
 	}
 	
 	//------------------------------------------------------------------------------------------------

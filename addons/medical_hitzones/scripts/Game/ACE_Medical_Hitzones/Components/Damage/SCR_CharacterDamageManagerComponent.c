@@ -136,6 +136,25 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		m_mBleedingParticles = null;
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	//! Returns overall scaled health of the character
+	//! Should be used instead of GetHealthScaled
+	override float ACE_Medical_GetHealthScaled()
+	{
+		array<HitZone> physicalHitZones = {};
+		GetPhysicalHitZones(physicalHitZones);
+		float lowestHealth = 1;
+		
+		foreach (HitZone hitZone : physicalHitZones)
+		{
+			float health = hitZone.GetHealthScaled();
+			if (health < lowestHealth)
+				lowestHealth = health;
+		}
+		
+		return lowestHealth;
+	}
+	
 #ifdef ENABLE_DIAG
 	//-----------------------------------------------------------------------------------------------------------
 	override void OnDiag(IEntity owner, float timeSlice)

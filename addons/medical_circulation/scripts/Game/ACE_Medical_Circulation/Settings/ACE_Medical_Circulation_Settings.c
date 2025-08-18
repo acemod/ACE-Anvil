@@ -29,6 +29,9 @@ class ACE_Medical_Circulation_Settings : ACE_ModSettings
 	[Attribute(defvalue: "false", desc: "AI will die instead of entering cardiac arrest if false")]
 	bool m_bCardiacArrestForAIEnabled;
 	
+	[Attribute(defvalue: "0.23", desc: "Stroke volume gets multiplied by this scale during CPR.", params: "0 1")]
+	float m_fCPRStrokeVolumeScale;
+	
 	[Attribute(defvalue: "22", desc: "Default delay between check for successful CPR [s]", params: "0 inf")]
 	float m_fCPRSuccessCheckTimeoutS;
 	

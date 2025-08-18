@@ -8,6 +8,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{660F338D19E8B527}" {
+   Id "ACE_Medical-Editor_TooltipDetail_Resilience_Name"
+   Target_en_us "Resilience"
+   Target_de_de "Resilienz"
+   Modified 1712273696
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{60CF45A3ED3C6951}" {
    Id "ACE_Medical-EpinephrineInjectionAction"
    Target_en_us "Inject epinephrine"

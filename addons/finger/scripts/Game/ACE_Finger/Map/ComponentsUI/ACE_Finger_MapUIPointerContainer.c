@@ -174,7 +174,11 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 			return;
 		
 		m_aPointers.Remove(i);
-		m_aWidgets[i].RemoveFromHierarchy();
+		
+		Widget w = m_aWidgets[i];
+		if (w)
+			w.RemoveFromHierarchy();
+		
 		m_aWidgets.Remove(i);
 	}
 	

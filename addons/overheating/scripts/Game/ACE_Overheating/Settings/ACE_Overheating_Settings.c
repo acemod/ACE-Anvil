@@ -31,4 +31,6 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "0.1", desc: "Probability for clearing jam to fail.", params: "0 1")]
 	float m_fClearJamFailureChance;
 	*****/
+	[Attribute(defvalue: "800", desc: "Temperature above which barrel starts glowing [K].", params: "0 inf")]
+	float m_fMinGlowTemperature;
 }

@@ -56,6 +56,9 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		nextTemperature = Math.Max(nextTemperature, externalTemperature);
 		m_pContext.m_pObject.SetBarrelTemperature(nextTemperature);
 		m_pContext.m_pObject.SetJamChance(s_pSettings.m_fJamChanceScale * m_pContext.m_pObject.GetData().ComputeJamChance(nextTemperature));
+		
+		if (m_pContext.m_pGlowComponent)
+			m_pContext.m_pGlowComponent.SetIntensity(Math.Clamp(Math.InverseLerp(s_pSettings.m_fMinGlowTemperature, 1300, nextTemperature), 0, 1));
 	}
 	
 	//------------------------------------------------------------------------------------------------

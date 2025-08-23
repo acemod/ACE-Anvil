@@ -179,6 +179,9 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	[RplProp(onRplName: "OnStateChanged")]
 	protected bool m_bIsJammed = false;
 	
+	[RplProp()]
+	protected float m_fClearJamFailureChance = 0.1;
+	
 	protected float m_fBarrelTemperature;
 	protected float m_fAmmoTemperature;
 	protected float m_fCookOffProgress;
@@ -237,16 +240,25 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 			return;
 		
 		m_pMuzzle = MuzzleComponent.Cast(weapon.FindComponent(MuzzleComponent));
-		if (!m_pMuzzle)
+		
+		// Server side init
+		RplComponent rpl = RplComponent.Cast(owner.FindComponent(RplComponent));
+		if (rpl && rpl.IsProxy())
 			return;
 		
 		m_pData = ACE_Overheating_MuzzleJamComponentClass.Cast(GetComponentData(owner));
 		m_pData.Init(owner);
+		
+		ACE_Overheating_Settings settings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
+		if (settings)
+			m_fClearJamFailureChance = settings.m_fClearJamFailureChance;
+		
 		// Temporary solution: Use standard ambient temperature until we got a proper weather system
 		m_fBarrelTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fAmmoTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fJamChance = m_pData.ComputeJamChance(m_fBarrelTemperature);
 		InitCookOffCookOffProgressScale();
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -372,6 +384,12 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	float GetJamChance()
 	{
 		return m_fJamChance;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetClearJamFailureChance()
+	{
+		return m_fClearJamFailureChance;
 	}
 	
 #ifdef ENABLE_DIAG

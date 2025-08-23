@@ -17,6 +17,9 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1.0", desc: "Scale for how likely a weapon jams.", params: "0 inf")]
 	float m_fJamChanceScale;
 	
+	[Attribute(defvalue: "0.1", desc: "Probability for clearing jam to fail.", params: "0 1")]
+	float m_fClearJamFailureChance;
+	
 	// The reference data (A. Hameed et al., Defence Technology 2014, 10, 86–91) with which our model was fitted used Bullseye propellant (433.15 K), but for ACE, we take the upper limit of Ball propellant (473.15 K)
 	[Attribute(defvalue: "473.15", desc: "Temperature at which ammo can cook off [K].", params: "0 inf")]
 	float m_fGunpowderAutoignitionTemperature;
@@ -27,10 +30,6 @@ class ACE_Overheating_Settings : ACE_ModSettings
   	[Attribute(defvalue: "2.031", desc: "Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature.", params: "0 inf")]
 	float m_fBarrel2BulletMassScaledTemperatureRateConstant;
 	
-	/*****
-	[Attribute(defvalue: "0.1", desc: "Probability for clearing jam to fail.", params: "0 1")]
-	float m_fClearJamFailureChance;
-	*****/
 	[Attribute(defvalue: "800", desc: "Temperature above which barrel starts glowing [K].", params: "0 inf")]
 	float m_fMinGlowTemperature;
 }

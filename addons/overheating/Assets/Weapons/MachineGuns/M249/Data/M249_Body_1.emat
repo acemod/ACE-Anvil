@@ -1,0 +1,9 @@
+MatPBRBasic : "{758946B2EC5F1439}Assets/Weapons/MachineGuns/M249/Data/M249_Body_1.emat" {
+ Emissive 0 0 0 1
+ EmissiveAbsoluteLV 0
+ EmissiveMap "{3175FE13B1FC2769}Assets/Weapons/MachineGuns/M249/Data/M249_Body_1_EM.edds"
+ Refs {
+  "Emissive"
+  "ACE_Overheating_BarrelGlowComponent.m_vColor"
+ }
+}

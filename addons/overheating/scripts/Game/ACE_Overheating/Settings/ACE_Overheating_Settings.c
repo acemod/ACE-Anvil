@@ -11,7 +11,7 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1.3", desc: "Scale for how quickly a weapon cools down for open bolt weapons.", params: "0 inf")]
 	float m_fOpenBoltCoolingScale;
 	
-	[Attribute(defvalue: "20", desc: "Scale for how quickly a weapon cools down in water.", params: "0 inf")]
+	[Attribute(defvalue: "200", desc: "Scale for how quickly a weapon cools down in water.", params: "0 inf")]
 	float m_fWaterCoolingScale;
 	
 	[Attribute(defvalue: "1.0", desc: "Scale for how likely a weapon jams.", params: "0 inf")]

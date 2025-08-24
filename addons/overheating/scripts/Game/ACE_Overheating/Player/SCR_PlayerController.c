@@ -115,9 +115,9 @@ modded class SCR_PlayerController : PlayerController
 		if (barrel)
 			barrel.SetBarrelTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
 		
-		ACE_Overheating_BarrelGlowComponent glowComponent = ACE_Overheating_BarrelGlowComponent.FromMuzzle(weapon.GetCurrentMuzzle());
-		if (glowComponent)
-			glowComponent.ForceIntensity(0);
+		ACE_Overheating_BarrelGlowEffectComponent glowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(weapon.GetCurrentMuzzle());
+		if (glowEffect)
+			glowEffect.ForceIntensity(0);
 	}
 	
 	//------------------------------------------------------------------------------------------------

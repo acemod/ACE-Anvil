@@ -5,7 +5,7 @@ GenericEntity : "{F54F6C453A8CB478}Prefabs/Weapons/Core/MachineGun_Base.et" {
    components {
     MuzzleComponent "{50F64C4591CD7AA6}" {
      components {
-      ACE_Overheating_BarrelGlowComponent "{662ED760F469E74A}" {
+      ACE_Overheating_BarrelGlowEffectComponent "{662ED760F469E74A}" {
       }
       ACE_Overheating_BarrelComponent "{65B9755AADB68C43}" {
        m_fBarrelDiameter 0.01828

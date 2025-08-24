@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------------------------
-//! TO DO: Rename to ACE_Overheating_BarrelComponentClass
 //! Shared data across all instances of a prefab
-class ACE_Overheating_MuzzleJamComponentClass : ScriptComponentClass
+class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 {
 	// Default: Specific heat capacity of steel
 	[Attribute(defvalue: "0.466", desc: "Specific heat capacity of the barrel [J / (g * K)]", category: "Barrel")]
@@ -173,8 +172,7 @@ class ACE_Overheating_MuzzleJamComponentClass : ScriptComponentClass
 }
 
 //------------------------------------------------------------------------------------------------
-//! TO DO: Rename to ACE_Overheating_BarrelComponent
-class ACE_Overheating_MuzzleJamComponent : ScriptComponent
+class ACE_Overheating_BarrelComponent : ScriptComponent
 {
 	[RplProp(onRplName: "OnStateChanged")]
 	protected bool m_bIsJammed = false;
@@ -191,33 +189,33 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	protected float m_fJamChance;
 	
 	protected MuzzleComponent m_pMuzzle;
-	protected ACE_Overheating_MuzzleJamComponentClass m_pData;
+	protected ACE_Overheating_BarrelComponentClass m_pData;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_MuzzleJamComponent FromWeapon(IEntity weapon)
+	static ACE_Overheating_BarrelComponent FromWeapon(IEntity weapon)
 	{
 		if (!weapon)
 			return null;
 		
-		return ACE_Overheating_MuzzleJamComponent.FromWeapon(BaseWeaponComponent.Cast(weapon.FindComponent(BaseWeaponComponent)));
+		return ACE_Overheating_BarrelComponent.FromWeapon(BaseWeaponComponent.Cast(weapon.FindComponent(BaseWeaponComponent)));
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_MuzzleJamComponent FromWeapon(BaseWeaponComponent weapon)
+	static ACE_Overheating_BarrelComponent FromWeapon(BaseWeaponComponent weapon)
 	{
 		if (!weapon)
 			return null;
 		
-		return ACE_Overheating_MuzzleJamComponent.FromMuzzle(weapon.GetCurrentMuzzle());
+		return ACE_Overheating_BarrelComponent.FromMuzzle(weapon.GetCurrentMuzzle());
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_MuzzleJamComponent FromMuzzle(BaseMuzzleComponent muzzle)
+	static ACE_Overheating_BarrelComponent FromMuzzle(BaseMuzzleComponent muzzle)
 	{
 		if (!muzzle)
 			return null;
 		
-		return ACE_Overheating_MuzzleJamComponent.Cast(muzzle.FindComponent(ACE_Overheating_MuzzleJamComponent));
+		return ACE_Overheating_BarrelComponent.Cast(muzzle.FindComponent(ACE_Overheating_BarrelComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -246,7 +244,7 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 		if (rpl && rpl.IsProxy())
 			return;
 		
-		m_pData = ACE_Overheating_MuzzleJamComponentClass.Cast(GetComponentData(owner));
+		m_pData = ACE_Overheating_BarrelComponentClass.Cast(GetComponentData(owner));
 		m_pData.Init(owner);
 		
 		ACE_Overheating_Settings settings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
@@ -369,7 +367,7 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Overheating_MuzzleJamComponentClass GetData()
+	ACE_Overheating_BarrelComponentClass GetData()
 	{
 		return m_pData;
 	}

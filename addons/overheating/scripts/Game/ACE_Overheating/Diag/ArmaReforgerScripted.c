@@ -30,11 +30,11 @@ modded class ArmaReforgerScripted : ChimeraGame
 		if (!system)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent jamComponent = system.GetLocalActiveJamComponent();
-		if (jamComponent)
+		ACE_Overheating_BarrelComponent barrel = system.GetLocalActiveBarrel();
+		if (barrel)
 		{
-			ACE_Overheating_HandleJamSetterDiag(jamComponent);
-			ACE_Overheating_HandleTemperatureSetterDiag(jamComponent);
+			ACE_Overheating_HandleJamSetterDiag(barrel);
+			ACE_Overheating_HandleTemperatureSetterDiag(barrel);
 		}
 		
 		if (DiagMenu.GetBool(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_TEMPERATURE_DIAG))
@@ -42,9 +42,9 @@ modded class ArmaReforgerScripted : ChimeraGame
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void ACE_Overheating_HandleJamSetterDiag(ACE_Overheating_MuzzleJamComponent jamComponent)
+	protected void ACE_Overheating_HandleJamSetterDiag(ACE_Overheating_BarrelComponent barrel)
 	{
-		bool currentJamState = jamComponent.IsJammed();
+		bool currentJamState = barrel.IsJammed();
 		bool currentJamSetting = DiagMenu.GetBool(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_JAM_SETTER);
 		if (currentJamState == currentJamSetting)
 			return;
@@ -59,7 +59,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 		{
 			SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 			if (playerController)
-				playerController.ACE_Overheating_RequestSetJamState(jamComponent, currentJamSetting);
+				playerController.ACE_Overheating_RequestSetJamState(barrel, currentJamSetting);
 			
 			m_bACE_Overheating_PreviousJamState = currentJamSetting;
 			m_bACE_Overheating_PreviousJamSetting = currentJamSetting;
@@ -67,23 +67,23 @@ modded class ArmaReforgerScripted : ChimeraGame
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void ACE_Overheating_HandleTemperatureSetterDiag(ACE_Overheating_MuzzleJamComponent jamComponent)
+	protected void ACE_Overheating_HandleTemperatureSetterDiag(ACE_Overheating_BarrelComponent barrel)
 	{
 		float newBarrelSetting = DiagMenu.GetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_BARREL_TEMPERATURE_SETTER);
 		
 		if (newBarrelSetting != m_fACE_Overheating_PreviousBarrelTemperatureSetting)
-			jamComponent.SetBarrelTemperature(newBarrelSetting);
+			barrel.SetBarrelTemperature(newBarrelSetting);
 		else
-			DiagMenu.SetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_BARREL_TEMPERATURE_SETTER, jamComponent.GetBarrelTemperature());
+			DiagMenu.SetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_BARREL_TEMPERATURE_SETTER, barrel.GetBarrelTemperature());
 					
 		m_fACE_Overheating_PreviousBarrelTemperatureSetting = DiagMenu.GetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_BARREL_TEMPERATURE_SETTER);
 		
 		float newAmmoSetting = DiagMenu.GetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_AMMO_TEMPERATURE_SETTER);
 		
 		if (newAmmoSetting != m_fACE_Overheating_PreviousAmmoTemperatureSetting)
-			jamComponent.SetAmmoTemperature(newAmmoSetting);
+			barrel.SetAmmoTemperature(newAmmoSetting);
 		else
-			DiagMenu.SetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_AMMO_TEMPERATURE_SETTER, jamComponent.GetAmmoTemperature());
+			DiagMenu.SetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_AMMO_TEMPERATURE_SETTER, barrel.GetAmmoTemperature());
 		
 		m_fACE_Overheating_PreviousAmmoTemperatureSetting = DiagMenu.GetRangeValue(SCR_DebugMenuID.ACE_OVERHEATING_DEBUGUI_MENU_AMMO_TEMPERATURE_SETTER);
 	}
@@ -103,7 +103,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 		if (!weaponManager)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent barrel = ACE_Overheating_MuzzleJamComponent.FromWeapon(weaponManager.GetCurrentWeapon());
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weaponManager.GetCurrentWeapon());
 		if (!barrel)
 			return;
 		

@@ -3,7 +3,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 {
 	protected static ACE_Overheating_Settings s_pSettings;
 	protected static BaseWeatherManagerEntity s_pWeatherManager;
-	protected ref ACE_Overheating_MuzzleContext m_pContext = null;
+	protected ref ACE_Overheating_BarrelContext m_pContext = null;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Overheating_BarrelTemperatureJob()
@@ -128,13 +128,13 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetContext(ACE_Overheating_MuzzleContext context)
+	void SetContext(ACE_Overheating_BarrelContext context)
 	{
 		m_pContext = context;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Overheating_MuzzleContext GetContext()
+	ACE_Overheating_BarrelContext GetContext()
 	{
 		return m_pContext;
 	}

@@ -112,10 +112,12 @@ modded class SCR_PlayerController : PlayerController
 			return;
 		
 		ACE_Overheating_MuzzleJamComponent barrel = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
-		if (!barrel)
-			return;
+		if (barrel)
+			barrel.SetBarrelTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
 		
-		barrel.SetBarrelTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+		ACE_Overheating_BarrelGlowComponent glowComponent = ACE_Overheating_BarrelGlowComponent.FromMuzzle(weapon.GetCurrentMuzzle());
+		if (glowComponent)
+			glowComponent.ForceIntensity(0);
 	}
 	
 	//------------------------------------------------------------------------------------------------

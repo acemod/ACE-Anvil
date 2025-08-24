@@ -2,12 +2,15 @@
 class ACE_Overheating_MuzzleContext : ACE_FrameJobScheduler_IObjectContext<ACE_Overheating_MuzzleJamComponent>
 {
 	SCR_ChimeraCharacter m_pOwnerChar;
+	ACE_Overheating_BarrelGlowComponent m_pGlowComponent;
 	bool m_bIsChamberingPossible;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Overheating_MuzzleContext(ACE_Overheating_MuzzleJamComponent object)
 	{
 		m_pOwnerChar = SCR_ChimeraCharacter.Cast(object.GetOwner().GetParent());
-		m_bIsChamberingPossible = object.GetMuzzle().IsChamberingPossible();
+		MuzzleComponent muzzle = object.GetMuzzle();
+		m_pGlowComponent = ACE_Overheating_BarrelGlowComponent.FromMuzzle(muzzle);
+		m_bIsChamberingPossible = muzzle.IsChamberingPossible();
 	}
 }

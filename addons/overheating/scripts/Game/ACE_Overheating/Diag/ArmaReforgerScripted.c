@@ -103,7 +103,15 @@ modded class ArmaReforgerScripted : ChimeraGame
 		if (!weaponManager)
 			return;
 		
-		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weaponManager.GetCurrentWeapon());
+		BaseWeaponComponent weapon = weaponManager.GetCurrentWeapon();
+		if (!weapon)
+			return;
+		
+		BaseMuzzleComponent muzzle = weapon.GetCurrentMuzzle();
+		if (!muzzle)
+			return;
+		
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromMuzzle(muzzle);
 		if (!barrel)
 			return;
 		
@@ -112,16 +120,21 @@ modded class ArmaReforgerScripted : ChimeraGame
 			return;
 		
 		DbgUI.Begin(string.Format("ACE Overheating Diag (%1)", targetType), 0, 700);
-		DbgUI.Text(string.Format("Heating rate:                 %1 K/Round", settings.m_fHeatingScale * barrel.GetData().GetHeatPerShot() /  barrel.GetData().GetBarrelHeatCapacity()));
+		DbgUI.Text(string.Format("Heating Rate:                 %1 K/Round", settings.m_fHeatingScale * barrel.GetData().GetHeatPerShot() /  barrel.GetData().GetBarrelHeatCapacity()));
 		DbgUI.Text(string.Format("Heat Transfer Coefficient:    %1 W/(m^2*K)", barrel.GetHeatTransferCoefficient()));
+		
+		ACE_Overheating_HelperAttachmentComponent helperAttachment = ACE_Overheating_HelperAttachmentComponent.Cast(muzzle.FindComponent(ACE_Overheating_HelperAttachmentComponent));
+		if (helperAttachment)
+			DbgUI.Text(string.Format("Muzzle Dispersion Factor:     %1", helperAttachment.GetMuzzleDispersionFactor()));
+		
 		DbgUI.Text(string.Format("Jam Chance:                   %1", barrel.GetJamChance()));
 		DbgUI.Text(string.Format("Is Jammed:                    %1", barrel.IsJammed().ToString()));
 		DbgUI.Text(string.Format("Barrel Temperature:           %1 K", barrel.GetBarrelTemperature()));
-		DbgUI.PlotLiveClamped("BarrelTemperature", 500, 300, barrel.GetBarrelTemperature(), ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE, ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE + 1000, 100, 1000);
+		DbgUI.PlotLiveClamped("BarrelTemperature", 500, 290, barrel.GetBarrelTemperature(), ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE, ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE + 1000, 100, 1000);
 		DbgUI.Text(string.Format("Ammo Temperature:             %1 K", barrel.GetAmmoTemperature()));
-		DbgUI.PlotLiveClamped("AmmoTemperature", 500, 300, barrel.GetAmmoTemperature(), ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE, ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE + 1000, 100, 1000);
+		DbgUI.PlotLiveClamped("AmmoTemperature", 500, 290, barrel.GetAmmoTemperature(), ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE, ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE + 1000, 100, 1000);
 		DbgUI.Text(string.Format("Cookoff Progress:             %1 %%", 100 * barrel.GetCookOffProgress() / barrel.GetCookOffProgressScale()));
-		DbgUI.PlotLiveClamped("CookoffProgress", 500, 300, barrel.GetCookOffProgress() / barrel.GetCookOffProgressScale(), 0, 1, 100, 1000);
+		DbgUI.PlotLiveClamped("CookoffProgress", 500, 290, barrel.GetCookOffProgress() / barrel.GetCookOffProgressScale(), 0, 1, 100, 1000);
 		DbgUI.End();
 	}
 }

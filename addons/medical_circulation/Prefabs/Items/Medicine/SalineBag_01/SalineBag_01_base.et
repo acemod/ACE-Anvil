@@ -1,0 +1,10 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SCR_ConsumableItemComponent "{59E68C4DC131E9FC}" {
+   m_ConsumableEffect SCR_ConsumableSalineBag "{59E68C4DDD8B416A}" {
+    m_fItemAbsoluteRegenerationAmount 750
+   }
+  }
+ }
+}

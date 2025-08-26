@@ -10,6 +10,9 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
        m_cJamChanceTemperatureCurve {
         0.273 0.003 0.58 0.024 0.734 0.06 0.811 0.18 0.888 0.45
        }
+       m_cMuzzleDispersionFactorTemperatureCurve {
+        0.231 0 0.466 0.033 0.722 0.147 1 0.333
+       }
       }
       ACE_Overheating_HelperAttachmentComponent "{663325CC2662FC79}" {
        AttachmentSlot InventoryStorageSlot AttachmentSlot {

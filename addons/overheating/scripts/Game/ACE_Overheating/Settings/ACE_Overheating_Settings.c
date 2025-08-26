@@ -30,6 +30,9 @@ class ACE_Overheating_Settings : ACE_ModSettings
   	[Attribute(defvalue: "2.031", desc: "Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature.", params: "0 inf")]
 	float m_fBarrel2BulletMassScaledTemperatureRateConstant;
 	
+	[Attribute(defvalue: "1.0", desc: "Scales the additional temperature-dependent dispersion of shots. Set to 0.0 to turn it off.", params: "0 inf")]
+	float m_fMuzzleDispersionScale;
+	
 	[Attribute(defvalue: "800", desc: "Temperature above which barrel starts glowing [K].", params: "0 1300")]
 	float m_fMinGlowTemperature;
 }

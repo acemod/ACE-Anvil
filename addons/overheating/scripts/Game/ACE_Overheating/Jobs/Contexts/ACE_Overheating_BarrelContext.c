@@ -3,6 +3,7 @@ class ACE_Overheating_BarrelContext : ACE_FrameJobScheduler_IObjectContext<ACE_O
 {
 	SCR_ChimeraCharacter m_pOwnerChar;
 	ACE_Overheating_BarrelGlowEffectComponent m_pGlowEffect;
+	ACE_Overheating_HelperAttachmentComponent m_pHelperAttachment;
 	bool m_bIsChamberingPossible;
 	
 	//------------------------------------------------------------------------------------------------
@@ -10,7 +11,8 @@ class ACE_Overheating_BarrelContext : ACE_FrameJobScheduler_IObjectContext<ACE_O
 	{
 		m_pOwnerChar = SCR_ChimeraCharacter.Cast(object.GetOwner().GetParent());
 		MuzzleComponent muzzle = object.GetMuzzle();
-		m_pGlowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(muzzle);
 		m_bIsChamberingPossible = muzzle.IsChamberingPossible();
+		m_pHelperAttachment = ACE_Overheating_HelperAttachmentComponent.Cast(muzzle.FindComponent(ACE_Overheating_HelperAttachmentComponent));
+		m_pGlowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(muzzle);
 	}
 }

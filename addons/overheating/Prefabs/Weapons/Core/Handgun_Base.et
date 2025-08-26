@@ -1,6 +1,8 @@
 GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
  ID "0000000000000001"
  components {
+  SCR_WeaponStatsManagerComponent "{663325CC35683F01}" {
+  }
   WeaponComponent "{CFBAA4B706BA66E8}" {
    components {
     MuzzleComponent "{50F64C45E7271D47}" {

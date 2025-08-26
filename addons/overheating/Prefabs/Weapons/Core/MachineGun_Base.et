@@ -6,6 +6,8 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
     "{1ABE61EA39D00553}Sounds/Weapons/Machineguns/ACE_Overheating_BarrelSwap.acp"
    }
   }
+  SCR_WeaponStatsManagerComponent "{663325CDA83F057C}" {
+  }
   WeaponComponent "{CFBAA4B706BA66E8}" {
    components {
     MuzzleComponent "{50F64C4591CD7AA6}" {

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{4D26D7D3139066F4}Prefabs/Weapons/MachineGuns/UK59/MG_UK59_base.et"
+ Name "{F9E6107C47C1B088}Prefabs/Weapons/Core/LongRangeRifle_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

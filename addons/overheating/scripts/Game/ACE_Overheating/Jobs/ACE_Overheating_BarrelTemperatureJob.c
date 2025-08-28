@@ -3,7 +3,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 {
 	protected static ACE_Overheating_Settings s_pSettings;
 	protected static BaseWeatherManagerEntity s_pWeatherManager;
-	protected ref ACE_Overheating_MuzzleContext m_pContext = null;
+	protected ref ACE_Overheating_BarrelContext m_pContext = null;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Overheating_BarrelTemperatureJob()
@@ -55,10 +55,13 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		nextTemperature += (ComputeHeating(timeSlice) + ComputeCooling(timeSlice, currentTemperature, externalTemperature)) / m_pContext.m_pObject.GetData().GetBarrelHeatCapacity();		
 		nextTemperature = Math.Max(nextTemperature, externalTemperature);
 		m_pContext.m_pObject.SetBarrelTemperature(nextTemperature);
-		m_pContext.m_pObject.SetJamChance(s_pSettings.m_fJamChanceScale * m_pContext.m_pObject.GetData().ComputeJamChance(nextTemperature));
+		m_pContext.m_pObject.SetJamChance(ComputeJamChance(nextTemperature));
 		
-		if (m_pContext.m_pGlowComponent)
-			m_pContext.m_pGlowComponent.SetIntensity(Math.Clamp(Math.InverseLerp(s_pSettings.m_fMinGlowTemperature, 1300, nextTemperature), 0, 1));
+		if (m_pContext.m_pHelperAttachment)
+			m_pContext.m_pHelperAttachment.UpdateStats(ComputeMuzzleDispersionFactor(nextTemperature));
+		
+		if (m_pContext.m_pGlowEffect)
+			m_pContext.m_pGlowEffect.SetIntensity(Math.Clamp(Math.InverseLerp(s_pSettings.m_fMinGlowTemperature, 1300, nextTemperature), 0, 1));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -128,13 +131,25 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetContext(ACE_Overheating_MuzzleContext context)
+	protected float ComputeJamChance(float temperature)
+	{
+		return s_pSettings.m_fJamChanceScale * m_pContext.m_pObject.GetData().ComputeJamChance(temperature);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeMuzzleDispersionFactor(float temperature)
+	{
+		return 1 + s_pSettings.m_fMuzzleDispersionScale * m_pContext.m_pObject.GetData().ComputeAdditionalMuzzleDispersionFactor(temperature);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetContext(ACE_Overheating_BarrelContext context)
 	{
 		m_pContext = context;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Overheating_MuzzleContext GetContext()
+	ACE_Overheating_BarrelContext GetContext()
 	{
 		return m_pContext;
 	}

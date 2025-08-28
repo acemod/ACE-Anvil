@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Overheating_JammingSystem : GameSystem
 {
-	protected ACE_Overheating_MuzzleJamComponent m_pLocalActiveJamComponent = null;
+	protected ACE_Overheating_BarrelComponent m_pLocalActiveBarrel = null;
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Overheating_JammingSystem GetInstance()
@@ -45,7 +45,7 @@ class ACE_Overheating_JammingSystem : GameSystem
 		{
 			eventHandlerManager.RemoveScriptHandler("OnWeaponChanged", this, OnWeaponChangedLocal);
 			eventHandlerManager.RemoveScriptHandler("OnMuzzleChanged", this, OnMuzzleChangedLocal);
-			m_pLocalActiveJamComponent = null;
+			m_pLocalActiveBarrel = null;
 			UpdateFireHandlerLocal(char, true);
 		}
 	}
@@ -53,24 +53,24 @@ class ACE_Overheating_JammingSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	protected void OnProjectileShot(int playerID, BaseWeaponComponent weapon, IEntity entity)
 	{
-		ACE_Overheating_MuzzleJamComponent jamComponent = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
-		if (!jamComponent)
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
+		if (!barrel)
 			return;
 		
 		// TO DO: Move to temperature systems
-		jamComponent.IncremenHeatCounter();
-		jamComponent.SetAmmoTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
-		jamComponent.SetCookOffProgress(0);
+		barrel.IncremenHeatCounter();
+		barrel.SetAmmoTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+		barrel.SetCookOffProgress(0);
 		
-		if (Math.RandomFloat(0, 1) < jamComponent.GetJamChance())
-			jamComponent.SetState(true);
+		if (Math.RandomFloat(0, 1) < barrel.GetJamChance())
+			barrel.SetState(true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void OnJamStateChanged(ACE_Overheating_MuzzleJamComponent jamComponent, bool isJammed)
+	void OnJamStateChanged(ACE_Overheating_BarrelComponent barrel, bool isJammed)
 	{
 		//! Only handle on local client
-		if (m_pLocalActiveJamComponent != jamComponent)
+		if (m_pLocalActiveBarrel != barrel)
 			return;
 		
 		ChimeraCharacter localPlayer = ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
@@ -78,7 +78,7 @@ class ACE_Overheating_JammingSystem : GameSystem
 			return;
 		
 		if (isJammed)
-			GetGame().GetCallqueue().CallLater(PlayWeaponSound, 500, false, jamComponent.GetOwner(), "SOUND_RELOAD_BOLT_PULL");
+			GetGame().GetCallqueue().CallLater(PlayWeaponSound, 500, false, barrel.GetOwner(), "SOUND_RELOAD_BOLT_PULL");
 		
 		UpdateFireHandlerLocal(localPlayer, !isJammed);
 	}
@@ -91,8 +91,8 @@ class ACE_Overheating_JammingSystem : GameSystem
 		if (!localPlayer)
 			return;
 		
-		m_pLocalActiveJamComponent = ACE_Overheating_MuzzleJamComponent.FromWeapon(newWeapon);
-		UpdateFireHandlerLocal(localPlayer, !m_pLocalActiveJamComponent || !m_pLocalActiveJamComponent.IsJammed());
+		m_pLocalActiveBarrel = ACE_Overheating_BarrelComponent.FromWeapon(newWeapon);
+		UpdateFireHandlerLocal(localPlayer, !m_pLocalActiveBarrel || !m_pLocalActiveBarrel.IsJammed());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -103,8 +103,8 @@ class ACE_Overheating_JammingSystem : GameSystem
 		if (!localPlayer)
 			return;
 		 
-		m_pLocalActiveJamComponent = ACE_Overheating_MuzzleJamComponent.FromMuzzle(newMuzzle);
-		UpdateFireHandlerLocal(localPlayer, !m_pLocalActiveJamComponent || !m_pLocalActiveJamComponent.IsJammed());
+		m_pLocalActiveBarrel = ACE_Overheating_BarrelComponent.FromMuzzle(newMuzzle);
+		UpdateFireHandlerLocal(localPlayer, !m_pLocalActiveBarrel || !m_pLocalActiveBarrel.IsJammed());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -131,8 +131,8 @@ class ACE_Overheating_JammingSystem : GameSystem
 	//! Play dry sound
 	protected void OnFireFailedLocal(float value = 0.0, EActionTrigger trigger = 0)
 	{
-		if (m_pLocalActiveJamComponent)
-			PlayWeaponSound(m_pLocalActiveJamComponent.GetOwner(), "SOUND_DRY");
+		if (m_pLocalActiveBarrel)
+			PlayWeaponSound(m_pLocalActiveBarrel.GetOwner(), "SOUND_DRY");
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -144,8 +144,8 @@ class ACE_Overheating_JammingSystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Overheating_MuzzleJamComponent GetLocalActiveJamComponent()
+	ACE_Overheating_BarrelComponent GetLocalActiveBarrel()
 	{
-		return m_pLocalActiveJamComponent;
+		return m_pLocalActiveBarrel;
 	}
 }

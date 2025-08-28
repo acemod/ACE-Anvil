@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Overheating_CharacterContext : ACE_FrameJobScheduler_IObjectContext<SCR_ChimeraCharacter>
 {
-	ACE_Overheating_MuzzleJamComponent m_pBarrel;
+	ACE_Overheating_BarrelComponent m_pBarrel;
 	BaseMuzzleComponent m_pMuzzle;
 	SCR_CharacterCommandHandlerComponent m_pCharCommandHandler;
 	bool m_bIsChamberingPossible;
@@ -27,7 +27,7 @@ class ACE_Overheating_CharacterContext : ACE_FrameJobScheduler_IObjectContext<SC
 	//! Update fire handler when weapon changed
 	protected void OnWeaponChanged(BaseWeaponComponent newWeapon, BaseWeaponComponent prevWeapon)
 	{
-		m_pBarrel = ACE_Overheating_MuzzleJamComponent.FromWeapon(newWeapon);
+		m_pBarrel = ACE_Overheating_BarrelComponent.FromWeapon(newWeapon);
 		
 		m_pMuzzle = null;
 		if (m_pBarrel)
@@ -41,7 +41,7 @@ class ACE_Overheating_CharacterContext : ACE_FrameJobScheduler_IObjectContext<SC
 	//! Update fire handler when muzzle changed
 	protected void OnMuzzleChanged(BaseWeaponComponent weapon, BaseMuzzleComponent newMuzzle, BaseMuzzleComponent prevMuzzle)
 	{
-		m_pBarrel = ACE_Overheating_MuzzleJamComponent.FromMuzzle(newMuzzle);
+		m_pBarrel = ACE_Overheating_BarrelComponent.FromMuzzle(newMuzzle);
 		
 		m_pMuzzle = newMuzzle;
 		if (m_pMuzzle)

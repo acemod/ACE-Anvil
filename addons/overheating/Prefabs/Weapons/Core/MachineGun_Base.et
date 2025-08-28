@@ -6,15 +6,29 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
     "{1ABE61EA39D00553}Sounds/Weapons/Machineguns/ACE_Overheating_BarrelSwap.acp"
    }
   }
+  SCR_WeaponStatsManagerComponent "{663325CDA83F057C}" {
+  }
   WeaponComponent "{CFBAA4B706BA66E8}" {
    components {
     MuzzleComponent "{50F64C4591CD7AA6}" {
      components {
-      ACE_Overheating_MuzzleJamComponent "{65B9755AADB68C43}" {
+      ACE_Overheating_BarrelComponent "{65B9755AADB68C43}" {
        m_fBarrelDiameter 0.02275
        m_fHeatingScale 0.8
        m_cJamChanceTemperatureCurve {
         0.273 0.003 0.58 0.024 0.734 0.06 0.811 0.18 0.888 0.45
+       }
+       m_cMuzzleDispersionFactorTemperatureCurve {
+        0.231 0 0.466 0.033 0.722 0.147 1 0.333
+       }
+      }
+      ACE_Overheating_BarrelGlowEffectComponent "{663325CC8AC05C84}" {
+      }
+      ACE_Overheating_HelperAttachmentComponent "{663325CD0C04AE29}" {
+       AttachmentSlot InventoryStorageSlot AttachmentSlot {
+        Prefab "{D4B8C629F3D4A322}Prefabs/Weapons/Attachments/Muzzle/ACE_Overheating_HelperAttachment.et"
+       }
+       AttachmentType AttachmentMuzzle "{663325CD3874732E}" {
        }
       }
      }

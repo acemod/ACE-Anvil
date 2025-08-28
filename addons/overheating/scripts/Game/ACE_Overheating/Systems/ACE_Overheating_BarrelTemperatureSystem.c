@@ -43,14 +43,14 @@ class ACE_Overheating_BarrelTemperatureSystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Register(notnull ACE_Overheating_MuzzleJamComponent jamComponent)
+	void Register(notnull ACE_Overheating_BarrelComponent barrel)
 	{
-		m_pScheduler.Register(jamComponent);
+		m_pScheduler.Register(barrel);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Unregister(ACE_Overheating_MuzzleJamComponent jamComponent)
+	void Unregister(ACE_Overheating_BarrelComponent barrel)
 	{
-		m_pScheduler.Unregister(jamComponent);
+		m_pScheduler.Unregister(barrel);
 	}
 }

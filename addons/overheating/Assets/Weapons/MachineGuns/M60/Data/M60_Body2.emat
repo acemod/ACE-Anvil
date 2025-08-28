@@ -3,6 +3,6 @@ MatPBRBasic : "{51F0B466B57B2722}Assets/Weapons/MachineGuns/M60/Data/M60_Body2.e
  EmissiveAbsoluteLV 0
  EmissiveMap "{E65ED29824A4834C}Assets/Weapons/MachineGuns/M60/Data/M60_Body2_EM.edds"
  Refs {
-  "Emissive" "ACE_Overheating_BarrelGlowComponent.m_vColor"
+  "Emissive" "ACE_Overheating_BarrelGlowEffectComponent.m_vColor"
  }
 }

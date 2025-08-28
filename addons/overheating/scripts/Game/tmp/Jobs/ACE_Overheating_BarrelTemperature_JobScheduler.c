@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 //! Manual template initialized copy of
-//! ACE_TemplateFrameJobScheduler<ACE_Overheating_MuzzleJamComponent, ACE_Overheating_MuzzleContext, ACE_Overheating_BarrelTemperatureJob>
+//! ACE_TemplateFrameJobScheduler<ACE_Overheating_BarrelComponent, ACE_Overheating_BarrelContext, ACE_Overheating_BarrelTemperatureJob>
 //! as workaround for:
 //! - https://feedback.bistudio.com/T193122
 //! - https://feedback.bistudio.com/T193389
@@ -15,7 +15,7 @@ class ACE_Overheating_BarrelTemperature_JobScheduler : ACE_IFrameJob
 	
 	protected ref ACE_Overheating_BarrelTemperatureJob m_pTemplateJob;
 	protected ref array<ref ACE_Overheating_BarrelTemperatureJob> m_aJobs = {};
-	protected ref array<ACE_Overheating_MuzzleJamComponent> m_aInitialObjectsToRegister = {};
+	protected ref array<ACE_Overheating_BarrelComponent> m_aInitialObjectsToRegister = {};
 	protected ACE_FrameJobScheduler_EState m_eState = ACE_FrameJobScheduler_EState.UPDATE_QUEUE;
 	protected float m_fNextUpdateStartTime = 0;
 	protected int m_iCurrentJobIdx = 0;
@@ -27,7 +27,7 @@ class ACE_Overheating_BarrelTemperature_JobScheduler : ACE_IFrameJob
 	{
 		m_pTemplateJob = templateJob;
 		
-		foreach (ACE_Overheating_MuzzleJamComponent object : m_aInitialObjectsToRegister)
+		foreach (ACE_Overheating_BarrelComponent object : m_aInitialObjectsToRegister)
 		{
 			Register(object);
 		}
@@ -77,7 +77,7 @@ class ACE_Overheating_BarrelTemperature_JobScheduler : ACE_IFrameJob
 		for (int i = 0; i < m_iMaxIterationsPerFrame; ++i)
 		{
 			ACE_Overheating_BarrelTemperatureJob job = m_aJobs[m_iCurrentJobIdx];
-			ACE_Overheating_MuzzleContext context = job.GetContext();
+			ACE_Overheating_BarrelContext context = job.GetContext();
 			
 			if (context.IsValid())
 				job.OnUpdate((currentTime - context.m_fLastUpdateTime) / 1000);
@@ -106,7 +106,7 @@ class ACE_Overheating_BarrelTemperature_JobScheduler : ACE_IFrameJob
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Register(ACE_Overheating_MuzzleJamComponent object)
+	void Register(ACE_Overheating_BarrelComponent object)
 	{
 		if (!m_pTemplateJob)
 		{
@@ -114,7 +114,7 @@ class ACE_Overheating_BarrelTemperature_JobScheduler : ACE_IFrameJob
 			return;
 		}
 		
-		ACE_Overheating_MuzzleContext context = new ACE_Overheating_MuzzleContext(object);
+		ACE_Overheating_BarrelContext context = new ACE_Overheating_BarrelContext(object);
 		if (!context.IsValid())
 			return;
 		
@@ -128,7 +128,7 @@ class ACE_Overheating_BarrelTemperature_JobScheduler : ACE_IFrameJob
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Unregister(ACE_Overheating_MuzzleJamComponent object)
+	void Unregister(ACE_Overheating_BarrelComponent object)
 	{
 		foreach (int i, ACE_Overheating_BarrelTemperatureJob job : m_aJobs)
 		{

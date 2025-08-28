@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 //! How to configure a weapon for glowing:
 //! --------------------------------------
-//! 1) Add ACE_Overheating_BarrelGlowComponent as a child of MuzzleComponent to weapon prefab
+//! 1) Add ACE_Overheating_BarrelGlowEffectComponent as a child of MuzzleComponent to weapon prefab
 //! 2) Add emissive map to weapon emat and bind `Emissive` to `m_vColor`
 //!    Example override for M249:
 //!    ```
@@ -10,11 +10,11 @@
 //!     EmissiveAbsoluteLV 0
 //!     EmissiveMap "{3175FE13B1FC2769}Assets/Weapons/MachineGuns/M249/Data/M249_Body_1_EM.edds"
 //!     Refs {
-//!      "Emissive" "ACE_Overheating_BarrelGlowComponent.m_vColor"
+//!      "Emissive" "ACE_Overheating_BarrelGlowEffectComponent.m_vColor"
 //!     }
 //!    }
 //!    ```
-class ACE_Overheating_BarrelGlowComponentClass : ScriptComponentClass
+class ACE_Overheating_BarrelGlowEffectComponentClass : ScriptComponentClass
 {
 	[Attribute(defvalue: "0.188 0.025 0 1", desc: "Color for maximal glowing barrel.")]
 	protected ref Color m_cMaxColor;
@@ -45,7 +45,7 @@ class ACE_Overheating_BarrelGlowComponentClass : ScriptComponentClass
 }
 
 //------------------------------------------------------------------------------------------------
-class ACE_Overheating_BarrelGlowComponent : ScriptComponent
+class ACE_Overheating_BarrelGlowEffectComponent : ScriptComponent
 {
 	[RplProp(onRplName: "OnIntensityStepChanged")]
 	protected int m_iIntensityStep;
@@ -53,15 +53,15 @@ class ACE_Overheating_BarrelGlowComponent : ScriptComponent
 	protected float m_fTargetIntensity;
 	protected float m_fIntensity;
 	protected vector m_vColor;
-	protected ACE_Overheating_BarrelGlowComponentClass m_pData;
+	protected ACE_Overheating_BarrelGlowEffectComponentClass m_pData;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_BarrelGlowComponent FromMuzzle(BaseMuzzleComponent muzzle)
+	static ACE_Overheating_BarrelGlowEffectComponent FromMuzzle(BaseMuzzleComponent muzzle)
 	{
 		if (!muzzle)
 			return null;
 		
-		return ACE_Overheating_BarrelGlowComponent.Cast(muzzle.FindComponent(ACE_Overheating_BarrelGlowComponent));
+		return ACE_Overheating_BarrelGlowEffectComponent.Cast(muzzle.FindComponent(ACE_Overheating_BarrelGlowEffectComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -72,7 +72,7 @@ class ACE_Overheating_BarrelGlowComponent : ScriptComponent
 		if (!GetGame().InPlayMode())
 			return;
 		
-		m_pData = ACE_Overheating_BarrelGlowComponentClass.Cast(GetComponentData(owner));
+		m_pData = ACE_Overheating_BarrelGlowEffectComponentClass.Cast(GetComponentData(owner));
 	}
 	
 	//------------------------------------------------------------------------------------------------

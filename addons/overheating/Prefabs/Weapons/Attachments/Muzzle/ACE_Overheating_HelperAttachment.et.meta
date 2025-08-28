@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{76C400582D3C4AF9}Prefabs/Weapons/MachineGuns/PKM/MG_PKM_base.et"
+ Name "{D4B8C629F3D4A322}Prefabs/Weapons/Core/Attachment_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

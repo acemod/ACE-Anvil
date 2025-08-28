@@ -60,7 +60,7 @@ class ACE_Medical_Circulation_Settings : ACE_ModSettings
 	
 	//------------------------------------------------------------------------------------------------
 	//! Calculate derived values
-	void ACE_Medical_Circulation_Settings()
+	override void Init()
 	{
 		// Make sure we retain the default settings for subconfigs when left empty
 		if (!m_CardiacArrestDamageEffect)

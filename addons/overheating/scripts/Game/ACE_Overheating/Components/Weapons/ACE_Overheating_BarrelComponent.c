@@ -1,7 +1,6 @@
 //------------------------------------------------------------------------------------------------
-//! TO DO: Rename to ACE_Overheating_BarrelComponentClass
 //! Shared data across all instances of a prefab
-class ACE_Overheating_MuzzleJamComponentClass : ScriptComponentClass
+class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 {
 	// Default: Specific heat capacity of steel
 	[Attribute(defvalue: "0.466", desc: "Specific heat capacity of the barrel [J / (g * K)]", category: "Barrel")]
@@ -25,6 +24,20 @@ class ACE_Overheating_MuzzleJamComponentClass : ScriptComponentClass
 	
 	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Probability to jam vs temperature [K]", params: "1300 0.1 0 0")]
 	protected ref Curve m_cJamChanceTemperatureCurve;
+	
+	// Additional temperature-dependent muzzle dispersion factor f
+	// -----------------------------------------------------------
+	// Base dispersion cone diameter gets multiplied by (1 + f)
+	//
+	// Formula: f = tan(a + da(T)) / tan(a) - 1
+	// First-order Taylor approximation for small angles: f ≈ da(T) / a
+	// where a is base dispersion angle and da(T) is the additional temperature-dependent dispersion
+	//
+	// Using Reforger's M16A4 base dispersion: Cone height = 400 m; Cone diameter = 0.4 m => a ≈ 0.5 mrad
+	// and ACE3 additional dispersion: 0 mils at 0 °C, 0.5 mils at 333°C, 2.2 mils at 666 °C, 5 mils at 1000 °C
+	// => Additional dispersion factors: 0.0 at 0 °C, 1.0 at 333°C, 4.4 at 666 °C, 10.0 at 1000 °C
+	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Additional muzzle dispersion factor vs temperature [K]", params: "1300 30 0 0")]
+	protected ref Curve m_cMuzzleDispersionFactorTemperatureCurve;
 	
 	protected bool m_bInitDone = false;
 	protected float m_fHeatPerShot;
@@ -170,14 +183,22 @@ class ACE_Overheating_MuzzleJamComponentClass : ScriptComponentClass
 	{
 		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cJamChanceTemperatureCurve)[1];
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	float ComputeAdditionalMuzzleDispersionFactor(float temperature)
+	{
+		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cMuzzleDispersionFactorTemperatureCurve)[1];
+	}
 }
 
 //------------------------------------------------------------------------------------------------
-//! TO DO: Rename to ACE_Overheating_BarrelComponent
-class ACE_Overheating_MuzzleJamComponent : ScriptComponent
+class ACE_Overheating_BarrelComponent : ScriptComponent
 {
 	[RplProp(onRplName: "OnStateChanged")]
 	protected bool m_bIsJammed = false;
+	
+	[RplProp()]
+	protected float m_fClearJamFailureChance = 0.1;
 	
 	protected float m_fBarrelTemperature;
 	protected float m_fAmmoTemperature;
@@ -188,33 +209,33 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	protected float m_fJamChance;
 	
 	protected MuzzleComponent m_pMuzzle;
-	protected ACE_Overheating_MuzzleJamComponentClass m_pData;
+	protected ACE_Overheating_BarrelComponentClass m_pData;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_MuzzleJamComponent FromWeapon(IEntity weapon)
+	static ACE_Overheating_BarrelComponent FromWeapon(IEntity weapon)
 	{
 		if (!weapon)
 			return null;
 		
-		return ACE_Overheating_MuzzleJamComponent.FromWeapon(BaseWeaponComponent.Cast(weapon.FindComponent(BaseWeaponComponent)));
+		return ACE_Overheating_BarrelComponent.FromWeapon(BaseWeaponComponent.Cast(weapon.FindComponent(BaseWeaponComponent)));
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_MuzzleJamComponent FromWeapon(BaseWeaponComponent weapon)
+	static ACE_Overheating_BarrelComponent FromWeapon(BaseWeaponComponent weapon)
 	{
 		if (!weapon)
 			return null;
 		
-		return ACE_Overheating_MuzzleJamComponent.FromMuzzle(weapon.GetCurrentMuzzle());
+		return ACE_Overheating_BarrelComponent.FromMuzzle(weapon.GetCurrentMuzzle());
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_MuzzleJamComponent FromMuzzle(BaseMuzzleComponent muzzle)
+	static ACE_Overheating_BarrelComponent FromMuzzle(BaseMuzzleComponent muzzle)
 	{
 		if (!muzzle)
 			return null;
 		
-		return ACE_Overheating_MuzzleJamComponent.Cast(muzzle.FindComponent(ACE_Overheating_MuzzleJamComponent));
+		return ACE_Overheating_BarrelComponent.Cast(muzzle.FindComponent(ACE_Overheating_BarrelComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -237,16 +258,25 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 			return;
 		
 		m_pMuzzle = MuzzleComponent.Cast(weapon.FindComponent(MuzzleComponent));
-		if (!m_pMuzzle)
+		
+		// Server side init
+		RplComponent rpl = RplComponent.Cast(owner.FindComponent(RplComponent));
+		if (rpl && rpl.IsProxy())
 			return;
 		
-		m_pData = ACE_Overheating_MuzzleJamComponentClass.Cast(GetComponentData(owner));
+		m_pData = ACE_Overheating_BarrelComponentClass.Cast(GetComponentData(owner));
 		m_pData.Init(owner);
+		
+		ACE_Overheating_Settings settings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
+		if (settings)
+			m_fClearJamFailureChance = settings.m_fClearJamFailureChance;
+		
 		// Temporary solution: Use standard ambient temperature until we got a proper weather system
 		m_fBarrelTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fAmmoTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
 		m_fJamChance = m_pData.ComputeJamChance(m_fBarrelTemperature);
 		InitCookOffCookOffProgressScale();
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -357,7 +387,7 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Overheating_MuzzleJamComponentClass GetData()
+	ACE_Overheating_BarrelComponentClass GetData()
 	{
 		return m_pData;
 	}
@@ -372,6 +402,12 @@ class ACE_Overheating_MuzzleJamComponent : ScriptComponent
 	float GetJamChance()
 	{
 		return m_fJamChance;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetClearJamFailureChance()
+	{
+		return m_fClearJamFailureChance;
 	}
 	
 #ifdef ENABLE_DIAG

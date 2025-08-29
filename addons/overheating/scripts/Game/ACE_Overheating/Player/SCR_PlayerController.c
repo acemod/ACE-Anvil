@@ -52,18 +52,18 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_Overheating_RequestSetJamState(ACE_Overheating_MuzzleJamComponent jamComponent, bool state)
+	void ACE_Overheating_RequestSetJamState(ACE_Overheating_BarrelComponent barrel, bool state)
 	{
-		Rpc(RplAsk_ACE_Overheating_RequestSetJamStateServer, Replication.FindItemId(jamComponent), state);
+		Rpc(RplAsk_ACE_Overheating_RequestSetJamStateServer, Replication.FindItemId(barrel), state);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RplAsk_ACE_Overheating_RequestSetJamStateServer(RplId jamComponentID, bool state)
+	protected void RplAsk_ACE_Overheating_RequestSetJamStateServer(RplId barrelID, bool state)
 	{
-		ACE_Overheating_MuzzleJamComponent jamComponent = ACE_Overheating_MuzzleJamComponent.Cast(Replication.FindItem(jamComponentID));
-		if (jamComponent)
-			jamComponent.SetState(state);
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.Cast(Replication.FindItem(barrelID));
+		if (barrel)
+			barrel.SetState(state);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -80,7 +80,7 @@ modded class SCR_PlayerController : PlayerController
 		if (!weapon)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent barrel = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
 		if (!barrel)
 			return;
 		
@@ -111,11 +111,13 @@ modded class SCR_PlayerController : PlayerController
 		if (!weapon)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent barrel = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
-		if (!barrel)
-			return;
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
+		if (barrel)
+			barrel.SetBarrelTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
 		
-		barrel.SetBarrelTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+		ACE_Overheating_BarrelGlowEffectComponent glowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(weapon.GetCurrentMuzzle());
+		if (glowEffect)
+			glowEffect.ForceIntensity(0);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -132,7 +134,7 @@ modded class SCR_PlayerController : PlayerController
 		if (!weapon)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent barrel = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
 		if (!barrel)
 			return;
 		
@@ -141,7 +143,7 @@ modded class SCR_PlayerController : PlayerController
 			return;
 		
 		ACE_Overheating_BarrelTemperatureJob job = new ACE_Overheating_BarrelTemperatureJob();
-		job.SetContext(new ACE_Overheating_MuzzleContext(barrel));
+		job.SetContext(new ACE_Overheating_BarrelContext(barrel));
 		job.OnUpdate(settings.m_fWaterCoolingScale);
 		RpcAsk_ACE_Overheating_SendWeaponStateNotification(ENotification.ACE_OVERHEATING_BARREL_TEMPERATURE_RESULT, weaponId);
 	}

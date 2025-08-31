@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Medical_Breathing_Dev"
+ GUID "631337C3898CD468"
+ TITLE "ACE Medical Breathing Dev"
+ Dependencies {
+  "65AD7D4F994EA327" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{63133871BF73D2D6}" {
+      StringTableSource "{5A243CDE720B08D7}Language/ACE_Medical_Breathing_localization.st"
+      Languages {
+       LanguageDefinition "{63133871BD3BB4CD}" {
+        Code "cs_cz"
+        StringTableRuntime "{21441EFE9A7CA479}Language/ACE_Medical_Breathing_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{63133871BD3BB47B}" {
+        Code "de_de"
+        StringTableRuntime "{F43A04CD89DFB559}Language/ACE_Medical_Breathing_localization.de_de.conf"
+       }
+       LanguageDefinition "{63133871BD3BB46F}" {
+        Code "en_us"
+        StringTableRuntime "{AACA8E86E32CB058}Language/ACE_Medical_Breathing_localization.en_us.conf"
+       }
+       LanguageDefinition "{63133871BD3BB45E}" {
+        Code "es_es"
+        StringTableRuntime "{6F86C30F0D2EDB47}Language/ACE_Medical_Breathing_localization.es_es.conf"
+       }
+       LanguageDefinition "{63133871BD3BB44E}" {
+        Code "fr_fr"
+        StringTableRuntime "{D42E3638EBAD3845}Language/ACE_Medical_Breathing_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{63133871BD3BB3A3}" {
+        Code "it_it"
+        StringTableRuntime "{5432B90C468FBBBC}Language/ACE_Medical_Breathing_localization.it_it.conf"
+       }
+       LanguageDefinition "{63133871BD3BB3AE}" {
+        Code "ja_jp"
+        StringTableRuntime "{4429049E78FE8B17}Language/ACE_Medical_Breathing_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{63133871BD3BB39C}" {
+        Code "ko_kr"
+        StringTableRuntime "{E4972C32EBD38828}Language/ACE_Medical_Breathing_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{63133871BD3BB38E}" {
+        Code "pl_pl"
+        StringTableRuntime "{B8E68AC8553C1454}Language/ACE_Medical_Breathing_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{63133871BD3BB2B5}" {
+        Code "pt_br"
+        StringTableRuntime "{6D9110046EC2DEEE}Language/ACE_Medical_Breathing_localization.pt_br.conf"
+       }
+       LanguageDefinition "{63133871BD3BB2AC}" {
+        Code "ru_ru"
+        StringTableRuntime "{38D004ACF3BBBB98}Language/ACE_Medical_Breathing_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{63133871BD3BB280}" {
+        Code "uk_ua"
+        StringTableRuntime "{B288515A9F9505CD}Language/ACE_Medical_Breathing_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{63133871BD3BB2F1}" {
+        Code "zh_cn"
+        StringTableRuntime "{68383F67A635D5D0}Language/ACE_Medical_Breathing_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

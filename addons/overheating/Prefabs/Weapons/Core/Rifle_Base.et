@@ -21,6 +21,7 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
        }
       }
       ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       ParticleEffect "{3F557E132C35E01B}Particles/Weapon/ACE_Overheating_Empty.ptc"
        EffectPosition EntitySlotInfo EffectPosition {
         PivotID "barrel_muzzle"
        }

@@ -48,6 +48,10 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	protected ref Curve m_cVelocityRndTemperatureCurve;
 	protected float m_fVelocityRnd;
 	
+	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle emitting time vs temperature [K]", params: "1300 3 0 0")]
+	protected ref Curve m_cEmittingTimeTemperatureCurve;
+	protected float m_fEmittingTime;
+	
 	protected ACE_Overheating_BarrelComponent m_pBarrel;
 	protected static ACE_Overheating_Settings s_pSettings;
 	
@@ -83,6 +87,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		m_fSizeRnd = Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cSizeRndTemperatureCurve)[1];
 		m_fVelocity = Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cVelocityMultiplierTemperatureCurve)[1];
 		m_fVelocityRnd = Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cVelocityRndTemperatureCurve)[1];
+		m_fEmittingTime = Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cEmittingTimeTemperatureCurve)[1];
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -116,10 +121,12 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.SIZE_RND, m_fSizeRnd);
 			particles.SetParam(i, EmitterParam.VELOCITY, m_fVelocity);
 			particles.SetParam(i, EmitterParam.VELOCITY_RND, m_fVelocityRnd);
+			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 		
-		//vector t[4];
-		//weaponAnim.GetBoneMatrix(weaponAnim.GetBoneIndex("barrel_muzzle"), t)
+		vector t[4];
+		weaponAnim.GetBoneMatrix(weaponAnim.GetBoneIndex("barrel_muzzle"), t);
+		Print(t);
 		
 		ParticleEffectEntity barrelEffect = ParticleEffectEntity.SpawnParticleEffect(m_sBarrelSurfaceSmokeEffectName, spawnParams);
 		allEmitterNames.Clear();
@@ -138,6 +145,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.SIZE_RND, m_fSizeRnd);
 			particles.SetParam(i, EmitterParam.VELOCITY, m_fVelocity);
 			particles.SetParam(i, EmitterParam.VELOCITY_RND, m_fVelocityRnd);
+			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 	}
 }

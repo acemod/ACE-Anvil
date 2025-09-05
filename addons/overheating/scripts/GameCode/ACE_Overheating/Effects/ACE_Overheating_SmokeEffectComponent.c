@@ -48,7 +48,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	protected ref Curve m_cVelocityRndTemperatureCurve;
 	protected float m_fVelocityRnd;
 	
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle emitting time vs temperature [K]", params: "1300 3 0 0")]
+	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle emitting time vs temperature [K]", params: "1300 30 0 0")]
 	protected ref Curve m_cEmittingTimeTemperatureCurve;
 	protected float m_fEmittingTime;
 	

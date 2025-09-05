@@ -24,11 +24,12 @@ EffectDef {
    VelAffect 0.639
    AirResistance 4
    AirResistanceRND 2
-   WindInfluence 0.068
+   WindInfluence 0.043
    GravityMultiply 0
    GravityMultiplyRND -0.107
    AnimOnce 1
    AnimFPS 20
+   LifetimeByAnim 1
    RandomFrame 0
    Lifetime 0.001
    LifetimeRND 0.001

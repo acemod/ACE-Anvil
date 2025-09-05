@@ -20,6 +20,11 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
        AttachmentType AttachmentMuzzle "{663325CC4B126A7F}" {
        }
       }
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       EffectPosition EntitySlotInfo EffectPosition {
+        PivotID "barrel_muzzle"
+       }
+      }
      }
     }
    }

@@ -1,0 +1,56 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef HOT_1 {
+   ConeAngle 360 0 0
+   MaxNum 100
+   BirthRate 1
+   BirthRateRND 1
+   BirthRateVel 25
+   Offset 0 0 0
+   Angles -90 0 0
+   LodMin 0
+   LodMax 0
+   Material "{2D9695202AB3533C}Particles/_Materials/Gas/Muzzle_Smoke_01.emat"
+   SizeMultiplier 0.001
+   SizeRND 0.001
+   CenterY 0
+   RotMultiplier 50
+   RotRND -150
+   RandomRotDir 1
+   RandomAngle 1
+   Velocity 0.001
+   VelocityRND 0.001
+   VelAffect 0.639
+   AirResistance 4
+   AirResistanceRND 2
+   WindInfluence 0.068
+   GravityMultiply 0
+   GravityMultiplyRND -0.107
+   AnimOnce 1
+   AnimFPS 20
+   RandomFrame 0
+   Lifetime 0.001
+   LifetimeRND 0.001
+   Alpha {
+    0 0 0.005 0.2061 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.131 0.428 1 1 1
+   }
+   EmittingTime 3
+   Repeat 0
+   AlphaMast {
+    0 1 1 0
+   }
+  }
+ }
+ MinFPS 30
+ CollisionPreset "{5DC8DBF6E2ACBAF5}"
+}

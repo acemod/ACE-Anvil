@@ -21,5 +21,7 @@ class ACE_Medical_CPRHelperCompartment : ACE_AnimationHelperCompartment
 	{
 		if (m_pPatientVitals)
 			m_pPatientVitals.SetIsCPRPerformed(false);
+		
+		super.OnCompartmentLeft();
 	}
 }

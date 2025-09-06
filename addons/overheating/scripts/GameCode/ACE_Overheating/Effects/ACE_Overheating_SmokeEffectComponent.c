@@ -111,13 +111,13 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
 			spawnParams.Parent = weapon;
 			spawnParams.PivotID = weaponAnim.GetBoneIndex("barrel_muzzle");
+			spawnParams.DeleteWhenStopped = false;
 			m_pMuzzleEffect = ParticleEffectEntity.SpawnParticleEffect(m_sMuzzleSmokeEffectName, spawnParams);
 		}
 		
-		if (m_pMuzzleEffect.HasActiveParticles())
-			GetGame().GetCallqueue().Remove(m_pMuzzleEffect.StopEmission);
-		else
-			m_pMuzzleEffect.Play();
+		GetGame().GetCallqueue().Remove(m_pMuzzleEffect.StopEmission);
+		m_pMuzzleEffect.Play();
+			
 		
 		Particles particles = m_pMuzzleEffect.GetParticles();
 		array<string> allEmitterNames = {};
@@ -178,5 +178,12 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 		*/
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ~ACE_Overheating_SmokeEffectComponent()
+	{
+		if (m_pMuzzleEffect)
+			SCR_EntityHelper.DeleteEntityAndChildren(m_pMuzzleEffect);
 	}
 }

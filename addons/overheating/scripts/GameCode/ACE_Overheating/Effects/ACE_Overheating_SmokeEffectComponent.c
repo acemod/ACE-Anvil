@@ -121,7 +121,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.SIZE_RND, m_fSizeRnd);
 			particles.SetParam(i, EmitterParam.VELOCITY, m_fVelocity);
 			particles.SetParam(i, EmitterParam.VELOCITY_RND, m_fVelocityRnd);
-			//particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
+			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 		
 		vector muzzleTransform[4];
@@ -147,7 +147,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.SIZE_RND, m_fSizeRnd);
 			particles.SetParam(i, EmitterParam.VELOCITY, m_fVelocity);
 			particles.SetParam(i, EmitterParam.VELOCITY_RND, m_fVelocityRnd);
-			//particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
+			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 	}
 }

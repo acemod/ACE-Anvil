@@ -64,7 +64,7 @@ class ACE_Overheating_AmmoTemperatureJob : ACE_IFrameJob
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Uses Arrhenius equation to compute the progress of some reaction that causes cookoffR
+	//! Uses Arrhenius equation to compute the progress of some reaction that causes cookoff
 	protected float ComputeCookOffProgress(float timeSlice, float nextTemperature)
 	{
 		float progress = m_pContext.m_pBarrel.GetCookOffProgress();		

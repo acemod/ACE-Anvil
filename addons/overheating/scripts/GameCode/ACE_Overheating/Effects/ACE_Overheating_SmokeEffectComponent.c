@@ -121,13 +121,15 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.SIZE_RND, m_fSizeRnd);
 			particles.SetParam(i, EmitterParam.VELOCITY, m_fVelocity);
 			particles.SetParam(i, EmitterParam.VELOCITY_RND, m_fVelocityRnd);
-			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
+			//particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 		
-		vector t[4];
-		weaponAnim.GetBoneMatrix(weaponAnim.GetBoneIndex("barrel_muzzle"), t);
-		Print(t);
+		vector muzzleTransform[4];
+		weaponAnim.GetBoneMatrix(weaponAnim.GetBoneIndex("barrel_muzzle"), muzzleTransform);
+		vector chamberTransform[4];
+		weaponAnim.GetBoneMatrix(weaponAnim.GetBoneIndex("barrel_chamber"), chamberTransform);
 		
+		spawnParams.Transform[3] = 0.5 * (chamberTransform - muzzleTransform);
 		ParticleEffectEntity barrelEffect = ParticleEffectEntity.SpawnParticleEffect(m_sBarrelSurfaceSmokeEffectName, spawnParams);
 		allEmitterNames.Clear();
 		particles.GetEmitterNames(allEmitterNames);
@@ -145,7 +147,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.SIZE_RND, m_fSizeRnd);
 			particles.SetParam(i, EmitterParam.VELOCITY, m_fVelocity);
 			particles.SetParam(i, EmitterParam.VELOCITY_RND, m_fVelocityRnd);
-			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
+			//particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 	}
 }

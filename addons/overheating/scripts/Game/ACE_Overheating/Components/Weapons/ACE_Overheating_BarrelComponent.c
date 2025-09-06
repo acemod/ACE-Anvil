@@ -52,33 +52,36 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		if (m_bInitDone)
 			return;
 		
-		SCR_WeaponAttachmentsStorageComponent weaponStorage = SCR_WeaponAttachmentsStorageComponent.Cast(instanceOwner.FindComponent(SCR_WeaponAttachmentsStorageComponent));
-		if (!weaponStorage)
-			return;
-		
-		SCR_ItemAttributeCollection attributes = SCR_ItemAttributeCollection.Cast(weaponStorage.GetAttributes());
-		if (!attributes)
-			return;	
-		
 		MuzzleComponent muzzle = MuzzleComponent.Cast(instanceOwner.FindComponent(MuzzleComponent));
 		if (!muzzle)
-			return;
-		
-		BaseMagazineComponent magazine = muzzle.GetMagazine();
-		if (!magazine)
 			return;
 		
 		float initialBulletSpeed;
 		GetBulletProperties(muzzle, m_fBulletMass, initialBulletSpeed);
 		// Heat produced by a shot is the initial kinetic energy of the bullet times a heating scale
 		m_fHeatPerShot = m_fHeatingScale * 0.5 * m_fBulletMass * Math.Pow(initialBulletSpeed, 2);
-		m_fBarrelHeatCapacity = m_fBarrelSpecificHeatCapacity * m_fBarrelMassFraction * attributes.GetWeight() * 1000; // 1000 for kg to g
+		m_fBarrelHeatCapacity = m_fBarrelSpecificHeatCapacity * ComputeBarrelMass(instanceOwner) * 1000; // 1000 for kg to g
 		m_fBarrelSurfaceArea = Math.PI * m_fBarrelDiameter * ComputeBarrelLength(instanceOwner);
 		m_bInitDone = true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Calculated from barrel memory points
+	//! Estimates mass of the barrel in kg
+	protected float ComputeBarrelMass(IEntity weapon)
+	{
+		SCR_WeaponAttachmentsStorageComponent weaponStorage = SCR_WeaponAttachmentsStorageComponent.Cast(weapon.FindComponent(SCR_WeaponAttachmentsStorageComponent));
+		if (!weaponStorage)
+			return 0;
+		
+		SCR_ItemAttributeCollection attributes = SCR_ItemAttributeCollection.Cast(weaponStorage.GetAttributes());
+		if (!attributes)
+			return 0;
+		
+		return m_fBarrelMassFraction * attributes.GetWeight();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Calculated from barrel memory points in meters
 	protected float ComputeBarrelLength(IEntity weapon)
 	{
 		Animation weaponAnim = weapon.GetAnimation();

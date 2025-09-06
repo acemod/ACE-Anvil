@@ -52,8 +52,13 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	protected ref Curve m_cEmittingTimeTemperatureCurve;
 	protected float m_fEmittingTime;
 	
+	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Scripted particle emitting time [s] vs temperature [K]", params: "1300 30 0 0")]
+	protected ref Curve m_cScriptedEmittingTimeTemperatureCurve;
+	protected float m_fScriptedEmittingTimeMS;
+	
 	protected ACE_Overheating_BarrelComponent m_pBarrel;
 	protected static ACE_Overheating_Settings s_pSettings;
+	protected ParticleEffectEntity m_pMuzzleEffect;
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Overheating_SmokeEffectComponent FromMuzzle(BaseMuzzleComponent muzzle)
@@ -88,6 +93,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		m_fVelocity = Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cVelocityMultiplierTemperatureCurve)[1];
 		m_fVelocityRnd = Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cVelocityRndTemperatureCurve)[1];
 		m_fEmittingTime = Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cEmittingTimeTemperatureCurve)[1];
+		m_fScriptedEmittingTimeMS = 1000 * Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cScriptedEmittingTimeTemperatureCurve)[1];
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -98,16 +104,25 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		if (!m_pBarrel || m_pBarrel.GetBarrelTemperature() < s_pSettings.m_fMinSmokeTemperature)
 			return;
 		
-		IEntity weapon = muzzle.GetOwner();
-		Animation weaponAnim = weapon.GetAnimation();
-		ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
-		spawnParams.Parent = weapon;
-		spawnParams.PivotID = weaponAnim.GetBoneIndex("barrel_muzzle");
-		ParticleEffectEntity muzzleEffect = ParticleEffectEntity.SpawnParticleEffect(m_sMuzzleSmokeEffectName, spawnParams);
-		Particles particles = muzzleEffect.GetParticles();
+		if (!m_pMuzzleEffect)
+		{
+			IEntity weapon = muzzle.GetOwner();
+			Animation weaponAnim = weapon.GetAnimation();
+			ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
+			spawnParams.Parent = weapon;
+			spawnParams.PivotID = weaponAnim.GetBoneIndex("barrel_muzzle");
+			m_pMuzzleEffect = ParticleEffectEntity.SpawnParticleEffect(m_sMuzzleSmokeEffectName, spawnParams);
+		}
+		
+		if (m_pMuzzleEffect.HasActiveParticles())
+			GetGame().GetCallqueue().Remove(m_pMuzzleEffect.StopEmission);
+		else
+			m_pMuzzleEffect.Play();
+		
+		Particles particles = m_pMuzzleEffect.GetParticles();
 		array<string> allEmitterNames = {};
 		particles.GetEmitterNames(allEmitterNames);
-		
+
 		foreach (int i, string emitterName : allEmitterNames)
 		{
 			if (!m_aTemperatureDependentEmitterNames.Contains(emitterName))
@@ -124,6 +139,18 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
 		
+		GetGame().GetCallqueue().CallLater(m_pMuzzleEffect.StopEmission, m_fScriptedEmittingTimeMS, false);
+		
+		/*
+		ParticleEffectEntitySpawnParams spawnParams;
+		Particles particles;
+		array<string> allEmitterNames = {};
+		
+		
+		spawnParams = new ParticleEffectEntitySpawnParams();
+		spawnParams.Parent = weapon;
+		spawnParams.PivotID = weaponAnim.GetBoneIndex("barrel_muzzle");
+		
 		vector muzzleTransform[4];
 		weaponAnim.GetBoneMatrix(weaponAnim.GetBoneIndex("barrel_muzzle"), muzzleTransform);
 		vector chamberTransform[4];
@@ -131,6 +158,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		
 		spawnParams.Transform[3] = 0.5 * (chamberTransform - muzzleTransform);
 		ParticleEffectEntity barrelEffect = ParticleEffectEntity.SpawnParticleEffect(m_sBarrelSurfaceSmokeEffectName, spawnParams);
+		particles = barrelEffect.GetParticles();
 		allEmitterNames.Clear();
 		particles.GetEmitterNames(allEmitterNames);
 		
@@ -149,5 +177,6 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			particles.SetParam(i, EmitterParam.VELOCITY_RND, m_fVelocityRnd);
 			particles.SetParam(i, EmitterParam.EMITTING_TIME, m_fEmittingTime);
 		}
+		*/
 	}
 }

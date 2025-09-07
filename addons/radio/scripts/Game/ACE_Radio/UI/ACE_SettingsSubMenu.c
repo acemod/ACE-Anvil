@@ -58,21 +58,6 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		{
 			Print("Radio setting 'Beep_Cycle' not found", LogLevel.WARNING);
 		}
-		
-		// Cycle transreceiver beep
-		SCR_SelectionWidgetComponent checkBoxClick = SCR_SelectionWidgetComponent.GetSelectionComponent("Click_Off", wRadioRoot);
-		if (checkBoxClick)
-		{
-			bool value;
-			radioSettings.Get(ACE_Radio_SettingsModule.CLICKOFF, value);
-
-			checkBoxClick.SetCurrentItem(value, false, false);
-			checkBoxClick.m_OnChanged.Insert(SetClickOff);
-		}
-		else
-		{
-			Print("Radio setting 'Click_Off' not found", LogLevel.WARNING);
-		}
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -104,15 +89,6 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 		PrintFormat("SetBeepCycle: %1", state, level: LogLevel.NORMAL);
 
 		ACE_Radio_SettingsModule.GetInstance().Set(ACE_Radio_SettingsModule.BEEPCYCLE, state);
-		GetGame().UserSettingsChanged();
-	}
-
-	//------------------------------------------------------------------------------------------------
-	protected void SetClickOff(SCR_SelectionWidgetComponent checkBox, bool state)
-	{
-		PrintFormat("SetClickOff: %1", state, level: LogLevel.NORMAL);
-
-		ACE_Radio_SettingsModule.GetInstance().Set(ACE_Radio_SettingsModule.CLICKOFF, state);
 		GetGame().UserSettingsChanged();
 	}
 }

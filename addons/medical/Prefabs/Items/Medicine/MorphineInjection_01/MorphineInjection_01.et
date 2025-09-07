@@ -21,8 +21,6 @@ GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/M
      ACE_Medical_MorphineDamageEffect "{6122D60861B541E7}" {
      }
     }
-    m_fItemRegenerationSpeedDPS 5
-    m_fItemRegenerationDurationS 60
    }
   }
  }

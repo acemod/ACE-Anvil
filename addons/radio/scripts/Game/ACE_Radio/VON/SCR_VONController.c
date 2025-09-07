@@ -29,7 +29,7 @@ modded class SCR_VONController: ScriptComponent
 		settings.Get(ACE_Radio_SettingsModule.CLICKOFF, m_bClickOff);
 
 		PrintFormat("SCR_VONController.ACE_LoadSettings: %1, %2, %3, %4",
-			m_eBeepTypeCh1, 
+			m_eBeepTypeCh1,
 			m_eBeepTypeCh2,
 			m_bBeepCycle,
 			m_bBeepCycle,
@@ -63,7 +63,7 @@ modded class SCR_VONController: ScriptComponent
 			super.SetActiveTransmit(entry);
 			return;
 		}
-		
+
 		super.SetActiveTransmit(entry);
 
 		SCR_VONEntryRadio radioEntry = SCR_VONEntryRadio.Cast(entry);
@@ -79,7 +79,6 @@ modded class SCR_VONController: ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	override void DeactivateVON(EVONTransmitType transmitType = EVONTransmitType.NONE)
 	{
-		Pring("SCR_VONController.ACE_LoadSettings: m_bClickOff", m_bClickOff);
 		if (m_bIsActive && m_bClickOff)
 		{
 			if (transmitType != EVONTransmitType.DIRECT)

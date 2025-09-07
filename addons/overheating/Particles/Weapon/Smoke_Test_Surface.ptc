@@ -2,6 +2,8 @@ EffectDef {
  Version 2
  Emitters {
   EmitterDef HOT_1 {
+   ShapeType Box
+   ShapeSize 0.06 0.14 0.05
    ConeAngle 360 0 5
    MaxNum 100
    BirthRate 0

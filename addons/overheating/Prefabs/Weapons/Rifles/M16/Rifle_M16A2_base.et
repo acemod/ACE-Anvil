@@ -25,7 +25,7 @@ GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
         0.385 0.167 0.754 0.419 1 1
        }
        m_aSomkeEffects {
-        ACE_Overheating_SmokeEffect "{6650F89005C40872}" {
+        ACE_Overheating_SmokeEffectConfig "{6650F89005C40872}" {
          m_sContinuousParticleEffect "{61BC10DBBD809DA4}Particles/Weapon/Smoke_Test_Surface.ptc"
          m_sFadeoutParticleEffect "{194CD804F15A1114}Particles/Weapon/Smoke_Test_Surface_FadeOut.ptc"
          m_pEffectPosition PointInfo "{6650F8903C086983}" {

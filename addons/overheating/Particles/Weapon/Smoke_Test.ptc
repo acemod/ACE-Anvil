@@ -18,8 +18,7 @@ EffectDef {
    VelAngle 1
    FlipU Random
    FlipV Random
-   Velocity 0.001
-   VelocityRND 0.001
+   Velocity 0
    VelAffect 0.2
    AirResistance 2
    AirResistanceRND 1
@@ -27,12 +26,8 @@ EffectDef {
    GravityMultiply 0
    GravityMultiplyRND -0.107
    Spring 0.004
-   AnimOnce 1
    AnimFPS 25
-   LifetimeByAnim 1
-   RandomFrame 0
-   Lifetime 0.001
-   LifetimeRND 0.001
+   Lifetime 0
    Alpha {
     0 0 0.005 0.2061 1 0
    }
@@ -66,8 +61,7 @@ EffectDef {
    VelAngle 1
    FlipU Random
    FlipV Random
-   Velocity 0.001
-   VelocityRND 0.001
+   Velocity 0
    VelAffect 0.2
    AirResistance 2
    AirResistanceRND 1
@@ -75,12 +69,8 @@ EffectDef {
    GravityMultiply 0
    GravityMultiplyRND -0.151
    Spring 0.004
-   AnimOnce 1
    AnimFPS 20
-   LifetimeByAnim 1
-   RandomFrame 0
-   Lifetime 0.001
-   LifetimeRND 0.001
+   Lifetime 0
    Alpha {
     0 0 0.0034 0.1637 1 0
    }

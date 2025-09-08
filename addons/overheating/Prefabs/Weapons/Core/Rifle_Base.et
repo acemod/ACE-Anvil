@@ -26,16 +26,6 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
         PivotID "barrel_muzzle"
        }
        ResetOnFire 0
-       m_sMuzzleSmokeEffectName "{52EFBFC3634F588E}Particles/Weapon/Smoke_Test.ptc"
-       m_pMuzzleSmokeEffectPoint PointInfo "{6650F63A75D51AD2}" {
-        PivotID "slot_barrel_muzzle"
-        Offset 0 0 0.0168
-       }
-       m_sBarrelSurfaceSmokeEffectName "{61BC10DBBD809DA4}Particles/Weapon/Smoke_Test_Surface.ptc"
-       m_pBarrelSurfaceSmokeEffectPoint PointInfo "{6650F635D00AA7BC}" {
-        PivotID "slot_hand_guard"
-        Offset 0 0 0.1358
-       }
        m_cBirthRateTemperatureCurve {
         0.366 0 0.568 0.278 1 0.503
        }
@@ -50,6 +40,15 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
        }
        m_cEmittingTimeTemperatureCurve {
         0.387 0.17 0.748 0.5 1 1
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffect "{6650F89004554222}" {
+         m_sContinuousParticleEffect "{52EFBFC3634F588E}Particles/Weapon/Smoke_Test.ptc"
+         m_sFadeoutParticleEffect "{BF34CF76D5A92EBD}Particles/Weapon/Smoke_Test_FadeOut.ptc"
+         m_pEffectPosition PointInfo "{6650F8903978BCB2}" {
+          PivotID "barrel_muzzle"
+         }
+        }
        }
       }
      }

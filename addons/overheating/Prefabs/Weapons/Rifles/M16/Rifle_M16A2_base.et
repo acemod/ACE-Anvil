@@ -8,6 +8,18 @@ GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
       ACE_Overheating_BarrelComponent "{65B9755B8CB25ED7}" {
        m_fBarrelDiameter 0.01799
       }
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffect "{6650F89005C40872}" {
+         m_sContinuousParticleEffect "{61BC10DBBD809DA4}Particles/Weapon/Smoke_Test_Surface.ptc"
+         m_sFadeoutParticleEffect "{194CD804F15A1114}Particles/Weapon/Smoke_Test_Surface_FadeOut.ptc"
+         m_pEffectPosition PointInfo "{6650F8903C086983}" {
+          PivotID "slot_hand_guard"
+          Offset 0 0 0.1358
+         }
+        }
+       }
+      }
      }
     }
    }

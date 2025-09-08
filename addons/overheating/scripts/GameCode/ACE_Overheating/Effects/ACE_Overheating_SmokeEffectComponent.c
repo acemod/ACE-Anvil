@@ -78,6 +78,18 @@ class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 	{
 		return 1000 * Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cEmittingTimeTemperatureCurve)[1];
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	PointInfo GetMuzzleSmokeEffectPoint()
+	{
+		return m_pMuzzleSmokeEffectPoint;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	PointInfo GetBarrelSurfaceSmokeEffectPoint()
+	{
+		return m_pBarrelSurfaceSmokeEffectPoint;
+	}
 }
 
 //------------------------------------------------------------------------------------------------
@@ -151,20 +163,20 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		Animation weaponAnim = weapon.GetAnimation();
 		ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
 		spawnParams.Parent = weapon;
-		int pivotID = weaponAnim.GetBoneIndex("barrel_muzzle");
-		spawnParams.PivotID = pivotID;
+		PointInfo point = m_pData.GetMuzzleSmokeEffectPoint();
+		point.Init(weapon);
+		spawnParams.PivotID = point.GetNodeId();
+		point.GetLocalTransform(spawnParams.Transform);
 		spawnParams.DeleteWhenStopped = false;
 		m_pMuzzleEffect = ParticleEffectEntity.SpawnParticleEffect(m_pData.GetMuzzleSmokeEffectName(), spawnParams);
 		
 		spawnParams = new ParticleEffectEntitySpawnParams();
+		point = m_pData.GetBarrelSurfaceSmokeEffectPoint();
+		point.Init(weapon);
 		spawnParams.Parent = weapon;
-		spawnParams.PivotID = pivotID;
+		spawnParams.PivotID = point.GetNodeId();
+		point.GetLocalTransform(spawnParams.Transform);
 		spawnParams.DeleteWhenStopped = false;
-		vector muzzleTransform[4];
-		weaponAnim.GetBoneMatrix(pivotID, muzzleTransform);
-		vector chamberTransform[4];
-		weaponAnim.GetBoneMatrix(weaponAnim.GetBoneIndex("barrel_chamber"), chamberTransform);
-		spawnParams.Transform[3] = 0.5 * (chamberTransform[3] - muzzleTransform[3]);
 		m_pBarrelSurfaceEffect = ParticleEffectEntity.SpawnParticleEffect(m_pData.GetBarrelSurfaceSmokeEffectName(), spawnParams);
 	}
 	

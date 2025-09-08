@@ -1,18 +1,6 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 {
-	[Attribute(defvalue: "{5EF5A6DBC1EA1B1D}Particles/Weapon/ACE_Overheating_MuzzleSmoke.ptc", uiwidget: UIWidgets.ResourceNamePicker)]
-	protected ResourceName m_sMuzzleSmokeEffectName;
-	
-	[Attribute()]
-	protected ref PointInfo m_pMuzzleSmokeEffectPoint;
-	
-	[Attribute(defvalue: "{5EF5A6DBC1EA1B1D}Particles/Weapon/ACE_Overheating_MuzzleSmoke.ptc", uiwidget: UIWidgets.ResourceNamePicker)]
-	protected ResourceName m_sBarrelSurfaceSmokeEffectName;
-	
-	[Attribute()]
-	protected ref PointInfo m_pBarrelSurfaceSmokeEffectPoint;
-	
 	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Birth rate vs temperature [K]", params: "1300 100 0 0")]
 	protected ref Curve m_cBirthRateTemperatureCurve;
 	
@@ -30,18 +18,6 @@ class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 	
 	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle emitting time vs temperature [K]", params: "1300 60 0 0")]
 	protected ref Curve m_cEmittingTimeTemperatureCurve;
-	
-	//------------------------------------------------------------------------------------------------
-	ResourceName GetMuzzleSmokeEffectName()
-	{
-		return m_sMuzzleSmokeEffectName;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	ResourceName GetBarrelSurfaceSmokeEffectName()
-	{
-		return m_sBarrelSurfaceSmokeEffectName;
-	}
 	
 	//------------------------------------------------------------------------------------------------
 	float GetLifetimeRndScale()
@@ -76,25 +52,16 @@ class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 	//------------------------------------------------------------------------------------------------
 	float ComputeEmittingTime(float temperature)
 	{
-		return 1000 * Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cEmittingTimeTemperatureCurve)[1];
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	PointInfo GetMuzzleSmokeEffectPoint()
-	{
-		return m_pMuzzleSmokeEffectPoint;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	PointInfo GetBarrelSurfaceSmokeEffectPoint()
-	{
-		return m_pBarrelSurfaceSmokeEffectPoint;
+		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cEmittingTimeTemperatureCurve)[1];
 	}
 }
 
 //------------------------------------------------------------------------------------------------
 class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 {
+	[Attribute()]
+	protected ref array<ref ACE_Overheating_SmokeEffect> m_aSomkeEffects;
+	
 	protected ACE_Overheating_SmokeEffectComponentClass m_pData;
 	protected float m_fBirthRate;
 	protected float m_fLifetime;
@@ -104,8 +71,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	
 	protected ACE_Overheating_BarrelComponent m_pBarrel;
 	protected static ACE_Overheating_Settings s_pSettings;
-	protected ParticleEffectEntity m_pMuzzleEffect;
-	protected ParticleEffectEntity m_pBarrelSurfaceEffect;
+	bool m_bInitDone = false;
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Overheating_SmokeEffectComponent FromMuzzle(BaseMuzzleComponent muzzle)
@@ -136,7 +102,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		m_fLifetime = m_pData.ComputeLifetime(temperature);
 		m_fSize = m_pData.ComputeSize(temperature);
 		m_fVelocity = m_pData.ComputeVelocity(temperature);
-		m_fEmittingTimeMS = m_pData.ComputeEmittingTime(temperature);
+		m_fEmittingTimeMS = 1000 * m_pData.ComputeEmittingTime(temperature);
 	}
 		
 	//------------------------------------------------------------------------------------------------
@@ -147,8 +113,8 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		if (!m_pBarrel || m_pBarrel.GetBarrelTemperature() < s_pSettings.m_fMinSmokeTemperature)
 			return;
 		
-		if (!m_pMuzzleEffect)
-			InitEffects(muzzle);
+		if (!m_bInitDone)
+			InitEffects(muzzle.GetOwner());
 		
 		GetGame().GetCallqueue().Remove(StopEffects);
 		StartEffects();
@@ -157,36 +123,22 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void InitEffects(BaseMuzzleComponent muzzle)
+	void InitEffects(IEntity weapon)
 	{
-		IEntity weapon = muzzle.GetOwner();
-		Animation weaponAnim = weapon.GetAnimation();
-		ParticleEffectEntitySpawnParams spawnParams = new ParticleEffectEntitySpawnParams();
-		spawnParams.Parent = weapon;
-		PointInfo point = m_pData.GetMuzzleSmokeEffectPoint();
-		point.Init(weapon);
-		spawnParams.PivotID = point.GetNodeId();
-		point.GetLocalTransform(spawnParams.Transform);
-		spawnParams.DeleteWhenStopped = false;
-		m_pMuzzleEffect = ParticleEffectEntity.SpawnParticleEffect(m_pData.GetMuzzleSmokeEffectName(), spawnParams);
+		foreach (ACE_Overheating_SmokeEffect effect : m_aSomkeEffects)
+		{
+			effect.Init(weapon);
+		}
 		
-		spawnParams = new ParticleEffectEntitySpawnParams();
-		point = m_pData.GetBarrelSurfaceSmokeEffectPoint();
-		point.Init(weapon);
-		spawnParams.Parent = weapon;
-		spawnParams.PivotID = point.GetNodeId();
-		point.GetLocalTransform(spawnParams.Transform);
-		spawnParams.DeleteWhenStopped = false;
-		m_pBarrelSurfaceEffect = ParticleEffectEntity.SpawnParticleEffect(m_pData.GetBarrelSurfaceSmokeEffectName(), spawnParams);
+		m_bInitDone = true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void ApplyParamsToEffects()
 	{
-		array<Particles> particlesList = {m_pMuzzleEffect.GetParticles(), m_pBarrelSurfaceEffect.GetParticles()};
-		
-		foreach (Particles particles : particlesList)
+		foreach (ACE_Overheating_SmokeEffect effect : m_aSomkeEffects)
 		{
+			Particles particles = effect.GetEffectEntity().GetParticles();
 			particles.SetParam(-1, EmitterParam.BIRTH_RATE, m_fBirthRate);
 			particles.SetParam(-1, EmitterParam.LIFETIME, m_fLifetime);
 			particles.SetParam(-1, EmitterParam.LIFETIME_RND, m_pData.GetLifetimeRndScale() * m_fLifetime);
@@ -198,21 +150,75 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	//------------------------------------------------------------------------------------------------
 	void StartEffects()
 	{
-		m_pMuzzleEffect.Play();
-		m_pBarrelSurfaceEffect.Play();
+		foreach (ACE_Overheating_SmokeEffect effect : m_aSomkeEffects)
+		{
+			effect.GetEffectEntity().Play();
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void StopEffects()
 	{
-		m_pMuzzleEffect.StopEmission();
-		m_pBarrelSurfaceEffect.StopEmission();
+		foreach (ACE_Overheating_SmokeEffect effect : m_aSomkeEffects)
+		{
+			effect.GetEffectEntity().StopEmission();
+			
+			ParticleEffectEntity fadeOut = effect.SpawnFadeOutEffect();
+			Particles particles = fadeOut.GetParticles();
+			particles.SetParam(-1, EmitterParam.BIRTH_RATE, m_fBirthRate);
+			particles.SetParam(-1, EmitterParam.LIFETIME, m_fLifetime);
+			particles.SetParam(-1, EmitterParam.LIFETIME_RND, m_pData.GetLifetimeRndScale() * m_fLifetime);
+			particles.SetParam(-1, EmitterParam.SIZE, m_fSize);
+			particles.SetParam(-1, EmitterParam.VELOCITY, m_fVelocity);
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------------
+[BaseContainerProps(), SCR_BaseContainerResourceTitleField("m_sContinuousParticleEffect")]
+class ACE_Overheating_SmokeEffect : Managed
+{
+	[Attribute(uiwidget: UIWidgets.ResourceNamePicker, params: "ptc")]
+	protected ResourceName m_sContinuousParticleEffect;
+	
+	[Attribute(uiwidget: UIWidgets.ResourceNamePicker, params: "ptc")]
+	protected ResourceName m_sFadeoutParticleEffect;
+	
+	[Attribute()]
+	protected ref PointInfo m_pEffectPosition;
+	
+	protected ref ParticleEffectEntitySpawnParams m_pSpawnParams;
+	protected ParticleEffectEntity m_pEffectEntity;
+	
+	//------------------------------------------------------------------------------------------------
+	void Init(IEntity weapon)
+	{
+		Animation weaponAnim = weapon.GetAnimation();
+		m_pSpawnParams = new ParticleEffectEntitySpawnParams();
+		m_pSpawnParams.Parent = weapon;
+		m_pEffectPosition.Init(weapon);
+		m_pSpawnParams.PivotID = m_pEffectPosition.GetNodeId();
+		m_pEffectPosition.GetLocalTransform(m_pSpawnParams.Transform);
+		m_pSpawnParams.DeleteWhenStopped = false;
+		m_pEffectEntity = ParticleEffectEntity.SpawnParticleEffect(m_sContinuousParticleEffect, m_pSpawnParams);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ~ACE_Overheating_SmokeEffectComponent()
+	ParticleEffectEntity GetEffectEntity()
 	{
-		SCR_EntityHelper.DeleteEntityAndChildren(m_pMuzzleEffect);
-		SCR_EntityHelper.DeleteEntityAndChildren(m_pBarrelSurfaceEffect);			
+		return m_pEffectEntity;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ParticleEffectEntity SpawnFadeOutEffect()
+	{
+		m_pSpawnParams.DeleteWhenStopped = true;
+		return ParticleEffectEntity.SpawnParticleEffect(m_sFadeoutParticleEffect, m_pSpawnParams);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ~ACE_Overheating_SmokeEffect()
+	{
+		SCR_EntityHelper.DeleteEntityAndChildren(m_pEffectEntity);
 	}
 }

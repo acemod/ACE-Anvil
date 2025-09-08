@@ -8,6 +8,8 @@ class ACE_CookOff_ObjectContext : ACE_FrameJobScheduler_IObjectContext<IEntity>
 	int m_iTotalAmmoCount = 0;
 	float m_fDetonationCountdown;
 	
+	protected static const ResourceName HELPER_ENTITY_PREFAB_NAME = "{503A79B1A99FEF74}Prefabs/Helpers/ACE_CookOff_HelperEntity.et";
+	
 	//------------------------------------------------------------------------------------------------
 	void ACE_CookOff_ObjectContext(IEntity object)
 	{
@@ -20,7 +22,7 @@ class ACE_CookOff_ObjectContext : ACE_FrameJobScheduler_IObjectContext<IEntity>
 		
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.Parent = object;
-		m_pHelperEntity = ACE_CookOff_HelperEntity.Cast(GetGame().SpawnEntityPrefab(Resource.Load("{503A79B1A99FEF74}Prefabs/Helpers/ACE_CookOff_HelperEntity.et"), null, params));
+		m_pHelperEntity = ACE_CookOff_HelperEntity.Cast(GetGame().SpawnEntityPrefab(Resource.Load(HELPER_ENTITY_PREFAB_NAME), null, params));
 	}
 	
 	//------------------------------------------------------------------------------------------------

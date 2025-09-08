@@ -4,8 +4,14 @@ class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 	[Attribute(defvalue: "{5EF5A6DBC1EA1B1D}Particles/Weapon/ACE_Overheating_MuzzleSmoke.ptc", uiwidget: UIWidgets.ResourceNamePicker)]
 	protected ResourceName m_sMuzzleSmokeEffectName;
 	
+	[Attribute()]
+	protected ref PointInfo m_pMuzzleSmokeEffectPoint;
+	
 	[Attribute(defvalue: "{5EF5A6DBC1EA1B1D}Particles/Weapon/ACE_Overheating_MuzzleSmoke.ptc", uiwidget: UIWidgets.ResourceNamePicker)]
 	protected ResourceName m_sBarrelSurfaceSmokeEffectName;
+	
+	[Attribute()]
+	protected ref PointInfo m_pBarrelSurfaceSmokeEffectPoint;
 	
 	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Birth rate vs temperature [K]", params: "1300 100 0 0")]
 	protected ref Curve m_cBirthRateTemperatureCurve;

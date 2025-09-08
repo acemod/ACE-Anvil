@@ -27,27 +27,21 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
        }
        ResetOnFire 0
        m_sMuzzleSmokeEffectName "{52EFBFC3634F588E}Particles/Weapon/Smoke_Test.ptc"
-       m_sBarrelSurfaceSmokeEffectName "{61BC10DBBD809DA4}Particles/Weapon/Smoke_Test_Surface.ptc"
-       m_aTemperatureDependentEmitterNames {
-        "HOT_1" "HOT_0"
-       }
+       m_sBarrelSurfaceSmokeEffectName "{3F557E132C35E01B}Particles/Weapon/ACE_Overheating_Empty.ptc"
        m_cBirthRateTemperatureCurve {
         0.366 0 0.568 0.278 1 0.503
        }
-       m_cLifetimeMultiplierMultiplierTemperatureCurve {
+       m_cLifetimeTemperatureCurve {
         0 0 0.559 0.222 1 0.377
        }
-       m_cSizeMultiplierTemperatureCurve {
+       m_cSizeTemperatureCurve {
         0.167 0 0.311 0.042 0.452 0.094 0.59 0.128 0.795 0.153 1 0.154
        }
-       m_cVelocityMultiplierTemperatureCurve {
+       m_cVelocityTemperatureCurve {
         0 0.04 0.462 0.049 0.628 0.055 0.807 0.07 1 0.099
        }
        m_cEmittingTimeTemperatureCurve {
-        0 0.507 1 0.845
-       }
-       m_cScriptedEmittingTimeTemperatureCurve {
-        0 0.205 1 0.299
+        0.346 0.033 1 0.167
        }
       }
      }

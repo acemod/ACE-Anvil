@@ -8,11 +8,6 @@ GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
       ACE_Overheating_BarrelComponent "{65B9755B8CB25ED7}" {
        m_fBarrelDiameter 0.01799
       }
-      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
-       EffectPosition EntitySlotInfo EffectPosition {
-        PivotID "barrel_muzzle"
-       }
-      }
      }
     }
    }

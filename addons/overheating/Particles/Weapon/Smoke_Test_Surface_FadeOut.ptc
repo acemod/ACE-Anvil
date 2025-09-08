@@ -43,7 +43,10 @@ EffectDef {
    Size {
     0 0.131 0.428 1 1 1
    }
-   EmittingTime 1
+   Repeat 0
+   AlphaMast {
+    0 1 0.5013 0
+   }
   }
  }
  MinFPS 30

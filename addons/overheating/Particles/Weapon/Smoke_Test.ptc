@@ -26,6 +26,7 @@ EffectDef {
    GravityMultiply 0
    GravityMultiplyRND -0.107
    Spring 0.004
+   AnimOnce 1
    AnimFPS 25
    Lifetime 0
    Alpha {
@@ -42,7 +43,7 @@ EffectDef {
    }
    EmittingTime 1
    AlphaMast {
-    0 1 0.9385 0.9394 0.982 0 1 0
+    0 1
    }
   }
  }

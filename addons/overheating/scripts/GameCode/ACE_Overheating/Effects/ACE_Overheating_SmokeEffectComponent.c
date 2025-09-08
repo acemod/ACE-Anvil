@@ -74,7 +74,8 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	[Attribute()]
 	protected ref array<ref ACE_Overheating_SmokeEffectConfig> m_aSomkeEffects;
 	
-	
+	[RplProp()]
+	protected bool m_bSmokeEnabled = false;
 	[RplProp()]
 	protected int m_iBirthRate;
 	[RplProp()]
@@ -137,7 +138,18 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	{
 		super.OnFired(effectEntity, muzzle, projectileEntity);
 		
-		if (!m_pBarrel || m_pBarrel.GetBarrelTemperature() < s_pSettings.m_fMinSmokeTemperature)
+		if (Replication.IsServer())
+		{
+			bool smokeEnabled = m_pBarrel.GetBarrelTemperature() >= s_pSettings.m_fMinSmokeTemperature;
+			
+			if (smokeEnabled != m_bSmokeEnabled)
+			{
+				m_bSmokeEnabled = smokeEnabled;
+				Replication.BumpMe();
+			}
+		}
+		
+		if (!m_bSmokeEnabled)
 			return;
 		
 		if (!m_bInitDone)

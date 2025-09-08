@@ -42,6 +42,30 @@ GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
         PivotID "barrel_muzzle"
        }
        ResetOnFire 0
+       m_cBirthRateTemperatureCurve {
+        0.385 0 0.693 0.153 1 0.199
+       }
+       m_cLifetimeTemperatureCurve {
+        0.384 0 0.717 0.242 1 0.368
+       }
+       m_cSizeTemperatureCurve {
+        0.347 0 0.641 0.47 1 0.622
+       }
+       m_cVelocityTemperatureCurve {
+        0.381 0 0.683 0.623 1 1
+       }
+       m_cEmittingTimeTemperatureCurve {
+        0.373 0 0.373 0.002 1 0.002
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6651556FB34B7B44}" {
+         m_sContinuousParticleEffect "{7E134FED6221D9A8}Particles/Weapon/Suppressor_Carbine.ptc"
+         m_sFadeoutParticleEffect "{7E134FED6221D9A8}Particles/Weapon/Suppressor_Carbine.ptc"
+         m_pEffectPosition PointInfo "{6651556F9633EF9D}" {
+          PivotID "slot_barrel_muzzle"
+         }
+        }
+       }
       }
      }
     }

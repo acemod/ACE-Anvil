@@ -19,6 +19,7 @@ EffectDef {
    FlipU Random
    FlipV Random
    Velocity 0
+   VelocityRND 0.1
    VelAffect 0.5
    AirResistance 3
    AirResistanceRND 4
@@ -27,14 +28,14 @@ EffectDef {
    GravityMultiplyRND -0.107
    Spring 0.001
    AnimOnce 1
-   AnimFPS 25
+   AnimFPS 20
    RandomFrame 1
    Lifetime 2
    Color {
     0 0.6788 0.6788 0.6788
    }
    Alpha {
-    0 0.291 0.5522 0.1394 1 0
+    0 0.7516 0.5527 0.4243 1 0
    }
    Emissivity {
     0 0
@@ -56,7 +57,7 @@ EffectDef {
    LodMax 0
    Material "{239FB3ED3B942A0B}Particles/_Materials/Gas/Smoke_Weapons_02.emat"
    SizeMultiplier 0.2
-   SizeRND 0.1
+   SizeRND 0.3
    CenterY 0
    RotMultiplier 45
    RotRND -55
@@ -65,6 +66,7 @@ EffectDef {
    FlipU Random
    FlipV Random
    Velocity 0
+   VelocityRND 0.1
    VelAffect 0.5
    AirResistance 2
    AirResistanceRND 3
@@ -73,13 +75,13 @@ EffectDef {
    GravityMultiplyRND -0.063
    Spring 0.001
    AnimOnce 1
-   AnimFPS 25
+   AnimFPS 20
    Lifetime 2
    Color {
     0 0.6788 0.6788 0.6788
    }
    Alpha {
-    0 0.8425 0.5517 0.1879 1 0
+    0 0.8728 0.5517 0.4364 1 0
    }
    Emissivity {
     0 0
@@ -103,8 +105,8 @@ EffectDef {
    LodMin 0
    LodMax 0
    Material "{9099B7494562F78F}Particles/_Materials/Gas/Steam_Base_Random_03_White.emat"
-   SizeMultiplier 0.2
-   SizeRND 0.2
+   SizeMultiplier 0.1
+   SizeRND 0.1
    CenterY 0
    RotMultiplier 45
    RotRND -55
@@ -113,9 +115,9 @@ EffectDef {
    FlipU Random
    FlipV Random
    Velocity 0
-   VelocityRND 0.3
+   VelocityRND 0.6
    VelAffect 0.5
-   AirResistance 1
+   AirResistance 2
    AirResistanceRND 2
    WindInfluence 0.122
    GravityMultiply 0
@@ -129,7 +131,7 @@ EffectDef {
     0 0.6788 0.6788 0.6788
    }
    Alpha {
-    0 0.5576 1 0
+    0 0.794 1 0
    }
    Emissivity {
     0 0

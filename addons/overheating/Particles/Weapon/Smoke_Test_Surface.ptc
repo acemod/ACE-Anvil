@@ -3,53 +3,8 @@ EffectDef {
  Emitters {
   EmitterDef HOT_1 {
    ShapeType Box
-   ShapeSize 0.06 0.14 0.05
+   ShapeSize 0.02 0.18 0.04
    ConeAngle 360 0 5
-   MaxNum 100
-   BirthRate 0
-   Offset 0 0 0
-   Angles -90 0 0
-   LodMin 0
-   LodMax 0
-   Material "{737EBC63953EDD33}Particles/_Materials/Gas/Muzzle_Smoke_02.emat"
-   SizeMultiplier 0
-   CenterY 0
-   RotMultiplier 50
-   RotRND -150
-   RandomRotDir 1
-   VelAngle 1
-   FlipU Random
-   FlipV Random
-   Velocity 0
-   VelAffect 0.2
-   AirResistance 2
-   AirResistanceRND 1
-   WindInfluence 0.124
-   GravityMultiply 0
-   GravityMultiplyRND -0.107
-   Spring 0.004
-   AnimFPS 25
-   RandomFrame 0
-   Lifetime 0
-   Alpha {
-    0 0 0.005 0.2061 1 0
-   }
-   Emissivity {
-    0 0
-   }
-   RotationSpeed {
-    0 1 1 0
-   }
-   Size {
-    0 0.131 0.428 1 1 1
-   }
-   EmittingTime 1
-   AlphaMast {
-    0 1 0.9385 0.9394 0.982 0 1 0
-   }
-  }
-  EmitterDef HOT_0 {
-   ConeAngle 360 0 0
    MaxNum 100
    BirthRate 0
    Angles -90 0 0
@@ -66,17 +21,18 @@ EffectDef {
    FlipV Random
    Velocity 0
    VelAffect 0.2
-   AirResistance 2
-   AirResistanceRND 1
-   WindInfluence 0.086
+   AirResistance 1
+   AirResistanceRND 3
+   WindInfluence 0.124
    GravityMultiply 0
-   GravityMultiplyRND -0.151
+   GravityMultiplyRND -0.063
    Spring 0.004
+   AnimOnce 1
    AnimFPS 20
    RandomFrame 0
    Lifetime 0
    Alpha {
-    0 0 0.0034 0.1637 1 0
+    0 0.1152 0.3698 0.0546 1 0
    }
    Emissivity {
     0 0
@@ -87,10 +43,7 @@ EffectDef {
    Size {
     0 0.131 0.428 1 1 1
    }
-   EmittingTime 1
-   AlphaMast {
-    0 1 0.9385 0.9394 0.982 0 1 0
-   }
+   EmittingTime 60
   }
  }
  MinFPS 30

@@ -70,4 +70,14 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		m_bACE_Captives_IsCaptive = isCaptive;
 		Replication.BumpMe();
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Prevent captives from equipping gadgets in vehicles
+	override bool GetCanEquipGadget(IEntity gadget)
+	{
+		if (m_bACE_Captives_IsCaptive)
+			return false;
+		
+		return super.GetCanEquipGadget(gadget);
+	}
 }

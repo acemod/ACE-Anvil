@@ -11,7 +11,8 @@ class ACE_Radio_SettingsModule: ModuleGameSettings
 	const string BEEPCH1 = "m_eBeepCh1";
 	const string BEEPCH2 = "m_eBeepCh2";
 	const string BEEPCYCLE = "m_bBeepCycle";
-	
+	const string CLICKOFF = "m_bClickOff";
+
 	[Attribute(ACE_ERadioBeep.NORMAL.ToString(), uiwidget: UIWidgets.ComboBox, desc: "Sound to play when activating VoN Ch1", enums: ParamEnumArray.FromEnum(ACE_ERadioBeep))]
 	ACE_ERadioBeep m_eBeepCh1;
 
@@ -20,6 +21,9 @@ class ACE_Radio_SettingsModule: ModuleGameSettings
 	
 	[Attribute("1", desc: "Should radio channel beep sound play when cycling transreceivers")]
 	bool m_bBeepCycle;
+
+	[Attribute("1", desc: "Should the radio channel click-off sound play when ending the transmission")]
+	bool m_bClickOff;
 	
 	//------------------------------------------------------------------------------------------------
 	static BaseContainer GetInstance()

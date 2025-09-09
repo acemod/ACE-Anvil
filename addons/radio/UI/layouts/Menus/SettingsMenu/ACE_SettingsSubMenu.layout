@@ -71,6 +71,23 @@ HorizontalLayoutWidgetClass {
           }
          }
         }
+        ButtonWidgetClass "{664EB3C5E0BC479D}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+         Name "Click_Off"
+         Slot LayoutSlot "{64481AA16C28CD32}" {
+          HorizontalAlign 3
+          Padding 4 4 4 4
+         }
+         components {
+          SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+           m_sLabel "#ACE_Radio-Settings_Click_Off"
+           m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+           m_aElementNames {
+            "#AR-UI_No" "#AR-UI_Yes"
+           }
+           m_bCycleMode 1
+          }
+         }
+        }
        }
       }
      }

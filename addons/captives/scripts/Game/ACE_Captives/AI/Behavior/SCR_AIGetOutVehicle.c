@@ -16,4 +16,3 @@ modded class SCR_AIGetOutVehicle : SCR_AIVehicleBehavior
 		super.OnActionSelected();
 	}
 }
-

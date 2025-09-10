@@ -31,7 +31,6 @@ Simulates heating of weapons when firing with the following effects:
 ## Settings
 
 Certain aspects of this mod can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
-
 | Field                                 | Value                | Description                                        |
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_fHeatingScale`                     | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Scales the heat transferred to the barrel by a shot. The larger, the faster the temperature of the barrel increases. |
@@ -43,6 +42,7 @@ Certain aspects of this mod can be configured in the mission header section of a
 | `m_fGunpowderAutoignitionTemperature` | Type: `float`**<br />Range: 0 to 1300<br />Default: `473.15` | Temperature at which ammo can cook off [K]. |
 | `m_fBarrel2BulletMassScaledTemperatureRateConstant` | Type: `float`**<br />Range: 0 to ∞<br />Default: `2.031` | Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature. |
 | `m_fMuzzleDispersionScale`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Scales the additional temperature-dependent dispersion of shots. Set to 0.0 to turn it off. |
+| `m_fMinSmokeTemperature`              | Type: `float`**<br />Range: 0 to 1300<br />Default: `500.0` | Temperature above which barrel starts smoking [K]. |
 | `m_fMinGlowTemperature`               | Type: `float`**<br />Range: 0 to 1300<br />Default: `800.0` | Temperature above which barrel starts glowing [K]. |
 
 \*\* Note that floats need a decimal point to get properly read.
@@ -61,6 +61,7 @@ Example for the `missionHeader` in a server config:
             "m_fGunpowderAutoignitionTemperature": 473.15,
             "m_fBarrel2BulletMassScaledTemperatureRateConstant": 2.031,
             "m_fMuzzleDispersionScale": 1.0,
+            "m_fMinSmokeTemperature": 500.0,
             "m_fMinGlowTemperature": 800.0
         }
     }
@@ -94,3 +95,7 @@ Example for the `missionHeader` in a server config:
    }
   }
   ```
+
+### Additional Requirements for Smoking Muzzle
+
+- `ACE_Overheating_SmokeEffectComponent` as a child component of `MuzzleComponent` on the weapon prefab (already present if prefab inherits from `Rifle_Base.et`, `Handgun_Base.et` or `MachineGun_Base.et`).

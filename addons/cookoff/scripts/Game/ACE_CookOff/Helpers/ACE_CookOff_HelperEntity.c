@@ -124,9 +124,7 @@ class ACE_CookOff_HelperEntity : GenericEntity
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
 	protected void RpcDo_PlayCookoffSoundBroadcast(ACE_CookOff_EAmmoType ammoType)
 	{
-		SCR_SoundManagerEntity soundManagerEntity = GetGame().GetSoundManagerEntity();
-		if (soundManagerEntity)
-			soundManagerEntity.CreateAndPlayAudioSource(this, s_pData.GetAudioSourceConfig(ammoType));
+		SCR_SoundManagerModule.CreateAndPlayAudioSource(this, s_pData.GetAudioSourceConfig(ammoType));
 	}
 	
 	//------------------------------------------------------------------------------------------------

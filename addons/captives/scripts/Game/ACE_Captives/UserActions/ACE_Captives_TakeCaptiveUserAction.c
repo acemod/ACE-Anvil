@@ -25,17 +25,7 @@ class ACE_Captives_TakeCaptiveUserAction : ACE_InstantGadgetUserAction
 		if (!ownerCharController)
 			return false;
 		
-		if (ownerCharController.ACE_IsCarried())
-			return false;
-		
-		if (ownerCharController.ACE_Captives_IsCaptive())
-			return false;
-		
-		// Incapacitated characters can be tied
-		if (ownerCharController.GetLifeState() == ECharacterLifeState.INCAPACITATED)
-			return true;
-				
-		return ownerCharController.ACE_Captives_HasSurrendered();
+		return ownerCharController.ACE_Captives_CanBeTakenCaptive(user);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -55,7 +45,7 @@ class ACE_Captives_TakeCaptiveUserAction : ACE_InstantGadgetUserAction
 			return;
 		
 		SCR_CharacterControllerComponent ownerCharController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
-		if (!ownerCharController)
+		if (!ownerCharController || !ownerCharController.ACE_Captives_CanBeTakenCaptive(pUserEntity))
 			return;
 		
 		ownerCharController.ACE_Captives_SetCaptive(true);

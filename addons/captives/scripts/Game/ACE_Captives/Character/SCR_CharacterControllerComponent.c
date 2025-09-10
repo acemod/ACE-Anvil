@@ -136,4 +136,14 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		// 0.4 corresponds to a sector angle of 101.54°
 		return dot * dot / ownerDir.LengthSq() / relCaptorPos.LengthSq() >= 0.4;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Prevent captives from equipping gadgets in vehicles
+	override bool GetCanEquipGadget(IEntity gadget)
+	{
+		if (m_bACE_Captives_IsCaptive)
+			return false;
+		
+		return super.GetCanEquipGadget(gadget);
+	}
 }

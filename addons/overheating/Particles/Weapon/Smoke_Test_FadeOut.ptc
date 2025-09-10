@@ -30,7 +30,7 @@ EffectDef {
    AnimFPS 25
    Lifetime 0
    Alpha {
-    0 0 0.005 0.2061 1 0
+    0 0.0849 0.032 0.0485 1 0
    }
    Emissivity {
     0 0

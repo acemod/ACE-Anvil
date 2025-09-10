@@ -3,34 +3,36 @@ EffectDef {
  Emitters {
   EmitterDef HOT_1 {
    ShapeType Box
-   ShapeSize 0.02 0.18 0.04
-   ConeAngle 360 0 5
-   MaxNum 100
-   BirthRate 0
-   Angles -90 0 0
+   ShapeSize 0.01 0.01 0.31
+   MaxNum 65
+   BirthRate 35
    LodMin 0
    LodMax 0
-   Material "{2D9695202AB3533C}Particles/_Materials/Gas/Muzzle_Smoke_01.emat"
-   SizeMultiplier 0
+   Material "{D797F4753649427F}Particles/_Materials/Gas/Smoke_Weapons_03.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.1
    CenterY 0
-   RotMultiplier 50
-   RotRND -150
+   RotMultiplier 45
+   RotRND -55
    RandomRotDir 1
-   VelAngle 1
+   RandomAngle 1
    FlipU Random
    FlipV Random
    Velocity 0
-   VelAffect 0.2
-   AirResistance 1
-   AirResistanceRND 3
-   WindInfluence 0.124
+   VelAffect 0.5
+   AirResistance 3
+   AirResistanceRND 4
+   WindInfluence 0.13
    GravityMultiply 0
-   GravityMultiplyRND -0.063
-   Spring 0.004
+   GravityMultiplyRND -0.107
+   Spring 0.001
    AnimOnce 1
-   AnimFPS 20
-   RandomFrame 0
-   Lifetime 0
+   AnimFPS 25
+   RandomFrame 1
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
    Alpha {
     0 0.1152 0.3698 0.0546 1 0
    }
@@ -41,11 +43,115 @@ EffectDef {
     0 1 1 0
    }
    Size {
-    0 0.131 0.428 1 1 1
+    0 0.1189 0.533 0.8061 1 1
    }
    Repeat 0
    AlphaMast {
-    0 1 0.5133 0.2545 0.9417 0 1 0
+    0 1 0.503 0
+   }
+  }
+  EmitterDef HOT_2 {
+   ShapeType Box
+   ShapeSize 0.01 0.01 0.31
+   MaxNum 65
+   BirthRate 35
+   LodMin 0
+   LodMax 0
+   Material "{239FB3ED3B942A0B}Particles/_Materials/Gas/Smoke_Weapons_02.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.1
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelAffect 0.5
+   AirResistance 2
+   AirResistanceRND 3
+   WindInfluence 0.07
+   GravityMultiply 0
+   GravityMultiplyRND -0.063
+   Spring 0.001
+   AnimOnce 1
+   AnimFPS 25
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
+   Alpha {
+    0 0.8425 0.5517 0.1879 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.533 0.8061 1 1
+   }
+   Repeat 0
+   AlphaMast {
+    0 1 0.5013 0
+   }
+  }
+  EmitterDef HOT_0 {
+   ShapeSize 0.015 0.02 0.35
+   ConeAngle 360 70 90
+   MaxNum 65
+   BirthRate 15
+   BirthRateRND 15
+   Offset 0 0 0.16
+   Angles -90 0 0
+   LodMin 0
+   LodMax 0
+   Material "{9099B7494562F78F}Particles/_Materials/Gas/Steam_Base_Random_03_White.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.2
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.3
+   VelAffect 0.5
+   AirResistance 1
+   AirResistanceRND 2
+   WindInfluence 0.122
+   GravityMultiply 0
+   GravityMultiplyRND -0.041
+   Spring 0.005
+   AnimOnce 1
+   AnimFPS 15
+   RandomFrame 1
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
+   Alpha {
+    0 0.5576 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.533 0.8061 1 1
+   }
+   Repeat 0
+   ColorMast {
+    0 0.6606 0.6242 0.5818
+   }
+   AlphaMast {
+    0 1 0.5046 0
    }
   }
  }

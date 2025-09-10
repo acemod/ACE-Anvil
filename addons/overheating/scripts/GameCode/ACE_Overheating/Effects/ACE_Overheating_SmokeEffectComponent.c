@@ -123,6 +123,8 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		m_fVelocity = m_pData.ComputeVelocity(temperature);
 		m_fEmittingTimeMS = 1000 * m_pData.ComputeEmittingTime(temperature);
 		Replication.BumpMe();
+		
+	#ifdef ENABLE_DIAG
 		PrintFormat("ACE_Overheating_SmokeEffectComponent::UpdateParams");
 		Print("----------");
 		Print(m_iBirthRate);
@@ -131,6 +133,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		Print(m_fVelocity);
 		Print(m_fEmittingTimeMS);
 		Print("----------");
+	#endif
 	}
 		
 	//------------------------------------------------------------------------------------------------
@@ -195,7 +198,10 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	//------------------------------------------------------------------------------------------------
 	void StartEffects()
 	{
+	#ifdef ENABLE_DIAG
 		Print("ACE_Overheating_SmokeEffectComponent::StartEffects");
+	#endif
+		
 		foreach (ACE_Overheating_SmokeEffectConfig effectConfig : m_aSomkeEffects)
 		{
 			effectConfig.GetEffectEntity().Play();
@@ -205,7 +211,10 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	//------------------------------------------------------------------------------------------------
 	void StopEffects()
 	{
+	#ifdef ENABLE_DIAG
 		Print("ACE_Overheating_SmokeEffectComponent::StopEffects");
+	#endif
+		
 		foreach (ACE_Overheating_SmokeEffectConfig effectConfig : m_aSomkeEffects)
 		{
 			effectConfig.GetEffectEntity().StopEmission();

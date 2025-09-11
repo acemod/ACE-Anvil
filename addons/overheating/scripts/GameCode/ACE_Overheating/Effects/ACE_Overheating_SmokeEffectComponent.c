@@ -117,11 +117,16 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	//------------------------------------------------------------------------------------------------
 	void UpdateParams(float temperature)
 	{
-		m_iBirthRate = m_pData.ComputeBirthRate(temperature);
-		m_fLifetime = m_pData.ComputeLifetime(temperature);
-		m_fSize = m_pData.ComputeSize(temperature);
-		m_fVelocity = m_pData.ComputeVelocity(temperature);
-		m_fEmittingTimeMS = 1000 * m_pData.ComputeEmittingTime(temperature);
+		m_bSmokeEnabled = (m_pBarrel.GetBarrelTemperature() >= s_pSettings.m_fMinSmokeTemperature);
+		if (m_bSmokeEnabled)
+		{
+			m_iBirthRate = m_pData.ComputeBirthRate(temperature);
+			m_fLifetime = m_pData.ComputeLifetime(temperature);
+			m_fSize = m_pData.ComputeSize(temperature);
+			m_fVelocity = m_pData.ComputeVelocity(temperature);
+			m_fEmittingTimeMS = 1000 * m_pData.ComputeEmittingTime(temperature);
+		}
+		
 		Replication.BumpMe();
 		
 	#ifdef ENABLE_DIAG
@@ -140,17 +145,6 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	override void OnFired(IEntity effectEntity, BaseMuzzleComponent muzzle, IEntity projectileEntity)
 	{
 		super.OnFired(effectEntity, muzzle, projectileEntity);
-		
-		if (Replication.IsServer())
-		{
-			bool smokeEnabled = m_pBarrel.GetBarrelTemperature() >= s_pSettings.m_fMinSmokeTemperature;
-			
-			if (smokeEnabled != m_bSmokeEnabled)
-			{
-				m_bSmokeEnabled = smokeEnabled;
-				Replication.BumpMe();
-			}
-		}
 		
 		if (!m_bSmokeEnabled)
 			return;

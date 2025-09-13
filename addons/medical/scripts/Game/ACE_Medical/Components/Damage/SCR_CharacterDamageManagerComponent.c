@@ -185,4 +185,19 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		return m_bACE_Medical_SecondChanceTriggered;
 	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Add pain when armor stops a bullet
+	override void ArmorHitEventDamage(EDamageType type, float damage, IEntity instigator)
+	{
+		super.ArmorHitEventDamage(type, damage, instigator);
+
+		if (!m_bACE_Medical_Initialized || !m_pACE_Medical_PainHitZone)
+			return;
+
+		if (damage > 0)
+		{
+			m_pACE_Medical_PainHitZone.HandleDamage(damage, EDamageType.TRUE, instigator);
+		}
+	}
 }

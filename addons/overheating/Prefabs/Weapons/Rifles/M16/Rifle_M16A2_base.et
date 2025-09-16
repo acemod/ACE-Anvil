@@ -10,27 +10,27 @@ GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
       }
       ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
        m_cBirthRateTemperatureCurve {
-        0 0.028 0.387 0.197 0.66 0.321 0.869 0.426 1 0.533
+        0 0.028 0.379 0.261 0.644 0.456 0.849 0.604 1 0.689
        }
        m_cLifetimeTemperatureCurve {
-        0 0 0.387 0.125 0.76 0.263 1 0.408
+        0 0 0.384 0.153 0.779 0.284 1 0.437
        }
        m_cSizeTemperatureCurve {
-        0.167 0 0.325 0.027 0.5 0.058 0.691 0.097 0.864 0.128 1 0.166
+        0.167 0 0.337 0.014 0.512 0.027 0.705 0.048 0.886 0.077 1 0.136
        }
        m_cVelocityTemperatureCurve {
-        0 0.017 0.456 0.023 0.663 0.042 0.864 0.084 1 0.116
+        0 0.051 1 0.145 592.8 0.069 861.9 0.126 1123.2 0.252 1300 0.348
        }
        m_cEmittingTimeTemperatureCurve {
         0.385 0.167 0.754 0.419 1 1
        }
        m_aSomkeEffects {
         ACE_Overheating_SmokeEffectConfig "{6650F89005C40872}" {
-         m_sContinuousParticleEffect "{61BC10DBBD809DA4}Particles/Weapon/Smoke_Test_Surface.ptc"
-         m_sFadeoutParticleEffect "{194CD804F15A1114}Particles/Weapon/Smoke_Test_Surface_FadeOut.ptc"
+         m_sContinuousParticleEffect "{61BC10DBBD809DA4}Particles/Weapon/m16a2/Smoke_M16A2_Surface.ptc"
+         m_sFadeoutParticleEffect "{194CD804F15A1114}Particles/Weapon/m16a2/Smoke_M16A2_Surface_FadeOut.ptc"
          m_pEffectPosition PointInfo "{6650F8903C086983}" {
           PivotID "slot_hand_guard"
-          Offset 0 0 0.1208
+          Offset 0 0 0.1369
          }
         }
        }
@@ -42,6 +42,30 @@ GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
         PivotID "barrel_muzzle"
        }
        ResetOnFire 0
+       m_cBirthRateTemperatureCurve {
+        0.385 0 0.693 0.153 1 0.199
+       }
+       m_cLifetimeTemperatureCurve {
+        0.384 0 0.717 0.242 1 0.368
+       }
+       m_cSizeTemperatureCurve {
+        0.347 0 0.641 0.47 1 0.622
+       }
+       m_cVelocityTemperatureCurve {
+        0.381 0 0.683 0.623 1 1
+       }
+       m_cEmittingTimeTemperatureCurve {
+        0.373 0 0.373 0.002 1 0.002
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6651556FB34B7B44}" {
+         m_sContinuousParticleEffect "{7E134FED6221D9A8}Particles/Weapon/Suppressor_Carbine.ptc"
+         m_sFadeoutParticleEffect "{7E134FED6221D9A8}Particles/Weapon/Suppressor_Carbine.ptc"
+         m_pEffectPosition PointInfo "{6651556F9633EF9D}" {
+          PivotID "slot_barrel_muzzle"
+         }
+        }
+       }
       }
      }
     }

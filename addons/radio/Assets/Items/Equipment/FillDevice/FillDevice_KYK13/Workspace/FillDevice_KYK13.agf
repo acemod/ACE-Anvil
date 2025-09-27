@@ -1,0 +1,224 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Master {
+   Nodes {
+    AnimSrcNodeGroupSelect " Erc Hold" {
+     EditorPos 241.8 168.2
+     Child "Idle Pose Src"
+     Group "Hold"
+     Column "Erc"
+    }
+    AnimSrcNodeGroupSelect "Cro Hold" {
+     EditorPos 244.4 168.2
+     Child "Idle Pose Src"
+     Group "Hold"
+     Column "Cro"
+    }
+    AnimSrcNodeStateMachine MasterControl {
+     EditorPos 248.977 161.783
+     states {
+      AnimSrcNodeState Hold {
+       EditorPos 246.377 163.283
+       Child "StanceSTM Hold"
+      }
+      AnimSrcNodeState Inspection {
+       EditorPos 251.677 163.283
+       Child "StanceSTM Inspect"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5A329380951D1B8D}" {
+       FromState "Hold"
+       ToState "Inspection"
+       Duration "0.25"
+       Condition "ItemInspectionState != 0"
+       BlendFn S
+       Events {
+        AnimSrcEventGeneric "{5A44F841C4206170}" {
+         Name "Sound"
+         UserString "SOUND_CHAR_MOVEMENT_RADIO_INSPECT_IN.LeftHand"
+        }
+       }
+      }
+      AnimSrcNodeTransition "{5A329380951D1BBC}" {
+       FromState "Inspection"
+       ToState "Hold"
+       Duration "0.25"
+       Condition "RemainingTimeLess(0.3) || ItemInspectionState == 0"
+       BlendFn S
+       PostEval 1
+       Events {
+        AnimSrcEventGeneric "{5A44F84130A891D4}" {
+         Name "Sound"
+         UserString "SOUND_CHAR_MOVEMENT_RADIO_INSPECT_OUT.LeftHand"
+        }
+       }
+      }
+     }
+    }
+    AnimSrcNodeStateMachine "StanceSTM Hold" {
+     EditorPos 244.1 165.5
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos 241.7 167
+       Child " Erc Hold"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 244.2 166.1
+       Child "Cro Hold"
+       StartCondition "Stance == 1"
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 246.9 167
+       Child "Pne Hold"
+       StartCondition "Stance == 2"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5496D127EC9B478A}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5496D127EC9B47BB}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F05}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F30}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F3F}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F2D}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect "Pne Hold" {
+     EditorPos 246.9 168.2
+     Child "Idle Pose Src"
+     Group "Hold"
+     Column "Pne"
+    }
+    AnimSrcNodePose "Idle Pose Src" {
+     EditorPos 244.4 170.2
+     Source "Hold.Pose"
+    }
+    AnimSrcNodeGroupSelect "Pne Inspect" {
+     EditorPos 257.1 168.3
+     Child "Inspect Pose Src"
+     Group "Inspection"
+     Column "Pne"
+    }
+    AnimSrcNodeStateMachine "StanceSTM Inspect" {
+     EditorPos 254.3 165.6
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos 251.9 167.1
+       Child "Erc Inspect"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 254.4 166.2
+       Child "Cro Inspect"
+       StartCondition "Stance == 1"
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 257.1 167.1
+       Child "Pne Inspect"
+       StartCondition "Stance == 2"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5496D127EC9B478A}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5496D127EC9B47BB}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F05}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F30}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F3F}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F2D}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodePose "Inspect Pose Src" {
+     EditorPos 254.6 170.2
+     Source "Inspection.Pose"
+    }
+    AnimSrcNodeGroupSelect "Cro Inspect" {
+     EditorPos 254.6 168.3
+     Child "Inspect Pose Src"
+     Group "Inspection"
+     Column "Cro"
+    }
+    AnimSrcNodeGroupSelect "Erc Inspect" {
+     EditorPos 252 168.3
+     Child "Inspect Pose Src"
+     Group "Inspection"
+     Column "Erc"
+    }
+   }
+  }
+ }
+}

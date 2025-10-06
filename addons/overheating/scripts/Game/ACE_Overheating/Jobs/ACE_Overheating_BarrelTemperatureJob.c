@@ -121,7 +121,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		
 		float h = 4.5908 * Math.Pow(airVelocity.LengthSq(), 3.0 / 10.0) + 9.3198 * s_pWeatherManager.GetRainIntensity();
 		h /= Math.Pow(m_pContext.m_pObject.GetData().GetBarrelDiameter(), 0.4);
-		h = Math.Max(12.5, h);
+		h = Math.Max(s_pSettings.m_fMinConvectiveHeatTransferCoefficient, h);
 		
 	#ifdef ENABLE_DIAG
 		m_pContext.m_pObject.SetHeatTransferCoefficient(h);

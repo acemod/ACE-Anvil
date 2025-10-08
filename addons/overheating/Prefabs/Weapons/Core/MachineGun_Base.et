@@ -13,8 +13,9 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
     MuzzleComponent "{50F64C4591CD7AA6}" {
      components {
       ACE_Overheating_BarrelComponent "{65B9755AADB68C43}" {
+       m_fBarrelMassFraction 0.32
        m_fBarrelDiameter 0.02275
-       m_fHeatingScale 0.8
+       m_fHeatingScale 0.508
        m_cJamChanceTemperatureCurve {
         0.273 0.003 0.58 0.024 0.734 0.06 0.811 0.18 0.888 0.45
        }

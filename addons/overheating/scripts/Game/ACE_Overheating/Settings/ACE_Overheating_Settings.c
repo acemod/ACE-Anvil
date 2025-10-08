@@ -24,9 +24,9 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "473.15", desc: "Temperature at which ammo can cook off [K].", params: "0 1300")]
 	float m_fGunpowderAutoignitionTemperature;
 	
-	// Fit to M60 model, such that cook-off progress will exactly reach 1.0 and then stop progressing for the next bullet when firing 100 RPM for 2 minutes and then cease fire.
-	[Attribute(defvalue: "22.5", desc: "Convective heat transfer coefficient for cooling of barrel in still air [W / (m^2 * K)].", params: "0 inf")]
-	float m_fMinConvectiveHeatTransferCoefficient;
+	// Fit to M60 model, such that cook-off progress will exactly reach 1.0 and then stop progressing for the next bullet and T_barrel_final=35°C when firing 100 RPM for 2 minutes and then cease fire for 15 minutes.
+	[Attribute(defvalue: "125.63", desc: "Base heat transfer coefficient for cooling of barrel from other channels than radiation and convection from wind and rain.", params: "0 inf")]
+	float m_fBaseHeatTransferCoefficient;
 	
 	// MassScaledTemperatureRateConstant [g/s] = HeatTransferCoefficient [J/(s*m^2*K)] * SurfaceArea [m^2] / SpecificHeat [J/(g*K)]
 	// The fit of reference data (A. Hameed et al., Defence Technology 2014, 10, 86–91) would be 30.4587377 g/s, but we assume that heat transfer from barrel to bullet is far less efficient than in the experimental configuration of the paper

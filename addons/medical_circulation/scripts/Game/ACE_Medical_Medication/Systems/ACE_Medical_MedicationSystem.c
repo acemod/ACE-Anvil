@@ -14,9 +14,11 @@ class ACE_Medical_MedicationSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
+		super.InitInfo(outInfo);
 		outInfo.SetAbstract(false)
 			.SetUnique(true)
-			.SetLocation(ESystemLocation.Server)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	
 	//------------------------------------------------------------------------------------------------

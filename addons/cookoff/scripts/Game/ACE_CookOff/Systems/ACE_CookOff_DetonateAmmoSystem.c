@@ -12,21 +12,22 @@ class ACE_CookOff_DetonateAmmoSystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.FixedFrame);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Should be paused when the world is not running
 	override bool ShouldBePaused()
 	{
 		return true;
 	}
 	
-	//------------------------------------------------------------------------------------------------
-	override static void InitInfo(WorldSystemInfo outInfo)
-	{
-		outInfo.SetAbstract(false)
-			.SetUnique(true)
-			.SetLocation(ESystemLocation.Server);
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()
 	{
 		m_pScheduler.OnInit(CreateTemplateJob());

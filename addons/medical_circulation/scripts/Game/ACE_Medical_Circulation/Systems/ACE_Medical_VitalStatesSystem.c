@@ -16,9 +16,11 @@ class ACE_Medical_VitalStatesSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
+		super.InitInfo(outInfo);
 		outInfo.SetAbstract(false)
 			.SetUnique(true)
-			.SetLocation(ESystemLocation.Server)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	
 	//------------------------------------------------------------------------------------------------

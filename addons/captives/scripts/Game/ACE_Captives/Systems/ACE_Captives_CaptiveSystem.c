@@ -15,7 +15,10 @@ class ACE_Captives_CaptiveSystem : GameSystem
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
 		super.InitInfo(outInfo);
-		outInfo.SetLocation(ESystemLocation.Server);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	
 	//------------------------------------------------------------------------------------------------

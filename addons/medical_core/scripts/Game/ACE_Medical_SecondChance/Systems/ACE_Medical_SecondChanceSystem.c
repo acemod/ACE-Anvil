@@ -31,8 +31,10 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
 		super.InitInfo(outInfo);
-		outInfo.SetLocation(ESystemLocation.Server);
-		outInfo.AddPoint(ESystemPoint.Frame);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.Frame);
 	}
 	
 	//------------------------------------------------------------------------------------------------

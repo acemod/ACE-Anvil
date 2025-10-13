@@ -81,6 +81,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "Leo"
   }
+  CustomStringTableItem "{6624FDAA28CE989A}" {
+   Id "ACE_Medical-Editor_TooltipDetail_Brain_Name"
+   Target_en_us "Brain"
+   Target_de_de "Gehirn"
+   Modified 1713700601
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6230E5C2DA63508A}" {
    Id "ACE_Medical-Editor_TooltipDetail_VitalSigns_Name"
    Target_en_us "Vital signs"

@@ -5,7 +5,7 @@ GenericEntity : "{F9E6107C47C1B088}Prefabs/Weapons/Core/LongRangeRifle_Base.et" 
    components {
     MuzzleComponent "{CA6BE4D6B867541F}" {
      components {
-      ACE_Overheating_MuzzleJamComponent "{65B9755B8CB25ED7}" {
+      ACE_Overheating_BarrelComponent "{65B9755B8CB25ED7}" {
        m_fBarrelDiameter 0.01442
       }
      }

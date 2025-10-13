@@ -29,10 +29,25 @@ class ACE_Overheating_RackBoltState : ACE_FSM_IState<ACE_Overheating_WeaponAnimC
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Evaluate and execute clearing if successful on rack bolt event
 	protected void OnRackBoltAnimEvent(AnimationEventID animEventType, AnimationEventID animUserString, int intParam, float timeFromStart, float timeToEnd)
 	{
 		if (animEventType != m_pContext.m_iRackBoltEvent)
 			return;
+		
+		m_pContext.m_pCharController.GetOnAnimationEvent().Remove(OnRackBoltAnimEvent);
+		
+		// Clearing can only happen when jammed or barrel is chambered. In case of jam, evaluate chance for clearing
+		if (m_pContext.m_pBarrel.IsJammed())
+		{
+			if (Math.RandomFloat(0, 1) < m_pContext.m_pBarrel.GetClearJamFailureChance())
+				return;
+		}
+		else
+		{
+			if (!m_pContext.m_pBarrel.GetMuzzle().IsCurrentBarrelChambered())
+				return;
+		}
 		
 		ClearJam(m_pContext);
 	}
@@ -43,7 +58,7 @@ class ACE_Overheating_RackBoltState : ACE_FSM_IState<ACE_Overheating_WeaponAnimC
 	{
 		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		if (playerController)
-			playerController.ACE_Overheating_RequestSetJamState(context.m_pJamComponent, false);
+			playerController.ACE_Overheating_RequestSetJamState(context.m_pBarrel, false);
 		
 		IEntity weapon = context.m_pWeapon.GetOwner();
 		if (!weapon)

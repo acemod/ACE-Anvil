@@ -5,9 +5,19 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
    components {
     MuzzleComponent "{CA6BE4D6B867541F}" {
      components {
-      ACE_Overheating_MuzzleJamComponent "{65B9755B8CB25ED7}" {
+      ACE_Overheating_BarrelComponent "{65B9755B8CB25ED7}" {
        m_cJamChanceTemperatureCurve {
-        0.385 0.003 0.692 0.024 0.846 0.06 0.923 0.18 1 0.45
+        0.273 0.003 0.58 0.024 0.734 0.06 0.811 0.18 0.888 0.45
+       }
+       m_cMuzzleDispersionFactorTemperatureCurve {
+        0.231 0 0.466 0.033 0.722 0.147 1 0.333
+       }
+      }
+      ACE_Overheating_HelperAttachmentComponent "{663325CC5D5AE7BF}" {
+       AttachmentSlot InventoryStorageSlot AttachmentSlot {
+        Prefab "{D4B8C629F3D4A322}Prefabs/Weapons/Attachments/Muzzle/ACE_Overheating_HelperAttachment.et"
+       }
+       AttachmentType AttachmentMuzzle "{663325CC4B126A7F}" {
        }
       }
      }

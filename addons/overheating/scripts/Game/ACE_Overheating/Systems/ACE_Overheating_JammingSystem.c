@@ -11,6 +11,16 @@ class ACE_Overheating_JammingSystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void Register(notnull ChimeraCharacter char, bool isOwner)
 	{
 		EventHandlerManagerComponent eventHandlerManager = EventHandlerManagerComponent.Cast(char.FindComponent(EventHandlerManagerComponent));

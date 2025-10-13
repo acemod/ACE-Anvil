@@ -117,6 +117,9 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	//------------------------------------------------------------------------------------------------
 	void UpdateParams(float temperature)
 	{
+		if (!s_pSettings)
+			return;
+		
 		m_bSmokeEnabled = (m_pBarrel.GetBarrelTemperature() >= s_pSettings.m_fMinSmokeTemperature);
 		if (m_bSmokeEnabled)
 		{

@@ -17,6 +17,9 @@ class ACE_RenderTargetComponent : ScriptComponent
 	[RplProp(onRplName: "OnToggleActive"), Attribute(defvalue: "false", desc: "Whether renter target is turned on")]
 	protected bool m_bIsActive;
 	
+	[Attribute(defvalue: "false", desc: "Whether it is only rendered for the owner")]
+	protected bool m_bOwnerOnly;
+	
 	protected Widget m_wRoot;
 	protected RTTextureWidget m_wRTTexture;
 	protected InventoryItemComponent m_pItemComponent;
@@ -118,6 +121,23 @@ class ACE_RenderTargetComponent : ScriptComponent
 			m_pOnToggleRender = new ScriptInvokerBase<ScriptInvokerWidgetBool>();
 		
 		return m_pOnToggleRender;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns whether the local machine is allowed to render
+	bool CanRenderLocal()
+	{
+		if (System.IsConsoleApp())
+			return false;
+		
+		if (!m_bOwnerOnly)
+			return true;
+		
+		RplComponent rpl = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		if (!rpl || rpl.IsOwner())
+			return true;
+		
+		return false;
 	}
 	
 	//------------------------------------------------------------------------------------------------

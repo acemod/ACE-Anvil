@@ -20,6 +20,7 @@ class ACE_RenderTargetComponent : ScriptComponent
 	protected Widget m_wRoot;
 	protected RTTextureWidget m_wRTTexture;
 	protected InventoryItemComponent m_pItemComponent;
+	protected ref ScriptInvokerBase<ScriptInvokerWidgetBool> m_pOnToggleRender;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_RenderTargetComponent(IEntityComponentSource src, IEntity ent, IEntity parent)
@@ -96,7 +97,11 @@ class ACE_RenderTargetComponent : ScriptComponent
 			m_wRTTexture = RTTextureWidget.Cast(m_wRoot.FindAnyWidget("RTTexture0"));
 			m_wRTTexture.SetRenderTarget(GetOwner());
 		}
-		else
+		
+		if (m_pOnToggleRender)
+			m_pOnToggleRender.Invoke(m_wRTTexture, active);
+		
+		if (!active)
 		{
 			if (m_wRTTexture)
 				m_wRTTexture.RemoveRenderTarget(GetOwner());
@@ -104,6 +109,15 @@ class ACE_RenderTargetComponent : ScriptComponent
 			if (m_wRoot)
 				m_wRoot.RemoveFromHierarchy();
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ScriptInvokerBase<ScriptInvokerWidgetBool> GetOnToggleRender()
+	{
+		if (!m_pOnToggleRender)
+			m_pOnToggleRender = new ScriptInvokerBase<ScriptInvokerWidgetBool>();
+		
+		return m_pOnToggleRender;
 	}
 	
 	//------------------------------------------------------------------------------------------------

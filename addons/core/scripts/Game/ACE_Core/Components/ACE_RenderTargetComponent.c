@@ -106,7 +106,7 @@ class ACE_RenderTargetComponent : ScriptComponent
 		
 		if (!active)
 		{
-			if (m_wRTTexture)
+			if (m_wRTTexture && !GetOwner().IsDeleted())
 				m_wRTTexture.RemoveRenderTarget(GetOwner());
 			
 			if (m_wRoot)

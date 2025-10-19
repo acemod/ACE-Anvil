@@ -30,13 +30,4 @@ class ACE_IGadgetScreenHandler
 	void OnButtonClick(ACE_EGadgetButtonID buttonID);
 	
 	//------------------------------------------------------------------------------------------------
-	protected void HideDirectChildren(Widget w)
-	{
-		Widget child = w.GetChildren();
-		while (child)
-		{
-			child.SetVisible(false);
-			child = child.GetSibling();
-		}
-	}
 }

@@ -7,7 +7,7 @@ class ACE_ScreenGadgetComponentClass : SCR_GadgetComponentClass
 //------------------------------------------------------------------------------------------------
 class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 {
-	[Attribute()]
+	[Attribute(desc: "Handlers for all screens")]
 	protected ref array<ref ACE_IGadgetScreenHandler> m_aScreenHandlers;
 	
 	[RplProp(onRplName: "OnScreenChanged")]

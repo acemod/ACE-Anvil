@@ -74,6 +74,10 @@ class ACE_RenderTargetSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	void Register(notnull ACE_RenderTargetComponent component)
 	{
+		// Only register if local machine is allowed to render
+		if (!component.CanRenderLocal())
+			return;
+		
 		m_aComponents.Insert(component);
 		
 		vector camPos;

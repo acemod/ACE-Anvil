@@ -17,9 +17,13 @@ class ACE_RenderTargetComponent : ScriptComponent
 	[RplProp(onRplName: "OnToggleActive"), Attribute(defvalue: "false", desc: "Whether renter target is turned on")]
 	protected bool m_bIsActive;
 	
+	[Attribute(defvalue: "false", desc: "Whether it is only rendered for the owner")]
+	protected bool m_bOwnerOnly;
+	
 	protected Widget m_wRoot;
 	protected RTTextureWidget m_wRTTexture;
 	protected InventoryItemComponent m_pItemComponent;
+	protected ref ScriptInvokerBase<ScriptInvokerWidgetBool> m_pOnToggleRender;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_RenderTargetComponent(IEntityComponentSource src, IEntity ent, IEntity parent)
@@ -96,7 +100,11 @@ class ACE_RenderTargetComponent : ScriptComponent
 			m_wRTTexture = RTTextureWidget.Cast(m_wRoot.FindAnyWidget("RTTexture0"));
 			m_wRTTexture.SetRenderTarget(GetOwner());
 		}
-		else
+		
+		if (m_pOnToggleRender)
+			m_pOnToggleRender.Invoke(m_wRTTexture, active);
+		
+		if (!active)
 		{
 			if (m_wRTTexture)
 				m_wRTTexture.RemoveRenderTarget(GetOwner());
@@ -104,6 +112,32 @@ class ACE_RenderTargetComponent : ScriptComponent
 			if (m_wRoot)
 				m_wRoot.RemoveFromHierarchy();
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ScriptInvokerBase<ScriptInvokerWidgetBool> GetOnToggleRender()
+	{
+		if (!m_pOnToggleRender)
+			m_pOnToggleRender = new ScriptInvokerBase<ScriptInvokerWidgetBool>();
+		
+		return m_pOnToggleRender;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns whether the local machine is allowed to render
+	bool CanRenderLocal()
+	{
+		if (System.IsConsoleApp())
+			return false;
+		
+		if (!m_bOwnerOnly)
+			return true;
+		
+		RplComponent rpl = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		if (!rpl || rpl.IsOwner())
+			return true;
+		
+		return false;
 	}
 	
 	//------------------------------------------------------------------------------------------------

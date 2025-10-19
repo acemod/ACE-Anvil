@@ -11,10 +11,24 @@ class ACE_PhysicalButtonsComponent : ScriptComponent
 	protected ref array<ref ACE_PhysicalButtonConfig> m_aButtonConfigs;
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnPostInit(IEntity owner)
+	override protected void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
 		SetEventMask(owner, EntityEvent.INIT);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void EOnInit(IEntity owner)
+	{
+		super.EOnInit(owner);
+		
+		if (!GetGame().InPlayMode())
+			return;
+		
+		foreach (ACE_PhysicalButtonConfig buttonConfig : m_aButtonConfigs)
+		{
+			buttonConfig.Init(owner);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -44,6 +58,9 @@ class ACE_PhysicalButtonsComponent : ScriptComponent
 			AudioSystem.PlaySound(config.m_sPressedSoundPath);
 		else
 			AudioSystem.PlaySound(config.m_sReleasedSoundPath);
+		
+		if (!state && config.m_pCommand)
+			config.m_pCommand.Execute();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -85,12 +102,13 @@ class ACE_PhysicalButtonConfig
 	[Attribute(defvalue: "{A8CB8AE57458C226}Sounds/Props/Military/Radios/Samples/Props_Radios_Button_Release_1.wav", desc: "Sound for when the button is released", uiwidget: UIWidgets.ResourceNamePicker, params: "wav")]
 	ResourceName m_sReleasedSoundPath;
 	
-	[Attribute(desc: "Command that the button executes", uiwidget: UIWidgets.SearchComboBox, enums: SCR_ParamEnumArray.FromEnum(ACE_EGadgetCommand))]
-	ACE_EGadgetCommand m_eCommandID;
-}
-
-//------------------------------------------------------------------------------------------------
-[EnumLinear()]
-enum ACE_EGadgetCommand
-{
+	[Attribute(desc: "Command that the button executes")]
+	ref ACE_IGadgetCommand m_pCommand;
+	
+	//------------------------------------------------------------------------------------------------
+	void Init(IEntity gadget)
+	{
+		if (m_pCommand)
+			m_pCommand.Init(gadget);
+	}
 }

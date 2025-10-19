@@ -5,38 +5,31 @@ class ACE_IGadgetScreenHandler
 	[Attribute(uiwidget: UIWidgets.SearchComboBox, enums: ParamEnumArray.FromEnum(ACE_EGadgetScreenID))]
 	ACE_EGadgetScreenID m_eID;
 	
-	protected ACE_ScreenGadgetComponent m_pGadget;
-	protected Widget m_wRoot;
+	//------------------------------------------------------------------------------------------------
+	void Init(notnull ACE_ScreenGadgetComponent gadget);
 	
 	//------------------------------------------------------------------------------------------------
-	void Init(notnull ACE_ScreenGadgetComponent gadget)
-	{
-		m_pGadget = gadget;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void OnOpen(Widget root)
-	{
-		m_wRoot = root;
-	}
+	void OnOpen(Widget root);
 	
 	//------------------------------------------------------------------------------------------------
 	void OnClose(Widget root);
 	
 	//------------------------------------------------------------------------------------------------
+	//! Called when handler becomes active on server (called before OnOpen)
+	void OnActivateServer();
+	
+	//------------------------------------------------------------------------------------------------
+	//! Called when handler becomes inactive on server (called before OnClose)
+	void OnDeactivateServer();
+	
+	//------------------------------------------------------------------------------------------------
 	void OnUpdate(float timeSlice);
 	
 	//------------------------------------------------------------------------------------------------
-	void OnButtonClick(ACE_EGadgetButtonID buttonID);
+	//! Called when some screen-relevant data on ACE_ScreenGadgetComponent got updated
+	void OnRefreshScreen();
 	
 	//------------------------------------------------------------------------------------------------
-	protected void HideDirectChildren(Widget w)
-	{
-		Widget child = w.GetChildren();
-		while (child)
-		{
-			child.SetVisible(false);
-			child = child.GetSibling();
-		}
-	}
+	//! Returns true if button got handled (used for optimizing overrides)
+	bool OnButtonClickServer(ACE_EGadgetButtonID buttonID);
 }

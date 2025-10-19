@@ -32,7 +32,9 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 			handler.Init(this);
 		}
 		
-		ChangeScreen(m_aScreenHandlers[0].m_eID);
+		if (!m_aScreenHandlers.IsEmpty())
+			ChangeScreen(m_aScreenHandlers[0].m_eID);
+		
 		m_pRenderTargetComponent = ACE_RenderTargetComponent.Cast(owner.FindComponent(ACE_RenderTargetComponent));
 		
 		if (m_pRenderTargetComponent.IsRendered())
@@ -97,13 +99,30 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void OnButtonClick(ACE_EGadgetButtonID buttonID)
+	//! Called when some screen-relevant data on ACE_ScreenGadgetComponent got updated
+	//! Add it to `onRplName` for relevant RplProps
+	protected void OnRefreshScreen()
 	{
-		if (m_pCurrenScreenHandler)
-			m_pCurrenScreenHandler.OnButtonClick(buttonID);
+		if (m_pCurrenScreenHandler && m_wRTTexture)
+			m_pCurrenScreenHandler.OnRefreshScreen();
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Forward button click to current screen handler
+	void OnButtonClick(ACE_EGadgetButtonID buttonID)
+	{
+		Rpc(RpcDo_OnButtonClickServer, buttonID);
+	}
+	
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcDo_OnButtonClickServer(ACE_EGadgetButtonID buttonID)
+	{
+		if (m_pCurrenScreenHandler)
+			m_pCurrenScreenHandler.OnButtonClickServer(buttonID);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Change screen
 	void ChangeScreen(ACE_EGadgetScreenID nextID)
 	{
 		m_eCurrentScreenID = nextID;
@@ -112,6 +131,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Change screen and push the old one to stack
 	void PushScreen(ACE_EGadgetScreenID nextID)
 	{
 		m_aScreenIdStack.Insert(m_eCurrentScreenID);
@@ -119,6 +139,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Remove screen from stack and change to it
 	bool PopScreen()
 	{
 		int i = m_aScreenIdStack.Count() - 1;
@@ -132,6 +153,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Change to bottommost screen and clear stack
 	bool PopToRootScreen()
 	{
 		if (m_aScreenIdStack.IsEmpty())
@@ -146,8 +168,14 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnScreenChanged()
 	{
-		if (m_pCurrenScreenHandler && m_wRTTexture)
-			m_pCurrenScreenHandler.OnClose(m_wRTTexture);
+		if (m_pCurrenScreenHandler)
+		{
+			if (Replication.IsServer())
+				m_pCurrenScreenHandler.OnDeactivateServer();
+			
+			if (m_wRTTexture)
+				m_pCurrenScreenHandler.OnClose(m_wRTTexture);
+		}
 		
 		foreach (ACE_IGadgetScreenHandler handler : m_aScreenHandlers)
 		{
@@ -158,13 +186,13 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 			}
 		}
 		
-		if (m_pCurrenScreenHandler && m_wRTTexture)
-			m_pCurrenScreenHandler.OnOpen(m_wRTTexture);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	ACE_IGadgetScreenHandler GetCurrentScreenHandler()
-	{
-		return m_pCurrenScreenHandler;
+		if (m_pCurrenScreenHandler)
+		{
+			if (Replication.IsServer())
+				m_pCurrenScreenHandler.OnActivateServer();
+			
+			if (m_wRTTexture)
+				m_pCurrenScreenHandler.OnOpen(m_wRTTexture);
+		}
 	}
 }

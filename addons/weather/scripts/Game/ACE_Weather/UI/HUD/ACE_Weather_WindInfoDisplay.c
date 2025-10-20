@@ -2,7 +2,6 @@
 class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 {
 	protected ChimeraCharacter m_pCharacterEntity;
-	protected Animation m_pCharAnim;
 	protected TNodeId m_pCharHeadBone;
 	protected TimeAndWeatherManagerEntity m_pWeatherManager;
 	protected Widget m_wLayout;
@@ -52,8 +51,7 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		if (!m_pCharacterEntity)
 			return;
 		
-		m_pCharAnim = m_pCharacterEntity.GetAnimation();
-		m_pCharHeadBone = m_pCharAnim.GetBoneIndex("Head");
+		m_pCharHeadBone = m_pCharacterEntity.GetAnimation().GetBoneIndex("Head");
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -81,7 +79,7 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		
 		// Get wind direction relative to head
 		vector localHeadTransform[4];
-		m_pCharAnim.GetBoneMatrix(m_pCharHeadBone, localHeadTransform);
+		m_pCharacterEntity.GetAnimation().GetBoneMatrix(m_pCharHeadBone, localHeadTransform);
 		float headDir = m_pCharacterEntity.VectorToParent(localHeadTransform[0]).ToYaw();
 		float windDir = m_pWeatherManager.GetWindDirection();
 		float windAngleRad = Math.DEG2RAD * (windDir - headDir);

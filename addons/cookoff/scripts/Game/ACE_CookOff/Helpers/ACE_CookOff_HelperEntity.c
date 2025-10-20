@@ -94,12 +94,15 @@ class ACE_CookOff_HelperEntity : GenericEntity
 		params.Parent = parent;
 		params.Transform[3] = Vector(Math.RandomFloat(-0.2, 0.2), Math.RandomFloat(0, 3), Math.RandomFloat(-0.2, 0.2));
 		IEntity explosive = GetGame().SpawnEntityPrefab(Resource.Load(explosiveName), null, params);
-		GetGame().GetCallqueue().CallLater(DetonateExplosive, 100, false, explosive, parent);
+		GetGame().GetCallqueue().CallLater(DetonateExplosive, 100, false, explosive);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void DetonateExplosive(IEntity explosive, IEntity parent)
+	protected void DetonateExplosive(IEntity explosive)
 	{
+		if (!explosive)
+			return;
+		
 		RplComponent rpl = RplComponent.Cast(explosive.FindComponent(RplComponent));
 		Rpc(RpcDo_DetonateExplosiveBroadcast, rpl.Id());
 		RpcDo_DetonateExplosiveBroadcast(rpl.Id());

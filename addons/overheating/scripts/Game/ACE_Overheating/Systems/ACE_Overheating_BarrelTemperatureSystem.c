@@ -5,9 +5,8 @@ class ACE_Overheating_BarrelTemperatureSystem : GameSystem
 	protected ref ACE_Overheating_BarrelTemperature_JobScheduler m_pScheduler;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_BarrelTemperatureSystem GetInstance()
+	static ACE_Overheating_BarrelTemperatureSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Overheating_BarrelTemperatureSystem.Cast(world.FindSystem(ACE_Overheating_BarrelTemperatureSystem));
 	}
 	

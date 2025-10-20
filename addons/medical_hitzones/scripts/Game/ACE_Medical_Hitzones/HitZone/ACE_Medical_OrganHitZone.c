@@ -59,7 +59,7 @@ class ACE_Medical_OrganHitZone: SCR_HitZone
 		if (!m_bACE_Medical_IsVital)
 			return;
 		
-		ACE_Medical_SecondChanceSystem system = ACE_Medical_SecondChanceSystem.GetInstance();
+		ACE_Medical_SecondChanceSystem system = ACE_Medical_SecondChanceSystem.GetInstance(damageManager.GetOwner().GetWorld());
 		if (system)
 			system.Register(damageManager, this);
 		else

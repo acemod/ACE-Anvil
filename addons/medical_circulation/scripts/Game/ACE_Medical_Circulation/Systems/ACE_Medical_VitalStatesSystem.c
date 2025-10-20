@@ -7,9 +7,8 @@ class ACE_Medical_VitalStatesSystem : GameSystem
 	protected ACE_Medical_Circulation_Settings m_pSettings;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Medical_VitalStatesSystem GetInstance()
+	static ACE_Medical_VitalStatesSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Medical_VitalStatesSystem.Cast(world.FindSystem(ACE_Medical_VitalStatesSystem));
 	}
 	

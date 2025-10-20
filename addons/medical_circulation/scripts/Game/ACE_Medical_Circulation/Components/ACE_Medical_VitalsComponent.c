@@ -36,7 +36,7 @@ class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		
 		Reset();
 	
-		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance();
+		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance(owner.GetWorld());
 		if (system)
 			system.Register(SCR_ChimeraCharacter.Cast(owner));
 	}
@@ -226,7 +226,7 @@ class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 	
-		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance();
+		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance(owner.GetWorld());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(owner));
 	}

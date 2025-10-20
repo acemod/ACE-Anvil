@@ -10,7 +10,7 @@ modded class SCR_HealSupportStationComponent : SCR_BaseDamageHealSupportStationC
 	{
 		super.DelayedInit(owner);
 		
-		if (!Replication.IsServer())
+		if (!Replication.IsServer() || !owner)
 			return;
 		
 		ACE_Medical_Core_Settings settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();

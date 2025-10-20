@@ -20,7 +20,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 			SCR_MissionHeader missionHeader = SCR_MissionHeader.Cast(GetGame().GetMissionHeader());
 			if (missionHeader)
 				missionHeader.ACE_ApplyToSettingsConfig(m_ACE_SettingsConfig);
-		};
+		}
 		
 		return super.OnGameStart();
 	}

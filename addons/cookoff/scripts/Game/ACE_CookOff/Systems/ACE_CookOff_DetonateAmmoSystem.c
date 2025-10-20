@@ -5,10 +5,19 @@ class ACE_CookOff_DetonateAmmoSystem : GameSystem
 	protected ref ACE_CookOff_DetonateAmmo_JobScheduler m_pScheduler;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_CookOff_DetonateAmmoSystem GetInstance()
+	static ACE_CookOff_DetonateAmmoSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_CookOff_DetonateAmmoSystem.Cast(world.FindSystem(ACE_CookOff_DetonateAmmoSystem));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.FixedFrame);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -18,15 +27,6 @@ class ACE_CookOff_DetonateAmmoSystem : GameSystem
 		return true;
 	}
 	
-	//------------------------------------------------------------------------------------------------
-	override static void InitInfo(WorldSystemInfo outInfo)
-	{
-		outInfo.SetAbstract(false)
-			.SetUnique(true)
-			.SetLocation(ESystemLocation.Server);
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()
 	{
 		m_pScheduler.OnInit(CreateTemplateJob());

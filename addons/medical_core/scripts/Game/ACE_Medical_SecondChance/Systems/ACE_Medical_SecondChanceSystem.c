@@ -21,9 +21,8 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	protected static const float SECOND_CHANCE_SCALED_RECOVERED_HEALTH = 0.01;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Medical_SecondChanceSystem GetInstance()
+	static ACE_Medical_SecondChanceSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Medical_SecondChanceSystem.Cast(world.FindSystem(ACE_Medical_SecondChanceSystem));
 	}
 	

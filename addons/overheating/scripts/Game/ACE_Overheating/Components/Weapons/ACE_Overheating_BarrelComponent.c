@@ -308,7 +308,7 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnStateChanged()
 	{
-		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance();
+		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.OnJamStateChanged(this, m_bIsJammed);
 	}

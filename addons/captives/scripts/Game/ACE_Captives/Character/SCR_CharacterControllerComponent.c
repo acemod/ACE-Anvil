@@ -42,7 +42,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	void ACE_Captives_SetCaptive(bool isCaptive)
 	{
-		ACE_Captives_CaptiveSystem system = ACE_Captives_CaptiveSystem.GetInstance();
+		ACE_Captives_CaptiveSystem system = ACE_Captives_CaptiveSystem.GetInstance(GetOwner().GetWorld());
 		if (!system)
 			return;
 		

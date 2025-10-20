@@ -5,9 +5,8 @@ class ACE_CookOff_DetonateAmmoSystem : GameSystem
 	protected ref ACE_CookOff_DetonateAmmo_JobScheduler m_pScheduler;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_CookOff_DetonateAmmoSystem GetInstance()
+	static ACE_CookOff_DetonateAmmoSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_CookOff_DetonateAmmoSystem.Cast(world.FindSystem(ACE_CookOff_DetonateAmmoSystem));
 	}
 	

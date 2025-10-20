@@ -5,9 +5,8 @@ class ACE_Captives_CaptiveSystem : GameSystem
 	protected ref map<SCR_ChimeraCharacter, ref ACE_Captives_CaptiveSystemCharacterWrapper> m_aCaptives = new map<SCR_ChimeraCharacter, ref ACE_Captives_CaptiveSystemCharacterWrapper>();
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Captives_CaptiveSystem GetInstance()
+	static ACE_Captives_CaptiveSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Captives_CaptiveSystem.Cast(world.FindSystem(ACE_Captives_CaptiveSystem));
 	}
 	
@@ -123,15 +122,15 @@ class ACE_Captives_CaptiveSystem : GameSystem
 //! Forwards character events to ACE_Captives_CaptiveSystem's event handlers
 class ACE_Captives_CaptiveSystemCharacterWrapper : Managed
 {
-	protected static ACE_Captives_CaptiveSystem s_pSystem;
+	protected ACE_Captives_CaptiveSystem m_pSystem;
 	protected SCR_ChimeraCharacter m_pCharacter;	
 	
 	//------------------------------------------------------------------------------------------------
 	//! Register event handlers
 	void ACE_Captives_CaptiveSystemCharacterWrapper(notnull SCR_ChimeraCharacter char)
 	{
-		if (!s_pSystem)
-			s_pSystem = ACE_Captives_CaptiveSystem.GetInstance();
+		if (!m_pSystem)
+			m_pSystem = ACE_Captives_CaptiveSystem.GetInstance(char.GetWorld());
 		
 		m_pCharacter = char;
 		
@@ -147,13 +146,13 @@ class ACE_Captives_CaptiveSystemCharacterWrapper : Managed
 	//------------------------------------------------------------------------------------------------
 	protected void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		s_pSystem.OnLifeStateChanged(m_pCharacter, previousLifeState, newLifeState);
+		m_pSystem.OnLifeStateChanged(m_pCharacter, previousLifeState, newLifeState);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected void OnCompartmentLeft(IEntity vehicle, BaseCompartmentManagerComponent manager, int mgrID, int slotID, bool move)
 	{
-		s_pSystem.OnCompartmentLeft(m_pCharacter, vehicle, manager, mgrID, slotID, move);
+		m_pSystem.OnCompartmentLeft(m_pCharacter, vehicle, manager, mgrID, slotID, move);
 	}
 	
 	//------------------------------------------------------------------------------------------------

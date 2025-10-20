@@ -190,13 +190,13 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	//------------------------------------------------------------------------------------------------
 	float ComputeJamChance(float temperature)
 	{
-		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cJamChanceTemperatureCurve)[1];
+		return LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cJamChanceTemperatureCurve)[1];
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ComputeAdditionalMuzzleDispersionFactor(float temperature)
 	{
-		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cMuzzleDispersionFactorTemperatureCurve)[1];
+		return LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cMuzzleDispersionFactorTemperatureCurve)[1];
 	}
 }
 

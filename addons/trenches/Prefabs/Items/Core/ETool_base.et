@@ -4,6 +4,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   SCR_DeployablePlaceableItemComponent "{66AAF977B9074622}" {
    m_eMeasurementMethod FROM_CENTER_OF_MASS
    m_bACE_CanBeStacked 0
+   m_bACE_RequiredSurfaceLabel DIGGABLE
    m_fMaxPlacementDistance 2.5
    m_ePlacementType XYZ
    m_bForwardAwayFromPlayer 1

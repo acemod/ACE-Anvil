@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{6E35D94130954509}Prefabs/Items/Equipment/Accessories/ETool_ALICE/ETool_ALICE_FreeRoamBuilding_Gadget.et"
+ Name "{44FC3E59DFA001A4}Prefabs/Items/Core/ETool_base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

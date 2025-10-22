@@ -1,28 +1,26 @@
 //------------------------------------------------------------------------------------------------
-class ACE_LoadtimeEntityManagerClass : SCR_BaseGameModeComponentClass
-{
-}
-
-//------------------------------------------------------------------------------------------------
 //! Methods for manipulating unreplicated loadtime entities
-class ACE_LoadtimeEntityManager : SCR_BaseGameModeComponent
+class ACE_LoadtimeEntityManager : GameSystem
 {
 	// array<EntityID> can't be properly replicated (see https://feedback.bistudio.com/T186903) so we use a wrapper instead
 	[RplProp(onRplName: "DeleteInitialEntities")]
 	protected ref array<ref ACE_EntityIdWrapper> m_aDeletedEntityIDs = {};
 	
-	protected static ACE_LoadtimeEntityManager s_pInstance;
-	
-	//------------------------------------------------------------------------------------------------
-	void ACE_LoadtimeEntityManager(IEntityComponentSource src, IEntity ent, IEntity parent)
-	{
-		s_pInstance = this;
-	}
-	
 	//------------------------------------------------------------------------------------------------
 	static ACE_LoadtimeEntityManager GetInstance()
 	{
-		return s_pInstance;
+		ChimeraWorld world = GetGame().GetWorld();
+		return ACE_LoadtimeEntityManager.Cast(world.FindSystem(ACE_LoadtimeEntityManager));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Both)
+			.AddPoint(WorldSystemPoint.RuntimeStarted)
 	}
 		
 	//------------------------------------------------------------------------------------------------

@@ -19,8 +19,21 @@ class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 		if (!manager)
 			return ESerializeResult.DEFAULT;
 		
+		array<EntityID> deletedEntityIDs = manager.GetDeletedEntityIDs();
+		if (deletedEntityIDs.IsEmpty())
+			return ESerializeResult.DEFAULT;
+		
 		context.WriteValue("version", 1);
-		context.WriteValue("entityIDs", manager.GetDeletedEntityIDs());
+		
+		array<string> stringifiedIDs = {};
+		stringifiedIDs.Reserve(deletedEntityIDs.Count());
+		
+		foreach (EntityID entityID : deletedEntityIDs)
+		{
+			stringifiedIDs.Insert(ACE_EntityIdHelper.ToString(entityID));
+		}
+		
+		context.WriteValue("deletedEntityIDs", stringifiedIDs);
 		return ESerializeResult.OK;
 	}
 
@@ -34,9 +47,19 @@ class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 		int version;
 		context.Read(version);
 
-		array<EntityID> entityIDs;
-		context.Read(entityIDs);
-		manager.DeleteEntitiesByIdGlobal(entityIDs);
+		array<string> stringifiedIDs;
+		context.Read(stringifiedIDs);
+		array<EntityID> deletedEntityIDs = {};
+		deletedEntityIDs.Reserve(stringifiedIDs.Count());
+
+		foreach (string str : stringifiedIDs)
+		{
+			EntityID entityID = ACE_EntityIdHelper.FromString(str);
+			if (entityID != EntityID.INVALID)
+				deletedEntityIDs.Insert(entityID);
+		}
+		
+		manager.DeleteEntitiesByIdGlobal(deletedEntityIDs);
 		return true;
 	}
 }

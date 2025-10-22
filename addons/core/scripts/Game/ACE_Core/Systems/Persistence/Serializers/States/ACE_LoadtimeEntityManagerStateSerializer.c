@@ -4,7 +4,7 @@ class ACE_LoadtimeEntityManagerState : PersistentState
 }
 
 //------------------------------------------------------------------------------------------------
-class ACE_LoadtimeEntityStateManagerSerializer : ScriptedStateSerializer
+class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 {
 	//------------------------------------------------------------------------------------------------
 	override static typename GetTargetType()

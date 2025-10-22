@@ -48,7 +48,7 @@ class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 		context.Read(version);
 
 		array<string> stringifiedIDs;
-		context.Read(stringifiedIDs);
+		context.ReadValue("deletedEntityIDs", stringifiedIDs);
 		array<EntityID> deletedEntityIDs = {};
 		deletedEntityIDs.Reserve(stringifiedIDs.Count());
 

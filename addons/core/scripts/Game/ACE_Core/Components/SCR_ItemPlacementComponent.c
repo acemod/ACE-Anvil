@@ -56,6 +56,8 @@ modded class SCR_ItemPlacementComponent : ScriptComponent
 	override void ValidatePlacement(vector up, IEntity tracedEntity, BaseWorld world, IEntity character, out ENotification cantPlaceReason)
 	{
 		super.ValidatePlacement(up, tracedEntity, world, character, cantPlaceReason);
+		if (cantPlaceReason > 0)
+			return;
 		
 		ACE_ESurfaceLabel label = m_PlaceableItem.ACE_RequiredSurfaceLabel();
 		if (label == ACE_ESurfaceLabel.NONE)

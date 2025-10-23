@@ -2,8 +2,10 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
  ID "54A2D42003013D58"
  components {
   SCR_DeployablePlaceableItemComponent "{66AAF977B9074622}" {
+   m_aIgnoredComponents {
+    "SCR_EditableEntityComponent"
+   }
    m_eMeasurementMethod FROM_CENTER_OF_MASS
-   m_bACE_CanBeStacked 0
    m_bACE_RequiredSurfaceLabel DIGGABLE
    m_fMaxPlacementDistance 2.5
    m_ePlacementType XYZ

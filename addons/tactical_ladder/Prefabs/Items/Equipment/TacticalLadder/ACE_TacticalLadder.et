@@ -138,7 +138,7 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
     m_MagIndicator SCR_MagazineIndicatorConfiguration "{5CDCD73FF80278AD}" {
      m_sImagesetIcons "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
      m_sImagesetGlows "{00FE3DBDFD15227B}UI/Textures/Icons/icons_wrapperUI-glow.imageset"
-     m_sOutline "bipod"
+     m_sOutline "ladder"
      m_bProgressBar 0
     }
     m_eAmmoTypeFlags 0

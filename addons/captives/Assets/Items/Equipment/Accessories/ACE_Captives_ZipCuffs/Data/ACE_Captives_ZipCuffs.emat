@@ -1,0 +1,6 @@
+MatPBRBasic {
+ MetalnessScale 0
+ BCRMap "{BF8762633A364851}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuff/Data/ACE_Captives_ZipCuff_BCR.edds"
+ NormalPower 2
+ NMOMap "{875FD9F1E3411ACF}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuff/Data/ACE_Captives_ZipCuff_NMO.edds"
+}

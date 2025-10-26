@@ -1,0 +1,81 @@
+HorizontalLayoutWidgetClass {
+ {
+  ScrollLayoutWidgetClass "{64475E8865185276}" {
+   Prefab "{64475E8865185276}"
+   {
+    VerticalLayoutWidgetClass "{64475E8865185274}" {
+     Prefab "{64475E8865185274}"
+     {
+      VerticalLayoutWidgetClass "{64476516122ABAC4}" {
+       Name "ACE_Radio"
+       Slot LayoutSlot "{64476516122ABAFD}" {
+       }
+       {
+        VerticalLayoutWidgetClass "{64476640D7B4C338}" : "{FEEEB639F2735BA1}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsTitle.layout" {
+         Name "SettingsTitle0"
+         Slot LayoutSlot "{64476640D7B4C35A}" {
+         }
+         components {
+          SCR_LabelComponent "{58B30C1A8E56F0FF}" {
+           m_sLabel "#ACE_Radio-Settings-Radio"
+          }
+         }
+        }
+        ButtonWidgetClass "{64476516D54DC19A}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+         Name "Beep_Ch1"
+         Slot LayoutSlot "{54890CCD613ED416}" {
+          Padding 4 4 4 4
+         }
+         components {
+          SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+           m_sLabel "#ACE_Radio-Settings-Radio_Beep_Ch1"
+           m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+           m_aElementNames {
+            "#ACE_Radio-Settings-Radio_Beep_Off" "#ACE_Radio-Settings-Radio_Beep_High" "#ACE_Radio-Settings-Radio_Beep_Low"
+           }
+           m_bUseLightArrows 1
+           m_bCycleMode 1
+          }
+         }
+        }
+        ButtonWidgetClass "{64476516DF04C11E}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+         Name "Beep_Ch2"
+         Slot LayoutSlot "{54890CCD613ED416}" {
+          Padding 4 4 4 4
+         }
+         components {
+          SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+           m_sLabel "#ACE_Radio-Settings-Radio_Beep_Ch2"
+           m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+           m_aElementNames {
+            "#ACE_Radio-Settings-Radio_Beep_Off" "#ACE_Radio-Settings-Radio_Beep_High" "#ACE_Radio-Settings-Radio_Beep_Low"
+           }
+           m_bCycleMode 1
+          }
+         }
+        }
+        ButtonWidgetClass "{64481AA16C28CDC6}" : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+         Name "Beep_Cycle"
+         Slot LayoutSlot "{64481AA16C28CD32}" {
+          HorizontalAlign 3
+          Padding 4 4 4 4
+         }
+         components {
+          SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+           m_sLabel "#ACE_Radio-Settings_Beep_Cycle"
+           m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+           m_aElementNames {
+            "#AR-UI_No" "#AR-UI_Yes"
+           }
+           m_bCycleMode 1
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

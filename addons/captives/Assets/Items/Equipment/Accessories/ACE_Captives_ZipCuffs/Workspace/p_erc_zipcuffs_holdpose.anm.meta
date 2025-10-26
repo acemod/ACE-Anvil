@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{7798F71C06B02431}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/p_erc_zipcuffs_holdpose.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

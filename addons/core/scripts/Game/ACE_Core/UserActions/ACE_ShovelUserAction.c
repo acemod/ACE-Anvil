@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 //! Shovel Entity user action
-class ACE_ShovelUserAction : ACE_GadgetUserAction
+class ACE_ShovelUserAction : ACE_ContinousGadgetUserAction
 {	
 	//------------------------------------------------------------------------------------------------
 	//! User needs to equip the shovel for the action to show up

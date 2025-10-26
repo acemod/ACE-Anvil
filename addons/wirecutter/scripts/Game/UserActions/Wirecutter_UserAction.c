@@ -17,8 +17,10 @@ class Wirecutter_UserAction : ScriptedUserAction
 	
 	override void OnActionStart(IEntity pUserEntity)
 	{
+		/*****
 		if (s_onFenceCut)
 			s_onFenceCut.Invoke(GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(pUserEntity), m_eInstrumentType);
+		
 		
 		SCR_SoundManagerEntity soundManagerEntity = GetGame().GetSoundManagerEntity();
 		if (!soundManagerEntity)
@@ -39,10 +41,12 @@ class Wirecutter_UserAction : ScriptedUserAction
 		AudioSystem.TerminateSound(m_AudioHandle);
 		soundManagerEntity.PlayAudioSource(audioSource);			
 		m_AudioHandle = audioSource.m_AudioHandle;
+		*****/
 	}
 	
 	override void OnActionCanceled(IEntity pOwnerEntity, IEntity pUserEntity)
 	{		
+		/*****
 		AudioSystem.TerminateSound(m_AudioHandle);
 		
 		SCR_SoundManagerEntity soundManagerEntity = GetGame().GetSoundManagerEntity();
@@ -67,6 +71,7 @@ class Wirecutter_UserAction : ScriptedUserAction
 					
 		soundManagerEntity.PlayAudioSource(audioSource, mat);			
 		m_AudioHandle = audioSource.m_AudioHandle;
+		*****/
 	}
 	
 	IEntity GetWirecutter(notnull IEntity ent)
@@ -104,12 +109,15 @@ class Wirecutter_UserAction : ScriptedUserAction
 		return true;
 	}
 	
-		override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
+	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
 	{
 		if (!Replication.IsServer())
               return;
 		
-		SCR_EntityHelper.DeleteEntityAndChildren(pOwnerEntity);
+		vector hitPosDirNorm[3];
+		hitPosDirNorm[0] = pOwnerEntity.GetOrigin();
+		SCR_PlayerController userCtrl = SCR_PlayerController.Cast(GetGame().GetPlayerController());
+		userCtrl.ACE_RequestDestroyEntity(SCR_DestructibleEntity.Cast(pOwnerEntity), EDamageType.MELEE, hitPosDirNorm, 3000);
 	}
 
 void ~Wirecutter_UserAction()

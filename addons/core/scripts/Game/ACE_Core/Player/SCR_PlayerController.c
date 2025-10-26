@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_PlayerController : PlayerController
 {
+	protected const float ACE_DESTRUCTION_DAMAGE_MULTIPLIER = 10;
+	
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of unreplicated entity from all machines
 	//! Called from local player
@@ -41,7 +43,7 @@ modded class SCR_PlayerController : PlayerController
 		
 		float health = entity.GetCurrentHealth();
 		if (health > 0)
-			entity.HandleDamage(damageType, health, hitPosDirNorm);
+			entity.HandleDamage(damageType, ACE_DESTRUCTION_DAMAGE_MULTIPLIER * health, hitPosDirNorm);
 		
 		if (deletionDelayMS <= 0)
 			return;

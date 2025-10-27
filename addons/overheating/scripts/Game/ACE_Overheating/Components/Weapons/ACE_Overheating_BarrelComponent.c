@@ -22,6 +22,18 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	[Attribute(defvalue: "0.01476", desc: "Outer diameter of the barrel [m]. ", precision: 5, category: "Barrel")]
 	protected float m_fBarrelDiameter;
 	
+	[Attribute(defvalue: "barrel_chamber", desc: "Name of the bone for the chamber")]
+	protected string m_sChamberBoneName;
+	
+	[Attribute(defvalue: "chamber", desc: "If m_sChamberBoneName does not exist, it searches for the first bone that contains this pattern")]
+	protected string m_sFallbackChamberBoneNamePattern;
+	
+	[Attribute(defvalue: "barrel_muzzle", desc: "Name of the bone for the muzzle")]
+	protected string m_sMuzzleBoneName;
+	
+	[Attribute(defvalue: "muzzle", desc: "If m_sMuzzleBoneName does not exist, it searches for the first bone that contains this pattern")]
+	protected string m_sFallbackMuzzleBoneNamePattern;
+	
 	// M60 (MachineGun_Base.et): 0.731 (Fitted together with m_fBaseHeatTransferCoefficient, such that cook-off progress will exactly reach 1.0 and then stop progressing for the next bullet and T_barrel_final=35°C when firing 100 RPM for 2 minutes and then cease fire for 15 minutes)
 	// M249 (MG_M249_base.et): 1.000
 	// PKM (MachineGun_Base.et): 0.508 (Calculated scale to get similar heat transfer per shot as M60)
@@ -94,10 +106,35 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		if (!weaponAnim)
 			return 0;
 		
+		TNodeId chamberBoneID = FindBoneID(weaponAnim, m_sChamberBoneName, m_sFallbackChamberBoneNamePattern);
+		TNodeId muzzleBoneID = FindBoneID(weaponAnim, m_sMuzzleBoneName, m_sFallbackMuzzleBoneNamePattern);
 		vector chamberTransform[4], muzzleTransform[4];
-		weaponAnim.GetBoneLocalMatrix(weaponAnim.GetBoneIndex("barrel_chamber"), chamberTransform);
-		weaponAnim.GetBoneLocalMatrix(weaponAnim.GetBoneIndex("barrel_muzzle"), muzzleTransform);
+		weaponAnim.GetBoneLocalMatrix(chamberBoneID, chamberTransform);
+		weaponAnim.GetBoneLocalMatrix(muzzleBoneID, muzzleTransform);
 		return vector.Distance(chamberTransform[3], muzzleTransform[3]);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Gets bone ID for a weapon
+	//! Returns bone ID for defaultBoneName if it exists
+	//! Otherwise searches for fallbackPattern and returns the first match
+	protected TNodeId FindBoneID(Animation weaponAnim, string defaultBoneName, string fallbackPattern)
+	{
+		TNodeId boneID = weaponAnim.GetBoneIndex(defaultBoneName);
+		if (boneID >= 0)
+			return boneID;
+		
+		array<string> boneNames = {};
+		weaponAnim.GetBoneNames(boneNames);
+		
+		foreach (string name : boneNames)
+		{
+			name.ToLower();
+			if (name.Contains(fallbackPattern))
+				return weaponAnim.GetBoneIndex(name);
+		}
+		
+		return -1;
 	}
 	
 	//------------------------------------------------------------------------------------------------

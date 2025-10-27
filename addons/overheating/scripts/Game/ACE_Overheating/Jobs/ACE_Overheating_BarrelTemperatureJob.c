@@ -82,14 +82,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		float heatFlux = -ComputeHeatTransferCoefficient() * (currentTemperature - externalTemperature);
 		// Radidative heat flux (Stefan-Boltzmann law)
 		heatFlux -= m_pContext.m_pObject.GetData().GetBarrelEmissivity() * ACE_PhysicalConstants.STEFAN_BOLTZMANN * (Math.Pow(currentTemperature, 4) - Math.Pow(externalTemperature, 4));
-		float heat = heatFlux * m_pContext.m_pObject.GetData().GetBarrelSurfaceArea() * timeSlice;
-		
-		if (m_pContext.m_bIsChamberingPossible)
-			heat *= s_pSettings.m_fDefaultCoolingScale;
-		else
-			heat *= s_pSettings.m_fOpenBoltCoolingScale;
-		
-		return heat;
+		return heatFlux * m_pContext.m_pObject.GetData().GetBarrelSurfaceArea() * timeSlice;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -124,7 +117,14 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		
 		float h = 4.5908 * Math.Pow(airVelocity.LengthSq(), 3.0 / 10.0) + 9.3198 * s_pWeatherManager.GetRainIntensity();
 		h /= Math.Pow(m_pContext.m_pObject.GetData().GetBarrelDiameter(), 0.4);
-		h = s_pSettings.m_fBaseHeatTransferCoefficient + Math.Max(12.5, h);
+		h = Math.Max(12.5, h);
+		
+		if (m_pContext.m_bIsChamberingPossible)
+			h *= s_pSettings.m_fDefaultAirCoolingScale;
+		else
+			h *= s_pSettings.m_fOpenBoltAirCoolingScale;
+		
+		h += s_pSettings.m_fBaseHeatTransferCoefficient;
 		
 	#ifdef ENABLE_DIAG
 		m_pContext.m_pObject.SetHeatTransferCoefficient(h);

@@ -1,8 +1,10 @@
 //------------------------------------------------------------------------------------------------
+//! This filter is used for deciding whether tags are shown in armavision
 [BaseContainerProps(), SCR_BaseContainerCustomTitleEnum(EEditableEntityState, "m_State")]
 modded class SCR_FriendlyEditableEntityFilter : SCR_BaseEditableEntityFilter
 {
 	//------------------------------------------------------------------------------------------------
+	//! Return false if local player is captive or has surrenders, such that they can't see any tags
 	override protected bool IsFriendly(GenericEntity owner)
 	{
 		if (!super.IsFriendly(owner))

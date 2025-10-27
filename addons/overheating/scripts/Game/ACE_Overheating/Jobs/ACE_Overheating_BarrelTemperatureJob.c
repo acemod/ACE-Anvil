@@ -78,18 +78,11 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	//! Returns the heat loss of the barrel through convection and radiation
 	protected float ComputeCooling(float timeSlice, float currentTemperature, float externalTemperature)
 	{
-		// Convective heat flux (Newton's law of cooling)
-		float heatFlux = -ComputeConvectiveHeatTransferCoefficient() * (currentTemperature - externalTemperature);
+		// Conductive and convective heat flux (Newton's law of cooling)
+		float heatFlux = -ComputeHeatTransferCoefficient() * (currentTemperature - externalTemperature);
 		// Radidative heat flux (Stefan-Boltzmann law)
 		heatFlux -= m_pContext.m_pObject.GetData().GetBarrelEmissivity() * ACE_PhysicalConstants.STEFAN_BOLTZMANN * (Math.Pow(currentTemperature, 4) - Math.Pow(externalTemperature, 4));
-		float heat = heatFlux * m_pContext.m_pObject.GetData().GetBarrelSurfaceArea() * timeSlice;
-		
-		if (m_pContext.m_bIsChamberingPossible)
-			heat *= s_pSettings.m_fDefaultCoolingScale;
-		else
-			heat *= s_pSettings.m_fOpenBoltCoolingScale;
-		
-		return heat;
+		return heatFlux * m_pContext.m_pObject.GetData().GetBarrelSurfaceArea() * timeSlice;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -115,7 +108,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	//! Derived from equation (1), such that h = 50 for rain intensity (RI) = 1 and d = 0.015 m
 	//------------------------------------------------------------------------------------------------
 	//! TO DO: Account for water and better relation for rain
-	protected float ComputeConvectiveHeatTransferCoefficient()
+	protected float ComputeHeatTransferCoefficient()
 	{
 		vector airVelocity = s_pWeatherManager.GetWindSpeed() * vector.FromYaw(s_pWeatherManager.GetWindDirection());
 		
@@ -125,6 +118,13 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		float h = 4.5908 * Math.Pow(airVelocity.LengthSq(), 3.0 / 10.0) + 9.3198 * s_pWeatherManager.GetRainIntensity();
 		h /= Math.Pow(m_pContext.m_pObject.GetData().GetBarrelDiameter(), 0.4);
 		h = Math.Max(12.5, h);
+		
+		if (m_pContext.m_bIsChamberingPossible)
+			h *= s_pSettings.m_fDefaultAirCoolingScale;
+		else
+			h *= s_pSettings.m_fOpenBoltAirCoolingScale;
+		
+		h += s_pSettings.m_fBaseHeatTransferCoefficient;
 		
 	#ifdef ENABLE_DIAG
 		m_pContext.m_pObject.SetHeatTransferCoefficient(h);

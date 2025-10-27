@@ -10,15 +10,33 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	[Attribute(defvalue: "0.85", desc: "Emissivity of the barrel surface", category: "Barrel")]
 	protected float m_fBarrelEmissivity;
 	
-	// Default: Value from ACE3
+	// Default: 0.550 (Value from ACE3)
+	// M60 (MG_M60_base.et): 3.74 / 10.4 = 0.360 (Spare barrel mass (literature value) divided by total mass (ingame value))
+	// M249 (MG_M249_base.et): 3.178 / 6.9 = 0.461
+	// PKM (MachineGun_Base.et): 2.4 / 7.5 = 0.32
 	[Attribute(defvalue: "0.55", desc: "Ratio between barrel mass and total mass of the weapon", category: "Barrel")]
 	protected float m_fBarrelMassFraction;
 	
-	// Default: Measured value from AK74_body.xob
+	// Default (Measured value from AK74_body.xob): 0.01476
+	// M60: 0.01828
 	[Attribute(defvalue: "0.01476", desc: "Outer diameter of the barrel [m]. ", precision: 5, category: "Barrel")]
 	protected float m_fBarrelDiameter;
 	
-	// MachineGun_Base.et has 0.8 to matches the 200 Rnd <2 min reported in M60 manual: https://upload.wikimedia.org/wikipedia/commons/c/c7/TM-9-1005-224-10.pdf
+	[Attribute(defvalue: "barrel_chamber", desc: "Name of the bone for the chamber")]
+	protected string m_sChamberBoneName;
+	
+	[Attribute(defvalue: "chamber", desc: "If m_sChamberBoneName does not exist, it searches for the first bone that contains this pattern")]
+	protected string m_sFallbackChamberBoneNamePattern;
+	
+	[Attribute(defvalue: "barrel_muzzle", desc: "Name of the bone for the muzzle")]
+	protected string m_sMuzzleBoneName;
+	
+	[Attribute(defvalue: "muzzle", desc: "If m_sMuzzleBoneName does not exist, it searches for the first bone that contains this pattern")]
+	protected string m_sFallbackMuzzleBoneNamePattern;
+	
+	// M60 (MachineGun_Base.et): 0.731 (Fitted together with m_fBaseHeatTransferCoefficient, such that cook-off progress will exactly reach 1.0 and then stop progressing for the next bullet and T_barrel_final=35°C when firing 100 RPM for 2 minutes and then cease fire for 15 minutes)
+	// M249 (MG_M249_base.et): 1.000
+	// PKM (MachineGun_Base.et): 0.508 (Calculated scale to get similar heat transfer per shot as M60)
 	[Attribute(defvalue: "1", desc: "Heat transferred to the barrel is given by this scale times the kinetic energy of the bullet.")]
 	protected float m_fHeatingScale;
 	
@@ -88,10 +106,35 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		if (!weaponAnim)
 			return 0;
 		
+		TNodeId chamberBoneID = FindBoneID(weaponAnim, m_sChamberBoneName, m_sFallbackChamberBoneNamePattern);
+		TNodeId muzzleBoneID = FindBoneID(weaponAnim, m_sMuzzleBoneName, m_sFallbackMuzzleBoneNamePattern);
 		vector chamberTransform[4], muzzleTransform[4];
-		weaponAnim.GetBoneLocalMatrix(weaponAnim.GetBoneIndex("barrel_chamber"), chamberTransform);
-		weaponAnim.GetBoneLocalMatrix(weaponAnim.GetBoneIndex("barrel_muzzle"), muzzleTransform);
+		weaponAnim.GetBoneLocalMatrix(chamberBoneID, chamberTransform);
+		weaponAnim.GetBoneLocalMatrix(muzzleBoneID, muzzleTransform);
 		return vector.Distance(chamberTransform[3], muzzleTransform[3]);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Gets bone ID for a weapon
+	//! Returns bone ID for defaultBoneName if it exists
+	//! Otherwise searches for fallbackPattern and returns the first match
+	protected TNodeId FindBoneID(Animation weaponAnim, string defaultBoneName, string fallbackPattern)
+	{
+		TNodeId boneID = weaponAnim.GetBoneIndex(defaultBoneName);
+		if (boneID >= 0)
+			return boneID;
+		
+		array<string> boneNames = {};
+		weaponAnim.GetBoneNames(boneNames);
+		
+		foreach (string name : boneNames)
+		{
+			name.ToLower();
+			if (name.Contains(fallbackPattern))
+				return weaponAnim.GetBoneIndex(name);
+		}
+		
+		return -1;
 	}
 	
 	//------------------------------------------------------------------------------------------------

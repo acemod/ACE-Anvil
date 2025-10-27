@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{1A0A72CFC5D87FD5}Assets/Weapons/MachineGuns/UK59/Data/UK59_Metal.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

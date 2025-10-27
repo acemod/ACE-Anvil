@@ -32,6 +32,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! - Linear response from full health -> 0 to serious damage -> 1
 	float ACE_Medical_GetPainIntensity()
 	{
+		if (!m_pACE_Medical_PainHitZone)
+			return 0;
+		
 		// Account for analgesic effects
 		float health = m_pACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression;
 		

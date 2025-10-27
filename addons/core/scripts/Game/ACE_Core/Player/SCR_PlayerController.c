@@ -1,8 +1,6 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_PlayerController : PlayerController
 {
-	protected const float ACE_DESTRUCTION_DAMAGE_MULTIPLIER = 10;
-	
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of unreplicated entity from all machines
 	//! Called from local player
@@ -28,14 +26,14 @@ modded class SCR_PlayerController : PlayerController
 	//------------------------------------------------------------------------------------------------
 	//! Request destruction of SCR_DestructibleEntity
 	//! Called from local player
-	void ACE_RequestDestroyEntity(SCR_DestructibleEntity entity, EDamageType damageType, vector hitPosDirNorm[3], int deletionDelayMS = -1)
+	void ACE_RequestDestroyEntity(SCR_DestructibleEntity entity, vector hitPosDirNorm[3], int deletionDelayMS = -1)
 	{
-		Rpc(RpcAsk_ACE_DestroyEntity, entity.GetID(), damageType, hitPosDirNorm, deletionDelayMS);
+		Rpc(RpcAsk_ACE_DestroyEntity, entity.GetID(), hitPosDirNorm, deletionDelayMS);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_DestroyEntity(EntityID entityID, EDamageType damageType, vector hitPosDirNorm[3], int deletionDelayMS)
+	protected void RpcAsk_ACE_DestroyEntity(EntityID entityID, vector hitPosDirNorm[3], int deletionDelayMS)
 	{
 		SCR_DestructibleEntity entity = SCR_DestructibleEntity.Cast(GetGame().GetWorld().FindEntityByID(entityID));
 		if (!entity)
@@ -43,7 +41,7 @@ modded class SCR_PlayerController : PlayerController
 		
 		float health = entity.GetCurrentHealth();
 		if (health > 0)
-			entity.HandleDamage(damageType, ACE_DESTRUCTION_DAMAGE_MULTIPLIER * health, hitPosDirNorm);
+			entity.HandleDamage(EDamageType.TRUE, health, hitPosDirNorm);
 		
 		if (deletionDelayMS <= 0)
 			return;

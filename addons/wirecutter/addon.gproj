@@ -1,0 +1,22 @@
+GameProject {
+ ID "ACE_Wirecutter"
+ GUID "62F364B35E9B51B0"
+ TITLE "ACE Wirecutter"
+ Dependencies {
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

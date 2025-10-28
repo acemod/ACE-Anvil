@@ -206,6 +206,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Stops effect with a fade-out
 	void StopEffects()
 	{
 	#ifdef ENABLE_DIAG
@@ -216,6 +217,28 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		{
 			effectConfig.GetEffectEntity().StopEmission();
 			ApplyParamsToEffectEntity(effectConfig.SpawnFadeOutEffect());
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Instantly terminates effects
+	void TerminateEffects()
+	{
+		if (!System.IsConsoleApp())
+			RpcDo_TerminateEffectsBroadcast();
+		
+		Rpc(RpcDo_TerminateEffectsBroadcast);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_TerminateEffectsBroadcast()
+	{
+		GetGame().GetCallqueue().Remove(StopEffects);
+		
+		foreach (ACE_Overheating_SmokeEffectConfig effectConfig : m_aSomkeEffects)
+		{
+			effectConfig.GetEffectEntity().Stop();
 		}
 	}
 }

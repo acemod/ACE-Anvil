@@ -12,4 +12,11 @@ class ACE_Math
 	{
 		return x / (1 + x);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float Round(float value, int precision)
+	{
+		float scale = Math.Pow(10, precision);
+		return Math.Round(value * scale) / scale;
+	}
 }

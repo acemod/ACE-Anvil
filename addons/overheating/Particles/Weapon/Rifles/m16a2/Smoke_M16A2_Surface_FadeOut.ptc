@@ -46,11 +46,12 @@ EffectDef {
    Size {
     0 0.1189 0.533 0.8061 1 1
    }
+   Repeat 0
    ColorMast {
     0 1 1 1 0.5196 0.8 0.8 0.8 1 1 1 1
    }
    AlphaMast {
-    0 1 0.0001 1 0.4815 0.5575 1 0
+    0 1 0.5 0
    }
   }
   EmitterDef HOT_2 {
@@ -94,11 +95,12 @@ EffectDef {
    Size {
     0 0.1189 0.5319 0.6909 1 1
    }
+   Repeat 0
    ColorMast {
     0 1 1 1 0.5196 0.8 0.8 0.8 1 1 1 1
    }
    AlphaMast {
-    0 1 0.0001 1 0.4815 0.5575 1 0
+    0 1 0.5 0
    }
   }
   EmitterDef HOT_0 {
@@ -151,8 +153,9 @@ EffectDef {
    Size {
     0 0.1189 0.533 0.8061 1 1
    }
+   Repeat 0
    AlphaMast {
-    0 1 1 0
+    0 1 0.5 0
    }
   }
  }

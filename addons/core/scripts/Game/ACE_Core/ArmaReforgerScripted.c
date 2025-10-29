@@ -3,7 +3,7 @@
 //! Created when the game starts (not when a world starts!) and persists until the game is closed.
 modded class ArmaReforgerScripted : ChimeraGame
 {
-	static protected ref ACE_SettingsConfig s_pACE_SettingsConfig;
+	static protected ref ACE_SettingsConfig s_ACE_SettingsConfig;
 	static protected bool s_bACE_WasMissionHeaderApplied = false;
 	
 	//------------------------------------------------------------------------------------------------

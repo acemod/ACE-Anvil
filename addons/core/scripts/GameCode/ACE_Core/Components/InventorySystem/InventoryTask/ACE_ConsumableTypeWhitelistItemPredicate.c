@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-//! Match items based on a whitelist of ECommonItemType
+//! Match items based on a whitelist of SCR_EConsumableType
 [BaseContainerProps()]
 class ACE_ConsumableTypeWhitelistItemPredicate : ACE_InventorySearchPredicate
 {

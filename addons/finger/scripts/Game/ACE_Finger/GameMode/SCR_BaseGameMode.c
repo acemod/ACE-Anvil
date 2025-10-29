@@ -38,7 +38,7 @@ modded class SCR_BaseGameMode : BaseGameMode
 		super.OnPlayerDisconnected(playerId, cause, timeout);
 		
 		ACE_Finger_MapPointer ptr;
-		if (m_aACE_Finger_Pointers.Find(playerId, ptr))
+		if (m_aACE_Finger_Pointers.Take(playerId, ptr))
 			SCR_EntityHelper.DeleteEntityAndChildren(ptr);
 	}
 }

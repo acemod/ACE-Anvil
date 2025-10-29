@@ -23,7 +23,7 @@ class ACE_SelectItemRadialMenuCategoryEntry : ACE_SelectionMenuCategoryEntry
 		storageManager.FindItems(items, m_pItemSearchPredicate);
 		SCR_Sorting<IEntity, ACE_CompareItemName>.HeapSort(items, false);
 		
-		// Make sure we only add each
+		// Make sure we only add each item prefab once
 		set<EntityPrefabData> uniquePrefabDataSet = new set<EntityPrefabData>();
 		
 		foreach (IEntity item : items)

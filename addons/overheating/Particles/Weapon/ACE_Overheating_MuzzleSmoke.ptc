@@ -1,0 +1,44 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef smoke_long {
+   ConeAngle 360 0 0
+   MaxNum 1
+   BirthRate 20
+   BirthRateRND 0
+   BirthRateVel 0
+   Offset 0 0 0
+   Angles -90 0 0
+   LodMin 0
+   LodMax 2
+   Material "{B6B47613FF3B9485}Particles/_Materials/Gas/Smoke_heavy_white_sheet.emat"
+   SizeMultiplier 0.3
+   SizeRND 0.05
+   RotMultiplier 50
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   Velocity 0
+   VelocityRND 0
+   VelAffect 0.2
+   AirResistance 1
+   WindInfluence 0.1
+   GravityMultiply 0
+   GravityMultiplyRND 0
+   AnimOnce 1
+   AnimFPS 20
+   Lifetime 8
+   LifetimeRND 0
+   LifetimeVelFactor 1
+   LifetimeVelSmoothing 0
+   Alpha {
+    0 0 0.0317 0.4061 0.698 0.2909 1 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   EmittingTime 0.05
+   Repeat 0
+  }
+ }
+}

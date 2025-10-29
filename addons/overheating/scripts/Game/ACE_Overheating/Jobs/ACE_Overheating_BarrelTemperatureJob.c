@@ -62,6 +62,9 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		
 		if (m_pContext.m_pGlowEffect)
 			m_pContext.m_pGlowEffect.SetIntensity(Math.Clamp(Math.InverseLerp(s_pSettings.m_fMinGlowTemperature, 1300, nextTemperature), 0, 1));
+		
+		if (m_pContext.m_pSmokeEffect)
+			m_pContext.m_pSmokeEffect.UpdateParams(nextTemperature);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -1,0 +1,40 @@
+GenericEntity : "{F54F6C453A8CB478}Prefabs/Weapons/Core/MachineGun_Base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{50F64C4591CD7AA6}" {
+     components {
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       m_cBirthRateTemperatureCurve {
+        0.366 0 0.388 0.161 0.637 0.373 1 0.582
+       }
+       m_cLifetimeTemperatureCurve {
+        0 0 0.553 0.248 1 0.431
+       }
+       m_cSizeTemperatureCurve {
+        0.167 0 0.323 0.034 0.484 0.079 0.617 0.115 0.807 0.159 1 0.195
+       }
+       m_cVelocityTemperatureCurve {
+        0 0.04 0.459 0.059 0.627 0.076 0.811 0.095 1 0.127
+       }
+       m_cEmittingTimeTemperatureCurve {
+        0.387 0.17 0.718 0.562 1 1
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6656F24AE4EE9D46}" {
+         m_sContinuousParticleEffect "{5AD458006EAC322E}Particles/Weapon/MGs/PKM/Smoke_PKM_Surface.ptc"
+         m_sFadeoutParticleEffect "{4CBA661F933935BE}Particles/Weapon/MGs/PKM/Smoke_PKM_Surface_FadeOut.ptc"
+         m_pEffectPosition PointInfo "{6656F24AE2D095E4}" {
+          PivotID "barrel_muzzle"
+          Offset 0 0 -0.2963
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

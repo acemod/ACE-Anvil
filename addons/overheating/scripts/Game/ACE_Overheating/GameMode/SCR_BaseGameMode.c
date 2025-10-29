@@ -15,7 +15,7 @@ modded class SCR_BaseGameMode : BaseGameMode
 		if (weaponStorage)
 			weaponStorage.ACE_Overheating_ToggleRegisterWeapons(false);
 		
-		ACE_Overheating_AmmoTemperatureSystem ammoSystem = ACE_Overheating_AmmoTemperatureSystem.GetInstance();
+		ACE_Overheating_AmmoTemperatureSystem ammoSystem = ACE_Overheating_AmmoTemperatureSystem.GetInstance(playerChar.GetWorld());
 		if (ammoSystem)
 			ammoSystem.Unregister(playerChar);
 	}

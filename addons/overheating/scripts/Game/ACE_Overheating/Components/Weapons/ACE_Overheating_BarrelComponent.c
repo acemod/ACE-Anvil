@@ -227,13 +227,13 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	//------------------------------------------------------------------------------------------------
 	float ComputeJamChance(float temperature)
 	{
-		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cJamChanceTemperatureCurve)[1];
+		return LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cJamChanceTemperatureCurve)[1];
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ComputeAdditionalMuzzleDispersionFactor(float temperature)
 	{
-		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cMuzzleDispersionFactorTemperatureCurve)[1];
+		return LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cMuzzleDispersionFactorTemperatureCurve)[1];
 	}
 }
 
@@ -345,7 +345,7 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnStateChanged()
 	{
-		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance();
+		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.OnJamStateChanged(this, m_bIsJammed);
 	}

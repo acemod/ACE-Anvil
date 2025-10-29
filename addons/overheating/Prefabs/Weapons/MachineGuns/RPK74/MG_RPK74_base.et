@@ -10,6 +10,21 @@ GenericEntity : "{F54F6C453A8CB478}Prefabs/Weapons/Core/MachineGun_Base.et" {
        m_fBarrelDiameter 0.01476
        m_fHeatingScale 1
       }
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       m_cVelocityTemperatureCurve {
+        0 0.04 0.462 0.049 0.628 0.055 0.807 0.07 1 0.102
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{665B7E470FB3D8A1}" {
+         m_sContinuousParticleEffect "{DDE2878E48BBB63B}Particles/Weapon/MGs/RPK/Smoke_RPK_Surface.ptc"
+         m_sFadeoutParticleEffect "{C6E1983287B70047}Particles/Weapon/MGs/RPK/Smoke_RPK_Surface_FadeOut.ptc"
+         m_pEffectPosition PointInfo "{665B7E4793BBD619}" {
+          PivotID "barrel_muzzle"
+          Offset 0 -0.004 -0.4809
+         }
+        }
+       }
+      }
      }
     }
    }

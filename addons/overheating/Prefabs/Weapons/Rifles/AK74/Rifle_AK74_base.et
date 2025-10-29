@@ -1,0 +1,45 @@
+GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{CA6BE4D6B867541F}" {
+     components {
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       m_cBirthRateTemperatureCurve {
+        0.383 0.098 0.705 0.306 1 0.461
+       }
+       m_cLifetimeTemperatureCurve {
+        0 0 0.474 0.103 0.697 0.163 0.877 0.227 1 0.319
+       }
+       m_cSizeTemperatureCurve {
+        0.167 0 0.323 0.028 0.487 0.053 0.645 0.072 0.829 0.1 1 0.141
+       }
+       m_cVelocityTemperatureCurve {
+        0 0.04 0.462 0.049 0.628 0.055 0.815 0.068 1 0.096
+       }
+       m_cEmittingTimeTemperatureCurve {
+        0.387 0.17 0.727 0.546 1 1
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6650F89004554222}" {
+         m_pEffectPosition PointInfo "{6650F8903978BCB2}" {
+          Offset 0 0 0.0198
+         }
+        }
+        ACE_Overheating_SmokeEffectConfig "{6656B134909DB280}" {
+         m_sContinuousParticleEffect "{47DA8AC87481198A}Particles/Weapon/ak74/Smoke_AK74_Surface.ptc"
+         m_sFadeoutParticleEffect "{CA9A000CE7BF16C0}Particles/Weapon/ak74/Smoke_AK74_Surface_FadeOut.ptc"
+         m_pEffectPosition PointInfo "{6656B13538008E9B}" {
+          PivotID "barrel_muzzle"
+          Offset 0 0.0041 -0.2484
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

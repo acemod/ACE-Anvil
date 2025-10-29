@@ -1,15 +1,15 @@
 AudioClass {
  sounds {
-  SoundClass {
+  SoundClass "4105" {
    id 4105
    name "ACE_OVERHEATING_SOUND_SWAP_BARREL"
    version 5
    tl -274.261 -188.87
    ins {
-    ConnectionsClass connections {
+    ConnectionsClass "con:64" {
      id 64
      links {
-      ConnectionClass connection {
+      ConnectionClass "2052:65" {
        id 2052
        port 65
       }
@@ -17,22 +17,22 @@ AudioClass {
     }
    }
    volume_dB -10
-   outState 1035
+   outState 5131
    outStatePort 26631
   }
  }
  mixers {
-  MixerClass {
-   id 1035
+  MixerClass "5131" {
+   id 5131
    name "OutputState"
    version 4
-   tl -84 -187
-   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   tl -56 -194
+   res "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    ins {
-    ConnectionsClass connections {
+    ConnectionsClass "con:26631" {
      id 26631
      links {
-      ConnectionClass connection {
+      ConnectionClass "4105:65" {
        id 4105
        port 65
       }
@@ -40,24 +40,27 @@ AudioClass {
     }
    }
    pi {
-    16777216 0
+    2 0
    }
-   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   path "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    inputs {
-    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin"
+    "Music" "UI"
    }
   }
  }
  banks_local {
-  BankLocalClass {
+  BankLocalClass "2052" {
    id 2052
    name "BarrelSwap"
    version 7
    tl -496 -187
    Volume 2
    Samples {
-    AudioBankSampleClass Sample {
+    AudioBankSampleClass "ACE_Overheating_BarrelSwap.wav" {
      Filename "{AD75581D6865B7B9}Sounds/Weapons/Machineguns/Samples/ACE_Overheating_BarrelSwap.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
     }
    }
   }

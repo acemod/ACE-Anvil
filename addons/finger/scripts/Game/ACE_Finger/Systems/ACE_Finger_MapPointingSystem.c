@@ -6,18 +6,20 @@ class ACE_Finger_MapPointingSystem : GameSystem
 	protected ref array<ACE_Finger_MapPointer> m_aActivePointers = {};
 	
 	//------------------------------------------------------------------------------------------------
-	override static void InitInfo(WorldSystemInfo outInfo)
-	{
-		super.InitInfo(outInfo);
-		outInfo.SetAbstract(false)
-			.SetLocation(ESystemLocation.Client);
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	static ACE_Finger_MapPointingSystem GetInstance()
 	{
 		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Finger_MapPointingSystem.Cast(world.FindSystem(ACE_Finger_MapPointingSystem));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Client)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	
 	//------------------------------------------------------------------------------------------------

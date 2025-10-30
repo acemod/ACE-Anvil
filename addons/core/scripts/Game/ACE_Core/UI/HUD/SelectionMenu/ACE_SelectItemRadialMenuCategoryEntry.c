@@ -3,7 +3,7 @@
 [BaseContainerProps(configRoot: true), SCR_BaseContainerCustomTitleUIInfo("Name")]
 class ACE_SelectItemRadialMenuCategoryEntry : ACE_SelectionMenuCategoryEntry
 {
-	[Attribute(desc: "Perdicate that items should match")]
+	[Attribute(desc: "Predicate that items should match")]
 	protected ref ACE_InventorySearchPredicate m_pItemSearchPredicate;
 	
 	//------------------------------------------------------------------------------------------------

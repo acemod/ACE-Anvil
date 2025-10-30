@@ -3,32 +3,42 @@
 //! Created when the game starts (not when a world starts!) and persists until the game is closed.
 modded class ArmaReforgerScripted : ChimeraGame
 {
-	static protected ref ACE_SettingsConfig m_ACE_SettingsConfig;
+	static protected ref ACE_SettingsConfig s_ACE_SettingsConfig;
+	static protected bool s_bACE_WasMissionHeaderApplied = false;
 	
 	//------------------------------------------------------------------------------------------------
-	//! Load settings when starting the game for the first time
-	override bool OnGameStart()
+	//! Load settings from config file
+	override void OnAfterInit(BaseWorld world)
 	{
-		if ((!Replication.IsRunning() || Replication.IsServer()) && !m_ACE_SettingsConfig)
-		{
-			// Load settings from config file
-			m_ACE_SettingsConfig = SCR_ConfigHelperT<ACE_SettingsConfig>.GetConfigObject("{A305FEB7400A2965}Configs/ACE/Settings.conf");
-			if (!m_ACE_SettingsConfig)
-				return false;
-			
-			// Override with settings present in mission header
-			SCR_MissionHeader missionHeader = SCR_MissionHeader.Cast(GetGame().GetMissionHeader());
-			if (missionHeader)
-				missionHeader.ACE_ApplyToSettingsConfig(m_ACE_SettingsConfig);
-		}
+		super.OnAfterInit(world);
 		
-		return super.OnGameStart();
+		if (Replication.IsServer() && !s_ACE_SettingsConfig)
+			s_ACE_SettingsConfig = SCR_ConfigHelperT<ACE_SettingsConfig>.GetConfigObject("{A305FEB7400A2965}Configs/ACE/Settings.conf");
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Override with settings present in mission header
+	//! Only done the first time due to subsequent mission headers not containing server config settings
+	//! See https://feedback.bistudio.com/T172515
+	override protected void OnMissionSet(MissionHeader mission)
+	{
+		super.OnMissionSet(mission);
+		
+		if (!Replication.IsServer() || s_bACE_WasMissionHeaderApplied)
+			return;
+		
+		SCR_MissionHeader scriptedMission = SCR_MissionHeader.Cast(mission);
+		if (!scriptedMission)
+			return;
+		
+		scriptedMission.ACE_ApplyToSettingsConfig(ACE_GetSettingsConfig());
+		s_bACE_WasMissionHeaderApplied = true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Return all settings
 	static ACE_SettingsConfig ACE_GetSettingsConfig()
 	{
-		return m_ACE_SettingsConfig;
+		return s_ACE_SettingsConfig;
 	}
 }

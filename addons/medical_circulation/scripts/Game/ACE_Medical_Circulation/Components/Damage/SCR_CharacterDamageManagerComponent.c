@@ -59,7 +59,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		else if (vitalsComponent.WasRevived())
 			m_fACE_Medical_ResilienceRegenScale = circulationSettings.m_fMaxRevivalResilienceRecoveryScale;
 		else
-			m_fACE_Medical_ResilienceRegenScale = s_pACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
 		
 		// Scale recovery scale by health of the brain hit zone
 		m_fACE_Medical_ResilienceRegenScale *= m_pACE_Medical_BrainHitZone.GetHealthScaled();

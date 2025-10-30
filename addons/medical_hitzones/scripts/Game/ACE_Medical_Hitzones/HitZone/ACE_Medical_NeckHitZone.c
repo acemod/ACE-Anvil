@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------------------------------------------
-class ACE_Medical_NeckHitZone : SCR_CharacterHitZone
+modded class ACE_Medical_NeckHitZone : SCR_CharacterHitZone
 {
 	//-----------------------------------------------------------------------------------------------------------
 	//! Add bleeding when wounded and knock the character out

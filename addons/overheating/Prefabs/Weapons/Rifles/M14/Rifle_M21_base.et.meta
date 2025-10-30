@@ -1,5 +1,9 @@
 MetaFileClass {
+<<<<<<<< HEAD:addons/overheating/Prefabs/Weapons/Rifles/M14/Rifle_M21_base.et.meta
  Name "{3FB5275A6505B323}Prefabs/Weapons/Rifles/M14/Rifle_M21_base.et"
+========
+ Name "{177172E4559E8F95}Prefabs/Helpers/ACE_Finger_MapPointer.et"
+>>>>>>>> medical/circulation-hitzones-compat:addons/finger/Prefabs/Helpers/ACE_Finger_MapPointer.et.meta
  Configurations {
   EntityTemplateResourceClass PC {
   }

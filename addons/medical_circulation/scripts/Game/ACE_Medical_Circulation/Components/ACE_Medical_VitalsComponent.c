@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_VitalsComponentClass : ACE_BaseComponentClass
+class ACE_Medical_VitalsComponentClass : ScriptComponentClass
 {
 }
 
 //------------------------------------------------------------------------------------------------
 //! Updates to vitals are mostly server side right now
 //! Clients can request values for vitals via ACE_Medical_NetworkComponent
-class ACE_Medical_VitalsComponent : ACE_BaseComponent
+class ACE_Medical_VitalsComponent : ScriptComponent
 {
 	[RplProp()]
 	protected ACE_Medical_EVitalStateID m_eVitalStateID = ACE_Medical_EVitalStateID.STABLE;

@@ -1,9 +1,10 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
-	protected static ACE_Medical_Core_Settings s_pACE_Medical_Core_Settings;
-	protected SCR_CharacterHitZone m_pACE_Medical_LastStruckPhysicalHitZone;
-	protected SCR_CharacterHealthHitZone m_pACE_Medical_HealthHitZone;
+	protected static ACE_Medical_Core_Settings s_ACE_Medical_Core_Settings;
+
+	protected SCR_CharacterHitZone m_ACE_Medical_LastStruckPhysicalHitZone;
+	protected SCR_CharacterHealthHitZone m_ACE_Medical_HealthHitZone;
 	protected float m_fACE_Medical_ResilienceRegenScale = 1;
 	
 	[RplProp()]

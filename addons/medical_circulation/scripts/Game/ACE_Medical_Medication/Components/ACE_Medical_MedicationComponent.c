@@ -26,7 +26,7 @@ class ACE_Medical_MedicationComponent : ScriptComponent
 		ACE_Medical_EDrugType drug = dose.GetDrugType();
 		dose.SetAdministrationTime();
 		
-		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance();
+		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance(GetOwner().GetWorld());
 		if (system && m_aDrugs.IsEmpty())
 			system.Register(SCR_ChimeraCharacter.Cast(GetOwner()));
 		
@@ -111,7 +111,7 @@ class ACE_Medical_MedicationComponent : ScriptComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 	
-		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance();
+		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance(owner.GetWorld());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(owner));
 	}

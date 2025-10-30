@@ -38,7 +38,13 @@ class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 	//! CO = HR * SV
 	protected float ComputeCardiacOutput(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		return context.m_pVitals.GetHeartRate() * s_pCirculationSettings.m_fDefaultStrokeVolumeML * context.m_pBloodHitZone.GetHealthScaled();
+		return context.m_pVitals.GetHeartRate() * ComputeStrokeVolume(context, timeSlice);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeStrokeVolume(ACE_Medical_CharacterContext context, float timeSlice)
+	{
+		return s_pCirculationSettings.m_fDefaultStrokeVolumeML * context.m_pBloodHitZone.GetHealthScaled();
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -1,0 +1,11 @@
+GenericEntity : "{9C80A507960AA473}Prefabs/Weapons/Core/Mine_base.et" {
+ ID "5968D2B6A82C6019"
+ components {
+  ActionsManagerComponent "{59E4E6938E65C2ED}" {
+   additionalActions {
+    ACE_NoUserAction "{64933B9AAC846215}" {
+    }
+   }
+  }
+ }
+}

@@ -134,7 +134,8 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 			hitPosDirNorm,
 			damageManager.GetOwner(),
 			hitZone,
-			null, null, -1, -1
+			damageManager.GetInstigator(), // We have to use the last instigator, as otherwise bleedouts would count as suicide
+			null, -1, -1
 		);
 		regenContext.damageEffect = new InstantDamageEffect();
 		damageManager.HandleDamage(regenContext);

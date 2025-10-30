@@ -32,7 +32,7 @@ class ACE_ContinousGadgetUserAction : ACE_BaseGadgetUserAction
 		{
 			CharacterAnimationComponent pAnimationComponent = charController.GetAnimationComponent();
 			int itemActionId = pAnimationComponent.BindCommand("CMD_Item_Action");
-			CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(pAnimationComponent.GetCommandHandler());
+			CharacterCommandHandlerComponent cmdHandler = pAnimationComponent.GetCommandHandler();
 			if (cmdHandler)
 				cmdHandler.FinishItemUse(true);
 		}
@@ -54,7 +54,7 @@ class ACE_ContinousGadgetUserAction : ACE_BaseGadgetUserAction
 			return;
 		
 		CharacterAnimationComponent userAnimationComponent = userCharController.GetAnimationComponent();
-		CharacterCommandHandlerComponent cmdHandler = CharacterCommandHandlerComponent.Cast(userAnimationComponent.GetCommandHandler());
+		CharacterCommandHandlerComponent cmdHandler = userAnimationComponent.GetCommandHandler();
 		cmdHandler.FinishItemUse(true);
 		
 		if (m_pItemSoundComponent)

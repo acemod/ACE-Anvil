@@ -20,7 +20,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	void ACE_Captives_SetCaptive(bool isCaptive)
 	{
-		ACE_Captives_CaptiveSystem system = ACE_Captives_CaptiveSystem.GetInstance();
+		ACE_Captives_CaptiveSystem system = ACE_Captives_CaptiveSystem.GetInstance(GetOwner().GetWorld());
 		if (!system)
 			return;
 		
@@ -69,5 +69,15 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	{
 		m_bACE_Captives_IsCaptive = isCaptive;
 		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Prevent captives from equipping gadgets in vehicles
+	override bool GetCanEquipGadget(IEntity gadget)
+	{
+		if (m_bACE_Captives_IsCaptive)
+			return false;
+		
+		return super.GetCanEquipGadget(gadget);
 	}
 }

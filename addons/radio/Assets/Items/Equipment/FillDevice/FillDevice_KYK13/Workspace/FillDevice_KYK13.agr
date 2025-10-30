@@ -1,0 +1,19 @@
+AnimSrcGraph {
+ AnimSetTemplate "{6C12880517CC54C1}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.ast"
+ ControlTemplate AnimSrcGCT "{666B7A785850D4F9}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+   AnimSrcGCTVarInt ItemInspectionState {
+    MaxValue 1
+   }
+  }
+ }
+ Debug AnimSrcGD "{666B7A785850DEC0}" {
+ }
+ GraphFilesResourceNames {
+  "{51EEF0BFBEAAE902}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

@@ -1,0 +1,90 @@
+GenericEntity : "{10C26F96EF7A8CF5}Prefabs/Props/Core/Props_Base.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  SCR_MilitaryBaseLogicComponent "{666F6D2DE6758D45}" {
+  }
+  ActionsManagerComponent "{5CB6D5B110622410}" {
+   ActionContexts {
+    UserActionContext "{666D4077968FE5AE}" {
+     UIInfo SCR_ActionContextUIInfo "{666D40778A819BDF}" {
+     }
+     ContextName "default"
+     Position PointInfo "{666D40778FBCC490}" {
+     }
+    }
+   }
+   additionalActions {
+    ACE_Radio_LoadKeysUserAction "{666D4077DBCFAAD8}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load A keys"
+     Duration 1
+    }
+    ACE_Radio_LoadKeysUserAction "{666D404A4A04EE98}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load B keys"
+     Duration 1
+     "Sort Priority" 1
+     m_iGroupID 1
+    }
+    ACE_Radio_LoadKeysUserAction "{666D404A408EED21}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load C keys"
+     Duration 1
+     "Sort Priority" 2
+     m_iGroupID 2
+    }
+    ACE_Radio_LoadKeysUserAction "{666D404A6C63533C}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load D keys"
+     Duration 1
+     "Sort Priority" 3
+     m_iGroupID 3
+    }
+    ACE_Radio_LoadKeysUserAction "{666D404A60C55EDE}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load E keys"
+     Duration 1
+     "Sort Priority" 4
+     m_iGroupID 4
+    }
+    ACE_Radio_LoadKeysUserAction "{666D404A61F6413C}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load F keys"
+     Duration 1
+     "Sort Priority" 5
+     m_iGroupID 5
+    }
+    ACE_Radio_LoadKeysUserAction "{666D404A6702E6EC}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load G keys"
+     Duration 1
+     "Sort Priority" 6
+     m_iGroupID 6
+    }
+    ACE_Radio_LoadKeysUserAction "{666D4048FD32C50B}" {
+     ParentContextList {
+      "default"
+     }
+     ActionTitle "Load H keys"
+     Duration 1
+     "Sort Priority" 7
+     m_iGroupID 7
+    }
+   }
+  }
+ }
+}

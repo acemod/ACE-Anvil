@@ -1,6 +1,21 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{66657BEC7C58D254}" {
+   Id "ACE_Radio-Item_KYK13_Description"
+   Target_en_us "A module used for transferring crypographic keys to radios."
+   Target_de_de "Ein Modul zum Übetragen von kryptographischen Schlüsseln auf Funkgeräte."
+   Modified 1717962704
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66657BEC7B8734FC}" {
+   Id "ACE_Radio-Item_KYK13_Name"
+   Target_en_us "KYK-13 Fill Device"
+   Modified 1717961004
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{644826487CAE8882}" {
    Id "ACE_Radio-Settings-Radio"
    Target_en_us "Radio"

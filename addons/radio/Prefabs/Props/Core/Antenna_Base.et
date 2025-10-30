@@ -1,0 +1,26 @@
+GenericEntity : "{10C26F96EF7A8CF5}Prefabs/Props/Core/Props_Base.et" {
+ ID "52628D6C80C2F99C"
+ components {
+  ActionsManagerComponent "{666E2886DD0D9C58}" {
+   ActionContexts {
+    UserActionContext "{666E2886D2723D9F}" {
+     UIInfo SCR_ActionContextUIInfo "{666E2886D6C96D97}" {
+     }
+     ContextName "default"
+     Position PointInfo "{666E2886CAA09AA9}" {
+      Offset 0 1.3 0
+     }
+    }
+   }
+   additionalActions {
+    ACE_Radio_CopyKeyUserAction "{666E2886C5B112ED}" {
+     ParentContextList {
+      "default"
+     }
+     Duration 1
+     "Sort Priority" -1
+    }
+   }
+  }
+ }
+}

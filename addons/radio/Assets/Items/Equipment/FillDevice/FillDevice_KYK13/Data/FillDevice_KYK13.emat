@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{B4EF949BF0705D62}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Data/FillDevice_KYK13_BCR.edds"
+ NMOMap "{8C372F0929070FFC}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Data/FillDevice_KYK13_NMO.edds"
+}

@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{7EE0EE0520098032}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.agr"
+ Configurations {
+  AnimGraphResourceClass PC {
+  }
+  AnimGraphResourceClass XBOX_ONE : PC {
+  }
+  AnimGraphResourceClass XBOX_SERIES : PC {
+  }
+  AnimGraphResourceClass PS4 : PC {
+  }
+  AnimGraphResourceClass PS5 : PC {
+  }
+  AnimGraphResourceClass HEADLESS : PC {
+  }
+ }
+}

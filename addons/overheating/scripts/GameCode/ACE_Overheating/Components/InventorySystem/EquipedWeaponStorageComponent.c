@@ -16,14 +16,14 @@ modded class EquipedWeaponStorageComponent : BaseEquipedWeaponStorageComponent
 		
 		foreach (IEntity weapon : weapons)
 		{
-			ACE_Overheating_MuzzleJamComponent jamComponent = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
-			if (!jamComponent)
+			ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
+			if (!barrel)
 				continue;
 			
 			if (enable)
-				system.Register(jamComponent);
+				system.Register(barrel);
 			else
-				system.Unregister(jamComponent);
+				system.Unregister(barrel);
 		}
 		
 		m_bACE_Overheating_ShouldRegisterWeapons = enable;
@@ -38,13 +38,13 @@ modded class EquipedWeaponStorageComponent : BaseEquipedWeaponStorageComponent
 		if (!m_bACE_Overheating_ShouldRegisterWeapons)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent jamComponent = ACE_Overheating_MuzzleJamComponent.FromWeapon(item);
-		if (!jamComponent)
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(item);
+		if (!barrel)
 			return;
 		
 		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance();
 		if (system)
-			system.Register(jamComponent);
+			system.Register(barrel);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -56,12 +56,12 @@ modded class EquipedWeaponStorageComponent : BaseEquipedWeaponStorageComponent
 		if (!m_bACE_Overheating_ShouldRegisterWeapons)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent jamComponent = ACE_Overheating_MuzzleJamComponent.FromWeapon(item);
-		if (!jamComponent)
+		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(item);
+		if (!barrel)
 			return;
 		
 		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance();
 		if (system)
-			system.Unregister(jamComponent);
+			system.Unregister(barrel);
 	}
 }

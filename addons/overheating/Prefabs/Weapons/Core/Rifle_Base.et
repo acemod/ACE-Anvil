@@ -5,9 +5,52 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
    components {
     MuzzleComponent "{CA6BE4D6B867541F}" {
      components {
-      ACE_Overheating_MuzzleJamComponent "{65B9755B8CB25ED7}" {
+      ACE_Overheating_BarrelComponent "{65B9755B8CB25ED7}" {
        m_cJamChanceTemperatureCurve {
-        0.385 0.003 0.692 0.024 0.846 0.06 0.923 0.18 1 0.45
+        0.273 0.003 0.58 0.024 0.734 0.06 0.811 0.18 0.888 0.45
+       }
+       m_cMuzzleDispersionFactorTemperatureCurve {
+        0.231 0 0.466 0.033 0.722 0.147 1 0.333
+       }
+      }
+      ACE_Overheating_HelperAttachmentComponent "{663325CC5D5AE7BF}" {
+       AttachmentSlot InventoryStorageSlot AttachmentSlot {
+        Prefab "{D4B8C629F3D4A322}Prefabs/Weapons/Attachments/Muzzle/ACE_Overheating_HelperAttachment.et"
+       }
+       AttachmentType AttachmentMuzzle "{663325CC4B126A7F}" {
+       }
+      }
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       ParticleEffect "{3F557E132C35E01B}Particles/Weapon/ACE_Overheating_Empty.ptc"
+       EffectPosition EntitySlotInfo EffectPosition {
+        PivotID "barrel_muzzle"
+       }
+       ResetOnFire 0
+       m_cBirthRateTemperatureCurve {
+        0.366 0 0.568 0.278 1 0.503
+       }
+       m_cLifetimeTemperatureCurve {
+        0 0 0.559 0.222 1 0.377
+       }
+       m_iLifetimePrecision 1
+       m_cSizeTemperatureCurve {
+        0.167 0 0.323 0.034 0.484 0.079 0.617 0.115 0.809 0.133 1 0.154
+       }
+       m_cVelocityTemperatureCurve {
+        0 0.04 0.462 0.049 0.628 0.055 0.807 0.07 1 0.099
+       }
+       m_cEmittingTimeTemperatureCurve {
+        0.387 0.17 0.748 0.5 1 1
+       }
+       m_iEmittingTimePrecision 0
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6650F89004554222}" {
+         m_sContinuousParticleEffect "{52EFBFC3634F588E}Particles/Weapon/Smoke_Test.ptc"
+         m_sFadeoutParticleEffect "{BF34CF76D5A92EBD}Particles/Weapon/Smoke_Test_FadeOut.ptc"
+         m_pEffectPosition PointInfo "{6650F8903978BCB2}" {
+          PivotID "barrel_muzzle"
+         }
+        }
        }
       }
      }

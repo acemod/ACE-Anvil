@@ -34,8 +34,8 @@ modded class SCR_AvailableActionsConditionData
 		if (!system)
 			return;
 		
-		ACE_Overheating_MuzzleJamComponent jamComponent = system.GetLocalActiveJamComponent();
-		if (jamComponent)
-			m_bACE_Overheating_IsCharacterWeaponJammed = jamComponent.IsJammed();
+		ACE_Overheating_BarrelComponent barrel = system.GetLocalActiveBarrel();
+		if (barrel)
+			m_bACE_Overheating_IsCharacterWeaponJammed = barrel.IsJammed();
 	}
 }

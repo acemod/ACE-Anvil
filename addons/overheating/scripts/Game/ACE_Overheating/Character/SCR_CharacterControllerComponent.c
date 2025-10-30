@@ -33,13 +33,13 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	void ACE_Overheating_TryClearJam(notnull BaseWeaponComponent weapon, BaseMuzzleComponent muzzle = null)
 	{
-		ACE_Overheating_MuzzleJamComponent jamComponent;
+		ACE_Overheating_BarrelComponent barrel;
 		if (muzzle)
-			jamComponent = ACE_Overheating_MuzzleJamComponent.FromMuzzle(muzzle);
+			barrel = ACE_Overheating_BarrelComponent.FromMuzzle(muzzle);
 		else
-			jamComponent = ACE_Overheating_MuzzleJamComponent.FromWeapon(weapon);
+			barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
 		
-		ACE_Overheating_WeaponAnimContext context = new ACE_Overheating_WeaponAnimContext(ChimeraCharacter.Cast(GetOwner()), weapon, jamComponent);
+		ACE_Overheating_WeaponAnimContext context = new ACE_Overheating_WeaponAnimContext(ChimeraCharacter.Cast(GetOwner()), weapon, barrel);
 		if (context.IsReloading())
 			return;
 		

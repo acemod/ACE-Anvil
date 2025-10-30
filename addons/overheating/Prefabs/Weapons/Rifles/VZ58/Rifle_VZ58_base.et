@@ -1,0 +1,40 @@
+GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{CA6BE4D6B867541F}" {
+     components {
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       m_cBirthRateTemperatureCurve {
+        0.38 0 0.477 0.209 0.659 0.358 1 0.503
+       }
+       m_cLifetimeTemperatureCurve {
+        0 0 0.534 0.24 0.999 0.408
+       }
+       m_cSizeTemperatureCurve {
+        0.167 0 0.323 0.034 0.484 0.079 0.617 0.115 0.819 0.145 1 0.154
+       }
+       m_cVelocityTemperatureCurve {
+        0 0 0.459 0.024 0.635 0.037 0.827 0.051 1 0.074
+       }
+       m_cEmittingTimeTemperatureCurve {
+        0.387 0.17 0.746 0.52 1 1
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6656F24BECEF8AE1}" {
+         m_sContinuousParticleEffect "{47DA8AC87481198A}Particles/Weapon/vz58/Smoke_VZ58_Surface.ptc"
+         m_sFadeoutParticleEffect "{CA9A000CE7BF16C0}Particles/Weapon/vz58/Smoke_VZ58_Surface_FadeOut.ptc"
+         m_pEffectPosition PointInfo "{6656F24BC84EFD7C}" {
+          PivotID "barrel_muzzle"
+          Offset 0 -0.0107 -0.2863
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

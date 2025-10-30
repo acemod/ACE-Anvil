@@ -2,8 +2,8 @@
 class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 {
 	protected static ACE_Overheating_Settings s_pSettings;
-	protected static BaseWeatherManagerEntity s_pWeathermManager;
-	protected ref ACE_Overheating_MuzzleContext m_pContext = null;
+	protected static BaseWeatherManagerEntity s_pWeatherManager;
+	protected ref ACE_Overheating_BarrelContext m_pContext = null;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Overheating_BarrelTemperatureJob()
@@ -11,10 +11,10 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		if (!s_pSettings)
 			s_pSettings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
 		
-		if (!s_pWeathermManager)
+		if (!s_pWeatherManager)
 		{
 			ChimeraWorld world = GetGame().GetWorld();
-			s_pWeathermManager = world.GetTimeAndWeatherManager();
+			s_pWeatherManager = world.GetTimeAndWeatherManager();
 		}
 	}
 	
@@ -55,7 +55,16 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		nextTemperature += (ComputeHeating(timeSlice) + ComputeCooling(timeSlice, currentTemperature, externalTemperature)) / m_pContext.m_pObject.GetData().GetBarrelHeatCapacity();		
 		nextTemperature = Math.Max(nextTemperature, externalTemperature);
 		m_pContext.m_pObject.SetBarrelTemperature(nextTemperature);
-		m_pContext.m_pObject.SetJamChance(s_pSettings.m_fJamChanceScale * m_pContext.m_pObject.GetData().ComputeJamChance(nextTemperature));
+		m_pContext.m_pObject.SetJamChance(ComputeJamChance(nextTemperature));
+		
+		if (m_pContext.m_pHelperAttachment)
+			m_pContext.m_pHelperAttachment.UpdateStats(ComputeMuzzleDispersionFactor(nextTemperature));
+		
+		if (m_pContext.m_pGlowEffect)
+			m_pContext.m_pGlowEffect.SetIntensity(Math.Clamp(Math.InverseLerp(s_pSettings.m_fMinGlowTemperature, 1300, nextTemperature), 0, 1));
+		
+		if (m_pContext.m_pSmokeEffect)
+			m_pContext.m_pSmokeEffect.UpdateParams(nextTemperature);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -69,18 +78,11 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	//! Returns the heat loss of the barrel through convection and radiation
 	protected float ComputeCooling(float timeSlice, float currentTemperature, float externalTemperature)
 	{
-		// Convective heat flux (Newton's law of cooling)
-		float heatFlux = -ComputeConvectiveHeatTransferCoefficient() * (currentTemperature - externalTemperature);
+		// Conductive and convective heat flux (Newton's law of cooling)
+		float heatFlux = -ComputeHeatTransferCoefficient() * (currentTemperature - externalTemperature);
 		// Radidative heat flux (Stefan-Boltzmann law)
 		heatFlux -= m_pContext.m_pObject.GetData().GetBarrelEmissivity() * ACE_PhysicalConstants.STEFAN_BOLTZMANN * (Math.Pow(currentTemperature, 4) - Math.Pow(externalTemperature, 4));
-		float heat = heatFlux * m_pContext.m_pObject.GetData().GetBarrelSurfaceArea() * timeSlice;
-		
-		if (m_pContext.m_bIsChamberingPossible)
-			heat *= s_pSettings.m_fDefaultCoolingScale;
-		else
-			heat *= s_pSettings.m_fOpenBoltCoolingScale;
-		
-		return heat;
+		return heatFlux * m_pContext.m_pObject.GetData().GetBarrelSurfaceArea() * timeSlice;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -106,11 +108,23 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	//! Derived from equation (1), such that h = 50 for rain intensity (RI) = 1 and d = 0.015 m
 	//------------------------------------------------------------------------------------------------
 	//! TO DO: Account for water and better relation for rain
-	protected float ComputeConvectiveHeatTransferCoefficient()
+	protected float ComputeHeatTransferCoefficient()
 	{
-		float h = 4.5908 * Math.Pow(s_pWeathermManager.GetWindSpeed(), 0.6) + 9.3198 * s_pWeathermManager.GetRainIntensity();
+		vector airVelocity = s_pWeatherManager.GetWindSpeed() * vector.FromYaw(s_pWeatherManager.GetWindDirection());
+		
+		if (m_pContext.m_pOwnerChar && !m_pContext.m_pOwnerChar.IsInVehicle())
+			airVelocity += m_pContext.m_pOwnerChar.GetPhysics().GetVelocity();
+		
+		float h = 4.5908 * Math.Pow(airVelocity.LengthSq(), 3.0 / 10.0) + 9.3198 * s_pWeatherManager.GetRainIntensity();
 		h /= Math.Pow(m_pContext.m_pObject.GetData().GetBarrelDiameter(), 0.4);
 		h = Math.Max(12.5, h);
+		
+		if (m_pContext.m_bIsChamberingPossible)
+			h *= s_pSettings.m_fDefaultAirCoolingScale;
+		else
+			h *= s_pSettings.m_fOpenBoltAirCoolingScale;
+		
+		h += s_pSettings.m_fBaseHeatTransferCoefficient;
 		
 	#ifdef ENABLE_DIAG
 		m_pContext.m_pObject.SetHeatTransferCoefficient(h);
@@ -120,13 +134,25 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetContext(ACE_Overheating_MuzzleContext context)
+	protected float ComputeJamChance(float temperature)
+	{
+		return s_pSettings.m_fJamChanceScale * m_pContext.m_pObject.GetData().ComputeJamChance(temperature);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ComputeMuzzleDispersionFactor(float temperature)
+	{
+		return 1 + s_pSettings.m_fMuzzleDispersionScale * m_pContext.m_pObject.GetData().ComputeAdditionalMuzzleDispersionFactor(temperature);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetContext(ACE_Overheating_BarrelContext context)
 	{
 		m_pContext = context;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Overheating_MuzzleContext GetContext()
+	ACE_Overheating_BarrelContext GetContext()
 	{
 		return m_pContext;
 	}

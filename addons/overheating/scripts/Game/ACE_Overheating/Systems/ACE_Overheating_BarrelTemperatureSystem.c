@@ -12,18 +12,20 @@ class ACE_Overheating_BarrelTemperatureSystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Should be paused when the world is not running
 	override bool ShouldBePaused()
 	{
 		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override static void InitInfo(WorldSystemInfo outInfo)
-	{
-		outInfo.SetAbstract(false)
-			.SetUnique(true)
-			.SetLocation(ESystemLocation.Server);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -43,14 +45,14 @@ class ACE_Overheating_BarrelTemperatureSystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Register(notnull ACE_Overheating_MuzzleJamComponent jamComponent)
+	void Register(notnull ACE_Overheating_BarrelComponent barrel)
 	{
-		m_pScheduler.Register(jamComponent);
+		m_pScheduler.Register(barrel);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Unregister(ACE_Overheating_MuzzleJamComponent jamComponent)
+	void Unregister(ACE_Overheating_BarrelComponent barrel)
 	{
-		m_pScheduler.Unregister(jamComponent);
+		m_pScheduler.Unregister(barrel);
 	}
 }

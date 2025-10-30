@@ -117,9 +117,9 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		ptr.SetPos(Vector(xWorld, 0, zWorld));
 		ptr.ToggleActive(true);
 		
-		SCR_MapCursorModule curstorModule = SCR_MapCursorModule.Cast(m_MapEntity.GetMapModule(SCR_MapCursorModule));
-		if (curstorModule)
-			curstorModule.ACE_Finger_HandlePointing(true);
+		SCR_MapCursorModule cursorModule = SCR_MapCursorModule.Cast(m_MapEntity.GetMapModule(SCR_MapCursorModule));
+		if (cursorModule)
+			cursorModule.ACE_Finger_HandlePointing(true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -131,9 +131,9 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		
 		ptr.ToggleActive(false);
 		
-		SCR_MapCursorModule curstorModule = SCR_MapCursorModule.Cast(m_MapEntity.GetMapModule(SCR_MapCursorModule));
-		if (curstorModule)
-			curstorModule.ACE_Finger_HandlePointing(false);
+		SCR_MapCursorModule cursorModule = SCR_MapCursorModule.Cast(m_MapEntity.GetMapModule(SCR_MapCursorModule));
+		if (cursorModule)
+			cursorModule.ACE_Finger_HandlePointing(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -174,7 +174,11 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 			return;
 		
 		m_aPointers.Remove(i);
-		m_aWidgets[i].RemoveFromHierarchy();
+		
+		Widget w = m_aWidgets[i];
+		if (w)
+			w.RemoveFromHierarchy();
+		
 		m_aWidgets.Remove(i);
 	}
 	

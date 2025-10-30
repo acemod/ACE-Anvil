@@ -48,6 +48,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.CreateBleedingParticleEffect(hitZone, colliderDescriptorIndex);
 		
+		if (System.IsConsoleApp())
+			return;
+		
 		ACE_Medical_HipsHitZone hipsHitZone = ACE_Medical_HipsHitZone.Cast(hitZone);
 		if (hipsHitZone)
 		{
@@ -98,6 +101,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.RemoveBleedingParticleEffect(hitZone);
 		
+		if (System.IsConsoleApp())
+			return;
+		
 		ACE_Medical_HipsHitZone hipsHitZone = ACE_Medical_HipsHitZone.Cast(hitZone);
 		if (hipsHitZone)
 		{
@@ -115,11 +121,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Remove bleeding particle effects when character is dead
-	override void OnDamageStateChanged(EDamageState state)
+	protected override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
-		super.OnDamageStateChanged(state);
+		super.OnDamageStateChanged(newState, previousDamageState, isJIP);
 		
-		if (state != EDamageState.DESTROYED || !m_mBleedingParticles)
+		if (newState != EDamageState.DESTROYED || !m_mBleedingParticles)
 			return;
 		
 		foreach (ParticleEffectEntity effect : m_mBleedingParticles)
@@ -130,6 +136,26 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		m_mBleedingParticles = null;
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	//! Returns overall scaled health of the character
+	//! Should be used instead of GetHealthScaled
+	override float ACE_Medical_GetHealthScaled()
+	{
+		array<HitZone> physicalHitZones = {};
+		GetPhysicalHitZones(physicalHitZones);
+		float lowestHealth = 1;
+		
+		foreach (HitZone hitZone : physicalHitZones)
+		{
+			float health = hitZone.GetHealthScaled();
+			if (health < lowestHealth)
+				lowestHealth = health;
+		}
+		
+		return lowestHealth;
+	}
+	
+/*****
 #ifdef ENABLE_DIAG
 	//-----------------------------------------------------------------------------------------------------------
 	override void OnDiag(IEntity owner, float timeSlice)
@@ -147,4 +173,5 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 	}
 #endif
+*****/
 }

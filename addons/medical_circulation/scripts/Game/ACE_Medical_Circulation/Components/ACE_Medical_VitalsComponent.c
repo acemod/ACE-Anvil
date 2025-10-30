@@ -27,6 +27,13 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
 	//------------------------------------------------------------------------------------------------
+	override protected void OnPostInit(IEntity owner)
+	{
+		super.OnPostInit(owner);
+		SetEventMask(owner, EntityEvent.INIT);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);

@@ -3,7 +3,7 @@
 //! Created when the game starts (not when a world starts!) and persists until the game is closed.
 modded class ArmaReforgerScripted : ChimeraGame
 {
-	static protected ref ACE_SettingsConfig s_pACE_SettingsConfig;
+	static protected ref ACE_SettingsConfig s_ACE_SettingsConfig;
 	static protected bool s_bACE_WasMissionHeaderApplied = false;
 	
 	//------------------------------------------------------------------------------------------------
@@ -12,8 +12,8 @@ modded class ArmaReforgerScripted : ChimeraGame
 	{
 		super.OnAfterInit(world);
 		
-		if (Replication.IsServer() && !s_pACE_SettingsConfig)
-			s_pACE_SettingsConfig = SCR_ConfigHelperT<ACE_SettingsConfig>.GetConfigObject("{A305FEB7400A2965}Configs/ACE/Settings.conf");
+		if (Replication.IsServer() && !s_ACE_SettingsConfig)
+			s_ACE_SettingsConfig = SCR_ConfigHelperT<ACE_SettingsConfig>.GetConfigObject("{A305FEB7400A2965}Configs/ACE/Settings.conf");
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -39,6 +39,6 @@ modded class ArmaReforgerScripted : ChimeraGame
 	//! Return all settings
 	static ACE_SettingsConfig ACE_GetSettingsConfig()
 	{
-		return s_pACE_SettingsConfig;
+		return s_ACE_SettingsConfig;
 	}
 }

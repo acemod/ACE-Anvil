@@ -184,12 +184,12 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	//------------------------------------------------------------------------------------------------
 	protected void ApplyParamsToEffectEntity(ParticleEffectEntity effectEntity)
 	{
-			Particles particles = effectEntity.GetParticles();
-			particles.SetParam(-1, EmitterParam.BIRTH_RATE, m_iBirthRate);
-			particles.SetParam(-1, EmitterParam.LIFETIME, m_fLifetime);
-			particles.SetParam(-1, EmitterParam.LIFETIME_RND, m_pData.GetLifetimeRndScale() * m_fLifetime);
-			particles.SetParam(-1, EmitterParam.SIZE, m_fSize);
-			particles.SetParam(-1, EmitterParam.VELOCITY, m_fVelocity);
+		Particles particles = effectEntity.GetParticles();
+		particles.SetParam(-1, EmitterParam.BIRTH_RATE, m_iBirthRate);
+		particles.SetParam(-1, EmitterParam.LIFETIME, m_fLifetime);
+		particles.SetParam(-1, EmitterParam.LIFETIME_RND, m_pData.GetLifetimeRndScale() * m_fLifetime);
+		particles.SetParam(-1, EmitterParam.SIZE, m_fSize);
+		particles.SetParam(-1, EmitterParam.VELOCITY, m_fVelocity);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -206,6 +206,7 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Stops effect with a fade-out
 	void StopEffects()
 	{
 	#ifdef ENABLE_DIAG
@@ -216,6 +217,28 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 		{
 			effectConfig.GetEffectEntity().StopEmission();
 			ApplyParamsToEffectEntity(effectConfig.SpawnFadeOutEffect());
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Instantly terminates effects
+	void TerminateEffects()
+	{
+		if (!System.IsConsoleApp())
+			RpcDo_TerminateEffectsBroadcast();
+		
+		Rpc(RpcDo_TerminateEffectsBroadcast);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_TerminateEffectsBroadcast()
+	{
+		GetGame().GetCallqueue().Remove(StopEffects);
+		
+		foreach (ACE_Overheating_SmokeEffectConfig effectConfig : m_aSomkeEffects)
+		{
+			effectConfig.GetEffectEntity().Stop();
 		}
 	}
 }

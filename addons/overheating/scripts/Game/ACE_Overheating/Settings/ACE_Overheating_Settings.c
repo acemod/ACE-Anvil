@@ -5,13 +5,13 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1.0", desc: "Scales the heat transferred to the barrel by a shot. The larger, the faster the temperature of the barrel increases.", params: "0 inf")]
 	float m_fHeatingScale;
 	
-	[Attribute(defvalue: "1.0", desc: "Scale for how quickly a weapon cools down. Cooling rate is multiplied by this scale.", params: "0 inf")]
-	float m_fDefaultCoolingScale;
+	[Attribute(defvalue: "1.0", desc: "Scale for how quickly a weapon gets cooled down by air. Cooling rate is multiplied by this scale.", params: "0 inf")]
+	float m_fDefaultAirCoolingScale;
 	
-	[Attribute(defvalue: "1.3", desc: "Scale for how quickly a weapon cools down for open bolt weapons.", params: "0 inf")]
-	float m_fOpenBoltCoolingScale;
+	[Attribute(defvalue: "1.3", desc: "Scale for how quickly a weapon gets cooled down by air for open bolt weapons.", params: "0 inf")]
+	float m_fOpenBoltAirCoolingScale;
 	
-	[Attribute(defvalue: "200", desc: "Scale for how quickly a weapon cools down in water.", params: "0 inf")]
+	[Attribute(defvalue: "18", desc: "Scale for how quickly a weapon cools down in water.", params: "0 inf")]
 	float m_fWaterCoolingScale;
 	
 	[Attribute(defvalue: "1.0", desc: "Scale for how likely a weapon jams.", params: "0 inf")]

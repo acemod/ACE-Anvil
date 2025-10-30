@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_VitalsComponentClass : ACE_BaseComponentClass
+class ACE_Medical_VitalsComponentClass : ScriptComponentClass
 {
 }
 
 //------------------------------------------------------------------------------------------------
 //! Updates to vitals are mostly server side right now
 //! Clients can request values for vitals via ACE_Medical_NetworkComponent
-class ACE_Medical_VitalsComponent : ACE_BaseComponent
+class ACE_Medical_VitalsComponent : ScriptComponent
 {
 	[RplProp()]
 	protected ACE_Medical_EVitalStateID m_eVitalStateID = ACE_Medical_EVitalStateID.STABLE;
@@ -25,6 +25,13 @@ class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	protected float m_fHeartRateMedicationAdjustment = 0;
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	protected float m_fReviveSuccessCheckTimerScale = 1;
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void OnPostInit(IEntity owner)
+	{
+		super.OnPostInit(owner);
+		SetEventMask(owner, EntityEvent.INIT);
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void EOnInit(IEntity owner)

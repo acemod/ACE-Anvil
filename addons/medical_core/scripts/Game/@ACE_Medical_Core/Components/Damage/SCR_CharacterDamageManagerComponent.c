@@ -1,9 +1,10 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
-	protected static ACE_Medical_Core_Settings s_pACE_Medical_Core_Settings;
-	protected SCR_CharacterHitZone m_pACE_Medical_LastStruckPhysicalHitZone;
-	protected SCR_CharacterHealthHitZone m_pACE_Medical_HealthHitZone;
+	protected static ACE_Medical_Core_Settings s_ACE_Medical_Core_Settings;
+
+	protected SCR_CharacterHitZone m_ACE_Medical_LastStruckPhysicalHitZone;
+	protected SCR_CharacterHealthHitZone m_ACE_Medical_HealthHitZone;
 	protected float m_fACE_Medical_ResilienceRegenScale = 1;
 	
 	[RplProp()]
@@ -18,15 +19,15 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (!GetGame().InPlayMode())
 			return;
 		
-		m_pACE_Medical_HealthHitZone = SCR_CharacterHealthHitZone.Cast(GetHitZoneByName("Health"));
+		m_ACE_Medical_HealthHitZone = SCR_CharacterHealthHitZone.Cast(GetHitZoneByName("Health"));
 		
-		if (!s_pACE_Medical_Core_Settings)
-			s_pACE_Medical_Core_Settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
+		if (!s_ACE_Medical_Core_Settings)
+			s_ACE_Medical_Core_Settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
 		
-		if (s_pACE_Medical_Core_Settings)
+		if (s_ACE_Medical_Core_Settings)
 		{
-			m_fACE_Medical_ResilienceRegenScale = s_pACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
-			m_fACE_Medical_MinHealthScaledForEpinephrine = s_pACE_Medical_Core_Settings.m_fMinHealthScaledForEpinephrine;
+			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_MinHealthScaledForEpinephrine = s_ACE_Medical_Core_Settings.m_fMinHealthScaledForEpinephrine;
 			Replication.BumpMe();
 		}
 	}
@@ -42,15 +43,15 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		
 		SCR_CharacterHitZone struckPhysicalHitZone = SCR_CharacterHitZone.Cast(damageContext.struckHitZone);
 		if (struckPhysicalHitZone)
-			m_pACE_Medical_LastStruckPhysicalHitZone = struckPhysicalHitZone;
+			m_ACE_Medical_LastStruckPhysicalHitZone = struckPhysicalHitZone;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	protected override void OnDamageStateChanged(EDamageState state)
+	protected override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
-		super.OnDamageStateChanged(state);
+		super.OnDamageStateChanged(newState, previousDamageState, isJIP);
 		
-		if (Replication.IsServer() && (state == EDamageState.DESTROYED))
+		if (Replication.IsServer() && (newState == EDamageState.DESTROYED))
 			ACE_Medical_OnKilled();
 	}
 	
@@ -61,7 +62,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Returns last stuck physical hit zone
 	SCR_CharacterHitZone ACE_Medical_GetLastStruckPhysicalHitZone()
 	{
-		return m_pACE_Medical_LastStruckPhysicalHitZone;
+		return m_ACE_Medical_LastStruckPhysicalHitZone;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -70,7 +71,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (m_pBloodHitZone.GetDamageState() == ECharacterBloodState.UNCONSCIOUS)
 			m_fACE_Medical_ResilienceRegenScale = 0;
 		else
-			m_fACE_Medical_ResilienceRegenScale = s_pACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -110,7 +111,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 		
 		// Check if too injured
-		if (m_pACE_Medical_HealthHitZone.GetHealthScaled() < m_fACE_Medical_MinHealthScaledForEpinephrine)
+		if (m_ACE_Medical_HealthHitZone.GetHealthScaled() < m_fACE_Medical_MinHealthScaledForEpinephrine)
 		{
 			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
 			return false;
@@ -124,6 +125,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Should be used instead of GetHealthScaled
 	float ACE_Medical_GetHealthScaled()
 	{
-		return m_pACE_Medical_HealthHitZone.GetHealthScaled();
+		return m_ACE_Medical_HealthHitZone.GetHealthScaled();
 	}
 }

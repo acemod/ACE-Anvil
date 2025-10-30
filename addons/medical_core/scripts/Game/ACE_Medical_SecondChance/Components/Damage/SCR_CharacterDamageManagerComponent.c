@@ -41,11 +41,11 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	bool ACE_Medical_IsSecondChanceEnabled()
 	{
 		// Check for AI
-		if (!s_pACE_Medical_Core_Settings.m_bSecondChanceForAIEnabled && !EntityUtils.IsPlayer(GetOwner()))
+		if (!s_ACE_Medical_Core_Settings.m_bSecondChanceForAIEnabled && !EntityUtils.IsPlayer(GetOwner()))
 			return false;
 		
 		// Check for fall damage
-		if (s_pACE_Medical_Core_Settings.m_bSecondChanceForFallDamageEnabled || m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
+		if (s_ACE_Medical_Core_Settings.m_bSecondChanceForFallDamageEnabled || m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
 			return true;
 		
 		if (m_fACE_Medical_SecondChanceDeactivationTimeMS - m_fACE_Medical_LastFallDamageTimeMS <= ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS)
@@ -94,7 +94,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		super.ACE_Medical_UpdateResilienceRegenScale();
 		
 		if (m_bACE_Medical_WasSecondChanceGranted)
-			m_fACE_Medical_ResilienceRegenScale = Math.Min(m_fACE_Medical_ResilienceRegenScale, s_pACE_Medical_Core_Settings.m_fSecondChanceResilienceRegenScale);
+			m_fACE_Medical_ResilienceRegenScale = Math.Min(m_fACE_Medical_ResilienceRegenScale, s_ACE_Medical_Core_Settings.m_fSecondChanceResilienceRegenScale);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

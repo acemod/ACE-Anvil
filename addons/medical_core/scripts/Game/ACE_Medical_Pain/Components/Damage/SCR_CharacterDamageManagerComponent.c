@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
-	protected ACE_Medical_PainHitZone m_pACE_Medical_PainHitZone;
+	protected ACE_Medical_PainHitZone m_ACE_Medical_PainHitZone;
 	
 	[RplProp(condition: RplCondition.OwnerOnly)]
 	protected float m_fACE_Medical_PainSuppression = 0;
@@ -10,20 +10,20 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Called by ACE_Medical_PainHitZone.OnInit to initialize the hit zone
 	void ACE_Medical_SetPainHitZone(HitZone hitzone)
 	{
-		m_pACE_Medical_PainHitZone = ACE_Medical_PainHitZone.Cast(hitzone);
+		m_ACE_Medical_PainHitZone = ACE_Medical_PainHitZone.Cast(hitzone);
 	}
 
 	//-----------------------------------------------------------------------------------------------------------
 	//! Return the pain hit zone
 	ACE_Medical_PainHitZone ACE_Medical_GetPainHitZone()
 	{
-		return m_pACE_Medical_PainHitZone;
+		return m_ACE_Medical_PainHitZone;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	bool ACE_Medical_IsInPain()
 	{
-		return m_pACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression <= m_pACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE);
+		return m_ACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression <= m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -32,19 +32,19 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! - Linear response from full health -> 0 to serious damage -> 1
 	float ACE_Medical_GetPainIntensity()
 	{
-		if (!m_pACE_Medical_PainHitZone)
+		if (!m_ACE_Medical_PainHitZone)
 			return 0;
 		
 		// Account for analgesic effects
-		float health = m_pACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression;
+		float health = m_ACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression;
 		
-		if (health > m_pACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE))
+		if (health > m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE))
 			return 0;
 		
-		if (health <= m_pACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.SERIOUS))
+		if (health <= m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.SERIOUS))
 			return 1;
 		
-		return Math.InverseLerp(1, m_pACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.SERIOUS), health);
+		return Math.InverseLerp(1, m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.SERIOUS), health);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

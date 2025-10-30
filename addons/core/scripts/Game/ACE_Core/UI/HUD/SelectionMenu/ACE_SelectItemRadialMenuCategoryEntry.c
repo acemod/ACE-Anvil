@@ -3,7 +3,11 @@
 [BaseContainerProps(configRoot: true), SCR_BaseContainerCustomTitleUIInfo("Name")]
 class ACE_SelectItemRadialMenuCategoryEntry : ACE_SelectionMenuCategoryEntry
 {
+<<<<<<< HEAD
 	[Attribute(desc: "Perdicate that items should match")]
+=======
+	[Attribute(desc: "Predicate that items should match")]
+>>>>>>> medical/rewrite
 	protected ref ACE_InventorySearchPredicate m_pItemSearchPredicate;
 	
 	//------------------------------------------------------------------------------------------------

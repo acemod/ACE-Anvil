@@ -1,0 +1,34 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ Slot FrameWidgetSlot "{667B238989AA1DEF}" {
+  OffsetLeft 0
+  OffsetTop 0
+  SizeX 1920
+  OffsetRight -1920
+  SizeY 1080
+  OffsetBottom -1080
+ }
+ {
+  SizeLayoutWidgetClass "{667B2E26F81247E7}" {
+   Name "Layout"
+   Slot FrameWidgetSlot "{667B2E26F81247DD}" {
+    OffsetLeft 0
+    OffsetTop 0
+    SizeX 128
+    OffsetRight -128
+    SizeY 128
+    OffsetBottom -128
+   }
+   {
+    CanvasWidgetClass "{667B2E26A9C9585A}" {
+     Name "Canvas"
+     Slot AlignableSlot "{667B2E31A331DAAC}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     ZoomLevel 0.5
+    }
+   }
+  }
+ }
+}

@@ -12,9 +12,10 @@ StringTable {
    Id "ACE_Medical-Editor_TooltipDetail_Resilience_Name"
    Target_en_us "Resilience"
    Target_de_de "Resilienz"
-   Modified 1712273696
+   Target_ru_ru "Устойчивость"
+   Modified 1722592332
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{60CF45A3ED3C6951}" {
    Id "ACE_Medical-EpinephrineInjectionAction"
@@ -128,73 +129,82 @@ StringTable {
    Id "ACE_Medical-KeyBind_OpenRadialMenu"
    Target_en_us "Open medical radial menu"
    Target_de_de "Öffne medizinisches Kreismenü"
-   Modified 1699833171
+   Target_ru_ru "Открыть меню медицины"
+   Modified 1722592324
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{65516A9625D01268}" {
    Id "ACE_Medical-RadialMenu_ExaminePatient"
    Target_en_us "Examine patient"
    Target_de_de "Patient untersuchen"
-   Modified 1699834887
+   Target_ru_ru "Осмотреть пациента"
+   Modified 1722592322
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{65516A94855EB699}" {
    Id "ACE_Medical-RadialMenu_FluidReplacement"
    Target_en_us "Fluid Replacement"
    Target_de_de "Volumentherapie"
-   Modified 1699835500
+   Target_ru_ru "Восполнение объёма крови"
+   Modified 1722592320
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{65516A967A9EA7B6}" {
    Id "ACE_Medical-RadialMenu_FractureManagement"
    Target_en_us "Fracture management"
    Target_de_de "Frakturbehandlung"
-   Modified 1699835013
+   Target_ru_ru "Лечение перелома"
+   Modified 1722592314
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{65516A94A58D1608}" {
    Id "ACE_Medical-RadialMenu_HemorrhageControl"
    Target_en_us "Hemorrhage control"
    Target_de_de "Blutstillung"
-   Modified 1699836091
+   Target_ru_ru "Контроль кровоизлияния"
+   Modified 1722592313
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{65516A97B16C0831}" {
    Id "ACE_Medical-RadialMenu_Medication"
    Target_en_us "Medication"
    Target_de_de "Medikation"
-   Modified 1699835120
+   Target_ru_ru "Медикаменты"
+   Modified 1722592311
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{630D4CCE326184CA}" {
    Id "ACE_Medical-UserAction_BackPosition"
    Target_en_us "Put on back"
    Target_de_de "Auf den Rücken drehen"
-   Modified 1661817144
+   Target_ru_ru "Положить на спину"
+   Modified 1722592310
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{630D4CCE36458E06}" {
    Id "ACE_Medical-UserAction_LeftRecoveryPosition"
    Target_en_us "Put in left recovery position"
    Target_de_de "In linke Bewusstlosenlagerung bringen"
-   Modified 1694200390
+   Target_ru_ru "Положить на левый бок"
+   Modified 1722592308
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{64FB538E9326BF80}" {
    Id "ACE_Medical-UserAction_RightRecoveryPosition"
    Target_en_us "Put in right recovery position"
    Target_de_de "In rechte Bewusstlosenlagerung bringen"
-   Modified 1694200417
+   Target_ru_ru "Положить на правый бок"
+   Modified 1722592336
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "dr_ext"
   }
  }
 }

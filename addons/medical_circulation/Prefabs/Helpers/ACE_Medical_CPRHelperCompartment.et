@@ -1,0 +1,12 @@
+ACE_Medical_CPRHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
+ ID "4B42E71698F5739C"
+ components {
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimInstance "{9591A985FDD73C7B}Assets/Helpers/Workspace/ACE_Medical_CPR.asi"
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+    AnimInstance "{9591A985FDD73C7B}Assets/Helpers/Workspace/ACE_Medical_CPR.asi"
+   }
+  }
+ }
+ m_eLifeStateChangedGetOutType TELEPORT
+}

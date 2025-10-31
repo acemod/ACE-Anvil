@@ -39,6 +39,15 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(GetOwner()));
+		
+		ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(GetOwner().FindComponent(ACE_Medical_VitalsComponent));
+		if (vitalsComponent)
+		{
+			vitalsComponent.SetHeartRate(0);
+			vitalsComponent.SetCardiacOutput(0);
+			vitalsComponent.SetMeanArterialPressure(0);
+			vitalsComponent.SetPulsePressure(0);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

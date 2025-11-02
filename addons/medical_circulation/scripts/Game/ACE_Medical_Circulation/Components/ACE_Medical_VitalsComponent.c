@@ -234,7 +234,6 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 		m_fSystemicVascularResistanceMedicationAdjustment = 0;
 		m_fReviveSuccessCheckTimerScale = 1;
 		
-		m_bIsCPRPerformed = false;
 		m_bWasRevived = false;
 		
 		m_eVitalStateID = ACE_Medical_EVitalStateID.STABLE;

@@ -218,11 +218,26 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	//! Resets vitals to defaults
 	void Reset()
 	{
+		// direct member assignment avoids Replication.BumpMe() calls during EOnInit,
+		// to prevent premature replication that can cause init order issues
 		ACE_Medical_Circulation_Settings settings = ACE_SettingsHelperT<ACE_Medical_Circulation_Settings>.GetModSettings();
 		if (settings)
-			SetHeartRate(settings.m_fDefaultHeartRateBPM);
+		{
+			m_fHeartRateBPM = settings.m_fDefaultHeartRateBPM;
+			m_fCardiacOutput = settings.m_fDefaultHeartRateBPM * settings.m_fDefaultStrokeVolumeML;
+			m_fSystemicVascularResistance = settings.m_fDefaultSystemicVascularResistance;
+			m_fMeanArterialPressureKPA = settings.m_fDefaultMeanArterialPressureKPA;
+			m_fPulsePressureKPA = settings.m_fDefaultPulsePressureKPA;
+		}
 		
-		SetVitalStateID(ACE_Medical_EVitalStateID.STABLE);
+		m_fHeartRateMedicationAdjustment = 0;
+		m_fSystemicVascularResistanceMedicationAdjustment = 0;
+		m_fReviveSuccessCheckTimerScale = 1;
+		
+		m_bIsCPRPerformed = false;
+		m_bWasRevived = false;
+		
+		m_eVitalStateID = ACE_Medical_EVitalStateID.STABLE;
 	}
 	
 	//------------------------------------------------------------------------------------------------

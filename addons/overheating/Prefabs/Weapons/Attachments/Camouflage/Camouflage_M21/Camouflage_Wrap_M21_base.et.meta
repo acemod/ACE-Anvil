@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6F6E328F3155E677}Prefabs/Weapons/Attachments/Camouflage/Camouflage_M21/Camouflage_Wrap_M21_base.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

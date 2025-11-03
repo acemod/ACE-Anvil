@@ -47,6 +47,8 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	//------------------------------------------------------------------------------------------------
 	override void DisplayControlledEntityChanged(IEntity from, IEntity to)
 	{
+		Show(false);
+		
 		m_pCharacterEntity = ChimeraCharacter.Cast(to);
 		if (!m_pCharacterEntity)
 			return;
@@ -168,5 +170,16 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	protected void ToggleDisplay()
 	{
 		Show(!IsShown());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Terminate screen when chracter transitions from uncon to death
+	override protected void DisplayConsciousnessChanged(bool conscious, bool init = false)
+	{
+		if (init || !conscious)
+			return;
+		
+		if (m_CharacterController.GetLifeState() == ECharacterLifeState.DEAD)
+			Show(false);
 	}
 }

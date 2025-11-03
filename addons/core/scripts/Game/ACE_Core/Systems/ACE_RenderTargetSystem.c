@@ -18,11 +18,10 @@ class ACE_RenderTargetSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
-		super.InitInfo(outInfo);
 		outInfo.SetAbstract(true)
 			.SetUnique(false)
-			.SetLocation(ESystemLocation.Client)
-			.AddPoint(ESystemPoint.Frame);
+			.SetLocation(WorldSystemLocation.Client)
+			.AddPoint(WorldSystemPoint.Frame);
 	}
 	
 	//------------------------------------------------------------------------------------------------

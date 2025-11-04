@@ -1,0 +1,419 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  RTTextureWidgetClass "{6560EEE98D1425A6}" {
+   Name "RTTexture0"
+   Slot FrameWidgetSlot "{60C8F51E9E680055}" {
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 1024
+    OffsetRight -1024
+    SizeY 1100
+    OffsetBottom -1100
+   }
+   {
+    FrameWidgetClass "{65612DD19175A96B}" {
+     Name "ScreenFrame"
+     Slot FrameWidgetSlot "{65612DD19175A942}" {
+      PositionX 0
+      OffsetLeft 0
+      OffsetTop 0
+      SizeX 1024
+      OffsetRight -1024
+      SizeY 630
+      OffsetBottom -630
+     }
+     Clipping False
+     {
+      OverlayWidgetClass "{6561244F786818E6}" {
+       Name "MainOverlay"
+       Slot FrameWidgetSlot "{6561244D698EC06B}" {
+        Anchor 0 0 1 1
+        PositionX 0
+        OffsetLeft 0
+        PositionY 0
+        OffsetTop 0
+        SizeX -1080
+        OffsetRight 0
+        SizeY -810
+        OffsetBottom 0
+       }
+       {
+        ImageWidgetClass "{65612DDF57EF0B00}" {
+         Name "Background"
+         Slot OverlayWidgetSlot "{656F5463875066BF}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         Color 0 0 0 1
+         Size 283 175
+        }
+        FrameWidgetClass "{66A0E18C059FC6CE}" {
+         Name "ContentMargins"
+         Slot OverlayWidgetSlot "{66A0E18C059FC628}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+          Padding 35 20 35 20
+         }
+         {
+          OverlayWidgetClass "{66A0E185E8E0CF80}" {
+           Name "ContentOverlay"
+           Slot FrameWidgetSlot "{66A0E185E8E0CFFC}" {
+            Anchor 0 0 1 1
+            PositionX 0
+            OffsetLeft 0
+            PositionY 0
+            OffsetTop 0
+            SizeX -984
+            OffsetRight 0
+            SizeY -600
+            OffsetBottom 0
+            SizeToContent 1
+           }
+           {
+            VerticalLayoutWidgetClass "{66A0E18676B162C9}" {
+             Name "DisplayHome"
+             Slot OverlayWidgetSlot "{66A13907A19CD3C4}" {
+              HorizontalAlign 1
+              VerticalAlign 0
+             }
+             "Is Visible" 0
+             {
+              TextWidgetClass "{66A0E18676B162C8}" {
+               Name "DayOfTheWeek"
+               Slot LayoutSlot "{66A0E18676B16358}" {
+                Padding 0 -30 0 0
+               }
+               Text "Tuesday"
+               "Font Size" 180
+               "Min Font Size" 180
+               "Horizontal Alignment" Center
+               "Vertical Alignment" Center
+              }
+              TextWidgetClass "{66A0E18676B162CB}" {
+               Name "Date"
+               Slot LayoutSlot "{66A0E18676B162B3}" {
+                Padding 0 -30 0 0
+               }
+               Text "Nov 17, 2015"
+               "Font Size" 180
+               "Min Font Size" 180
+               "Horizontal Alignment" Center
+               "Vertical Alignment" Center
+              }
+              TextWidgetClass "{66A0E18676B162CA}" {
+               Name "Time"
+               Slot LayoutSlot "{66A0E18676B1629D}" {
+                Padding 0 -60 0 0
+               }
+               Text "15:41:37"
+               "Font Size" 245
+               "Min Font Size" 245
+               "Horizontal Alignment" Center
+               "Vertical Alignment" Center
+              }
+             }
+            }
+            OverlayWidgetClass "{66A0E182A66F9473}" {
+             Name "DisplayData"
+             Slot OverlayWidgetSlot "{66A13907A19CD356}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             "Is Visible" 0
+             {
+              VerticalLayoutWidgetClass "{66A0E18D240AEAFC}" {
+               Name "HeaderAndBody"
+               Slot OverlayWidgetSlot "{66A13907A19CD340}" {
+                HorizontalAlign 3
+                VerticalAlign 0
+               }
+               {
+                SizeLayoutWidgetClass "{66A0E1869533A095}" {
+                 Name "Header"
+                 Slot LayoutSlot "{66A0E1869533A0CE}" {
+                 }
+                 AllowHeightOverride 1
+                 HeightOverride 165
+                 {
+                  OverlayWidgetClass "{66A0E18D2952D607}" {
+                   Name "HeaderOverlay"
+                   Slot AlignableSlot "{66A0E186D65504BC}" {
+                    HorizontalAlign 3
+                    VerticalAlign 3
+                   }
+                   {
+                    HorizontalLayoutWidgetClass "{66A0E18CA7523328}" {
+                     Name "TitleLayout"
+                     Slot OverlayWidgetSlot "{66A0E18CA7523319}" {
+                      HorizontalAlign 0
+                     }
+                     {
+                      ImageWidgetClass "{66A0E18CB26555FE}" {
+                       Name "Icon"
+                       Slot LayoutSlot "{66A13907A19CD2F7}" {
+                        HorizontalAlign 3
+                        Padding 0 0 6 0
+                       }
+                       Texture "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+                       Image "moveAll"
+                       Size 165 165
+                      }
+                      TextWidgetClass "{66A0E18CF68F69FD}" {
+                       Name "Title"
+                       Slot LayoutSlot "{66A0E18CF68F69C6}" {
+                        HorizontalAlign 0
+                        VerticalAlign 1
+                        Padding 14 0 0 0
+                       }
+                       Text "WIND SPEED"
+                       "Font Size" 90
+                       FontProperties FontProperties "{66A0E18314850E70}" {
+                        Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+                       }
+                      }
+                     }
+                    }
+                    TextWidgetClass "{66A0E1839A104820}" {
+                     Name "Unit"
+                     Slot OverlayWidgetSlot "{66A0E1839A104812}" {
+                      HorizontalAlign 2
+                     }
+                     Text "m/s"
+                     "Font Size" 90
+                    }
+                   }
+                  }
+                 }
+                }
+                OverlayWidgetClass "{66A0E18041991D62}" {
+                 Name "Body"
+                 Slot LayoutSlot "{66A13907A19CD203}" {
+                 }
+                 {
+                  OverlayWidgetClass "{66A1391738148360}" {
+                   Name "Compass"
+                   Slot OverlayWidgetSlot "{66A139173814835D}" {
+                    HorizontalAlign 3
+                    VerticalAlign 0
+                    Padding 0 -20 0 0
+                   }
+                   "Is Visible" 0
+                   {
+                    TextWidgetClass "{66A139173777BD2B}" {
+                     Name "Cardinal"
+                     Slot OverlayWidgetSlot "{66A139173777BD75}" {
+                      HorizontalAlign 0
+                      VerticalAlign 3
+                     }
+                     Text "SSW"
+                     "Font Size" 245
+                     "Min Font Size" 245
+                    }
+                    TextWidgetClass "{66A139173619188B}" {
+                     Name "Bearing"
+                     Slot OverlayWidgetSlot "{66A13917361918FF}" {
+                      HorizontalAlign 2
+                      VerticalAlign 3
+                     }
+                     Text "200°"
+                     "Font Size" 245
+                     "Min Font Size" 245
+                    }
+                   }
+                  }
+                  VerticalLayoutWidgetClass "{66A3629AF3CACB95}" {
+                   Name "Default"
+                   Slot OverlayWidgetSlot "{66A3629AF3CACBFA}" {
+                    HorizontalAlign 3
+                    VerticalAlign 3
+                    Padding 0 -25 170 0
+                   }
+                   "Is Visible" 0
+                   {
+                    TextWidgetClass "{66A0E187A59E5E58}" {
+                     Name "MainData"
+                     Slot LayoutSlot "{66A362844F34D054}" {
+                      HorizontalAlign 2
+                      VerticalAlign 0
+                      Padding 0 0 0 0
+                     }
+                     Text "24.3"
+                     "Font Size" 245
+                     "Min Font Size" 245
+                     "Horizontal Alignment" Right
+                     "Vertical Alignment" Center
+                     FontProperties FontProperties "{66A0E18F09A1D423}" {
+                      Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+                     }
+                    }
+                    TextWidgetClass "{66A3629A0EB96F3A}" {
+                     Name "SecondaryData"
+                     Slot LayoutSlot "{66A362844F34DFB2}" {
+                      HorizontalAlign 2
+                      VerticalAlign 0
+                      Padding 0 -25 0 0
+                     }
+                     Text "0.0 m/s @ 000°"
+                     "Font Size" 70
+                     "Min Font Size" 70
+                    }
+                   }
+                  }
+                 }
+                }
+               }
+              }
+              RichTextWidgetClass "{66A3628F97FA0F9A}" {
+               Name "Footer"
+               Slot OverlayWidgetSlot "{66A3628F2D2AF9BA}" {
+                HorizontalAlign 3
+                VerticalAlign 2
+               }
+               "Is Visible" 0
+               Text "Magnetic North"\
+               "— set mode"
+               "Font Size" 70
+               "Min Font Size" 70
+               FontProperties FontProperties "{66A3628FDF2C4FE6}" {
+                Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+               }
+              }
+             }
+            }
+            OverlayWidgetClass "{66A36282E5D470C0}" {
+             Name "DisplayRefHeading"
+             Slot OverlayWidgetSlot "{66A3628F2D2AF999}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             "Is Visible" 0
+             {
+              VerticalLayoutWidgetClass "{66A3628321460CB5}" {
+               Name "HeaderAndBody"
+               Slot OverlayWidgetSlot "{66A3628321460C92}" {
+                HorizontalAlign 3
+                VerticalAlign 0
+               }
+               {
+                TextWidgetClass "{66A3628356B1D92C}" {
+                 Name "Title"
+                 Slot LayoutSlot "{66A3628356B1D90D}" {
+                  HorizontalAlign 1
+                  VerticalAlign 0
+                  Padding 0 35 0 0
+                 }
+                 Text "MAGNETIC HEADING"
+                 "Font Size" 90
+                 "Min Font Size" 90
+                }
+                TextWidgetClass "{66A36282830C4D82}" {
+                 Name "Heading"
+                 Slot LayoutSlot "{66A36282830C4DD2}" {
+                  HorizontalAlign 1
+                 }
+                 Text "000°"
+                 "Font Size" 90
+                 "Min Font Size" 90
+                }
+                VerticalLayoutWidgetClass "{66A362888BAD675C}" {
+                 Name "Options"
+                 Slot LayoutSlot "{66A362A5C93E7395}" {
+                 }
+                 "Is Visible" 0
+                 {
+                  TextWidgetClass "{66A362888186D3D8}" {
+                   Name "Auto"
+                   Slot LayoutSlot "{66A362888186D330}" {
+                   }
+                   Text "Auto Set"
+                   "Font Size" 70
+                   "Min Font Size" 70
+                  }
+                  TextWidgetClass "{66A362888303F4B4}" {
+                   Name "Manual"
+                   Slot LayoutSlot "{66A362888303F49A}" {
+                   }
+                   Text "Manual Set"
+                   "Font Size" 70
+                   "Min Font Size" 70
+                  }
+                 }
+                }
+                RichTextWidgetClass "{66A362834F60A410}" {
+                 Name "Instructions"
+                 Slot LayoutSlot "{66A362A5C93E73FD}" {
+                 }
+                 "Is Visible" 0
+                 Text "Point down the"\
+                 "Runway or Range"
+                 "Font Size" 70
+                 "Min Font Size" 70
+                 "Horizontal Alignment" Center
+                }
+               }
+              }
+              VerticalLayoutWidgetClass "{66A36282310CEC9A}" {
+               Name "Footer"
+               Slot OverlayWidgetSlot "{66A3628F2D2AF9C3}" {
+                HorizontalAlign 3
+                VerticalAlign 2
+               }
+               {
+                TextWidgetClass "{66A3628C99ABFF62}" {
+                 Name "Separator"
+                 Slot LayoutSlot "{66A3628C99ABFF47}" {
+                 }
+                 Text "=============================="
+                 "Font Size" 70
+                 "Min Font Size" 70
+                }
+                OverlayWidgetClass "{66A3628257B7A9C0}" {
+                 Name "Navigation"
+                 Slot LayoutSlot "{66A3628257B7A92D}" {
+                 }
+                 {
+                  TextWidgetClass "{66A36282212265CF}" {
+                   Name "Power"
+                   Slot OverlayWidgetSlot "{66A3628F2D2AF920}" {
+                    HorizontalAlign 2
+                   }
+                   Text "(|) exit"
+                   "Font Size" 70
+                   "Min Font Size" 70
+                  }
+                  TextWidgetClass "{66A362822C64A981}" {
+                   Name "Command"
+                   Slot OverlayWidgetSlot "{66A3628F2D2AF92C}" {
+                    HorizontalAlign 0
+                   }
+                   Text "— select"
+                   "Font Size" 70
+                   "Min Font Size" 70
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+        ImageWidgetClass "{65612DC31321086C}" {
+         Name "OffScreen"
+         Slot OverlayWidgetSlot "{66A13907A19CD18F}" {
+         }
+         "Is Visible" 0
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

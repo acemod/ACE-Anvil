@@ -2,7 +2,6 @@
 class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 {
 	protected ChimeraCharacter m_pCharacterEntity;
-	protected Animation m_pCharAnim;
 	protected TNodeId m_pCharHeadBone;
 	protected TimeAndWeatherManagerEntity m_pWeatherManager;
 	protected Widget m_wLayout;
@@ -48,12 +47,13 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	//------------------------------------------------------------------------------------------------
 	override void DisplayControlledEntityChanged(IEntity from, IEntity to)
 	{
+		Show(false);
+		
 		m_pCharacterEntity = ChimeraCharacter.Cast(to);
 		if (!m_pCharacterEntity)
 			return;
 		
-		m_pCharAnim = m_pCharacterEntity.GetAnimation();
-		m_pCharHeadBone = m_pCharAnim.GetBoneIndex("Head");
+		m_pCharHeadBone = m_pCharacterEntity.GetAnimation().GetBoneIndex("Head");
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -81,7 +81,7 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		
 		// Get wind direction relative to head
 		vector localHeadTransform[4];
-		m_pCharAnim.GetBoneMatrix(m_pCharHeadBone, localHeadTransform);
+		m_pCharacterEntity.GetAnimation().GetBoneMatrix(m_pCharHeadBone, localHeadTransform);
 		float headDir = m_pCharacterEntity.VectorToParent(localHeadTransform[0]).ToYaw();
 		float windDir = m_pWeatherManager.GetWindDirection();
 		float windAngleRad = Math.DEG2RAD * (windDir - headDir);
@@ -170,5 +170,16 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	protected void ToggleDisplay()
 	{
 		Show(!IsShown());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Terminate screen when chracter transitions from uncon to death
+	override protected void DisplayConsciousnessChanged(bool conscious, bool init = false)
+	{
+		if (init || !conscious)
+			return;
+		
+		if (m_CharacterController.GetLifeState() == ECharacterLifeState.DEAD)
+			Show(false);
 	}
 }

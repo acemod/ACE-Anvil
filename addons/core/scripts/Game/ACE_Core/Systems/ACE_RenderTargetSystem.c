@@ -9,17 +9,16 @@ class ACE_RenderTargetSystem : GameSystem
 	protected ref array<ACE_RenderTargetComponent> m_aComponents = {};
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_RenderTargetSystem GetInstance()
+	static ACE_RenderTargetSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_RenderTargetSystem.Cast(world.FindSystem(ACE_RenderTargetSystem));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
-		outInfo.SetAbstract(true)
-			.SetUnique(false)
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
 			.SetLocation(WorldSystemLocation.Client)
 			.AddPoint(WorldSystemPoint.Frame);
 	}

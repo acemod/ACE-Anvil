@@ -33,7 +33,7 @@ class ACE_RenderTargetComponent : ScriptComponent
 		
 		m_fRenderDistanceSq = Math.Pow(m_fRenderDistanceM, 2);
 		
-		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance();
+		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance(GetOwner().GetWorld());
 		if (system && m_bIsActive)
 			system.Register(this);
 	}
@@ -58,7 +58,7 @@ class ACE_RenderTargetComponent : ScriptComponent
 		if (m_bIsActive == IsRendered())
 			return;
 		
-		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance();
+		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance(GetOwner().GetWorld());
 		if (!system)
 			return;
 		
@@ -146,7 +146,7 @@ class ACE_RenderTargetComponent : ScriptComponent
 		if (!GetGame().InPlayMode())
 			return;
 		
-		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance();
+		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance(GetOwner().GetWorld());
 		if (system && m_bIsActive)
 			system.Unregister(this);
 	}

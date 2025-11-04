@@ -36,15 +36,15 @@ class ACE_Medical_RepositionUserAction : ScriptedUserAction
 		if (!ownerController)
 			return false;
 		
-		if (!ownerController.IsUnconscious() || ownerController.ACE_Medical_GetUnconsciousPose() == m_eUnconsciousPose)
+		if (ownerController.GetLifeState() != ECharacterLifeState.INCAPACITATED || ownerController.ACE_Medical_GetUnconsciousPose() == m_eUnconsciousPose)
 			return false;
 		
 		CharacterAnimationComponent ownerAnimComponent = ownerChar.GetAnimationComponent();
 		if (!ownerAnimComponent)
 			return false;
 		
-		if (!ownerAnimComponent || ownerAnimComponent.IsRagdollActive())
-			return false;
+        if (ownerAnimComponent.IsRagdollActive())
+            return false;
 		
 		return true;
 	}
@@ -59,6 +59,22 @@ class ACE_Medical_RepositionUserAction : ScriptedUserAction
 		SCR_CharacterControllerComponent ownerController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
 		if (!ownerController)
 			return;
+		
+		// ensure target is still incapacitated
+        if (ownerController.GetLifeState() != ECharacterLifeState.INCAPACITATED)
+            return;
+		
+		// ensure current pose is not the target one
+		if (ownerController.ACE_Medical_GetUnconsciousPose() == m_eUnconsciousPose)
+            return;
+		
+		// mirror vehicle/animation safety server-side
+        if (ownerChar.IsInVehicle())
+            return;
+        CharacterAnimationComponent ownerAnimComponent = ownerChar.GetAnimationComponent();
+		
+        if (!ownerAnimComponent || ownerAnimComponent.IsRagdollActive())
+            return;
 		
 		ownerController.ACE_Medical_Reposition(m_eUnconsciousPose);
 	}

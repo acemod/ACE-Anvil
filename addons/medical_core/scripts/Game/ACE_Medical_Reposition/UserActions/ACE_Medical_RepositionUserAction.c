@@ -71,8 +71,8 @@ class ACE_Medical_RepositionUserAction : ScriptedUserAction
 		// mirror vehicle/animation safety server-side
         if (ownerChar.IsInVehicle())
             return;
-        CharacterAnimationComponent ownerAnimComponent = ownerChar.GetAnimationComponent();
 		
+        CharacterAnimationComponent ownerAnimComponent = ownerChar.GetAnimationComponent();
         if (!ownerAnimComponent || ownerAnimComponent.IsRagdollActive())
             return;
 		

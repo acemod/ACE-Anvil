@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6FEFD819BB225407}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_pne_kyk13_inspectpose.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

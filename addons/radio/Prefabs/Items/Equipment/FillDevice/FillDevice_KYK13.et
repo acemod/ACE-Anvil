@@ -1,0 +1,128 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SignalsManagerComponent "{66657BE6A38C2993}" {
+  }
+  ACE_Radio_FillDeviceComponent "{66657BE6DF602780}" {
+   m_eAnimVariable ANPRC68
+  }
+  AttachmentSlotComponent "{666C26660C069EAE}" {
+   AttachmentSlot InventoryStorageSlot Slot {
+    PivotID "i_connector"
+   }
+   AttachmentType BaseAttachmentType "{666C2666639E2F4B}" {
+   }
+   ShowInInspection 1
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Radio-Item_KYK13_Name"
+     Description "#ACE_Radio-Item_KYK13_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.338
+     SizeSetupStrategy Manual
+     ItemDimensions 5 5 5
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{66657BE57C875839}" {
+     AnimationInstance "{938ABBDE3C00D2DC}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.asi"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{666C266A496E0354}" {
+       AnimGraph "{7EE0EE0520098032}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.agr"
+       AnimInstance "{938ABBDE3C00D2DC}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.asi"
+       BindingName "Gadget"
+      }
+     }
+     AllowInspection 1
+    }
+    CustomAttributes {
+     CharacterModifierAttributes "{66657BE4E6DA1831}" {
+     }
+     PreviewRenderAttributes "{66657BE4E555044E}" {
+      CameraPreset Top
+      CameraOrbitAngles 0 0 225
+      CameraDistanceToItem 0.1
+      LodModel 1
+     }
+    }
+    m_bStackable 0
+   }
+  }
+  MeshObject "{66657BEC0CAF1504}" {
+   Object "{A55D1186EB181232}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/FillDevice_KYK13.xob"
+  }
+  RigidBody "{666D31E1BDBE14CC}" {
+   ModelGeometry 1
+  }
+  SCR_SoundDataComponent "{5B18D20ED0099A17}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{666D40663136AF07}" {
+     m_sSoundProject "{5409F2998421DA59}Sounds/Items/Equipment/Radios/Items_Radio_Inspection_Actions.acp"
+     m_sSoundEventName "SOUND_ITEM_RADIO_TUNE_UP"
+    }
+   }
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   ActionContexts {
+    UserActionContext "{666615D55F8E51C1}" {
+     UIInfo SCR_ActionContextUIInfo "{666615D5665CBA0B}" {
+     }
+     ContextName "connector"
+     Position PointInfo "{666615D551EC18FC}" {
+      PivotID "i_connector"
+     }
+    }
+    UserActionContext "{666615D540E97840}" {
+     UIInfo SCR_ActionContextUIInfo "{666615D2989EDD57}" {
+     }
+     ContextName "address_switch"
+     Position PointInfo "{666615D547A27612}" {
+      PivotID "i_address_switch"
+     }
+    }
+    UserActionContext "{66701B57EEAB8DCC}" {
+     UIInfo SCR_ActionContextUIInfo "{66701B57EDA4B264}" {
+     }
+     ContextName "button"
+     Position PointInfo "{66701B57E0BB9FEB}" {
+      PivotID "i_button"
+     }
+    }
+   }
+   additionalActions {
+    ACE_Radio_SwitchAddressUserAction "{666C2600A89BBD50}" {
+     ParentContextList {
+      "address_switch"
+     }
+     UIInfo SCR_ActionUIInfo "{666C2600DDB57040}" {
+     }
+     Duration -1
+     PerformPerFrame 1
+     "Signal name" "address"
+     "Max value" 5
+     m_fAdjustmentStep 1
+     m_bManualAdjustment 1
+    }
+    ACE_Radio_CopyKeyUserAction "{666D4047F5C77EF5}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{666D4047E223B7D4}" {
+     }
+     Duration 1
+     "Sort Priority" -1
+    }
+    ACE_Radio_ClearKeysUserAction "{66701B57C45CB785}" {
+     ParentContextList {
+      "button"
+     }
+     UIInfo SCR_ActionUIInfo "{66701B57F8873342}" {
+      Name "#ACE_Radio-UserAction_ClearAll"
+     }
+     Duration 1
+    }
+   }
+  }
+ }
+}

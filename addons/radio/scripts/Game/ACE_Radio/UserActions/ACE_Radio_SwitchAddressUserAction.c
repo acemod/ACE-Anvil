@@ -1,6 +1,9 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Radio_SwitchAddressUserAction : SCR_AdjustSignalAction
 {
+	[Attribute(defvalue: "#ACE_Radio-UserAction_Address", desc: "Action string for selected address")]
+	protected LocalizedString m_sAddress;
+	
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
@@ -22,7 +25,7 @@ class ACE_Radio_SwitchAddressUserAction : SCR_AdjustSignalAction
 		if (!device)
 			return false;
 		
-		outName = string.Format("Address: %1", device.GetCurrentKeyName());
+		outName = WidgetManager.Translate(m_sAddress, device.GetCurrentKeyName());
 		return true;
 	}
 	

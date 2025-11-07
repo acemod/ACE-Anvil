@@ -96,7 +96,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
       "address_switch"
      }
      UIInfo SCR_ActionUIInfo "{666C2600DDB57040}" {
-      Name "Switch Address"
      }
      Duration -1
      PerformPerFrame 1
@@ -119,7 +118,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
       "button"
      }
      UIInfo SCR_ActionUIInfo "{66701B57F8873342}" {
-      Name "Clear all"
+      Name "#ACE_Radio-UserAction_ClearAll"
      }
      Duration 1
     }

@@ -1,6 +1,9 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Radio_LoadKeysUserAction : ScriptedUserAction
 {
+	[Attribute(defvalue: "#ACE_Radio-UserAction_LoadKey", desc: "Action string for loading key")]
+	protected LocalizedString m_sLoad;
+	
 	[Attribute(desc: "ID of the encryption key group")]
 	protected int m_iGroupID;
 	
@@ -73,7 +76,7 @@ class ACE_Radio_LoadKeysUserAction : ScriptedUserAction
 		if (!info)
 			return false;
 		
-		outName = string.Format("Load %1", WidgetManager.Translate(info.GetCompanyCallsignName(m_iGroupID)));
+		outName = WidgetManager.Translate(m_sLoad, WidgetManager.Translate(info.GetCompanyCallsignName(m_iGroupID)));
 		return true;
 	}
 	

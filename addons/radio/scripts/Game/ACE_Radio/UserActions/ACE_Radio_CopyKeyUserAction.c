@@ -1,6 +1,12 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Radio_CopyKeyUserAction : ScriptedUserAction
 {
+	[Attribute(defvalue: "#ACE_Radio-UserAction_CopyKey", desc: "Action string for copying key")]
+	protected LocalizedString m_sCopyTo;
+	
+	[Attribute(defvalue: "#ACE_Radio-FailReason_NotLoaded", desc: "String for when not loaded")]
+	protected LocalizedString m_sNotLoaded;
+	
 	protected ACE_Radio_FillDeviceComponent m_pDevice;
 	
 	//------------------------------------------------------------------------------------------------
@@ -18,7 +24,7 @@ class ACE_Radio_CopyKeyUserAction : ScriptedUserAction
 		
 		if (!m_pDevice.IsLoaded())
 		{
-			SetCannotPerformReason("Not Loaded");
+			SetCannotPerformReason(m_sNotLoaded);
 			return false;
 		}
 		
@@ -74,7 +80,7 @@ class ACE_Radio_CopyKeyUserAction : ScriptedUserAction
 		else
 			keyName = m_pDevice.GetCurrentKeyName();
 		
-		outName = string.Format("Copy %1 to %2", keyName, GetOwnerName());
+		outName = WidgetManager.Translate(m_sCopyTo, keyName, GetOwnerName());
 		return true;
 	}
 	

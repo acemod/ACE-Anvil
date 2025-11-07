@@ -57,7 +57,7 @@ class ACE_Medical_Medication_SimulationJob : ACE_IContextFrameJob<ACE_Medical_Ch
 		for (int i = doses.Count() - 1; i >= 0; i--)
 		{
 			ACE_Medical_Dose dose = doses[i];
-			float concentration = dose.ComputeConcentration(config);
+			float concentration = dose.ComputeConcentration(config, m_pContext);
 			
 			// Remove doses that have expired
 			if (deleteExpiredDoses && dose.IsExpired())

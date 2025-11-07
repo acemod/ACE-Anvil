@@ -7,7 +7,7 @@ class ACE_Medical_Bolus : ACE_Medical_Dose
 	protected float m_fConcentrationNM;
 	
 	//------------------------------------------------------------------------------------------------
-	override float ComputeConcentration(ACE_Medical_PharmacokineticsConfig config)
+	override float ComputeConcentration(ACE_Medical_PharmacokineticsConfig config, ACE_Medical_CharacterContext context = null)
 	{
 		float time = GetElapsedTime();
 		float concentration = config.m_fActivationRateConstant / (config.m_fActivationRateConstant - config.m_fDeactivationRateConstant);

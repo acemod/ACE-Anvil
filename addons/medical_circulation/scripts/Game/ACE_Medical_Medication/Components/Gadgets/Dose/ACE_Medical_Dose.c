@@ -12,7 +12,7 @@ class ACE_Medical_Dose : ScriptAndConfig
 	//------------------------------------------------------------------------------------------------
 	//! Computes the current concentration of this dose based on the administration time and the
 	//! passed config for the pharamockinetics
-	float ComputeConcentration(ACE_Medical_PharmacokineticsConfig config);
+	float ComputeConcentration(ACE_Medical_PharmacokineticsConfig config, ACE_Medical_CharacterContext context = null);
 	
 	//------------------------------------------------------------------------------------------------
 	//! Get the type of the drug administered by this dose

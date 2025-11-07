@@ -86,6 +86,36 @@ class ACE_Medical_MedicationSystem : GameSystem
 		{
 			effect.OnDiag(targetContext, timeSlice);
 		}
+
+		float bloodFlowScale = 1;
+		if (targetContext.m_pDamageManager)
+			bloodFlowScale = targetContext.m_pDamageManager.ACE_Medical_GetBloodFlowScale();
+
+		bool hasInfusions = false;
+		for (int doseIdx = 0; doseIdx < doses.Count(); doseIdx++)
+		{
+			array<ref ACE_Medical_Dose> drugDoses = doses[doseIdx];
+			foreach (ACE_Medical_Dose dose : drugDoses)
+			{
+				ACE_Medical_Infusion infusion = ACE_Medical_Infusion.Cast(dose);
+				if (!infusion)
+					continue;
+
+				if (!hasInfusions)
+				{
+					hasInfusions = true;
+					DbgUI.Text("\nInfusions:\n===============================");
+				}
+
+				float baseRate = infusion.GetInfusionRate();
+				float effectiveRate = baseRate * bloodFlowScale;
+				float elapsed = infusion.GetElapsedTime();
+				float duration = infusion.GetInfusionDuration();
+				float remaining = Math.Max(0, duration - elapsed);
+				string drugName = SCR_Enum.GetEnumName(ACE_Medical_EDrugType, drugs[doseIdx]);
+				DbgUI.Text(string.Format("- %1: base %2 nM/s, effective %3 nM/s, remaining %4 s (scale %5)", drugName, baseRate, effectiveRate, remaining, bloodFlowScale));
+			}
+		}
 		
 		DbgUI.End();
 	}

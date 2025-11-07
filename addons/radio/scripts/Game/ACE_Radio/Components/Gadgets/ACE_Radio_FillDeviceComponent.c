@@ -85,7 +85,7 @@ class ACE_Radio_FillDeviceComponent : SCR_GadgetComponent
 		if (!info)
 			return "";
 		
-		return  WidgetManager.Translate(info.GetCompanyCallsignName(m_iGroupID));
+		return WidgetManager.Translate(info.GetCompanyCallsignName(m_iGroupID));
 	}
 	
 	//------------------------------------------------------------------------------------------------

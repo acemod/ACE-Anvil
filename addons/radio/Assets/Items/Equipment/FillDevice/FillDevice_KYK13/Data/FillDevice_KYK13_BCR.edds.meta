@@ -9,7 +9,7 @@ MetaFileClass {
   }
   PNGResourceClass PS4 : "{12273E1A0928F0C4}Configs/System/ResourceTypes/PS4/TextureColorMap.conf" {
   }
-  PNGResourceClass PS5 : "{531A0D167B1ABD97}configs/ResourceTypes/PS5/TextureColorMap.conf" {
+  PNGResourceClass PS5 : "{531A0D167B1ABD97}Configs/System/ResourceTypes/PS5/TextureColorMap.conf" {
   }
   PNGResourceClass HEADLESS : "{BEAF5CD0C438676E}Configs/System/ResourceTypes/HEADLESS/TextureColorMap.conf" {
   }

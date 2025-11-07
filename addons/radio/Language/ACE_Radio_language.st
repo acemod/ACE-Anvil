@@ -11,9 +11,9 @@ StringTable {
   }
   CustomStringTableItem "{66657BEC7C58D254}" {
    Id "ACE_Radio-Item_KYK13_Description"
-   Target_en_us "A module used for transferring crypographic keys to radios."
+   Target_en_us "A module used for transferring cryptographic keys to radios."
    Target_de_de "Ein Modul zum Übetragen von kryptographischen Schlüsseln auf Funkgeräte."
-   Modified 1717962704
+   Modified 1724865142
    Author "Kexanone"
    LastChanged "Kexanone"
   }

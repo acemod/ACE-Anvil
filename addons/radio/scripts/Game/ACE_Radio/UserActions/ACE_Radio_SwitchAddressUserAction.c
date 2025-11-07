@@ -50,10 +50,7 @@ class ACE_Radio_SwitchAddressUserAction : SCR_AdjustSignalAction
 		vector transform[4];
 		Math3D.AnglesToMatrix(Vector(28.4 * m_fTargetValue, 0, 0), transform);
 		anim.SetBoneMatrix(GetOwner(), pivot, transform);
-		
-		SCR_SoundManagerEntity soundManager = GetGame().GetSoundManagerEntity();
-		if (soundManager)
-			soundManager.CreateAndPlayAudioSource(GetOwner(), SCR_SoundEvent.SOUND_ITEM_RADIO_TUNE_UP);
+		SCR_SoundManagerModule.CreateAndPlayAudioSource(GetOwner(), SCR_SoundEvent.SOUND_ITEM_RADIO_TUNE_UP);
 	}
 	
 	//------------------------------------------------------------------------------------------------

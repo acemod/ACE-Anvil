@@ -39,12 +39,8 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		m_pWeatherManager = world.GetTimeAndWeatherManager();
 		m_wLayout = m_wRoot.FindWidget("Layout");
 		m_wCanvas = CanvasWidget.Cast(m_wLayout.FindWidget("Canvas"));
-		
 		m_pInnerCircle.m_iColor = Color.WHITE;
 		m_pMainLine.m_iColor = Color.WHITE;
-		
-		UpdateDPIScale(GetGame().GetWorkspace().DPIScale(1));
-		UpdateCirclesVertices();
 		GetGame().GetInputManager().AddActionListener("ACE_Weather_WindInfoToggle", EActionTrigger.DOWN, ToggleDisplay);
 	}
 	
@@ -85,7 +81,7 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	//------------------------------------------------------------------------------------------------
 	override protected void DisplayUpdate(IEntity owner, float timeSlice)
 	{
-		if (!m_pCharacterEntity)
+		if (!IsShown() || !m_pCharacterEntity)
 			return;
 		
 		float dpiScale = GetGame().GetWorkspace().DPIScale(1);

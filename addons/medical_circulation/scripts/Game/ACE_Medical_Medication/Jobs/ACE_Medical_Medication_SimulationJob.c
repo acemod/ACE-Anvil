@@ -53,7 +53,7 @@ class ACE_Medical_Medication_SimulationJob : ACE_IContextFrameJob<ACE_Medical_Ch
 		ACE_Medical_PharmacokineticsConfig config = s_pSettings.GetPharmacokineticsConfig(drug);
 		float totalConcentration = 0;
 		
-		// TO DO: Handle IV infusions
+		// Infusions implement their own ComputeConcentration override, so they flow through this loop
 		for (int i = doses.Count() - 1; i >= 0; i--)
 		{
 			ACE_Medical_Dose dose = doses[i];

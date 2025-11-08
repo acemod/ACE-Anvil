@@ -41,4 +41,25 @@ class ACE_Medical_Dose : ScriptAndConfig
 	{
 		return m_bIsExpired;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ForceExpire()
+	{
+		m_bIsExpired = true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_Dose CloneDose()
+	{
+		typename type = Type();
+		if (!type)
+			return null;
+		
+		ACE_Medical_Dose copy = ACE_Medical_Dose.Cast(type.Spawn());
+		if (!copy)
+			return null;
+		
+		copy.m_eDrugType = m_eDrugType;
+		return copy;
+	}
 }

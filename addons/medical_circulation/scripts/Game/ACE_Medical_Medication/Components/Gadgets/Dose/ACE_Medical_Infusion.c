@@ -54,4 +54,17 @@ class ACE_Medical_Infusion : ACE_Medical_Dose
 	{
 		return m_fInfusionDurationS;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override ACE_Medical_Dose CloneDose()
+	{
+		ACE_Medical_Infusion copy = ACE_Medical_Infusion.Cast(super.CloneDose());
+		if (!copy)
+			return null;
+		
+		copy.m_fInfusionRate = m_fInfusionRate;
+		copy.m_fInfusionDurationS = m_fInfusionDurationS;
+		copy.m_bIsStopped = false;
+		return copy;
+	}
 }

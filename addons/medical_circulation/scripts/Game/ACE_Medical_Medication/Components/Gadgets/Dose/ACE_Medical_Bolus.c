@@ -27,4 +27,15 @@ class ACE_Medical_Bolus : ACE_Medical_Dose
 	{
 		return m_fConcentrationNM;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override ACE_Medical_Dose CloneDose()
+	{
+		ACE_Medical_Bolus copy = ACE_Medical_Bolus.Cast(super.CloneDose());
+		if (!copy)
+			return null;
+		
+		copy.m_fConcentrationNM = m_fConcentrationNM;
+		return copy;
+	}
 }

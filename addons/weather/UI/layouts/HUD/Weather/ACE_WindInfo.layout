@@ -12,12 +12,14 @@ FrameWidgetClass {
   SizeLayoutWidgetClass "{667B2E26F81247E7}" {
    Name "Layout"
    Slot FrameWidgetSlot "{667B2E26F81247DD}" {
+    Anchor 1 1 1 1
     OffsetLeft 0
     OffsetTop 0
-    SizeX 128
-    OffsetRight -128
-    SizeY 128
-    OffsetBottom -128
+    SizeX 256
+    OffsetRight -256
+    SizeY 256
+    OffsetBottom -256
+    Alignment 1.75 1
    }
    {
     CanvasWidgetClass "{667B2E26A9C9585A}" {

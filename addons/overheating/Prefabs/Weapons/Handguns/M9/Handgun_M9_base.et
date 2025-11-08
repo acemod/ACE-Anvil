@@ -1,0 +1,16 @@
+GenericEntity : "{EE7028E9DF49763A}Prefabs/Weapons/Core/Handgun_Base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{50F64C45E7271D47}" {
+     components {
+      ACE_Overheating_BarrelComponent "{65B9755A1DB21A31}" {
+       m_fBarrelDiameter 0.01371
+      }
+     }
+    }
+   }
+  }
+ }
+}

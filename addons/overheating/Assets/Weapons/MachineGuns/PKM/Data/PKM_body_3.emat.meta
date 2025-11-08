@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{E86D1DE592A111CD}Assets/Weapons/MachineGuns/PKM/Data/PKM_body_3.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

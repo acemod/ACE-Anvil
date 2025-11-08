@@ -1,0 +1,66 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 4105
+   name "ACE_OVERHEATING_SOUND_SWAP_BARREL"
+   version 5
+   tl -274.261 -188.87
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 2052
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -10
+   outState 1035
+   outStatePort 26631
+  }
+ }
+ mixers {
+  MixerClass {
+   id 1035
+   name "OutputState"
+   version 4
+   tl -84 -187
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 26631
+     links {
+      ConnectionClass connection {
+       id 4105
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    16777216 0
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin"
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 2052
+   name "BarrelSwap"
+   version 7
+   tl -496 -187
+   Volume 2
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{AD75581D6865B7B9}Sounds/Weapons/Machineguns/Samples/ACE_Overheating_BarrelSwap.wav"
+    }
+   }
+  }
+ }
+ version 1
+}

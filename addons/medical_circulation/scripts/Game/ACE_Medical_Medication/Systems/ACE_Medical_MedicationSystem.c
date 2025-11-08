@@ -5,18 +5,19 @@ class ACE_Medical_MedicationSystem : GameSystem
 	protected ref ACE_Medical_Medication_JobScheduler m_pScheduler;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Medical_MedicationSystem GetInstance()
+	static ACE_Medical_MedicationSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Medical_MedicationSystem.Cast(world.FindSystem(ACE_Medical_MedicationSystem));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
+		super.InitInfo(outInfo);
 		outInfo.SetAbstract(false)
 			.SetUnique(true)
-			.SetLocation(ESystemLocation.Server)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -38,7 +38,7 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 		if (!ownerController)
 			return false;
 		
-		if (!ownerController.IsUnconscious())
+		if (ownerController.GetLifeState() != ECharacterLifeState.INCAPACITATED)
 			return false;
 		
 		CharacterAnimationComponent ownerAnimation = ownerChar.GetAnimationComponent();

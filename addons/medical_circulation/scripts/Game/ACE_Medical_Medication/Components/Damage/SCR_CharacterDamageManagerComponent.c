@@ -18,7 +18,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.ACE_Medical_OnKilled();
 		
-		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance();
+		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(GetOwner()));
 	}

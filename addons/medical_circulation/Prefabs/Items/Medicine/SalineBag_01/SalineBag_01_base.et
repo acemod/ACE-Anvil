@@ -2,12 +2,13 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
  ID "508AB2013EEE1E00"
  components {
   SCR_ConsumableItemComponent "{59E68C4DC131E9FC}" {
-    m_ConsumableEffect ACE_Medical_ConsumableMedication "{59E68C74C1F3910E}" {
+    m_ConsumableEffect ACE_Medical_ConsumableSalineInfusion "{59E68C74C1F3910E}" {
      m_aDamageEffectsToLoad {
       UnknownDamageEffect "{6122D60861B541E7}" {
       }
      }
      m_eDeviceType ACE_MEDICAL_SALINE_BAG
+     m_fItemAbsoluteRegenerationAmount 0
      m_Doses {
       ACE_Medical_Infusion "{65D2FB436C5ADEF0}" {
         m_eDrugType SALINE

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{C18AF5C57DAEB2E2}UI/layouts/Gagets/WindMeter/ACE_Kestrel4500_Screen.layout"
+ Name "{C18AF5C57DAEB2E2}UI/layouts/Gadgets/WindMeter/ACE_Kestrel4500_Screen.layout"
  Configurations {
   LayoutResourceClass PC {
   }

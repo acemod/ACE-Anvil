@@ -15,7 +15,7 @@ class ACE_Overheating_JammingSystem : GameSystem
 		super.InitInfo(outInfo);
 		outInfo.SetAbstract(false)
 			.SetUnique(true)
-			.SetLocation(WorldSystemLocation.Server)
+			.SetLocation(WorldSystemLocation.Both)
 			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	

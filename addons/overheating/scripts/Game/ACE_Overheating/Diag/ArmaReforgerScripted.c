@@ -27,7 +27,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 	{
 		super.OnUpdate(world, timeslice);
 		
-		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance();
+		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance(world);
 		if (!system)
 			return;
 		

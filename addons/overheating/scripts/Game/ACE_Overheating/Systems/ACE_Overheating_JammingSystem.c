@@ -4,9 +4,8 @@ class ACE_Overheating_JammingSystem : GameSystem
 	protected ACE_Overheating_BarrelComponent m_pLocalActiveBarrel = null;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_JammingSystem GetInstance()
+	static ACE_Overheating_JammingSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Overheating_JammingSystem.Cast(world.FindSystem(ACE_Overheating_JammingSystem));
 	}
 	
@@ -16,7 +15,7 @@ class ACE_Overheating_JammingSystem : GameSystem
 		super.InitInfo(outInfo);
 		outInfo.SetAbstract(false)
 			.SetUnique(true)
-			.SetLocation(WorldSystemLocation.Server)
+			.SetLocation(WorldSystemLocation.Both)
 			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	

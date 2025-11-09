@@ -68,6 +68,7 @@ Summary of settings that can be modified in the server config:
 | Field                                 | Value                | Description                                        |
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_fDefaultResilienceRegenScale`      | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.3` | Default resilience regeneration scale. The default regeneration rate (5 HP/s) will be multiplied by this factor. |
+| `m_fResilienceDamageScale`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Resilience damage scale. All incoming damage to the resilience hitzone will be multiplied by this factor. Lower values make characters less likely to fall unconscious. |
 | `m_fMinHealthScaledForEpinephrine`    | Type: `float`**<br />Range: 0 to 1<br />Default: `0.33` | Can only apply epinephrine when patient has at least this health (ignored in advanced medication). |
 | `m_bBleedOutForPlayersEnabled`        | Type: `bool`*<br />Default: `true` | Whether players can bleed out |
 | `m_fBleedingRateScale`                | Type: `float`**<br />Default: `1.0` | Character bleeding rate multiplier |
@@ -96,6 +97,7 @@ Template for the `missionHeader` in a server config:
     "m_ACE_Settings": {
         "m_ACE_Medical_Core": {
             "m_fDefaultResilienceRegenScale": 0.3,
+            "m_fResilienceDamageScale": 1.0,
             "m_fMinHealthScaledForEpinephrine": 0.33,
             "m_bBleedOutForPlayersEnabled": 1,
             "m_fBleedingRateScale": 1.0,

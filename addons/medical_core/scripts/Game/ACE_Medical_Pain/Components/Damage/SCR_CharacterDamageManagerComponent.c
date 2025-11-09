@@ -2,9 +2,15 @@
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
 	protected ACE_Medical_PainHitZone m_ACE_Medical_PainHitZone;
-	
+
 	[RplProp(condition: RplCondition.OwnerOnly)]
 	protected float m_fACE_Medical_PainSuppression = 0;
+
+	[Attribute(defvalue: "0.25", uiwidget: UIWidgets.Slider, desc: "Percentage of armor damage that gets converted to pain", params: "0 1 0.01")]
+	protected float m_fACE_Medical_ArmorPainMultiplier;
+
+	[Attribute(defvalue: "10", uiwidget: UIWidgets.Slider, desc: "Minimum armor damage required to cause pain", params: "0 50 1")]
+	protected float m_fACE_Medical_ArmorPainThreshold;
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Called by ACE_Medical_PainHitZone.OnInit to initialize the hit zone
@@ -58,5 +64,36 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	float ACE_Medical_GetPainSuppression()
 	{
 		return m_fACE_Medical_PainSuppression;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Add pain when armor blocks damage
+	//! Behavior:
+	//! - Small impacts below threshold are ignored
+	//! - First significant impact sets character to moderate pain state
+	//! - Subsequent hits when already beyond moderate don't add more pain
+	override void ArmorHitEventDamage(EDamageType type, float damage, IEntity instigator)
+	{
+		super.ArmorHitEventDamage(type, damage, instigator);
+
+		if (!m_ACE_Medical_PainHitZone)
+			return;
+
+		if (damage < m_fACE_Medical_ArmorPainThreshold)
+			return;
+
+		// If already in pain (beyond moderate), don't add more
+		if (ACE_Medical_IsInPain())
+			return;
+
+		// Not in pain yet - apply pain to reach moderate threshold
+		float painDamage = damage * m_fACE_Medical_ArmorPainMultiplier;
+
+		float moderateThreshold = m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE);
+		float currentHealth = m_ACE_Medical_PainHitZone.GetHealthScaled();
+		float minDamageForPain = (currentHealth - moderateThreshold) * m_ACE_Medical_PainHitZone.GetMaxHealth();
+
+		painDamage = Math.Max(painDamage, minDamageForPain);
+		m_ACE_Medical_PainHitZone.HandleDamage(painDamage, EDamageType.TRUE, instigator);
 	}
 }

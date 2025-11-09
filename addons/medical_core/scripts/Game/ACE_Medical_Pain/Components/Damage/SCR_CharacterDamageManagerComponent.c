@@ -70,7 +70,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Add pain when armor blocks damage
 	//! Behavior:
 	//! - Small impacts below threshold are ignored
-	//! - First significant impact sets character to moderate pain state
+	//! - First significant impact sets character to moderate pain state + any additional pain from impact
 	//! - Subsequent hits when already beyond moderate don't add more pain
 	override void ArmorHitEventDamage(EDamageType type, float damage, IEntity instigator)
 	{
@@ -82,18 +82,17 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (damage < m_fACE_Medical_ArmorPainThreshold)
 			return;
 
-		// If already in pain (beyond moderate), don't add more
 		if (ACE_Medical_IsInPain())
 			return;
 
-		// Not in pain yet - apply pain to reach moderate threshold
-		float painDamage = damage * m_fACE_Medical_ArmorPainMultiplier;
-
 		float moderateThreshold = m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE);
 		float currentHealth = m_ACE_Medical_PainHitZone.GetHealthScaled();
-		float minDamageForPain = (currentHealth - moderateThreshold) * m_ACE_Medical_PainHitZone.GetMaxHealth();
+		float damageToReachModerate = (currentHealth - moderateThreshold) * m_ACE_Medical_PainHitZone.GetMaxHealth();
 
-		painDamage = Math.Max(painDamage, minDamageForPain);
-		m_ACE_Medical_PainHitZone.HandleDamage(painDamage, EDamageType.TRUE, instigator);
+		float additionalPainDamage = damage * m_fACE_Medical_ArmorPainMultiplier;
+
+		float totalPainDamage = damageToReachModerate + additionalPainDamage;
+
+		m_ACE_Medical_PainHitZone.HandleDamage(totalPainDamage, EDamageType.TRUE, instigator);
 	}
 }

@@ -1,6 +1,29 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{66CF3B5DD2400B3F}" {
+   Id "ACE_Radio-FailReason_NotLoaded"
+   Target_en_us "Not loaded"
+   Target_de_de "Nicht geladen"
+   Modified 1724863097
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66657BEC7C58D254}" {
+   Id "ACE_Radio-Item_KYK13_Description"
+   Target_en_us "A module used for transferring cryptographic keys to radios."
+   Target_de_de "Ein Modul zum Übetragen von kryptographischen Schlüsseln auf Funkgeräte."
+   Modified 1724865142
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66657BEC7B8734FC}" {
+   Id "ACE_Radio-Item_KYK13_Name"
+   Target_en_us "KYK-13 Fill Device"
+   Modified 1717961004
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{644826487CAE8882}" {
    Id "ACE_Radio-Settings-Radio"
    Target_en_us "Radio"
@@ -64,6 +87,38 @@ StringTable {
    Modified 1716434296
    Author "darkshifty"
    LastChanged "darkshifty"
+  }
+  CustomStringTableItem "{66CF3B5A5C85AB29}" {
+   Id "ACE_Radio-UserAction_Address"
+   Target_en_us "Address: %1"
+   Target_de_de "Adresse: %1"
+   Modified 1724863571
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66CF3B5BAABA47AE}" {
+   Id "ACE_Radio-UserAction_ClearAll"
+   Target_en_us "Clear all"
+   Target_de_de "Alle löschen"
+   Modified 1724863735
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66CF3B5D07D15121}" {
+   Id "ACE_Radio-UserAction_CopyKey"
+   Target_en_us "Copy %1 to %2"
+   Target_de_de "Kopiere %1 nach %2"
+   Modified 1724863181
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66CF3B5D60010DC8}" {
+   Id "ACE_Radio-UserAction_LoadKey"
+   Target_en_us "Load %1"
+   Target_de_de "Lade %1"
+   Modified 1724863191
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
  }
 }

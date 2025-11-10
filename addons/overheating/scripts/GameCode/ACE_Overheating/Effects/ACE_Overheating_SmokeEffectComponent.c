@@ -40,31 +40,31 @@ class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 	//------------------------------------------------------------------------------------------------
 	int ComputeBirthRate(float temperature)
 	{
-		return Math.Round(Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cBirthRateTemperatureCurve)[1]);
+		return Math.Round(LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cBirthRateTemperatureCurve)[1]);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ComputeLifetime(float temperature)
 	{
-		return ACE_Math.Round(Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cLifetimeTemperatureCurve)[1], m_iLifetimePrecision);
+		return ACE_Math.Round(LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cLifetimeTemperatureCurve)[1], m_iLifetimePrecision);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ComputeSize(float temperature)
 	{
-		return ACE_Math.Round(Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cSizeTemperatureCurve)[1], m_iSizePrecision);
+		return ACE_Math.Round(LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cSizeTemperatureCurve)[1], m_iSizePrecision);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ComputeVelocity(float temperature)
 	{
-		return ACE_Math.Round(Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cVelocityTemperatureCurve)[1], m_iVelocityPrecision);
+		return ACE_Math.Round(LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cVelocityTemperatureCurve)[1], m_iVelocityPrecision);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ComputeEmittingTime(float temperature)
 	{
-		return ACE_Math.Round(Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cEmittingTimeTemperatureCurve)[1], m_iEmittingTimePrecision);
+		return ACE_Math.Round(LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cEmittingTimeTemperatureCurve)[1], m_iEmittingTimePrecision);
 	}
 }
 

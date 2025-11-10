@@ -40,17 +40,21 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//-----------------------------------------------------------------------------------------------------------
 	bool ACE_Medical_IsSecondChanceEnabled()
 	{
-		// Check for AI
-		if (!s_ACE_Medical_Core_Settings.m_bSecondChanceForAIEnabled && !EntityUtils.IsPlayer(GetOwner()))
-			return false;
-		
+		// Check for AI - if AI setting is disabled, block second chance for AI and possessed AI
+		if (!s_ACE_Medical_Core_Settings.m_bSecondChanceForAIEnabled)
+		{
+			SCR_ECharacterControlType controlType = SCR_CharacterHelper.GetCharacterControlType(GetOwner());
+			if (controlType == SCR_ECharacterControlType.AI || controlType == SCR_ECharacterControlType.POSSESSED_AI)
+				return false;
+		}
+
 		// Check for fall damage
 		if (s_ACE_Medical_Core_Settings.m_bSecondChanceForFallDamageEnabled || m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
 			return true;
-		
+
 		if (m_fACE_Medical_SecondChanceDeactivationTimeMS - m_fACE_Medical_LastFallDamageTimeMS <= ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS)
 			return false;
-		
+
 		return true;
 	}
 	

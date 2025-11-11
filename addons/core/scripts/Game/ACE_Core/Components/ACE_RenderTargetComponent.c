@@ -88,8 +88,8 @@ class ACE_RenderTargetComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Friend setter for ACE_RenderTargetSystem
-	void _ToggleRender(bool active)
+	[Friend(ACE_RenderTargetSystem)]
+	protected void ToggleRender(bool active)
 	{
 		if (active)
 		{

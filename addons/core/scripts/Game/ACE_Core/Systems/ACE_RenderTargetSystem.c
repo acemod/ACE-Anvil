@@ -42,7 +42,8 @@ class ACE_RenderTargetSystem : GameSystem
 		m_fUpdateTimerS = 0;
 		
 		vector camPos;
-		GetCameraPos(camPos);
+		if(!GetCameraPos(camPos))
+			return;
 		
 		foreach (ACE_RenderTargetComponent component : m_aComponents)
 		{

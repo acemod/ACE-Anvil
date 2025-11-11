@@ -55,7 +55,7 @@ class ACE_RenderTargetSystem : GameSystem
 	{
 		bool shouldBeRendered = vector.DistanceSq(camPos, component.GetOwner().GetOrigin()) <= component.GetRenderDistanceSq();
 		if (shouldBeRendered != component.IsRendered())
-			component._ToggleRender(shouldBeRendered);
+			component.ToggleRender(shouldBeRendered);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ class ACE_RenderTargetSystem : GameSystem
 		m_aComponents.RemoveItem(component);
 		
 		if (component.IsRendered())
-			component._ToggleRender(false);
+			component.ToggleRender(false);
 		
 		if (m_aComponents.IsEmpty())
 			Enable(false);

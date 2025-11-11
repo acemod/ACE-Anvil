@@ -88,6 +88,14 @@ StringTable {
    Author "kexanone"
    LastChanged "Smith"
   }
+  CustomStringTableItem "{66D54CF8AFAC8A55}" {
+   Id "ACE_Medical-InfoWidget_Splint"
+   Target_en_us "Stabilizes fractures and speeds up healing"
+   Target_de_de "Stabilisiert Frakturen und beschleunigt Heilung"
+   Modified 1725267534
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{60CF45A0A9B86435}" {
    Id "ACE_Medical-Item_Epinephrine_Description"
    Target_en_us "Administered to unconscious patients."
@@ -123,6 +131,22 @@ StringTable {
    Modified 1655484454
    Author "kexanone"
    LastChanged "Smith"
+  }
+  CustomStringTableItem "{66D54CFA78569BA9}" {
+   Id "ACE_Medical-Item_Splint_Description"
+   Target_en_us "Applied to patients with fractures."
+   Target_de_de "Angewandt an Patienten mit Frakturen."
+   Modified 1725264660
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{66D54CFA7FD3D1D0}" {
+   Id "ACE_Medical-Item_Splint_Name"
+   Target_en_us "Splint"
+   Target_de_de "Schiene"
+   Modified 1725264203
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{65515E08A4E02C61}" {
    Id "ACE_Medical-KeyBind_OpenRadialMenu"

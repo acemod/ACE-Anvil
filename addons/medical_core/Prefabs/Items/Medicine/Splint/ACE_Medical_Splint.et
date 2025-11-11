@@ -1,0 +1,33 @@
+GenericEntity : "{0845FCD5D1E53541}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_01_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Medical-Item_Splint_Name"
+     Description "#ACE_Medical-Item_Splint_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{5E0EC111B36279BB}" {
+       Name "#ACE_Medical-InfoWidget_Splint"
+       IconSetName "Bone-Fracture_UI"
+      }
+     }
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.128
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{551CA1C351DBEA72}" {
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{6098B9508619B4D0}" {
+      CameraOrbitAngles 0 -30 220
+      CameraDistanceToItem 1.3
+     }
+    }
+   }
+  }
+  MeshObject "{51F66EC3C5BC700D}" {
+   Object "{13555448DB9FBF2C}Assets/Items/Medicine/Splint/ACE_Medical_Splint.xob"
+  }
+ }
+}

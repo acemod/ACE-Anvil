@@ -22,8 +22,8 @@ FrameWidgetClass {
       OffsetTop 0
       SizeX 1024
       OffsetRight -1024
-      SizeY 630
-      OffsetBottom -630
+      SizeY 700
+      OffsetBottom -700
      }
      Clipping False
      {

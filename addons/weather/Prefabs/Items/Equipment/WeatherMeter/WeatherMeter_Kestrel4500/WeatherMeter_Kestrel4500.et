@@ -1,0 +1,158 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ACE_PhysicalButtonsComponent "{66A36225AB3038FC}" {
+   m_aButtonConfigs {
+    ACE_PhysicalButtonConfig "{66A36225A9A22CD3}" {
+     m_sColliderName "UBX_ButtonUp"
+     m_sBoneName "i_button_up"
+     m_vPressedOffset 0 -0.002 0
+     m_pCommand ACE_ScreenButtonClickGadgetCommand "{66A36226B657E12B}" {
+      m_eButtonID UP
+     }
+    }
+    ACE_PhysicalButtonConfig "{66A36225A9F44650}" {
+     m_sColliderName "UBX_ButtonDown"
+     m_sBoneName "i_button_down"
+     m_vPressedOffset 0 -0.002 0
+     m_pCommand ACE_ScreenButtonClickGadgetCommand "{66A36226B09F81AF}" {
+      m_eButtonID DOWN
+     }
+    }
+    ACE_PhysicalButtonConfig "{66A36225A9366C32}" {
+     m_sColliderName "UBX_ButtonLeft"
+     m_sBoneName "i_button_left"
+     m_vPressedOffset 0 -0.002 0
+     m_pCommand ACE_ScreenButtonClickGadgetCommand "{66A36226BD19D8F0}" {
+      m_eButtonID LEFT
+     }
+    }
+    ACE_PhysicalButtonConfig "{66A36225A95D6185}" {
+     m_sColliderName "UBX_ButtonRight"
+     m_sBoneName "i_button_right"
+     m_vPressedOffset 0 -0.002 0
+     m_pCommand ACE_ScreenButtonClickGadgetCommand "{66A36226BEFA5326}" {
+      m_eButtonID RIGHT
+     }
+    }
+    ACE_PhysicalButtonConfig "{66A36225F92701D5}" {
+     m_sColliderName "UBX_ButtonPower"
+     m_sBoneName "i_button_power"
+     m_vPressedOffset 0 -0.002 0
+     m_pCommand ACE_ScreenButtonClickGadgetCommand "{66A36226BBD71A81}" {
+      m_eButtonID POWER
+     }
+    }
+    ACE_PhysicalButtonConfig "{66A36225FE8BB705}" {
+     m_sColliderName "UBX_ButtonEnter"
+     m_sBoneName "i_button_enter"
+     m_vPressedOffset 0 -0.002 0
+     m_pCommand ACE_ScreenButtonClickGadgetCommand "{66A3622681E3163B}" {
+      m_eButtonID ENTER
+     }
+    }
+   }
+  }
+  ACE_RenderTargetComponent "{66A1390798C30F5B}" {
+   m_sLayoutName "{C18AF5C57DAEB2E2}UI/layouts/Gadgets/WindMeter/ACE_Kestrel4500_Screen.layout"
+   m_bIsActive 1
+  }
+  ACE_Weather_KestrelGadgetComponent "{66A139078A9BB501}" {
+   m_eAnimVariable NONE
+   m_aScreenHandlers {
+    ACE_Weather_KestrelHomeScreen "{66A13903401274C2}" {
+     m_eID KESTREL_HOME
+     m_eNextScreenID KESTREL_DIRECTION
+     m_ePreviousScreenID KESTREL_ALTITUDE
+    }
+    ACE_Weather_KestrelCompassScreen "{66A1390A79C33769}" {
+     m_eID KESTREL_DIRECTION
+     m_eNextScreenID KESTREL_WIND
+     m_ePreviousScreenID KESTREL_HOME
+     m_sIconName "subscribe"
+     m_fIconRotation 180
+     m_sTitle "DIRECTION"
+     m_sFooterText "Magnetic North"\
+     "— set mode"
+    }
+    ACE_Weather_KestrelWindSpeedScreen "{66A139005DA6D3AA}" {
+     m_eID KESTREL_WIND
+     m_eNextScreenID KESTREL_CROSSWIND
+     m_ePreviousScreenID KESTREL_DIRECTION
+     m_sIconName "moveAll"
+     m_fIconRotation 180
+     m_sTitle "WIND SPEED"
+     m_sUnit "m/s"
+    }
+    ACE_Weather_KestrelProjWindSpeedScreen "{66A3629B89CB3D77}" {
+     m_eID KESTREL_CROSSWIND
+     m_eNextScreenID KESTREL_HEADWIND
+     m_ePreviousScreenID KESTREL_WIND
+     m_sIconName "moveAll"
+     m_sTitle "CROSSWIND"
+     m_sUnit "m/s"
+     m_sFooterText "— set heading"
+     m_fProjectionAngle 90
+    }
+    ACE_Weather_KestrelProjWindSpeedScreen "{66A3629B8DE3A197}" {
+     m_eID KESTREL_HEADWIND
+     m_eNextScreenID KESTREL_ALTITUDE
+     m_ePreviousScreenID KESTREL_CROSSWIND
+     m_sIconName "moveAll"
+     m_fIconRotation -90
+     m_sTitle "HEADWIND"
+     m_sUnit "m/s"
+     m_sFooterText "— set heading"
+    }
+    ACE_Weather_KestrelAltitudeScreen "{66A1390B890CEC29}" {
+     m_eID KESTREL_ALTITUDE
+     m_eNextScreenID KESTREL_HOME
+     m_ePreviousScreenID KESTREL_HEADWIND
+     m_sIconImageSet "{BCD5479864D1A79A}UI/Textures/Map/topographicIcons/icons_topographic_map.imageset"
+     m_sIconName "rocks"
+     m_sTitle "ALTITUDE"
+     m_sUnit "m"
+    }
+    ACE_Weather_KestrelRefHeadingMenuScreen "{66A362BB793DD4EE}" {
+     m_eID KESTREL_REF_HEADING_MENU
+     m_sCommandNavText "— select"
+     m_sPowerNavText "(|) exit"
+    }
+    ACE_Weather_KestrelRefHeadingAutoSetScreen "{66A362BB70FEAF27}" {
+     m_eID KESTREL_REF_HEADING_AUTO_SET
+     m_sCommandNavText "— set heading"
+     m_sPowerNavText "(|) back"
+     m_sInstructions "Point Down the"\
+     "Range or Runway"
+    }
+    ACE_Weather_KestrelRefHeadingManualSetScreen "{66A362BB717BC78B}" {
+     m_eID KESTREL_REF_HEADING_MANUAL_SET
+     m_sCommandNavText "— set heading"
+     m_sPowerNavText "(|) back"
+     m_sInstructions "Press <ucs codepoints=\"\u003C\"/> and >"\
+     "to Adjust"
+    }
+   }
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    CustomAttributes {
+     PreviewRenderAttributes "{66D9106D47720E73}" {
+      CameraPreset Top
+      CameraOrbitAngles 25 -25 180
+      CameraDistanceToItem 0.17
+     }
+    }
+   }
+  }
+  MeshObject "{66A139066D58ACF2}" {
+   Object "{318E8F197C2EA183}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/WeatherMeter_Kestrel4500.xob"
+  }
+  RigidBody "{66A139078F8E2C26}" {
+   ModelGeometry 1
+   Static 1
+  }
+ }
+ coords 127.116 1.135 127.526
+ angles 0 195 0
+}

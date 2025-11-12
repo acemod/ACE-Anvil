@@ -12,7 +12,8 @@ class ACE_Weather_KestrelRefHeadingManualSetScreen : ACE_Weather_IKestrelRefHead
 	//------------------------------------------------------------------------------------------------
 	override void OnRefreshScreen()
 	{
-		m_wHeading.SetText(string.Format("%1°", m_pKestrel.GetTmpRefHeading().ToString(3)));
+		if (m_wHeading)
+			m_wHeading.SetText(string.Format("%1°", m_pKestrel.GetTmpRefHeading().ToString(3)));
 	}
 	
 	//------------------------------------------------------------------------------------------------

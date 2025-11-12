@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{4DD97728810CA5B9}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Data/ScreenGlass.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

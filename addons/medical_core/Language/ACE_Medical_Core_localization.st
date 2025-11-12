@@ -220,5 +220,13 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{66D8267E58817461}" {
+   Id "ACE_Medical-UserAction_UseSplint"
+   Target_en_us "Use splint"
+   Target_de_de "Schiene anwenden"
+   Modified 1725444110
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
  }
 }

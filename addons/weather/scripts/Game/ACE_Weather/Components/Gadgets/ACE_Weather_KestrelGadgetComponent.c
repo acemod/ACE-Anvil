@@ -26,7 +26,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 		if (!GetGame().InPlayMode())
 			return;
 		
-		ChimeraWorld world = owner.GetWorld();
+		ChimeraWorld world = GetGame().GetWorld();
 		m_pWeatherManager = world.GetTimeAndWeatherManager();
 	}
 	

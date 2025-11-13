@@ -25,7 +25,6 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 	{
 		m_pPhysicalButtonsComponent = component;
 		
-	#ifdef PLATFORM_CONSOLE
 		IEntity owner = m_pPhysicalButtonsComponent.GetOwner();
 		if (!owner)
 			return;
@@ -34,31 +33,46 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 		if (!ownerAnim)
 			return;
 		
-		vector modelToWorldTransform[4];
-		owner.GetWorldTransform(modelToWorldTransform);
-		
-		// Create helper button widgets on console
 		Widget button;
-		foreach (ACE_PhysicalButtonConfig config : m_pPhysicalButtonsComponent.GetAllButtonConfigs())
+		array<ref ACE_PhysicalButtonConfig> configs = m_pPhysicalButtonsComponent.GetAllButtonConfigs();
+		int numButtons = configs.Count();
+		vector cursorPos;
+		
+		foreach (int i, ACE_PhysicalButtonConfig config : m_pPhysicalButtonsComponent.GetAllButtonConfigs())
 		{
 			// Project position of button bone on screen
 			vector modelTransform[4];
 			ownerAnim.GetBoneMatrix(ownerAnim.GetBoneIndex(config.m_sBoneName), modelTransform);
-			vector worldTransform[4];
-			Math3D.MatrixMultiply4(modelToWorldTransform, modelTransform, worldTransform);
-			vector screenPos = m_wWorkspace.ProjWorldToScreen(worldTransform[3], GetGame().GetWorld());
+			vector worldPos = owner.CoordToParent(modelTransform[3]);
+			vector screenPos = m_wWorkspace.ProjWorldToScreen(worldPos, owner.GetWorld());
+			cursorPos += m_wWorkspace.DPIScale(1) * screenPos / numButtons;
 			
+			// Create helper button widgets on console
+		#ifdef PLATFORM_CONSOLE
 			button = m_wWorkspace.CreateWidgets(m_sGamepadButtonLayout, m_wWidget);
 			FrameSlot.SetPos(button, screenPos[0], screenPos[1]);
+			
+			string nextButtonName = configs[(numButtons + i + 1) % numButtons].m_sColliderName;
+			button.SetNavigation(WidgetNavigationDirection.UP, WidgetNavigationRuleType.EXPLICIT, nextButtonName);
+			button.SetNavigation(WidgetNavigationDirection.RIGHT, WidgetNavigationRuleType.EXPLICIT, nextButtonName);
+			string prevButtonName = configs[(numButtons + i - 1) % numButtons].m_sColliderName;
+			button.SetNavigation(WidgetNavigationDirection.DOWN, WidgetNavigationRuleType.EXPLICIT, prevButtonName);
+			button.SetNavigation(WidgetNavigationDirection.LEFT, WidgetNavigationRuleType.EXPLICIT, prevButtonName);
 			
 			ACE_GamepadPhysicalButtonUIComponent handler = ACE_GamepadPhysicalButtonUIComponent.Cast(button.FindHandler(ACE_GamepadPhysicalButtonUIComponent));
 			if (handler)
 				handler.SetPhysicalButton(m_pPhysicalButtonsComponent, config);	
+		#endif
 		}
 		
+	#ifdef PLATFORM_CONSOLE
 		if (button)
 			m_wWorkspace.SetFocusedWidget(button);
 	#endif
+		
+		// Move cursor to centroid of all buttons
+		if (cursorPos)
+			GetGame().GetInputManager().SetCursorPosition(cursorPos[0], cursorPos[1]);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -93,6 +107,7 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 		vector cameraPos = m_wWorkspace.ProjScreenToWorldNative(x, y, cameraDir, GetGame().GetWorld());
 		
 		TraceParam params = new TraceParam();
+		params.Include = m_pPhysicalButtonsComponent.GetOwner();
 		params.Flags = TraceFlags.ENTS;
 		params.TargetLayers = EPhysicsLayerDefs.Interaction;
 		params.Start = cameraPos;

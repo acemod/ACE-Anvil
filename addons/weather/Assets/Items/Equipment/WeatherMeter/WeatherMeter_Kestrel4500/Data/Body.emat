@@ -1,4 +1,4 @@
 MatPBRBasic {
  BCRMap "{BD10261DC66D2266}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Data/Body_BCR.edds"
- OpacityMap "{85C89D8F1F1A70F8}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Data/Body_NMO.edds"
+ NMOMap "{85C89D8F1F1A70F8}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Data/Body_NMO.edds"
 }

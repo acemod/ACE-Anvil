@@ -33,7 +33,7 @@ MetaFileClass {
    }
    GeometryParams {
     GeometryParam UBX_Body {
-     LayerPreset "ItemFireView"
+     LayerPreset "Weapon"
      SurfaceProperties {
       "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
      }

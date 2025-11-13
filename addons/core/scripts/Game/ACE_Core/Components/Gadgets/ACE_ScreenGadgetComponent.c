@@ -18,6 +18,13 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	
 	protected Widget m_wRTTexture;
 	protected ACE_RenderTargetComponent m_pRenderTargetComponent;
+	protected InventoryItemComponent m_pItemComponent;
+	
+	protected SCR_CharacterControllerComponent m_pOwnerCharController;
+	protected ACE_InspectGadgetMenu m_pInspectionMenu;
+	protected bool m_bIsInspecting = false;
+	
+	protected static const int ENTER_RAISED_MODE_DELAY_MS = 350;
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
@@ -36,6 +43,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 			ChangeScreen(m_aScreenHandlers[0].m_eID);
 		
 		m_pRenderTargetComponent = ACE_RenderTargetComponent.Cast(owner.FindComponent(ACE_RenderTargetComponent));
+		m_pItemComponent = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
 		
 		if (m_pRenderTargetComponent.IsRendered())
 			OnToggleRenderScreen(m_pRenderTargetComponent.GetRTTexture(), true);
@@ -49,13 +57,21 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	{
 		super.ModeSwitch(mode, charOwner);
 		
+		// Gadget has to be tracable for physical buttons to work
+		m_pItemComponent.SetTraceable(mode != EGadgetMode.IN_SLOT);
+		
+		if (charOwner)
+			m_pOwnerCharController = SCR_CharacterControllerComponent.Cast(charOwner.FindComponent(SCR_CharacterControllerComponent));
+		else
+			m_pOwnerCharController = null;
+		
 		RplComponent rpl = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
 		if (!rpl || rpl.IsProxy())
 			return;
 		
 		m_pRenderTargetComponent.ToggleActive(EGadgetMode.IN_HAND == mode);
 		
-		if (mode != EGadgetMode.ON_GROUND && mode != EGadgetMode.IN_STORAGE)
+		if (mode != EGadgetMode.ON_GROUND && mode != EGadgetMode.IN_SLOT)
 			return;
 		
 		RplIdentity identity = RplIdentity.Local();
@@ -96,6 +112,44 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	{
 		if (m_pCurrenScreenHandler)
 			m_pCurrenScreenHandler.OnUpdate(timeSlice);
+		
+		bool isInspecting = m_pOwnerCharController.GetInspect();
+		if (isInspecting == m_bIsInspecting)
+			return;
+		
+		m_bIsInspecting = isInspecting;
+		GetGame().GetCallqueue().Remove(InitInspectionMenu);
+		
+		if (m_bIsInspecting)
+		{
+			if (m_pOwnerCharController.IsGadgetRaisedModeWanted())
+			{
+				InitInspectionMenu();
+			}
+			else
+			{
+				m_pOwnerCharController.SetGadgetRaisedModeWanted(true);
+				GetGame().GetCallqueue().CallLater(InitInspectionMenu, ENTER_RAISED_MODE_DELAY_MS);
+			}
+		}
+		else
+		{
+			GetGame().GetMenuManager().CloseMenu(m_pInspectionMenu);
+			m_pInspectionMenu = null;
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void InitInspectionMenu()
+	{
+		if (!m_bIsInspecting)
+			return;
+		
+		m_pInspectionMenu = ACE_InspectGadgetMenu.Cast(GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.ACE_InspectGadgetMenu, DialogPriority.INFORMATIVE, 0, true));
+		
+		ACE_PhysicalButtonsComponent buttonComponent = ACE_PhysicalButtonsComponent.Cast(GetOwner().FindComponent(ACE_PhysicalButtonsComponent));
+		if (m_pInspectionMenu && buttonComponent)
+			m_pInspectionMenu.GetPhysicalButtonsUIComponent().SetPhysicalButtonsComponent(buttonComponent);
 	}
 	
 	//------------------------------------------------------------------------------------------------

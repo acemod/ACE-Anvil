@@ -208,9 +208,9 @@ FrameWidgetClass {
                       HorizontalAlign 0
                       VerticalAlign 3
                      }
-                     Text "SSW"
-                     "Font Size" 245
-                     "Min Font Size" 245
+                     Text "WNW"
+                     "Font Size" 230
+                     "Min Font Size" 230
                     }
                     TextWidgetClass "{66A139173619188B}" {
                      Name "Bearing"
@@ -219,8 +219,8 @@ FrameWidgetClass {
                       VerticalAlign 3
                      }
                      Text "200°"
-                     "Font Size" 245
-                     "Min Font Size" 245
+                     "Font Size" 230
+                     "Min Font Size" 230
                     }
                    }
                   }

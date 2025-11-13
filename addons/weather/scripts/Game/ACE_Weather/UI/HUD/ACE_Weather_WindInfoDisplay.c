@@ -12,15 +12,25 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	protected ref array<ref CanvasWidgetCommand> m_aDrawCommands = {m_pInnerCircle, m_pMainLine};
 	protected ref array<float> m_aOuterCircleVertices;
 	
-	protected static const float MAIN_LINE_LENGTH = 48;
-	protected static const float LINE_WIDTH = 3;
-	protected static const float TEN_KNOTS_BARB_LENGTH = 20;
-	protected static const float FIVE_KNOTS_BARB_LENGTH = 10;
-	protected static const float INTER_FEATHER_DIST = 7;
-	protected static const float FEATHER_ANGLE_RAD = 0.3;
-	protected static const float INNER_CIRCLE_RADIUS = 5;
-	protected static const float OUTER_CIRCLE_RADIUS = 15;
-	protected static const int CRICLE_VERTEX_COUNT = 16;
+	// Lengths with respect to a native widget size of 256x256
+	protected const float MAIN_LINE_LENGTH = 2 * 48;
+	protected const float LINE_WIDTH = 2 * 3;
+	protected const float TEN_KNOTS_BARB_LENGTH = 2 * 20;
+	protected const float FIVE_KNOTS_BARB_LENGTH = 2 * 10;
+	protected const float INTER_FEATHER_DIST = 2 * 7;
+	protected const float FEATHER_ANGLE_RAD = 0.3;
+	protected const float INNER_CIRCLE_RADIUS = 2 * 5;
+	protected const float OUTER_CIRCLE_RADIUS = 2 * 15;
+	protected const int CRICLE_VERTEX_COUNT = 16;
+	
+	protected float m_fDPIScale;
+	protected float m_fMainLineLengthScaled;
+	protected float m_fLineWidthScaled;
+	protected float m_fTenKnotsBarbLengthScaled;
+	protected float m_fFiveKnotsBarbLengthScaled;
+	protected float m_fInterFeatherDistScaled;
+	protected float m_fInnerCircleRadiusScaled;
+	protected float m_fOuterCircleRadiusScaled;
 	
 	//------------------------------------------------------------------------------------------------
 	override void DisplayStartDraw(IEntity owner)
@@ -29,13 +39,25 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		m_pWeatherManager = world.GetTimeAndWeatherManager();
 		m_wLayout = m_wRoot.FindWidget("Layout");
 		m_wCanvas = CanvasWidget.Cast(m_wLayout.FindWidget("Canvas"));
-		m_vCanvasCenter = 0.5 * FrameSlot.GetSize(m_wLayout);
 		m_pInnerCircle.m_iColor = Color.WHITE;
-		m_pInnerCircle.m_fWidth = LINE_WIDTH;
-		InitCirclesVertices();
 		m_pMainLine.m_iColor = Color.WHITE;
-		m_pMainLine.m_fWidth = LINE_WIDTH;
 		GetGame().GetInputManager().AddActionListener("ACE_Weather_WindInfoToggle", EActionTrigger.DOWN, ToggleDisplay);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void UpdateDPIScale(float scale)
+	{
+		m_fDPIScale = scale;
+		m_vCanvasCenter = m_fDPIScale * 0.5 * FrameSlot.GetSize(m_wLayout);
+		m_fMainLineLengthScaled = m_fDPIScale * MAIN_LINE_LENGTH;
+		m_fLineWidthScaled = m_fDPIScale * LINE_WIDTH;
+		m_fTenKnotsBarbLengthScaled = m_fDPIScale * TEN_KNOTS_BARB_LENGTH;
+		m_fFiveKnotsBarbLengthScaled = m_fDPIScale * FIVE_KNOTS_BARB_LENGTH;
+		m_fInterFeatherDistScaled = m_fDPIScale * INTER_FEATHER_DIST;
+		m_fInnerCircleRadiusScaled = m_fDPIScale * INNER_CIRCLE_RADIUS;
+		m_fOuterCircleRadiusScaled = m_fDPIScale * OUTER_CIRCLE_RADIUS;
+		m_pInnerCircle.m_fWidth = m_fLineWidthScaled;
+		m_pMainLine.m_fWidth = m_fLineWidthScaled;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -59,8 +81,15 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	//------------------------------------------------------------------------------------------------
 	override protected void DisplayUpdate(IEntity owner, float timeSlice)
 	{
-		if (!m_pCharacterEntity)
+		if (!IsShown() || !m_pCharacterEntity)
 			return;
+		
+		float dpiScale = GetGame().GetWorkspace().DPIScale(1);
+		if (m_fDPIScale != dpiScale)
+		{
+			UpdateDPIScale(dpiScale);
+			UpdateCirclesVertices();
+		}
 		
 		UpdateWindBarbs();
 	}
@@ -88,8 +117,8 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		vector screenWindVec = Vector(-Math.Cos(windAngleRad), -Math.Sin(windAngleRad), 0);
 		vector screenPerpVec = Vector(screenWindVec[1], -screenWindVec[0], 0);
 		
-		vector mainStart = m_vCanvasCenter - INNER_CIRCLE_RADIUS * screenWindVec;
-		vector mainEnd = m_vCanvasCenter - MAIN_LINE_LENGTH * screenWindVec;
+		vector mainStart = m_vCanvasCenter - m_fInnerCircleRadiusScaled * screenWindVec;
+		vector mainEnd = m_vCanvasCenter - m_fMainLineLengthScaled * screenWindVec;
 		m_pMainLine.m_Vertices = {mainStart[0], mainStart[1], mainEnd[0], mainEnd[1]};
 		vector featherPos = mainEnd;
 		
@@ -97,11 +126,11 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		
 		// Single 5 knots barb is offset for clarification
 		if (fiveKnotsCount == 1)
-			featherPos += INTER_FEATHER_DIST * screenWindVec;
+			featherPos += m_fInterFeatherDistScaled * screenWindVec;
 		
 		while (fiveKnotsCount > 0)
 		{
-			float featherLen = TEN_KNOTS_BARB_LENGTH;
+			float featherLen = m_fTenKnotsBarbLengthScaled;
 			
 			if (fiveKnotsCount >= 10)
 			{
@@ -111,13 +140,13 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 			else
 			{
 				if (fiveKnotsCount == 1)
-					featherLen = FIVE_KNOTS_BARB_LENGTH;
+					featherLen = m_fFiveKnotsBarbLengthScaled;
 				
 				m_aDrawCommands.Insert(GetBarbDrawCommand(featherPos, featherLen, screenWindVec, screenPerpVec));
 				fiveKnotsCount -= 2;
 			}
 			
-			featherPos += INTER_FEATHER_DIST * screenWindVec;
+			featherPos += m_fInterFeatherDistScaled * screenWindVec;
 		}
 		
 		m_wCanvas.SetDrawCommands(m_aDrawCommands);
@@ -128,11 +157,11 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	{
 		PolygonDrawCommand pennant = new PolygonDrawCommand();
 		pennant.m_iColor = Color.WHITE;
-		featherPos += LINE_WIDTH * screenWindVec;
-		vector start = featherPos + 0.5 * LINE_WIDTH * (screenWindVec - screenPerpVec);
+		featherPos += m_fLineWidthScaled * screenWindVec;
+		vector start = featherPos + 0.5 * m_fLineWidthScaled * (screenWindVec - screenPerpVec);
 		vector apex1 = featherPos + featherLen * (screenPerpVec * Math.Cos(FEATHER_ANGLE_RAD) - screenWindVec * Math.Sin(FEATHER_ANGLE_RAD));
-		vector apex2 = apex1 - LINE_WIDTH * screenWindVec;
-		vector end = start - featherLen * screenWindVec * Math.Sin(FEATHER_ANGLE_RAD) - LINE_WIDTH * screenWindVec;
+		vector apex2 = apex1 - m_fLineWidthScaled * screenWindVec;
+		vector end = start - featherLen * screenWindVec * Math.Sin(FEATHER_ANGLE_RAD) - m_fLineWidthScaled * screenWindVec;
 		pennant.m_Vertices = {start[0], start[1], apex1[0], apex1[1], apex2[0], apex2[1], end[0], end[1]};
 		return pennant;
 	}
@@ -142,14 +171,14 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 	{
 		LineDrawCommand barb = new LineDrawCommand();
 		barb.m_iColor = Color.WHITE;
-		barb.m_fWidth = LINE_WIDTH;
+		barb.m_fWidth = m_fLineWidthScaled;
 		vector barbEnd = featherPos + featherLen * (screenPerpVec * Math.Cos(FEATHER_ANGLE_RAD) - screenWindVec * Math.Sin(FEATHER_ANGLE_RAD));
 		barb.m_Vertices = {featherPos[0], featherPos[1], barbEnd[0], barbEnd[1]};
 		return barb;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void InitCirclesVertices()
+	protected void UpdateCirclesVertices()
 	{
 		m_aOuterCircleVertices = {};
 		m_aOuterCircleVertices.Reserve(2 * CRICLE_VERTEX_COUNT + 2);
@@ -159,10 +188,10 @@ class ACE_Weather_WindInfoDisplay : SCR_InfoDisplayExtended
 		for (int i = 0; i <= CRICLE_VERTEX_COUNT; ++i)
 		{
 			float angle = i * Math.PI2 / CRICLE_VERTEX_COUNT;
-			m_aOuterCircleVertices.Insert(m_vCanvasCenter[0] + OUTER_CIRCLE_RADIUS * Math.Cos(angle));
-			m_aOuterCircleVertices.Insert(m_vCanvasCenter[1] + OUTER_CIRCLE_RADIUS * Math.Sin(angle));
-			m_pInnerCircle.m_Vertices.Insert(m_vCanvasCenter[0] + INNER_CIRCLE_RADIUS * Math.Cos(angle));
-			m_pInnerCircle.m_Vertices.Insert(m_vCanvasCenter[1] + INNER_CIRCLE_RADIUS * Math.Sin(angle));
+			m_aOuterCircleVertices.Insert(m_vCanvasCenter[0] + m_fOuterCircleRadiusScaled * Math.Cos(angle));
+			m_aOuterCircleVertices.Insert(m_vCanvasCenter[1] + m_fOuterCircleRadiusScaled * Math.Sin(angle));
+			m_pInnerCircle.m_Vertices.Insert(m_vCanvasCenter[0] + m_fInnerCircleRadiusScaled * Math.Cos(angle));
+			m_pInnerCircle.m_Vertices.Insert(m_vCanvasCenter[1] + m_fInnerCircleRadiusScaled * Math.Sin(angle));
 		}
 	}
 	

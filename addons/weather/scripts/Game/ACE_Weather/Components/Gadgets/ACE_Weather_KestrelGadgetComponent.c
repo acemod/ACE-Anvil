@@ -31,6 +31,18 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	override bool CanBeRaised()
+	{
+		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool IsUsingADSControls()
+	{
+		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	string GetTime()
 	{
 		int hours, minutes, seconds;

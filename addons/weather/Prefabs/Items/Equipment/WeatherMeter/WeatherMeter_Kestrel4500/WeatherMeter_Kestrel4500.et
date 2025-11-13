@@ -55,10 +55,9 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   ACE_RenderTargetComponent "{66A1390798C30F5B}" {
    m_sLayoutName "{C18AF5C57DAEB2E2}UI/layouts/Gadgets/WindMeter/ACE_Kestrel4500_Screen.layout"
-   m_bIsActive 1
   }
   ACE_Weather_KestrelGadgetComponent "{66A139078A9BB501}" {
-   m_eAnimVariable NONE
+   m_eAnimVariable SY183
    m_aScreenHandlers {
     ACE_Weather_KestrelHomeScreen "{66A13903401274C2}" {
      m_eID KESTREL_HOME
@@ -136,21 +135,43 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Weather-Item_Kacestrel4500_Name"
+     Description "#ACE_Weather-Item_Kacestrel4500_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.108
+     SizeSetupStrategy Manual
+     ItemDimensions 5 5 5
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{66DA03F410507E48}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{66DA03F5E5AE4E6A}" {
+       AnimGraph "{5EDA940C8AADF0A4}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Workspace/Kestrel4500.agr"
+       AnimInstance "{B3B0C1D796A4A24A}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Workspace/Kestrel4500.asi"
+       BindingName "Gadget"
+      }
+     }
+     AllowInspection 1
+    }
     CustomAttributes {
      PreviewRenderAttributes "{66D9106D47720E73}" {
       CameraPreset Top
       CameraOrbitAngles 25 -25 180
       CameraDistanceToItem 0.17
      }
+     CharacterModifierAttributes "{66DA30A8831F5EAE}" {
+     }
     }
    }
   }
   MeshObject "{66A139066D58ACF2}" {
    Object "{318E8F197C2EA183}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/WeatherMeter_Kestrel4500.xob"
+   InheritVisibility 1
   }
   RigidBody "{66A139078F8E2C26}" {
+   SimState None
    ModelGeometry 1
-   Static 1
   }
  }
  coords 127.116 1.135 127.526

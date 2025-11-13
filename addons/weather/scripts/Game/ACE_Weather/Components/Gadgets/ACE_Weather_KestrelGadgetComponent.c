@@ -67,7 +67,8 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	//------------------------------------------------------------------------------------------------
 	float GetDirection()
 	{
-		return Math.Round(GetOwner().GetTransformAxis(2).ToYaw());
+		vector dirDown = GetOwner().GetTransformAxis(2) - GetOwner().GetTransformAxis(1);
+		return Math.Round(dirDown.ToYaw());
 	}
 	
 	//------------------------------------------------------------------------------------------------

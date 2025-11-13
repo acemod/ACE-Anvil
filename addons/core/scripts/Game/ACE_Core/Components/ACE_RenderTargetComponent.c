@@ -10,6 +10,17 @@ class ACE_RenderTargetComponent : ScriptComponent
 	[Attribute(uiwidget: UIWidgets.ResourcePickerThumbnail, desc: "Layout for the render target", params: "layout")]
 	protected ResourceName m_sLayoutName;
 	
+	[Attribute(defvalue: "0.706 0.824 0.973", desc: "Color used for base and emissive color of backlight material.")]
+	protected ref Color m_cEnabledBacklightColor;
+	
+	// Color for backlight material. Applied via material via Refs:
+	// Refs {
+	//     "Color" "ACE_RenderTargetComponent.m_iBacklightColor"
+	//     "Emissive" "ACE_RenderTargetComponent.m_iBacklightColor"
+	// }
+	[RplProp()]
+	protected int m_iBacklightColor;
+	
 	[Attribute(defvalue: "15", desc: "Maximum distance for render target being active [m]")]
 	protected float m_fRenderDistanceM;
 	protected float m_fRenderDistanceSq;
@@ -36,6 +47,8 @@ class ACE_RenderTargetComponent : ScriptComponent
 		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance(GetOwner().GetWorld());
 		if (system && m_bIsActive)
 			system.Register(this);
+		
+		UpdateBacklightColor();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -66,6 +79,17 @@ class ACE_RenderTargetComponent : ScriptComponent
 			system.Register(this);
 		else
 			system.Unregister(this);
+		
+		UpdateBacklightColor();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void UpdateBacklightColor()
+	{
+		if (m_bIsActive)
+			m_iBacklightColor = m_cEnabledBacklightColor.PackToInt();
+		else
+			m_iBacklightColor = Color.BLACK;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -138,6 +162,13 @@ class ACE_RenderTargetComponent : ScriptComponent
 			return true;
 		
 		return false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetEnabledBacklightColor(Color color)
+	{
+		m_cEnabledBacklightColor = color;
+		UpdateBacklightColor();
 	}
 	
 	//------------------------------------------------------------------------------------------------

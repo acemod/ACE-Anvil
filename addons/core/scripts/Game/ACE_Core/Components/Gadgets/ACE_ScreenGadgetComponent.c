@@ -134,7 +134,9 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		}
 		else
 		{
-			GetGame().GetMenuManager().CloseMenu(m_pInspectionMenu);
+			if (m_pInspectionMenu)
+				GetGame().GetMenuManager().CloseMenu(m_pInspectionMenu);
+			
 			m_pInspectionMenu = null;
 		}
 	}

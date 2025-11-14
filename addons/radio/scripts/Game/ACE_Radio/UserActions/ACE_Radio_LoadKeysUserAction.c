@@ -97,7 +97,7 @@ class ACE_Radio_LoadKeysUserAction : ScriptedUserAction
 	}
 }
 
-#ifndef ENABLE_DIAG
+#ifdef ENABLE_DIAG
 //------------------------------------------------------------------------------------------------
 //! Workaround, as VONCanTransmitCrossFaction cannot be enabled in workbench
 modded class SCR_VONController

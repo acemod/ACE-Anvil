@@ -72,9 +72,6 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		
 		m_pRenderTargetComponent.ToggleActive(EGadgetMode.IN_HAND == mode);
 		
-		if (mode != EGadgetMode.ON_GROUND && mode != EGadgetMode.IN_SLOT)
-			return;
-		
 		RplIdentity identity = RplIdentity.Local();
 		int playerID = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(charOwner);
 		if (playerID > 0)

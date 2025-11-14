@@ -4,8 +4,8 @@ MetaFileClass {
   FBXResourceClass PC {
    ExportSkinning 1
    MaterialAssigns {
-    MaterialAssignClass "{66D901678029B4D8}" {
-     SourceMaterial "Material"
+    MaterialAssignClass "{66DB77581B5D18C9}" {
+     SourceMaterial "Body"
      AssignedMaterial "{1013AA90851EAAEA}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Data/Body.emat"
     }
     MaterialAssignClass "{66D901672FE80770}" {
@@ -28,12 +28,12 @@ MetaFileClass {
     }
     MeshParam Screen_glass {
     }
-    MeshParam kestrel_4500_01 {
+    MeshParam Body {
     }
    }
    GeometryParams {
     GeometryParam UBX_Body {
-     LayerPreset "Weapon"
+     LayerPreset "ItemFireView"
      SurfaceProperties {
       "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
      }
@@ -57,6 +57,14 @@ MetaFileClass {
      Margin 0
     }
     GeometryParam UBX_ButtonLeft {
+     LayerPreset "Interaction"
+     SurfaceProperties {
+      "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UBX_ButtonLight {
      LayerPreset "Interaction"
      SurfaceProperties {
       "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"

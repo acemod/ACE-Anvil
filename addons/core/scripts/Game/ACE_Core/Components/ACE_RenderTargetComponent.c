@@ -10,8 +10,8 @@ class ACE_RenderTargetComponent : ScriptComponent
 	[Attribute(uiwidget: UIWidgets.ResourcePickerThumbnail, desc: "Layout for the render target", params: "layout")]
 	protected ResourceName m_sLayoutName;
 	
-	[Attribute(defvalue: "0.706 0.824 0.973", desc: "Color used for base and emissive color of backlight material.")]
-	protected ref Color m_cEnabledBacklightColor;
+	[RplProp(onRplName: "UpdateBacklightColor"), Attribute(defvalue: "11879480", uiwidget: UIWidgets.ColorPicker, desc: "Color used for base and emissive color of backlight material.")]
+	protected int m_iEnabledBacklightColor;
 	
 	// Color for backlight material. Applied via material via Refs:
 	// Refs {
@@ -87,7 +87,7 @@ class ACE_RenderTargetComponent : ScriptComponent
 	protected void UpdateBacklightColor()
 	{
 		if (m_bIsActive)
-			m_iBacklightColor = m_cEnabledBacklightColor.PackToInt();
+			m_iBacklightColor = m_iEnabledBacklightColor;
 		else
 			m_iBacklightColor = Color.BLACK;
 	}
@@ -165,10 +165,24 @@ class ACE_RenderTargetComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetEnabledBacklightColor(Color color)
+	void RequestSetEnabledBacklightColor(int color)
 	{
-		m_cEnabledBacklightColor = color;
+		Rpc(RpcDo_SetEnabledBacklightColor, color);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcDo_SetEnabledBacklightColor(int color)
+	{
+		m_iEnabledBacklightColor = color;
 		UpdateBacklightColor();
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	int GetEnabledBacklightColor()
+	{
+		return m_iEnabledBacklightColor;
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -114,6 +114,9 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		if (m_pCurrenScreenHandler)
 			m_pCurrenScreenHandler.OnUpdate(timeSlice);
 		
+		if (!m_pRplComponent.IsOwner())
+			return;
+		
 		bool isInspecting = m_pOwnerCharController.GetInspect();
 		if (isInspecting == m_bIsInspecting)
 			return;

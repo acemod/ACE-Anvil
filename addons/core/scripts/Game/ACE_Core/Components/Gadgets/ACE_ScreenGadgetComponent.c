@@ -19,6 +19,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	protected Widget m_wRTTexture;
 	protected ACE_RenderTargetComponent m_pRenderTargetComponent;
 	protected InventoryItemComponent m_pItemComponent;
+	protected RplComponent m_pRplComponent;
 	
 	protected SCR_CharacterControllerComponent m_pOwnerCharController;
 	protected ACE_InspectGadgetMenu m_pInspectionMenu;
@@ -44,6 +45,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		
 		m_pRenderTargetComponent = ACE_RenderTargetComponent.Cast(owner.FindComponent(ACE_RenderTargetComponent));
 		m_pItemComponent = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
+		m_pRplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
 		
 		if (m_pRenderTargetComponent.IsRendered())
 			OnToggleRenderScreen(m_pRenderTargetComponent.GetRTTexture(), true);
@@ -65,8 +67,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		else
 			m_pOwnerCharController = null;
 		
-		RplComponent rpl = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
-		if (!rpl || rpl.IsProxy())
+		if (m_pRplComponent.IsProxy())
 			return;
 		
 		m_pRenderTargetComponent.ToggleActive(EGadgetMode.IN_HAND == mode);
@@ -83,7 +84,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 				identity = playerController.GetRplIdentity();
 		}
 		
-		rpl.Give(identity);
+		m_pRplComponent.Give(identity);
 	}
 	
 	//------------------------------------------------------------------------------------------------

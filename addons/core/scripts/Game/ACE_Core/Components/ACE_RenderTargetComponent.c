@@ -10,18 +10,6 @@ class ACE_RenderTargetComponent : ScriptComponent
 	[Attribute(uiwidget: UIWidgets.ResourcePickerThumbnail, desc: "Layout for the render target", params: "layout")]
 	protected ResourceName m_sLayoutName;
 	
-	[Attribute(uiwidget: UIWidgets.ColorPicker, desc: "Emissive color of backlight material.")]
-	protected int m_iEnabledBacklightColor;
-	
-	[RplProp(onRplName: "OnToggleBacklight")]
-	protected bool m_bIsBacklightActive = false;
-	
-	// Color for backlight material. Applied via material via Refs:
-	// Refs {
-	//     "Emissive" "ACE_RenderTargetComponent.m_iBacklightColor"
-	// }
-	protected int m_iBacklightColor;
-	
 	[Attribute(defvalue: "15", desc: "Maximum distance for render target being active [m]")]
 	protected float m_fRenderDistanceM;
 	protected float m_fRenderDistanceSq;
@@ -48,8 +36,6 @@ class ACE_RenderTargetComponent : ScriptComponent
 		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance(GetOwner().GetWorld());
 		if (system && m_bIsActive)
 			system.Register(this);
-		
-		OnToggleBacklight();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -88,16 +74,6 @@ class ACE_RenderTargetComponent : ScriptComponent
 		else
 			system.Unregister(this);
 		
-		OnToggleBacklight();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected void OnToggleBacklight()
-	{
-		if (m_bIsActive && m_bIsBacklightActive)
-			m_iBacklightColor = m_iEnabledBacklightColor;
-		else
-			m_iBacklightColor = Color.BLACK;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -170,27 +146,6 @@ class ACE_RenderTargetComponent : ScriptComponent
 			return true;
 		
 		return false;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void RequestToggleBacklight(bool active)
-	{
-		Rpc(RpcDo_ToggleBacklightServer, active);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcDo_ToggleBacklightServer(bool active)
-	{
-		m_bIsBacklightActive = active;
-		OnToggleBacklight();
-		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	bool IsBacklightActive()
-	{
-		return m_bIsBacklightActive;
 	}
 	
 	//------------------------------------------------------------------------------------------------

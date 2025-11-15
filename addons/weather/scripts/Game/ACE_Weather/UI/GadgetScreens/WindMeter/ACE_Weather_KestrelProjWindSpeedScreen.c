@@ -8,9 +8,9 @@ class ACE_Weather_KestrelProjWindSpeedScreen : ACE_Weather_IKestrelDefaultDataSc
 	//------------------------------------------------------------------------------------------------
 	override void OnUpdate(float timeSlice)
 	{
-		float projectedSpeed = m_pKestrel.GetProjectedWindSpeed(m_fProjectionAngle);
+		float projectedSpeed = m_pKestrel.GetMeasuredProjectedWindSpeed(m_fProjectionAngle);
 		m_wMainData.SetText(projectedSpeed.ToString(-1, 1));
-		float speed = m_pKestrel.GetWindSpeed();
+		float speed = m_pKestrel.GetMeasuredWindSpeed();
 		int bearing = m_pKestrel.GetDirection();
 		m_wSecondaryData.SetText(string.Format("%1 m/s @ %2°", speed.ToString(-1, 1), bearing.ToString(3)));
 	}

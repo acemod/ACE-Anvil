@@ -18,8 +18,10 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	
 	protected TimeAndWeatherManagerEntity m_pWeatherManager;
 	protected TNodeId m_iImpellerBone;
+	protected float m_fImpellerSpinSpeed;
 	
 	protected static const float IMPELLER_SPIN_PER_WIND_SPEED = -2750; // [°/m]: ratio between spin speed [°/s] and wind speed [m/s]
+	protected static const float IMPELLER_SPIN_RATE_CONSTANT = 1; // [1/s]: How fast current spin converges towards target spin (exponential rate constant)
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
@@ -35,6 +37,20 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	override void ActivateGadgetUpdate()
+	{
+		super.ActivateGadgetUpdate();
+		m_fImpellerSpinSpeed = 0;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void DeactivateGadgetUpdate()
+	{
+		super.DeactivateGadgetUpdate();
+		m_fImpellerSpinSpeed = 0;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Update impeller rotation
 	override void Update(float timeSlice)
 	{
@@ -44,7 +60,9 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 		GetOwner().GetAnimation().GetBoneMatrix(m_iImpellerBone, transform);
 		float yaw = Math3D.MatrixToAngles(transform)[0];
 		transform[3] = vector.Zero;
-		float nextYaw = Math.Mod(yaw + IMPELLER_SPIN_PER_WIND_SPEED * timeSlice * GetWindSpeed(), 360);
+		float progress = Math.Min(IMPELLER_SPIN_RATE_CONSTANT * timeSlice, 1);
+		m_fImpellerSpinSpeed = Math.Lerp(m_fImpellerSpinSpeed, IMPELLER_SPIN_PER_WIND_SPEED * GetEffectiveWindSpeed(), progress);
+		float nextYaw = Math.Mod(yaw + m_fImpellerSpinSpeed * timeSlice, 360);
 		Math3D.AnglesToMatrix(Vector(nextYaw, 0, 0), transform);
 		GetOwner().GetAnimation().SetBoneMatrix(GetOwner(), m_iImpellerBone, transform);
 	}
@@ -91,7 +109,8 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	float GetWindSpeed()
+	//! Returns effective relative wind speed [m/s]
+	float GetEffectiveWindSpeed()
 	{
 		float gadgetDir = GetDirection();
 		float windDir = m_pWeatherManager.GetWindDirection();
@@ -100,10 +119,17 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Returns wind speed projected at m_iHeading + angle (0 for headwind and 90 for crosswind)
-	float GetProjectedWindSpeed(float angle)
+	//! Returns the measured wind speed based on impeller speed [m/s]
+	float GetMeasuredWindSpeed()
 	{
-		return GetWindSpeed() * Math.Cos(Math.DEG2RAD * (GetDirection() - m_iRefHeading - angle));
+		return m_fImpellerSpinSpeed / IMPELLER_SPIN_PER_WIND_SPEED;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns measured wind speed projected at m_iHeading + angle (0 for headwind and 90 for crosswind)
+	float GetMeasuredProjectedWindSpeed(float angle)
+	{
+		return GetMeasuredWindSpeed() * Math.Cos(Math.DEG2RAD * (GetDirection() - m_iRefHeading - angle));
 	}
 	
 	//------------------------------------------------------------------------------------------------

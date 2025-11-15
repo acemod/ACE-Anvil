@@ -33,7 +33,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	
 	// Color for backlight material. Applied via material via Refs:
 	// Refs {
-	//     "Emissive" "ACE_RenderTargetComponent.m_iBacklightColor"
+	//     "Emissive" "ACE_ScreenGadgetComponent.m_iBacklightColor"
 	// }
 	protected int m_iBacklightColor;
 	

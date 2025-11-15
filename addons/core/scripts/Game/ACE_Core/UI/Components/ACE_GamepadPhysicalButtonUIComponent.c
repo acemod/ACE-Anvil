@@ -2,8 +2,8 @@
 class ACE_GamepadPhysicalButtonUIComponent : ScriptedWidgetComponent
 {
 	protected Widget m_wWidget;
-	protected ACE_PhysicalButtonsComponent m_pPhysicalButtonsComponent;
-	protected ACE_PhysicalButtonConfig m_pButtonConfig;
+	protected ACE_PhysicalButtonsComponent m_PhysicalButtonsComponent;
+	protected ACE_PhysicalButtonConfig m_ButtonConfig;
 	
 	protected static const int BUTTON_RELEASE_DELAY_MS = 250;
 	
@@ -16,16 +16,16 @@ class ACE_GamepadPhysicalButtonUIComponent : ScriptedWidgetComponent
 	//------------------------------------------------------------------------------------------------
 	void SetPhysicalButton(ACE_PhysicalButtonsComponent component, ACE_PhysicalButtonConfig buttonConfig)
 	{
-		m_pPhysicalButtonsComponent = component;
-		m_pButtonConfig = buttonConfig;
+		m_PhysicalButtonsComponent = component;
+		m_ButtonConfig = buttonConfig;
 		m_wWidget.SetName(buttonConfig.m_sColliderName);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override bool OnClick(Widget w, int x, int y, int button)
 	{
-		m_pPhysicalButtonsComponent.SetButtonState(m_pButtonConfig.m_sColliderName, true);
-		GetGame().GetCallqueue().CallLater(m_pPhysicalButtonsComponent.SetButtonState, BUTTON_RELEASE_DELAY_MS, false, m_pButtonConfig.m_sColliderName, false);
+		m_PhysicalButtonsComponent.SetButtonState(m_ButtonConfig.m_sColliderName, true);
+		GetGame().GetCallqueue().CallLater(m_PhysicalButtonsComponent.SetButtonState, BUTTON_RELEASE_DELAY_MS, false, m_ButtonConfig.m_sColliderName, false);
 		return true;
 	}
 	

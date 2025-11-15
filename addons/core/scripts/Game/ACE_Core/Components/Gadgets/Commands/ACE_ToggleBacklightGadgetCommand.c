@@ -2,18 +2,18 @@
 //! Used for forwarding button clicks to gadget screen
 class ACE_ToggleBacklightGadgetCommand : ACE_IGadgetCommand
 {
-	protected ACE_RenderTargetComponent m_pRTComponent;
+	protected ACE_ScreenGadgetComponent m_pScreenComponent;
 	
 	//------------------------------------------------------------------------------------------------
 	override void Init(IEntity gadget)
 	{
 		super.Init(gadget);
-		m_pRTComponent = ACE_RenderTargetComponent.Cast(gadget.FindComponent(ACE_RenderTargetComponent));
+		m_pScreenComponent = ACE_ScreenGadgetComponent.Cast(gadget.FindComponent(ACE_ScreenGadgetComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void Execute()
 	{
-		m_pRTComponent.RequestToggleBacklight(!m_pRTComponent.IsBacklightActive());
+		m_pScreenComponent.RequestToggleBacklight(!m_pScreenComponent.IsBacklightActive());
 	}
 }

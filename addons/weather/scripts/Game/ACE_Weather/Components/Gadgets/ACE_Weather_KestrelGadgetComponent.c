@@ -17,6 +17,9 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	protected ACE_EGadgetScreenID m_eRefHeadingSetMode;
 	
 	protected TimeAndWeatherManagerEntity m_pWeatherManager;
+	protected TNodeId m_iImpellerBone;
+	
+	protected static const float IMPELLER_SPIN_PER_WIND_SPEED = -2750; // [°/m]: ratio between spin speed [°/s] and wind speed [m/s]
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
@@ -28,6 +31,22 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 		
 		ChimeraWorld world = GetGame().GetWorld();
 		m_pWeatherManager = world.GetTimeAndWeatherManager();
+		m_iImpellerBone = owner.GetAnimation().GetBoneIndex("i_impeller");
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Update impeller rotation
+	override void Update(float timeSlice)
+	{
+		super.Update(timeSlice);
+		
+		vector transform[4];
+		GetOwner().GetAnimation().GetBoneMatrix(m_iImpellerBone, transform);
+		float yaw = Math3D.MatrixToAngles(transform)[0];
+		transform[3] = vector.Zero;
+		float nextYaw = Math.Mod(yaw + IMPELLER_SPIN_PER_WIND_SPEED * timeSlice * GetWindSpeed(), 360);
+		Math3D.AnglesToMatrix(Vector(nextYaw, 0, 0), transform);
+		GetOwner().GetAnimation().SetBoneMatrix(GetOwner(), m_iImpellerBone, transform);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -10,12 +10,11 @@ class ACE_RenderTargetComponent : ScriptComponent
 	[Attribute(uiwidget: UIWidgets.ResourcePickerThumbnail, desc: "Layout for the render target", params: "layout")]
 	protected ResourceName m_sLayoutName;
 	
-	[RplProp(onRplName: "UpdateBacklightColor"), Attribute(defvalue: "11879480", uiwidget: UIWidgets.ColorPicker, desc: "Color used for base and emissive color of backlight material.")]
+	[RplProp(onRplName: "UpdateBacklightColor"), Attribute(uiwidget: UIWidgets.ColorPicker, desc: "Emissive color of backlight material.")]
 	protected int m_iEnabledBacklightColor;
 	
 	// Color for backlight material. Applied via material via Refs:
 	// Refs {
-	//     "Color" "ACE_RenderTargetComponent.m_iBacklightColor"
 	//     "Emissive" "ACE_RenderTargetComponent.m_iBacklightColor"
 	// }
 	[RplProp()]

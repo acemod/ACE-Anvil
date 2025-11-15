@@ -48,14 +48,14 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
     ACE_PhysicalButtonConfig "{66DB77584082F435}" {
      m_sColliderName "UBX_ButtonLight"
      m_sBoneName "i_button_light"
-     m_pCommand ACE_Weather_ToggleLightKestrelCommand "{66DB775AB731FD76}" {
-      m_iSecondaryBacklightColor 1250110
+     m_pCommand ACE_ToggleBacklightGadgetCommand "{66DB775AB731FD76}" {
      }
     }
    }
   }
   ACE_RenderTargetComponent "{66A1390798C30F5B}" {
    m_sLayoutName "{C18AF5C57DAEB2E2}UI/layouts/Gadgets/WindMeter/ACE_Kestrel4500_Screen.layout"
+   m_iEnabledBacklightColor 1973860
   }
   ACE_Weather_KestrelGadgetComponent "{66A139078A9BB501}" {
    m_eAnimVariable SY183

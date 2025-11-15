@@ -72,9 +72,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	//------------------------------------------------------------------------------------------------
 	string GetWeekDay()
 	{
-		int year, month, day;
-		m_pWeatherManager.GetDate(year, month, day);
-		return m_pWeatherManager.GetWeekDayStringForDate(year, month, day);
+		return m_pWeatherManager.GetWeekDayString();
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -25,6 +25,18 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	protected ACE_InspectGadgetMenu m_pInspectionMenu;
 	protected bool m_bIsInspecting = false;
 	
+	[Attribute(uiwidget: UIWidgets.ColorPicker, desc: "Emissive color of backlight material.")]
+	protected int m_iEnabledBacklightColor;
+	
+	[RplProp(onRplName: "OnToggleBacklight")]
+	protected bool m_bIsBacklightActive = false;
+	
+	// Color for backlight material. Applied via material via Refs:
+	// Refs {
+	//     "Emissive" "ACE_ScreenGadgetComponent.m_iBacklightColor"
+	// }
+	protected int m_iBacklightColor;
+	
 	protected static const int ENTER_RAISED_MODE_DELAY_MS = 350;
 	
 	//------------------------------------------------------------------------------------------------
@@ -46,6 +58,11 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		m_pRenderTargetComponent = ACE_RenderTargetComponent.Cast(owner.FindComponent(ACE_RenderTargetComponent));
 		m_pItemComponent = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
 		m_pRplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		
+		if (m_pRenderTargetComponent.IsToggledOn())
+			OnToggleScreenActive(true);
+		
+		m_pRenderTargetComponent.GetOnToggleActive().Insert(OnToggleScreenActive);
 		
 		if (m_pRenderTargetComponent.IsRendered())
 			OnToggleRenderScreen(m_pRenderTargetComponent.GetRTTexture(), true);
@@ -82,6 +99,12 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		}
 		
 		m_pRplComponent.Give(identity);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnToggleScreenActive(bool active)
+	{
+		OnToggleBacklight();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -251,5 +274,35 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 			if (m_wRTTexture)
 				m_pCurrenScreenHandler.OnOpen(m_wRTTexture);
 		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void RequestToggleBacklight(bool active)
+	{
+		Rpc(RpcDo_ToggleBacklightServer, active);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcDo_ToggleBacklightServer(bool active)
+	{
+		m_bIsBacklightActive = active;
+		OnToggleBacklight();
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool IsBacklightActive()
+	{
+		return m_bIsBacklightActive;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnToggleBacklight()
+	{
+		if (m_pRenderTargetComponent.IsToggledOn() && m_bIsBacklightActive)
+			m_iBacklightColor = m_iEnabledBacklightColor;
+		else
+			m_iBacklightColor = Color.BLACK;
 	}
 }

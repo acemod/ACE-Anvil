@@ -2,11 +2,8 @@
 //! Used for forwarding button clicks to gadget screen
 class ACE_Weather_ToggleLightKestrelCommand : ACE_IGadgetCommand
 {
-	[Attribute(defvalue: "13172680", uiwidget: UIWidgets.ColorPicker, desc: "Primary backlight color")]
-	protected int m_iPrimaryBacklightColor;
-	
-	[Attribute(defvalue: "1973860", uiwidget: UIWidgets.ColorPicker, desc: "Secondary backlight color that can be toggled to")]
-	protected int m_iSecondaryBacklightColor;
+	[Attribute(defvalue: "1973860", uiwidget: UIWidgets.ColorPicker, desc: "Backlight color")]
+	protected int m_iBacklightColor;
 	
 	protected ACE_RenderTargetComponent m_pRTComponent;
 	
@@ -20,9 +17,9 @@ class ACE_Weather_ToggleLightKestrelCommand : ACE_IGadgetCommand
 	//------------------------------------------------------------------------------------------------
 	override void Execute()
 	{
-		if (m_pRTComponent.GetEnabledBacklightColor() == m_iPrimaryBacklightColor)
-			m_pRTComponent.RequestSetEnabledBacklightColor(m_iSecondaryBacklightColor);
+		if (m_pRTComponent.GetEnabledBacklightColor() == m_iBacklightColor)
+			m_pRTComponent.RequestSetEnabledBacklightColor(Color.BLACK);
 		else
-			m_pRTComponent.RequestSetEnabledBacklightColor(m_iPrimaryBacklightColor);
+			m_pRTComponent.RequestSetEnabledBacklightColor(m_iBacklightColor);
 	}
 }

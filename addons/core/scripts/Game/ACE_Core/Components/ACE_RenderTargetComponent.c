@@ -23,6 +23,7 @@ class ACE_RenderTargetComponent : ScriptComponent
 	protected Widget m_wRoot;
 	protected RTTextureWidget m_wRTTexture;
 	protected InventoryItemComponent m_pItemComponent;
+	protected ref ScriptInvokerBool m_pOnToggleActive;
 	protected ref ScriptInvokerBase<ScriptInvokerWidgetBool> m_pOnToggleRender;
 	
 	//------------------------------------------------------------------------------------------------
@@ -74,6 +75,8 @@ class ACE_RenderTargetComponent : ScriptComponent
 		else
 			system.Unregister(this);
 		
+		if (m_pOnToggleActive)
+			m_pOnToggleActive.Invoke(m_bIsActive);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -123,6 +126,17 @@ class ACE_RenderTargetComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Invoker for when the screen is turned on/off
+	ScriptInvokerBool GetOnToggleActive()
+	{
+		if (!m_pOnToggleActive)
+			m_pOnToggleActive = new ScriptInvokerBool();
+		
+		return m_pOnToggleActive;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Invoker for when the screen rendering starts/stops
 	ScriptInvokerBase<ScriptInvokerWidgetBool> GetOnToggleRender()
 	{
 		if (!m_pOnToggleRender)

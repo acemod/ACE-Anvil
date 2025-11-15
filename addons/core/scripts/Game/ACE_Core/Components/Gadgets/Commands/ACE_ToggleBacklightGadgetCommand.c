@@ -2,18 +2,18 @@
 //! Used for toggling screen backlight
 class ACE_ToggleBacklightGadgetCommand : ACE_IGadgetCommand
 {
-	protected ACE_ScreenGadgetComponent m_pScreenComponent;
+	protected ACE_ScreenGadgetComponent m_ScreenComponent;
 	
 	//------------------------------------------------------------------------------------------------
 	override void Init(IEntity gadget)
 	{
 		super.Init(gadget);
-		m_pScreenComponent = ACE_ScreenGadgetComponent.Cast(gadget.FindComponent(ACE_ScreenGadgetComponent));
+		m_ScreenComponent = ACE_ScreenGadgetComponent.Cast(gadget.FindComponent(ACE_ScreenGadgetComponent));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void Execute()
 	{
-		m_pScreenComponent.RequestToggleBacklight(!m_pScreenComponent.IsBacklightActive());
+		m_ScreenComponent.RequestToggleBacklight(!m_ScreenComponent.IsBacklightActive());
 	}
 }

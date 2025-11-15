@@ -53,7 +53,14 @@ class ACE_RenderTargetComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ToggleActive(bool active)
+	void RequestToggleActive(bool active)
+	{
+		Rpc(RpcDo_ToggleActiveServer, active);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcDo_ToggleActiveServer(bool active)
 	{
 		m_bIsActive = active;
 		OnToggleActive();

@@ -19,7 +19,7 @@ class ACE_Weather_KestrelRefHeadingMenuScreen : ACE_Weather_IKestrelRefHeadingSc
 	//------------------------------------------------------------------------------------------------
 	override void OnActivateServer()
 	{
-		m_pKestrel.SetRefHeadingSetMode(ACE_EGadgetScreenID.KESTREL_REF_HEADING_AUTO_SET);
+		m_Kestrel.SetRefHeadingSetMode(ACE_EGadgetScreenID.KESTREL_REF_HEADING_AUTO_SET);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ class ACE_Weather_KestrelRefHeadingMenuScreen : ACE_Weather_IKestrelRefHeadingSc
 		if (!m_wOptions)
 			return;
 		
-		if (m_pKestrel.GetRefHeadingSetMode() == ACE_EGadgetScreenID.KESTREL_REF_HEADING_AUTO_SET)
+		if (m_Kestrel.GetRefHeadingSetMode() == ACE_EGadgetScreenID.KESTREL_REF_HEADING_AUTO_SET)
 		{
 			m_wAuto.SetColorInt(Color.GRAY);
 			m_wManual.SetColorInt(Color.WHITE);
@@ -49,21 +49,21 @@ class ACE_Weather_KestrelRefHeadingMenuScreen : ACE_Weather_IKestrelRefHeadingSc
 		{
 			case ACE_EGadgetButtonID.UP:
 			{
-				m_pKestrel.ToggleRefHeadingSetMode();
+				m_Kestrel.ToggleRefHeadingSetMode();
 				isHandled = true;
 				break;
 			}
 			
 			case ACE_EGadgetButtonID.DOWN:
 			{
-				m_pKestrel.ToggleRefHeadingSetMode();
+				m_Kestrel.ToggleRefHeadingSetMode();
 				isHandled = true;
 				break;
 			}
 			
 			case ACE_EGadgetButtonID.ENTER:
 			{
-				m_pKestrel.PushScreen(m_pKestrel.GetRefHeadingSetMode());
+				m_Kestrel.PushScreen(m_Kestrel.GetRefHeadingSetMode());
 				isHandled = true;
 				break;
 			}

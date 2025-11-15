@@ -8,13 +8,13 @@ class ACE_Weather_IKestrelScreen : ACE_IGadgetScreenHandler
 	[Attribute(uiwidget: UIWidgets.SearchComboBox, enums: ParamEnumArray.FromEnum(ACE_EGadgetScreenID))]
 	ACE_EGadgetScreenID m_ePreviousScreenID;
 	
-	protected ACE_Weather_KestrelGadgetComponent m_pKestrel;
+	protected ACE_Weather_KestrelGadgetComponent m_Kestrel;
 	
 	//------------------------------------------------------------------------------------------------
 	override void Init(notnull ACE_ScreenGadgetComponent gadget)
 	{
 		super.Init(gadget);
-		m_pKestrel = ACE_Weather_KestrelGadgetComponent.Cast(gadget);
+		m_Kestrel = ACE_Weather_KestrelGadgetComponent.Cast(gadget);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -31,13 +31,13 @@ class ACE_Weather_IKestrelScreen : ACE_IGadgetScreenHandler
 		{
 			case ACE_EGadgetButtonID.UP:
 			{
-				m_pKestrel.ChangeScreen(m_ePreviousScreenID);
+				m_Kestrel.ChangeScreen(m_ePreviousScreenID);
 				return true;
 			};
 			
 			case ACE_EGadgetButtonID.DOWN:
 			{
-				m_pKestrel.ChangeScreen(m_eNextScreenID);
+				m_Kestrel.ChangeScreen(m_eNextScreenID);
 				return true;
 			};
 		}

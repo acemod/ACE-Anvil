@@ -28,7 +28,7 @@ class ACE_Weather_IKestrelRefHeadingScreen : ACE_Weather_IKestrelScreen
 		command.SetText(m_sCommandNavText);
 		TextWidget power = TextWidget.Cast(navigation.FindAnyWidget("Power"));
 		power.SetText(m_sPowerNavText);
-		m_wHeading.SetText(string.Format("%1°", m_pKestrel.GetRefHeading().ToString(3)));
+		m_wHeading.SetText(string.Format("%1°", m_Kestrel.GetRefHeading().ToString(3)));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class ACE_Weather_IKestrelRefHeadingScreen : ACE_Weather_IKestrelScreen
 		{
 			case ACE_EGadgetButtonID.POWER:
 			{
-				m_pKestrel.PopScreen();
+				m_Kestrel.PopScreen();
 				return true;
 			};
 		}

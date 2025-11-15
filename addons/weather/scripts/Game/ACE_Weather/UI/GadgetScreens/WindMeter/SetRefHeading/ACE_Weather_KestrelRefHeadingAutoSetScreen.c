@@ -5,7 +5,7 @@ class ACE_Weather_KestrelRefHeadingAutoSetScreen : ACE_Weather_IKestrelRefHeadin
 	//------------------------------------------------------------------------------------------------
 	override void OnUpdate(float timeSlice)
 	{
-		int heading = Math.Round(m_pKestrel.GetDirection());
+		int heading = Math.Round(m_Kestrel.GetDirection());
 		m_wHeading.SetText(string.Format("%1°", heading.ToString(3)));
 	}
 	
@@ -19,8 +19,8 @@ class ACE_Weather_KestrelRefHeadingAutoSetScreen : ACE_Weather_IKestrelRefHeadin
 		{
 			case ACE_EGadgetButtonID.ENTER:
 			{
-				m_pKestrel.SetRefHeading(Math.Round(m_pKestrel.GetDirection()));
-				m_pKestrel.PopToRootScreen();
+				m_Kestrel.SetRefHeading(Math.Round(m_Kestrel.GetDirection()));
+				m_Kestrel.PopToRootScreen();
 				return true;
 			};
 		}

@@ -16,7 +16,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	[RplProp(onRplName: "OnRefreshScreen")]
 	protected ACE_EGadgetScreenID m_eRefHeadingSetMode;
 	
-	protected TimeAndWeatherManagerEntity m_pWeatherManager;
+	protected TimeAndWeatherManagerEntity m_WeatherManager;
 	protected TNodeId m_iImpellerBone;
 	protected float m_fImpellerSpinSpeed;
 	
@@ -32,7 +32,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 			return;
 		
 		ChimeraWorld world = GetGame().GetWorld();
-		m_pWeatherManager = world.GetTimeAndWeatherManager();
+		m_WeatherManager = world.GetTimeAndWeatherManager();
 		m_iImpellerBone = owner.GetAnimation().GetBoneIndex("i_impeller");
 	}
 	
@@ -83,21 +83,21 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	string GetTime()
 	{
 		int hours, minutes, seconds;
-		m_pWeatherManager.GetHoursMinutesSeconds(hours, minutes, seconds);
+		m_WeatherManager.GetHoursMinutesSeconds(hours, minutes, seconds);
 		return SCR_FormatHelper.FormatTime(hours, minutes, seconds);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	string GetWeekDay()
 	{
-		return m_pWeatherManager.GetWeekDayString();
+		return m_WeatherManager.GetWeekDayString();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	string GetDate()
 	{
 		int year, month, day;
-		m_pWeatherManager.GetDate(year, month, day);
+		m_WeatherManager.GetDate(year, month, day);
 		return string.Format("%1 %2, %3", SCR_DateTimeHelper.GetAbbreviatedMonthString(month), day, year);
 	}
 	
@@ -113,9 +113,9 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	float GetEffectiveWindSpeed()
 	{
 		float gadgetDir = GetDirection();
-		float windDir = m_pWeatherManager.GetWindDirection();
+		float windDir = m_WeatherManager.GetWindDirection();
 		float windAngleRad = Math.DEG2RAD * (windDir - gadgetDir);
-		return -m_pWeatherManager.GetWindSpeed() * Math.Cos(windAngleRad);
+		return -m_WeatherManager.GetWindSpeed() * Math.Cos(windAngleRad);
 	}
 	
 	//------------------------------------------------------------------------------------------------

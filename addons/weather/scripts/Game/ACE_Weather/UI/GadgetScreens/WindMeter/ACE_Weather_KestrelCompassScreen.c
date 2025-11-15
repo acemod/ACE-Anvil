@@ -18,7 +18,7 @@ class ACE_Weather_KestrelCompassScreen : ACE_Weather_IKestrelDataScreen
 	//------------------------------------------------------------------------------------------------
 	override void OnUpdate(float timeSlice)
 	{
-		int gadgetDir = m_pKestrel.GetDirection();
+		int gadgetDir = m_Kestrel.GetDirection();
 		m_wCardinal.SetText(ACE_CompassTools.GetCardinalFromBearing(gadgetDir));
 		m_wBearing.SetText(string.Format("%1°", gadgetDir.ToString(3)));
 	}

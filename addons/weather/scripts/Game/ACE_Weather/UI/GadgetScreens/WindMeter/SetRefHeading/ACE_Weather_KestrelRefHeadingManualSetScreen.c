@@ -6,14 +6,14 @@ class ACE_Weather_KestrelRefHeadingManualSetScreen : ACE_Weather_IKestrelRefHead
 	//! Copy ref heading to tmp
 	override void OnActivateServer()
 	{
-		m_pKestrel.SetTmpRefHeading(m_pKestrel.GetRefHeading());
+		m_Kestrel.SetTmpRefHeading(m_Kestrel.GetRefHeading());
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnRefreshScreen()
 	{
 		if (m_wHeading)
-			m_wHeading.SetText(string.Format("%1°", m_pKestrel.GetTmpRefHeading().ToString(3)));
+			m_wHeading.SetText(string.Format("%1°", m_Kestrel.GetTmpRefHeading().ToString(3)));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -26,20 +26,20 @@ class ACE_Weather_KestrelRefHeadingManualSetScreen : ACE_Weather_IKestrelRefHead
 		{
 			case ACE_EGadgetButtonID.LEFT:
 			{
-				m_pKestrel.SetTmpRefHeading((m_pKestrel.GetTmpRefHeading() - 1) % 360);
+				m_Kestrel.SetTmpRefHeading((m_Kestrel.GetTmpRefHeading() - 1) % 360);
 				return true;
 			}
 			
 			case ACE_EGadgetButtonID.RIGHT:
 			{
-				m_pKestrel.SetTmpRefHeading((m_pKestrel.GetTmpRefHeading() + 1) % 360);
+				m_Kestrel.SetTmpRefHeading((m_Kestrel.GetTmpRefHeading() + 1) % 360);
 				return true;
 			}
 			
 			case ACE_EGadgetButtonID.ENTER:
 			{
-				m_pKestrel.SetRefHeading(m_pKestrel.GetTmpRefHeading());
-				m_pKestrel.PopToRootScreen();
+				m_Kestrel.SetRefHeading(m_Kestrel.GetTmpRefHeading());
+				m_Kestrel.PopToRootScreen();
 				return true;
 			}
 		}

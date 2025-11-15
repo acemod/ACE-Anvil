@@ -22,8 +22,8 @@ class ACE_Weather_KestrelHomeScreen : ACE_Weather_IKestrelScreen
 	//------------------------------------------------------------------------------------------------
 	override void OnUpdate(float timeSlice)
 	{
-		m_wDayOfTheWeek.SetText(m_pKestrel.GetWeekDay());
-		m_wDate.SetText(m_pKestrel.GetDate());
-		m_wTime.SetText(m_pKestrel.GetTime());
+		m_wDayOfTheWeek.SetText(m_Kestrel.GetWeekDay());
+		m_wDate.SetText(m_Kestrel.GetDate());
+		m_wTime.SetText(m_Kestrel.GetTime());
 	}
 }

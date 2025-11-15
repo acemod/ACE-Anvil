@@ -70,7 +70,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		if (m_pRplComponent.IsProxy())
 			return;
 		
-		m_pRenderTargetComponent.ToggleActive(EGadgetMode.IN_HAND == mode);
+		m_pRenderTargetComponent.RequestToggleActive(EGadgetMode.IN_HAND == mode);
 		
 		RplIdentity identity = RplIdentity.Local();
 		int playerID = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(charOwner);

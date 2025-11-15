@@ -12,9 +12,10 @@ StringTable {
    Id "ACE_Finger-Keybind_PointOnMap"
    Target_en_us "Point on map"
    Target_de_de "Zeige auf der Karte"
-   Modified 1710700228
+   Target_zh_cn "指向地圖位置"
+   Modified 1725496209
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{60EE977D3F616C5F}" {
    Id "ACE_Finger-Notification_PlayerPointsAtEntity"
@@ -23,10 +24,11 @@ StringTable {
    Target_de_de "%1 zeigt auf %2"
    Target_cs_cz "%1 ukazuje na %2"
    Target_ru_ru "%1 указывает на %2"
+   Target_zh_cn "%1 指向 %2"
    Target_uk_ua "%1 вказує на %2"
-   Modified 1655484088
+   Modified 1725225699
    Author "kexanone"
-   LastChanged "Smith"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{60EE977D0262C356}" {
    Id "ACE_Finger-Notification_PlayerPointsAtPosition"
@@ -35,10 +37,11 @@ StringTable {
    Target_de_de "%1 zeigt auf eine Position"
    Target_cs_cz "%1 ukazuje na pozici"
    Target_ru_ru "%1 указывает на позицию"
+   Target_zh_cn "%1 指向該位置"
    Target_uk_ua "%1 вказує на позицію"
-   Modified 1655484054
+   Modified 1725225763
    Author "kexanone"
-   LastChanged "Smith"
+   LastChanged "YuanYu"
   }
  }
 }

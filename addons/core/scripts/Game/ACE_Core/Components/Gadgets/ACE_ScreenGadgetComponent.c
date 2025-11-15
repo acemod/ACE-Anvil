@@ -12,17 +12,17 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	
 	[RplProp(onRplName: "OnScreenChanged")]
 	protected ACE_EGadgetScreenID m_eCurrentScreenID;
-	protected ACE_IGadgetScreenHandler m_pCurrenScreenHandler;
+	protected ACE_IGadgetScreenHandler m_CurrenScreenHandler;
 	
 	protected ref array<ACE_EGadgetScreenID> m_aScreenIdStack = {};
 	
 	protected Widget m_wRTTexture;
-	protected ACE_RenderTargetComponent m_pRenderTargetComponent;
-	protected InventoryItemComponent m_pItemComponent;
-	protected RplComponent m_pRplComponent;
+	protected ACE_RenderTargetComponent m_RenderTargetComponent;
+	protected InventoryItemComponent m_ItemComponent;
+	protected RplComponent m_RplComponent;
 	
-	protected SCR_CharacterControllerComponent m_pOwnerCharController;
-	protected ACE_InspectGadgetMenu m_pInspectionMenu;
+	protected SCR_CharacterControllerComponent m_OwnerCharController;
+	protected ACE_InspectGadgetMenu m_InspectionMenu;
 	protected bool m_bIsInspecting = false;
 	
 	[Attribute(uiwidget: UIWidgets.ColorPicker, desc: "Emissive color of backlight material.")]
@@ -55,19 +55,19 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		if (!m_aScreenHandlers.IsEmpty())
 			ChangeScreen(m_aScreenHandlers[0].m_eID);
 		
-		m_pRenderTargetComponent = ACE_RenderTargetComponent.Cast(owner.FindComponent(ACE_RenderTargetComponent));
-		m_pItemComponent = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
-		m_pRplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
+		m_RenderTargetComponent = ACE_RenderTargetComponent.Cast(owner.FindComponent(ACE_RenderTargetComponent));
+		m_ItemComponent = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
+		m_RplComponent = RplComponent.Cast(GetOwner().FindComponent(RplComponent));
 		
-		if (m_pRenderTargetComponent.IsToggledOn())
+		if (m_RenderTargetComponent.IsToggledOn())
 			OnToggleScreenActive(true);
 		
-		m_pRenderTargetComponent.GetOnToggleActive().Insert(OnToggleScreenActive);
+		m_RenderTargetComponent.GetOnToggleActive().Insert(OnToggleScreenActive);
 		
-		if (m_pRenderTargetComponent.IsRendered())
-			OnToggleRenderScreen(m_pRenderTargetComponent.GetRTTexture(), true);
+		if (m_RenderTargetComponent.IsRendered())
+			OnToggleRenderScreen(m_RenderTargetComponent.GetRTTexture(), true);
 		
-		m_pRenderTargetComponent.GetOnToggleRender().Insert(OnToggleRenderScreen);
+		m_RenderTargetComponent.GetOnToggleRender().Insert(OnToggleRenderScreen);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -77,17 +77,17 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		super.ModeSwitch(mode, charOwner);
 		
 		// Gadget has to be tracable for physical buttons to work
-		m_pItemComponent.SetTraceable(mode != EGadgetMode.IN_SLOT);
+		m_ItemComponent.SetTraceable(mode != EGadgetMode.IN_SLOT);
 		
 		if (charOwner)
-			m_pOwnerCharController = SCR_CharacterControllerComponent.Cast(charOwner.FindComponent(SCR_CharacterControllerComponent));
+			m_OwnerCharController = SCR_CharacterControllerComponent.Cast(charOwner.FindComponent(SCR_CharacterControllerComponent));
 		else
-			m_pOwnerCharController = null;
+			m_OwnerCharController = null;
 		
-		if (m_pRplComponent.IsProxy())
+		if (m_RplComponent.IsProxy())
 			return;
 		
-		m_pRenderTargetComponent.RequestToggleActive(EGadgetMode.IN_HAND == mode);
+		m_RenderTargetComponent.RequestToggleActive(EGadgetMode.IN_HAND == mode);
 		
 		RplIdentity identity = RplIdentity.Local();
 		int playerID = GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(charOwner);
@@ -98,7 +98,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 				identity = playerController.GetRplIdentity();
 		}
 		
-		m_pRplComponent.Give(identity);
+		m_RplComponent.Give(identity);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -114,8 +114,8 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		{
 			m_wRTTexture = rtTexture;
 			
-			if (m_pCurrenScreenHandler)
-				m_pCurrenScreenHandler.OnOpen(m_wRTTexture);
+			if (m_CurrenScreenHandler)
+				m_CurrenScreenHandler.OnOpen(m_wRTTexture);
 			
 			ActivateGadgetUpdate();
 		}
@@ -123,21 +123,21 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		{
 			DeactivateGadgetUpdate();
 			
-			if (m_pCurrenScreenHandler)
-				m_pCurrenScreenHandler.OnClose(m_wRTTexture);
+			if (m_CurrenScreenHandler)
+				m_CurrenScreenHandler.OnClose(m_wRTTexture);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void Update(float timeSlice)
 	{
-		if (m_pCurrenScreenHandler)
-			m_pCurrenScreenHandler.OnUpdate(timeSlice);
+		if (m_CurrenScreenHandler)
+			m_CurrenScreenHandler.OnUpdate(timeSlice);
 		
-		if (!m_pRplComponent.IsOwner())
+		if (!m_RplComponent.IsOwner())
 			return;
 		
-		bool isInspecting = m_pOwnerCharController.GetInspect();
+		bool isInspecting = m_OwnerCharController.GetInspect();
 		if (isInspecting == m_bIsInspecting)
 			return;
 		
@@ -146,22 +146,22 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		
 		if (m_bIsInspecting)
 		{
-			if (m_pOwnerCharController.IsGadgetRaisedModeWanted())
+			if (m_OwnerCharController.IsGadgetRaisedModeWanted())
 			{
 				InitInspectionMenu();
 			}
 			else
 			{
-				m_pOwnerCharController.SetGadgetRaisedModeWanted(true);
+				m_OwnerCharController.SetGadgetRaisedModeWanted(true);
 				GetGame().GetCallqueue().CallLater(InitInspectionMenu, ENTER_RAISED_MODE_DELAY_MS);
 			}
 		}
 		else
 		{
-			if (m_pInspectionMenu)
-				GetGame().GetMenuManager().CloseMenu(m_pInspectionMenu);
+			if (m_InspectionMenu)
+				GetGame().GetMenuManager().CloseMenu(m_InspectionMenu);
 			
-			m_pInspectionMenu = null;
+			m_InspectionMenu = null;
 		}
 	}
 	
@@ -171,11 +171,11 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 		if (!m_bIsInspecting)
 			return;
 		
-		m_pInspectionMenu = ACE_InspectGadgetMenu.Cast(GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.ACE_InspectGadgetMenu, DialogPriority.INFORMATIVE, 0, true));
+		m_InspectionMenu = ACE_InspectGadgetMenu.Cast(GetGame().GetMenuManager().OpenDialog(ChimeraMenuPreset.ACE_InspectGadgetMenu, DialogPriority.INFORMATIVE, 0, true));
 		
 		ACE_PhysicalButtonsComponent buttonComponent = ACE_PhysicalButtonsComponent.Cast(GetOwner().FindComponent(ACE_PhysicalButtonsComponent));
-		if (m_pInspectionMenu && buttonComponent)
-			m_pInspectionMenu.GetPhysicalButtonsUIComponent().SetPhysicalButtonsComponent(buttonComponent);
+		if (m_InspectionMenu && buttonComponent)
+			m_InspectionMenu.GetPhysicalButtonsUIComponent().SetPhysicalButtonsComponent(buttonComponent);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -183,8 +183,8 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	//! Add it to `onRplName` for relevant RplProps
 	protected void OnRefreshScreen()
 	{
-		if (m_pCurrenScreenHandler && m_wRTTexture)
-			m_pCurrenScreenHandler.OnRefreshScreen();
+		if (m_CurrenScreenHandler && m_wRTTexture)
+			m_CurrenScreenHandler.OnRefreshScreen();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -197,8 +197,8 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void RpcDo_OnButtonClickServer(ACE_EGadgetButtonID buttonID)
 	{
-		if (m_pCurrenScreenHandler)
-			m_pCurrenScreenHandler.OnButtonClickServer(buttonID);
+		if (m_CurrenScreenHandler)
+			m_CurrenScreenHandler.OnButtonClickServer(buttonID);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -248,31 +248,31 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnScreenChanged()
 	{
-		if (m_pCurrenScreenHandler)
+		if (m_CurrenScreenHandler)
 		{
 			if (Replication.IsServer())
-				m_pCurrenScreenHandler.OnDeactivateServer();
+				m_CurrenScreenHandler.OnDeactivateServer();
 			
 			if (m_wRTTexture)
-				m_pCurrenScreenHandler.OnClose(m_wRTTexture);
+				m_CurrenScreenHandler.OnClose(m_wRTTexture);
 		}
 		
 		foreach (ACE_IGadgetScreenHandler handler : m_aScreenHandlers)
 		{
 			if (handler.m_eID == m_eCurrentScreenID)
 			{
-				m_pCurrenScreenHandler = handler;
+				m_CurrenScreenHandler = handler;
 				break;
 			}
 		}
 		
-		if (m_pCurrenScreenHandler)
+		if (m_CurrenScreenHandler)
 		{
 			if (Replication.IsServer())
-				m_pCurrenScreenHandler.OnActivateServer();
+				m_CurrenScreenHandler.OnActivateServer();
 			
 			if (m_wRTTexture)
-				m_pCurrenScreenHandler.OnOpen(m_wRTTexture);
+				m_CurrenScreenHandler.OnOpen(m_wRTTexture);
 		}
 	}
 	
@@ -300,7 +300,7 @@ class ACE_ScreenGadgetComponent : SCR_GadgetComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnToggleBacklight()
 	{
-		if (m_pRenderTargetComponent.IsToggledOn() && m_bIsBacklightActive)
+		if (m_RenderTargetComponent.IsToggledOn() && m_bIsBacklightActive)
 			m_iBacklightColor = m_iEnabledBacklightColor;
 		else
 			m_iBacklightColor = Color.BLACK;

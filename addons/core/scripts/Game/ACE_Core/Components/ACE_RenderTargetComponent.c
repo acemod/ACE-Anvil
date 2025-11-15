@@ -22,9 +22,9 @@ class ACE_RenderTargetComponent : ScriptComponent
 	
 	protected Widget m_wRoot;
 	protected RTTextureWidget m_wRTTexture;
-	protected InventoryItemComponent m_pItemComponent;
-	protected ref ScriptInvokerBool m_pOnToggleActive;
-	protected ref ScriptInvokerBase<ScriptInvokerWidgetBool> m_pOnToggleRender;
+	protected InventoryItemComponent m_ItemComponent;
+	protected ref ScriptInvokerBool m_OnToggleActive;
+	protected ref ScriptInvokerBase<ScriptInvokerWidgetBool> m_OnToggleRender;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_RenderTargetComponent(IEntityComponentSource src, IEntity ent, IEntity parent)
@@ -75,8 +75,8 @@ class ACE_RenderTargetComponent : ScriptComponent
 		else
 			system.Unregister(this);
 		
-		if (m_pOnToggleActive)
-			m_pOnToggleActive.Invoke(m_bIsActive);
+		if (m_OnToggleActive)
+			m_OnToggleActive.Invoke(m_bIsActive);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -112,8 +112,8 @@ class ACE_RenderTargetComponent : ScriptComponent
 			m_wRTTexture.SetRenderTarget(GetOwner());
 		}
 		
-		if (m_pOnToggleRender)
-			m_pOnToggleRender.Invoke(m_wRTTexture, active);
+		if (m_OnToggleRender)
+			m_OnToggleRender.Invoke(m_wRTTexture, active);
 		
 		if (!active)
 		{
@@ -129,20 +129,20 @@ class ACE_RenderTargetComponent : ScriptComponent
 	//! Invoker for when the screen is turned on/off
 	ScriptInvokerBool GetOnToggleActive()
 	{
-		if (!m_pOnToggleActive)
-			m_pOnToggleActive = new ScriptInvokerBool();
+		if (!m_OnToggleActive)
+			m_OnToggleActive = new ScriptInvokerBool();
 		
-		return m_pOnToggleActive;
+		return m_OnToggleActive;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Invoker for when the screen rendering starts/stops
 	ScriptInvokerBase<ScriptInvokerWidgetBool> GetOnToggleRender()
 	{
-		if (!m_pOnToggleRender)
-			m_pOnToggleRender = new ScriptInvokerBase<ScriptInvokerWidgetBool>();
+		if (!m_OnToggleRender)
+			m_OnToggleRender = new ScriptInvokerBase<ScriptInvokerWidgetBool>();
 		
-		return m_pOnToggleRender;
+		return m_OnToggleRender;
 	}
 	
 	//------------------------------------------------------------------------------------------------

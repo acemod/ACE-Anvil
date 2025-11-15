@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-//! Used for forwarding button clicks to gadget screen
+//! Used for toggling screen backlight
 class ACE_ToggleBacklightGadgetCommand : ACE_IGadgetCommand
 {
 	protected ACE_ScreenGadgetComponent m_pScreenComponent;

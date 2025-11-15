@@ -10,7 +10,7 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 	
 	protected WorkspaceWidget m_wWorkspace;
 	protected Widget m_wWidget;
-	protected ACE_PhysicalButtonsComponent m_pPhysicalButtonsComponent;
+	protected ACE_PhysicalButtonsComponent m_PhysicalButtonsComponent;
 	protected string m_sActiveButtonColliderName;
 
 	//------------------------------------------------------------------------------------------------
@@ -23,9 +23,9 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 	//------------------------------------------------------------------------------------------------
 	void SetPhysicalButtonsComponent(notnull ACE_PhysicalButtonsComponent component)
 	{
-		m_pPhysicalButtonsComponent = component;
+		m_PhysicalButtonsComponent = component;
 		
-		IEntity owner = m_pPhysicalButtonsComponent.GetOwner();
+		IEntity owner = m_PhysicalButtonsComponent.GetOwner();
 		if (!owner)
 			return;
 		
@@ -34,11 +34,11 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 			return;
 		
 		Widget button;
-		array<ref ACE_PhysicalButtonConfig> configs = m_pPhysicalButtonsComponent.GetAllButtonConfigs();
+		array<ref ACE_PhysicalButtonConfig> configs = m_PhysicalButtonsComponent.GetAllButtonConfigs();
 		int numButtons = configs.Count();
 		vector cursorPos;
 		
-		foreach (int i, ACE_PhysicalButtonConfig config : m_pPhysicalButtonsComponent.GetAllButtonConfigs())
+		foreach (int i, ACE_PhysicalButtonConfig config : m_PhysicalButtonsComponent.GetAllButtonConfigs())
 		{
 			// Project position of button bone on screen
 			vector modelTransform[4];
@@ -61,7 +61,7 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 			
 			ACE_GamepadPhysicalButtonUIComponent handler = ACE_GamepadPhysicalButtonUIComponent.Cast(button.FindHandler(ACE_GamepadPhysicalButtonUIComponent));
 			if (handler)
-				handler.SetPhysicalButton(m_pPhysicalButtonsComponent, config);	
+				handler.SetPhysicalButton(m_PhysicalButtonsComponent, config);	
 		#endif
 		}
 		
@@ -78,24 +78,24 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 	//------------------------------------------------------------------------------------------------
 	override bool OnMouseButtonDown(Widget w, int x, int y, int button)
 	{
-		if (button != SCR_EMouseButtons.LEFT || !m_pPhysicalButtonsComponent || !m_sActiveButtonColliderName.IsEmpty())
+		if (button != SCR_EMouseButtons.LEFT || !m_PhysicalButtonsComponent || !m_sActiveButtonColliderName.IsEmpty())
 			return false;
 		
 		m_sActiveButtonColliderName = TraceButtonCollider(x, y);
 		if (m_sActiveButtonColliderName.IsEmpty())
 			return false;
 		
-		m_pPhysicalButtonsComponent.SetButtonState(m_sActiveButtonColliderName, 1);
+		m_PhysicalButtonsComponent.SetButtonState(m_sActiveButtonColliderName, 1);
 		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override bool OnMouseButtonUp(Widget w, int x, int y, int button)
 	{
-		if (button != SCR_EMouseButtons.LEFT || !m_pPhysicalButtonsComponent || m_sActiveButtonColliderName.IsEmpty())
+		if (button != SCR_EMouseButtons.LEFT || !m_PhysicalButtonsComponent || m_sActiveButtonColliderName.IsEmpty())
 			return false;
 		
-		m_pPhysicalButtonsComponent.SetButtonState(m_sActiveButtonColliderName, 0);
+		m_PhysicalButtonsComponent.SetButtonState(m_sActiveButtonColliderName, 0);
 		m_sActiveButtonColliderName = "";
 		return true;
 	}
@@ -107,7 +107,7 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 		vector cameraPos = m_wWorkspace.ProjScreenToWorldNative(x, y, cameraDir, GetGame().GetWorld());
 		
 		TraceParam params = new TraceParam();
-		params.Include = m_pPhysicalButtonsComponent.GetOwner();
+		params.Include = m_PhysicalButtonsComponent.GetOwner();
 		params.Flags = TraceFlags.ENTS;
 		params.TargetLayers = EPhysicsLayerDefs.Interaction;
 		params.Start = cameraPos;

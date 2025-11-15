@@ -59,8 +59,8 @@ class ACE_PhysicalButtonsComponent : ScriptComponent
 		else
 			AudioSystem.PlaySound(config.m_sReleasedSoundPath);
 		
-		if (!state && config.m_pCommand)
-			config.m_pCommand.Execute();
+		if (!state && config.m_Command)
+			config.m_Command.Execute();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -103,12 +103,12 @@ class ACE_PhysicalButtonConfig
 	ResourceName m_sReleasedSoundPath;
 	
 	[Attribute(desc: "Command that the button executes")]
-	ref ACE_IGadgetCommand m_pCommand;
+	ref ACE_IGadgetCommand m_Command;
 	
 	//------------------------------------------------------------------------------------------------
 	void Init(IEntity gadget)
 	{
-		if (m_pCommand)
-			m_pCommand.Init(gadget);
+		if (m_Command)
+			m_Command.Init(gadget);
 	}
 }

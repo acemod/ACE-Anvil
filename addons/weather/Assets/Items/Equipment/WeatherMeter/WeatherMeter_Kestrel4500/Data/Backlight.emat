@@ -7,6 +7,6 @@ MatPBRBasic {
  ReceiveShadow 0
  Refs {
   "Emissive"
-  "ACE_RenderTargetComponent.m_iBacklightColor"
+  "ACE_ScreenGadgetComponent.m_iBacklightColor"
  }
 }

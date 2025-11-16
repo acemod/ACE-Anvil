@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Finger_MapPointer : WorldController
+class ACE_Finger_MapPointerController : WorldController
 {
 	[RplProp(), Attribute(defvalue: "10", desc: "Range of the pointer in meters. Only players in range will see it. Anyone can see it if negative.")]
 	protected float m_fPointerRangeM;

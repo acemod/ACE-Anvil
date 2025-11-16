@@ -3,7 +3,7 @@
 class ACE_Finger_MapPointingSystem : GameSystem
 {
 	protected ACE_Finger_MapUIPointerContainer m_pContainer;
-	protected ref array<ACE_Finger_MapPointer> m_aActivePointers = {};
+	protected ref array<ACE_Finger_MapPointerController> m_aActivePointers = {};
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Finger_MapPointingSystem GetInstance()
@@ -20,11 +20,11 @@ class ACE_Finger_MapPointingSystem : GameSystem
 			.SetUnique(true)
 			.SetLocation(WorldSystemLocation.Client)
 			.AddPoint(WorldSystemPoint.RuntimeStarted)
-			.AddController(ACE_Finger_MapPointer);
+			.AddController(ACE_Finger_MapPointerController);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void RegisterActivePointer(ACE_Finger_MapPointer ptr)
+	void RegisterActivePointer(ACE_Finger_MapPointerController ptr)
 	{
 		if (m_pContainer)
 			m_pContainer.AddPointer(ptr);
@@ -33,7 +33,7 @@ class ACE_Finger_MapPointingSystem : GameSystem
 	}
 		
 	//------------------------------------------------------------------------------------------------
-	void UnregisterActivePointer(ACE_Finger_MapPointer ptr)
+	void UnregisterActivePointer(ACE_Finger_MapPointerController ptr)
 	{
 		if (m_pContainer)
 			m_pContainer.RemovePointer(ptr);
@@ -46,7 +46,7 @@ class ACE_Finger_MapPointingSystem : GameSystem
 	{
 		m_pContainer = container;
 		
-		foreach (ACE_Finger_MapPointer ptr : m_aActivePointers)
+		foreach (ACE_Finger_MapPointerController ptr : m_aActivePointers)
 		{
 			m_pContainer.AddPointer(ptr);
 		}

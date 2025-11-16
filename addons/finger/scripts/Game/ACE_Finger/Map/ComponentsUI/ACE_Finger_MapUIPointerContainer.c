@@ -82,7 +82,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		if (!m_pLocalPlayerChar)
 			return false;
 		
-		IEntity ptrPlayer = GetGame().GetPlayerManager().GetPlayerControlledEntity(ptr.GetOwnerPlayerID());
+		IEntity ptrPlayer = GetGame().GetPlayerManager().GetPlayerControlledEntity(ptr.ACE_GetOwnerPlayerId());
 		if (!ptrPlayer)
 			return false;
 		
@@ -157,7 +157,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		handler.SetImage("{4020BDDA0BA7D5CF}UI/Textures/Icons/icons_gamepad/icons_gamepad.imageset", "stick_hold");
 		handler.ACE_ResizeImage(0.6, 0.6);
 		handler.SetColor(Color.Orange);
-		handler.SetAuthor(GetGame().GetPlayerManager().GetPlayerName(ptr.GetOwnerPlayerID()));
+		handler.SetAuthor(GetGame().GetPlayerManager().GetPlayerName(ptr.ACE_GetOwnerPlayerId()));
 		handler.SetAuthorVisible(true);
 		
 		m_aPointers.Insert(ptr);

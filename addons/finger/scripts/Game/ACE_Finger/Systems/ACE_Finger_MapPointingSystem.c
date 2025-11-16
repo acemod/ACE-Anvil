@@ -19,7 +19,8 @@ class ACE_Finger_MapPointingSystem : GameSystem
 		outInfo.SetAbstract(false)
 			.SetUnique(true)
 			.SetLocation(WorldSystemLocation.Client)
-			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
+			.AddPoint(WorldSystemPoint.RuntimeStarted)
+			.AddController(ACE_Finger_MapPointer);
 	}
 	
 	//------------------------------------------------------------------------------------------------

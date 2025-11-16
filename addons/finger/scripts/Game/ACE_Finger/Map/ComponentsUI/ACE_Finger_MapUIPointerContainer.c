@@ -158,6 +158,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		handler.ACE_ResizeImage(0.6, 0.6);
 		handler.SetColor(Color.Orange);
 		handler.SetAuthor(GetGame().GetPlayerManager().GetPlayerName(ptr.ACE_GetOwnerPlayerId()));
+		handler.SetAuthorVisible(true);
 		
 		m_aPointers.Insert(ptr);
 		m_aWidgets.Insert(w);

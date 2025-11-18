@@ -68,13 +68,12 @@ Summary of settings that can be modified in the server config:
 | Field                                 | Value                | Description                                        |
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_fDefaultResilienceRegenScale`      | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.3` | Default resilience regeneration scale. The default regeneration rate (5 HP/s) will be multiplied by this factor. |
+| `m_fResilienceDamageScale`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Resilience damage scale. All incoming damage to the resilience hitzone will be multiplied by this factor. Lower values make characters less likely to fall unconscious. |
 | `m_fMinHealthScaledForEpinephrine`    | Type: `float`**<br />Range: 0 to 1<br />Default: `0.33` | Can only apply epinephrine when patient has at least this health (ignored in advanced medication). |
 | `m_bBleedOutForPlayersEnabled`        | Type: `bool`*<br />Default: `true` | Whether players can bleed out |
 | `m_fBleedingRateScale`                | Type: `float`**<br />Default: `1.0` | Character bleeding rate multiplier |
 | `m_fMaxTotalBleedingRate`             | Type: `float`**<br />Default: `-1.0` | Maximum possibe bleeding rate in ml/s (Negative value means unlimited) |
 | `m_fBloodRegenScale`                  | Type: `float`**<br />Default: `1.0` | Character blood regeneration rate multiplier |
-| `m_bHealSupplyUsageEnabled`           | Type: `bool`*<br />Default: `true` | Healing consumes supplies when enabled. Ignored when global supply usage is disabled. |
-| `m_fMedicalKitMaxHealScaled`          | Type: `float`**<br />Range: 0 to 1<br />Default: `0.5` | Maximum scaled health (from 0 to 1) that a medical kit can heal to outside of medical facilities |
 | `m_ePainScreenEffectType`             | Type: `int`***<br />Default: `WHITE_FLASH`<br />Options:<br />`0` (`NONE`)<br />`1` (`WHITE_FLASH`)<br />`2` (`GREY_FLASH`)<br />`3` (`CHROMATIC_ABERRATION`)<br />`4` (`RADIAL_BLUR`) | What kind of pain screen effect is used |
 | `m_fSecondChanceResilienceRegenScale` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.0` | Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor. |
 | `m_fDefaultSecondChance`              | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Default probability for second chance for killing blows |
@@ -96,13 +95,12 @@ Template for the `missionHeader` in a server config:
     "m_ACE_Settings": {
         "m_ACE_Medical_Core": {
             "m_fDefaultResilienceRegenScale": 0.3,
+            "m_fResilienceDamageScale": 1.0,
             "m_fMinHealthScaledForEpinephrine": 0.33,
             "m_bBleedOutForPlayersEnabled": 1,
             "m_fBleedingRateScale": 1.0,
             "m_fMaxTotalBleedingRate": -1.0,
             "m_fBloodRegenScale": 1.0,
-            "m_bHealSupplyUsageEnabled": 1,
-            "m_fMedicalKitMaxHealScaled": 0.5,
             "m_ePainScreenEffectType": 1,
             "m_fSecondChanceResilienceRegenScale": 0.0,
             "m_fDefaultSecondChance": 1.0,

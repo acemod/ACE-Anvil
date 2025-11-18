@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Finger_MapPointer : WorldController
+class ACE_Finger_MapPointerController : WorldController
 {
 	[RplProp(), Attribute(defvalue: "10", desc: "Range of the pointer in meters. Only players in range will see it. Anyone can see it if negative.")]
 	protected float m_fPointerRangeM;
@@ -16,10 +16,10 @@ class ACE_Finger_MapPointer : WorldController
 	protected static const int ATTEMPT_TIMEOUT_MS = 500;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Finger_MapPointer GetLocalInstance()
+	static ACE_Finger_MapPointerController GetLocalInstance()
 	{
 		ChimeraWorld world = GetGame().GetWorld();
-		return ACE_Finger_MapPointer.Cast(world.GetSystems().FindMyController(ACE_Finger_MapPointer));
+		return ACE_Finger_MapPointerController.Cast(world.GetSystems().FindMyController(ACE_Finger_MapPointerController));
 	}
 	
 	override static void InitInfo(WorldControllerInfo outInfo)
@@ -130,7 +130,7 @@ class ACE_Finger_MapPointer : WorldController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ~ACE_Finger_MapPointer()
+	void ~ACE_Finger_MapPointerController()
 	{
 		ACE_Finger_MapPointingSystem manager = ACE_Finger_MapPointingSystem.GetInstance();
 		if (manager)

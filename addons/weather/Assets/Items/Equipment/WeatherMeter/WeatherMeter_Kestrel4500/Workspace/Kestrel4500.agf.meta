@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{71D48AB6140E9994}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Workspace/Kestrel4500.agf"
+ Configurations {
+  AnimGraphFileResourceClass PC {
+  }
+  AnimGraphFileResourceClass XBOX_ONE : PC {
+  }
+  AnimGraphFileResourceClass XBOX_SERIES : PC {
+  }
+  AnimGraphFileResourceClass PS4 : PC {
+  }
+  AnimGraphFileResourceClass PS5 : PC {
+  }
+  AnimGraphFileResourceClass HEADLESS : PC {
+  }
+ }
+}

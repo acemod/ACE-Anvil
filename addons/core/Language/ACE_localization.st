@@ -87,7 +87,7 @@ StringTable {
    Target_ko_kr "업기"
    Target_pt_br "Carregar"
    Target_uk_ua "Перенести"
-   Target_zh_cn "揹負"
+   Target_zh_cn "背負"
    Modified 1725495012
    Author "kexanone"
    LastChanged "YuanYu"
@@ -100,7 +100,7 @@ StringTable {
    Target_cs_cz "Nošení"
    Target_ru_ru "Перенос"
    Target_uk_ua "Перенесення"
-   Target_zh_cn "揹負中"
+   Target_zh_cn "背負中"
    Modified 1725495000
    Author "kexanone"
    LastChanged "YuanYu"

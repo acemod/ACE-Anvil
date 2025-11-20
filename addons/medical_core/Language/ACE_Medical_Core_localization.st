@@ -12,6 +12,7 @@ StringTable {
    Id "ACE_Medical-Editor_TooltipDetail_Resilience_Name"
    Target_en_us "Resilience"
    Target_de_de "Resilienz"
+   Target_ru_ru "Устойчивость"
    Target_zh_cn "恢復力"
    Modified 1725220405
    Author "Kexanone"
@@ -138,6 +139,7 @@ StringTable {
    Id "ACE_Medical-KeyBind_OpenRadialMenu"
    Target_en_us "Open medical radial menu"
    Target_de_de "Öffne medizinisches Kreismenü"
+   Target_ru_ru "Открыть меню медицины"
    Target_zh_cn "打開醫療環形選單"
    Modified 1725496962
    Author "Kexanone"
@@ -147,6 +149,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_ExaminePatient"
    Target_en_us "Examine patient"
    Target_de_de "Patient untersuchen"
+   Target_ru_ru "Осмотреть пациента"
    Target_zh_cn "檢查傷患"
    Modified 1725496555
    Author "Kexanone"
@@ -156,6 +159,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_FluidReplacement"
    Target_en_us "Fluid Replacement"
    Target_de_de "Volumentherapie"
+   Target_ru_ru "Восполнение объёма крови"
    Target_zh_cn "補液"
    Modified 1725221453
    Author "Kexanone"
@@ -165,6 +169,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_FractureManagement"
    Target_en_us "Fracture management"
    Target_de_de "Frakturbehandlung"
+   Target_ru_ru "Лечение перелома"
    Target_zh_cn "骨折處置"
    Modified 1725497003
    Author "Kexanone"
@@ -174,6 +179,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_HemorrhageControl"
    Target_en_us "Hemorrhage control"
    Target_de_de "Blutstillung"
+   Target_ru_ru "Контроль кровоизлияния"
    Target_zh_cn "止血"
    Modified 1725221536
    Author "Kexanone"
@@ -183,6 +189,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_Medication"
    Target_en_us "Medication"
    Target_de_de "Medikation"
+   Target_ru_ru "Медикаменты"
    Target_zh_cn "藥物治療"
    Modified 1725221632
    Author "Kexanone"
@@ -192,6 +199,7 @@ StringTable {
    Id "ACE_Medical-UserAction_BackPosition"
    Target_en_us "Put on back"
    Target_de_de "Auf den Rücken drehen"
+   Target_ru_ru "Положить на спину"
    Target_zh_cn "協助仰躺"
    Modified 1725496394
    Author "Kexanone"
@@ -201,6 +209,7 @@ StringTable {
    Id "ACE_Medical-UserAction_LeftRecoveryPosition"
    Target_en_us "Put in left recovery position"
    Target_de_de "In linke Bewusstlosenlagerung bringen"
+   Target_ru_ru "Положить на левый бок"
    Target_zh_cn "轉為左側復甦姿勢"
    Modified 1725496514
    Author "Kexanone"
@@ -210,6 +219,7 @@ StringTable {
    Id "ACE_Medical-UserAction_RightRecoveryPosition"
    Target_en_us "Put in right recovery position"
    Target_de_de "In rechte Bewusstlosenlagerung bringen"
+   Target_ru_ru "Положить на правый бок"
    Target_zh_cn "轉為右側復甦姿勢"
    Modified 1725496522
    Author "Kexanone"

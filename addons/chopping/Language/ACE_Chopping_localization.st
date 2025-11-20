@@ -9,9 +9,10 @@ StringTable {
    Target_cs_cz "Posekat porost"
    Target_ru_ru "Убрать куст"
    Target_uk_ua "Прибрати кущ"
-   Modified 1655483584
+   Target_zh_cn "清除樹叢"
+   Modified 1725225029
    Author "kexanone"
-   LastChanged "Smith"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{5EB746AAD5FF74DB}" {
    Id "ACE_Chopping_RemoveTree"
@@ -21,9 +22,10 @@ StringTable {
    Target_cs_cz "Pokácet strom"
    Target_ru_ru "Убрать дерево"
    Target_uk_ua "Прибрати дерево"
-   Modified 1655483566
+   Target_zh_cn "砍樹"
+   Modified 1725225047
    Author "kexanone"
-   LastChanged "Smith"
+   LastChanged "YuanYu"
   }
  }
 }

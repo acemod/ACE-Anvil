@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_VitalsComponentClass : ACE_BaseComponentClass
+class ACE_Medical_VitalsComponentClass : ScriptComponentClass
 {
 }
 
 //------------------------------------------------------------------------------------------------
 //! Updates to vitals are mostly server side right now
 //! Clients can request values for vitals via ACE_Medical_NetworkComponent
-class ACE_Medical_VitalsComponent : ACE_BaseComponent
+class ACE_Medical_VitalsComponent : ScriptComponent
 {
 	[RplProp()]
 	protected ACE_Medical_EVitalStateID m_eVitalStateID = ACE_Medical_EVitalStateID.STABLE;
@@ -27,6 +27,13 @@ class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
 	//------------------------------------------------------------------------------------------------
+	override protected void OnPostInit(IEntity owner)
+	{
+		super.OnPostInit(owner);
+		SetEventMask(owner, EntityEvent.INIT);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);
@@ -36,7 +43,7 @@ class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		
 		Reset();
 	
-		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance();
+		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance(owner.GetWorld());
 		if (system)
 			system.Register(SCR_ChimeraCharacter.Cast(owner));
 	}
@@ -213,7 +220,19 @@ class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	{
 		ACE_Medical_Circulation_Settings settings = ACE_SettingsHelperT<ACE_Medical_Circulation_Settings>.GetModSettings();
 		if (settings)
+		{
 			SetHeartRate(settings.m_fDefaultHeartRateBPM);
+			SetCardiacOutput(settings.m_fDefaultHeartRateBPM * settings.m_fDefaultStrokeVolumeML);
+			SetSystemicVascularResistance(settings.m_fDefaultSystemicVascularResistance);
+			SetMeanArterialPressure(settings.m_fDefaultMeanArterialPressureKPA);
+			SetPulsePressure(settings.m_fDefaultPulsePressureKPA);
+		}
+		
+		SetHeartRateMedicationAdjustment(0);
+		SetSystemicVascularResistenceMedicationAdjustment(0);
+		SetReviveSuccessCheckTimerScale(1);
+		
+		ClearReviveHistory();
 		
 		SetVitalStateID(ACE_Medical_EVitalStateID.STABLE);
 	}
@@ -226,7 +245,7 @@ class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 	
-		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance();
+		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance(owner.GetWorld());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(owner));
 	}

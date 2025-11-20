@@ -14,12 +14,13 @@ class ACE_FrameJobSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
+		super.InitInfo(outInfo);
 		outInfo.SetAbstract(false)
 			.SetUnique(true)
-			.SetLocation(ESystemLocation.Both)
-			.AddPoint(ESystemPoint.Frame)
-			.AddPoint(ESystemPoint.FixedFrame)
-			.AddPoint(ESystemPoint.PostFixedFrame)
+			.SetLocation(WorldSystemLocation.Both)
+			.AddPoint(WorldSystemPoint.Frame)
+			.AddPoint(WorldSystemPoint.FixedFrame)
+			.AddPoint(WorldSystemPoint.PostFixedFrame);
 	}
 	
 	//------------------------------------------------------------------------------------------------

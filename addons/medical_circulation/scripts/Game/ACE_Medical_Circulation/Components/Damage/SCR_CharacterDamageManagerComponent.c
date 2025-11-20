@@ -36,9 +36,18 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.ACE_Medical_OnKilled();
 		
-		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance();
+		ACE_Medical_VitalStatesSystem system = ACE_Medical_VitalStatesSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(GetOwner()));
+		
+		ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(GetOwner().FindComponent(ACE_Medical_VitalsComponent));
+		if (vitalsComponent)
+		{
+			vitalsComponent.SetHeartRate(0);
+			vitalsComponent.SetCardiacOutput(0);
+			vitalsComponent.SetMeanArterialPressure(0);
+			vitalsComponent.SetPulsePressure(0);
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -59,7 +68,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		else if (vitalsComponent.WasRevived())
 			m_fACE_Medical_ResilienceRegenScale = circulationSettings.m_fMaxRevivalResilienceRecoveryScale;
 		else
-			m_fACE_Medical_ResilienceRegenScale = s_pACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
 		
 		// Scale recovery scale by health of the brain hit zone
 		m_fACE_Medical_ResilienceRegenScale *= m_pACE_Medical_BrainHitZone.GetHealthScaled();

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{4E29194BA809DF32}Prefabs/Characters/Factions/INDFOR/FIA/Character_FIA_AC_Medic.et"
+ Name "{46FD263F0F368A92}Prefabs/Items/Equipment/Kits/MedicalKit_01/MedicalKit_01_base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

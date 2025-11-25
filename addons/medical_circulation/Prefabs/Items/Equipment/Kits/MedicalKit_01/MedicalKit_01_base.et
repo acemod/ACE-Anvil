@@ -1,7 +1,7 @@
 GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
  ID "508AB2013EEE1E00"
  components {
-  SCR_UniversalInventoryStorageComponent "{5E4E8A7876A50FDC}" {
+  ACE_Medical_MedicalKitInventoryStorageComponent "{5E4E8A7876A50FDC}" {
    MultiSlots {
     MultiSlotConfiguration "{66E83E2AB3E32CD4}" {
      SlotTemplate InventoryStorageSlot AmmoniumCarbonate {

@@ -1,7 +1,7 @@
 GenericEntity : "{46FD263F0F368A92}Prefabs/Items/Equipment/Kits/MedicalKit_01/MedicalKit_01_base.et" {
  ID "508AB2013EEE1E00"
  components {
-  SCR_UniversalInventoryStorageComponent "{5E4E8A7876A50FDC}" {
+  ACE_Medical_MedicalKitInventoryStorageComponent "{5E4E8A7876A50FDC}" {
    MultiSlots {
     MultiSlotConfiguration "{66E81CB9F5B0F5B5}" {
      SlotTemplate LoadoutSlotInfo Bandage {

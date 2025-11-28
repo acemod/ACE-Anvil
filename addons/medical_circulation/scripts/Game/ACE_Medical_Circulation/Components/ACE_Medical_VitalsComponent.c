@@ -119,6 +119,12 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	ACE_Medical_ECardiacRhythm GetCardiacRhythm()
+	{
+		return m_eCardiacRhythm;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Set cardiac output in ml/min
 	void SetCardiacOutput(float cardiacOutput)
 	{

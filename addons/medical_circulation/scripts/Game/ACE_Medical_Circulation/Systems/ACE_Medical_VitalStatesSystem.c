@@ -123,6 +123,7 @@ class ACE_Medical_VitalStatesSystem : GameSystem
 		DbgUI.Text(string.Format("Blood state:                  %1", SCR_Enum.GetEnumName(ACE_Medical_EBloodState, damageManager.GetBloodHitZone().GetDamageState())));
 		DbgUI.Text(string.Format("Resilience regen scale:       %1", damageManager.ACE_Medical_GetResilienceRegenScale()));
 		DbgUI.Text(string.Format("Heart rate:                   %1 bpm", Math.Round(component.GetHeartRate())));
+		DbgUI.Text(string.Format("Cardiac Rhythm:               %1", SCR_Enum.GetEnumName(ACE_Medical_ECardiacRhythm, component.GetCardiacRhythm())));
 		DbgUI.PlotLiveClamped("HR", 500, 400, component.GetHeartRate(), 0, 220, 100, 1000);
 		Tuple2<float, float> pressures = component.GetBloodPressures();
 		DbgUI.Text(string.Format("Blood pressure:               %1/%2 mmHg", Math.Round(pressures.param2 * ACE_PhysicalConstants.KPA2MMHG), Math.Round(pressures.param1 * ACE_PhysicalConstants.KPA2MMHG)));

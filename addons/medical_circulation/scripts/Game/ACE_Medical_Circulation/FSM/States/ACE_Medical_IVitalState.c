@@ -67,4 +67,39 @@ class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 	{
 		return s_pCirculationSettings.m_fPulsePressureScale * context.m_pVitals.GetMeanArterialPressure();
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected ACE_Medical_ECardiacRhythm ComputeCardiacRhythm(ACE_Medical_CharacterContext context, float timeSlice)
+	{
+		float hr = context.m_pVitals.GetHeartRate();
+		
+		if (hr == 0)
+			return ACE_Medical_ECardiacRhythm.PEA;
+		
+		if (hr > 0 && hr < 20)
+			return ACE_Medical_ECardiacRhythm.Idioventricular;
+		
+		if (hr >= 20 && hr < 40)
+			return ACE_Medical_ECardiacRhythm.Junctional;
+		
+		if (hr >= 40 && hr < 60)
+			return ACE_Medical_ECardiacRhythm.SinusBrady;
+		
+		if (hr >= 60 && hr <= 100)
+			return ACE_Medical_ECardiacRhythm.Sinus;
+		
+		if (hr > 100)
+		{
+			if (context.m_pVitals.GetVitalStateID() == ACE_Medical_EVitalStateID.CRITICAL)
+			{
+				return ACE_Medical_ECardiacRhythm.VF;
+			}
+			else
+			{
+				return ACE_Medical_ECardiacRhythm.SinusTachy;
+			}
+		}
+		
+		return ACE_Medical_ECardiacRhythm.Unknown;
+	}
 }

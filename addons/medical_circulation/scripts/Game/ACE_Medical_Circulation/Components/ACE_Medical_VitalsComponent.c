@@ -26,6 +26,8 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
+	protected ACE_Medical_ECardiacRhythm m_eCardiacRhythm = ACE_Medical_ECardiacRhythm.Unknown;
+	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
 	{
@@ -108,6 +110,18 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	float GetHeartRate()
 	{
 		return m_fHeartRateBPM;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetCardiacRhythm(ACE_Medical_ECardiacRhythm rhythm)
+	{
+		m_eCardiacRhythm = rhythm;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_ECardiacRhythm GetCardiacRhythm()
+	{
+		return m_eCardiacRhythm;
 	}
 	
 	//------------------------------------------------------------------------------------------------

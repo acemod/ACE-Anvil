@@ -14,10 +14,10 @@ StringTable {
    Target_ja_jp "引きずる"
    Target_ko_kr "끌기"
    Target_pt_br "Arrastar"
-   Target_zh_cn "拖拉"
-   Modified 1689077863
+   Target_zh_cn "拖行"
+   Modified 1725224988
    Author "Kex"
-   LastChanged "Kex"
+   LastChanged "YuanYu"
   }
  }
 }

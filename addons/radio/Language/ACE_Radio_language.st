@@ -85,7 +85,7 @@ StringTable {
    Target_zh_cn "頻道切換蜂鳴聲"
    Modified 1725493711
    Author "veteran29"
-   LastChanged "YuanYu""
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{664EB3C5389562D0}" {
    Id "ACE_Radio-Settings_Click_Off"

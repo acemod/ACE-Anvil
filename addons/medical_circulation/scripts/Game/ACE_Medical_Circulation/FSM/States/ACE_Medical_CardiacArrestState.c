@@ -7,7 +7,7 @@ class ACE_Medical_CardiacArrestState : ACE_Medical_IVitalState
 		super.OnEnter(context);
 		
 		//! Kill AI when cardiac arrest is not allowed
-		if (!s_pCirculationSettings.m_bCardiacArrestForAIEnabled && !EntityUtils.IsPlayer(context.m_pObject))
+		if (!s_pCirculationSettings.m_bCardiacArrestForAIEnabled && !ACE_EntityUtils.IsPlayer(context.m_pObject))
 		{
 			context.m_pDamageManager.Kill(context.m_pDamageManager.GetInstigator());
 			return;

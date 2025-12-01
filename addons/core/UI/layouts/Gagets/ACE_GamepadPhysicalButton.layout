@@ -1,0 +1,30 @@
+ButtonWidgetClass {
+ Name "Button"
+ Slot FrameWidgetSlot "{6563682E29BADC1C}" {
+  OffsetLeft 0
+  OffsetTop 0
+  SizeX 128
+  OffsetRight -128
+  SizeY 128
+  OffsetBottom -128
+  Alignment 0.5 0.5
+  SizeToContent 1
+ }
+ Opacity 0
+ components {
+  ACE_GamepadPhysicalButtonUIComponent "{65641D94B3955D9B}" {
+  }
+ }
+ style blank
+ {
+  ImageWidgetClass "{6563682E0ED041D0}" {
+   Name "GamepadCursorFocus"
+   Slot ButtonWidgetSlot "{65641D97992C7EAE}" {
+   }
+   Color 0.7605 0.3916 0.0802 1
+   Texture "{272DB16BAE0E7D3C}UI/Textures/Editor/Cursors/GamepadCursor_Default.edds"
+   Image ""
+   Size 128 128
+  }
+ }
+}

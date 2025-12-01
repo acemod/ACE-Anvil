@@ -56,7 +56,7 @@ class ACE_Drawing
 	
 	static array<ref Shape> DrawDamageSphere(vector origin, int count, ACE_DrawingDamageFunction damageFunction)
 	{
-		float goldenRatio = 1.618;
+		const float goldenRatio = 1.618;
 		int N = count / 2;
 		int counter = 0;
 		array<ref Shape> shapes = {};

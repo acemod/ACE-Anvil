@@ -3,8 +3,8 @@ MetaFileClass {
  Configurations {
   FBXResourceClass PC {
    MaterialAssigns {
-    MaterialAssignClass "{670424E13A7827DB}" {
-     SourceMaterial "zemlia"
+    MaterialAssignClass "{6704502359F5287A}" {
+     SourceMaterial "TerrainMat"
      AssignedMaterial "{30369C94C941BE87}Common/Materials/ACE_Trenches_MatTerrainObj.emat"
     }
    }

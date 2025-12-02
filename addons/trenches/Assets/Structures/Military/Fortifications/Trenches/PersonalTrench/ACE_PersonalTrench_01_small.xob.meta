@@ -13,10 +13,10 @@ MetaFileClass {
     }
    }
    GeometryParams {
-    GeometryParam UTM_FireGeometry {
-     LayerPreset "FireGeo"
+    GeometryParam UTM_BuildingFireView {
+     LayerPreset "BuildingFireView"
      SurfaceProperties {
-      "{536BF67B2052B869}material/metal.gamemat"
+      "{C3691F2D8FE0234F}Common/Materials/Game/dirt.gamemat"
      }
      Mass 0
      Margin 0

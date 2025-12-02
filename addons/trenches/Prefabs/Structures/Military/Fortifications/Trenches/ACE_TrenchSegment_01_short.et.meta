@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{1DF64746992BC64A}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_TrenchHalf_01_long.et"
+ Name "{19D504D46A48529A}Prefabs/Structures/Military/Fortifications/Trenches/ACE_TrenchSegment_01_short.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

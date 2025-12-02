@@ -1,0 +1,41 @@
+GenericEntity : "{945F09C688613F60}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_SmallPersonalTrench_01.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  ACE_Trenches_OutlineGarbageComponent "{670424E9C917465A}" {
+  }
+  SCR_EditableEntityComponent "{5E50727929EC2547}" : "{8B8F72167C615EAA}Prefabs/Editor/Components/Compositions_SCR_EditableEntityComponent.ct" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    Name "#AR-EditableEntity_DirtCover_01_long_v1_Name"
+    m_Image "{5EFA9ECADE0076BD}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_DirtCover_01_long_v1.edds"
+    m_sFaction "US"
+    m_aAuthoredLabels {
+     THEME_MILITARY FACTION_US
+    }
+    m_aAutoLabels {
+     ENTITYTYPE_OBJECT SIZE_S
+    }
+    m_EntityBudgetCost {
+     SCR_EntityBudgetValue "{670424E9C9174648}" {
+      m_BudgetType CAMPAIGN
+     }
+    }
+    m_EntityChildrenBudgetCost {
+     SCR_EntityBudgetValue "{670424E9C917464E}" {
+      m_BudgetType PROPS
+      m_Value 1
+     }
+    }
+   }
+  }
+  SCR_EditorLinkComponent "{670424E9C91745B3}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{670424E9C91745B7}" {
+     m_Prefab "{37B7E7A5001CEA28}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_PersonalTrench_01_small.et"
+     m_vPosition 0 0 0
+     m_vAngles 0 0 0
+     m_fScale 1
+    }
+   }
+  }
+ }
+}

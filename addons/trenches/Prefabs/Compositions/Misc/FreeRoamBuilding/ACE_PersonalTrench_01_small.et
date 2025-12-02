@@ -1,0 +1,29 @@
+GenericEntity : "{6E9190BC2713551D}Prefabs/Compositions/Slotted/BuildableComposition_Base.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  ACE_Trenches_BuildingCompositionComponent "{5E96A067C097D570}" {
+   m_AudioSourceConfigurationSpawn SCR_AudioSourceConfiguration "{5E96A067C355978C}" {
+    m_sSoundEventName "SOUND_BUILD_SANDBAG"
+   }
+   m_AudioSourceConfigurationDespawn SCR_AudioSourceConfiguration "{5E96A0643BAAEAF8}" {
+    m_sSoundEventName "SOUND_DESTROY_SANDBAG"
+   }
+  }
+  RigidBody "{5E96A067A67C5029}" {
+   Geometries {
+    PhysicsBoxGeometry UserAction {
+     Extents 3 2 1.5
+    }
+   }
+  }
+  Hierarchy "{670424E8EC0EC740}" {
+  }
+ }
+ coords 0 0 0
+ {
+  StaticModelEntity : "{DB5A27BF4057AEE1}Prefabs/Structures/Military/Fortifications/Trenches/ACE_PersonalTrench_01_small.et {
+   ID "670424E8EC0ED64F"
+   Flags 0x180403 0
+  }
+ }
+}

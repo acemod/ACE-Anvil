@@ -28,7 +28,13 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
     SCR_DeployableVariantContainer "{670D0DE1D325F771}" {
      m_iVariantId 2
      m_sReplacementPrefab "{68BE02FEBBE7E5D3}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_PersonalTrench_01_big.et"
-     m_sPreviewObject "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_PersonalTrench_01_big.xob"
+     m_sPreviewObject "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/PersonalTrench/ACE_PersonalTrench_01_big.xob"
+     m_fMaxAllowedTilt 45
+    }
+    SCR_DeployableVariantContainer "{670D6BAF2811155D}" {
+     m_iVariantId 3
+     m_sReplacementPrefab "{C8CB97EAACBAA7BB}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_PersonalTrench_01_giant.et"
+     m_sPreviewObject "{409F7F9C29BAA88A}Assets/Structures/Military/Fortifications/Trenches/PersonalTrench/ACE_PersonalTrench_01_giant.xob"
      m_fMaxAllowedTilt 45
     }
    }

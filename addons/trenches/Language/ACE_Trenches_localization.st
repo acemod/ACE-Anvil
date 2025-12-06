@@ -17,6 +17,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{670D4C2495CF93FE}" {
+   Id "ACE_Trenches-EditableEntity_TrenchSegment_01_giant_Name"
+   Target_en_us "Trench Segment (Giant)"
+   Target_de_de "Schützengrabensegment (Gigantisch)"
+   Modified 1728930803
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{670D1E4318FD977F}" {
    Id "ACE_Trenches-EditableEntity_TrenchSegment_01_short_Name"
    Target_en_us "Trench Segment (Short)"

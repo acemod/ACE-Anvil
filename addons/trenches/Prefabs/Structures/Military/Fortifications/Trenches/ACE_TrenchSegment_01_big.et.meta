@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6C7F99DA0B767221}Prefabs/Structures/Military/Fortifications/Trenches/ACE_TrenchSegment_01_big.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

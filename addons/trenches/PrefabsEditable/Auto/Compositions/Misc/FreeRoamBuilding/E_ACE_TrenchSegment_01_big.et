@@ -1,0 +1,39 @@
+GenericEntity : "{05ABF88A53D6161F}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_TrenchSegment_01_big.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  ACE_Trenches_OutlineGarbageComponent "{670D0DEE7A8A1F00}" {
+  }
+  SCR_EditableEntityComponent "{5E50727929EC2547}" : "{8B8F72167C615EAA}Prefabs/Editor/Components/Compositions_SCR_EditableEntityComponent.ct" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    Name "#ACE_Trenches-EditableEntity_TrenchSegment_01_big_Name"
+    m_Image "{91E1E6F914E2F1C0}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_ACE_TrenchSegment_01_big.edds"
+    m_aAuthoredLabels {
+     THEME_MILITARY ENTITYTYPE_OBJECT SIZE_M FACTION_US FACTION_USSR FACTION_FIA
+    }
+    m_aAutoLabels {
+    }
+    m_EntityBudgetCost {
+     SCR_EntityBudgetValue "{670D0DEE7A8A1F71}" {
+      m_BudgetType CAMPAIGN
+     }
+    }
+    m_EntityChildrenBudgetCost {
+     SCR_EntityBudgetValue "{670D0DEE7A8A1F77}" {
+      m_BudgetType PROPS
+      m_Value 1
+     }
+    }
+   }
+  }
+  SCR_EditorLinkComponent "{670D0DEE7A8A1F74}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{670D0DEE7A8A1F7B}" {
+     m_Prefab "{E19CF9D491C43020}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_TrenchSegment_01_big.et"
+     m_vPosition 0 0 0
+     m_vAngles 0 0 0
+     m_fScale 1
+    }
+   }
+  }
+ }
+}

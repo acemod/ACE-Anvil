@@ -6,7 +6,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
     "SCR_EditableEntityComponent"
    }
    m_eMeasurementMethod FROM_CENTER_OF_MASS
-   m_fMaxPlacementDistance 2.5
+   m_fMaxPlacementDistance 5
    m_ePlacementType XYZ
    m_bForwardAwayFromPlayer 1
    m_bAttachPlacedItemToTheSurfaceEntity 0

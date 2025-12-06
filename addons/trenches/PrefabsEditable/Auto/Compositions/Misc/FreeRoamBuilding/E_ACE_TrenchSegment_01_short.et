@@ -1,18 +1,16 @@
-GenericEntity : "{051A6522307D9476}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_TrenchHalf_01_long.et" {
+GenericEntity : "{051A6522307D9476}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_TrenchSegment_01_short.et" {
  ID "5282DCB5DFC8538F"
  components {
   ACE_Trenches_OutlineGarbageComponent "{64973CD8E259BECA}" {
   }
   SCR_EditableEntityComponent "{5E50727929EC2547}" : "{8B8F72167C615EAA}Prefabs/Editor/Components/Compositions_SCR_EditableEntityComponent.ct" {
    m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
-    Name "#AR-EditableEntity_DirtCover_01_long_v1_Name"
-    m_Image "{5EFA9ECADE0076BD}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_DirtCover_01_long_v1.edds"
-    m_sFaction "US"
+    Name "#ACE_Trenches-EditableEntity_TrenchSegment_01_short_Name"
+    m_Image "{60F303E0DB02F8F6}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_ACE_TrenchSegment_01_short.edds"
     m_aAuthoredLabels {
-     108 11
+     THEME_MILITARY ENTITYTYPE_OBJECT SIZE_M FACTION_US FACTION_USSR FACTION_FIA
     }
     m_aAutoLabels {
-     1 121
     }
     m_EntityBudgetCost {
      SCR_EntityBudgetValue "{64973CD8E259BE35}" {
@@ -30,7 +28,7 @@ GenericEntity : "{051A6522307D9476}Prefabs/Compositions/Misc/FreeRoamBuilding/AC
   SCR_EditorLinkComponent "{64973CD8E259BE7D}" {
    m_aEntries {
     SCR_EditorLinkEntry "{64973CD8E259BE61}" {
-     m_Prefab "{1DF64746992BC64A}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_TrenchHalf_01_long.et"
+     m_Prefab "{1DF64746992BC64A}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_TrenchSegment_01_short.et"
      m_vPosition 0 0 0
      m_vAngles 0 0 0
      m_fScale 1

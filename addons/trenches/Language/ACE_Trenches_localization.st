@@ -33,5 +33,13 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{670D6BA9CAA8072A}" {
+   Id "ACE_Trenches-EditableEntity_VehicleTrench_01_Name"
+   Target_en_us "Vehicle Trench"
+   Target_de_de "Fahrzeug Schützengraben"
+   Modified 1728935966
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
  }
 }

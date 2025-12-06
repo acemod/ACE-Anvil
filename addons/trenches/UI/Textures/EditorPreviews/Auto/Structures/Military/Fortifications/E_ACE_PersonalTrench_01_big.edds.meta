@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{91E1E6F914E2F1C0}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_ACE_TrenchSegment_01_big.edds"
+ Name "{91E1E6F914E2F1C0}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_ACE_PersonalTrench_01_big.edds"
  Configurations {
   PNGResourceClass PC : "{DC555BD399D92412}Configs/System/ResourceTypes/PC/TextureUnspecified.conf" {
    ColorSpace ToSRGB

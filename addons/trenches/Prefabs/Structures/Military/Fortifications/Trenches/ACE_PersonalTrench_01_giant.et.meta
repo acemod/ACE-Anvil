@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{68BE02FEBBE7E5D3}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_TrenchSegment_01_big.et"
+ Name "{04154B3F1813D5C8}Prefabs/Structures/Military/Fortifications/Trenches/ACE_PersonalTrench_01_giant.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

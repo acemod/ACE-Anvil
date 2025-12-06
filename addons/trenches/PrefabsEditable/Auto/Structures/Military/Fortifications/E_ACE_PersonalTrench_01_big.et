@@ -1,0 +1,27 @@
+GenericEntity : "{3B9D178DEB635AFD}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_DirtCover_Base.et" {
+ ID "60ED25685B736E4E"
+ components {
+  MeshObject "{60ED256B7FE9D171}" {
+   Object "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_PersonalTrench_01_big.xob"
+   Materials {
+    MaterialAssignClass "{670D0DEE201453E2}" {
+     SourceMaterial "DirtCover_01"
+     AssignedMaterial "{30369C94C941BE87}Common/Materials/ACE_Trenches_MatTerrainObj.emat"
+    }
+   }
+  }
+  SCR_EditableEntityComponent "{60ED256B631A65DC}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{60ED2568D69DDD17}" {
+    Name "#ACE_Trenches-EditableEntity_PersonalTrench_01_big_Name"
+    m_Image "{91E1E6F914E2F1C0}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_ACE_PersonalTrench_01_big.edds"
+   }
+  }
+  SCR_PreviewEntityComponent "{60ED256B76DEE153}" {
+   m_aEntries {
+    SCR_BasePreviewEntry "{60ED2568E4572001}" {
+     m_Mesh "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_PersonalTrench_01_big.xob"
+    }
+   }
+  }
+ }
+}

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{409F7F9C29BAA88A}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_TrenchSegment_01_giant.xob"
+ Name "{409F7F9C29BAA88A}Assets/Structures/Military/Fortifications/Trenches/PersonalTrench/ACE_PersonalTrench_01_giant.xob"
  Configurations {
   FBXResourceClass PC {
    MaterialAssigns {

@@ -25,18 +25,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      m_sPreviewObject "{BCD1983E05E44502}Assets/Structures/Military/Fortifications/Trenches/PersonalTrench/ACE_PersonalTrench_01_small.xob"
      m_fMaxAllowedTilt 45
     }
-    SCR_DeployableVariantContainer "{66AB0D1A9A1843D4}" {
-     m_iVariantId 2
-     m_sReplacementPrefab "{E14F00C2836CAB68}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_DirtCover_01_long_v1.et"
-     m_sPreviewObject "{B119EC6E3C59AF3B}Assets/Structures/Military/Fortifications/DirtMounds/DirtCover_01_long_01.xob"
-     m_fMaxAllowedTilt 45
-    }
-    SCR_DeployableVariantContainer "{66AB0D1A8D70C196}" {
-     m_iVariantId 3
-     m_sReplacementPrefab "{32B0F4CA468D8A56}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_DirtCover_01_short.et"
-     m_sPreviewObject "{155FCD2AE8BA59A3}Assets/Structures/Military/Fortifications/DirtMounds/DirtCover_01_short.xob"
-     m_fMaxAllowedTilt 45
-    }
    }
   }
  }

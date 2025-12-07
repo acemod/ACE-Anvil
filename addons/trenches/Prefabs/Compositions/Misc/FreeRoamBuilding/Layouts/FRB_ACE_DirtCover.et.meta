@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{4409EBD9F169E898}Prefabs/Compositions/Misc/FreeRoamBuilding/Layouts/ACE_FRB_LivingArea_L_USSR_01.et"
+ Name "{4409EBD9F169E898}Prefabs/Compositions/Misc/FreeRoamBuilding/Layouts/FRB_ACE_DirtCover.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

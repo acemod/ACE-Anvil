@@ -122,9 +122,6 @@ class ACE_AnimationHelperCompartment : GenericEntity
 				
 		vector transform[4];
 		GetWorldTransform(transform);
-		vector pos;
-		SCR_WorldTools.FindEmptyTerrainPosition(pos, transform[3], SEARCH_POS_RADIUS_M);
-		transform[3] = pos;
 		compartmentAccess.ACE_MoveOutVehicle(transform, true);
 		
 		// Broadcast teleport on network

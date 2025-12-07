@@ -10,6 +10,13 @@ ACE_Carrying_HelperCompartment : "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying
    m_bCarrierAllowWalkingSideways 0
    m_bCarrierAllowStandStance 0
   }
+  SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   DoorInfoList {
+    CompartmentDoorInfo "{62CF60C6D92648FD}" {
+     StanceChangeOnExit Prone
+    }
+   }
+  }
   VehicleAnimationComponent "{50B812962B17E60B}" {
    AnimInstance "{79AB94DEA9896020}Assets/Helpers/Workspace/ACE_Carrying_Dragged.asi"
    AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {

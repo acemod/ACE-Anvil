@@ -8,9 +8,6 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 //! --- To Do: Create derived classes of this for carrying and CPR
 class ACE_AnimationHelperCompartment : GenericEntity
 {
-	[Attribute(defvalue: "ANIMATED", uiwidget: UIWidgets.SearchComboBox, desc: "Get out type when life state has changed", enums: ParamEnumArray.FromEnum(EGetOutType))]
-	protected EGetOutType m_eLifeStateChangedGetOutType;
-	
 	[RplProp(onRplName: "OnPerformerChanged")]
 	protected RplId m_iPerformerID;
 	protected SCR_ChimeraCharacter m_pPerformer;
@@ -84,11 +81,11 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Terminates animation
-	void Terminate(EGetOutType getOutType = EGetOutType.ANIMATED)
+	void Terminate()
 	{
 		// Reschedule termination when init is not yet done, for instance, when called before the character is moving in
 		if (!m_bInitDone)
-			GetGame().GetCallqueue().CallLater(Terminate, 100, false, getOutType);
+			GetGame().GetCallqueue().CallLater(Terminate, 100);
 		
 		if (!m_pPerformer)
 		{
@@ -103,7 +100,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 			return;
 		}
 		
-		if (getOutType == EGetOutType.ANIMATED)
+		if (m_pPerformer.GetCharacterController().GetLifeState() == ECharacterLifeState.ALIVE)
 			compartmentAccess.ACE_GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
 		else
 			EjectPerformer();
@@ -125,7 +122,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 		vector pos;
 		SCR_WorldTools.FindEmptyTerrainPosition(pos, transform[3], SEARCH_POS_RADIUS_M);
 		transform[3] = pos;
-		compartmentAccess.ACE_MoveOutVehicle(transform);
+		compartmentAccess.ACE_MoveOutVehicle(transform, true);
 		
 		// Broadcast teleport on network
 		RplComponent performerRpl = RplComponent.Cast(m_pPerformer.FindComponent(RplComponent));
@@ -150,7 +147,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//! Terminate when performer gets incapacitated or dies
 	protected void OnPerformerLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		Terminate(m_eLifeStateChangedGetOutType);
+		Terminate();
 	}
 	
 	//------------------------------------------------------------------------------------------------

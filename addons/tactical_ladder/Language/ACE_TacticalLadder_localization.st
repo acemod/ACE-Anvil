@@ -6,9 +6,10 @@ StringTable {
    Target_en_us "Portable ladder for scaling obstacles or tactical entry."
    Target_de_de "Tragbare Leiter zum Überwinden von Hindernissen oder für taktisches Eindringen."
    Target_zh_cn "便攜式伸縮梯，用於攀爬或戰術突入"
+   Target_ko_kr "장애물을 오르거나 전술 진입을 위한 휴대용 사다리입니다."
    Modified 1725492187
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{62F97CC0ADB17508}" {
    Id "ACE_TacticalLadder-Item_Name"
@@ -26,7 +27,7 @@ StringTable {
    Target_zh_cn "伸縮梯"
    Modified 1725492044
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{62F97CC046FFD8B6}" {
    Id "ACE_TacticalLadder-UserAction_Extend"
@@ -44,25 +45,27 @@ StringTable {
    Target_zh_cn "拉伸梯子"
    Modified 1725491968
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{650728115F9B1510}" {
    Id "ACE_TacticalLadder-UserAction_TooShort"
    Target_en_us "Too short"
    Target_de_de "Zu kurz"
    Target_zh_cn "太短"
+   Target_ko_kr "너무 짧음"
    Modified 1725491927
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6507280146ED7892}" {
    Id "ACE_TacticalLadder-UserAction_TopExitObstructed"
    Target_en_us "Top exit obstructed"
    Target_de_de "Oberste Sprosse nicht zugänglich"
    Target_zh_cn "梯頂受阻"
+   Target_ko_kr "위쪽 출구 막힘"
    Modified 1725491920
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
  }
 }

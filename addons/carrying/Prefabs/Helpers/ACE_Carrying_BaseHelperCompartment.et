@@ -30,4 +30,5 @@ ACE_Carrying_HelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_Animatio
    }
   }
  }
+ m_bForceRagdollOnTermination 1
 }

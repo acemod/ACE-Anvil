@@ -8,6 +8,9 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 //! --- To Do: Create derived classes of this for carrying and CPR
 class ACE_AnimationHelperCompartment : GenericEntity
 {
+	[Attribute(defvalue: "false", desc: "Whether performer should always enter ragdoll when terminating the helper compartment")]
+	protected bool m_bForceRagdollOnTermination;
+	
 	[RplProp(onRplName: "OnPerformerChanged")]
 	protected RplId m_iPerformerID;
 	protected SCR_ChimeraCharacter m_pPerformer;
@@ -100,7 +103,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 			return;
 		}
 		
-		if (m_pPerformer.GetCharacterController().GetLifeState() == ECharacterLifeState.ALIVE)
+		if (!m_bForceRagdollOnTermination && m_pPerformer.GetCharacterController().GetLifeState() == ECharacterLifeState.ALIVE)
 			compartmentAccess.ACE_GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
 		else
 			EjectPerformer();

@@ -1,0 +1,8 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ "Ignore Cursor" 0
+ components {
+  ACE_PhysicalButtonsUIComponent "{6563032AD753AEC4}" {
+  }
+ }
+}

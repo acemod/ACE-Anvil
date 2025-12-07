@@ -2,7 +2,7 @@ StaticModelEntity : "{EEE62BE393A2AD4A}Prefabs/Structures/Military/Fortification
  ID "5272E314F01B2DBE"
  components {
   MeshObject "{5272E314F6439B95}" {
-   Object "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_TrenchSegment_01_big.xob"
+   Object "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_PersonalTrench_01_big.xob"
   }
  }
 }

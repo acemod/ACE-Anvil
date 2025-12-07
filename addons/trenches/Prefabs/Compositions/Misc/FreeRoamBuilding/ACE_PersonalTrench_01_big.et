@@ -1,7 +1,7 @@
 GenericEntity : "{18231427AFBE8E8A}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_BuildableTrench_Base.et" {
  ID "5282DCB5DFC8538F"
  {
-  StaticModelEntity : "{6C7F99DA0B767221}Prefabs/Structures/Military/Fortifications/Trenches/ACE_TrenchSegment_01_big.et" {
+  StaticModelEntity : "{6C7F99DA0B767221}Prefabs/Structures/Military/Fortifications/Trenches/ACE_PersonalTrench_01_big.et" {
    ID "670D0DEE1F7E28E8"
    Flags 0x100000 0
    coords 0 0 0

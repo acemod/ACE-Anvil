@@ -220,7 +220,19 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	{
 		ACE_Medical_Circulation_Settings settings = ACE_SettingsHelperT<ACE_Medical_Circulation_Settings>.GetModSettings();
 		if (settings)
+		{
 			SetHeartRate(settings.m_fDefaultHeartRateBPM);
+			SetCardiacOutput(settings.m_fDefaultHeartRateBPM * settings.m_fDefaultStrokeVolumeML);
+			SetSystemicVascularResistance(settings.m_fDefaultSystemicVascularResistance);
+			SetMeanArterialPressure(settings.m_fDefaultMeanArterialPressureKPA);
+			SetPulsePressure(settings.m_fDefaultPulsePressureKPA);
+		}
+		
+		SetHeartRateMedicationAdjustment(0);
+		SetSystemicVascularResistenceMedicationAdjustment(0);
+		SetReviveSuccessCheckTimerScale(1);
+		
+		ClearReviveHistory();
 		
 		SetVitalStateID(ACE_Medical_EVitalStateID.STABLE);
 	}

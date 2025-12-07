@@ -7,8 +7,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected float m_fACE_Medical_LastFallDamageTimeMS = -float.INFINITY;
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Friend method for SCR_CharacterHitZone and SCR_CharacterHealthHitZone
-	void ACE_Medical_OnSecondChanceGranted()
+	[Friend(ACE_Medical_SecondChanceSystem)]
+	protected void ACE_Medical_OnSecondChanceGranted()
 	{
 		// Only handle first second chance
 		if (m_bACE_Medical_WasSecondChanceGranted)
@@ -38,17 +38,21 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//-----------------------------------------------------------------------------------------------------------
 	bool ACE_Medical_IsSecondChanceEnabled()
 	{
-		// Check for AI
-		if (!s_ACE_Medical_Core_Settings.m_bSecondChanceForAIEnabled && !EntityUtils.IsPlayer(GetOwner()))
-			return false;
-		
+		// Check for AI - if AI setting is disabled, block second chance for AI and possessed AI
+		if (!s_ACE_Medical_Core_Settings.m_bSecondChanceForAIEnabled)
+		{
+			SCR_ECharacterControlType controlType = SCR_CharacterHelper.GetCharacterControlType(GetOwner());
+			if (controlType == SCR_ECharacterControlType.AI || controlType == SCR_ECharacterControlType.POSSESSED_AI)
+				return false;
+		}
+
 		// Check for fall damage
 		if (s_ACE_Medical_Core_Settings.m_bSecondChanceForFallDamageEnabled || m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
 			return true;
 		
 		if (m_fACE_Medical_SecondChanceDeactivationTimeMS - m_fACE_Medical_LastFallDamageTimeMS <= s_ACE_Medical_Core_Settings.m_iSecondChanceDeactivationTimeoutMs)
 			return false;
-		
+
 		return true;
 	}
 	

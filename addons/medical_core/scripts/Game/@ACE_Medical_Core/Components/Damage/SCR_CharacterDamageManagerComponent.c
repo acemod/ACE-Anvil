@@ -6,7 +6,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected SCR_CharacterHitZone m_ACE_Medical_LastStruckPhysicalHitZone;
 	protected SCR_CharacterHealthHitZone m_ACE_Medical_HealthHitZone;
 	protected float m_fACE_Medical_ResilienceRegenScale = 1;
-	
+	protected float m_fACE_Medical_ResilienceDamageScale = 1;
+
 	[RplProp()]
 	protected float m_fACE_Medical_MinHealthScaledForEpinephrine = 0.33;
 	
@@ -27,6 +28,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (s_ACE_Medical_Core_Settings)
 		{
 			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
+			m_fACE_Medical_ResilienceDamageScale = s_ACE_Medical_Core_Settings.m_fResilienceDamageScale;
 			m_fACE_Medical_MinHealthScaledForEpinephrine = s_ACE_Medical_Core_Settings.m_fMinHealthScaledForEpinephrine;
 			Replication.BumpMe();
 		}
@@ -79,7 +81,13 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		return m_fACE_Medical_ResilienceRegenScale;
 	}
-	
+
+	//------------------------------------------------------------------------------------------------
+	float ACE_Medical_GetResilienceDamageScale()
+	{
+		return m_fACE_Medical_ResilienceDamageScale;
+	}
+
 	//------------------------------------------------------------------------------------------------
 	//! Check if epinephrine can be applied to this character
 	bool ACE_Medical_CanApplyEpinephrine(out SCR_EConsumableFailReason failReason)

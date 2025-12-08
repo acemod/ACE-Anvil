@@ -9,9 +9,10 @@ StringTable {
    Target_pt_br "Segure sob o nariz"
    Target_zh_cn "置於鼻下"
    Target_uk_ua "Піднести до носа"
+   Target_kr_ko "코 밑 잡기"
    Modified 1725500839
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B53ACDD034A6}" {
    Id "ACE_Medical-BloodState_Class1"
@@ -21,9 +22,10 @@ StringTable {
    Target_pt_br "Hemorragia de Classe I"
    Target_zh_cn "I 級出血"
    Target_uk_ua "Кровотеча I ступеня"
+   Target_kr_ko "경미한 실혈"
    Modified 1725499800
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B53AC27D464E}" {
    Id "ACE_Medical-BloodState_Class2"
@@ -33,9 +35,10 @@ StringTable {
    Target_pt_br "Hemorragia de Classe II"
    Target_zh_cn "II 級出血"
    Target_uk_ua "Кровотеча II ступеня"
+   Target_kr_ko "보통 실혈"
    Modified 1725499822
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B53AC01F5452}" {
    Id "ACE_Medical-BloodState_Class3"
@@ -45,9 +48,10 @@ StringTable {
    Target_pt_br "Hemorragia de Classe III"
    Target_zh_cn "III 級出血"
    Target_uk_ua "Кровотеча III ступеня"
+   Target_kr_ko "심한 실혈"
    Modified 1725499840
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B53AC6AA6AB1}" {
    Id "ACE_Medical-BloodState_Class4"
@@ -57,9 +61,10 @@ StringTable {
    Target_pt_br "Hemorragia de Classe IV"
    Target_zh_cn "IV 級出血"
    Target_uk_ua "Кровотеча IV ступеня"
+   Target_kr_ko "극심한 실혈"
    Modified 1725499846
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55046CF7CC7}" {
    Id "ACE_Medical-CheckBloodPressureAction"
@@ -69,9 +74,10 @@ StringTable {
    Target_pt_br "Verificar pressão arterial"
    Target_zh_cn "量測血壓"
    Target_uk_ua "Перевірити тиск"
+   Target_kr_ko "혈압 확인"
    Modified 1725500513
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5504DC3E45E}" {
    Id "ACE_Medical-CheckPulseAction"
@@ -81,9 +87,10 @@ StringTable {
    Target_pt_br "Verificar pulso"
    Target_zh_cn "量測脈搏"
    Target_uk_ua "Перевірити пульс"
+   Target_kr_ko "맥박 확인"
    Modified 1725500537
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5503F479D0C}" {
    Id "ACE_Medical-CPRAction"
@@ -93,9 +100,10 @@ StringTable {
    Target_pt_br "Realizar RCP"
    Target_zh_cn "進行心肺復甦術 (CPR)"
    Target_uk_ua "Провести серцево-легеневу реанімацію"
+   Target_kr_ko "심폐소생술 실시"
    Modified 1725500470
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6624FDAA28CE989A}" {
    Id "ACE_Medical-Editor_TooltipDetail_Brain_Name"
@@ -103,9 +111,10 @@ StringTable {
    Target_de_de "Gehirn"
    Target_ru_ru "Мозг"
    Target_zh_cn "大腦"
+   Target_kr_ko "뇌"
    Modified 1725500425
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6230E5C2DA63508A}" {
    Id "ACE_Medical-Editor_TooltipDetail_VitalSigns_Name"
@@ -114,9 +123,10 @@ StringTable {
    Target_ru_ru "Жизненные показатели"
    Target_zh_cn "生命徵象"
    Target_uk_ua "Життєві показники"
+   Target_kr_ko "바이탈 사인"
    Modified 1725500626
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55BAA8F501D}" {
    Id "ACE_Medical-InfoWidget_AmmoniumCarbonate"
@@ -126,9 +136,10 @@ StringTable {
    Target_pt_br "Aumenta a chance de acordar"
    Target_zh_cn "增加甦醒機率"
    Target_uk_ua "Збільшує шанс отямлення"
+   Target_kr_ko "일어날 확률 증가"
    Modified 1725500657
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55BAE36450B}" {
    Id "ACE_Medical-InfoWidget_Epinephrine"
@@ -138,9 +149,10 @@ StringTable {
    Target_pt_br "Aumenta a frequência cardíaca"
    Target_zh_cn "提高心率"
    Target_uk_ua "Підвищує частоту серцевих скорочень"
+   Target_kr_ko "맥박 증가"
    Modified 1725500676
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55BA0A3E335}" {
    Id "ACE_Medical-InfoWidget_Metoprolol"
@@ -150,9 +162,10 @@ StringTable {
    Target_pt_br "Reduz a frequência cardíaca"
    Target_zh_cn "降低心率"
    Target_uk_ua "Знижує частоту серцевих скорочень"
+   Target_kr_ko "맥밤 감소"
    Modified 1725500698
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55BA77C7538}" {
    Id "ACE_Medical-InfoWidget_Naloxone"
@@ -162,9 +175,10 @@ StringTable {
    Target_pt_br "Antagonista para opioides como morfina"
    Target_zh_cn "對嗎啡等鴉片類藥物的拮抗劑"
    Target_uk_ua "Застосовується при передозуванні"
+   Target_kr_ko "모르핀 같은 오이포이드 계열에 대한 길항제"
    Modified 1725500749
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55BB2295B31}" {
    Id "ACE_Medical-InfoWidget_Phenylephrine"
@@ -174,9 +188,10 @@ StringTable {
    Target_pt_br "Aumenta a pressão arterial e diminui o sangramento e transfusão"
    Target_zh_cn "提高血壓，並減緩出血與輸血速度"
    Target_uk_ua "Підвищує артеріальний тиск"
+   Target_kr_ko "혈압을 높히고 출혈과 수혈 속도를 늦춤"
    Modified 1725500793
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5586006E639}" {
    Id "ACE_Medical-Item_AmmoniumCarbonate_Description"
@@ -186,9 +201,10 @@ StringTable {
    Target_pt_br "Administrado a pacientes inconscientes."
    Target_zh_cn "給予無意識患者使用"
    Target_uk_ua "Застосовується до непритомних пацієнтів, УВАГА застосовувати при нормальних показниках ЧСС (близько 70 ударів на секунду) та Артеріальному тиску близько 120/80 "
+   Target_kr_ko "의식불명인 환자에게 투여됩니다."
    Modified 1725500824
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5586D87363C}" {
    Id "ACE_Medical-Item_AmmoniumCarbonate_Name"
@@ -198,9 +214,10 @@ StringTable {
    Target_pt_br "Carbonato de Amônio"
    Target_zh_cn "碳酸銨 (嗅鹽)"
    Target_uk_ua "Амонію карбонат (нюхальна сіль)"
+   Target_kr_ko "탄산암모늄"
    Modified 1725500240
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55B9B65D93A}" {
    Id "ACE_Medical-Item_Epinephrine_Description"
@@ -210,9 +227,10 @@ StringTable {
    Target_pt_br "Administrado a pacientes em parada cardíaca"
    Target_zh_cn "給予心臟驟停的患者使用"
    Target_uk_ua "Застосовується при зупинці серця"
+   Target_kr_ko "심정지 환자에게 투여됩니다."
    Modified 1725500893
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{65C6FCD64D6EB190}" {
    Id "ACE_Medical-Item_Epinephrine_Name"
@@ -221,9 +239,10 @@ StringTable {
    Target_ru_ru "Эпинефрин"
    Target_zh_cn "腎上腺素"
    Target_uk_ua "Адреналін (Епінефрин)"
+   Target_kr_ko "에피네프린"
    Modified 1725499874
    Author "PC Ill"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5585D442A6C}" {
    Id "ACE_Medical-Item_Metoprolol_Description"
@@ -233,9 +252,10 @@ StringTable {
    Target_pt_br "Administrado a pacientes com frequência cardíaca muito alta"
    Target_zh_cn "給予心率過高的患者使用"
    Target_uk_ua "Застосовується при занадто високому пульсі"
+   Target_kr_ko "맥박이 너무 높은 환자에게 투여됩니다."
    Modified 1725500917
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5585EEF5D9C}" {
    Id "ACE_Medical-Item_Metoprolol_Name"
@@ -245,9 +265,10 @@ StringTable {
    Target_pt_br "Metoprolol"
    Target_zh_cn "美托洛爾 (Metoprolol)"
    Target_uk_ua "Метопролол"
+   Target_kr_ko "코 밑 잡기"
    Modified 1725500086
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5582C95F2EA}" {
    Id "ACE_Medical-Item_Naloxone_Description"
@@ -257,9 +278,10 @@ StringTable {
    Target_pt_br "Administrado a pacientes com overdose de opioides"
    Target_zh_cn "給予鴉片類藥物過量的患者使用"
    Target_uk_ua "Застосовується при передозуванні опіоїдами"
+   Target_kr_ko "오이포이드 중독 환자에게 투여됩니다."
    Modified 1725500987
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B558202D6005}" {
    Id "ACE_Medical-Item_Naloxone_Name"
@@ -269,9 +291,10 @@ StringTable {
    Target_pt_br "Naloxona"
    Target_zh_cn "納洛酮 (Naloxone)"
    Target_uk_ua "Налоксон"
+   Target_kr_ko "날록손"
    Modified 1725500078
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55877861E3A}" {
    Id "ACE_Medical-Item_Phenylephrine_Description"
@@ -281,9 +304,10 @@ StringTable {
    Target_pt_br "Administrado a pacientes para elevar a pressão arterial"
    Target_zh_cn "給予因低血壓需要升壓的患者使用"
    Target_uk_ua "Застосовується для підвищення тиску"
+   Target_kr_ko "환자의 혈압을 높일 때 투여됩니다."
    Modified 1725501050
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55875DE022F}" {
    Id "ACE_Medical-Item_Phenylephrine_Name"
@@ -293,9 +317,10 @@ StringTable {
    Target_pt_br "Fenilefrina"
    Target_zh_cn "苯福林 (Phenylephrine)"
    Target_uk_ua "Фенілефрин"
+   Target_kr_ko "페닐에프린"
    Modified 1725500277
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55ED01FBD98}" {
    Id "ACE_Medical-MetoprololInjectionAction"
@@ -305,9 +330,10 @@ StringTable {
    Target_pt_br "Injetar metoprolol"
    Target_zh_cn "注射美托洛爾 (Metoprolol)"
    Target_uk_ua "Ввести метопролол"
+   Target_kr_ko "메토프롤롤 주사"
    Modified 1725501105
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55ECF6624E9}" {
    Id "ACE_Medical-NaloxoneInjectionAction"
@@ -317,9 +343,10 @@ StringTable {
    Target_pt_br "Injetar naloxona"
    Target_zh_cn "注射納洛酮 (Naloxone)"
    Target_uk_ua "Ввести налоксон"
+   Target_kr_ko "날록손 주사"
    Modified 1725501121
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55235D38AF1}" {
    Id "ACE_Medical-Notification_BLOOD_PRESSURE_RESULT"
@@ -329,9 +356,10 @@ StringTable {
    Target_pt_br "pressão arterial em %1/%2 mmHg"
    Target_zh_cn "你測得的血壓為 %1/%2 mmHg"
    Target_uk_ua "У пацієнта тиск %1/%2 мм рт.ст."
+   Target_kr_ko "혈압이 %1/%2 mmHg인 것을 확인했습니다."
    Modified 1725501164
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B5523F76CF1E}" {
    Id "ACE_Medical-Notification_PULSE_RESULT"
@@ -341,9 +369,10 @@ StringTable {
    Target_pt_br "Frequência cardíaca em %1"
    Target_zh_cn "你測得的心律為 %1"
    Target_uk_ua "У пацієнта пульс %1"
+   Target_kr_ko "맥박이 %1인 것을 확인했습니다."
    Modified 1725501458
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{6228B55ED9DB4B14}" {
    Id "ACE_Medical-PhenylephrineInjectionAction"
@@ -353,9 +382,10 @@ StringTable {
    Target_pt_br "Injetar fenilefrina"
    Target_zh_cn "注射苯福林 (Phenylephrine)"
    Target_uk_ua "Ввести фенілефрин"
+   Target_kr_ko "페닐에프린 주사"
    Modified 1725501134
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
  }
 }

@@ -90,6 +90,7 @@ StringTable {
    Id "ACE-RadialMenu_ChangeMagazine"
    Target_en_us "Change mangazine"
    Target_de_de "Magazin wechseln"
+   Target_ko_kr "탄창 교환"
    Modified 1715088550
    Author "Kexanone"
    LastChanged "Kexanone"

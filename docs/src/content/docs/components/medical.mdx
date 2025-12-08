@@ -74,6 +74,8 @@ Summary of settings that can be modified in the server config:
 | `m_fBleedingRateScale`                | Type: `float`**<br />Default: `1.0` | Character bleeding rate multiplier |
 | `m_fMaxTotalBleedingRate`             | Type: `float`**<br />Default: `-1.0` | Maximum possibe bleeding rate in ml/s (Negative value means unlimited) |
 | `m_fBloodRegenScale`                  | Type: `float`**<br />Default: `1.0` | Character blood regeneration rate multiplier |
+| `m_fMedicalKitMaxHealScaled`          | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Maximum scaled health (from 0 to 1) that a medical kit can heal to outside of medical facilities. |
+| `m_fMedicalKitHealingPerExecution`    | Type: `float`**<br />Range: 0 to ∞<br />Default: `10.0` | Amount of health that is restored each execution of the medical kit outside of medical facilities. |
 | `m_ePainScreenEffectType`             | Type: `int`***<br />Default: `WHITE_FLASH`<br />Options:<br />`0` (`NONE`)<br />`1` (`WHITE_FLASH`)<br />`2` (`GREY_FLASH`)<br />`3` (`CHROMATIC_ABERRATION`)<br />`4` (`RADIAL_BLUR`) | What kind of pain screen effect is used |
 | `m_fSecondChanceResilienceRegenScale` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.0` | Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor. |
 | `m_fDefaultSecondChance`              | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Default probability for second chance for killing blows |
@@ -101,6 +103,8 @@ Template for the `missionHeader` in a server config:
             "m_fBleedingRateScale": 1.0,
             "m_fMaxTotalBleedingRate": -1.0,
             "m_fBloodRegenScale": 1.0,
+            "m_fMedicalKitMaxHealScaled": 1.0,
+            "m_fMedicalKitHealingPerExecution": 10.0,
             "m_ePainScreenEffectType": 1,
             "m_fSecondChanceResilienceRegenScale": 0.0,
             "m_fDefaultSecondChance": 1.0,

@@ -10,15 +10,10 @@ ACE_Carrying_HelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_Animatio
   }
   SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
    CompartmentSlots {
-    CargoCompartmentSlot Carried {
-     PassengerPositionInfo EntitySlotInfo s1 {
-      Offset -0.1 -0.6 0.05
+    CargoCompartmentSlot Performer {
+     OverrideEntryPositionInfo PointInfo "{670E0D3DB86D5304}" {
      }
-     ForcedFreeLook 1
-     SeatType 1
-     OverrideEntryPositionInfo PointInfo "{61D2CA8A14132241}" {
-     }
-     OverrideExitPositionInfo PointInfo "{61D2CA8A18570AAB}" {
+     OverrideExitPositionInfo PointInfo "{670E0D3DB3C80C6C}" {
      }
     }
    }
@@ -35,5 +30,5 @@ ACE_Carrying_HelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_Animatio
    }
   }
  }
- m_eID NONE
+ m_bForceRagdollOnTermination 1
 }

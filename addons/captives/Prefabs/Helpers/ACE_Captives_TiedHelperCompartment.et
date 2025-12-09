@@ -24,5 +24,4 @@ ACE_Captives_TiedHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_Anim
    }
   }
  }
- m_eLifeStateChangedGetOutType TELEPORT
 }

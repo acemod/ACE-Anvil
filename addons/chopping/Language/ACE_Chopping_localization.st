@@ -10,9 +10,10 @@ StringTable {
    Target_ru_ru "Убрать куст"
    Target_uk_ua "Прибрати кущ"
    Target_zh_cn "清除樹叢"
+   Target_ko_kr "수풀 제거"
    Modified 1725225029
    Author "kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{5EB746AAD5FF74DB}" {
    Id "ACE_Chopping_RemoveTree"
@@ -23,9 +24,10 @@ StringTable {
    Target_ru_ru "Убрать дерево"
    Target_uk_ua "Прибрати дерево"
    Target_zh_cn "砍樹"
+   Target_ko_kr "나무 제거"
    Modified 1725225047
    Author "kexanone"
-   LastChanged "YuanYu"
+   LastChanged "Psycool"
   }
  }
 }

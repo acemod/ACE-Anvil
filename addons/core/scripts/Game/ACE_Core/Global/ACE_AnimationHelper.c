@@ -51,10 +51,10 @@ class ACE_AnimationTools
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static void TerminateHelperCompartment(notnull IEntity performer, EGetOutType getOutType = EGetOutType.ANIMATED)
+	static void TerminateHelperCompartment(notnull IEntity performer)
 	{
 		ACE_AnimationHelperCompartment helper = GetHelperCompartment(performer);
 		if (helper)
-			helper.Terminate(getOutType);
+			helper.Terminate();
 	}
 }

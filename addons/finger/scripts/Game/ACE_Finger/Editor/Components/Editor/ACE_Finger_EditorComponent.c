@@ -51,17 +51,18 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 	//! Method for local player to request pings on a position or target
 	void SendPing(vector targetPos, SCR_EditableEntityComponent target = null)
 	{
+		ChimeraCharacter player = ChimeraCharacter.Cast(GetGame().GetPlayerController().GetControlledEntity());
+		if (!player || player.GetCharacterController().GetLifeState() != ECharacterLifeState.ALIVE)
+			return;
+		
 		float currentCooldown = m_fPingCooldownS - (GetGame().GetWorld().GetWorldTime() - m_fLastPingTime) / 1000;
 		if (m_fLastPingTime > 0 && currentCooldown > 0)
 		{
 			SCR_NotificationsComponent.SendLocal(ENotification.ACTION_ON_COOLDOWN, currentCooldown * 100);
 			return;
-		};
-		m_fLastPingTime = GetGame().GetWorld().GetWorldTime();
+		}
 		
-		IEntity player = GetGame().GetPlayerController().GetControlledEntity();
-		if (!player)
-			return;
+		m_fLastPingTime = GetGame().GetWorld().GetWorldTime();
 
 		Rpc(RpcAsk_SendPing, GetGame().GetPlayerController().GetPlayerId(), player.GetOrigin(), targetPos, Replication.FindId(target));
 	}

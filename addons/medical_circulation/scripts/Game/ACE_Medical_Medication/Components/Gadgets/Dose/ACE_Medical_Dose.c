@@ -12,7 +12,7 @@ class ACE_Medical_Dose : ScriptAndConfig
 	//------------------------------------------------------------------------------------------------
 	//! Computes the current concentration of this dose based on the administration time and the
 	//! passed config for the pharamockinetics
-	float ComputeConcentration(ACE_Medical_PharmacokineticsConfig config);
+	float ComputeConcentration(ACE_Medical_PharmacokineticsConfig config, ACE_Medical_CharacterContext context = null);
 	
 	//------------------------------------------------------------------------------------------------
 	//! Get the type of the drug administered by this dose
@@ -40,5 +40,26 @@ class ACE_Medical_Dose : ScriptAndConfig
 	bool IsExpired()
 	{
 		return m_bIsExpired;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ForceExpire()
+	{
+		m_bIsExpired = true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_Dose CloneDose()
+	{
+		typename type = Type();
+		if (!type)
+			return null;
+		
+		ACE_Medical_Dose copy = ACE_Medical_Dose.Cast(type.Spawn());
+		if (!copy)
+			return null;
+		
+		copy.m_eDrugType = m_eDrugType;
+		return copy;
 	}
 }

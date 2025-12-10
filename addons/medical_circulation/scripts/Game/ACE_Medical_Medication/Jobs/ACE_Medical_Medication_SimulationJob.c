@@ -18,7 +18,7 @@ class ACE_Medical_Medication_SimulationJob : ACE_IContextFrameJob<ACE_Medical_Ch
 		array<ref array<ref ACE_Medical_Dose>> doses;
 		m_pContext.m_pMedication.GetMedications(drugs, doses);
 		map<ACE_Medical_EDrugType, float> concentrations = ComputeConcentrations(drugs, doses);
-		ApplyEffects(concentrations);
+		ApplyEffects(concentrations, timeSlice);
 		
 		// Unregister once no drug is left to manage
 		if (drugs.IsEmpty())
@@ -53,11 +53,11 @@ class ACE_Medical_Medication_SimulationJob : ACE_IContextFrameJob<ACE_Medical_Ch
 		ACE_Medical_PharmacokineticsConfig config = s_pSettings.GetPharmacokineticsConfig(drug);
 		float totalConcentration = 0;
 		
-		// TO DO: Handle IV infusions
+		// Infusions implement their own ComputeConcentration override, so they flow through this loop
 		for (int i = doses.Count() - 1; i >= 0; i--)
 		{
 			ACE_Medical_Dose dose = doses[i];
-			float concentration = dose.ComputeConcentration(config);
+			float concentration = dose.ComputeConcentration(config, m_pContext);
 			
 			// Remove doses that have expired
 			if (deleteExpiredDoses && dose.IsExpired())
@@ -70,11 +70,11 @@ class ACE_Medical_Medication_SimulationJob : ACE_IContextFrameJob<ACE_Medical_Ch
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ApplyEffects(map<ACE_Medical_EDrugType, float> concentrations)
+	void ApplyEffects(map<ACE_Medical_EDrugType, float> concentrations, float timeSlice)
 	{
 		foreach (ACE_Medical_DrugEffectConfig config : s_pSettings.m_aPharmacodynamicsConfigs)
 		{
-			config.ApplyEffect(m_pContext, concentrations);
+			config.ApplyEffect(m_pContext, concentrations, timeSlice);
 		}
 	}
 	

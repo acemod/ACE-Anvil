@@ -1,0 +1,114 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  SCR_CharacterInventoryStorageComponent "{520EA1D2DB118DAC}" {
+   components {
+    ACE_EquipmentStorageComponent "{671625C6478FB2AB}" {
+     StoragePurpose 0 0x1
+     SaveInLoadout 0
+     UseVirtualInventoryReplication 0
+     InitialStorageSlots {
+      SCR_EquipmentStorageSlot LaryngealTubeSlot {
+       PivotID "Orbicularis_bottomCenterLips"
+       Offset -0.0028 -0.0062 0.0452
+       Angles 0 -90 -5
+       Enabled 0
+       Prefab "{498EBFCE4936F47B}Prefabs/Items/Medicine/KingLT/ACE_Medical_KingLT.et"
+       AllowedItemTypes {
+        "MORPHINE" "SALINE"
+       }
+       AnimatedMeshRefference "{C111ED61F81374EE}Assets/Items/Medicine/KingLT/ACE_Medical_KingLT.xob"
+      }
+      EquipmentStorageSlot OxygenMaskSlot {
+       PivotID "Orbicularis_bottomCenterLips"
+       Offset 0 -0.01 0.006
+       Angles 90 0 0
+       Enabled 0
+       Prefab "{FDFA3EAC0D60C65F}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.et"
+       AllowedItemTypes {
+        "MORPHINE" "SALINE"
+       }
+       AnimatedMeshRefference "{F880E60E75B74C5F}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.xob"
+      }
+     }
+    }
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    SCR_MorphineUserAction "{63112655F652950E}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{63112655E941BA1D}" {
+      Name "#ACE_Medical-UserAction_NeedleDecompression"
+     }
+     ActionTitle "Needle Decompression"
+     m_eHitZoneGroup UPPERTORSO
+     m_eConsumableType ACE_MEDICAL_NCD_KIT
+    }
+    SCR_MorphineUserAction "{63162326FC92EC82}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo UIInfo "{63162326F18A331B}" {
+      Name "Insert King LT"
+     }
+     ActionTitle "King LT"
+     m_eHitZoneGroup HEAD
+     m_eConsumableType ACE_MEDICAL_LARYNGEAL_TUBE
+    }
+    SCR_MorphineUserAction "{64FF4A1151A33D9D}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo UIInfo "{64FF4A1151A33DC4}" {
+      Name "Put oxygen mask on"
+     }
+     ActionTitle "Oxygen mask"
+     m_eHitZoneGroup HEAD
+     m_eConsumableType ACE_MEDICAL_OXYGEN_MASK
+    }
+    ACE_Medical_ChestSealUserAction "{631348EDB9E985D9}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{631348EDB256F161}" {
+      Name "#ACE_Medical-UserAction_ChestSeal"
+     }
+     ActionTitle "Chest Seal"
+     m_eHitZoneGroup UPPERTORSO
+     m_eConsumableType ACE_MEDICAL_CHEST_SEAL
+    }
+    ACE_Medical_CheckVitalsUserAction "{671625C8CF4C0ADB}" {
+     ParentContextList {
+      "Head" "Chest"
+     }
+     UIInfo SCR_ActionUIInfo "{671625C8CF4C0A65}" {
+      Name "#ACE_Medical-UserAction_CheckBreathing"
+      m_sIconName "search"
+     }
+     ActionTitle "Check Breathing"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 12
+     m_eNotificationType ACE_MEDICAL_BREATHING_RESULT
+    }
+    ACE_Medical_CheckVitalsUserAction "{671625D3CC437B03}" {
+     ParentContextList {
+      "LeftArm" "RightArm"
+     }
+     UIInfo SCR_ActionUIInfo "{671625D3CC436EFF}" {
+      Name "#ACE_Medical-UserAction_CheckSpO2"
+      m_sIconName "search"
+     }
+     ActionTitle "Check SpO2"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 12
+     m_eNotificationType ACE_MEDICAL_SPO2_RESULT
+    }
+   }
+  }
+ }
+}

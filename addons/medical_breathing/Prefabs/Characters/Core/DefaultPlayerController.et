@@ -1,0 +1,41 @@
+SCR_PlayerController {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  ACE_RadialMenuComponent "{654944904311E33E}" {
+   m_aRadialMenuControllers {
+    ACE_RadialMenuController "{65494490457B367E}" {
+     m_Data SCR_SelectionMenuData "{654944919C4B07CF}" {
+      m_aEntries {
+       ACE_Medical_ExamineCasualtyRadialMenuCategoryEntry "{654944954316FDE9}" {
+        m_aEntries {
+         ACE_Medical_CheckVitalsRadialMenuEntry "{655A0134FD3F1611}" {
+          Name "#ACE_Medical-UserAction_CheckBreathing"
+          Icon "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons.imageset"
+          IconSetName "Unconscious_UI"
+          m_eNotificationType ACE_MEDICAL_BREATHING_RESULT
+         }
+         ACE_Medical_CheckVitalsRadialMenuEntry "{671625D35500EE32}" {
+          Name "#ACE_Medical-UserAction_CheckSpO2"
+          Icon "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons.imageset"
+          IconSetName "SpO2_UI"
+          m_eNotificationType ACE_MEDICAL_SPO2_RESULT
+         }
+        }
+       }
+       ACE_SelectItemRadialMenuCategoryEntry "{65593867A15A5CE1}" {
+        Name "#ACE_Medical-RadialMenu_AirwayThoraxManagement"
+        Icon "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons.imageset"
+        IconSetName "TPTX_UI"
+        m_pItemSearchPredicate ACE_ConsumableTypeWhitelistItemPredicate "{655A0130DF673626}" {
+         m_aWhitelist {
+          ACE_MEDICAL_NCD_KIT ACE_MEDICAL_CHEST_SEAL ACE_MEDICAL_LARYNGEAL_TUBE ACE_MEDICAL_OXYGEN_MASK
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

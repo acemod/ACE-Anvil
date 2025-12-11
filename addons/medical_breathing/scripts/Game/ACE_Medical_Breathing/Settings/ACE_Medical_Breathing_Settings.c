@@ -9,7 +9,7 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "false", desc: "Enables simulation of blood pH and kidney damage")]
 	bool m_bKidneyEnabled;
 	
-	[Attribute(defvalue: "0.5", desc: "Probability of tongue-based airway obstruction in supine position", params: "0 1")]
+	[Attribute(defvalue: "0.15", desc: "Probability of tongue-based airway obstruction in supine position", params: "0 1")]
 	float m_fAirwayObstructionChance;
 	
 	[Attribute(defvalue: "0.3", desc: "Enables tension pneumothorax and hemothorax", params: "0 1")]

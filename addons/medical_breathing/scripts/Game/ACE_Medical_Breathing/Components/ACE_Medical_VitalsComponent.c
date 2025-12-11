@@ -11,9 +11,9 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	protected float m_fCvenCO2 = 0.0012360371385742145; // kPa
 	
 	[RplProp()]
-	protected bool m_bAreAirwaysObstructed = false;
+	protected bool m_bIsAirwayObstructed = false;
 	[RplProp()]
-	protected bool m_bAreAirwaysOccluded = false;
+	protected bool m_bIsAirwayOccluded = false;
 	[RplProp()]
 	protected float m_fPneumothoraxScale = 0;
 	[RplProp()]
@@ -129,33 +129,33 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Set tongue-based obstruction fo airways
-	void SetAreAirwaysObstructed(bool areObstructed)
+	//! Set tongue-based obstruction of airway
+	void SetIsAirwayObstructed(bool isObstructed)
 	{
-		m_bAreAirwaysObstructed = areObstructed;
+		m_bIsAirwayObstructed = isObstructed;
 		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Are airways obstructed by tongue
-	bool AreAirwaysObstructed()
+	//! Is airway obstructed by tongue
+	bool IsAirwayObstructed()
 	{
-		return m_bAreAirwaysObstructed;
+		return m_bIsAirwayObstructed;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Set vomit-based occlusion fo airways
-	void SetAreAirwaysOccluded(bool areOccluded)
+	//! Set vomit-based occlusion of airway
+	void SetIsAirwayOccluded(bool isOccluded)
 	{
-		m_bAreAirwaysOccluded = areOccluded;
+		m_bIsAirwayOccluded = isOccluded;
 		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Are airways occluded by vomit
-	bool AreAirwaysOccluded()
+	//! Is airway occluded by vomit
+	bool IsAirwayOccluded()
 	{
-		return m_bAreAirwaysOccluded;
+		return m_bIsAirwayOccluded;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -174,7 +174,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	bool CanBreath()
 	{
-		return !m_bAreAirwaysObstructed && !m_bAreAirwaysOccluded && !m_bHasTensionPneumothorax;
+		return !m_bIsAirwayObstructed && !m_bIsAirwayOccluded && !m_bHasTensionPneumothorax;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -188,8 +188,8 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		SetPalvCO2(5.2101385454100555);
 		SetCvenCO2(0.0012360371385742145);
 		SetPneumothoraxScale(0);
-		SetAreAirwaysObstructed(false);
-		SetAreAirwaysOccluded(false);
+		SetIsAirwayObstructed(false);
+		SetIsAirwayOccluded(false);
 		SetHasTensionPneumothorax(false);
 	}
 }

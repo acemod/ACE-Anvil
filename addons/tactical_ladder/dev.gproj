@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_TacticalLadder_Dev"
+ GUID "65AD7CB89F219E38"
+ TITLE "ACE Tactical Ladder Dev"
+ Dependencies {
+  "65AD7D0D9941A380" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{62F93B0123BB0DBF}" {
+      StringTableSource "{82EA2E3394DB4584}Language/ACE_TacticalLadder_localization.st"
+      Languages {
+       LanguageDefinition "{62F93B012156A427}" {
+        Code "cs_cz"
+        StringTableRuntime "{7ADCA2FF2424D54F}Language/ACE_TacticalLadder_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{62F93B012156A46D}" {
+        Code "de_de"
+        StringTableRuntime "{AFA2B8CC3787C46F}Language/ACE_TacticalLadder_localization.de_de.conf"
+       }
+       LanguageDefinition "{62F93B012156A445}" {
+        Code "en_us"
+        StringTableRuntime "{F15232875D74C16E}Language/ACE_TacticalLadder_localization.en_us.conf"
+       }
+       LanguageDefinition "{62F93B012156A3BA}" {
+        Code "es_es"
+        StringTableRuntime "{341E7F0EB376AA71}Language/ACE_TacticalLadder_localization.es_es.conf"
+       }
+       LanguageDefinition "{62F93B012156A3A9}" {
+        Code "fr_fr"
+        StringTableRuntime "{8FB68A3955F54973}Language/ACE_TacticalLadder_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{62F93B012156A382}" {
+        Code "it_it"
+        StringTableRuntime "{0FAA050DF8D7CA8A}Language/ACE_TacticalLadder_localization.it_it.conf"
+       }
+       LanguageDefinition "{62F93B012156A3F5}" {
+        Code "ja_jp"
+        StringTableRuntime "{1FB1B89FC6A6FA21}Language/ACE_TacticalLadder_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{62F93B012156A3E4}" {
+        Code "ko_kr"
+        StringTableRuntime "{BF0F9033558BF91E}Language/ACE_TacticalLadder_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{62F93B012156A330}" {
+        Code "pl_pl"
+        StringTableRuntime "{E37E36C9EB646562}Language/ACE_TacticalLadder_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{62F93B012156A327}" {
+        Code "pt_br"
+        StringTableRuntime "{3609AC05D09AAFD8}Language/ACE_TacticalLadder_localization.pt_br.conf"
+       }
+       LanguageDefinition "{62F93B012156A2D8}" {
+        Code "ru_ru"
+        StringTableRuntime "{6348B8AD4DE3CAAE}Language/ACE_TacticalLadder_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{62F93B012156A239}" {
+        Code "uk_ua"
+        StringTableRuntime "{E910ED5B21CD74FB}Language/ACE_TacticalLadder_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{62F93B012156A229}" {
+        Code "zh_cn"
+        StringTableRuntime "{33A08366186DA4E6}Language/ACE_TacticalLadder_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

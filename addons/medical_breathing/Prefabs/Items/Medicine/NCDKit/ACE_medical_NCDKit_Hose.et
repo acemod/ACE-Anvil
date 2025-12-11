@@ -1,0 +1,8 @@
+GenericEntity {
+ ID "62E122E5AC2285A9"
+ components {
+  MeshObject "{62E122E5AC228586}" {
+   Object "{C4CF2DEE7FBAA24B}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Hose.xob"
+  }
+ }
+}

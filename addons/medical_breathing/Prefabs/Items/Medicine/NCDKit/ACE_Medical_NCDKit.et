@@ -65,7 +65,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      ACE_Medical_NCDKitDamageEffect "{6311264BBDF2C6FC}" {
      }
     }
-    m_eDeviceType ACE_MEDICAL_NCD_KIT
    }
   }
   ACE_Medical_NCDKitAnimationComponent "{62E0016A1BDD19BB}" {

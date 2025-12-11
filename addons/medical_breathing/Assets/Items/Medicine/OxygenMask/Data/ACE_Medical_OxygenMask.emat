@@ -1,0 +1,8 @@
+MatPBRBasic {
+ Cull none
+ Sort translucent
+ BlendMode AlphaBlend
+ BCRMap "{3BE1554FDACBDF50}Assets/Items/Medicine/OxygenMask/Data/ACE_Medical_OxygenMask_BCR.edds"
+ OpacityMap "{5CE3E84267E2DB91}Assets/Items/Medicine/OxygenMask/Data/ACE_Medical_OxygenMask_A.edds"
+ NMOMap "{0339EEDD03BC8DCE}Assets/Items/Medicine/OxygenMask/Data/ACE_Medical_OxygenMask_NMO.edds"
+}

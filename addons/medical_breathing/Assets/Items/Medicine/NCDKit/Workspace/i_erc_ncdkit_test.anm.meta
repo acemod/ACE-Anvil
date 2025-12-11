@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{4BF790D9B734D821}Assets/Items/Medicine/NCDKit/Workspace/i_erc_ncdkit_test.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

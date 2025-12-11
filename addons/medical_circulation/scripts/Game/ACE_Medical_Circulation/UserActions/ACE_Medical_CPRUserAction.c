@@ -65,14 +65,24 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 		if (!super.CanBePerformedScript(user))
 			return false;
 		
-		IEntity owner = GetOwner();
-		if (!owner)
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
 			return false;
+		
+		SCR_CharacterControllerComponent ownerController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
+		if (!ownerController)
+			return false;
+		
+		if (ownerController.ACE_Medical_GetUnconsciousPose() != ACE_Medical_EUnconsciousPose.BACK)
+		{
+			SetCannotPerformReason("#ACE_Medical-FailReason_NotOnBack");
+			return false;
+		}
 		
 		TraceOBB trace = new TraceOBB();
 		trace.Exclude = user;
 		vector transform[4];
-		GetEntryTransform(transform, owner, user);
+		GetEntryTransform(transform, ownerChar, user);
 		
 		for (int i = 0; i < 3; i++)
 		{

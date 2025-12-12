@@ -108,6 +108,18 @@ SCR_ChimeraCharacter {
      "Sort Priority" 12
      m_eNotificationType ACE_MEDICAL_SPO2_RESULT
     }
+    ACE_Medical_ClearVomitAction "{6719486D8DA01A7C}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo UIInfo "{6719486D8DA00BA7}" {
+      Name "#ACE_Medical-UserAction_ClearVomit"
+     }
+     ActionTitle "Clear vomit"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 101
+    }
     ACE_Medical_TiltHeadUserAction "{6719486E84FB2F9A}" {
      ParentContextList {
       "Head"

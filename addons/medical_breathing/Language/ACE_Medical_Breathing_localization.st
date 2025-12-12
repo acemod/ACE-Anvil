@@ -145,6 +145,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{6719486F0C433459}" {
+   Id "ACE_Medical-UserAction_ClearVomit"
+   Target_en_us "Clear vomit"
+   Target_de_de "Erbrochenes entfernen"
+   Modified 1729713671
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6311265639790D08}" {
    Id "ACE_Medical-UserAction_KingLT"
    Target_en_us "Insert King LT"
@@ -166,6 +174,14 @@ StringTable {
    Target_en_us "Put on oxygen mask"
    Target_de_de "Sauerstoffmaske anziehen"
    Modified 1694632641
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{6719486DE90061BC}" {
+   Id "ACE_Medical-UserAction_TiltHead"
+   Target_en_us "Lift chin"
+   Target_de_de "Kinn anheben"
+   Modified 1729712783
    Author "Kexanone"
    LastChanged "Kexanone"
   }

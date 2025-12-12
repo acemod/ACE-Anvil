@@ -21,9 +21,5 @@ class ACE_Medical_LaryngealTubeDamageEffect : SCR_InstantDamageEffect
 		
 		vitalsComponent.SetIsAirwayOccluded(false);
 		vitalsComponent.SetIsAirwayObstructed(false);
-		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(targetChar.GetDamageManager());
-		if (damageManager)
-			damageManager.ACE_Medical_UpdateResilienceRegenScale();
 	}
 }

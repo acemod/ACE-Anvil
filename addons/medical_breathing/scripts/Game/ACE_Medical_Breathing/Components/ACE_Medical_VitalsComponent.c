@@ -134,6 +134,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	{
 		m_bIsAirwayObstructed = isObstructed;
 		Replication.BumpMe();
+		OnUpdateCanBreathServer();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -149,6 +150,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	{
 		m_bIsAirwayOccluded = isOccluded;
 		Replication.BumpMe();
+		OnUpdateCanBreathServer();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -163,6 +165,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	{
 		m_bHasTensionPneumothorax = hasTPTX;
 		Replication.BumpMe();
+		OnUpdateCanBreathServer();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -175,6 +178,18 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	bool CanBreath()
 	{
 		return !m_bIsAirwayObstructed && !m_bIsAirwayOccluded && !m_bHasTensionPneumothorax;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnUpdateCanBreathServer()
+	{
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!char)
+			return;
+		
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
+		if (damageManager)
+			damageManager.ACE_Medical_UpdateResilienceRegenScale();
 	}
 	
 	//------------------------------------------------------------------------------------------------

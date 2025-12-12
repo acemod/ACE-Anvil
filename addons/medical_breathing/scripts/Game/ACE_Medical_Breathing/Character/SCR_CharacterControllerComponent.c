@@ -18,10 +18,6 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(char.FindComponent(ACE_Medical_VitalsComponent));
 		if (vitals)
 			vitals.SetIsAirwayObstructed(ACE_Medical_ShouldAirwayBeObstructed(char));
-		
-		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
-		if (damageManager)
-			damageManager.ACE_Medical_UpdateResilienceRegenScale();
 	}
 	
 	//------------------------------------------------------------------------------------------------

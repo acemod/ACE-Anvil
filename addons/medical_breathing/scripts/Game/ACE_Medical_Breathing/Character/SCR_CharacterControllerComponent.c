@@ -38,4 +38,20 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		
 		return (Math.RandomFloat(0, 1) < settings.m_fAirwayObstructionChance);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_Medical_TiltHead()
+	{
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!char)
+			return;
+		
+		CharacterAnimationComponent animComponent = char.GetAnimationComponent();
+		if (animComponent)
+			animComponent.CallCommand(animComponent.BindCommand("ACE_Medical_CMD_HeadTilt"), 0, 0);
+		
+		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(char.FindComponent(ACE_Medical_VitalsComponent));
+		if (vitals)
+			vitals.SetIsAirwayObstructed(false);
+	}
 }

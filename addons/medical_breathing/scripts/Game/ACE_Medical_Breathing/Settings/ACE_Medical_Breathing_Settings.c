@@ -5,7 +5,7 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "0.15", desc: "Probability of tongue-based airway obstruction in supine position", params: "0 1")]
 	float m_fAirwayObstructionChance;
 	
-	[Attribute(defvalue: "0.3", desc: "Enables tension pneumothorax and hemothorax", params: "0 1")]
+	[Attribute(defvalue: "0.8", desc: "Enables tension pneumothorax and hemothorax", params: "0 1")]
 	float m_fPneumothoraxChance;
 	
 	[Attribute(defvalue: "0.1", desc: "Maximum loss of lung volume due to pneumothorax in percentage", params: "0 1")]

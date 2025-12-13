@@ -82,7 +82,7 @@ SCR_ChimeraCharacter {
     }
     ACE_Medical_CheckVitalsUserAction "{671625C8CF4C0ADB}" {
      ParentContextList {
-      "Head" "Chest"
+      "Head"
      }
      UIInfo SCR_ActionUIInfo "{671625C8CF4C0A65}" {
       Name "#ACE_Medical-UserAction_CheckBreathing"

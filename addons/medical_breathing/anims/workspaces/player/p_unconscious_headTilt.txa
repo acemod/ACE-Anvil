@@ -1,0 +1,41 @@
+$animation "" {
+ #version 2
+ #fps 30
+ #numFrames 0
+ $node "Neck1" {
+  $keys t q {
+   $frame 0 {
+    #t 0.000002 0.290313 0.0000001
+    #q -0.00000017 -0.99895829 -0.04563709 0.00000005
+   }
+  }
+  $node "Neck2" {
+   $keys t q {
+    $frame 0 {
+     #t 0 0.0499381 0.0000016
+     #q 0.02789906 -0 -0.0000001 0.99961084
+    }
+   }
+   $node "Neck3" {
+    $keys t q {
+     $frame 0 {
+      #t -0.000001 0.0478995 -0.0000011
+      #q 0.0436016 -0 -0 0.99904901
+     }
+    }
+    $node "Head" {
+     $keys t q {
+      $frame 0 {
+       #t 0 0.042274 0.0020643
+       #q 0.24094775 -0.00000001 0 0.97053814
+      }
+     }
+    }
+   }
+  }
+ }
+ $custProps {
+  #custProp "profile" "ACE_NeckABS"
+  #custProp "sourceFile" "Character_AnimationRig_Unconscious.blend"
+ }
+}

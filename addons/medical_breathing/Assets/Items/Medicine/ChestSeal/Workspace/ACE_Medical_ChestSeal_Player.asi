@@ -1,0 +1,31 @@
+AnimSetInstanceSource "{62DF7A9FEDEE004C}" {
+ Template "{A0C96A478C33502E}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal.ast"
+ Lines {
+  AnimSetInstanceSource_Line "ChestSeal.Cro.ReviveOther" {
+   Resource "{8424BFB08A6BDD31}Assets/Items/Medicine/ChestSeal/Workspace/p_cro_chestseal_revive.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSeal.Cro.Idle" {
+   Resource "{0FD77936C746BD72}Assets/Items/Medicine/NCDKit/Workspace/p_cro_ncdkit_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSeal.Erc.Idle" {
+   Resource "{7DFFA840FBAE1936}Assets/Items/Medicine/NCDKit/Workspace/p_erc_ncdkit_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSeal.Pne.Idle" {
+   Resource "{F0C9C5052F43B57B}Assets/Items/Medicine/NCDKit/Workspace/p_pne_ncdkit_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSeal.Erc.FingerAnim" {
+   Resource "{5429FEB641365E62}Assets/Items/Medicine/ChestSeal/Workspace/p_erc_chestseal_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSealAmbulance.LeftPatient.ReviveOther" {
+   Resource "{890624C491AE5144}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_healing_morphin_L.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSealAmbulance.RightPatient.ReviveOther" {
+   Resource "{780D1C90E2F164A8}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_healing_morphin_R.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSeal.Cro.FingerAnim" {
+   Resource "{C69EF2A1D7762FB0}Assets/Items/Medicine/ChestSeal/Workspace/p_cro_chestseal_fingerAnim.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{62DF7A9FE5874DBB}" {
+ }
+}

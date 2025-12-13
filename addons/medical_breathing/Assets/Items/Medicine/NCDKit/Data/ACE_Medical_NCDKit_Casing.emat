@@ -1,0 +1,12 @@
+MatPBRBasic {
+ Color 0.479 0.479 0.479 1
+ SpecularIBL 0.479 0.479 0.479 1
+ Cull none
+ Specular 0.913 0.88 0.863 1
+ SpecularMul 0.821
+ RoughnessScale 0.5
+ MetalnessScale 0
+ DielectricReflectance 0.16
+ BCRMap "{B0A69399D63106CA}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Casing_BCR.edds"
+ NMOMap "{887E280B0F465454}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Casing_NMO.edds"
+}

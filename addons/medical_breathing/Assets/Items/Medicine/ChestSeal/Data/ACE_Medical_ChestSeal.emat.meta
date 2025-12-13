@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{D812CBFEB313745C}Assets/Items/Medicine/ChestSeal/Data/ACE_Medical_ChestSeal.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

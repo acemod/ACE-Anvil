@@ -44,9 +44,6 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		if (animEventType != animComponent.BindEvent("ACE_Medical_Event_UnconsciousPoseChange"))
 			return;
 		
-		if (intParam == m_eACE_Medical_UnconsciousPose)
-			return;
-		
 		ACE_Medical_Reposition(intParam);
 	}
 	

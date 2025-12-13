@@ -1,0 +1,32 @@
+AnimSrcGraph {
+ AnimSetTemplate "{A0C96A478C33502E}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal.ast"
+ ControlTemplate AnimSrcGCT "{62DAF04941656164}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+   AnimSrcGCTVarFloat LookX {
+    MaxValue 1
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_HealOther {
+   }
+   AnimSrcGCTCmd CMD_Revive {
+   }
+   AnimSrcGCTCmd CMD_HealSelf {
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "MEDICAL"
+   "ACE_Medical_ChestSeal"
+  }
+ }
+ Debug AnimSrcGD "{62DAF0494165616E}" {
+ }
+ GraphFilesResourceNames {
+  "{9D3512FD2555EDED}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

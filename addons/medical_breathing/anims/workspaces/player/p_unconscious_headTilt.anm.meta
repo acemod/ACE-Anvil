@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{93723BE3F1EB1D6B}anims/workspaces/player/p_unconscious_headTilt.anm"
+ Configurations {
+  TXAResourceClass PC {
+   SourcePath "Character_AnimationRig_Unconscious.blend"
+   SourceProfile "ACE_NeckABS"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

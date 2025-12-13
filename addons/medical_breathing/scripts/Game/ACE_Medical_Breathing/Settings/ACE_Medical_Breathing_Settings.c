@@ -5,6 +5,12 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "0.15", desc: "Probability of tongue-based airway obstruction in supine position", params: "0 1")]
 	float m_fAirwayObstructionChance;
 	
+	[Attribute(defvalue: "0.1", desc: "Chance for unconscious patient to vomit. Evaulated once a minute.", params: "0 1")]
+	float m_fVomitChancePerMinute;
+	
+	[Attribute(defvalue: "6", desc: "Minimum delay for vomiting again in minutes", params: "0 inf")]
+	float m_fVomitCooldown;
+	
 	[Attribute(defvalue: "0.8", desc: "Enables tension pneumothorax and hemothorax", params: "0 1")]
 	float m_fPneumothoraxChance;
 	

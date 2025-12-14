@@ -11,7 +11,7 @@ SCR_PlayerController {
          ACE_Medical_CheckVitalsRadialMenuEntry "{655A0134FD3F1611}" {
           Name "#ACE_Medical-UserAction_CheckBreathing"
           Icon "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons.imageset"
-          IconSetName "Unconscious_UI"
+          IconSetName "Lungs_UI"
           m_eNotificationType ACE_MEDICAL_BREATHING_RESULT
          }
          ACE_Medical_CheckVitalsRadialMenuEntry "{671625D35500EE32}" {

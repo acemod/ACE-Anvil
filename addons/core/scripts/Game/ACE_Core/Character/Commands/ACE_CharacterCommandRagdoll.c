@@ -18,7 +18,7 @@ class ACE_CharacterCommandRagdoll : CharacterCommandScripted
 	//------------------------------------------------------------------------------------------------
 	override void OnActivate()
 	{
-		m_pCharController.Ragdoll(true);
+		//m_pCharController.Ragdoll(true);
 		
 		if (m_fDuration >= 0)
 			GetGame().GetCallqueue().CallLater(Terminate, m_fDuration * 1000);

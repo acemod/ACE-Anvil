@@ -20,4 +20,10 @@ class ACE_Medical_ResuscitationState : ACE_Medical_IVitalState
 	{
 		return Math.Min(super.ComputeMeanArterialPressure(context, timeSlice), s_pCirculationSettings.m_CardiacArrestThresholds.m_fMeanArterialPressureHighKPA);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override protected ACE_Medical_ECardiacRhythm ComputeCardiacRhythm(ACE_Medical_CharacterContext context, float timeSlice)
+	{
+		return ACE_Medical_ECardiacRhythm.Unknown;
+	}
 }

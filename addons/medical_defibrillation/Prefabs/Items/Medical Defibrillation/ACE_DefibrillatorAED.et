@@ -1,9 +1,6 @@
 GenericEntity : "{039D069A46C6501E}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorBase.et" {
  ID "508AB2013EEE1E00"
  components {
-  ACE_MedicalDefibrillation_DefibrillatorComponent "{655C16E1F7265C60}" {
-   m_eDefibrillatorEmulation Automated
-  }
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
     ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
@@ -13,22 +10,6 @@ GenericEntity : "{039D069A46C6501E}Prefabs/Items/Medical Defibrillation/ACE_Defi
      SizeSetupStrategy Manual
      ItemDimensions 15 15 15
      ItemVolume 3000
-    }
-   }
-  }
-  ActionsManagerComponent "{508AB5952B584B2E}" {
-   additionalActions {
-    ACE_MedicalDefibrillation_DefibrillatorAnalyseUserAction "{652723B8A735E8A7}" {
-     ParentContextList {
-      "default"
-     }
-     UIInfo UIInfo "{652723B8BA8D3E94}" {
-      Name "#ACE_MedicalDefibrillation-AnalyseUserAction_Name"
-      Icon "{B547588B1CEBEC1D}UI/Textures/DamageState/damageState-unconscious.edds"
-     }
-     ActionTitle "Analyse"
-     Duration 1
-     "Sort Priority" 1
     }
    }
   }

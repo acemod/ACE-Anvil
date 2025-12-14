@@ -3,12 +3,12 @@ GameProject {
  GUID "64FF097BE776612B"
  TITLE "ACE Medical Defibrillation"
  Dependencies {
-  "6214CEA5DA92BFF3" "60C4CE4888FF4621" "60C4C12DAE90727B" "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "60C4CE4888FF4621" "60C4C12DAE90727B" "6214CEA5DA92BFF3"
  }
  Configurations {
   GameProjectConfig PC {
    SystemModuleSettings SystemModuleSettings "{5F10A1570304557B}" {
-    DefaultConfig "{86E953538A28A98E}Configs/Systems/ChimeraSystemsConfig.conf"
+    DefaultConfig "{86E953538A28A98D}Configs/Systems/ChimeraSystemsConfig.conf"
    }
    WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
     StringTables {

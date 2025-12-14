@@ -2,10 +2,8 @@ enum ACE_Medical_ECardiacRhythm
 {
 	Unknown,
 	PEA,
-	Idioventricular,
-	Junctional,
-	SinusBrady,
+	VF,
+	Bradycardia,
 	Sinus,
-	SinusTachy,
-	VF
+	Tachycardia
 }

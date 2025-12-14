@@ -5,12 +5,21 @@ class ACE_Medical_ConsumableChestSeal : SCR_ConsumableEffectHealthItems
 	//------------------------------------------------------------------------------------------------
 	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
 	{
-		ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(target.FindComponent(ACE_Medical_VitalsComponent));
+		SCR_ChimeraCharacter targetChar = SCR_ChimeraCharacter.Cast(target);
+		if (!targetChar)
+			return false;
+		
+		ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(targetChar.FindComponent(ACE_Medical_VitalsComponent));
 		if (!vitalsComponent || vitalsComponent.GetPneumothoraxScale() <= 0)
 		{
 			failReason = SCR_EConsumableFailReason.UNDAMAGED;
 			return false;
 		}
+		
+		// user is item if applied to oneself
+		// cannot be applied to oneself in prone stance
+		if (!SCR_ChimeraCharacter.Cast(user) && targetChar.GetCharacterController().GetStance() == ECharacterStance.PRONE)
+			return false;
 		
 		return true;
 	}

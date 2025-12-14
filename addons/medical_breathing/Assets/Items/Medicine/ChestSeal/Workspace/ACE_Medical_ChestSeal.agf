@@ -29,6 +29,15 @@ AnimSrcGraphFile {
        TimeStorage "Real Time"
        IsExit 1
       }
+      AnimSrcNodeState "Heal Self" {
+       Tags {
+        "TagLItemAction"
+       }
+       EditorPos -47.423 -3.225
+       Child "Heal Self Anim"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
      }
      transitions {
       AnimSrcNodeTransition "{62DAF07B55581DD8}" {
@@ -36,7 +45,7 @@ AnimSrcGraphFile {
        ToState "Idle"
        Duration "0.5"
        Condition "GetCommandI(CMD_Revive) == -2 || GetCommandI(CMD_HealOther) == -2 || GetCommandI(CMD_HealSelf) == -2 || RemainingTimeLess(0.001)"
-       BlendFn S
+       BlendFn "S"
        PostEval 1
       }
       AnimSrcNodeTransition "{62DAF00DC0749859}" {
@@ -48,6 +57,11 @@ AnimSrcGraphFile {
        FromState "Idle"
        ToState "Revive Other Amblance"
        Condition "(IsCommand(CMD_HealOther) || IsCommand(CMD_Revive)) && IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{671D3BFDD77BB901}" {
+       FromState "Idle"
+       ToState "Heal Self"
+       Condition "IsCommand(CMD_HealSelf)"
       }
      }
     }
@@ -121,6 +135,7 @@ AnimSrcGraphFile {
      EditorPos -47.7 3.9
      Child0 "Idle Finger Anim"
      Child1 "Idle Pose"
+     Optimization "Always eval both"
     }
     AnimSrcNodePose "Idle Finger Anim" {
      EditorPos -49 5.2
@@ -181,6 +196,10 @@ AnimSrcGraphFile {
      Child "healOther_Src"
      Group "ChestSealAmbulance"
      Column "LeftPatient"
+    }
+    AnimSrcNodeSource "Heal Self Anim" {
+     EditorPos -50.044 -3.343
+     Source "ChestSeal.Cro.HealSelf"
     }
    }
   }

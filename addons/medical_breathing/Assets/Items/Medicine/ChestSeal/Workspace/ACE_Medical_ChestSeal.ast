@@ -4,6 +4,7 @@ AnimSetTemplateSource {
    Name "ChestSeal"
    Animations {
     "FingerAnim"
+    "HealSelf"
     "Idle"
     "ReviveOther"
    }

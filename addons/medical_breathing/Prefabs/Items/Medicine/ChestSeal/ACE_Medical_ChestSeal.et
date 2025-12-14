@@ -64,6 +64,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   SCR_ConsumableItemComponent "{631348EAC4135D63}" {
    m_eAnimVariable ADRIANOV
+   m_eUseMask 7
    m_ConsumableEffect ACE_Medical_ConsumableChestSeal "{631348EAC4135D64}" {
     m_aDamageEffectsToLoad {
      ACE_Medical_ChestSealDamageEffect "{631348EDD7BDA5AF}" {

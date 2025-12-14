@@ -25,6 +25,9 @@ AnimSetInstanceSource "{62DF7A9FEDEE004C}" {
   AnimSetInstanceSource_Line "ChestSeal.Cro.FingerAnim" {
    Resource "{C69EF2A1D7762FB0}Assets/Items/Medicine/ChestSeal/Workspace/p_cro_chestseal_fingerAnim.anm"
   }
+  AnimSetInstanceSource_Line "ChestSeal.Cro.HealSelf" {
+   Resource "{83A93AABB48F6247}Assets/Items/Medicine/ChestSeal/Workspace/p_cro_chestseal_selfHeal.anm"
+  }
  }
  RBF AnimSetInstanceSourceRBFArray "{62DF7A9FE5874DBB}" {
  }

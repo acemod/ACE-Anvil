@@ -1,0 +1,50 @@
+FrameWidgetClass {
+ {
+  OverlayWidgetClass "{60DCC8DF2787CD32}" {
+   Prefab "{60DCC8DF2787CD32}"
+   {
+    SizeLayoutWidgetClass "{589F049780D13CA5}" {
+     Prefab "{589F049780D13CA5}"
+     {
+      VerticalLayoutWidgetClass "{589F049780D13CA3}" {
+       Prefab "{589F049780D13CA3}"
+       {
+        OverlayWidgetClass "{589F0497F7A00346}" {
+         Prefab "{589F0497F7A00346}"
+         {
+          HorizontalLayoutWidgetClass "{60DCC8DF2787CD00}" {
+           Prefab "{60DCC8DF2787CD00}"
+           {
+            SizeLayoutWidgetClass "{60E8ACB4B49799E9}" {
+             Prefab "{60E8ACB4B49799E9}"
+             {
+              OverlayWidgetClass "{60E672A53165A6BB}" {
+               Prefab "{60E672A53165A6BB}"
+               {
+                VerticalLayoutWidgetClass "{60DCC8DF2787CD61}" {
+                 Prefab "{60DCC8DF2787CD61}"
+                 {
+                  FrameWidgetClass "{671C3808486C0DD3}" : "{B9C23E1A72BB9D35}UI/layouts/Menus/Inventory/Medical/ACE_Medical_MedicationInfo.layout" {
+                   Name "ACE_Medical_MedicationInfo"
+                   Slot LayoutSlot "{671C3808486C0DB7}" {
+                    Padding 0 0 0 4
+                   }
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

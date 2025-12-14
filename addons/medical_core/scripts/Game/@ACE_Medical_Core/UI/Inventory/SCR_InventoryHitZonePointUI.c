@@ -6,6 +6,7 @@ modded class SCR_InventoryHitZonePointUI : ScriptedWidgetComponent
 	protected ACE_Medical_EUIInfoType m_eACE_Medical_TooltipInfoType;
 	
 	//------------------------------------------------------------------------------------------------
+	//! Create tooltip
 	//! Override this to add specific info to m_DamageInfo associated with type
 	protected void ACE_Medical_ShowGlobalStatTooltip(Widget w, ACE_Medical_EUIInfoType type)
 	{
@@ -37,6 +38,7 @@ modded class SCR_InventoryHitZonePointUI : ScriptedWidgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Show tooltip
 	override bool OnMouseEnter(Widget w, int x, int y)
 	{
 		super.OnMouseEnter(w, x, y);
@@ -48,6 +50,7 @@ modded class SCR_InventoryHitZonePointUI : ScriptedWidgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Hide tooltip
 	override bool OnMouseLeave(Widget w, Widget enterW, int x, int y)
 	{
 		super.OnMouseLeave(w, enterW, x, y);

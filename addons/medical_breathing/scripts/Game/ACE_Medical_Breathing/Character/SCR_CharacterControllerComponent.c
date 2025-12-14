@@ -54,4 +54,28 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		if (vitals)
 			vitals.SetIsAirwayObstructed(false);
 	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Toggle vomit handling
+	override void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState, bool isJIP)
+	{
+		super.OnLifeStateChanged(previousLifeState, newLifeState, isJIP);
+		
+		// OnLifeStateChanged sometimes gets triggered without a change in state
+		if (!Replication.IsServer() || previousLifeState == newLifeState)
+			return;
+		
+		ACE_Medical_VomitSystem vomitSystem = ACE_Medical_VomitSystem.GetInstance();
+		if (!vomitSystem)
+			return;
+		
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar)
+			return;
+		
+		if (newLifeState == ECharacterLifeState.INCAPACITATED)
+			vomitSystem.Register(ownerChar);
+		else
+			vomitSystem.Unregister(ownerChar);
+	}
 }

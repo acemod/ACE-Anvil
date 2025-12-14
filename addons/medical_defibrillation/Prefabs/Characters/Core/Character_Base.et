@@ -3,13 +3,12 @@ SCR_ChimeraCharacter {
  components {
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
-    ACE_MedicalDefibrillation_UserActions_ConnectPatient "{671A224D28BCF579}" {
+    ACE_Medical_Defibrillation_UserActions_DefibConnect "{671C09FD5BB621C8}" {
      ParentContextList {
       "Chest"
      }
-     UIInfo UIInfo "{671A224C4D3D93B8}" {
-      Name "$ConnectPatient"
-      Icon "{D6B46B6655BC3FD5}UI/Textures/Editor/ContextMenu/ContextAction_LightningStrike.edds"
+     UIInfo UIInfo "{671C09FD5D000AFC}" {
+      Name "#ConnectPlaceholder"
      }
      Duration 1
     }

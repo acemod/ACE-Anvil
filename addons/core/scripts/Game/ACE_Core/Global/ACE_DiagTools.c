@@ -45,7 +45,7 @@ class ACE_DiagTools
 		target = IEntity.Cast(camera.GetCursorTarget());
 		if (target)
 		{
-			if (ACE_MedicalDefibrillation_DefibrillatorComponent.Cast(target.FindComponent(ACE_MedicalDefibrillation_DefibrillatorComponent)))
+			if (ACE_Medical_Defibrillation_DefibComponent.Cast(target.FindComponent(ACE_Medical_Defibrillation_DefibComponent)))
 				return false;
 			
 			targetType = "Target";

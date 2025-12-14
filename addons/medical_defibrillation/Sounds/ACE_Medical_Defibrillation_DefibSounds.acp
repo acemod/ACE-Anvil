@@ -1,0 +1,923 @@
+AudioClass {
+ sounds {
+  SoundClass "3081" {
+   id 3081
+   name "ACE_Medical_Defibrillation_SoundCharging"
+   version 5
+   tl 197.823 -290.924
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "5138:65" {
+       id 5138
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB 3
+  }
+  SoundClass "8201" {
+   id 8201
+   name "ACE_Medical_Defibrillation_SoundCharged"
+   version 5
+   tl 208.57 132.646
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "12306:65" {
+       id 12306
+       port 65
+      }
+     }
+    }
+   }
+  }
+  SoundClass "14345" {
+   id 14345
+   name "ACE_Medical_Defibrillation_SoundThump"
+   version 5
+   tl 209.57 530.426
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "16402:65" {
+       id 16402
+       port 65
+      }
+     }
+    }
+   }
+  }
+  SoundClass "25609" {
+   id 25609
+   name "ACE_Medical_Defibrillation_SoundShockAdvised"
+   version 5
+   tl 1282.127 -287.407
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "21522:65" {
+       id 21522
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -9
+  }
+  SoundClass "30729" {
+   id 30729
+   name "ACE_Medical_Defibrillation_SoundNoShockAdvised"
+   version 5
+   tl 1294.471 109.343
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "31762:65" {
+       id 31762
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -9
+  }
+  SoundClass "37897" {
+   id 37897
+   name "ACE_Medical_Defibrillation_SoundConnected"
+   version 5
+   tl 1282.659 500.987
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "34834:65" {
+       id 34834
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -9
+  }
+  SoundClass "39945" {
+   id 39945
+   name "ACE_Medical_Defibrillation_SoundDisconnected"
+   version 5
+   tl 1296.194 890.331
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "44050:65" {
+       id 44050
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -9
+  }
+  SoundClass "48137" {
+   id 48137
+   name "ACE_Medical_Defibrillation_SoundAnalysing"
+   version 5
+   tl 1298.278 1275.64
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "50194:65" {
+       id 50194
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -9
+  }
+  SoundClass "56329" {
+   id 56329
+   name "ACE_Medical_Defibrillation_SoundCPRBeep"
+   version 5
+   tl 1313.063 1673.856
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "55314:65" {
+       id 55314
+       port 65
+      }
+     }
+    }
+   }
+  }
+ }
+ generators {
+  GeneratorClass "51205" {
+   id 51205
+   name "Generator 50"
+   version 6
+   tl 727.523 1677.177
+   function Triangle
+   volume 0.251
+   volume_dB -12
+   time 100
+   "Termination Fade Out" 0
+  }
+ }
+ shaders {
+  ShaderClass "5138" {
+   id 5138
+   name "Shader 2"
+   version 5
+   tl -27.063 -292.459
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "6172:65" {
+       id 6172
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "2067:65" {
+       id 2067
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "4117:65" {
+       id 4117
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "1028:65" {
+       id 1028
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "12306" {
+   id 12306
+   name "Shader 2"
+   version 5
+   tl -25.316 131.79
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "11292:65" {
+       id 11292
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "10259:65" {
+       id 10259
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "9237:65" {
+       id 9237
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "7172:65" {
+       id 7172
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "16402" {
+   id 16402
+   name "Shader 2"
+   version 5
+   tl -24.316 529.57
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "15388:65" {
+       id 15388
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "18451:65" {
+       id 18451
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "13333:65" {
+       id 13333
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "17412:65" {
+       id 17412
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "21522" {
+   id 21522
+   name "Shader 2"
+   version 5
+   tl 1036.142 -292.697
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "24604:65" {
+       id 24604
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "22547:65" {
+       id 22547
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "23573:65" {
+       id 23573
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "20484:65" {
+       id 20484
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "31762" {
+   id 31762
+   name "Shader 2"
+   version 5
+   tl 1048.486 104.053
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "28700:65" {
+       id 28700
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "26643:65" {
+       id 26643
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "29717:65" {
+       id 29717
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "27652:65" {
+       id 27652
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "34834" {
+   id 34834
+   name "Shader 2"
+   version 5
+   tl 1036.674 495.697
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "36892:65" {
+       id 36892
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "35859:65" {
+       id 35859
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "33813:65" {
+       id 33813
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "32772:65" {
+       id 32772
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "44050" {
+   id 44050
+   name "Shader 2"
+   version 5
+   tl 1050.209 885.041
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "38940:65" {
+       id 38940
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "42003:65" {
+       id 42003
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "40981:65" {
+       id 40981
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "43012:65" {
+       id 43012
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "50194" {
+   id 50194
+   name "Shader 2"
+   version 5
+   tl 1052.293 1270.35
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "45084:65" {
+       id 45084
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "49171:65" {
+       id 49171
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "46101:65" {
+       id 46101
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "47108:65" {
+       id 47108
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "55314" {
+   id 55314
+   name "Shader 2"
+   version 5
+   tl 1028.753 1678.393
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "53276:65" {
+       id 53276
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "52243:65" {
+       id 52243
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "54293:65" {
+       id 54293
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "51205:65" {
+       id 51205
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass "2067" {
+   id 2067
+   name "Amplitude 4"
+   version 5
+   tl -260.911 -115.214
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "10259" {
+   id 10259
+   name "Amplitude 4"
+   version 5
+   tl -259.163 309.033
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "18451" {
+   id 18451
+   name "Amplitude 4"
+   version 5
+   tl -258.163 706.813
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "22547" {
+   id 22547
+   name "Amplitude 4"
+   version 5
+   tl 724.771 -123.145
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "26643" {
+   id 26643
+   name "Amplitude 4"
+   version 5
+   tl 737.114 273.605
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "35859" {
+   id 35859
+   name "Amplitude 4"
+   version 5
+   tl 725.302 665.249
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "42003" {
+   id 42003
+   name "Amplitude 4"
+   version 5
+   tl 738.838 1054.593
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "49171" {
+   id 49171
+   name "Amplitude 4"
+   version 5
+   tl 740.922 1439.902
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "52243" {
+   id 52243
+   name "Amplitude 4"
+   version 5
+   tl 719.095 1859.004
+   curve "1/r"
+   outerRange 50
+  }
+ }
+ frequency {
+  FrequencyClass "4117" {
+   id 4117
+   name "Frequency 5"
+   version 5
+   tl -259.195 -35.742
+   enableDistanceAtt 1
+  }
+  FrequencyClass "9237" {
+   id 9237
+   name "Frequency 5"
+   version 5
+   tl -257.448 388.507
+   enableDistanceAtt 1
+  }
+  FrequencyClass "13333" {
+   id 13333
+   name "Frequency 5"
+   version 5
+   tl -256.448 786.287
+   enableDistanceAtt 1
+  }
+  FrequencyClass "23573" {
+   id 23573
+   name "Frequency 5"
+   version 5
+   tl 726.487 -43.673
+   enableDistanceAtt 1
+  }
+  FrequencyClass "29717" {
+   id 29717
+   name "Frequency 5"
+   version 5
+   tl 738.83 353.077
+   enableDistanceAtt 1
+  }
+  FrequencyClass "33813" {
+   id 33813
+   name "Frequency 5"
+   version 5
+   tl 727.018 744.721
+   enableDistanceAtt 1
+  }
+  FrequencyClass "40981" {
+   id 40981
+   name "Frequency 5"
+   version 5
+   tl 740.554 1134.065
+   enableDistanceAtt 1
+  }
+  FrequencyClass "46101" {
+   id 46101
+   name "Frequency 5"
+   version 5
+   tl 742.638 1519.374
+   enableDistanceAtt 1
+  }
+  FrequencyClass "54293" {
+   id 54293
+   name "Frequency 5"
+   version 5
+   tl 722.324 1938.476
+   enableDistanceAtt 1
+  }
+ }
+ banks_local {
+  BankLocalClass "1028" {
+   id 1028
+   name "Charging"
+   version 7
+   tl -258.969 -295.401
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorSound_Charging.wav" {
+     Filename "{D0B7ABE445409970}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_Charging.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "7172" {
+   id 7172
+   name "Charged"
+   version 7
+   tl -257.481 129.895
+   "Loop count" 255
+   "Infinite loop" 1
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorSound_Charged.wav" {
+     Filename "{496A55EAAAD3C099}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_Charged.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "17412" {
+   id 17412
+   name "Shock Thump"
+   version 7
+   tl -256.481 528.998
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorSound_ShockThump.wav" {
+     Filename "{A9F7DB0FF2EE8CC5}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_ShockThump.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "20484" {
+   id 20484
+   name "Shock Advised"
+   version 7
+   tl 731.967 -297.987
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_ShockAdvised.wav" {
+     Filename "{B947101D98B22D7C}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_ShockAdvised.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "27652" {
+   id 27652
+   name "No Shock Advised"
+   version 7
+   tl 745.633 97.441
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_NoShockAdvised.wav" {
+     Filename "{1FA0148AF1CCD1DD}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_NoShockAdvised.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "32772" {
+   id 32772
+   name "Connected"
+   version 7
+   tl 733.821 489.085
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Connected.wav" {
+     Filename "{B5C11AB72AC005FA}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Connected.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "43012" {
+   id 43012
+   name "Disconnected"
+   version 7
+   tl 747.357 878.429
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Disconnected.wav" {
+     Filename "{738508CCEC10793E}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Disconnected.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "47108" {
+   id 47108
+   name "Analysing"
+   version 7
+   tl 749.441 1263.738
+   Samples {
+    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Analysing.wav" {
+     Filename "{8E2A822D6B05EBBE}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Analysing.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass "6172" {
+   id 6172
+   name "Spatiality 3"
+   version 5
+   tl -256.907 -203.437
+   spatialFactor 1
+  }
+  SpatialityClass "11292" {
+   id 11292
+   name "Spatiality 3"
+   version 5
+   tl -255.161 222.127
+   spatialFactor 1
+  }
+  SpatialityClass "15388" {
+   id 15388
+   name "Spatiality 3"
+   version 5
+   tl -254.161 619.907
+   spatialFactor 1
+  }
+  SpatialityClass "24604" {
+   id 24604
+   name "Spatiality 3"
+   version 5
+   tl 728.775 -211.368
+   spatialFactor 1
+  }
+  SpatialityClass "28700" {
+   id 28700
+   name "Spatiality 3"
+   version 5
+   tl 741.118 185.382
+   spatialFactor 1
+  }
+  SpatialityClass "36892" {
+   id 36892
+   name "Spatiality 3"
+   version 5
+   tl 729.306 577.026
+   spatialFactor 1
+  }
+  SpatialityClass "38940" {
+   id 38940
+   name "Spatiality 3"
+   version 5
+   tl 742.842 966.37
+   spatialFactor 1
+  }
+  SpatialityClass "45084" {
+   id 45084
+   name "Spatiality 3"
+   version 5
+   tl 744.926 1351.679
+   spatialFactor 1
+  }
+  SpatialityClass "53276" {
+   id 53276
+   name "Spatiality 3"
+   version 5
+   tl 723.099 1770.781
+   spatialFactor 1
+  }
+ }
+ version 1
+ listenerWindowModel "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.xob"
+}

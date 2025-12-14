@@ -1,5 +1,5 @@
 GameProject {
- ID "ACE_MedicalDefibrillation"
+ ID "ACE_Medical_Defibrillation"
  GUID "64FF097BE776612B"
  TITLE "ACE Medical Defibrillation"
  Dependencies {

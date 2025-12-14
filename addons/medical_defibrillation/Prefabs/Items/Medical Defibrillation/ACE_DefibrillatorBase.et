@@ -3,12 +3,17 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
  components {
   SignalsManagerComponent "{655C16EC9DB5136B}" {
   }
-  SoundComponent "{655C16ECB615B046}" {
+  ACE_Medical_Defibrillation_DefibSoundComponent "{671C09EE44D37889}" {
    Filenames {
-    "{561CB411D5D8E866}Sounds/ACE_MedicalDefibrillation_DefibrillatorSounds.acp" "{0340D00A7674D634}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompts.acp"
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp"
    }
   }
-  ACE_MedicalDefibrillation_DefibrillatorComponent "{671C09C000F9F5E7}" {
+  SoundComponent "{655C16ECB615B046}" {
+   Filenames {
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp" "{0340D00A7674D634}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompts.acp"
+   }
+  }
+  ACE_Medical_Defibrillation_DefibComponent "{671C09EFE7878C09}" {
   }
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
@@ -30,6 +35,15 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   ActionsManagerComponent "{508AB5952B584B2E}" {
    additionalActions {
     ACE_NoUserAction "{51EC842E3A187379}" {
+    }
+    ACE_Medical_Defibrillation_UserAction_DefibDisconnect "{671C09FF5A7200A1}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{671C09FF5F06B782}" {
+      Name "#Disconnect"
+     }
+     Duration 1
     }
    }
   }

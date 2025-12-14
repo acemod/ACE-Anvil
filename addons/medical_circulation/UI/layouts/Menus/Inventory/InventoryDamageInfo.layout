@@ -18,45 +18,9 @@ FrameWidgetClass {
             VerticalLayoutWidgetClass "{5CEED9EF773378D2}" {
              Prefab "{5CEED9EF773378D2}"
              {
-              HorizontalLayoutWidgetClass "{671C387381A92902}" {
+              HorizontalLayoutWidgetClass "{671D563B7FE5005C}" : "{A0E642090EC80F41}UI/layouts/Menus/Inventory/Medical/ACE_Medical_MedicationTooltipEntry.layout" {
                Name "ACE_Medical_MedicationLayout"
-               Slot LayoutSlot {
-               }
-               {
-                VerticalLayoutWidgetClass "{671C3873B94DD0A0}" {
-                 Name "VerticalLayout0"
-                 Slot LayoutSlot {
-                 }
-                 {
-                  ImageWidgetClass "{671C3873AF2A66F5}" {
-                   Name "MorphineInfo_icon"
-                   Slot LayoutSlot {
-                   }
-                   "Is Visible" 0
-                   Size 48 48
-                  }
-                 }
-                }
-                VerticalLayoutWidgetClass "{671C3873A85D800B}" {
-                 Name "VerticalLayout1"
-                 Slot LayoutSlot {
-                 }
-                 {
-                  TextWidgetClass "{671C3873A2E2973B}" {
-                   Name "MorphineInfo_text"
-                   Slot LayoutSlot {
-                    VerticalAlign 1
-                    SizeMode Fill
-                   }
-                   "Is Visible" 0
-                   "Font Size" 18
-                   "Min Font Size" 18
-                   "Vertical Alignment" Center
-                   Wrap 1
-                   Offset 20 0
-                  }
-                 }
-                }
+               Slot LayoutSlot "{671D563B4A9CC93C}" {
                }
               }
              }

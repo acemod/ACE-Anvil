@@ -7,4 +7,5 @@ modded class ACE_Medical_CharacterContext : ACE_FrameJobScheduler_IObjectContext
 	float m_fPerfFluxCO2;
 	float m_fOxygenConsumption;
 	float m_fCO2Production;
+	float m_fNextVomitUpdateTime;
 }

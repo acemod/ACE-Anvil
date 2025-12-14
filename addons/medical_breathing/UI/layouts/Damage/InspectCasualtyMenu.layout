@@ -18,47 +18,9 @@ FrameWidgetClass {
             VerticalLayoutWidgetClass "{5D8EBD44CE264F96}" {
              Prefab "{5D8EBD44CE264F96}"
              {
-              HorizontalLayoutWidgetClass "{671D5632B289F58E}" {
+              HorizontalLayoutWidgetClass "{671D563B070C0A37}" : "{28C7A857DA90B1B9}UI/layouts/Menus/Inventory/Medical/ACE_Medical_PneumothoraxTooltipEntry.layout" {
                Name "ACE_Medical_PneumothoraxLayout"
                Slot LayoutSlot "{671D5632B4FB4339}" {
-               }
-               {
-                VerticalLayoutWidgetClass "{671D5632B80A9508}" {
-                 Name "VerticalLayout1"
-                 Slot LayoutSlot "{5CEED9EEB4E3EB81}" {
-                 }
-                 {
-                  ImageWidgetClass "{671D1B02A4990AD2}" {
-                   Name "ACE_Medical_PneumothoraxInfo_icon"
-                   Slot LayoutSlot "{5CEED9EECD8ECE32}" {
-                   }
-                   "Is Visible" 0
-                   Texture "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons.imageset"
-                   Image "TPTX_UI"
-                   Size 48 48
-                  }
-                 }
-                }
-                VerticalLayoutWidgetClass "{671D563281621E3C}" {
-                 Name "VerticalLayout0"
-                 Slot LayoutSlot "{5CEED9EEBB4969EB}" {
-                 }
-                 {
-                  TextWidgetClass "{671D1B02A496F8CE}" {
-                   Name "ACE_Medical_PneumothoraxInfo_text"
-                   Slot LayoutSlot "{671D563288C6BBE9}" {
-                    VerticalAlign 1
-                    SizeMode Fill
-                   }
-                   "Is Visible" 0
-                   "Font Size" 18
-                   "Min Font Size" 18
-                   "Vertical Alignment" Center
-                   Wrap 1
-                   Offset 20 0
-                  }
-                 }
-                }
                }
               }
              }

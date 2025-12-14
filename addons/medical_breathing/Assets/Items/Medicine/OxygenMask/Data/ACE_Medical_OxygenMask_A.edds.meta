@@ -9,7 +9,7 @@ MetaFileClass {
   }
   TIFFResourceClass PS4 : "{19FBA5E0ACB1C98E}Configs/System/ResourceTypes/PS4/TextureOneChannel.conf" {
   }
-  TIFFResourceClass PS5 : "{EE57BA009CACD0D1}configs/ResourceTypes/PS5/TextureOneChannel.conf" {
+  TIFFResourceClass PS5 : "{EE57BA009CACD0D1}Configs/System/ResourceTypes/PS5/TextureOneChannel.conf" {
   }
   TIFFResourceClass HEADLESS : "{6866463573917E52}Configs/System/ResourceTypes/HEADLESS/TextureOneChannel.conf" {
   }

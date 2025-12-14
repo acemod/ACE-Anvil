@@ -2,6 +2,8 @@ MetaFileClass {
  Name "{C69EF2A1D7762FB0}Assets/Items/Medicine/ChestSeal/Workspace/p_cro_chestseal_fingerAnim.anm"
  Configurations {
   TXAResourceClass PC {
+   SourcePath "Character_AnimationRig_ChestSeal_v2.blend"
+   SourceProfile "123_LHandABS"
   }
   TXAResourceClass XBOX_ONE : PC {
   }

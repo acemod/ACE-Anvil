@@ -2,7 +2,7 @@
 //! Add more extensible implementation of ShowVirtualHZInfo for tooltips of new global stats
 modded class SCR_InventoryHitZonePointUI : ScriptedWidgetComponent
 {
-	[Attribute(desc: "Medical info type for tooltip", uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(ACE_Medical_EUIInfoType))]
+	[Attribute(desc: "Medical info type for tooltip", uiwidget: UIWidgets.Flags, enumType: ACE_Medical_EUIInfoType)]
 	protected ACE_Medical_EUIInfoType m_eACE_Medical_TooltipInfoType;
 	
 	//------------------------------------------------------------------------------------------------

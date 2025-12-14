@@ -9,7 +9,7 @@ MetaFileClass {
   }
   TIFFResourceClass PS4 : "{962DE8F3FC2848A3}Configs/System/ResourceTypes/PS4/TextureUIAtlas.conf" {
   }
-  TIFFResourceClass PS5 : "{BED5DFAD2A554849}configs/ResourceTypes/PS5/TextureUIAtlas.conf" {
+  TIFFResourceClass PS5 : "{BED5DFAD2A554849}Configs/System/ResourceTypes/PS5/TextureUIAtlas.conf" {
   }
   TIFFResourceClass HEADLESS : "{15892FB1C3E30D2C}Configs/System/ResourceTypes/HEADLESS/TextureUIAtlas.conf" {
   }

@@ -113,11 +113,27 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{671D563325641152}" {
+   Id "ACE_Medical-Pneumothorax"
+   Target_en_us "Pneumothorax"
+   Target_de_de "Pneumothorax"
+   Modified 1729978799
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6559386744A11E53}" {
    Id "ACE_Medical-RadialMenu_AirwayThoraxManagement"
    Target_en_us "Airway/Thorax management"
    Target_de_de "Atemweg/Brustkorb Versorgung"
    Modified 1700362756
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{671D5633273D3233}" {
+   Id "ACE_Medical-TensionPneumothorax"
+   Target_en_us "Tension pneumothorax"
+   Target_de_de "Spannungspneumothorax"
+   Modified 1729978791
    Author "Kexanone"
    LastChanged "Kexanone"
   }

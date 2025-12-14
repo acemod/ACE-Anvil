@@ -12,16 +12,14 @@ modded class ACE_Medical_CharacterChestHitZone : SCR_CharacterHitZone
 		if (!Replication.IsServer() || !PTX_DAMAGE_TYPE_WHITELIST.Contains(damageContext.damageType) || damageContext.damageValue < GetCriticalHealthThreshold())
 			return;
 		
-		/*****
-		ACE_Medical_RespiratoryComponent respiratoryComponent = ownerChar.ACE_Medical_GetRespiratoryComponent();
-		if (!respiratoryComponent)
+		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(GetOwner().FindComponent(ACE_Medical_VitalsComponent));
+		if (!vitals)
 			return;
 		
 		ACE_Medical_Breathing_Settings settings = ACE_SettingsHelperT<ACE_Medical_Breathing_Settings>.GetModSettings();
-		if (!settings)
+		if (!settings || Math.RandomFloat(0, 1) >= settings.m_fPneumothoraxChance)
 			return;
 		
-		respiratoryComponent.SetPneumothoraxVolume(settings.m_RespiratorySystem.m_fMaxPneumothoraxVolumeML / 4);
-		*****/
+		vitals.SetPneumothoraxScale(settings.m_fMaxPneumothoraxScale / 4);
 	}
 }

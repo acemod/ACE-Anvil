@@ -14,10 +14,11 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	protected bool m_bIsAirwayObstructed = false;
 	[RplProp()]
 	protected bool m_bIsAirwayOccluded = false;
-	[RplProp()]
+	[RplProp(onRplName: "OnPneumothoraxStateChanged")]
 	protected float m_fPneumothoraxScale = 0;
-	[RplProp()]
+	[RplProp(onRplName: "OnPneumothoraxStateChanged")]
 	protected bool m_bHasTensionPneumothorax = false;
+	protected ref ScriptInvoker<float, bool> m_OnPneumothoraxStateChanged;
 	
 	static const float PALVO2_MAX = 19.925; // kPa
 	static const float CARBONATE_DEHYDRATION_RATE_SCALE = 126.93385;
@@ -119,6 +120,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	{
 		m_fPneumothoraxScale = scale;
 		Replication.BumpMe();
+		OnPneumothoraxStateChanged();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -165,6 +167,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	{
 		m_bHasTensionPneumothorax = hasTPTX;
 		Replication.BumpMe();
+		OnPneumothoraxStateChanged();
 		OnUpdateCanBreathServer();
 	}
 	
@@ -190,6 +193,22 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
 		if (damageManager)
 			damageManager.ACE_Medical_UpdateResilienceRegenScale();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnPneumothoraxStateChanged()
+	{
+		if (m_OnPneumothoraxStateChanged)
+			m_OnPneumothoraxStateChanged.Invoke(m_fPneumothoraxScale, m_bHasTensionPneumothorax);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ScriptInvoker<float, bool> GetOnPneumothoraxStateChanged()
+	{
+		if (!m_OnPneumothoraxStateChanged)
+			m_OnPneumothoraxStateChanged = new ScriptInvoker<float, bool>();
+		
+		return m_OnPneumothoraxStateChanged;
 	}
 	
 	//------------------------------------------------------------------------------------------------

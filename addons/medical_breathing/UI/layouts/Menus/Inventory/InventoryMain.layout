@@ -27,7 +27,9 @@ FrameWidgetClass {
                   FrameWidgetClass "{671D563DF1E7AAFC}" : "{42333020C90DFC23}UI/layouts/Menus/Inventory/Medical/ACE_Medical_PneumothoraxInfo.layout" {
                    Name "ACE_Medical_PneumothoraxInfo"
                    Slot LayoutSlot "{671D563DF1E7AAD4}" {
+                    Padding 0 0 0 4
                    }
+                   "Is Visible" 0
                   }
                  }
                 }

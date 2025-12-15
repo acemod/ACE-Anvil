@@ -29,7 +29,9 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! TO DO: Rate depending on PalvCO2
+	//! TO DO:
+	//! - Rate depending on PalvCO2
+	//! - Smoothly adjust RR based on target
 	protected float ComputeRespiratoryRate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		if (!context.m_pVitals.CanBreath())

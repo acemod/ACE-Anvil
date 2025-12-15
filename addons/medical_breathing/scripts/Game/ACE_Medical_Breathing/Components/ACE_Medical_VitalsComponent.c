@@ -118,6 +118,19 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	//! Sets extend of pneumothorax
 	void SetPneumothoraxScale(float scale)
 	{
+		// Handle deterioration
+		if ((m_fPneumothoraxScale == 0) ^ (scale == 0))
+		{
+			ACE_Medical_PneumothoraxSystem system = ACE_Medical_PneumothoraxSystem.GetInstance(GetOwner().GetWorld());
+			if (system)
+			{
+				if (m_fPneumothoraxScale == 0)
+					system.Register(SCR_ChimeraCharacter.Cast(GetOwner()));
+				else
+					system.Unregister(SCR_ChimeraCharacter.Cast(GetOwner()));
+			}
+		}
+		
 		m_fPneumothoraxScale = scale;
 		Replication.BumpMe();
 		OnPneumothoraxStateChanged();

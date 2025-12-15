@@ -11,14 +11,26 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "6", desc: "Minimum delay for vomiting again in minutes", params: "0 inf")]
 	float m_fVomitCooldown;
 	
-	[Attribute(defvalue: "0.8", desc: "Enables tension pneumothorax and hemothorax", params: "0 1")]
+	[Attribute(defvalue: "0.51", desc: "Chance for pneumothorax after a critical hit to the chest", params: "0 1")]
 	float m_fPneumothoraxChance;
 	
-	[Attribute(defvalue: "0.1", desc: "Maximum loss of lung volume due to pneumothorax in percentage", params: "0 1")]
+	[Attribute(defvalue: "0.5", desc: "Probability for ongoing pneumothorax to deteriorate. Evaluated once a minute.", params: "0 1")]
+	float m_fPneumothoraxDeteriorationChancePerMinute;
+	
+	[Attribute(defvalue: "0.75", desc: "Maximum loss of lung volume due to pneumothorax in percentage", params: "0 1")]
 	float m_fMaxPneumothoraxScale;
 	
-	[Attribute(defvalue: "true", desc: "Enables tension pneumothorax and hemothorax")]
-	bool m_bAdvancedPneumothoraxEnabled;
+	[Attribute(defvalue: "0.18", desc: "Precentage loss of lung volume per deterioration of pneumothorax", params: "0 1")]
+	float m_fPneumothoraxScaleDeteriorationStep;
+	
+	[Attribute(defvalue: "true", desc: "Enter cardiac arrest when pneumothorax fully deteriorated.")]
+	bool m_fPneumothoraxArrestEnabled;
+	
+	[Attribute(defvalue: "0.12", desc: "Chance for tension pneumothorax after a critical hit to a chest with pneumothorax", params: "0 1")]
+	float m_fTensionPneumothoraxChance;
+	
+	[Attribute(defvalue: "0.05", desc: "Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute.", params: "0 1")]
+	float m_fDeteriorateToTensionPneumothoraxChancePerMinute;
 	
 	[Attribute(defvalue: "true", desc: "Enables simulation of PaCO2 and its influence on respiratory rate", params: "0 inf")]
 	bool m_bPaCO2Enabled;

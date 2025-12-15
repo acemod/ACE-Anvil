@@ -43,6 +43,7 @@ class ACE_Medical_Defibrillation_DefibProgressData : Managed
 	void SetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory durationName, float value)
 	{
 		m_mDurations[durationName] = value;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -57,19 +58,24 @@ class ACE_Medical_Defibrillation_DefibProgressData : Managed
 	void SetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory timerName, float value)
 	{
 		m_mTimers[timerName] = value;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void ModifyTimer(ACE_Medical_Defibrillation_EDefibProgressCategory timerName, float value)
 	{
 		if (m_mTimers.Contains(timerName))
+		{
 			m_mTimers[timerName] = Math.Max(m_mTimers[timerName] + value, 0);
+			Replication.BumpMe();
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void ResetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory timerName)
 	{
 		m_mTimers[timerName] = 0;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -79,6 +85,7 @@ class ACE_Medical_Defibrillation_DefibProgressData : Managed
 		ResetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.Analysis);
 		ResetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
 		ResetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.StateTimeElapsed);
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------

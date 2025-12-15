@@ -19,6 +19,8 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	[Attribute(defvalue: "10", params: "0 inf 0.1", desc: "Stun duration (s) for a character that touches the patient while a shock is delivered.")]
 	protected float m_fContactShockStunDuration;
 	
+	[RplProp(onRplName: "OnPatientReplicated")]
+	protected int m_iPatientRplId;
 	protected IEntity m_pPatient;
 	
 	[RplProp(onRplName: "OnDefibStateChanged")]
@@ -105,7 +107,15 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	void SetPatient(IEntity patient)
 	{
+		if (!patient)
+			return;
+		ACE_Medical_VitalsComponent component = ACE_Medical_VitalsComponent.Cast(patient.FindComponent(ACE_Medical_VitalsComponent));
+		if (!component)
+			return;
+		
+		m_iPatientRplId = ACE_ReplicationHelper.GetRplIdByEntity(patient);
 		m_pPatient = patient;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -143,5 +153,11 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	{
 		PrintFormat("%1::OnDefibDataChanged | Data updated to client...", this.ClassName());
 		// TODO: Impliment Defib UI Changes
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnPatientReplicated()
+	{
+		m_pPatient = ACE_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
 	}
 }

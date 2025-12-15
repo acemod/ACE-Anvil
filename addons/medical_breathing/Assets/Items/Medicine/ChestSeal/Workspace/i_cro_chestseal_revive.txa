@@ -224,6 +224,6 @@ $animation "" {
  }
  $custProps {
   #custProp "profile" "ACE_Medical_ChestSeal"
-  #custProp "sourceFile" "Character_AnimationRig_ChestSeal_v2.blend"
+  #custProp "sourceFile" "Character_AnimationRig_ChestSeal.blend"
  }
 }

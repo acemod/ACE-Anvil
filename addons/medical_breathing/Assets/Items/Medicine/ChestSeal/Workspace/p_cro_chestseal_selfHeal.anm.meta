@@ -2,7 +2,7 @@ MetaFileClass {
  Name "{83A93AABB48F6247}Assets/Items/Medicine/ChestSeal/Workspace/p_cro_chestseal_selfHeal.anm"
  Configurations {
   TXAResourceClass PC {
-   SourcePath "Character_AnimationRig_ChestSeal_v2.blend"
+   SourcePath "Character_AnimationRig_ChestSeal.blend"
    SourceProfile "252_UpperbodyADD_ArmsABS"
   }
   TXAResourceClass XBOX_ONE : PC {

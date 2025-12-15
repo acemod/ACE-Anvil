@@ -180,6 +180,6 @@ $animation "" {
  }
  $custProps {
   #custProp "profile" "123_LHandABS"
-  #custProp "sourceFile" "Character_AnimationRig_ChestSeal_v2.blend"
+  #custProp "sourceFile" "Character_AnimationRig_ChestSeal.blend"
  }
 }

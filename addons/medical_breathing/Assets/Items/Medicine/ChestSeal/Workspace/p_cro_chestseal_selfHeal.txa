@@ -11193,6 +11193,6 @@ $animation "" {
  }
  $custProps {
   #custProp "profile" "252_UpperbodyADD_ArmsABS"
-  #custProp "sourceFile" "Character_AnimationRig_ChestSeal_v2.blend"
+  #custProp "sourceFile" "Character_AnimationRig_ChestSeal.blend"
  }
 }

@@ -65,7 +65,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		if (!Replication.IsServer() || previousLifeState == newLifeState)
 			return;
 		
-		ACE_Medical_VomitSystem vomitSystem = ACE_Medical_VomitSystem.GetInstance();
+		ACE_Medical_VomitSystem vomitSystem = ACE_Medical_VomitSystem.GetInstance(GetOwner().GetWorld());
 		if (!vomitSystem)
 			return;
 		

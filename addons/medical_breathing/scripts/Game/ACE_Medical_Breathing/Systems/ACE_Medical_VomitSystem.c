@@ -6,9 +6,8 @@ class ACE_Medical_VomitSystem : GameSystem
 	protected ref ACE_Medical_Vomit_JobScheduler m_pScheduler;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Medical_VomitSystem GetInstance()
+	static ACE_Medical_VomitSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Medical_VomitSystem.Cast(world.FindSystem(ACE_Medical_VomitSystem));
 	}
 	

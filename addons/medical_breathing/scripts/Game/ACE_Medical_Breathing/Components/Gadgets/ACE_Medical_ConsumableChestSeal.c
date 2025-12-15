@@ -23,6 +23,15 @@ class ACE_Medical_ConsumableChestSeal : SCR_ConsumableEffectHealthItems
 		
 		return true;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group, out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
+	{
+		if (group != ECharacterHitZoneGroup.UPPERTORSO)
+			return false;
+		
+		return super.CanApplyEffect(target, user, failReason);
+	}
 
 	//------------------------------------------------------------------------------------------------
 	//! Set consumable type in ctor

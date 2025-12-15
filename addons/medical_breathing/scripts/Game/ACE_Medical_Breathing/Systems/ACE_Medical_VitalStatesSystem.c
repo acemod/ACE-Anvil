@@ -19,6 +19,8 @@ modded class ACE_Medical_VitalStatesSystem : GameSystem
 
 		DbgUI.Begin(string.Format("ACE Medical Breathing O2 (%1)", targetType), 0, 700);
 		DbgUI.Text(string.Format("Respiratory Rate:             %1 1/min", component.GetRespiratoryRate()));
+		DbgUI.Text(string.Format("Pneumothorax Scale:           %1 \%", component.GetPneumothoraxScale()));
+		DbgUI.Text(string.Format("Tension Pneumothorax:         %1", component.HasTensionPneumothorax().ToString()));
 		float PalvO2 = component.GetPalvO2() * ACE_PhysicalConstants.KPA2MMHG;
 		DbgUI.Text(string.Format("PalvO2:                       %1 mmHg", PalvO2));
 		DbgUI.PlotLiveClamped("PalvO2", 500, 400, PalvO2, 0, 150, 100, 1000);

@@ -1,0 +1,107 @@
+FrameWidgetClass {
+ Name "PneumothoraxInfo"
+ Slot FrameWidgetSlot "{5A5A812761D27B12}" {
+  OffsetLeft 0
+  OffsetTop 0
+  SizeX 48
+  OffsetRight -48
+  SizeY 48
+  OffsetBottom -48
+  Alignment 0.5 0.5
+ }
+ "Z Order" 1000
+ Clipping False
+ components {
+  SCR_InventoryHitZonePointUI "{5A5A9494EB54C5E9}" {
+   m_bAllowHoverOver 0
+   m_bBleedingHitZone 1
+   m_aDOTLevels {
+    0 10 20 30
+   }
+   m_eACE_Medical_TooltipInfoType PNEUMOTHORAX
+  }
+ }
+ {
+  OverlayWidgetClass "{671D563C796D1C8E}" {
+   Name "Overlay0"
+   Slot FrameWidgetSlot "{5A6059EC9C7D4AEC}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 48
+    OffsetRight -48
+    SizeY 48
+    OffsetBottom -48
+    Alignment 0.5 0.5
+   }
+   Clipping False
+   {
+    SizeLayoutWidgetClass "{671D563C796D1CF3}" {
+     Name "rootFrame"
+     Slot OverlayWidgetSlot "{5A5A8123BB0BEB70}" {
+      HorizontalAlign 3
+      VerticalAlign 3
+     }
+     Clipping False
+     WidthOverride 80
+     HeightOverride 80
+     {
+      OverlayWidgetClass "{671D563C796D1CF1}" {
+       Name "Overlay0"
+       Slot AlignableSlot "{5A5A5CEA6816EA21}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       {
+        ImageWidgetClass "{671D563C796D1CF0}" {
+         Name "Background"
+         Slot OverlayWidgetSlot "{5A5A5CEA615FA2E8}" {
+         }
+         Color 0.0742 0.007 0.007 1
+         Texture "{57BA08212D754624}UI/Textures/InventoryIcons/Medical/Hitzone-BG_UI.edds"
+         Size 64 64
+        }
+        ButtonWidgetClass "{671D563C796D1CF7}" {
+         Name "Button"
+         Slot OverlayWidgetSlot "{5A5A5EC2ED525CEA}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         Opacity 0
+         Color 0 0 0 0.369
+        }
+        ImageWidgetClass "{671D563C796D1CF6}" {
+         Name "Icon"
+         Slot OverlayWidgetSlot "{5A5A5EC4D9AADDAE}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+          Padding 3 3 3 3
+         }
+         Color 0.855 0.0595 0.0612 1
+         Texture "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons.imageset"
+         Image "TPTX_UI"
+         Size 64 64
+         Mask "{EEEA388EB9A457E9}UI/Textures/ProgressMasks/ProgressMaskVertical_256x1.edds"
+         "Transition width" 0.07
+         Progress 0
+         "Mask Mode" "Include Below"
+         Range 0.5
+        }
+        ImageWidgetClass "{671D563C796DC873}" {
+         Name "Outline"
+         Slot OverlayWidgetSlot "{5A5A8121CADF661C}" {
+         }
+         Color 0.855 0.0595 0.0612 1
+         Texture "{4C13A0801C18ED27}UI/Textures/InventoryIcons/Medical/outline_UI.edds"
+         Size 64 64
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

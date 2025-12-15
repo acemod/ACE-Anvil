@@ -1,0 +1,13 @@
+MatPBRBasic {
+ Sort translucent
+ SpecularMul 4
+ AlphaTest 0.22
+ AlphaMul 5
+ BlendMode AlphaBlend
+ RoughnessScale 1.5
+ MetalnessScale 0
+ DielectricReflectance 0.133
+ BCRMap "{75927D500C831759}Assets/Items/Medicine/KingLT/ACE_Medical_KingLT_BCR.edds"
+ OpacityMap "{FA72A01E6FAFCB2A}Assets/Items/Medicine/KingLT/ACE_Medical_KingLT_OPA.edds"
+ NMOMap "{4D4AC6C2D5F445C7}Assets/Items/Medicine/KingLT/ACE_Medical_KingLT_NMO.edds"
+}

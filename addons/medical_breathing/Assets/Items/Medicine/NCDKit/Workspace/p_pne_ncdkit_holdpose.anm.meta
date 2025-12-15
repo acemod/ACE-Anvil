@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{F0C9C5052F43B57B}Assets/Items/Medicine/NCDKit/Workspace/p_pne_ncdkit_holdpose.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

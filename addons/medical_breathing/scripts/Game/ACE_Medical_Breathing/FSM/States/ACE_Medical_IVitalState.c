@@ -24,8 +24,8 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		UpdatePerfusion(context, timeSlice);
 		context.m_pVitals.SetPalvO2(ComputePalvO2(context, timeSlice));
 		context.m_pVitals.SetSpO2(ComputeSpO2(context, timeSlice));
-		context.m_pVitals.SetCvenCO2(UpdateCvenCO2(context, timeSlice));
-		context.m_pVitals.SetPalvCO2(UpdatePalvCO2(context, timeSlice));
+		context.m_pVitals.SetCvenCO2(ComputeCvenCO2(context, timeSlice));
+		context.m_pVitals.SetPalvCO2(ComputePalvCO2(context, timeSlice));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -85,13 +85,13 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float UpdateCvenCO2(ACE_Medical_CharacterContext context, float timeSlice)
+	protected float ComputeCvenCO2(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		return context.m_pVitals.GetCvenCO2() + timeSlice * (context.m_fCO2Production - context.m_fPerfFluxCO2) / context.m_pBloodHitZone.ACE_Medical_GetVenousBloodVolume();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float UpdatePalvCO2(ACE_Medical_CharacterContext context, float timeSlice)
+	protected float ComputePalvCO2(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		return Math.Max(context.m_pVitals.GetPalvCO2() + timeSlice * (ACE_PhysicalConstants.R * context.m_pVitals.GetTemperature() / context.m_pVitals.GetCapacityVolume() * context.m_fPerfFluxCO2 - context.m_fVentFluxCO2), 0);
 	}

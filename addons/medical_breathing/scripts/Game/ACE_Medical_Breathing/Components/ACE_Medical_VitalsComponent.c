@@ -2,13 +2,13 @@
 //! Add SpO2
 modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 {
-	protected float m_fRespiratoryRate = 14.573233653074396; // 1/min
-	protected float m_fTidalVolume = 500*2/3; // ml
-	protected float m_fCapacityVolume = 6000*2/3; // ml
-	protected float m_fSpO2 = 97.14862728279128; // %
-	protected float m_fPalvO2 = 13.3; // kPa
-	protected float m_fPalvCO2 = 5.2101385454100555; // kPa
-	protected float m_fCvenCO2 = 0.0012360371385742145; // kPa
+	protected float m_fRespiratoryRate; // 1/min
+	protected const float m_fTidalVolume = 500*2/3; // ml
+	protected const float m_fCapacityVolume = 6000*2/3; // ml
+	protected float m_fSpO2; // %
+	protected float m_fPalvO2; // kPa
+	protected float m_fPalvCO2; // kPa
+	protected float m_fCvenCO2; // kPa
 	
 	[RplProp()]
 	protected bool m_bIsAirwayObstructed = false;
@@ -229,10 +229,16 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	override void Reset()
 	{
 		super.Reset();
-		SetRespiratoryRate(14.573233653074396);
-		SetSpO2(97.14862728279128);
+		
+		ACE_Medical_Breathing_Settings settings = ACE_SettingsHelperT<ACE_Medical_Breathing_Settings>.GetModSettings();
+		if (settings)
+		{
+			SetRespiratoryRate(settings.m_fDefaultRespiratoryRateBPM);
+			SetSpO2(settings.m_fDefaultSpO2);
+			SetPalvCO2(settings.m_fDefaultPalvCO2KPA);
+		}
+		
 		SetPalvO2(13.3);
-		SetPalvCO2(5.2101385454100555);
 		SetCvenCO2(0.0012360371385742145);
 		SetPneumothoraxScale(0);
 		SetIsAirwayObstructed(false);

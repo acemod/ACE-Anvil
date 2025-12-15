@@ -26,7 +26,7 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "true", desc: "Enter cardiac arrest when pneumothorax fully deteriorated.")]
 	bool m_fPneumothoraxArrestEnabled;
 	
-	[Attribute(defvalue: "0.12", desc: "Chance for tension pneumothorax after a critical hit to a chest with pneumothorax", params: "0 1")]
+	[Attribute(defvalue: "0.15", desc: "Chance for tension pneumothorax after a critical hit to a chest with pneumothorax", params: "0 1")]
 	float m_fTensionPneumothoraxChance;
 	
 	[Attribute(defvalue: "0.05", desc: "Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute.", params: "0 1")]

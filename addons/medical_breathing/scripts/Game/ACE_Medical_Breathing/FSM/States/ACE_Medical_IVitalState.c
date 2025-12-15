@@ -32,10 +32,10 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	//! TO DO: Rate depending on PalvCO2
 	protected float ComputeRespiratoryRate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		if (context.m_pVitals.CanBreath())
-			return 14.573233653074396;
-		else
+		if (!context.m_pVitals.CanBreath())
 			return 0;
+		
+		return Math.Min(s_pBreathingSettings.m_fMaxRespiratoryRateBPM, s_pBreathingSettings.m_fDefaultRespiratoryRateBPM / (1 - context.m_pVitals.GetPneumothoraxScale()));
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -381,3 +381,50 @@ _TBD_
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Circulation:
 
 <PlantUML src="/plantumls/medical/breathing-treatment-1.puml" alt="breathing-treatment-1.puml" />
+
+### Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_fAirwayObstructionChance`          | Type: `float`**<br />Range: 0 to 1<br />Default: `0.15` | Probability of tongue-based airway obstruction in supine position |
+| `m_fVomitChancePerMinute`             | Type: `float`**<br />Range: 0 to 1<br />Default: `0.1` | Chance for unconscious patient to vomit. Evaulated once a minute. |
+| `m_fVomitCooldown`                    | Type: `float`**<br />Range: 0 to ∞<br />Default: `6.0` | Minimum delay for vomiting again in minutes |
+| `m_fPneumothoraxChance`               | Type: `float`**<br />Range: 0 to 1<br />Default: `0.51` | Chance for pneumothorax after a critical hit to the chest |
+| `m_fPneumothoraxDeteriorationChancePerMinute` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.5` | Probability for ongoing pneumothorax to deteriorate. Evaluated once a minute. |
+| `m_fMaxPneumothoraxScale`             | Type: `float`**<br />Range: 0 to 1<br />Default: `0.75` | Maximum loss of lung volume due to pneumothorax in percentage |
+| `m_fPneumothoraxScaleDeteriorationStep` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.18` | Precentage loss of lung volume per deterioration of pneumothorax |
+| `m_fPneumothoraxArrestEnabled`        | Type: `bool`*<br />Default: `true` | Enter cardiac arrest when pneumothorax fully deteriorated. |
+| `m_fTensionPneumothoraxChance`        | Type: `float`**<br />Range: 0 to 1<br />Default: `0.15` | Chance for tension pneumothorax after a critical hit to a chest with pneumothorax |
+| `m_fDeteriorateToTensionPneumothoraxChancePerMinute` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.05` | Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute. |
+| `m_fDefaultRespiratoryRateBPM`        | Type: `float`**<br />Range: 0 to ∞<br />Default: `14.573` | Default respiratory rate [breaths per minute] |
+| `m_fMaxRespiratoryRateBPM`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `40.0` | Maximum respiratory rate [breaths per minute] |
+| `m_fDefaultSpO2`                      | Type: `float`**<br />Range: 0 to 100<br />Default: `97.149` | Default value of SpO2 |
+| `m_fDefaultPalvCO2KPA`                | Type: `float`**<br />Range: 0 to 100<br />Default: `5.21` | Default value of alveolar partial pressure of CO2 |
+| `m_bPaCO2Enabled`                     | Type: `bool`*<br />Range: 0 to ∞<br />Default: `true` | Enables simulation of PaCO2 and its influence on respiratory rate |
+
+Template for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Medical_Breathing": {
+            "m_fAirwayObstructionChance": 0.15,
+            "m_fVomitChancePerMinute": 0.1,
+            "m_fVomitCooldown": 6.0,
+            "m_fPneumothoraxChance": 0.51,
+            "m_fPneumothoraxDeteriorationChancePerMinute": 0.5,
+            "m_fMaxPneumothoraxScale": 0.75,
+            "m_fPneumothoraxScaleDeteriorationStep": 0.18,
+            "m_fPneumothoraxArrestEnabled": 1,
+            "m_fTensionPneumothoraxChance": 0.15,
+            "m_fDeteriorateToTensionPneumothoraxChancePerMinute": 0.05,
+            "m_fDefaultRespiratoryRateBPM": 14.573,
+            "m_fMaxRespiratoryRateBPM": 40.0,
+            "m_fDefaultSpO2": 97.149,
+            "m_fDefaultPalvCO2KPA": 5.21,
+            "m_bPaCO2Enabled": 1
+        }
+    }
+}
+```

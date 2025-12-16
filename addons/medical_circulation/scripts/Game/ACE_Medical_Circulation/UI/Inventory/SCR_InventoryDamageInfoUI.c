@@ -3,15 +3,18 @@
 modded class SCR_InventoryDamageInfoUI : ScriptedWidgetComponent
 {
 	//------------------------------------------------------------------------------------------------
-	void ACE_Medical_SetMedicationVisible(bool visible, string text)
+	//! Insert blood state in bleeding widget
+	void ACE_Medical_SetBloodStateVisible(bool visible, string text)
 	{
-		if (!m_wMorphineIconWidget || !m_wMorphineTextWidget)
+		if (!visible || !m_wBleedingIconWidget || !m_wBleedingTextWidget)
 			return;
 		
-		m_wMorphineIconWidget.LoadImageFromSet(0, m_sMedicalIconsImageSet, m_sMorphineIcon);
-		m_wMorphineIconWidget.SetVisible(visible);
+		string bleedingText;
+		if (m_wBleedingTextWidget.IsVisible())
+			text += "\n" + m_wBleedingTextWidget.GetText();
 		
-		m_wMorphineTextWidget.SetText(text);
-		m_wMorphineTextWidget.SetVisible(visible);
+		m_wBleedingIconWidget.SetVisible(visible);
+		m_wBleedingTextWidget.SetVisible(visible);
+		m_wBleedingTextWidget.SetText(text);
 	}
 }

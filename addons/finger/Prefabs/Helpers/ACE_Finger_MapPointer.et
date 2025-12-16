@@ -1,9 +1,0 @@
-ACE_Finger_MapPointer {
- ID "65F71835764A9CD4"
- components {
-  RplComponent "{65F7183541786025}" {
-   Streamable Disabled
-  }
- }
- coords 1.873 3.704 3.07
-}

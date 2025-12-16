@@ -108,6 +108,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "YuanYu"
   }
+  CustomStringTableItem "{671704F22873C242}" {
+   Id "ACE_Medical-FailReason_NotOnBack"
+   Target_en_us "Not on back"
+   Target_de_de "Nicht auf dem Rücken"
+   Modified 1729584086
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{6228B55BAA8F501D}" {
    Id "ACE_Medical-InfoWidget_AmmoniumCarbonate"
    Target_en_us "Increases wake-up chance"

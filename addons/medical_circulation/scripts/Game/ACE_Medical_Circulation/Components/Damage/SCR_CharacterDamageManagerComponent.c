@@ -1,20 +1,29 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
-	protected ACE_Medical_BrainHitZone m_pACE_Medical_BrainHitZone;
+	protected ACE_Medical_BrainHitZone m_ACE_Medical_BrainHitZone;
+	protected ACE_Medical_VitalsComponent m_ACE_Medical_Vitals;
 	protected float m_fACE_Medical_BloodFlowScale = 1;
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Initialize members
+	override void OnPostInit(IEntity owner)
+	{
+		super.OnPostInit(owner);
+		
+		if (!GetGame().InPlayMode())
+			return;
+		
+		m_ACE_Medical_Vitals = ACE_Medical_VitalsComponent.Cast(owner.FindComponent(ACE_Medical_VitalsComponent));
+	}
 	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Transition to cardiac arrest
 	override void ACE_Medical_OnSecondChanceGranted()
 	{
 		// Only handle first second chance
-		if (!m_bACE_Medical_WasSecondChanceGranted)
-		{
-			ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(GetOwner().FindComponent(ACE_Medical_VitalsComponent));
-			if (vitalsComponent)
-				vitalsComponent.SetVitalStateID(ACE_Medical_EVitalStateID.CARDIAC_ARREST);
-		}
+		if (m_ACE_Medical_Vitals && !m_bACE_Medical_WasSecondChanceGranted)
+			m_ACE_Medical_Vitals.SetVitalStateID(ACE_Medical_EVitalStateID.CARDIAC_ARREST);
 		
 		super.ACE_Medical_OnSecondChanceGranted();
 	}
@@ -25,9 +34,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.FullHeal(ignoreHealingDOT);
 		
-		ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(GetOwner().FindComponent(ACE_Medical_VitalsComponent));
-		if (vitalsComponent)
-			vitalsComponent.Reset();
+		if (m_ACE_Medical_Vitals)
+			m_ACE_Medical_Vitals.Reset();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -40,13 +48,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(GetOwner()));
 		
-		ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(GetOwner().FindComponent(ACE_Medical_VitalsComponent));
-		if (vitalsComponent)
+		if (m_ACE_Medical_Vitals)
 		{
-			vitalsComponent.SetHeartRate(0);
-			vitalsComponent.SetCardiacOutput(0);
-			vitalsComponent.SetMeanArterialPressure(0);
-			vitalsComponent.SetPulsePressure(0);
+			m_ACE_Medical_Vitals.SetHeartRate(0);
+			m_ACE_Medical_Vitals.SetCardiacOutput(0);
+			m_ACE_Medical_Vitals.SetMeanArterialPressure(0);
+			m_ACE_Medical_Vitals.SetPulsePressure(0);
 		}
 	}
 	
@@ -58,20 +65,19 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (!circulationSettings)
 			return;
 		
-		ACE_Medical_VitalsComponent vitalsComponent = ACE_Medical_VitalsComponent.Cast(GetOwner().FindComponent(ACE_Medical_VitalsComponent));
-		if (!vitalsComponent)
+		if (!m_ACE_Medical_Vitals)
 			return;
 		
 		// No recovery when vitals are not stable
-		if (vitalsComponent.GetVitalStateID() != ACE_Medical_EVitalStateID.STABLE)
+		if (m_ACE_Medical_Vitals.GetVitalStateID() != ACE_Medical_EVitalStateID.STABLE)
 			m_fACE_Medical_ResilienceRegenScale = 0;
-		else if (vitalsComponent.WasRevived())
+		else if (m_ACE_Medical_Vitals.WasRevived())
 			m_fACE_Medical_ResilienceRegenScale = circulationSettings.m_fMaxRevivalResilienceRecoveryScale;
 		else
 			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
 		
 		// Scale recovery scale by health of the brain hit zone
-		m_fACE_Medical_ResilienceRegenScale *= m_pACE_Medical_BrainHitZone.GetHealthScaled();
+		m_fACE_Medical_ResilienceRegenScale *= m_ACE_Medical_BrainHitZone.GetHealthScaled();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -91,13 +97,13 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Called by ACE_Medical_BrainHitZone.OnInit to initialize the hit zone
 	void ACE_Medical_SetBrainHitZone(HitZone hitzone)
 	{
-		m_pACE_Medical_BrainHitZone = ACE_Medical_BrainHitZone.Cast(hitzone);
+		m_ACE_Medical_BrainHitZone = ACE_Medical_BrainHitZone.Cast(hitzone);
 	}
 
 	//-----------------------------------------------------------------------------------------------------------
 	//! Return the pain hit zone
 	ACE_Medical_BrainHitZone ACE_Medical_GetBrainHitZone()
 	{
-		return m_pACE_Medical_BrainHitZone;
+		return m_ACE_Medical_BrainHitZone;
 	}
 }

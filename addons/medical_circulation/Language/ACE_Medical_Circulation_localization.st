@@ -112,11 +112,19 @@ StringTable {
    Target_en_us "Vital signs"
    Target_de_de "Vitaldaten"
    Target_ru_ru "Жизненные показатели"
-   Target_uk_ua "Життєві показники"
    Target_zh_cn "生命徵象"
+   Target_uk_ua "Життєві показники"
    Modified 1722592685
    Author "Kexanone"
    LastChanged "dr_ext"
+  }
+  CustomStringTableItem "{6720C07189EC3236}" {
+   Id "ACE_Medical-FailReason_NotOnBack"
+   Target_en_us "Not on back"
+   Target_de_de "Nicht auf dem Rücken"
+   Modified 1730199717
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{6228B55BAA8F501D}" {
    Id "ACE_Medical-InfoWidget_AmmoniumCarbonate"
@@ -219,8 +227,8 @@ StringTable {
    Target_en_us "Epinephrine"
    Target_de_de "Epinephrin"
    Target_ru_ru "Эпинефрин"
-   Target_uk_ua "Адреналін (Епінефрин)"
    Target_zh_cn "腎上腺素"
+   Target_uk_ua "Адреналін (Епінефрин)"
    Modified 1722592847
    Author "PC Ill"
    LastChanged "dr_ext"

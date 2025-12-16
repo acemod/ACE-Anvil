@@ -21,9 +21,9 @@ StringTable {
    Target_pt_br "Hemorragia de Classe I"
    Target_zh_cn "I 級出血"
    Target_uk_ua "Кровотеча I ступеня"
-   Modified 1725499800
+   Modified 1722592586
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B53AC27D464E}" {
    Id "ACE_Medical-BloodState_Class2"
@@ -33,9 +33,9 @@ StringTable {
    Target_pt_br "Hemorragia de Classe II"
    Target_zh_cn "II 級出血"
    Target_uk_ua "Кровотеча II ступеня"
-   Modified 1725499822
+   Modified 1722592593
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B53AC01F5452}" {
    Id "ACE_Medical-BloodState_Class3"
@@ -45,9 +45,9 @@ StringTable {
    Target_pt_br "Hemorragia de Classe III"
    Target_zh_cn "III 級出血"
    Target_uk_ua "Кровотеча III ступеня"
-   Modified 1725499840
+   Modified 1722592601
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B53AC6AA6AB1}" {
    Id "ACE_Medical-BloodState_Class4"
@@ -57,9 +57,9 @@ StringTable {
    Target_pt_br "Hemorragia de Classe IV"
    Target_zh_cn "IV 級出血"
    Target_uk_ua "Кровотеча IV ступеня"
-   Modified 1725499846
+   Modified 1722592610
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55046CF7CC7}" {
    Id "ACE_Medical-CheckBloodPressureAction"
@@ -69,9 +69,9 @@ StringTable {
    Target_pt_br "Verificar pressão arterial"
    Target_zh_cn "量測血壓"
    Target_uk_ua "Перевірити тиск"
-   Modified 1725500513
+   Modified 1722592660
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5504DC3E45E}" {
    Id "ACE_Medical-CheckPulseAction"
@@ -81,9 +81,9 @@ StringTable {
    Target_pt_br "Verificar pulso"
    Target_zh_cn "量測脈搏"
    Target_uk_ua "Перевірити пульс"
-   Modified 1725500537
+   Modified 1722592669
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5503F479D0C}" {
    Id "ACE_Medical-CPRAction"
@@ -93,9 +93,9 @@ StringTable {
    Target_pt_br "Realizar RCP"
    Target_zh_cn "進行心肺復甦術 (CPR)"
    Target_uk_ua "Провести серцево-легеневу реанімацію"
-   Modified 1725500470
+   Modified 1722592628
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6624FDAA28CE989A}" {
    Id "ACE_Medical-Editor_TooltipDetail_Brain_Name"
@@ -103,9 +103,9 @@ StringTable {
    Target_de_de "Gehirn"
    Target_ru_ru "Мозг"
    Target_zh_cn "大腦"
-   Modified 1725500425
+   Modified 1722592675
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6230E5C2DA63508A}" {
    Id "ACE_Medical-Editor_TooltipDetail_VitalSigns_Name"
@@ -114,15 +114,15 @@ StringTable {
    Target_ru_ru "Жизненные показатели"
    Target_zh_cn "生命徵象"
    Target_uk_ua "Життєві показники"
-   Modified 1725500626
+   Modified 1722592685
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
-  CustomStringTableItem "{671704F22873C242}" {
+  CustomStringTableItem "{6720C07189EC3236}" {
    Id "ACE_Medical-FailReason_NotOnBack"
    Target_en_us "Not on back"
    Target_de_de "Nicht auf dem Rücken"
-   Modified 1729584086
+   Modified 1730199717
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -134,9 +134,9 @@ StringTable {
    Target_pt_br "Aumenta a chance de acordar"
    Target_zh_cn "增加甦醒機率"
    Target_uk_ua "Збільшує шанс отямлення"
-   Modified 1725500657
+   Modified 1722592716
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55BAE36450B}" {
    Id "ACE_Medical-InfoWidget_Epinephrine"
@@ -146,9 +146,9 @@ StringTable {
    Target_pt_br "Aumenta a frequência cardíaca"
    Target_zh_cn "提高心率"
    Target_uk_ua "Підвищує частоту серцевих скорочень"
-   Modified 1725500676
+   Modified 1722592725
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55BA0A3E335}" {
    Id "ACE_Medical-InfoWidget_Metoprolol"
@@ -158,9 +158,9 @@ StringTable {
    Target_pt_br "Reduz a frequência cardíaca"
    Target_zh_cn "降低心率"
    Target_uk_ua "Знижує частоту серцевих скорочень"
-   Modified 1725500698
+   Modified 1722592731
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55BA77C7538}" {
    Id "ACE_Medical-InfoWidget_Naloxone"
@@ -170,9 +170,9 @@ StringTable {
    Target_pt_br "Antagonista para opioides como morfina"
    Target_zh_cn "對嗎啡等鴉片類藥物的拮抗劑"
    Target_uk_ua "Застосовується при передозуванні"
-   Modified 1725500749
+   Modified 1722592750
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55BB2295B31}" {
    Id "ACE_Medical-InfoWidget_Phenylephrine"
@@ -182,9 +182,9 @@ StringTable {
    Target_pt_br "Aumenta a pressão arterial e diminui o sangramento e transfusão"
    Target_zh_cn "提高血壓，並減緩出血與輸血速度"
    Target_uk_ua "Підвищує артеріальний тиск"
-   Modified 1725500793
+   Modified 1722592770
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5586006E639}" {
    Id "ACE_Medical-Item_AmmoniumCarbonate_Description"
@@ -194,9 +194,9 @@ StringTable {
    Target_pt_br "Administrado a pacientes inconscientes."
    Target_zh_cn "給予無意識患者使用"
    Target_uk_ua "Застосовується до непритомних пацієнтів, УВАГА застосовувати при нормальних показниках ЧСС (близько 70 ударів на секунду) та Артеріальному тиску близько 120/80 "
-   Modified 1725500824
+   Modified 1722592791
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5586D87363C}" {
    Id "ACE_Medical-Item_AmmoniumCarbonate_Name"
@@ -206,9 +206,9 @@ StringTable {
    Target_pt_br "Carbonato de Amônio"
    Target_zh_cn "碳酸銨 (嗅鹽)"
    Target_uk_ua "Амонію карбонат (нюхальна сіль)"
-   Modified 1725500240
+   Modified 1722592801
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55B9B65D93A}" {
    Id "ACE_Medical-Item_Epinephrine_Description"
@@ -218,9 +218,9 @@ StringTable {
    Target_pt_br "Administrado a pacientes em parada cardíaca"
    Target_zh_cn "給予心臟驟停的患者使用"
    Target_uk_ua "Застосовується при зупинці серця"
-   Modified 1725500893
+   Modified 1722592976
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{65C6FCD64D6EB190}" {
    Id "ACE_Medical-Item_Epinephrine_Name"
@@ -229,9 +229,9 @@ StringTable {
    Target_ru_ru "Эпинефрин"
    Target_zh_cn "腎上腺素"
    Target_uk_ua "Адреналін (Епінефрин)"
-   Modified 1725499874
+   Modified 1722592847
    Author "PC Ill"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5585D442A6C}" {
    Id "ACE_Medical-Item_Metoprolol_Description"
@@ -241,9 +241,9 @@ StringTable {
    Target_pt_br "Administrado a pacientes com frequência cardíaca muito alta"
    Target_zh_cn "給予心率過高的患者使用"
    Target_uk_ua "Застосовується при занадто високому пульсі"
-   Modified 1725500917
+   Modified 1722592989
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5585EEF5D9C}" {
    Id "ACE_Medical-Item_Metoprolol_Name"
@@ -253,9 +253,9 @@ StringTable {
    Target_pt_br "Metoprolol"
    Target_zh_cn "美托洛爾 (Metoprolol)"
    Target_uk_ua "Метопролол"
-   Modified 1725500086
+   Modified 1722592887
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5582C95F2EA}" {
    Id "ACE_Medical-Item_Naloxone_Description"
@@ -265,9 +265,9 @@ StringTable {
    Target_pt_br "Administrado a pacientes com overdose de opioides"
    Target_zh_cn "給予鴉片類藥物過量的患者使用"
    Target_uk_ua "Застосовується при передозуванні опіоїдами"
-   Modified 1725500987
+   Modified 1722593001
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B558202D6005}" {
    Id "ACE_Medical-Item_Naloxone_Name"
@@ -277,9 +277,9 @@ StringTable {
    Target_pt_br "Naloxona"
    Target_zh_cn "納洛酮 (Naloxone)"
    Target_uk_ua "Налоксон"
-   Modified 1725500078
+   Modified 1722592919
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55877861E3A}" {
    Id "ACE_Medical-Item_Phenylephrine_Description"
@@ -289,9 +289,9 @@ StringTable {
    Target_pt_br "Administrado a pacientes para elevar a pressão arterial"
    Target_zh_cn "給予因低血壓需要升壓的患者使用"
    Target_uk_ua "Застосовується для підвищення тиску"
-   Modified 1725501050
+   Modified 1722593010
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55875DE022F}" {
    Id "ACE_Medical-Item_Phenylephrine_Name"
@@ -301,9 +301,9 @@ StringTable {
    Target_pt_br "Fenilefrina"
    Target_zh_cn "苯福林 (Phenylephrine)"
    Target_uk_ua "Фенілефрин"
-   Modified 1725500277
+   Modified 1722593017
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55ED01FBD98}" {
    Id "ACE_Medical-MetoprololInjectionAction"
@@ -313,9 +313,9 @@ StringTable {
    Target_pt_br "Injetar metoprolol"
    Target_zh_cn "注射美托洛爾 (Metoprolol)"
    Target_uk_ua "Ввести метопролол"
-   Modified 1725501105
+   Modified 1722593310
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55ECF6624E9}" {
    Id "ACE_Medical-NaloxoneInjectionAction"
@@ -325,9 +325,9 @@ StringTable {
    Target_pt_br "Injetar naloxona"
    Target_zh_cn "注射納洛酮 (Naloxone)"
    Target_uk_ua "Ввести налоксон"
-   Modified 1725501121
+   Modified 1722593317
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55235D38AF1}" {
    Id "ACE_Medical-Notification_BLOOD_PRESSURE_RESULT"
@@ -337,9 +337,9 @@ StringTable {
    Target_pt_br "pressão arterial em %1/%2 mmHg"
    Target_zh_cn "你測得的血壓為 %1/%2 mmHg"
    Target_uk_ua "У пацієнта тиск %1/%2 мм рт.ст."
-   Modified 1725501164
+   Modified 1722593510
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B5523F76CF1E}" {
    Id "ACE_Medical-Notification_PULSE_RESULT"
@@ -349,9 +349,9 @@ StringTable {
    Target_pt_br "Frequência cardíaca em %1"
    Target_zh_cn "你測得的心律為 %1"
    Target_uk_ua "У пацієнта пульс %1"
-   Modified 1725501458
+   Modified 1722593499
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
   CustomStringTableItem "{6228B55ED9DB4B14}" {
    Id "ACE_Medical-PhenylephrineInjectionAction"
@@ -361,9 +361,9 @@ StringTable {
    Target_pt_br "Injetar fenilefrina"
    Target_zh_cn "注射苯福林 (Phenylephrine)"
    Target_uk_ua "Ввести фенілефрин"
-   Modified 1725501134
+   Modified 1722593525
    Author "Kexanone"
-   LastChanged "YuanYu"
+   LastChanged "dr_ext"
   }
  }
 }

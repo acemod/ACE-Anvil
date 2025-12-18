@@ -122,9 +122,10 @@ StringTable {
    Id "ACE_Medical-FailReason_NotOnBack"
    Target_en_us "Not on back"
    Target_de_de "Nicht auf dem Rücken"
-   Modified 1730199717
+   Target_zh_cn "未在背上"
+   Modified 1730460598
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6228B55BAA8F501D}" {
    Id "ACE_Medical-InfoWidget_AmmoniumCarbonate"
@@ -204,7 +205,7 @@ StringTable {
    Target_de_de "Ammoniumcarbonat"
    Target_ru_ru "Карбонат аммония"
    Target_pt_br "Carbonato de Amônio"
-   Target_zh_cn "碳酸銨 (嗅鹽)"
+   Target_zh_cn "碳酸铵 (嗅鹽)"
    Target_uk_ua "Амонію карбонат (нюхальна сіль)"
    Modified 1722592801
    Author "Kexanone"

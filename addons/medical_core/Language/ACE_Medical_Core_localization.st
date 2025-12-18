@@ -228,7 +228,7 @@ StringTable {
    Target_en_us "Put in left recovery position"
    Target_de_de "In linke Bewusstlosenlagerung bringen"
    Target_ru_ru "Положить на левый бок"
-   Target_zh_cn "轉為左側復甦姿勢"
+   Target_zh_cn "翻至左側復甦姿勢"
    Target_ko_kr "좌측으로 회복자세 교정하기"
    Modified 1725496514
    Author "Kexanone"
@@ -239,7 +239,7 @@ StringTable {
    Target_en_us "Put in right recovery position"
    Target_de_de "In rechte Bewusstlosenlagerung bringen"
    Target_ru_ru "Положить на правый бок"
-   Target_zh_cn "轉為右側復甦姿勢"
+   Target_zh_cn "翻至右側復甦姿勢"
    Target_ko_kr "우측으로 회복자세 교정하기"
    Modified 1725496522
    Author "Kexanone"

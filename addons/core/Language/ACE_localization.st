@@ -24,9 +24,10 @@ StringTable {
    Id "ACE-ControlsHint_InspectTurret"
    Target_en_us "Inspect Turret"
    Target_de_de "Geschütz untersuchen"
-   Modified 1715082397
+   Target_zh_cn "檢查砲塔"
+   Modified 1730461122
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{64771570B1AFAB10}" {
    Id "ACE-Emotes_Emote_Pushups_Name"
@@ -90,9 +91,10 @@ StringTable {
    Id "ACE-RadialMenu_ChangeMagazine"
    Target_en_us "Change mangazine"
    Target_de_de "Magazin wechseln"
-   Modified 1715088550
+   Target_zh_cn "更換彈匣"
+   Modified 1730461077
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
    Id "ACE-UserAction_Carry"

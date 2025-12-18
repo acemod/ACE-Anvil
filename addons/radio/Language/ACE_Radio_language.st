@@ -5,24 +5,27 @@ StringTable {
    Id "ACE_Radio-FailReason_NotLoaded"
    Target_en_us "Not loaded"
    Target_de_de "Nicht geladen"
-   Modified 1724863097
+   Target_zh_cn "尚未載入"
+   Modified 1730462291
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{66657BEC7C58D254}" {
    Id "ACE_Radio-Item_KYK13_Description"
    Target_en_us "A module used for transferring cryptographic keys to radios."
    Target_de_de "Ein Modul zum Übetragen von kryptographischen Schlüsseln auf Funkgeräte."
-   Modified 1724865142
+   Target_zh_cn "用於向無線電設備傳輸加密金鑰的模組"
+   Modified 1730462250
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{66657BEC7B8734FC}" {
    Id "ACE_Radio-Item_KYK13_Name"
    Target_en_us "KYK-13 Fill Device"
-   Modified 1717961004
+   Target_zh_cn "KYK-13 加密金鑰加載器"
+   Modified 1730462791
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{644826487CAE8882}" {
    Id "ACE_Radio-Settings-Radio"
@@ -98,41 +101,46 @@ StringTable {
    Id "ACE_Radio-Settings_Click_Off"
    Target_en_us "Click-off sound when transmission ends"
    Target_pl_pl "Dźwięk odłączenia przy zakończeniu transmisji"
-   Modified 1716434296
+   Target_zh_cn "傳輸結束時的斷訊提示音"
+   Modified 1730462812
    Author "darkshifty"
-   LastChanged "darkshifty"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{66CF3B5A5C85AB29}" {
    Id "ACE_Radio-UserAction_Address"
    Target_en_us "Address: %1"
    Target_de_de "Adresse: %1"
-   Modified 1724863571
+   Target_zh_cn "位址： %1"
+   Modified 1730462941
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{66CF3B5BAABA47AE}" {
    Id "ACE_Radio-UserAction_ClearAll"
    Target_en_us "Clear all"
    Target_de_de "Alle löschen"
-   Modified 1724863735
+   Target_zh_cn "全部清除"
+   Modified 1730463063
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{66CF3B5D07D15121}" {
    Id "ACE_Radio-UserAction_CopyKey"
    Target_en_us "Copy %1 to %2"
    Target_de_de "Kopiere %1 nach %2"
-   Modified 1724863181
+   Target_zh_cn "將 %1 複製到 %2"
+   Modified 1730463110
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{66CF3B5D60010DC8}" {
    Id "ACE_Radio-UserAction_LoadKey"
    Target_en_us "Load %1"
    Target_de_de "Lade %1"
-   Modified 1724863191
+   Target_zh_cn "讀取 %1"
+   Modified 1730462989
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
  }
 }

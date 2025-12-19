@@ -209,7 +209,7 @@ StringTable {
    Id "ACE_Medical-UserAction_BackPosition"
    Target_en_us "Put on back"
    Target_de_de "Auf den Rücken drehen"
-   Target_zh_cn "協助仰躺"
+   Target_zh_cn "翻為仰躺"
    Target_ko_kr "똑바로 눕히기"
    Modified 1725496394
    Author "Kexanone"
@@ -219,7 +219,7 @@ StringTable {
    Id "ACE_Medical-UserAction_LeftRecoveryPosition"
    Target_en_us "Put in left recovery position"
    Target_de_de "In linke Bewusstlosenlagerung bringen"
-   Target_zh_cn "轉為左側復甦姿勢"
+   Target_zh_cn "翻至左側復甦姿勢"
    Target_ko_kr "좌측으로 회복자세 교정하기"
    Modified 1725496514
    Author "Kexanone"
@@ -229,7 +229,7 @@ StringTable {
    Id "ACE_Medical-UserAction_RightRecoveryPosition"
    Target_en_us "Put in right recovery position"
    Target_de_de "In rechte Bewusstlosenlagerung bringen"
-   Target_zh_cn "轉為右側復甦姿勢"
+   Target_zh_cn "翻至右側復甦姿勢"
    Target_ko_kr "우측으로 회복자세 교정하기"
    Modified 1725496522
    Author "Kexanone"

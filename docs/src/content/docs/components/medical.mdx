@@ -362,10 +362,6 @@ Template for the `missionHeader` in a server config:
 
 <UnpublishedModWarning />
 
-### Overview
-
-_TBD_
-
 ## ACE Medical Breathing
 
 <UnpublishedModWarning />
@@ -374,17 +370,62 @@ _TBD_
 
 ### Overview
 
-_TBD_
+**ACE Medical Breathing** adds the following feature:
+- **Respiratory System:**
+  - Simulation of respiratory rate, alveolar and blood O<sub>2</sub> and CO<sub>2</sub>
+  - Obstruction of airway through vomit or tongue
+  - Open and tension pneumothorax
+- **Medical Items:**
+  - Adds King LT, chest seal, NCD kit
 
 ### Details
 
-_TBD_
+#### Glossary
+
+- PTX: Pneumothorax
+- LT: Laryngeal tube
+- RR: Respiratory rate
+
+#### Airway
+
+Airway can be blocked by either vomit or tongue. An unconscious vomiting patient will get their airway blocked, unless they have a King LT inserted or are in recovery position. Vomit that blocks the airway has to be cleared with the user action that shows up on their head. In contrast, tongue-based obstruction only happens in supine position and can be resolved by either lifting the chin, inserting a King LT or putting the patient in recovery position.
+
+#### Pneumothorax
+
+Pneumothorax (PTX) is the presence of air in the pleural space between lung and chest wall. It can be caused by projectile or stab wounds and leads to a partial collapse of the affected lung. There are two variants: Open and tension. Patients with an open pneumothorax should be immediately treated with a chest seal to prevent further collapse or deterioration to a tension pneumothorax. Tension pneumothorax is an even more serious condition, as it speeds up collapse and can seriously impede the function of the heart. It will readily lead to cardiac arrest, unless resolved with a NCD kit. In both cases, you will see an elevation in RR and HR. Tension pneumothorax will additionally lead to a drop in BP.
+
+#### Vital Ranges
+
+SpO2 is added as an additional quantity that determines vital states from [`ACE Medical Circulation`](#vital-ranges).
+
+| State | HR [BPM] | BP [mmHg] | Hemorrhage class | SpO2 |
+| --- | --- | --- | --- | --- |
+| Cardiac arrest | > 220 | > 284/189 | --- | --- |
+| Stable | 40 - 220 | 69/46 - 284/189 | < II | 85 - 97 |
+| Unstable | < 40 | < 69/46 | II | < 85 |
+| Critical | < 30 | < 51/34 | III | < 75 |
+| Cardiac arrest | < 20 | < 51/34* | IV | < 65 |
+
+\* BP below 51/34 mmHg only leads to cardiac arrest if the heart rate is at least critical (_i.e._ < 30 BPM).
+
+Moreover, patients are also unstable if their airway is blocked.
 
 ### Treatments
 
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Circulation:
 
 <PlantUML src="/plantumls/medical/breathing-treatment-1.puml" alt="breathing-treatment-1.puml" />
+
+### Usage
+
+#### Lifting chin
+
+- Unconscious patients in supine position have an interaction on their head for lifting their chin.
+
+#### Clear vomit
+
+- Patients that have their airway occluded by vomit have an interaction on their head for clearing vomit.
+
 
 ### Settings
 

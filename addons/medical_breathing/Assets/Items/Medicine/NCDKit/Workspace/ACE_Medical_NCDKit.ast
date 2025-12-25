@@ -1,0 +1,27 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{62DAF0668905978C}" {
+   Name "NCDKit"
+   Animations {
+    "FingerAnim"
+    "Idle"
+    "ReviveOther"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{6315339F2BCC104E}" {
+   Name "NCDKitAmbulance"
+   Animations {
+    "ReviveOther"
+   }
+   Columns {
+    "LeftPatient"
+    "RightPatient"
+   }
+  }
+ }
+}

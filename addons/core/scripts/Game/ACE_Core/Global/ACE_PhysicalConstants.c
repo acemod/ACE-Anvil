@@ -6,4 +6,5 @@ class ACE_PhysicalConstants
 	
 	// Conversions
 	static const float KPA2MMHG = 7.5006168; // kPa to mmHg
+	static const float ATM2KPA = 101.325; // atm to kPa
 }

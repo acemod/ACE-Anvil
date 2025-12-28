@@ -1,6 +1,37 @@
 ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M15AT/Mine_M15AT.et" {
  ID "5968D2B6A82C6019"
  components {
+  ACE_LadderInventoryItemComponent "{59E4E694B93DC656}" {
+   Attributes SCR_ItemAttributeCollection "{5A10B8E3F1D55606}" {
+    ItemDisplayName WeaponUIInfo "{5A10B8E3F31D239B}" {
+     Name "#ACE_TacticalLadder-Item_Name"
+     Description "#ACE_TacticalLadder-Item_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{5A10B8E3E50A16D2}" {
+     Weight 10.4
+     ItemDimensions 30 30 30
+     ItemVolume 25000
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{5A10B8E3C98BD0A4}" {
+     IkSettings {
+      ItemIKSettings "{59E4E696CE54F34A}" {
+      }
+     }
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{5A12A52945DC707E}" {
+      CameraPreset Front
+      CameraOrbitAngles 0 0 0
+      CameraDistanceToItem 0.8
+      CameraOffset 0 0 0
+      LodModel 1
+     }
+     CharacterModifierAttributes "{5A4CB6450DEB8E32}" {
+      CanBeEquippedInVehicle 0
+     }
+    }
+   }
+  }
   BaseTriggerComponent "{59E4E69D8E9B4323}" {
    Enabled 0
   }
@@ -92,37 +123,6 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
   }
   SCR_MineDamageManager "{5A187C4DB2CF86F2}" {
    Enabled 0
-  }
-  SCR_MineInventoryItemComponent "{59E4E694B93DC656}" {
-   Attributes SCR_ItemAttributeCollection "{5A10B8E3F1D55606}" {
-    ItemDisplayName WeaponUIInfo "{5A10B8E3F31D239B}" {
-     Name "#ACE_TacticalLadder-Item_Name"
-     Description "#ACE_TacticalLadder-Item_Description"
-    }
-    ItemPhysAttributes ItemPhysicalAttributes "{5A10B8E3E50A16D2}" {
-     Weight 10.4
-     ItemDimensions 46 78 7
-     ItemVolume 8000
-    }
-    ItemAnimationAttributes ItemAnimationAttributes "{5A10B8E3C98BD0A4}" {
-     IkSettings {
-      ItemIKSettings "{59E4E696CE54F34A}" {
-      }
-     }
-    }
-    CustomAttributes {
-     PreviewRenderAttributes "{5A12A52945DC707E}" {
-      CameraPreset Front
-      CameraOrbitAngles 0 0 0
-      CameraDistanceToItem 0.8
-      CameraOffset 0 0 0
-      LodModel 1
-     }
-     CharacterModifierAttributes "{5A4CB6450DEB8E32}" {
-      CanBeEquippedInVehicle 0
-     }
-    }
-   }
   }
   SCR_PlaceableItemComponent "{5A127CDA1D1B58E6}" {
    m_ePlacementType ACE_XYZ_UP

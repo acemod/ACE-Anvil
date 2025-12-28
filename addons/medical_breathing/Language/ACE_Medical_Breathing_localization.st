@@ -114,10 +114,10 @@ StringTable {
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{671D563325641152}" {
-   Id "ACE_Medical-Pneumothorax"
-   Target_en_us "Pneumothorax"
-   Target_de_de "Pneumothorax"
-   Modified 1729978799
+   Id "ACE_Medical-OpenPneumothorax"
+   Target_en_us "Open pneumothorax"
+   Target_de_de "Offener Pneumothorax"
+   Modified 1730352105
    Author "Kexanone"
    LastChanged "Kexanone"
   }

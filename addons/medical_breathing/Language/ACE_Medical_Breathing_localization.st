@@ -128,11 +128,11 @@ StringTable {
    LastChanged "YuanYu"
   }
   CustomStringTableItem "{671D563325641152}" {
-   Id "ACE_Medical-Pneumothorax"
-   Target_en_us "Pneumothorax"
-   Target_de_de "Pneumothorax"
-   Target_zh_cn "氣胸"
-   Modified 1730465824
+   Id "ACE_Medical-OpenPneumothorax"
+   Target_en_us "Open pneumothorax"
+   Target_de_de "Offener Pneumothorax"
+   Target_zh_cn "開放性氣胸"
+   Modified 1730352105
    Author "Kexanone"
    LastChanged "YuanYu"
   }

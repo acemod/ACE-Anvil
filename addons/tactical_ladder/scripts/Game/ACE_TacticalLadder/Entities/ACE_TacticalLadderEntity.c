@@ -70,19 +70,6 @@ class ACE_TacticalLadderEntity : GenericEntity
 			Rpc(RpcDo_OnItemPickedFromGroundBroadcast);
 		}
 	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	protected void RpcDo_OnItemDroppedOnGround()
-	{
-		vector transform[4];
-		GetWorldTransform(transform);
-		TraceParam traceParams = new TraceParam();
-		traceParams.Exclude = this;
-		traceParams.TargetLayers = EPhysicsLayerPresets.Building;
-		SCR_TerrainHelper.SnapToTerrain(transform, GetWorld(), false, traceParams);
-		SetWorldTransform(transform);
-	}
 		
 	//------------------------------------------------------------------------------------------------
 	//! Retract ladder when picking up from ground

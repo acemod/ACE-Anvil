@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_PlayerController : PlayerController
 {
+	protected static const float ACE_MAX_DELETED_DISTANCE_M = 5; // Maximum distance for deletion requests to be granted
+	
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of unreplicated entity from all machines
 	//! Called from local player
@@ -16,6 +18,13 @@ modded class SCR_PlayerController : PlayerController
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void RpcAsk_ACE_DeleteEntityByID(EntityID entityID)
 	{
+		IEntity entity = GetGame().GetWorld().FindEntityByID(entityID);
+		if (!entity)
+			return;
+		
+		if (!ACE_IsDeletionGrantedByServer(entity))
+			return;
+		
 		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
 		if (!manager)
 			return;
@@ -28,6 +37,8 @@ modded class SCR_PlayerController : PlayerController
 	//! Called from local player
 	void ACE_RequestDestroyEntity(SCR_DestructibleEntity entity, vector hitPosDirNorm[3], int deletionDelayMS = -1)
 	{
+
+		
 		Rpc(RpcAsk_ACE_DestroyEntity, entity.GetID(), hitPosDirNorm, deletionDelayMS);
 	}
 	
@@ -37,6 +48,9 @@ modded class SCR_PlayerController : PlayerController
 	{
 		SCR_DestructibleEntity entity = SCR_DestructibleEntity.Cast(GetGame().GetWorld().FindEntityByID(entityID));
 		if (!entity)
+			return;
+		
+		if (!ACE_IsDeletionGrantedByServer(entity))
 			return;
 		
 		float health = entity.GetCurrentHealth();
@@ -58,6 +72,22 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Check whether player is allowed deleting the entity
+	protected bool ACE_IsDeletionGrantedByServer(IEntity entityToDelete)
+	{
+		// Only physical loadtime entities can be deleted
+		if (!entityToDelete || !entityToDelete.IsLoaded() || !entityToDelete.GetVObject())
+			return false;
+		
+		SCR_ChimeraCharacter playerChar = SCR_ChimeraCharacter.Cast(GetControlledEntity());
+		if (!playerChar)
+			return false;
+		
+		// Can only delete nearby entities
+		return (vector.Distance(playerChar.GetOrigin(), entityToDelete.GetOrigin()) <= ACE_MAX_DELETED_DISTANCE_M);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void ACE_RequestAnimateWithHelperCompartment(ACE_EAnimationHelperID helperID)
 	{
 		Rpc(RpcAsk_ACE_AnimateWithHelperCompartment, helperID);
@@ -74,4 +104,5 @@ modded class SCR_PlayerController : PlayerController
 		
 		ACE_AnimationTools.AnimateWithHelperCompartment(helperID, char);
 	}
+
 }

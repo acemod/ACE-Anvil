@@ -1,0 +1,19 @@
+$animation "" {
+ #version 1.0
+ #fps 30
+ #numFrames 1
+ $node "i_hose" {
+  $keys t q {
+   $frame 0 1 {
+    #t 0.0063896 0.0371028 0.0434308
+   }
+  }
+  $node "i_needle" {
+   $keys t q {
+    $frame 0 1 {
+     #t 0 0.023 0
+    }
+   }
+  }
+ }
+}

@@ -3,7 +3,7 @@ modded class SCR_BaseGameMode : BaseGameMode
 {
 	//------------------------------------------------------------------------------------------------
 	//! Terminate loitering, as it would break on reconnection
-	override protected override void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
+	override protected void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
 	{
 		super.OnPlayerDisconnected(playerId, cause, timeout);
 		

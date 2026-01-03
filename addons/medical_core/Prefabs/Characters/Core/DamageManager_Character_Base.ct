@@ -1,0 +1,33 @@
+SCR_CharacterDamageManagerComponent {
+ "Additional hit zones" {
+  SCR_CharacterHealthHitZone Health {
+   HZDefault 0
+  }
+  SCR_CharacterHeadHitZone Head {
+   m_fACE_Medical_SecondChance 0
+  }
+  ACE_Medical_CharacterChestHitZone Chest {
+  }
+  ACE_Medical_CharacterAbdomenHitZone Abdomen {
+  }
+  ACE_Medical_HipsHitZone Hips {
+  }
+  ACE_Medical_NeckHitZone Neck {
+  }
+  ACE_Medical_PainHitZone ACE_Medical_Pain {
+   IgnoreExplosions 1
+   BaseDamageMultiplier 0.5
+   MaxHealth 100
+   "DamageState threshold" {
+    0.8
+    0.333
+   }
+   m_fFullRegenerationTime 900
+  }
+  SCR_HitZone ACE_Medical_Default {
+   HZDefault 1
+   IgnoreExplosions 1
+   MaxHealth 100
+  }
+ }
+}

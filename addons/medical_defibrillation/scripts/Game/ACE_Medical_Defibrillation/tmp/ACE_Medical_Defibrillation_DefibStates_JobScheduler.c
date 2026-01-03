@@ -7,7 +7,7 @@
 [BaseContainerProps()]
 class ACE_Medical_Defibrillation_DefibStates_JobScheduler : ACE_IFrameJob
 {
-	[Attribute(defvalue: "1000", desc: "Approximate update timeout for a particular object [ms]", params: "0, 250")]
+	[Attribute(defvalue: "100", desc: "Approximate update timeout for a particular object [ms]", params: "0, 100")]
 	protected int m_fObjectUpdateTimeoutMS;
 	
 	[Attribute(defvalue: "10", desc: "Maximum number of entities to be updated per frame")]

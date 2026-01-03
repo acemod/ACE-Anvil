@@ -146,13 +146,83 @@ AudioClass {
    id 56329
    name "ACE_Medical_Defibrillation_SoundCPRBeep"
    version 5
-   tl 1313.063 1673.856
+   tl 1314.584 1675.377
    ins {
     ConnectionsClass "con:64" {
      id 64
      links {
       ConnectionClass "55314:65" {
        id 55314
+       port 65
+      }
+     }
+    }
+   }
+  }
+  SoundClass "60425" {
+   id 60425
+   name "ACE_Medical_Defibrillation_SoundCPRReminder"
+   version 5
+   tl 228.406 940.008
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "57362:65" {
+       id 57362
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -9
+  }
+  SoundClass "63497" {
+   id 63497
+   name "ACE_Medical_Defibrillation_SoundDoNotTouchPatient"
+   version 5
+   tl 257.475 1415.549
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "68626:65" {
+       id 68626
+       port 65
+      }
+     }
+    }
+   }
+   volume_dB -9
+  }
+  SoundClass "70665" {
+   id 70665
+   name "ACE_Medical_Defibrillation_SoundChargedBeepLow"
+   version 5
+   tl 486.305 2097.844
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "71698:65" {
+       id 71698
+       port 65
+      }
+     }
+    }
+   }
+  }
+  SoundClass "76809" {
+   id 76809
+   name "ACE_Medical_Defibrillation_SoundChargedBeepHigh"
+   version 5
+   tl 1316.418 2131.288
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "80914:65" {
+       id 80914
        port 65
       }
      }
@@ -166,11 +236,28 @@ AudioClass {
    name "Generator 50"
    version 6
    tl 727.523 1677.177
-   function Triangle
    volume 0.251
    volume_dB -12
    time 100
-   "Termination Fade Out" 0
+  }
+  GeneratorClass "69637" {
+   id 69637
+   name "Generator 50"
+   version 6
+   tl -99.235 2098.865
+   volume 0.089
+   volume_dB -21
+   time 250
+  }
+  GeneratorClass "79877" {
+   id 79877
+   name "Generator 50"
+   version 6
+   tl 730.878 2132.309
+   volume 0.089
+   volume_dB -21
+   time 200
+   frequency 880
   }
  }
  shaders {
@@ -597,6 +684,194 @@ AudioClass {
     7 0
    }
   }
+  ShaderClass "57362" {
+   id 57362
+   name "Shader 2"
+   version 5
+   tl -5.48 939.152
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "58396:65" {
+       id 58396
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "61459:65" {
+       id 61459
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "59413:65" {
+       id 59413
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "62468:65" {
+       id 62468
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "68626" {
+   id 68626
+   name "Shader 2"
+   version 5
+   tl 23.589 1414.693
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "66588:65" {
+       id 66588
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "64531:65" {
+       id 64531
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "65557:65" {
+       id 65557
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "67588:65" {
+       id 67588
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "71698" {
+   id 71698
+   name "Shader 2"
+   version 5
+   tl 201.995 2100.081
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "73756:65" {
+       id 73756
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "72723:65" {
+       id 72723
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "74773:65" {
+       id 74773
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "69637:65" {
+       id 69637
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass "80914" {
+   id 80914
+   name "Shader 2"
+   version 5
+   tl 1032.108 2133.525
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "77852:65" {
+       id 77852
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "75795:65" {
+       id 75795
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "78869:65" {
+       id 78869
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "79877:65" {
+       id 79877
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
  }
  amplitudes {
   AmplitudeClass "2067" {
@@ -671,6 +946,38 @@ AudioClass {
    curve "1/r"
    outerRange 50
   }
+  AmplitudeClass "61459" {
+   id 61459
+   name "Amplitude 4"
+   version 5
+   tl -239.327 1116.395
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "64531" {
+   id 64531
+   name "Amplitude 4"
+   version 5
+   tl -210.258 1591.936
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "72723" {
+   id 72723
+   name "Amplitude 4"
+   version 5
+   tl -107.663 2280.692
+   curve "1/r"
+   outerRange 50
+  }
+  AmplitudeClass "75795" {
+   id 75795
+   name "Amplitude 4"
+   version 5
+   tl 722.45 2314.136
+   curve "1/r"
+   outerRange 50
+  }
  }
  frequency {
   FrequencyClass "4117" {
@@ -734,6 +1041,34 @@ AudioClass {
    name "Frequency 5"
    version 5
    tl 722.324 1938.476
+   enableDistanceAtt 1
+  }
+  FrequencyClass "59413" {
+   id 59413
+   name "Frequency 5"
+   version 5
+   tl -237.612 1195.869
+   enableDistanceAtt 1
+  }
+  FrequencyClass "65557" {
+   id 65557
+   name "Frequency 5"
+   version 5
+   tl -208.543 1671.41
+   enableDistanceAtt 1
+  }
+  FrequencyClass "74773" {
+   id 74773
+   name "Frequency 5"
+   version 5
+   tl -104.434 2360.164
+   enableDistanceAtt 1
+  }
+  FrequencyClass "78869" {
+   id 78869
+   name "Frequency 5"
+   version 5
+   tl 725.679 2393.608
    enableDistanceAtt 1
   }
  }
@@ -852,6 +1187,34 @@ AudioClass {
     }
    }
   }
+  BankLocalClass "62468" {
+   id 62468
+   name "Continue CPR"
+   version 7
+   tl -237.645 938.58
+   Samples {
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundCPRReminder.wav" {
+     Filename "{701D6A628A906F72}Sounds/ACE_Medical_Defibrillation_SoundCPRReminder.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+  BankLocalClass "67588" {
+   id 67588
+   name "Do Not Touch Patient"
+   version 7
+   tl -208.576 1414.121
+   Samples {
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundDoNotTouchPatient.wav" {
+     Filename "{246C8E311FB8F7EF}Sounds/ACE_Medical_Defibrillation_SoundDoNotTouchPatient.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
  }
  spatialities {
   SpatialityClass "6172" {
@@ -915,6 +1278,34 @@ AudioClass {
    name "Spatiality 3"
    version 5
    tl 723.099 1770.781
+   spatialFactor 1
+  }
+  SpatialityClass "58396" {
+   id 58396
+   name "Spatiality 3"
+   version 5
+   tl -235.325 1029.489
+   spatialFactor 1
+  }
+  SpatialityClass "66588" {
+   id 66588
+   name "Spatiality 3"
+   version 5
+   tl -206.256 1505.03
+   spatialFactor 1
+  }
+  SpatialityClass "73756" {
+   id 73756
+   name "Spatiality 3"
+   version 5
+   tl -103.659 2192.469
+   spatialFactor 1
+  }
+  SpatialityClass "77852" {
+   id 77852
+   name "Spatiality 3"
+   version 5
+   tl 726.454 2225.913
    spatialFactor 1
   }
  }

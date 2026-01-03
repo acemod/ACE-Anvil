@@ -7,7 +7,8 @@ class ACE_Medical_Defibrillation_AnalysingState : ACE_Medical_Defibrillation_IDe
 		
 		context.m_pDefibrillator.GetDefibProgressData().ResetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.Analysis);
 		
-		// Play analysing sound effect
+		// Play analysing sound
+		context.m_pDefibrillator.GetSoundComponent().PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDANALYSING);
 		
 		Print("ACE_Medical_Defibrillation_AnalysingState::OnEnter | State entered: analysing");
 	}

@@ -64,6 +64,9 @@ class ACE_Medical_CardiacArrestState : ACE_Medical_IVitalState
 		float hemII = context.m_pBloodHitZone.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_2_HEMORRHAGE);
 		float currentHealthScaled = context.m_pBloodHitZone.GetHealthScaled();
 		
+		if (context.m_pVitals.IsCPRPerformed())
+			return ACE_Medical_ECardiacRhythm.Unknown;
+		
 		if (currentHealthScaled <= hemIV)
 		{
 			return ACE_Medical_ECardiacRhythm.PEA;

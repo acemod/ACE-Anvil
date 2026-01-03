@@ -13,7 +13,7 @@ class ACE_Medical_Defibrillation_DefibSoundComponent : SoundComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void PlayDefibSoundServer(string soundName, bool terminatePrevious = false, bool isLoop = false)
+	void PlaySound(string soundName, bool terminatePrevious = false, bool isLoop = false)
 	{
 		if (!Replication.IsServer())
 			return;
@@ -23,13 +23,13 @@ class ACE_Medical_Defibrillation_DefibSoundComponent : SoundComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void TerminateDefibSound(bool terminateAll = false)
+	void TerminateSound(bool terminateAll = false)
 	{
 		if (!Replication.IsServer())
 			return;
 		
 		RPC_TerminateSound(terminateAll);
-		Rpc(TerminateDefibSound, terminateAll);
+		Rpc(TerminateSound, terminateAll);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -40,7 +40,7 @@ class ACE_Medical_Defibrillation_DefibSoundComponent : SoundComponent
 			return;
 		
 		if (terminatePrevious)
-			TerminateDefibSound();
+			TerminateSound();
 		
 		m_pCurrentSound = SoundEvent(soundName);
 	}
@@ -55,5 +55,34 @@ class ACE_Medical_Defibrillation_DefibSoundComponent : SoundComponent
 			Terminate(m_pCurrentSound);
 		
 		m_pCurrentSound = null;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void PlaySoundOnPatient(string soundName)
+	{
+		if (!Replication.IsServer())
+			return;
+		
+		RPC_PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
+		Rpc(RPC_PlaySoundOnPatient, ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RPC_PlaySoundOnPatient(string soundName)
+	{
+		ACE_Medical_Defibrillation_DefibComponent defibComponent = ACE_Medical_Defibrillation_DefibComponent.Cast(GetOwner().FindComponent(ACE_Medical_Defibrillation_DefibComponent));
+		if (!defibComponent)
+			return;
+		
+		IEntity patient = defibComponent.GetPatient();
+		if (!patient)
+			return;
+		
+		CharacterSoundComponent sndComponent = CharacterSoundComponent.Cast(patient.FindComponent(CharacterSoundComponent));
+		if (!sndComponent)
+			return;
+		
+		sndComponent.SoundEvent(soundName);
 	}
 }

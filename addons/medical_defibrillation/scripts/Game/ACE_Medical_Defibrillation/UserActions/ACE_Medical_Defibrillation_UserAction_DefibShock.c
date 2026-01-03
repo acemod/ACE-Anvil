@@ -1,15 +1,5 @@
-class ACE_Medical_Defibrillation_UserAction_DefibDisconnect : ScriptedUserAction
+class ACE_Medical_Defibrillation_UserActions_DefibShock : ScriptedUserAction
 {
-	//------------------------------------------------------------------------------------------------	
-	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
-	{
-		super.Init(pOwnerEntity, pManagerComponent);
-		
-		World world = GetGame().GetWorld();
-		if (!world)
-			return;
-	}
-	
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
@@ -19,12 +9,11 @@ class ACE_Medical_Defibrillation_UserAction_DefibDisconnect : ScriptedUserAction
 		if (!defibComponent)
 			return false;
 		
-		IEntity patient = defibComponent.GetPatient();
-		if (!patient)
-		{
-			PrintFormat("%1::CanBeShownScript | Defib has no patient!", this.ClassName());
+		if (!defibComponent.GetPatient())
 			return false;
-		}
+		
+		if (defibComponent.GetDefibStateID() != ACE_Medical_Defibrillation_EDefibStateID.CHARGED)
+			return false;
 		
 		return true;
 	}
@@ -35,12 +24,11 @@ class ACE_Medical_Defibrillation_UserAction_DefibDisconnect : ScriptedUserAction
 		if (!Replication.IsServer())
 			return;
 		
-		PrintFormat("%1::PerformAction | Server Execution: %2", this.ClassName(), Replication.IsServer());
-		
 		ACE_Medical_Defibrillation_DefibComponent defibComponent = ACE_Medical_Defibrillation_DefibComponent.Cast(GetOwner().FindComponent(ACE_Medical_Defibrillation_DefibComponent));
 		if (!defibComponent)
 			return;
 		
-		defibComponent.ResetPatient();
+		defibComponent.ShockPatient();
+		return;
 	}
 }

@@ -9,4 +9,18 @@ class ACE_Medical_Defibrillation_DefibSounds
 	const static string SOUNDSHOCKADVISED = "ACE_Medical_Defibrillation_SoundShockAdvised";
 	const static string SOUNDSHOCKTHUMP = "ACE_Medical_Defibrillation_SoundThump";
 	const static string SOUNDCPRBEEP = "ACE_Medical_Defibrillation_SoundCPRBeep";
+	const static string SOUNDCHARGEDBEEPLOW = "ACE_Medical_Defibrillation_SoundChargedBeepLow";
+	const static string SOUNDCHARGEDBEEPHIGH = "ACE_Medical_Defibrillation_SoundChargedBeepHigh";
+	const static string SOUNDCPRREMINDER = "ACE_Medical_Defibrillation_SoundCPRReminder";
+	const static string SOUNDDONOTTOUCHPATIENT = "ACE_Medical_Defibrillation_SoundDoNotTouchPatient";
+	
+	float m_fLastCPRPaceTimer;
+	float m_fContinueCPRTimer;
+	float m_fPatientTouchTimer;
+	float m_fChargedBeepTimer;
+	float m_iChargedBeepPhase;
+	
+	void ACE_Medical_Defibrillation_DefibSounds()
+	{
+	}
 }

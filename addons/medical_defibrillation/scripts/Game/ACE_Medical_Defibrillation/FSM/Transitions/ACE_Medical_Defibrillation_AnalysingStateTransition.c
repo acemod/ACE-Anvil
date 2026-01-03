@@ -27,7 +27,6 @@ class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<
 	override void OnPerform(ACE_Medical_Defibrillation_DefibContext context)
 	{
 		Print("ACE_Medical_Defibrillation_AnalysingStateTransition::OnPerform | Entering state: Analysing");
-		context.m_pDefibrillator.GetSoundComponent().PlayDefibSoundServer(ACE_Medical_Defibrillation_DefibSounds.SOUNDANALYSING);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -43,7 +42,20 @@ class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<
 			return false;
 		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(patient.FindComponent(ACE_Medical_VitalsComponent));
 		if (vitals.IsCPRPerformed())
+		{
+			if (context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer >= 3500 &&
+				context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown) == 0)
+			{
+				context.m_pDefibrillator.GetSoundComponent().PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDDONOTTOUCHPATIENT);
+				context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer = 0;
+			}
+			context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer += timeSlice;
 			return false;
+		}
+		else
+		{
+			context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer = 3500;
+		}
 		
 		// Defib in Connected state for at least 2 seconds
 		ACE_Medical_Defibrillation_DefibProgressData defibProgress = context.m_pDefibrillator.GetDefibProgressData();

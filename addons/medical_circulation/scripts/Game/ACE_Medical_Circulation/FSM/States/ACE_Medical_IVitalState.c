@@ -74,6 +74,9 @@ class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 	{
 		float hr = context.m_pVitals.GetHeartRate();
 		
+		if (context.m_pVitals.IsCPRPerformed())
+			return ACE_Medical_ECardiacRhythm.Unknown;
+		
 		if (hr >= 0 && hr < 60)
 			return ACE_Medical_ECardiacRhythm.Bradycardia;
 		
@@ -81,9 +84,7 @@ class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 			return ACE_Medical_ECardiacRhythm.Sinus;
 		
 		if (hr > 100)
-		{
 			return ACE_Medical_ECardiacRhythm.Tachycardia;
-		}
 		
 		return ACE_Medical_ECardiacRhythm.Unknown;
 	}

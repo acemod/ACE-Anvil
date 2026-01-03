@@ -11,9 +11,8 @@ class ACE_Medical_Defibrillation_QueryNearestDefib : ACE_QueryNearestEntity
 	//! Store entity if it is the closest
 	override protected bool QueryCallback(IEntity entity)
 	{
-		EntityPrefabData prefabData = entity.GetPrefabData();
-		ResourceName prefabName = prefabData.GetPrefabName();
-		
+		if (!entity)
+			return true;
 		ACE_Medical_Defibrillation_DefibComponent defibrillatorComponent = ACE_Medical_Defibrillation_DefibComponent.Cast(entity.FindComponent(ACE_Medical_Defibrillation_DefibComponent));
 		if (!defibrillatorComponent)
 			return true;
@@ -39,6 +38,8 @@ class ACE_Medical_Defibrillation_QueryNearestDefib : ACE_QueryNearestEntity
 		m_pNearestEntity = null;
 		GetGame().GetWorld().QueryEntitiesBySphere(m_vSearchPos, m_fSearchDistanceM, QueryCallback);
 		
+		if (!m_pNearestEntity)
+			return null;
 		ACE_Medical_Defibrillation_DefibComponent defibrillatorComponent = ACE_Medical_Defibrillation_DefibComponent.Cast(m_pNearestEntity.FindComponent(ACE_Medical_Defibrillation_DefibComponent));
 		if (!defibrillatorComponent)
 			return null;

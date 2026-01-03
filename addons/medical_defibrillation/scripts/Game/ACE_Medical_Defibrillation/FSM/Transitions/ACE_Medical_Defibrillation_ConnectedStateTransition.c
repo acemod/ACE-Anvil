@@ -25,7 +25,7 @@ class ACE_Medical_Defibrillation_ConnectedStateTransition : ACE_FSM_ITransition<
 	{
 		Print("ACE_Medical_Defibrillation_ConnectedStateTransition::OnPerform | Entering state: Connected");
 		
-		context.m_pDefibrillator.GetSoundComponent().PlayDefibSoundServer(ACE_Medical_Defibrillation_DefibSounds.SOUNDCONNECTED);
+		context.m_pDefibrillator.GetSoundComponent().PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCONNECTED);
 	}
 	
 	//------------------------------------------------------------------------------------------------

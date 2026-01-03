@@ -4,7 +4,13 @@ class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
 	
 	protected const float UPDATERATE = 500;
 	
-	protected IEntity m_pNearestDefib
+	protected IEntity m_pNearestDefib;
+	
+	//------------------------------------------------------------------------------------------------	
+	//! Make the action server only
+	//------------------------------------------------------------------------------------------------
+	override bool CanBroadcastScript() { return false; }
+	override bool HasLocalEffectOnlyScript() { return false; }
 	
 	//------------------------------------------------------------------------------------------------	
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
@@ -26,8 +32,6 @@ class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
 		if (!CanExecuteThisTick())
 			return (m_pNearestDefib && !PriorDefibFound());
 		
-		PrintFormat("%1::CanBeShownScript | Checking for nearby defib...", this.ClassName());
-		
 		ACE_Medical_Defibrillation_QueryNearestDefib query = new ACE_Medical_Defibrillation_QueryNearestDefib(3);
 		m_pNearestDefib = null;
 		m_pNearestDefib = query.GetEntity(GetOwner().GetOrigin());
@@ -44,7 +48,6 @@ class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
 		IEntity patient = defibComponent.GetPatient();
 		if (patient)
 		{
-			PrintFormat("%1::CanBeShownScript | Defib already has a patient!", this.ClassName());
 			return false;
 		}
 		
@@ -59,6 +62,9 @@ class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
 		
 		PrintFormat("%1::PerformAction | Server Execution: %2", this.ClassName(), Replication.IsServer());
 		
+		ACE_Medical_Defibrillation_QueryNearestDefib query = new ACE_Medical_Defibrillation_QueryNearestDefib(3);
+		m_pNearestDefib = null;
+		m_pNearestDefib = query.GetEntity(GetOwner().GetOrigin());
 		if (!m_pNearestDefib)
 			return;
 		

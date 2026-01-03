@@ -41,9 +41,29 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
       "default"
      }
      UIInfo UIInfo "{671C09FF5F06B782}" {
-      Name "#Disconnect"
+      Name "#ACE-Medical-Defibrillation-DisconnectPatient"
      }
      Duration 1
+     "Sort Priority" 1
+    }
+    ACE_Medical_Defibrillation_UserActions_DefibShock "{673856DECBEEA89B}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{673856DECD3BB5B7}" {
+      Name "#ACE-Medical-Defibrillation-DeliverShock"
+     }
+     Duration 1
+    }
+    ACE_Medical_Defibrillation_UserAction_DefibPickup "{684476916E9E30B7}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{6844769117FA5C78}" {
+      Name "#ACE-Medical-Defibrillation-DefibPickup"
+     }
+     Duration 1
+     "Sort Priority" 10
     }
    }
   }

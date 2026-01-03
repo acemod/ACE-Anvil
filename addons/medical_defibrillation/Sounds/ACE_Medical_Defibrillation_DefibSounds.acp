@@ -181,7 +181,7 @@ AudioClass {
    id 63497
    name "ACE_Medical_Defibrillation_SoundDoNotTouchPatient"
    version 5
-   tl 257.475 1415.549
+   tl 256.325 1415.549
    ins {
     ConnectionsClass "con:64" {
      id 64
@@ -199,7 +199,7 @@ AudioClass {
    id 70665
    name "ACE_Medical_Defibrillation_SoundChargedBeepLow"
    version 5
-   tl 486.305 2097.844
+   tl 487.455 2097.844
    ins {
     ConnectionsClass "con:64" {
      id 64
@@ -245,6 +245,7 @@ AudioClass {
    name "Generator 50"
    version 6
    tl -99.235 2098.865
+   function Square
    volume 0.089
    volume_dB -21
    time 250
@@ -254,6 +255,7 @@ AudioClass {
    name "Generator 50"
    version 6
    tl 730.878 2132.309
+   function Square
    volume 0.089
    volume_dB -21
    time 200

@@ -8,22 +8,22 @@ modded class ACE_Medical_IVitalState
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected ACE_Medical_ECardiacRhythm ComputeCardiacRhythm(ACE_Medical_CharacterContext context, float timeSlice)
+	protected ACE_Medical_Defibrillation_ECardiacRhythm ComputeCardiacRhythm(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		float hr = context.m_pVitals.GetHeartRate();
 
 		if (context.m_pVitals.IsCPRPerformed())
-			return ACE_Medical_ECardiacRhythm.Unknown;
+			return ACE_Medical_Defibrillation_ECardiacRhythm.Unknown;
 
 		if (hr >= 0 && hr < 60)
-			return ACE_Medical_ECardiacRhythm.Bradycardia;
+			return ACE_Medical_Defibrillation_ECardiacRhythm.Bradycardia;
 
 		if (hr >= 60 && hr <= 100)
-			return ACE_Medical_ECardiacRhythm.Sinus;
+			return ACE_Medical_Defibrillation_ECardiacRhythm.Sinus;
 
 		if (hr > 100)
-			return ACE_Medical_ECardiacRhythm.Tachycardia;
+			return ACE_Medical_Defibrillation_ECardiacRhythm.Tachycardia;
 
-		return ACE_Medical_ECardiacRhythm.Unknown;
+		return ACE_Medical_Defibrillation_ECardiacRhythm.Unknown;
 	}
 }

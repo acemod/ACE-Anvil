@@ -1,0 +1,47 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  CharacterSoundComponent "{520EA1D2F659CF84}" {
+   Filenames + {
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp"
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList +{
+     }
+     UIInfo SCR_ActionUIInfo "{630C214BCA7A937F}" {
+      Name "#ACE_Medical-UserAction_LeftRecoveryPosition"
+     }
+     ActionTitle "Left recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 102
+     m_eUnconsciousPose LEFT_SIDE
+    }
+    ACE_Medical_RepositionUserAction "{630C214BD01264A1}" {
+     ParentContextList +{
+     }
+     UIInfo SCR_ActionUIInfo "{630C214BCA7A937F}" {
+      Name "#ACE_Medical-UserAction_LeftRecoveryPosition"
+     }
+     ActionTitle "Left recovery position"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 102
+     m_eUnconsciousPose LEFT_SIDE
+    }
+    ACE_Medical_Defibrillation_UserActions_DefibConnect "{671C09FD5BB621C8}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo UIInfo "{671C09FD5D000AFC}" {
+      Name "#ACE-Medical-Defibrillation-ConnectPatient"
+     }
+     Duration 1
+    }
+   }
+  }
+ }
+}

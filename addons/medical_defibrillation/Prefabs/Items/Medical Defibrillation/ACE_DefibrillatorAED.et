@@ -1,0 +1,17 @@
+GenericEntity : "{039D069A46C6501E}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorBase.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "#ACE_MedicalDefibrillation-AED_DisplayName"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
+     SizeSetupStrategy Manual
+     ItemDimensions 15 15 15
+     ItemVolume 3000
+    }
+   }
+  }
+ }
+}

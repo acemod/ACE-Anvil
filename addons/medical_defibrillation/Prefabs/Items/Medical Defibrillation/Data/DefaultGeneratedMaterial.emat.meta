@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{72DB11F6B089272D}Prefabs/Items/Medical Defibrillation/Data/DefaultGeneratedMaterial.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

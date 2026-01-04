@@ -1,0 +1,38 @@
+GameProject {
+ ID "ACE_Medical_Defibrillation"
+ GUID "64FF097BE776612B"
+ TITLE "ACE Medical Defibrillation"
+ Dependencies {
+  "58D0FB3206B6F859" "60C4CE4888FF4621" "60C4C12DAE90727B" "6214CEA5DA92BFF3"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   SystemModuleSettings SystemModuleSettings "{5F10A1570304557B}" {
+    DefaultConfig "{86E953538A28A98D}Configs/Systems/ChimeraSystemsConfig.conf"
+   }
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{651E36C4817A033E}" {
+      StringTableSource "{FA3E82493E1C4163}Language/ACE_MedicalDefibrillation_localization.st"
+      Languages {
+       LanguageDefinition "{651E36C482A0B38A}" {
+        Code "en_us"
+        StringTableRuntime "{D9E36C61DFA43470}Language/ACE_MedicalDefibrillation_localization.en_us.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

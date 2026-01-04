@@ -18,23 +18,6 @@ AudioClass {
    }
    volume_dB 3
   }
-  SoundClass "8201" {
-   id 8201
-   name "ACE_Medical_Defibrillation_SoundCharged"
-   version 5
-   tl 208.57 132.646
-   ins {
-    ConnectionsClass "con:64" {
-     id 64
-     links {
-      ConnectionClass "12306:65" {
-       id 12306
-       port 65
-      }
-     }
-    }
-   }
-  }
   SoundClass "14345" {
    id 14345
    name "ACE_Medical_Defibrillation_SoundThump"
@@ -110,7 +93,7 @@ AudioClass {
    id 39945
    name "ACE_Medical_Defibrillation_SoundDisconnected"
    version 5
-   tl 1296.194 890.331
+   tl 1297.715 890.331
    ins {
     ConnectionsClass "con:64" {
      id 64
@@ -301,53 +284,6 @@ AudioClass {
      links {
       ConnectionClass "1028:65" {
        id 1028
-       port 65
-      }
-     }
-    }
-   }
-   pi {
-    7 0
-   }
-  }
-  ShaderClass "12306" {
-   id 12306
-   name "Shader 2"
-   version 5
-   tl -25.316 131.79
-   ins {
-    ConnectionsClass "con:0" {
-     id 0
-     links {
-      ConnectionClass "11292:65" {
-       id 11292
-       port 65
-      }
-     }
-    }
-    ConnectionsClass "con:1" {
-     id 1
-     links {
-      ConnectionClass "10259:65" {
-       id 10259
-       port 65
-      }
-     }
-    }
-    ConnectionsClass "con:2" {
-     id 2
-     links {
-      ConnectionClass "9237:65" {
-       id 9237
-       port 65
-      }
-     }
-    }
-    ConnectionsClass "con:64" {
-     id 64
-     links {
-      ConnectionClass "7172:65" {
-       id 7172
        port 65
       }
      }
@@ -884,14 +820,6 @@ AudioClass {
    curve "1/r"
    outerRange 50
   }
-  AmplitudeClass "10259" {
-   id 10259
-   name "Amplitude 4"
-   version 5
-   tl -259.163 309.033
-   curve "1/r"
-   outerRange 50
-  }
   AmplitudeClass "18451" {
    id 18451
    name "Amplitude 4"
@@ -989,13 +917,6 @@ AudioClass {
    tl -259.195 -35.742
    enableDistanceAtt 1
   }
-  FrequencyClass "9237" {
-   id 9237
-   name "Frequency 5"
-   version 5
-   tl -257.448 388.507
-   enableDistanceAtt 1
-  }
   FrequencyClass "13333" {
    id 13333
    name "Frequency 5"
@@ -1081,24 +1002,8 @@ AudioClass {
    version 7
    tl -258.969 -295.401
    Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorSound_Charging.wav" {
-     Filename "{D0B7ABE445409970}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_Charging.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
-    }
-   }
-  }
-  BankLocalClass "7172" {
-   id 7172
-   name "Charged"
-   version 7
-   tl -257.481 129.895
-   "Loop count" 255
-   "Infinite loop" 1
-   Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorSound_Charged.wav" {
-     Filename "{496A55EAAAD3C099}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_Charged.wav"
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundCharging.wav" {
+     Filename "{D0B7ABE445409970}Sounds/ACE_Medical_Defibrillation_SoundCharging.wav"
      Probability 100
      Index 0
      SampleMetadata ""
@@ -1111,8 +1016,8 @@ AudioClass {
    version 7
    tl -256.481 528.998
    Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorSound_ShockThump.wav" {
-     Filename "{A9F7DB0FF2EE8CC5}Sounds/ACE_MedicalDefibrillation_DefibrillatorSound_ShockThump.wav"
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundShockThump.wav" {
+     Filename "{A9F7DB0FF2EE8CC5}Sounds/ACE_Medical_Defibrillation_SoundShockThump.wav"
      Probability 100
      Index 0
      SampleMetadata ""
@@ -1125,8 +1030,8 @@ AudioClass {
    version 7
    tl 731.967 -297.987
    Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_ShockAdvised.wav" {
-     Filename "{B947101D98B22D7C}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_ShockAdvised.wav"
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundShockAdvised.wav" {
+     Filename "{B947101D98B22D7C}Sounds/ACE_Medical_Defibrillation_SoundShockAdvised.wav"
      Probability 100
      Index 0
      SampleMetadata ""
@@ -1139,8 +1044,8 @@ AudioClass {
    version 7
    tl 745.633 97.441
    Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_NoShockAdvised.wav" {
-     Filename "{1FA0148AF1CCD1DD}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_NoShockAdvised.wav"
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundNoShockAdvised.wav" {
+     Filename "{1FA0148AF1CCD1DD}Sounds/ACE_Medical_Defibrillation_SoundNoShockAdvised.wav"
      Probability 100
      Index 0
      SampleMetadata ""
@@ -1153,8 +1058,8 @@ AudioClass {
    version 7
    tl 733.821 489.085
    Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Connected.wav" {
-     Filename "{B5C11AB72AC005FA}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Connected.wav"
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundConnected.wav" {
+     Filename "{B5C11AB72AC005FA}Sounds/ACE_Medical_Defibrillation_SoundConnected.wav"
      Probability 100
      Index 0
      SampleMetadata ""
@@ -1167,8 +1072,8 @@ AudioClass {
    version 7
    tl 747.357 878.429
    Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Disconnected.wav" {
-     Filename "{738508CCEC10793E}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Disconnected.wav"
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundDisconnected.wav" {
+     Filename "{738508CCEC10793E}Sounds/ACE_Medical_Defibrillation_SoundDisconnected.wav"
      Probability 100
      Index 0
      SampleMetadata ""
@@ -1181,8 +1086,8 @@ AudioClass {
    version 7
    tl 749.441 1263.738
    Samples {
-    AudioBankSampleClass "ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Analysing.wav" {
-     Filename "{8E2A822D6B05EBBE}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompt_Analysing.wav"
+    AudioBankSampleClass "ACE_Medical_Defibrillation_SoundAnalysing.wav" {
+     Filename "{8E2A822D6B05EBBE}Sounds/ACE_Medical_Defibrillation_SoundAnalysing.wav"
      Probability 100
      Index 0
      SampleMetadata ""
@@ -1224,13 +1129,6 @@ AudioClass {
    name "Spatiality 3"
    version 5
    tl -256.907 -203.437
-   spatialFactor 1
-  }
-  SpatialityClass "11292" {
-   id 11292
-   name "Spatiality 3"
-   version 5
-   tl -255.161 222.127
    spatialFactor 1
   }
   SpatialityClass "15388" {

@@ -28,7 +28,15 @@ class ACE_Medical_Defibrillation_UserActions_DefibShock : ScriptedUserAction
 		if (!defibComponent)
 			return;
 		
-		defibComponent.ShockPatient();
+		if (defibComponent.ShockPatient())
+		{
+			ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_GlobalHelpers.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
+			if (!networkComponent)
+				return;
+			
+			networkComponent.RequestDefibNotification(ENotification.ACE_MEDICAL_DEFIBRILLATION_SHOCKDELIVERED, SCR_ChimeraCharacter.Cast(pOwnerEntity));
+		}
+		
 		return;
 	}
 }

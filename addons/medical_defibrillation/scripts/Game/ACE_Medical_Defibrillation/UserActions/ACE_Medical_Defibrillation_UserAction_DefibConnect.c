@@ -69,7 +69,18 @@ class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
 		if (!defibComponent)
 			return;
 		
-		defibComponent.SetPatient(pOwnerEntity);
+		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_GlobalHelpers.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
+		if (!networkComponent)
+			return;
+		
+		if (defibComponent.SetPatient(pOwnerEntity))
+		{			
+			networkComponent.RequestDefibNotification(ENotification.ACE_MEDICAL_DEFIBRILLATION_CONNECTED, SCR_ChimeraCharacter.Cast(pOwnerEntity));
+		}
+		else
+		{
+			networkComponent.RequestDefibNotification(ENotification.ACE_MEDICAL_DEFIBRILLATION_UNABLETOCONNECT, SCR_ChimeraCharacter.Cast(pOwnerEntity));
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

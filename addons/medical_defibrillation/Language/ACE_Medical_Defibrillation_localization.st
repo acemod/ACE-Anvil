@@ -1,11 +1,31 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
-  CustomStringTableItem "{68440A1FB5E26172}" {
-   Id "ACE-Medical-Defibrillation-DeliverShock"
-   Target_en_us "Deliver Shock"
-   Status PROOFREADING_PENDING
-   Modified 1749313709
+  CustomStringTableItem "{6857508BC1AB85AD}" {
+   Id "ACE-MedicalDefibrillation_Notification_PatientConnected"
+   Target_en_us "Patient connected"
+   Modified 1750561758
+   Author "Hypoxic"
+   LastChanged "Hypoxic"
+  }
+  CustomStringTableItem "{6857508BCBFAFE72}" {
+   Id "ACE-MedicalDefibrillation_Notification_PatientDisconnected"
+   Target_en_us "Patient disconnected"
+   Modified 1750561769
+   Author "Hypoxic"
+   LastChanged "Hypoxic"
+  }
+  CustomStringTableItem "{6857508B9214D20B}" {
+   Id "ACE-MedicalDefibrillation_Notification_ShockDelivered"
+   Target_en_us "Shock delivered"
+   Modified 1750561843
+   Author "Hypoxic"
+   LastChanged "Hypoxic"
+  }
+  CustomStringTableItem "{6857508BE557A595}" {
+   Id "ACE-MedicalDefibrillation_Notification_UnableToConnectPatient"
+   Target_en_us "Unable to connect patient"
+   Modified 1750561820
    Author "Hypoxic"
    LastChanged "Hypoxic"
   }

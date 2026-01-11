@@ -39,5 +39,11 @@ class ACE_Medical_Defibrillation_UserAction_DefibDisconnect : ScriptedUserAction
 			return;
 		
 		defibComponent.ResetPatient();
+		
+		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_GlobalHelpers.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
+		if (!networkComponent)
+			return;
+
+		networkComponent.RequestDefibNotification(ENotification.ACE_MEDICAL_DEFIBRILLATION_DISCONNECTED, SCR_ChimeraCharacter.Cast(pOwnerEntity));
 	}
 }

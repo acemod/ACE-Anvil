@@ -129,23 +129,24 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void SetPatient(IEntity patient)
+	bool SetPatient(IEntity patient)
 	{
 		if (!patient)
 		{
 			m_iPatientRplId = ACE_Medical_Defibrillation_ReplicationHelper.GetRplIdByEntity(null);
 			m_pPatient = null;
 			Replication.BumpMe();
-			return;
+			return false;
 		}
 		
 		ACE_Medical_VitalsComponent component = ACE_Medical_VitalsComponent.Cast(patient.FindComponent(ACE_Medical_VitalsComponent));
 		if (!component)
-			return;
+			return false;
 		
 		m_iPatientRplId = ACE_Medical_Defibrillation_ReplicationHelper.GetRplIdByEntity(patient);
 		m_pPatient = patient;
 		Replication.BumpMe();
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -177,14 +178,14 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ShockPatient()
+	bool ShockPatient()
 	{
 		if (!m_pPatient)
-			return;
+			return false;
 		
 		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(m_pPatient.FindComponent(ACE_Medical_VitalsComponent));
 		if (!vitals)
-			return;
+			return false;
 		
 		vitals.ModifyShocksDelivered(1);
 		GetSoundComponent().PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
@@ -193,6 +194,8 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		
 		float cprCooldown = m_pProgressData.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
 		m_pProgressData.SetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown, cprCooldown);
+		
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------

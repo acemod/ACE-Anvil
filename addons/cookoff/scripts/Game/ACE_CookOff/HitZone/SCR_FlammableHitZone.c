@@ -20,7 +20,7 @@ modded class SCR_FlammableHitZone : SCR_VehicleHitZone
 		if (isBurning == shouldBeBurning)
 			return;
 		
-		ACE_CookOff_DetonateAmmoSystem system = ACE_CookOff_DetonateAmmoSystem.GetInstance();
+		ACE_CookOff_DetonateAmmoSystem system = ACE_CookOff_DetonateAmmoSystem.GetInstance(GetOwner().GetWorld());
 		if (!system)
 			return;
 		

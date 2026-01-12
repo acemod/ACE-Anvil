@@ -13,6 +13,7 @@ StringTable {
    Id "ACE_Weather-Item_Kacestrel4500_Description"
    Target_en_us "Pocket weather tracker"
    Target_de_de "Taschen-Wettermessgerät"
+   Target_ko_kr "휴대용 기상 관측기기"
    Modified 1725567205
    Author "Kexanone"
    LastChanged "Kexanone"
@@ -20,6 +21,7 @@ StringTable {
   CustomStringTableItem "{66DA03F69293ABD9}" {
    Id "ACE_Weather-Item_Kacestrel4500_Name"
    Target_en_us "Kacetrel 4500"
+   Target_ko_kr "케ACE트렐 4500"
    Modified 1725566669
    Author "Kexanone"
    LastChanged "Kexanone"

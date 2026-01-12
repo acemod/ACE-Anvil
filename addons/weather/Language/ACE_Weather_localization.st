@@ -4,9 +4,10 @@ StringTable {
   CustomStringTableItem "{667B2E0B01C5BDEC}" {
    Id "ACE_Weather-AddonName"
    Target_en_us "ACE Weather"
+   Target_ko_kr "ACE 날씨"
    Modified 1719367753
    Author "Kex"
-   LastChanged "Kex"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{667B2E0B3C32F8F7}" {
    Id "ACE_Weather-Keybind_WindInfoToggle"

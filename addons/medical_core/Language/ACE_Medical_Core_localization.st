@@ -13,6 +13,7 @@ StringTable {
    Id "ACE_Medical-Editor_TooltipDetail_Resilience_Name"
    Target_en_us "Resilience"
    Target_de_de "Resilienz"
+   Target_ru_ru "Устойчивость"
    Target_zh_cn "恢復力"
    Target_ko_kr "회복력"
    Modified 1725220405
@@ -149,6 +150,7 @@ StringTable {
    Id "ACE_Medical-KeyBind_OpenRadialMenu"
    Target_en_us "Open medical radial menu"
    Target_de_de "Öffne medizinisches Kreismenü"
+   Target_ru_ru "Открыть меню медицины"
    Target_zh_cn "打開醫療環形選單"
    Target_ko_kr "원형 의료 메뉴 열기"
    Modified 1725496962
@@ -159,6 +161,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_ExaminePatient"
    Target_en_us "Examine patient"
    Target_de_de "Patient untersuchen"
+   Target_ru_ru "Осмотреть пациента"
    Target_zh_cn "檢查傷患"
    Target_ko_kr "환자 검사"
    Modified 1725496555
@@ -169,6 +172,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_FluidReplacement"
    Target_en_us "Fluid Replacement"
    Target_de_de "Volumentherapie"
+   Target_ru_ru "Восполнение объёма крови"
    Target_zh_cn "補液"
    Target_ko_kr "체액 복구"
    Modified 1725221453
@@ -179,6 +183,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_FractureManagement"
    Target_en_us "Fracture management"
    Target_de_de "Frakturbehandlung"
+   Target_ru_ru "Лечение перелома"
    Target_zh_cn "骨折處置"
    Target_ko_kr "골절 관리"
    Modified 1725497003
@@ -189,6 +194,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_HemorrhageControl"
    Target_en_us "Hemorrhage control"
    Target_de_de "Blutstillung"
+   Target_ru_ru "Контроль кровоизлияния"
    Target_zh_cn "止血"
    Target_ko_kr "지혈"
    Modified 1725221536
@@ -199,6 +205,7 @@ StringTable {
    Id "ACE_Medical-RadialMenu_Medication"
    Target_en_us "Medication"
    Target_de_de "Medikation"
+   Target_ru_ru "Медикаменты"
    Target_zh_cn "藥物治療"
    Target_ko_kr "약물"
    Modified 1725221632
@@ -209,6 +216,7 @@ StringTable {
    Id "ACE_Medical-UserAction_BackPosition"
    Target_en_us "Put on back"
    Target_de_de "Auf den Rücken drehen"
+   Target_ru_ru "Положить на спину"
    Target_zh_cn "協助仰躺"
    Target_ko_kr "똑바로 눕히기"
    Modified 1725496394
@@ -219,6 +227,7 @@ StringTable {
    Id "ACE_Medical-UserAction_LeftRecoveryPosition"
    Target_en_us "Put in left recovery position"
    Target_de_de "In linke Bewusstlosenlagerung bringen"
+   Target_ru_ru "Положить на левый бок"
    Target_zh_cn "轉為左側復甦姿勢"
    Target_ko_kr "좌측으로 회복자세 교정하기"
    Modified 1725496514
@@ -229,6 +238,7 @@ StringTable {
    Id "ACE_Medical-UserAction_RightRecoveryPosition"
    Target_en_us "Put in right recovery position"
    Target_de_de "In rechte Bewusstlosenlagerung bringen"
+   Target_ru_ru "Положить на правый бок"
    Target_zh_cn "轉為右側復甦姿勢"
    Target_ko_kr "우측으로 회복자세 교정하기"
    Modified 1725496522

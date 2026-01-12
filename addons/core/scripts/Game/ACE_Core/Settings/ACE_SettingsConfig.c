@@ -8,7 +8,7 @@ class ACE_SettingsConfig
 	protected ref map<typename,ref ACE_ModSettings> m_mModSettingsMap;
 	
 	//------------------------------------------------------------------------------------------------
-	//! Construct map for faster look-up of settings
+	//! Init settings and construct map
 	//! We can't use maps as attribute, so we initialize the settings with an array
 	protected void InitMap()
 	{
@@ -16,6 +16,7 @@ class ACE_SettingsConfig
 		
 		foreach (ACE_ModSettings settings : m_aInitialModSettings)
 		{
+			settings.Init();
 			m_mModSettingsMap[settings.Type()] = settings;
 		}
 		
@@ -58,6 +59,7 @@ class ACE_SettingsConfig
 		if (!m_mModSettingsMap)
 			InitMap();
 		
+		settings.Init();
 		m_mModSettingsMap[settings.Type()] = settings;
 	}
 }

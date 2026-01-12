@@ -29,7 +29,7 @@ modded class SCR_InventoryHitZonePointUI : ScriptedWidgetComponent
 		if (vitals.HasTensionPneumothorax())
 			return "#ACE_Medical-TensionPneumothorax";
 		else if (vitals.GetPneumothoraxScale() > 0)
-			return "#ACE_Medical-Pneumothorax";
+			return "#ACE_Medical-OpenPneumothorax";
 		
 		return "";
 	}

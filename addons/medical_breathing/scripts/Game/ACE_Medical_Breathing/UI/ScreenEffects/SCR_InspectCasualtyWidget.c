@@ -22,7 +22,7 @@ modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 		if (vitals.HasTensionPneumothorax())
 			pneumothoraxText = "#ACE_Medical-TensionPneumothorax";
 		else if (vitals.GetPneumothoraxScale() > 0)
-			pneumothoraxText = "#ACE_Medical-Pneumothorax";
+			pneumothoraxText = "#ACE_Medical-OpenPneumothorax";
 		
 		damageInfoUI.ACE_Medical_SetPneumothoraxStateVisible(!pneumothoraxText.IsEmpty(), pneumothoraxText);
 	}

@@ -59,10 +59,16 @@ class ACE_CookOff_HelperEntity : GenericEntity
 		else if (magazineEntity.FindComponent(MissileMoveComponent))
 			ammoType = ACE_CookOff_EAmmoType.ROCKET;
 		
-		if (!System.IsConsoleApp())
-			RpcDo_PlayCookoffSoundBroadcast(ammoType);
+		RplComponent parentRpl = RplComponent.Cast(parent.FindComponent(RplComponent));
+		if (!parentRpl)
+			return;
 		
-		Rpc(RpcDo_PlayCookoffSoundBroadcast, ammoType);
+		RplId parentId = parentRpl.Id();
+		
+		if (!System.IsConsoleApp())
+			RpcDo_PlayCookoffSoundBroadcast(ammoType, parentId);
+		
+		Rpc(RpcDo_PlayCookoffSoundBroadcast, ammoType, parentId);
 		
 		if (Math.RandomFloat(0, 1) > 0.8)
 			return;
@@ -84,7 +90,7 @@ class ACE_CookOff_HelperEntity : GenericEntity
 		
 		array<ResourceName> ammoNames = {};
 		ammonConfigSrc.Get("AmmoResourceArray", ammoNames);
-		SpawnProjectile(ACE_BaseContainerTools.ToInternalResourcename(ammoNames.GetRandomElement()), parent);
+		SpawnProjectile(ACE_BaseContainerTools.ToInternalResourcename(ammoNames.GetRandomElement()), parentId);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -109,32 +115,36 @@ class ACE_CookOff_HelperEntity : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void SpawnProjectile(ResourceName ammoName, IEntity parent)
+	protected void SpawnProjectile(ResourceName ammoName, RplId parentId)
 	{
-		RplComponent parentRpl = RplComponent.Cast(parent.FindComponent(RplComponent));
-		if (!parentRpl)
-			return;
-		
 		vector localPos = Vector(Math.RandomFloat(-0.2, 0.2), Math.RandomFloat(0, 3), Math.RandomFloat(-0.2, 0.2));
 		vector dir = Vector(Math.RandomFloat(-1, 1), Math.RandomFloat(-0.2, 0.8), Math.RandomFloat(-1, 1));
 		float initSpeedCoef = Math.RandomFloat(0.001, 0.025);
 		
-		Rpc(RpcDo_SpawnProjectileBroadcast, ammoName, localPos, dir, initSpeedCoef, parentRpl.Id());
-		RpcDo_SpawnProjectileBroadcast(ammoName, localPos, dir, initSpeedCoef, parentRpl.Id());
+		Rpc(RpcDo_SpawnProjectileBroadcast, ammoName, localPos, dir, initSpeedCoef, parentId);
+		RpcDo_SpawnProjectileBroadcast(ammoName, localPos, dir, initSpeedCoef, parentId);
 	}
 			
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	protected void RpcDo_PlayCookoffSoundBroadcast(ACE_CookOff_EAmmoType ammoType)
+	protected void RpcDo_PlayCookoffSoundBroadcast(ACE_CookOff_EAmmoType ammoType, RplId parentId)
 	{
-		SCR_SoundManagerModule.CreateAndPlayAudioSource(this, s_pData.GetAudioSourceConfig(ammoType));
+		RplComponent parentRpl = RplComponent.Cast(Replication.FindItem(parentId));
+		if (!parentRpl)
+			return;
+		
+		IEntity parent = parentRpl.GetEntity();
+		if (!parent)
+			return;
+		
+		SCR_SoundManagerModule.CreateAndPlayAudioSource(parent, s_pData.GetAudioSourceConfig(ammoType));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	protected void RpcDo_SpawnProjectileBroadcast(ResourceName ammoName, vector localPos, vector dir, float initSpeedCoef, RplId parentID)
+	protected void RpcDo_SpawnProjectileBroadcast(ResourceName ammoName, vector localPos, vector dir, float initSpeedCoef, RplId parentId)
 	{
-		RplComponent parentRpl = RplComponent.Cast(Replication.FindItem(parentID));
+		RplComponent parentRpl = RplComponent.Cast(Replication.FindItem(parentId));
 		if (!parentRpl)
 			return;
 		

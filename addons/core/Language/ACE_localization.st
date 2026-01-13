@@ -26,11 +26,9 @@ StringTable {
    Target_de_de "Liegestützen"
    Target_zh_cn "伏地挺身"
    Target_ko_kr "팔굽혀펴기"
-   Target_es_es "Lagartijas"
-   Target_it_it "Flessioni"
    Modified 1725225923
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{64771570304E885F}" {
    Id "ACE-Emotes_Emote_Salute_Name"
@@ -38,11 +36,9 @@ StringTable {
    Target_de_de "Salutieren"
    Target_zh_cn "敬禮"
    Target_ko_kr "경례"
-   Target_es_es "Saludo militar"
-   Target_it_it "Saluto militare"
    Modified 1725225958
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{64771570B4AF7606}" {
    Id "ACE-Emotes_Emote_SitOnFloor_Name"
@@ -50,11 +46,9 @@ StringTable {
    Target_de_de "Auf den Boden sitzen"
    Target_zh_cn "席地而坐"
    Target_ko_kr "바닥에 앉기"
-   Target_es_es "Sentarse en el suelo"
-   Target_it_it "Sedersi per terra"
    Modified 1725226056
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{60FD565E5C4D775C}" {
    Id "ACE-Item_Banana_Description"
@@ -66,11 +60,9 @@ StringTable {
    Target_uk_ua "Здоровий калій!"
    Target_zh_cn "香蕉含鉀量高，腎功能不良者應諮詢醫生後食用"
    Target_ko_kr "건강한 칼륨덩어리입니다!"
-   Target_es_es "¡Potasio saludable!"
-   Target_it_it "Potassio sano!"
    Modified 1725226291
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{60FD565E59AC0571}" {
    Id "ACE-Item_Banana_Name"
@@ -82,11 +74,9 @@ StringTable {
    Target_uk_ua "Банан"
    Target_zh_cn "香蕉"
    Target_ko_kr "바나나"
-   Target_es_es "Plátano"
-   Target_it_it "Banana"
    Modified 1725226356
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
    Id "ACE-UserAction_Carry"
@@ -117,11 +107,9 @@ StringTable {
    Target_uk_ua "Перенесення"
    Target_zh_cn "背負中"
    Target_ko_kr "업는 중"
-   Target_es_es "Arrastrar"
-   Target_it_it "Trascina"
    Modified 1725495000
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{64AD6AAED7334824}" {
    Id "ACE-UserAction_LoadCarried"
@@ -129,11 +117,9 @@ StringTable {
    Target_de_de "Getragener laden:"
    Target_zh_cn "將隨行單位移進載具"
    Target_ko_kr "업힌 사람 싣기:"
-   Target_es_es "Cargar paciente:"
-   Target_it_it "Carica trasportato:"
    Modified 1725495680
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{649D4AEF943234F2}" {
    Id "ACE-UserAction_Release"
@@ -150,11 +136,9 @@ StringTable {
    Target_pt_br "Soltar"
    Target_zh_cn "放下"
    Target_uk_ua "Відпустити"
-   Target_es_es "Soltar"
-   Target_it_it "Lascia"
    Modified 1725226721
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{60FD565E50C080B7}" {
    Id "ACE-Weapon_FragBanana_Description"
@@ -166,11 +150,9 @@ StringTable {
    Target_uk_ua "Вибуховий калій!"
    Target_zh_cn "注意高爆破片"
    Target_ko_kr "폭발하는 칼륨덩어리입니다!"
-   Target_es_es "¡Potasio explosivo!"
-   Target_it_it "Potassio esplosivo!"
    Modified 1725494036
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{60FD565E48F06F03}" {
    Id "ACE-Weapon_FragBanana_Name"
@@ -182,21 +164,17 @@ StringTable {
    Target_uk_ua "Осколковий банан"
    Target_zh_cn "香蕉手榴彈"
    Target_ko_kr "세열바나나"
-   Target_es_es "Plátano frag."
-   Target_it_it "Banana Frag"
    Modified 1725493922
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{649D4AEE400FD73C}" {
    Id "ACE_Core-AddonName"
    Target_en_us "Core"
    Target_ko_kr "코어"
-   Target_es_es "Core"
-   Target_it_it "Core"
    Modified 1688030694
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
  }
 }

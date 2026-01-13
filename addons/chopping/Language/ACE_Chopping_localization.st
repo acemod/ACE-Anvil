@@ -11,11 +11,9 @@ StringTable {
    Target_uk_ua "Прибрати кущ"
    Target_zh_cn "清除樹叢"
    Target_ko_kr "수풀 제거"
-   Target_es_es "Remover arbusto"
-   Target_it_it "Rimuovi cespuglio"
    Modified 1725225029
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{5EB746AAD5FF74DB}" {
    Id "ACE_Chopping_RemoveTree"
@@ -27,11 +25,9 @@ StringTable {
    Target_uk_ua "Прибрати дерево"
    Target_zh_cn "砍樹"
    Target_ko_kr "나무 제거"
-   Target_es_es "Remover árbol"
-   Target_it_it "Rimuovi albero"
    Modified 1725225047
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Psycool"
   }
  }
 }

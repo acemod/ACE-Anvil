@@ -45,6 +45,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	protected void UpdateOxygenMetabolism(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		float lambda = Math.InverseLerp(75, 97, Math.Clamp(context.m_pVitals.GetSpO2(), 75, 97));
+		// Interpolate RER from 0.8 to 1.2 for SpO2 97% to 75%. Also overall consumption is reduced to simulate the body focusing on vital body parts at reduced SpO2
 		context.m_fOxygenConsumption = Math.Lerp(0.013, 0.208, lambda);
 		context.m_fCO2Production = Math.Lerp(0.0156, 0.1664, lambda);
 	}

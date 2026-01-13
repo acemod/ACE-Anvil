@@ -1,6 +1,11 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Medical_CriticalState : ACE_Medical_StableState
 {
+	// Tachycardia constants
+	static const float TACHYCARDIA_MULTIPLIER = 14.3; // Multiplier for tachycardia calculation
+	static const float TACHYCARDIA_LERP_MIN = 0.5; // Minimum lerp value for tachycardia
+	static const float TACHYCARDIA_LERP_MAX = 1.0; // Maximum lerp value for tachycardia
+	static const float MAP_MIN_FOR_CALCULATION = 6.0; // [kPa] Minimum MAP for tachycardia calculation
 	static const float HR_MAX_ACIDOSIS_BPM = 30.0; // [bpm] HR at 100% metabolic acidosis
 	
 	//------------------------------------------------------------------------------------------------
@@ -8,7 +13,6 @@ class ACE_Medical_CriticalState : ACE_Medical_StableState
 	override void OnEnter(ACE_Medical_CharacterContext context)
 	{
 		super.OnEnter(context);
-		// Force uncon
 		context.m_pDamageManager.GetResilienceHitZone().SetHealth(0);
 		context.m_pDamageManager.UpdateConsciousness();
 	}
@@ -36,15 +40,10 @@ class ACE_Medical_CriticalState : ACE_Medical_StableState
 	{
 		float bloodVolumeRatio = context.m_pBloodHitZone.GetHealthScaled();
 		
-		if (bloodVolumeRatio < context.m_pBloodHitZone.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_3_HEMORRHAGE))
-		{
-			float baseTachycardiaHR = context.m_pVitals.GetHeartRate() * 14.3 * Math.Lerp(0.5, 1, bloodVolumeRatio) / Math.Max(6, context.m_pVitals.GetMeanArterialPressure());
-			
-			// Apply acidosis impact on top of tachycardia
-			float heartWeaknessFactor = CalculateHeartWeaknessFromAcidosis(context.m_pVitals.GetMetabolicAcidosisLevel());
-			return Math.Lerp(baseTachycardiaHR, HR_MAX_ACIDOSIS_BPM, heartWeaknessFactor);
-		}
+		// We're already in CriticalState, so always apply critical HR calculation
+		float mapValue = Math.Max(context.m_pVitals.GetMeanArterialPressure(), MAP_MIN_FOR_CALCULATION);
+		float baseTachycardiaHR = context.m_pVitals.GetHeartRate() * TACHYCARDIA_MULTIPLIER * Math.Lerp(TACHYCARDIA_LERP_MIN, TACHYCARDIA_LERP_MAX, bloodVolumeRatio) / mapValue;
 		
-		return super.ComputeBaseTargetHeartRate(context, timeSlice);
+		return Math.Lerp(baseTachycardiaHR, HR_MAX_ACIDOSIS_BPM, context.m_pVitals.GetHeartWeaknessFactor());
 	}
 }

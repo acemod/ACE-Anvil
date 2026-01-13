@@ -6,13 +6,14 @@ class ACE_Medical_StableState : ACE_Medical_IVitalState
 	static const float ACIDOSIS_RANGE = 2.0; // Acidosis range from -1.0 to 1.0
 	static const float ACIDOSIS_MAX_LEVEL = 1.0; // Maximum acidosis level
 	static const float ACIDOSIS_NO_IMPACT_THRESHOLD = 0.0; // Below this threshold, no heart impact
-	static const float HR_MIN_ACIDOSIS_BPM = 50.0; // [bpm] Minimum HR at 100% metabolic acidosis in stable state
 	
-	// Quadratic equation coefficients: time = a*x^2 + b*x + c
-	// Points: (0.2, 120), (0.4, 900), (1.0, 60)
-	static const float ACIDOSIS_QUADRATIC_A = -6625.0; // x^2 coefficient
-	static const float ACIDOSIS_QUADRATIC_B = 7875.0; // x coefficient
-	static const float ACIDOSIS_QUADRATIC_C = -1190.0; // constant
+	// Single quadratic equation coefficients for time to full effect
+	// Points: (0.0, 300), (0.5, 900), (1.0, 300) with maximum at 50%
+	// Quadratic: y = ax^2 + bx + c
+	static const float ACIDOSIS_QUADRATIC_A = -2400.0; // x^2 coefficient
+	static const float ACIDOSIS_QUADRATIC_B = 2400.0; // x coefficient
+	static const float ACIDOSIS_QUADRATIC_C = 300.0; // constant
+	static const float ACIDOSIS_NO_CHANGE_THRESHOLD = 0.6; // Blood volume threshold for no-change (60%)
 	
 	
 	//------------------------------------------------------------------------------------------------
@@ -24,14 +25,15 @@ class ACE_Medical_StableState : ACE_Medical_IVitalState
 	
 	//------------------------------------------------------------------------------------------------
 	//! Optimized combined calculation of acidosis rate to avoid function call overhead
-	//! Returns ACIDOSIS_RANGE / timeToFullEffect, with timeToFullEffect calculated from quadratic equation
+	//! Returns ACIDOSIS_RANGE / timeToFullEffect, with timeToFullEffect calculated from single quadratic
+	//! Quadratic: y = ax^2 + bx + c with maximum at 50% blood volume
+	//! Points: (0.0, 300s), (0.5, 900s), (1.0, 300s)
 	protected float CalculateAcidosisRate(float bloodRemaining)
 	{
 		// Clamp blood remaining to valid range [0.0, 1.0]
 		float x = Math.Clamp(bloodRemaining, 0.0, 1.0);
 		
-		// Optimized quadratic calculation: a*x^2 + b*x + c
-		// Compute x*x once and reuse
+		// Calculate time to full effect using single quadratic
 		float xSquared = x * x;
 		float timeToFull = ACIDOSIS_QUADRATIC_A * xSquared + ACIDOSIS_QUADRATIC_B * x + ACIDOSIS_QUADRATIC_C;
 		
@@ -65,6 +67,9 @@ class ACE_Medical_StableState : ACE_Medical_IVitalState
 		if ((isIncreasing && currentAcidosis >= ACIDOSIS_MAX_LEVEL) || (!isIncreasing && currentAcidosis <= ACIDOSIS_STARTING_LEVEL))
 			return;
 		
+		// Cache current weakness factor to compare later
+		float currentWeakness = context.m_pVitals.GetHeartWeaknessFactor();
+		
 		// Extract blood volume ratio once
 		float bloodVolumeRatio = context.m_pBloodHitZone.GetHealthScaled();
 		float acidosisRate = CalculateAcidosisRate(bloodVolumeRatio);
@@ -75,10 +80,15 @@ class ACE_Medical_StableState : ACE_Medical_IVitalState
 		float sign = 2.0 * isIncreasing - 1.0;
 		float newAcidosis = Math.Clamp(currentAcidosis + (delta * sign), ACIDOSIS_STARTING_LEVEL, ACIDOSIS_MAX_LEVEL);
 		
-		// Only update if value has actually changed (use epsilon for floating point comparison)
-		if (Math.AbsFloat(newAcidosis - currentAcidosis) > 0.0001)
+		// Only update if value has actually changed
+		if (newAcidosis != currentAcidosis)
 		{
 			context.m_pVitals.SetMetabolicAcidosisLevel(newAcidosis);
+			
+			// Recalculate weakness factor and update only if changed
+			float newWeakness = CalculateHeartWeaknessFromAcidosis(newAcidosis);
+			if (newWeakness != currentWeakness)
+				context.m_pVitals.SetHeartWeaknessFactor(newWeakness);
 		}
 	}
 	
@@ -91,30 +101,24 @@ class ACE_Medical_StableState : ACE_Medical_IVitalState
 	//------------------------------------------------------------------------------------------------
 	override protected float ComputeHeartRate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float targetHeartRate = ComputeTargetHeartRate(context, timeSlice);
-		float prevHeartRate = context.m_pVitals.GetHeartRate();
-		float progress = Math.Min(0.5 * timeSlice, 1);
-		return Math.Lerp(prevHeartRate, targetHeartRate, progress);
+		float progress = Math.Clamp(0.5 * timeSlice, 0.0, 1.0);
+		return Math.Lerp(context.m_pVitals.GetHeartRate(), ComputeTargetHeartRate(context, timeSlice), progress);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected float ComputeTargetHeartRate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float target = ComputeBaseTargetHeartRate(context, timeSlice);
-		target = Math.Max(target, s_pCirculationSettings.m_fDefaultHeartRateBPM + 50 * context.m_pDamageManager.ACE_Medical_GetPainIntensity());
+		float painAdjustedHR = s_pCirculationSettings.m_fDefaultHeartRateBPM + 50 * context.m_pDamageManager.ACE_Medical_GetPainIntensity();
+		float target = Math.Max(ComputeBaseTargetHeartRate(context, timeSlice), painAdjustedHR);
 		target += context.m_pVitals.GetHeartRateMedicationAdjustment();
 		// TO DO: SpO2-based adjustments
 		
-		return Math.Max(0, target);
+		return Math.Max(0.0, target);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected float ComputeBaseTargetHeartRate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float baseHR = s_pCirculationSettings.m_fDefaultHeartRateBPM;
-		float heartWeaknessFactor = CalculateHeartWeaknessFromAcidosis(context.m_pVitals.GetMetabolicAcidosisLevel());
-		
-		// Apply acidosis impact: lerp from base HR down to minimum HR based on heart weakness
-		return Math.Lerp(baseHR, HR_MIN_ACIDOSIS_BPM, heartWeaknessFactor);
+		return s_pCirculationSettings.m_fDefaultHeartRateBPM;
 	}
 }

@@ -26,6 +26,9 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
+	//! Metabolic acidosis level (-1.0 = no acidosis, 0.0 = threshold, 1.0 = maximum acidosis)
+	protected float m_fMetabolicAcidosisLevel = -1.0;
+	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
 	{
@@ -176,6 +179,20 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 			m_fMeanArterialPressureKPA + 2/3 * m_fPulsePressureKPA
 		);
 	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Get metabolic acidosis level (-1.0 = no acidosis, 0.0 = threshold, 1.0 = maximum acidosis)
+	float GetMetabolicAcidosisLevel()
+	{
+		return m_fMetabolicAcidosisLevel;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Set metabolic acidosis level (-1.0 = no acidosis, 0.0 = threshold, 1.0 = maximum acidosis)
+	void SetMetabolicAcidosisLevel(float level)
+	{
+		m_fMetabolicAcidosisLevel = Math.Clamp(level, -1.0, 1.0);
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	void SetHeartRateMedicationAdjustment(float adjustment)
@@ -228,6 +245,7 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 			SetPulsePressure(settings.m_fDefaultPulsePressureKPA);
 		}
 		
+		SetMetabolicAcidosisLevel(-1.0);
 		SetHeartRateMedicationAdjustment(0);
 		SetSystemicVascularResistenceMedicationAdjustment(0);
 		SetReviveSuccessCheckTimerScale(1);

@@ -7,9 +7,11 @@ StringTable {
    Target_pl_pl "Radio"
    Target_zh_cn "無線電"
    Target_ko_kr "무전기"
+   Target_es_es "Radio"
+   Target_it_it "Radio"
    Modified 1725493460
    Author "veteran29"
-   LastChanged "Psycool"
+   LastChanged "KingDaddyBoyz"
   }
   CustomStringTableItem "{6448264807CE1461}" {
    Id "ACE_Radio-Settings-Radio_Beep_Ch1"
@@ -17,9 +19,11 @@ StringTable {
    Target_pl_pl "Pisk transmisji kanału 1"
    Target_zh_cn "Ch.1 傳輸蜂鳴聲"
    Target_ko_kr "1 채널 송신음"
+   Target_es_es "Pitido de transmisión del canal 1"
+   Target_it_it "Segnale di trasmissione Canale 1"
    Modified 1725493513
    Author "veteran29"
-   LastChanged "Psycool"
+   LastChanged "KingDaddyBoyz"
   }
   CustomStringTableItem "{6448264808F0EDBE}" {
    Id "ACE_Radio-Settings-Radio_Beep_Ch2"
@@ -27,9 +31,11 @@ StringTable {
    Target_pl_pl "Pisk transmisji kanału 2"
    Target_zh_cn "Ch.2 傳輸蜂鳴聲"
    Target_ko_kr "2 채널 송신음"
+   Target_es_es "Pitido de transmisión Ch.2"
+   Target_it_it "Segnale di trasmissione Canale 2"
    Modified 1725493517
    Author "veteran29"
-   LastChanged "Psycool"
+   LastChanged "KingDaddyBoyz"
   }
   CustomStringTableItem "{644826481FB40F2F}" {
    Id "ACE_Radio-Settings-Radio_Beep_High"
@@ -37,9 +43,11 @@ StringTable {
    Target_pl_pl "Wysoki"
    Target_zh_cn "高音"
    Target_ko_kr "높음"
+   Target_es_es "Alto"
+   Target_it_it "Alta"
    Modified 1725492506
    Author "veteran29"
-   LastChanged "Psycool"
+   LastChanged "KingDaddyBoyz"
   }
   CustomStringTableItem "{6448264811A5CBD7}" {
    Id "ACE_Radio-Settings-Radio_Beep_Low"
@@ -47,9 +55,11 @@ StringTable {
    Target_pl_pl "Niski"
    Target_zh_cn "低音"
    Target_ko_kr "낮음"
+   Target_es_es "Bajo"
+   Target_it_it "bassa"
    Modified 1725492514
    Author "veteran29"
-   LastChanged "Psycool"
+   LastChanged "KingDaddyBoyz"
   }
   CustomStringTableItem "{644826480D886913}" {
    Id "ACE_Radio-Settings-Radio_Beep_Off"
@@ -57,9 +67,11 @@ StringTable {
    Target_pl_pl "Wyłączony"
    Target_zh_cn "關閉"
    Target_ko_kr "없음"
+   Target_es_es "Apagado"
+   Target_it_it "Spenta"
    Modified 1725492519
    Author "veteran29"
-   LastChanged "Psycool"
+   LastChanged "KingDaddyBoyz"
   }
   CustomStringTableItem "{64482648D1C29B76}" {
    Id "ACE_Radio-Settings_Beep_Cycle"
@@ -67,9 +79,11 @@ StringTable {
    Target_pl_pl "Pisk przy zmianie nadajnika"
    Target_zh_cn "頻道切換蜂鳴聲"
    Target_ko_kr "무전기 순환음"
+   Target_es_es "Pitido de ciclo del transceptor"
+   Target_it_it "Segnale di ciclo del ricetrasmettitore"
    Modified 1725493711
    Author "veteran29"
-   LastChanged "Psycool""
+   LastChanged "KingDaddyBoyz""
   }
  }
 }

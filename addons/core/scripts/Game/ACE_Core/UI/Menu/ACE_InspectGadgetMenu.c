@@ -15,6 +15,10 @@ class ACE_InspectGadgetMenu : ChimeraMenuBase
 		super.OnMenuClose();
 		GetGame().GetInputManager().RemoveActionListener("MenuOpen", EActionTrigger.DOWN, Close);
 		GetGame().GetInputManager().RemoveActionListener("MenuBack", EActionTrigger.DOWN, Close);
+		
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
+		if (char)
+			char.GetCharacterController().SetInspect(null);
 	}
 	
 	//------------------------------------------------------------------------------------------------

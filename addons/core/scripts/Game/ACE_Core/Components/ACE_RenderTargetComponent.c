@@ -42,6 +42,9 @@ class ACE_RenderTargetComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	void RequestToggleActive(bool active)
 	{
+		if (active == m_bIsActive)
+			return;
+		
 		Rpc(RpcDo_ToggleActiveServer, active);
 	}
 	
@@ -63,9 +66,6 @@ class ACE_RenderTargetComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	void OnToggleActive()
 	{
-		if (m_bIsActive == IsRendered())
-			return;
-		
 		ACE_RenderTargetSystem system = ACE_RenderTargetSystem.GetInstance(GetOwner().GetWorld());
 		if (!system)
 			return;

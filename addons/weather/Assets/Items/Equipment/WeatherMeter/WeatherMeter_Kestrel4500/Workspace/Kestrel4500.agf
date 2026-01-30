@@ -1,0 +1,625 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Master {
+   Nodes {
+    AnimSrcNodeStateMachine MasterControl {
+     Tags {
+      "TagGadget"
+     }
+     EditorPos 304.1 154.6
+     states {
+      AnimSrcNodeState Ras {
+       EditorPos 302.3 156
+       Child "RasSTM"
+       StartCondition "!Low && WeaponType != 0"
+      }
+      AnimSrcNodeState Low {
+       EditorPos 305.5 156
+       Child "LowSTM"
+       StartCondition "Low || WeaponType == 0"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{54A0B34CA569EF73}" {
+       FromState "Ras"
+       ToState "Low"
+       Duration "0.2"
+       Condition "Low && HasVariableChanged(Low) || WeaponType == 0 && HasVariableChanged(WeaponType)"
+      }
+      AnimSrcNodeTransition "{54A0B34CA569EF6A}" {
+       FromState "Low"
+       ToState "Ras"
+       Duration "0.2"
+       Condition "!Low && HasVariableChanged(Low) || WeaponType != 0 && HasVariableChanged(WeaponType)"
+      }
+     }
+    }
+    AnimSrcNodeStateMachine RasSTM {
+     EditorPos 295.4 159.9
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos 293 161
+       Child "ErcRasG"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 295.5 160.6
+       Child "CroRasG"
+       StartCondition "Stance == 1"
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 298 161
+       Child "PneRasG"
+       StartCondition "Stance == 2"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5496D127EC9B4104}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5496D127EC9B4125}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6EB62}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E891}" {
+       FromState "Cro"
+       ToState "Cro"
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E899}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E889}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E8B7}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodePose WeaponLower {
+     EditorPos 298.3 164.7
+     Source "Gadget.WeaponLower"
+     Time "0.0"
+    }
+    AnimSrcNodeBlendT LowerWeaponB {
+     EditorPos 295.6 164.2
+     BlendTime "0.3"
+     BlendFn "S"
+     TriggerOn ""
+     TriggerOff ""
+     Child0 "GadgetIdleSTM"
+     Child1 "WeaponLower"
+     Optimization "Always eval left"
+    }
+    AnimSrcNodeStateMachine GadgetIdleSTM {
+     Tags {
+      "TagGadget"
+     }
+     EditorPos 302.9 166.8
+     states {
+      AnimSrcNodeState Compass_Adrianov {
+       EditorPos 301.7 168.9
+       Child "IK2 "
+       StartCondition "true && !IsAttachment (\"Vehicle\")"
+      }
+      AnimSrcNodeState Compass_Adrianov_Focused {
+       EditorPos 304 170
+       Child "IK2 Focused "
+       StartCondition "Focused && !IsAttachment (\"Vehicle\")"
+      }
+      AnimSrcNodeState VehiclePose {
+       EditorPos 309.4 168.9
+       Child "BufferVehicleB"
+       StartCondition "IsAttachment (\"Vehicle\")"
+      }
+      AnimSrcNodeState TurretPose {
+       EditorPos 312.9 167.4
+       Child "IK2 Turret"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{51AE94D4B6B1E1EB}" {
+       FromState ""
+       ToState "Compass_Adrianov"
+       Duration "0.2"
+       Condition ""
+      }
+      AnimSrcNodeTransition "{52AAC387BD7DA0A4}" {
+       FromState "Compass_Adrianov"
+       ToState "Compass_Adrianov_Focused"
+       Duration "0.3"
+       Condition "Focused && HasVariableChanged(Focused)"
+       BlendFn "S"
+       PostEval 1
+       Events {
+        AnimSrcEventGeneric "{5C8C854BDB855AC3}" {
+         Name "Sound"
+         UserString "SOUND_CHAR_MOVEMENT.leftarm"
+         UserInt 7
+        }
+       }
+      }
+      AnimSrcNodeTransition "{52AAC387BD7DA0D2}" {
+       FromState "Compass_Adrianov_Focused"
+       ToState "Compass_Adrianov"
+       Duration "0.3"
+       Condition "!Focused && HasVariableChanged(Focused)"
+       BlendFn "S"
+       PostEval 1
+       Events {
+        AnimSrcEventGeneric "{5C8C854BF94655F8}" {
+         Name "Sound"
+         UserString "SOUND_CHAR_MOVEMENT.leftarm"
+         UserInt 7
+        }
+       }
+      }
+      AnimSrcNodeTransition "{5AB2A72747601325}" {
+       FromState "Compass_Adrianov"
+       ToState "VehiclePose"
+       Duration "0.1"
+       Condition "IsAttachment (\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{5AB2A7274760135B}" {
+       FromState "VehiclePose"
+       ToState "Compass_Adrianov"
+       Duration "0.1"
+       Condition "!IsAttachment (\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{60DCB7D6ED76C7E2}" {
+       FromState "Compass_Adrianov"
+       ToState "TurretPose"
+       Duration "0.3"
+       Condition "IsTag(\"TURRET\")"
+      }
+      AnimSrcNodeTransition "{60DCB7D6ED76C7E9}" {
+       FromState "TurretPose"
+       ToState "Compass_Adrianov"
+       Duration "0.2"
+       Condition "!IsTag(\"TURRET\") && !IsAttachment (\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{60DCB7D6ED76C7F4}" {
+       FromState "VehiclePose"
+       ToState "TurretPose"
+       Duration "0.3"
+       Condition "IsTag(\"TURRET\")"
+      }
+      AnimSrcNodeTransition "{60DCB7D6ED76C7FC}" {
+       FromState "TurretPose"
+       ToState "VehiclePose"
+       Duration "0.2"
+       Condition "!IsTag(\"TURRET\") && IsAttachment (\"Vehicle\")"
+      }
+     }
+    }
+    AnimSrcNodePose idlePose {
+     EditorPos 299.8 184.2
+     Source "Gadget.Idle"
+    }
+    AnimSrcNodePose FocusedPose {
+     Tags {
+      "TagFocused"
+     }
+     EditorPos 305.9 187.9
+     Source "Gadget.Focused"
+    }
+    AnimSrcNodeStateMachine LowSTM {
+     EditorPos 311.2 159.7
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos 308.8 160.9
+       Child "ErcLowG"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 311.3 160.3
+       Child "CroLowG"
+       StartCondition "Stance == 1"
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 313.8 160.9
+       Child "PneLowG"
+       StartCondition "Stance == 2"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5496D127EC9B478A}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5496D127EC9B47BB}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F05}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F30}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F3F}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4BBB186A69F2D}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeBufferUse BufferUse {
+     EditorPos 303.6 180.1
+     BufferName "FullbodyGadget"
+    }
+    AnimSrcNodeBlend GadgetAimspaceB {
+     EditorPos 299.7 182.9
+     BlendWeight "1.0"
+     Child0 "idlePose"
+     Child1 "Blend T 36717"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeBlend GadgetAimspaceFocusedB {
+     EditorPos 305.9 183.7
+     BlendWeight "1.0"
+     Child0 "FocusedPose"
+     Child1 "GadgetAimspace 28102"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodePose2 GadgetAimspace {
+     EditorPos 300 188.1
+     Source "Gadget.ErcRas.Aimspace"
+     ValueX "AimY"
+     ValueY "0.0"
+     Table "Y(0):       X(-90) = 0.55, X(0) = 1, X(90) = 2"
+    }
+    AnimSrcNodeBlend BufferB {
+     EditorPos 299.7 178.9
+     BlendWeight "1"
+     Child0 "BufferUse"
+     Child1 "Blend 38490"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeBlend BufferFocusedB {
+     EditorPos 305.9 178.2
+     BlendWeight "1"
+     Child0 "BufferUse"
+     Child1 "Blend 20379"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeGroupSelect ErcRasG {
+     EditorPos 292.8 162.2
+     Child "LowerWeaponB"
+     Group "Gadget"
+     Column "ErcRas"
+    }
+    AnimSrcNodeGroupSelect CroRasG {
+     EditorPos 295.7 162.2
+     Child "LowerWeaponB"
+     Group "Gadget"
+     Column "CroRas"
+    }
+    AnimSrcNodeGroupSelect PneRasG {
+     EditorPos 298.8 162.28
+     Child "LowerWeaponB"
+     Group "Gadget"
+     Column "PneRas"
+    }
+    AnimSrcNodeGroupSelect ErcLowG {
+     EditorPos 309.2 162.3
+     Child "GadgetIdleSTM"
+     Group "Gadget"
+     Column "ErcLow"
+    }
+    AnimSrcNodeGroupSelect CroLowG {
+     EditorPos 311.5 162.4
+     Child "GadgetIdleSTM"
+     Group "Gadget"
+     Column "CroLow"
+    }
+    AnimSrcNodeGroupSelect PneLowG {
+     EditorPos 314.2 162.5
+     Child "GadgetIdleSTM"
+     Group "Gadget"
+     Column "PneLow"
+    }
+    AnimSrcNodeIK2Target "IK2 Target _1" {
+     EditorPos 299.309 177.062
+     Child "BufferB"
+     Chains {
+      AnimSrcIkTargetBinding "{5496D84E3C6AD625}" {
+       IkTarget "HeadTarget"
+       IkChain "Head"
+      }
+     }
+    }
+    AnimSrcNodeIK2Target "IK2 Target Offset_1" {
+     EditorPos 299.409 175.162
+     Child "Rotate_1"
+     Chains {
+      AnimSrcIkTargetBinding "{5496D84E3C6AD625}" {
+       IkTarget "HeadTarget"
+       IkChain ""
+       LocalSpaceOffset AnimSrcTransformOffset "{60DCB7D6ED76DB9F}" {
+        Position 0 0 0
+        Rotation 0 0 0
+        Pose "Gadget.Offset"
+        FromBone "head"
+        ToBone "lefthand"
+        FromFrame 0
+        ToFrame 0
+        BonesAreInModelSpace 1
+       }
+      }
+     }
+    }
+    AnimSrcNodeIK2 "IK2 " {
+     EditorPos 299.509 173.962
+     Child "IK2 Target Offset_1"
+     Weight "clamp(normalize(AimY, -75, -20),0, 0.9)"
+     Chains {
+      AnimSrcIkBinding "{5496D84E14A9DFC7}" {
+       IkTarget "HeadTarget"
+       IkChain "LeftArm"
+      }
+     }
+     Solver AnimSrcNodeIK2TwoBoneSolver "{5AEE92E08D1E5E1F}" {
+      SnapRotation 1
+      AllowStretching 1
+     }
+     Version 1
+    }
+    AnimSrcNodeProcTransform Rotate_1 {
+     EditorPos 299.309 176.162
+     Child "IK2 Target _1"
+     Expression "AimY/180*3.14 + (TargetYOffset/180*3.14) * 0.5"
+     IkTargets {
+      AnimSrcNodeProcTrIkTargetItem "{54D511C9EBD772A4}" {
+       IkTarget "HeadTarget"
+       Op Rotate
+       Amount "-0.3"
+      }
+     }
+    }
+    AnimSrcNodeIK2Target "IK2 Target Focused Offset" {
+     EditorPos 305.889 174.386
+     Child "Rotate"
+     Chains {
+      AnimSrcIkTargetBinding "{5496D84E3C6AD625}" {
+       IkTarget "HeadTarget"
+       IkChain ""
+       LocalSpaceOffset AnimSrcTransformOffset "{60DCB7D6ED76DF1F}" {
+        Position 0 0 0
+        Rotation 0 0 0
+        Pose "Gadget.FocusedOffset"
+        FromBone "head"
+        ToBone "lefthand"
+        FromFrame 0
+        ToFrame 0
+        BonesAreInModelSpace 1
+       }
+      }
+     }
+    }
+    AnimSrcNodeIK2 "IK2 Focused " {
+     EditorPos 305.964 173.508
+     Child "IK2 Target Focused Offset"
+     Weight "normalize(AimY, -90, -20)"
+     Chains {
+      AnimSrcIkBinding "{5496D84E14A9DFC7}" {
+       IkTarget "HeadTarget"
+       IkChain "LeftArm"
+      }
+     }
+     Solver AnimSrcNodeIK2TwoBoneSolver "{5AEE92E08D1E5E68}" {
+      SnapRotation 1
+      AllowStretching 1
+     }
+     Version 1
+    }
+    AnimSrcNodeIK2Target "IK2 Target Focused" {
+     EditorPos 305.889 176.486
+     Child "BufferFocusedB"
+     Chains {
+      AnimSrcIkTargetBinding "{5496D84E3C6AD625}" {
+       IkTarget "HeadTarget"
+       IkChain "Head"
+      }
+     }
+    }
+    AnimSrcNodeProcTransform Rotate {
+     EditorPos 305.889 175.586
+     Child "IK2 Target Focused"
+     Expression "AimY/180*3.14 + (TargetYOffset/180*3.14) * 0.5"
+     IkTargets {
+      AnimSrcNodeProcTrIkTargetItem "{54D511C9EBD772A4}" {
+       IkTarget "HeadTarget"
+       Op Rotate
+       Amount "-0.3"
+      }
+     }
+    }
+    AnimSrcNodeBlend GadgetAimspaceVehicleB {
+     EditorPos 311.3 180.8
+     BlendWeight "1.0"
+     Child0 "VehiclePose"
+     Child1 "GadgetAimspace"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodePose VehiclePose {
+     EditorPos 311.5 183
+     Source "Gadget.Idle_Vehicle"
+    }
+    AnimSrcNodeBlend BufferVehicleB {
+     EditorPos 311.4 178.8
+     BlendWeight "1"
+     Child0 "BufferUse"
+     Child1 "GadgetAimspaceVehicleB"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodePose2 "GadgetAimspace 28102" {
+     EditorPos 308.3 187.9
+     Source "Gadget.ErcLow.Aimspace"
+     ValueX "AimY"
+     ValueY "0.0"
+     Table "Y(0):       X(-90) = 0.45, X(0) = 1, X(90) = 2"
+    }
+    AnimSrcNodePose2 "GadgetAimspace 29203" {
+     EditorPos 302.4 188.1
+     Source "Gadget.CroRas.Aimspace"
+     ValueX "AimY"
+     ValueY "0.0"
+     Table "Y(0):       X(-90) = 0.15, X(0) = 0.8, X(90) = 2"
+    }
+    AnimSrcNodeBlendT "Blend T 36717" {
+     EditorPos 299.8 185.5
+     BlendTime "0.5"
+     Condition "Stance == 1"
+     Child0 "GadgetAimspace"
+     Child1 "GadgetAimspace 29203"
+     Optimization "Skip blended out"
+    }
+    AnimSrcNodeBlend "Blend 38490" {
+     EditorPos 299.9 181.3
+     BlendWeight "1"
+     Child0 "GadgetAimspaceB"
+     Child1 "Source 17029"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeSource "Source 17029" {
+     EditorPos 302.926 182.883
+     Source "Gadget.ErcRas.Fingers"
+     Looptype Loop
+    }
+    AnimSrcNodeIK2Target "IK2 Target Turret Offset" {
+     EditorPos 317.237 174.1
+     Child "Rotate 36728"
+     Chains {
+      AnimSrcIkTargetBinding "{5496D84E3C6AD625}" {
+       IkTarget "HeadTarget"
+       IkChain ""
+       LocalSpaceOffset AnimSrcTransformOffset "{60DCB7D6ED76E2A0}" {
+        Position 0 0 0
+        Rotation 0 0 0
+        Pose "Gadget.Offset_Turret"
+        FromBone "head"
+        ToBone "lefthand"
+        FromFrame 0
+        ToFrame 0
+        BonesAreInModelSpace 1
+       }
+      }
+     }
+    }
+    AnimSrcNodeBlend BufferTurret {
+     EditorPos 317.3 177.6
+     BlendWeight "1"
+     Child0 "BufferUse"
+     Child1 "GadgetAimspaceTurretB"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodePose TurretPose {
+     EditorPos 317.7 181.4
+     Source "Gadget.Idle_Turret"
+    }
+    AnimSrcNodeBlend GadgetAimspaceTurretB {
+     EditorPos 317.6 178.8
+     BlendWeight "1.0"
+     Child0 "TurretPose"
+     Child1 "GadgetAimspace"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeIK2Target "IK2 Target Turret" {
+     EditorPos 317.237 176.1
+     Child "BufferTurret"
+     Chains {
+      AnimSrcIkTargetBinding "{5496D84E3C6AD625}" {
+       IkTarget "HeadTarget"
+       IkChain "Head"
+      }
+     }
+    }
+    AnimSrcNodeProcTransform "Rotate 36728" {
+     EditorPos 317.237 175.3
+     Child "IK2 Target Turret"
+     Expression "AimY/180*3.14 + (TargetYOffset/180*3.14) * 0.5"
+     IkTargets {
+      AnimSrcNodeProcTrIkTargetItem "{54D511C9EBD772A4}" {
+       IkTarget "HeadTarget"
+       Op Rotate
+       Amount "-0.3"
+      }
+     }
+    }
+    AnimSrcNodeIK2 "IK2 Turret" {
+     EditorPos 317.337 173.2
+     Child "IK2 Target Turret Offset"
+     Weight "1.0"
+     Chains {
+      AnimSrcIkBinding "{5496D84E14A9DFC7}" {
+       IkTarget "HeadTarget"
+       IkChain "LeftArm"
+      }
+     }
+     Solver AnimSrcNodeIK2TwoBoneSolver "{5AEEB9096F22179F}" {
+      SnapRotation 1
+      AllowStretching 1
+     }
+     Version 1
+    }
+    AnimSrcNodeBlend "Blend 20379" {
+     EditorPos 305.9 181.406
+     BlendWeight "1"
+     Child0 "GadgetAimspaceFocusedB"
+     Child1 "Source 17029"
+     Optimization "Always eval both"
+    }
+   }
+  }
+ }
+}

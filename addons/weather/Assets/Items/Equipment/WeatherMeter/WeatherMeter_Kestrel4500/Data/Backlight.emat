@@ -1,0 +1,12 @@
+MatPBRBasic {
+ Color 0.784 1 0.784 1
+ Emissive 0 0 0 1
+ EmissiveLV -3
+ EmissiveAbsoluteLV 0
+ CastShadow 0
+ ReceiveShadow 0
+ Refs {
+  "Emissive"
+  "ACE_ScreenGadgetComponent.m_iBacklightColor"
+ }
+}

@@ -9,7 +9,9 @@ StringTable {
    Target_es_es "Escalera portátil para escalar obstáculos o entrada táctica."
    Target_zh_cn "便攜式伸縮梯，用於攀爬或戰術突入"
    Target_ko_kr "장애물을 오르거나 전술 진입을 위한 휴대용 사다리입니다."
-   Modified 1725492187
+   Target_pt_br "Escada portátil para escalar obstáculos ou entrada tática."
+   Target_zh_cn "便攜式伸縮梯，用於攀爬或戰術突入"
+   Modified 1750692357
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
   }
@@ -57,7 +59,9 @@ StringTable {
    Target_es_es "Muy corto"
    Target_zh_cn "太短"
    Target_ko_kr "너무 짧음"
-   Modified 1725491927
+   Target_pt_br "Muito curto"
+   Target_zh_cn "太短"
+   Modified 1750692387
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
   }
@@ -69,7 +73,9 @@ StringTable {
    Target_es_es "Salida superior obstruida"
    Target_zh_cn "梯頂受阻"
    Target_ko_kr "위쪽 출구 막힘"
-   Modified 1725491920
+   Target_pt_br "Saída superior obstruída"
+   Target_zh_cn "梯頂受阻"
+   Modified 1750692406
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
   }

@@ -26,8 +26,11 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
-	//! Metabolic acidosis level (-1.0 = no acidosis, 0.0 = threshold, 1.0 = maximum acidosis)
-	protected float m_fMetabolicAcidosisLevel = -1.0;
+	//! Blood pH (7.4 = normal, 7.35 = impact threshold, 6.8 = maximum acidosis)
+	protected float m_fBloodPH = 7.4;
+	
+	//! Heart weakness factor derived from pH (0 = none, 1 = max); cached when pH changes
+	protected float m_fHeartWeaknessFactor = 0;
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
@@ -181,17 +184,39 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Get metabolic acidosis level (-1.0 = no acidosis, 0.0 = threshold, 1.0 = maximum acidosis)
-	float GetMetabolicAcidosisLevel()
+	//! Get blood pH (7.4 = normal, 6.8 = maximum acidosis)
+	float GetBloodPH()
 	{
-		return m_fMetabolicAcidosisLevel;
+		return m_fBloodPH;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Set metabolic acidosis level (-1.0 = no acidosis, 0.0 = threshold, 1.0 = maximum acidosis)
-	void SetMetabolicAcidosisLevel(float level)
+	//! Set blood pH (clamped to [6.8, 7.4])
+	void SetBloodPH(float pH)
 	{
-		m_fMetabolicAcidosisLevel = Math.Clamp(level, -1.0, 1.0);
+		m_fBloodPH = Math.Clamp(pH, 6.8, 7.4);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Get heart weakness factor (0 = none, 1 = max); derived from pH in circulation states
+	float GetHeartWeaknessFactor()
+	{
+		return m_fHeartWeaknessFactor;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Set heart weakness factor (0 = none, 1 = max)
+	void SetHeartWeaknessFactor(float factor)
+	{
+		m_fHeartWeaknessFactor = Math.Clamp(factor, 0.0, 1.0);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Compatibility: maps pH to legacy acidosis level [-1, 1] for external/legacy callers
+	//! pH 7.4 -> -1, pH 7.35 -> 0, pH 6.8 -> 1
+	float GetMetabolicAcidosisLevel()
+	{
+		return (7.4 - m_fBloodPH) / 0.6 * 2.0 - 1.0;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -245,7 +270,8 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 			SetPulsePressure(settings.m_fDefaultPulsePressureKPA);
 		}
 		
-		SetMetabolicAcidosisLevel(-1.0);
+		SetBloodPH(7.4);
+		SetHeartWeaknessFactor(0);
 		SetHeartRateMedicationAdjustment(0);
 		SetSystemicVascularResistenceMedicationAdjustment(0);
 		SetReviveSuccessCheckTimerScale(1);

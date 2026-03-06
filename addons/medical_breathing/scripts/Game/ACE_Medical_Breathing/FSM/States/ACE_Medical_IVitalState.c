@@ -65,9 +65,8 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		float alveolarOxygenSaturation = ACE_Math.Hill(Math.Pow(context.m_pVitals.GetPalvO2() / ACE_MaterialProperties.DEFAULT_KD_HEMOGLOBIN, ACE_MaterialProperties.HILL_COEFF_HEMOGLOBIN));
 		float pneumothoraxScale = context.m_pVitals.GetPneumothoraxScale();
 
-		if (pneumothoraxScale < 1) {
+		if (pneumothoraxScale < 1)
 			perfusion = context.m_pVitals.GetCardiacOutput() / 60 * Math.Pow(1 - pneumothoraxScale, 2/3);
-		}
 
 		float maxFluxO2 = perfusion * context.m_pBloodHitZone.ACE_Medical_GetHemeConcentration() * alveolarOxygenSaturation;
 		float rateScale = perfusion / s_fDefaultPerfusion;

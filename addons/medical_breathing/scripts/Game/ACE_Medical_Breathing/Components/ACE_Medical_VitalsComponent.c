@@ -94,14 +94,14 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Sets venous carbon dioxide concentration in nM
+	//! Sets venous carbon dioxide concentration in mmol/ml (≙ M)
 	void SetCvenCO2(float c)
 	{
 		m_fCvenCO2 = c;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Returns venous carbon dioxide concentration in nM
+	//! Returns venous carbon dioxide concentration in mmol/ml (≙ M)
 	float GetCvenCO2()
 	{
 		return m_fCvenCO2;

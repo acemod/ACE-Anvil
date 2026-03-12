@@ -1,9 +1,6 @@
 ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
  ID "4B42E71698F5739C"
  components {
-  ControllersManagerComponent "{2CD4A765B3F3A3B1}" {
-   Enabled 0
-  }
   SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
    DoorInfoList {
     CompartmentDoorInfo "{62CF60C6D92648FD}" {
@@ -53,10 +50,10 @@ ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
   }
   VehicleAnimationComponent "{50B812962B17E60B}" {
    AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.agr"
-   AnimInstance ""
+   AnimInstance "{A0A5BCBD5629BADB}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.asi"
    AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
     AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.agr"
-    AnimInstance ""
+    AnimInstance "{A0A5BCBD5629BADB}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.asi"
    }
    AutoVariablesBind 1
    DeactivationDelay 2

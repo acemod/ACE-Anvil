@@ -2,13 +2,7 @@ GenericEntity : "{3B9D178DEB635AFD}PrefabsEditable/Auto/Structures/Military/Fort
  ID "60ED25685B736E4E"
  components {
   MeshObject "{60ED256B7FE9D171}" {
-   Object "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_PersonalTrench_01_big.xob"
-   Materials {
-    MaterialAssignClass "{670D0DEE201453E2}" {
-     SourceMaterial "DirtCover_01"
-     AssignedMaterial "{30369C94C941BE87}Common/Materials/ACE_Trenches_MatTerrainObj.emat"
-    }
-   }
+   Object "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/PersonalTrench/ACE_PersonalTrench_01_big.xob"
   }
   SCR_EditableEntityComponent "{60ED256B631A65DC}" {
    m_UIInfo SCR_EditableEntityUIInfo "{60ED2568D69DDD17}" {
@@ -19,7 +13,7 @@ GenericEntity : "{3B9D178DEB635AFD}PrefabsEditable/Auto/Structures/Military/Fort
   SCR_PreviewEntityComponent "{60ED256B76DEE153}" {
    m_aEntries {
     SCR_BasePreviewEntry "{60ED2568E4572001}" {
-     m_Mesh "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_PersonalTrench_01_big.xob"
+     m_Mesh "{C154C291EFC445DE}Assets/Structures/Military/Fortifications/Trenches/PersonalTrench/ACE_PersonalTrench_01_big.xob"
     }
    }
   }

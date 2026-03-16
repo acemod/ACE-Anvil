@@ -1,0 +1,72 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SignalsManagerComponent "{655C16EC9DB5136B}" {
+  }
+  ACE_Medical_Defibrillation_DefibSoundComponent "{671C09EE44D37889}" {
+   Filenames {
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp"
+   }
+  }
+  SoundComponent "{655C16ECB615B046}" {
+   Filenames {
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp" "{0340D00A7674D634}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompts.acp"
+   }
+  }
+  ACE_Medical_Defibrillation_DefibComponent "{671C09EFE7878C09}" {
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "#ACE_MedicalDefibrillation-Defibrillator_DisplayName"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
+     Weight 3.2
+    }
+    m_Size SLOT_1x1
+    m_eQuickSlotSize SLOT_1x1
+    m_SlotType SLOT_GADGETS_STORAGE
+    m_bStackable 0
+   }
+  }
+  MeshObject "{64FB47CE0046FB12}" {
+   Object "{DA5DDF2E4860BBF6}test/Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.xob"
+  }
+  RigidBody "{68483DE61388D41E}" {
+   Mass 3.2
+   ModelGeometry 1
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    ACE_Medical_Defibrillation_UserAction_DefibPickup "{51EC842E3A187379}" {
+     Duration 1
+     "Sort Priority" 10
+    }
+    ACE_Medical_Defibrillation_UserAction_DefibDisconnect "{671C09FF5A7200A1}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{671C09FF5F06B782}" {
+      Name "#ACE-MedicalDefibrillation_UserAction_DisconnectPatient"
+     }
+     Duration 1
+     "Sort Priority" 1
+    }
+    ACE_Medical_Defibrillation_UserActions_DefibShock "{673856DECBEEA89B}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{673856DECD3BB5B7}" {
+      Name "#ACE-MedicalDefibrillation_UserAction_DeliverShock"
+     }
+     Duration 1
+    }
+   }
+  }
+  GadgetAnimationComponent "{64FC042FA738F687}" {
+   AnimGraph "{8462461570E623A5}Assets/Weapons/Explosives/workspace/M34.agr"
+   AnimInstance "{67A3E465A8D20576}Assets/Weapons/Explosives/workspace/M34_weapon.asi"
+  }
+ }
+ coords 0 0 0
+}

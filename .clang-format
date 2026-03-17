@@ -7,7 +7,7 @@ DerivePointerAlignment: false
 PointerAlignment: Left
 NamespaceIndentation: All
 IncludeBlocks: Merge
-AllowShortBlocksOnASingleLine: true
+AllowShortBlocksOnASingleLine: false
 BreakBeforeBraces: Allman
 UseCRLF: false
 DeriveLineEnding: false

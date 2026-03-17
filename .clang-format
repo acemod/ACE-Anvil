@@ -9,3 +9,5 @@ NamespaceIndentation: All
 IncludeBlocks: Merge
 AllowShortBlocksOnASingleLine: true
 BreakBeforeBraces: Allman
+UseCRLF: false
+DeriveLineEnding: false

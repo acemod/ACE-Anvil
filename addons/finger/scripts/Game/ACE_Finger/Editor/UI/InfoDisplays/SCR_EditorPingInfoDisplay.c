@@ -1,14 +1,12 @@
 //------------------------------------------------------------------------------------------------
 //! Extends editor ping display for finger pointing pings
-modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay
-{
+modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay {
     protected ACE_Finger_EditorComponent m_pACE_Finger_EditorComponent;
 
     //------------------------------------------------------------------------------------------------
     //! Callback for tactical ping keybinds
     //! Sends tracer from center of screen and sends a ping for the first intersection
-    protected void ACE_Finger_SendPingAction(float value, EActionTrigger reason)
-    {
+    protected void ACE_Finger_SendPingAction(float value, EActionTrigger reason) {
         if (SCR_EditorManagerEntity.IsOpenedInstance())
             return;
 
@@ -41,8 +39,7 @@ modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay
 
     //------------------------------------------------------------------------------------------------
     //! Attach handlers when display is opened
-    override event void OnStartDraw(IEntity owner)
-    {
+    override event void OnStartDraw(IEntity owner) {
         super.OnStartDraw(owner);
 
         m_pACE_Finger_EditorComponent = ACE_Finger_EditorComponent.Cast(ACE_Finger_EditorComponent.GetInstance(ACE_Finger_EditorComponent, true));
@@ -59,8 +56,7 @@ modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay
 
     //------------------------------------------------------------------------------------------------
     //! Detatch handlers when display is closed
-    override event void OnStopDraw(IEntity owner)
-    {
+    override event void OnStopDraw(IEntity owner) {
         super.OnStopDraw(owner);
 
         if (!m_pACE_Finger_EditorComponent)

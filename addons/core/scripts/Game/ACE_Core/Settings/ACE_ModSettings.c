@@ -1,6 +1,4 @@
 //------------------------------------------------------------------------------------------------
 //! Settings for a mod
 [BaseContainerProps()]
-class ACE_ModSettings
-{
-}
+class ACE_ModSettings {}

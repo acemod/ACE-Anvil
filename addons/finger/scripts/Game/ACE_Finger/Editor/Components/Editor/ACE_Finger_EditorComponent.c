@@ -1,13 +1,10 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Finger_EditorComponentClass : SCR_BaseEditorComponentClass
-{
-}
+class ACE_Finger_EditorComponentClass : SCR_BaseEditorComponentClass {}
 
 //------------------------------------------------------------------------------------------------
 //! Attached to SCR_EditorManagerEntity in EditorManager.et
 //! Equivalent to SCR_PingEditorComponent for finger pings
-class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
-{
+class ACE_Finger_EditorComponent : SCR_BaseEditorComponent {
     [Attribute(defvalue: "1000", desc: "Maximum pointing distance in meters")]
     protected float m_fMaxPointingDistanceM;
 
@@ -29,11 +26,9 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 
     //------------------------------------------------------------------------------------------------
     //! Method for local player to request pings on a position or target
-    void SendPing(vector targetPos, SCR_EditableEntityComponent target = null)
-    {
+    void SendPing(vector targetPos, SCR_EditableEntityComponent target = null) {
         float currentCooldown = m_fPingCooldownS - (GetGame().GetWorld().GetWorldTime() - m_fLastPingTime) / 1000;
-        if (m_fLastPingTime > 0 && currentCooldown > 0)
-        {
+        if (m_fLastPingTime > 0 && currentCooldown > 0) {
             SCR_NotificationsComponent.SendLocal(ENotification.ACTION_ON_COOLDOWN, currentCooldown * 100);
             return;
         };
@@ -49,8 +44,7 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
     //------------------------------------------------------------------------------------------------
     //! Broadcasts ping to all clients
     [RplRpc(RplChannel.Reliable, RplRcver.Server)]
-    protected void RpcAsk_SendPing(int reporterID, vector reporterPos, vector targetPos, RplId targetID)
-    {
+    protected void RpcAsk_SendPing(int reporterID, vector reporterPos, vector targetPos, RplId targetID) {
         // Send ping to server as well if not dedicated
         if (RplSession.Mode() != RplMode.Dedicated)
             RpcDo_SendPing(reporterID, reporterPos, targetPos, targetID);
@@ -61,8 +55,7 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
     //------------------------------------------------------------------------------------------------
     //! Creates ping effect and notification for local player
     [RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-    protected void RpcDo_SendPing(int reporterID, vector reporterPos, vector targetPos, RplId targetID)
-    {
+    protected void RpcDo_SendPing(int reporterID, vector reporterPos, vector targetPos, RplId targetID) {
         IEntity player = GetGame().GetPlayerController().GetControlledEntity();
         if (!player || vector.Distance(player.GetOrigin(), reporterPos) > m_fPingRangeM)
             return;
@@ -75,21 +68,17 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
         ACE_Finger_EditorComponent localInstance = ACE_Finger_EditorComponent.Cast(ACE_Finger_EditorComponent.GetInstance(ACE_Finger_EditorComponent, true));
         SCR_BaseEditorEffect.Activate(m_PointingEffects, localInstance, targetPos, targets);
 
-        if (target)
-        {
+        if (target) {
             SCR_NotificationsComponent.SendLocal(ENotification.ACE_FINGER_PING_TARGET_ENTITY, reporterID, targetID);
             localInstance.OnPingEntityRegister(target);
-        }
-        else
-        {
+        } else {
             SCR_NotificationsComponent.SendLocal(ENotification.ACE_FINGER_PING, targetPos, reporterID);
         }
     }
 
     //------------------------------------------------------------------------------------------------
     //! Calls register event when effect is a ping entity
-    override void EOnEffect(SCR_BaseEditorEffect effect)
-    {
+    override void EOnEffect(SCR_BaseEditorEffect effect) {
         SCR_EntityEditorEffect entityEffect = SCR_EntityEditorEffect.Cast(effect);
         if (!entityEffect)
             return;
@@ -99,16 +88,14 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 
     //------------------------------------------------------------------------------------------------
     //! Schedules deletion of ping entity when registered
-    protected void OnPingEntityRegister(SCR_EditableEntityComponent pingEntity)
-    {
+    protected void OnPingEntityRegister(SCR_EditableEntityComponent pingEntity) {
         Event_OnPingEntityRegister.Invoke(-1, pingEntity);
         GetGame().GetCallqueue().CallLater(Expire, m_fPingLifetimeS * 1000, false, pingEntity);
     }
 
     //------------------------------------------------------------------------------------------------
     //! Deletes the ping entity
-    protected void Expire(SCR_EditableEntityComponent pingEntity)
-    {
+    protected void Expire(SCR_EditableEntityComponent pingEntity) {
         if (!pingEntity)
             return;
 
@@ -120,22 +107,19 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 
     //------------------------------------------------------------------------------------------------
     //! Return maximum distance
-    float GetMaxPointingDistance()
-    {
+    float GetMaxPointingDistance() {
         return m_fMaxPointingDistanceM;
     }
 
     //------------------------------------------------------------------------------------------------
     //! Returns invoker for ping entity registration event
-    ScriptInvoker GetOnPingEntityRegister()
-    {
+    ScriptInvoker GetOnPingEntityRegister() {
         return Event_OnPingEntityRegister;
     }
 
     //------------------------------------------------------------------------------------------------
     //! Returns invoker for ping entity unregistration event
-    ScriptInvoker GetOnPingEntityUnregister()
-    {
+    ScriptInvoker GetOnPingEntityUnregister() {
         return Event_OnPingEntityUnregister;
     }
 }

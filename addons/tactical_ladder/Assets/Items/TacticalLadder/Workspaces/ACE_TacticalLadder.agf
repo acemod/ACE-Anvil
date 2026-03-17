@@ -1,0 +1,84 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Master {
+   Nodes {
+    AnimSrcNodeStateMachine MasterControl {
+     EditorPos 408 95.2
+     states {
+      AnimSrcNodeState LadderIn {
+       Tags {
+        "TagRItemAction"
+       }
+       EditorPos 406 96.3
+       Child "Source 1_3"
+       StartCondition ""
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Idle {
+       EditorPos 401.7 96.3
+       Child "Blend 28674"
+       StartCondition "true"
+       TimeStorage "Real Time"
+       IsExit 0
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5A4CB238A6DC7455}" {
+       FromState "LadderIn"
+       ToState "Idle"
+       Condition "IsCommand(CMD_Item_Action) && GetCommandI(CMD_Item_Action) == -2"
+      }
+      AnimSrcNodeTransition "{5CB690750F7E92F2}" {
+       FromState "Idle"
+       ToState "LadderIn"
+       Duration "0.5"
+       StartTime "0.9"
+       Condition "IsCommand(CMD_Item_Action) && GetCommandI(CMD_Item_Action) == 1 && Stance == 1"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5CB690750F7E921D}" {
+       FromState "Idle"
+       ToState "LadderIn"
+       Duration "0.3"
+       Condition "IsCommand(CMD_Item_Action) && GetCommandI(CMD_Item_Action) == 1 && Stance == 0"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62F8BCA293A2B57F}" {
+       FromState "LadderIn"
+       ToState "Idle"
+       Duration "0.5"
+       Condition "RemainingTimeLess(0.15)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeSource "Source 1_3" {
+     EditorPos 406 100
+     Source "Deploy.Default.LadderIn"
+     Predictions {
+      AnimSrcNodePrediction ItemUsePrediction {
+       Name "ItemUsePrediction"
+       Bone "RightHandProp"
+       PercentTime 1
+      }
+     }
+    }
+    AnimSrcNodeBlend "Blend 28674" {
+     EditorPos 401.3 100
+     BlendWeight "1"
+     Child0 "Buffer Use 33180"
+     Child1 "Pose 16816"
+    }
+    AnimSrcNodeBufferUse "Buffer Use 33180" {
+     EditorPos 401 102.5
+     BufferName "FullBody"
+    }
+    AnimSrcNodePose "Pose 16816" {
+     EditorPos 398.8 102.5
+     Source "Deploy.Default.Idle"
+    }
+   }
+  }
+ }
+}

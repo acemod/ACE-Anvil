@@ -1,0 +1,16 @@
+AnimSetInstanceSource "{64AB46D2DF9D37FD}" {
+ Template "{2255EA04D2FD8565}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Animation.Default.In" {
+   Resource "{7C19A05B93DD7062}Assets/Helpers/Workspace/p_erc_captives_surrender_in.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Loop" {
+   Resource "{A4D0B4278909E260}Assets/Helpers/Workspace/p_erc_captives_surrender_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Out" {
+   Resource "{36E71213EAA0C7A1}Assets/Helpers/Workspace/p_erc_captives_surrender_out.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{64AB46D24BC3FD3A}" {
+ }
+}

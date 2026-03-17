@@ -81,7 +81,7 @@ class ACE_BackblastComponent : ScriptComponent
 
 		foreach (SCR_ChimeraCharacter character : affectedEntities)
 		{
-			SCR_DamageManagerComponent damageManager = character.GetDamageManager();
+			SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(character.GetDamageManager());
 			if (!damageManager)
 				continue;
 			
@@ -119,8 +119,8 @@ class ACE_BackblastComponent : ScriptComponent
 				if (!charHitZone)
 					continue;
 				
-				charHitZone.AddBleeding(nodes[0]);
-			};
+				damageManager.AddBleedingEffectOnHitZone(charHitZone, nodes[0]);
+			}
 		}
 
 		if (m_bDebugModeEnabled)

@@ -3,9 +3,6 @@
     "*.css": "postcss"
   },
 
-  // Enable the ESlint flat config support
-  "eslint.experimental.useFlatConfig": true,
-
   "eslint.codeActionsOnSave.rules": null,
 
   // Disable the default formatter, use eslint instead

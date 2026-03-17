@@ -3,18 +3,17 @@ MetaFileClass {
  Configurations {
   FBXResourceClass PC {
    MaterialAssigns {
-    MaterialAssignClass "{60FD1612120373AD}" {
-     SourceMaterial "ACE_Banana"
+    MaterialAssignClass "{619B46F7CD55A1BE}" {
+     SourceMaterial "ace_banana"
      AssignedMaterial "{A8CC18415D637D0B}Assets/Items/Food/Data/ACE_Banana.emat"
     }
    }
    MeshParams {
-    MeshParam Object {
+    MeshParam ace_banana {
     }
    }
    GeometryParams {
-    GeometryParam UBX_Object {
-     LayerPreset "ItemFireView"
+    GeometryParam UBX_banana {
      SurfaceProperties {
       "{63B8E1D41F2C6F98}Common/Materials/Game/rubber.gamemat"
      }

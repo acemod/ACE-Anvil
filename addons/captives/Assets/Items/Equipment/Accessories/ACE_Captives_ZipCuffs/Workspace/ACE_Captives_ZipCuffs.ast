@@ -1,0 +1,17 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{64CF4216AAD36BD5}" {
+   Name "ZipCuffs"
+   Animations {
+    "Action"
+    "FingerAnim"
+    "Idle"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+ }
+}

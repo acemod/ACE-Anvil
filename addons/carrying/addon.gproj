@@ -60,18 +60,24 @@ GameProject {
         Code "zh_cn"
         StringTableRuntime "{279B2AC25AB0EF26}Language/ACE_Carrying_localization.zh_cn.conf"
        }
+       LanguageDefinition "{62ACCBB6F112B22B}" {
+        Code "uk_ua"
+        StringTableRuntime "{94271257D4C08602}Language/ACE_Carrying_localization.uk_ua.conf"
+       }
       }
      }
     }
    }
-  }
-  GameProjectConfig HEADLESS {
   }
   GameProjectConfig XBOX_ONE {
   }
   GameProjectConfig XBOX_SERIES {
   }
   GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
   }
  }
 }

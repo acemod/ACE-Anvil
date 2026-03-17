@@ -8,16 +8,16 @@ GenericEntity : "{E8F00BF730225B00}Prefabs/Weapons/Grenades/Grenade_M67.et" {
      Description "#ACE-Weapon_FragBanana_Description"
     }
     ItemPhysAttributes ItemPhysicalAttributes "{56CA88CA367A150F}" {
-     Weight 0.3
-     ItemVolume 10
+     Weight 0.4
+     ItemVolume 100
      RestingUP Right
      RestingAdditiveOffsetLS 0.12 0 0
     }
     CustomAttributes {
      PreviewRenderAttributes "{52D2D341931DB0B8}" {
       CameraPreset Back
-      CameraOrbitAngles 0 0 0
-      CameraDistanceToItem 0.4
+      CameraOrbitAngles 180 90 45
+      CameraDistanceToItem 0.3
       FOV 40
      }
     }

@@ -1,0 +1,28 @@
+AnimSrcGraph {
+ AnimSetTemplate "{04A77B7D26E3D642}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/ACE_Captives_ZipCuffs.ast"
+ ControlTemplate AnimSrcGCT "{64CF4216AADEAD94}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+   AnimSrcGCTVarFloat LookX {
+    MaxValue 1
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_Item_Action {
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "MEDICAL"
+   "ACE_Medical_ChestSeal"
+  }
+ }
+ Debug AnimSrcGD "{64CF4216AADEAD98}" {
+ }
+ GraphFilesResourceNames {
+  "{395B03C78F856B81}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/ACE_Captives_ZipCuffs.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

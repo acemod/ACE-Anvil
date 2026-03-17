@@ -8,10 +8,13 @@ class ACE_Finger_EditorComponentClass: SCR_BaseEditorComponentClass
 //! Equivalent to SCR_PingEditorComponent for finger pings
 class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 {
-	[Attribute(defvalue: "1000", desc: "Maximum pointing distance in meters")]
+	[RplProp(), Attribute(defvalue: "1000", desc: "Maximum pointing distance in meters.")]
 	protected float m_fMaxPointingDistanceM;
 	
-	[Attribute(defvalue: "10", desc: "Range of the ping in meters. Only players in range will see it.")]
+	[Attribute(defvalue: "true", desc: "Whether the ping can attach to entities.")]
+	bool m_bCanPingAttach;
+	
+	[RplProp(), Attribute(defvalue: "10", desc: "Range of the ping in meters. Only players in range will see it. Anyone can see it if negative.")]
 	protected float m_fPingRangeM;
 	
 	[Attribute(defvalue: "6", desc: "Lifetime of ping in seconds")]
@@ -26,6 +29,23 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 	protected ref ScriptInvoker Event_OnPingEntityRegister = new ScriptInvoker;
 	protected ref ScriptInvoker Event_OnPingEntityUnregister = new ScriptInvoker;
 	protected float m_fLastPingTime = 0;
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void OnPostInit(IEntity owner)
+	{
+		super.OnPostInit(owner);
+		
+		if (!Replication.IsServer())
+			return;
+		
+		ACE_Finger_Settings settings = ACE_SettingsHelperT<ACE_Finger_Settings>.GetModSettings();
+		if (settings)
+		{
+			m_fMaxPointingDistanceM = settings.m_fMaxPointingDistanceM;
+			m_bCanPingAttach = settings.m_bCanPingAttach;
+			m_fPingRangeM = settings.m_fPingRangeM;
+		}
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Method for local player to request pings on a position or target
@@ -51,6 +71,10 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void RpcAsk_SendPing(int reporterID, vector reporterPos, vector targetPos, RplId targetID)
 	{
+		// Drop target if pings can't be attached
+		if (!m_bCanPingAttach)
+			targetID = RplId.Invalid();
+		
 		// Send ping to server as well if not dedicated
 		if (RplSession.Mode() != RplMode.Dedicated)
 			RpcDo_SendPing(reporterID, reporterPos, targetPos, targetID);
@@ -64,7 +88,10 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 	protected void RpcDo_SendPing(int reporterID, vector reporterPos, vector targetPos,  RplId targetID)
 	{
 		IEntity player = GetGame().GetPlayerController().GetControlledEntity();
-		if (!player || vector.Distance(player.GetOrigin(), reporterPos) > m_fPingRangeM)
+		if (!player)
+			return;
+		
+		if (m_fPingRangeM >= 0 && vector.Distance(player.GetOrigin(), reporterPos) > m_fPingRangeM)
 			return;
 		
 		SCR_EditableEntityComponent target = SCR_EditableEntityComponent.Cast(Replication.FindItem(targetID));

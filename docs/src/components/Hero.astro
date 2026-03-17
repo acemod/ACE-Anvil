@@ -1,0 +1,17 @@
+---
+import DefaultHero from '@astrojs/starlight/components/Hero.astro'
+
+const baseUrl = import.meta.env.BASE_URL
+---
+
+<DefaultHero />
+
+<script define:vars={{ baseUrl }}>
+// Insert baseUrl in all href of hero
+document.querySelector('div.hero')?.querySelectorAll('[href]').forEach((el) => {
+  const href = el.getAttribute('href')
+  if (href && href.startsWith('/')) {
+    el.setAttribute('href', baseUrl + href.slice(1))
+  }
+})
+</script>

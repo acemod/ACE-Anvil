@@ -1,0 +1,21 @@
+ACE_Carrying_HelperCompartment : "{FF78613C1DAFF28F}Prefabs/Helpers/ACE_Carrying_BaseHelperCompartment.et" {
+ ID "4B42E71698F5739C"
+ components {
+  ACE_CarriableAnimationHelperComponent "{64A80AC492A35587}" {
+   m_AttachmentPoint PointInfo "{64A80AC491114F47}" {
+    PivotID "Scene_Root"
+    Offset 0 0 1
+   }
+   m_bCarrierAllowWalkingForward 0
+   m_bCarrierAllowWalkingSideways 0
+   m_bCarrierAllowStandStance 0
+  }
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimInstance "{79AB94DEA9896020}Assets/Helpers/Workspace/ACE_Carrying_Dragged.asi"
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+    AnimInstance "{79AB94DEA9896020}Assets/Helpers/Workspace/ACE_Carrying_Dragged.asi"
+   }
+  }
+ }
+ m_eID DRAGGED
+}

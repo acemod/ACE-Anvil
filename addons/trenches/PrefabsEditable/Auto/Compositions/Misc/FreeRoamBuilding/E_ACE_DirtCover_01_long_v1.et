@@ -1,6 +1,8 @@
 GenericEntity : "{AE4206993ACBAE48}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_DirtCover_01_long_v1.et" {
  ID "5282DCB5DFC8538F"
  components {
+  ACE_Trenches_OutlineGarbageComponent "{626E298C73057C81}" {
+  }
   SCR_EditableEntityComponent "{5E50727929EC2547}" : "{8B8F72167C615EAA}Prefabs/Editor/Components/Compositions_SCR_EditableEntityComponent.ct" {
    m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
     Name "#AR-EditableEntity_DirtCover_01_long_v1_Name"

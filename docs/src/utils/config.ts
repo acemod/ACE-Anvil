@@ -13,12 +13,18 @@ export interface AceConfig {
   githubUrl: string
   discordUrl: string
   version: AceVersion
+  docsVersions: DocsVersion[]
 }
 
 export interface AceVersion {
   major: number
   minor: number
   patch: number
+}
+
+export interface DocsVersion {
+  name: string
+  baseUrl: string
 }
 
 export const config = yaml.load(fs.readFileSync('src/config.yml', 'utf8')) as {

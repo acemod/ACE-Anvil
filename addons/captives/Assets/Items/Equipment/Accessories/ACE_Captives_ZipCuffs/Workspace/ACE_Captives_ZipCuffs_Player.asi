@@ -1,0 +1,22 @@
+AnimSetInstanceSource "{64CF42AB972B1F85}" {
+ Template "{04A77B7D26E3D642}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/ACE_Captives_ZipCuffs.ast"
+ Lines {
+  AnimSetInstanceSource_Line "ZipCuffs.Erc.Idle" {
+   Resource "{7798F71C06B02431}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/p_erc_zipcuffs_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "ZipCuffs.Erc.FingerAnim" {
+   Resource "{6DAF85AACB4068C2}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/p_erc_zipcuffs_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "ZipCuffs.Cro.Idle" {
+   Resource "{D6C1DDF284A4CFCE}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/p_cro_zipcuffs_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "ZipCuffs.Pne.Idle" {
+   Resource "{29DD90BC7A6850DC}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/p_pne_zipcuffs_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "ZipCuffs.Erc.Action" {
+   Resource "{CCAE2533813A2903}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/p_erc_zipcuffs_action.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{64CF4216AAD1FFD2}" {
+ }
+}

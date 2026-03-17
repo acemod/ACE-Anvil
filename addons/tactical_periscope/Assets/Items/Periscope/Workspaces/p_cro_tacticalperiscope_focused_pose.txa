@@ -1,0 +1,296 @@
+$animation "" {
+ #version 2
+ #fps 30
+ #numFrames 0
+ $nodeDiff "Spine1" {
+  $keys q {
+   $frame 0 {
+   }
+  }
+  $nodeDiff "Stomach1" {
+   $keys t q {
+    $frame 0 {
+    }
+   }
+  }
+  $nodeDiff "Spine2" {
+   $keys q {
+    $frame 0 {
+    }
+   }
+   $nodeDiff "Spine3" {
+    $keys q {
+     $frame 0 {
+     }
+    }
+    $nodeDiff "Stomach2" {
+     $keys t q {
+      $frame 0 {
+      }
+     }
+    }
+    $nodeDiff "Spine4" {
+     $keys q {
+      $frame 0 {
+      }
+     }
+     $nodeDiff "Stomach3" {
+      $keys t q {
+       $frame 0 {
+       }
+      }
+     }
+     $nodeDiff "Spine5" {
+      $keys q {
+       $frame 0 {
+       }
+      }
+      $nodeDiff "Neck1" {
+       $keys q {
+        $frame 0 {
+        }
+       }
+       $nodeDiff "Neck2" {
+        $keys q {
+         $frame 0 {
+         }
+        }
+        $nodeDiff "Neck3" {
+         $keys q {
+          $frame 0 {
+          }
+         }
+         $nodeDiff "Head" {
+          $keys q {
+           $frame 0 {
+           }
+          }
+         }
+        }
+       }
+      }
+      $node "LeftShoulder" {
+       $keys q {
+        $frame 0 {
+         #q -0.44381151 0.45659956 0.49842477 0.58832067
+        }
+       }
+       $node "LeftArm" {
+        $keys q {
+         $frame 0 {
+          #q -0.24345867 -0.20263807 -0.30531961 -0.89802325
+         }
+        }
+        $node "LeftArmVolume" {
+         $keys q {
+          $frame 0 {
+           #q 0.20077878 0.01617272 0.00078243 0.97950286
+          }
+         }
+        }
+        $node "LeftArmTwist" {
+         $keys q {
+          $frame 0 {
+           #q 0.00200847 -0.02069033 0.00574118 0.99976742
+          }
+         }
+         $node "LeftForeArm" {
+          $keys q {
+           $frame 0 {
+            #q 0.63984042 -0.28376931 0.31435442 0.64129579
+           }
+          }
+          $node "LeftForeArmVolume" {
+           $keys q {
+            $frame 0 {
+             #q -0.15631938 0.33942753 -0.1947034 0.90688682
+            }
+           }
+          }
+          $node "LeftForeArmTwist" {
+           $keys q {
+            $frame 0 {
+             #q -0.00198171 0.4675397 -0.00109571 0.88396913
+            }
+           }
+           $node "LeftHandUpperVolume" {
+            $keys q {
+             $frame 0 {
+              #q 0.12077667 0.81625783 -0.00325608 0.56491202
+             }
+            }
+           }
+           $node "LeftHand" {
+            $keys q {
+             $frame 0 {
+              #q -0.10189515 0.87696892 0.32786489 0.3362256
+             }
+            }
+            $node "LeftHandThumb1" {
+             $keys q {
+              $frame 0 {
+               #q -0.04389852 -0.63337344 0.2457445 0.73247582
+              }
+             }
+             $node "LeftHandThumb2" {
+              $keys q {
+               $frame 0 {
+                #q 0.18566738 -0.00989933 0.03846832 0.9818095
+               }
+              }
+              $node "LeftHandThumb3" {
+               $keys q {
+                $frame 0 {
+                 #q -0.22513264 -0.17041573 -0.04018512 0.95846701
+                }
+               }
+               $node "LeftHandThumb4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.15608603 -0.00007537 -0.00046045 0.98774338
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "LeftHandIndex1" {
+             $keys q {
+              $frame 0 {
+               #q -0.00049797 -0.10830509 0.07434219 0.99133408
+              }
+             }
+             $node "LeftHandIndex2" {
+              $keys q {
+               $frame 0 {
+                #q -0.38953424 -0.05192903 0.06664017 0.91712904
+               }
+              }
+              $node "LeftHandIndex3" {
+               $keys q {
+                $frame 0 {
+                 #q 0.48169497 -0.21879604 -0.12480454 -0.83935827
+                }
+               }
+               $node "LeftHandIndex4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.43495584 0.00049679 -0.00041118 0.90045154
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "LeftHandMiddle1" {
+             $keys q {
+              $frame 0 {
+               #q -0.01083239 0.01791425 0.0265142 0.9994294
+              }
+             }
+             $node "LeftHandMiddle2" {
+              $keys q {
+               $frame 0 {
+                #q -0.53350866 -0.02260457 0.01868519 0.84528631
+               }
+              }
+              $node "LeftHandMiddle3" {
+               $keys q {
+                $frame 0 {
+                 #q 0.57804644 -0.12469959 -0.07066368 -0.80331761
+                }
+               }
+               $node "LeftHandMiddle4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.42411709 -0.00771768 0.06535554 0.90321302
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "LeftHandRing1" {
+             $keys q {
+              $frame 0 {
+               #q -0.00900488 0.06190659 -0.0025993 0.99803799
+              }
+             }
+             $node "LeftHandRing2" {
+              $keys q {
+               $frame 0 {
+                #q -0.56890541 -0.00154299 -0.02040115 0.8221485
+               }
+              }
+              $node "LeftHandRing3" {
+               $keys q {
+                $frame 0 {
+                 #q 0.54423773 -0.05999315 -0.03917944 -0.83586556
+                }
+               }
+               $node "LeftHandRing4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.40146837 -0.00004739 0.00015219 0.91587305
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "LeftHandPinky1" {
+             $keys q {
+              $frame 0 {
+               #q -0.0402757 -0.00114178 -0.02981332 0.99874312
+              }
+             }
+             $node "LeftHandPinky2" {
+              $keys q {
+               $frame 0 {
+                #q 0.5867632 -0.15485623 0.02231914 -0.79450011
+               }
+              }
+              $node "LeftHandPinky3" {
+               $keys q {
+                $frame 0 {
+                 #q -0.45976248 -0.06694233 -0.03350928 0.88488114
+                }
+               }
+               $node "LeftHandPinky4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.43264037 -0.01822902 0.05025748 0.89998019
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "LeftHandInbetween" {
+             $keys t q {
+              $frame 0 {
+               #t -0.0415688 0.064254 -0.0247446
+               #q -0.04689819 0.00439717 0.07037637 0.99640781
+              }
+             }
+            }
+            $node "LeftHandProp" {
+             $keys t q {
+              $frame 0 {
+               #t -0.0899737 0.1297415 -0.0162529
+               #q 0.9930495 -0.11116001 -0.0340465 -0.01836043
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,39 @@
+ACE_Carrying_HelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
+ ID "4B42E71698F5739C"
+ components {
+  ACE_CarriableAnimationHelperComponent "{64A80AC492A35587}" {
+   m_AttachmentPoint PointInfo "{64A80AC491114F47}" {
+   }
+   m_fCarrierSpeedLimit 0.5
+   m_bCarrierAllowJumping 0
+   m_bTerminateWhenReleased 1
+  }
+  SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   CompartmentSlots {
+    CargoCompartmentSlot Carried {
+     PassengerPositionInfo EntitySlotInfo s1 {
+      Offset -0.1 -0.6 0.05
+     }
+     ForcedFreeLook 1
+     SeatType 1
+     OverrideEntryPositionInfo PointInfo "{61D2CA8A14132241}" {
+     }
+     OverrideExitPositionInfo PointInfo "{61D2CA8A18570AAB}" {
+     }
+    }
+   }
+  }
+  SCR_VehicleCameraDataComponent "{5E0BA784A744A7CE}" {
+   m_fHeight 0.5
+   m_fDist_Max 2
+   m_fDist_Min 1
+   m_fDist_Desired 1.5
+   m_fFOV 74
+  }
+  VehicleAnimationComponent "{50B812962B17E60B}" {
+   AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
+   }
+  }
+ }
+ m_eID NONE
+}

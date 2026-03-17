@@ -1,0 +1,76 @@
+@startuml
+!include ../theme-selector.iuml
+package "== Advanced Medical Treatment (excluding OD)" {
+    start
+    group "**M**assive hemorrhage" {
+        :Stop bleedings;
+    }
+    while (Is unconscious?) is (yes)
+        package "=== Unconscious" $theme_selector("#LightYellow") {
+            group "**A**irway" {
+                if (Airway blocked?) then (yes)
+                    :Remove occlusions and\nobstructions;
+                else (no)
+                endif
+                :Secure airway with\nrecovery position or King LT;
+            }
+            group "**R**espiration" {
+                if (Has pneumothorax) then (yes)
+                    :Use chest seal;
+                    if (Has tension pneumothorax) then (yes)
+                        :Use NCD kit;
+                    else (no)
+                    endif
+                else (no)
+                endif
+            }
+            while (In cardiac arrest?) is (yes)
+                package "=== Cardiac arrest"  $theme_selector("#LightSalmon") {
+                    group "**C**irculation" {
+                        fork
+                            :Put in supine\nposition;
+                            :Perform CPR;
+                        fork again
+                            if (SpO2 < 75%) then (yes)
+                                :Provide supplemental\noxygen;
+                            else (no)
+                            endif
+                        fork again
+                            if (Has at least class II\nhemorrhage) then (yes)
+                                :Give saline;
+                            else (no)
+                            endif
+                        fork again
+                            if (Has at most class II\nhemorrhage and\nlast epinephrine\ninjection > 1 min?) then (yes)
+                                :Inject epinephrine;
+                            else (no)
+                            endif
+                        end fork
+                    }
+                }
+            endwhile (no)
+            if (Has stable vitals) then (no)
+                if (SpO2 < 85%) then (yes)
+                    :Provide supplemental\noxygen;
+                else (no)
+                endif
+                if (Has at least class II\nhemorrhage?) then (yes)
+                    :Give saline;
+                else (no)
+                endif
+                :Adjust with medication;
+            else (yes)
+                :Give ammonium carbonate;
+            endif
+        }
+    endwhile (no)
+
+    if (Is in pain and\nlast morphine\ninjection > 15 min?) then (yes)
+        :Inject morphine;
+    else (no)
+    endif
+
+    :Heal wounds with\nmedical kit;
+    end
+}
+@enduml

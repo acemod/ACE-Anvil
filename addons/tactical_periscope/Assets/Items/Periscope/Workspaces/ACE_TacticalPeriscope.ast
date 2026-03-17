@@ -1,0 +1,17 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{62FA448B9106C4F2}" {
+   Name "Gadget"
+   Animations {
+    "FingerAnim"
+    "Focused"
+    "Idle"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+ }
+}

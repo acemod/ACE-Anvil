@@ -2,7 +2,7 @@
 //! Tools for dealing with bearings and caridnals
 class ACE_CompassTools
 {
-	protected static ref const array<string> s_aCardinals = {"N", "NE", "E", "SE", "S", "SW", "W", "NW"};
+	protected static ref const array<string> s_aCardinals = {"N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW"};
 	
 	//------------------------------------------------------------------------------------------------
 	//! Returns the bearing for a given world transform
@@ -19,8 +19,8 @@ class ACE_CompassTools
 	//! \return cardinal
 	static string GetCardinalFromBearing(float bearing)
 	{
-		int i = Math.Round(bearing / 45);
-		if (i > 7)
+		int i = Math.Round(bearing / 22.5);
+		if (i > 15)
 			i = 0;
 		
 		return s_aCardinals[i];

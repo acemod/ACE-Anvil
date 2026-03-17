@@ -1,37 +1,37 @@
 AudioClass {
  sounds {
-  SoundClass {
+  SoundClass "2057" {
    id 2057
    name "SOUND_ACE_FINGER_PING"
    version 5
    tl 2.016 -99.016
    ins {
-    ConnectionsClass connections {
+    ConnectionsClass "con:64" {
      id 64
      links {
-      ConnectionClass connection {
+      ConnectionClass "3076:65" {
        id 3076
        port 65
       }
      }
     }
    }
-   outState 1035
+   outState 4107
    outStatePort 26631
   }
  }
  mixers {
-  MixerClass {
-   id 1035
+  MixerClass "4107" {
+   id 4107
    name "OutputState"
    version 4
-   tl 250 -102
-   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   tl 260 -97
+   res "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    ins {
-    ConnectionsClass connections {
+    ConnectionsClass "con:26631" {
      id 26631
      links {
-      ConnectionClass connection {
+      ConnectionClass "2057:65" {
        id 2057
        port 65
       }
@@ -39,16 +39,16 @@ AudioClass {
     }
    }
    pi {
-    67108864
+    2 0
    }
-   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   path "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    inputs {
-    "ANM_Footsteps" "ANM_Voice" "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialogue" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialogue_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct"
+    "Music" "UI"
    }
   }
  }
  banks_local {
-  BankLocalClass {
+  BankLocalClass "3076" {
    id 3076
    name "ACE_Finger_Ping"
    version 7
@@ -56,8 +56,11 @@ AudioClass {
    Volume -6
    "Pitch variance" 0.15
    Samples {
-    AudioBankSampleClass Sample {
+    AudioBankSampleClass "ACE_Finger_Ping.wav" {
      Filename "{0CB027CD4D78EA4B}Sounds/UI/Samples/ACE_Finger_Ping.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
     }
    }
   }

@@ -1,0 +1,37 @@
+MetaFileClass {
+ Name "{2D84074ABE1913A3}Assets/Helpers/ACE_InteractionCube.xob"
+ Configurations {
+  FBXResourceClass PC {
+   MaterialAssigns {
+    MaterialAssignClass "{611AED33C087A6B7}" {
+     SourceMaterial "DummyMaterial"
+     AssignedMaterial "{0176D378AD388FFF}system/wbdata/MaterialEditor/DummyMaterial.emat"
+    }
+   }
+   MeshParams {
+    MeshParam Cube {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_Cube {
+     LayerPreset "Interaction"
+     SurfaceProperties {
+      "{EA270CE454C419FD}Common/Materials/Game/wood.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass PS5 : PC {
+  }
+  FBXResourceClass HEADLESS : PC {
+  }
+ }
+}

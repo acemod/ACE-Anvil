@@ -13,3 +13,10 @@ ace:
     major: 1
     minor: 0
     patch: 0
+  docsVersions:
+    - name: Release
+      baseUrl: /
+    - name: Dev
+      baseUrl: /dev/
+    - name: MANW
+      baseUrl: /manw/

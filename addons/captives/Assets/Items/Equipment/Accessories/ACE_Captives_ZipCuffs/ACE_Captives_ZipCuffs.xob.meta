@@ -1,0 +1,37 @@
+MetaFileClass {
+ Name "{8D29CE583DCAF587}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/ACE_Captives_ZipCuffs.xob"
+ Configurations {
+  FBXResourceClass PC {
+   MaterialAssigns {
+    MaterialAssignClass "{64C9466BEE670151}" {
+     SourceMaterial "Restrainers_01_FDF4D2D93EFBBFF3"
+     AssignedMaterial "{8681F3D606187583}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Data/ACE_Captives_ZipCuffs.emat"
+    }
+   }
+   MeshParams {
+    MeshParam ZipCuffs {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_ZipCuffs {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass PS5 : PC {
+  }
+  FBXResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{3B9D178DEB635AFD}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_DirtCover_01_long_v1.et.et"
+ Name "{3B9D178DEB635AFD}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_DirtCover_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6DAF85AACB4068C2}Assets/Items/Equipment/Accessories/ACE_Captives_ZipCuffs/Workspace/p_erc_zipcuffs_fingerAnim.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

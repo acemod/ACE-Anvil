@@ -1,0 +1,116 @@
+!function $theme_selector($lightColor, $darkenRatio=85)
+!if ($DARK_THEME == 1)
+!return %darken($lightColor, $darkenRatio)
+!else
+!return $lightColor
+!endif
+!endfunction
+
+!if ($DARK_THEME == 1)
+!$BGCOLOR = "#24272F"
+!$FGCOLOR = "#D6DEEB"
+<style>
+  root {
+    BackgroundColor $BGCOLOR
+    FontColor $FGCOLOR
+    LineColor $FGCOLOR
+  }
+  groupHeader {
+    BackgroundColor $FGCOLOR
+    FontColor $BGCOLOR
+  }
+  referenceHeader {
+    BackgroundColor $FGCOLOR
+    FontColor $BGCOLOR
+  }
+  separator {
+    BackgroundColor $FGCOLOR
+    FontColor $BGCOLOR
+  }
+</style>
+skinparam Activity {
+  BackgroundColor $BGCOLOR
+  BarColor $FGCOLOR
+  BorderColor $FGCOLOR
+  FontColor $FGCOLOR
+}
+skinparam Boundary {
+  FontColor $FGCOLOR
+}
+skinparam Box {
+  Padding 5
+}
+skinparam CircledCharacter {
+  FontColor $BGCOLOR
+}
+skinparam Class {
+  BackgroundColor $BGCOLOR
+  BorderColor $FGCOLOR
+  FontColor $FGCOLOR
+}
+skinparam ClassAttribute {
+  FontColor $FGCOLOR
+}
+skinparam ClassStereotype {
+  FontColor $FGCOLOR
+}
+skinparam Footer {
+  FontColor $FGCOLOR
+}
+skinparam Header {
+  FontColor $FGCOLOR
+}
+skinparam IconPackage {
+  Color $FGCOLOR
+  BackgroundColor $BGCOLOR
+}
+skinparam IconPrivate {
+  Color $FGCOLOR
+  BackgroundColor $BGCOLOR
+}
+skinparam IconProtected {
+  Color $FGCOLOR
+  BackgroundColor $BGCOLOR
+}
+skinparam IconPublic {
+  Color $FGCOLOR
+  BackgroundColor $BGCOLOR
+}
+skinparam Note {
+  FontColor $FGCOLOR
+}
+skinparam Object {
+  BorderColor $FGCOLOR
+}
+skinparam Package {
+  BorderColor $FGCOLOR
+  FontColor $FGCOLOR
+}
+skinparam State {
+  BackgroundColor $BGCOLOR
+  BorderColor $FGCOLOR
+}
+skinparam StereotypeA {
+  BackgroundColor $FGCOLOR
+  BorderColor $FGCOLOR
+}
+skinparam StereotypeC {
+  BackgroundColor $FGCOLOR
+  BorderColor $FGCOLOR
+}
+skinparam StereotypeE {
+  BackgroundColor $FGCOLOR
+  BorderColor $FGCOLOR
+}
+skinparam StereotypeI {
+  BackgroundColor $FGCOLOR
+  BorderColor $FGCOLOR
+}
+skinparam StereotypeN {
+  BackgroundColor $FGCOLOR
+  BorderColor $FGCOLOR
+}
+skinparam UseCaseStereoType {
+  FontColor $FGCOLOR
+}
+!endif

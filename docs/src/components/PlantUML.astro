@@ -1,0 +1,41 @@
+---
+import fs from 'node:fs'
+import path from 'node:path'
+import { Image } from 'astro:assets'
+import plantUmlEncoder from 'plantuml-encoder'
+
+// Preprocesses plantuml files's !include statement
+function preprocessPlantUmlFile(filePath: string) {
+  const content = fs.readFileSync(filePath, 'utf-8')
+  const baseDir = path.dirname(filePath)
+  return content.replace(/^!include(.+)$/gm, (_match, includePath) => {
+    const resolvedPath = path.resolve(`${baseDir}/${includePath.trim()}`)
+    return fs.readFileSync(resolvedPath, 'utf-8')
+  })
+}
+
+interface Props {
+  src: string
+  alt?: string
+  format?: string
+  server?: string
+}
+
+const { src, alt = '', format = 'svg', server = 'https://www.plantuml.com/plantuml' } = Astro.props
+const content = preprocessPlantUmlFile(path.resolve(`./public/${src}`))
+const themes = {
+  light: `!$DARK_THEME=0\n${content}`,
+  dark: `!$DARK_THEME=1\n${content}`,
+}
+const urls: Record<string, string> = {}
+
+for (const [theme, content] of Object.entries(themes)) {
+  const encoded = plantUmlEncoder.encode(content)
+  urls[theme] = `${server}/${format}/${encoded}`
+}
+---
+
+<span>
+  <Image class="dark:sl-hidden" src={urls.light} alt={alt} inferSize />
+  <Image class="light:sl-hidden" src={urls.dark} alt={alt} inferSize />
+</span>

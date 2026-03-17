@@ -2,10 +2,10 @@
 modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
 	protected ACE_Medical_PainHitZone m_ACE_Medical_PainHitZone;
-	
+
 	[RplProp(condition: RplCondition.OwnerOnly)]
 	protected float m_fACE_Medical_PainSuppression = 0;
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Called by ACE_Medical_PainHitZone.OnInit to initialize the hit zone
 	void ACE_Medical_SetPainHitZone(HitZone hitzone)
@@ -19,13 +19,14 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		return m_ACE_Medical_PainHitZone;
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	bool ACE_Medical_IsInPain()
 	{
-		return m_ACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression <= m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE);
+		return m_ACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression <=
+			   m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE);
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Returns intensity of pain used for ACE_Medical_PainScreenEffect
 	//! - 0 when less than moderate damage
@@ -34,26 +35,26 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		if (!m_ACE_Medical_PainHitZone)
 			return 0;
-		
+
 		// Account for analgesic effects
 		float health = m_ACE_Medical_PainHitZone.GetHealthScaled() + m_fACE_Medical_PainSuppression;
-		
+
 		if (health > m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.MODERATE))
 			return 0;
-		
+
 		if (health <= m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.SERIOUS))
 			return 1;
-		
+
 		return Math.InverseLerp(1, m_ACE_Medical_PainHitZone.GetDamageStateThreshold(ECharacterHealthState.SERIOUS), health);
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	void ACE_Medical_SetPainSuppression(float percentage)
 	{
 		m_fACE_Medical_PainSuppression = percentage;
 		Replication.BumpMe();
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	float ACE_Medical_GetPainSuppression()
 	{

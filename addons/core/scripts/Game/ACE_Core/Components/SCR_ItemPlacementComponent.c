@@ -6,10 +6,10 @@ modded class SCR_ItemPlacementComponent : ScriptComponent
 	protected override void EOnFrame(IEntity owner, float timeSlice)
 	{
 		super.EOnFrame(owner, timeSlice);
-		
+
 		if (m_PlaceableItem.GetPlacementType() != SCR_EPlacementType.ACE_XYZ_UP)
 			return;
-		
+
 		CameraManager cameraManager = GetGame().GetCameraManager();
 		if (!cameraManager)
 			return;
@@ -27,7 +27,7 @@ modded class SCR_ItemPlacementComponent : ScriptComponent
 		Math3D.AnglesToMatrix(Vector(m_vCurrentMat[2].ToYaw(), 0, 0), m_vCurrentMat);
 		m_PreviewEntity.SetTransform(m_vCurrentMat);
 		m_PreviewEntity.Update();
-		
+
 		if (m_eCantPlaceReason == 0)
 			SCR_Global.SetMaterial(m_PreviewEntity, m_sCanBuildMaterial);
 		else if (m_eCantPlaceReason == ENotification.PLACEABLE_ITEM_CANT_PLACE_DISTANCE)
@@ -35,17 +35,17 @@ modded class SCR_ItemPlacementComponent : ScriptComponent
 		else
 			SCR_Global.SetMaterial(m_PreviewEntity, m_sCannotBuildMaterial);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Add check for entities that cannot be stacked
 	override protected bool ValidateEntity(notnull IEntity entity)
 	{
 		if (!super.ValidateEntity(entity))
 			return false;
-		
+
 		if (m_PlaceableItem.ACE_CanBeStacked())
 			return true;
-		
+
 		return (entity.GetPrefabData() != m_PlaceableItem.GetOwner().GetPrefabData());
 	}
 }

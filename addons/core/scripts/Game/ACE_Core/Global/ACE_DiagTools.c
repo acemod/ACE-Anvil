@@ -10,21 +10,21 @@ class ACE_DiagTools
 		CameraBase camera = GetGame().GetCameraManager().CurrentCamera();
 		if (!camera)
 			return false;
-		
+
 		target = SCR_ChimeraCharacter.Cast(camera.GetCursorTarget());
 		if (target)
 		{
 			targetType = "Target";
 			return true;
 		}
-		
+
 		target = SCR_ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
 		if (target)
 		{
 			targetType = "Self";
 			return true;
 		}
-		
+
 		return false;
 	}
 }

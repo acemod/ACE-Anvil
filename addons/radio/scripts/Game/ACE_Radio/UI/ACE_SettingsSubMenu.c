@@ -1,5 +1,5 @@
 modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
-{	
+{
 	//------------------------------------------------------------------------------------------------
 	override void OnTabCreate(Widget menuRoot, ResourceName buttonsLayout, int index)
 	{
@@ -21,7 +21,7 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 			int value;
 			radioSettings.Get(ACE_Radio_SettingsModule.BEEPCH1, value);
 
-			checkBoxBeep1.SetCurrentItem(value >> 1, false, false); //--- Shift the value, because it's a flag
+			checkBoxBeep1.SetCurrentItem(value >> 1, false, false);	 //--- Shift the value, because it's a flag
 			checkBoxBeep1.m_OnChanged.Insert(SetBeepCh1);
 		}
 		else
@@ -36,14 +36,14 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 			int value;
 			radioSettings.Get(ACE_Radio_SettingsModule.BEEPCH2, value);
 
-			checkBoxBeep2.SetCurrentItem(value >> 1, false, false); //--- Shift the value, because it's a flag
+			checkBoxBeep2.SetCurrentItem(value >> 1, false, false);	 //--- Shift the value, because it's a flag
 			checkBoxBeep2.m_OnChanged.Insert(SetBeepCh2);
 		}
 		else
 		{
 			Print("Radio setting 'Beep_Ch2' not found", LogLevel.WARNING);
 		}
-		
+
 		// Cycle transreceiver beep
 		SCR_SelectionWidgetComponent checkBoxCycle = SCR_SelectionWidgetComponent.GetSelectionComponent("Beep_Cycle", wRadioRoot);
 		if (checkBoxCycle)
@@ -76,13 +76,13 @@ modded class ACE_SettingsSubMenu : SCR_SettingsSubMenuBase
 	protected void SetBeepProp(SCR_SelectionWidgetComponent checkBox, int state, string prop)
 	{
 		PrintFormat("SetBeepProp: %1, %2", prop, state, level: LogLevel.NORMAL);
-		
-		state = 1 << state; //--- Shift the value, because it's a flag
+
+		state = 1 << state;	 //--- Shift the value, because it's a flag
 
 		ACE_Radio_SettingsModule.GetInstance().Set(prop, state);
 		GetGame().UserSettingsChanged();
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	protected void SetBeepCycle(SCR_SelectionWidgetComponent checkBox, bool state)
 	{

@@ -3,7 +3,7 @@
 class ACE_Chopping_UserAction : ACE_ShovelUserAction
 {
 	protected static const int DELETE_FALLING_TREE_DELAY_MS = 3000;
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of the tree
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
@@ -11,18 +11,18 @@ class ACE_Chopping_UserAction : ACE_ShovelUserAction
 		SCR_PlayerController userCtrl = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		if (!userCtrl)
 			return;
-		
+
 		ACE_Chopping_HelperEntity helper = ACE_Chopping_HelperEntity.Cast(GetOwner());
 		if (!helper)
 			return;
-		
+
 		Tree plant = Tree.Cast(helper.GetAssociatedPlant());
 		if (!plant)
 			return;
-		
+
 		bool enabled;
 		BaseContainer container = plant.GetPrefabData().GetPrefab();
-		
+
 		if (container && container.Get("Enabled", enabled) && enabled)
 		{
 			vector hitPosDirNorm[3];
@@ -33,7 +33,7 @@ class ACE_Chopping_UserAction : ACE_ShovelUserAction
 		{
 			userCtrl.ACE_RequestDeleteEntity(plant);
 		}
-		
+
 		delete helper;
 	}
 

@@ -9,7 +9,7 @@ class ACE_CompareItemName : SCR_SortCompare<IEntity>
 		else
 			return 0;
 	}
-	
+
 	//---------------------------------------------------------------------------------------------------
 	protected static string GetName(IEntity item)
 	{
@@ -20,7 +20,7 @@ class ACE_CompareItemName : SCR_SortCompare<IEntity>
 		UIInfo uiInfo = itemComponent.GetUIInfo();
 		if (!uiInfo)
 			return "";
-		
+
 		return uiInfo.GetName();
 	}
 }

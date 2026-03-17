@@ -7,23 +7,23 @@ class ACE_Captives_ToggleCaptiveContextAction : SCR_SelectedEntitiesContextActio
 	{
 		if (!super.CanBeShown(selectedEntity, cursorWorldPosition, flags))
 			return false;
-		
+
 		return SCR_EditableCharacterComponent.Cast(selectedEntity);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	override void Perform(SCR_EditableEntityComponent selectedEntity, vector cursorWorldPosition)
 	{
 		super.Perform(selectedEntity, cursorWorldPosition);
-		
+
 		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(selectedEntity.GetOwner());
 		if (!char)
 			return;
-		
+
 		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
 		if (!charController)
 			return;
-		
+
 		charController.ACE_Captives_SetCaptive(!charController.ACE_Captives_IsCaptive());
 	}
 }

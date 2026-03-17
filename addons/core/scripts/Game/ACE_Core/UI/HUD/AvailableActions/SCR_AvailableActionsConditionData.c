@@ -18,7 +18,7 @@ modded class SCR_AvailableActionsConditionData
 	{
 		return m_bACE_IsCarrier;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	// Fetch data
 	//------------------------------------------------------------------------------------------------
@@ -29,13 +29,13 @@ modded class SCR_AvailableActionsConditionData
 	override void FetchData(IEntity controlledEntity, float timeSlice)
 	{
 		super.FetchData(controlledEntity, timeSlice);
-		
+
 		// Invalidates and clears any data prior to following collection
 		ACE_Clear();
-		
+
 		if (!controlledEntity)
 			return;
-		
+
 		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(controlledEntity.FindComponent(SCR_CharacterControllerComponent));
 		if (charCtrl)
 			m_bACE_IsCarrier = charCtrl.ACE_IsCarrier();

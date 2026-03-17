@@ -7,11 +7,11 @@ modded class SCR_MineInventoryItemComponent : SCR_PlaceableInventoryItemComponen
 	{
 		if (super.ShouldHideInVicinity())
 			return true;
-		
+
 		SCR_MineWeaponComponent weaponComponent = SCR_MineWeaponComponent.Cast(GetOwner().FindComponent(SCR_MineWeaponComponent));
 		if (!weaponComponent)
 			return false;
-		
+
 		return weaponComponent.ACE_Exposives_IsBuried();
 	}
 }

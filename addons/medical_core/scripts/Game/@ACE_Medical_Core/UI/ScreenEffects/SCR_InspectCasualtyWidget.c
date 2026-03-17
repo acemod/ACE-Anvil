@@ -1,10 +1,13 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 {
-	override protected void GetDamageInfo(SCR_InventoryHitZonePointUI hitZonePointUI, IEntity targetEntity, inout float bleedingRate, inout array<bool> hZGroupsBleeding, inout int damageIntensity, inout bool regenerating, inout bool isTourniquetted, inout bool isSalineBagged, inout bool isMorphined)
+	override protected void GetDamageInfo(SCR_InventoryHitZonePointUI hitZonePointUI, IEntity targetEntity, inout float bleedingRate,
+										  inout array<bool> hZGroupsBleeding, inout int damageIntensity, inout bool regenerating, inout bool isTourniquetted,
+										  inout bool isSalineBagged, inout bool isMorphined)
 	{
-		super.GetDamageInfo(hitZonePointUI, targetEntity, bleedingRate, hZGroupsBleeding, damageIntensity, regenerating, isTourniquetted, isSalineBagged, isMorphined);
-		
+		super.GetDamageInfo(hitZonePointUI, targetEntity, bleedingRate, hZGroupsBleeding, damageIntensity, regenerating, isTourniquetted, isSalineBagged,
+							isMorphined);
+
 		ChimeraCharacter character = ChimeraCharacter.Cast(targetEntity);
 		if (!character)
 			return;
@@ -12,7 +15,7 @@ modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 		SCR_CharacterDamageManagerComponent damageMan = SCR_CharacterDamageManagerComponent.Cast(character.GetDamageManager());
 		if (!damageMan)
 			return;
-		
+
 		float health = damageMan.ACE_Medical_GetHealthScaled();
 		if (health == 1)
 			damageIntensity = 0;

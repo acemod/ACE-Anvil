@@ -8,15 +8,15 @@ class ACE_Medical_InspectCasualtyRadialMenuEntry : ACE_SelectionMenuEntry
 		PlayerCamera camera = PlayerCamera.Cast(GetGame().GetCameraManager().CurrentCamera());
 		if (!camera)
 			return;
-		
+
 		SCR_ChimeraCharacter targetChar = SCR_ChimeraCharacter.Cast(camera.GetCursorTarget());
 		if (!targetChar)
 			return;
-		
+
 		array<BaseInfoDisplay> displays = {};
 		GetGame().GetPlayerController().GetHUDManagerComponent().GetInfoDisplays(displays);
-		
-		foreach (BaseInfoDisplay display : displays)
+
+		foreach (BaseInfoDisplay display: displays)
 		{
 			SCR_InspectCasualtyWidget casualtyInspectDisplay = SCR_InspectCasualtyWidget.Cast(display);
 			if (!casualtyInspectDisplay)

@@ -10,7 +10,7 @@ modded class SCR_PlayerController : PlayerController
 	protected override void OnInit(IEntity owner)
 	{
 		super.OnInit(owner);
-		
+
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 
@@ -22,36 +22,36 @@ modded class SCR_PlayerController : PlayerController
 			Replication.BumpMe();
 		}
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Medical_OnPainEffectTypeChanged()
 	{
 		SCR_HUDManagerComponent hudManager = SCR_HUDManagerComponent.Cast(FindComponent(SCR_HUDManagerComponent));
 		if (!hudManager)
 			return;
-		
+
 		array<BaseInfoDisplay> displays = {};
 		hudManager.GetInfoDisplays(displays);
-		
+
 		SCR_ScreenEffectsManager effectsManager;
-		foreach (BaseInfoDisplay display : displays)
+		foreach (BaseInfoDisplay display: displays)
 		{
 			effectsManager = SCR_ScreenEffectsManager.Cast(display);
 			if (effectsManager)
 				break;
 		}
-		
+
 		if (!effectsManager)
 			return;
-		
+
 		array<BaseInfoDisplay> effects = {};
 		effectsManager.GetInfoDisplays(effects);
-		foreach (BaseInfoDisplay effect : effects)
+		foreach (BaseInfoDisplay effect: effects)
 		{
 			ACE_Medical_PainScreenEffect painEffect = ACE_Medical_PainScreenEffect.Cast(effect);
 			if (!painEffect)
 				continue;
-			
+
 			painEffect.SetPainEffectType(m_eACE_Medical_PainEffectType);
 			break;
 		}

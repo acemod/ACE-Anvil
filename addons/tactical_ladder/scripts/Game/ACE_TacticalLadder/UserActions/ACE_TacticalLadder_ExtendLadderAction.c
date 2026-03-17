@@ -2,14 +2,14 @@
 class ACE_TacticalLadder_ExtendLadderAction : SCR_AdjustSignalAction
 {
 	protected ACE_TacticalLadderEntity m_pOwner;
-	
+
 	//------------------------------------------------------------------------------------------------
 	protected override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		super.Init(pOwnerEntity, pManagerComponent);
 		m_pOwner = ACE_TacticalLadderEntity.Cast(pOwnerEntity);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Force update of entity when signal was adjusted
 	override protected bool OnSaveActionData(ScriptBitWriter writer)
@@ -27,7 +27,7 @@ class ACE_TacticalLadder_ExtendLadderAction : SCR_AdjustSignalAction
 		m_pOwner.UpdateScriptedLocal();
 		return result;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Handle streaming out of signal
 	override protected bool OnRplSave(ScriptBitWriter writer)
@@ -36,7 +36,7 @@ class ACE_TacticalLadder_ExtendLadderAction : SCR_AdjustSignalAction
 		writer.WriteFloat(m_fTargetValue);
 		return true;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Handle streaming in of signal
 	override protected bool OnRplLoad(ScriptBitReader reader)

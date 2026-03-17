@@ -10,21 +10,21 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 
 	[RplProp()]
 	protected float m_fACE_Medical_MinHealthScaledForEpinephrine = 0.33;
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize members
 	override void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
-		
+
 		if (!GetGame().InPlayMode())
 			return;
-		
+
 		m_ACE_Medical_HealthHitZone = SCR_CharacterHealthHitZone.Cast(GetHitZoneByName("Health"));
-		
+
 		if (!s_ACE_Medical_Core_Settings)
 			s_ACE_Medical_Core_Settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
-		
+
 		if (s_ACE_Medical_Core_Settings)
 		{
 			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
@@ -33,40 +33,40 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			Replication.BumpMe();
 		}
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Update last struck physical hit zone
 	override void OnDamage(notnull BaseDamageContext damageContext)
 	{
 		super.OnDamage(damageContext);
-		
+
 		if (!Replication.IsServer())
 			return;
-		
+
 		SCR_CharacterHitZone struckPhysicalHitZone = SCR_CharacterHitZone.Cast(damageContext.struckHitZone);
 		if (struckPhysicalHitZone)
 			m_ACE_Medical_LastStruckPhysicalHitZone = struckPhysicalHitZone;
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	protected override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
 		super.OnDamageStateChanged(newState, previousDamageState, isJIP);
-		
+
 		if (Replication.IsServer() && (newState == EDamageState.DESTROYED))
 			ACE_Medical_OnKilled();
 	}
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	protected void ACE_Medical_OnKilled();
-	
+
 	//-----------------------------------------------------------------------------------------------------------
 	//! Returns last stuck physical hit zone
 	SCR_CharacterHitZone ACE_Medical_GetLastStruckPhysicalHitZone()
 	{
 		return m_ACE_Medical_LastStruckPhysicalHitZone;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	void ACE_Medical_UpdateResilienceRegenScale()
 	{
@@ -75,7 +75,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		else
 			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	float ACE_Medical_GetResilienceRegenScale()
 	{
@@ -95,14 +95,14 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
 		if (!ownerChar)
 			return false;
-		
+
 		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
 		if (charController.GetLifeState() != ECharacterLifeState.INCAPACITATED)
 		{
 			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED;
 			return false;
 		}
-		
+
 		// Check if epinephrine is in the system already
 		array<ref SCR_PersistentDamageEffect> effects = GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
 		if (!effects.IsEmpty())
@@ -110,24 +110,24 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;
 		}
-		
+
 		// Cannot be applied while bleeding
 		if (IsBleeding())
 		{
 			failReason = SCR_EConsumableFailReason.IS_BLEEDING;
 			return false;
 		}
-		
+
 		// Check if too injured
 		if (m_ACE_Medical_HealthHitZone.GetHealthScaled() < m_fACE_Medical_MinHealthScaledForEpinephrine)
 		{
 			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
 			return false;
 		}
-		
+
 		return true;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	//! Returns overall scaled health of the character
 	//! Should be used instead of GetHealthScaled

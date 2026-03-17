@@ -1,4 +1,4 @@
-modded class SCR_VONController: ScriptComponent
+modded class SCR_VONController : ScriptComponent
 {
 	const string ACE_SOUND_START_HIGH = "Sounds/ACE_Radio/beep_high.wav";
 	const string ACE_SOUND_START_LOW = "Sounds/ACE_Radio/beep_low.wav";
@@ -38,7 +38,8 @@ modded class SCR_VONController: ScriptComponent
 		else
 			beepType = m_eBeepTypeCh2;
 
-		switch (beepType) {
+		switch (beepType)
+		{
 			case ACE_ERadioBeep.LOW:
 				return ACE_SOUND_START_LOW;
 			case ACE_ERadioBeep.NORMAL:
@@ -56,7 +57,7 @@ modded class SCR_VONController: ScriptComponent
 			super.SetActiveTransmit(entry);
 			return;
 		}
-		
+
 		super.SetActiveTransmit(entry);
 
 		SCR_VONEntryRadio radioEntry = SCR_VONEntryRadio.Cast(entry);

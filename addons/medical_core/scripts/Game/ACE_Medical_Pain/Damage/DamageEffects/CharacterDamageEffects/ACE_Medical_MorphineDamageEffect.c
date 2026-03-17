@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_MorphineDamageEffect: SCR_DotDamageEffect
+class ACE_Medical_MorphineDamageEffect : SCR_DotDamageEffect
 {
 	//------------------------------------------------------------------------------------------------
 	override bool HijackDamageEffect(SCR_ExtendedDamageManagerComponent dmgManager)
@@ -7,10 +7,10 @@ class ACE_Medical_MorphineDamageEffect: SCR_DotDamageEffect
 		SCR_CharacterDamageManagerComponent charDmgManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
 		if (charDmgManager)
 			SetAffectedHitZone(charDmgManager.ACE_Medical_GetPainHitZone());
-		
+
 		return false;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	override EDamageType GetDefaultDamageType()
 	{

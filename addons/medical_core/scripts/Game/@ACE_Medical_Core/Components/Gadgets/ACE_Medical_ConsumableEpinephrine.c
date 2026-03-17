@@ -14,13 +14,14 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(targetChar.GetDamageManager());
 		if (!damageManager)
 			return false;
-		
+
 		return damageManager.ACE_Medical_CanApplyEpinephrine(failReason);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	//! Can be applied to hit zones under same conditions as CanApplyEffect
-	override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group, out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
+	override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group,
+									 out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
 	{
 		return CanApplyEffect(target, user, failReason);
 	}

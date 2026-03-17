@@ -11,9 +11,10 @@ class ACE_ConsumableTypeWhitelistItemPredicate : ACE_InventorySearchPredicate
 	{
 		QueryComponentTypes.Insert(SCR_ConsumableItemComponent);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
-	override protected bool IsMatch(BaseInventoryStorageComponent storage, IEntity item, array<GenericComponent> queriedComponents, array<BaseItemAttributeData> queriedAttributes)
+	override protected bool IsMatch(BaseInventoryStorageComponent storage, IEntity item, array<GenericComponent> queriedComponents,
+									array<BaseItemAttributeData> queriedAttributes)
 	{
 		SCR_ConsumableItemComponent consumableComponent = SCR_ConsumableItemComponent.Cast(queriedComponents[0]);
 		return m_aWhitelist.Find(consumableComponent.GetConsumableType()) >= 0;

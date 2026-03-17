@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------------------------
 [BaseContainerProps()]
-modded class SCR_MapCursorModule: SCR_MapModuleBase
+modded class SCR_MapCursorModule : SCR_MapModuleBase
 {
 	//------------------------------------------------------------------------------------------------
 	//! Handle pointing state
@@ -20,7 +20,7 @@ modded class SCR_MapCursorModule: SCR_MapModuleBase
 		{
 			UnsetCursorState(EMapCursorState.ACE_FINGER_CS_POINTER);
 		}
-		
+
 		return false;
 	}
 }

@@ -21,9 +21,8 @@ class ACE_EntityIdHelper
 		array<int> bits = ACE_HexTools.HexStringToInt(str);
 		if (bits.Count() == 1)
 			bits.InsertAt(0, 0);
-		else
-			if (bits.Count() > 2)
-				return EntityID.INVALID;
+		else if (bits.Count() > 2)
+			return EntityID.INVALID;
 
 		return EntityID.FromInt(bits[0], bits[1]);
 	}

@@ -8,7 +8,7 @@ class ACE_Medical_ExamineCasualtyRadialMenuCategoryEntry : ACE_SelectionMenuCate
 		PlayerCamera camera = GetGame().GetPlayerController().GetPlayerCamera();
 		if (!camera)
 			return false;
-		
+
 		return SCR_ChimeraCharacter.Cast(camera.GetCursorTarget());
 	}
 }

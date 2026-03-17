@@ -3,7 +3,7 @@
 modded class CharacterCameraSet : ScriptedCameraSet
 {
 	static const int ACE_TACTICAL_PERISCOPE_CHARACTERCAMERA = 43;
-	
+
 	//------------------------------------------------------------------------------------------------
 	override void Init()
 	{

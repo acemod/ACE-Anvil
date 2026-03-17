@@ -7,15 +7,15 @@ modded class SCR_LootDeadBodyAction : SCR_LootAction
 	{
 		if (super.CanBePerformedScript(user))
 			return true;
-		
+
 		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
 		if (!ownerChar || ownerChar == user)
 			return false;
-		
+
 		// Cannot loot inside vehicles
 		if (ownerChar.IsInVehicle() && !ACE_AnimationTools.GetHelperCompartment(ownerChar))
 			return false;
-		
+
 		SCR_CharacterControllerComponent ownerCharController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
 		if (!ownerCharController)
 			return false;

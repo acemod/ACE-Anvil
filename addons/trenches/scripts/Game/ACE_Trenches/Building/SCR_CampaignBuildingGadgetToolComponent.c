@@ -12,10 +12,10 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 			else
 				SCR_UISoundEntity.SoundEvent("SOUND_HUD_GADGET_CANCEL");
 		}
-		
+
 		super.SetPlacementMode(newState);
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	int ACE_Trenches_GetCurrentVariantID()
 	{

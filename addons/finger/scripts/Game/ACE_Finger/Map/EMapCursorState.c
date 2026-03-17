@@ -1,6 +1,3 @@
 //------------------------------------------------------------------------------------------------
 //! Map cursor state
-modded enum EMapCursorState
-{
-	ACE_FINGER_CS_POINTER = 1<<17
-}
+modded enum EMapCursorState { ACE_FINGER_CS_POINTER = 1 << 17 }

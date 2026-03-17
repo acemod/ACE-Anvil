@@ -8,7 +8,7 @@ class ACE_IsCharacterCarrierCondition : SCR_AvailableActionCondition
 	{
 		if (!data)
 			return false;
-		
+
 		return GetReturnResult(data.ACE_GetIsCharacterCarrier());
 	}
 }

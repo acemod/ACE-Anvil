@@ -2,20 +2,20 @@
 //! Adding dynamic spawning/despawning of chopping helper entities to building preview handlers
 modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 {
-	protected ref ACE_Chopping_Config m_ACE_Chopping_Config;	
+	protected ref ACE_Chopping_Config m_ACE_Chopping_Config;
 	protected ref array<IEntity> m_aACE_Chopping_PlantsInRange = {};
 	protected ref array<IEntity> m_aACE_Chopping_PlantsInRangeOld = {};
 	protected ref array<IEntity> m_aACE_Chopping_HelperEntities = {};
 	protected const ResourceName ACE_CHOPPING_CONFIG_NAME = "{B205BD6D8069137B}Config/ACE/Chopping.conf";
-	
+
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
-		
+
 		if (!GetGame().InPlayMode())
 			return;
-		
+
 		m_ACE_Chopping_Config = SCR_ConfigHelperT<ACE_Chopping_Config>.GetConfigObject(ACE_CHOPPING_CONFIG_NAME);
 	}
 
@@ -24,12 +24,12 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	override protected void RemovePreviews()
 	{
 		super.RemovePreviews();
-		
-		foreach (IEntity helper : m_aACE_Chopping_HelperEntities)
+
+		foreach (IEntity helper: m_aACE_Chopping_HelperEntities)
 		{
 			SCR_EntityHelper.DeleteEntityAndChildren(helper);
 		}
-		
+
 		m_aACE_Chopping_PlantsInRange.Clear();
 		m_aACE_Chopping_PlantsInRangeOld.Clear();
 		m_aACE_Chopping_HelperEntities.Clear();
@@ -51,11 +51,11 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 				SCR_EntityHelper.DeleteEntityAndChildren(m_aACE_Chopping_HelperEntities[i]);
 				m_aACE_Chopping_PlantsInRangeOld.Remove(i);
 				m_aACE_Chopping_HelperEntities.Remove(i);
-			}	
+			}
 		}
-		
+
 		// Create helpers for new plants in range
-		foreach (IEntity plant : m_aACE_Chopping_PlantsInRange)
+		foreach (IEntity plant: m_aACE_Chopping_PlantsInRange)
 		{
 			if (plant && !m_aACE_Chopping_PlantsInRangeOld.Contains(plant))
 			{
@@ -63,7 +63,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 				m_aACE_Chopping_PlantsInRangeOld.Insert(plant);
 			}
 		}
-		
+
 		m_aACE_Chopping_PlantsInRange.Clear();
 		return true;
 	}
@@ -73,12 +73,11 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 	override protected bool EvaluatePreviewEntity(IEntity ent)
 	{
 		super.EvaluatePreviewEntity(ent);
-		
+
 		if (!Tree.Cast(ent))
 			return true;
-		
+
 		m_aACE_Chopping_PlantsInRange.Insert(ent);
 		return true;
 	}
 }
-

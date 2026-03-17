@@ -8,15 +8,15 @@ modded class SCR_FriendlyPlayerEditableEntityFilter : SCR_PlayerEditableEntityFi
 	{
 		if (!super.CanAdd(entity))
 			return false;
-		
+
 		SCR_ChimeraCharacter localPlayer = SCR_ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
 		if (!localPlayer)
 			return false;
-		
+
 		SCR_CharacterControllerComponent localCharController = SCR_CharacterControllerComponent.Cast(localPlayer.GetCharacterController());
 		if (!localCharController)
 			return false;
-		
+
 		return (!localCharController.ACE_Captives_IsCaptive() && !localCharController.ACE_Captives_HasSurrendered());
 	}
 }

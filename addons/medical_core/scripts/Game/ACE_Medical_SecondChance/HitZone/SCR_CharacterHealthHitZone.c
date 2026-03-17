@@ -7,17 +7,17 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 	override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
 		super.OnDamageStateChanged(newState, previousDamageState, isJIP);
-		
+
 		if (!Replication.IsServer())
 			return;
-		
+
 		if (newState != EDamageState.DESTROYED)
 			return;
-		
+
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(GetHitZoneContainer());
 		if (!damageManager)
 			return;
-		
+
 		ACE_Medical_SecondChanceSystem system = ACE_Medical_SecondChanceSystem.GetInstance(damageManager.GetOwner().GetWorld());
 		if (system)
 		{

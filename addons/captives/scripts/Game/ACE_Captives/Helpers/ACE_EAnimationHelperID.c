@@ -1,7 +1,6 @@
 //----------------------------------------------------------------------------------------
 [EnumLinear()]
-modded enum ACE_EAnimationHelperID
-{
+modded enum ACE_EAnimationHelperID {
 	TIED,
 	SURRENDER,
 }

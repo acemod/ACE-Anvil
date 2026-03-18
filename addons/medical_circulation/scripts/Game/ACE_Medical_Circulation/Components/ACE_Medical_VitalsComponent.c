@@ -191,10 +191,10 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Set blood pH (clamped to [6.8, 7.4])
+	//! Set blood pH
 	void SetBloodPH(float pH)
 	{
-		m_fBloodPH = Math.Clamp(pH, 6.8, 7.4);
+		m_fBloodPH = pH;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -209,14 +209,6 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	void SetHeartWeaknessFactor(float factor)
 	{
 		m_fHeartWeaknessFactor = Math.Clamp(factor, 0.0, 1.0);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Compatibility: maps pH to legacy acidosis level [-1, 1] for external/legacy callers
-	//! pH 7.4 -> -1, pH 7.35 -> 0, pH 6.8 -> 1
-	float GetMetabolicAcidosisLevel()
-	{
-		return (7.4 - m_fBloodPH) / 0.6 * 2.0 - 1.0;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -270,6 +262,7 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 			SetPulsePressure(settings.m_fDefaultPulsePressureKPA);
 		}
 		
+		// TODO: Replace with ACE_MaterialProperties::DEFAULT_PH_BLOOD
 		SetBloodPH(7.4);
 		SetHeartWeaknessFactor(0);
 		SetHeartRateMedicationAdjustment(0);

@@ -60,9 +60,10 @@ class ACE_Medical_StableState : ACE_Medical_IVitalState
 		float pHRate = CalculateAcidosisRate(bloodVolumeRatio);
 		float delta = timeSlice * pHRate;
 		// Worsening: pH decreases; recovery: pH increases
-		float newPH = isIncreasing
-			? Math.Clamp(currentPH - delta, PH_MIN, PH_NORMAL)
-			: Math.Clamp(currentPH + delta, PH_MIN, PH_NORMAL);
+		float computedPH = currentPH + delta;
+		if (isIncreasing)
+			computedPH = currentPH - delta;
+		float newPH = Math.Clamp(computedPH, PH_MIN, PH_NORMAL);
 		
 		if (newPH != currentPH)
 		{

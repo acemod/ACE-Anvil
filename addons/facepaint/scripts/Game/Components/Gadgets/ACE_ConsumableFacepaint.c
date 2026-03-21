@@ -75,11 +75,8 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 		
 		if (!targetHead || targetHead == visualIdentity.GetHead())
 		{
-			SCR_FactionManager fm = SCR_FactionManager.Cast(GetGame().GetFactionManager());
-			if (!fm)
-				return;
-
-			Faction usFaction = Faction.Cast(fm.GetFactionByIndex(0));
+			// fallback on vanilla US mapping if none found
+			SCR_Faction usFaction = SCR_ConfigHelperT<SCR_Faction>.GetConfigObject("{5EB46557DF2AA24F}Configs/Factions/US.conf");
 			if (!usFaction)
 				return;
 

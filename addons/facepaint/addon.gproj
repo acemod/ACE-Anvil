@@ -3,7 +3,7 @@ GameProject {
  GUID "68EAA4976497C46A"
  TITLE "ACE Facepaint"
  Dependencies {
-  "58D0FB3206B6F859"
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
  }
  Configurations {
   GameProjectConfig PC {

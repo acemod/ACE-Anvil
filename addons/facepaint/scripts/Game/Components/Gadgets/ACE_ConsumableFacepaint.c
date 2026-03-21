@@ -2,17 +2,18 @@
 [BaseContainerProps()]
 class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 {
-	static string getTargetHead(VisualIdentity currentIdentity, FactionIdentity factionIdentity)
+	static string GetTargetHead(VisualIdentity currentIdentity, FactionIdentity factionIdentity)
 	{
 		ResourceName targetHead;
-		array <ref VisualIdentity> visualIdentities = {};
+		array<ref VisualIdentity> visualIdentities = {};
 		factionIdentity.GetVisualIdentities(visualIdentities);
 		foreach (VisualIdentity visualIdentity : visualIdentities)
 		{
-			array <ref ResourceName> headCamos = {};
+			array<ref ResourceName> headCamos = {};
+			// sane max length if we somehow get an infinite loop
 			int i;
 			// GetHeadCamos returns the first element in the array if index exceeds array length
-			while (true)
+			while (i < 100)
 			{
 				ResourceName headCamo = visualIdentity.GetHeadCamo(i);
 
@@ -23,10 +24,6 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 
 				headCamos.Insert(headCamo);
 				i++;
-
-				// sane max length if we somehow get an infinite loop
-				if (i == 100)
-					break;
 			}
 			
 			if (headCamos.Contains(currentIdentity.GetHead()))
@@ -71,7 +68,7 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 			return;
 		
 		ResourceName targetHead;
-		targetHead = getTargetHead(visualIdentity, factionIdentity);
+		targetHead = GetTargetHead(visualIdentity, factionIdentity);
 		
 		if (!targetHead || targetHead == visualIdentity.GetHead())
 		{
@@ -84,13 +81,11 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 			if (!factionIdentity)
 				return;
 			
-			targetHead = getTargetHead(visualIdentity, usIdentity);
+			targetHead = GetTargetHead(visualIdentity, usIdentity);
 		}
 		
 		if (!targetHead)
-		{
 			return;
-		}
 		
 		visualIdentity.SetHead(targetHead);
 		identityComponent.CommitChanges();
@@ -109,6 +104,6 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 	// constructor
 	void ACE_ConsumableFacepaint()
 	{
-		m_eConsumableType = SCR_EConsumableType.ACE_FACE_PAINT;
+		m_eConsumableType = SCR_EConsumableType.ACE_FACEPAINT;
 	}		
 }

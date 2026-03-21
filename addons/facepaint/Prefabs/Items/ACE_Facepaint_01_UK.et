@@ -12,8 +12,8 @@ GenericEntity : "{1852DD0D0BED6182}Prefabs/Items/ACE_Facepaint_01_Base.et" {
   MeshObject "{64976372EAF33CB8}" {
    Materials {
     MaterialAssignClass "{6698E5EECC47D9B8}" {
-     SourceMaterial "ary_camcream_01"
-     AssignedMaterial "{A5C1AC67992960C1}Assets/Items/ARY_CamCream_01/Data/ace_camcream_01_uk.emat"
+     SourceMaterial "ace_camcream_01"
+     AssignedMaterial "{A5C1AC67992960C1}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01_uk.emat"
     }
    }
   }

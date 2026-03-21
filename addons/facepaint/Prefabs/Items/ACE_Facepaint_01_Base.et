@@ -55,7 +55,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    }
   }
   MeshObject "{64976372EAF33CB8}" {
-   Object "{DCBA50BD3539C5E7}Assets/Items/ARY_CamCream_01/ARY_CamCream_01.xob"
+   Object "{D4229A04F9561878}Assets/Items/ACE_CamCream_01/ACE_CamCream_01.xob"
   }
   RigidBody "{64976372EAF33CB9}" {
    Mass 1

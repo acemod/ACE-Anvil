@@ -1,20 +1,7 @@
-[BaseContainerProps()]
-class ACE_CamoFaceMap
-{
-	[Attribute("", UIWidgets.ResourceNamePicker, desc: "Uncamo face")]
-	string m_uncamoFace;
-	
-	[Attribute("", UIWidgets.ResourceNamePicker, desc: "Camo faces")]
-	ref array<string> m_camoFaces;
-}
-
 //! Facepaint effect
 [BaseContainerProps()]
 class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 {
-	[Attribute("", uiwidget: UIWidgets.Object, desc: "Map of non-camo faces to camo faces", category: "General")]
-	ref array<ref ACE_CamoFaceMap> m_fCamoFaceMap;
-	
 	static string getTargetHead(VisualIdentity currentIdentity, FactionIdentity factionIdentity)
 	{
 		ResourceName targetHead;
@@ -31,7 +18,6 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 
 				if (!headCamo)
 					break;
-
 				if (headCamos.Contains(headCamo))
 					break;
 

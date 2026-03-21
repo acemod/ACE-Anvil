@@ -22,4 +22,4 @@ class ACE_CharacterAppliedFacepaintCondition : SCR_AvailableActionCondition
 		bool result = visualIdentity.GetHead().Contains("_camo");
 		return GetReturnResult(result);
 	}
-};
+}

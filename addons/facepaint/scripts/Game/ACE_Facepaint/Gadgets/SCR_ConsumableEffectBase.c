@@ -3,4 +3,4 @@
 modded enum SCR_EConsumableType
 {
 	ACE_FACEPAINT
-};
+}

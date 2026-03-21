@@ -1,9 +1,11 @@
+//------------------------------------------------------------------------------------------------
 //! Facepaint effect
 [BaseContainerProps()]
 class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 {
 	protected static const string US_FACTION_CONFIG = "{5EB46557DF2AA24F}Configs/Factions/US.conf";
 	
+	//------------------------------------------------------------------------------------------------
 	static string GetTargetHead(VisualIdentity currentIdentity, FactionIdentity factionIdentity)
 	{
 		ResourceName targetHead;

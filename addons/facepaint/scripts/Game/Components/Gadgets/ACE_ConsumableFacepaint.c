@@ -15,40 +15,46 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 	[Attribute("", uiwidget: UIWidgets.Object, desc: "Map of non-camo faces to camo faces", category: "General")]
 	ref array<ref ACE_CamoFaceMap> m_fCamoFaceMap;
 	
-	static void getTargetHead(VisualIdentity currentIdentity, FactionIdentity factionIdentity, string targetHead)
+	static string getTargetHead(VisualIdentity currentIdentity, FactionIdentity factionIdentity)
 	{
-		Print(currentIdentity.GetHead());
-		
-		Resource factionIdentityResource = BaseContainerTools.CreateContainerFromInstance(factionIdentity);
-		if (!factionIdentityResource)
-			return;
-		BaseContainer factionIdentityContainer = factionIdentityResource.GetResource().ToBaseContainer();
-		
-		Print(factionIdentityContainer);
+		ResourceName targetHead;
+		array <ref VisualIdentity> visualIdentities = {};
+		factionIdentity.GetVisualIdentities(visualIdentities);
+		foreach (VisualIdentity visualIdentity : visualIdentities)
+		{
+			array <ref ResourceName> headCamos = {};
+			int i;
+			// GetHeadCamos returns the first element in the array if index exceeds array length
+			while (true)
+			{
+				ResourceName headCamo = visualIdentity.GetHeadCamo(i);
 
-		BaseContainerList visualIdentities = factionIdentityContainer.GetObjectArray("VisualIdentityArray");
-		
-		Print(visualIdentities);
-		Print(visualIdentities.Count());
-		
-		//foreach (VisualIdentity visualIdentity : visualIdentities)
-		//{
-		//	Resource visualIdentityResource = BaseContainerTools.CreateContainerFromInstance(visualIdentity);
-		//	BaseContainer visualIdentityContainer = visualIdentityResource.GetResource().ToBaseContainer();
-		//	array <ref ResourceName> headCamos;
-		//	visualIdentityContainer.Get("Headcamo", headCamos);
-		//	Print(headCamos);
-		//	if (headCamos.Contains(currentIdentity.GetHead()))
-		//	{
-		//		targetHead = visualIdentity.GetHead();
-		//		return;
-		//	}
-		//	else if (visualIdentity.GetHead() == currentIdentity.GetHead())
-		//	{
-		//		targetHead = headCamos[Math.RandomInt(0, headCamos.Count())];
-		//		return;
-		//	}
-		//}
+				if (!headCamo)
+					break;
+
+				if (headCamos.Contains(headCamo))
+					break;
+
+				headCamos.Insert(headCamo);
+				i++;
+
+				// sane max length if we somehow get an infinite loop
+				if (i == 100)
+					break;
+			}
+			
+			if (headCamos.Contains(currentIdentity.GetHead()))
+			{
+				targetHead = visualIdentity.GetHead();
+				break;
+			}
+			else if (visualIdentity.GetHead() == currentIdentity.GetHead())
+			{
+				targetHead = headCamos[Math.RandomInt(0, headCamos.Count())];
+				break;
+			}
+		}
+		return targetHead;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -79,7 +85,24 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 			return;
 		
 		ResourceName targetHead;
-		getTargetHead(visualIdentity, factionIdentity, targetHead);
+		targetHead = getTargetHead(visualIdentity, factionIdentity);
+		
+		if (!targetHead || targetHead == visualIdentity.GetHead())
+		{
+			SCR_FactionManager fm = SCR_FactionManager.Cast(GetGame().GetFactionManager());
+			if (!fm)
+				return;
+
+			Faction usFaction = Faction.Cast(fm.GetFactionByIndex(0));
+			if (!usFaction)
+				return;
+
+			FactionIdentity usIdentity = usFaction.GetFactionIdentity();
+			if (!factionIdentity)
+				return;
+			
+			targetHead = getTargetHead(visualIdentity, usIdentity);
+		}
 		
 		if (!targetHead)
 		{

@@ -1,0 +1,78 @@
+GenericEntity : "{1852DD0D0BED6182}Prefabs/Items/ACE_Facepaint_01_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ace-item-facepaint-ussr-name"
+     Description "#ace-item-facepaint-ussr-description"
+    }
+   }
+  }
+  MeshObject "{64976372EAF33CB8}" {
+   Materials {
+    MaterialAssignClass "{6698E5E819612369}" {
+     SourceMaterial "ary_camcream_01"
+     AssignedMaterial "{3130F14E13865C6E}Assets/Items/ARY_CamCream_01/Data/ace_camcream_01_ussr.emat"
+    }
+   }
+  }
+  SCR_ConsumableItemComponent "{64976372EAF33CBE}" {
+   m_ConsumableEffect ACE_ConsumableFacepaint "{64976372EAF33CB1}" {
+    m_fCamoFaceMap {
+     ACE_CamoFaceMap "{68674B6E6AA73A74}" {
+      m_camoFaces {
+       "{76AB07B1EC86DEC1}Prefabs/Characters/Heads/Head_Asian_02/Head_Asian_02_camo_USSR_01.et" "{1AFF3351504251EF}Prefabs/Characters/Heads/Head_Asian_02/Head_Asian_02_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6E7726976B}" {
+      m_camoFaces {
+       "{FEAFB8C6203A0B82}Prefabs/Characters/Heads/Head_White_02/Head_White_02_camo_USSR_01.et" "{EDC5B8024684A4F8}Prefabs/Characters/Heads/Head_White_02/Head_White_02_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6E46DE20AE}" {
+      m_camoFaces {
+       "{FDF3993A05C780B0}Prefabs/Characters/Heads/Head_White_03/Head_White_03_camo_USSR_01.et" "{91A7ADDAB9030F9E}Prefabs/Characters/Heads/Head_White_03/Head_White_03_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6E568F0875}" {
+      m_camoFaces {
+       "{FDF3993A05C780B0}Prefabs/Characters/Heads/Head_White_03/Head_White_03_camo_USSR_01.et" "{91A7ADDAB9030F9E}Prefabs/Characters/Heads/Head_White_03/Head_White_03_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6E2A06BB26}" {
+      m_camoFaces {
+       "{CA2D11DB52BBE611}Prefabs/Characters/Heads/Head_White_04/Head_White_04_camo_USSR_01.et" "{A679253BEE7F693F}Prefabs/Characters/Heads/Head_White_04/Head_White_04_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6E3B4681A9}" {
+      m_camoFaces {
+       "{B64F0403AD3C4D77}Prefabs/Characters/Heads/Head_White_05/Head_White_05_camo_USSR_01.et" "{DA1B30E311F8C259}Prefabs/Characters/Heads/Head_White_05/Head_White_05_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6E064B4967}" {
+      m_camoFaces {
+       "{32E93A6AADB4B0DD}Prefabs/Characters/Heads/Head_White_06/Head_White_06_camo_USSR_01.et" "{5EBD0E8A11703FF3}Prefabs/Characters/Heads/Head_White_06/Head_White_06_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6E17774C57}" {
+      m_camoFaces {
+       "{5D542BA8034C7D9F}Prefabs/Characters/Heads/Head_White_08/Head_White_08_camo_USSR_01.et" "{31001F48BF88F2B1}Prefabs/Characters/Heads/Head_White_08/Head_White_08_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6EE4E7B6D8}" {
+      m_camoFaces {
+       "{21363E70FCCBD6F9}Prefabs/Characters/Heads/Head_White_09/Head_White_09_camo_USSR_01.et" "{4D620A90400F59D7}Prefabs/Characters/Heads/Head_White_09/Head_White_09_camo_USSR_02.et"
+      }
+     }
+     ACE_CamoFaceMap "{68674B6EFA46B2C9}" {
+      m_camoFaces {
+       "{B0575E76CB6D8165}Prefabs/Characters/Heads/Head_White_10/Head_White_10_camo_USSR_01.et" "{DC036A9677A90E4B}Prefabs/Characters/Heads/Head_White_10/Head_White_10_camo_USSR_02.et"
+      }
+     }
+    }
+   }
+  }
+ }
+ coords 122.555 3.005 133.766
+}

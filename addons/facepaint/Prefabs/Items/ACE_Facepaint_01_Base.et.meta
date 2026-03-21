@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{1852DD0D0BED6182}Prefabs/Items/Medicine/FieldDressing_01/Facepaint_01_Base.et"
+ Name "{1852DD0D0BED6182}Prefabs/Items/ACE_Facepaint_01_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }
@@ -12,8 +12,6 @@ MetaFileClass {
   EntityTemplateResourceClass PS5 : PC {
   }
   EntityTemplateResourceClass HEADLESS : PC {
-  }
-  EntityTemplateResourceClass Xbox : PC {
   }
  }
 }

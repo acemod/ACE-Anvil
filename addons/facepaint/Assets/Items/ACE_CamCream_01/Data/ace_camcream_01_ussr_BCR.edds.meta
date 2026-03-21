@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{E29B170F97050BD7}Assets/Items/ARY_CamCream_01/Data/ace_camcream_01_BCR.edds"
+ Name "{92EA28A564362099}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01_ussr_BCR.edds"
  Configurations {
   PNGResourceClass PC : "{EAB5DE3219F9CBA8}Configs/System/ResourceTypes/PC/TextureColorMap.conf" {
   }

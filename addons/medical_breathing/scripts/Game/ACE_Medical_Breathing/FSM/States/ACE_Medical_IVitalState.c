@@ -53,8 +53,14 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateVentilation(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float scaledRate = context.m_pVitals.GetRespiratoryRate() / 60 *  context.m_pVitals.GetTidalVolume() / context.m_pVitals.GetCapacityVolume();
-		context.m_fVentFluxO2 = scaledRate * (ACE_Medical_VitalsComponent.PALVO2_MAX - context.m_pVitals.GetPalvO2());
+		float scaledRate = context.m_pVitals.GetRespiratoryRate() / 60.0 *  context.m_pVitals.GetTidalVolume() / context.m_pVitals.GetCapacityVolume();
+		
+		// Enforce minimum rate when BVM is present
+		ACE_EquipmentStorageComponent storageComponent = ACE_EquipmentStorageComponent.Cast(context.m_pObject.FindComponent(ACE_EquipmentStorageComponent));
+		if (storageComponent && storageComponent.IsSlotOccupied(ACE_EEquipementSlot.OXYGEN_MASK) && context.m_pVitals.CanBreath())
+			scaledRate = Math.Max(0.015, scaledRate);
+		
+		context.m_fVentFluxO2 = scaledRate * (context.m_pVitals.GetPalvO2Max() - context.m_pVitals.GetPalvO2());
 		context.m_fVentFluxCO2 = scaledRate * context.m_pVitals.GetPalvCO2();
 	}
 	
@@ -70,6 +76,8 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 
 		float maxFluxO2 = perfusion * context.m_pBloodHitZone.ACE_Medical_GetHemeConcentration() * alveolarOxygenSaturation;
 		float rateScale = perfusion / s_fDefaultPerfusion;
+		
+		// Limit perfusion when character cannot breathe
 		if (!context.m_pVitals.CanBreath())
 			rateScale = Math.Min(rateScale, 1/22);
 		
@@ -83,7 +91,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	//------------------------------------------------------------------------------------------------
 	protected float ComputePalvO2(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		return Math.Clamp(context.m_pVitals.GetPalvO2() + timeSlice * (context.m_fVentFluxO2 - ACE_PhysicalConstants.R * context.m_pVitals.GetTemperature() / context.m_pVitals.GetCapacityVolume() * context.m_fPerfFluxO2), 0, ACE_Medical_VitalsComponent.PALVO2_MAX);
+		return Math.Clamp(context.m_pVitals.GetPalvO2() + timeSlice * (context.m_fVentFluxO2 - ACE_PhysicalConstants.R * context.m_pVitals.GetTemperature() / context.m_pVitals.GetCapacityVolume() * context.m_fPerfFluxO2), 0, context.m_pVitals.GetPalvO2Max());
 	}
 	
 	//------------------------------------------------------------------------------------------------

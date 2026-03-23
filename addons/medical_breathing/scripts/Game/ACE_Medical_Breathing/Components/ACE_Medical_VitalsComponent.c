@@ -21,6 +21,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	protected ref ScriptInvoker<float, bool> m_OnPneumothoraxStateChanged;
 	
 	static const float PALVO2_MAX = 19.925; // kPa
+	static const float PALVO2_MAX_BVM = 95.0; // kPa
 	static const float CARBONATE_DEHYDRATION_RATE_SCALE = 126.93385;
 	
 	//------------------------------------------------------------------------------------------------
@@ -77,6 +78,17 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	float GetPalvO2()
 	{
 		return m_fPalvO2;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns maximum possible alveolar oxygen pressure in kPa
+	float GetPalvO2Max()
+	{
+		ACE_EquipmentStorageComponent storageComponent = ACE_EquipmentStorageComponent.Cast(GetOwner().FindComponent(ACE_EquipmentStorageComponent));
+		if (storageComponent && storageComponent.IsSlotOccupied(ACE_EEquipementSlot.OXYGEN_MASK) && CanBreath())
+			return PALVO2_MAX_BVM;
+		else
+			return PALVO2_MAX;
 	}
 	
 	//------------------------------------------------------------------------------------------------

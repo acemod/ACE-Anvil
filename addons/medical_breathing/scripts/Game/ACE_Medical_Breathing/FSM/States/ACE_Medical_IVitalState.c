@@ -53,7 +53,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateVentilation(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float scaledRate = context.m_pVitals.GetRespiratoryRate() / 60 *  context.m_pVitals.GetTidalVolume() / context.m_pVitals.GetCapacityVolume();
+		float scaledRate = context.m_pVitals.GetRespiratoryRate() / 60.0 *  context.m_pVitals.GetTidalVolume() / context.m_pVitals.GetCapacityVolume();
 		
 		// Enforce minimum rate when BVM is present
 		ACE_EquipmentStorageComponent storageComponent = ACE_EquipmentStorageComponent.Cast(context.m_pObject.FindComponent(ACE_EquipmentStorageComponent));

@@ -23,29 +23,11 @@ class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 	override void OnUpdate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		super.OnUpdate(context, timeSlice);
-		float hr = ComputeHeartRate(context, timeSlice);
-		// Calculate CO using newly computed HR (not stale value from component)
-		float strokeVolume = ComputeStrokeVolume(context, timeSlice);
-		float co = hr * strokeVolume;
-		float svr = ComputeSystemicVascularResistance(context, timeSlice);
-		
-		// Calculate MAP using newly computed CO and SVR values (not stale values from component)
-		float mapValue = co * svr;
-		// Calculate PP using newly computed MAP value (not stale value from component)
-		float pulsePressureScale = s_pCirculationSettings.m_fPulsePressureScale;
-		// Ensure settings Init() has been called - calculate derived value if needed
-		if (pulsePressureScale == 0 && s_pCirculationSettings)
-		{
-			s_pCirculationSettings.m_fPulsePressureScale = s_pCirculationSettings.m_fDefaultPulsePressureKPA / s_pCirculationSettings.m_fDefaultMeanArterialPressureKPA;
-			pulsePressureScale = s_pCirculationSettings.m_fPulsePressureScale;
-		}
-		float pp = pulsePressureScale * mapValue;
-		
-		context.m_pVitals.SetHeartRate(hr);
-		context.m_pVitals.SetCardiacOutput(co);
-		context.m_pVitals.SetSystemicVascularResistance(svr);
-		context.m_pVitals.SetMeanArterialPressure(mapValue);
-		context.m_pVitals.SetPulsePressure(pp);
+		context.m_pVitals.SetHeartRate(ComputeHeartRate(context, timeSlice));
+		context.m_pVitals.SetCardiacOutput(ComputeCardiacOutput(context, timeSlice));
+		context.m_pVitals.SetSystemicVascularResistance(ComputeSystemicVascularResistance(context, timeSlice));
+		context.m_pVitals.SetMeanArterialPressure(ComputeMeanArterialPressure(context, timeSlice));
+		context.m_pVitals.SetPulsePressure(ComputePulsePressure(context, timeSlice));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -101,6 +83,14 @@ class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 	//! PP ~ MAP
 	protected float ComputePulsePressure(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		return s_pCirculationSettings.m_fPulsePressureScale * context.m_pVitals.GetMeanArterialPressure();
+		float pulsePressureScale = s_pCirculationSettings.m_fPulsePressureScale;
+		// Ensure settings Init() has been called - calculate derived value if needed
+		if (pulsePressureScale == 0 && s_pCirculationSettings)
+		{
+			s_pCirculationSettings.m_fPulsePressureScale = s_pCirculationSettings.m_fDefaultPulsePressureKPA / s_pCirculationSettings.m_fDefaultMeanArterialPressureKPA;
+			pulsePressureScale = s_pCirculationSettings.m_fPulsePressureScale;
+		}
+		
+		return pulsePressureScale * context.m_pVitals.GetMeanArterialPressure();
 	}
 }

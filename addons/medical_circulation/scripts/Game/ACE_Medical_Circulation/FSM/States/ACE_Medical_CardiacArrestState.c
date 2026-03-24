@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_CardiacArrestState : ACE_Medical_StableState
+class ACE_Medical_CardiacArrestState : ACE_Medical_IVitalState
 {
 	//------------------------------------------------------------------------------------------------
 	override void OnEnter(ACE_Medical_CharacterContext context)
@@ -21,9 +21,8 @@ class ACE_Medical_CardiacArrestState : ACE_Medical_StableState
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnUpdate(ACE_Medical_CharacterContext context, float timeSlice)
+	override protected void UpdateMetabolicAcidosisForState(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		super.OnUpdate(context, timeSlice);
 		CalculateMetabolicAcidosisBuildup(context, timeSlice);
 	}
 	
@@ -32,13 +31,7 @@ class ACE_Medical_CardiacArrestState : ACE_Medical_StableState
 	//! If blood volume > 60%, no acidosis change occurs
 	protected void CalculateMetabolicAcidosisBuildup(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float bloodVolumeRatio = context.m_pBloodHitZone.GetHealthScaled();
-		
-		// No acidosis change if blood volume > 60%
-		if (bloodVolumeRatio > ACIDOSIS_NO_CHANGE_THRESHOLD)
-			return;
-		
-		UpdateMetabolicAcidosis(context, timeSlice, true);
+		UpdateMetabolicAcidosisWithThreshold(context, timeSlice, true, false);
 	}
 	
 	//------------------------------------------------------------------------------------------------

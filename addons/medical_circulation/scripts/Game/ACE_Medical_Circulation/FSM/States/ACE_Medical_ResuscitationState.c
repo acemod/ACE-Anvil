@@ -1,10 +1,9 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_ResuscitationState : ACE_Medical_StableState
+class ACE_Medical_ResuscitationState : ACE_Medical_IVitalState
 {
 	//------------------------------------------------------------------------------------------------
-	override void OnUpdate(ACE_Medical_CharacterContext context, float timeSlice)
+	override protected void UpdateMetabolicAcidosisForState(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		super.OnUpdate(context, timeSlice);
 		CalculateMetabolicAcidosisRecovery(context, timeSlice);
 	}
 	
@@ -13,11 +12,7 @@ class ACE_Medical_ResuscitationState : ACE_Medical_StableState
 	//! If blood volume <= 60%, no acidosis change occurs 
 	override protected void CalculateMetabolicAcidosisRecovery(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float bloodVolumeRatio = context.m_pBloodHitZone.GetHealthScaled();
-		
-		// Only allow acidosis to decrease if blood volume > 60%
-		if (bloodVolumeRatio > ACIDOSIS_NO_CHANGE_THRESHOLD)
-			UpdateMetabolicAcidosis(context, timeSlice, false);
+		UpdateMetabolicAcidosisWithThreshold(context, timeSlice, false, true);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -2,9 +2,24 @@
 class ACE_Medical_StableState : ACE_Medical_IVitalState
 {
 	//------------------------------------------------------------------------------------------------
-	override protected void UpdateMetabolicAcidosisForState(ACE_Medical_CharacterContext context, float timeSlice)
+	override void OnUpdate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
+		super.OnUpdate(context, timeSlice);
 		CalculateMetabolicAcidosisRecovery(context, timeSlice);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void CalculateMetabolicAcidosisRecovery(ACE_Medical_CharacterContext context, float timeSlice)
+	{
+		ACE_Medical_Acidosis.CalculateMetabolicAcidosisRecovery(context, timeSlice);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Updates blood pH based on blood volume and time (worsening = pH down, recovery = pH up)
+	//! @param isIncreasing True for critical/cardiac arrest (acidosis worsens, pH decreases), false for recovery
+	protected void UpdateMetabolicAcidosis(ACE_Medical_CharacterContext context, float timeSlice, bool isIncreasing)
+	{
+		ACE_Medical_Acidosis.UpdateMetabolicAcidosis(context, timeSlice, isIncreasing);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -13,6 +13,7 @@ class ACE_Medical_CriticalState : ACE_Medical_StableState
 	override void OnEnter(ACE_Medical_CharacterContext context)
 	{
 		super.OnEnter(context);
+		// Force uncon
 		context.m_pDamageManager.GetResilienceHitZone().SetHealth(0);
 		context.m_pDamageManager.UpdateConsciousness();
 	}
@@ -36,11 +37,11 @@ class ACE_Medical_CriticalState : ACE_Medical_StableState
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Add hypovolemic shock induced tachycardia
 	override protected float ComputeBaseTargetHeartRate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		float bloodVolumeRatio = context.m_pBloodHitZone.GetHealthScaled();
 		
-		// We're already in CriticalState, so always apply critical HR calculation
 		float mapValue = Math.Max(context.m_pVitals.GetMeanArterialPressure(), MAP_MIN_FOR_CALCULATION);
 		float baseTachycardiaHR = context.m_pVitals.GetHeartRate() * TACHYCARDIA_MULTIPLIER * Math.Lerp(TACHYCARDIA_LERP_MIN, TACHYCARDIA_LERP_MAX, bloodVolumeRatio) / mapValue;
 		

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_CardiacArrestState : ACE_Medical_StableState
+class ACE_Medical_CardiacArrestState : ACE_Medical_IVitalState
 {
 	//------------------------------------------------------------------------------------------------
 	override void OnEnter(ACE_Medical_CharacterContext context)
@@ -21,9 +21,8 @@ class ACE_Medical_CardiacArrestState : ACE_Medical_StableState
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override void OnUpdate(ACE_Medical_CharacterContext context, float timeSlice)
+	override protected void UpdateMetabolicAcidosisForState(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		super.OnUpdate(context, timeSlice);
 		CalculateMetabolicAcidosisBuildup(context, timeSlice);
 	}
 	

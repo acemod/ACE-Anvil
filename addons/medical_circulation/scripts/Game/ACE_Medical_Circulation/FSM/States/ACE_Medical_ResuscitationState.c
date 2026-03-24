@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_ResuscitationState : ACE_Medical_StableState
+class ACE_Medical_ResuscitationState : ACE_Medical_IVitalState
 {
 	//------------------------------------------------------------------------------------------------
-	//! In resuscitation, acidosis can only decrease (recover)
-	//! If blood volume <= 60%, no acidosis change occurs 
-	override protected void CalculateMetabolicAcidosisRecovery(ACE_Medical_CharacterContext context, float timeSlice)
+	override protected void UpdateMetabolicAcidosisForState(ACE_Medical_CharacterContext context, float timeSlice)
 	{
+		//! In resuscitation, acidosis can only decrease (recover)
+		//! If blood volume <= 60%, no acidosis change occurs
 		ACE_Medical_Acidosis.UpdateMetabolicAcidosisWithThreshold(context, timeSlice, false, true);
 	}
 	

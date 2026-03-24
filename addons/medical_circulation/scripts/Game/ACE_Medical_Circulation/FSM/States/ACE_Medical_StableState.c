@@ -2,9 +2,8 @@
 class ACE_Medical_StableState : ACE_Medical_IVitalState
 {
 	//------------------------------------------------------------------------------------------------
-	override void OnUpdate(ACE_Medical_CharacterContext context, float timeSlice)
+	override protected void UpdateMetabolicAcidosisForState(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		super.OnUpdate(context, timeSlice);
 		CalculateMetabolicAcidosisRecovery(context, timeSlice);
 	}
 	

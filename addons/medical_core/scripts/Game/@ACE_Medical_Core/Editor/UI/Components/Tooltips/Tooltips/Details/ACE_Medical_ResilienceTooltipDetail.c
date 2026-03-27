@@ -1,15 +1,15 @@
 [BaseContainerProps(), BaseContainerCustomTitleField("m_sDisplayName")]
 class ACE_Medical_ResilienceTooltipDetail : SCR_DpsConditionBarBaseTooltipDetail
 {
-	protected SCR_CharacterResilienceHitZone m_pResilienceHitZone;
+	protected SCR_CharacterResilienceHitZone m_ResilienceHitZone;
 	
 	//------------------------------------------------------------------------------------------------
 	override void UpdateDetail(SCR_EditableEntityComponent entity)
 	{
 		super.UpdateDetail(entity);
 		
-		if (m_pResilienceHitZone)
-			SetBarAndPercentageValue(m_pResilienceHitZone.GetHealthScaled());
+		if (m_ResilienceHitZone)
+			SetBarAndPercentageValue(m_ResilienceHitZone.GetHealthScaled());
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@ class ACE_Medical_ResilienceTooltipDetail : SCR_DpsConditionBarBaseTooltipDetail
 		if (!charDamageManager || charDamageManager.GetState() == EDamageState.DESTROYED || !charDamageManager.IsDamageHandlingEnabled())
 			return false;
 
-		m_pResilienceHitZone = charDamageManager.GetResilienceHitZone();
+		m_ResilienceHitZone = charDamageManager.GetResilienceHitZone();
 		return true;
 	}
 }

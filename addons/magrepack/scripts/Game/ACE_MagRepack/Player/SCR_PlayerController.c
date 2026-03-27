@@ -94,11 +94,23 @@ modded class SCR_PlayerController : PlayerController
 				SCR_EntityHelper.DeleteEntityAndChildren(fromEntity);
 			}
 		}	
-	}		
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_MagRepack_RequestRepack(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent inventoryManager, BaseInventoryStorageComponent toItemStorageComponent, BaseInventoryStorageComponent fromItemStorageComponent)
+	{
+		Rpc(ACE_MagRepack_RpcAsk_Repack,
+			Replication.FindId(fromMag),
+			Replication.FindId(toMag),
+			Replication.FindId(inventoryManager),
+			Replication.FindId(toItemStorageComponent),
+			Replication.FindId(fromItemStorageComponent),
+		);
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	void ACE_MagRepack_RpcAsk_Repack(RplId fromMag, RplId toMag, RplId managerComp, RplId storageTo, RplId storageFrom)
+	protected void ACE_MagRepack_RpcAsk_Repack(RplId fromMag, RplId toMag, RplId managerComp, RplId storageTo, RplId storageFrom)
 	{
   		// Make sure we have everything
 		if (!fromMag.IsValid())

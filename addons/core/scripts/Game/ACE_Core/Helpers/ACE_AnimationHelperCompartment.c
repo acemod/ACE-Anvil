@@ -27,10 +27,14 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	{
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
 		if (compartmentAccess)
+		{
+			// Already signal the access component that we are about to move into the helper compartment
+			compartmentAccess.ACE_SetIsRequestingGettingIn(true);
 			compartmentAccess.GetOnCompartmentEntered().Insert(OnCompartmentEntered);
+		}
 		
 		m_pPerformer = performer;
-		m_iPerformerID = Replication.FindItemId(m_pPerformer);
+		m_iPerformerID = Replication.FindItemId(performer);
 		OnPerformerChanged();
 		Replication.BumpMe();
 	}
@@ -65,12 +69,12 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	protected void DetachHandlers()
 	{
-		if (m_pPerformer)
-		{
-			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
-			if (charController)
-				charController.m_OnLifeStateChanged.Remove(OnPerformerLifeStateChanged);
-		}
+		if (!m_pPerformer)
+			return;
+		
+		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
+		if (charController)
+			charController.m_OnLifeStateChanged.Remove(OnPerformerLifeStateChanged);
 		
 		// Clean-up when carried has left the compartment
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
@@ -85,6 +89,12 @@ class ACE_AnimationHelperCompartment : GenericEntity
 		// Reschedule termination when init is not yet done, for instance, when called before the character is moving in
 		if (!m_bInitDone)
 			GetGame().GetCallqueue().CallLater(Terminate, 100, false, getOutType);
+		
+		if (!m_pPerformer)
+		{
+			OnCompartmentLeft();
+			return;
+		}
 		
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccess)

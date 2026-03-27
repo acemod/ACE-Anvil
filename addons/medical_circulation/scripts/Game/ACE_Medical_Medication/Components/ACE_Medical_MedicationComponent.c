@@ -26,7 +26,7 @@ class ACE_Medical_MedicationComponent : ScriptComponent
 		ACE_Medical_EDrugType drug = dose.GetDrugType();
 		dose.SetAdministrationTime();
 		
-		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance();
+		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance(GetOwner().GetWorld());
 		if (system && m_aDrugs.IsEmpty())
 			system.Register(SCR_ChimeraCharacter.Cast(GetOwner()));
 		
@@ -87,6 +87,22 @@ class ACE_Medical_MedicationComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	string GetInfoText()
+	{
+		array<string> medicationTexts = {};
+		medicationTexts.Reserve(m_aLogMessageTimes.Count());
+		
+		for (int i = m_aLogMessageTimes.Count() - 1; i >= 0; i--)
+		{
+			int hours = Math.Floor(m_aLogMessageTimes[i]);
+			int minutes = Math.Round(60 * (m_aLogMessageTimes[i] - hours));
+			medicationTexts.Insert(string.Format("%1:%2 %3 (%4)", hours, minutes, m_aLogMessages[i], m_aLogMessageAuthors[i]));
+		}
+		
+		return SCR_StringHelper.Join("\n", medicationTexts);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Clears the body of all drugs and effects
 	void Clear()
 	{
@@ -111,7 +127,7 @@ class ACE_Medical_MedicationComponent : ScriptComponent
 		if (!GetGame().InPlayMode() || !Replication.IsServer())
 			return;
 	
-		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance();
+		ACE_Medical_MedicationSystem system = ACE_Medical_MedicationSystem.GetInstance(owner.GetWorld());
 		if (system)
 			system.Unregister(SCR_ChimeraCharacter.Cast(owner));
 	}

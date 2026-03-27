@@ -15,7 +15,7 @@ modded class ArmaReforgerScripted : ChimeraGame
 		super.OnUpdate(world, timeslice);
 		
 		if (DiagMenu.GetBool(SCR_DebugMenuID.ACE_MEDICAL_DEBUGUI_MENU_VITAL_STATE_DEBUG))
-			ACE_Medical_VitalStatesSystem.GetInstance().OnDiag(timeslice);
+			ACE_Medical_VitalStatesSystem.GetInstance(world).OnDiag(timeslice);
 	}
 }
 #endif

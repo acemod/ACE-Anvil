@@ -4,7 +4,6 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 	const vector SCREEN_POS_OFFSET = "-50 0 0";
 	
 	protected IEntity m_pCompassEntity;
-	protected Animation m_CompassAnimation;
 	protected TNodeId m_iNeedleBone;
 	protected BaseWorld m_World;
 	protected WorkspaceWidget m_wWorkspace;
@@ -39,7 +38,7 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 			return;
 		
 		vector transform[4];
-		m_CompassAnimation.GetBoneMatrix(m_iNeedleBone, transform);
+		m_pCompassEntity.GetAnimation().GetBoneMatrix(m_iNeedleBone, transform);
 		vector screenPos = m_wWorkspace.ProjWorldToScreen(transform[3] + m_pCompassEntity.GetOrigin(), m_World);
 		screenPos += SCREEN_POS_OFFSET;
 				
@@ -66,8 +65,7 @@ class ACE_Compass_Display : SCR_InfoDisplayExtended
 	void SetCompassEntity(notnull IEntity compass)
 	{
 		m_pCompassEntity = compass;
-		m_CompassAnimation = compass.GetAnimation();
-		m_iNeedleBone = m_CompassAnimation.GetBoneIndex("i_needle");
+		m_iNeedleBone = compass.GetAnimation().GetBoneIndex("i_needle");
 	}
 	
 	//------------------------------------------------------------------------------------------------

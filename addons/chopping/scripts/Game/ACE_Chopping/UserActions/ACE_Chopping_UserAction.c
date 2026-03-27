@@ -27,7 +27,7 @@ class ACE_Chopping_UserAction : ACE_ShovelUserAction
 		{
 			vector hitPosDirNorm[3];
 			hitPosDirNorm[0] = pOwnerEntity.GetOrigin();
-			userCtrl.ACE_RequestDestroyEntity(plant, EDamageType.MELEE, hitPosDirNorm, DELETE_FALLING_TREE_DELAY_MS);
+			userCtrl.ACE_RequestDestroyEntity(plant, hitPosDirNorm, DELETE_FALLING_TREE_DELAY_MS);
 		}
 		else
 		{

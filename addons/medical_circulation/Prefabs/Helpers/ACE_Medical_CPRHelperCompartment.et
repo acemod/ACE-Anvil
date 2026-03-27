@@ -1,6 +1,13 @@
 ACE_Medical_CPRHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
  ID "4B42E71698F5739C"
  components {
+  SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   DoorInfoList {
+    CompartmentDoorInfo "{62CF60C6D92648FD}" {
+     StanceChangeOnExit Crouch
+    }
+   }
+  }
   VehicleAnimationComponent "{50B812962B17E60B}" {
    AnimInstance "{9591A985FDD73C7B}Assets/Helpers/Workspace/ACE_Medical_CPR.asi"
    AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {

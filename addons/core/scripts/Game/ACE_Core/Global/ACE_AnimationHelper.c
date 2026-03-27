@@ -28,6 +28,10 @@ class ACE_AnimationTools
 		if (!res.IsValid())
 			return null;
 		
+		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
+		if (!compartmentAccess || compartmentAccess.ACE_IsGettingIn())
+			return null;
+		
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		params.Transform = transform;

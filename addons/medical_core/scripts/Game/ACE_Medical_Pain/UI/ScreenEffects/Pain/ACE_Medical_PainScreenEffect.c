@@ -5,15 +5,15 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 	[Attribute()]
 	protected ref array<ref ACE_Medical_BasePainScreenEffectMode> m_aModes;
 	
-	protected ACE_Medical_BasePainScreenEffectMode m_pSelectedMode;
-	protected SCR_CharacterControllerComponent m_pCharController;
-	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
-	protected ACE_Medical_PainHitZone m_pPainHitZone;
+	protected ACE_Medical_BasePainScreenEffectMode m_SelectedMode;
+	protected SCR_CharacterControllerComponent m_CharController;
+	protected SCR_CharacterDamageManagerComponent m_DamageManager;
+	protected ACE_Medical_PainHitZone m_PainHitZone;
 	
 	//------------------------------------------------------------------------------------------------
 	override void DisplayControlledEntityChanged(IEntity from, IEntity to)
 	{
-		if (!m_pSelectedMode)
+		if (!m_SelectedMode)
 			return;
 		
 		ClearEffects();
@@ -22,22 +22,22 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 		if (!char)
 			return;
 		
-		m_pSelectedMode.InitEffect(char, m_wRoot);
+		m_SelectedMode.InitEffect(char, m_wRoot);
 		
-		m_pCharController = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
-		if (!m_pCharController)
+		m_CharController = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
+		if (!m_CharController)
 			return;
 		
-		m_pDamageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
-		if (!m_pDamageManager)
+		m_DamageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
+		if (!m_DamageManager)
 			return;
 		
-		m_pPainHitZone = m_pDamageManager.ACE_Medical_GetPainHitZone();
-		if (!m_pPainHitZone)
+		m_PainHitZone = m_DamageManager.ACE_Medical_GetPainHitZone();
+		if (!m_PainHitZone)
 			return;
 		
 		UpdateEnablePainEffect();
-		m_pPainHitZone.GetOnDamageStateChanged().Insert(OnPainStateChanged);
+		m_PainHitZone.GetOnDamageStateChanged().Insert(OnPainStateChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -58,29 +58,29 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 	//------------------------------------------------------------------------------------------------
 	override void UpdateEffect(float timeSlice)
 	{
-		if (!m_pSelectedMode)
+		if (!m_SelectedMode)
 			return;
 		
-		if (m_pSelectedMode.ShouldGetUpdated())
-			m_pSelectedMode.UpdateEffect(timeSlice);
+		if (m_SelectedMode.ShouldGetUpdated())
+			m_SelectedMode.UpdateEffect(timeSlice);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Clear pain effect over time
 	override void ClearEffects()
 	{
-		if (m_pSelectedMode)
-			m_pSelectedMode.EnableEffect(false);
+		if (m_SelectedMode)
+			m_SelectedMode.EnableEffect(false);
 		
-		if (m_pPainHitZone)
-			m_pPainHitZone.GetOnDamageStateChanged().Remove(OnPainStateChanged);
+		if (m_PainHitZone)
+			m_PainHitZone.GetOnDamageStateChanged().Remove(OnPainStateChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	protected override void DisplayOnSuspended()
 	{
-		if (m_pSelectedMode)
-			m_pSelectedMode.EnableEffect(false);
+		if (m_SelectedMode)
+			m_SelectedMode.EnableEffect(false);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -92,13 +92,13 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateEnablePainEffect()
 	{
-		if (!m_pSelectedMode)
+		if (!m_SelectedMode)
 			return;
 		
-		if (m_pDamageManager.ACE_Medical_IsInPain() && m_pCharController.GetLifeState() == ECharacterLifeState.ALIVE)
-			m_pSelectedMode.EnableEffect(true);
+		if (m_DamageManager.ACE_Medical_IsInPain() && m_CharController.GetLifeState() == ECharacterLifeState.ALIVE)
+			m_SelectedMode.EnableEffect(true);
 		else
-			m_pSelectedMode.TerminateEffect();
+			m_SelectedMode.TerminateEffect();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ class ACE_Medical_PainScreenEffect : SCR_BaseScreenEffect
 			if (mode.GetEffectType() != type)
 				continue;
 			
-			m_pSelectedMode = mode;
+			m_SelectedMode = mode;
 			return;
 		}
 	}

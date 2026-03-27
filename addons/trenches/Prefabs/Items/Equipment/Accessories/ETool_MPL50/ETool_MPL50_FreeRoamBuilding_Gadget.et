@@ -1,8 +1,0 @@
-GenericEntity : "{8A89D3F70713E55B}Prefabs/Items/Equipment/Accessories/ETool_MPL50/ETool_MPL50.et" {
- ID "5DACB1594629547A"
- components {
-  SCR_CampaignBuildingGadgetToolComponent "{5D9C6E85CC9796B7}" {
-   m_eUseMask FROM_ACTION
-  }
- }
-}

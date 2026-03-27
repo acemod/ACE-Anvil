@@ -158,19 +158,9 @@ modded class SCR_InventoryMenuUI : ChimeraMenuBase
 		RplComponent rpl = RplComponent.Cast(fromMag.GetOwner().FindComponent(RplComponent));
 		
 		if (rpl.IsMaster())
-		{
 			playerController.ACE_MagRepack_Repack(fromMag, toMag, m_InventoryManager, toItemStorageComponent, fromItemStorageComponent);
-		}
 		else
-		{
-			playerController.Rpc(playerController.ACE_MagRepack_RpcAsk_Repack, 
-				Replication.FindId(fromMag), 
-				Replication.FindId(toMag),
-				Replication.FindId(m_InventoryManager),
-				Replication.FindId(toItemStorageComponent),
-				Replication.FindId(fromItemStorageComponent),
-			);
-		}
+			playerController.ACE_MagRepack_RequestRepack(fromMag, toMag, m_InventoryManager, toItemStorageComponent, fromItemStorageComponent);
 		
 		// Repacking complete. Refresh visuals and play sound to indicate success.
 

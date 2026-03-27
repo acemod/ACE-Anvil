@@ -63,6 +63,12 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	protected float m_fBarrelSurfaceArea;
 	protected float m_fBulletMass;
 	
+	// Fallbacks for misconfigured weapons
+	protected static const float FALLBACK_BARREL_MASS = 1.0; // kg
+	protected static const float FALLBACK_BARREL_LENGTH = 0.5; // m
+	protected static const float FALLBACK_BULLET_MASS = 0.004; // kg
+	protected static const float FALLBACK_INITIAL_BULLET_SPEED = 930; // m/s
+	
 	//------------------------------------------------------------------------------------------------
 	//! Calculate derived quantities
 	void Init(IEntity instanceOwner)
@@ -89,13 +95,26 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	{
 		SCR_WeaponAttachmentsStorageComponent weaponStorage = SCR_WeaponAttachmentsStorageComponent.Cast(weapon.FindComponent(SCR_WeaponAttachmentsStorageComponent));
 		if (!weaponStorage)
-			return 0;
+		{
+			Debug.Error(string.Format("\"%1\" has no SCR_WeaponAttachmentsStorageComponent.", weapon.GetPrefabData().GetPrefabName()));
+			return FALLBACK_BARREL_MASS;
+		}
 		
 		SCR_ItemAttributeCollection attributes = SCR_ItemAttributeCollection.Cast(weaponStorage.GetAttributes());
 		if (!attributes)
-			return 0;
+		{
+			Debug.Error(string.Format("\"%1\" has no SCR_ItemAttributeCollection.", weapon.GetPrefabData().GetPrefabName()));
+			return FALLBACK_BARREL_MASS;
+		}
 		
-		return m_fBarrelMassFraction * attributes.GetWeight();
+		float mass = m_fBarrelMassFraction * attributes.GetWeight();
+		if (mass <= 0)
+		{
+			Debug.Error(string.Format("\"%1\" has no mass.", weapon.GetPrefabData().GetPrefabName()));
+			mass = FALLBACK_BARREL_MASS;
+		}
+		
+		return mass;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -104,14 +123,25 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	{
 		Animation weaponAnim = weapon.GetAnimation();
 		if (!weaponAnim)
-			return 0;
+		{
+			Debug.Error(string.Format("\"%1\" has no Animation.", weapon.GetPrefabData().GetPrefabName()));
+			return FALLBACK_BARREL_LENGTH;
+		}
 		
 		TNodeId chamberBoneID = FindBoneID(weaponAnim, m_sChamberBoneName, m_sFallbackChamberBoneNamePattern);
 		TNodeId muzzleBoneID = FindBoneID(weaponAnim, m_sMuzzleBoneName, m_sFallbackMuzzleBoneNamePattern);
 		vector chamberTransform[4], muzzleTransform[4];
 		weaponAnim.GetBoneLocalMatrix(chamberBoneID, chamberTransform);
 		weaponAnim.GetBoneLocalMatrix(muzzleBoneID, muzzleTransform);
-		return vector.Distance(chamberTransform[3], muzzleTransform[3]);
+		
+		float length = vector.Distance(chamberTransform[3], muzzleTransform[3]);
+		if (length <= 0)
+		{
+			Debug.Error(string.Format("Could not determine barrel length for \"%1\".", weapon.GetPrefabData().GetPrefabName()));
+			length = FALLBACK_BARREL_LENGTH;
+		}
+		
+		return length;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -141,45 +171,32 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	//! Retrieves initial speed and mass for bullet in first magazine
 	protected void GetBulletProperties(MuzzleComponent muzzle, out float bulletMass, out float initialBulletSpeed)
 	{
-		BaseMagazineComponent magazine = muzzle.GetMagazine();
-		if (!magazine)
-			return;
+		ResourceName firstBulletPrefabName;
 		
-		IEntityComponentSource magazineSrc = magazine.GetComponentSource(magazine.GetOwner());
-		if (!magazineSrc)
-			return;
+		array<ResourceName> bulletPrefabNames = ACE_BulletTools.GetDefaultResourceNamesFromMuzzle(muzzle);
+		if (bulletPrefabNames.IsEmpty())
+		{
+			Debug.Error(string.Format("\"%1\" has no default bullets.", muzzle.GetOwner().GetPrefabData().GetPrefabName()));
+			firstBulletPrefabName = "";
+		}
+		else
+		{
+			firstBulletPrefabName = bulletPrefabNames[0];
+		}
 		
-		ResourceName ammoConfigName;
-		magazineSrc.Get("AmmoConfig", ammoConfigName);
-		
-		Resource ammoConfigRes = Resource.Load(ammoConfigName);
-		if (!ammoConfigRes.IsValid())
-			return;
-		
-		BaseContainer ammonConfigSrc = ammoConfigRes.GetResource().ToBaseContainer();
-		if (!ammonConfigSrc)
-			return;
-		
-		array<ResourceName> ammoNames = {};
-		ammonConfigSrc.Get("AmmoResourceArray", ammoNames);
-		
-		if (ammoNames.IsEmpty())
-			return;
-		
-		Resource ammoRes = Resource.Load(ammoNames[0]);
-		if (!ammoRes.IsValid())
-			return;
-		
-		IEntitySource ammoSrc = ammoRes.GetResource().ToEntitySource();
-		if (!ammoSrc)
-			return;
-		
-		IEntityComponentSource shellMovementSource = ACE_BaseContainerTools.FindComponentSource(ammoSrc, ShellMoveComponent);
-		if (!shellMovementSource)
-			return;
-		
-		shellMovementSource.Get("Mass", bulletMass);
-		shellMovementSource.Get("InitSpeed", initialBulletSpeed);
+		bulletMass = ACE_BulletTools.GetMass(firstBulletPrefabName);
+		if (bulletMass <= 0)
+		{
+			Debug.Error(string.Format("\"%1\" has no mass.", firstBulletPrefabName));
+			bulletMass = FALLBACK_BULLET_MASS;
+		}
+				
+		initialBulletSpeed = ACE_BulletTools.GetInitialSpeed(firstBulletPrefabName);
+		if (initialBulletSpeed <= 0)
+		{
+			Debug.Error(string.Format("\"%1\" has no initial speed.", firstBulletPrefabName));
+			initialBulletSpeed = FALLBACK_INITIAL_BULLET_SPEED;
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

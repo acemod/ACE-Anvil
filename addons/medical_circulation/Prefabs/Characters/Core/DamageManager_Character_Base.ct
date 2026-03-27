@@ -3,7 +3,9 @@ SCR_CharacterDamageManagerComponent {
   SCR_CharacterBloodHitZone Blood {
    MaxHealth 3000
    "DamageState threshold" {
-    0.7 0.4 0.2
+    0.7
+    0.4
+    0.2
    }
   }
   SCR_CharacterHeadHitZone Head {
@@ -15,7 +17,7 @@ SCR_CharacterDamageManagerComponent {
   ACE_Medical_CharacterAbdomenHitZone Abdomen {
    m_fBleedingRateScale 0.325
   }
-  SCR_CharacterHitZone Hips {
+  ACE_Medical_HipsHitZone Hips {
    m_fBleedingRateScale 0.325
   }
   SCR_CharacterHitZone RArm {
@@ -54,7 +56,7 @@ SCR_CharacterDamageManagerComponent {
   SCR_CharacterHitZone LFoot {
    m_fBleedingRateScale 0.325
   }
-  SCR_CharacterHitZone Neck {
+  ACE_Medical_NeckHitZone Neck {
    m_fBleedingRateScale 5
   }
   ACE_Medical_BrainHitZone ACE_Medical_Brain {

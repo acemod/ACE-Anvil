@@ -18,7 +18,7 @@ modded class SCR_CharacterHealthHitZone : SCR_HitZone
 		if (!damageManager)
 			return;
 		
-		ACE_Medical_SecondChanceSystem system = ACE_Medical_SecondChanceSystem.GetInstance();
+		ACE_Medical_SecondChanceSystem system = ACE_Medical_SecondChanceSystem.GetInstance(damageManager.GetOwner().GetWorld());
 		if (system)
 		{
 			SCR_CharacterHitZone struckHitZone = damageManager.ACE_Medical_GetLastStruckPhysicalHitZone();

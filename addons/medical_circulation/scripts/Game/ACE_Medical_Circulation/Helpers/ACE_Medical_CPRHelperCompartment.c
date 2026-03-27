@@ -19,6 +19,8 @@ class ACE_Medical_CPRHelperCompartment : ACE_AnimationHelperCompartment
 	//------------------------------------------------------------------------------------------------
 	override void OnCompartmentLeft()
 	{
+		super.OnCompartmentLeft();
+		
 		if (m_pPatientVitals)
 			m_pPatientVitals.SetIsCPRPerformed(false);
 	}

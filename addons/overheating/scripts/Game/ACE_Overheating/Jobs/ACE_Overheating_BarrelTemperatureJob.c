@@ -112,7 +112,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 	{
 		vector airVelocity = s_pWeatherManager.GetWindSpeed() * vector.FromYaw(s_pWeatherManager.GetWindDirection());
 		
-		if (m_pContext.m_pOwnerChar && !m_pContext.m_pOwnerChar.IsInVehicle())
+		if (!m_pContext.m_pOwnerChar.IsInVehicle())
 			airVelocity += m_pContext.m_pOwnerChar.GetPhysics().GetVelocity();
 		
 		float h = 4.5908 * Math.Pow(airVelocity.LengthSq(), 3.0 / 10.0) + 9.3198 * s_pWeatherManager.GetRainIntensity();

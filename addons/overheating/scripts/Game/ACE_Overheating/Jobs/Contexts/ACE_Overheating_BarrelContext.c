@@ -17,4 +17,10 @@ class ACE_Overheating_BarrelContext : ACE_FrameJobScheduler_IObjectContext<ACE_O
 		m_pSmokeEffect = ACE_Overheating_SmokeEffectComponent.FromMuzzle(muzzle);
 		m_pGlowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(muzzle);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool IsValid()
+	{
+		return m_pOwnerChar && m_pOwnerChar.GetPhysics() && super.IsValid();
+	}
 }

@@ -4,7 +4,7 @@
 modded class SCR_PlayerController : PlayerController
 {
 	[RplProp(condition: RplCondition.OwnerOnly, onRplName: "ACE_Medical_OnPainEffectTypeChanged")]
-	protected ACE_Medical_EPainEffectType m_fACE_Medical_PainEffectType;
+	protected ACE_Medical_EPainEffectType m_eACE_Medical_PainEffectType;
 
 	//------------------------------------------------------------------------------------------------
 	protected override void OnInit(IEntity owner)
@@ -17,7 +17,7 @@ modded class SCR_PlayerController : PlayerController
 		ACE_Medical_Core_Settings settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
 		if (settings)
 		{
-			m_fACE_Medical_PainEffectType = settings.m_ePainScreenEffectType;
+			m_eACE_Medical_PainEffectType = settings.m_ePainScreenEffectType;
 			ACE_Medical_OnPainEffectTypeChanged();
 			Replication.BumpMe();
 		}
@@ -52,7 +52,7 @@ modded class SCR_PlayerController : PlayerController
 			if (!painEffect)
 				continue;
 			
-			painEffect.SetPainEffectType(m_fACE_Medical_PainEffectType);
+			painEffect.SetPainEffectType(m_eACE_Medical_PainEffectType);
 			break;
 		}
 	}

@@ -1,0 +1,75 @@
+FrameWidgetClass : "{FC58AB2BEBBA6D0E}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_USSR.layout" {
+ {
+  RTTextureWidgetClass "{60C8F51E9E680399}" {
+   Prefab "{60C8F51E9E680399}"
+   {
+    FrameWidgetClass "{60C8F51EA4C53599}" {
+     Prefab "{60C8F51EA4C53599}"
+     {
+      VerticalLayoutWidgetClass "{60CACB3CF08B74DA}" {
+       Prefab "{60CACB3CF08B74DA}"
+       {
+        HorizontalLayoutWidgetClass "{60CACB3CDBF6E604}" {
+         Prefab "{60CACB3CDBF6E604}"
+         {
+          VerticalLayoutWidgetClass "{60CA76C7FD2D43DD}" {
+           Prefab "{60CA76C7FD2D43DD}"
+           {
+            VerticalLayoutWidgetClass "{60CACB2315EED092}" {
+             Prefab "{60CACB2315EED092}"
+             {
+              GridLayoutWidgetClass "{60CACB2315EED09C}" {
+               Prefab "{60CACB2315EED09C}"
+               {
+                HorizontalLayoutWidgetClass "{60CACB2315EED09A}" {
+                 Prefab "{60CACB2315EED09A}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MRADs"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2315EED084}" {
+                 Prefab "{60CACB2315EED084}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MRADs"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2315EED087}" {
+                 Prefab "{60CACB2315EED087}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MRADs"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2315EED081}" {
+                 Prefab "{60CACB2315EED081}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MRADs"
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

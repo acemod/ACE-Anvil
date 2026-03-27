@@ -1,0 +1,154 @@
+FrameWidgetClass : "{6E4CC0DD94FAB365}UI/layouts/Gadgets/BallisticTable/BallisticTable.layout" {
+ {
+  RTTextureWidgetClass "{60C8F51E9E680399}" {
+   Prefab "{60C8F51E9E680399}"
+   {
+    FrameWidgetClass "{60C8F51EA4C53599}" {
+     Prefab "{60C8F51EA4C53599}"
+     {
+      VerticalLayoutWidgetClass "{60CACB3CF08B74DA}" {
+       Prefab "{60CACB3CF08B74DA}"
+       {
+        HorizontalLayoutWidgetClass "{60CACB3CDBF6E604}" {
+         Prefab "{60CACB3CDBF6E604}"
+         {
+          VerticalLayoutWidgetClass "{60CA76C7FD2D43DD}" {
+           Prefab "{60CA76C7FD2D43DD}"
+           {
+            VerticalLayoutWidgetClass "{60CACB206FBC43A0}" {
+             Prefab "{60CACB206FBC43A0}"
+             {
+              GridLayoutWidgetClass "{60CACB2005A3A282}" {
+               Prefab "{60CACB2005A3A282}"
+               {
+                HorizontalLayoutWidgetClass "{60CACB20278C4D64}" {
+                 Prefab "{60CACB20278C4D64}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "Target"\
+                   "Range"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2005A3A28B}" {
+                 Prefab "{60CACB2005A3A28B}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "Bullet"\
+                   "Drop"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2005A3A28E}" {
+                 Prefab "{60CACB2005A3A28E}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "Wind"\
+                   "4 m/s"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB21CD9DB8CA}" {
+                 Prefab "{60CACB21CD9DB8CA}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "Wind"\
+                   "6 m/s"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB21CD25DE44}" {
+                 Prefab "{60CACB21CD25DE44}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "Wind"\
+                   "8 m/s"
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+            VerticalLayoutWidgetClass "{60CACB2315EED092}" {
+             Prefab "{60CACB2315EED092}"
+             {
+              GridLayoutWidgetClass "{60CACB2315EED09C}" {
+               Prefab "{60CACB2315EED09C}"
+               {
+                HorizontalLayoutWidgetClass "{60CACB2315EED09A}" {
+                 Prefab "{60CACB2315EED09A}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MILs"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2315EED084}" {
+                 Prefab "{60CACB2315EED084}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MILs"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2315EED087}" {
+                 Prefab "{60CACB2315EED087}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MILs"
+                  }
+                 }
+                }
+                HorizontalLayoutWidgetClass "{60CACB2315EED081}" {
+                 Prefab "{60CACB2315EED081}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "MILs"
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+            VerticalLayoutWidgetClass "{613A662D9616B408}" {
+             Prefab "{613A662D9616B408}"
+             {
+              GridLayoutWidgetClass "{613A662D9616B40A}" {
+               Prefab "{613A662D9616B40A}"
+               {
+                HorizontalLayoutWidgetClass "{613A662D9616B434}" {
+                 Prefab "{613A662D9616B434}"
+                 {
+                  TextWidgetClass "{60CA7A78C5ED06C0}" {
+                   Prefab "{60CA7A78C5ED06C0}"
+                   Text "ZERO"
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -24,5 +24,5 @@ Allows scopes to be adjusted in elevation and windage in mrads.
 Elevations can be fine-tuned with `ACE Effective Vertical Zeroing Scale` attribute on `SCR_2DOpticsComponent`.
 For instance, if the ballistic table reports 10.0 mrads for 800 m, but the actual elevation from testing is 9.4 mrad, one should set the scale to 9.4 / 10.0 = 0.94.
 This will make +1.0 mrad elevation adjustments effectively take +0.94 mrad and in return 10.0 mrad becomes accurate for 800 m.
-It is recommended to do a linear fit for various ranges or if a single range is picked, take one far away, such as 800 m.
+While deriving the scale from a single range can work if the picked range is far, e.g. 800 m, a linear fit for various ranges will be more accurate.
 Diag tools in the workbench can come in handy for this (see [weapon optic creation tutorial](https://community.bistudio.com/wiki/Arma_Reforger:Weapon_Optic_Creation#Diagnostic_tools)).

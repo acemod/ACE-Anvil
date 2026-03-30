@@ -1,0 +1,72 @@
+AudioClass {
+ sounds {
+  SoundClass "2057" {
+   id 2057
+   name "ACE_SCOPES_SOUND_CLICK"
+   version 5
+   tl -26.118 -126.1
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "1028:65" {
+       id 1028
+       port 65
+      }
+     }
+    }
+   }
+   outState 5131
+   outStatePort 26631
+  }
+ }
+ mixers {
+  MixerClass "5131" {
+   id 5131
+   name "OutputState"
+   version 4
+   tl 184.337 -126.823
+   res "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
+   ins {
+    ConnectionsClass "con:26631" {
+     id 26631
+     links {
+      ConnectionClass "2057:65" {
+       id 2057
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   path "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
+   inputs {
+    "Music" "UI"
+   }
+   visiblePorts {
+    26631
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass "1028" {
+   id 1028
+   name "ACE_Scopes_Click"
+   version 7
+   tl -269.065 -127.169
+   Volume -14
+   "Pitch variance" 0.15
+   Samples {
+    AudioBankSampleClass "ACE_Scopes_Click.wav" {
+     Filename "{DEEF73DABEB92B94}Sounds/UI/Samples/ACE_Scopes_Click.wav"
+     Probability 100
+     Index 0
+     SampleMetadata ""
+    }
+   }
+  }
+ }
+ version 1
+}

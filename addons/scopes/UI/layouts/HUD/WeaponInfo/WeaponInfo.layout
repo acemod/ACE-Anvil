@@ -1,0 +1,96 @@
+FrameWidgetClass {
+ {
+  VerticalLayoutWidgetClass "{5876BC8CDCDF5238}" {
+   Prefab "{5876BC8CDCDF5238}"
+   {
+    HorizontalLayoutWidgetClass "{5876BC8CDCDF5222}" {
+     Prefab "{5876BC8CDCDF5222}"
+     {
+      HorizontalLayoutWidgetClass "{68F932CB50826113}" {
+       Name "m_ACE_Zeroing"
+       Slot LayoutSlot "{68F932CB50826109}" {
+       }
+       {
+        RichTextWidgetClass "{68F932CB4F4874CE}" {
+         Name "m_ACE_ZeroingLabel"
+         Slot LayoutSlot "{68F932C39DC6D17E}" {
+          HorizontalAlign 2
+          VerticalAlign 1
+         }
+         Text "ELEV"\
+         "WIND"
+         "Font Size" 18
+         "Min Font Size" 18
+         "Vertical Alignment" Center
+         FontProperties FontProperties "{68F918FFEC54CC67}" {
+          Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+          ShadowSize 10
+          ShadowColor 0 0 0 0.7
+         }
+        }
+        SizeLayoutWidgetClass "{68F932CA169C82FB}" {
+         Name "SizeLayout0"
+         Slot LayoutSlot "{68F932CA169C82D0}" {
+          HorizontalAlign 2
+          VerticalAlign 1
+          Padding 0 0 2 0
+         }
+         AllowMinDesiredWidth 1
+         MinDesiredWidth 40
+         {
+          RichTextWidgetClass "{68F918FF98D3155B}" {
+           Name "m_ACE_ZeroingText"
+           Slot AlignableSlot "{68F932CA08E82885}" {
+            HorizontalAlign 2
+            VerticalAlign 1
+           }
+           Text "0.0"\
+           "0.1"
+           "Font Size" 18
+           "Min Font Size" 18
+           "Horizontal Alignment" Right
+           "Vertical Alignment" Center
+           FontProperties FontProperties "{68F918FFEC54CC67}" {
+            Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+            ShadowSize 10
+            ShadowColor 0 0 0 0.7
+           }
+          }
+         }
+        }
+        SizeLayoutWidgetClass "{68F951284D1442DA}" {
+         Name "SizeLayout1"
+         Slot LayoutSlot "{68F932CA169C82D0}" {
+          HorizontalAlign 2
+          VerticalAlign 1
+         }
+         AllowMinDesiredWidth 1
+         MinDesiredWidth 25
+         {
+          RichTextWidgetClass "{68F951284D1442D8}" {
+           Name "m_ACE_ZeroingSuffix"
+           Slot AlignableSlot "{68F932CA08E82885}" {
+            HorizontalAlign 0
+            VerticalAlign 1
+           }
+           Text ""\
+           "R"
+           "Font Size" 18
+           "Min Font Size" 18
+           "Vertical Alignment" Center
+           FontProperties FontProperties "{68F918FFEC54CC67}" {
+            Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+            ShadowSize 10
+            ShadowColor 0 0 0 0.7
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

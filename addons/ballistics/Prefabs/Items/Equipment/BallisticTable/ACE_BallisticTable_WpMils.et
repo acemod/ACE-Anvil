@@ -4,8 +4,8 @@ GameEntity : "{889DC9D8BF3E3DD5}Prefabs/Items/Equipment/BallisticTable/ACE_Balli
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
     ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
-     Name "#ACE_Ballistics-Item_BallisticTables_USSR_Name"
-     Description "#ACE_Ballistics-Item_BallisticTables_USSR_Description"
+     Name "#ACE_Ballistics-Item_BallisticTables_WpMils_Name"
+     Description "#ACE_Ballistics-Item_BallisticTables_WpMils_Description"
     }
    }
   }

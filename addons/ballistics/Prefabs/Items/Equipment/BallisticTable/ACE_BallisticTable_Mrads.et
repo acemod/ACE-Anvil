@@ -2,14 +2,14 @@ GameEntity : "{889DC9D8BF3E3DD5}Prefabs/Items/Equipment/BallisticTable/ACE_Balli
  ID "508AB2013EEE1E00"
  components {
   ACE_BallisticTableComponent "{60CAB3ECC903C006}" {
-   m_sLayoutName "{94BEF98329CC0B81}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_US.layout"
+   m_sLayoutName "{94BEF98329CC0B81}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_Mrads.layout"
    m_eUnitType MILLIRADIANS
   }
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
     ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
-     Name "#ACE_Ballistics-Item_BallisticTables_US_Name"
-     Description "#ACE_Ballistics-Item_BallisticTables_US_Description"
+     Name "#ACE_Ballistics-Item_BallisticTables_Mrads_Name"
+     Description "#ACE_Ballistics-Item_BallisticTables_Mrads_Description"
     }
    }
   }

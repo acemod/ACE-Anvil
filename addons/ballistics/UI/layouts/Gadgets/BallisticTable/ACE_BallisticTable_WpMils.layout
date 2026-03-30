@@ -150,6 +150,8 @@ FrameWidgetClass : "{6E4CC0DD94FAB365}UI/layouts/Gadgets/BallisticTable/Ballisti
                  {
                   TextWidgetClass "{60CA7A78C5ED06C0}" {
                    Prefab "{60CA7A78C5ED06C0}"
+                   Slot LayoutSlot "{60CA7A7DFDCBF5E1}" {
+                   }
                    Text "100 M"
                   }
                  }

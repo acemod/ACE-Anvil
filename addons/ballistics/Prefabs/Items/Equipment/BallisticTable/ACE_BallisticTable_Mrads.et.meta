@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{03C6EB1EBD25AA33}Prefabs/Items/Equipment/BallisticTable/ACE_BallisticTable_US.et"
+ Name "{03C6EB1EBD25AA33}Prefabs/Items/Equipment/BallisticTable/ACE_BallisticTable_Mrads.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

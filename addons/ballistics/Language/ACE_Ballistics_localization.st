@@ -2,30 +2,34 @@ StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
   CustomStringTableItem "{68F762272F79489D}" {
-   Id "ACE_Ballistics-Item_BallisticTables_US_Description"
+   Id "ACE_Ballistics-Item_BallisticTables_Mrads_Description"
    Target_en_us "Collection of ballistic tables in milliradians for bullets compatible with your rifle."
-   Modified 1761045239
+   Target_de_de "Sammlung von Schusstafeln in Milliradians für Kugeln, die kompatibel sind mit deiner Waffe."
+   Modified 1761350348
    Author "Kexanone"
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{68F7622720A91AF2}" {
-   Id "ACE_Ballistics-Item_BallisticTables_US_Name"
-   Target_en_us "US Ballistic Tables"
-   Modified 1761044909
+   Id "ACE_Ballistics-Item_BallisticTables_Mrads_Name"
+   Target_en_us "Ballistic Tables in mrads"
+   Target_de_de "Schusstafeln in mrads"
+   Modified 1761350049
    Author "Kexanone"
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{68F76227713095DD}" {
-   Id "ACE_Ballistics-Item_BallisticTables_USSR_Description"
+   Id "ACE_Ballistics-Item_BallisticTables_WpMils_Description"
    Target_en_us "Collection of ballistic tables in Warsaw Pact mils for bullets compatible with your rifle."
-   Modified 1761045228
+   Target_de_de "Sammlung von Schusstafeln in Warschauer Pakt mils für Kugeln, die kompatibel sind mit deiner Waffe."
+   Modified 1761350262
    Author "Kexanone"
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{68F7622774AC7852}" {
-   Id "ACE_Ballistics-Item_BallisticTables_USSR_Name"
-   Target_en_us "USSR Ballistic Tables"
-   Modified 1761044912
+   Id "ACE_Ballistics-Item_BallisticTables_WpMils_Name"
+   Target_en_us "Ballistic Tables in WP mils"
+   Target_de_de "Schusstafeln in WP mils"
+   Modified 1761350069
    Author "Kexanone"
    LastChanged "Kexanone"
   }

@@ -1,20 +1,26 @@
 class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 {
+	protected float m_fInitSpeedCoef;
+	protected float m_fDefaultZeroingRange;
+	
 	protected static const ref array<float> WIND_SPEEDS = {4, 6, 8};
-	protected static const float MAX_DROP = -30.0;
+	protected static const float MIN_DROP = -30.0;
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_VisualisedBallisticConfig(ResourceName projectilePrefab, SCR_EOpticsAngleUnits unitType = SCR_EOpticsAngleUnits.MILLIRADIANS)
+	void ACE_VisualisedBallisticConfig(ResourceName projectilePrefab, float initSpeedCoef = 1.0, float defaultZeroingRange = 100.0, SCR_EOpticsAngleUnits unitType = SCR_EOpticsAngleUnits.MILLIRADIANS)
 	{
 		m_sProjectilePrefab = projectilePrefab;
 		m_sDisplayedText = FilePath.StripExtension(FilePath.StripPath(projectilePrefab));
+		float initialSpeed = initSpeedCoef * ACE_BulletTools.GetInitialSpeed(projectilePrefab);
+		m_sDisplayedText += string.Format(" (%1 m/s)", Math.Round(initialSpeed));
 		m_eUnitType = unitType;
-		m_fProjectileInitSpeedCoef = m_eUnitType;  // Used as storage for comparison on SCR_BallisticData
+		m_fProjectileInitSpeedCoef = initSpeedCoef;
 		m_iRangeStep = 50;
 		m_iMinRange = 100;
 		m_iMaxRange = 1500;
 		m_iElevationChangeDownRange = 50;
-		m_fStandardDispersion = 100;
+		m_fDefaultZeroingRange = defaultZeroingRange;
+		m_fStandardDispersion = defaultZeroingRange;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -23,55 +29,51 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		if (VerifyDataExistence(m_iBallisticDataId))
 			return true;
 		
-		float initialSpeed = ACE_BulletTools.GetInitialSpeed(m_sProjectilePrefab);
+		float initialSpeed = m_fProjectileInitSpeedCoef * ACE_BulletTools.GetInitialSpeed(m_sProjectilePrefab);
 		IEntity dummy = GetGame().SpawnEntityPrefabLocal(Resource.Load(m_sProjectilePrefab), GetGame().GetWorld());
 		ProjectileMoveComponent moveComponent = ProjectileMoveComponent.Cast(dummy.FindComponent(ProjectileMoveComponent));
 
 		array<ref array<float>> ballisticValues = {};
-		float drop = -0.1;
-		float zeroDrop;
+		float zeroDrop = 0.0;
 
 		for (int range = m_iMinRange; range <= m_iMaxRange; range += m_iRangeStep)
 		{
 			array<float> row = {range};
 			row.Resize(2 + WIND_SPEEDS.Count());
-			float firstDrop = 0.0;
-			bool firstDropSet = false;
-				
+			
+			float time;
+			float height = BallisticTable.GetHeightFromProjectile(range, time, dummy, m_fProjectileInitSpeedCoef);
+			float drop = -SCR_Math.ConvertFromRadians(Math.Atan2(height, range), m_eUnitType);
+			
+			if (drop < MIN_DROP)
+				break;
+			
+			row[1] = drop;
+			
+			if (range == m_fDefaultZeroingRange)
+				zeroDrop = drop;
+						
 			foreach (int i, float windSpeed : WIND_SPEEDS)
 			{
-				float windage;
-				
-				if (!ComputeDropAndWindage(moveComponent, range, initialSpeed, windSpeed, drop, windage))
-					break;
-				
-				if (!firstDropSet)
-				{
-					if (drop < MAX_DROP)
-					{
-						// Replace invalid drops by zeroDrop to get them replaced by dash
-						firstDrop = zeroDrop;
-						break;
-					}
-					
-					firstDrop = drop;
-					firstDropSet = true;
-				}
-				
+				float xOffset = ComputeProjectileWindageOffset(moveComponent, initialSpeed, windSpeed, drop, time);
+				float windage = SCR_Math.ConvertFromRadians(Math.Atan2(xOffset, range), m_eUnitType);
 				row[2 + i] = ACE_Math.Round(windage, 1);
 			}
 			
-			if (ballisticValues.IsEmpty())
-				zeroDrop = firstDrop;
-			else
-				row[1] = ACE_Math.Round(firstDrop - zeroDrop, 1);
-			
 			ballisticValues.Insert(row);
+		}
+		
+		// Shift drops by default zeroing drop
+		for (int i = 0; i < ballisticValues.Count(); ++i)
+		{
+			ballisticValues[i][1] = ACE_Math.Round(ballisticValues[i][1] - zeroDrop, 1);
 		}
 		
 		SCR_EntityHelper.DeleteEntityAndChildren(dummy);
 
 		SCR_BallisticData ballisticData = new SCR_BallisticData(ballisticValues, m_sProjectilePrefab, m_bDirectFireMode, m_iRangeStep, m_fProjectileInitSpeedCoef);
+		ballisticData.ACE_SetUnitType(m_eUnitType);
+		
 		if (!SCR_BallisticData.s_aBallistics)
 			SCR_BallisticData.s_aBallistics = {};
 
@@ -81,78 +83,27 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Optimize drop with secant method to match targetRange
-	//! Return drop and windage in angle
-	protected bool ComputeDropAndWindage(ProjectileMoveComponent moveComponent, float targetRange, float initialSpeed, float windSpeed, inout float drop, out float windage)
+	override bool VerifyDataExistence(inout int id = -1)
 	{
-		ACE_Ballistics_DropResidual fn = new ACE_Ballistics_DropResidual(moveComponent, targetRange, initialSpeed, windSpeed);
-		ACE_MathTools_RootResult<float> solution = ACE_MathTools.Secant(fn, drop + 0.1, drop - 0.1, ftol: 0.1, xtol: 0.0);
-		drop = MilliradiansToUnit(solution.m_fRoot);
-		windage = MilliradiansToUnit(fn.GetWindageResult());
-		return solution.m_bConverged;
+		if (!super.VerifyDataExistence(id))
+			return false;
+		
+		SCR_BallisticData ballisticData = SCR_BallisticData.s_aBallistics[id];
+		return (ballisticData.ACE_GetUnitType() == m_eUnitType);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected vector ComputeProjectileSimulationResult(ProjectileMoveComponent moveComponent, float initialSpeed, float windSpeed, float drop)
+	protected float ComputeProjectileWindageOffset(ProjectileMoveComponent moveComponent, float initialSpeed, float windSpeed, float drop, float time)
 	{
-		return moveComponent.GetProjectileSimulationResult(
+		vector offset = moveComponent.GetProjectileSimulationResult(
 			vector.Zero, // initPosition
 			initialSpeed, // initSpeed
-			Math.RAD2DEG * 1e-3 * -drop, // initElevationAngle
+			-Math.RAD2DEG * SCR_Math.ConvertToRadians(drop, m_eUnitType), // initElevationAngle
 			0, // initAzimuth
 			{windSpeed, 0, 0}, // windVelocity
 			0, // targetHeight
-			10, // maxSimulationTime
+			time, // maxSimulationTime
 		);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	protected float MilliradiansToUnit(float value)
-	{
-		if (m_eUnitType == SCR_EOpticsAngleUnits.MILLIRADIANS)
-			return value;
-		
-		return SCR_Math.ConvertFromRadians(1e-3 * value, m_eUnitType);
-	}
-}
-
-//------------------------------------------------------------------------------------------------
-class ACE_Ballistics_DropResidual : ACE_MathTools_FunctionBase<float, float>
-{
-	protected ProjectileMoveComponent m_MoveComponent;
-	protected float m_fTargetRange;
-	protected float m_fInitialSpeed;
-	protected vector m_vWindVelocity;
-	protected vector m_fOffset;
-	
-	//------------------------------------------------------------------------------------------------
-	void ACE_Ballistics_DropResidual(ProjectileMoveComponent moveComponent, float targetRange, float initialSpeed, float windSpeed)
-	{
-		m_fTargetRange = targetRange;
-		m_MoveComponent = moveComponent;
-		m_fInitialSpeed = initialSpeed;
-		m_vWindVelocity = {windSpeed, 0, 0};
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Return residual between computed range for the drop x in mrad and the targetRange
-	override float Eval(float x)
-	{
-		m_fOffset = m_MoveComponent.GetProjectileSimulationResult(
-			vector.Zero, // initPosition
-			m_fInitialSpeed, // initSpeed
-			Math.RAD2DEG * 1e-3 * -x, // initElevationAngle
-			0, // initAzimuth
-			m_vWindVelocity, // windVelocity
-			0, // targetHeight
-			10, // maxSimulationTime
-		);
-		return m_fOffset[2] - m_fTargetRange;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	float GetWindageResult()
-	{
-		return 1e3 * Math.Atan2(m_fOffset[0], m_fOffset[2]);
+		return offset[0];
 	}
 }

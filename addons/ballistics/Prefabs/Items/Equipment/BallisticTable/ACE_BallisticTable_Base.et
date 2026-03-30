@@ -2,7 +2,8 @@ GameEntity : "{35D7F1189BE00E94}Prefabs/Items/Equipment/BallisticTable/Ballistic
  ID "508AB2013EEE1E00"
  components {
   ACE_BallisticTableComponent "{60CAB3ECC903C006}" {
-   m_sLayoutName "{FC58AB2BEBBA6D0E}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_USSR.layout"
+   m_sLayoutName "{FC58AB2BEBBA6D0E}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_WpMils.layout"
+   m_bReplaceZerosWithDash 0
    m_eUnitType MILS_WP
    m_eAnimVariable MAP
   }

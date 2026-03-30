@@ -16,30 +16,40 @@ class ACE_BallisticTableComponentClass : SCR_BallisticTableComponentClass
 		array<BaseWeaponComponent> weapons = {};
 		player.GetWeaponManager().GetWeapons(weapons);
 		array<ResourceName> allBulletPrefab = {};
+		array<float> speedCoefs = {};
+		array<float> defaultZeroingRanges = {};
 		
 		foreach (BaseWeaponComponent weapon : weapons)
 		{
 			if (weapon.GetWeaponType() == EWeaponType.WT_HANDGUN)
 				continue;
 			
+			float defaultZeroingRange = weapon.GetCurrentSightsZeroing();
 			array<BaseMuzzleComponent> muzzles = {};
 			weapon.GetMuzzlesList(muzzles);
 			
 			foreach (BaseMuzzleComponent muzzle : muzzles)
 			{
+				float speedCoef = muzzle.GetBulletInitSpeedCoef();
+				
 				foreach (ResourceName bulletPrefab : ACE_BulletTools.GetDefaultResourceNamesFromMuzzle(muzzle))
 				{
-					if (!allBulletPrefab.Contains(bulletPrefab))
-						allBulletPrefab.Insert(bulletPrefab);
+					int idx = allBulletPrefab.Find(bulletPrefab);
+					if ((idx >= 0) && (speedCoefs[idx] == speedCoef) && (defaultZeroingRanges[idx] == defaultZeroingRange))
+						continue;
+					
+					allBulletPrefab.Insert(bulletPrefab);
+					speedCoefs.Insert(speedCoef);
+					defaultZeroingRanges.Insert(defaultZeroingRange);
 				}
 			}
 		}
 		
 		m_aBallisticPages.Reserve(allBulletPrefab.Count());
 		
-		foreach (ResourceName bulletPrefab : allBulletPrefab)
+		foreach (int i, ResourceName bulletPrefab : allBulletPrefab)
 		{
-			ACE_VisualisedBallisticConfig page = new ACE_VisualisedBallisticConfig(bulletPrefab, m_eUnitType);
+			ACE_VisualisedBallisticConfig page = new ACE_VisualisedBallisticConfig(bulletPrefab, speedCoefs[i], defaultZeroingRanges[i], m_eUnitType);
 			page.GenerateBallisticData();
 			m_aBallisticPages.Insert(page);
 		}

@@ -1,0 +1,8 @@
+GameEntity : "{966B4E5523D2F166}Prefabs/Weapons/Attachments/Optics/WeaponOptic_Base.et" {
+ ID "4BA426CBAED42A14"
+ components {
+  SCR_2DPIPSightsComponent "{5D0CC83435B55855}" {
+   m_fACE_EffectiveVerticalZeroingScale 0.94
+  }
+ }
+}

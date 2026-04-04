@@ -7,7 +7,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	protected static const float MIN_DROP = -30.0;
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_VisualisedBallisticConfig(ResourceName projectilePrefab, float initSpeedCoef = 1.0, float defaultZeroingRange = 100.0, SCR_EOpticsAngleUnits unitType = SCR_EOpticsAngleUnits.MILLIRADIANS)
+	void ACE_VisualisedBallisticConfig(ResourceName projectilePrefab, float initSpeedCoef = 1.0, float defaultZeroingRange = 100.0, ResourceName tableLayoutName = "", SCR_EOpticsAngleUnits unitType = SCR_EOpticsAngleUnits.MILLIRADIANS)
 	{
 		m_sProjectilePrefab = projectilePrefab;
 		m_sDisplayedText = FilePath.StripExtension(FilePath.StripPath(projectilePrefab));
@@ -22,7 +22,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		m_fDefaultZeroingRange = defaultZeroingRange;
 		m_fStandardDispersion = defaultZeroingRange;
 		
-		m_sLayoutName = "{94BEF98329CC0B81}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_Mrads.layout";
+		m_sLayoutName = tableLayoutName;
 		m_sRowPrefab = "{F75FE2331AF70BF8}UI/layouts/Gadgets/BallisticTable/ContentRowLayout.layout";
 		m_sCellPrefab = "{801F5CED215A1CFF}UI/layouts/Gadgets/BallisticTable/Content.layout";
 		m_aGridFillWeights = {1, 1, 1, 1, 1};

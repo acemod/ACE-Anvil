@@ -3,6 +3,7 @@ GameEntity : "{889DC9D8BF3E3DD5}Prefabs/Items/Equipment/BallisticTable/ACE_Balli
  components {
   ACE_BallisticTableComponent "{60CAB3ECC903C006}" {
    m_eUnitType MILLIRADIANS
+   m_sACE_TableLayoutName "{94BEF98329CC0B81}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_Mrads.layout"
   }
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {

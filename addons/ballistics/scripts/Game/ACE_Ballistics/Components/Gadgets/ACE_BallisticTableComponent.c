@@ -1,8 +1,11 @@
 //------------------------------------------------------------------------------------------------
 class ACE_BallisticTableComponentClass : SCR_BallisticTableComponentClass
 {
-	[Attribute(SCR_Enum.GetDefault(SCR_EOpticsAngleUnits.MILLIRADIANS), uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(SCR_EOpticsAngleUnits))]
+	[Attribute(SCR_Enum.GetDefault(SCR_EOpticsAngleUnits.MILLIRADIANS), uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(SCR_EOpticsAngleUnits), category: "Layouts")]
 	protected SCR_EOpticsAngleUnits m_eUnitType;
+	
+	[Attribute(defvalue: "{FC58AB2BEBBA6D0E}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_WpMils.layout", uiwidget: UIWidgets.ResourceNamePicker, category: "Layouts")]
+	protected ResourceName m_sACE_TableLayoutName;
 	
 	//------------------------------------------------------------------------------------------------
 	void UpdateBallisticData()
@@ -49,7 +52,7 @@ class ACE_BallisticTableComponentClass : SCR_BallisticTableComponentClass
 		
 		foreach (int i, ResourceName bulletPrefab : allBulletPrefab)
 		{
-			ACE_VisualisedBallisticConfig page = new ACE_VisualisedBallisticConfig(bulletPrefab, speedCoefs[i], defaultZeroingRanges[i], m_eUnitType);
+			ACE_VisualisedBallisticConfig page = new ACE_VisualisedBallisticConfig(bulletPrefab, speedCoefs[i], defaultZeroingRanges[i], m_sACE_TableLayoutName, m_eUnitType);
 			page.GenerateBallisticData();
 			m_aPages.Insert(page);
 		}

@@ -1,0 +1,268 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef HOT_1_R {
+   ShapeType Box
+   ShapeSize 0.12 0.01 0.02
+   ConeAngle 180 10 45
+   BirthRate 35
+   Offset 0.025 0 0
+   Angles 90 0 90
+   LodMin 0
+   LodMax 0
+   Material "{D797F4753649427F}Particles/_Materials/Gas/Smoke_Weapons_03.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.05
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.5
+   VelAffect 1
+   AirResistance 4
+   AirResistanceRND 4
+   WindInfluence 0.074
+   GravityMultiply 0
+   GravityMultiplyRND -0.041
+   Spring 0.001
+   AnimOnce 1
+   AnimFPS 20
+   RandomFrame 1
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
+   Alpha {
+    0 0.3394 0.5554 0.0788 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.533 0.8061 1 1
+   }
+   AlphaMast {
+    0 1 1 0
+   }
+  }
+  EmitterDef HOT_1_L {
+   ShapeType Box
+   ShapeSize 0.12 0.01 0.02
+   ConeAngle 180 10 45
+   BirthRate 35
+   Offset -0.025 0 0
+   Angles 90 0 -90
+   LodMin 0
+   LodMax 0
+   Material "{D797F4753649427F}Particles/_Materials/Gas/Smoke_Weapons_03.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.05
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.5
+   VelAffect 1
+   AirResistance 4
+   AirResistanceRND 4
+   WindInfluence 0.079
+   GravityMultiply 0
+   GravityMultiplyRND -0.041
+   Spring 0.001
+   AnimOnce 1
+   AnimFPS 20
+   RandomFrame 1
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
+   Alpha {
+    0 0.3273 0.7632 0.0667 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.533 0.8061 1 1
+   }
+   AlphaMast {
+    0 1 1 0
+   }
+  }
+  EmitterDef HOT_2_L {
+   ShapeType Box
+   ShapeSize 0.08 0.01 0.02
+   ConeAngle 180 10 45
+   MaxNum 45
+   BirthRate 35
+   BirthRateRND 5
+   BirthRateVel 15
+   Offset 0 0.01 0
+   Angles 90 0 -90
+   LodMin 0
+   LodMax 0
+   Material "{239FB3ED3B942A0B}Particles/_Materials/Gas/Smoke_Weapons_02.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.1
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.4
+   VelAffect 1
+   AirResistance 4
+   AirResistanceRND 3
+   WindInfluence 0.081
+   GravityMultiply 0
+   GravityMultiplyRND -0.107
+   EnableCollisions 1
+   NormalRestitution 0.105
+   Friction 1
+   Spring 0.001
+   AnimOnce 1
+   AnimFPS 25
+   Lifetime 2
+   Alpha {
+    0 1 0.0822 1 0.5431 0.4001 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0.2848
+   }
+   Size {
+    0 0 0.1617 0.2061 0.4519 0.7213 1 1
+   }
+   AlphaMast {
+    0 1 1 0
+   }
+  }
+  EmitterDef HOT_2_R {
+   ShapeType Box
+   ShapeSize 0.08 0.01 0.02
+   ConeAngle 180 10 45
+   MaxNum 45
+   BirthRate 35
+   BirthRateRND 5
+   BirthRateVel 15
+   Offset 0 0.01 0
+   Angles 90 0 90
+   LodMin 0
+   LodMax 0
+   Material "{239FB3ED3B942A0B}Particles/_Materials/Gas/Smoke_Weapons_02.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.1
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.4
+   VelAffect 1
+   AirResistance 4
+   AirResistanceRND 3
+   WindInfluence 0.091
+   GravityMultiply 0
+   GravityMultiplyRND -0.107
+   EnableCollisions 1
+   NormalRestitution 0.061
+   TagentialRestitution 0.713
+   Spring 0.001
+   AnimOnce 1
+   AnimFPS 25
+   Lifetime 2
+   Alpha {
+    0 1 0.0684 1 0.5415 0.3395 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0.2909
+   }
+   Size {
+    0 0 0.1463 0.1515 0.4901 0.7516 1 1
+   }
+   AlphaMast {
+    0 1 1 0
+   }
+  }
+  EmitterDef HOT_0 {
+   ShapeSize 0.015 0.02 0.35
+   ConeAngle 360 80 90
+   MaxNum 50
+   BirthRate 15
+   BirthRateRND 5
+   BirthRateVel 10
+   Offset 0 0.011 0.1
+   Angles -90 0 0
+   LodMin 0
+   LodMax 0
+   Material "{9099B7494562F78F}Particles/_Materials/Gas/Steam_Base_Random_03_White.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.06
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.2
+   VelAffect 1
+   AirResistance 2
+   AirResistanceRND 3
+   WindInfluence 0.255
+   GravityMultiply 0
+   GravityMultiplyRND -0.107
+   Spring 0.01
+   AnimOnce 1
+   AnimFPS 15
+   RandomFrame 1
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
+   Alpha {
+    0 0.3879 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.533 0.8061 1 1
+   }
+   AlphaMast {
+    0 1 1 0
+   }
+  }
+ }
+ MinFPS 30
+ CollisionPreset "{5D9EE44C68755DF5}"
+}

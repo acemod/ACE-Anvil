@@ -1,26 +1,15 @@
 AudioClass {
  sounds {
-<<<<<<< Updated upstream
-  SoundClass {
-=======
   SoundClass "4105" {
->>>>>>> Stashed changes
    id 4105
    name "ACE_OVERHEATING_SOUND_SWAP_BARREL"
    version 5
    tl -274.261 -188.87
    ins {
-<<<<<<< Updated upstream
-    ConnectionsClass connections {
-     id 64
-     links {
-      ConnectionClass connection {
-=======
     ConnectionsClass "con:64" {
      id 64
      links {
       ConnectionClass "2052:65" {
->>>>>>> Stashed changes
        id 2052
        port 65
       }
@@ -28,28 +17,11 @@ AudioClass {
     }
    }
    volume_dB -10
-<<<<<<< Updated upstream
-   outState 1035
-=======
    outState 5131
->>>>>>> Stashed changes
    outStatePort 26631
   }
  }
  mixers {
-<<<<<<< Updated upstream
-  MixerClass {
-   id 1035
-   name "OutputState"
-   version 4
-   tl -84 -187
-   res "{B764D803219C775E}Sounds/FinalMix.afm"
-   ins {
-    ConnectionsClass connections {
-     id 26631
-     links {
-      ConnectionClass connection {
-=======
   MixerClass "5131" {
    id 5131
    name "OutputState"
@@ -61,7 +33,6 @@ AudioClass {
      id 26631
      links {
       ConnectionClass "4105:65" {
->>>>>>> Stashed changes
        id 4105
        port 65
       }
@@ -69,44 +40,27 @@ AudioClass {
     }
    }
    pi {
-<<<<<<< Updated upstream
-    16777216 0
-   }
-   path "{B764D803219C775E}Sounds/FinalMix.afm"
-   inputs {
-    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin"
-=======
     2 0
    }
    path "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    inputs {
     "Music" "UI"
->>>>>>> Stashed changes
    }
   }
  }
  banks_local {
-<<<<<<< Updated upstream
-  BankLocalClass {
-=======
   BankLocalClass "2052" {
->>>>>>> Stashed changes
    id 2052
    name "BarrelSwap"
    version 7
    tl -496 -187
    Volume 2
    Samples {
-<<<<<<< Updated upstream
-    AudioBankSampleClass Sample {
-     Filename "{AD75581D6865B7B9}Sounds/Weapons/Machineguns/Samples/ACE_Overheating_BarrelSwap.wav"
-=======
     AudioBankSampleClass "ACE_Overheating_BarrelSwap.wav" {
      Filename "{AD75581D6865B7B9}Sounds/Weapons/Machineguns/Samples/ACE_Overheating_BarrelSwap.wav"
      Probability 100
      Index 0
      SampleMetadata ""
->>>>>>> Stashed changes
     }
    }
   }

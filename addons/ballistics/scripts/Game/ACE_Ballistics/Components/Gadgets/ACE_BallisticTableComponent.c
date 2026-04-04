@@ -7,7 +7,7 @@ class ACE_BallisticTableComponentClass : SCR_BallisticTableComponentClass
 	//------------------------------------------------------------------------------------------------
 	void UpdateBallisticData()
 	{
-		m_aBallisticPages.Clear();
+		m_aPages.Clear();
 		
 		SCR_ChimeraCharacter player = SCR_ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
 		if (!player)
@@ -45,13 +45,13 @@ class ACE_BallisticTableComponentClass : SCR_BallisticTableComponentClass
 			}
 		}
 		
-		m_aBallisticPages.Reserve(allBulletPrefab.Count());
+		m_aPages.Reserve(allBulletPrefab.Count());
 		
 		foreach (int i, ResourceName bulletPrefab : allBulletPrefab)
 		{
 			ACE_VisualisedBallisticConfig page = new ACE_VisualisedBallisticConfig(bulletPrefab, speedCoefs[i], defaultZeroingRanges[i], m_eUnitType);
 			page.GenerateBallisticData();
-			m_aBallisticPages.Insert(page);
+			m_aPages.Insert(page);
 		}
 	}
 }

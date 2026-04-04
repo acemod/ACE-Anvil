@@ -61,8 +61,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 						
 			foreach (int i, float windSpeed : WIND_SPEEDS)
 			{
-				float xOffset = ComputeProjectileWindageOffset(moveComponent, initialSpeed, windSpeed, drop, time);
-				float windage = SCR_Math.ConvertFromRadians(Math.Atan2(xOffset, range), m_eUnitType);
+				float windage = ComputeProjectileWindage(moveComponent, initialSpeed, windSpeed, range, drop, time);
 				row[2 + i] = ACE_Math.Round(windage, 1);
 			}
 			
@@ -99,7 +98,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float ComputeProjectileWindageOffset(ProjectileMoveComponent moveComponent, float initialSpeed, float windSpeed, float drop, float time)
+	protected float ComputeProjectileWindage(ProjectileMoveComponent moveComponent, float initialSpeed, float windSpeed, float range, float drop, float time)
 	{
 		vector offset = moveComponent.GetProjectileSimulationResult(
 			vector.Zero, // initPosition
@@ -110,6 +109,6 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 			0, // targetHeight
 			maxSimulationTime: time, // maxSimulationTime
 		);
-		return offset[0];
+		return SCR_Math.ConvertFromRadians(Math.Atan2(offset[0], range), m_eUnitType);
 	}
 }

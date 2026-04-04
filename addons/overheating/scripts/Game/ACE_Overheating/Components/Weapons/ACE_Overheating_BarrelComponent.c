@@ -40,7 +40,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	[Attribute(defvalue: "1", desc: "Heat transferred to the barrel is given by this scale times the kinetic energy of the bullet.")]
 	protected float m_fHeatingScale;
 	
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Probability to jam vs temperature [K]", params: "1300 0.1 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Probability to jam vs temperature [K]", params: "1300 0.1 0 0")]
 	protected ref Curve m_cJamChanceTemperatureCurve;
 	
 	// Additional temperature-dependent muzzle dispersion factor f
@@ -54,7 +54,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	// Using Reforger's M16A4 base dispersion: Cone height = 400 m; Cone diameter = 0.4 m => a ≈ 0.5 mrad
 	// and ACE3 additional dispersion: 0 mils at 0 °C, 0.5 mils at 333°C, 2.2 mils at 666 °C, 5 mils at 1000 °C
 	// => Additional dispersion factors: 0.0 at 0 °C, 1.0 at 333°C, 4.4 at 666 °C, 10.0 at 1000 °C
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Additional muzzle dispersion factor vs temperature [K]", params: "1300 30 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Additional muzzle dispersion factor vs temperature [K]", params: "1300 30 0 0")]
 	protected ref Curve m_cMuzzleDispersionFactorTemperatureCurve;
 	
 	protected bool m_bInitDone = false;

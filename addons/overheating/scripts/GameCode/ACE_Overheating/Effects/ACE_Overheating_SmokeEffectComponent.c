@@ -184,12 +184,21 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	//------------------------------------------------------------------------------------------------
 	protected void ApplyParamsToEffectEntity(ParticleEffectEntity effectEntity)
 	{
+<<<<<<< HEAD
 			Particles particles = effectEntity.GetParticles();
 			particles.SetParam(-1, EmitterParam.BIRTH_RATE, m_iBirthRate);
 			particles.SetParam(-1, EmitterParam.LIFETIME, m_fLifetime);
 			particles.SetParam(-1, EmitterParam.LIFETIME_RND, m_pData.GetLifetimeRndScale() * m_fLifetime);
 			particles.SetParam(-1, EmitterParam.SIZE, m_fSize);
 			particles.SetParam(-1, EmitterParam.VELOCITY, m_fVelocity);
+=======
+		Particles particles = effectEntity.GetParticles();
+		particles.SetParam(-1, EmitterParam.BIRTH_RATE, m_iBirthRate);
+		particles.SetParam(-1, EmitterParam.LIFETIME, m_fLifetime);
+		particles.SetParam(-1, EmitterParam.LIFETIME_RND, m_pData.GetLifetimeRndScale() * m_fLifetime);
+		particles.SetParam(-1, EmitterParam.SIZE, m_fSize);
+		particles.SetParam(-1, EmitterParam.VELOCITY, m_fVelocity);
+>>>>>>> Ashyl-overheating
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -206,6 +215,10 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
+=======
+	//! Stops effect with a fade-out
+>>>>>>> Ashyl-overheating
 	void StopEffects()
 	{
 	#ifdef ENABLE_DIAG
@@ -218,6 +231,31 @@ class ACE_Overheating_SmokeEffectComponent : MuzzleEffectComponent
 			ApplyParamsToEffectEntity(effectConfig.SpawnFadeOutEffect());
 		}
 	}
+<<<<<<< HEAD
+=======
+	
+	//------------------------------------------------------------------------------------------------
+	//! Instantly terminates effects
+	void TerminateEffects()
+	{
+		if (!System.IsConsoleApp())
+			RpcDo_TerminateEffectsBroadcast();
+		
+		Rpc(RpcDo_TerminateEffectsBroadcast);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_TerminateEffectsBroadcast()
+	{
+		GetGame().GetCallqueue().Remove(StopEffects);
+		
+		foreach (ACE_Overheating_SmokeEffectConfig effectConfig : m_aSomkeEffects)
+		{
+			effectConfig.GetEffectEntity().Stop();
+		}
+	}
+>>>>>>> Ashyl-overheating
 }
 
 //------------------------------------------------------------------------------------------------

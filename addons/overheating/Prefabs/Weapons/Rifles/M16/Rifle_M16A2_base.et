@@ -26,8 +26,8 @@ GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
        }
        m_aSomkeEffects {
         ACE_Overheating_SmokeEffectConfig "{6650F89005C40872}" {
-         m_sContinuousParticleEffect "{61BC10DBBD809DA4}Particles/Weapon/m16a2/Smoke_M16A2_Surface.ptc"
-         m_sFadeoutParticleEffect "{194CD804F15A1114}Particles/Weapon/m16a2/Smoke_M16A2_Surface_FadeOut.ptc"
+         m_sContinuousParticleEffect "{61BC10DBBD809DA4}Particles/Weapon/Rifles/m16a2/Smoke_M16A2_Surface.ptc"
+         m_sFadeoutParticleEffect "{194CD804F15A1114}Particles/Weapon/Rifles/m16a2/Smoke_M16A2_Surface_FadeOut.ptc"
          m_pEffectPosition PointInfo "{6650F8903C086983}" {
           PivotID "slot_hand_guard"
           Offset 0 0 0.1369

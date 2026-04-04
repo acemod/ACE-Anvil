@@ -47,8 +47,9 @@ EffectDef {
    Size {
     0 0.1189 0.533 0.8061 1 1
    }
+   Repeat 0
    AlphaMast {
-    0 1 1 0
+    0 1 0.5 0
    }
   }
   EmitterDef HOT_2 {
@@ -99,8 +100,9 @@ EffectDef {
    Size {
     0 0 0.1617 0.2061 0.4519 0.7213 1 1
    }
+   Repeat 0
    AlphaMast {
-    0 1 1 0
+    0 1 0.5 0
    }
   }
   EmitterDef HOT_3 {
@@ -152,11 +154,12 @@ EffectDef {
    Size {
     0 0.1189 0.533 0.8061 1 1
    }
+   Repeat 0
    ColorMast {
     0 0.6606 0.6242 0.5818
    }
    AlphaMast {
-    0 1 1 0
+    0 1 0.5 0
    }
   }
   EmitterDef HOT_0 {
@@ -208,11 +211,12 @@ EffectDef {
    Size {
     0 0.1189 0.533 0.8061 1 1
    }
+   Repeat 0
    ColorMast {
     0 0.6606 0.6242 0.5818
    }
    AlphaMast {
-    0 1 1 0
+    0 1 0.5 0
    }
   }
   EmitterDef HOT_4 {
@@ -268,11 +272,12 @@ EffectDef {
    Size {
     0 0.1189 0.5038 0.4667 1 0.7212
    }
+   Repeat 0
    ColorMast {
     0 0.8545 0.8181 0.7757 0.2678 0.8727 0.8485 0.8424 1 1 1 1
    }
    AlphaMast {
-    0 1 1 0
+    0 1 0.5 0
    }
   }
   EmitterDef HOT_6 {
@@ -327,11 +332,12 @@ EffectDef {
    Size {
     0 0 0.5139 0.3697 1 0.503
    }
+   Repeat 0
    ColorMast {
     0 0.8545 0.8181 0.7757 0.2678 0.8727 0.8485 0.8424 1 1 1 1
    }
    AlphaMast {
-    0 1 1 0
+    0 1 0.5 0
    }
   }
  }

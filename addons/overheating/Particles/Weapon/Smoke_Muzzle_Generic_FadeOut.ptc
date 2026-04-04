@@ -28,7 +28,7 @@ EffectDef {
    Spring 0.004
    AnimOnce 1
    AnimFPS 25
-   Lifetime 0
+   Lifetime 2
    Alpha {
     0 0.0849 0.032 0.0485 1 0
    }

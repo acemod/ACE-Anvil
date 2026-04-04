@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 {
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Birth rate vs temperature [K]", params: "1300 100 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Birth rate vs temperature [K]", params: "1300 100 0 0")]
 	protected ref Curve m_cBirthRateTemperatureCurve;
 	
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle lifetime [s] vs temperature [K]", params: "1300 4 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Particle lifetime [s] vs temperature [K]", params: "1300 4 0 0")]
 	protected ref Curve m_cLifetimeTemperatureCurve;
 	
 	[Attribute(defvalue: "2", "Precision of life time [s]", params: "0 8")]
@@ -13,19 +13,19 @@ class ACE_Overheating_SmokeEffectComponentClass : MuzzleEffectComponentClass
 	[Attribute(defvalue: "1", desc: "Particle lifetime Rnd scale", params: "0 10")]
 	protected float m_fLifetimeRndScale;
 	
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle size vs temperature [K]", params: "1300 1 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Particle size vs temperature [K]", params: "1300 1 0 0")]
 	protected ref Curve m_cSizeTemperatureCurve;
 	
 	[Attribute(defvalue: "2", "Precision of size", params: "0 8")]
 	protected int m_iSizePrecision;
 	
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle velocity [m/s] vs temperature [K]", params: "1300 3 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Particle velocity [m/s] vs temperature [K]", params: "1300 3 0 0")]
 	protected ref Curve m_cVelocityTemperatureCurve;
 	
 	[Attribute(defvalue: "2", "Precision of velocity", params: "0 8")]
 	protected int m_iVelocityPrecision;
 	
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Particle emitting time [s] vs temperature [K]", params: "1300 60 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Particle emitting time [s] vs temperature [K]", params: "1300 60 0 0")]
 	protected ref Curve m_cEmittingTimeTemperatureCurve;
 	
 	[Attribute(defvalue: "2", "Precision of velocity", params: "0 8")]

@@ -40,24 +40,20 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		ProjectileMoveComponent moveComponent = ProjectileMoveComponent.Cast(dummy.FindComponent(ProjectileMoveComponent));
 
 		array<ref array<float>> ballisticValues = {};
-		float zeroDrop = 0.0;
+		float time;
+		float zeroDrop = ComputeProjectileDrop(moveComponent, m_fDefaultZeroingRange, time);
 
 		for (int range = m_iMinRange; range <= m_iMaxRange; range += m_iRangeStep)
 		{
 			array<float> row = {range};
 			row.Resize(2 + WIND_SPEEDS.Count());
 			
-			float time;
-			float height = BallisticTable.GetHeightFromProjectile(range, time, dummy, m_fProjectileInitSpeedCoef);
-			float drop = -SCR_Math.ConvertFromRadians(Math.Atan2(height, range), m_eUnitType);
+			float drop = ComputeProjectileDrop(moveComponent, range, time);
 			
 			if (drop < MIN_DROP)
 				break;
 			
 			row[1] = drop;
-			
-			if (range == m_fDefaultZeroingRange)
-				zeroDrop = drop;
 						
 			foreach (int i, float windSpeed : WIND_SPEEDS)
 			{
@@ -95,6 +91,12 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		
 		SCR_BallisticData ballisticData = SCR_BallisticData.s_aBallistics[id];
 		return (ballisticData.ACE_GetUnitType() == m_eUnitType);
+	}
+	
+	protected float ComputeProjectileDrop(ProjectileMoveComponent moveComponent, float range, float time)
+	{
+		float height = BallisticTable.GetHeightFromProjectile(range, time, moveComponent.GetParentProjectile(), m_fProjectileInitSpeedCoef);
+		return -SCR_Math.ConvertFromRadians(Math.Atan2(height, range), m_eUnitType);
 	}
 	
 	//------------------------------------------------------------------------------------------------

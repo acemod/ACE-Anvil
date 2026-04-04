@@ -1,13 +1,16 @@
 //------------------------------------------------------------------------------------------------
 class ACE_BallisticTableComponentClass : SCR_BallisticTableComponentClass
 {
-	[Attribute(SCR_Enum.GetDefault(SCR_EOpticsAngleUnits.MILLIRADIANS), uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(SCR_EOpticsAngleUnits))]
+	[Attribute(SCR_Enum.GetDefault(SCR_EOpticsAngleUnits.MILLIRADIANS), uiwidget: UIWidgets.ComboBox, enums: ParamEnumArray.FromEnum(SCR_EOpticsAngleUnits), category: "Layouts")]
 	protected SCR_EOpticsAngleUnits m_eUnitType;
+	
+	[Attribute(defvalue: "{FC58AB2BEBBA6D0E}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_WpMils.layout", uiwidget: UIWidgets.ResourceNamePicker, category: "Layouts")]
+	protected ResourceName m_sACE_TableLayoutName;
 	
 	//------------------------------------------------------------------------------------------------
 	void UpdateBallisticData()
 	{
-		m_aBallisticPages.Clear();
+		m_aPages.Clear();
 		
 		SCR_ChimeraCharacter player = SCR_ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
 		if (!player)
@@ -45,13 +48,13 @@ class ACE_BallisticTableComponentClass : SCR_BallisticTableComponentClass
 			}
 		}
 		
-		m_aBallisticPages.Reserve(allBulletPrefab.Count());
+		m_aPages.Reserve(allBulletPrefab.Count());
 		
 		foreach (int i, ResourceName bulletPrefab : allBulletPrefab)
 		{
-			ACE_VisualisedBallisticConfig page = new ACE_VisualisedBallisticConfig(bulletPrefab, speedCoefs[i], defaultZeroingRanges[i], m_eUnitType);
+			ACE_VisualisedBallisticConfig page = new ACE_VisualisedBallisticConfig(bulletPrefab, speedCoefs[i], defaultZeroingRanges[i], m_sACE_TableLayoutName, m_eUnitType);
 			page.GenerateBallisticData();
-			m_aBallisticPages.Insert(page);
+			m_aPages.Insert(page);
 		}
 	}
 }

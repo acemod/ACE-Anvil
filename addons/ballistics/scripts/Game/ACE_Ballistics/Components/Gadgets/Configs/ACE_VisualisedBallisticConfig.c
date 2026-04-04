@@ -102,7 +102,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 			0, // initAzimuth
 			{windSpeed, 0, 0}, // windVelocity
 			0, // targetHeight
-			time, // maxSimulationTime
+			maxSimulationTime: time, // maxSimulationTime
 		);
 		return offset[0];
 	}

@@ -21,6 +21,12 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		m_iElevationChangeDownRange = 50;
 		m_fDefaultZeroingRange = defaultZeroingRange;
 		m_fStandardDispersion = defaultZeroingRange;
+		
+		m_sLayoutName = "{94BEF98329CC0B81}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_Mrads.layout";
+		m_sRowPrefab = "{F75FE2331AF70BF8}UI/layouts/Gadgets/BallisticTable/ContentRowLayout.layout";
+		m_sCellPrefab = "{801F5CED215A1CFF}UI/layouts/Gadgets/BallisticTable/Content.layout";
+		m_aGridFillWeights = {1, 1, 1, 1, 1};
+		m_sAverageDispersionFormat = "%1 m";
 	}
 	
 	//------------------------------------------------------------------------------------------------

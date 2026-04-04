@@ -73,6 +73,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 
 		SCR_BallisticData ballisticData = new SCR_BallisticData(ballisticValues, m_sProjectilePrefab, m_bDirectFireMode, m_iRangeStep, m_fProjectileInitSpeedCoef);
 		ballisticData.ACE_SetUnitType(m_eUnitType);
+		ballisticData.ACE_SetDefaultZeroingRange(m_fDefaultZeroingRange);
 		
 		if (!SCR_BallisticData.s_aBallistics)
 			SCR_BallisticData.s_aBallistics = {};
@@ -89,7 +90,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 			return false;
 		
 		SCR_BallisticData ballisticData = SCR_BallisticData.s_aBallistics[id];
-		return (ballisticData.ACE_GetUnitType() == m_eUnitType);
+		return (ballisticData.ACE_GetUnitType() == m_eUnitType) && (ballisticData.ACE_GetDefaultZeroingRange() == m_fDefaultZeroingRange);
 	}
 	
 	//------------------------------------------------------------------------------------------------

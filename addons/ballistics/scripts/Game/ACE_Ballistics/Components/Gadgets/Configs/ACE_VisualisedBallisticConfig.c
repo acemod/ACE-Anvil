@@ -3,7 +3,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	protected float m_fInitSpeedCoef;
 	protected float m_fDefaultZeroingRange;
 	
-	protected static const ref array<float> WIND_SPEEDS = {4, 6, 8};
+	protected static const float WIND_SPEED = 4.0;
 	protected static const float MIN_DROP = -30.0;
 	
 	//------------------------------------------------------------------------------------------------
@@ -46,7 +46,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		for (int range = m_iMinRange; range <= m_iMaxRange; range += m_iRangeStep)
 		{
 			array<float> row = {range};
-			row.Resize(2 + WIND_SPEEDS.Count());
+			row.Resize(3);
 			
 			float drop = ComputeProjectileDrop(moveComponent, range, time);
 			
@@ -54,13 +54,8 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 				break;
 			
 			row[1] = drop;
-						
-			foreach (int i, float windSpeed : WIND_SPEEDS)
-			{
-				float windage = ComputeProjectileWindage(moveComponent, initialSpeed, windSpeed, range, drop, time);
-				row[2 + i] = ACE_Math.Round(windage, 1);
-			}
-			
+			float windage = ComputeProjectileWindage(moveComponent, initialSpeed, WIND_SPEED, range, drop, time);
+			row[2] = ACE_Math.Round(windage, 1);
 			ballisticValues.Insert(row);
 		}
 		

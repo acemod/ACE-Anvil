@@ -3,11 +3,11 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	protected float m_fInitSpeedCoef;
 	protected float m_fDefaultZeroingRange;
 	
-	protected static const ref array<float> WIND_SPEEDS = {4, 6, 8};
+	protected static const float WIND_SPEED = 4.0;
 	protected static const float MIN_DROP = -30.0;
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_VisualisedBallisticConfig(ResourceName projectilePrefab, float initSpeedCoef = 1.0, float defaultZeroingRange = 100.0, SCR_EOpticsAngleUnits unitType = SCR_EOpticsAngleUnits.MILLIRADIANS)
+	void ACE_VisualisedBallisticConfig(ResourceName projectilePrefab, float initSpeedCoef = 1.0, float defaultZeroingRange = 100.0, ResourceName tableLayoutName = "", SCR_EOpticsAngleUnits unitType = SCR_EOpticsAngleUnits.MILLIRADIANS)
 	{
 		m_sProjectilePrefab = projectilePrefab;
 		m_sDisplayedText = FilePath.StripExtension(FilePath.StripPath(projectilePrefab));
@@ -21,6 +21,12 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		m_iElevationChangeDownRange = 50;
 		m_fDefaultZeroingRange = defaultZeroingRange;
 		m_fStandardDispersion = defaultZeroingRange;
+		
+		m_sLayoutName = tableLayoutName;
+		m_sRowPrefab = "{F75FE2331AF70BF8}UI/layouts/Gadgets/BallisticTable/ContentRowLayout.layout";
+		m_sCellPrefab = "{801F5CED215A1CFF}UI/layouts/Gadgets/BallisticTable/Content.layout";
+		m_aGridFillWeights = {1, 1, 1, 1, 1};
+		m_sAverageDispersionFormat = "%1 m";
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -34,32 +40,22 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		ProjectileMoveComponent moveComponent = ProjectileMoveComponent.Cast(dummy.FindComponent(ProjectileMoveComponent));
 
 		array<ref array<float>> ballisticValues = {};
-		float zeroDrop = 0.0;
+		float time;
+		float zeroDrop = ComputeProjectileDrop(moveComponent, m_fDefaultZeroingRange, time);
 
 		for (int range = m_iMinRange; range <= m_iMaxRange; range += m_iRangeStep)
 		{
 			array<float> row = {range};
-			row.Resize(2 + WIND_SPEEDS.Count());
+			row.Resize(3);
 			
-			float time;
-			float height = BallisticTable.GetHeightFromProjectile(range, time, dummy, m_fProjectileInitSpeedCoef);
-			float drop = -SCR_Math.ConvertFromRadians(Math.Atan2(height, range), m_eUnitType);
+			float drop = ComputeProjectileDrop(moveComponent, range, time);
 			
 			if (drop < MIN_DROP)
 				break;
 			
 			row[1] = drop;
-			
-			if (range == m_fDefaultZeroingRange)
-				zeroDrop = drop;
-						
-			foreach (int i, float windSpeed : WIND_SPEEDS)
-			{
-				float xOffset = ComputeProjectileWindageOffset(moveComponent, initialSpeed, windSpeed, drop, time);
-				float windage = SCR_Math.ConvertFromRadians(Math.Atan2(xOffset, range), m_eUnitType);
-				row[2 + i] = ACE_Math.Round(windage, 1);
-			}
-			
+			float windage = ComputeProjectileWindage(moveComponent, initialSpeed, WIND_SPEED, range, drop, time);
+			row[2] = ACE_Math.Round(windage, 1);
 			ballisticValues.Insert(row);
 		}
 		
@@ -93,8 +89,14 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		return (ballisticData.ACE_GetUnitType() == m_eUnitType) && (ballisticData.ACE_GetDefaultZeroingRange() == m_fDefaultZeroingRange);
 	}
 	
+	protected float ComputeProjectileDrop(ProjectileMoveComponent moveComponent, float range, float time)
+	{
+		float height = BallisticTable.GetHeightFromProjectile(range, time, moveComponent.GetParentProjectile(), m_fProjectileInitSpeedCoef);
+		return -SCR_Math.ConvertFromRadians(Math.Atan2(height, range), m_eUnitType);
+	}
+	
 	//------------------------------------------------------------------------------------------------
-	protected float ComputeProjectileWindageOffset(ProjectileMoveComponent moveComponent, float initialSpeed, float windSpeed, float drop, float time)
+	protected float ComputeProjectileWindage(ProjectileMoveComponent moveComponent, float initialSpeed, float windSpeed, float range, float drop, float time)
 	{
 		vector offset = moveComponent.GetProjectileSimulationResult(
 			vector.Zero, // initPosition
@@ -103,8 +105,8 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 			0, // initAzimuth
 			{windSpeed, 0, 0}, // windVelocity
 			0, // targetHeight
-			time, // maxSimulationTime
+			maxSimulationTime: time, // maxSimulationTime
 		);
-		return offset[0];
+		return SCR_Math.ConvertFromRadians(Math.Atan2(offset[0], range), m_eUnitType);
 	}
 }

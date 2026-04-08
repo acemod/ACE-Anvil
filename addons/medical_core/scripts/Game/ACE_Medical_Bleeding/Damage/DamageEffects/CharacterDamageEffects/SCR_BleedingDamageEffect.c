@@ -18,6 +18,7 @@ modded class SCR_BleedingDamageEffect : SCR_DotDamageEffect
 		
 		ACE_Medical_BloodLossDamageEffect bloodLossDamageEffect = new ACE_Medical_BloodLossDamageEffect();
 		bloodLossDamageEffect.SetMaxDuration(0);
+		bloodLossDamageEffect.SetDamageType(EDamageType.BLEEDING);
 		bloodLossDamageEffect.SetInstigator(GetInstigator());
 		dmgManager.AddDamageEffect(bloodLossDamageEffect);
 	}

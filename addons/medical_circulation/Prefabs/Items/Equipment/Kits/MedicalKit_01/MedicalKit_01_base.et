@@ -1,0 +1,33 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ACE_Medical_MedicalKitInventoryStorageComponent "{5E4E8A7876A50FDC}" {
+   MultiSlots {
+    MultiSlotConfiguration "{66E83E2AB3E32CD4}" {
+     SlotTemplate InventoryStorageSlot AmmoniumCarbonate {
+      Prefab "{58CF3AB87C441295}Prefabs/Items/Medicine/AmmoniumCarbonatePackage/ACE_Medical_AmmoniumCarbonatePackage.et"
+     }
+     NumSlots 8
+    }
+    MultiSlotConfiguration "{66E83E2AD137C97B}" {
+     SlotTemplate InventoryStorageSlot Naloxone {
+      Prefab "{02DD34077F51F65E}Prefabs/Items/Medicine/NaloxoneInjection/ACE_Medical_NaloxoneInjection.et"
+     }
+     NumSlots 8
+    }
+    MultiSlotConfiguration "{66E83E2AC236DEDE}" {
+     SlotTemplate InventoryStorageSlot Phenylephrine {
+      Prefab "{9BBA766CD869002C}Prefabs/Items/Medicine/PhenylephrineInjection/ACE_Medical_PhenylephrineInjection.et"
+     }
+     NumSlots 8
+    }
+    MultiSlotConfiguration "{66E83E2AE241C25A}" {
+     SlotTemplate InventoryStorageSlot Metoprolol {
+      Prefab "{D0434D5215B54181}Prefabs/Items/Medicine/MetoprololInjection/ACE_Medical_MetoprololInjection.et"
+     }
+     NumSlots 8
+    }
+   }
+  }
+ }
+}

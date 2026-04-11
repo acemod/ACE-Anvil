@@ -26,6 +26,12 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	protected float m_fReviveSuccessCheckTimerScale = 1;
 	
+	//! Blood pH (7.4 = normal, 7.35 = impact threshold, 6.8 = maximum acidosis)
+	protected float m_fBloodPH = 7.4;
+	
+	//! Heart weakness factor derived from pH (0 = none, 1 = max); cached when pH changes
+	protected float m_fHeartWeaknessFactor = 0;
+	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
 	{
@@ -176,6 +182,34 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 			m_fMeanArterialPressureKPA + 2/3 * m_fPulsePressureKPA
 		);
 	}
+
+	//------------------------------------------------------------------------------------------------
+	//! Get blood pH (7.4 = normal, 6.8 = maximum acidosis)
+	float GetBloodPH()
+	{
+		return m_fBloodPH;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Set blood pH
+	void SetBloodPH(float pH)
+	{
+		m_fBloodPH = pH;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Get heart weakness factor (0 = none, 1 = max); derived from pH in circulation states
+	float GetHeartWeaknessFactor()
+	{
+		return m_fHeartWeaknessFactor;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Set heart weakness factor (0 = none, 1 = max)
+	void SetHeartWeaknessFactor(float factor)
+	{
+		m_fHeartWeaknessFactor = Math.Clamp(factor, 0.0, 1.0);
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	void SetHeartRateMedicationAdjustment(float adjustment)
@@ -228,6 +262,9 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 			SetPulsePressure(settings.m_fDefaultPulsePressureKPA);
 		}
 		
+		// TODO: Replace with ACE_MaterialProperties::DEFAULT_PH_BLOOD
+		SetBloodPH(7.4);
+		SetHeartWeaknessFactor(0);
 		SetHeartRateMedicationAdjustment(0);
 		SetSystemicVascularResistenceMedicationAdjustment(0);
 		SetReviveSuccessCheckTimerScale(1);

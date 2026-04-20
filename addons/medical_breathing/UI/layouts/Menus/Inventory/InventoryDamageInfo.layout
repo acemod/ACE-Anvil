@@ -1,0 +1,39 @@
+FrameWidgetClass {
+ {
+  FrameWidgetClass "{5CEED9EF77337926}" {
+   Prefab "{5CEED9EF77337926}"
+   {
+    SizeLayoutWidgetClass "{5CEED9EF77337922}" {
+     Prefab "{5CEED9EF77337922}"
+     {
+      FrameWidgetClass "{5CEED9EF7733792C}" {
+       Prefab "{5CEED9EF7733792C}"
+       {
+        OverlayWidgetClass "{5CEED9EF7733792D}" {
+         Prefab "{5CEED9EF7733792D}"
+         {
+          VerticalLayoutWidgetClass "{5CEED9EF7733792A}" {
+           Prefab "{5CEED9EF7733792A}"
+           {
+            VerticalLayoutWidgetClass "{5CEED9EF773378D2}" {
+             Prefab "{5CEED9EF773378D2}"
+             {
+              HorizontalLayoutWidgetClass "{671D563B356BC355}" : "{28C7A857DA90B1B9}UI/layouts/Menus/Inventory/Medical/ACE_Medical_PneumothoraxTooltipEntry.layout" {
+               Name "ACE_Medical_PneumothoraxLayout"
+               Slot LayoutSlot "{671D5632B4FB4339}" {
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

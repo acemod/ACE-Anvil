@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{172A7A035D3314DC}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons-200_atlas.edds"
+ Configurations {
+  TIFFResourceClass PC : "{1D692833852EC72A}Configs/System/ResourceTypes/PC/TextureUIAtlas.conf" {
+  }
+  TIFFResourceClass XBOX_ONE : "{96767353535A4256}Configs/System/ResourceTypes/XBOX_ONE/TextureUIAtlas.conf" {
+  }
+  TIFFResourceClass XBOX_SERIES : "{8A3A5BA26FD3DE70}Configs/System/ResourceTypes/XBOX_SERIES/TextureUIAtlas.conf" {
+  }
+  TIFFResourceClass PS4 : "{962DE8F3FC2848A3}Configs/System/ResourceTypes/PS4/TextureUIAtlas.conf" {
+  }
+  TIFFResourceClass PS5 : "{BED5DFAD2A554849}Configs/System/ResourceTypes/PS5/TextureUIAtlas.conf" {
+  }
+  TIFFResourceClass HEADLESS : "{15892FB1C3E30D2C}Configs/System/ResourceTypes/HEADLESS/TextureUIAtlas.conf" {
+  }
+ }
+}

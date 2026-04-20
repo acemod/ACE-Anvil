@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{42333020C90DFC23}UI/layouts/Menus/Inventory/Medical/ACE_Medical_PneumothoraxInfo.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass PS5 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

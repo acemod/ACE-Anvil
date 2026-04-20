@@ -1,0 +1,58 @@
+MetaFileClass {
+ Name "{DC6A627D67D78EA1}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   MaterialAssigns {
+    MaterialAssignClass "{62DE1B8526F487DC}" {
+     SourceMaterial "ACE_Medical_NCDKit_Casing"
+     AssignedMaterial "{044A8826CD545498}Assets/Items/Medicine/NCDKit/Data/ACE_Medical_NCDKit_Casing.emat"
+    }
+    MaterialAssignClass "{62DE1B8526F4872B}" {
+     SourceMaterial "ACE_Medical_NCDKit_Hose"
+     AssignedMaterial "{F293518E6FBA02B1}Assets/Items/Medicine/NCDKit/Data/ACE_Medical_NCDKit_Hose.emat"
+    }
+    MaterialAssignClass "{62DE1B8526F48728}" {
+     SourceMaterial "ACE_Medical_NCDKit_Needle"
+     AssignedMaterial "{96930A6037D159F1}Assets/Items/Medicine/NCDKit/Data/ACE_Medical_NCDKit_Needle.emat"
+    }
+    MaterialAssignClass "{62DE1B89A9E0E48C}" {
+     SourceMaterial "ACE_Medical_NCDKit_HoseHub"
+     AssignedMaterial "{1125E326AEE846C2}Assets/Items/Medicine/NCDKit/Data/ACE_Medical_NCDKit_HoseHub.emat"
+    }
+    MaterialAssignClass "{62DE1B89A9E0E4ED}" {
+     SourceMaterial "ACE_Medical_NCDKit_NeedleHub"
+     AssignedMaterial "{140E5D026951B89A}Assets/Items/Medicine/NCDKit/Data/ACE_Medical_NCDKit_NeedleHub.emat"
+    }
+   }
+   MeshParams {
+    MeshParam Casing {
+    }
+    MeshParam Hose {
+    }
+    MeshParam Needle {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_Casing {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass PS5 : PC {
+  }
+  FBXResourceClass HEADLESS : PC {
+  }
+ }
+}

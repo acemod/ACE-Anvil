@@ -1,0 +1,11 @@
+MatPBRBasic {
+ SpecularIBL 0.479 0.479 0.479 1
+ Sort translucent
+ SpecularMul 0.821
+ RoughnessScale 0.5
+ MetalnessScale 0
+ DielectricReflectance 0.16
+ BCRMap "{ABB98B08FD30AC68}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Hose_BCR.edds"
+ OpacityMap "{53A2DEB3D50659DA}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Hose_OPM.edds"
+ NMOMap "{7F92A109E5798898}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_NMO.edds"
+}

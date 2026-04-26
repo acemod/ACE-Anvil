@@ -8,11 +8,17 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected float m_fACE_Medical_ResilienceRegenScale = 1;
 	protected float m_fACE_Medical_ResilienceDamageScale = 1;
 
+	protected float m_fACE_Medical_LastAdrenalineHitResponseTime = 0.0;
+
+	protected const float ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_COOLDOWN = 12.0;
+	protected const float ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_MIN_DAMAGE = 0.05;
+	protected const float ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_DURATION = 8.0;
+	protected const float ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_DPS = -0.04;
+
 	[RplProp()]
 	protected float m_fACE_Medical_MinHealthScaledForEpinephrine = 0.33;
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Initialize members
 	override void OnPostInit(IEntity owner)
 	{
 		super.OnPostInit(owner);
@@ -35,7 +41,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Update last struck physical hit zone
 	override void OnDamage(notnull BaseDamageContext damageContext)
 	{
 		super.OnDamage(damageContext);
@@ -46,6 +51,36 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		SCR_CharacterHitZone struckPhysicalHitZone = SCR_CharacterHitZone.Cast(damageContext.struckHitZone);
 		if (struckPhysicalHitZone)
 			m_ACE_Medical_LastStruckPhysicalHitZone = struckPhysicalHitZone;
+
+		ACE_Medical_ApplyAdrenalineHitResponse(damageContext);
+	}
+
+	//-----------------------------------------------------------------------------------------------------------
+	protected void ACE_Medical_ApplyAdrenalineHitResponse(notnull BaseDamageContext damageContext)
+	{
+		if (!Replication.IsServer())
+			return;
+
+		if (damageContext.damageValue < ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_MIN_DAMAGE)
+			return;
+
+		float currentTime = GetGame().GetWorld().GetWorldTime();
+
+		if (currentTime < m_fACE_Medical_LastAdrenalineHitResponseTime + ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_COOLDOWN)
+			return;
+
+		array<ref SCR_PersistentDamageEffect> effects = GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
+		if (!effects.IsEmpty())
+			return;
+
+		ACE_Medical_EpinephrineDamageEffect epiEffect = new ACE_Medical_EpinephrineDamageEffect();
+
+		epiEffect.SetMaxDuration(ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_DURATION);
+		epiEffect.SetDPS(ACE_MEDICAL_ADRENALINE_HIT_RESPONSE_DPS);
+
+		AddDamageEffect(epiEffect);
+
+		m_fACE_Medical_LastAdrenalineHitResponseTime = currentTime;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -61,7 +96,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected void ACE_Medical_OnKilled();
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Returns last stuck physical hit zone
 	SCR_CharacterHitZone ACE_Medical_GetLastStruckPhysicalHitZone()
 	{
 		return m_ACE_Medical_LastStruckPhysicalHitZone;
@@ -89,7 +123,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Check if epinephrine can be applied to this character
 	bool ACE_Medical_CanApplyEpinephrine(out SCR_EConsumableFailReason failReason)
 	{
 		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
@@ -103,7 +136,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			return false;
 		}
 		
-		// Check if epinephrine is in the system already
 		array<ref SCR_PersistentDamageEffect> effects = GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
 		if (!effects.IsEmpty())
 		{
@@ -111,14 +143,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			return false;
 		}
 		
-		// Cannot be applied while bleeding
 		if (IsBleeding())
 		{
 			failReason = SCR_EConsumableFailReason.IS_BLEEDING;
 			return false;
 		}
 		
-		// Check if too injured
 		if (m_ACE_Medical_HealthHitZone.GetHealthScaled() < m_fACE_Medical_MinHealthScaledForEpinephrine)
 		{
 			failReason = SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED;
@@ -129,8 +159,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Returns overall scaled health of the character
-	//! Should be used instead of GetHealthScaled
 	float ACE_Medical_GetHealthScaled()
 	{
 		return m_ACE_Medical_HealthHitZone.GetHealthScaled();

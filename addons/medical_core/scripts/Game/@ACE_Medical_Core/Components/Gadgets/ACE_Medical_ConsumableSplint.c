@@ -15,6 +15,12 @@ class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(target);
 		if (!char)
 			return false;
+
+		if (!ACE_Medical_IsLimbGroup(group))
+		{
+			failReason = SCR_EConsumableFailReason.UNDAMAGED;
+			return false;
+		}
 		
 		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
 		if (!damageManager)
@@ -42,6 +48,17 @@ class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 		}
 		
 		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected bool ACE_Medical_IsLimbGroup(ECharacterHitZoneGroup group)
+	{
+		return (
+			group == ECharacterHitZoneGroup.LEFTARM ||
+			group == ECharacterHitZoneGroup.RIGHTARM ||
+			group == ECharacterHitZoneGroup.LEFTLEG ||
+			group == ECharacterHitZoneGroup.RIGHTLEG
+		);
 	}
 	
 	//------------------------------------------------------------------------------------------------

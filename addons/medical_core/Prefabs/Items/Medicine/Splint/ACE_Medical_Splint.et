@@ -24,6 +24,9 @@ GenericEntity : "{30CDE9F71FC702E8}Prefabs/Items/Medicine/FieldDressing_01/Field
      }
     }
     CustomAttributes {
+     SCR_AlternativeModel "{6098B95342DA15AE}" {
+      m_sAlternativeModel "{13555448DB9FBF2C}Assets/Items/Medicine/Splint/ACE_Medical_Splint.xob"
+     }
      PreviewRenderAttributes "{6098B9508619B4D0}" {
       CameraOrbitAngles 0 -30 220
       CameraDistanceToItem 1.3
@@ -38,11 +41,18 @@ GenericEntity : "{30CDE9F71FC702E8}Prefabs/Items/Medicine/FieldDressing_01/Field
   }
   SCR_ConsumableItemComponent "{5943631460899505}" {
    m_ConsumableEffect ACE_Medical_ConsumableSplint "{594363147CC4C6BE}" {
+    m_bDeleteOnUse 0
     m_fItemRegenerationSpeed 0.7
     m_fItemRegenerationDuration 30
     m_aDamageEffectsToLoad {
      ACE_Medical_SplintDamageEffect "{6122D60853A60F10}" {
      }
+    }
+   }
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    ACE_Medical_RemoveSplintUserAction "{6935242C77BE1AB6}" {
     }
    }
   }

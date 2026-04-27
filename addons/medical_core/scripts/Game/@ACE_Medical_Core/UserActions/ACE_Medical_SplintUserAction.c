@@ -8,8 +8,7 @@ class ACE_Medical_SplintUserAction : SCR_MorphineUserAction
 	//! Same as in SCR_MorphineUserAction, but handle case where target is bleeding
 	override bool CanBePerformedScript(IEntity user)
 	{
-		// Medic character
-		ChimeraCharacter userCharacter = ChimeraCharacter.Cast(user);
+		SCR_ChimeraCharacter userCharacter = SCR_ChimeraCharacter.Cast(user);
 		if (!userCharacter)
 			return false;
 		

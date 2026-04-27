@@ -3,6 +3,8 @@
 [BaseContainerProps()]
 class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 {
+	protected const float ACE_MEDICAL_SPLINT_HEAL_THRESHOLD = 0.5;
+
 	//------------------------------------------------------------------------------------------------
 	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
 	{
@@ -66,7 +68,7 @@ class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 	{
 		foreach (HitZone hitZone : groupHitZones)
 		{
-			if (hitZone.GetHealthScaled() < 0.667)
+			if (hitZone.GetHealthScaled() < ACE_MEDICAL_SPLINT_HEAL_THRESHOLD)
 				return true;
 		}
 		

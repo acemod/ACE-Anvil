@@ -3,6 +3,12 @@
 class ACE_Medical_RemoveSplintUserAction : SCR_MorphineUserAction
 {
 	//------------------------------------------------------------------------------------------------
+	override bool CanBeShownScript(IEntity user)
+	{
+		return CanBePerformedScript(user);
+	}
+
+	//------------------------------------------------------------------------------------------------
 	override bool CanBePerformedScript(IEntity user)
 	{
 		SCR_ChimeraCharacter targetCharacter = SCR_ChimeraCharacter.Cast(GetOwner());
@@ -16,10 +22,7 @@ class ACE_Medical_RemoveSplintUserAction : SCR_MorphineUserAction
 		array<HitZone> groupHitZones = {};
 		damageManager.GetHitZonesOfGroup(m_eHitZoneGroup, groupHitZones);
 
-		if (!damageManager.IsDamageEffectPresentOnHitZones(ACE_Medical_SplintDamageEffect, groupHitZones))
-			return false;
-
-		return true;
+		return damageManager.IsDamageEffectPresentOnHitZones(ACE_Medical_SplintDamageEffect, groupHitZones);
 	}
 
 	//------------------------------------------------------------------------------------------------

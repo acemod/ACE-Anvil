@@ -41,18 +41,12 @@ GenericEntity : "{30CDE9F71FC702E8}Prefabs/Items/Medicine/FieldDressing_01/Field
   }
   SCR_ConsumableItemComponent "{5943631460899505}" {
    m_ConsumableEffect ACE_Medical_ConsumableSplint "{594363147CC4C6BE}" {
-    m_bDeleteOnUse 0
     m_fItemRegenerationSpeed 0.7
-    m_fItemRegenerationDuration 30
+    m_fItemRegenerationDuration 90
     m_aDamageEffectsToLoad {
      ACE_Medical_SplintDamageEffect "{6122D60853A60F10}" {
+      m_fACE_SplintHealTarget 0.5
      }
-    }
-   }
-  }
-  ActionsManagerComponent "{508AB5952B584B2E}" {
-   additionalActions {
-    ACE_Medical_RemoveSplintUserAction "{6935242C77BE1AB6}" {
     }
    }
   }

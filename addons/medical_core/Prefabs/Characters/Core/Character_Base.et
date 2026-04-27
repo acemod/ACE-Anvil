@@ -70,58 +70,6 @@ SCR_ChimeraCharacter {
      m_eHitZoneGroup RIGHTLEG
      m_eConsumableType ACE_MEDICAL_SPLINT
     }
-    ACE_Medical_RemoveSplintUserAction "{69369E27399985AD}" {
-     ParentContextList {
-      "RightLeg"
-     }
-     UIInfo SCR_ActionUIInfo "{69369E3345180C17}" {
-      Name "Remove Splint"
-      m_sIconName "medical"
-     }
-     Duration 3
-     "Sort Priority" 100
-     m_eHitZoneGroup RIGHTLEG
-     m_eConsumableType ACE_MEDICAL_SPLINT
-    }
-    ACE_Medical_RemoveSplintUserAction "{69369E27ED945F0B}" {
-     ParentContextList {
-      "LeftLeg"
-     }
-     UIInfo SCR_ActionUIInfo "{69369E3345180C17}" {
-      Name "Remove Splint"
-      m_sIconName "medical"
-     }
-     Duration 3
-     "Sort Priority" 100
-     m_eHitZoneGroup LEFTLEG
-     m_eConsumableType ACE_MEDICAL_SPLINT
-    }
-    ACE_Medical_RemoveSplintUserAction "{69369E27FE87A4B1}" {
-     ParentContextList {
-      "LeftArm"
-     }
-     UIInfo SCR_ActionUIInfo "{69369E3345180C17}" {
-      Name "Remove Splint"
-      m_sIconName "medical"
-     }
-     Duration 3
-     "Sort Priority" 100
-     m_eHitZoneGroup LEFTARM
-     m_eConsumableType ACE_MEDICAL_SPLINT
-    }
-    ACE_Medical_RemoveSplintUserAction "{69369E27D56477B2}" {
-     ParentContextList {
-      "RightArm"
-     }
-     UIInfo SCR_ActionUIInfo "{69369E3345180C17}" {
-      Name "Remove Splint"
-      m_sIconName "medical"
-     }
-     Duration 3
-     "Sort Priority" 100
-     m_eHitZoneGroup RIGHTARM
-     m_eConsumableType ACE_MEDICAL_SPLINT
-    }
     ACE_Medical_RepositionUserAction "{630C32646482C8E5}" {
      ParentContextList {
       "LowerTorso"

@@ -8,6 +8,7 @@ StringTable {
    Target_es_es "Médico"
    Target_ko_kr "의료"
    Target_pt_br "Médico"
+   Target_ja_jp "医療"
    Modified 1699833891
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -21,6 +22,7 @@ StringTable {
    Target_ko_kr "회복력"
    Target_pt_br "Resiliência"
    Target_zh_cn "恢復力"
+   Target_ja_jp "回復力"
    Modified 1725220405
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -38,6 +40,7 @@ StringTable {
    Target_pt_br "Injetar epinefrina"
    Target_zh_cn "注射腎上腺素"
    Target_uk_ua "Вколоти адреналін"
+   Target_ja_jp "エピネフリンを投与する"
    Modified 1725220431
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -55,6 +58,7 @@ StringTable {
    Target_pt_br "Sem dor"
    Target_zh_cn "無疼痛"
    Target_uk_ua "Не відчуває болю"
+   Target_ja_jp "痛みはない"
    Modified 1725496849
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -72,6 +76,7 @@ StringTable {
    Target_pt_br "Consciente"
    Target_zh_cn "未昏迷"
    Target_uk_ua "У свідомості"
+   Target_ja_jp "意識不明ではない"
    Modified 1725220523
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -89,6 +94,7 @@ StringTable {
    Target_pt_br "Ferido gravemente"
    Target_zh_cn "傷勢過重"
    Target_uk_ua "Надто поранений"
+   Target_ja_jp "怪我が酷い"
    Modified 1725497083
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -106,6 +112,7 @@ StringTable {
    Target_pt_br "Aumenta as possibilidades de acordar"
    Target_zh_cn "增加甦醒機率"
    Target_uk_ua "Збільшує ймовірність пробудження"
+   Target_ja_jp "蘇生確率が高くなる"
    Modified 1725220754
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -123,6 +130,7 @@ StringTable {
    Target_pt_br "Aliviar dor intensa"
    Target_zh_cn "緩解劇烈疼痛"
    Target_uk_ua "Знімає сильний біль"
+   Target_ja_jp "激しい痛みを和らげる"
    Modified 1725220793
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -140,6 +148,7 @@ StringTable {
    Target_pt_br "Administrado a pacientes inconscientes."
    Target_zh_cn "給予昏迷的患者使用"
    Target_uk_ua "Призначають пацієнтам без свідомості."
+   Target_ja_jp "意識が無い場合に投与する."
    Modified 1725223370
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -157,6 +166,7 @@ StringTable {
    Target_pt_br "Epinefrina"
    Target_zh_cn "腎上腺素"
    Target_uk_ua "Ін'єкція адреналіну"
+   Target_ja_jp "エピネフリン"
    Modified 1725220837
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -174,6 +184,7 @@ StringTable {
    Target_pt_br "Administrado a pacientes com dor intensa."
    Target_zh_cn "用於治療劇烈疼痛的患者"
    Target_uk_ua "Призначають пацієнтам із сильним болем."
+   Target_ja_jp "激しい痛みがある場合に投与する."
    Modified 1725222289
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
@@ -187,6 +198,7 @@ StringTable {
    Target_ko_kr "원형 의료 메뉴 열기"
    Target_pt_br "Abrir menu médico radial"
    Target_zh_cn "打開醫療環形選單"
+   Target_ja_jp "医療メニューを開く"
    Modified 1725496962
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -200,6 +212,7 @@ StringTable {
    Target_ko_kr "환자 검사"
    Target_pt_br "Examinar paciente"
    Target_zh_cn "檢查傷患"
+   Target_ja_jp "診察する"
    Modified 1725496555
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -213,6 +226,7 @@ StringTable {
    Target_ko_kr "체액 복구"
    Target_pt_br "Substituir fluidos"
    Target_zh_cn "補液"
+   Target_ja_jp "輸液"
    Modified 1725221453
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -226,6 +240,7 @@ StringTable {
    Target_ko_kr "골절 관리"
    Target_pt_br "Tratamento de fraturas"
    Target_zh_cn "骨折處置"
+   Target_ja_jp "骨折の治療"
    Modified 1725497003
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -239,6 +254,7 @@ StringTable {
    Target_ko_kr "지혈"
    Target_pt_br "Controlo da hemorragia"
    Target_zh_cn "止血"
+   Target_ja_jp "出血"
    Modified 1725221536
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -252,6 +268,7 @@ StringTable {
    Target_ko_kr "약물"
    Target_pt_br "Medicação"
    Target_zh_cn "藥物治療"
+   Target_ja_jp "薬"
    Modified 1725221632
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -265,6 +282,7 @@ StringTable {
    Target_ko_kr "똑바로 눕히기"
    Target_pt_br "Virar de costas"
    Target_zh_cn "翻為仰躺"
+   Target_ja_jp "仰向けにする"
    Modified 1725496394
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -278,6 +296,7 @@ StringTable {
    Target_ko_kr "좌측으로 회복자세 교정하기"
    Target_pt_br "Por em posição de recuperação esquerda"
    Target_zh_cn "翻至左側復甦姿勢"
+   Target_ja_jp "左向きに寝かせる"
    Modified 1725496514
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"
@@ -291,6 +310,7 @@ StringTable {
    Target_ko_kr "우측으로 회복자세 교정하기"
    Target_pt_br "Por em posição de recuperação direita"
    Target_zh_cn "翻至右側復甦姿勢"
+   Target_ja_jp "右向きに寝かせる"
    Modified 1725496522
    Author "Kexanone"
    LastChanged "KingDaddyBoyz"

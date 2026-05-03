@@ -1,0 +1,25 @@
+GenericEntity {
+ ID "627CE52CCB2692FE"
+ components {
+  SignalsManagerComponent "{655E050163DEE0CD}" {
+  }
+  ActionsManagerComponent "{F32B667C3C823800}" {
+   additionalActions {
+    ACE_AdjustDoorAction "{6560F161895D7624}" {
+     ParentContextList {
+      "SCR_DoorUserAction"
+     }
+     UIInfo UIInfo "{6560F1618D9B852B}" {
+      Name "#ACE_Doors-UserAction_Adjust"
+     }
+     Duration -1
+     PerformPerFrame 1
+     "Sort Priority" 2
+     "Signal name" "adjust"
+     m_fAdjustmentStep 0.05
+     m_bManualAdjustment 1
+    }
+   }
+  }
+ }
+}

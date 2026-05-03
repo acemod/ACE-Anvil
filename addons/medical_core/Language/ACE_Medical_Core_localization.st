@@ -8,10 +8,11 @@ StringTable {
    Target_es_es "Médico"
    Target_ko_kr "의료"
    Target_pt_br "Médico"
+   Target_fr_fr "Médecin"
    Target_ja_jp "医療"
    Modified 1699833891
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{660F338D19E8B527}" {
    Id "ACE_Medical-Editor_TooltipDetail_Resilience_Name"
@@ -21,16 +22,17 @@ StringTable {
    Target_es_es "Resiliencia"
    Target_ko_kr "회복력"
    Target_pt_br "Resiliência"
+   Target_fr_fr "Résilience"
    Target_zh_cn "恢復力"
    Target_ja_jp "回復力"
    Modified 1725220405
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60CF45A3ED3C6951}" {
    Id "ACE_Medical-EpinephrineInjectionAction"
    Target_en_us "Inject epinephrine"
-   Target_fr_fr "Injecter de l'adrénaline"
+   Target_fr_fr "Injecter de l'épiméphine"
    Target_it_it "Somministrare adrenalina"
    Target_de_de "Epinephrin injizieren"
    Target_es_es "Inyectar epinefrina"
@@ -43,7 +45,7 @@ StringTable {
    Target_ja_jp "エピネフリンを投与する"
    Modified 1725220431
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60C8CE8D36767C39}" {
    Id "ACE_Medical-FailReason_NoPain"
@@ -66,7 +68,7 @@ StringTable {
   CustomStringTableItem "{60CF45A099EA2D99}" {
    Id "ACE_Medical-FailReason_NotUnconscious"
    Target_en_us "Not unconscious"
-   Target_fr_fr "Pas inconscient"
+   Target_fr_fr "Conscient"
    Target_it_it "Non incosciente"
    Target_de_de "Nicht bewusstlos"
    Target_es_es "Consciente"
@@ -79,12 +81,12 @@ StringTable {
    Target_ja_jp "意識不明ではない"
    Modified 1725220523
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60F61507D00761D0}" {
    Id "ACE_Medical-FailReason_TooInjured"
    Target_en_us "Too injured"
-   Target_fr_fr "Trop grièvement blessé"
+   Target_fr_fr "Grièvement blessé"
    Target_it_it "Eccessivamente ferito"
    Target_de_de "Zu verletzt"
    Target_es_es "Herido grave"
@@ -97,7 +99,7 @@ StringTable {
    Target_ja_jp "怪我が酷い"
    Modified 1725497083
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60CF45A17B6601E3}" {
    Id "ACE_Medical-InfoWidget_Epinephrine"
@@ -120,7 +122,7 @@ StringTable {
   CustomStringTableItem "{60C8F66C4889FFD9}" {
    Id "ACE_Medical-InfoWidget_Morphine"
    Target_en_us "Alleviates severe pain"
-   Target_fr_fr "Allège une douleur violente"
+   Target_fr_fr "Soulage les douleurs intenses"
    Target_it_it "Allevia il dolore severo"
    Target_de_de "Lindert starke Schmerzen"
    Target_es_es "Aliviar dolor intenso"
@@ -133,7 +135,7 @@ StringTable {
    Target_ja_jp "激しい痛みを和らげる"
    Modified 1725220793
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60CF45A0A9B86435}" {
    Id "ACE_Medical-Item_Epinephrine_Description"
@@ -156,7 +158,7 @@ StringTable {
   CustomStringTableItem "{60CF45A0B47E9549}" {
    Id "ACE_Medical-Item_Epinephrine_Name"
    Target_en_us "Epinephrine"
-   Target_fr_fr "Adrénaline"
+   Target_fr_fr "Épinéphrine"
    Target_it_it "Adrenalina"
    Target_de_de "Epinephrin"
    Target_es_es "Epinefrina"
@@ -169,12 +171,12 @@ StringTable {
    Target_ja_jp "エピネフリン"
    Modified 1725220837
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{5E101C5589E004EE}" {
    Id "ACE_Medical-Item_Morphine_Description"
    Target_en_us "Administered to patients in severe pain."
-   Target_fr_fr "Administrée à des patients ressentant une douleur violente."
+   Target_fr_fr "Administré aux patients souffrant de douleurs intenses."
    Target_it_it "Somministrato a pazienti con dolore severo."
    Target_de_de "Verabreicht an Patienten mit akuten Schmerzen."
    Target_es_es "Administrado a pacientes con dolor intenso."
@@ -187,11 +189,12 @@ StringTable {
    Target_ja_jp "激しい痛みがある場合に投与する."
    Modified 1725222289
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{65515E08A4E02C61}" {
    Id "ACE_Medical-KeyBind_OpenRadialMenu"
    Target_en_us "Open medical radial menu"
+   Target_fr_fr "Ouvrir le menu radial médical"
    Target_it_it "Apri menu medico radiale"
    Target_de_de "Öffne medizinisches Kreismenü"
    Target_es_es "Abrir menú radial médico"
@@ -201,11 +204,12 @@ StringTable {
    Target_ja_jp "医療メニューを開く"
    Modified 1725496962
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{65516A9625D01268}" {
    Id "ACE_Medical-RadialMenu_ExaminePatient"
    Target_en_us "Examine patient"
+   Target_fr_fr "Examiner le patient"
    Target_it_it "Valuta il paziente"
    Target_de_de "Patient untersuchen"
    Target_es_es "Examinar paciente"
@@ -215,11 +219,12 @@ StringTable {
    Target_ja_jp "診察する"
    Modified 1725496555
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{65516A94855EB699}" {
    Id "ACE_Medical-RadialMenu_FluidReplacement"
    Target_en_us "Fluid Replacement"
+   Target_fr_fr "Remplacement du fluide"
    Target_it_it "Ripristino dei fluidi"
    Target_de_de "Volumentherapie"
    Target_es_es "Reemplazar fluidos"
@@ -229,11 +234,12 @@ StringTable {
    Target_ja_jp "輸液"
    Modified 1725221453
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{65516A967A9EA7B6}" {
    Id "ACE_Medical-RadialMenu_FractureManagement"
    Target_en_us "Fracture management"
+   Target_fr_fr "Gestion des fractures"
    Target_it_it "Gestione delle fratture"
    Target_de_de "Frakturbehandlung"
    Target_es_es "Tratamiento de fracturas"
@@ -243,11 +249,12 @@ StringTable {
    Target_ja_jp "骨折の治療"
    Modified 1725497003
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{65516A94A58D1608}" {
    Id "ACE_Medical-RadialMenu_HemorrhageControl"
    Target_en_us "Hemorrhage control"
+   Target_fr_fr "Contrôle des hémorragies"
    Target_it_it "Controllo delle emorragie"
    Target_de_de "Blutstillung"
    Target_es_es "Control de hemorragia"
@@ -257,11 +264,12 @@ StringTable {
    Target_ja_jp "出血"
    Modified 1725221536
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{65516A97B16C0831}" {
    Id "ACE_Medical-RadialMenu_Medication"
    Target_en_us "Medication"
+   Target_fr_fr "Médication"
    Target_it_it "Farmaci"
    Target_de_de "Medikation"
    Target_es_es "Medicación"
@@ -271,11 +279,12 @@ StringTable {
    Target_ja_jp "薬"
    Modified 1725221632
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{630D4CCE326184CA}" {
    Id "ACE_Medical-UserAction_BackPosition"
    Target_en_us "Put on back"
+   Target_fr_fr "Mettre sur le dos"
    Target_it_it "Posiziona supino"
    Target_de_de "Auf den Rücken drehen"
    Target_es_es "Poner de espaldas"
@@ -285,11 +294,12 @@ StringTable {
    Target_ja_jp "仰向けにする"
    Modified 1725496394
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{630D4CCE36458E06}" {
    Id "ACE_Medical-UserAction_LeftRecoveryPosition"
    Target_en_us "Put in left recovery position"
+   Target_fr_fr "Mettre en position de récupération gauche"
    Target_it_it "Posiziona in decubito laterale sinistro"
    Target_de_de "In linke Bewusstlosenlagerung bringen"
    Target_es_es "Poner en posición de recuperación izquierda"
@@ -299,11 +309,12 @@ StringTable {
    Target_ja_jp "左向きに寝かせる"
    Modified 1725496514
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64FB538E9326BF80}" {
    Id "ACE_Medical-UserAction_RightRecoveryPosition"
    Target_en_us "Put in right recovery position"
+   Target_fr_fr "Mettre en position de récupération droite"
    Target_it_it "Posiziona in decubito laterale destro"
    Target_de_de "In rechte Bewusstlosenlagerung bringen"
    Target_es_es "Poner en posición de recuperación derecha"
@@ -313,7 +324,7 @@ StringTable {
    Target_ja_jp "右向きに寝かせる"
    Modified 1725496522
    Author "Kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
  }
 }

@@ -359,7 +359,47 @@ Template for the `missionHeader` in a server config:
 
 ### Overview
 
-_TBD_
+ACE Medical Defibrillation extends ACE Medical Circulation with basic electrophysiology. This serves as the test bed for more advanced electrophysicology to be added in the future. Current prototypes:
+
+- Defibrillation System
+    - Automated External Defibrillator
+        - Self manages defibrillator state.
+        - Determines if patient is in shockable rhythm.
+        - Automatically charges when shockable rhythm is found.
+        - Will automatically perform rhythm checks over time. Players only need to continue CPR and shock when advised.
+        - If shock is delivered to patient while CPR is being performed, CPR performer will be stunned.
+        - AED does not stop and will continue to cycle, well after patient is fully dead.
+
+When shocks are delivered, a modifier is added to the unconscious check within the Cardiovascular System to increase chances of awakening. Players can simply choose to do nothing and not interact with an AED and still revive players, only slower.
+
+### Rhythms
+
+For code simplicity, rhythms have been significantly simplified compared to real life:
+
+| Rhythm                                 | Vital State              | Blood State          | Heart Rate |
+| -------------------------------------- | ------------------------ | -------------------- | ---------- |
+| Pulseless Electrical Activity (PEA)    | Cardiac Arrest           | Class 4 Hemorrhage   | N/A        |
+| Ventricular Fibrillation (VF)          | Cardiac Arrest           | ≤ Class 3 Hemorrhage | N/A        |
+| Bradycardia                            | Critical/Unstable/Stable | N/A                  | < 60       |
+| Sinus                                  | Critical/Unstable/Stable | N/A                  | 60 - 100   |
+| Tachycardia                            | Critical/Unstable/Stable | N/A                  | > 100      |
+
+### Gameplay Loop
+
+Depending on the amount of damage sustained, when a patient enters the Cardiac Arrest state, the player will have to perform enough treatment to get the patient out of Class 4 Hemorrhage in order to reach a shockable rhythm. The player can then increase the revive chance by successfully delivering shocks during the CPR loop.
+
+Note: When defibrillator is set in AED mode, it will see a revived patient as having a non-shockable rhythm and continue to suggest CPR. This is on the player to determine if the patient has been revived by checking blood pressure and heart rate.
+
+### Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                        | Type    | Range      | Default | Description |
+| ---------------------------- | ------- | ---------- | ------- | ----------- |
+| **m_bEnabled**               | bool    | —          | —       | Enables the defibrillation system |
+| **m_bDefibIsMandatory**      | bool    | —          | —       | Defibrillation is mandatory for revive |
+| **m_fMaxReviveChanceBonus**  | float   | 0.0 to 1.0 | 0.3     | Maximum revive chance bonus<br>Formula: `bonus = maxBonus × (1 - 0.5^shocks)` |
+| **m_fContactShockStunDuration** | float | 0.0 to ∞   | 10.0    | Stun duration when touching patient during shock (seconds) |
 
 ## ACE Medical Breathing
 

@@ -7,6 +7,35 @@ GameProject {
  }
  Configurations {
   GameProjectConfig PC {
+   ScriptProjectManagerSettings ScriptProjectManagerSettings "{AC4BE58770485E4B}" {
+    Configurations {
+     ScriptConfigurationClass workbench {
+      Defines + {
+       "ACE_CORE_STABLE"
+      }
+     }
+     ScriptConfigurationClass pc {
+      Defines + {
+       "ACE_CORE_STABLE"
+      }
+     }
+     ScriptConfigurationClass xbox {
+      Defines + {
+       "ACE_CORE_STABLE"
+      }
+     }
+     ScriptConfigurationClass ps4 {
+      Defines + {
+       "ACE_CORE_STABLE"
+      }
+     }
+     ScriptConfigurationClass ps5 {
+      Defines + {
+       "ACE_CORE_STABLE"
+      }
+     }
+    }
+   }
    WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
     StringTables {
      StringTableDefinition "{60C7312BAE6838E6}" {

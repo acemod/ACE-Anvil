@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_UnitMarkers"
+ GUID "63A9FD22C7B548A1"
+ TITLE "ACE Unit Markers"
+ Dependencies {
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
+ }
+}

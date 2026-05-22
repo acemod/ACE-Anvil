@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "mcp__enfusion-mcp__api_search"
+      "mcp__enfusion-mcp__api_search",
+      "mcp__enfusion-mcp__game_read",
+      "mcp__enfusion-mcp__game_browse"
     ]
   }
 }

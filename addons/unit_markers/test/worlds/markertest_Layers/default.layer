@@ -57,5 +57,9 @@ PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/Perc
  coords 1643.069 -8.342 1364.757
 }
 SCR_GameModeEditor GameMode_Editor_Full : "{DA3986AF1B5032B7}Prefabs/MP/Modes/Editor/GameMode_Editor_Full.et" {
+ components {
+  ACE_UnitMarkers_MapInjectorComponent "{696D2C3232BE79FF}" {
+  }
+ }
  coords 1643.069 -8.214 1363.757
 }

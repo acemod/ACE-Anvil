@@ -9,30 +9,36 @@
 class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 {
 	protected static const float UPDATE_INTERVAL_S = 1.5;
+	protected static const int MARKER_SIZE_PX = 16;
+	protected static const string MILITARY_IMAGESET = "{3A89628ECBF03E7C}UI/Textures/Map/icons_map_military/icons_map_military.imageset";
 
 	protected float m_fUpdateTimer = 0;
 	protected bool m_bActive = false;
 
-	// Parallel arrays - entity reference and its corresponding map marker
+	// Parallel arrays: world entity -> overlay widget root
 	protected ref array<IEntity> m_aTrackedEntities = {};
-	protected ref array<SCR_MapMarkerBase> m_aMarkers = {};
+	protected ref array<Widget> m_aWidgets = {};
 
 	//------------------------------------------------------------------------------------------------
 	override protected void OnMapOpen(MapConfiguration config)
 	{
 		super.OnMapOpen(config);
 
-		if (!IsLocalPlayerGameMaster())
+		bool isGM = IsLocalPlayerGameMaster();
+		Print(string.Format("[ACE_UnitMarkers] OnMapOpen - IsGM: %1", isGM), LogLevel.NORMAL);
+
+		if (!isGM)
 			return;
 
 		m_bActive = true;
-		m_fUpdateTimer = UPDATE_INTERVAL_S; // trigger an update on the first Update() call
+		m_fUpdateTimer = UPDATE_INTERVAL_S;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	override protected void OnMapClose(MapConfiguration config)
 	{
 		super.OnMapClose(config);
+		Print("[ACE_UnitMarkers] OnMapClose", LogLevel.NORMAL);
 		m_bActive = false;
 		ClearAllMarkers();
 	}
@@ -54,7 +60,6 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Returns true when the local player has a non-limited editor (GM) instance.
 	protected bool IsLocalPlayerGameMaster()
 	{
 		SCR_EditorManagerEntity editorManager = SCR_EditorManagerEntity.GetInstance();
@@ -64,42 +69,49 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateMarkers()
 	{
-		SCR_MapMarkerManagerComponent markerManager = GetMarkerManager();
-		if (!markerManager)
-			return;
-
 		array<IEntity> currentEntities = {};
 		CollectTrackedEntities(currentEntities);
 
-		// Remove markers for entities that are no longer tracked
+		Print(string.Format("[ACE_UnitMarkers] UpdateMarkers - found %1 trackable entities", currentEntities.Count()), LogLevel.NORMAL);
+
+		// Remove markers for entities no longer tracked
 		for (int i = m_aTrackedEntities.Count() - 1; i >= 0; i--)
 		{
 			if (!currentEntities.Contains(m_aTrackedEntities[i]))
-				RemoveMarkerAt(markerManager, i);
+				RemoveMarkerAt(i);
 		}
 
-		// Create new markers or refresh positions of existing ones
+		// Create or refresh
+		int created = 0;
+		int failed = 0;
 		foreach (IEntity ent : currentEntities)
 		{
 			int idx = m_aTrackedEntities.Find(ent);
 			if (idx < 0)
 			{
-				SCR_MapMarkerBase marker = CreateMarker(markerManager, ent);
-				if (marker)
+				Widget w = CreateMarkerWidget(ent);
+				if (w)
 				{
 					m_aTrackedEntities.Insert(ent);
-					m_aMarkers.Insert(marker);
+					m_aWidgets.Insert(w);
+					created++;
+				}
+				else
+				{
+					failed++;
 				}
 			}
 			else
 			{
-				RefreshMarker(m_aMarkers[idx], ent);
+				RefreshMarkerWidget(m_aWidgets[idx], ent);
 			}
 		}
+
+		if (created > 0 || failed > 0)
+			Print(string.Format("[ACE_UnitMarkers] UpdateMarkers - created: %1, failed: %2, total tracked: %3", created, failed, m_aTrackedEntities.Count()), LogLevel.NORMAL);
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Iterates all world entities and collects those that should have a GM marker.
 	protected void CollectTrackedEntities(out array<IEntity> entities)
 	{
 		GetGame().GetWorld().QueryEntitiesByAABB(
@@ -110,8 +122,6 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 			EQueryEntitiesFlags.ALL
 		);
 
-		// QueryEntitiesByAABB callbacks can't write to a local out array directly,
-		// so we use a temporary member and swap after the call.
 		entities = m_aQueryResults;
 		m_aQueryResults = new array<IEntity>();
 	}
@@ -126,7 +136,6 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Returns true for living infantry not in a vehicle, and for vehicles that have occupants.
 	protected bool ShouldTrack(IEntity ent)
 	{
 		ChimeraCharacter character = ChimeraCharacter.Cast(ent);
@@ -138,7 +147,6 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 			if (ctrl && ctrl.IsDead())
 				return false;
 
-			// Vehicle marker covers occupants - skip characters sitting inside a vehicle
 			if (IsInVehicle(character))
 				return false;
 
@@ -153,7 +161,6 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Walks the entity parent chain to determine whether the character is inside a vehicle.
 	protected bool IsInVehicle(ChimeraCharacter character)
 	{
 		IEntity parent = character.GetParent();
@@ -167,7 +174,6 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Checks child entities for at least one ChimeraCharacter occupant.
 	protected bool VehicleHasOccupants(Vehicle vehicle)
 	{
 		IEntity child = vehicle.GetChildren();
@@ -181,118 +187,122 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected SCR_MapMarkerBase CreateMarker(SCR_MapMarkerManagerComponent markerManager, IEntity ent)
+	//! Creates an overlay widget parented to the map canvas for this entity.
+	protected Widget CreateMarkerWidget(IEntity ent)
 	{
-		EMilitarySymbolIdentity identity = GetEntityIdentity(ent);
-		EMilitarySymbolIcon icon;
-		EMilitarySymbolDimension dimension;
-		GetEntitySymbol(ent, icon, dimension);
-
-		SCR_MapMarkerBase marker = markerManager.PrepareMilitaryMarker(identity, dimension, icon);
-
-		// Faction identity may not be configured in the scenario - fall back to UNKNOWN
-		if (!marker && identity != EMilitarySymbolIdentity.UNKNOWN)
-			marker = markerManager.PrepareMilitaryMarker(EMilitarySymbolIdentity.UNKNOWN, dimension, icon);
-
-		if (!marker)
+		CanvasWidget canvas = m_MapEntity.GetMapWidget();
+		if (!canvas)
+		{
+			Print("[ACE_UnitMarkers] CreateMarkerWidget - map canvas null", LogLevel.WARNING);
 			return null;
+		}
 
-		vector pos = ent.GetOrigin();
-		marker.SetWorldPos((int)pos[0], (int)pos[2]);
-		marker.SetCustomText(BuildMarkerLabel(ent));
+		WorkspaceWidget workspace = GetGame().GetWorkspace();
 
-		// true = local-only, not broadcast over network
-		markerManager.InsertStaticMarker(marker, true);
-		return marker;
+		// Root frame - positioned via FrameSlot, children use absolute positions within it
+		Widget root = workspace.CreateWidget(WidgetType.FrameWidgetTypeID, WidgetFlags.VISIBLE, new Color(1, 1, 1, 1), 0, canvas);
+		if (!root)
+		{
+			Print("[ACE_UnitMarkers] CreateMarkerWidget - failed to create root frame", LogLevel.WARNING);
+			return null;
+		}
+
+		Color factionColor = GetFactionColor(ent);
+
+		// Icon image - centered on the anchor point
+		ImageWidget icon = ImageWidget.Cast(workspace.CreateWidget(WidgetType.ImageWidgetTypeID, WidgetFlags.VISIBLE, factionColor, 0, root));
+		if (icon)
+		{
+			icon.LoadImageFromSet(0, MILITARY_IMAGESET, GetIconName(ent));
+			FrameSlot.SetSize(icon, MARKER_SIZE_PX, MARKER_SIZE_PX);
+			FrameSlot.SetPos(icon, -MARKER_SIZE_PX * 0.5, -MARKER_SIZE_PX * 0.5);
+		}
+
+		// Label text - below the icon
+		TextWidget label = TextWidget.Cast(workspace.CreateWidget(WidgetType.TextWidgetTypeID, WidgetFlags.VISIBLE, factionColor, 0, root));
+		if (label)
+		{
+			label.SetText(BuildMarkerLabel(ent));
+			FrameSlot.SetPos(label, -MARKER_SIZE_PX * 0.5, MARKER_SIZE_PX * 0.5);
+		}
+
+		// Position on map
+		RefreshMarkerWidget(root, ent);
+
+		Print(string.Format("[ACE_UnitMarkers] CreateMarkerWidget - created for entity %1", ent.GetName()), LogLevel.NORMAL);
+		return root;
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected void RefreshMarker(SCR_MapMarkerBase marker, IEntity ent)
+	protected void RefreshMarkerWidget(Widget root, IEntity ent)
 	{
-		if (!marker || !ent)
+		if (!root || !ent)
 			return;
 
 		vector pos = ent.GetOrigin();
-		marker.SetWorldPos((int)pos[0], (int)pos[2]);
-		marker.SetCustomText(BuildMarkerLabel(ent));
+		int screenX, screenY;
+		m_MapEntity.WorldToScreen(pos[0], pos[2], screenX, screenY, true);
+
+		WorkspaceWidget workspace = GetGame().GetWorkspace();
+		FrameSlot.SetPos(root, workspace.DPIUnscale(screenX), workspace.DPIUnscale(screenY));
+
+		// Update label text (second child of root)
+		Widget firstChild = root.GetChildren();
+		if (firstChild)
+		{
+			TextWidget label = TextWidget.Cast(firstChild.GetSibling());
+			if (label)
+				label.SetText(BuildMarkerLabel(ent));
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected EMilitarySymbolIdentity GetEntityIdentity(IEntity ent)
-	{
-		FactionAffiliationComponent factionComp = FactionAffiliationComponent.Cast(
-			ent.FindComponent(FactionAffiliationComponent)
-		);
-		if (!factionComp)
-			return EMilitarySymbolIdentity.UNKNOWN;
-
-		Faction faction = factionComp.GetAffiliatedFaction();
-		if (!faction)
-			return EMilitarySymbolIdentity.UNKNOWN;
-
-		return ResolveIdentityForFaction(faction.GetFactionKey());
-	}
-
-	//------------------------------------------------------------------------------------------------
-	//! Maps vanilla Reforger faction keys to NATO military symbol identities.
-	//! Extend this list to support custom faction keys from other mods or missions.
-	protected EMilitarySymbolIdentity ResolveIdentityForFaction(string factionKey)
-	{
-		if (factionKey == "US" || factionKey == "US_Army" || factionKey == "NATO" || factionKey == "BLUFOR")
-			return EMilitarySymbolIdentity.BLUFOR;
-
-		if (factionKey == "USSR" || factionKey == "Soviet" || factionKey == "OPFOR" || factionKey == "RU")
-			return EMilitarySymbolIdentity.OPFOR;
-
-		if (factionKey == "FIA" || factionKey == "INDFOR" || factionKey == "Guerrilla" || factionKey == "Resistance")
-			return EMilitarySymbolIdentity.INDFOR;
-
-		return EMilitarySymbolIdentity.UNKNOWN;
-	}
-
-	//------------------------------------------------------------------------------------------------
-	//! Assigns the NATO military symbol icon and operational dimension for an entity.
-	//! Helicopters use the AIR dimension (circle frame).
-	//! Armed ground vehicles receive the ARMOR icon; unarmed ones receive MOTORIZED.
-	//! Infantry always receive the INFANTRY icon on the LAND dimension.
-	protected void GetEntitySymbol(IEntity ent, out EMilitarySymbolIcon icon, out EMilitarySymbolDimension dimension)
+	protected string GetIconName(IEntity ent)
 	{
 		if (ChimeraCharacter.Cast(ent))
-		{
-			icon = EMilitarySymbolIcon.INFANTRY;
-			dimension = EMilitarySymbolDimension.LAND;
-			return;
-		}
+			return "infantry";
 
 		Vehicle vehicle = Vehicle.Cast(ent);
 		if (vehicle)
 		{
 			if (vehicle.FindComponent(HelicopterControllerComponent))
-			{
-				icon = EMilitarySymbolIcon.ROTARY_WING;
-				dimension = EMilitarySymbolDimension.AIR;
-				return;
-			}
+				return "helicopter";
 
-			// Armed ground vehicles (tanks, IFVs, armed APCs) get the ARMOR symbol;
-			// unarmed transports (trucks, jeeps) get the MOTORIZED symbol.
 			if (vehicle.FindComponent(TurretControllerComponent))
-				icon = EMilitarySymbolIcon.ARMOR;
-			else
-				icon = EMilitarySymbolIcon.MOTORIZED;
+				return "armor";
 
-			dimension = EMilitarySymbolDimension.LAND;
-			return;
+			return "motorized";
 		}
 
-		icon = EMilitarySymbolIcon.INFANTRY;
-		dimension = EMilitarySymbolDimension.LAND;
+		return "infantry";
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Builds the text label shown beneath the marker.
-	//! Infantry: player name (if applicable) + cardinal direction in brackets, e.g. "Smith [NE]".
-	//! Vehicles: player name of the driver if player-controlled, otherwise empty.
+	protected Color GetFactionColor(IEntity ent)
+	{
+		FactionAffiliationComponent factionComp = FactionAffiliationComponent.Cast(ent.FindComponent(FactionAffiliationComponent));
+		if (factionComp)
+		{
+			Faction faction = factionComp.GetAffiliatedFaction();
+			if (faction)
+			{
+				string key = faction.GetFactionKey();
+
+				if (key == "US" || key == "US_Army" || key == "NATO" || key == "BLUFOR")
+					return new Color(0.2, 0.4, 1, 1); // blue
+
+				if (key == "USSR" || key == "Soviet" || key == "OPFOR" || key == "RU")
+					return new Color(1, 0.2, 0.2, 1); // red
+
+				if (key == "FIA" || key == "INDFOR" || key == "Guerrilla" || key == "Resistance")
+					return new Color(0.2, 0.8, 0.2, 1); // green
+			}
+		}
+
+		return new Color(1, 1, 1, 1); // white = unknown
+	}
+
+	//------------------------------------------------------------------------------------------------
 	protected string BuildMarkerLabel(IEntity ent)
 	{
 		string playerName = string.Empty;
@@ -312,15 +322,11 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Returns a cardinal direction string for the entity's current facing, e.g. "[NE]".
-	//! Uses the forward vector from the entity's world transform matrix.
-	//! In Enfusion: X=east, Z=north; yaw 0=north, increasing clockwise.
 	protected string GetCardinalDirection(IEntity ent)
 	{
 		vector mat[4];
 		ent.GetWorldTransform(mat);
 
-		// mat[2] is the forward (look) direction in world space
 		float yaw = Math.Atan2(mat[2][0], mat[2][2]) * Math.RAD2DEG;
 		if (yaw < 0)
 			yaw += 360;
@@ -336,41 +342,25 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected void RemoveMarkerAt(SCR_MapMarkerManagerComponent markerManager, int idx)
+	protected void RemoveMarkerAt(int idx)
 	{
-		if (m_aMarkers[idx])
-			markerManager.RemoveStaticMarker(m_aMarkers[idx]);
+		if (m_aWidgets[idx])
+			m_aWidgets[idx].RemoveFromHierarchy();
 
 		m_aTrackedEntities.Remove(idx);
-		m_aMarkers.Remove(idx);
+		m_aWidgets.Remove(idx);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ClearAllMarkers()
 	{
-		SCR_MapMarkerManagerComponent markerManager = GetMarkerManager();
-		if (markerManager)
+		foreach (Widget w : m_aWidgets)
 		{
-			foreach (SCR_MapMarkerBase marker : m_aMarkers)
-			{
-				if (marker)
-					markerManager.RemoveStaticMarker(marker);
-			}
+			if (w)
+				w.RemoveFromHierarchy();
 		}
 
 		m_aTrackedEntities.Clear();
-		m_aMarkers.Clear();
-	}
-
-	//------------------------------------------------------------------------------------------------
-	protected SCR_MapMarkerManagerComponent GetMarkerManager()
-	{
-		BaseGameMode gameMode = GetGame().GetGameMode();
-		if (!gameMode)
-			return null;
-
-		return SCR_MapMarkerManagerComponent.Cast(
-			gameMode.FindComponent(SCR_MapMarkerManagerComponent)
-		);
+		m_aWidgets.Clear();
 	}
 }

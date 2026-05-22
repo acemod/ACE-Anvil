@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__enfusion-mcp__api_search"
+    ]
+  }
+}

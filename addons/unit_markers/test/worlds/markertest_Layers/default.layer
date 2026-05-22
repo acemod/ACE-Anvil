@@ -1,0 +1,61 @@
+SCR_MapEntity MapEntity : "{731564B66F91B107}Prefabs/World/Game/MapEntity.et" {
+ coords 1643.069 -8.604 1366.757
+ "Map Geometry Data" "{0DD089CCD442399A}worlds/Arland/Arland.topo"
+ "Satellite background image" "{F98F3D2CBA523091}UI/Textures/Map/worlds/Arland/ArlandRasterized.edds"
+ {
+  CommentEntity {
+   coords 0 1 0
+   m_Comment "MapEntity: "\
+   "Set up map textures"
+   m_Color 0 0 0
+   m_FaceCamera 1
+   m_TextBackground 1
+   m_BackgroundColor 1 0.6 0
+   m_BackgroundTransparency 0
+  }
+ }
+}
+SCR_AIWorld SCR_AIWorld : "{E0A05C76552E7F58}Prefabs/AI/SCR_AIWorld.et" {
+ components {
+  NavmeshWorldComponent "{5584F30E67F617AD}" {
+   NavmeshSettings NavmeshWorld "{50FC63BEBE3973C5}" {
+    NavmeshFilesConfig BaseNavmeshFilesConfig "{696D25AB4CC332D3}" {
+     NavmeshFile "{804386FFEB7B7EFD}worlds/MP/Navmeshes/LowResArland.nmn"
+    }
+   }
+  }
+  NavmeshWorldComponent "{5584F30EEFEE1223}" {
+   NavmeshSettings ChimeraNavmeshWorld "{50FC63BEBE3973C5}" {
+    NavmeshFilesConfig BaseNavmeshFilesConfig "{60CA9BE5536BF701}" {
+     NavmeshFile "{D8EF7131FB31AF97}worlds/GameMaster/Navmeshes/GM_Arland.nmn"
+    }
+   }
+  }
+  NavmeshWorldComponent "{5C8C9B750D124A63}" {
+   NavmeshSettings NavmeshWorld "{5C8C9B750B60C6E2}" {
+    NavmeshFilesConfig BaseNavmeshFilesConfig "{5C90BD0EC793647D}" {
+     NavmeshFile "{A0AEEB1E7EF474FA}worlds/GameMaster/Navmeshes/GM_Arland_vehicles.nmn"
+    }
+   }
+  }
+ }
+ coords 1643.069 -8.467 1365.757
+ {
+  CommentEntity {
+   coords 0 1 0
+   m_Comment "SCR_AIWorld: "\
+   "Configure navigation mesh"
+   m_Color 0 0 0
+   m_FaceCamera 1
+   m_TextBackground 1
+   m_BackgroundColor 1 0.6 0
+   m_BackgroundTransparency 0
+  }
+ }
+}
+PerceptionManager PerceptionManager : "{028DAEAD63E056BE}Prefabs/World/Game/PerceptionManager.et" {
+ coords 1643.069 -8.342 1364.757
+}
+SCR_GameModeEditor GameMode_Editor_Full : "{DA3986AF1B5032B7}Prefabs/MP/Modes/Editor/GameMode_Editor_Full.et" {
+ coords 1643.069 -8.214 1363.757
+}

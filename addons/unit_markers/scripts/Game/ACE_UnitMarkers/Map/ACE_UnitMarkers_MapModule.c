@@ -102,13 +102,27 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 	//! Iterates all world entities and collects those that should have a GM marker.
 	protected void CollectTrackedEntities(out array<IEntity> entities)
 	{
-		IEntity ent = GetGame().GetWorld().GetFirstEntity();
-		while (ent)
-		{
-			if (ShouldTrack(ent))
-				entities.Insert(ent);
-			ent = GetGame().GetWorld().GetNextEntity(ent);
-		}
+		GetGame().GetWorld().QueryEntitiesByAABB(
+			Vector(-1000000, 0, -1000000),
+			Vector(1000000, 10000, 1000000),
+			QueryEntitiesCallback_ShouldTrack,
+			null,
+			EQueryEntitiesFlags.ALL
+		);
+
+		// QueryEntitiesByAABB callbacks can't write to a local out array directly,
+		// so we use a temporary member and swap after the call.
+		entities = m_aQueryResults;
+		m_aQueryResults = new array<IEntity>();
+	}
+
+	protected ref array<IEntity> m_aQueryResults = new array<IEntity>();
+
+	protected bool QueryEntitiesCallback_ShouldTrack(IEntity ent)
+	{
+		if (ShouldTrack(ent))
+			m_aQueryResults.Insert(ent);
+		return true;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -253,7 +267,7 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 		Vehicle vehicle = Vehicle.Cast(ent);
 		if (vehicle)
 		{
-			if (Helicopter.Cast(vehicle))
+			if (vehicle.FindComponent(HelicopterControllerComponent))
 			{
 				icon = EMilitarySymbolIcon.ROTARY_WING;
 				dimension = EMilitarySymbolDimension.AIR;
@@ -262,7 +276,7 @@ class ACE_UnitMarkers_MapModule : SCR_MapUIBaseComponent
 
 			// Armed ground vehicles (tanks, IFVs, armed APCs) get the ARMOR symbol;
 			// unarmed transports (trucks, jeeps) get the MOTORIZED symbol.
-			if (vehicle.FindComponent(WeaponManagerComponent))
+			if (vehicle.FindComponent(TurretControllerComponent))
 				icon = EMilitarySymbolIcon.ARMOR;
 			else
 				icon = EMilitarySymbolIcon.MOTORIZED;

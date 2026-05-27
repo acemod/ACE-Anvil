@@ -14,17 +14,19 @@ StringTable {
    Target_en_us "Pocket weather tracker"
    Target_de_de "Taschen-Wettermessgerät"
    Target_ko_kr "휴대용 기상 관측기기"
-   Modified 1725567205
+   Target_zh_cn "口袋型氣象觀測儀"
+   Modified 1730462104
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{66DA03F69293ABD9}" {
    Id "ACE_Weather-Item_Kacestrel4500_Name"
    Target_en_us "Kacetrel 4500"
    Target_ko_kr "케ACE트렐 4500"
+   Target_zh_cn "Kestrel 4500"
    Modified 1725566669
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{667B2E0B3C32F8F7}" {
    Id "ACE_Weather-Keybind_WindInfoToggle"
@@ -39,7 +41,7 @@ StringTable {
    Target_ja_jp "風速を表示"
    Target_ko_kr "바람 정보 표시"
    Target_pt_br "Mostrar informação do vento"
-   Target_zh_cn "顯示風力資訊"
+   Target_zh_cn "顯示風向風速資訊"
    Target_uk_ua "Показати інформацію про вітер"
    Modified 1719368269
    Author "Kex"

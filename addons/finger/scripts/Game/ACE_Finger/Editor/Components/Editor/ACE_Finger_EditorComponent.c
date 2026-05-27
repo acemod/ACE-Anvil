@@ -63,7 +63,7 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 		if (!player)
 			return;
 
-		Rpc(RpcAsk_SendPing, GetGame().GetPlayerController().GetPlayerId(), player.GetOrigin(), targetPos, Replication.FindId(target));
+		Rpc(RpcAsk_SendPing, GetGame().GetPlayerController().GetPlayerId(), player.GetOrigin(), targetPos, Replication.FindItemId(target));
 	}
 	
 	//------------------------------------------------------------------------------------------------

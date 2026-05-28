@@ -35,41 +35,41 @@ StringTable {
    Id "ACE_Medical-InfoWidget_OxygenMask"
    Target_en_us "Provides supplemental oxygen"
    Target_de_de "Sauerstoff zuführen"
-   Target_zh_cn "提供輔助供氧"
+   Target_zh_cn "提供輔助氧氣"
    Target_ko_kr "산소 보충을 제공합니다"
-   Modified 1700362805
+   Modified 1769401286
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{64FF4A20D0C03B3A}" {
    Id "ACE_Medical-Item_ChestSeal_Description"
    Target_en_us "Special dressing for open chest wounds"
    Target_de_de "Spezialverband für offenen Brustkorbverletzungen"
-   Target_zh_cn "胸壁開放傷口封閉敷料"
+   Target_zh_cn "用於開放性胸部傷口的專用敷料"
    Target_ko_kr "가슴 부위의 상처를 개방하는 특수한 붕대입니다"
-   Modified 1694633389
+   Modified 1769401692
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{64FF4A20DDF8616D}" {
    Id "ACE_Medical-Item_ChestSeal_Name"
    Target_en_us "Chest Seal"
    Target_de_de "Thorax Pflaster"
-   Target_zh_cn "胸壁封閉敷料"
+   Target_zh_cn "胸壁密封貼片"
    Target_ko_kr "체스트 씰"
-   Modified 1694633304
+   Modified 1769400809
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{62D754F3AABB4BEF}" {
    Id "ACE_Medical-Item_KingLT_Description"
    Target_en_us "Airway management device inserted into throat"
    Target_de_de "Hilfsmittel zur Atemwegssicherung"
-   Target_zh_cn "聲門上呼吸道裝置"
+   Target_zh_cn "置入咽喉的氣道處置器材"
    Target_ko_kr "기도에 넣어 호흡을 관리하는 장비입니다"
-   Modified 1658286267
+   Modified 1769400978
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{62D754F3B0E7DA62}" {
    Id "ACE_Medical-Item_KingLT_Name"
@@ -85,31 +85,31 @@ StringTable {
    Id "ACE_Medical-Item_NCDKit_Description"
    Target_en_us "Kit for performing needle decompression"
    Target_de_de "Set zur Durchführung von Nadeldekompression"
-   Target_zh_cn "針刺減壓套件"
+   Target_zh_cn "用於執行針刺減壓的工具"
    Target_ko_kr "감압용 바늘로 사용하는 의료 키트입니다"
    Modified 1694634678
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{64FF4A263E864FA9}" {
    Id "ACE_Medical-Item_NCDKit_Name"
    Target_en_us "NCD Kit"
    Target_de_de "Dekompressionsnadelset"
-   Target_zh_cn "NCD Kit 非傳染病救援包"
+   Target_zh_cn "NCD 減壓針"
    Target_ko_kr "NCD 키트"
-   Modified 1694634641
+   Modified 1769401104
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{64FF4A23362FB915}" {
    Id "ACE_Medical-Item_OxygenMask_Description"
    Target_en_us "Mask for oxygen therapy"
    Target_de_de "Maske für Sauerstofftherapie"
-   Target_zh_cn "氧氣治療面罩"
+   Target_zh_cn "用於氧氣治療的面罩"
    Target_ko_kr "산소 치료를 위한 마스크입니다"
-   Modified 1694633716
+   Modified 1769401465
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{64FF4A2335B51A2F}" {
    Id "ACE_Medical-Item_OxygenMask_Name"
@@ -155,11 +155,11 @@ StringTable {
    Id "ACE_Medical-RadialMenu_AirwayThoraxManagement"
    Target_en_us "Airway/Thorax management"
    Target_de_de "Atemweg/Brustkorb Versorgung"
-   Target_zh_cn "氣道與胸廓管理"
+   Target_zh_cn "氣道與胸腔處置"
    Target_ko_kr "기도/흉부 관리"
-   Modified 1700362756
+   Modified 1769400600
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{671D5633273D3233}" {
    Id "ACE_Medical-TensionPneumothorax"
@@ -195,11 +195,11 @@ StringTable {
    Id "ACE_Medical-UserAction_ChestSeal"
    Target_en_us "Use chest seal"
    Target_de_de "Thorax Pflaster anwenden"
-   Target_zh_cn "使用胸壁封閉敷料"
+   Target_zh_cn "使用胸壁密封貼片"
    Target_ko_kr "체스트 씰 사용하기"
-   Modified 1662077541
+   Modified 1769401188
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6719486F0C433459}" {
    Id "ACE_Medical-UserAction_ClearVomit"
@@ -215,11 +215,11 @@ StringTable {
    Id "ACE_Medical-UserAction_KingLT"
    Target_en_us "Insert King LT"
    Target_de_de "Larynxtubus einsetzen"
-   Target_zh_cn "插入King喉管"
+   Target_zh_cn "置入 King LT 喉管"
    Target_ko_kr "킹 LT 삽입하기"
-   Modified 1662077451
+   Modified 1769401542
    Author "Kexanone"
-   LastChanged "Psycool"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6311265606824A7E}" {
    Id "ACE_Medical-UserAction_NeedleDecompression"

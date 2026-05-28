@@ -85,7 +85,7 @@ StringTable {
    Id "ACE_Medical-Item_NCDKit_Description"
    Target_en_us "Kit for performing needle decompression"
    Target_de_de "Set zur Durchführung von Nadeldekompression"
-   Target_zh_cn "用於執行針刺減壓的工具組"
+   Target_zh_cn "用於執行針刺減壓的工具"
    Target_ko_kr "감압용 바늘로 사용하는 의료 키트입니다"
    Modified 1694634678
    Author "Kexanone"
@@ -95,7 +95,7 @@ StringTable {
    Id "ACE_Medical-Item_NCDKit_Name"
    Target_en_us "NCD Kit"
    Target_de_de "Dekompressionsnadelset"
-   Target_zh_cn "NCD 減壓針組"
+   Target_zh_cn "NCD 減壓針"
    Target_ko_kr "NCD 키트"
    Modified 1769401104
    Author "Kexanone"

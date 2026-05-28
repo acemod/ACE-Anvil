@@ -21,7 +21,7 @@ class ACE_ConsumableFacepaint : SCR_ConsumableEffectBase
 			{
 				ResourceName headCamo = visualIdentity.GetHeadCamo(i);
 
-				if (!headCamo)
+				if (!headCamo || headCamo == visualIdentity.GetHead())
 					break;
 				if (headCamos.Contains(headCamo))
 					break;

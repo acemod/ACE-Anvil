@@ -1,0 +1,49 @@
+AnimSetInstanceSource "{631433A68A60A236}" {
+ Template "{158184EF3000FB7D}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.ast"
+ Lines {
+  AnimSetInstanceSource_Line "KingLT.Erc.Idle" {
+   Resource "{F9DF72BB1275B0ED}Assets/Items/Medicine/KingLT/Workspaces/p_erc_kinglt_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "KingLT.Erc.HealOther" {
+   Resource "{D619FDD3EBF8C825}Assets/Items/Medicine/KingLT/Workspaces/p_erc_kinglt_healOther.anm"
+  }
+  AnimSetInstanceSource_Line "CroStance.Erc.In" {
+   Resource "{B08FC9AB407C33E2}anims/anm/player/locomotion/unarmed/transitions/p_erc_trans_cro_low.anm"
+  }
+  AnimSetInstanceSource_Line "CroStance.Erc.Idle" {
+   Resource "{CA6E7B8428B08799}anims/anm/player/locomotion/unarmed/turns/p_unarmed_cro_idle_pose.anm"
+  }
+  AnimSetInstanceSource_Line "CroStance.Pne.Idle" {
+   Resource "{CA6E7B8428B08799}anims/anm/player/locomotion/unarmed/turns/p_unarmed_cro_idle_pose.anm"
+  }
+  AnimSetInstanceSource_Line "CroStance.Cro.Idle" {
+   Resource "{CA6E7B8428B08799}anims/anm/player/locomotion/unarmed/turns/p_unarmed_cro_idle_pose.anm"
+  }
+  AnimSetInstanceSource_Line "CroStance.Pne.In" {
+   Resource "{F8E6A9D9A2DB86DE}anims/anm/player/locomotion/unarmed/transitions/p_pne_trans_cro_low.anm"
+  }
+  AnimSetInstanceSource_Line "CroStance.Erc.Out" {
+   Resource "{F7443995131BB524}anims/anm/player/locomotion/unarmed/transitions/p_cro_trans_erc_low.anm"
+  }
+  AnimSetInstanceSource_Line "CroStance.Pne.Out" {
+   Resource "{3505589754916FC8}anims/anm/player/locomotion/unarmed/transitions/p_cro_trans_pne_low.anm"
+  }
+  AnimSetInstanceSource_Line "KingLT.Cro.Idle" {
+   Resource "{0FD77936C746BD72}Assets/Items/Medicine/NCDKit/Workspace/p_cro_ncdkit_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "KingLT.Pne.Idle" {
+   Resource "{F0C9C5052F43B57B}Assets/Items/Medicine/NCDKit/Workspace/p_pne_ncdkit_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "KingLT.Erc.FingerAnim" {
+   Resource "{A10C6CE6A75EC830}Assets/Items/Medicine/KingLT/Workspaces/p_erc_kinglt_fingerAnim2.anm"
+  }
+  AnimSetInstanceSource_Line "KingLTAmbulance.LeftPatient.HealOther" {
+   Resource "{890624C491AE5144}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_healing_morphin_L.anm"
+  }
+  AnimSetInstanceSource_Line "KingLTAmbulance.RightPatient.HealOther" {
+   Resource "{780D1C90E2F164A8}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_healing_morphin_R.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{62DB6D59887BDD84}" {
+ }
+}

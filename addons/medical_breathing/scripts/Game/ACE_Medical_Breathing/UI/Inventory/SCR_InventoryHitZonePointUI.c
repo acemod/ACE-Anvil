@@ -25,7 +25,6 @@ modded class SCR_InventoryHitZonePointUI : ScriptedWidgetComponent
 		if (!vitals)
 			return "";
 		
-		string pneumothoraxText;
 		if (vitals.HasTensionPneumothorax())
 			return "#ACE_Medical-TensionPneumothorax";
 		else if (vitals.GetPneumothoraxScale() > 0)

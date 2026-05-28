@@ -10,7 +10,7 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	void RequestPatientStateNotification(ENotification type, SCR_ChimeraCharacter patient)
 	{
-		Rpc(RpcAsk_SendPatientStateNotification, type, Replication.FindId(patient));
+		Rpc(RpcAsk_SendPatientStateNotification, type, Replication.FindItemId(patient));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -58,7 +58,7 @@ class ACE_Medical_NetworkComponent : ScriptComponent
 	//! Allows clients to request an update of the data of a patient
 	void RequestUpdatePatientData(SCR_ChimeraCharacter patient)
 	{
-		Rpc(RpcAsk_UpdatePatientData, Replication.FindId(patient));
+		Rpc(RpcAsk_UpdatePatientData, Replication.FindItemId(patient));
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -64,7 +64,7 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 		
 		m_fLastPingTime = GetGame().GetWorld().GetWorldTime();
 
-		Rpc(RpcAsk_SendPing, GetGame().GetPlayerController().GetPlayerId(), player.GetOrigin(), targetPos, Replication.FindId(target));
+		Rpc(RpcAsk_SendPing, GetGame().GetPlayerController().GetPlayerId(), player.GetOrigin(), targetPos, Replication.FindItemId(target));
 	}
 	
 	//------------------------------------------------------------------------------------------------

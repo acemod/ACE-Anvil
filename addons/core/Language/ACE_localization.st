@@ -20,6 +20,14 @@ StringTable {
    Author "kexanone"
    LastChanged "kexanone"
   }
+  CustomStringTableItem "{6639110B40CE8693}" {
+   Id "ACE-ControlsHint_InspectTurret"
+   Target_en_us "Inspect Turret"
+   Target_de_de "Geschütz untersuchen"
+   Modified 1715082397
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{64771570B1AFAB10}" {
    Id "ACE-Emotes_Emote_Pushups_Name"
    Target_en_us "Push-ups"
@@ -92,6 +100,14 @@ StringTable {
    Modified 1750691073
    Author "kexanone"
    LastChanged "KingDaddyBoyz"
+  }
+  CustomStringTableItem "{663A2182DD1E0961}" {
+   Id "ACE-RadialMenu_ChangeMagazine"
+   Target_en_us "Change mangazine"
+   Target_de_de "Magazin wechseln"
+   Modified 1715088550
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
    Id "ACE-UserAction_Carry"

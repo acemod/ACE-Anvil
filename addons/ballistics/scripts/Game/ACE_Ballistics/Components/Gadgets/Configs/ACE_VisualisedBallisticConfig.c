@@ -40,7 +40,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		ProjectileMoveComponent moveComponent = ProjectileMoveComponent.Cast(dummy.FindComponent(ProjectileMoveComponent));
 
 		array<ref array<float>> ballisticValues = {};
-		float time;
+		const float time;
 		float zeroDrop = ComputeProjectileDrop(moveComponent, m_fDefaultZeroingRange, time);
 
 		for (int range = m_iMinRange; range <= m_iMaxRange; range += m_iRangeStep)

@@ -72,7 +72,7 @@ class ACE_PhysicalButtonsUIComponent : ScriptedWidgetComponent
 		
 		// Move cursor to centroid of all buttons
 		if (cursorPos)
-			GetGame().GetInputManager().SetCursorPosition(cursorPos[0], cursorPos[1]);
+			GetGame().GetInputManager().GetMouseDeviceHandler().SetCursorPosition(cursorPos[0], cursorPos[1]);
 	}
 	
 	//------------------------------------------------------------------------------------------------

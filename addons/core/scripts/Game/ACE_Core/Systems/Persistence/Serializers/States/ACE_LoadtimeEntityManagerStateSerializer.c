@@ -11,39 +11,44 @@ class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 	{
 		return ACE_LoadtimeEntityManagerState;
 	}
-	
+
 	//------------------------------------------------------------------------------------------------
-	override ESerializeResult Serialize(notnull Managed instance, notnull BaseSerializationSaveContext context)
+	//! Reforger 1.7: persistence contexts were renamed. The old
+	//! `BaseSerializationSaveContext` / `BaseSerializationLoadContext` are gone; the parent
+	//! `ScriptedStateSerializer` now uses `SaveContext` / `LoadContext`. With the new parameter
+	//! types the `override` of these `event` methods is accepted again (Bohemia's own subclasses
+	//! such as SCR_TaskSystemSerializer / SCR_PlayerReconnectDataSerializer use the same form).
+	override ESerializeResult Serialize(notnull Managed instance, notnull SaveContext context)
 	{
 		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
 		if (!manager)
 			return ESerializeResult.DEFAULT;
-		
+
 		array<EntityID> deletedEntityIDs = manager.GetDeletedEntityIDs();
 		if (deletedEntityIDs.IsEmpty())
 			return ESerializeResult.DEFAULT;
-		
+
 		context.WriteValue("version", 1);
-		
+
 		array<string> stringifiedIDs = {};
 		stringifiedIDs.Reserve(deletedEntityIDs.Count());
-		
+
 		foreach (EntityID entityID : deletedEntityIDs)
 		{
 			stringifiedIDs.Insert(ACE_EntityIdHelper.ToString(entityID));
 		}
-		
+
 		context.WriteValue("deletedEntityIDs", stringifiedIDs);
 		return ESerializeResult.OK;
 	}
 
 	//------------------------------------------------------------------------------------------------
-	override bool Deserialize(notnull Managed instance, notnull BaseSerializationLoadContext context)
+	override bool Deserialize(notnull Managed instance, notnull LoadContext context)
 	{
 		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
 		if (!manager)
 			return false;
-		
+
 		int version;
 		context.Read(version);
 
@@ -58,7 +63,7 @@ class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 			if (entityID != EntityID.INVALID)
 				deletedEntityIDs.Insert(entityID);
 		}
-		
+
 		manager.DeleteEntitiesByIdGlobal(deletedEntityIDs);
 		return true;
 	}

@@ -41,7 +41,7 @@ StringTable {
    Target_ja_jp "風速を表示"
    Target_ko_kr "바람 정보 표시"
    Target_pt_br "Mostrar informação do vento"
-   Target_zh_cn "顯示風向風速資訊"
+   Target_zh_cn "顯示風力資訊"
    Target_uk_ua "Показати інформацію про вітер"
    Modified 1719368269
    Author "Kex"

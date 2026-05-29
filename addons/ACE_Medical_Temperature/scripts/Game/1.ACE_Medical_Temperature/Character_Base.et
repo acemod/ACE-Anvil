@@ -1,0 +1,23 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_CheckVitalsUserAction "{697B36BE12393F06}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo SCR_ActionUIInfo "{697B36B14549F362}" {
+      Name "#ACE_Medical-UserAction_CheckTemperature"
+      m_sIconName "search"
+     }
+     ActionTitle "Check Temperature"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 100
+     m_eNotificationType ACE_MEDICAL_TEMPERATURE_RESULT
+    }
+   }
+  }
+ }
+}

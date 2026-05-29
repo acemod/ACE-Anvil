@@ -1,0 +1,22 @@
+GameProject {
+ ID "ACE_Medical_Temperature"
+ GUID "697B35821F863643"
+ TITLE "ACE_Medical_Temperature"
+ Dependencies {
+  "65AD7D4F994EA327" "65AD7D0D9941A380" "6586079789278413" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

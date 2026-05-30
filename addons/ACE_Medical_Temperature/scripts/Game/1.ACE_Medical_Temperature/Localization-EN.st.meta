@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{AFDD4366E5050FB1}scripts/Game/1.ACE_Medical_Temperature/Localization-EN.st"
+ Configurations {
+  StringTableResourceClass PC {
+  }
+  StringTableResourceClass XBOX_ONE : PC {
+  }
+  StringTableResourceClass XBOX_SERIES : PC {
+  }
+  StringTableResourceClass PS4 : PC {
+  }
+  StringTableResourceClass PS5 : PC {
+  }
+  StringTableResourceClass HEADLESS : PC {
+  }
+ }
+}

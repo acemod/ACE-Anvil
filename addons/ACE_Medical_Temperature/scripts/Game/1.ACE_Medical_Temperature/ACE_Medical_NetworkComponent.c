@@ -12,7 +12,7 @@ modded class ACE_Medical_NetworkComponent : ScriptComponent
 		{
 			case ENotification.ACE_MEDICAL_TEMPERATURE_RESULT:
 			{
-				param1 = patientContext.m_pVitals.GetTemperature();
+				param1 = patientContext.m_pVitals.GetTemperature()-ACE_PhysicalConstants.ZERO_CELSIUS;
 				return true;
 			}
 			

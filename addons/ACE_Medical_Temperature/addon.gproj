@@ -7,6 +7,19 @@ GameProject {
  }
  Configurations {
   GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{697B716E52F74D59}" {
+      StringTableSource "{AFDD4366E5050FB1}scripts/Game/1.ACE_Medical_Temperature/Localization-EN.st"
+      Languages {
+       LanguageDefinition "{697B716E4F6F0AC5}" {
+        Code "en_us"
+        StringTableRuntime "{65933F969672086A}scripts/Game/1.ACE_Medical_Temperature/Localization-EN.en_us.conf"
+       }
+      }
+     }
+    }
+   }
   }
   GameProjectConfig XBOX_ONE {
   }

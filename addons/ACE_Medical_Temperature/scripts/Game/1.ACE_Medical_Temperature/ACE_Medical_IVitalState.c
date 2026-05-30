@@ -1,26 +1,39 @@
 modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>{
+	protected static ACE_Medical_Temperature_Settings s_pTemperatureSettings;
+	protected static float s_fDefaultCoreTemperature;
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_Medical_IVitalState(ACE_FSM_EStateID id)
+	{
+		if (!s_pTemperatureSettings)
+		{
+			s_pTemperatureSettings = ACE_SettingsHelperT<ACE_Medical_Temperature_Settings>.GetModSettings();
+			s_fDefaultCoreTemperature = s_pTemperatureSettings.m_fDefaultCoreTemperature;
+		}
+	}
+	
 	override void OnUpdate(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		super.OnUpdate(context, timeSlice);
+		updateTemperature(context,timeSlice);
 	}
-	protected void updateTemperature(ACE_Medical_CharacterContext context, float timeSlice){
+	protected void updateTemperature(ACE_Medical_CharacterContext context, float timeSlice)
+	{
 		
 		//Get the current core temperature
-		float m_fCurrentCoreTemperature=context.m_fCoreTemperature;
+		float m_fCurrentCoreTemperature=context.m_pVitals.m_fCoreTemperature;
 		//float outdoorTemperature = m_fAmbientTemperature
 		//TODO Calculate the final outdoor temperature (placeholder)
-		float m_fFinalOutdoorTemperature = m_fAmbientTemperature;
+		float m_fFinalOutdoorTemperature = s_pTemperatureSettings.m_fAmbientTemperature;
 		
 		//Calculate how different the outdoor air is to core temperature
-		float m_fOutdoorTemperatureDiff = m_fFinalTemperature-context.m_fCoreTemperature;
-		//Reduce by how much insulation the player is wearing
-		float m_fOutdoorTemperatureChange=context.m_fInsulationFactor * m_fTemperatureDiff;
+		float m_fOutdoorTemperatureDiff = m_fFinalOutdoorTemperature-context.m_pVitals.m_fCoreTemperature;
+		//Reduce the impact of outside temperature by insulation
+		float m_fCoreTemperatureChange = m_fOutdoorTemperatureDiff*context.m_pVitals.m_fInsulationFactor;
+		//Apply all the changes to core temperature
+		context.m_pVitals.SetTemperature(m_fCurrentCoreTemperature + m_fCoreTemperatureChange*timeSlice);
 		
-		float m_fCoreTemperatureChange = m_fOutdoorTemperatureChange;
-		
-		context.m_fCoreTemperature=m_fCurrentCoreTemperature + m_fCoreTemperatureChange*timeSlice;
-		
-		//float m_fBodyHeat = m_fComplicatedKATBAShit;
+		//Todo: implement body heat system
 		
 		
 	}

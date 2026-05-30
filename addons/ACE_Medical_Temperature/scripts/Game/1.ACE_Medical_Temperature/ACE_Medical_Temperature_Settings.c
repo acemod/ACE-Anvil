@@ -3,7 +3,7 @@
 class ACE_Medical_Temperature_Settings : ACE_ModSettings
 {
 	
-	[Attribute(defvalue: "293.0", desc: "Daily low temperature of your map, at sea level, K", params: "0 1000")]
+	[Attribute(defvalue: "250.0", desc: "Daily low temperature of your map, at sea level, K", params: "0 1000")]
 	float m_fAmbientTemperature;
 	
 	[Attribute(defvalue: "304.0", desc: "Core temperature of a person upon spawnin", params: "0 1000")]

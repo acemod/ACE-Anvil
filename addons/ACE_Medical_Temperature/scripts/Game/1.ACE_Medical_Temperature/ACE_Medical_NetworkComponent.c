@@ -13,7 +13,7 @@ modded class ACE_Medical_NetworkComponent : ScriptComponent
 			case ENotification.ACE_MEDICAL_TEMPERATURE_RESULT:
 			{
 				//TODO: use the actual constant later :p
-				param1 = (patientContext.m_pVitals.GetTemperature()-273.15)*100;//*100 is Neccessary to get two decimal points of precision
+				param1 = (patientContext.m_pVitals.GetTemperature()-273)*100;//*100 is Neccessary to get two decimal points of precision
 				return true;
 			}
 			

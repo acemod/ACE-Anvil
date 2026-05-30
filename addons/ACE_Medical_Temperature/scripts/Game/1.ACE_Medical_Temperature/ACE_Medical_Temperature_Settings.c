@@ -2,8 +2,6 @@
 //Kelvin to Celsius is always 273 degrees in this mod. No exceptions.
 class ACE_Medical_Temperature_Settings : ACE_ModSettings
 {
-	[Attribute(defvalue: "true", desc: "Enable updating temperature. If disabled, temperature will remain fixed at the spawning value.", params: "0 inf")]
-	bool m_bEnableTemperature;
 	
 	[Attribute(defvalue: "293.0", desc: "Daily low temperature of your map, at sea level, K", params: "0 1000")]
 	float m_fAmbientTemperature;

@@ -4,9 +4,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		super.OnUpdate(context, timeSlice);
 	}
 	protected void updateTemperature(ACE_Medical_CharacterContext context, float timeSlice){
-		if (!m_bEnableTemperature){
-			return;
-		}
+		
 		//Get the current core temperature
 		float m_fCurrentCoreTemperature=context.m_fCoreTemperature;
 		//float outdoorTemperature = m_fAmbientTemperature

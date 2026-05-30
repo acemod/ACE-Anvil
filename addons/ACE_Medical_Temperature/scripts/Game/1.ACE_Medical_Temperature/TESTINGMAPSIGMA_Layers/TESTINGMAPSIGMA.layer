@@ -1,12 +1,19 @@
 GenericEntity : "{0A8E6C5528057189}PrefabLibrary/CainLibrary/Props/Construction/MetalSheetStack_low.et" {
- coords 125.649 203.492 125.629
+ coords 158.286 10.544 101.365
  angles 0 107.801 0
  scale 15
 }
-SCR_ChimeraCharacter : "{37578B1666981FCE}scripts/Game/1.ACE_Medical_Temperature/Character_Base.et" {
- coords 122.287 15.669 134.072
+GameEntity : "{328BE73FB04612AC}PrefabLibrary/DefaultLibrary/Props/Civilian/Fireplace_01.et" {
+ coords 207.944 1 156.577
+}
+SCR_DestructibleBuildingEntity : "{61986EB0E0286DC7}PrefabLibrary/DefaultLibrary/Structures/Commercial/FuelStation_E_01.et" {
+ coords 205.871 0 161.747
 }
 SCR_DestructibleEntity : "{862A9C690448BBC5}PrefabLibrary/CainLibrary/Infrastructure/Industrial/ProductPipeline_01_high_stairs.et" {
  coords 119.789 1 135
  scale 3
+}
+SCR_DestructibleBuildingEntity : "{E889E8CCCA21EC6C}PrefabLibrary/DefaultLibrary/Structures/Commercial/PubVillage_E_2L01.et" {
+ coords 210.314 5.196 142.684
+ angles 0 115.719 0
 }

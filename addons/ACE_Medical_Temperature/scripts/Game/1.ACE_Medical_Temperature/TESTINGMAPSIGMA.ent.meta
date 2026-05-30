@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6A7020A987E0903C}scripts/Game/1.ACE_Medical_Temperature/TESTINGMAPSIGMA.ent"
+ Configurations {
+  ENTResourceClass PC {
+  }
+  ENTResourceClass XBOX_ONE : PC {
+  }
+  ENTResourceClass XBOX_SERIES : PC {
+  }
+  ENTResourceClass PS4 : PC {
+  }
+  ENTResourceClass PS5 : PC {
+  }
+  ENTResourceClass HEADLESS : PC {
+  }
+ }
+}

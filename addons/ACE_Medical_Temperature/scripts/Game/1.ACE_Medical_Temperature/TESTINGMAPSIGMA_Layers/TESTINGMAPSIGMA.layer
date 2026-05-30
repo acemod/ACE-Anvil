@@ -1,0 +1,12 @@
+GenericEntity : "{0A8E6C5528057189}PrefabLibrary/CainLibrary/Props/Construction/MetalSheetStack_low.et" {
+ coords 125.649 203.492 125.629
+ angles 0 107.801 0
+ scale 15
+}
+SCR_ChimeraCharacter : "{37578B1666981FCE}scripts/Game/1.ACE_Medical_Temperature/Character_Base.et" {
+ coords 122.287 15.669 134.072
+}
+SCR_DestructibleEntity : "{862A9C690448BBC5}PrefabLibrary/CainLibrary/Infrastructure/Industrial/ProductPipeline_01_high_stairs.et" {
+ coords 119.789 1 135
+ scale 3
+}

@@ -1,7 +1,7 @@
 modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>{
 	protected static ACE_Medical_Temperature_Settings s_pTemperatureSettings;
 	protected static float s_fDefaultCoreTemperature;
-	
+	IEntity player = SCR_PlayerController.GetLocalMainEntity();
 	//------------------------------------------------------------------------------------------------
 	void ACE_Medical_IVitalState(ACE_FSM_EStateID id)
 	{
@@ -25,8 +25,13 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		//float outdoorTemperature = m_fAmbientTemperature
 		//Start with the ambient temperature at sea level
 		float m_fFinalOutdoorTemperature = s_pTemperatureSettings.m_fAmbientTemperature;
-		//Adjust temperature by -6.5c per KM
-		//m_fFinalOutdoorTemperature = 
+		//Get the player
+		
+		vector pos = player.GetOrigin();//Get the position of the player
+		float m_fAltitude=pos[2];
+			
+		m_fFinalOutdoorTemperature -= m_fAltitude*(-6.5/1000); //Adjust temperature by -6.5c per KM
+		
 		//Calculate how different the outdoor air is to core temperature
 		float m_fOutdoorTemperatureDiff = m_fFinalOutdoorTemperature-context.m_pVitals.m_fCoreTemperature;
 		//Reduce the impact of outside temperature by insulation

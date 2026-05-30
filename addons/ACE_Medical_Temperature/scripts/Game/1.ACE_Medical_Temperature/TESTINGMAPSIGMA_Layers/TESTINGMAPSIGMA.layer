@@ -14,6 +14,6 @@ SCR_DestructibleEntity : "{862A9C690448BBC5}PrefabLibrary/CainLibrary/Infrastruc
  scale 3
 }
 SCR_DestructibleBuildingEntity : "{E889E8CCCA21EC6C}PrefabLibrary/DefaultLibrary/Structures/Commercial/PubVillage_E_2L01.et" {
- coords 210.314 5.196 142.684
+ coords 210.314 0.773 142.684
  angles 0 115.719 0
 }

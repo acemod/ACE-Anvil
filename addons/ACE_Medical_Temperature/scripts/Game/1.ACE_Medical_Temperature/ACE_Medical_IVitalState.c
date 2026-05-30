@@ -40,12 +40,10 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		//Get time manager to output sunrise and sunset times to these variables
 		s_TimeManager.GetSunriseHour(s_fSunriseTime);
 		s_TimeManager.GetSunsetHour(s_fSunsetTime);
-		
+		float s_fDayNightCyclePower=0;//Default to zero, if it's zero it means the sun is set
 		if (s_TimeManager.IsDayHour(s_TimeManager.GetTime().m_iHours)){//If it is day
 			float s_fDayNightCycleProgress = Math.Map(s_TimeManager.GetTimeOfTheDay(),s_fSunriseTime,s_fSunsetTime,0,1);//How far along in the sun's path is the sun currently?
-			float s_fDayNightCyclePower = -4 * Math.Pow(s_fDayNightCycleProgress-0.5,2)+1;//Adjust the imapct of the sum according to this parabola
-		} else {//if it's night, clamp the suns power to zero
-			float s_fDayNightCyclePower=0;
+			s_fDayNightCyclePower = -4 * Math.Pow(s_fDayNightCycleProgress-0.5,2)+1;//Adjust the imapct of the sum according to this parabola
 		}
 		
 		float m_fFinalOutdoorTemperature = Math.Map(s_fDayNightCyclePower,0,1,s_fDailyLowTemperature,s_fDailyHighTemperature);

@@ -1,7 +1,7 @@
 modded class ACE_Medical_VitalsComponent : ACE_BaseComponent{
 	//Kelvin = 273 + degrees celsius
  	float m_fCoreTemperature;//Core temperature of patient, Kelvin
-	float m_fInsulationFactor=0.01;//Insulation factor of clothing - 0.03 = 3% of core heat escapes
+	float m_fInsulationFactor=0.001;//Insulation factor of clothing - 0.03 = 3% of core heat escapes
 	//Returns the core temperature of player in celsius
 	float GetTemperature()
 	{

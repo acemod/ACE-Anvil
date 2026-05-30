@@ -23,9 +23,10 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		//Get the current core temperature
 		float m_fCurrentCoreTemperature=context.m_pVitals.m_fCoreTemperature;
 		//float outdoorTemperature = m_fAmbientTemperature
-		//TODO Calculate the final outdoor temperature (placeholder)
+		//Start with the ambient temperature at sea level
 		float m_fFinalOutdoorTemperature = s_pTemperatureSettings.m_fAmbientTemperature;
-		
+		//Adjust temperature by -6.5c per KM
+		//m_fFinalOutdoorTemperature = 
 		//Calculate how different the outdoor air is to core temperature
 		float m_fOutdoorTemperatureDiff = m_fFinalOutdoorTemperature-context.m_pVitals.m_fCoreTemperature;
 		//Reduce the impact of outside temperature by insulation

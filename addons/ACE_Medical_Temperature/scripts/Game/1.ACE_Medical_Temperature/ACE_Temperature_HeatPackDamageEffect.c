@@ -1,7 +1,10 @@
 class ACE_Temperature_HeatPackDamageEffect : SCR_DotDamageEffect {
 	
 	
-	
+	override bool HijackDamageEffect(SCR_ExtendedDamageManagerComponent dmgManager)
+	{
+		return false;
+	}
 	override event void OnEffectApplied(SCR_ExtendedDamageManagerComponent dmgManager)
 	{	
 		SCR_ChimeraCharacter player = SCR_ChimeraCharacter.Cast(dmgManager.GetOwner());
@@ -17,6 +20,15 @@ class ACE_Temperature_HeatPackDamageEffect : SCR_DotDamageEffect {
  		vitals.m_iHeatPackCount-=1;
 	}
 	
+	bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out int reason){
+		return true;
 	
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override EDamageType GetDefaultDamageType()
+	{
+		return EDamageType.HEALING;
+	}
 
 }

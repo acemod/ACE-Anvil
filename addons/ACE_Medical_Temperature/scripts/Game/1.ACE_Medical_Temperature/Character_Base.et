@@ -16,7 +16,7 @@ SCR_ChimeraCharacter {
      }
      ActionTitle "Apply heatpack"
      VisibilityRange 2
-     Duration 3
+     Duration 5
      m_eConsumableType ACE_MEDICAL_HEATPACK
     }
     ACE_Medical_CheckVitalsUserAction "{697B36BE12393F06}" {

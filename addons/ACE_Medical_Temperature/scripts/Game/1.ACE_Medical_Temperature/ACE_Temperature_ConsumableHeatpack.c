@@ -17,12 +17,28 @@ class ACE_Temperature_ConsumableHeatpack : SCR_ConsumableEffectHealthItems
 	}
 	//------------------------------------------------------------------------------------------------
 	//! Set consumable type in ctor
-	void ACE_Medical_ConsumableHeatpack()
+	void ACE_Temperature_ConsumableHeatpack()
 	{
 		m_eConsumableType = SCR_EConsumableType.ACE_MEDICAL_HEATPACK;
 	}
-	override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group, out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
+
+	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
 	{
-		return true;
+		if (!Replication.IsServer())
+			return;
+		ACE_Medical_MedicationComponent medicationComponent = ACE_Medical_MedicationComponent.Cast(target.FindComponent(ACE_Medical_MedicationComponent));
+		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(target.FindComponent(DamageManagerComponent));
+		if (!damageManager)
+			return;
+		
+		
+		
+		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
+		if (!itemComponent)
+			return;
+		if (medicationComponent){
+			medicationComponent.AddLogEntry(itemComponent.GetUIInfo().GetName(), GetGame().GetPlayerManager().GetPlayerIdFromControlledEntity(user));
+		}
+		
 	}
 }

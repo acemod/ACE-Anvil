@@ -33,10 +33,15 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		//---Day night cycle adjustment---//
 		
 		//Get time manager to output sunrise and sunset times to these variables
-		s_TimeManager.GetSunriseHour(s_fSunriseTime);
-		s_TimeManager.GetSunsetHour(s_fSunsetTime);
+		if (s_TimeManager)
+		{
+			s_TimeManager.GetSunriseHour(s_fSunriseTime);
+			s_TimeManager.GetSunsetHour(s_fSunsetTime);
+		}
+		
 		float s_fDayNightCyclePower=0;//Default to zero, if it's zero it means the sun is set
-		if (s_TimeManager.IsDayHour(s_TimeManager.GetTime().m_iHours)){//If it is day
+		if (s_TimeManager.IsDayHour(s_TimeManager.GetTime().m_iHours))
+		{//If it is day
 			float s_fDayNightCycleProgress = Math.InverseLerp(s_fSunriseTime,s_fSunsetTime,s_TimeManager.GetTimeOfTheDay());//How far along in the sun's path is the sun currently?
 			s_fDayNightCyclePower = -4 * Math.Pow(s_fDayNightCycleProgress-0.5,2)+1;//Convert the linear x variable into a power according to this parabola
 		}

@@ -1,0 +1,4 @@
+MatPBRBasic : "{5A3BD1BBBE0D06B1}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01.emat" {
+ BCRMap "{92EA28A564362099}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01_ussr_BCR.edds"
+ NMOMap "{DA43AC9D4E725949}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01_NMO.edds"
+}

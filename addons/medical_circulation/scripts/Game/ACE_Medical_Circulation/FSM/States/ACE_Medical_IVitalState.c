@@ -28,6 +28,14 @@ class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 		context.m_pVitals.SetSystemicVascularResistance(ComputeSystemicVascularResistance(context, timeSlice));
 		context.m_pVitals.SetMeanArterialPressure(ComputeMeanArterialPressure(context, timeSlice));
 		context.m_pVitals.SetPulsePressure(ComputePulsePressure(context, timeSlice));
+		
+		UpdateMetabolicAcidosisForState(context, timeSlice);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Per-state metabolic acidosis step (recovery, buildup, threshold rules, or none)
+	protected void UpdateMetabolicAcidosisForState(ACE_Medical_CharacterContext context, float timeSlice)
+	{
 	}
 	
 	//------------------------------------------------------------------------------------------------

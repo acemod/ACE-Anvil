@@ -1,31 +1,19 @@
 modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>{
 	protected static ACE_Medical_Temperature_Settings s_pTemperatureSettings;
-	protected static float s_fDefaultCoreTemperature;
-	protected static float s_fDailyLowTemperature;
-	protected static float s_fDailyHighTemperature;
-	protected static float s_fWindchillPower;
-	protected static float s_fIndoorLeakage;
-	protected static float s_fCoreTemperatureEfficacy;
+
 	protected static ChimeraWorld s_World;
 	protected static TimeAndWeatherManagerEntity s_TimeManager;//Try and make this static
+	protected static IEntity s_player;
 	protected static float s_fSunriseTime;
 	protected static float s_fSunsetTime;
-	protected static IEntity s_player;
-	protected static float s_fNaturalCoreHeating;
-	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Medical_IVitalState(ACE_FSM_EStateID id)
 	{
 		if (!s_pTemperatureSettings)
 		{
 			s_pTemperatureSettings = ACE_SettingsHelperT<ACE_Medical_Temperature_Settings>.GetModSettings();
-			s_fDefaultCoreTemperature = s_pTemperatureSettings.m_fDefaultCoreTemperature;
-			s_fDailyLowTemperature=s_pTemperatureSettings.m_fDailyLowTemperature;
-			s_fDailyHighTemperature=s_pTemperatureSettings.m_fDailyHighTemperature;
-			s_fWindchillPower=s_pTemperatureSettings.m_fWindchillPower;
-			s_fIndoorLeakage=s_pTemperatureSettings.m_fIndoorLeakage;
-			s_fCoreTemperatureEfficacy=s_pTemperatureSettings.m_fCoreTemperatureEfficacy;
-			s_fNaturalCoreHeating=s_pTemperatureSettings.m_fNaturalCoreHeating;
+			s_fSunriseTime=0;
+			s_fSunsetTime=0;
 		}
 		if (!s_World){
 			s_World=GetGame().GetWorld();
@@ -53,7 +41,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 			s_fDayNightCyclePower = -4 * Math.Pow(s_fDayNightCycleProgress-0.5,2)+1;//Convert the linear x variable into a power according to this parabola
 		}
 		//Map the progress in the day night cycle to the temperature ranges specified in the config
-		float m_fFinalOutdoorTemperature = Math.Lerp(s_fDailyLowTemperature,s_fDailyHighTemperature,s_fDayNightCyclePower);
+		float m_fFinalOutdoorTemperature = Math.Lerp(s_pTemperatureSettings.m_fDailyLowTemperature,s_pTemperatureSettings.m_fDailyHighTemperature,s_fDayNightCyclePower);
 		
 		//Get player
 		SCR_ChimeraCharacter player=context.m_pObject;
@@ -66,10 +54,10 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 			m_fFinalOutdoorTemperature -= m_fAltitude*(6.5/1000); //Adjust temperature by -6.5c per KM above sea level - 
 			
 			//---Windchill adjustment---//
-			float m_fWindchillIndex = Math.Pow(s_fWindchillPower*s_TimeManager.GetWindSpeed(),0.8);//Windchill temperature is on a curve, gets less effective with time
+			float m_fWindchillIndex = Math.Pow(s_pTemperatureSettings.m_fWindchillPower*s_TimeManager.GetWindSpeed(),0.8);//Windchill temperature is on a curve, gets less effective with time
 			float m_fIndoorSignal = context.m_signalsManager.GetSignalValue(22);
 			float m_fVehicleSignal = context.m_signalsManager.GetSignalValue(24);
-			float m_fWindchillFactor= Math.Lerp(m_fWindchillIndex,s_fIndoorLeakage,Math.Max(m_fIndoorSignal,m_fVehicleSignal));//At zero protection, have full windchill power, when indoors / in a vehicle scale down windchill to the config value
+			float m_fWindchillFactor= Math.Lerp(m_fWindchillIndex,s_pTemperatureSettings.m_fIndoorLeakage,Math.Max(m_fIndoorSignal,m_fVehicleSignal));//At zero protection, have full windchill power, when indoors / in a vehicle scale down windchill to the config value
 			m_fFinalOutdoorTemperature-=m_fWindchillFactor;
 		}
 		
@@ -81,11 +69,11 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		float m_fOutdoorTemperatureFactor = m_fOutdoorTemperatureDiff*context.m_pVitals.m_fInsulationFactor;
 		
 		//Simulating core temperature natural heating. The amount of power it has scales down linearly with blood lost
-		float m_fNaturalHeatingFactor= context.m_pBloodHitZone.GetHealthScaled()*s_fNaturalCoreHeating/1000;
+		float m_fNaturalHeatingFactor= context.m_pBloodHitZone.GetHealthScaled()*s_pTemperatureSettings.m_fNaturalCoreHeating/1000;
 		
 		//Simulating core temperature ability to sweat/heat itself up naturally. The amount of power it has scales down linearly with blood lost
 		//The power is increased by the setting in the config
-		float m_fNaturalCoreFactor = context.m_pBloodHitZone.GetHealthScaled()*s_fCoreTemperatureEfficacy/1000;
+		float m_fNaturalCoreFactor = context.m_pBloodHitZone.GetHealthScaled()*s_pTemperatureSettings.m_fCoreTemperatureEfficacy/1000;
 		if (context.m_pVitals.GetTemperature()>307){//If core is too hot, natural system instead should cool off
 			m_fNaturalCoreFactor*=-1;
 		} 
@@ -97,6 +85,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		
 		//---Debug Printouts---//
 		Print(context.m_pVitals.m_fCoreTemperature-273);
+		Print(context.m_pVitals.m_iHeatPackCount);
 		Print(m_fFinalOutdoorTemperature-273);
 		Print(m_fFinalChange);
 		Print(m_fOutdoorTemperatureFactor);

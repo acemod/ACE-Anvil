@@ -3,6 +3,22 @@ SCR_ChimeraCharacter {
  components {
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
+    ACE_Medical_HeatpackUserAction "{697F35501517AD39}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo SCR_ActionUIInfo "{697F35500C2E495D}" {
+      Name "HeatpackAction"
+      Description "Apply a heatpack"
+      m_sInteractionIcon "{29DE5CB9A3FE0287}UI/Textures/Icons/icons_radialWeapons.imageset"
+      m_sInteractionGlowIcon "{29DE5CB9A3FE0287}UI/Textures/Icons/icons_radialWeapons.imageset"
+      m_sIconName "gadget_bandage"
+     }
+     ActionTitle "Apply heatpack"
+     VisibilityRange 2
+     Duration 3
+     m_eConsumableType ACE_MEDICAL_HEATPACK
+    }
     ACE_Medical_CheckVitalsUserAction "{697B36BE12393F06}" {
      ParentContextList {
       "Head"

@@ -43,8 +43,8 @@ class ACE_Temperature_FreezingEffectHandler :SCR_BaseScreenEffect
 		m_fInterpProgress+=timeSlice;
 		float m_fDeathProgress=Math.InverseLerp(m_fDefaultCoreTemperature, m_fUnconTemperature, m_fCurrentTemperature);
 		
-		m_wImageWidget.SetOpacity(m_fDeathProgress/2+0.5);
-		m_wImageWidget.SetMaskProgress(m_fDeathProgress);
+		m_wImageWidget.SetOpacity(m_fDeathProgress);
+		m_wImageWidget.SetMaskProgress(Math.Min(m_fDeathProgress/5,0.12));
 	}
 	
 	bool ShouldGetUpdated()

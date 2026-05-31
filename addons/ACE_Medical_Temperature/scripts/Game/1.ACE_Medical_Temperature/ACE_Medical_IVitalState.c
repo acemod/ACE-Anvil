@@ -49,11 +49,11 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		s_TimeManager.GetSunsetHour(s_fSunsetTime);
 		float s_fDayNightCyclePower=0;//Default to zero, if it's zero it means the sun is set
 		if (s_TimeManager.IsDayHour(s_TimeManager.GetTime().m_iHours)){//If it is day
-			float s_fDayNightCycleProgress = Math.Map(s_TimeManager.GetTimeOfTheDay(),s_fSunriseTime,s_fSunsetTime,0,1);//How far along in the sun's path is the sun currently?
+			float s_fDayNightCycleProgress = Math.InverseLerp(s_fSunriseTime,s_fSunsetTime,s_TimeManager.GetTimeOfTheDay());//How far along in the sun's path is the sun currently?
 			s_fDayNightCyclePower = -4 * Math.Pow(s_fDayNightCycleProgress-0.5,2)+1;//Convert the linear x variable into a power according to this parabola
 		}
 		//Map the progress in the day night cycle to the temperature ranges specified in the config
-		float m_fFinalOutdoorTemperature = Math.Map(s_fDayNightCyclePower,0,1,s_fDailyLowTemperature,s_fDailyHighTemperature);
+		float m_fFinalOutdoorTemperature = Math.Lerp(s_fDailyLowTemperature,s_fDailyHighTemperature,s_fDayNightCyclePower);
 		
 		//Get player
 		SCR_ChimeraCharacter player=context.m_pObject;
@@ -66,10 +66,10 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 			m_fFinalOutdoorTemperature -= m_fAltitude*(6.5/1000); //Adjust temperature by -6.5c per KM above sea level - 
 			
 			//---Windchill adjustment---//
-			float m_fWindchillFactor = Math.Pow(s_fWindchillPower*s_TimeManager.GetWindSpeed(),0.8);//Windchill temperature is on a curve, gets less effective with time
-			float indoorSignal = context.m_signalsManager.GetSignalValue(22);
-			float vehicleSignal = context.m_signalsManager.GetSignalValue(24);
-			m_fWindchillFactor*= Math.Lerp(s_fWindchillPower,s_fIndoorLeakage,Math.Max(indoorSignal,vehicleSignal));//At zero protection, have full windchill power, when indoors / in a vehicle scale down windchill to the config value
+			float m_fWindchillIndex = Math.Pow(s_fWindchillPower*s_TimeManager.GetWindSpeed(),0.8);//Windchill temperature is on a curve, gets less effective with time
+			float m_fIndoorSignal = context.m_signalsManager.GetSignalValue(22);
+			float m_fVehicleSignal = context.m_signalsManager.GetSignalValue(24);
+			float m_fWindchillFactor= Math.Lerp(m_fWindchillIndex,s_fIndoorLeakage,Math.Max(m_fIndoorSignal,m_fVehicleSignal));//At zero protection, have full windchill power, when indoors / in a vehicle scale down windchill to the config value
 			m_fFinalOutdoorTemperature-=m_fWindchillFactor;
 		}
 		

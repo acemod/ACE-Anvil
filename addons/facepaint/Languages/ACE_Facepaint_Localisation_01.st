@@ -5,55 +5,61 @@ StringTable {
    Id "ace-item-facepaint-uk-description"
    Target_en_us "UK manufactured camouflage face cream stick. Either end has a different colour camouflage cream."
    Target_ko_kr "영국에서 제조된 위장 크림 막대입니다. 양 끝에는 서로 다른 색상의 위장 무늬 크림이 들어 있습니다."
+   Target_zh_cn "英製偽裝膏；兩端各配置不同顏色的偽裝迷彩膏，用於破壞面部輪廓與反光"
    Target_fr_fr "Stick de crème camouflage pour le visage, fabriqué au Royaume-Uni. Chaque extrémité contient une crème camouflage de couleur différente"
-   Modified 1721299661
+   Modified 1769405904
    Author "Admin"
-   LastChanged "Martian"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6698E5EF23C64B58}" {
    Id "ace-item-facepaint-uk-name"
    Target_en_us "Camouflage Face Cream"
    Target_fr_fr "Crème de Camouflage"
    Target_ko_kr "위장 크림 (영국)"
-   Modified 1721299657
+   Target_zh_cn "面部偽裝膏"
+   Modified 1769405922
    Author "Admin"
-   LastChanged "Martian"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6698E5E8B65DE72C}" {
    Id "ace-item-facepaint-us-description"
    Target_en_us "US manufactured camouflage face cream stick. Either end has a different colour camouflage cream."
    Target_ko_kr "미국에서 제조된 위장 크림 막대입니다. 양 끝에는 서로 다른 색상의 위장 무늬 크림이 들어 있습니다."
+   Target_zh_cn "美製偽裝膏；兩端各配置不同顏色的偽裝迷彩膏，用於破壞面部輪廓與反光"
    Target_fr_fr "Stick de crème camouflage pour le visage, fabriqué aux États-Unis. Chaque extrémité contient une crème camouflage de couleur différente."
-   Modified 1721298554
+   Modified 1769405798
    Author "Admin"
-   LastChanged "Martian"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6698E5E8B4523D5E}" {
    Id "ace-item-facepaint-us-name"
    Target_en_us "Camouflage Face Cream"
    Target_fr_fr "Crème de Camouflage"
    Target_ko_kr "위장 크림 (미국)"
-   Modified 1721298508
+   Target_zh_cn "面部偽裝膏"
+   Modified 1769405733
    Author "Admin"
-   LastChanged "Martian"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6698E5E8B00BF20B}" {
    Id "ace-item-facepaint-ussr-description"
    Target_en_us "Soviet manufactured camouflage face cream stick."
    Target_fr_fr "stick de crème de camouflage pour le visage, de fabrication soviétique"
    Target_ko_kr "소련에서 제조된 위장 크림 막대입니다."
-   Modified 1721298533
+   Target_zh_cn "蘇製偽裝膏"
+   Modified 1769405835
    Author "Admin"
-   LastChanged "Martian"
+   LastChanged "YuanYu"
   }
   CustomStringTableItem "{6698E5E8B3B8B6E0}" {
    Id "ace-item-facepaint-ussr-name"
    Target_en_us "Camouflage Face Cream"
    Target_fr_fr "Crème de Camouflage"
    Target_ko_kr "위장 크림 (소련)"
-   Modified 1721298511
+   Target_zh_cn "面部偽裝膏"
+   Modified 1769405857
    Author "Admin"
-   LastChanged "Martian"
+   LastChanged "YuanYu"
   }
  }
 }

@@ -35,11 +35,6 @@ SCR_PlayerController {
      InfoDisplays {
       ACE_Temperature_FreezingEffectHandler "{697EE61140A46C92}" {
        m_LayoutPath "{BFBCF7C2CF2E36EE}UI/layouts/HUD/ScreenEffects/ScreenEffects.layout"
-       m_eLayer MEDIUM
-       m_aHandlers {
-        SCR_InfoDisplayHandler "{697EE6119ECD292B}" {
-        }
-       }
        m_eShow 39
       }
      }

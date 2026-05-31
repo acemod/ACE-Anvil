@@ -3,18 +3,20 @@ FrameWidgetClass {
   ImageWidgetClass "{697D2A2A1A485104}" {
    Name "ACE_Temperature_Freezing"
    Slot FrameWidgetSlot "{697D2A2A1A485131}" {
+    Anchor 0 0 1 1
+    PositionX 0
     OffsetLeft 0
+    PositionY 0
     OffsetTop 0
-    SizeX 1920
-    OffsetRight -1920
-    SizeY 1080
-    OffsetBottom -1080
+    SizeX 0
+    OffsetRight 0
+    SizeY 0
+    OffsetBottom 0
    }
    Opacity 0.46
-   "Opacity Gamma" 1.491
    Color 0.0099 0.0825 0.1616 1
    Mask "{CA1F7652B536AA21}UI/Textures/ScreenEffects/Suppression/supressionVignette4.edds"
-   "Transition width" 0.57
+   "Transition width" 0.11
    Progress 0
   }
  }

@@ -13,4 +13,4 @@ Please note that all contributors to this project are volunteers and do this in 
 
 ## Assistance with contributing
 
-If you require assistance with contributing, check out the #dev channel on our [Discord](https://acemod.org/discord). Additional documentation can be found on our [Development wiki](https://anvil.acemod.org/guides/development/).
+If you require assistance with contributing, check out the #dev-anvil channel on our [Discord](https://acemod.org/discord). Additional documentation can be found on our [Development wiki](https://anvil.acemod.org/guides/development/).

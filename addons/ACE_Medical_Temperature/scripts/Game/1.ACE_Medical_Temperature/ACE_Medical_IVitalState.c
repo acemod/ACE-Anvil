@@ -70,34 +70,37 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		//Calculate how different the outdoor air is to core temperature
 		float m_fOutdoorTemperatureDiff = m_fFinalOutdoorTemperature - context.m_pVitals.GetTemperature();
 		
-		//Reduce the impact of outside temperature by insulation
+		//Reduce the impact of outside temperature by insulation for a final temperature factor
 		float m_fOutdoorTemperatureFactor = m_fOutdoorTemperatureDiff*context.m_pVitals.m_fInsulationFactor;
 		
 		//Simulating core temperature natural heating. The amount of power it has scales down linearly with blood lost
 		float m_fNaturalHeatingFactor= context.m_pBloodHitZone.GetHealthScaled()*s_pTemperatureSettings.m_fNaturalCoreHeating/1000;
 		
+		
+		
 		//Simulating core temperature ability to sweat/heat itself up naturally. The amount of power it has scales down linearly with blood lost
 		//The power is increased by the setting in the config
-		float m_fNaturalCoreFactor = context.m_pBloodHitZone.GetHealthScaled()*s_pTemperatureSettings.m_fCoreTemperatureEfficacy/1000;
+		float m_fNaturalCoreFactor = context.m_pBloodHitZone.GetHealthScaled()*s_pTemperatureSettings.m_fCoreHeatEfficacy/1000;
 		if (context.m_pVitals.GetTemperature()>307){//If core is too hot, natural system instead should cool off
 			m_fNaturalCoreFactor*=-1;
 		} 
 		
+		//Heating of heat pack is the amount of heat packs * the heating from a heat pack
+		float m_fHeatpackFactor = context.m_pVitals.m_iHeatPackCount*s_pTemperatureSettings.m_fHeatpackHeating/1000;
 		
-		float m_fFinalChange = m_fOutdoorTemperatureFactor + m_fNaturalHeatingFactor+m_fNaturalCoreFactor;
+		float m_fFinalChange = m_fOutdoorTemperatureFactor + m_fNaturalHeatingFactor + m_fNaturalCoreFactor + m_fHeatpackFactor;
 		//Apply all the changes to core temperature, scaled for timescale
 		context.m_pVitals.SetTemperature(context.m_pVitals.GetTemperature() + m_fFinalChange*timeSlice);
 		
 		//---Debug Printouts---//
 		Print(context.m_pVitals.m_iHeatPackCount);
-		//Print(context.m_pVitals.m_fCoreTemperature-273);
-		
+		Print(context.m_pVitals.m_fCoreTemperature-273);
 //		Print(m_fFinalOutdoorTemperature-273);
-//		Print(m_fFinalChange);
-//		Print(m_fOutdoorTemperatureFactor);
-//		Print(m_fNaturalHeatingFactor);
-//		Print(m_fNaturalCoreFactor);
-		
+		Print(m_fFinalChange);
+		Print(m_fOutdoorTemperatureFactor);
+		Print(m_fNaturalHeatingFactor);
+		Print(m_fNaturalCoreFactor);
+		Print(m_fHeatpackFactor);
 		
 	}
 }

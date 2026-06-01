@@ -61,8 +61,8 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    m_eAnimVariable ADRIANOV
    m_eUseMask 7
    m_ConsumableEffect ACE_Temperature_ConsumableHeatpack "{697F748DBBE178DF}" {
-    m_fApplyToSelfDuration 120
-    m_fApplyToOtherDuration 120
+    m_fApplyToSelfDuration 300
+    m_fApplyToOtherDuration 300
     m_fItemRegenerationSpeed 1
     m_fItemRegenerationDuration 120
     m_fItemAbsoluteRegenerationAmount 120
@@ -77,6 +77,11 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    ActionContexts {
     UserActionContext "{508AC2ABEC97066C}" {
      "Display UI At Reference Point" 1
+    }
+   }
+   additionalActions {
+    SCR_PickUpItemAction "{51EC842E3A187379}" {
+     VisibilityRange 2
     }
    }
   }

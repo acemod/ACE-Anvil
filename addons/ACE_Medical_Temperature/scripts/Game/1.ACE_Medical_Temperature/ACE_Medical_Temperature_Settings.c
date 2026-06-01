@@ -15,11 +15,14 @@ class ACE_Medical_Temperature_Settings : ACE_ModSettings
 	[Attribute(defvalue: "307.0", desc: "Core temperature of a person upon spawnin", params: "0 1000")]
 	float m_fDefaultCoreTemperature;
 	
-	[Attribute(defvalue: "400", desc: "Effectiveness of core natural heating. Increase this for stronger natural heating", params: "0 1000")]
-	float m_fCoreTemperatureEfficacy;
-	
-	[Attribute(defvalue: "150", desc: "Effectiveness of core temperature management per second. Increase this for stronger natural heat management", params: "0 1000")]
+	[Attribute(defvalue: "400", desc: "Effectiveness of core natural heating. Increase this for stronger natural heating. Millidegrees per second.", params: "0 10000")]
 	float m_fNaturalCoreHeating;
+	
+	[Attribute(defvalue: "220", desc: "Effectiveness of the heat pack item. Increase this for a stronger heating effect per pack. Millidegrees per second.", params: "0 10000")]
+	float m_fHeatpackHeating;
+	
+	[Attribute(defvalue: "150", desc: "Effectiveness of core temperature management per second. Increase this for stronger natural heat management. Millidegrees per second.", params: "0 10000")]
+	float m_fCoreHeatEfficacy;
 	
 	
 	[Attribute(defvalue: "1.5", desc: "How powerful of an affect should wind have on insulation", params: "0 100")]

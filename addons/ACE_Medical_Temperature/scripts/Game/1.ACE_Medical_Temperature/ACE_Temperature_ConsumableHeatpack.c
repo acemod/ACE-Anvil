@@ -24,6 +24,7 @@ class ACE_Temperature_ConsumableHeatpack : SCR_ConsumableEffectHealthItems
 
 	override void ApplyEffect(notnull IEntity target, notnull IEntity user, IEntity item, ItemUseParameters animParams)
 	{
+		super.ApplyEffect(target,user,item,animParams);
 		if (!Replication.IsServer())
 			return;
 		ACE_Medical_MedicationComponent medicationComponent = ACE_Medical_MedicationComponent.Cast(target.FindComponent(ACE_Medical_MedicationComponent));

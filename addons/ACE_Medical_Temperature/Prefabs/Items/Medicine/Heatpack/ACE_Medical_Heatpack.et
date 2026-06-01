@@ -59,13 +59,16 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   SCR_ConsumableItemComponent "{697F26949CB7E268}" {
    m_eAnimVariable ADRIANOV
+   m_eUseMask 7
    m_ConsumableEffect ACE_Temperature_ConsumableHeatpack "{697F748DBBE178DF}" {
     m_fApplyToSelfDuration 23
+    m_fApplyToOtherDuration 22.3
     m_aDamageEffectsToLoad {
      ACE_Temperature_HeatPackDamageEffect "{697F748DB0CB0ECD}" {
      }
     }
    }
+   m_bVisibleEquipped 1
   }
   ActionsManagerComponent "{508AB5952B584B2E}" {
    ActionContexts {

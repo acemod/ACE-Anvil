@@ -89,13 +89,14 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		context.m_pVitals.SetTemperature(context.m_pVitals.GetTemperature() + m_fFinalChange*timeSlice);
 		
 		//---Debug Printouts---//
-		Print(context.m_pVitals.m_fCoreTemperature-273);
 		Print(context.m_pVitals.m_iHeatPackCount);
-		Print(m_fFinalOutdoorTemperature-273);
-		Print(m_fFinalChange);
-		Print(m_fOutdoorTemperatureFactor);
-		Print(m_fNaturalHeatingFactor);
-		Print(m_fNaturalCoreFactor);
+		//Print(context.m_pVitals.m_fCoreTemperature-273);
+		
+//		Print(m_fFinalOutdoorTemperature-273);
+//		Print(m_fFinalChange);
+//		Print(m_fOutdoorTemperatureFactor);
+//		Print(m_fNaturalHeatingFactor);
+//		Print(m_fNaturalCoreFactor);
 		
 		
 	}

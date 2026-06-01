@@ -4,11 +4,11 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
     ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
-     Name "HeatpackTOLOCALIZE"
-     Description "HEATPACKTOLOCALLIZE"
+     Name "#ACE_Medical-Heatpack-Name"
+     Description "#ACE_Medical-Heatpack-Description"
      m_aItemHints {
       SCR_InventoryItemHintUIInfo "{697F26949CB7FA5E}" {
-       Name "#ACE_Medical-InfoWidget_AmmoniumCarbonate"
+       Name "#ACE_Medical-InfoWidget-Heatpack"
        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
        IconSetName "Morphine_l_UI"
       }

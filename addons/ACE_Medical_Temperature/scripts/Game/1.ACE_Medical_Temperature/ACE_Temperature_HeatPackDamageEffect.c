@@ -28,10 +28,5 @@ class ACE_Temperature_HeatpackDamageEffect : SCR_DotDamageEffect {
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override EDamageType GetDefaultDamageType()
-	{
-		Print("Heatpackdamageeffect line 32");
-		return EDamageType.HEALING;
-	}
 
 }

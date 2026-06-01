@@ -5,7 +5,7 @@ SCR_ChimeraCharacter {
    additionalActions {
     ACE_Medical_HeatpackUserAction "{697F35501517AD39}" {
      ParentContextList {
-      "Head"
+      "Chest"
      }
      UIInfo SCR_ActionUIInfo "{697F35500C2E495D}" {
       Name "HeatpackAction"

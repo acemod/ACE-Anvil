@@ -1,3 +1,15 @@
+$grp StaticModelEntity : "{038175C0596A575F}PrefabLibrary/DefaultLibrary/Props/Construction/GravelPile_01_large.et" {
+ {
+  coords 140.039 -0.824 258.23
+  angles 0 142.794 0
+  scale 0.949
+ }
+ {
+  coords 138.411 -2.73 265.48
+  angles 0 -179.984 0
+  scale 1.061
+ }
+}
 GenericEntity : "{0A8E6C5528057189}PrefabLibrary/CainLibrary/Props/Construction/MetalSheetStack_low.et" {
  coords 158.286 10.544 101.365
  angles 0 107.801 0

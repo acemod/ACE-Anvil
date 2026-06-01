@@ -1,4 +1,4 @@
-class ACE_Temperature_HeatackDamageEffect : SCR_DotDamageEffect {
+class ACE_Temperature_HeatpackDamageEffect : SCR_DotDamageEffect {
 	
 	
 //	override bool HijackDamageEffect(SCR_ExtendedDamageManagerComponent dmgManager)

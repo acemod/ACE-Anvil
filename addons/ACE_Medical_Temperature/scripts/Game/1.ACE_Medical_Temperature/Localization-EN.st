@@ -1,6 +1,10 @@
 StringTable {
  ItemClassName "DefaultStringTableItem"
  Items {
+  DefaultStringTableItem "{698219E60EBED04C}" {
+   Id "ACE_Medical-Heatpack-Apply-Action"
+   Target_en_us "Apply instant heat pack"
+  }
   DefaultStringTableItem "{6982160C1238488B}" {
    Id "ACE_Medical-Heatpack-Description"
    Target_en_us "Administered to patients with hypothermia."

@@ -46,22 +46,25 @@ class ACE_Carrying_PullUserAction : ACE_Carrying_BaseUserAction {
 		
 		float travelDistance = Math.Min(1,distanceFloat)-0.1; // Minimum buffer distance of a bit, cap 1 meter per drag
 		
+		
+		
+		float travelDistanceNormalized = travelDistance/distanceFloat; //Normalize by distance
+		vector newOwnerPos = vector.Lerp(ownerEntityPos,userEntityPos,travelDistanceNormalized);
+		newOwnerPos[2]=newOwnerPos[2]+0.7; //Correction factor to keep the ragdoll from clipping into the ground
 		Print(ownerEntityPos);
 		Print(userEntityPos);
 		Print(distanceVector);
 		Print(distanceFloat);
 		Print(travelDistance);
+		Print(travelDistanceNormalized);
 		
-		float travelDistanceNormalized = travelDistance/distanceFloat; //Normalize by distance
-		vector newOwnerPos = vector.Lerp(ownerEntityPos,userEntityPos,distanceFloat);
+		SCR_EditableCharacterComponent comp = SCR_EditableCharacterComponent.Cast(pOwnerEntity.FindComponent(SCR_EditableCharacterComponent));
+		vector transform[4];
+		pOwnerEntity.GetTransform(transform);
+		transform[3] = newOwnerPos;
+		comp.SetTransform(transform);
 		
-		array<string> matrixValues = {"","","",""};
-		
-		
-		string.Format("1 0 0 %1,0 1 0 %2,0 0 1 %3,0 0 0 1",newOwnerPos[0],newOwnerPos[1],newOwnerPos[2]).Split(",",matrixValues,false);
-
-		vector mat[4] = {matrixValues[0].ToVector(),matrixValues[1].ToVector(),matrixValues[2].ToVector(),matrixValues[3].ToVector()};
-        SCR_EditableCharacterComponent.Cast(pOwnerEntity.FindComponent(SCR_EditableCharacterComponent)).SetTransform(mat);
+        
         
 		
 	}

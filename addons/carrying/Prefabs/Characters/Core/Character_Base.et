@@ -29,6 +29,20 @@ SCR_ChimeraCharacter {
      CanAggregate 1
      "Sort Priority" 12
     }
+    ACE_Carrying_PullUserAction "{69850D2E4C59C50C}" {
+     ParentContextList {
+      "LeftWrist" "RightWrist" "LeftLeg" "RightLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{69850D2EB0071102}" {
+      Name "#ACE-UserAction_Pull"
+      Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+      m_sIconName "moveCommandAlt"
+     }
+     ActionTitle "#ACE-UserAction_Pull"
+     VisibilityRange 2
+     Duration 0.2
+     "Sort Priority" -100000
+    }
    }
   }
  }

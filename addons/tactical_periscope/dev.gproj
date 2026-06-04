@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_TacticalPeriscope_Dev"
+ GUID "65AD7CD09CAEC4E2"
+ TITLE "ACE Tactical Periscope Dev"
+ Dependencies {
+  "58D0FB3206B6F859" "65AD7D0D9941A380"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{64A40CB069C07FC7}" {
+      StringTableSource "{FD20CF2F69D7033E}Language/ACE_TacticalPeriscope_localization.st"
+      Languages {
+       LanguageDefinition "{64A40CB06FCFF4A1}" {
+        Code "cs_cz"
+        StringTableRuntime "{90FC786ADDAD32E7}Language/ACE_TacticalPeriscope_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF4D2}" {
+        Code "de_de"
+        StringTableRuntime "{45826259CE0E23C7}Language/ACE_TacticalPeriscope_localization.de_de.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF433}" {
+        Code "en_us"
+        StringTableRuntime "{1B72E812A4FD26C6}Language/ACE_TacticalPeriscope_localization.en_us.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF41D}" {
+        Code "es_es"
+        StringTableRuntime "{DE3EA59B4AFF4DD9}Language/ACE_TacticalPeriscope_localization.es_es.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF465}" {
+        Code "fr_fr"
+        StringTableRuntime "{659650ACAC7CAEDB}Language/ACE_TacticalPeriscope_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF444}" {
+        Code "it_it"
+        StringTableRuntime "{E58ADF98015E2D22}Language/ACE_TacticalPeriscope_localization.it_it.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF3A2}" {
+        Code "ja_jp"
+        StringTableRuntime "{F591620A3F2F1D89}Language/ACE_TacticalPeriscope_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF39C}" {
+        Code "ko_kr"
+        StringTableRuntime "{552F4AA6AC021EB6}Language/ACE_TacticalPeriscope_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF3FC}" {
+        Code "pl_pl"
+        StringTableRuntime "{095EEC5C12ED82CA}Language/ACE_TacticalPeriscope_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF1E3}" {
+        Code "pt_br"
+        StringTableRuntime "{DC29769029134870}Language/ACE_TacticalPeriscope_localization.pt_br.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF1DB}" {
+        Code "ru_ru"
+        StringTableRuntime "{89686238B46A2D06}Language/ACE_TacticalPeriscope_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF13A}" {
+        Code "uk_ua"
+        StringTableRuntime "{033037CED8449353}Language/ACE_TacticalPeriscope_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{64A40CB06FCFF11A}" {
+        Code "zh_cn"
+        StringTableRuntime "{D98059F3E1E4434E}Language/ACE_TacticalPeriscope_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

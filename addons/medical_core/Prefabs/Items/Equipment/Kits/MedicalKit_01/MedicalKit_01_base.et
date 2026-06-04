@@ -32,5 +32,11 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    }
    m_fMaxWeight 10
   }
+  SCR_ArsenalComponent "{5E3CC268A92CDE62}" {
+   Enabled 0
+  }
+  SCR_ArsenalInventoryStorageManagerComponent "{5E3CC268AFE7341C}" {
+   Enabled 0
+  }
  }
 }

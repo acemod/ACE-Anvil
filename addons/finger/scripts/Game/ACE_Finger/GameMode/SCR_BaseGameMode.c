@@ -5,9 +5,9 @@ modded class SCR_BaseGameMode : BaseGameMode
 	
 	//------------------------------------------------------------------------------------------------
 	//! Create map pointer for the player
-	override void OnPlayerConnected(int playerId)
+	override void OnPlayerRegistered(int playerId)
 	{
-		super.OnPlayerConnected(playerId);
+		super.OnPlayerRegistered(playerId);
 		
 		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
 		if (!playerController)

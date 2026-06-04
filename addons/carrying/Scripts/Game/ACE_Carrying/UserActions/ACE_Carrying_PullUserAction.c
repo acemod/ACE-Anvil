@@ -11,10 +11,12 @@ class ACE_Carrying_PullUserAction : ScriptedUserAction {
 
 	override void PerformContinuousAction(IEntity pOwnerEntity, IEntity pUserEntity, float timeSlice)
 	{
+		vector userEntityPos  = pUserEntity.GetOrigin();
 		//Make the user entity crouch, if they are not swimming
 		if (!userControllerComponent.IsSwimming())
 		{
 			userControllerComponent.ForceStance(ECharacterStance.CROUCH);//Put them into crouch position
+			userEntityPos[1] = userEntityPos[1]-0.7;//Make force more efficenct when dragging
 		}
 		//Enforce one call per interval
 		if (m_fApplicationDeltaTime<m_fApplicationInterval)
@@ -27,11 +29,9 @@ class ACE_Carrying_PullUserAction : ScriptedUserAction {
 		ownerAnimationComponent.GetRagdollBone(boneIndex,boneMatrix);//Get the ragdoll bone
 		vector boneCoordinates = {boneMatrix[3][0],boneMatrix[3][1],boneMatrix[3][2]};//Find it's location
 		
-		vector userEntityPos  = pUserEntity.GetOrigin();
-
 		vector impulseDirection = (userEntityPos-boneCoordinates).Normalized();//Find the direction that impulse should be applied in
 		float m_fDistance  = Math.Min(vector.Distance(boneCoordinates,userEntityPos),2); //Cap it, so no infinite force
-		float impulsePower = Math.Pow(m_fDistance,2)*40-20;
+		float impulsePower = Math.Pow(m_fDistance,2)*50-30;
 		ownerAnimationComponent.AddRagdollEffectorDamage(pOwnerEntity.CoordToLocal(boneCoordinates),impulseDirection,impulsePower,0.2,m_fApplicationInterval);//Apply a force to it
 	}
 

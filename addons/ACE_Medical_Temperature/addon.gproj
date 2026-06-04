@@ -1,0 +1,35 @@
+GameProject {
+ ID "ACE_Medical_Temperature"
+ GUID "697B35821F863643"
+ TITLE "ACE_Medical_Temperature"
+ Dependencies {
+  "65AD7D4F994EA327" "65AD7D0D9941A380" "6586079789278413" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{697B716E52F74D59}" {
+      StringTableSource "{AFDD4366E5050FB1}scripts/Game/1.ACE_Medical_Temperature/Localization-EN.st"
+      Languages {
+       LanguageDefinition "{697B716E4F6F0AC5}" {
+        Code "en_us"
+        StringTableRuntime "{65933F969672086A}scripts/Game/1.ACE_Medical_Temperature/Localization-EN.en_us.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

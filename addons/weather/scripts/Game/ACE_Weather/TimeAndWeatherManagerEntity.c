@@ -1,7 +1,7 @@
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity 
 {
 	//Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
-	float m_fCurrentOutdoorTemperature;
+	float m_fCurrentOutdoorTemperature=293;//Buffer value to prevent instant freezing
 	float m_fUpdateInterval = 30; // One update per x seconds
 	float m_fNextUpdate = 1;
 	bool m_bCurrentlyDay; 
@@ -10,7 +10,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	
 	float m_fDailyTemperatureMinimum;
 	float m_fDailyTemperatureMaximum;
-	float m_fDailySunsetTemperature = 288;
+	float m_fDailySunsetTemperature;
 	
 	float m_fAlpha;
 	float m_fExpResultPrime;//Used as a helper for calculating tau
@@ -35,15 +35,16 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		//Day init always has to be done
 		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[GetMonth()-1],m_fMonthlyDailyLowTemperature[GetMonth()%12],(GetDay()-0.999999)/31);
 		UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
+		Print(m_fSunriseHour);
+		Print(m_fSunsetHour);
 		m_bCurrentlyDay = m_fSunriseHour<GetTimeOfTheDay() && GetTimeOfTheDay()<m_fSunsetHour;
 		if (!m_bCurrentlyDay)
 		{
 			CalculateOutdoorTemperature(m_fSunsetHour-0.001);//Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
-			int year = GetYear();int month = GetMonth(); int day = GetDay();
-			GetDayXFromDate(year,month,day,1); //Get tmr's date 
-			GetSunsetHourForDate(year,month,day,GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(),  m_fSunsetHour);//Workaround for pre-midnight night inits
 			UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
 		}
+		
+		
 		m_bInitialized=true;
 	}
 	
@@ -55,14 +56,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	
 	void CalculateOutdoorTemperature(float currentTime)
 	{
-		if ((m_fSunriseHour<currentTime && currentTime<m_fSunsetHour) != m_bCurrentlyDay)//Update the params
-		{
-			m_bCurrentlyDay= !m_bCurrentlyDay;
-			if (m_bCurrentlyDay)
-				UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
-			else 
-				UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
-		}
 		if (currentTime<m_fSunriseHour)//Post midnight, pre sunrise
 		{
 			m_fCurrentOutdoorTemperature = m_fTau + (m_fDailySunsetTemperature-m_fTau)*ACE_Math.Exp(-m_fExpDecay*(currentTime+24-m_fSunsetHour)/(24-m_fDayLength));
@@ -84,9 +77,17 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			return m_fCurrentOutdoorTemperature;
 		if (!m_bInitialized)
 			Init();
+		if ((m_fSunriseHour<GetTimeOfTheDay() && GetTimeOfTheDay()<m_fSunsetHour) != m_bCurrentlyDay)//If out of date, update the params
+		{
+			m_bCurrentlyDay= !m_bCurrentlyDay;
+			if (m_bCurrentlyDay)
+				UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
+			else 
+				UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
+		}
 		CalculateOutdoorTemperature(GetTimeOfTheDay());
-		float currentTime = GetTimeOfTheDay()+24*GetDay()-24;
-		Print(currentTime);
+		float timeStamp = GetTimeOfTheDay()+24*GetDay()-24;
+		Print(timeStamp);
 		Print(m_fCurrentOutdoorTemperature);
 		
 		

@@ -1,7 +1,10 @@
 TimeAndWeatherManagerEntity {
  ID "5244F08C9618CADD"
+ "Day Duration" 1200
+ "Month of the Year" 1
+ "Day of the Month" 1
  m_fMonthlyPeakTemperatureHour {
-  16 16
+  8 8
  }
  m_fMonthlyDailyLowTemperature {
   281 281

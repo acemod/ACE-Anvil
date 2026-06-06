@@ -3,14 +3,14 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
 	float m_fCurrentOutdoorTemperature=293;
 	float m_fUpdateInterval = 30; // One update per x seconds
-	float m_fNextUpdate = 3;
+	float m_fNextUpdate = 1;
 	bool m_bCurrentlyDay; 
 	bool m_bInitialized;
 	
 	
 	float m_fDailyTemperatureMinimum;
 	float m_fDailyTemperatureMaximum;
-	float m_fDailySunsetTemperature;
+	float m_fDailySunsetTemperature = 288;
 	
 	float m_fAlpha;
 	float m_fExpResultPrime;//Used as a helper for calculating tau
@@ -32,10 +32,17 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected ref array<float> m_fMonthlyDailyHighTemperature;
 	
 	void Init(){
-		m_bCurrentlyDay = m_fSunriseHour<GetTimeOfTheDay()<m_fSunsetHour;
+		GetSunriseHour(m_fSunriseHour); GetSunsetHour(m_fSunsetHour);
+		Print(m_fSunriseHour);
+		Print(m_fSunsetHour);
+		Print(GetTimeOfTheDay());
+		m_bCurrentlyDay = m_fSunriseHour<GetTimeOfTheDay() && GetTimeOfTheDay()<m_fSunsetHour;
 		if (m_bCurrentlyDay)//Init during day
 		{
-			m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[GetMonth()-1],m_fMonthlyDailyLowTemperature[GetMonth()%12],(GetDay()-1)/30);
+			Print(GetYear());
+			Print(GetMonth());
+			Print(GetDay());
+			m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[GetMonth()-1],m_fMonthlyDailyLowTemperature[GetMonth()%12],(GetDay()-1.0000001)/30);
  			UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
 		} 
 		else 
@@ -45,8 +52,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			GetDayXFromDate(year,month,day,1); //Get tmr's date 
 			GetSunsetHourForDate(year,month,day,GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(),  m_fSunsetHour);//Workaround for pre-midnight night inits
 			m_fDayLength = m_fSunsetHour-m_fSunriseHour;
-			m_fCurrentOutdoorTemperature = 283;//Gets loaded into sunset temp
-			
 			UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
 		}
 		m_bInitialized=true;
@@ -60,9 +65,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	
 	void CalculateOutdoorTemperature(float currentTime)
 	{
-		if (m_fSunriseHour<currentTime<m_fSunsetHour != m_bCurrentlyDay)//Update the params
+		if ((m_fSunriseHour<currentTime && currentTime<m_fSunsetHour) != m_bCurrentlyDay)//Update the params
 		{
-			m_bCurrentlyDay = m_fSunriseHour<currentTime<m_fSunsetHour;
+			m_bCurrentlyDay= !m_bCurrentlyDay;
 			if (m_bCurrentlyDay)
 				UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
 			else 
@@ -91,7 +96,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			Init();
 		CalculateOutdoorTemperature(GetTimeOfTheDay());
 		float currentTime = GetTimeOfTheDay()+24*GetDay()-24;
-		Print(currentTime);
 		Print(m_fCurrentOutdoorTemperature);
 		
 		
@@ -101,8 +105,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	
 	void UpdateSunrisePortion(int year, int month, int day)
 	{
-		m_fPeakTemperatureHour = Math.Lerp(m_fMonthlyPeakTemperatureHour[month-1],m_fMonthlyPeakTemperatureHour[month%12],(day-1)/30);
-		m_fDailyTemperatureMaximum = Math.Lerp(m_fMonthlyDailyHighTemperature[month-1],m_fMonthlyDailyHighTemperature[month%12],(day-1)/30);
+		m_fPeakTemperatureHour = Math.Lerp(m_fMonthlyPeakTemperatureHour[month-1],m_fMonthlyPeakTemperatureHour[month%12],(day-1.0000001)/30);
+		m_fDailyTemperatureMaximum = Math.Lerp(m_fMonthlyDailyHighTemperature[month-1],m_fMonthlyDailyHighTemperature[month%12],(day-1.0000001)/30);
 		m_fAlpha = m_fPeakTemperatureHour - (m_fSunriseHour+m_fSunsetHour)/2;
 		GetSunriseHour(m_fSunriseHour); GetSunsetHour(m_fSunsetHour);
 		m_fDayLength = m_fSunsetHour-m_fSunriseHour;
@@ -114,7 +118,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		
 		GetDayXFromDate(year,month,day,1);//Get tommorow's date
 		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(),  m_fSunriseHourPrime);
-		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[month-1],m_fMonthlyDailyLowTemperature[(month)%12],(day-1)/30);
+		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[month-1],m_fMonthlyDailyLowTemperature[(month)%12],(day-1.0000001)/30);
 		m_fExpResultPrime = ACE_Math.Exp(-m_fExpDecay*(m_fSunriseHourPrime-m_fSunsetHour)/(24-m_fDayLength));
 		m_fTau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature*m_fExpResultPrime)/(1-m_fExpResultPrime);
 	}

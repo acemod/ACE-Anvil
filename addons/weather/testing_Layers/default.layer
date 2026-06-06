@@ -4,13 +4,33 @@ GenericWorldEntity world {
  boundMaxs 102.486 22.441 101.442
  blockSize 100 1500 100
 }
+GenericWorldLightEntity : "{BF7CD669B2F4A143}Prefabs/World/Game/Arland/Lighting_Arland.et" {
+ coords 2.058 2.44 0.748
+ angles 0 0 0
+}
+SCR_BaseGameMode GameMode_Plain1 : "{1B76F75A3175E85C}Prefabs/MP/Modes/Plain/GameMode_Plain.et" {
+ coords 1.851 2.44 0.679
+}
+SCR_FactionManager FactionManager_USxUSSR1 : "{589540B35EBA8CDC}Prefabs/MP/Managers/Factions/FactionManager_USxUSSR.et" {
+ coords 2.201 2.44 0.685
+}
 TimeAndWeatherManagerEntity : "{A3BAF78F6F03315B}Prefabs/World/Game/TimeAndWeatherManager.et" {
  coords 1.676 2.44 0.688
+ "Day Duration" 1200
  "Initial Day Time" 23.554
- Year 2006
+ Year 1989
+ "Month of the Year" 6
+ Latitude 45
+ Longitude -72
  "Internal variant transition" 0
  "Internal subvariant 0" 0
  "Internal subvariant 1" 0
+}
+ScriptedChatEntity : "{F69BC912AC8236F9}Prefabs/MP/ScriptedChatEntity.et" {
+ coords 1.972 2.44 0.641
+}
+SCR_LoadoutManager : "{97EF4C1A41F63DDB}Prefabs/MP/Managers/Loadouts/LoadoutManager_USxUSSR.et" {
+ coords 2.207 2.44 0.826
 }
 StaticModelEntity : "{B6159DDE16E19151}Prefabs/Terrain/Core/TerrainObject_base.et" {
  coords 1.985 1.94 0.941

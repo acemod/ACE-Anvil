@@ -1,13 +1,7 @@
 TimeAndWeatherManagerEntity {
  ID "5244F08C9618CADD"
- "Day Duration" 1200
- "Initial Day Time" 0
- "Month of the Year" 1
- "Day of the Month" 1
- Latitude 43.651
- Longitude 100.653
  m_fMonthlyPeakTemperatureHour {
-  20 20
+  16 16
  }
  m_fMonthlyDailyLowTemperature {
   281 281

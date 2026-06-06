@@ -9,7 +9,6 @@ modded class SCR_InventoryDamageInfoUI : ScriptedWidgetComponent
 		if (!visible || !m_wBleedingIconWidget || !m_wBleedingTextWidget)
 			return;
 		
-		string bleedingText;
 		if (m_wBleedingTextWidget.IsVisible())
 			text += "\n" + m_wBleedingTextWidget.GetText();
 		

@@ -13,10 +13,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected ref array<float> m_aACE_MonthlyAverageDailyTemperatureAirMaxs;
 	
 	// Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
-	float m_fACE_CurrentOutdoorTemperature = 293;  // Buffer value to prevent instant freezing
-	float m_fACE_UpdateInterval;				   // One update per x seconds
-	float m_fACE_UpdateTimer;					   // [s]
-	bool m_bCurrentlyDay;
+	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Buffer value to prevent instant freezing
+	protected float m_fACE_UpdateInterval;		   // One update per x seconds
+	protected float m_fACE_UpdateTimer;			   // [s]
+	protected bool m_bCurrentlyDay;
 
 	float m_fDailyTemperatureMinimum;
 	float m_fDailyTemperatureMaximum;

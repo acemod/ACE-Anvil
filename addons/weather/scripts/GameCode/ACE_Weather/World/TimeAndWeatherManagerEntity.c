@@ -12,7 +12,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(desc: "Average daily maximum air temperature for each month in Kelvin", params: "0 1000", category: "Temperature")]
 	protected ref array<float> m_aACE_MonthlyAverageDailyTemperatureAirMaxs;
 	
-	[Attribute(defvalue: "1.45", desc: "Overcast-induced temperature shift is overcast times this factor in Kelvin", category: "Temperature")]
+	[Attribute(defvalue: "1.45", desc: "Overcast-induced temperature shift is overcast times this factor in Kelvin. Symmetrically shifts Tmax down and Tmin up to lower DTR.", category: "Temperature")]
 	protected float m_fACE_OvercastTemperatureFactor;
 	
 	[Attribute(defvalue: "2.2", desc: "Exponential temperature decay rate at night. γ in SinExp model.", params: "0 100", category: "Temperature")]

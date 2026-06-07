@@ -1,3 +1,6 @@
+//------------------------------------------------------------------------------------------------
+//! Calculate outdoor temperature based on corrected SinExp model
+//! Ref.: Int. J. Climatol. 2006, 26, 75. (Equations 3a, 3b and 4)
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
 	[Attribute(desc: "Average hour of the day at which peak air temperature occurs per month in 24 h format.", params: "0 24", category: "Temperature")]
@@ -12,7 +15,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(defvalue: "2.2", desc: "Exponential temperature decay rate at night. γ in SinExp model.", params: "0 100", category: "Temperature")]
 	protected float m_fACE_SinExp_Gamma;
 	
-	// Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
 	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Buffer value to prevent instant freezing
 	protected bool m_bACE_IsCurrentlyDay;
 

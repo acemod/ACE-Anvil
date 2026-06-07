@@ -1,5 +1,17 @@
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
+	[Attribute(defvalue: "2.2", desc: "Exponential temperature decay rate at night. Corresponds to γ in SinExp model.", params: "0 100", category: "Temperature")]
+	protected float m_fACE_Temperature_ExpDecayRate;
+	
+	[Attribute(desc: "Average hour of the day at which peak air temperature occurs per month in 24 h format.", params: "0 24", category: "Temperature")]
+	protected ref array<float> m_aACE_AverageTemperatureAirMaxHourByMonth;
+	
+	[Attribute(desc: "Average daily minimum air temperature for each month in Kelvin", params: "0 1000", category: "Temperature")]
+	protected ref array<float> m_aACE_AverageDailyTemperatureAirMinByMonth;
+	
+	[Attribute(desc: "Average daily maximum air temperature for each month in Kelvin", params: "0 1000", category: "Temperature")]
+	protected ref array<float> m_aACE_AverageDailyTemperatureAirMaxByMonth;
+	
 	// Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
 	float m_fACE_CurrentOutdoorTemperature = 293;  // Buffer value to prevent instant freezing
 	float m_fACE_UpdateInterval;				   // One update per x seconds
@@ -12,21 +24,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	float m_fDailySunsetTemperature;
 
 	float m_fAlpha;
-	float m_fTau;
+	float m_fACE_Temperature_Tau;
 
 	float m_fDayLength;
 	float m_fSunriseHour;
 	float m_fSunsetHour;
 	float m_fPeakTemperatureHour;
 
-	[Attribute(defvalue: "2.2", desc: "Exponential decay function, symbolized as y in the equation", params: "0 100", category: "Temperature")]
-	float m_fExpDecay;
-	[Attribute(desc: "Hour at which peak temperature occurs, 24hr format", params: "0 24", category: "Temperature")]
-	protected ref array<float> m_fMonthlyPeakTemperatureHour;
-	[Attribute(desc: "Daily low temp for the 1st of each month, kelvin", params: "0 1000", category: "Temperature")]
-	protected ref array<float> m_fMonthlyDailyLowTemperature;
-	[Attribute(desc: "Daily high temp for the 1st of each month, kelvin", params: "0 1000", category: "Temperature")]
-	protected ref array<float> m_fMonthlyDailyHighTemperature;
 
 	//------------------------------------------------------------------------------------------------
 	protected void TimeAndWeatherManagerEntity(IEntitySource src, IEntity parent)
@@ -39,7 +43,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	{
 		// Day init always has to be done
 		m_fDailyTemperatureMinimum =
-			Math.Lerp(m_fMonthlyDailyLowTemperature[GetMonth() - 1], m_fMonthlyDailyLowTemperature[GetMonth() % 12], (GetDay() - 0.999999) / 31);
+			Math.Lerp(m_aACE_AverageDailyTemperatureAirMinByMonth[GetMonth() - 1], m_aACE_AverageDailyTemperatureAirMinByMonth[GetMonth() % 12], (GetDay() - 0.999999) / 31);
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 		Print(m_fSunriseHour);
 		Print(m_fSunsetHour);
@@ -107,7 +111,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	{
 		if (currentTime < m_fSunriseHour)  // Post midnight, pre sunrise
 		{
-			return m_fTau + (m_fDailySunsetTemperature - m_fTau) * ACE_Math.Exp(-m_fExpDecay * (currentTime + 24 - m_fSunsetHour) / (24 - m_fDayLength));
+			return m_fACE_Temperature_Tau + (m_fDailySunsetTemperature - m_fACE_Temperature_Tau) * ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (currentTime + 24 - m_fSunsetHour) / (24 - m_fDayLength));
 		}
 		else if (currentTime < m_fSunsetHour)  // sun is out, post sunrise pre sunset
 		{
@@ -116,15 +120,15 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		}
 		else  // sun is set, pre midnight
 		{
-			return m_fTau + (m_fDailySunsetTemperature - m_fTau) * ACE_Math.Exp(-m_fExpDecay * (currentTime - m_fSunsetHour) / (24 - m_fDayLength));
+			return m_fACE_Temperature_Tau + (m_fDailySunsetTemperature - m_fACE_Temperature_Tau) * ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (currentTime - m_fSunsetHour) / (24 - m_fDayLength));
 		}
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_UpdateSunrisePortion(int year, int month, int day)
 	{
-		m_fPeakTemperatureHour = Math.Lerp(m_fMonthlyPeakTemperatureHour[month - 1], m_fMonthlyPeakTemperatureHour[month % 12], (day - 0.999999) / 31);
-		m_fDailyTemperatureMaximum = Math.Lerp(m_fMonthlyDailyHighTemperature[month - 1], m_fMonthlyDailyHighTemperature[month % 12], (day - 0.999999) / 31);
+		m_fPeakTemperatureHour = Math.Lerp(m_aACE_AverageTemperatureAirMaxHourByMonth[month - 1], m_aACE_AverageTemperatureAirMaxHourByMonth[month % 12], (day - 0.999999) / 31);
+		m_fDailyTemperatureMaximum = Math.Lerp(m_aACE_AverageDailyTemperatureAirMaxByMonth[month - 1], m_aACE_AverageDailyTemperatureAirMaxByMonth[month % 12], (day - 0.999999) / 31);
 		GetSunriseHour(m_fSunriseHour);
 		GetSunsetHour(m_fSunsetHour);
 		m_fDayLength = m_fSunsetHour - m_fSunriseHour;
@@ -139,8 +143,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
 		float sunriseHourPrime;
 		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), sunriseHourPrime);
-		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[month - 1], m_fMonthlyDailyLowTemperature[(month) % 12], (day - 0.999999) / 31);
-		float expResult = ACE_Math.Exp(-m_fExpDecay * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
-		m_fTau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * expResult) / (1 - expResult);
+		m_fDailyTemperatureMinimum = Math.Lerp(m_aACE_AverageDailyTemperatureAirMinByMonth[month - 1], m_aACE_AverageDailyTemperatureAirMinByMonth[(month) % 12], (day - 0.999999) / 31);
+		float expResult = ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
+		m_fACE_Temperature_Tau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * expResult) / (1 - expResult);
 	}
 }

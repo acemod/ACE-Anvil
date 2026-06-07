@@ -1,15 +1,12 @@
 TimeAndWeatherManagerEntity {
  ID "5244F08C9618CADD"
- "Day Duration" 1200
- "Month of the Year" 1
- "Day of the Month" 1
- m_fMonthlyPeakTemperatureHour {
+ m_aACE_AverageTemperatureAirMaxHourByMonth {
   15 15 15 15 15 15 15 15 15 15 15 15
  }
- m_fMonthlyDailyLowTemperature {
+ m_aACE_AverageDailyTemperatureAirMinByMonth {
   281 281 281 281 281 281 281 281 281 281 281 281
  }
- m_fMonthlyDailyHighTemperature {
+ m_aACE_AverageDailyTemperatureAirMaxByMonth {
   297 297 297 297 297 297 297 297 297 297 297 297
  }
 }

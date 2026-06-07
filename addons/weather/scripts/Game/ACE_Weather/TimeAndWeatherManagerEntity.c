@@ -115,59 +115,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	{
 		m_fDailySunsetTemperature = m_fCurrentOutdoorTemperature;
 		
-		GetDayXFromDate(year,month,day,1);//Get tommorow's date
+		ACE_AddDaysToDate(year, month, day, 1); //Get tommorow's date
 		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(),  m_fSunriseHourPrime);
 		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[month-1],m_fMonthlyDailyLowTemperature[(month)%12],(day-0.999999)/31);
 		m_fExpResultPrime = ACE_Math.Exp(-m_fExpDecay*(m_fSunriseHourPrime-m_fSunsetHour)/(24-m_fDayLength));
 		m_fTau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature*m_fExpResultPrime)/(1-m_fExpResultPrime);
-	}
-
-	//------------------------------------------------------------------------------------------------
-	void GetDayXFromDate(inout int year, inout int month, inout int day, int offset)
-	{
-	    int sign = offset.Sign();
-	
-	    while (offset != 0)
-	    {
-	        day += sign;
-	        offset -= sign;
-	
-	        if (!CheckValidDate(year, month, day))
-	        {
-	            if (sign > 0)
-	            {
-	                if (month != 12)
-	                {
-	                    month += 1;
-	                }
-	                else
-	                {
-	                    month = 1;
-	                    year += 1;
-	                }
-	
-	                day = 1;
-	            }
-	            else
-	            {
-	                day = 31;
-	
-	                if (month == 1)
-	                {
-	                    month = 12;
-	                    year -= 1;
-	                }
-	                else
-	                {
-	                    month -= 1;
-	                }
-	
-	                while (!CheckValidDate(year, month, day))
-	                {
-	                    day -= 1;
-	                }
-	            }
-	        }
-	    }
 	}
 }

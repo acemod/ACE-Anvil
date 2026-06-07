@@ -182,8 +182,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (changeDuration < forecastDuration)
 			weight = GetTransitionManager().GetTimeLeftUntilNextState() / forecastDuration;
 		
-		float average = 0.0;
-		average += weight * ACE_GetOvercastForState(GetTransitionManager().GetCurrentState());
+		float average = weight * ACE_GetOvercastForState(GetTransitionManager().GetCurrentState());
 		average += (1.0 - weight) * ACE_GetOvercastForState(GetTransitionManager().GetNextState());
 		return average;
 	}	

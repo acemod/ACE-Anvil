@@ -97,7 +97,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 
 	//------------------------------------------------------------------------------------------------
-	float ACE_CalculateOutdoorTemperature(float currentTime)
+	float ACE_GetCurrentOutdoorTemperature()
+	{
+		return m_fACE_CurrentOutdoorTemperature;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float ACE_CalculateOutdoorTemperature(float currentTime)
 	{
 		if (currentTime < m_fSunriseHour)  // Post midnight, pre sunrise
 		{
@@ -112,12 +118,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		{
 			return m_fTau + (m_fDailySunsetTemperature - m_fTau) * ACE_Math.Exp(-m_fExpDecay * (currentTime - m_fSunsetHour) / (24 - m_fDayLength));
 		}
-	}
-
-	//------------------------------------------------------------------------------------------------
-	float ACE_GetCurrentOutdoorTemperature()
-	{
-		return m_fACE_CurrentOutdoorTemperature;
 	}
 
 	//------------------------------------------------------------------------------------------------

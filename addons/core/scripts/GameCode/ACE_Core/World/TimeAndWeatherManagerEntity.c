@@ -4,6 +4,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected float m_fACE_UpdateFrequency; // One update per x seconds
 	protected float m_fACE_UpdateTimer; // [s]
 	
+	static const float ACE_AVERAGE_DAYS_PER_YEAR = 365.2425;
+	static const float ACE_AVERAGE_DAYS_PER_MONTH = ACE_AVERAGE_DAYS_PER_YEAR / 12;
+	
 	//------------------------------------------------------------------------------------------------
 	protected void TimeAndWeatherManagerEntity(IEntitySource src, IEntity parent)
 	{

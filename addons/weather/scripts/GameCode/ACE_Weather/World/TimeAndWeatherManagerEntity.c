@@ -27,9 +27,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected float m_fACE_SinExp_Hr;
 	protected float m_fACE_SinExp_Hs;
 	protected float m_fACE_SinExp_Hmax;
-	
-	static const float AVERAGE_DAYS_PER_YEAR = 365.2425;
-	static const float AVERAGE_DAYS_PER_MONTH = AVERAGE_DAYS_PER_YEAR / 12;
 
 	//------------------------------------------------------------------------------------------------
 	override protected void EOnInit(IEntity owner)
@@ -137,7 +134,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//------------------------------------------------------------------------------------------------
 	protected float InterpolateForDayFromMonthlyAverage(int month, int day, array<float> monthlyAverages)
 	{
-		float lambda = (day - 0.5 * AVERAGE_DAYS_PER_MONTH) / AVERAGE_DAYS_PER_MONTH;
+		float lambda = (day - 0.5 * ACE_AVERAGE_DAYS_PER_MONTH) / ACE_AVERAGE_DAYS_PER_MONTH;
 		
 		if (lambda >= 0)
 			return Math.Lerp(monthlyAverages[month - 1], monthlyAverages[month % 12], lambda);

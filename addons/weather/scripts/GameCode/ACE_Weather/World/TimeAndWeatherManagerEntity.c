@@ -103,8 +103,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		}
 		else if (currentTime < m_fSunsetHour)  // sun is out, post sunrise pre sunset
 		{
-			float m_fInputBuffer = Math.PI * (currentTime - m_fSunriseHour) / (m_fDayLength + 2 * m_fAlpha);
-			return m_fDailyTemperatureMinimum + (m_fDailyTemperatureMaximum - m_fDailyTemperatureMinimum) * Math.Sin(m_fInputBuffer);
+			float phase = Math.PI * (currentTime - m_fSunriseHour) / (m_fDayLength + 2 * m_fAlpha);
+			return m_fDailyTemperatureMinimum + (m_fDailyTemperatureMaximum - m_fDailyTemperatureMinimum) * Math.Sin(phase);
 		}
 		else  // sun is set, pre midnight
 		{

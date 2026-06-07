@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-//! Calculate outdoor temperature based on corrected SinExp model
+//! Calculate air temperature based on corrected SinExp model
 //! Ref.: Int. J. Climatol. 2006, 26, 75. (Equations 3a, 3b and 4)
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
@@ -30,7 +30,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(defvalue: "1.204", desc: "Standard deviation of diurnal temperature range noise in Kelvin.", params: "0 1000", category: "Temperature")]
 	protected float m_fACE_DiurnalTemperatureRangeStdDev;
 	
-	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Default value to prevent instant freezing
+	protected float m_fACE_CurrentAirTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Default value to prevent instant freezing
 	protected bool m_bACE_IsCurrentlyDay;
 
 	protected float m_fACE_SinExp_Tmin;
@@ -73,7 +73,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_bACE_IsCurrentlyDay = IsDayHour(GetTimeOfTheDay());
 		if (!m_bACE_IsCurrentlyDay)
 		{
-			m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(m_fACE_SinExp_Hs - 0.001); // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
+			m_fACE_CurrentAirTemperature = ACE_CalculateAirTemperature(m_fACE_SinExp_Hs - 0.001); // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
 			ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());
 		}
 	}
@@ -92,17 +92,17 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 				ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());
 		}
 
-		m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(GetTimeOfTheDay());
+		m_fACE_CurrentAirTemperature = ACE_CalculateAirTemperature(GetTimeOfTheDay());
 	}
 
 	//------------------------------------------------------------------------------------------------
-	float ACE_GetCurrentOutdoorTemperature()
+	float ACE_GetAirTemperature()
 	{
-		return m_fACE_CurrentOutdoorTemperature;
+		return m_fACE_CurrentAirTemperature;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float ACE_CalculateOutdoorTemperature(float currentTime)
+	protected float ACE_CalculateAirTemperature(float currentTime)
 	{
 		if (currentTime < m_fACE_SinExp_Hr)  // Post midnight, pre sunrise
 		{
@@ -141,7 +141,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_UpdateSunsetPortion(int year, int month, int day)
 	{
-		m_fACE_SinExp_Ts = m_fACE_CurrentOutdoorTemperature;
+		m_fACE_SinExp_Ts = m_fACE_CurrentAirTemperature;
 		
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
 		

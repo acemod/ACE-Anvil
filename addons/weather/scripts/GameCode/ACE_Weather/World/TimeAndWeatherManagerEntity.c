@@ -64,7 +64,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		
 		// Day init always has to be done
 		m_fACE_SinExp_Tmin = ACE_InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
-		m_fACE_SinExp_Tmin += m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast();
+		m_fACE_SinExp_Tmin += m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast(12);
 		m_fACE_SinExp_Tmin += m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
 		m_fACE_SinExp_Tmin += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
@@ -124,7 +124,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	{
 		m_fACE_SinExp_Hmax = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
 		m_fACE_SinExp_Tmax = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
-		m_fACE_SinExp_Tmax -= m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast();
+		m_fACE_SinExp_Tmax -= m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast(12);
 		m_fACE_SinExp_Tmax -= m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
 		m_fACE_SinExp_Tmax += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		
@@ -154,7 +154,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			hrPrime = 0; // Workaround for polar circles
 				
 		m_fACE_SinExp_Tmin = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
-		m_fACE_SinExp_Tmin += m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast();
+		m_fACE_SinExp_Tmin += m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast(12);
 		m_fACE_SinExp_Tmin += m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
 		m_fACE_SinExp_Tmin += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		float expResult = ACE_Math.Exp(-m_fACE_SinExp_Gamma * (24 + hrPrime - m_fACE_SinExp_Hs) / (24 - m_fACE_SinExp_L));
@@ -173,12 +173,18 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 		
 	//------------------------------------------------------------------------------------------------
-	protected float ACE_ComputeAverageOvercastForecast()
+	//! Compute average overcast for given duration in hours
+	protected float ACE_ComputeAverageOvercastForecast(float forecastDuration)
 	{
-		float average = 0;
-		float weight = GetTransitionManager().GetTimeLeftUntilNextState() / 12;
+		float weight = 1.0;
+		
+		float changeDuration = GetTransitionManager().GetTimeLeftUntilNextState();
+		if (changeDuration < foreCastDuration)
+			weight = GetTransitionManager().GetTimeLeftUntilNextState() / forecastDuration;
+		
+		float average = 0.0;
 		average += weight * ACE_GetOvercastForState(GetTransitionManager().GetCurrentState());
-		average += (1 - weight) * ACE_GetOvercastForState(GetTransitionManager().GetNextState());
+		average += (1.0 - weight) * ACE_GetOvercastForState(GetTransitionManager().GetNextState());
 		return average;
 	}	
 }

@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------------------------
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
+	protected ResourceName m_sACE_WeatherStatesConfigName;
 	protected float m_fACE_UpdateFrequency; // One update per x seconds
 	protected float m_fACE_UpdateTimer; // [s]
 	
@@ -11,6 +12,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected void TimeAndWeatherManagerEntity(IEntitySource src, IEntity parent)
 	{
 		src.Get("Update Frequency", m_fACE_UpdateFrequency);
+		src.Get("WeatherStateMachine", m_sACE_WeatherStatesConfigName);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -29,6 +31,31 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//------------------------------------------------------------------------------------------------
 	//! TODO: Replaced with BaseWeatherManagerEntity::UpdateWeather once it gets overridable
 	void ACE_UpdateWeather(float timeSlice);
+	
+	//------------------------------------------------------------------------------------------------
+	float ACE_GetOvercastForState(notnull WeatherState state)
+	{
+		Resource res = Resource.Load(m_sACE_WeatherStatesConfigName);
+		if (!res.IsValid())
+			return 0;
+		
+		BaseContainer stateMachineSrc = res.GetResource().ToBaseContainer();
+		BaseContainerList states = stateMachineSrc.GetObjectArray("States");
+		BaseContainer stateSrc = states.Get(state.GetStateID());
+		BaseContainer variantSrc = stateSrc.GetObject(string.Format("WeatherVariant%1", state.GetStartVariantIndex()));
+		BaseContainer weatherItems = variantSrc.GetObject("WeatherItems");
+		array<float> cloudParams;
+		Print(weatherItems.Get("CloudsParams", cloudParams));
+		
+		for (int i = 0; i < cloudParams.Count(); i += 5)
+		{
+			// 55 -> ConverageModifier
+			if (cloudParams[i] == 55)
+				return cloudParams[i+4];
+		}
+		
+		return 0;
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Adds offset in days to date

@@ -42,14 +42,14 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	{
 		//Day init always has to be done
 		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[GetMonth()-1],m_fMonthlyDailyLowTemperature[GetMonth()%12],(GetDay()-0.999999)/31);
-		UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
+		ACE_UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
 		Print(m_fSunriseHour);
 		Print(m_fSunsetHour);
 		m_bCurrentlyDay = m_fSunriseHour<GetTimeOfTheDay() && GetTimeOfTheDay()<m_fSunsetHour;
 		if (!m_bCurrentlyDay)
 		{
-			m_fACE_CurrentOutdoorTemperature = CalculateOutdoorTemperature(m_fSunsetHour-0.001); //Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
-			UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
+			m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(m_fSunsetHour-0.001); //Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
+			ACE_UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
 		}
 		
 		
@@ -87,19 +87,19 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		{
 			m_bCurrentlyDay= !m_bCurrentlyDay;
 			if (m_bCurrentlyDay)
-				UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
+				ACE_UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
 			else 
-				UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
+				ACE_UpdateSunsetPortion(GetYear(),GetMonth(),GetDay());
 		}
 		
-		m_fACE_CurrentOutdoorTemperature = CalculateOutdoorTemperature(GetTimeOfTheDay());
+		m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(GetTimeOfTheDay());
 		float timeStamp = GetTimeOfTheDay()+24*GetDay()-24;
 		Print(timeStamp);
 		Print(m_fACE_CurrentOutdoorTemperature);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	float CalculateOutdoorTemperature(float currentTime)
+	float ACE_CalculateOutdoorTemperature(float currentTime)
 	{
 		if (currentTime<m_fSunriseHour)//Post midnight, pre sunrise
 		{
@@ -123,7 +123,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void UpdateSunrisePortion(int year, int month, int day)
+	void ACE_UpdateSunrisePortion(int year, int month, int day)
 	{
 		m_fPeakTemperatureHour = Math.Lerp(m_fMonthlyPeakTemperatureHour[month-1],m_fMonthlyPeakTemperatureHour[month%12],(day-0.999999)/31);
 		m_fDailyTemperatureMaximum = Math.Lerp(m_fMonthlyDailyHighTemperature[month-1],m_fMonthlyDailyHighTemperature[month%12],(day-0.999999)/31);
@@ -133,7 +133,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void UpdateSunsetPortion(int year, int month, int day)
+	void ACE_UpdateSunsetPortion(int year, int month, int day)
 	{
 		m_fDailySunsetTemperature = m_fACE_CurrentOutdoorTemperature;
 		

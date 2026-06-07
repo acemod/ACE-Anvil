@@ -12,10 +12,25 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(desc: "Average daily maximum air temperature for each month in Kelvin", params: "0 1000", category: "Temperature")]
 	protected ref array<float> m_aACE_MonthlyAverageDailyTemperatureAirMaxs;
 	
+	[Attribute(defvalue: "1.45", desc: "Overcast-induced temperature shift is overcast times this factor in Kelvin", category: "Temperature")]
+	protected float m_fACE_OvercastTemperatureFactor;
+	
 	[Attribute(defvalue: "2.2", desc: "Exponential temperature decay rate at night. γ in SinExp model.", params: "0 100", category: "Temperature")]
 	protected float m_fACE_SinExp_Gamma;
 	
-	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Buffer value to prevent instant freezing
+	[Attribute(defvalue: "0.888", desc: "Autoregressive coefficient of mean temperature noise.", params: "0 1", category: "Temperature")]
+	protected float m_fACE_MeanTemperatureAirAutoRegCoeff;
+	
+	[Attribute(defvalue: "3.218", desc: "Standard deviation of mean temperature noise in Kelvin.", params: "0 1000", category: "Temperature")]
+	protected float m_fACE_MeanTemperatureAirStdDev;
+	
+	[Attribute(defvalue: "0.566", desc: "Autoregressive coefficient of diurnal temperature range noise.", params: "0 1", category: "Temperature")]
+	protected float m_fACE_DiurnalTemperatureRangeAutoRegCoeff;
+	
+	[Attribute(defvalue: "1.204", desc: "Standard deviation of diurnal temperature range noise in Kelvin.", params: "0 1000", category: "Temperature")]
+	protected float m_fACE_DiurnalTemperatureRangeStdDev;
+	
+	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Default value to prevent instant freezing
 	protected bool m_bACE_IsCurrentlyDay;
 
 	protected float m_fACE_SinExp_Tmin;
@@ -27,6 +42,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected float m_fACE_SinExp_Hr;
 	protected float m_fACE_SinExp_Hs;
 	protected float m_fACE_SinExp_Hmax;
+	
+	protected ref ACE_AutoRegModel m_fACE_DiurnalTemperatureRangeNoiseGenerator;
+	protected ref ACE_AutoRegModel m_fACE_MeanTemperatureAirNoiseGenerator;
 
 	//------------------------------------------------------------------------------------------------
 	//! TODO: Better approach for accuratly initializing SinExp from any starting point
@@ -41,16 +59,21 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (rpl && rpl.IsProxy())
 			return;
 		
+		m_fACE_DiurnalTemperatureRangeNoiseGenerator = ACE_AutoRegModel(m_fACE_DiurnalTemperatureRangeAutoRegCoeff, m_fACE_DiurnalTemperatureRangeStdDev);
+		m_fACE_MeanTemperatureAirNoiseGenerator = ACE_AutoRegModel(m_fACE_MeanTemperatureAirAutoRegCoeff, m_fACE_MeanTemperatureAirStdDev);
+		
 		// Day init always has to be done
 		m_fACE_SinExp_Tmin = ACE_InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
+		m_fACE_SinExp_Tmin += m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast();
+		m_fACE_SinExp_Tmin += m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
+		m_fACE_SinExp_Tmin += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 		Print(m_fACE_SinExp_Hr);
 		Print(m_fACE_SinExp_Hs);
 		m_bACE_IsCurrentlyDay = IsDayHour(GetTimeOfTheDay());
 		if (!m_bACE_IsCurrentlyDay)
 		{
-			m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(
-				m_fACE_SinExp_Hs - 0.001);	 // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
+			m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(m_fACE_SinExp_Hs - 0.001); // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
 			ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());
 		}
 	}
@@ -101,6 +124,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	{
 		m_fACE_SinExp_Hmax = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
 		m_fACE_SinExp_Tmax = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
+		m_fACE_SinExp_Tmax -= m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast();
+		m_fACE_SinExp_Tmax -= m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
+		m_fACE_SinExp_Tmax += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		
 		if (!GetSunriseHour(m_fACE_SinExp_Hr))
 			m_fACE_SinExp_Hr = 0; // Workaround for polar circles
@@ -128,6 +154,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			hrPrime = 0; // Workaround for polar circles
 				
 		m_fACE_SinExp_Tmin = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
+		m_fACE_SinExp_Tmin += m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast();
+		m_fACE_SinExp_Tmin += m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
+		m_fACE_SinExp_Tmin += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		float expResult = ACE_Math.Exp(-m_fACE_SinExp_Gamma * (24 + hrPrime - m_fACE_SinExp_Hs) / (24 - m_fACE_SinExp_L));
 		m_fACE_SinExp_Tau = (m_fACE_SinExp_Tmin - m_fACE_SinExp_Ts * expResult) / (1 - expResult);
 	}
@@ -142,4 +171,14 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		else
 			return Math.Lerp(monthlyAverages[month - 1], monthlyAverages[(month - 2) % 12], -lambda);
 	}
+		
+	//------------------------------------------------------------------------------------------------
+	protected float ACE_ComputeAverageOvercastForecast()
+	{
+		float average = 0;
+		float weight = GetTransitionManager().GetTimeLeftUntilNextState() / 12;
+		average += weight * ACE_GetOvercastForState(GetTransitionManager().GetCurrentState());
+		average += (1 - weight) * ACE_GetOvercastForState(GetTransitionManager().GetNextState());
+		return average;
+	}	
 }

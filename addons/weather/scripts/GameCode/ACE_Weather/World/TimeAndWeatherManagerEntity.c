@@ -120,8 +120,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	{
 		m_fPeakTemperatureHour = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
 		m_fDailyTemperatureMaximum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
-		GetSunriseHour(m_fSunriseHour);
-		GetSunsetHour(m_fSunsetHour);
+		
+		if (!GetSunriseHour(m_fSunriseHour))
+			m_fSunriseHour = 0; // Workaround for polar circles
+		
+		if (!GetSunsetHour(m_fSunsetHour))
+			m_fSunsetHour = 24; // Workaround for polar circles
+		
 		m_fDayLength = m_fSunsetHour - m_fSunriseHour;
 		m_fAlpha = m_fPeakTemperatureHour - (m_fSunriseHour + m_fSunsetHour) / 2;
 	}
@@ -130,10 +135,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected void ACE_UpdateSunsetPortion(int year, int month, int day)
 	{
 		m_fDailySunsetTemperature = m_fACE_CurrentOutdoorTemperature;
-
+		
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
+		
 		float sunriseHourPrime;
-		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), sunriseHourPrime);
+		if (!GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), sunriseHourPrime))
+			sunriseHourPrime = 0; // Workaround for polar circles
+		
 		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		float expResult = ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
 		m_fACE_Temperature_Tau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * expResult) / (1 - expResult);

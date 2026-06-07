@@ -31,7 +31,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(desc: "Daily high temp for the 1st of each month, kelvin", params: "0 1000", category:"Temperature")]
 	protected ref array<float> m_fMonthlyDailyHighTemperature;
 	
-	void Init(){
+	//------------------------------------------------------------------------------------------------
+	void Init()
+	{
 		//Day init always has to be done
 		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[GetMonth()-1],m_fMonthlyDailyLowTemperature[GetMonth()%12],(GetDay()-0.999999)/31);
 		UpdateSunrisePortion(GetYear(),GetMonth(),GetDay());
@@ -48,12 +50,14 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_bInitialized=true;
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	override void EOnFrame(IEntity owner, float timeSlice)
 	{
 		super.EOnFrame(owner, timeSlice);
 		GetCurrentOutdoorTemperature();
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	void CalculateOutdoorTemperature(float currentTime)
 	{
 		if (currentTime<m_fSunriseHour)//Post midnight, pre sunrise
@@ -71,6 +75,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		} 
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	float GetCurrentOutdoorTemperature()
 	{
 		if (GetEngineTime()<m_fNextUpdate)
@@ -95,6 +100,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		return m_fCurrentOutdoorTemperature;
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	void UpdateSunrisePortion(int year, int month, int day)
 	{
 		m_fPeakTemperatureHour = Math.Lerp(m_fMonthlyPeakTemperatureHour[month-1],m_fMonthlyPeakTemperatureHour[month%12],(day-0.999999)/31);
@@ -104,6 +110,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_fAlpha = m_fPeakTemperatureHour - (m_fSunriseHour+m_fSunsetHour)/2;
 	}
 	
+	//------------------------------------------------------------------------------------------------
 	void UpdateSunsetPortion(int year, int month, int day)
 	{
 		m_fDailySunsetTemperature = m_fCurrentOutdoorTemperature;
@@ -115,6 +122,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_fTau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature*m_fExpResultPrime)/(1-m_fExpResultPrime);
 	}
 
+	//------------------------------------------------------------------------------------------------
 	void GetDayXFromDate(inout int year, inout int month, inout int day, int offset)
 	{
 	    int sign = offset.Sign();

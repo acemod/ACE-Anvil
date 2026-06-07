@@ -54,5 +54,19 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{698F36C018AF65DF}" {
+   Id "ACE_MedicalDefibrillation-Defibrillator_DisplayName"
+   Target_en_us "ACE Defibrillator"
+   Modified 1770993618
+   Author "Hypoxic"
+   LastChanged "steamuser"
+  }
+  CustomStringTableItem "{698F36C1F37B0969}" {
+   Id "ACE_MedicalDefibrillation_DefibrillatorAED_DisplayName"
+   Target_en_us "ACE Automated External Defibrillator"
+   Modified 1770995980
+   Author "steamuser"
+   LastChanged "steamuser"
+  }
  }
 }

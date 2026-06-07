@@ -2,20 +2,6 @@
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
 	//------------------------------------------------------------------------------------------------
-	//! Converts time of the day to solar time of the day
-	//! \param[in] time Time of the day in hours
-	//! \return solar time of the day in hours
-	float ACE_ToSolarTimeOfTheDay(float time)
-	{
-		time -= GetTimeZoneOffset();
-		
-		if (IsDSTEnabled())
-			time -= GetDSTOffset();
-		
-		return SCR_Math.fmod(time + GetCurrentLongitude() / 15, 24);
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Adds offset in days to date
 	//! \param[inout] year Year of the date to update
 	//! \param[inout] month Month of the date to update

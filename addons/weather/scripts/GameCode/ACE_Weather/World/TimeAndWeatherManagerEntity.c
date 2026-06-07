@@ -16,7 +16,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Buffer value to prevent instant freezing
 	protected float m_fACE_UpdateInterval;		   // One update per x seconds
 	protected float m_fACE_UpdateTimer;			   // [s]
-	protected bool m_bCurrentlyDay;
+	protected bool m_bACE_IsCurrentlyDay;
 
 	float m_fDailyTemperatureMinimum;
 	float m_fDailyTemperatureMaximum;
@@ -56,8 +56,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 		Print(m_fSunriseHour);
 		Print(m_fSunsetHour);
-		m_bCurrentlyDay = m_fSunriseHour < GetTimeOfTheDay() && GetTimeOfTheDay() < m_fSunsetHour;
-		if (!m_bCurrentlyDay)
+		m_bACE_IsCurrentlyDay = IsDayHour(GetTimeOfTheDay());
+		if (!m_bACE_IsCurrentlyDay)
 		{
 			m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(
 				m_fSunsetHour - 0.001);	 // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
@@ -76,10 +76,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 
 		m_fACE_UpdateTimer = m_fACE_UpdateInterval;
 		
-		if ((m_fSunriseHour < GetTimeOfTheDay() && GetTimeOfTheDay() < m_fSunsetHour) != m_bCurrentlyDay)  // If out of date, update the params
+		if (IsDayHour(GetTimeOfTheDay()) != m_bACE_IsCurrentlyDay)  // If out of date, update the params
 		{
-			m_bCurrentlyDay = !m_bCurrentlyDay;
-			if (m_bCurrentlyDay)
+			m_bACE_IsCurrentlyDay = !m_bACE_IsCurrentlyDay;
+			if (m_bACE_IsCurrentlyDay)
 				ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 			else
 				ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());

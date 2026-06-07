@@ -123,7 +123,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_UpdateSunrisePortion(int year, int month, int day)
+	protected void ACE_UpdateSunrisePortion(int year, int month, int day)
 	{
 		m_fPeakTemperatureHour = Math.Lerp(m_fMonthlyPeakTemperatureHour[month-1],m_fMonthlyPeakTemperatureHour[month%12],(day-0.999999)/31);
 		m_fDailyTemperatureMaximum = Math.Lerp(m_fMonthlyDailyHighTemperature[month-1],m_fMonthlyDailyHighTemperature[month%12],(day-0.999999)/31);
@@ -133,7 +133,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_UpdateSunsetPortion(int year, int month, int day)
+	protected void ACE_UpdateSunsetPortion(int year, int month, int day)
 	{
 		m_fDailySunsetTemperature = m_fACE_CurrentOutdoorTemperature;
 		

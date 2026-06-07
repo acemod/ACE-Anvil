@@ -179,7 +179,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		float weight = 1.0;
 		
 		float changeDuration = GetTransitionManager().GetTimeLeftUntilNextState();
-		if (changeDuration < foreCastDuration)
+		if (changeDuration < forecastDuration)
 			weight = GetTransitionManager().GetTimeLeftUntilNextState() / forecastDuration;
 		
 		float average = 0.0;

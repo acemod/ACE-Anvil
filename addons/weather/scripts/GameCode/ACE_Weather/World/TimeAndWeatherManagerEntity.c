@@ -1,8 +1,5 @@
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
-	[Attribute(defvalue: "2.2", desc: "Exponential temperature decay rate at night. Corresponds to γ in SinExp model.", params: "0 100", category: "Temperature")]
-	protected float m_fACE_Temperature_ExpDecayRate;
-	
 	[Attribute(desc: "Average hour of the day at which peak air temperature occurs per month in 24 h format.", params: "0 24", category: "Temperature")]
 	protected ref array<float> m_aACE_MonthlyAverageTemperatureAirMaxHours;
 	
@@ -12,23 +9,25 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(desc: "Average daily maximum air temperature for each month in Kelvin", params: "0 1000", category: "Temperature")]
 	protected ref array<float> m_aACE_MonthlyAverageDailyTemperatureAirMaxs;
 	
+	[Attribute(defvalue: "2.2", desc: "Exponential temperature decay rate at night. γ in SinExp model.", params: "0 100", category: "Temperature")]
+	protected float m_fACE_SinExp_Gamma;
+	
 	// Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
 	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Buffer value to prevent instant freezing
 	protected float m_fACE_UpdateInterval;		   // One update per x seconds
 	protected float m_fACE_UpdateTimer;			   // [s]
 	protected bool m_bACE_IsCurrentlyDay;
 
-	float m_fDailyTemperatureMinimum;
-	float m_fDailyTemperatureMaximum;
-	float m_fDailySunsetTemperature;
+	protected float m_fACE_SinExp_Tmin;
+	protected float m_fACE_SinExp_Tmax;
+	protected float m_fACE_SinExp_Ts;
 
-	float m_fAlpha;
-	float m_fACE_Temperature_Tau;
-
-	float m_fDayLength;
-	float m_fSunriseHour;
-	float m_fSunsetHour;
-	float m_fPeakTemperatureHour;
+	protected float m_fACE_SinExp_Alpha;
+	protected float m_fACE_SinExp_Tau;
+	protected float m_fACE_SinExp_L;
+	protected float m_fACE_SinExp_Hr;
+	protected float m_fACE_SinExp_Hs;
+	protected float m_fACE_SinExp_Hmax;
 	
 	static const float AVERAGE_DAYS_PER_YEAR = 365.2425;
 	static const float AVERAGE_DAYS_PER_MONTH = AVERAGE_DAYS_PER_YEAR / 12;
@@ -52,15 +51,15 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			return;
 		
 		// Day init always has to be done
-		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
+		m_fACE_SinExp_Tmin = InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
-		Print(m_fSunriseHour);
-		Print(m_fSunsetHour);
+		Print(m_fACE_SinExp_Hr);
+		Print(m_fACE_SinExp_Hs);
 		m_bACE_IsCurrentlyDay = IsDayHour(GetTimeOfTheDay());
 		if (!m_bACE_IsCurrentlyDay)
 		{
 			m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(
-				m_fSunsetHour - 0.001);	 // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
+				m_fACE_SinExp_Hs - 0.001);	 // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
 			ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());
 		}
 	}
@@ -97,41 +96,41 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//------------------------------------------------------------------------------------------------
 	protected float ACE_CalculateOutdoorTemperature(float currentTime)
 	{
-		if (currentTime < m_fSunriseHour)  // Post midnight, pre sunrise
+		if (currentTime < m_fACE_SinExp_Hr)  // Post midnight, pre sunrise
 		{
-			return m_fACE_Temperature_Tau + (m_fDailySunsetTemperature - m_fACE_Temperature_Tau) * ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (currentTime + 24 - m_fSunsetHour) / (24 - m_fDayLength));
+			return m_fACE_SinExp_Tau + (m_fACE_SinExp_Ts - m_fACE_SinExp_Tau) * ACE_Math.Exp(-m_fACE_SinExp_Gamma * (currentTime + 24 - m_fACE_SinExp_Hs) / (24 - m_fACE_SinExp_L));
 		}
-		else if (currentTime < m_fSunsetHour)  // sun is out, post sunrise pre sunset
+		else if (currentTime < m_fACE_SinExp_Hs)  // sun is out, post sunrise pre sunset
 		{
-			float phase = Math.PI * (currentTime - m_fSunriseHour) / (m_fDayLength + 2 * m_fAlpha);
-			return m_fDailyTemperatureMinimum + (m_fDailyTemperatureMaximum - m_fDailyTemperatureMinimum) * Math.Sin(phase);
+			float phase = Math.PI * (currentTime - m_fACE_SinExp_Hr) / (m_fACE_SinExp_L + 2 * m_fACE_SinExp_Alpha);
+			return m_fACE_SinExp_Tmin + (m_fACE_SinExp_Tmax - m_fACE_SinExp_Tmin) * Math.Sin(phase);
 		}
 		else  // sun is set, pre midnight
 		{
-			return m_fACE_Temperature_Tau + (m_fDailySunsetTemperature - m_fACE_Temperature_Tau) * ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (currentTime - m_fSunsetHour) / (24 - m_fDayLength));
+			return m_fACE_SinExp_Tau + (m_fACE_SinExp_Ts - m_fACE_SinExp_Tau) * ACE_Math.Exp(-m_fACE_SinExp_Gamma * (currentTime - m_fACE_SinExp_Hs) / (24 - m_fACE_SinExp_L));
 		}
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_UpdateSunrisePortion(int year, int month, int day)
 	{
-		m_fPeakTemperatureHour = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
-		m_fDailyTemperatureMaximum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
+		m_fACE_SinExp_Hmax = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
+		m_fACE_SinExp_Tmax = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
 		
-		if (!GetSunriseHour(m_fSunriseHour))
-			m_fSunriseHour = 0; // Workaround for polar circles
+		if (!GetSunriseHour(m_fACE_SinExp_Hr))
+			m_fACE_SinExp_Hr = 0; // Workaround for polar circles
 				
-		if (!GetSunsetHour(m_fSunsetHour))
-			m_fSunsetHour = 24; // Workaround for polar circles
+		if (!GetSunsetHour(m_fACE_SinExp_Hs))
+			m_fACE_SinExp_Hs = 24; // Workaround for polar circles
 				
-		m_fDayLength = m_fSunsetHour - m_fSunriseHour;
-		m_fAlpha = m_fPeakTemperatureHour - (m_fSunriseHour + m_fSunsetHour) / 2;
+		m_fACE_SinExp_L = m_fACE_SinExp_Hs - m_fACE_SinExp_Hr;
+		m_fACE_SinExp_Alpha = m_fACE_SinExp_Hmax - (m_fACE_SinExp_Hr + m_fACE_SinExp_Hs) / 2;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_UpdateSunsetPortion(int year, int month, int day)
 	{
-		m_fDailySunsetTemperature = m_fACE_CurrentOutdoorTemperature;
+		m_fACE_SinExp_Ts = m_fACE_CurrentOutdoorTemperature;
 		
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
 		
@@ -139,13 +138,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (IsDSTEnabled())
 			dstOffset = GetDSTOffset();
 		
-		float sunriseHourPrime;
-		if (!GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), dstOffset, sunriseHourPrime))
-			sunriseHourPrime = 0; // Workaround for polar circles
+		float hrPrime;
+		if (!GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), dstOffset, hrPrime))
+			hrPrime = 0; // Workaround for polar circles
 				
-		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
-		float expResult = ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
-		m_fACE_Temperature_Tau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * expResult) / (1 - expResult);
+		m_fACE_SinExp_Tmin = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
+		float expResult = ACE_Math.Exp(-m_fACE_SinExp_Gamma * (24 + hrPrime - m_fACE_SinExp_Hs) / (24 - m_fACE_SinExp_L));
+		m_fACE_SinExp_Tau = (m_fACE_SinExp_Tmin - m_fACE_SinExp_Ts * expResult) / (1 - expResult);
 	}
 	
 	//------------------------------------------------------------------------------------------------

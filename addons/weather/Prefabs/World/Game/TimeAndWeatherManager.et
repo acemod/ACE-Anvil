@@ -4,9 +4,9 @@ TimeAndWeatherManagerEntity {
   15 15 15 15 15 15 15 15 15 15 15 15
  }
  m_aACE_MonthlyAverageDailyTemperatureAirMins {
-  281 281 281 281 281 281 281 281 281 281 281 281
+  277 277 279 281 286 290 293 293 289 285 281 279
  }
  m_aACE_MonthlyAverageDailyTemperatureAirMaxs {
-  297 297 297 297 297 297 297 297 297 297 297 297
+  283 283 285 289 294 299 302 301 298 293 288 284
  }
 }

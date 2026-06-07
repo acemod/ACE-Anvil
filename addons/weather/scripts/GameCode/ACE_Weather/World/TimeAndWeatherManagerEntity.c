@@ -41,7 +41,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			return;
 		
 		// Day init always has to be done
-		m_fACE_SinExp_Tmin = InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
+		m_fACE_SinExp_Tmin = ACE_InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 		Print(m_fACE_SinExp_Hr);
 		Print(m_fACE_SinExp_Hs);
@@ -98,8 +98,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_UpdateSunrisePortion(int year, int month, int day)
 	{
-		m_fACE_SinExp_Hmax = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
-		m_fACE_SinExp_Tmax = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
+		m_fACE_SinExp_Hmax = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
+		m_fACE_SinExp_Tmax = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
 		
 		if (!GetSunriseHour(m_fACE_SinExp_Hr))
 			m_fACE_SinExp_Hr = 0; // Workaround for polar circles
@@ -126,13 +126,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (!GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), dstOffset, hrPrime))
 			hrPrime = 0; // Workaround for polar circles
 				
-		m_fACE_SinExp_Tmin = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
+		m_fACE_SinExp_Tmin = ACE_InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		float expResult = ACE_Math.Exp(-m_fACE_SinExp_Gamma * (24 + hrPrime - m_fACE_SinExp_Hs) / (24 - m_fACE_SinExp_L));
 		m_fACE_SinExp_Tau = (m_fACE_SinExp_Tmin - m_fACE_SinExp_Ts * expResult) / (1 - expResult);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float InterpolateForDayFromMonthlyAverage(int month, int day, array<float> monthlyAverages)
+	protected float ACE_InterpolateForDayFromMonthlyAverage(int month, int day, array<float> monthlyAverages)
 	{
 		float lambda = (day - 0.5 * ACE_AVERAGE_DAYS_PER_MONTH) / ACE_AVERAGE_DAYS_PER_MONTH;
 		

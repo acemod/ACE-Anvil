@@ -86,9 +86,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		}
 
 		m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(GetTimeOfTheDay());
-		float timeStamp = GetTimeOfTheDay() + 24 * GetDay() - 24;
-		Print(timeStamp);
-		Print(m_fACE_CurrentOutdoorTemperature);
 	}
 
 	//------------------------------------------------------------------------------------------------

@@ -36,11 +36,11 @@ modded class ArmaReforgerScripted : ChimeraGame
 		if (!manager)
 			return;
 		
-		float outDoorTemperature = manager.ACE_GetCurrentOutdoorTemperature() - ACE_PhysicalConstants.ZERO_CELSIUS;
+		float airTemperature = manager.ACE_GetAirTemperature() - ACE_PhysicalConstants.ZERO_CELSIUS;
 		
 		DbgUI.Begin("ACE Weather Diag", 0, 700);
-		DbgUI.Text(string.Format("Outdoor Air Temperature:      %1 deg C", ACE_Math.Round(outDoorTemperature, 1)));
-		DbgUI.PlotLiveClamped("OutdoorTemperature", 500, 500, outDoorTemperature, -10, 40, 100, 10000);
+		DbgUI.Text(string.Format("Air Temperature:      %1 deg C", ACE_Math.Round(airTemperature, 1)));
+		DbgUI.PlotLiveClamped("AirTemperature", 500, 500, airTemperature, -10, 40, 100, 10000);
 		DbgUI.End();
 	}
 }

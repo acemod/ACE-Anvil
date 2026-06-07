@@ -4,12 +4,12 @@ TimeAndWeatherManagerEntity {
  "Month of the Year" 1
  "Day of the Month" 1
  m_fMonthlyPeakTemperatureHour {
-  8 8
+  15 15 15 15 15 15 15 15 15 15 15 15
  }
  m_fMonthlyDailyLowTemperature {
-  281 281
+  281 281 281 281 281 281 281 281 281 281 281 281
  }
  m_fMonthlyDailyHighTemperature {
-  297 297
+  297 297 297 297 297 297 297 297 297 297 297 297
  }
 }

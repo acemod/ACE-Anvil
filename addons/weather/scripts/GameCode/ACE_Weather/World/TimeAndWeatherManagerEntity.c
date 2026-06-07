@@ -29,6 +29,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected float m_fACE_SinExp_Hmax;
 
 	//------------------------------------------------------------------------------------------------
+	//! TODO: Better approach for accuratly initializing SinExp from any starting point
 	override protected void EOnInit(IEntity owner)
 	{
 		super.EOnInit(owner);

@@ -56,7 +56,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 		Print(m_fSunriseHour);
 		Print(m_fSunsetHour);
-		float localTimeOfTheDay = ACE_ToLocalTimeOfTheDay(GetTimeOfTheDay());
+		float localTimeOfTheDay = ACE_ToSolarTimeOfTheDay(GetTimeOfTheDay());
 		m_bCurrentlyDay = m_fSunriseHour < localTimeOfTheDay && localTimeOfTheDay < m_fSunsetHour;
 		if (!m_bCurrentlyDay)
 		{
@@ -77,7 +77,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 
 		m_fACE_UpdateTimer = m_fACE_UpdateInterval;
 		
-		float localTimeOfTheDay = ACE_ToLocalTimeOfTheDay(GetTimeOfTheDay());
+		float localTimeOfTheDay = ACE_ToSolarTimeOfTheDay(GetTimeOfTheDay());
 
 		if ((m_fSunriseHour < localTimeOfTheDay && localTimeOfTheDay < m_fSunsetHour) != m_bCurrentlyDay)  // If out of date, update the params
 		{
@@ -127,12 +127,12 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (!GetSunriseHour(m_fSunriseHour))
 			m_fSunriseHour = 0; // Workaround for polar circles
 		
-		m_fSunriseHour = ACE_ToLocalTimeOfTheDay(m_fSunriseHour);
+		m_fSunriseHour = ACE_ToSolarTimeOfTheDay(m_fSunriseHour);
 		
 		if (!GetSunsetHour(m_fSunsetHour))
 			m_fSunsetHour = 24; // Workaround for polar circles
 		
-		m_fSunsetHour = ACE_ToLocalTimeOfTheDay(m_fSunsetHour);
+		m_fSunsetHour = ACE_ToSolarTimeOfTheDay(m_fSunsetHour);
 		
 		m_fDayLength = m_fSunsetHour - m_fSunriseHour;
 		m_fAlpha = m_fPeakTemperatureHour - (m_fSunriseHour + m_fSunsetHour) / 2;
@@ -145,11 +145,15 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
 		
+		float dstOffset = 0;
+		if (IsDSTEnabled())
+			dstOffset = GetDSTOffset();
+		
 		float sunriseHourPrime;
-		if (!GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), sunriseHourPrime))
+		if (!GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), dstOffset, sunriseHourPrime))
 			sunriseHourPrime = 0; // Workaround for polar circles
 		
-		sunriseHourPrime = ACE_ToLocalTimeOfTheDay(sunriseHourPrime);
+		sunriseHourPrime = ACE_ToSolarTimeOfTheDay(sunriseHourPrime);
 		
 		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		float expResult = ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));

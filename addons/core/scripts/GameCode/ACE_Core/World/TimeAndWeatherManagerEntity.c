@@ -2,12 +2,16 @@
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
 	//------------------------------------------------------------------------------------------------
-	//! Converts time of the day at 0° longitude (e.g. returned by GetTimeOfTheDay()) to local time of 
-	//! the day for the current longitude
+	//! Converts time of the day to solar time of the day
 	//! \param[in] time Time of the day in hours
-	//! \return local time of the day in hours
-	float ACE_ToLocalTimeOfTheDay(float time)
+	//! \return solar time of the day in hours
+	float ACE_ToSolarTimeOfTheDay(float time)
 	{
+		time -= GetTimeZoneOffset();
+		
+		if (IsDSTEnabled())
+			time -= GetDSTOffset();
+		
 		return SCR_Math.fmod(time + GetCurrentLongitude() / 15, 24);
 	}
 	

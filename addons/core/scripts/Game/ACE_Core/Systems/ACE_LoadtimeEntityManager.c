@@ -25,7 +25,7 @@ class ACE_LoadtimeEntityManager : GameSystem
 		
 	//------------------------------------------------------------------------------------------------
 	//! Ensures that already deleted unreplicated entities are deleted for JIPs
-	void DeleteInitialEntities()
+	protected void DeleteInitialEntities()
 	{
 		foreach (ACE_EntityIdWrapper idWrapper : m_aDeletedEntityIDs)
 		{
@@ -68,8 +68,9 @@ class ACE_LoadtimeEntityManager : GameSystem
 	//! Deletes unreplicated entity by ID on a local machine
 	void DeleteEntityByIdLocal(EntityID entityID)
 	{
+		// Only physical loadtime entities can be deleted
 		IEntity entity = GetGame().GetWorld().FindEntityByID(entityID);
-		if (entity)
+		if (entity && entity.IsLoaded() && entity.GetVObject())
 			delete entity;
 	}
 	

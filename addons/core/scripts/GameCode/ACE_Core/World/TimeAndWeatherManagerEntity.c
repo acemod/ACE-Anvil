@@ -1,6 +1,32 @@
 //------------------------------------------------------------------------------------------------
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
+	protected float m_fACE_UpdateFrequency; // One update per x seconds
+	protected float m_fACE_UpdateTimer; // [s]
+	
+	//------------------------------------------------------------------------------------------------
+	protected void TimeAndWeatherManagerEntity(IEntitySource src, IEntity parent)
+	{
+		src.Get("Update Frequency", m_fACE_UpdateFrequency);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void EOnFrame(IEntity owner, float timeSlice)
+	{
+		super.EOnFrame(owner, timeSlice);
+
+		m_fACE_UpdateTimer -= timeSlice;
+		if (m_fACE_UpdateTimer > 0)
+			return;
+
+		ACE_UpdateWeather(m_fACE_UpdateFrequency - m_fACE_UpdateTimer);
+		m_fACE_UpdateTimer = m_fACE_UpdateFrequency;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! TODO: Replaced with BaseWeatherManagerEntity::UpdateWeather once it gets overridable
+	void ACE_UpdateWeather(float timeSlice);
+	
 	//------------------------------------------------------------------------------------------------
 	//! Adds offset in days to date
 	//! \param[inout] year Year of the date to update

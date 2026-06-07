@@ -14,14 +14,11 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	
 	// Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
 	protected float m_fACE_CurrentOutdoorTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Buffer value to prevent instant freezing
-	protected float m_fACE_UpdateInterval;		   // One update per x seconds
-	protected float m_fACE_UpdateTimer;			   // [s]
 	protected bool m_bACE_IsCurrentlyDay;
 
 	protected float m_fACE_SinExp_Tmin;
 	protected float m_fACE_SinExp_Tmax;
 	protected float m_fACE_SinExp_Ts;
-
 	protected float m_fACE_SinExp_Alpha;
 	protected float m_fACE_SinExp_Tau;
 	protected float m_fACE_SinExp_L;
@@ -31,12 +28,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	
 	static const float AVERAGE_DAYS_PER_YEAR = 365.2425;
 	static const float AVERAGE_DAYS_PER_MONTH = AVERAGE_DAYS_PER_YEAR / 12;
-
-	//------------------------------------------------------------------------------------------------
-	protected void TimeAndWeatherManagerEntity(IEntitySource src, IEntity parent)
-	{
-		src.Get("Update Frequency", m_fACE_UpdateInterval);
-	}
 
 	//------------------------------------------------------------------------------------------------
 	override protected void EOnInit(IEntity owner)
@@ -65,16 +56,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 
 	//------------------------------------------------------------------------------------------------
-	override void EOnFrame(IEntity owner, float timeSlice)
+	override void ACE_UpdateWeather(float timeSlice)
 	{
-		super.EOnFrame(owner, timeSlice);
+		super.ACE_UpdateWeather(timeSlice);
 
-		m_fACE_UpdateTimer -= timeSlice;
-		if (m_fACE_UpdateTimer > 0)
-			return;
-
-		m_fACE_UpdateTimer = m_fACE_UpdateInterval;
-		
 		if (IsDayHour(GetTimeOfTheDay()) != m_bACE_IsCurrentlyDay)  // If out of date, update the params
 		{
 			m_bACE_IsCurrentlyDay = !m_bACE_IsCurrentlyDay;

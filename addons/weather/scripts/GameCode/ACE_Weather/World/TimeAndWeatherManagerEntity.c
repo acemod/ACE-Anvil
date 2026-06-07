@@ -141,7 +141,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
 		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), m_fSunriseHourPrime);
 		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[month - 1], m_fMonthlyDailyLowTemperature[(month) % 12], (day - 0.999999) / 31);
-		m_fExpResultPrime = ACE_Math.Exp(-m_fExpDecay * (m_fSunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
+		m_fExpResultPrime = ACE_Math.Exp(-m_fExpDecay * (24 + m_fSunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
 		m_fTau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * m_fExpResultPrime) / (1 - m_fExpResultPrime);
 	}
 }

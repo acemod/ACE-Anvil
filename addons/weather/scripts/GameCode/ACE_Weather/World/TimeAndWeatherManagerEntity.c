@@ -17,7 +17,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	float m_fACE_UpdateInterval;				   // One update per x seconds
 	float m_fACE_UpdateTimer;					   // [s]
 	bool m_bCurrentlyDay;
-	bool m_bInitialized;
 
 	float m_fDailyTemperatureMinimum;
 	float m_fDailyTemperatureMaximum;
@@ -41,8 +40,17 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	}
 
 	//------------------------------------------------------------------------------------------------
-	void Init()
+	override protected void EOnInit(IEntity owner)
 	{
+		super.EOnInit(owner);
+
+		if (!GetGame().InPlayMode())
+			return;
+
+		RplComponent rpl = SCR_EntityHelper.GetEntityRplComponent(owner);
+		if (rpl && rpl.IsProxy())
+			return;
+		
 		// Day init always has to be done
 		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
@@ -55,21 +63,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 				m_fSunsetHour - 0.001);	 // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
 			ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());
 		}
-
-		m_bInitialized = true;
-	}
-
-	//------------------------------------------------------------------------------------------------
-	override protected void EOnInit(IEntity owner)
-	{
-		super.EOnInit(owner);
-
-		if (!GetGame().InPlayMode())
-			return;
-
-		RplComponent rpl = SCR_EntityHelper.GetEntityRplComponent(owner);
-		if (rpl && rpl.IsProxy())
-			return;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -82,9 +75,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			return;
 
 		m_fACE_UpdateTimer = m_fACE_UpdateInterval;
-
-		if (!m_bInitialized)
-			Init();
 
 		if ((m_fSunriseHour < GetTimeOfTheDay() && GetTimeOfTheDay() < m_fSunsetHour) != m_bCurrentlyDay)  // If out of date, update the params
 		{

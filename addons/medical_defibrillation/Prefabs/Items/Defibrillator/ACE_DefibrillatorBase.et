@@ -18,10 +18,10 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
     ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
-     Name "#ACE_MedicalDefibrillation-Defibrillator_DisplayName"
+     Name "#ACE_MedicalDefibrillation_Defibrillator_DisplayName"
     }
     ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
-     Weight 3.2
+     Weight 1
     }
     m_Size SLOT_1x1
     m_eQuickSlotSize SLOT_1x1
@@ -30,7 +30,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    }
   }
   MeshObject "{64FB47CE0046FB12}" {
-   Object "{DA5DDF2E4860BBF6}test/Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.xob"
   }
   RigidBody "{68483DE61388D41E}" {
    Mass 3.2
@@ -62,10 +61,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      Duration 1
     }
    }
-  }
-  GadgetAnimationComponent "{64FC042FA738F687}" {
-   AnimGraph "{8462461570E623A5}Assets/Weapons/Explosives/workspace/M34.agr"
-   AnimInstance "{67A3E465A8D20576}Assets/Weapons/Explosives/workspace/M34_weapon.asi"
   }
  }
  coords 0 0 0

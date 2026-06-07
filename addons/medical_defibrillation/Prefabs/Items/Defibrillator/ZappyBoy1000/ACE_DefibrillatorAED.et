@@ -4,9 +4,10 @@ GenericEntity : "{039D069A46C6501E}Prefabs/Items/Defibrillator/ACE_Defibrillator
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
     ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
-     Name "#ACE_MedicalDefibrillation-AED_DisplayName"
+     Name "#ACE_MedicalDefibrillation_DefibrillatorAED_DisplayName"
     }
     ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
+     Weight 3.2
      SizeSetupStrategy Manual
      ItemDimensions 15 15 15
      ItemVolume 3000

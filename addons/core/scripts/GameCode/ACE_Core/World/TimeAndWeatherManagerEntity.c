@@ -2,6 +2,12 @@
 modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 {
 	//------------------------------------------------------------------------------------------------
+	//! Converts time of the day in hours at 0° longitude (e.g. returned by GetTimeOfTheDay()) to current longitude
+	float ACE_ToLocalTimeOfTheDay(float time)
+	{
+		return SCR_Math.fmod(time + GetCurrentLongitude() / 15, 24);
+	}
+	
 	void ACE_AddDaysToDate(inout int year, inout int month, inout int day, int offset)
 	{
 	    int sign = offset.Sign();

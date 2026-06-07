@@ -56,7 +56,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 		Print(m_fSunriseHour);
 		Print(m_fSunsetHour);
-		m_bCurrentlyDay = m_fSunriseHour < GetTimeOfTheDay() && GetTimeOfTheDay() < m_fSunsetHour;
+		float localTimeOfTheDay = ACE_ToLocalTimeOfTheDay(GetTimeOfTheDay());
+		m_bCurrentlyDay = m_fSunriseHour < localTimeOfTheDay && localTimeOfTheDay < m_fSunsetHour;
 		if (!m_bCurrentlyDay)
 		{
 			m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(
@@ -75,8 +76,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			return;
 
 		m_fACE_UpdateTimer = m_fACE_UpdateInterval;
+		
+		float localTimeOfTheDay = ACE_ToLocalTimeOfTheDay(GetTimeOfTheDay());
 
-		if ((m_fSunriseHour < GetTimeOfTheDay() && GetTimeOfTheDay() < m_fSunsetHour) != m_bCurrentlyDay)  // If out of date, update the params
+		if ((m_fSunriseHour < localTimeOfTheDay && localTimeOfTheDay < m_fSunsetHour) != m_bCurrentlyDay)  // If out of date, update the params
 		{
 			m_bCurrentlyDay = !m_bCurrentlyDay;
 			if (m_bCurrentlyDay)
@@ -85,7 +88,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 				ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());
 		}
 
-		m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(GetTimeOfTheDay());
+		m_fACE_CurrentOutdoorTemperature = ACE_CalculateOutdoorTemperature(localTimeOfTheDay);
 		float timeStamp = GetTimeOfTheDay() + 24 * GetDay() - 24;
 		Print(timeStamp);
 		Print(m_fACE_CurrentOutdoorTemperature);
@@ -124,8 +127,12 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (!GetSunriseHour(m_fSunriseHour))
 			m_fSunriseHour = 0; // Workaround for polar circles
 		
+		m_fSunriseHour = ACE_ToLocalTimeOfTheDay(m_fSunriseHour);
+		
 		if (!GetSunsetHour(m_fSunsetHour))
 			m_fSunsetHour = 24; // Workaround for polar circles
+		
+		m_fSunsetHour = ACE_ToLocalTimeOfTheDay(m_fSunsetHour);
 		
 		m_fDayLength = m_fSunsetHour - m_fSunriseHour;
 		m_fAlpha = m_fPeakTemperatureHour - (m_fSunriseHour + m_fSunsetHour) / 2;
@@ -141,6 +148,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		float sunriseHourPrime;
 		if (!GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), sunriseHourPrime))
 			sunriseHourPrime = 0; // Workaround for polar circles
+		
+		sunriseHourPrime = ACE_ToLocalTimeOfTheDay(sunriseHourPrime);
 		
 		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		float expResult = ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));

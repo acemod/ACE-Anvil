@@ -4,13 +4,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected float m_fACE_Temperature_ExpDecayRate;
 	
 	[Attribute(desc: "Average hour of the day at which peak air temperature occurs per month in 24 h format.", params: "0 24", category: "Temperature")]
-	protected ref array<float> m_aACE_AverageTemperatureAirMaxHourByMonth;
+	protected ref array<float> m_aACE_MonthlyAverageTemperatureAirMaxHours;
 	
 	[Attribute(desc: "Average daily minimum air temperature for each month in Kelvin", params: "0 1000", category: "Temperature")]
-	protected ref array<float> m_aACE_AverageDailyTemperatureAirMinByMonth;
+	protected ref array<float> m_aACE_MonthlyAverageDailyTemperatureAirMins;
 	
 	[Attribute(desc: "Average daily maximum air temperature for each month in Kelvin", params: "0 1000", category: "Temperature")]
-	protected ref array<float> m_aACE_AverageDailyTemperatureAirMaxByMonth;
+	protected ref array<float> m_aACE_MonthlyAverageDailyTemperatureAirMaxs;
 	
 	// Model using https://discord.com/channels/976165959041679380/1509719021908398121/1512238279070716037
 	float m_fACE_CurrentOutdoorTemperature = 293;  // Buffer value to prevent instant freezing
@@ -30,7 +30,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	float m_fSunriseHour;
 	float m_fSunsetHour;
 	float m_fPeakTemperatureHour;
-
+	
+	static const float AVERAGE_DAYS_PER_YEAR = 365.2425;
+	static const float AVERAGE_DAYS_PER_MONTH = AVERAGE_DAYS_PER_YEAR / 12;
 
 	//------------------------------------------------------------------------------------------------
 	protected void TimeAndWeatherManagerEntity(IEntitySource src, IEntity parent)
@@ -42,8 +44,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	void Init()
 	{
 		// Day init always has to be done
-		m_fDailyTemperatureMinimum =
-			Math.Lerp(m_aACE_AverageDailyTemperatureAirMinByMonth[GetMonth() - 1], m_aACE_AverageDailyTemperatureAirMinByMonth[GetMonth() % 12], (GetDay() - 0.999999) / 31);
+		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(GetMonth(), GetDay(), m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
 		Print(m_fSunriseHour);
 		Print(m_fSunsetHour);
@@ -127,8 +128,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_UpdateSunrisePortion(int year, int month, int day)
 	{
-		m_fPeakTemperatureHour = Math.Lerp(m_aACE_AverageTemperatureAirMaxHourByMonth[month - 1], m_aACE_AverageTemperatureAirMaxHourByMonth[month % 12], (day - 0.999999) / 31);
-		m_fDailyTemperatureMaximum = Math.Lerp(m_aACE_AverageDailyTemperatureAirMaxByMonth[month - 1], m_aACE_AverageDailyTemperatureAirMaxByMonth[month % 12], (day - 0.999999) / 31);
+		m_fPeakTemperatureHour = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageTemperatureAirMaxHours);
+		m_fDailyTemperatureMaximum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMaxs);
 		GetSunriseHour(m_fSunriseHour);
 		GetSunsetHour(m_fSunsetHour);
 		m_fDayLength = m_fSunsetHour - m_fSunriseHour;
@@ -143,8 +144,19 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
 		float sunriseHourPrime;
 		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), sunriseHourPrime);
-		m_fDailyTemperatureMinimum = Math.Lerp(m_aACE_AverageDailyTemperatureAirMinByMonth[month - 1], m_aACE_AverageDailyTemperatureAirMinByMonth[(month) % 12], (day - 0.999999) / 31);
+		m_fDailyTemperatureMinimum = InterpolateForDayFromMonthlyAverage(month, day, m_aACE_MonthlyAverageDailyTemperatureAirMins);
 		float expResult = ACE_Math.Exp(-m_fACE_Temperature_ExpDecayRate * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
 		m_fACE_Temperature_Tau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * expResult) / (1 - expResult);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected float InterpolateForDayFromMonthlyAverage(int month, int day, array<float> monthlyAverages)
+	{
+		float lambda = (day - 0.5 * AVERAGE_DAYS_PER_MONTH) / AVERAGE_DAYS_PER_MONTH;
+		
+		if (lambda >= 0)
+			return Math.Lerp(monthlyAverages[month - 1], monthlyAverages[month % 12], lambda);
+		else
+			return Math.Lerp(monthlyAverages[month - 1], monthlyAverages[(month - 2) % 12], -lambda);
 	}
 }

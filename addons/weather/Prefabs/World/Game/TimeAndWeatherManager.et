@@ -1,12 +1,12 @@
 TimeAndWeatherManagerEntity {
  ID "5244F08C9618CADD"
- m_aACE_AverageTemperatureAirMaxHourByMonth {
+ m_aACE_MonthlyAverageTemperatureAirMaxHours {
   15 15 15 15 15 15 15 15 15 15 15 15
  }
- m_aACE_AverageDailyTemperatureAirMinByMonth {
+ m_aACE_MonthlyAverageDailyTemperatureAirMins {
   281 281 281 281 281 281 281 281 281 281 281 281
  }
- m_aACE_AverageDailyTemperatureAirMaxByMonth {
+ m_aACE_MonthlyAverageDailyTemperatureAirMaxs {
   297 297 297 297 297 297 297 297 297 297 297 297
  }
 }

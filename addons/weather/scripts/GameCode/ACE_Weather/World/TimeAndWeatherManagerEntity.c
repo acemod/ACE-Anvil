@@ -12,14 +12,12 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	float m_fDailySunsetTemperature;
 
 	float m_fAlpha;
-	float m_fExpResultPrime;  // Used as a helper for calculating tau
 	float m_fTau;
 
 	float m_fDayLength;
 	float m_fSunriseHour;
 	float m_fSunsetHour;
 	float m_fPeakTemperatureHour;
-	float m_fSunriseHourPrime;
 
 	[Attribute(defvalue: "2.2", desc: "Exponential decay function, symbolized as y in the equation", params: "0 100", category: "Temperature")]
 	float m_fExpDecay;
@@ -139,9 +137,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_fDailySunsetTemperature = m_fACE_CurrentOutdoorTemperature;
 
 		ACE_AddDaysToDate(year, month, day, 1);	 // Get tommorow's date
-		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), m_fSunriseHourPrime);
+		float sunriseHourPrime;
+		GetSunriseHourForDate(year, month, day, GetCurrentLatitude(), GetCurrentLongitude(), GetTimeZoneOffset(), GetDSTOffset(), sunriseHourPrime);
 		m_fDailyTemperatureMinimum = Math.Lerp(m_fMonthlyDailyLowTemperature[month - 1], m_fMonthlyDailyLowTemperature[(month) % 12], (day - 0.999999) / 31);
-		m_fExpResultPrime = ACE_Math.Exp(-m_fExpDecay * (24 + m_fSunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
-		m_fTau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * m_fExpResultPrime) / (1 - m_fExpResultPrime);
+		float expResult = ACE_Math.Exp(-m_fExpDecay * (24 + sunriseHourPrime - m_fSunsetHour) / (24 - m_fDayLength));
+		m_fTau = (m_fDailyTemperatureMinimum - m_fDailySunsetTemperature * expResult) / (1 - expResult);
 	}
 }

@@ -30,6 +30,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(defvalue: "1.204", desc: "Standard deviation of diurnal temperature range noise in Kelvin.", params: "0 1000", category: "Temperature")]
 	protected float m_fACE_DiurnalTemperatureRangeStdDev;
 	
+	[Attribute(defvalue: "1.0", desc: "Minimum diurnal temperature range in Kelvin.", params: "0 1000", category: "Temperature")]
+	protected float m_fACE_MinDiurnalTemperatureRange;
+	
 	protected bool m_bACE_IsCurrentlyDay;
 
 	protected float m_fACE_SinExp_Tmin;
@@ -121,6 +124,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_fACE_SinExp_Tmax -= m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
 		m_fACE_SinExp_Tmax += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		
+		if (m_fACE_SinExp_Tmax - m_fACE_SinExp_Tmin < m_fACE_MinDiurnalTemperatureRange)
+			m_fACE_SinExp_Tmax = m_fACE_SinExp_Tmin + m_fACE_MinDiurnalTemperatureRange;
+		
 		if (!GetSunriseHour(m_fACE_SinExp_Hr))
 			m_fACE_SinExp_Hr = 0; // Workaround for polar circles
 				
@@ -150,6 +156,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_fACE_SinExp_Tmin += m_fACE_OvercastTemperatureFactor * ACE_ComputeAverageOvercastForecast(12);
 		m_fACE_SinExp_Tmin += m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
 		m_fACE_SinExp_Tmin += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
+		
+		if (m_fACE_SinExp_Tmax - m_fACE_SinExp_Tmin < m_fACE_MinDiurnalTemperatureRange)
+			m_fACE_SinExp_Tmin = m_fACE_SinExp_Tmax - m_fACE_MinDiurnalTemperatureRange;
+		
 		float expResult = ACE_Math.Exp(-m_fACE_SinExp_Gamma * (24 + hrPrime - m_fACE_SinExp_Hs) / (24 - m_fACE_SinExp_L));
 		m_fACE_SinExp_Tau = (m_fACE_SinExp_Tmin - m_fACE_SinExp_Ts * expResult) / (1 - expResult);
 	}

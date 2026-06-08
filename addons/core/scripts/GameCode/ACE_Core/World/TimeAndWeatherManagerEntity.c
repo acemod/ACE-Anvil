@@ -7,6 +7,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	
 	static const float ACE_AVERAGE_DAYS_PER_YEAR = 365.2425;
 	static const float ACE_AVERAGE_DAYS_PER_MONTH = ACE_AVERAGE_DAYS_PER_YEAR / 12;
+	protected float m_fACE_CurrentAirTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Default value to prevent instant freezing
+
+	static const float ACE_TEMPERATURE_LAPSE_RATE = -0.0065; // [K/m]
 	
 	//------------------------------------------------------------------------------------------------
 	protected void TimeAndWeatherManagerEntity(IEntitySource src, IEntity parent)
@@ -31,6 +34,13 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	//------------------------------------------------------------------------------------------------
 	//! TODO: Replaced with BaseWeatherManagerEntity::UpdateWeather once it gets overridable
 	void ACE_UpdateWeather(float timeSlice);
+	
+	//------------------------------------------------------------------------------------------------
+	//! Returns current temperature of air in Kelvin
+	float ACE_GetAirTemperature(float altitude = 0)
+	{
+		return m_fACE_CurrentAirTemperature + ACE_TEMPERATURE_LAPSE_RATE * altitude;
+	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ACE_GetOvercastForState(notnull WeatherState state)

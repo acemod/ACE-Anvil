@@ -30,7 +30,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(defvalue: "1.204", desc: "Standard deviation of diurnal temperature range noise in Kelvin.", params: "0 1000", category: "Temperature")]
 	protected float m_fACE_DiurnalTemperatureRangeStdDev;
 	
-	protected float m_fACE_CurrentAirTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Default value to prevent instant freezing
 	protected bool m_bACE_IsCurrentlyDay;
 
 	protected float m_fACE_SinExp_Tmin;
@@ -95,12 +94,6 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_fACE_CurrentAirTemperature = ACE_CalculateAirTemperature(GetTimeOfTheDay());
 	}
 
-	//------------------------------------------------------------------------------------------------
-	float ACE_GetAirTemperature()
-	{
-		return m_fACE_CurrentAirTemperature;
-	}
-	
 	//------------------------------------------------------------------------------------------------
 	protected float ACE_CalculateAirTemperature(float currentTime)
 	{

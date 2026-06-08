@@ -22,6 +22,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	override void EOnFrame(IEntity owner, float timeSlice)
 	{
 		super.EOnFrame(owner, timeSlice);
+		
+		if (!Replication.IsServer())
+			return;
 
 		m_fACE_UpdateTimer -= timeSlice;
 		if (m_fACE_UpdateTimer > 0)

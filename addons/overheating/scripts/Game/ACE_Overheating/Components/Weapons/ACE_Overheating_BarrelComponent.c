@@ -334,9 +334,9 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 		if (settings)
 			m_fClearJamFailureChance = settings.m_fClearJamFailureChance;
 		
-		// Temporary solution: Use standard ambient temperature until we got a proper weather system
-		m_fBarrelTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
-		m_fAmmoTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
+		float airTemperature = ACE_WeatherHelper.GetAirTemperatureForEntity(GetOwner());
+		m_fBarrelTemperature = airTemperature;
+		m_fAmmoTemperature = airTemperature;
 		m_fJamChance = m_pData.ComputeJamChance(m_fBarrelTemperature);
 		InitCookOffCookOffProgressScale();
 		Replication.BumpMe();

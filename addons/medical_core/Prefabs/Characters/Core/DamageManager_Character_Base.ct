@@ -30,4 +30,5 @@ SCR_CharacterDamageManagerComponent {
    MaxHealth 100
   }
  }
+ m_fTourniquetStrengthMultiplier 0.001
 }

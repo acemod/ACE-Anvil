@@ -169,7 +169,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (lambda >= 0)
 			return Math.Lerp(monthlyAverages[month - 1], monthlyAverages[month % 12], lambda);
 		else
-			return Math.Lerp(monthlyAverages[month - 1], monthlyAverages[(month - 2) % 12], -lambda);
+			return Math.Lerp(monthlyAverages[month - 1], monthlyAverages[(month + 10) % 12], -lambda);
 	}
 		
 	//------------------------------------------------------------------------------------------------

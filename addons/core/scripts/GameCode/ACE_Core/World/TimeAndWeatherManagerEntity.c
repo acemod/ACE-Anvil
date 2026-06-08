@@ -5,6 +5,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	protected float m_fACE_UpdateFrequency; // One update per x seconds
 	protected float m_fACE_UpdateTimer; // [s]
 	
+	[RplProp()]
 	protected float m_fACE_CurrentAirTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE; // Default value to prevent instant freezing
 	
 	static const float ACE_AVERAGE_DAYS_PER_YEAR = 365.2425; // in days

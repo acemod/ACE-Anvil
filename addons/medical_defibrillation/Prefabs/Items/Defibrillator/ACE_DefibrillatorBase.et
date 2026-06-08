@@ -3,14 +3,9 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
  components {
   SignalsManagerComponent "{655C16EC9DB5136B}" {
   }
-  ACE_Medical_Defibrillation_DefibSoundComponent "{671C09EE44D37889}" {
-   Filenames {
-    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp"
-   }
-  }
   SoundComponent "{655C16ECB615B046}" {
    Filenames {
-    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp" "{0340D00A7674D634}Sounds/ACE_MedicalDefibrillation_DefibrillatorVoicePrompts.acp"
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp"
    }
   }
   ACE_Medical_Defibrillation_DefibComponent "{671C09EFE7878C09}" {

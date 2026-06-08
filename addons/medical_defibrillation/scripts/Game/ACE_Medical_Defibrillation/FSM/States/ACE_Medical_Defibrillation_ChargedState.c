@@ -22,11 +22,11 @@ class ACE_Medical_Defibrillation_ChargedState : ACE_Medical_Defibrillation_IDefi
 		{
 			if (Math.Mod(context.m_pDefibrillator.m_pSounds.m_iChargedBeepPhase, 2) == 0)
 			{
-				context.m_pDefibrillator.GetSoundComponent().PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPLOW);
+				context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPLOW);
 			}
 			else
 			{
-				context.m_pDefibrillator.GetSoundComponent().PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPHIGH);
+				context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPHIGH);
 			}
 			
 			// Advance to next phase and reset timer

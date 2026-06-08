@@ -8,7 +8,7 @@ class ACE_Medical_Defibrillation_ChargingState : ACE_Medical_Defibrillation_IDef
 		context.m_pDefibrillator.GetDefibProgressData().ResetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.Charge);
 		
 		// Play analysing sound effect
-		context.m_pDefibrillator.GetSoundComponent().PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGING);
+		context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGING);
 		
 		Print("ACE_Medical_Defibrillation_ChargingState::OnEnter | State entered: charging");
 	}

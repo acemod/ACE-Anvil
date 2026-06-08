@@ -28,6 +28,8 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	
 	ref ACE_Medical_Defibrillation_DefibSounds m_pSounds;
 	
+	protected AudioHandle m_pCurrentSound;
+	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
 	{	
@@ -65,9 +67,9 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ACE_Medical_Defibrillation_DefibSoundComponent GetSoundComponent()
+	SoundComponent GetSoundComponent()
 	{
-		ACE_Medical_Defibrillation_DefibSoundComponent component = ACE_Medical_Defibrillation_DefibSoundComponent.Cast(GetOwner().FindComponent(ACE_Medical_Defibrillation_DefibSoundComponent));
+		SoundComponent component = SoundComponent.Cast(GetOwner().FindComponent(SoundComponent));
 		if (!component)
 			return null;
 		
@@ -188,7 +190,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 			return false;
 		
 		vitals.ModifyShocksDelivered(1);
-		GetSoundComponent().PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
+		PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
 		
 		SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CONNECTED);
 		
@@ -233,5 +235,87 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	protected void OnPatientReplicated()
 	{
 		m_pPatient = ACE_Medical_Defibrillation_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	AudioHandle GetCurrentSound()
+	{
+		return m_pCurrentSound;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void PlaySound(string soundName, bool terminatePrevious = false, bool isLoop = false)
+	{
+		if (!Replication.IsServer())
+			return;
+		
+		RPC_PlaySound(soundName, terminatePrevious, isLoop);
+		Rpc(RPC_PlaySound, soundName, terminatePrevious, isLoop);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void TerminateSound(bool terminateAll = false)
+	{
+		if (!Replication.IsServer())
+			return;
+		
+		RPC_TerminateSound(terminateAll);
+		Rpc(RPC_TerminateSound, terminateAll);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RPC_PlaySound(string soundName, bool terminatePrevious, bool isLoop)
+	{		
+		if (isLoop && m_pCurrentSound)
+			return;
+		
+		if (terminatePrevious)
+			TerminateSound();
+		
+		SoundComponent sndComp = GetSoundComponent();
+		if (sndComp)
+			m_pCurrentSound = sndComp.SoundEvent(soundName);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RPC_TerminateSound(bool terminateAll)
+	{
+		SoundComponent sndComp = GetSoundComponent();
+		if (!sndComp)
+			return;
+		
+		if (terminateAll)
+			sndComp.TerminateAll();
+		else
+			sndComp.Terminate(m_pCurrentSound);
+		
+		m_pCurrentSound = null;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void PlaySoundOnPatient(string soundName)
+	{
+		if (!Replication.IsServer())
+			return;
+		
+		RPC_PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
+		Rpc(RPC_PlaySoundOnPatient, ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	void RPC_PlaySoundOnPatient(string soundName)
+	{
+		IEntity patient = GetPatient();
+		if (!patient)
+			return;
+		
+		CharacterSoundComponent sndComponent = CharacterSoundComponent.Cast(patient.FindComponent(CharacterSoundComponent));
+		if (!sndComponent)
+			return;
+		
+		sndComponent.SoundEvent(soundName);
 	}
 }

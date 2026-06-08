@@ -46,7 +46,7 @@ class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<
 			if (context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer >= 3500 &&
 				context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown) == 0)
 			{
-				context.m_pDefibrillator.GetSoundComponent().PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDDONOTTOUCHPATIENT);
+				context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDDONOTTOUCHPATIENT);
 				context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer = 0;
 			}
 			context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer += timeSlice;

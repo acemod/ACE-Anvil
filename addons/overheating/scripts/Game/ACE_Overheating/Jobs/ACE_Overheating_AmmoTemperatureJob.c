@@ -29,7 +29,7 @@ class ACE_Overheating_AmmoTemperatureJob : ACE_IFrameJob
 		// Reset temperature when jammed or when chamber empty
 		if (m_pContext.m_pBarrel.IsJammed() || (m_pContext.m_bIsChamberingPossible && !m_pContext.m_pMuzzle.IsCurrentBarrelChambered()))
 		{
-			m_pContext.m_pBarrel.SetAmmoTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+			m_pContext.m_pBarrel.SetAmmoTemperature(ACE_WeatherHelper.GetAirTemperatureForEntity(m_pContext.m_pBarrel.GetOwner()));
 			m_pContext.m_pBarrel.SetCookOffProgress(0);
 			return;
 		}
@@ -43,7 +43,7 @@ class ACE_Overheating_AmmoTemperatureJob : ACE_IFrameJob
 			if (cookoffProgress >= m_pContext.m_pBarrel.GetCookOffProgressScale())
 			{
 				m_pContext.m_pCharCommandHandler.ACE_ForceWeaponFire();
-				nextTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
+				nextTemperature = ACE_WeatherHelper.GetAirTemperatureForEntity(m_pContext.m_pBarrel.GetOwner());
 				cookoffProgress = 0;
 				m_pContext.m_pBarrel.InitCookOffCookOffProgressScale();
 			}

@@ -139,6 +139,12 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	float GetTemperature()
+	{
+		return m_WeatherManager.ACE_GetAirTemperature(GetAltitude()) - ACE_PhysicalConstants.ZERO_CELSIUS;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void SetRefHeading(int heading)
 	{
 		m_iRefHeading = heading;
@@ -198,6 +204,7 @@ modded enum ACE_EGadgetScreenID
 	KESTREL_CROSSWIND,
 	KESTREL_HEADWIND,
 	KESTREL_ALTITUDE,
+	KESTREL_TEMPERATURE,
 	KESTREL_REF_HEADING_MENU,
 	KESTREL_REF_HEADING_AUTO_SET,
 	KESTREL_REF_HEADING_MANUAL_SET

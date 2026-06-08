@@ -48,8 +48,7 @@ class ACE_Overheating_BarrelTemperatureJob : ACE_IFrameJob
 		if (!m_pContext.IsValid())
 			return;
 				
-		// Temporary solution: Use standard ambient temperature until we got a proper weather system
-		float externalTemperature = ACE_WeatherHelper.GetAirTemperatureForEntity(m_pContext.m_pObject);
+		float externalTemperature = ACE_WeatherHelper.GetAirTemperatureForEntity(m_pContext.m_pObject.GetOwner());
 		float currentTemperature = m_pContext.m_pObject.GetBarrelTemperature();
 		float nextTemperature = currentTemperature;
 		nextTemperature += (ComputeHeating(timeSlice) + ComputeCooling(timeSlice, currentTemperature, externalTemperature)) / m_pContext.m_pObject.GetData().GetBarrelHeatCapacity();		

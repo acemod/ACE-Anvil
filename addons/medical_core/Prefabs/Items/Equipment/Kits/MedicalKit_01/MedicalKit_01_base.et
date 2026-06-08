@@ -1,0 +1,36 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ACE_Medical_MedicalKitInventoryStorageComponent "{5E4E8A7876A50FDC}" {
+   MaxCumulativeVolume 2999
+   MaxItemSize 10 10 10
+   MultiSlots {
+    MultiSlotConfiguration "{66E81CB8294EABB5}" {
+     SlotTemplate InventoryStorageSlot Morphine {
+      Prefab "{0D9A5DCF89AE7AA9}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01.et"
+     }
+     NumSlots 8
+    }
+    MultiSlotConfiguration "{66E81CB9ACED528B}" {
+     SlotTemplate LoadoutSlotInfo Epinephrine {
+      Prefab "{5B2FD067D70C1E8F}Prefabs/Items/Medicine/EpinephrineInjection/ACE_Medical_EpinephrineInjection.et"
+     }
+     NumSlots 8
+    }
+    MultiSlotConfiguration "{66E81CB9F5B0F5B5}" {
+     SlotTemplate LoadoutSlotInfo Bandage {
+      Prefab "{C3F1FA1E2EC2B345}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_USSR_01.et"
+     }
+     NumSlots 8
+    }
+    MultiSlotConfiguration "{66E81CBA65FAD3C2}" {
+     SlotTemplate InventoryStorageSlot Saline {
+      Prefab "{527D7C5D2E476BDC}Prefabs/Items/Medicine/SalineBag_01/SalineBag_USSR_01.et"
+     }
+     NumSlots 3
+    }
+   }
+   m_fMaxWeight 10
+  }
+ }
+}

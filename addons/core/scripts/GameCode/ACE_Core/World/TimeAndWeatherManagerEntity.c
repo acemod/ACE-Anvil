@@ -36,13 +36,16 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	void ACE_UpdateWeather(float timeSlice);
 	
 	//------------------------------------------------------------------------------------------------
-	//! Returns current temperature of air in Kelvin
+	//! Return current air temperature in Kelvin
+	//! \param[in] altitude Meters above sea level
+	//! \return temperature
 	float ACE_GetAirTemperature(float altitude = 0)
 	{
 		return m_fACE_CurrentAirTemperature + ACE_TEMPERATURE_LAPSE_RATE * altitude;
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Return overcast value in the interval [0, 2] for the weather state
 	float ACE_GetOvercastForState(notnull WeatherState state)
 	{
 		Resource res = Resource.Load(m_sACE_WeatherStatesConfigName);

@@ -78,6 +78,8 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 			m_fACE_CurrentAirTemperature = ACE_CalculateAirTemperature(m_fACE_SinExp_Hs - 0.001); // Get sunset temp slightly before sunset, will be loaded into sunset temp by updatesunsetportion
 			ACE_UpdateSunsetPortion(GetYear(), GetMonth(), GetDay());
 		}
+		
+		Replication.BumpMe();
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -95,6 +97,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		}
 
 		m_fACE_CurrentAirTemperature = ACE_CalculateAirTemperature(GetTimeOfTheDay());
+		Replication.BumpMe();
 	}
 
 	//------------------------------------------------------------------------------------------------

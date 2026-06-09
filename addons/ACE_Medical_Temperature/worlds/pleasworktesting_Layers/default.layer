@@ -1,0 +1,68 @@
+$grp SCR_SpawnPoint : "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et" {
+ {
+  coords 120.738 1 255.211
+ }
+ {
+  coords 120.966 1 255.063
+ }
+ {
+  coords 120.916 1 254.907
+ }
+ {
+  coords 120.872 1 254.802
+ }
+ {
+  coords 120.639 1 254.821
+ }
+ {
+  coords 120.295 1 255.129
+ }
+ {
+  coords 120.495 1 255.393
+ }
+ {
+  coords 120.811 1 255.325
+ }
+ {
+  coords 121.064 1 255.024
+ }
+ {
+  coords 121.159 1 254.66
+ }
+ {
+  coords 120.869 1 254.524
+ }
+}
+$grp SCR_SpawnPoint : "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et" {
+ {
+  coords 121.363 1 255.103
+ }
+ {
+  coords 121.592 1 254.75
+ }
+ {
+  coords 121.798 1 254.611
+ }
+ {
+  coords 122.121 1 254.301
+ }
+ {
+  coords 122.013 1 254.963
+ }
+ {
+  coords 122.213 1 254.726
+ }
+ {
+  coords 122.253 1 254.668
+ }
+ {
+  coords 122.209 1 254.672
+ }
+ {
+  coords 121.574 1 254.768
+ }
+}
+StaticModelEntity : "{AA9E5BE6EF2D17AE}PrefabsEditable/Auto/Props/Construction/GravelPile_01/E_GravelPile_01_large.et" {
+ coords 126.251 -21.823 258.834
+ scale 10
+}

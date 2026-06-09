@@ -14,14 +14,6 @@ class ACE_Carrying_BaseUserAction : ScriptedUserAction
 		SCR_CharacterControllerComponent ownerCharController = SCR_CharacterControllerComponent.Cast(ownerChar.GetCharacterController());
 		if (!ownerCharController || ownerCharController.GetLifeState() != ECharacterLifeState.INCAPACITATED)
 			return false;
-		
-		SCR_ChimeraCharacter userChar = SCR_ChimeraCharacter.Cast(user);
-		if (!userChar)
-			return false;
-		
-		SCR_CharacterControllerComponent userCharController = SCR_CharacterControllerComponent.Cast(userChar.GetCharacterController());
-		if (!userCharController || userCharController.GetLifeState() != ECharacterLifeState.ALIVE)
-			return false;
 
 		return true;
 	}

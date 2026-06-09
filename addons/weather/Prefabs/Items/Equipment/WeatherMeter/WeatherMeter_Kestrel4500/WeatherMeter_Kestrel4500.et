@@ -63,7 +63,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
     ACE_Weather_KestrelHomeScreen "{66A13903401274C2}" {
      m_eID KESTREL_HOME
      m_eNextScreenID KESTREL_DIRECTION
-     m_ePreviousScreenID KESTREL_TEMPERATURE
+     m_ePreviousScreenID KESTREL_ALTITUDE
     }
     ACE_Weather_KestrelCompassScreen "{66A1390A79C33769}" {
      m_eID KESTREL_DIRECTION
@@ -104,22 +104,22 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      m_sUnit "m/s"
      m_sFooterText "— set heading"
     }
+    ACE_Weather_KestrelTemperatureScreen "{69913E0B455D58DC}" {
+     m_eID KESTREL_TEMPERATURE
+     m_eNextScreenID KESTREL_ALTITUDE
+     m_ePreviousScreenID KESTREL_HEADWIND
+     m_sIconName "veh_engine_temp"
+     m_sTitle "TEMPERATURE"
+     m_sUnit "°C"
+    }
     ACE_Weather_KestrelAltitudeScreen "{66A1390B890CEC29}" {
      m_eID KESTREL_ALTITUDE
-     m_eNextScreenID KESTREL_TEMPERATURE
-     m_ePreviousScreenID KESTREL_HEADWIND
+     m_eNextScreenID KESTREL_HOME
+     m_ePreviousScreenID KESTREL_TEMPERATURE
      m_sIconImageSet "{BCD5479864D1A79A}UI/Textures/Map/topographicIcons/icons_topographic_map.imageset"
      m_sIconName "rocks"
      m_sTitle "ALTITUDE"
      m_sUnit "m"
-    }
-    ACE_Weather_KestrelTemperatureScreen "{69913E0B455D58DC}" {
-     m_eID KESTREL_TEMPERATURE
-     m_eNextScreenID KESTREL_HOME
-     m_ePreviousScreenID KESTREL_ALTITUDE
-     m_sIconName "veh_engine_temp"
-     m_sTitle "TEMPERATURE"
-     m_sUnit "°C"
     }
     ACE_Weather_KestrelRefHeadingMenuScreen "{66A362BB793DD4EE}" {
      m_eID KESTREL_REF_HEADING_MENU

@@ -49,36 +49,22 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	
 	protected void updateTemperature(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		//---Day night cycle adjustment---//
+		SCR_ChimeraCharacter player=context.m_pObject;
+		//Using air temp that kex wrote :)
+		float m_fOutdoorTemperature = s_TimeManager.ACE_GetAirTemperature(player.GetOrigin()[1]);
 		
-		s_fDayNightCyclePower=0;//Default to zero, if it's zero it means the sun is set
-		//Get time manager to output sunrise and sunset times to these variables
-		//Try to run these calcs once per second, if possible
-		if (s_TimeManager&&s_TimeManager.IsDayHour(s_TimeManager.GetTime().m_iHours))
-		{
-			float s_fDayNightCycleProgress = Math.InverseLerp(s_fSunriseTime,s_fSunsetTime,s_TimeManager.GetTimeOfTheDay());//How far along in the sun's path is the sun currently?
-			s_fDayNightCyclePower = -4 * Math.Pow(s_fDayNightCycleProgress-0.5,2)+1;//Convert the linear x variable into a power according to this parabola
-		}
-		//Map the progress in the day night cycle to the temperature ranges specified in the config
-		float m_fOutdoorTemperature = Math.Lerp(s_pTemperatureSettings.m_fOutdoorDailyLowTemperature,s_pTemperatureSettings.m_fOutdoorDailyHighTemperature,s_fDayNightCyclePower);
+		float m_fIndoorTemperature = (m_fOutdoorTemperature-393.15)*s_pTemperatureSettings.m_fIndoorInsulation + 393.15;//travel insulation degrees for each degree that outdoor temp changes
 		
-		float m_fIndoorTemperature = Math.Lerp(s_pTemperatureSettings.m_fIndoorDailyLowTemperature,s_pTemperatureSettings.m_fIndoorDailyHighTemperature,s_fDayNightCyclePower);
-		
-		float m_fVehicleTemperature = Math.Lerp(s_pTemperatureSettings.m_fVehicleDailyLowTemperature,s_pTemperatureSettings.m_fVehicleDailyHighTemperature,s_fDayNightCyclePower);
+		float m_fVehicleTemperature = (m_fOutdoorTemperature-393.15)*s_pTemperatureSettings.m_fVehicleInsulation + 393.15;
 		
 		//---Once per player calculations, if possible---//
-		
-		
-		//Get player
-		SCR_ChimeraCharacter player=context.m_pObject;
-		//If a player exists
-		Print(player.IsInVehicle());
 		if(!player)
 			return;
 		
 		float m_fFinalAmbientTemperature;
 		float m_fIndoorSignal = context.m_pSignalsManager.GetSignalValue(22);//Value for IsIndoors
 		float m_fVehicleSignal = context.m_pSignalsManager.GetSignalValue(24);//Value for if in a vehicle
+		
 		if (m_fIndoorSignal>0)//If the player is indoors
 		{ //Lerp based on how indoors they are, 1 being fully indoors
 			m_fFinalAmbientTemperature = Math.Lerp(m_fOutdoorTemperature,m_fIndoorTemperature,m_fIndoorSignal);
@@ -90,13 +76,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		else 
 		{
 			m_fFinalAmbientTemperature = m_fOutdoorTemperature;
-		}
-		
-		//---Altitude adjustment---//
-		vector pos = player.GetOrigin();//Get the position of the player
-		float m_fAltitude=pos[1];//Get the altitude
-		m_fFinalAmbientTemperature -= m_fAltitude*(6.5/1000); //Adjust temperature by -6.5c per KM above sea level - 
-				
+		}		
 		
 		//---Windchill adjustment---//
 		float m_fWindchillIndex = Math.Pow(s_pTemperatureSettings.m_fWindchillPower*s_TimeManager.GetWindSpeed(),0.8);//Windchill temperature is on a curve, gets diminishing returns with speed
@@ -110,7 +90,6 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		
 		//Reduce the impact of outside temperature by insulation for a final temperature factor
 		float m_fAmbientTemperatureFactor = m_fAmbientTemperatureDiff*context.m_pVitals.m_fInsulationScore;
-	
 		
 		//Simulating core temperature natural heating. The amount of power it has scales down linearly with blood lost
 		float m_fNaturalHeatingFactor= context.m_pBloodHitZone.GetHealthScaled()*s_pTemperatureSettings.m_fNaturalCoreHeating/1000;

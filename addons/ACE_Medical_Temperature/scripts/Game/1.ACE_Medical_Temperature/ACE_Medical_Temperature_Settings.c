@@ -9,17 +9,11 @@ class ACE_Medical_Temperature_Settings : ACE_ModSettings
 	[Attribute(defvalue: "298.0", desc: "Daily high temperature of your map, at sea level, K. Set this value high for a powerful beating sun at midday", params: "0 1000")]
 	float m_fOutdoorDailyHighTemperature;
 	
-	[Attribute(defvalue: "285.0", desc: "Daily low temperature of the indoors, at sea level, K. Set this value high for well insulated buildings with active heating", params: "0 1000")]
-	float m_fIndoorDailyLowTemperature;
+	[Attribute(defvalue: "0.5", desc: "How affected are buildings from the outdoors? 0 = perfectly insulated", params: "0 1")]
+	float m_fIndoorInsulation;
 	
-	[Attribute(defvalue: "300.0", desc: "Daily high temperature of the indoors, at sea level, K. Set this value low for well insulated buildings with AC", params: "0 1000")]
-	float m_fIndoorDailyHighTemperature;
-	
-	[Attribute(defvalue: "285.0", desc: "Daily low temperature of a vehicle, at sea level, K. Set this value high for well insulated vehicles with active heating", params: "0 1000")]
-	float m_fVehicleDailyLowTemperature;
-	
-	[Attribute(defvalue: "300.0", desc: "Daily high temperature of your map, at sea level, K. Set this value low for well insulated vehicles with AC", params: "0 1000")]
-	float m_fVehicleDailyHighTemperature;
+	[Attribute(defvalue: "0.7", desc: "How affected are  vehicles from the outdoors? 0 = perfectly insulated", params: "0 1")]
+	float m_fVehicleInsulation;
 	
 	[Attribute(defvalue: "50", desc: "Daily max humidity of your map, in %. This controls how fast wet clothes dry.", params: "0 100")]
 	float m_fDailyPeakHumidity;

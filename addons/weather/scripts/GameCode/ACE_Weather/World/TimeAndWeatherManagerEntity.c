@@ -33,6 +33,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	[Attribute(defvalue: "1.0", desc: "Minimum diurnal temperature range in Kelvin.", params: "0 1000", category: "Temperature")]
 	protected float m_fACE_MinDiurnalTemperatureRange;
 	
+	protected ref ACE_Weather_Settings m_Settings;
 	protected bool m_bACE_IsCurrentlyDay;
 
 	protected float m_fACE_SinExp_Tmin;
@@ -61,6 +62,10 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		if (rpl && rpl.IsProxy())
 			return;
 		
+		m_Settings = ACE_SettingsHelperT<ACE_Weather_Settings>.GetModSettings();
+		if (m_Settings && !m_Settings.m_bAirTemperatureSimulationEnabled)
+			return;
+		
 		m_fACE_DiurnalTemperatureRangeNoiseGenerator = ACE_AutoRegModel(m_fACE_DiurnalTemperatureRangeAutoRegCoeff, m_fACE_DiurnalTemperatureRangeStdDev);
 		m_fACE_MeanTemperatureAirNoiseGenerator = ACE_AutoRegModel(m_fACE_MeanTemperatureAirAutoRegCoeff, m_fACE_MeanTemperatureAirStdDev);
 		
@@ -86,6 +91,9 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 	override void ACE_UpdateWeather(float timeSlice)
 	{
 		super.ACE_UpdateWeather(timeSlice);
+		
+		if (m_Settings && !m_Settings.m_bAirTemperatureSimulationEnabled)
+			return;
 
 		if (IsDayHour(GetTimeOfTheDay()) != m_bACE_IsCurrentlyDay)  // If out of date, update the params
 		{

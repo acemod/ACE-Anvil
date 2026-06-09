@@ -2,7 +2,11 @@
 title: Weather
 ---
 
-Adds a toggleable display for showing information about wind direction and strength.
+**ACE Weather** extends the existing weather with: 
+- Advanced simulation of air temperature.
+
+**ACE Weather** adds the following measurement tools:
+- Toggleable display for showing information about wind direction and strength
 
 ## Usage
 
@@ -10,3 +14,37 @@ Adds a toggleable display for showing information about wind direction and stren
 
 - Toggle wind info display with `Show wind info` keybind in `ACE` category (Default: <kbd>Shift</kbd>+<kbd>K</kbd>).
 - The wind direction and strength are indicated by a [wind barb](https://www.weather.gov/hfo/windbarbinfo) in the top left corner.
+
+
+### Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_bAirTemperatureSimulationEnabled`  | Type: `bool`<br />Default: `true` | Whether advanced simulation of air temperature should be run. |
+
+Template for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Weather": {
+             "m_bAirTemperatureSimulationEnabled": true
+        }
+    }
+}
+```
+
+## Modded Terrain Support
+
+### Air Temperature Simulation
+
+**ACE Weather** adds the following attributes to the `TimeAndWeatherManagerEntity` that can be used for adjusting the simulation to a particular terrain:
+- `m_aACE_MonthlyAverageTemperatureAirMaxHours` - Average hour of the day at which peak air temperature occurs per month in 24 h format.
+- `m_aACE_MonthlyAverageDailyTemperatureAirMins` - Average daily minimum air temperature for each month in Kelvin
+- `m_aACE_MonthlyAverageDailyTemperatureAirMaxs` - Average daily maximum air temperature for each month in Kelvin
+
+Data can, for instance, be obtained from [Open-Meteo](https://open-meteo.com/en/docs), which was also used for the vanilla terrains:
+- Default → Basel (CH)
+- Everon/Arland → Groix (FR)
+- Kolguyev → Inishtooskert (IE)

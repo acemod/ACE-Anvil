@@ -25,8 +25,6 @@ class ACE_Medical_Defibrillation_AnalysedStateTransition : ACE_FSM_ITransition<A
 	{
 		if (context.m_pDefibrillator.GetDefibrillatorEmulation() == ACE_Medical_Defibrillation_EDefibEmulation.Manual_NotImplimented)
 			return;
-		
-		Print("ACE_Medical_Defibrillation_AnalysedStateTransition::OnPerform | Entering state: Analysed");
 	}
 	
 	//------------------------------------------------------------------------------------------------

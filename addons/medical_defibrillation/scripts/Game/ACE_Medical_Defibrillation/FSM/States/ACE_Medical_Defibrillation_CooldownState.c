@@ -7,7 +7,7 @@ class ACE_Medical_Defibrillation_CooldownState : ACE_Medical_Defibrillation_IDef
 	{
 		super.OnEnter(context);
 		
-		Print("ACE_Medical_Defibrillation_CooldownState::OnEnter | State entered: cooldown");
+		context.m_pDefibrillator.SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.COOLDOWN);
 	}
 	
 	//------------------------------------------------------------------------------------------------

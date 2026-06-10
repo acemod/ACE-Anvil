@@ -5,11 +5,11 @@ class ACE_Medical_Defibrillation_AnalysedState : ACE_Medical_Defibrillation_IDef
 	override void OnEnter(ACE_Medical_Defibrillation_DefibContext context)
 	{
 		super.OnEnter(context);
-			
-		Print("ACE_Medical_Defibrillation_AnalysedState::OnEnter | State entered: analysed");
+		
+		context.m_pDefibrillator.SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.ANALYSED);
 		
 		// Play shock advised/not advised sound and move to charging
-		if (context.m_pDefibrillator.IsShockableRhythm())
+		if (context.m_pDefibrillator.IsShockableRhythm() || context.m_pDefibrillator.GetDebugAlwaysShockableRhythm())
 		{
 			context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKADVISED)
 			// Will transition to charging after 2.0 seconds in this state automatically. See: ACE_Medical_Defibrillation_ChargingStateTransition

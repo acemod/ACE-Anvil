@@ -46,7 +46,6 @@ class ACE_Medical_Defibrillation_QueryNearestDefib : ACE_QueryNearestEntity
 		
 		EntityPrefabData prefabData = m_pNearestEntity.GetPrefabData();
 		ResourceName prefabName = prefabData.GetPrefabName();
-		PrintFormat("%1::QueryCallback | Defib found! %2", this.ClassName(), prefabName);
 		return m_pNearestEntity;
 	}
 }

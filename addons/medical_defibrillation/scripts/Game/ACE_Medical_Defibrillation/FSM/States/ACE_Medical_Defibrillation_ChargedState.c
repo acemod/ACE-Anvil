@@ -5,10 +5,18 @@ class ACE_Medical_Defibrillation_ChargedState : ACE_Medical_Defibrillation_IDefi
 	{
 		super.OnEnter(context);
 		
+		context.m_pDefibrillator.SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CHARGED);
+		
 		context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer = 0;
 		context.m_pDefibrillator.m_pSounds.m_iChargedBeepPhase = 0;
 		
-		Print("ACE_Medical_Defibrillation_ChargedState::OnEnter | State entered: charged");
+		context.m_pDefibrillator.SetChargedBeepLoop(true);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnExit(ACE_Medical_Defibrillation_DefibContext context)
+	{
+		context.m_pDefibrillator.SetChargedBeepLoop(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -16,6 +24,8 @@ class ACE_Medical_Defibrillation_ChargedState : ACE_Medical_Defibrillation_IDefi
 	{
 		super.OnUpdate(context, timeSlice);
 		
+		// Now local to defib component temporarily
+		/*
 		const float BEEP_INTERVAL = 250;
 		
 		if (context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer >= BEEP_INTERVAL)
@@ -34,5 +44,6 @@ class ACE_Medical_Defibrillation_ChargedState : ACE_Medical_Defibrillation_IDefi
 			context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer = 0;
 		}
 		context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer += timeSlice;
+		*/
 	}
 }

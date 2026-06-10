@@ -5,8 +5,9 @@ class ACE_Medical_Defibrillation_DisconnectedState : ACE_Medical_Defibrillation_
 	{
 		super.OnEnter(context);
 		
+		context.m_pDefibrillator.SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.DISCONNECTED);
+		
 		// Play disconnected sound effect
-		Print("ACE_Medical_Defibrillation_DisconnectedState::OnEnter | State entered: disconnected");
 		context.m_pDefibrillator.SetPatient(null);
 		context.m_pDefibrillator.GetDefibProgressData().ResetAll();
 	}

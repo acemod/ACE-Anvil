@@ -22,9 +22,7 @@ class ACE_Medical_Defibrillation_ConnectedStateTransition : ACE_FSM_ITransition<
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnPerform(ACE_Medical_Defibrillation_DefibContext context)
-	{
-		Print("ACE_Medical_Defibrillation_ConnectedStateTransition::OnPerform | Entering state: Connected");
-		
+	{		
 		context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCONNECTED);
 	}
 	

@@ -20,9 +20,7 @@ class ACE_Medical_Defibrillation_DefibProgressData : Managed
 	protected float m_fCPRCooldownDuration;
 	
 	void ACE_Medical_Defibrillation_DefibProgressData(ACE_Medical_Defibrillation_DefibComponent defibComponent, float analysisDuration, float chargeDuration, float cprCooldownDuration)
-	{
-		PrintFormat("%1::Constructor | Building new defib progress data...", this.ClassName());
-		
+	{		
 		m_pDefibComponent = defibComponent;
 		
 		m_mDurations = new map<ACE_Medical_Defibrillation_EDefibProgressCategory, float>();

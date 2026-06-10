@@ -16,7 +16,6 @@ AudioClass {
      }
     }
    }
-   volume_dB 3
   }
   SoundClass "14345" {
    id 14345
@@ -51,13 +50,13 @@ AudioClass {
      }
     }
    }
-   volume_dB -9
+   volume_dB -12
   }
   SoundClass "30729" {
    id 30729
    name "ACE_Medical_Defibrillation_SoundNoShockAdvised"
    version 5
-   tl 1294.471 109.343
+   tl 1296 112
    ins {
     ConnectionsClass "con:64" {
      id 64
@@ -69,13 +68,13 @@ AudioClass {
      }
     }
    }
-   volume_dB -9
+   volume_dB -12
   }
   SoundClass "37897" {
    id 37897
    name "ACE_Medical_Defibrillation_SoundConnected"
    version 5
-   tl 1282.659 500.987
+   tl 1280 496
    ins {
     ConnectionsClass "con:64" {
      id 64
@@ -87,13 +86,13 @@ AudioClass {
      }
     }
    }
-   volume_dB -9
+   volume_dB -12
   }
   SoundClass "39945" {
    id 39945
    name "ACE_Medical_Defibrillation_SoundDisconnected"
    version 5
-   tl 1297.715 890.331
+   tl 1296 896
    ins {
     ConnectionsClass "con:64" {
      id 64
@@ -105,7 +104,7 @@ AudioClass {
      }
     }
    }
-   volume_dB -9
+   volume_dB -12
   }
   SoundClass "48137" {
    id 48137
@@ -123,7 +122,7 @@ AudioClass {
      }
     }
    }
-   volume_dB -9
+   volume_dB -12
   }
   SoundClass "56329" {
    id 56329
@@ -158,7 +157,7 @@ AudioClass {
      }
     }
    }
-   volume_dB -9
+   volume_dB -12
   }
   SoundClass "63497" {
    id 63497
@@ -176,7 +175,7 @@ AudioClass {
      }
     }
    }
-   volume_dB -9
+   volume_dB -12
   }
   SoundClass "70665" {
    id 70665
@@ -1004,9 +1003,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundCharging.wav" {
      Filename "{D0B7ABE445409970}Sounds/ACE_Medical_Defibrillation_SoundCharging.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1018,9 +1014,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundShockThump.wav" {
      Filename "{A9F7DB0FF2EE8CC5}Sounds/ACE_Medical_Defibrillation_SoundShockThump.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1032,9 +1025,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundShockAdvised.wav" {
      Filename "{B947101D98B22D7C}Sounds/ACE_Medical_Defibrillation_SoundShockAdvised.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1046,9 +1036,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundNoShockAdvised.wav" {
      Filename "{1FA0148AF1CCD1DD}Sounds/ACE_Medical_Defibrillation_SoundNoShockAdvised.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1060,9 +1047,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundConnected.wav" {
      Filename "{B5C11AB72AC005FA}Sounds/ACE_Medical_Defibrillation_SoundConnected.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1074,9 +1058,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundDisconnected.wav" {
      Filename "{738508CCEC10793E}Sounds/ACE_Medical_Defibrillation_SoundDisconnected.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1088,9 +1069,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundAnalysing.wav" {
      Filename "{8E2A822D6B05EBBE}Sounds/ACE_Medical_Defibrillation_SoundAnalysing.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1102,9 +1080,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundCPRReminder.wav" {
      Filename "{701D6A628A906F72}Sounds/ACE_Medical_Defibrillation_SoundCPRReminder.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1116,9 +1091,6 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Medical_Defibrillation_SoundDoNotTouchPatient.wav" {
      Filename "{246C8E311FB8F7EF}Sounds/ACE_Medical_Defibrillation_SoundDoNotTouchPatient.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
@@ -1209,6 +1181,6 @@ AudioClass {
    spatialFactor 1
   }
  }
- version 1
+ version 2
  listenerWindowModel "{DA5DDF2E4860BBF6}Prefabs/Items/Medical Defibrillation/ACE_DefibrillatorAED.xob"
 }

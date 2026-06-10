@@ -26,7 +26,6 @@ class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<
 	//------------------------------------------------------------------------------------------------
 	override void OnPerform(ACE_Medical_Defibrillation_DefibContext context)
 	{
-		Print("ACE_Medical_Defibrillation_AnalysingStateTransition::OnPerform | Entering state: Analysing");
 	}
 	
 	//------------------------------------------------------------------------------------------------

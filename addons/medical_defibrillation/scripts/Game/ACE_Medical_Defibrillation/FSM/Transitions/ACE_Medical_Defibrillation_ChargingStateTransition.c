@@ -24,7 +24,6 @@ class ACE_Medical_Defibrillation_ChargingStateTransition : ACE_FSM_ITransition<A
 	//------------------------------------------------------------------------------------------------
 	override void OnPerform(ACE_Medical_Defibrillation_DefibContext context)
 	{
-		Print("ACE_Medical_Defibrillation_ChargingStateTransition::OnPerform | Entering state: Charging");
 	}
 	
 	//------------------------------------------------------------------------------------------------

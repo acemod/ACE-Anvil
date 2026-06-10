@@ -283,7 +283,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnPatientReplicated()
 	{
-		GetGame().GetCallqueue().CallLater(OnPatientReplicatedDelayed, 100);
+		GetGame().GetCallqueue().Call(OnPatientReplicatedDelayed);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -16,6 +16,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	[RplProp(onRplName: "OnRefreshScreen")]
 	protected ACE_EGadgetScreenID m_eRefHeadingSetMode;
 	
+	protected ChimeraCharacter m_User;
 	protected TimeAndWeatherManagerEntity m_WeatherManager;
 	protected TNodeId m_iImpellerBone;
 	protected float m_fImpellerSpinSpeed;
@@ -41,6 +42,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	{
 		super.ActivateGadgetUpdate();
 		m_fImpellerSpinSpeed = 0;
+		m_User = ChimeraCharacter.Cast(SCR_PlayerController.GetLocalControlledEntity());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -48,6 +50,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	{
 		super.DeactivateGadgetUpdate();
 		m_fImpellerSpinSpeed = 0;
+		m_User = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -104,8 +107,10 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	//------------------------------------------------------------------------------------------------
 	float GetDirection()
 	{
-		vector dirDown = GetOwner().GetTransformAxis(2) - GetOwner().GetTransformAxis(1);
-		return Math.Round(dirDown.ToYaw());
+		if (m_User.IsInVehicle())
+			return m_User.GetAngles()[1];
+		else
+			return SCR_Math.fmod(Math.RAD2DEG * m_User.GetCharacterController().GetInputContext().GetHeadingAngle(), 360);
 	}
 	
 	//------------------------------------------------------------------------------------------------

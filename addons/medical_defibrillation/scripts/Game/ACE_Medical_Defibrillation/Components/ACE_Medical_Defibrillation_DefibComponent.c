@@ -4,19 +4,19 @@ class ACE_Medical_Defibrillation_DefibComponentClass : ScriptComponentClass
 
 class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 {
-	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibEmulation))]
+	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibEmulation), category: "General Settings")]
 	protected ACE_Medical_Defibrillation_EDefibEmulation m_eDefibrillatorEmulation;
 	
 	protected float m_fAnalysisDuration = 3;
 	protected float m_fChargeDuration = 5.5;
 	
-	[Attribute(defvalue: "120", params: "0 inf 1", desc: "Time (s) between analysis events where players should perform CPR.")]
+	[Attribute(defvalue: "120", params: "0 inf 1", desc: "Time (s) between analysis events where players should perform CPR.", category: "AED Settings")]
 	protected float m_fCPRCooldownDuration;
 	
-	[Attribute(defvalue: "10", params: "0 inf 0.1", desc: "Stun duration (s) for a character that touches the patient while a shock is delivered.")]
-	protected float m_fContactShockStunDuration;
+	[Attribute(defvalue: "true", desc: "Plays pacing beats when players should be performing CPR.", category: "AED Settings")]
+	protected bool m_bPlayCPRPacingBeats;
 	
-	[Attribute(defvalue: "false", desc: "Always sets the AED to detect shockable rhythm. Use to quickly test shock systems.")]
+	[Attribute(defvalue: "false", desc: "Always sets the AED to detect shockable rhythm. Use to quickly test shock systems.", category: "DEBUG")]
 	protected bool m_bDebugAlwaysShockableRhythm;
 	
 	[RplProp(onRplName: "OnPatientReplicated")]
@@ -83,7 +83,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		{
 			m_pSounds.m_fLastCPRPaceTimer += timeSlice;
 			
-			if (m_pSounds.m_fLastCPRPaceTimer >= ACE_Medical_Defibrillation_GlobalHelpers.BpmToMs(115))
+			if (m_pSounds.m_fLastCPRPaceTimer >= ACE_Medical_Defibrillation_GlobalHelpers.BpmToMs(102))
 			{
 				PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCPRBEEP);
 				m_pSounds.m_fLastCPRPaceTimer = 0;

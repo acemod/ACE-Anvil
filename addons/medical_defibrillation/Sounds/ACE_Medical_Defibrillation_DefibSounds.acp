@@ -140,6 +140,7 @@ AudioClass {
      }
     }
    }
+   volume_dB -3
   }
   SoundClass "60425" {
    id 60425
@@ -193,6 +194,7 @@ AudioClass {
      }
     }
    }
+   volume_dB -3
   }
   SoundClass "76809" {
    id 76809
@@ -210,6 +212,7 @@ AudioClass {
      }
     }
    }
+   volume_dB -3
   }
  }
  generators {

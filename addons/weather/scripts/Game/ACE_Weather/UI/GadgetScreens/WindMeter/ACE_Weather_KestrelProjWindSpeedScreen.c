@@ -11,7 +11,7 @@ class ACE_Weather_KestrelProjWindSpeedScreen : ACE_Weather_IKestrelDefaultDataSc
 		float projectedSpeed = m_Kestrel.GetMeasuredProjectedWindSpeed(m_fProjectionAngle);
 		m_wMainData.SetText(projectedSpeed.ToString(-1, 1));
 		float speed = m_Kestrel.GetMeasuredWindSpeed();
-		int bearing = m_Kestrel.GetDirection();
+		int bearing = Math.Round(m_Kestrel.GetDirection());
 		m_wSecondaryData.SetText(string.Format("%1 m/s @ %2°", speed.ToString(-1, 1), bearing.ToString(3)));
 	}
 	

@@ -17,9 +17,22 @@ class ACE_Weather_KestrelCompassScreen : ACE_Weather_IKestrelDataScreen
 		
 		RichTextWidget footer = RichTextWidget.Cast(data.FindAnyWidget("Footer"));
 		if (m_Kestrel.GetUseTrueNorth())
-			footer.SetTextFormat("True N %1\n— set mode", m_Kestrel.GetDeclination().ToString(lenDec: 1));
+		{
+			string signPostfix = "E";
+			
+			float declination = m_Kestrel.GetDeclination();
+			if (declination < 0)
+			{
+				signPostfix = "W";
+				declination = -declination;
+			}
+			
+			footer.SetTextFormat("True N %1 %2\n— set mode", declination.ToString(lenDec: 1), signPostfix);
+		}
 		else
+		{
 			footer.SetText("Magnetic North\n— set mode");
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

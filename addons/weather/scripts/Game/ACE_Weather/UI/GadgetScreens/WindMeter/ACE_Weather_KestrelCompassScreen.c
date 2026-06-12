@@ -9,10 +9,17 @@ class ACE_Weather_KestrelCompassScreen : ACE_Weather_IKestrelDataScreen
 	override void OnOpen(Widget root)
 	{
 		super.OnOpen(root);
-		Widget compass = root.FindAnyWidget("Compass");
+		Widget data = root.FindAnyWidget("DisplayData");
+		Widget compass = data.FindAnyWidget("Compass");
 		compass.SetVisible(true);
 		m_wCardinal = TextWidget.Cast(compass.FindAnyWidget("Cardinal"));
 		m_wBearing = TextWidget.Cast(compass.FindAnyWidget("Bearing"));
+		
+		RichTextWidget footer = RichTextWidget.Cast(data.FindAnyWidget("Footer"));
+		if (m_Kestrel.GetUseTrueNorth())
+			footer.SetTextFormat("True N %1\n— set mode", m_Kestrel.GetDeclination().ToString(lenDec: 1));
+		else
+			footer.SetText("Magnetic North\n— set mode");
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -19,6 +19,9 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	[RplProp()]
 	protected bool m_bUseTrueNorth = false;
 	
+	[RplProp(onRplName: "OnRefreshScreen")]
+	protected bool m_bTmpUseTrueNorth = false;
+	
 	protected ChimeraCharacter m_User;
 	protected TimeAndWeatherManagerEntity m_WeatherManager;
 	protected TNodeId m_iImpellerBone;
@@ -226,6 +229,26 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	{
 		m_bUseTrueNorth = doUse;
 		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool GetUseTrueNorth()
+	{
+		return m_bUseTrueNorth;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetTmpUseTrueNorth(bool doUse)
+	{
+		m_bTmpUseTrueNorth = doUse;
+		OnRefreshScreen();
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool GetTmpUseTrueNorth()
+	{
+		return m_bTmpUseTrueNorth;
 	}
 }
 

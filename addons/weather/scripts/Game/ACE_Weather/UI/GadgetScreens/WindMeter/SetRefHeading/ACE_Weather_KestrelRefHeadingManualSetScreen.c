@@ -26,7 +26,7 @@ class ACE_Weather_KestrelRefHeadingManualSetScreen : ACE_Weather_IKestrelRefHead
 		{
 			case ACE_EGadgetButtonID.LEFT:
 			{
-				m_Kestrel.SetTmpRefHeading((m_Kestrel.GetTmpRefHeading() - 1) % 360);
+				m_Kestrel.SetTmpRefHeading((m_Kestrel.GetTmpRefHeading() + 359) % 360);
 				return true;
 			}
 			

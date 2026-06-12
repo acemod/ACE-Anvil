@@ -140,6 +140,9 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      m_sInstructions "Press <ucs codepoints=\"\u003C\"/> and >"\
      "to Adjust"
     }
+    ACE_Weather_KestrelDirModeScreen "{69983CA9EB168034}" {
+     m_eID KESTREL_DIR_MODE_SET
+    }
    }
    m_iEnabledBacklightColor 1973860
   }

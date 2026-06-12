@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{51419F8857AFEDAC}UI/layouts/Gadgets/WindMeter/ACE_Kestrel4500_Header.layout"
+ Configurations {
+  LayoutResourceClass PC {
+  }
+  LayoutResourceClass XBOX_ONE : PC {
+  }
+  LayoutResourceClass XBOX_SERIES : PC {
+  }
+  LayoutResourceClass PS4 : PC {
+  }
+  LayoutResourceClass PS5 : PC {
+  }
+  LayoutResourceClass HEADLESS : PC {
+  }
+ }
+}

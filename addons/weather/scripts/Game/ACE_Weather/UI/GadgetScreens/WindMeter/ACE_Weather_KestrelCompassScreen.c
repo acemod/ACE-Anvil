@@ -28,5 +28,24 @@ class ACE_Weather_KestrelCompassScreen : ACE_Weather_IKestrelDataScreen
 		int gadgetDir = Math.Round(m_Kestrel.GetDirection());
 		m_wCardinal.SetText(ACE_CompassTools.GetCardinalFromBearing(gadgetDir));
 		m_wBearing.SetText(string.Format("%1°", gadgetDir.ToString(3)));
+		m_wBearing.SetText(string.Format("%1°", Math.Round(gadgetDir).ToString(3, 0)));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool OnButtonClickServer(ACE_EGadgetButtonID buttonID)
+	{
+		if (super.OnButtonClickServer(buttonID))
+			return true;
+		
+		switch (buttonID)
+		{
+			case ACE_EGadgetButtonID.ENTER:
+			{
+				m_Kestrel.PushScreen(ACE_EGadgetScreenID.KESTREL_DIR_MODE_SET);
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

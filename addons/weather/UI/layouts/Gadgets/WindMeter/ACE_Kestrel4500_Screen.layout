@@ -131,61 +131,9 @@ FrameWidgetClass {
                 VerticalAlign 0
                }
                {
-                SizeLayoutWidgetClass "{66A0E1869533A095}" {
+                SizeLayoutWidgetClass "{69983CAA530B64DD}" : "{51419F8857AFEDAC}UI/layouts/Gadgets/WindMeter/ACE_Kestrel4500_Header.layout" {
                  Name "Header"
                  Slot LayoutSlot "{66A0E1869533A0CE}" {
-                 }
-                 AllowHeightOverride 1
-                 HeightOverride 165
-                 {
-                  OverlayWidgetClass "{66A0E18D2952D607}" {
-                   Name "HeaderOverlay"
-                   Slot AlignableSlot "{66A0E186D65504BC}" {
-                    HorizontalAlign 3
-                    VerticalAlign 3
-                   }
-                   {
-                    HorizontalLayoutWidgetClass "{66A0E18CA7523328}" {
-                     Name "TitleLayout"
-                     Slot OverlayWidgetSlot "{66A0E18CA7523319}" {
-                      HorizontalAlign 0
-                     }
-                     {
-                      ImageWidgetClass "{66A0E18CB26555FE}" {
-                       Name "Icon"
-                       Slot LayoutSlot "{66A13907A19CD2F7}" {
-                        HorizontalAlign 3
-                        Padding 0 0 6 0
-                       }
-                       Texture "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
-                       Image "moveAll"
-                       Size 165 165
-                      }
-                      TextWidgetClass "{66A0E18CF68F69FD}" {
-                       Name "Title"
-                       Slot LayoutSlot "{66A0E18CF68F69C6}" {
-                        HorizontalAlign 0
-                        VerticalAlign 1
-                        Padding 14 0 0 0
-                       }
-                       Text "WIND SPEED"
-                       "Font Size" 90
-                       FontProperties FontProperties "{66A0E18314850E70}" {
-                        Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
-                       }
-                      }
-                     }
-                    }
-                    TextWidgetClass "{66A0E1839A104820}" {
-                     Name "Unit"
-                     Slot OverlayWidgetSlot "{66A0E1839A104812}" {
-                      HorizontalAlign 2
-                     }
-                     Text "m/s"
-                     "Font Size" 90
-                    }
-                   }
-                  }
                  }
                 }
                 OverlayWidgetClass "{66A0E18041991D62}" {
@@ -395,6 +343,139 @@ FrameWidgetClass {
                   }
                  }
                 }
+               }
+              }
+             }
+            }
+            OverlayWidgetClass "{69983CA58571167B}" {
+             Name "DisplayDirMode"
+             Slot OverlayWidgetSlot "{66A13907A19CD356}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             "Is Visible" 0
+             {
+              VerticalLayoutWidgetClass "{69983CA58571167A}" {
+               Name "HeaderAndBody"
+               Slot OverlayWidgetSlot "{66A13907A19CD340}" {
+                HorizontalAlign 3
+                VerticalAlign 0
+               }
+               {
+                SizeLayoutWidgetClass "{69983CA585711679}" : "{51419F8857AFEDAC}UI/layouts/Gadgets/WindMeter/ACE_Kestrel4500_Header.layout" {
+                 Name "Header"
+                 Slot LayoutSlot "{66A0E1869533A0CE}" {
+                 }
+                }
+                VerticalLayoutWidgetClass "{69983CA4D44E8AF9}" {
+                 Name "Body"
+                 Slot LayoutSlot {
+                 }
+                 {
+                  HorizontalLayoutWidgetClass "{69983CA4176DD3E6}" {
+                   Name "ModeRow"
+                   Slot LayoutSlot "{69983CA4176DD380}" {
+                   }
+                   {
+                    SizeLayoutWidgetClass "{69983CA7832293E3}" {
+                     Name "SizeLayout0"
+                     Slot LayoutSlot "{69983CA783229384}" {
+                     }
+                     AllowWidthOverride 1
+                     WidthOverride 450
+                     {
+                      TextWidgetClass "{69983CA5857EE79F}" {
+                       Name "Label"
+                       Slot AlignableSlot "{69983CA7860E5FFE}" {
+                        HorizontalAlign 0
+                       }
+                       Text "Mode"
+                       "Font Size" 70
+                       "Min Font Size" 70
+                       "Horizontal Alignment" Right
+                       "Vertical Alignment" Center
+                       FontProperties FontProperties "{66A0E18F09A1D423}" {
+                        Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+                       }
+                      }
+                     }
+                    }
+                    TextWidgetClass "{69983CA5263B65D6}" {
+                     Name "Value"
+                     Slot LayoutSlot {
+                      HorizontalAlign 3
+                      Padding 0 0 0 0
+                     }
+                     Text "Magnetic"
+                     "Font Size" 70
+                     "Min Font Size" 70
+                     "Horizontal Alignment" Right
+                     "Vertical Alignment" Center
+                     FontProperties FontProperties "{66A0E18F09A1D423}" {
+                      Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+                     }
+                    }
+                   }
+                  }
+                  HorizontalLayoutWidgetClass "{69983CA4283C8D40}" {
+                   Name "VariationRow"
+                   Slot LayoutSlot "{69983CA4176DD380}" {
+                   }
+                   {
+                    SizeLayoutWidgetClass "{69983CA4779DBD9C}" {
+                     Name "SizeLayout0"
+                     Slot LayoutSlot "{69983CA4779DBDB1}" {
+                     }
+                     AllowMinDesiredWidth 1
+                     MinDesiredWidth 450
+                     {
+                      TextWidgetClass "{69983CA4283C8D5F}" {
+                       Name "Label"
+                       Slot AlignableSlot "{69983CA475862CB4}" {
+                        HorizontalAlign 0
+                       }
+                       Text "Variation"
+                       "Font Size" 70
+                       "Min Font Size" 70
+                       "Horizontal Alignment" Right
+                       "Vertical Alignment" Center
+                       FontProperties FontProperties "{66A0E18F09A1D423}" {
+                        Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+                       }
+                      }
+                     }
+                    }
+                    TextWidgetClass "{69983CA4283C8D5E}" {
+                     Name "Value"
+                     Slot LayoutSlot "{69983CA4283C8CAF}" {
+                      HorizontalAlign 3
+                     }
+                     Text "0.0"
+                     "Font Size" 70
+                     "Min Font Size" 70
+                     "Horizontal Alignment" Right
+                     "Vertical Alignment" Center
+                     FontProperties FontProperties "{66A0E18F09A1D423}" {
+                      Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+                     }
+                    }
+                   }
+                  }
+                 }
+                }
+               }
+              }
+              RichTextWidgetClass "{69983CA5857EE79D}" {
+               Name "Footer"
+               Slot OverlayWidgetSlot "{66A3628F2D2AF9BA}" {
+                HorizontalAlign 3
+                VerticalAlign 2
+               }
+               Text "— set mode"
+               "Font Size" 70
+               "Min Font Size" 70
+               FontProperties FontProperties "{66A3628FDF2C4FE6}" {
+                Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
                }
               }
              }

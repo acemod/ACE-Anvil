@@ -125,7 +125,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 		if (GetUseTrueNorth())
 			return GetTrueDirection();
 		else
-			return GetTrueDirection() + GetDeclination();
+			return GetTrueDirection() - GetDeclination();
 	}
 	
 	//------------------------------------------------------------------------------------------------

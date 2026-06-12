@@ -16,6 +16,12 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	[RplProp(onRplName: "OnRefreshScreen")]
 	protected ACE_EGadgetScreenID m_eRefHeadingSetMode;
 	
+	[RplProp()]
+	protected bool m_bUseTrueNorth = false;
+	
+	[RplProp(onRplName: "OnRefreshScreen")]
+	protected bool m_bTmpUseTrueNorth = false;
+	
 	protected ChimeraCharacter m_User;
 	protected TimeAndWeatherManagerEntity m_WeatherManager;
 	protected TNodeId m_iImpellerBone;
@@ -105,7 +111,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	float GetDirection()
+	float GetTrueDirection()
 	{
 		if (m_User.IsInVehicle())
 			return m_User.GetAngles()[1];
@@ -114,10 +120,29 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	float GetDirection()
+	{
+		if (GetUseTrueNorth())
+			return GetTrueDirection();
+		else
+			return GetTrueDirection() - GetDeclination();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetDeclination()
+	{
+		#ifdef ACE_COMPASS
+			return m_WeatherManager.ACE_GetMagneticDeclination();
+		#else
+			return 0.0;
+		#endif
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Returns effective relative wind speed [m/s]
 	float GetEffectiveWindSpeed()
 	{
-		float gadgetDir = GetDirection();
+		float gadgetDir = GetTrueDirection();
 		float windDir = m_WeatherManager.GetWindDirection();
 		float windAngleRad = Math.DEG2RAD * (windDir - gadgetDir);
 		return -m_WeatherManager.GetWindSpeed() * Math.Cos(windAngleRad);
@@ -134,7 +159,7 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	//! Returns measured wind speed projected at m_iHeading + angle (0 for headwind and 90 for crosswind)
 	float GetMeasuredProjectedWindSpeed(float angle)
 	{
-		return GetMeasuredWindSpeed() * Math.Cos(Math.DEG2RAD * (GetDirection() - m_iRefHeading - angle));
+		return GetMeasuredWindSpeed() * Math.Cos(Math.DEG2RAD * (GetTrueDirection() - m_iRefHeading - angle));
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -198,6 +223,33 @@ class ACE_Weather_KestrelGadgetComponent : ACE_ScreenGadgetComponent
 	{
 		return m_eRefHeadingSetMode;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetUseTrueNorth(bool doUse)
+	{
+		m_bUseTrueNorth = doUse;
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool GetUseTrueNorth()
+	{
+		return m_bUseTrueNorth;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetTmpUseTrueNorth(bool doUse)
+	{
+		m_bTmpUseTrueNorth = doUse;
+		OnRefreshScreen();
+		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool GetTmpUseTrueNorth()
+	{
+		return m_bTmpUseTrueNorth;
+	}
 }
 
 //------------------------------------------------------------------------------------------------
@@ -212,5 +264,6 @@ modded enum ACE_EGadgetScreenID
 	KESTREL_ALTITUDE,
 	KESTREL_REF_HEADING_MENU,
 	KESTREL_REF_HEADING_AUTO_SET,
-	KESTREL_REF_HEADING_MANUAL_SET
+	KESTREL_REF_HEADING_MANUAL_SET,
+	KESTREL_DIR_MODE_SET,
 }

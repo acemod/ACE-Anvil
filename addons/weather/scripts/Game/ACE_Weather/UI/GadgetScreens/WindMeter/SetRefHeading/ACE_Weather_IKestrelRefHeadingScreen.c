@@ -23,6 +23,12 @@ class ACE_Weather_IKestrelRefHeadingScreen : ACE_Weather_IKestrelScreen
 		m_wOptions = display.FindAnyWidget("Options");
 		m_wInstructions = TextWidget.Cast(display.FindAnyWidget("Instructions"));
 		
+		TextWidget title = TextWidget.Cast(display.FindAnyWidget("Title"));
+		if (m_Kestrel.GetUseTrueNorth())
+			title.SetText("TRUE DIRECTION");
+		else
+			title.SetText("MAGNETIC DIRECTION");
+		
 		Widget navigation = display.FindAnyWidget("Navigation");
 		TextWidget command = TextWidget.Cast(navigation.FindAnyWidget("Command"));
 		command.SetText(m_sCommandNavText);

@@ -23,6 +23,7 @@ StringTable {
   CustomStringTableItem "{64771570B1AFAB10}" {
    Id "ACE-Emotes_Emote_Pushups_Name"
    Target_en_us "Push-ups"
+   Target_fr_fr "Faire des pompes"
    Target_it_it "Flessioni"
    Target_de_de "Liegestützen"
    Target_es_es "Lagartijas"
@@ -31,11 +32,12 @@ StringTable {
    Target_zh_cn "伏地挺身"
    Modified 1750690968
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64771570304E885F}" {
    Id "ACE-Emotes_Emote_Salute_Name"
    Target_en_us "Salute"
+   Target_fr_fr "Salut militaire"
    Target_it_it "Saluto militare"
    Target_de_de "Salutieren"
    Target_es_es "Saludo militar"
@@ -44,11 +46,12 @@ StringTable {
    Target_zh_cn "敬禮"
    Modified 1750691025
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64771570B4AF7606}" {
    Id "ACE-Emotes_Emote_SitOnFloor_Name"
    Target_en_us "Sit on the floor"
+   Target_fr_fr "Asseyez-vous par terre"
    Target_it_it "Sedersi per terra"
    Target_de_de "Auf den Boden sitzen"
    Target_es_es "Sentarse en el suelo"
@@ -57,7 +60,7 @@ StringTable {
    Target_zh_cn "席地而坐"
    Modified 1750691043
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60FD565E5C4D775C}" {
    Id "ACE-Item_Banana_Description"
@@ -74,7 +77,7 @@ StringTable {
    Target_uk_ua "Здоровий калій!"
    Modified 1750691061
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60FD565E59AC0571}" {
    Id "ACE-Item_Banana_Name"
@@ -91,7 +94,7 @@ StringTable {
    Target_uk_ua "Банан"
    Modified 1750691073
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
    Id "ACE-UserAction_Carry"
@@ -110,7 +113,7 @@ StringTable {
    Target_uk_ua "Перенести"
    Modified 1750691164
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{5E0C2A71118B03B7}" {
    Id "ACE-UserAction_Carrying"
@@ -127,11 +130,12 @@ StringTable {
    Target_uk_ua "Перенесення"
    Modified 1750691202
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64AD6AAED7334824}" {
    Id "ACE-UserAction_LoadCarried"
    Target_en_us "Load carried:"
+   Target_fr_fr "Charge transportée"
    Target_it_it "Carica trasportato:"
    Target_de_de "Getragener laden:"
    Target_es_es "Cargar paciente:"
@@ -140,7 +144,7 @@ StringTable {
    Target_zh_cn "將隨行單位移進載具"
    Modified 1750691215
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{649D4AEF943234F2}" {
    Id "ACE-UserAction_Release"
@@ -159,7 +163,7 @@ StringTable {
    Target_uk_ua "Відпустити"
    Modified 1750691228
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60FD565E50C080B7}" {
    Id "ACE-Weapon_FragBanana_Description"
@@ -176,7 +180,7 @@ StringTable {
    Target_uk_ua "Вибуховий калій!"
    Modified 1750691236
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{60FD565E48F06F03}" {
    Id "ACE-Weapon_FragBanana_Name"
@@ -193,18 +197,19 @@ StringTable {
    Target_uk_ua "Осколковий банан"
    Modified 1750692631
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{649D4AEE400FD73C}" {
    Id "ACE_Core-AddonName"
    Target_en_us "Core"
+   Target_fr_fr "Core"
    Target_it_it "Core"
    Target_es_es "Core"
    Target_ko_kr "코어"
    Target_pt_br "Core"
    Modified 1750768621
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
  }
 }

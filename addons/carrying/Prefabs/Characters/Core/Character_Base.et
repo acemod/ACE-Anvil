@@ -1,5 +1,5 @@
 SCR_ChimeraCharacter {
- ID "0000000000000001"
+ ID "520EC961A090B1EE"
  components {
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {

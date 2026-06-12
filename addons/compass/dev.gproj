@@ -5,47 +5,4 @@ GameProject {
  Dependencies {
   "58D0FB3206B6F859" "65AD7D0D9941A380"
  }
- Configurations {
-  GameProjectConfig PC {
-   ScriptProjectManagerSettings ScriptProjectManagerSettings "{AC4BE58770485E4B}" {
-    Configurations {
-     ScriptConfigurationClass workbench {
-      Defines + {
-       "ACE_COMPASS"
-      }
-     }
-     ScriptConfigurationClass pc {
-      Defines + {
-       "ACE_COMPASS"
-      }
-     }
-     ScriptConfigurationClass xbox {
-      Defines + {
-       "ACE_COMPASS"
-      }
-     }
-     ScriptConfigurationClass ps4 {
-      Defines + {
-       "ACE_COMPASS"
-      }
-     }
-     ScriptConfigurationClass ps5 {
-      Defines + {
-       "ACE_COMPASS"
-      }
-     }
-    }
-   }
-  }
-  GameProjectConfig XBOX_ONE {
-  }
-  GameProjectConfig XBOX_SERIES {
-  }
-  GameProjectConfig PS4 {
-  }
-  GameProjectConfig PS5 {
-  }
-  GameProjectConfig HEADLESS {
-  }
- }
 }

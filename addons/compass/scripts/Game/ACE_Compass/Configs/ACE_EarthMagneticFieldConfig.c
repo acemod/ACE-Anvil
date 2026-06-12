@@ -36,7 +36,7 @@ class ACE_EarthMagneticFieldConfig
 		int i01 = GetGridIndex(x0, y1);
 		int i11 = GetGridIndex(x1, y1);
 		
-		return Bilerp(m_aDeclinations[i00], m_aDeclinations[i10], m_aDeclinations[i01], m_aDeclinations[i11], tx, ty);
+		return ACE_Math.Bilerp(m_aDeclinations[i00], m_aDeclinations[i10], m_aDeclinations[i01], m_aDeclinations[i11], tx, ty);
 	}
 	
 	//------------------------------------------------------------------------------------------------

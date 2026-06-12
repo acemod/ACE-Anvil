@@ -33,7 +33,7 @@ class ACE_Math
 	//! \param[in] c Value at (0, 1)
 	//! \param[in] d Value at (1, 1)
 	//! \return interpolated value
-	float Bilerp(float a, float b, float c, float d, float tx, float ty)
+	static float Bilerp(float a, float b, float c, float d, float tx, float ty)
 	{
 		float y0 = Math.Lerp(a, b, tx);
 		float y1 = Math.Lerp(c, d, tx);

@@ -369,7 +369,7 @@ FrameWidgetClass {
                 }
                 VerticalLayoutWidgetClass "{69983CA4D44E8AF9}" {
                  Name "Body"
-                 Slot LayoutSlot {
+                 Slot LayoutSlot "{6998F7E2773B7C40}" {
                  }
                  {
                   HorizontalLayoutWidgetClass "{69983CA4176DD3E6}" {
@@ -402,7 +402,7 @@ FrameWidgetClass {
                     }
                     TextWidgetClass "{69983CA5263B65D6}" {
                      Name "Value"
-                     Slot LayoutSlot {
+                     Slot LayoutSlot "{6998F7E2773B7B2E}" {
                       HorizontalAlign 3
                       Padding 0 0 0 0
                      }
@@ -465,17 +465,38 @@ FrameWidgetClass {
                 }
                }
               }
-              RichTextWidgetClass "{69983CA5857EE79D}" {
+              VerticalLayoutWidgetClass "{6998F7E58DEDB88B}" {
                Name "Footer"
-               Slot OverlayWidgetSlot "{66A3628F2D2AF9BA}" {
+               Slot OverlayWidgetSlot "{66A3628F2D2AF9C3}" {
                 HorizontalAlign 3
                 VerticalAlign 2
                }
-               Text "— set mode"
-               "Font Size" 70
-               "Min Font Size" 70
-               FontProperties FontProperties "{66A3628FDF2C4FE6}" {
-                Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+               {
+                OverlayWidgetClass "{6998F7E58DEDB888}" {
+                 Name "Navigation"
+                 Slot LayoutSlot "{66A3628257B7A92D}" {
+                 }
+                 {
+                  TextWidgetClass "{6998F7E58DEDB88F}" {
+                   Name "Power"
+                   Slot OverlayWidgetSlot "{66A3628F2D2AF920}" {
+                    HorizontalAlign 2
+                   }
+                   Text "(|) exit"
+                   "Font Size" 70
+                   "Min Font Size" 70
+                  }
+                  TextWidgetClass "{6998F7E58DED11B6}" {
+                   Name "Command"
+                   Slot OverlayWidgetSlot "{66A3628F2D2AF92C}" {
+                    HorizontalAlign 0
+                   }
+                   Text "— set mode"
+                   "Font Size" 70
+                   "Min Font Size" 70
+                  }
+                 }
+                }
                }
               }
              }

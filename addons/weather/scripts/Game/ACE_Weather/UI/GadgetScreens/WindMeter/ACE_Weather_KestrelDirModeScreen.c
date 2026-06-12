@@ -12,6 +12,7 @@ class ACE_Weather_KestrelDirModeScreen : ACE_Weather_IKestrelScreen
 		display.SetVisible(true);
 		Widget modeRow = display.FindAnyWidget("ModeRow");
 		m_wMode = TextWidget.Cast(modeRow.FindAnyWidget("Value"));
+		m_wMode.SetColorInt(Color.GRAY);
 		Widget variationRow = display.FindAnyWidget("VariationRow");
 		TextWidget variation = TextWidget.Cast(variationRow.FindAnyWidget("Value"));
 		variation.SetText(m_Kestrel.GetDeclination().ToString(lenDec: 1));

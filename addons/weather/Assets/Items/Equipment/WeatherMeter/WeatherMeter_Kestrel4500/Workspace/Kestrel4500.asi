@@ -1,0 +1,166 @@
+AnimSetInstanceSource "{5DAA8070652184AF}" {
+ Template "{F0DB105B65EF631A}Assets/Items/Equipment/workspaces/Compass_SY183.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Aimspace" {
+   Resource "{C920DC06886D7933}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_LArm_Aimspace_SY183.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Aimspace" {
+   Resource "{D9C0689C8045443C}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_LArm_Aimspace_una_SY183.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Focused" {
+   Resource "{FD3CF65EF9DFB7BD}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.FocusedOffset" {
+   Resource "{BEAEBC9A56B15791}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Idle" {
+   Resource "{2FCA39E0B70AC366}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Offset" {
+   Resource "{A5F6172C8C9668B0}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.Focused" {
+   Resource "{D9CF9E4272E54580}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.FocusedOffset" {
+   Resource "{5A5472FD77D83F65}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.Idle" {
+   Resource "{9CABC0D0155D08F8}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_una_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.Offset" {
+   Resource "{61B728C500844EFB}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_cro_SY183_una_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Focused" {
+   Resource "{D6C65807B0B8C24D}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.FocusedOffset" {
+   Resource "{2C19B08DC0F12643}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Idle" {
+   Resource "{36AF5BDE58F3B920}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Offset" {
+   Resource "{E14EDBE6853B2108}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Focused" {
+   Resource "{7896B4ACF0F1AE7F}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.FocusedOffset" {
+   Resource "{6CF4D4202CE8F02C}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Idle" {
+   Resource "{FF0886D0B550712D}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_una_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Offset" {
+   Resource "{BCC5163BE0BAC8C3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_SY183_una_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.Focused" {
+   Resource "{9EAF3875521F7771}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.FocusedOffset" {
+   Resource "{9DBBE7D6CECA9557}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.Idle" {
+   Resource "{8238466717509D84}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.Offset" {
+   Resource "{01E63790DD6F1BE3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.Focused" {
+   Resource "{26D3D30C8C29DA92}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.FocusedOffset" {
+   Resource "{C916950037D91977}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.Idle" {
+   Resource "{DE0B3AADE40CB5BC}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_una_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.Offset" {
+   Resource "{E5F7FD0BCB09F2FC}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_pne_SY183_una_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.WeaponLower" {
+   Resource "{262B451C1D164E65}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_RArm_gadgets.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.Idle_Vehicle" {
+   Resource "{89C2C7323CADF48F}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Idle_Vehicle" {
+   Resource "{89C2C7323CADF48F}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Idle_Vehicle" {
+   Resource "{89C2C7323CADF48F}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Idle_Vehicle" {
+   Resource "{89C2C7323CADF48F}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.Idle_Vehicle" {
+   Resource "{89C2C7323CADF48F}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.Idle_Vehicle" {
+   Resource "{89C2C7323CADF48F}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.Offset_Vehicle" {
+   Resource "{3244A408AF72D5F3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Offset_Vehicle" {
+   Resource "{3244A408AF72D5F3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Offset_Vehicle" {
+   Resource "{3244A408AF72D5F3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Offset_Vehicle" {
+   Resource "{3244A408AF72D5F3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.Offset_Vehicle" {
+   Resource "{3244A408AF72D5F3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.Offset_Vehicle" {
+   Resource "{3244A408AF72D5F3}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_veh_SY183_una_focused_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Aimspace" {
+   Resource "{D9C0689C8045443C}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_erc_LArm_Aimspace_una_SY183.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Fingers" {
+   Resource "{9908FF6E828E6747}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Workspace/p_erc_kestrel4500_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.Idle_Turret" {
+   Resource "{6A5F6B65D6AB92E5}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Idle_Turret" {
+   Resource "{6A5F6B65D6AB92E5}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Idle_Turret" {
+   Resource "{6A5F6B65D6AB92E5}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Idle_Turret" {
+   Resource "{6A5F6B65D6AB92E5}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.Idle_Turret" {
+   Resource "{6A5F6B65D6AB92E5}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.Idle_Turret" {
+   Resource "{6A5F6B65D6AB92E5}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneRas.Offset_Turret" {
+   Resource "{E97B8DE36DFDB39E}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.PneLow.Offset_Turret" {
+   Resource "{E97B8DE36DFDB39E}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcRas.Offset_Turret" {
+   Resource "{E97B8DE36DFDB39E}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.ErcLow.Offset_Turret" {
+   Resource "{E97B8DE36DFDB39E}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroRas.Offset_Turret" {
+   Resource "{E97B8DE36DFDB39E}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.CroLow.Offset_Turret" {
+   Resource "{E97B8DE36DFDB39E}Assets/Items/Equipment/Compass/Compass_SY183/anims/anm/p_tripod_SY183_120_idle_offset.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{59BC87C829F0B805}" {
+ }
+}

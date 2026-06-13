@@ -261,9 +261,9 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	    {
 	        vitals.ModifyShocksDelivered(1);
 			vitals.ResetTimeSinceLastShock();
-	        PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
 	    }
-	    
+		
+		PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);	    
 	    SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CONNECTED);
 	    
 	    float cprCooldown = m_pProgressData.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);

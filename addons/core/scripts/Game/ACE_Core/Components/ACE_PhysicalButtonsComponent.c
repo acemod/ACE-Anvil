@@ -96,10 +96,10 @@ class ACE_PhysicalButtonConfig
 	[Attribute(defvalue: "0 -0.001 0", desc: "Displacement vector for when the button is pressed button")]
 	vector m_vPressedOffset;
 	
-	[Attribute(defvalue: "{9DDDC275FFCC545F}Sounds/Props/Military/Radios/Samples/Props_Radios_Button_Press_1.wav", desc: "Sound for when the button is pressed", uiwidget: UIWidgets.ResourceNamePicker, params: "wav")]
+	[Attribute(defvalue: "{B6008DBCA565E5E1}Sounds/UI/Samples/Menu/UI_Button_Filter_On.wav", desc: "Sound for when the button is pressed", uiwidget: UIWidgets.ResourceNamePicker, params: "wav")]
 	ResourceName m_sPressedSoundPath;
 	
-	[Attribute(defvalue: "{A8CB8AE57458C226}Sounds/Props/Military/Radios/Samples/Props_Radios_Button_Release_1.wav", desc: "Sound for when the button is released", uiwidget: UIWidgets.ResourceNamePicker, params: "wav")]
+	[Attribute(defvalue: "{E495F2DA6A44D0BB}Sounds/UI/Samples/Menu/UI_Button_Filter_Off.wav", desc: "Sound for when the button is released", uiwidget: UIWidgets.ResourceNamePicker, params: "wav")]
 	ResourceName m_sReleasedSoundPath;
 	
 	[Attribute(desc: "Command that the button executes")]

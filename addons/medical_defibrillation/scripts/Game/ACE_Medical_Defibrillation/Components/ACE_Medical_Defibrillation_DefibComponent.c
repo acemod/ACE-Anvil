@@ -7,17 +7,13 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibEmulation), category: "General Settings")]
 	protected ACE_Medical_Defibrillation_EDefibEmulation m_eDefibrillatorEmulation;
 	
-	protected float m_fAnalysisDuration = 3;
 	protected float m_fChargeDuration = 5.5;
-	
-	[Attribute(defvalue: "120", params: "0 inf 1", desc: "Time (s) between analysis events where players should perform CPR.", category: "AED Settings")]
+	protected float m_fAnalysisDuration;
 	protected float m_fCPRCooldownDuration;
-	
-	[Attribute(defvalue: "true", desc: "Plays pacing beats when players should be performing CPR.", category: "AED Settings")]
 	protected bool m_bPlayCPRPacingBeats;
 	
 	[Attribute(defvalue: "false", desc: "Always sets the AED to detect shockable rhythm. Use to quickly test shock systems.", category: "DEBUG")]
-	protected bool m_bDebugAlwaysShockableRhythm;
+	bool m_bDebugAEDAlwaysShockableRhythm;
 	
 	[RplProp(onRplName: "OnPatientReplicated")]
 	protected int m_iPatientRplId;
@@ -42,6 +38,11 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		super.EOnInit(owner);
 		
 		SetEventMask(owner, EntityEvent.FRAME);
+		
+		ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
+		m_fCPRCooldownDuration = settings.m_fAED_CPRCooldownDuration;
+		m_bPlayCPRPacingBeats = settings.m_bAED_PlayCPRPacingBeats;
+		m_fAnalysisDuration = settings.m_fAED_AnalysisDuration;
 		
 		// Convert to milliseconds and make data
 		m_pProgressData = new ACE_Medical_Defibrillation_DefibProgressData(this,
@@ -87,7 +88,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		timeSlice *= 1000;
 		
 		// CPR Beep
-		if (m_bCPRBeepLoop)
+		if (m_bPlayCPRPacingBeats && m_bCPRBeepLoop)
 		{
 			m_pSounds.m_fLastCPRPaceTimer += timeSlice;
 			
@@ -428,6 +429,6 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	bool GetDebugAlwaysShockableRhythm()
 	{
-		return m_bDebugAlwaysShockableRhythm;
+		return m_bDebugAEDAlwaysShockableRhythm;
 	}
 }

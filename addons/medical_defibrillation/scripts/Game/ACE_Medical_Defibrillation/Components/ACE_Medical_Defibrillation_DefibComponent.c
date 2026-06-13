@@ -280,15 +280,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	    ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
 	    
 	    float spamPenalty = ACE_Medical_Defibrillation_DecayCalculator.CalculateSpamPenalty(vitals);
-	    
-	    float shockChance = ACE_Medical_Defibrillation_DecayCalculator.Calculate(
-	        shocks + 1,
-	        settings.m_fMaxShockSuccessChance,
-	        settings.m_fMinShockSuccessChance,
-	        settings.m_bShockChanceDecay,
-	        settings.m_eShockDecayFormula,
-	        settings.m_fShockSuccessDecayRate
-	    );
+	    float shockChance = ACE_Medical_Defibrillation_DecayCalculator.CalculateShockChance(vitals);
 	    
 	    float finalChance = shockChance * (1.0 - spamPenalty);
 	    

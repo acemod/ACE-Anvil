@@ -56,6 +56,12 @@ modded class ACE_Medical_VitalsComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void ModifyTimesArrested(int value)
+	{
+		m_iTimesArrested += value;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override void OnRevived()
 	{
 		super.OnRevived();

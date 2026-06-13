@@ -57,12 +57,12 @@ class ACE_Medical_Defibrillation_Settings : ACE_ModSettings
 	const float SHOCK_CHANCE_DECAY_RATE_REALISTIC = 0.75;
 	const ACE_Medical_Defibrillation_EDefibSettingDecayType SHOCK_SUCCESS_DECAY_FORMULA_REALISTIC = ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential;
 	const float MIN_SHOCK_SUCCESS_CHANCE_REALISTIC = 0;
-	const float MAX_SHOCK_SUCCESS_CHANCE_REALISTIC = 90;
+	const float MAX_SHOCK_SUCCESS_CHANCE_REALISTIC = 0.90;
 	const bool 	REVIVE_BONUS_DECAY_REALISTIC = true;
 	const float SHOCK_BONUS_DECAY_RATE_REALISTIC = 0.75;
 	const ACE_Medical_Defibrillation_EDefibSettingDecayType SHOCK_BONUS_DECAY_FORMULA_REALISTIC = ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential;
-	const float MAX_REVIVE_BONUS_REALISTIC = 25;
-	const float MIN_REVIVE_BONUS_REALISTIC = 0;
+	const float MAX_REVIVE_BONUS_REALISTIC = 0.25;
+	const float MIN_REVIVE_BONUS_REALISTIC = 0.0;
     
     // Casual Preset (2)
 	const bool  PUNISH_SPAM_SHOCKS_CASUAL = true;
@@ -71,12 +71,12 @@ class ACE_Medical_Defibrillation_Settings : ACE_ModSettings
 	const float SHOCK_CHANCE_DECAY_RATE_CASUAL = 0.15;
 	const ACE_Medical_Defibrillation_EDefibSettingDecayType SHOCK_SUCCESS_DECAY_FORMULA_CASUAL = ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear;
 	const float MIN_SHOCK_SUCCESS_CHANCE_CASUAL = 0;
-	const float MAX_SHOCK_SUCCESS_CHANCE_CASUAL = 90;
+	const float MAX_SHOCK_SUCCESS_CHANCE_CASUAL = 0.90;
 	const bool 	REVIVE_BONUS_DECAY_CASUAL = true;
 	const float SHOCK_BONUS_DECAY_RATE_CASUAL = 0.15;
 	const ACE_Medical_Defibrillation_EDefibSettingDecayType SHOCK_BONUS_DECAY_FORMULA_CASUAL = ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear;
-	const float MAX_REVIVE_BONUS_CASUAL = 60;
-	const float MIN_REVIVE_BONUS_CASUAL = 25;
+	const float MAX_REVIVE_BONUS_CASUAL = 0.60;
+	const float MIN_REVIVE_BONUS_CASUAL = 0.25;
 
     //------------------------------------------------------------------------------------------------
     override void Init()
@@ -103,7 +103,7 @@ class ACE_Medical_Defibrillation_Settings : ACE_ModSettings
 				
 				m_bReviveBonusDecay = REVIVE_BONUS_DECAY_REALISTIC;
 				m_fShockBonusDecayRate = SHOCK_BONUS_DECAY_RATE_REALISTIC;
-				m_fShockBonusDecayRate = SHOCK_BONUS_DECAY_FORMULA_REALISTIC;
+				m_eShockBonusDecayFormula = SHOCK_BONUS_DECAY_FORMULA_REALISTIC;
 				m_fMaxReviveBonus = MAX_REVIVE_BONUS_REALISTIC;
 				m_fMinReviveBonus = MIN_REVIVE_BONUS_REALISTIC;
 				break;
@@ -120,7 +120,7 @@ class ACE_Medical_Defibrillation_Settings : ACE_ModSettings
 				
 				m_bReviveBonusDecay = REVIVE_BONUS_DECAY_CASUAL;
 				m_fShockBonusDecayRate = SHOCK_BONUS_DECAY_RATE_CASUAL;
-				m_fShockBonusDecayRate = SHOCK_BONUS_DECAY_FORMULA_CASUAL;
+				m_eShockBonusDecayFormula = SHOCK_BONUS_DECAY_FORMULA_CASUAL;
 				m_fMaxReviveBonus = MAX_REVIVE_BONUS_CASUAL;
 				m_fMinReviveBonus = MIN_REVIVE_BONUS_CASUAL;
 				break;

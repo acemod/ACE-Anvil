@@ -21,14 +21,7 @@ modded class ACE_Medical_ReviveTransition
         if (shocks == 0)
             return 0;
         
-        float reviveBonus = ACE_Medical_Defibrillation_DecayCalculator.Calculate(
-            shocks,
-            s_pDefibSettings.m_fMaxReviveBonus,
-            s_pDefibSettings.m_fMinReviveBonus,
-            s_pDefibSettings.m_bReviveBonusDecay,
-            s_pDefibSettings.m_eShockBonusDecayFormula,
-            s_pDefibSettings.m_fShockBonusDecayRate
-        );
+        float reviveBonus = ACE_Medical_Defibrillation_DecayCalculator.CalculateReviveBonus(context.m_pVitals);
         
         return reviveBonus;
     }
@@ -46,17 +39,6 @@ modded class ACE_Medical_ReviveTransition
         
         if (isDefibMandatory && shocks == 0)
             return 0;
-
-        if (shocks == 0)
-            return result;
-        
-        float shockSuccessChance = ACE_Medical_Defibrillation_DefibComponent.CalculateShockSuccessChance(context.m_pVitals);
-        
-        float randomRoll = Math.RandomFloat01();
-        bool shockSuccessful = randomRoll < shockSuccessChance;
-        
-        if (!shockSuccessful)
-            return result;
         
         float reviveBonus = ComputeReviveBonus(context);
         result += reviveBonus;

@@ -1,0 +1,66 @@
+MetaFileClass {
+ Name "{05C1F40455DAF92F}Assets/Items/Equipement/Defibrillator/ZappyBoy1000/ACE_Medical_ZappyBoy1000.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   MaterialAssigns {
+    MaterialAssignClass "{656F54678395D5CC}" {
+     SourceMaterial "Body"
+     AssignedMaterial "{7865F0F14130205D}Assets/Items/Equipement/Defibrillator/ZappyBoy1000/Data/Body.emat"
+    }
+    MaterialAssignClass "{656F54678395D5EA}" {
+     SourceMaterial "ScreenGlass"
+     AssignedMaterial "{51D8F10E7CD4C941}Assets/Items/Equipement/Defibrillator/ZappyBoy1000/Data/ScreenGlass.emat"
+    }
+    MaterialAssignClass "{656F54678395D5C6}" {
+     SourceMaterial "ScreenBacklight"
+     AssignedMaterial "{5F37F66781168481}Assets/Items/Equipement/Defibrillator/ZappyBoy1000/Data/ScreenBacklight.emat"
+    }
+    MaterialAssignClass "{656F54678395D5C8}" {
+     SourceMaterial "ScreenRenderTarget"
+     AssignedMaterial "{64F3938CDB3114DE}Assets/Items/Equipement/Defibrillator/ZappyBoy1000/Data/ScreenRenderTarget.emat"
+    }
+   }
+   MeshParams {
+    MeshParam ZappyBoy1000 {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_Body {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{5EAA7FB0A83F90CF}Common/Materials/Game/plastic.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UBX_OnButton {
+     LayerPreset "Interaction"
+     SurfaceProperties {
+      "{536BF67B2052B869}material/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+    GeometryParam UBX_ShockButton {
+     LayerPreset "Interaction"
+     SurfaceProperties {
+      "{536BF67B2052B869}material/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass PS5 : PC {
+  }
+  FBXResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -96,7 +96,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
     }
     ACE_Weather_KestrelProjWindSpeedScreen "{66A3629B8DE3A197}" {
      m_eID KESTREL_HEADWIND
-     m_eNextScreenID KESTREL_ALTITUDE
+     m_eNextScreenID KESTREL_TEMPERATURE
      m_ePreviousScreenID KESTREL_CROSSWIND
      m_sIconName "moveAll"
      m_fIconRotation -90

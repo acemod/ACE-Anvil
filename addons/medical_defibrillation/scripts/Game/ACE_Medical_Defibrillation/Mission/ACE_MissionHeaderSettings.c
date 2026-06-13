@@ -4,7 +4,7 @@
 modded class ACE_MissionHeaderSettings
 {
 	[Attribute()]
-	protected ref ACE_Medical_Defibrillation_Defibrillation_Settings m_ACE_Medical_Defibrillation;
+	protected ref ACE_Medical_Defibrillation_Settings m_ACE_Medical_Defibrillation;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Applies settings from mission header to config

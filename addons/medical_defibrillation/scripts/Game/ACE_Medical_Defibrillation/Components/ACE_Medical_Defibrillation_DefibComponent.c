@@ -43,8 +43,6 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		
 		SetEventMask(owner, EntityEvent.FRAME);
 		
-		ACE_Medical_Defibrillation_Defibrillation_Settings settings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Defibrillation_Settings>.GetModSettings();
-		
 		// Convert to milliseconds and make data
 		m_pProgressData = new ACE_Medical_Defibrillation_DefibProgressData(this,
 																		   m_fAnalysisDuration * 1000,
@@ -70,6 +68,16 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		
 		// Subscribe to data change events for replication
 		m_pProgressData.m_OnDataChanged.Insert(OnDefibProgressChanged);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static ACE_Medical_Defibrillation_Settings GetDefibSystemSettings()
+	{
+		ACE_Medical_Defibrillation_Settings settings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
+		if (!settings)
+			return null;
+		
+		return settings;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -232,22 +240,59 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	bool ShockPatient()
 	{
-		if (!m_pPatient)
-			return false;
-		
-		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(m_pPatient.FindComponent(ACE_Medical_VitalsComponent));
-		if (!vitals)
-			return false;
-		
-		vitals.ModifyShocksDelivered(1);
-		PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
-		
-		SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CONNECTED);
-		
-		float cprCooldown = m_pProgressData.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
-		m_pProgressData.SetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown, cprCooldown);
-		
-		return true;
+	    if (!m_pPatient)
+	        return false;
+	    
+	    ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(m_pPatient.FindComponent(ACE_Medical_VitalsComponent));
+	    if (!vitals)
+	        return false;
+
+	    ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
+	    
+	    // Calculate shock success chance
+	    float shockSuccessChance = CalculateShockSuccessChance(vitals);
+	    
+	    // Roll for shock success
+	    float randomRoll = Math.RandomFloat01();
+	    bool shockSuccessful = randomRoll < shockSuccessChance;
+	    
+	    // Only increment shock count if shock was successful
+	    if (shockSuccessful)
+	    {
+	        vitals.ModifyShocksDelivered(1);
+			vitals.ResetTimeSinceLastShock();
+	        PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
+	    }
+	    
+	    SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CONNECTED);
+	    
+	    float cprCooldown = m_pProgressData.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
+	    m_pProgressData.SetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown, cprCooldown);
+	    
+	    return shockSuccessful;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float CalculateShockSuccessChance(ACE_Medical_VitalsComponent vitals)
+	{
+	    int shocks = vitals.GetShocksDelivered();
+	    float timeSinceLastShock = vitals.GetTimeSinceLastShock();
+	    ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
+	    
+	    float spamPenalty = ACE_Medical_Defibrillation_DecayCalculator.CalculateSpamPenalty(vitals);
+	    
+	    float shockChance = ACE_Medical_Defibrillation_DecayCalculator.Calculate(
+	        shocks + 1,
+	        settings.m_fMaxShockSuccessChance,
+	        settings.m_fMinShockSuccessChance,
+	        settings.m_bShockChanceDecay,
+	        settings.m_eShockDecayFormula,
+	        settings.m_fShockSuccessDecayRate
+	    );
+	    
+	    float finalChance = shockChance * (1.0 - spamPenalty);
+	    
+	    return Math.Clamp(finalChance, 0.0, settings.m_fMaxShockSuccessChance);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -1,13 +1,13 @@
 class ACE_Medical_Defibrillation_IDefibState : ACE_FSM_IState<ACE_Medical_Defibrillation_DefibContext>
 {
-	protected static ACE_Medical_Defibrillation_Defibrillation_Settings s_pDefibrillationSettings;
+	protected static ACE_Medical_Defibrillation_Settings s_pDefibrillationSettings;
 	protected ACE_Medical_CharacterContext m_pPatient;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Medical_Defibrillation_IDefibState(ACE_FSM_EStateID id)
 	{
 		if (!s_pDefibrillationSettings)
-			s_pDefibrillationSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Defibrillation_Settings>.GetModSettings();
+			s_pDefibrillationSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
 	}
 	
 	//------------------------------------------------------------------------------------------------

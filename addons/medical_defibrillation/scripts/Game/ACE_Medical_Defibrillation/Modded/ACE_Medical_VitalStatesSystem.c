@@ -22,8 +22,12 @@ modded class ACE_Medical_VitalStatesSystem
 		
 		DbgUI.Begin(string.Format("ACE Defibrillation: (%1)", targetType), 0, 500);
 		DbgUI.Text(string.Format("Cardiac Rhythm:                      %1", SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_ECardiacRhythm, component.GetCardiacRhythm())));
+		DbgUI.Text(string.Format("# Times Arrested:                    %1", ACE_Medical_Defibrillation_DiagTools.GetTimesArrested(target)));
 		DbgUI.Text(string.Format("Shocks Delivered:                    %1", component.GetShocksDelivered()));
-		DbgUI.Text(string.Format("Revive Chance Bonus:                 %1", ACE_Medical_Defibrillation_DiagTools.GetReviveChanceShockBonus(target)));
+		DbgUI.Text(string.Format("Shock Success Chance:                %1", ACE_Medical_Defibrillation_DiagTools.GetShockSuccessChance(target)));
+		DbgUI.Text(string.Format("Shock Spam Penalty:                  %1", ACE_Medical_Defibrillation_DiagTools.GetShockSpamPenalty(target)));
+		DbgUI.Text(string.Format("Time Since Last Shock:               %1", ACE_Medical_Defibrillation_DiagTools.GetTimeSinceLastShock(target)));
+		DbgUI.Text(string.Format("Revive Chance Bonus:                 %1", ACE_Medical_Defibrillation_DiagTools.GetReviveChanceBonus(target)));
 		
 		DbgUI.Spacer(10);
 		

@@ -4,7 +4,7 @@ class ACE_Medical_Defibrillation_DefibStatesSystem : GameSystem
 	[Attribute()]
 	protected ref ACE_Medical_Defibrillation_DefibStates_JobScheduler m_pScheduler;
 	
-	protected ACE_Medical_Defibrillation_Defibrillation_Settings m_pSettings;
+	protected ACE_Medical_Defibrillation_Settings m_pSettings;
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_Medical_Defibrillation_DefibStatesSystem GetInstance(ChimeraWorld world)
@@ -25,7 +25,7 @@ class ACE_Medical_Defibrillation_DefibStatesSystem : GameSystem
 	//------------------------------------------------------------------------------------------------
 	override protected void OnInit()
 	{
-		m_pSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Defibrillation_Settings>.GetModSettings();
+		m_pSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
 		m_pScheduler.OnInit(CreateTemplateJob());
 		
 		ACE_FrameJobSystem jobManager = ACE_FrameJobSystem.GetInstance();

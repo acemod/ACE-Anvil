@@ -1,6 +1,14 @@
 modded class ACE_Medical_CardiacArrestState
 {
 	//------------------------------------------------------------------------------------------------
+	override void OnEnter(ACE_Medical_CharacterContext context)
+	{
+		super.OnEnter(context);
+		
+		context.m_pVitals.ModifyShocksDelivered(1);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected ACE_Medical_Defibrillation_ECardiacRhythm ComputeCardiacRhythm(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		float hemIV = context.m_pBloodHitZone.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_4_HEMORRHAGE);

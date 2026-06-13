@@ -45,7 +45,49 @@ class ACE_Medical_Defibrillation_DiagTools
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static float GetReviveChanceShockBonus(IEntity target)
+	static float GetShockSuccessChance(IEntity target)
+	{
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(target);
+		if (!char)
+			return -1;
+		
+		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(char.FindComponent(ACE_Medical_VitalsComponent));
+		if (!vitals)
+			return -1;
+		
+		return ACE_Medical_Defibrillation_DefibComponent.CalculateShockSuccessChance(vitals);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float GetShockSpamPenalty(IEntity target)
+	{
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(target);
+		if (!char)
+			return -1;
+		
+		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(char.FindComponent(ACE_Medical_VitalsComponent));
+		if (!vitals)
+			return -1;
+		
+		return ACE_Medical_Defibrillation_DecayCalculator.CalculateSpamPenalty(vitals);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float GetTimeSinceLastShock(IEntity target)
+	{
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(target);
+		if (!char)
+			return -1;
+		
+		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(char.FindComponent(ACE_Medical_VitalsComponent));
+		if (!vitals)
+			return -1;
+		
+		return (vitals.GetTimeSinceLastShock() / 1000);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float GetReviveChanceBonus(IEntity target)
 	{
 		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(target);
 		if (!char)
@@ -54,9 +96,23 @@ class ACE_Medical_Defibrillation_DiagTools
 		ACE_Medical_CharacterContext context = new ACE_Medical_CharacterContext(char);
 		ACE_Medical_ReviveTransition transition = new ACE_Medical_ReviveTransition(ACE_Medical_EVitalStateID.ANY, ACE_Medical_EVitalStateID.ANY);
 		
-		return transition.ComputeReviveChanceShockBonus(context);
+		return transition.ComputeReviveBonus(context);
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	static int GetTimesArrested(IEntity target)
+	{
+		SCR_ChimeraCharacter char = SCR_ChimeraCharacter.Cast(target);
+		if (!char)
+			return -1;
+		
+		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(char.FindComponent(ACE_Medical_VitalsComponent));
+		if (!vitals)
+			return -1;
+		
+		return vitals.GetTimesArrested();
+	}
+		
 	//------------------------------------------------------------------------------------------------
 	static float GetReviveChance(IEntity target)
 	{

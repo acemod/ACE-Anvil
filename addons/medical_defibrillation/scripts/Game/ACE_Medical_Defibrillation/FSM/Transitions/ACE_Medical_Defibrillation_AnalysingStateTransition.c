@@ -14,13 +14,13 @@
 
 class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<ACE_Medical_Defibrillation_DefibContext>
 {
-	protected static ACE_Medical_Defibrillation_Defibrillation_Settings s_pDefibrillatorSettings;
+	protected static ACE_Medical_Defibrillation_Settings s_pDefibrillatorSettings;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Medical_Defibrillation_IDefibState(ACE_FSM_EStateID fromStateIDs, ACE_FSM_EStateID toStateID)
 	{
 		if (!s_pDefibrillatorSettings)
-			s_pDefibrillatorSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Defibrillation_Settings>.GetModSettings();
+			s_pDefibrillatorSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
 	}
 	
 	//------------------------------------------------------------------------------------------------

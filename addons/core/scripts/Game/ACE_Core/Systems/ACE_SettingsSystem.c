@@ -3,7 +3,7 @@ class ACE_SettingsSystem : GameSystem
 {
 	static protected ref ACE_SettingsConfig s_CachedSettingsConfig;
 	
-	[RplProp()]
+	[RplProp(onRplName: "InitializeSettings")]
 	protected ref ACE_SettingsConfig m_SettingsConfig;
 	
 	//------------------------------------------------------------------------------------------------
@@ -38,6 +38,16 @@ class ACE_SettingsSystem : GameSystem
 		}
 
 		m_SettingsConfig = s_CachedSettingsConfig;
+		InitializeSettings();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void InitializeSettings()
+	{
+		foreach (ACE_ModSettings settings : m_SettingsConfig.GetAllModSettings())
+		{
+			settings.Init();
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------

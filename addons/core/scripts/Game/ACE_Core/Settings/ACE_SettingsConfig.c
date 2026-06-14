@@ -5,59 +5,73 @@ class ACE_SettingsConfig
 {
 	[Attribute(desc: "Definitions of settings for all mods")]
 	protected ref array<ref ACE_ModSettings> m_aInitialModSettings;
-	protected ref map<typename,ref ACE_ModSettings> m_mModSettingsMap;
-	
-	//------------------------------------------------------------------------------------------------
-	//! Construct map for faster look-up of settings
-	//! We can't use maps as attribute, so we initialize the settings with an array
-	protected void InitMap()
-	{
-		m_mModSettingsMap = new map<typename,ref ACE_ModSettings>();
-		
-		foreach (ACE_ModSettings settings : m_aInitialModSettings)
-		{
-			m_mModSettingsMap[settings.Type()] = settings;
-		}
-		
-		m_aInitialModSettings = null;
-	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Return settings for all categories
-	array<ACE_ModSettings> GetAllModSettings()
+	array<ref ACE_ModSettings> GetAllModSettings()
 	{
-		if (!m_mModSettingsMap)
-			InitMap();
-		
-		array<ACE_ModSettings> output = {};
-		
-		foreach (ACE_ModSettings settings : m_mModSettingsMap)
-		{
-			output.Insert(settings);
-		}
-		
-		return output;
+		return m_aInitialModSettings;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Return settings for a mod
 	ACE_ModSettings GetModSettings(typename modSettingsType)
 	{
-		if (!m_mModSettingsMap)
-			InitMap();
+		foreach (ACE_ModSettings entry : m_aInitialModSettings)
+		{
+			if (entry.Type() == modSettingsType)
+				return entry;
+		}
 		
-		ACE_ModSettings settings;
-		m_mModSettingsMap.Find(modSettingsType, settings);
-		return settings;
+		return null;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Set settings for a mod
 	void SetModSettings(notnull ACE_ModSettings settings)
 	{
-		if (!m_mModSettingsMap)
-			InitMap();
+		for (int i, count = m_aInitialModSettings.Count(); i < count; i++)
+		{
+			if (m_aInitialModSettings[i].Type() == settings.Type())
+			{
+				m_aInitialModSettings[i] = settings;
+				return;
+			}
+		}
 		
-		m_mModSettingsMap[settings.Type()] = settings;
+		m_aInitialModSettings.Insert(settings);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static bool Extract(ACE_SettingsConfig instance, ScriptCtx ctx, SSnapSerializerBase snapshot)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool Inject(SSnapSerializerBase snapshot, ScriptCtx ctx, ACE_SettingsConfig instance)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static void Encode(SSnapSerializerBase snapshot, ScriptCtx ctx, ScriptBitSerializer packet);
+
+	//------------------------------------------------------------------------------------------------
+	static bool Decode(ScriptBitSerializer packet, ScriptCtx ctx, SSnapSerializerBase snapshot)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool SnapCompare(SSnapSerializerBase lhs, SSnapSerializerBase rhs , ScriptCtx ctx)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool PropCompare(ACE_SettingsConfig instance, SSnapSerializerBase snapshot, ScriptCtx ctx)
+	{
+		return true;
 	}
 }

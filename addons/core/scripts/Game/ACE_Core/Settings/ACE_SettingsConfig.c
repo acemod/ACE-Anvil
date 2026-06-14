@@ -41,4 +41,37 @@ class ACE_SettingsConfig
 		
 		m_aInitialModSettings.Insert(settings);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	static bool Extract(ACE_SettingsConfig instance, ScriptCtx ctx, SSnapSerializerBase snapshot)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool Inject(SSnapSerializerBase snapshot, ScriptCtx ctx, ACE_SettingsConfig instance)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static void Encode(SSnapSerializerBase snapshot, ScriptCtx ctx, ScriptBitSerializer packet);
+
+	//------------------------------------------------------------------------------------------------
+	static bool Decode(ScriptBitSerializer packet, ScriptCtx ctx, SSnapSerializerBase snapshot)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool SnapCompare(SSnapSerializerBase lhs, SSnapSerializerBase rhs , ScriptCtx ctx)
+	{
+		return true;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static bool PropCompare(ACE_SettingsConfig instance, SSnapSerializerBase snapshot, ScriptCtx ctx)
+	{
+		return true;
+	}
 }

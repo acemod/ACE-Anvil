@@ -56,6 +56,7 @@ class ACE_SettingsSystem : GameSystem
 	{
 		m_SettingsConfig.SetModSettings(settings);
 		Replication.BumpMe();
+		InitializeSettings();
 	}
 	
 	//------------------------------------------------------------------------------------------------

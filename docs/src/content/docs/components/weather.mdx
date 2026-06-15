@@ -24,13 +24,19 @@ Summary of settings that can be modified in the server config:
 | Field                                 | Value                | Description                                        |
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_bAirTemperatureSimulationEnabled`  | Type: `bool`<br />Default: `true` | Whether advanced simulation of air temperature should be run. |
+| `m_iMapToolWindReportInterval`        | Type: `int`<br />Default: `-1` | Interval between wind report updates in seconds (part of the weather report map tool). Negative values disable wind reports. |
+| `m_iMapToolWindReportSpeedPrecision`  | Type: `int`<br />Default: `1` | Wind report speed precision in m/s (part of the weather report map tool). |
+| `m_iMapToolWindReportDirectionPrecision` | Type: `int`<br />Default: `1` | Wind report direction precision in ° (part of the weather report map tool). |
 
 Template for the `missionHeader` in a server config:
 ```
 "missionHeader": {
     "m_ACE_Settings": {
         "m_ACE_Weather": {
-             "m_bAirTemperatureSimulationEnabled": true
+            "m_bAirTemperatureSimulationEnabled": true,
+            "m_iMapToolWindReportInterval": -1,
+            "m_iMapToolWindReportSpeedPrecision": 1,
+            "m_iMapToolWindReportDirectionPrecision": 1
         }
     }
 }

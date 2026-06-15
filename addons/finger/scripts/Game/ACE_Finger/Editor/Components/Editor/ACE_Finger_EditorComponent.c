@@ -8,13 +8,13 @@ class ACE_Finger_EditorComponentClass: SCR_BaseEditorComponentClass
 //! Equivalent to SCR_PingEditorComponent for finger pings
 class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 {
-	[RplProp(), Attribute(defvalue: "1000", desc: "Maximum pointing distance in meters.")]
+	[Attribute(defvalue: "1000", desc: "Maximum pointing distance in meters.")]
 	protected float m_fMaxPointingDistanceM;
 	
 	[Attribute(defvalue: "true", desc: "Whether the ping can attach to entities.")]
 	bool m_bCanPingAttach;
 	
-	[RplProp(), Attribute(defvalue: "10", desc: "Range of the ping in meters. Only players in range will see it. Anyone can see it if negative.")]
+	[Attribute(defvalue: "10", desc: "Range of the ping in meters. Only players in range will see it. Anyone can see it if negative.")]
 	protected float m_fPingRangeM;
 	
 	[Attribute(defvalue: "6", desc: "Lifetime of ping in seconds")]
@@ -35,9 +35,16 @@ class ACE_Finger_EditorComponent : SCR_BaseEditorComponent
 	{
 		super.OnPostInit(owner);
 		
-		if (!Replication.IsServer())
+		if (!GetGame().InPlayMode())
 			return;
 		
+		GetGame().GetCallqueue().Call(OnPostInitDelayed);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Delayed retrieval of settings to make sure they are replicated
+	protected void OnPostInitDelayed()
+	{
 		ACE_Finger_Settings settings = ACE_SettingsHelperT<ACE_Finger_Settings>.GetModSettings();
 		if (settings)
 		{

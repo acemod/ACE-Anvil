@@ -40,9 +40,12 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		SetEventMask(owner, EntityEvent.FRAME);
 		
 		ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
-		m_fCPRCooldownDuration = settings.m_fAED_CPRCooldownDuration;
-		m_bPlayCPRPacingBeats = settings.m_bAED_PlayCPRPacingBeats;
-		m_fAnalysisDuration = settings.m_fAED_AnalysisDuration;
+		if (settings)
+		{
+			m_fCPRCooldownDuration = settings.m_fAED_CPRCooldownDuration;
+			m_bPlayCPRPacingBeats = settings.m_bAED_PlayCPRPacingBeats;
+			m_fAnalysisDuration = settings.m_fAED_AnalysisDuration;
+		}
 		
 		// Convert to milliseconds and make data
 		m_pProgressData = new ACE_Medical_Defibrillation_DefibProgressData(this,
@@ -285,7 +288,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	    
 	    float finalChance = shockChance * (1.0 - spamPenalty);
 	    
-	    return Math.Clamp(finalChance, 0.0, settings.m_fMaxShockSuccessChance);
+	    return Math.Clamp(finalChance, 0.0, settings.m_fBaseShockSuccessChance);
 	}
 	
 	//------------------------------------------------------------------------------------------------

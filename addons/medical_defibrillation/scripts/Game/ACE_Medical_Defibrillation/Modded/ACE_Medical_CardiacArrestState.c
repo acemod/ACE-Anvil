@@ -6,6 +6,7 @@ modded class ACE_Medical_CardiacArrestState
 		super.OnEnter(context);
 		
 		context.m_pVitals.ModifyTimesArrested(1);
+		context.m_pVitals.ResetTimeOfArrest();
 	}
 	
 	//------------------------------------------------------------------------------------------------

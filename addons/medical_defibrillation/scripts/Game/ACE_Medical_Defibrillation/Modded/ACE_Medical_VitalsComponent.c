@@ -4,6 +4,7 @@ modded class ACE_Medical_VitalsComponent
 	protected int m_iShocksDelivered = 0;
 	protected float m_fTimeOfLastShock = 0;
 	protected float m_iTimesArrested = 0;
+	protected float m_fTimeOfArrest = 0;
 	
 	//------------------------------------------------------------------------------------------------
 	void SetCardiacRhythm(ACE_Medical_Defibrillation_ECardiacRhythm rhythm)
@@ -30,6 +31,29 @@ modded class ACE_Medical_VitalsComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	float GetTimeOfArrest()
+	{
+		return m_fTimeOfArrest;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	float GetTimeSinceArrestStart()
+	{
+		if (m_iTimesArrested <= 0)
+			return 0;
+		
+		float currentTime = GetGame().GetWorld().GetWorldTime();
+		return currentTime - m_fTimeOfArrest;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ResetTimeOfArrest()
+	{
+		float currentTime = GetGame().GetWorld().GetWorldTime();
+		m_fTimeOfArrest = currentTime;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	int GetShocksDelivered()
 	{
 		return m_iShocksDelivered;
@@ -38,6 +62,9 @@ modded class ACE_Medical_VitalsComponent
 	//------------------------------------------------------------------------------------------------
 	float GetTimeSinceLastShock()
 	{
+		if (m_iTimesArrested <= 0)
+			return 0;
+		
 		float currentTime = GetGame().GetWorld().GetWorldTime();
 		return currentTime - m_fTimeOfLastShock;
 	}

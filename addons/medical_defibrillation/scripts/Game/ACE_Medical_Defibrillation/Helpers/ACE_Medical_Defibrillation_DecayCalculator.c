@@ -1,81 +1,160 @@
 //------------------------------------------------------------------------------------------------
 class ACE_Medical_Defibrillation_DecayCalculator
-{
-    //------------------------------------------------------------------------------------------------
-    static float CalculateShockChance(ACE_Medical_VitalsComponent vitals)
-    {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        
-        int shocks = vitals.GetShocksDelivered();
-        
-        // If decay is disabled or no shocks, return max value
-        if (!settings.m_bShockChanceDecay || shocks <= 0)
-            return settings.m_fMaxShockSuccessChance;
-        
-        float result = settings.m_fMaxShockSuccessChance;
-        
-        switch (settings.m_eShockDecayFormula)
-        {
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential:
-                result = settings.m_fMaxShockSuccessChance * Math.Pow(settings.m_fShockSuccessDecayRate, shocks);
-                break;
-                
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear:
-                result = settings.m_fMaxShockSuccessChance - (settings.m_fShockSuccessDecayRate * shocks);
-                break;
-                
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Reciprocal:
-                result = settings.m_fMaxShockSuccessChance / (1.0 + (settings.m_fShockSuccessDecayRate * shocks));
-                break;
-                
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.SCurve:
-                float midpoint = 3.0;
-                float exponent = settings.m_fShockSuccessDecayRate * (shocks - midpoint);
-                result = settings.m_fMaxShockSuccessChance / (1.0 + Math.Pow(Math.E, exponent));
-                break;
-        }
-        
-        // Clamp between min and max
-        return Math.Clamp(result, settings.m_fMinShockSuccessChance, settings.m_fMaxShockSuccessChance);
-    }
-    
-    //------------------------------------------------------------------------------------------------
-    static float CalculateReviveBonus(ACE_Medical_VitalsComponent vitals)
-    {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        
-        int shocks = vitals.GetShocksDelivered();
-        
-        // If decay is disabled or no shocks, return max value
-        if (!settings.m_bReviveBonusDecay || shocks <= 0)
-            return settings.m_fMaxReviveBonus;
-        
-        float result = settings.m_fMaxReviveBonus;
-        
-        switch (settings.m_eShockBonusDecayFormula)
-        {
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential:
-                result = settings.m_fMaxReviveBonus * Math.Pow(settings.m_fShockBonusDecayRate, shocks);
-                break;
-                
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear:
-                result = settings.m_fMaxReviveBonus - (settings.m_fShockBonusDecayRate * shocks);
-                break;
-                
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Reciprocal:
-                result = settings.m_fMaxReviveBonus / (1.0 + (settings.m_fShockBonusDecayRate * shocks));
-                break;
-                
-            case ACE_Medical_Defibrillation_EDefibSettingDecayType.SCurve:
-                float midpoint = 3.0;
-                float exponent = settings.m_fShockBonusDecayRate * (shocks - midpoint);
-                result = settings.m_fMaxReviveBonus / (1.0 + Math.Pow(Math.E, exponent));
-                break;
-        }
-        
-        // Clamp between min and max
-        return Math.Clamp(result, settings.m_fMinReviveBonus, settings.m_fMaxReviveBonus);
-    }
+{	
+	//------------------------------------------------------------------------------------------------
+	static float CalculateShockChance(ACE_Medical_VitalsComponent vitals)
+	{
+	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
+	    
+	    int shocks = vitals.GetShocksDelivered();
+	    
+	    // Handle TimeBased separately - uses time since arrest started
+	    if (settings.m_eShockDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased)
+	    {
+	        return CalculateTimeBasedShockChance(vitals);
+	    }
+		
+	    // If decay is disabled or no shocks, return base value
+	    if (!settings.m_bShockChanceDecay || shocks <= 0)
+	        return settings.m_fBaseShockSuccessChance;
+	    
+	    float result = settings.m_fBaseShockSuccessChance;
+	    
+	    switch (settings.m_eShockDecayFormula)
+	    {
+	        case ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential:
+	            result = settings.m_fBaseShockSuccessChance * Math.Pow(settings.m_fShockSuccessDecayRate, shocks);
+	            break;
+	            
+	        case ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear:
+	            result = settings.m_fBaseShockSuccessChance - (settings.m_fShockSuccessDecayRate * shocks);
+	            break;
+	            
+	        case ACE_Medical_Defibrillation_EDefibSettingDecayType.Reciprocal:
+	            result = settings.m_fBaseShockSuccessChance / (1.0 + (settings.m_fShockSuccessDecayRate * shocks));
+	            break;
+	            
+	        case ACE_Medical_Defibrillation_EDefibSettingDecayType.SCurve:
+	            float midpoint = 3.0;
+	            float exponent = settings.m_fShockSuccessDecayRate * (shocks - midpoint);
+	            result = settings.m_fBaseShockSuccessChance / (1.0 + Math.Pow(Math.E, exponent));
+	            break;
+	    }
+	    
+	    return Math.Clamp(result, settings.m_fMinShockSuccessChance, settings.m_fBaseShockSuccessChance);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float CalculateReviveBonus(ACE_Medical_VitalsComponent vitals)
+	{
+	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
+	    
+	    int shocks = vitals.GetShocksDelivered();
+	    
+	    // Handle TimeBased separately - uses time since arrest started
+	    if (settings.m_eReviveBonusDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased)
+	    {
+	        return CalculateTimeBasedReviveBonus(vitals);
+	    }
+		
+	    // If decay is disabled or no shocks, return base value
+	    if (!settings.m_bReviveBonusDecay || shocks <= 0)
+	        return settings.m_fBaseReviveBonus;
+	    
+	    float totalBonus = 0;
+	    
+	    for (int i = 1; i <= shocks; i++)
+	    {
+	        float shockBonus = settings.m_fBaseReviveBonus;
+	        
+	        switch (settings.m_eReviveBonusDecayFormula)
+	        {
+	            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential:
+	                shockBonus = settings.m_fBaseReviveBonus * Math.Pow(settings.m_fReviveBonusDecayRate, i - 1);
+	                break;
+	                
+	            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear:
+	                shockBonus = settings.m_fBaseReviveBonus - (settings.m_fReviveBonusDecayRate * (i - 1));
+	                break;
+	                
+	            case ACE_Medical_Defibrillation_EDefibSettingDecayType.Reciprocal:
+	                shockBonus = settings.m_fBaseReviveBonus / (1.0 + (settings.m_fReviveBonusDecayRate * (i - 1)));
+	                break;
+	                
+	            case ACE_Medical_Defibrillation_EDefibSettingDecayType.SCurve:
+	                float midpoint = 3.0;
+	                float exponent = settings.m_fReviveBonusDecayRate * ((i - 1) - midpoint);
+	                shockBonus = settings.m_fBaseReviveBonus / (1.0 + Math.Pow(Math.E, exponent));
+	                break;
+	        }
+	        
+	        shockBonus = Math.Max(shockBonus, 0);
+	        totalBonus += shockBonus;
+	        
+	        if (totalBonus >= settings.m_fMaxTotalReviveBonus)
+	            break;
+	    }
+	    
+	    return Math.Min(totalBonus, settings.m_fMaxTotalReviveBonus);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float CalculateTimeBasedShockChance(ACE_Medical_VitalsComponent vitals)
+	{
+	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
+	    
+		if (!settings.m_bShockChanceDecay)
+			return settings.m_fBaseShockSuccessChance;
+		
+	    int timesArrest = vitals.GetTimesArrested();
+	    if (timesArrest <= 0)
+	        return settings.m_fBaseShockSuccessChance;
+	    
+	    float timeSinceArrest = vitals.GetTimeSinceArrestStart();
+	    float timeSeconds = timeSinceArrest / 1000.0;
+	    
+	    float decayTime = settings.m_fShockSuccessDecayRate;
+	    
+	    if (decayTime <= 0 || timeSeconds <= 0)
+	        return settings.m_fBaseShockSuccessChance;
+	    
+	    if (timeSeconds >= decayTime)
+	        return settings.m_fMinShockSuccessChance;
+	    
+	    float ratio = 1.0 - (timeSeconds / decayTime);
+	    float result = settings.m_fBaseShockSuccessChance * ratio;
+	    
+	    return Math.Clamp(result, settings.m_fMinShockSuccessChance, settings.m_fBaseShockSuccessChance);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float CalculateTimeBasedReviveBonus(ACE_Medical_VitalsComponent vitals)
+	{
+	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
+	    
+		if (!settings.m_bReviveBonusDecay)
+			return settings.m_fBaseReviveBonus;
+		
+	    int timesArrest = vitals.GetTimesArrested();
+	    if (timesArrest <= 0)
+	        return settings.m_fMaxTotalReviveBonus;
+	    
+	    float timeSinceArrest = vitals.GetTimeSinceArrestStart();
+	    float timeSeconds = timeSinceArrest / 1000.0;
+	    
+	    float decayTime = settings.m_fReviveBonusDecayRate;
+	    
+	    if (decayTime <= 0 || timeSeconds <= 0)
+	        return settings.m_fMaxTotalReviveBonus;
+	    
+	    if (timeSeconds >= decayTime)
+	        return 0;
+	    
+	    float ratio = 1.0 - (timeSeconds / decayTime);
+	    float result = settings.m_fMaxTotalReviveBonus * ratio;
+	    
+	    return Math.Clamp(result, 0, settings.m_fMaxTotalReviveBonus);
+	}
     
     //------------------------------------------------------------------------------------------------
     static float CalculateSpamPenalty(ACE_Medical_VitalsComponent vitals)

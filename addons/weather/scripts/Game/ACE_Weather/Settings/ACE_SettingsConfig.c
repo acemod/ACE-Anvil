@@ -2,7 +2,7 @@
 [BaseContainerProps(configRoot: true)]
 modded class ACE_SettingsConfig
 {
-	protected static const int ACE_WEATHER_SNAPSHOT_SIZE = 1 * 4;
+	protected static const int ACE_WEATHER_SNAPSHOT_SIZE = 3 * 4;
 	
 	//------------------------------------------------------------------------------------------------
 	override static bool Extract(ACE_SettingsConfig instance, ScriptCtx ctx, SSnapSerializerBase snapshot)
@@ -14,7 +14,9 @@ modded class ACE_SettingsConfig
 		if (!settings)
 			return true;
 		
-		snapshot.SerializeInt(settings.m_iMapWindReportInterval);
+		snapshot.SerializeInt(settings.m_iMapToolWindReportInterval);
+		snapshot.SerializeInt(settings.m_iMapToolWindReportSpeedPrecision);
+		snapshot.SerializeInt(settings.m_iMapToolWindReportDirectionPrecision);
 		return true;
 	}
 
@@ -28,7 +30,9 @@ modded class ACE_SettingsConfig
 		if (!settings)
 			return true;
 		
-		snapshot.SerializeInt(settings.m_iMapWindReportInterval);
+		snapshot.SerializeInt(settings.m_iMapToolWindReportInterval);
+		snapshot.SerializeInt(settings.m_iMapToolWindReportSpeedPrecision);
+		snapshot.SerializeInt(settings.m_iMapToolWindReportDirectionPrecision);
 		return true;
 	}
 
@@ -68,6 +72,8 @@ modded class ACE_SettingsConfig
 		if (!settings)
 			return true;
 		
-		return snapshot.CompareInt(settings.m_iMapWindReportInterval);
+		return snapshot.CompareInt(settings.m_iMapToolWindReportInterval)
+			&& snapshot.CompareInt(settings.m_iMapToolWindReportSpeedPrecision)
+			&& snapshot.CompareInt(settings.m_iMapToolWindReportDirectionPrecision);
 	}
 }

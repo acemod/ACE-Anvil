@@ -227,7 +227,7 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 		vector boreVector = weaponEntity.VectorToParent(chamberTransform[2]);
 		vector sightOffset = sightTransform[3] - chamberPos;
 		float sightOffsetLength = sightOffset.Length();
-		float boreToSightOffsetAngle = ACE_Math.ComputeAngle(sightOffset, boreVector);
+		float boreToSightOffsetAngle = ACE_Math3D.ComputeAngle(sightOffset, boreVector);
 		
 		return Math.Atan2(
 			range * Math.Sin(boreElevationAngle) + sightOffsetLength * Math.Sin(boreToSightOffsetAngle),

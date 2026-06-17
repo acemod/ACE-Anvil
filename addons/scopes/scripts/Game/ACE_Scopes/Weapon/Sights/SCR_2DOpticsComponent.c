@@ -218,14 +218,14 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 			return boreElevationAngle;
 		
 		Animation anim = weaponEntity.GetAnimation();
-		vector chamberTransform[4];
+		vector muzzleTransform[4];
 		
-		if (!anim.GetBoneMatrix(anim.GetBoneIndex("barrel_chamber"), chamberTransform))
+		if (!anim.GetBoneMatrix(anim.GetBoneIndex("barrel_muzzle"), muzzleTransform))
 			return boreElevationAngle;
 		
-		vector chamberPos = weaponEntity.CoordToParent(chamberTransform[3]);
-		vector boreVector = weaponEntity.VectorToParent(chamberTransform[2]);
-		vector sightOffset = sightTransform[3] - chamberPos;
+		vector muzzlePos = weaponEntity.CoordToParent(muzzleTransform[3]);
+		vector boreVector = weaponEntity.VectorToParent(muzzleTransform[2]);
+		vector sightOffset = sightTransform[3] - muzzlePos;
 		float sightOffsetLength = sightOffset.Length();
 		float boreToSightOffsetAngle = ACE_Math3D.ComputeAngle(sightOffset, boreVector);
 		

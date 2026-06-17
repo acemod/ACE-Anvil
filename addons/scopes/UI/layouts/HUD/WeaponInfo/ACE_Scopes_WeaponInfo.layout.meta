@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{8170DE93810F928A}UI/layouts/HUD/WeaponInfo/WeaponInfo.layout"
+ Name "{94AC490313D961C8}UI/layouts/HUD/WeaponInfo/ACE_Scopes_WeaponInfo.layout"
  Configurations {
   LayoutResourceClass PC {
   }

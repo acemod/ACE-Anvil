@@ -178,7 +178,7 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 		float zeroAngle = Math.Atan2(BallisticTable.GetHeightFromProjectileSource(zeroRange, time, m_ACE_ProjectileSource, m_fACE_ProjectileInitSpeedCoef), zeroRange);
 		
 		if (time < 0)
-			return SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
+			return -Math.RAD2DEG * SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
 		
 		float zeroSightToBoreAngle = ACE_ComputeSightToBoreAngle(zeroAngle, zeroRange);
 		float targetAngle = zeroAngle + SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
@@ -193,6 +193,9 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 		);
 				
 		float targetRange = targetResult[2];
+		if (float.AlmostEqual(targetRange, 0))
+			return -Math.RAD2DEG * SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
+		
 		float targetSightToBoreAngle = ACE_ComputeSightToBoreAngle(targetAngle, targetRange);
 		
 		PrintFormat("|%1|%2|", zeroing, SCR_Math.ConvertFromRadians(targetSightToBoreAngle - zeroSightToBoreAngle, SCR_EOpticsAngleUnits.MILLIRADIANS));

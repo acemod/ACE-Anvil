@@ -197,8 +197,6 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 			return -Math.RAD2DEG * SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
 		
 		float targetSightToBoreAngle = ACE_ComputeSightToBoreAngle(targetAngle, targetRange);
-		
-		PrintFormat("|%1|%2|", zeroing, SCR_Math.ConvertFromRadians(targetSightToBoreAngle - zeroSightToBoreAngle, SCR_EOpticsAngleUnits.MILLIRADIANS));
 		return -Math.RAD2DEG * (targetSightToBoreAngle - zeroSightToBoreAngle);
 	}
 	

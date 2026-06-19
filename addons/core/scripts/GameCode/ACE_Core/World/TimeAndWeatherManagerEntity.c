@@ -62,7 +62,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		BaseContainer variantSrc = stateSrc.GetObject(string.Format("WeatherVariant%1", state.GetStartVariantIndex()));
 		BaseContainer weatherItems = variantSrc.GetObject("WeatherItems");
 		array<float> cloudParams;
-		Print(weatherItems.Get("CloudsParams", cloudParams));
+		weatherItems.Get("CloudsParams", cloudParams);
 		
 		for (int i = 0; i < cloudParams.Count(); i += 5)
 		{

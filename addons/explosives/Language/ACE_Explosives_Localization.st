@@ -4,6 +4,7 @@ StringTable {
   CustomStringTableItem "{649378D01FD98890}" {
    Id "ACE-Explosives_FailReason_Buried"
    Target_en_us "Buried"
+   Target_fr_fr "Enterré"
    Target_it_it "Sepolto"
    Target_de_de "Eingegraben"
    Target_es_es "Enterrado"
@@ -12,11 +13,12 @@ StringTable {
    Target_zh_cn "已埋設"
    Modified 1750691276
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{649378D2BB5531A1}" {
    Id "ACE-Explosives_FailReason_HardSurface"
    Target_en_us "Hard surface"
+   Target_fr_fr "Surface dure"
    Target_it_it "Superficie dura"
    Target_de_de "Harte Oberfläche"
    Target_es_es "Superficie dura"
@@ -25,11 +27,12 @@ StringTable {
    Target_zh_cn "硬質地面（不可挖掘）"
    Modified 1750691286
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64933B9C7DC48AD7}" {
    Id "ACE-Explosives_UserAction_Bury_Name"
    Target_en_us "Bury"
+   Target_fr_fr "Enterrer"
    Target_it_it "Seppellire"
    Target_de_de "Eingraben"
    Target_es_es "Enterrar"
@@ -38,11 +41,12 @@ StringTable {
    Target_zh_cn "埋設"
    Modified 1750691295
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{61B80DDD1907B555}" {
    Id "ACE-Explosives_UserAction_Disarm_Name"
    Target_en_us "Disarm"
+   Target_fr_fr "Désarmer"
    Target_it_it "Disarmare"
    Target_de_de "Entschärfen"
    Target_es_es "Desarmar"
@@ -51,11 +55,12 @@ StringTable {
    Target_zh_cn "解除"
    Modified 1750691342
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64933B9C711A2AC1}" {
    Id "ACE-Explosives_UserAction_Unbury_Name"
    Target_en_us "Unbury"
+   Target_fr_fr "Déterrer"
    Target_it_it "Dissotterrare"
    Target_de_de "Ausgraben"
    Target_es_es "Desenterrar"
@@ -64,7 +69,7 @@ StringTable {
    Target_zh_cn "挖出"
    Modified 1750691350
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "Martian"
   }
  }
 }

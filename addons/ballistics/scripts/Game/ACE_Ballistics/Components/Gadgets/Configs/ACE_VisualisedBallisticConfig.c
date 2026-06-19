@@ -87,6 +87,12 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		return (ballisticData.ACE_GetUnitType() == m_eUnitType) && (ballisticData.ACE_GetDefaultZeroingRange() == m_fDefaultZeroingRange);
 	}
 	
+	protected float ComputeProjectileDrop(ProjectileMoveComponent moveComponent, float range, float time)
+	{
+		float height = BallisticTable.GetHeightFromProjectile(range, time, moveComponent.GetParentProjectile(), m_fProjectileInitSpeedCoef);
+		return -SCR_Math.ConvertFromRadians(Math.Atan2(height, range), m_eUnitType);
+	}
+	
 	//------------------------------------------------------------------------------------------------
 	protected float ComputeProjectileDrop(IEntitySource projectileSource, float range, float initialSpeed, out float time)
 	{

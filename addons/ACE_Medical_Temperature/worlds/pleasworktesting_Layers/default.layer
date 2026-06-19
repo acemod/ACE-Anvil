@@ -1,66 +1,180 @@
 $grp SCR_SpawnPoint : "{4FEA25583D0975F7}Prefabs/MP/Spawning/SpawnPoint_USSR.et" {
  {
-  coords 120.738 1 255.211
+  coords 118.101 1.271 223.525
  }
  {
-  coords 120.966 1 255.063
+  coords 117.97 1 223.46
  }
  {
-  coords 120.916 1 254.907
+  coords 118.025 1 222.844
  }
  {
-  coords 120.872 1 254.802
+  coords 118.265 1 222.312
  }
  {
-  coords 120.639 1 254.821
+  coords 118.508 1 222.009
  }
  {
-  coords 120.295 1 255.129
+  coords 118.739 1 221.893
  }
  {
-  coords 120.495 1 255.393
+  coords 118.708 1 222.469
  }
  {
-  coords 120.811 1 255.325
+  coords 118.393 1 222.975
  }
  {
-  coords 121.064 1 255.024
+  coords 117.998 1 223.096
  }
  {
-  coords 121.159 1 254.66
+  coords 117.871 1 222.75
  }
  {
-  coords 120.869 1 254.524
+  coords 118.174 1 222.128
+ }
+ {
+  coords 118.62 1 221.787
+ }
+ {
+  coords 118.984 1 221.716
+ }
+ {
+  coords 119.004 1 222.29
+ }
+ {
+  coords 118.69 1 222.906
+ }
+ {
+  coords 118.198 1 222.931
+ }
+ {
+  coords 118.422 1 222.247
+ }
+ {
+  coords 118.803 1 222.336
+ }
+ {
+  coords 118.582 1 222.346
+ }
+ {
+  coords 118.319 1 222.151
+ }
+ {
+  coords 118.239 1 222.121
+ }
+ {
+  coords 117.572 1 222.494
+ }
+ {
+  coords 117.488 1 222.194
+ }
+ {
+  coords 118.099 1 221.701
+ }
+ {
+  coords 118.538 1 221.816
+ }
+ {
+  coords 118.358 1 222.422
+ }
+ {
+  coords 118.006 1 222.617
+ }
+ {
+  coords 118.049 1 222.09
  }
 }
 $grp SCR_SpawnPoint : "{5A2220DD0C16958B}Prefabs/MP/Spawning/SpawnPoint_US.et" {
  {
-  coords 121.363 1 255.103
+  coords 118.876 1.244 223.58
  }
  {
-  coords 121.592 1 254.75
+  coords 119.141 1 223.516
  }
  {
-  coords 121.798 1 254.611
+  coords 119.337 1 223.514
  }
  {
-  coords 122.121 1 254.301
+  coords 119.687 1 223.267
  }
  {
-  coords 122.013 1 254.963
+  coords 119.813 1 222.94
  }
  {
-  coords 122.213 1 254.726
+  coords 119.485 1 222.595
  }
  {
-  coords 122.253 1 254.668
+  coords 119.138 1 222.587
  }
  {
-  coords 122.209 1 254.672
+  coords 118.885 1 222.54
  }
  {
-  coords 121.574 1 254.768
+  coords 119.035 1 222.189
  }
+ {
+  coords 119.488 1 222.105
+ }
+ {
+  coords 119.858 1 222.328
+ }
+ {
+  coords 119.888 1 222.803
+ }
+ {
+  coords 119.325 1 223.243
+ }
+ {
+  coords 119.496 1 221.8
+ }
+ {
+  coords 119.34 1 221.962
+ }
+ {
+  coords 119.128 1 221.957
+ }
+ {
+  coords 119.074 1 221.919
+ }
+ {
+  coords 119.511 1 221.594
+ }
+ {
+  coords 119.94 1 221.629
+ }
+ {
+  coords 119.892 1 222.196
+ }
+ {
+  coords 119.653 1 222.643
+ }
+ {
+  coords 119.346 1 222.732
+ }
+ {
+  coords 119.169 1 222.584
+ }
+ {
+  coords 119.699 1 222.036
+ }
+ {
+  coords 119.891 1 221.932
+ }
+ {
+  coords 119.807 1 222.456
+ }
+ {
+  coords 119.48 1 222.274
+ }
+ {
+  coords 119.824 1 221.9
+ }
+ {
+  coords 119.958 1 222.176
+ }
+}
+GenericEntity : "{891EF8A5FB7162F1}Prefabs/Props/Military/Arsenal/AmmoBoxes/US/AmmoBoxArsenal_Medical_US.et" {
+ coords 119.424 1 226.995
 }
 StaticModelEntity : "{AA9E5BE6EF2D17AE}PrefabsEditable/Auto/Props/Construction/GravelPile_01/E_GravelPile_01_large.et" {
  coords 126.251 -21.823 258.834

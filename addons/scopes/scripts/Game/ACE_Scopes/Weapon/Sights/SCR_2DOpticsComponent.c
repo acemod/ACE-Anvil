@@ -43,9 +43,7 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 	protected float m_fACE_HorizontalZeroing = 0.0;
 	protected float m_fACE_VerticalZeroing = 0.0;
 	protected IEntitySource m_ACE_ProjectileSource;
-	protected float m_fACE_ProjectileInitSpeedCoef;
 	protected float m_fACE_ProjectileInitSpeed;
-	protected ProjectileMoveComponent m_ACE_DummyMoveComponent;
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnInit(IEntity owner)
@@ -87,26 +85,11 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 		if (!res.IsValid())
 			return;
 		
-		IEntity dummy = GetGame().SpawnEntityPrefabLocal(res);
-		if (!dummy)
-			return;
-		
-		m_ACE_DummyMoveComponent = ProjectileMoveComponent.Cast(dummy.FindComponent(ProjectileMoveComponent));
 		m_ACE_ProjectileSource = res.GetResource().ToBaseContainer();
-		m_fACE_ProjectileInitSpeedCoef = muzzle.GetBulletInitSpeedCoef();
-		m_fACE_ProjectileInitSpeed = m_fACE_ProjectileInitSpeedCoef * ACE_BulletTools.GetInitialSpeed(bulletNames[0]);
+		m_fACE_ProjectileInitSpeed = muzzle.GetBulletInitSpeedCoef() * ACE_BulletTools.GetInitialSpeed(bulletNames[0]);
 		
 		// Reset camera angles offsets, as they are on the shared data component
 		ACE_SetZeroings(m_fACE_HorizontalZeroing, m_fACE_VerticalZeroing, init: true);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override void OnSightADSDeactivated()
-	{
-		super.OnSightADSDeactivated();
-		
-		if (m_ACE_DummyMoveComponent)
-			SCR_EntityHelper.DeleteEntityAndChildren(m_ACE_DummyMoveComponent.GetParentProjectile());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -175,7 +158,7 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 	{
 		float zeroRange = GetCurrentSightsRange()[1];
 		float time;
-		float zeroAngle = Math.Atan2(BallisticTable.GetHeightFromProjectileSource(zeroRange, time, m_ACE_ProjectileSource, m_fACE_ProjectileInitSpeedCoef), zeroRange);
+		float zeroAngle = ACE_BulletTools.ComputeElevationAngleForRange(m_ACE_ProjectileSource, zeroRange, m_fACE_ProjectileInitSpeed, time);
 		
 		if (time < 0)
 			return -Math.RAD2DEG * SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
@@ -183,17 +166,8 @@ modded class SCR_2DOpticsComponent : ScriptedSightsComponent
 		float zeroSightToBoreAngle = ACE_ComputeSightToBoreAngle(zeroAngle, zeroRange);
 		float targetAngle = zeroAngle + SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
 		
-		vector targetResult = m_ACE_DummyMoveComponent.GetProjectileSimulationResult(
-			vector.Zero, // initPosition
-			m_fACE_ProjectileInitSpeed, // initSpeed
-			Math.RAD2DEG * targetAngle, // initElevationAngle
-			0, // initAzimuth
-			vector.Zero, // windVelocity
-			0 // targetHeight
-		);
-				
-		float targetRange = targetResult[2];
-		if (float.AlmostEqual(targetRange, 0))
+		float targetRange = ACE_BulletTools.ComputeRangeForElevationAngle(m_ACE_ProjectileSource, targetAngle, m_fACE_ProjectileInitSpeed, time);
+		if (time < 0)
 			return -Math.RAD2DEG * SCR_Math.ConvertToRadians(zeroing, SCR_EOpticsAngleUnits.MILLIRADIANS);
 		
 		float targetSightToBoreAngle = ACE_ComputeSightToBoreAngle(targetAngle, targetRange);

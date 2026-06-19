@@ -41,7 +41,6 @@ AudioClass {
    pi {
     2 0
    }
-   path "{AF08E302CF8BA2E6}Sounds/FinalMix_UI_Music.afm"
    inputs {
     "Music" "UI"
    }
@@ -61,12 +60,9 @@ AudioClass {
    Samples {
     AudioBankSampleClass "ACE_Scopes_Click.wav" {
      Filename "{DEEF73DABEB92B94}Sounds/UI/Samples/ACE_Scopes_Click.wav"
-     Probability 100
-     Index 0
-     SampleMetadata ""
     }
    }
   }
  }
- version 1
+ version 2
 }

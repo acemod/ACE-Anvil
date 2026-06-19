@@ -62,10 +62,24 @@ class ACE_BulletTools
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Return mass of bullet
+	static float GetMass(IEntitySource bulletSource)
+	{
+		return GetFloatProperty(bulletSource, "Mass");
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Return initial speed of bullet
 	static float GetInitialSpeed(ResourceName bulletPrefabName)
 	{
 		return GetFloatProperty(bulletPrefabName, "InitSpeed");
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Return initial speed of bullet
+	static float GetInitialSpeed(IEntitySource bulletSource)
+	{
+		return GetFloatProperty(bulletSource, "InitSpeed");
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -78,7 +92,13 @@ class ACE_BulletTools
 		IEntitySource bulletSource = bulletRes.GetResource().ToEntitySource();
 		if (!bulletSource)
 			return 0;
-		
+
+		return GetFloatProperty(bulletSource, propertyName);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected static float GetFloatProperty(IEntitySource bulletSource, string propertyName)
+	{
 		IEntityComponentSource shellMovementSource = ACE_BaseContainerTools.FindComponentSource(bulletSource, ShellMoveComponent);
 		if (!shellMovementSource)
 			return 0;

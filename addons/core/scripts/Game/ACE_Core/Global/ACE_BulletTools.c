@@ -128,21 +128,21 @@ class ACE_BulletTools
 	//! \param[in] bulletSource Source container of the bullet
 	//! \param[in] initialSpeed Initial speed in m/s
 	//! \param[in] windSpeed Crosswind speed in m/s
-	//! \param[in] flightTime Duration of the flight to simulate in seconds
+	//! \param[in] time Duration of the flight to simulate in seconds
 	//! \return lateral wind drift in meters
-	static float ComputeLateralDrift(IEntitySource bulletSource, float initialSpeed, float windSpeed, float flightTime)
+	static float ComputeLateralDrift(IEntitySource bulletSource, float initialSpeed, float windSpeed, float time)
 	{
 		float dragCoef = GetAirDrag(bulletSource) / GetMass(bulletSource);
-		vector vBullet = {initialSpeed, 0, 0};
-		vector vWind = {0, 0, windSpeed};
+		vector velBullet = {initialSpeed, 0, 0};
+		vector velWind = {0, 0, windSpeed};
 		float drift = 0;
-		int nSteps = Math.Ceil(flightTime / SIMULATION_TIME_STEP);
+		int nSteps = Math.Ceil(time / SIMULATION_TIME_STEP);
 		
 		for (int i = 0; i < nSteps; ++i)
 		{
-			vector vRel = vBullet - vWind;
-			vBullet -= SIMULATION_TIME_STEP * dragCoef * vRel.Length() * vRel;
-			drift += SIMULATION_TIME_STEP * vBullet[2];
+			vector velRel = velBullet - velWind;
+			velBullet -= SIMULATION_TIME_STEP * dragCoef * velRel.Length() * velRel;
+			drift += SIMULATION_TIME_STEP * velBullet[2];
 		}
 		
 		return drift;
@@ -180,7 +180,7 @@ class ACE_BulletTools
 	static float ComputeRangeForElevationAngle(IEntitySource bulletSource, float elevationAngle, float initialSpeed, out float time)
 	{
 		float dragCoef = ACE_BulletTools.GetAirDrag(bulletSource) / ACE_BulletTools.GetMass(bulletSource);
-		vector vBullet = initialSpeed * Vector(Math.Cos(elevationAngle), Math.Sin(elevationAngle), 0);
+		vector vel = initialSpeed * Vector(Math.Cos(elevationAngle), Math.Sin(elevationAngle), 0);
 		vector pos = vector.Zero;
 		time = 0;
 		
@@ -188,8 +188,8 @@ class ACE_BulletTools
 		
 		for (int i = 0; i < nSteps; ++i)
 		{
-			vBullet += SIMULATION_TIME_STEP * (Physics.VGravity - dragCoef * vBullet.Length() * vBullet);
-			pos += SIMULATION_TIME_STEP * vBullet;
+			vel += SIMULATION_TIME_STEP * (Physics.VGravity - dragCoef * vel.Length() * vel);
+			pos += SIMULATION_TIME_STEP * vel;
 			time += SIMULATION_TIME_STEP;
 			
 			if (i > 0 && pos[1] <= 0)

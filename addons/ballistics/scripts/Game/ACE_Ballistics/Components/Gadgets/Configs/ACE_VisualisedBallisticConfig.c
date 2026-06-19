@@ -3,8 +3,8 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	protected float m_fInitSpeedCoef;
 	protected float m_fDefaultZeroingRange;
 	
-	protected static const float WIND_SPEED = 4.0;
-	protected static const float MIN_DROP = -30.0;
+	protected static const float WIND_SPEED = 4.0; // [m/s]
+	protected static const float MIN_DROP = -30.0; // [mrad]
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_VisualisedBallisticConfig(ResourceName projectilePrefab, float initSpeedCoef = 1.0, float defaultZeroingRange = 100.0, ResourceName tableLayoutName = "", SCR_EOpticsAngleUnits unitType = SCR_EOpticsAngleUnits.MILLIRADIANS)
@@ -36,25 +36,25 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 			return true;
 		
 		float initialSpeed = m_fProjectileInitSpeedCoef * ACE_BulletTools.GetInitialSpeed(m_sProjectilePrefab);
-		IEntity dummy = GetGame().SpawnEntityPrefabLocal(Resource.Load(m_sProjectilePrefab), GetGame().GetWorld());
-		ProjectileMoveComponent moveComponent = ProjectileMoveComponent.Cast(dummy.FindComponent(ProjectileMoveComponent));
+		IEntitySource projectileSource = Resource.Load(m_sProjectilePrefab).GetResource().ToBaseContainer();
 
 		array<ref array<float>> ballisticValues = {};
-		const float time;
-		float zeroDrop = ComputeProjectileDrop(moveComponent, m_fDefaultZeroingRange, time);
+		float time;
+		float zeroDrop = ComputeProjectileDrop(projectileSource, m_fDefaultZeroingRange, initialSpeed, time);
 
 		for (int range = m_iMinRange; range <= m_iMaxRange; range += m_iRangeStep)
 		{
 			array<float> row = {range};
 			row.Resize(3);
 			
-			float drop = ComputeProjectileDrop(moveComponent, range, time);
+			float drop = ComputeProjectileDrop(projectileSource, range, initialSpeed, time);
 			
 			if (drop < MIN_DROP)
 				break;
 			
 			row[1] = drop;
-			float windage = ComputeProjectileWindage(moveComponent, initialSpeed, WIND_SPEED, range, drop, time);
+			float drift = ACE_BulletTools.ComputeLateralDrift(projectileSource, initialSpeed, WIND_SPEED, time);
+			float windage = SCR_Math.ConvertFromRadians(Math.Atan2(drift, range), m_eUnitType);
 			row[2] = ACE_Math.Round(windage, 1);
 			ballisticValues.Insert(row);
 		}
@@ -65,8 +65,6 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 			ballisticValues[i][1] = ACE_Math.Round(ballisticValues[i][1] - zeroDrop, 1);
 		}
 		
-		SCR_EntityHelper.DeleteEntityAndChildren(dummy);
-
 		SCR_BallisticData ballisticData = new SCR_BallisticData(ballisticValues, m_sProjectilePrefab, m_bDirectFireMode, m_iRangeStep, m_fProjectileInitSpeedCoef);
 		ballisticData.ACE_SetUnitType(m_eUnitType);
 		ballisticData.ACE_SetDefaultZeroingRange(m_fDefaultZeroingRange);
@@ -96,17 +94,9 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected float ComputeProjectileWindage(ProjectileMoveComponent moveComponent, float initialSpeed, float windSpeed, float range, float drop, float time)
+	protected float ComputeProjectileDrop(IEntitySource projectileSource, float range, float initialSpeed, out float time)
 	{
-		vector offset = moveComponent.GetProjectileSimulationResult(
-			vector.Zero, // initPosition
-			initialSpeed, // initSpeed
-			-Math.RAD2DEG * SCR_Math.ConvertToRadians(drop, m_eUnitType), // initElevationAngle
-			0, // initAzimuth
-			{windSpeed, 0, 0}, // windVelocity
-			0, // targetHeight
-			maxSimulationTime: time, // maxSimulationTime
-		);
-		return SCR_Math.ConvertFromRadians(Math.Atan2(offset[0], range), m_eUnitType);
+		float elevationAngle = ACE_BulletTools.ComputeElevationAngleForRange(projectileSource, range, initialSpeed, time);
+		return -SCR_Math.ConvertFromRadians(elevationAngle, m_eUnitType);
 	}
 }

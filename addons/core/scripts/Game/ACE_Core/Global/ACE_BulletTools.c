@@ -136,13 +136,19 @@ class ACE_BulletTools
 		vector velBullet = {initialSpeed, 0, 0};
 		vector velWind = {0, 0, windSpeed};
 		float drift = 0;
+		float timer = 0;
 		int nSteps = Math.Ceil(time / SIMULATION_TIME_STEP);
 		
 		for (int i = 0; i < nSteps; ++i)
 		{
+			float dt = Math.Min(SIMULATION_TIME_STEP, time - timer);
+			if (dt <= 0.0)
+				break;
+			
 			vector velRel = velBullet - velWind;
-			velBullet -= SIMULATION_TIME_STEP * dragCoef * velRel.Length() * velRel;
-			drift += SIMULATION_TIME_STEP * velBullet[2];
+			velBullet -= dt * dragCoef * velRel.Length() * velRel;
+			drift += dt * velBullet[2];
+			timer += dt;
 		}
 		
 		return drift;
@@ -182,18 +188,25 @@ class ACE_BulletTools
 		float dragCoef = ACE_BulletTools.GetAirDrag(bulletSource) / ACE_BulletTools.GetMass(bulletSource);
 		vector vel = initialSpeed * Vector(Math.Cos(elevationAngle), Math.Sin(elevationAngle), 0);
 		vector pos = vector.Zero;
+		vector prevPos;
 		time = 0;
 		
 		int nSteps = Math.Ceil(MAX_SIMULATION_TIME / SIMULATION_TIME_STEP);
 		
 		for (int i = 0; i < nSteps; ++i)
 		{
+			prevPos = pos;
 			vel += SIMULATION_TIME_STEP * (Physics.VGravity - dragCoef * vel.Length() * vel);
 			pos += SIMULATION_TIME_STEP * vel;
 			time += SIMULATION_TIME_STEP;
 			
-			if (i > 0 && pos[1] <= 0)
-				return pos[0];
+			if (pos[1] <= 0.0 && prevPos[1] >= 0.0)
+			{
+				// Get final result from interpolation
+				float progress = Math.InverseLerp(prevPos[1], pos[1], 0);
+				time -= SIMULATION_TIME_STEP * (1 - progress);
+				return Math.Lerp(prevPos[0], pos[0], progress);
+			}
 		}
 		
 		time = -1;

@@ -136,13 +136,19 @@ class ACE_BulletTools
 		vector velBullet = {initialSpeed, 0, 0};
 		vector velWind = {0, 0, windSpeed};
 		float drift = 0;
+		float timer = 0;
 		int nSteps = Math.Ceil(time / SIMULATION_TIME_STEP);
 		
 		for (int i = 0; i < nSteps; ++i)
 		{
+			float dt = Math.Min(SIMULATION_TIME_STEP, time - timer);
+			if (dt <= 0.0)
+				break;
+			
 			vector velRel = velBullet - velWind;
-			velBullet -= SIMULATION_TIME_STEP * dragCoef * velRel.Length() * velRel;
-			drift += SIMULATION_TIME_STEP * velBullet[2];
+			velBullet -= dt * dragCoef * velRel.Length() * velRel;
+			drift += dt * velBullet[2];
+			timer += dt;
 		}
 		
 		return drift;
@@ -159,10 +165,11 @@ class ACE_BulletTools
 	{
 		time = -1;
 		ACE_BulletTools_RangeErrorForElevationAngle f = ACE_BulletTools_RangeErrorForElevationAngle(bulletSource, initialSpeed, range);
-		ACE_MathTools_RootResult<float> result = ACE_MathTools.Secant(f, 0.001, 0.002, xtol: 0.00001);
+		float guess = 0.5 * Math.Asin(Physics.STANDARD_GRAVITY * range / initialSpeed / initialSpeed); // Use vacuum solution as guess
+		ACE_MathTools_RootResult<float> result = ACE_MathTools.Secant(f, guess, guess + 0.001, xtol: 0.00001);
 		
 		if (!result.m_bConverged)
-			result = ACE_MathTools.Bisect(f, 0, 0.030, xtol: 0.00001);
+			result = ACE_MathTools.Bisect(f, guess, 0.030, xtol: 0.00001);
 		if (!result.m_bConverged)
 			return 0;
 		
@@ -182,18 +189,25 @@ class ACE_BulletTools
 		float dragCoef = ACE_BulletTools.GetAirDrag(bulletSource) / ACE_BulletTools.GetMass(bulletSource);
 		vector vel = initialSpeed * Vector(Math.Cos(elevationAngle), Math.Sin(elevationAngle), 0);
 		vector pos = vector.Zero;
+		vector prevPos;
 		time = 0;
 		
 		int nSteps = Math.Ceil(MAX_SIMULATION_TIME / SIMULATION_TIME_STEP);
 		
 		for (int i = 0; i < nSteps; ++i)
 		{
+			prevPos = pos;
 			vel += SIMULATION_TIME_STEP * (Physics.VGravity - dragCoef * vel.Length() * vel);
 			pos += SIMULATION_TIME_STEP * vel;
 			time += SIMULATION_TIME_STEP;
 			
-			if (i > 0 && pos[1] <= 0)
-				return pos[0];
+			if (pos[1] <= 0.0 && prevPos[1] >= 0.0)
+			{
+				// Get final result from interpolation
+				float progress = Math.InverseLerp(prevPos[1], pos[1], 0);
+				time -= SIMULATION_TIME_STEP * (1 - progress);
+				return Math.Lerp(prevPos[0], pos[0], progress);
+			}
 		}
 		
 		time = -1;

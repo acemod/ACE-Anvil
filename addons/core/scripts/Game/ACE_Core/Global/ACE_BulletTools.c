@@ -165,10 +165,11 @@ class ACE_BulletTools
 	{
 		time = -1;
 		ACE_BulletTools_RangeErrorForElevationAngle f = ACE_BulletTools_RangeErrorForElevationAngle(bulletSource, initialSpeed, range);
-		ACE_MathTools_RootResult<float> result = ACE_MathTools.Secant(f, 0.001, 0.002, xtol: 0.00001);
+		float guess = 0.5 * Math.Asin(Physics.STANDARD_GRAVITY * range / initialSpeed / initialSpeed); // Use vacuum solution as guess
+		ACE_MathTools_RootResult<float> result = ACE_MathTools.Secant(f, guess, guess + 0.001, xtol: 0.00001);
 		
 		if (!result.m_bConverged)
-			result = ACE_MathTools.Bisect(f, 0, 0.030, xtol: 0.00001);
+			result = ACE_MathTools.Bisect(f, guess, 0.030, xtol: 0.00001);
 		if (!result.m_bConverged)
 			return 0;
 		

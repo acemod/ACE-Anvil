@@ -11,7 +11,6 @@ SCR_ChimeraCharacter {
      "Sort Priority" 0
     }
     SCR_MorphineUserAction "{60CF45A52131AD5A}" {
-     ActionTitle "#ACE_Medical-EpinephrineInjectionAction"
      m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
     }
     ACE_Medical_AmmoniumCarbonateUserAction "{62150A66FC4875D8}" {

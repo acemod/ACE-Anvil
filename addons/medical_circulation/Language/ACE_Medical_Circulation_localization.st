@@ -128,15 +128,6 @@ StringTable {
    Author "Kexanone"
    LastChanged "Psycool"
   }
-  CustomStringTableItem "{69AD0AE2032DC58C}" {
-   Id "ACE_Medical-EpinephrineInjectionAction"
-   Target_en_us "Inject Epinephrine"
-   Target_de_de "Epinephrin injizieren"
-   Target_pt_br "Injetar epinephrine"
-   Modified 1772949671
-   Author "wilso"
-   LastChanged "wilso"
-  }
   CustomStringTableItem "{6720C07189EC3236}" {
    Id "ACE_Medical-FailReason_NotOnBack"
    Target_en_us "Not on back"

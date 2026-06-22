@@ -19,6 +19,12 @@ ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
    }
    CompartmentSlots {
     CargoCompartmentSlot Performer {
+     CompartmentAction CompartmentUserAction "{69AD265658BC24AA}" {
+     }
+     JumpOutAction CompartmentUserAction "{69AD265659781649}" {
+     }
+     SwitchSeatAction CompartmentUserAction "{69AD26565F43CFA0}" {
+     }
      PassengerPositionInfo EntitySlotInfo s1 {
      }
      ForcedFreeLook 1

@@ -25,10 +25,6 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!captiveChar)
 			return;
 		
-		SCR_CompartmentAccessComponent captiveCompartmentAccess = SCR_CompartmentAccessComponent.Cast(captiveChar.GetCompartmentAccessComponent());
-		if (captiveCompartmentAccess)
-			captiveCompartmentAccess.KickFromVehicle(GetRelevantDoorIndex(pUserEntity));
-		
 		ACE_AnimationHelperCompartment helper = ACE_AnimationTools.AnimateWithHelperCompartment(ACE_EAnimationHelperID.TIED, captiveChar);
 		if (!helper)
 			return;

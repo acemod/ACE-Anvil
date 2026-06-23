@@ -4,6 +4,7 @@ modded class SCR_MapCompassUI : SCR_MapRTWBaseUI
 	protected SCR_MapToolEntry m_ACE_DeclinationEntry;
 	protected Widget m_wACE_DeclinationInfo;
 	protected bool m_bACE_Declination_Visible;
+	protected bool m_bACE_Declination_WantedVisible;
 	
 	protected static const string ACE_DECLINATION_INFO_LAYOUT_NAME = "{584E24A7094D7F1A}UI/layouts/Map/ACE_MapDeclinationInfo.layout";
 	protected const ResourceName ACE_DECLINATION_ICON = "{694C2E8773F36418}UI/Textures/Map/ACE_DeclinationIcon.edds";
@@ -40,5 +41,20 @@ modded class SCR_MapCompassUI : SCR_MapRTWBaseUI
 	
 		m_ACE_DeclinationEntry.SetActive(visible);
 		m_bACE_Declination_Visible = visible;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnMapOpen(MapConfiguration config)
+	{
+		super.OnMapOpen(config);
+		ACE_Declination_SetVisible(m_bACE_Declination_WantedVisible);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void OnMapClose(MapConfiguration config)
+	{
+		super.OnMapClose(config);
+		m_bACE_Declination_WantedVisible = m_bACE_Declination_Visible;
+		ACE_Declination_SetVisible(false);
 	}
 }

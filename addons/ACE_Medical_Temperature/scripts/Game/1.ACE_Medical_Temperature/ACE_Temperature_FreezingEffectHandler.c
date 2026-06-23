@@ -28,6 +28,7 @@ class ACE_Temperature_FreezingEffectHandler :SCR_BaseScreenEffect
 	
 	void EnableEffect(bool enable)
 	{
+		m_fUnconTemperature=ACE_SettingsHelperT<ACE_Medical_Circulation_Settings>.GetModSettings().m_CriticalThresholds.m_fTemperatureThreshold;
 		m_wImageWidget.SetEnabled(enable);
 		m_wImageWidget.SetVisible(enable);
 	}
@@ -41,15 +42,17 @@ class ACE_Temperature_FreezingEffectHandler :SCR_BaseScreenEffect
 		}
 		float m_fCurrentTemperature = Math.Lerp(m_fYTemperature,m_fXTemperature,m_fInterpProgress);
 		m_fInterpProgress+=timeSlice;
+		if (m_fInterpProgress>1)
+			m_fInterpProgress=1;
 		float m_fDeathProgress=Math.InverseLerp(m_fDefaultCoreTemperature-1, m_fUnconTemperature, m_fCurrentTemperature);
 		
-		m_wImageWidget.SetOpacity(m_fDeathProgress);
+		m_wImageWidget.SetOpacity(Math.Pow(m_fDeathProgress,2));
 		m_wImageWidget.SetMaskProgress(Math.Min(m_fDeathProgress/5,0.12));
 	}
 	
 	bool ShouldGetUpdated()
 	{
-		return m_PlayerVitals.GetTemperature()<m_fDefaultCoreTemperature;
+		return m_PlayerVitals.GetTemperature()<37;
 	}
 	
 }

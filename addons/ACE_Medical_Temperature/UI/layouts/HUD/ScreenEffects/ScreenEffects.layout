@@ -16,6 +16,7 @@ FrameWidgetClass {
    Opacity 0.46
    Color 0.0099 0.0825 0.1616 1
    Mask "{CA1F7652B536AA21}UI/Textures/ScreenEffects/Suppression/supressionVignette4.edds"
+   "Transition width" 0.2
    Progress 0
   }
  }

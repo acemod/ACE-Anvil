@@ -51,9 +51,6 @@ ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
    m_fDist_Desired 1
    m_fFOV 74
   }
-  ActionsManagerComponent "{2CD4A765B4482F53}" {
-   Enabled 0
-  }
   VehicleAnimationComponent "{50B812962B17E60B}" {
    AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.agr"
    AnimInstance "{A0A5BCBD5629BADB}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.asi"

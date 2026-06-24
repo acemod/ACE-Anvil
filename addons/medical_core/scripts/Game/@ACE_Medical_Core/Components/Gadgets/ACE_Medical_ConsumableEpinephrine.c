@@ -29,6 +29,6 @@ class ACE_Medical_ConsumableEpinephrine : SCR_ConsumableEffectHealthItems
 	//! Set consumable type in ctor
 	void ACE_Medical_ConsumableEpinephrine()
 	{
-		m_eConsumableType = SCR_EConsumableType.ACE_MEDICAL_EPINEPHRINE;
+		m_eConsumableType = SCR_EConsumableType.ACE_MEDICAL_EPINEPHRINE_INJECTOR;
 	}
 }

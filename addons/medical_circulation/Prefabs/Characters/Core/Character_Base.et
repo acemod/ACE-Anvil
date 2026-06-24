@@ -11,7 +11,6 @@ SCR_ChimeraCharacter {
      "Sort Priority" 0
     }
     SCR_MorphineUserAction "{60CF45A52131AD5A}" {
-     ActionTitle "Inject Epinephrine"
      m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
     }
     ACE_Medical_AmmoniumCarbonateUserAction "{62150A66FC4875D8}" {
@@ -36,7 +35,7 @@ SCR_ChimeraCharacter {
       m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
       m_sIconName "Morphine_UI"
      }
-     ActionTitle "Inject Metoprolol"
+     ActionTitle "#ACE_Medical-MetoprololInjectionAction"
      m_eConsumableType ACE_MEDICAL_METOPROLOL_INJECTOR
     }
     SCR_MorphineUserAction "{6226EDEC7ACB618B}" {

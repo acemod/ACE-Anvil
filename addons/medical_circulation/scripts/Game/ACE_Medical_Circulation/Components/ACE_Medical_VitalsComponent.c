@@ -22,6 +22,8 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 	protected float m_fMeanArterialPressureKPA;
 	protected float m_fPulsePressureKPA;
 	
+	protected float m_fCoreTemperature;
+	
 	protected float m_fHeartRateMedicationAdjustment = 0;
 	protected float m_fSystemicVascularResistanceMedicationAdjustment = 0;
 	protected float m_fReviveSuccessCheckTimerScale = 1;
@@ -214,6 +216,19 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 		return m_fReviveSuccessCheckTimerScale;
 	}
 	
+	
+	//------------------------------------------------------------------------------------------------
+	//! Sets body temperature in K
+	void SetTemperature(float temperature)
+	{
+		m_fCoreTemperature = temperature;
+	}
+	//------------------------------------------------------------------------------------------------
+	//! Returns body temperature in K
+	float GetTemperature()
+	{
+		return m_fCoreTemperature;
+	}
 	//------------------------------------------------------------------------------------------------
 	//! Resets vitals to defaults
 	void Reset()
@@ -231,6 +246,7 @@ class ACE_Medical_VitalsComponent : ScriptComponent
 		SetHeartRateMedicationAdjustment(0);
 		SetSystemicVascularResistenceMedicationAdjustment(0);
 		SetReviveSuccessCheckTimerScale(1);
+		SetTemperature(310.15);
 		
 		ClearReviveHistory();
 		

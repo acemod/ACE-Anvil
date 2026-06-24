@@ -106,8 +106,8 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		
 		//---Debug Printouts---//
 		Print("--------Temperature--------");
-		Print(context.m_pVitals.m_fCoreTemperature-273.15);
-		Print(m_fFinalAmbientTemperature-273.15);
+		Print(context.m_pVitals.GetTemperature()-ACE_PhysicalConstants.ZERO_CELSIUS);
+		Print(m_fFinalAmbientTemperature-ACE_PhysicalConstants.ZERO_CELSIUS);
 		Print("--------Breakdown--------");
 		Print(m_fFinalChange);
 		Print(m_fAmbientTemperatureFactor);

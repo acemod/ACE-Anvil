@@ -120,13 +120,6 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Returns body temperature in K
-	float GetTemperature()
-	{
-		return 310.15;
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	//! Sets extend of pneumothorax
 	void SetPneumothoraxScale(float scale)
 	{

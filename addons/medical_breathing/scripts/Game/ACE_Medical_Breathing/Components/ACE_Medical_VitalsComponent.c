@@ -118,13 +118,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	{
 		return m_fCvenCO2;
 	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Returns body temperature in K
-	float GetTemperature()
-	{
-		return 310.15;
-	}
+
 	
 	//------------------------------------------------------------------------------------------------
 	//! Sets extend of pneumothorax

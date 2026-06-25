@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{376220E4740579F6}Prefabs/Items/Medicine/Heatpack/ACE_Safety_Blankie.et"
+ Name "{0DB1B1E5F129A3E2}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_SafetyBlanket.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

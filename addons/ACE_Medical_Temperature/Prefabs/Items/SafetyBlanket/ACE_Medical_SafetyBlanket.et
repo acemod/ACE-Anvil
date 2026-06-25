@@ -1,0 +1,74 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Medical-Item_SafetyBlanket_Name"
+     Description "#ACE_Medical-Item_SafetyBlanket_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{69B14A677C907F37}" {
+       Name "#ACE_Medical-InfoWidget_SafetyBlanket"
+       Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+       IconSetName "Unconscious_UI"
+      }
+     }
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 1
+     SizeSetupStrategy Manual
+     ItemDimensions 5 5 5
+     ItemVolume 500
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{69B14A677C907F5D}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{69B14A677C907F5F}" {
+       AnimGraph "{85DDE84A207F494B}Assets/Items/Medicine/OxygenMask/Workspace/ACE_Medical_OxygenMask.agr"
+       AnimInstance "{43827765479667B7}Assets/Items/Medicine/OxygenMask/Workspace/ACE_Medical_OxygenMask_Player.asi"
+       BindingName "Gadget"
+      }
+     }
+    }
+    CustomAttributes {
+     ItemActionAnimAttributes "{69B14A677C907F61}" {
+      AnimationGraphTemplate "{DFFC0A34A77ADCB4}anims/workspaces/player/player_main.agr"
+      ActionAnimationCommandName "CMD_HealSelf"
+      ActionAnimDuration 10
+      AllowMovementDuringAction 1
+     }
+     PreviewRenderAttributes "{69B14A677C907F63}" {
+      CameraPreset Top
+      CameraDistanceToItem 0.2
+      PreviewPrefab "{66C234BE25182886}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMaskPreview.et"
+     }
+     CharacterModifierAttributes "{69B14A677C907F62}" {
+      SpeedLimit 4
+      ADSSpeedLimit 4
+      SpeedLimitItemPrimaryAction 4
+      SpeedLimitHighready 4
+     }
+    }
+    CommonItemType "MORPHINE"
+    m_Size SLOT_2x2
+    m_eQuickSlotSize SLOT_2x1
+   }
+  }
+  MeshObject "{69B14A677C907F67}" {
+   Object "{F880E60E75B74C5F}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.xob"
+  }
+  RigidBody "{69B14A677C907F66}" {
+  }
+  SCR_ConsumableItemComponent "{69B14A677C907F68}" {
+   m_eAnimVariable ADRIANOV
+   m_fWeaponNoFireTime 1
+   m_ConsumableEffect ACE_Medical_ConsumableAttachableHealthItem "{69B14A677C907F6B}" {
+    m_bDeleteOnUse 0
+    m_eDeviceType ACE_MEDICAL_SAFETY_BLANKET
+    m_eSlotToAttach SAFETY_BLANKET
+   }
+   m_bVisibleEquipped 1
+  }
+ }
+}

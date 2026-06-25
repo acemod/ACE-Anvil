@@ -1,6 +1,25 @@
 SCR_ChimeraCharacter {
  ID "520EC961A090B1EE"
  components {
+  SCR_CharacterInventoryStorageComponent "{520EA1D2DB118DAC}" {
+   components {
+    ACE_EquipmentStorageComponent "{671625C6478FB2AB}" {
+     InitialStorageSlots {
+      EquipmentStorageSlot SafetyBlanketSlot {
+       PivotID "Hips"
+       Offset 0 0 0.1325
+       Angles 90 0 0
+       Enabled 0
+       Prefab "{FDFA3EAC0D60C65F}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.et"
+       AllowedItemTypes {
+        "MORPHINE"
+       }
+       AnimatedMeshRefference "{F880E60E75B74C5F}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.xob"
+      }
+     }
+    }
+   }
+  }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
     ACE_Medical_HeatpackUserAction "{697F35501517AD39}" {
@@ -32,6 +51,21 @@ SCR_ChimeraCharacter {
      Duration 3
      "Sort Priority" 100
      m_eNotificationType ACE_MEDICAL_TEMPERATURE_RESULT
+    }
+    SCR_MorphineUserAction "{69B14E301D0A3CF6}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo SCR_ActionUIInfo "{69B14E300B3B180F}" {
+      Name "#ACE_Medical-UserAction_ApplySafetyBlanket"
+      m_sIconName "medical"
+     }
+     ActionTitle "Apply safety blanket"
+     VisibilityRange 2
+     Duration 0.5
+     "Sort Priority" -100000
+     m_eHitZoneGroup LOWERTORSO
+     m_eConsumableType ACE_MEDICAL_SAFETY_BLANKET
     }
    }
   }

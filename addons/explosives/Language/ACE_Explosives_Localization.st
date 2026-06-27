@@ -29,6 +29,22 @@ StringTable {
    Author "Kex"
    LastChanged "Martian"
   }
+  CustomStringTableItem "{69B577E06C24C4A5}" {
+   Id "ACE-Explosives_Item_VMM3_Description"
+   Target_en_us "Metal and mine detector used for clearing landmines and UXO."
+   Target_de_de "Metall- und Minensuchgerät zur Räumung von Landminen und Blindgängern."
+   Modified 1773537009
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69B577E01F72AA28}" {
+   Id "ACE-Explosives_Item_VMM3_Name"
+   Target_en_us "BMM3 Metal/Mine Detector"
+   Target_de_de "BMM3 Metall- und Minensuchgerät"
+   Modified 1773535601
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{64933B9C7DC48AD7}" {
    Id "ACE-Explosives_UserAction_Bury_Name"
    Target_en_us "Bury"

@@ -1,0 +1,113 @@
+GenericEntity : "{EE7028E9DF49763A}Prefabs/Weapons/Core/Handgun_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  WeaponSoundComponent "{5A8685198A9AEEDD}" {
+   Filenames {
+    "{ACA236ED0994A163}Sounds/Items/Equipment/MetalDetector/ACE_MineDetector.acp"
+   }
+  }
+  MeshObject "{CFBAA4B701F95D69}" {
+   Object "{7B937FE09EEDD955}Assets/Items/Equipment/MineDetector/ACE_VMM3/VMM3.xob"
+  }
+  RigidBody "{66A139078F8E2C26}" {
+   SimState None
+   ModelGeometry 1
+  }
+  SCR_WeaponAttachmentsStorageComponent "{51F080D5CE45A1A2}" {
+   Attributes SCR_ItemAttributeCollection "{51F080D5C64F12C5}" {
+    ItemDisplayName WeaponUIInfo "{5222CB0701437228}" {
+     Name "#ACE-Explosives_Item_VMM3_Name"
+     Description "#ACE-Explosives_Item_VMM3_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{69B577E77114DA71}" {
+     Weight 1.7
+     SizeSetupStrategy Manual
+     ItemDimensions 18 18 18
+     ItemVolume 1000
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{5284960F659FDDA7}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     ExcludeBonesBlend {
+     }
+     IncludeBonesInIkBlend {
+      "LeftHand"
+     }
+     AllowInspection 0
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{52D2D34CD4A7302B}" {
+      CameraPreset Bottom
+      CameraOrbitAngles 0 0 -50
+      CameraDistanceToItem 1.2
+     }
+     CharacterModifierAttributes "{69B235DFD059FADD}" {
+      SpeedLimit 1.9
+      ADSSpeedLimit 1.9
+      SpeedLimitHighready 1.9
+      CanBeEquippedInVehicle 0
+     }
+    }
+    m_Size SLOT_1x1
+   }
+  }
+  ACE_MineDetectorComponent "{CFBAA4B706BA66E8}" {
+   components {
+    AttachmentSlotComponent "{B502E4DC8A9E835E}" {
+     Enabled 0
+    }
+    SightsComponent "{BB23A637957CFFF8}" {
+     Enabled 0
+    }
+    MuzzleComponent "{50F64C45E7271D47}" {
+     Enabled 0
+     components {
+      CaseEjectingEffectComponent "{5122AAD190FCA21D}" {
+       Enabled 0
+      }
+      SCR_MuzzleEffectComponent "{C9B3271BB22CDB68}" {
+       Enabled 0
+      }
+     }
+    }
+    WeaponAnimationComponent "{60B4EA76EB15F6E0}" {
+     AnimGraph "{9F6ABE5414BD0743}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3.agr"
+     AnimInstance "{6600EE1018DFBF35}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3_weapon.asi"
+     AnimInjection AnimationAttachmentInfo "{69B419FFD633F27D}" {
+      AnimGraph "{9F6ABE5414BD0743}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3.agr"
+      AnimInstance "{7200EB8F08B455AD}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3_player.asi"
+      BindingName "Weapon"
+     }
+     BindWithInjection 1
+    }
+   }
+   WeaponType FragGrenade
+   AllowedRaise "Only raised"
+   UIInfo WeaponUIInfo "{CC3BA6A2C42F09F4}" {
+    Name "#ACE-Explosives_Item_VMM3_Name"
+    Description "#ACE-Explosives_Item_VMM3_Description"
+    m_MagIndicator SCR_MagazineIndicatorConfiguration "{565ECA2FE3F0F3FB}" {
+     m_sImagesetIcons "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+     m_sImagesetGlows "{00FE3DBDFD15227B}UI/Textures/Icons/icons_wrapperUI-glow.imageset"
+     m_sOutline "radio-signal"
+     m_bProgressBar 0
+    }
+   }
+   m_bServerUpdateOnly 1
+  }
+  ActionsManagerComponent "{A29AE67FF4D82B0F}" {
+   ActionContexts {
+    UserActionContext "{5086F9ADF588DCA4}" {
+     Position PointInfo "{5086F9ADE97650DF}" {
+      Offset 0 0.061 0
+     }
+    }
+   }
+  }
+  WeaponGamepadEffectsManagerComponent "{61A2E5C3F4458F86}" {
+   Enabled 0
+  }
+  NwkPhysicsMovementComponent "{5EC2D09D38507493}" {
+   Enabled 0
+  }
+ }
+}

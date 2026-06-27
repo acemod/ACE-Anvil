@@ -11,6 +11,23 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		return m_fInsulationScore;
 	}
 	
+	void CalculateInsulation()
+	{
+		ACE_Medical_Temperature_Settings settings = ACE_SettingsHelperT<ACE_Medical_Temperature_Settings>.GetModSettings();
+		if (!settings)
+		{
+			return;
+		}
+		m_fInsulationScore = settings.m_fDefaultInsulationScore;
+		ACE_EquipmentStorageComponent ACEEquipmentStorageComponent = ACE_EquipmentStorageComponent.Cast(GetOwner().FindComponent(ACE_EquipmentStorageComponent));
+		if (ACEEquipmentStorageComponent.GetItem(ACE_EEquipementSlot.SAFETY_BLANKET))
+			m_fInsulationScore/=1.5;
+		
+		if (!settings.m_bDoClothingInsulation)
+			return;
+		
+		
+	}
 	override void Reset()
 	{
 		super.Reset();
@@ -20,7 +37,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		if (settings)
 		{
 			m_fCoreTemperature=settings.m_fDefaultCoreTemperature;
-			m_fInsulationScore=settings.m_fInsulationScore;
+			CalculateInsulation();
 		}
 	}
 }

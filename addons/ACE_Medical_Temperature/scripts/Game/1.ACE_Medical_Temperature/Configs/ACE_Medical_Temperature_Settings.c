@@ -23,8 +23,14 @@ class ACE_Medical_Temperature_Settings : ACE_ModSettings
 	[Attribute(defvalue: "100", desc: "Effectiveness of the heat pack item. Increase this for a stronger heating effect per pack. Millidegrees per second.", params: "0 10000")]
 	float m_fHeatpackHeating;
 	
-	[Attribute(defvalue: "0.005", desc: "Placeholder. Default insulation value.", params: "0 1")]
-	float m_fInsulationScore;
+	
+	[Attribute(defvalue:"1", desc:"Do clothing insulation calculations? If false, will default to value set below, regardless of clothing.")]
+	bool m_bDoClothingInsulation;
+	
+	[Attribute(defvalue: "0.005", desc: "Insulation value for a person with 1kg of clothing.", params: "0 1")]
+	float m_fDefaultInsulationScore;
+	
+	
 	
 	[Attribute(defvalue: "315.0", desc: "Core temperature at which a patient will die, K", params: "0 1000")]
 	float m_fLethalTemperature;

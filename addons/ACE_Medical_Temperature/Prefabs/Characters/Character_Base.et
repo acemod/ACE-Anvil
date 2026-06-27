@@ -4,6 +4,7 @@ SCR_ChimeraCharacter {
   SCR_CharacterInventoryStorageComponent "{520EA1D2DB118DAC}" {
    components {
     ACE_EquipmentStorageComponent "{671625C6478FB2AB}" {
+     StoragePurpose 0 0x1
      InitialStorageSlots {
       EquipmentStorageSlot SafetyBlanketSlot {
        PivotID "Hips"
@@ -12,9 +13,9 @@ SCR_ChimeraCharacter {
        Enabled 0
        Prefab "{FDFA3EAC0D60C65F}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.et"
        AllowedItemTypes {
-        "MORPHINE"
+        "MORPHINE" "SALINE"
        }
-       AnimatedMeshRefference "{F880E60E75B74C5F}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.xob"
+       AnimatedMeshRefference "{F880E60E75B74C5F}Assets/OxygenMask/ACE_Medical_OxygenMask.xob"
       }
      }
     }
@@ -52,7 +53,7 @@ SCR_ChimeraCharacter {
      "Sort Priority" 100
      m_eNotificationType ACE_MEDICAL_TEMPERATURE_RESULT
     }
-    SCR_MorphineUserAction "{69B14E301D0A3CF6}" {
+    ACE_Medical_SafetyBlanketUserAction "{69B14E301D0A3CF6}" {
      ParentContextList {
       "LowerTorso"
      }
@@ -66,6 +67,17 @@ SCR_ChimeraCharacter {
      "Sort Priority" -100000
      m_eHitZoneGroup LOWERTORSO
      m_eConsumableType ACE_MEDICAL_SAFETY_BLANKET
+    }
+    ACE_Medical_RemoveSafetyBlanketUserAction "{69B354AD07F88D7F}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo SCR_ActionUIInfo "{69B354AD07F88CE5}" {
+      Name "#ACE_Medical-UserAction_RemoveSafetyBlanket"
+      m_sIconName "medical"
+     }
+     ActionTitle "Remove safety blanket"
+     "Sort Priority" -100000
     }
    }
   }

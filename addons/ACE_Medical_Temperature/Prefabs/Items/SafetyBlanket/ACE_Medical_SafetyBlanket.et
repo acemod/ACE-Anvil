@@ -25,8 +25,8 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
      AnimationAttachments {
       AnimationAttachmentInfo "{69B14A677C907F5F}" {
-       AnimGraph "{85DDE84A207F494B}Assets/Items/Medicine/OxygenMask/Workspace/ACE_Medical_OxygenMask.agr"
-       AnimInstance "{43827765479667B7}Assets/Items/Medicine/OxygenMask/Workspace/ACE_Medical_OxygenMask_Player.asi"
+       AnimGraph "{85DDE84A207F494B}Assets/OxygenMask/Workspace/ACE_Medical_OxygenMask.agr"
+       AnimInstance "{43827765479667B7}Assets/OxygenMask/Workspace/ACE_Medical_OxygenMask_Player.asi"
        BindingName "Gadget"
       }
      }
@@ -41,13 +41,13 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      PreviewRenderAttributes "{69B14A677C907F63}" {
       CameraPreset Top
       CameraDistanceToItem 0.2
-      PreviewPrefab "{66C234BE25182886}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMaskPreview.et"
+      PreviewPrefab "{0DB1B1E5F129A3E2}Prefabs/Items/SafetyBlanket/ACE_Medical_SafetyBlanket.et"
      }
      CharacterModifierAttributes "{69B14A677C907F62}" {
-      SpeedLimit 4
-      ADSSpeedLimit 4
-      SpeedLimitItemPrimaryAction 4
-      SpeedLimitHighready 4
+      SpeedLimit 3
+      SpeedLimitItemPrimaryAction 3
+      Supress1hShooting 0
+      AllowGadgetUse 0
      }
     }
     CommonItemType "MORPHINE"
@@ -56,19 +56,32 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    }
   }
   MeshObject "{69B14A677C907F67}" {
-   Object "{F880E60E75B74C5F}Assets/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.xob"
+   Object "{F880E60E75B74C5F}Assets/OxygenMask/ACE_Medical_OxygenMask.xob"
   }
   RigidBody "{69B14A677C907F66}" {
   }
   SCR_ConsumableItemComponent "{69B14A677C907F68}" {
    m_eAnimVariable ADRIANOV
    m_fWeaponNoFireTime 1
-   m_ConsumableEffect ACE_Medical_ConsumableAttachableHealthItem "{69B14A677C907F6B}" {
+   m_ConsumableEffect ACE_Temperature_ConsumableAttachableHealthItem "{69B37A0B321EFE03}" {
     m_bDeleteOnUse 0
     m_eDeviceType ACE_MEDICAL_SAFETY_BLANKET
     m_eSlotToAttach SAFETY_BLANKET
    }
    m_bVisibleEquipped 1
+  }
+  SCR_SoundDataComponent "{5B18D20ED0099A17}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{5B18D209080A5D15}" {
+     m_sSoundProject "{727E913C87275968}Sounds/Items/_SharedData/PickUp/Items_PickUp_Uniform_Zipper.acp"
+    }
+    SCR_AudioSourceConfiguration "{5B18D2091B885AE6}" {
+     m_sSoundProject "{727E913C87275968}Sounds/Items/_SharedData/PickUp/Items_PickUp_Uniform_Zipper.acp"
+    }
+    SCR_AudioSourceConfiguration "{5B18D20930D9E274}" {
+     m_sSoundProject "{F62001ED6E9FA253}Sounds/Items/_SharedData/Drop/Items_Drop_Clothes.acp"
+    }
+   }
   }
  }
 }

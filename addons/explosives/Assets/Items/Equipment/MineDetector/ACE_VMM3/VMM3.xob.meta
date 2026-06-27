@@ -1,12 +1,12 @@
 MetaFileClass {
- Name "{7B937FE09EEDD955}Assets/Items/Equipment/MineDetector/VMM3/VMM3.xob"
+ Name "{7B937FE09EEDD955}Assets/Items/Equipment/MineDetector/ACE_VMM3/VMM3.xob"
  Configurations {
   FBXResourceClass PC {
    ExportSkinning 1
    MaterialAssigns {
     MaterialAssignClass "{69B227A34EF30552}" {
      SourceMaterial "Body"
-     AssignedMaterial "{8061D6455A00A86C}Assets/Items/Equipment/MineDetector/VMM3/data/Body.emat"
+     AssignedMaterial "{8061D6455A00A86C}Assets/Items/Equipment/MineDetector/ACE_VMM3/data/Body.emat"
     }
    }
    MeshParams {

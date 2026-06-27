@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{98C84DFBF66B46E2}Assets/Items/Equipment/MineDetector/VMM3/Workspace/p_erc_vmm3_idle_ik.anm"
+ Name "{98C84DFBF66B46E2}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/p_erc_vmm3_idle_ik.anm"
  Configurations {
   TXAResourceClass PC {
    SourcePath "Character_AnimationRig_VMM3.blend"

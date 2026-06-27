@@ -1,5 +1,5 @@
 AnimSrcGraph {
- AnimSetTemplate "{8D98D8542378D3B0}Assets/Items/Equipment/MineDetector/VMM3/Workspace/VMM3.ast"
+ AnimSetTemplate "{8D98D8542378D3B0}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3.ast"
  ControlTemplate AnimSrcGCT "{69B235D10710B5C6}" {
   Variables {
    AnimSrcGCTVarInt Stance {
@@ -43,7 +43,7 @@ AnimSrcGraph {
  Debug AnimSrcGD "{69B235D10710B533}" {
  }
  GraphFilesResourceNames {
-  "{B064A0EE8A1E6E73}Assets/Items/Equipment/MineDetector/VMM3/Workspace/VMM3.agf"
+  "{B064A0EE8A1E6E73}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3.agf"
  }
  DefaultRunNode "MasterControl"
 }

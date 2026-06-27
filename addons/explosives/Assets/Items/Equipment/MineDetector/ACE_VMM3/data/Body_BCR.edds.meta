@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{F9CA730BF3C440AF}data/Body_BCR.edds"
+ Name "{F9CA730BF3C440AF}Assets/Items/Equipment/MineDetector/ACE_VMM3/data/Body_BCR.edds"
  Configurations {
   PNGResourceClass PC : "{EAB5DE3219F9CBA8}Configs/System/ResourceTypes/PC/TextureColorMap.conf" {
   }

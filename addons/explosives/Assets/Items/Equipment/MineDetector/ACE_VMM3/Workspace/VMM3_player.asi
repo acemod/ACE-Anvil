@@ -1,14 +1,14 @@
 AnimSetInstanceSource {
- Template "{8D98D8542378D3B0}Assets/Items/Equipment/MineDetector/VMM3/Workspace/VMM3.ast"
+ Template "{8D98D8542378D3B0}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3.ast"
  Lines {
   AnimSetInstanceSource_Line "Weapon.Pne.Idle" {
-   Resource "{FF73A1A98577F567}Assets/Items/Equipment/MineDetector/VMM3/Workspace/p_pne_vmm3_idle.anm"
+   Resource "{FF73A1A98577F567}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/p_pne_vmm3_idle.anm"
   }
   AnimSetInstanceSource_Line "Weapon.Erc.IdleIK" {
-   Resource "{98C84DFBF66B46E2}Assets/Items/Equipment/MineDetector/VMM3/Workspace/p_erc_vmm3_idle_ik.anm"
+   Resource "{98C84DFBF66B46E2}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/p_erc_vmm3_idle_ik.anm"
   }
   AnimSetInstanceSource_Line "Weapon.Cro.IdleIK" {
-   Resource "{DC708131FFC60F5A}Assets/Items/Equipment/MineDetector/VMM3/Workspace/p_cro_vmm3_idle_ik.anm"
+   Resource "{DC708131FFC60F5A}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/p_cro_vmm3_idle_ik.anm"
   }
  }
  RBF AnimSetInstanceSourceRBFArray "{69B246B9860CFD5F}" {

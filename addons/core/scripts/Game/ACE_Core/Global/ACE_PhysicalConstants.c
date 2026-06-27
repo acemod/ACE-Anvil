@@ -6,4 +6,9 @@ class ACE_PhysicalConstants
 	
 	// Conversions
 	static const float KPA2MMHG = 7.5006168; // kPa to mmHg
+	static const float STANDARD_AMBIENT_TEMPERATURE = 298.15; // [K]
+	static const float STEFAN_BOLTZMANN = 5.6703744e-8; // [W / (m^2 * K^4)]
+	static const float ZERO_CELSIUS = 273.15; // 0 °C in K
+	static const float MPS2KNOTS = 1.94384449; // m/s to knots
+	static const float ATM2KPA = 101.325; // atm to kPa
 }

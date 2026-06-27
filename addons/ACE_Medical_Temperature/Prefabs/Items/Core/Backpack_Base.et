@@ -1,0 +1,95 @@
+GenericEntity {
+ ID "69B721AA4CBB2B3F"
+ components {
+  Persistence "{69B721AA4CBB2B49}" {
+  }
+  MeshObject "{69B721AA4CBB2B52}" {
+   Object "{A4048C2AA75EF832}Common/Models/Default.xob"
+   InheritVisibility 1
+  }
+  RigidBody "{69B721AA4CBB2B57}" {
+   Mass 5
+   ModelGeometry 1
+  }
+  SCR_SoundDataComponent "{69B721AA4CBB2B56}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{69B721AA4CBB2B58}" {
+     m_sSoundProject "{3D8789E7ACF6EDD3}Sounds/Items/_SharedData/PickUp/Items_PickUp_BackPack.acp"
+     m_sSoundEventName "SOUND_PICK_UP"
+    }
+    SCR_AudioSourceConfiguration "{69B721AA4CBB2B5A}" {
+     m_sSoundProject "{3D8789E7ACF6EDD3}Sounds/Items/_SharedData/PickUp/Items_PickUp_BackPack.acp"
+     m_sSoundEventName "SOUND_EQUIP"
+     m_eFlags 0
+    }
+    SCR_AudioSourceConfiguration "{69B721AA4CBB2B5D}" {
+     m_sSoundProject "{6D0C4AFA2B734709}Sounds/Items/_SharedData/Drop/Items_Drop_BackPack.acp"
+     m_sSoundEventName "SOUND_DROP"
+    }
+    SCR_AudioSourceConfiguration "{69B721AA4CBAD12F}" {
+     m_sSoundProject "{F01623940EA93645}Sounds/Items/_SharedData/Open/Backpack_ALICE/Items_Backpack_ALICE.acp"
+     m_sSoundEventName "SOUND_CONTAINER_OPEN"
+    }
+    SCR_AudioSourceConfiguration "{69B721AA4CBAD12C}" {
+     m_sSoundProject "{F01623940EA93645}Sounds/Items/_SharedData/Open/Backpack_ALICE/Items_Backpack_ALICE.acp"
+     m_sSoundEventName "SOUND_CONTAINER_CLOSE"
+    }
+   }
+  }
+  SCR_UniversalInventoryStorageComponent "{69B721AA4CBAD113}" {
+   Attributes SCR_ItemAttributeCollection "{69B721AA4CBAD112}" {
+    ItemDisplayName UIInfo "{69B721AA4CBAD110}" {
+     Name "#AR-Backpack_Name"
+     Description "#AR-Backpack_Name"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{69B721AA4CBAD117}" {
+     Weight 1.5
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{69B721AA4CBAD103}" {
+      CameraPreset Back
+      CameraOrbitAngles 25 -25 180
+      CameraDistanceToItem 4
+      FOV 10
+     }
+    }
+    m_Size SLOT_2x2
+    m_SlotType SLOT_BACKPACK
+   }
+   Priority 8
+   m_fMaxWeight 20
+  }
+  BaseLoadoutClothComponent "{69B721AA4CBAD100}" {
+   AreaType LoadoutBackpackArea "{69B721AA4CBAD107}" {
+   }
+   VisibleInVehicle 0
+   DepthBack 0.025
+   OffsetShoulderLeft -0.1
+   OffsetShoulderRight 0.1
+  }
+  ActionsManagerComponent "{69B721AA4CBAD105}" {
+   ActionContexts {
+    UserActionContext "{69B721AA4CBAD104}" {
+     ContextName "default"
+     Position PointInfo "{69B721AA4CBAD10B}" {
+     }
+     Radius 0.5
+    }
+   }
+   additionalActions {
+    SCR_OpenStorageAction "{52E6EC758E83398C}" : "{E9B4646CB9AA14B4}Prefabs/Characters/Core/OpenStorageAction.conf" {
+    }
+    SCR_EquipClothAction "{52E6EC758DC7DC4B}" : "{83B98F1A96591AC6}Prefabs/Characters/Core/Actions/EquipClothAction.conf" {
+    }
+    SCR_PickUpItemAction "{52E6EC758CC4113E}" : "{F39A4E9B190C1846}Prefabs/Characters/Core/Actions/PickUpItemAction.conf" {
+    }
+   }
+  }
+  RplComponent "{69B721AA4CBAD108}" {
+   "Rpl State Override" Runtime
+   "Parent Node From Parent Entity" 0
+  }
+  Hierarchy "{69B721AA4CBAD10F}" {
+  }
+ }
+}

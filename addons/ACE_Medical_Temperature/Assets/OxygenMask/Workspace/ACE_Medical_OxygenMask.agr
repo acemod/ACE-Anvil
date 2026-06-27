@@ -1,0 +1,32 @@
+AnimSrcGraph {
+ AnimSetTemplate "{972F8E4A17BA9DB8}Assets/Items/Medicine/OxygenMask/Workspace/ACE_Medical_OxygenMask.ast"
+ ControlTemplate AnimSrcGCT "{64FF4A19F344FD6E}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+   AnimSrcGCTVarFloat LookX {
+    MaxValue 1
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_HealOther {
+   }
+   AnimSrcGCTCmd CMD_Revive {
+   }
+   AnimSrcGCTCmd CMD_HealSelf {
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "MEDICAL"
+   "ACE_Medical_ChestSeal"
+  }
+ }
+ Debug AnimSrcGD "{64FF4A19F344FD67}" {
+ }
+ GraphFilesResourceNames {
+  "{AAD3F6F0BEDC207B}Assets/Items/Medicine/OxygenMask/Workspace/ACE_Medical_OxygenMask.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

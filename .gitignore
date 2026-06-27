@@ -5,3 +5,5 @@ CHANGELOG.md
 # Enfusion files
 *.rdb
 UserMaps.desc
+/addons/acemod ACE-Anvil master addons-carrying
+addons/all_in_one/addon.gproj

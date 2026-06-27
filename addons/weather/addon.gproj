@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Weather"
+ GUID "667D049B9D9A0883"
+ TITLE "ACE Weather"
+ Dependencies {
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{667B2E0AE586FBB4}" {
+      StringTableSource "{95AF98816BFC4873}Language/ACE_Weather_localization.st"
+      Languages {
+       LanguageDefinition "{667B2E0A1A7FA0EB}" {
+        Code "cs_cz"
+        StringTableRuntime "{736FE6EBA2DDF341}Language/ACE_Weather_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FA008}" {
+        Code "de_de"
+        StringTableRuntime "{A611FCD8B17EE261}Language/ACE_Weather_localization.de_de.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FA065}" {
+        Code "en_us"
+        StringTableRuntime "{F8E17693DB8DE760}Language/ACE_Weather_localization.en_us.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FA05D}" {
+        Code "es_es"
+        StringTableRuntime "{3DAD3B1A358F8C7F}Language/ACE_Weather_localization.es_es.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAFB0}" {
+        Code "fr_fr"
+        StringTableRuntime "{8605CE2DD30C6F7D}Language/ACE_Weather_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAFA9}" {
+        Code "it_it"
+        StringTableRuntime "{061941197E2EEC84}Language/ACE_Weather_localization.it_it.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAF9F}" {
+        Code "ja_jp"
+        StringTableRuntime "{1602FC8B405FDC2F}Language/ACE_Weather_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAF8D}" {
+        Code "ko_kr"
+        StringTableRuntime "{B6BCD427D372DF10}Language/ACE_Weather_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAFE3}" {
+        Code "pl_pl"
+        StringTableRuntime "{EACD72DD6D9D436C}Language/ACE_Weather_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAFD5}" {
+        Code "pt_br"
+        StringTableRuntime "{3FBAE811566389D6}Language/ACE_Weather_localization.pt_br.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAF3E}" {
+        Code "ru_ru"
+        StringTableRuntime "{6AFBFCB9CB1AECA0}Language/ACE_Weather_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAE88}" {
+        Code "uk_ua"
+        StringTableRuntime "{E0A3A94FA73452F5}Language/ACE_Weather_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{667B2E0A1A7FAEFC}" {
+        Code "zh_cn"
+        StringTableRuntime "{3A13C7729E9482E8}Language/ACE_Weather_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

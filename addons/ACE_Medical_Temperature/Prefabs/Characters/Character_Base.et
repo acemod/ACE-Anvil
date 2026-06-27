@@ -1,0 +1,85 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  SCR_CharacterInventoryStorageComponent "{520EA1D2DB118DAC}" {
+   components {
+    ACE_EquipmentStorageComponent "{671625C6478FB2AB}" {
+     StoragePurpose 0 0x1
+     InitialStorageSlots {
+      EquipmentStorageSlot SafetyBlanketSlot {
+       PivotID "Hips"
+       Offset 0 0 0.1325
+       Angles 90 0 0
+       Enabled 0
+       Prefab "{FDFA3EAC0D60C65F}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMask.et"
+       AllowedItemTypes {
+        "MORPHINE" "SALINE"
+       }
+       AnimatedMeshRefference "{F880E60E75B74C5F}Assets/OxygenMask/ACE_Medical_OxygenMask.xob"
+      }
+     }
+    }
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_HeatpackUserAction "{697F35501517AD39}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo SCR_ActionUIInfo "{697F35500C2E495D}" {
+      Name "#ACE_Medical-Heatpack-Apply-Action"
+      Description "Apply heatpack"
+      m_sInteractionIcon "{29DE5CB9A3FE0287}UI/Textures/Icons/icons_radialWeapons.imageset"
+      m_sInteractionGlowIcon "{29DE5CB9A3FE0287}UI/Textures/Icons/icons_radialWeapons.imageset"
+      m_sIconName "gadget_bandage"
+     }
+     ActionTitle "Apply heatpack"
+     VisibilityRange 2
+     Duration 1
+     m_eConsumableType ACE_MEDICAL_HEATPACK
+    }
+    ACE_Medical_CheckVitalsUserAction "{697B36BE12393F06}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo SCR_ActionUIInfo "{697B36B14549F362}" {
+      Name "#ACE_Medical-UserAction_CheckTemperature"
+      m_sIconName "search"
+     }
+     ActionTitle "Check Temperature"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 100
+     m_eNotificationType ACE_MEDICAL_TEMPERATURE_RESULT
+    }
+    ACE_Medical_SafetyBlanketUserAction "{69B14E301D0A3CF6}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo SCR_ActionUIInfo "{69B14E300B3B180F}" {
+      Name "#ACE_Medical-UserAction_ApplySafetyBlanket"
+      m_sIconName "medical"
+     }
+     ActionTitle "Apply safety blanket"
+     VisibilityRange 2
+     Duration 0.5
+     "Sort Priority" -100000
+     m_eHitZoneGroup LOWERTORSO
+     m_eConsumableType ACE_MEDICAL_SAFETY_BLANKET
+    }
+    ACE_Medical_RemoveSafetyBlanketUserAction "{69B354AD07F88D7F}" {
+     ParentContextList {
+      "LowerTorso"
+     }
+     UIInfo SCR_ActionUIInfo "{69B354AD07F88CE5}" {
+      Name "#ACE_Medical-UserAction_RemoveSafetyBlanket"
+      m_sIconName "medical"
+     }
+     ActionTitle "Remove safety blanket"
+     "Sort Priority" -100000
+    }
+   }
+  }
+ }
+}

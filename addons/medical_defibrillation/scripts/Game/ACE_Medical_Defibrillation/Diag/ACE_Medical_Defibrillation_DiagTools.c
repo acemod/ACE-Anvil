@@ -56,33 +56,33 @@ class ACE_Medical_Defibrillation_DiagTools
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetShockSuccessChance(IEntity target)
+    static float GetShockSuccessChance(IEntity target, ACE_Medical_Defibrillation_Settings settings)
     {
         ACE_Medical_VitalsComponent vitals = GetVitalsFromTarget(target);
         if (!vitals)
             return -1;
         
-        return ACE_Medical_Defibrillation_DefibComponent.CalculateShockSuccessChance(vitals);
+        return ACE_Medical_Defibrillation_CalculationsHelper.CalculateTotalShockChance(vitals, settings);
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetBaseShockChance(IEntity target)
-    {
+    static float GetBaseShockChance(IEntity target, ACE_Medical_Defibrillation_Settings settings)
+    {		
         ACE_Medical_VitalsComponent vitals = GetVitalsFromTarget(target);
         if (!vitals)
             return -1;
         
-        return ACE_Medical_Defibrillation_DecayCalculator.CalculateShockChance(vitals);
+        return ACE_Medical_Defibrillation_CalculationsHelper.CalculateShockChance(vitals, settings);
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetShockSpamPenalty(IEntity target)
+    static float GetShockSpamPenalty(IEntity target, ACE_Medical_Defibrillation_Settings settings)
     {
         ACE_Medical_VitalsComponent vitals = GetVitalsFromTarget(target);
         if (!vitals)
             return -1;
         
-        return ACE_Medical_Defibrillation_DecayCalculator.CalculateSpamPenalty(vitals);
+        return ACE_Medical_Defibrillation_CalculationsHelper.CalculateSpamPenalty(vitals, settings);
     }
     
     //------------------------------------------------------------------------------------------------
@@ -165,13 +165,13 @@ class ACE_Medical_Defibrillation_DiagTools
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetReviveBonus(IEntity target)
+    static float GetReviveBonus(IEntity target, ACE_Medical_Defibrillation_Settings settings)
     {
         ACE_Medical_VitalsComponent vitals = GetVitalsFromTarget(target);
         if (!vitals)
             return -1;
         
-        return ACE_Medical_Defibrillation_DecayCalculator.CalculateReviveBonus(vitals);
+        return ACE_Medical_Defibrillation_CalculationsHelper.CalculateReviveBonus(vitals, settings);
     }
     
     //------------------------------------------------------------------------------------------------
@@ -188,152 +188,92 @@ class ACE_Medical_Defibrillation_DiagTools
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetMaxTotalReviveBonus()
+    static float GetMaxTotalReviveBonus(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fMaxTotalReviveBonus;
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetBaseReviveBonus()
+    static float GetBaseReviveBonus(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fBaseReviveBonus;
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetBaseShockSuccessChance()
+    static float GetBaseShockSuccessChance(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fBaseShockSuccessChance;
     }
     
     //------------------------------------------------------------------------------------------------
-    static string GetShockDecayFormula()
+    static string GetShockDecayFormula(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return "Unknown";
-        
         return SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingDecayType, settings.m_eShockDecayFormula);
     }
     
     //------------------------------------------------------------------------------------------------
-    static string GetReviveBonusDecayFormula()
+    static string GetReviveBonusDecayFormula(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return "Unknown";
-        
         return SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingDecayType, settings.m_eReviveBonusDecayFormula);
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetShockDecayRate()
+    static float GetShockDecayRate(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fShockSuccessDecayRate;
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetReviveBonusDecayRate()
+    static float GetReviveBonusDecayRate(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fReviveBonusDecayRate;
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetSpamTimeout()
+    static float GetSpamTimeout(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fPunishSpamShocksTimeout;
     }
     
     //------------------------------------------------------------------------------------------------
-    static bool IsPunishSpamEnabled()
+    static bool IsPunishSpamEnabled(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return false;
-        
         return settings.m_bPunishSpamShocks;
     }
     
     //------------------------------------------------------------------------------------------------
-    static string GetActivePreset()
+    static string GetActivePreset(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return "Unknown";
-        
         return SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingPreset, settings.m_eDefibSettingPreset);
     }
     
     //------------------------------------------------------------------------------------------------
-    static bool IsDefibEnabled()
+    static bool IsDefibEnabled(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return false;
-        
         return settings.m_bEnabled;
     }
     
     //------------------------------------------------------------------------------------------------
-    static bool IsDefibMandatory()
+    static bool IsDefibMandatory(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return false;
-        
         return settings.m_bDefibIsMandatory;
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetAEDAnalysisDuration()
+    static float GetAEDAnalysisDuration(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fAED_AnalysisDuration;
     }
     
     //------------------------------------------------------------------------------------------------
-    static float GetAEDCPRCooldownDuration()
+    static float GetAEDCPRCooldownDuration(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return -1;
-        
         return settings.m_fAED_CPRCooldownDuration;
     }
     
     //------------------------------------------------------------------------------------------------
-    static bool IsAEDPlayCPRPacingBeats()
+    static bool IsAEDPlayCPRPacingBeats(ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        if (!settings)
-            return false;
-        
         return settings.m_bAED_PlayCPRPacingBeats;
     }
     

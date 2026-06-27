@@ -32,30 +32,36 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   ActionsManagerComponent "{508AB5952B584B2E}" {
    additionalActions {
-    ACE_Medical_Defibrillation_UserAction_DefibPickup "{51EC842E3A187379}" {
+    ACE_Medical_Defibrillation_PickupItemAction_DefibPickup "{51EC842E3A187379}" {
      Duration 1
-     "Sort Priority" 10
+     "Sort Priority" 999
     }
-    ACE_Medical_Defibrillation_UserAction_DefibDisconnect "{671C09FF5A7200A1}" {
+    ACE_Medical_Defibrillation_ScriptedUserAction_DefibDisconnect "{69B21D14B1E5B88E}" {
      ParentContextList {
       "default"
      }
-     UIInfo UIInfo "{671C09FF5F06B782}" {
+     UIInfo SCR_ActionUIInfo "{69B21D14B1E5B92F}" {
       Name "#ACE-MedicalDefibrillation_UserAction_DisconnectPatient"
+      m_sIconName "cancel"
      }
      Duration 1
-     "Sort Priority" 1
+     "Sort Priority" 998
     }
-    ACE_Medical_Defibrillation_UserActions_DefibShock "{673856DECBEEA89B}" {
+    ACE_Medical_Defibrillation_ScriptedUserAction_DefibShock "{69B21D1498D8F2B5}" {
      ParentContextList {
       "default"
      }
-     UIInfo UIInfo "{673856DECD3BB5B7}" {
+     UIInfo SCR_ActionUIInfo "{69B21D1498D8F37A}" {
       Name "#ACE-MedicalDefibrillation_UserAction_DeliverShock"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Unconscious_UI"
      }
      Duration 1
     }
    }
+  }
+  ACE_Medical_Defibrillation_DefibSoundManagerComponent "{69B5407ACE8A5084}" {
   }
  }
  coords 0 0 0

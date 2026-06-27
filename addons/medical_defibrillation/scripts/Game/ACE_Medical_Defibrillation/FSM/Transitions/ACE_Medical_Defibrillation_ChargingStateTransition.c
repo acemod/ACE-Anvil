@@ -36,7 +36,8 @@ class ACE_Medical_Defibrillation_ChargingStateTransition : ACE_FSM_ITransition<A
 		if (!patient)
 			return false;
 		
-		if (context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.StateTimeElapsed) >= 2.0)
+		const float ANALYSED_STATE_MINIMUM_TIME_SECONDS = 2.0;
+		if (context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.StateTimeElapsed) >= ANALYSED_STATE_MINIMUM_TIME_SECONDS)
 			return true;
 		
 		return false;

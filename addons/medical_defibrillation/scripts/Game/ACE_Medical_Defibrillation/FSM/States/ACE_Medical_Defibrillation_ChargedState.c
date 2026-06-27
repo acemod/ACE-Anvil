@@ -7,43 +7,34 @@ class ACE_Medical_Defibrillation_ChargedState : ACE_Medical_Defibrillation_IDefi
 		
 		context.m_pDefibrillator.SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CHARGED);
 		
-		context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer = 0;
-		context.m_pDefibrillator.m_pSounds.m_iChargedBeepPhase = 0;
+		// Play sounds
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (!manager)
+			return;
 		
-		context.m_pDefibrillator.SetChargedBeepLoop(true);
+		manager.m_pSoundTimers.m_fChargedBeepTimer = 0;
+		manager.m_pSoundTimers.m_iChargedBeepPhase = 0;
+		
+		manager.SetChargedBeepLoop(true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnExit(ACE_Medical_Defibrillation_DefibContext context)
 	{
-		context.m_pDefibrillator.SetChargedBeepLoop(false);
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (!manager)
+			return;
+		
+		manager.SetChargedBeepLoop(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnUpdate(ACE_Medical_Defibrillation_DefibContext context, float timeSlice)
 	{
 		super.OnUpdate(context, timeSlice);
-		
-		// Now local to defib component temporarily
-		/*
-		const float BEEP_INTERVAL = 250;
-		
-		if (context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer >= BEEP_INTERVAL)
-		{
-			if (Math.Mod(context.m_pDefibrillator.m_pSounds.m_iChargedBeepPhase, 2) == 0)
-			{
-				context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPLOW);
-			}
-			else
-			{
-				context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPHIGH);
-			}
-			
-			// Advance to next phase and reset timer
-			context.m_pDefibrillator.m_pSounds.m_iChargedBeepPhase++;
-			context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer = 0;
-		}
-		context.m_pDefibrillator.m_pSounds.m_fChargedBeepTimer += timeSlice;
-		*/
 	}
 }

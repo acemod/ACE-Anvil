@@ -1,4 +1,4 @@
-class ACE_Medical_Defibrillation_UserAction_DefibPickup : SCR_PickUpItemAction
+class ACE_Medical_Defibrillation_PickupItemAction_DefibPickup : SCR_PickUpItemAction
 {	
 	//------------------------------------------------------------------------------------------------
 	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)

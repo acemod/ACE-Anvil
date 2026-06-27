@@ -1,4 +1,4 @@
-class ACE_Medical_Defibrillation_UserActions_DefibShock : ScriptedUserAction
+class ACE_Medical_Defibrillation_ScriptedUserAction_DefibShock : ScriptedUserAction
 {
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
@@ -28,9 +28,9 @@ class ACE_Medical_Defibrillation_UserActions_DefibShock : ScriptedUserAction
 		if (!defibComponent)
 			return;
 		
-		if (defibComponent.ShockPatient())
+		if (defibComponent.TryShockPatient())
 		{
-			ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_GlobalHelpers.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
+			ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_ComponentManager.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
 			if (!networkComponent)
 				return;
 			

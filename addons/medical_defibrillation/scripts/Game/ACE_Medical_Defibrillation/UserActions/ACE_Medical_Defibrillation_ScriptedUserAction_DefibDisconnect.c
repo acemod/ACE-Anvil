@@ -1,4 +1,4 @@
-class ACE_Medical_Defibrillation_UserAction_DefibDisconnect : ScriptedUserAction
+class ACE_Medical_Defibrillation_ScriptedUserAction_DefibDisconnect : ACE_Medical_Defibrillation_ScriptedUserAction
 {
 	//------------------------------------------------------------------------------------------------	
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
@@ -40,7 +40,7 @@ class ACE_Medical_Defibrillation_UserAction_DefibDisconnect : ScriptedUserAction
 		
 		defibComponent.ResetPatient();
 		
-		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_GlobalHelpers.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
+		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_ComponentManager.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
 		if (!networkComponent)
 			return;
 

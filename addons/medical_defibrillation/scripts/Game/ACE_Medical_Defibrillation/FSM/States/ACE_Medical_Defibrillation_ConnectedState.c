@@ -7,8 +7,18 @@ class ACE_Medical_Defibrillation_ConnectedState : ACE_Medical_Defibrillation_IDe
 		
 		context.m_pDefibrillator.SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CONNECTED);
 		
-		context.m_pDefibrillator.m_pSounds.m_fContinueCPRTimer = 10000 - 2000;
-		context.m_pDefibrillator.m_pSounds.m_fLastCPRPaceTimer = -2000; // Have a delay on the first one so that previous sound can end
+		// Modify sound timers
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (!manager)
+			return;
+		
+		const float CPR_REMINDER_INTERVAL_MS = 10000;
+		const float CPR_BEATS_START_DELAY_MS = 2000;
+		
+		manager.m_pSoundTimers.m_fContinueCPRTimer = CPR_REMINDER_INTERVAL_MS - CPR_BEATS_START_DELAY_MS;
+		manager.m_pSoundTimers.m_fLastCPRPaceTimer = -CPR_BEATS_START_DELAY_MS;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -19,24 +29,31 @@ class ACE_Medical_Defibrillation_ConnectedState : ACE_Medical_Defibrillation_IDe
 		// Reduce CPR cooldown
 		context.m_pDefibrillator.GetDefibProgressData().ModifyTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown, -timeSlice);
 		
+		// Play sounds
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (!manager)
+			return;
+		
 		if (context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown) > 0)
 		{
-			context.m_pDefibrillator.m_pSounds.m_fContinueCPRTimer += timeSlice;
+			manager.m_pSoundTimers.m_fContinueCPRTimer += timeSlice;
 			
 			// Remind players to do CPR
-			if (context.m_pDefibrillator.m_pSounds.m_fContinueCPRTimer >= 10000)
+			if (manager.m_pSoundTimers.m_fContinueCPRTimer >= 10000)
 			{
-				context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCPRREMINDER);
-				context.m_pDefibrillator.m_pSounds.m_fContinueCPRTimer = 0;
+				manager.PlaySoundGlobal(ACE_Medical_Defibrillation_SharedSounds.SOUNDCPRREMINDER);
+				manager.m_pSoundTimers.m_fContinueCPRTimer = 0;
 			}
 			
 			// Temp Disable Until Better Networking - On remote clients it comes out to 600ms so there is some delay
 			// Play CPR pacing beats
-			context.m_pDefibrillator.SetCPRBeepLoop(true);
+			manager.SetCPRBeepLoop(true);
 		}
 		else
 		{
-			context.m_pDefibrillator.SetCPRBeepLoop(false);
+			manager.SetCPRBeepLoop(false);
 		}
 	}
 	
@@ -44,6 +61,12 @@ class ACE_Medical_Defibrillation_ConnectedState : ACE_Medical_Defibrillation_IDe
 	override void OnExit(ACE_Medical_Defibrillation_DefibContext context)
 	{
 		// st st st st stop the beats
-		context.m_pDefibrillator.SetCPRBeepLoop(false);
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (!manager)
+			return;
+		
+		manager.SetCPRBeepLoop(false);
 	}
 }

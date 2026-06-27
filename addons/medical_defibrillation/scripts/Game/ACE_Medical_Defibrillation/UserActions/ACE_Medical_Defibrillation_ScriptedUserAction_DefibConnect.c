@@ -1,4 +1,4 @@
-class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
+class ACE_Medical_Defibrillation_ScriptedUserAction_DefibConnect : ACE_Medical_Defibrillation_ScriptedUserAction
 {
 	protected float m_fLastUpdateTime;
 	
@@ -32,7 +32,7 @@ class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
 		if (!CanExecuteThisTick())
 			return (m_pNearestDefib && !PriorDefibFound());
 		
-		ACE_Medical_Defibrillation_QueryNearestDefib query = new ACE_Medical_Defibrillation_QueryNearestDefib(3);
+		ACE_Medical_Defibrillation_QueryNearestDefib query = new ACE_Medical_Defibrillation_QueryNearestDefib(m_pSettings.m_fDefibrillatorConnectionRange);
 		m_pNearestDefib = null;
 		m_pNearestDefib = query.GetEntity(GetOwner().GetOrigin());
 		if (!m_pNearestDefib)
@@ -69,7 +69,7 @@ class ACE_Medical_Defibrillation_UserActions_DefibConnect : ScriptedUserAction
 		if (!defibComponent)
 			return;
 		
-		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_GlobalHelpers.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
+		ACE_Medical_NetworkComponent networkComponent = ACE_Medical_Defibrillation_ComponentManager.GetMedicalNetworkComponent(SCR_ChimeraCharacter.Cast(pUserEntity));
 		if (!networkComponent)
 			return;
 		

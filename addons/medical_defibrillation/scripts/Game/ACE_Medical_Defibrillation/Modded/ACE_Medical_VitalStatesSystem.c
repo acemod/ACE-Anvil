@@ -1,6 +1,13 @@
 #ifdef ENABLE_DIAG
 modded class ACE_Medical_VitalStatesSystem
 {
+	protected ACE_Medical_Defibrillation_Settings m_pDefibrillationSettings;
+	
+	override protected void OnInit()
+	{
+		m_pDefibrillationSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
+	}
+	
     //------------------------------------------------------------------------------------------------
     //! Show vitals for target entity
     override void OnDiag(float timeSlice)
@@ -19,9 +26,6 @@ modded class ACE_Medical_VitalStatesSystem
         SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(target.FindComponent(SCR_CharacterDamageManagerComponent));
         if (!damageManager)
             return;
-        
-        // Get settings
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
         
         DbgUI.Begin(string.Format("ACE Defibrillation - Patient: (%1)", targetType), 0, 550);
         
@@ -49,8 +53,8 @@ modded class ACE_Medical_VitalStatesSystem
         DbgUI.Spacer(5);
         DbgUI.Text("=== SHOCK SUCCESS CALCULATION ===");
         
-        float baseShockChance = ACE_Medical_Defibrillation_DecayCalculator.CalculateShockChance(component);
-        float spamPenalty = ACE_Medical_Defibrillation_DecayCalculator.CalculateSpamPenalty(component);
+        float baseShockChance = ACE_Medical_Defibrillation_CalculationsHelper.CalculateShockChance(component, m_pDefibrillationSettings);
+        float spamPenalty = ACE_Medical_Defibrillation_CalculationsHelper.CalculateSpamPenalty(component, m_pDefibrillationSettings);
         float finalShockChance = baseShockChance * (1.0 - spamPenalty);
         
         DbgUI.Text(string.Format("Base Shock Chance:                   %1", baseShockChance * 100));
@@ -58,22 +62,22 @@ modded class ACE_Medical_VitalStatesSystem
         DbgUI.Text(string.Format("Final Shock Success Chance:          %1", finalShockChance * 100));
         
         // Decay formula info
-        string decayFormula = SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingDecayType, settings.m_eShockDecayFormula);
+        string decayFormula = SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingDecayType, m_pDefibrillationSettings.m_eShockDecayFormula);
         DbgUI.Text(string.Format("Decay Formula:                       %1", decayFormula));
-        DbgUI.Text(string.Format("Decay Rate:                          %1", settings.m_fShockSuccessDecayRate));
+        DbgUI.Text(string.Format("Decay Rate:                          %1", m_pDefibrillationSettings.m_fShockSuccessDecayRate));
         
         // ==================== REVIVE BONUS CALCULATION ====================
         DbgUI.Spacer(5);
         DbgUI.Text("=== REVIVE BONUS CALCULATION ===");
         
-        float reviveBonus = ACE_Medical_Defibrillation_DiagTools.GetReviveBonus(target);
+        float reviveBonus = ACE_Medical_Defibrillation_DiagTools.GetReviveBonus(target, m_pDefibrillationSettings);
         DbgUI.Text(string.Format("Revive Bonus:                        %1", reviveBonus * 100));
         
         // Bonus decay info
-        string bonusDecayFormula = SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingDecayType, settings.m_eReviveBonusDecayFormula);
+        string bonusDecayFormula = SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingDecayType, m_pDefibrillationSettings.m_eReviveBonusDecayFormula);
         DbgUI.Text(string.Format("Bonus Decay Formula:                 %1", bonusDecayFormula));
-        DbgUI.Text(string.Format("Bonus Decay Rate:                    %1", settings.m_fReviveBonusDecayRate));
-        DbgUI.Text(string.Format("Max Total Revive Bonus:              %1", settings.m_fMaxTotalReviveBonus * 100));
+        DbgUI.Text(string.Format("Bonus Decay Rate:                    %1", m_pDefibrillationSettings.m_fReviveBonusDecayRate));
+        DbgUI.Text(string.Format("Max Total Revive Bonus:              %1", m_pDefibrillationSettings.m_fMaxTotalReviveBonus * 100));
         
         // ==================== REVIVE CHANCE ====================
         DbgUI.Spacer(5);

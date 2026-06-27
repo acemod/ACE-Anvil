@@ -44,8 +44,6 @@ class ACE_Medical_Defibrillation_QueryNearestDefib : ACE_QueryNearestEntity
 		if (!defibrillatorComponent)
 			return null;
 		
-		EntityPrefabData prefabData = m_pNearestEntity.GetPrefabData();
-		ResourceName prefabName = prefabData.GetPrefabName();
 		return m_pNearestEntity;
 	}
 }

@@ -40,7 +40,7 @@ class ACE_Medical_Defibrillation_AnalysedStateTransition : ACE_FSM_ITransition<A
 		if (percentComplete >= 1.0)
 		{
 			// Wait for no sound to be playing
-			SoundComponent sndComponent = context.m_pDefibrillator.GetSoundComponent();
+			SoundComponent sndComponent = ACE_Medical_Defibrillation_ComponentManager.GetSoundComponent(context.m_pDefibrillator.GetOwner());
 			if (!sndComponent)
 				return true;
 			if (!sndComponent.IsPlaying())

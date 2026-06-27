@@ -7,7 +7,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	[Attribute("1", UIWidgets.ComboBox, "Defibrillator Emulation Type", "", ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibEmulation), category: "General Settings")]
 	protected ACE_Medical_Defibrillation_EDefibEmulation m_eDefibrillatorEmulation;
 	
-	protected float m_fChargeDuration = 5.5;
+	protected float m_fChargeDuration;
 	protected float m_fAnalysisDuration;
 	protected float m_fCPRCooldownDuration;
 	protected bool m_bPlayCPRPacingBeats;
@@ -25,12 +25,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	[RplProp(onRplName: "OnDefibProgressChanged"), RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
 	protected ref ACE_Medical_Defibrillation_DefibProgressData m_pProgressData;
 	
-	ref ACE_Medical_Defibrillation_DefibSounds m_pSounds;
-	
-	protected bool m_bCPRBeepLoop = false;
-	protected bool m_bChargedBeepLoop = false;
-	
-	protected AudioHandle m_pCurrentSound;
+	protected ACE_Medical_Defibrillation_Settings m_pSettings;
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void OnPostInit(IEntity owner)
@@ -39,12 +34,14 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 		
 		SetEventMask(owner, EntityEvent.FRAME);
 		
-		ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
-		if (settings)
+		m_pSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
+		
+		if (m_pSettings) // m_pSettings will be null on world creation in workbench
 		{
-			m_fCPRCooldownDuration = settings.m_fAED_CPRCooldownDuration;
-			m_bPlayCPRPacingBeats = settings.m_bAED_PlayCPRPacingBeats;
-			m_fAnalysisDuration = settings.m_fAED_AnalysisDuration;
+			m_fCPRCooldownDuration = m_pSettings.m_fAED_CPRCooldownDuration;
+			m_bPlayCPRPacingBeats = m_pSettings.m_bAED_PlayCPRPacingBeats;
+			m_fAnalysisDuration = m_pSettings.m_fAED_AnalysisDuration;
+			m_fChargeDuration = m_pSettings.m_fDefibChargeTime;
 		}
 		
 		// Convert to milliseconds and make data
@@ -52,9 +49,6 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 																		   m_fAnalysisDuration * 1000,
 																		   m_fChargeDuration * 1000,
 																		   m_fCPRCooldownDuration * 1000);
-		
-		// Create sound data
-		m_pSounds = new ACE_Medical_Defibrillation_DefibSounds();
 		
 		// Subscribe to the InventoryItemComponent OnParentSlotChanged
 		// Determines if defib is already on the ground to add it to the system
@@ -75,66 +69,12 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Medical_Defibrillation_Settings GetDefibSystemSettings()
+	bool DefibrillatorPatientInRange()
 	{
-		ACE_Medical_Defibrillation_Settings settings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
-		if (!settings)
-			return null;
+		if (!m_pPatient)
+			return false;
 		
-		return settings;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Temporary until a client side sound manager system is possibly implimented
-	override void EOnFrame(IEntity owner, float timeSlice)
-	{
-		timeSlice *= 1000;
-		
-		// CPR Beep
-		if (m_bPlayCPRPacingBeats && m_bCPRBeepLoop)
-		{
-			m_pSounds.m_fLastCPRPaceTimer += timeSlice;
-			
-			if (m_pSounds.m_fLastCPRPaceTimer >= ACE_Medical_Defibrillation_GlobalHelpers.BpmToMs(102))
-			{
-				PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCPRBEEP);
-				m_pSounds.m_fLastCPRPaceTimer = 0;
-			}
-		}
-		
-		// Charged Sound
-		if (m_bChargedBeepLoop)
-		{
-			const float BEEP_INTERVAL = 250;
-			
-			if (m_pSounds.m_fChargedBeepTimer >= BEEP_INTERVAL)
-			{
-				if (Math.Mod(m_pSounds.m_iChargedBeepPhase, 2) == 0)
-				{
-					PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPLOW);
-				}
-				else
-				{
-					PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGEDBEEPHIGH);
-				}
-				
-				// Advance to next phase and reset timer
-				m_pSounds.m_iChargedBeepPhase++;
-				m_pSounds.m_fChargedBeepTimer = 0;
-			}
-			
-			m_pSounds.m_fChargedBeepTimer += timeSlice;
-		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	SoundComponent GetSoundComponent()
-	{
-		SoundComponent component = SoundComponent.Cast(GetOwner().FindComponent(SoundComponent));
-		if (!component)
-			return null;
-		
-		return component;
+		return (vector.Distance(GetOwner().GetOrigin(), m_pPatient.GetOrigin())) <= m_pSettings.m_fDefibrillatorConnectionRange;
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -156,6 +96,8 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	{
 		SetPatient(null);
 		
+		m_pSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
+		
 		// Convert to milliseconds and make data
 		m_pProgressData = new ACE_Medical_Defibrillation_DefibProgressData(this,
 																		   m_fAnalysisDuration * 1000,
@@ -163,7 +105,12 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 																		   m_fCPRCooldownDuration * 1000);
 		
 		// Create sound data
-		m_pSounds = new ACE_Medical_Defibrillation_DefibSounds();
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(GetOwner());
+		if (!manager)
+		{
+			manager.Reset();
+		}
+		
 		m_eDefibrillatorStateID = ACE_Medical_Defibrillation_EDefibStateID.DISCONNECTED;
 	}
 	
@@ -242,7 +189,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	bool ShockPatient()
+	bool TryShockPatient()
 	{
 	    if (!m_pPatient)
 	        return false;
@@ -250,11 +197,9 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	    ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(m_pPatient.FindComponent(ACE_Medical_VitalsComponent));
 	    if (!vitals)
 	        return false;
-
-	    ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
 	    
 	    // Calculate shock success chance
-	    float shockSuccessChance = CalculateShockSuccessChance(vitals);
+	    float shockSuccessChance = ACE_Medical_Defibrillation_CalculationsHelper.CalculateTotalShockChance(vitals, m_pSettings);
 	    
 	    // Roll for shock success
 	    float randomRoll = Math.RandomFloat01();
@@ -266,29 +211,20 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	        vitals.ModifyShocksDelivered(1);
 			vitals.ResetTimeSinceLastShock();
 	    }
-		
-		PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);	    
+		    
 	    SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CONNECTED);
 	    
 	    float cprCooldown = m_pProgressData.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
 	    m_pProgressData.SetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown, cprCooldown);
 	    
+		// Play sounds
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(GetOwner());
+		if (manager)
+		{
+			manager.PlaySoundOnPatientGlobal(ACE_Medical_Defibrillation_SharedSounds.SOUNDSHOCKTHUMP);
+		}
+		
 	    return shockSuccessful;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	static float CalculateShockSuccessChance(ACE_Medical_VitalsComponent vitals)
-	{
-	    int shocks = vitals.GetShocksDelivered();
-	    float timeSinceLastShock = vitals.GetTimeSinceLastShock();
-	    ACE_Medical_Defibrillation_Settings settings = GetDefibSystemSettings();
-	    
-	    float spamPenalty = ACE_Medical_Defibrillation_DecayCalculator.CalculateSpamPenalty(vitals);
-	    float shockChance = ACE_Medical_Defibrillation_DecayCalculator.CalculateShockChance(vitals);
-	    
-	    float finalChance = shockChance * (1.0 - spamPenalty);
-	    
-	    return Math.Clamp(finalChance, 0.0, settings.m_fBaseShockSuccessChance);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -332,103 +268,7 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	{
 		m_pPatient = ACE_Medical_Defibrillation_ReplicationHelper.GetEntityByRplId(m_iPatientRplId);
 	}
-	
-	//------------------------------------------------------------------------------------------------
-	AudioHandle GetCurrentSound()
-	{
-		return m_pCurrentSound;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void SetCPRBeepLoop(bool state = false)
-	{
-		m_bCPRBeepLoop = state;
-		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void SetChargedBeepLoop(bool state = false)
-	{
-		m_bChargedBeepLoop = state;
-		Replication.BumpMe();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void PlaySound(string soundName, bool terminatePrevious = false, bool isLoop = false)
-	{
-		if (!Replication.IsServer())
-			return;
-		
-		RPC_PlaySound(soundName, terminatePrevious, isLoop);
-		Rpc(RPC_PlaySound, soundName, terminatePrevious, isLoop);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void TerminateSound(bool terminateAll = false)
-	{
-		if (!Replication.IsServer())
-			return;
-		
-		RPC_TerminateSound(terminateAll);
-		Rpc(RPC_TerminateSound, terminateAll);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RPC_PlaySound(string soundName, bool terminatePrevious, bool isLoop)
-	{		
-		if (isLoop && m_pCurrentSound)
-			return;
-		
-		if (terminatePrevious)
-			TerminateSound();
-		
-		SoundComponent sndComp = GetSoundComponent();
-		if (sndComp)
-			m_pCurrentSound = sndComp.SoundEvent(soundName);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RPC_TerminateSound(bool terminateAll)
-	{
-		SoundComponent sndComp = GetSoundComponent();
-		if (!sndComp)
-			return;
-		
-		if (terminateAll)
-			sndComp.TerminateAll();
-		else
-			sndComp.Terminate(m_pCurrentSound);
-		
-		m_pCurrentSound = null;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	void PlaySoundOnPatient(string soundName)
-	{
-		if (!Replication.IsServer())
-			return;
-		
-		RPC_PlaySoundOnPatient(ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
-		Rpc(RPC_PlaySoundOnPatient, ACE_Medical_Defibrillation_DefibSounds.SOUNDSHOCKTHUMP);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	void RPC_PlaySoundOnPatient(string soundName)
-	{
-		IEntity patient = GetPatient();
-		if (!patient)
-			return;
-		
-		CharacterSoundComponent sndComponent = CharacterSoundComponent.Cast(patient.FindComponent(CharacterSoundComponent));
-		if (!sndComponent)
-			return;
-		
-		sndComponent.SoundEvent(soundName);
-	}
-	
+
 	//------------------------------------------------------------------------------------------------
 	bool GetDebugAlwaysShockableRhythm()
 	{

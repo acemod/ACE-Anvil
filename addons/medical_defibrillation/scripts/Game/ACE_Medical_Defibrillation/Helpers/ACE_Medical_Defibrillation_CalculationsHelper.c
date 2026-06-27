@@ -1,17 +1,29 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_Defibrillation_DecayCalculator
+class ACE_Medical_Defibrillation_CalculationsHelper
 {	
 	//------------------------------------------------------------------------------------------------
-	static float CalculateShockChance(ACE_Medical_VitalsComponent vitals)
+	static float CalculateTotalShockChance(ACE_Medical_VitalsComponent vitals, ACE_Medical_Defibrillation_Settings settings)
 	{
-	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
+	    int shocks = vitals.GetShocksDelivered();
+	    float timeSinceLastShock = vitals.GetTimeSinceLastShock();
 	    
+	    float spamPenalty = ACE_Medical_Defibrillation_CalculationsHelper.CalculateSpamPenalty(vitals, settings);
+	    float shockChance = ACE_Medical_Defibrillation_CalculationsHelper.CalculateShockChance(vitals, settings);
+	    
+	    float finalChance = shockChance * (1.0 - spamPenalty);
+	    
+	    return Math.Clamp(finalChance, 0.0, settings.m_fBaseShockSuccessChance);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	static float CalculateShockChance(ACE_Medical_VitalsComponent vitals, ACE_Medical_Defibrillation_Settings settings)
+	{
 	    int shocks = vitals.GetShocksDelivered();
 	    
 	    // Handle TimeBased separately - uses time since arrest started
 	    if (settings.m_eShockDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased)
 	    {
-	        return CalculateTimeBasedShockChance(vitals);
+	        return CalculateTimeBasedShockChance(vitals, settings);
 	    }
 		
 	    // If decay is disabled or no shocks, return base value
@@ -45,16 +57,14 @@ class ACE_Medical_Defibrillation_DecayCalculator
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static float CalculateReviveBonus(ACE_Medical_VitalsComponent vitals)
+	static float CalculateReviveBonus(ACE_Medical_VitalsComponent vitals, ACE_Medical_Defibrillation_Settings settings)
 	{
-	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-	    
-	    int shocks = vitals.GetShocksDelivered();
+		int shocks = vitals.GetShocksDelivered();
 	    
 	    // Handle TimeBased separately - uses time since arrest started
 	    if (settings.m_eReviveBonusDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased)
 	    {
-	        return CalculateTimeBasedReviveBonus(vitals);
+	        return CalculateTimeBasedReviveBonus(vitals, settings);
 	    }
 		
 	    // If decay is disabled or no shocks, return base value
@@ -99,10 +109,8 @@ class ACE_Medical_Defibrillation_DecayCalculator
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static float CalculateTimeBasedShockChance(ACE_Medical_VitalsComponent vitals)
+	static float CalculateTimeBasedShockChance(ACE_Medical_VitalsComponent vitals, ACE_Medical_Defibrillation_Settings settings)
 	{
-	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-	    
 		if (!settings.m_bShockChanceDecay)
 			return settings.m_fBaseShockSuccessChance;
 		
@@ -128,10 +136,8 @@ class ACE_Medical_Defibrillation_DecayCalculator
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	static float CalculateTimeBasedReviveBonus(ACE_Medical_VitalsComponent vitals)
+	static float CalculateTimeBasedReviveBonus(ACE_Medical_VitalsComponent vitals, ACE_Medical_Defibrillation_Settings settings)
 	{
-	    ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-	    
 		if (!settings.m_bReviveBonusDecay)
 			return settings.m_fBaseReviveBonus;
 		
@@ -157,10 +163,8 @@ class ACE_Medical_Defibrillation_DecayCalculator
 	}
     
     //------------------------------------------------------------------------------------------------
-    static float CalculateSpamPenalty(ACE_Medical_VitalsComponent vitals)
+    static float CalculateSpamPenalty(ACE_Medical_VitalsComponent vitals, ACE_Medical_Defibrillation_Settings settings)
     {
-        ACE_Medical_Defibrillation_Settings settings = ACE_Medical_Defibrillation_DefibComponent.GetDefibSystemSettings();
-        
         bool punishSpam = settings.m_bPunishSpamShocks;
         float timeoutSeconds = settings.m_fPunishSpamShocksTimeout;
         float timeSinceLastShock = vitals.GetTimeSinceLastShock();

@@ -142,20 +142,19 @@ class ACE_Medical_Defibrillation_DefibStatesSystem : GameSystem
         // ==================== PRESET INFO ====================
         DbgUI.Spacer(5);
         DbgUI.Text("=== PRESET SETTINGS ===");
-		ACE_Medical_Defibrillation_Settings settings = defibComponent.GetDefibSystemSettings();
-        string presetName = SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingPreset, settings.m_eDefibSettingPreset);
+        string presetName = SCR_Enum.GetEnumName(ACE_Medical_Defibrillation_EDefibSettingPreset, m_pSettings.m_eDefibSettingPreset);
         DbgUI.Text(string.Format("Active Preset:                       %1", presetName));
-        DbgUI.Text(string.Format("Defib Enabled:                       %1", settings.m_bEnabled));
-        DbgUI.Text(string.Format("Defib Mandatory:                     %1", settings.m_bDefibIsMandatory));
-        DbgUI.Text(string.Format("Punish Spam Shocks:                  %1", settings.m_bPunishSpamShocks));
-        DbgUI.Text(string.Format("Spam Timeout:                        %1 seconds", settings.m_fPunishSpamShocksTimeout));
+        DbgUI.Text(string.Format("Defib Enabled:                       %1", m_pSettings.m_bEnabled));
+        DbgUI.Text(string.Format("Defib Mandatory:                     %1", m_pSettings.m_bDefibIsMandatory));
+        DbgUI.Text(string.Format("Punish Spam Shocks:                  %1", m_pSettings.m_bPunishSpamShocks));
+        DbgUI.Text(string.Format("Spam Timeout:                        %1 seconds", m_pSettings.m_fPunishSpamShocksTimeout));
         
         // ==================== AED SETTINGS ====================
         DbgUI.Spacer(5);
         DbgUI.Text("=== AED SETTINGS ===");
-        DbgUI.Text(string.Format("Analysis Duration:                   %1 seconds", settings.m_fAED_AnalysisDuration));
-        DbgUI.Text(string.Format("CPR Cooldown Duration:               %1 seconds", settings.m_fAED_CPRCooldownDuration));
-        DbgUI.Text(string.Format("Play CPR Pacing Beats:               %1", settings.m_bAED_PlayCPRPacingBeats));
+        DbgUI.Text(string.Format("Analysis Duration:                   %1 seconds", m_pSettings.m_fAED_AnalysisDuration));
+        DbgUI.Text(string.Format("CPR Cooldown Duration:               %1 seconds", m_pSettings.m_fAED_CPRCooldownDuration));
+        DbgUI.Text(string.Format("Play CPR Pacing Beats:               %1", m_pSettings.m_bAED_PlayCPRPacingBeats));
         
         DbgUI.End();
         

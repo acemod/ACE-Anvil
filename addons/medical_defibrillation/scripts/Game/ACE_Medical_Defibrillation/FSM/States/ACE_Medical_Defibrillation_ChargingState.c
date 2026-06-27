@@ -10,7 +10,13 @@ class ACE_Medical_Defibrillation_ChargingState : ACE_Medical_Defibrillation_IDef
 		context.m_pDefibrillator.GetDefibProgressData().ResetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.Charge);
 		
 		// Play analysing sound effect
-		context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDCHARGING);
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (!manager)
+			return;
+		
+		manager.PlaySoundGlobal(ACE_Medical_Defibrillation_SharedSounds.SOUNDCHARGING);
 	}
 	
 	//------------------------------------------------------------------------------------------------

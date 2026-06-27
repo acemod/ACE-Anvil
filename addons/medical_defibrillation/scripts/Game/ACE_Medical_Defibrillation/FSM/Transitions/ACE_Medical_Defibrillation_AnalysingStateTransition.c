@@ -40,21 +40,33 @@ class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<
 		if (!patient)
 			return false;
 		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(patient.FindComponent(ACE_Medical_VitalsComponent));
-		if (vitals.IsCPRPerformed())
+		
+		// Play sounds
+		// Reminder to not touch patient
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (manager)
 		{
-			if (context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer >= 3500 &&
-				context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown) == 0)
+			const float PATIENT_TOUCH_WARNING_DELAY_MS = 3500;
+			if (vitals.IsCPRPerformed())
 			{
-				context.m_pDefibrillator.PlaySound(ACE_Medical_Defibrillation_DefibSounds.SOUNDDONOTTOUCHPATIENT);
-				context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer = 0;
+				if (manager.m_pSoundTimers.m_fPatientTouchTimer >= PATIENT_TOUCH_WARNING_DELAY_MS &&
+					context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown) == 0)
+				{
+					manager.PlaySoundGlobal(ACE_Medical_Defibrillation_SharedSounds.SOUNDDONOTTOUCHPATIENT);
+					
+					manager.m_pSoundTimers.m_fPatientTouchTimer = 0;
+				}
+				manager.m_pSoundTimers.m_fPatientTouchTimer += timeSlice;
+				return false;
 			}
-			context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer += timeSlice;
-			return false;
+			else
+			{
+				manager.m_pSoundTimers.m_fPatientTouchTimer = PATIENT_TOUCH_WARNING_DELAY_MS;
+			}
 		}
-		else
-		{
-			context.m_pDefibrillator.m_pSounds.m_fPatientTouchTimer = 3500;
-		}
+
 		
 		// Defib in Connected state for at least 2 seconds
 		ACE_Medical_Defibrillation_DefibProgressData defibProgress = context.m_pDefibrillator.GetDefibProgressData();
@@ -62,8 +74,9 @@ class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<
 		if (cprCooldown > 0)
 			return false;
 
+		const float STATE_MINIMUM_TIME_MS = 2000;
 		float timeInState = defibProgress.GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.StateTimeElapsed);
-		if (timeInState < 2000)
+		if (timeInState < STATE_MINIMUM_TIME_MS)
 			return false;
 		
 		return true;

@@ -7,23 +7,13 @@ modded class ACE_Medical_ReviveTransition
     void ACE_Medical_ReviveTransition(ACE_FSM_EStateID fromStateIDs, ACE_FSM_EStateID toStateID)
     {
         if (!s_pDefibSettings)
-            s_pDefibSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
+			s_pDefibSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
     }
     
     //------------------------------------------------------------------------------------------------
     float ComputeReviveBonus(ACE_Medical_CharacterContext context)
     {
-        if (!s_pDefibSettings)
-            return 0;
-        
-        int shocks = context.m_pVitals.GetShocksDelivered();
-        
-        if (shocks == 0)
-            return 0;
-        
-        float reviveBonus = ACE_Medical_Defibrillation_DecayCalculator.CalculateReviveBonus(context.m_pVitals);
-        
-        return reviveBonus;
+        return ACE_Medical_Defibrillation_CalculationsHelper.CalculateReviveBonus(context.m_pVitals, s_pDefibSettings);
     }
     
     //------------------------------------------------------------------------------------------------

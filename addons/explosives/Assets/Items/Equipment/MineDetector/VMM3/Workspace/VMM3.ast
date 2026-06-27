@@ -1,0 +1,16 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{69B246B984BBDBF9}" {
+   Name "Weapon"
+   Animations {
+    "Idle"
+    "IdleIK"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+ }
+}

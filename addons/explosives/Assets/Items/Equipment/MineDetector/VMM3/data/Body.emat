@@ -1,0 +1,5 @@
+MatPBRBasic {
+ Emissive 0 0 0 1
+ BCRMap "{F9CA730BF3C440AF}data/Body_BCR.edds"
+ NMOMap "{C112C8992AB31231}data/Body_NMO.edds"
+}

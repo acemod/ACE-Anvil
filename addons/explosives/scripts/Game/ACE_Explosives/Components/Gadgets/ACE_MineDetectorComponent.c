@@ -70,6 +70,7 @@ class ACE_MineDetectorComponentClass : ACE_WeaponGadgetComponentClass
 //------------------------------------------------------------------------------------------------
 class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 {
+	protected static ACE_Explosives_Settings s_Settings;
 	protected ACE_MineDetectorComponentClass m_Data;
 	protected WeaponSoundComponent m_SoundComponent;
 	protected SignalsManagerComponent m_SignalsManager;
@@ -94,7 +95,11 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 		
 		if (Replication.IsServer())
 		{
-			m_Data = ACE_MineDetectorComponentClass.Cast(GetComponentData(GetOwner()));
+			if (!s_Settings)
+				s_Settings = ACE_SettingsHelperT<ACE_Explosives_Settings>.GetModSettings();
+			
+			if (!m_Data)
+				m_Data = ACE_MineDetectorComponentClass.Cast(GetComponentData(GetOwner()));
 			
 			vector headTransform[4];
 			Animation anim = GetOwner().GetAnimation();
@@ -163,7 +168,7 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 			return true;
 		}
 		
-		if (Building.Cast(entity))
+		if (!s_Settings.m_bAnyMetalDetectionEnabled || Building.Cast(entity))
 			return true;
 		
 		Physics physics = entity.GetPhysics();

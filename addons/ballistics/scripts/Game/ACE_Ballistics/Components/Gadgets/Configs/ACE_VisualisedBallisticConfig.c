@@ -4,6 +4,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 	protected float m_fDefaultZeroingRange;
 	
 	protected static const float WIND_SPEED = 4.0; // [m/s]
+	protected static const float TARGET_SPEED = 1.0; // [m/s]
 	protected static const float MIN_DROP = -30.0; // [mrad]
 	
 	//------------------------------------------------------------------------------------------------
@@ -45,7 +46,7 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 		for (int range = m_iMinRange; range <= m_iMaxRange; range += m_iRangeStep)
 		{
 			array<float> row = {range};
-			row.Resize(3);
+			row.Resize(4);
 			
 			float drop = ComputeProjectileDrop(projectileSource, range, initialSpeed, time);
 			
@@ -56,6 +57,8 @@ class ACE_VisualisedBallisticConfig : SCR_VisualisedBallisticConfig
 			float drift = ACE_BulletTools.ComputeLateralDrift(projectileSource, initialSpeed, WIND_SPEED, time);
 			float windage = SCR_Math.ConvertFromRadians(Math.Atan2(drift, range), m_eUnitType);
 			row[2] = ACE_Math.Round(windage, 1);
+			float lead = SCR_Math.ConvertFromRadians(Math.Atan2(TARGET_SPEED * time, range), m_eUnitType);
+			row[3] = ACE_Math.Round(lead, 1);
 			ballisticValues.Insert(row);
 		}
 		

@@ -29,6 +29,86 @@ SCR_ChimeraCharacter {
      CanAggregate 1
      "Sort Priority" 12
     }
+    ACE_Carrying_PullUserAction "{69875BE6366C8F57}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo SCR_ActionUIInfo "{69875BE63234721B}" {
+      Name "#ACE_Carrying-UserAction_Pull"
+      Description "Pull head"
+      m_sIconName "downloading"
+     }
+     ActionTitle "Pull head"
+     VisibilityRange 2
+     Duration 1000
+     PerformPerFrame 1
+     "Sort Priority" -99
+     boneIndex 2
+    }
+    ACE_Carrying_PullUserAction "{69892BD147B0A003}" {
+     ParentContextList {
+      "LeftArm" "LeftWrist"
+     }
+     UIInfo SCR_ActionUIInfo "{69892BD147B0A3B0}" {
+      Name "#ACE_Carrying-UserAction_Pull"
+      Description "Pull head"
+      m_sIconName "downloading"
+     }
+     ActionTitle "Pull left arm"
+     VisibilityRange 2
+     Duration 1000
+     PerformPerFrame 1
+     "Sort Priority" -99
+     boneIndex 5
+    }
+    ACE_Carrying_PullUserAction "{69892BD146B36082}" {
+     ParentContextList {
+      "RightArm" "RightWrist"
+     }
+     UIInfo SCR_ActionUIInfo "{69892BD146B360D4}" {
+      Name "#ACE_Carrying-UserAction_Pull"
+      Description "Pull head"
+      m_sIconName "downloading"
+     }
+     ActionTitle "Pull right arm"
+     VisibilityRange 2
+     Duration 1000
+     PerformPerFrame 1
+     "Sort Priority" -99
+     boneIndex 6
+    }
+    ACE_Carrying_PullUserAction "{69892BD141980DCE}" {
+     ParentContextList {
+      "LeftLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{69892BD141980D27}" {
+      Name "#ACE_Carrying-UserAction_Pull"
+      Description "Pull head"
+      m_sIconName "downloading"
+     }
+     ActionTitle "Pull left leg"
+     VisibilityRange 2
+     Duration 1000
+     PerformPerFrame 1
+     "Sort Priority" -99
+     boneIndex 8
+    }
+    ACE_Carrying_PullUserAction "{69892BD1402183CF}" {
+     ParentContextList {
+      "RightLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{69892BD140218314}" {
+      Name "#ACE_Carrying-UserAction_Pull"
+      Description "Pull head"
+      m_sIconName "downloading"
+     }
+     ActionTitle "Pull right leg"
+     VisibilityRange 2
+     Duration 1000
+     PerformPerFrame 1
+     "Sort Priority" -99
+     boneIndex 10
+    }
    }
   }
  }

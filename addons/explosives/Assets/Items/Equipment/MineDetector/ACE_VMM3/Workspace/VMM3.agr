@@ -19,6 +19,9 @@ AnimSrcGraph {
     MinValue -90
     MaxValue 90
    }
+   AnimSrcGCTVarInt WeaponInspectionState {
+    MaxValue 2
+   }
   }
   IkChains {
    AnimSrcGCTIkChain RHandProp {

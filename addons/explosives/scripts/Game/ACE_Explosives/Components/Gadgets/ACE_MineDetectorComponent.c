@@ -16,7 +16,7 @@ class ACE_MineDetectorComponentClass : ACE_WeaponGadgetComponentClass
 	[Attribute(defvalue: "1.0", desc: "Maximum timeout between beeps in seconds.", category: "Detector Sound")]
 	protected float m_fMaxTimeout;
 	
-	[Attribute(defvalue: "0.0", desc: "Distance in meters for minimum timout.", category: "Detector Sound")]
+	[Attribute(defvalue: "0.06", desc: "Distance in meters for minimum timout.", category: "Detector Sound")]
 	protected float m_fMinTimeoutDistance;
 	
 	[Attribute(defvalue: "2.0", desc: "Distance in meters for maximum timout.", category: "Detector Sound")]
@@ -28,7 +28,7 @@ class ACE_MineDetectorComponentClass : ACE_WeaponGadgetComponentClass
 	[Attribute(defvalue: "0.7", desc: "Minimum pitch of beep sound.", category: "Detector Sound")]
 	protected float m_fMinPitch;
 	
-	[Attribute(defvalue: "0.0", desc: "Distance in meters for maximum pitch.", category: "Detector Sound")]
+	[Attribute(defvalue: "0.06", desc: "Distance in meters for maximum pitch.", category: "Detector Sound")]
 	protected float m_fMaxPitchDistance;
 	
 	[Attribute(defvalue: "2.0", desc: "Distance in meters for minimum pitch.", category: "Detector Sound")]

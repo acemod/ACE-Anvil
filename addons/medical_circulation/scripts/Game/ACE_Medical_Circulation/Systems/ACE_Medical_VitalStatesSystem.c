@@ -127,6 +127,9 @@ class ACE_Medical_VitalStatesSystem : GameSystem
 		Tuple2<float, float> pressures = component.GetBloodPressures();
 		DbgUI.Text(string.Format("Blood pressure:               %1/%2 mmHg", Math.Round(pressures.param2 * ACE_PhysicalConstants.KPA2MMHG), Math.Round(pressures.param1 * ACE_PhysicalConstants.KPA2MMHG)));
 		DbgUI.PlotLiveClamped("BP", 500, 400, pressures.param2, 0, 30, 100, 1000);
+		float bloodPH = component.GetBloodPH();
+		DbgUI.Text(string.Format("Blood pH:                     %1", Math.Round(bloodPH * 100) / 100.0));
+		DbgUI.PlotLiveClamped("Blood pH", 500, 400, bloodPH, 6.8, 7.4, 100, 1000);
 		DbgUI.End();
 	}
 #endif

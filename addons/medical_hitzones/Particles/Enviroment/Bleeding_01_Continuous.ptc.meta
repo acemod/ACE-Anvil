@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{486BD20FE5257A33}Particles/Enviroment/Bleeding_01_Continuous.ptc"
+ Configurations {
+  PTCResourceClass PC : "{4B4500E061CCD624}Configs/System/ResourceTypes/PC/ParticleEffect.conf" {
+  }
+  PTCResourceClass XBOX_ONE : "{73FE8562A95EBA36}Configs/System/ResourceTypes/XBOX_ONE/ParticleEffect.conf" {
+  }
+  PTCResourceClass XBOX_SERIES : "{DC1673718B31CF7E}Configs/System/ResourceTypes/XBOX_SERIES/ParticleEffect.conf" {
+  }
+  PTCResourceClass PS4 : "{B94602D6C3160C98}Configs/System/ResourceTypes/PS4/ParticleEffect.conf" {
+  }
+  PTCResourceClass PS5 : "{E8F9F77ECEB75947}configs/ResourceTypes/PS5/ParticleEffect.conf" {
+  }
+  PTCResourceClass HEADLESS : "{EED8908A9A55ED1C}Configs/System/ResourceTypes/HEADLESS/ParticleEffect.conf" {
+  }
+ }
+}

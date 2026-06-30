@@ -21,9 +21,8 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	protected static const float SECOND_CHANCE_SCALED_RECOVERED_HEALTH = 0.01;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Medical_SecondChanceSystem GetInstance()
+	static ACE_Medical_SecondChanceSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Medical_SecondChanceSystem.Cast(world.FindSystem(ACE_Medical_SecondChanceSystem));
 	}
 	
@@ -31,8 +30,10 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 	override static void InitInfo(WorldSystemInfo outInfo)
 	{
 		super.InitInfo(outInfo);
-		outInfo.SetLocation(ESystemLocation.Server);
-		outInfo.AddPoint(ESystemPoint.Frame);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.Frame);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -133,7 +134,8 @@ class ACE_Medical_SecondChanceSystem : GameSystem
 			hitPosDirNorm,
 			damageManager.GetOwner(),
 			hitZone,
-			null, null, -1, -1
+			damageManager.GetInstigator(), // We have to use the last instigator, as otherwise bleedouts would count as suicide
+			null, -1, -1
 		);
 		regenContext.damageEffect = new InstantDamageEffect();
 		damageManager.HandleDamage(regenContext);

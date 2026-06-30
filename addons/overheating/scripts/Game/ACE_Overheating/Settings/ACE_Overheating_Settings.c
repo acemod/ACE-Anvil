@@ -5,13 +5,13 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1.0", desc: "Scales the heat transferred to the barrel by a shot. The larger, the faster the temperature of the barrel increases.", params: "0 inf")]
 	float m_fHeatingScale;
 	
-	[Attribute(defvalue: "1.0", desc: "Scale for how quickly a weapon cools down. Cooling rate is multiplied by this scale.", params: "0 inf")]
-	float m_fDefaultCoolingScale;
+	[Attribute(defvalue: "1.0", desc: "Scale for how quickly a weapon gets cooled down by air. Cooling rate is multiplied by this scale.", params: "0 inf")]
+	float m_fDefaultAirCoolingScale;
 	
-	[Attribute(defvalue: "1.3", desc: "Scale for how quickly a weapon cools down for open bolt weapons.", params: "0 inf")]
-	float m_fOpenBoltCoolingScale;
+	[Attribute(defvalue: "1.3", desc: "Scale for how quickly a weapon gets cooled down by air for open bolt weapons.", params: "0 inf")]
+	float m_fOpenBoltAirCoolingScale;
 	
-	[Attribute(defvalue: "200", desc: "Scale for how quickly a weapon cools down in water.", params: "0 inf")]
+	[Attribute(defvalue: "18", desc: "Scale for how quickly a weapon cools down in water.", params: "0 inf")]
 	float m_fWaterCoolingScale;
 	
 	[Attribute(defvalue: "1.0", desc: "Scale for how likely a weapon jams.", params: "0 inf")]
@@ -23,6 +23,10 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	// The reference data (A. Hameed et al., Defence Technology 2014, 10, 86–91) with which our model was fitted used Bullseye propellant (433.15 K), but for ACE, we take the upper limit of Ball propellant (473.15 K)
 	[Attribute(defvalue: "473.15", desc: "Temperature at which ammo can cook off [K].", params: "0 1300")]
 	float m_fGunpowderAutoignitionTemperature;
+	
+	// Fit to M60 model, such that cook-off progress will exactly reach 1.0 and then stop progressing for the next bullet and T_barrel_final=35°C when firing 100 RPM for 2 minutes and then cease fire for 15 minutes.
+	[Attribute(defvalue: "125.63", desc: "Base heat transfer coefficient for cooling of barrel from other channels than radiation and convection from wind and rain.", params: "0 inf")]
+	float m_fBaseHeatTransferCoefficient;
 	
 	// MassScaledTemperatureRateConstant [g/s] = HeatTransferCoefficient [J/(s*m^2*K)] * SurfaceArea [m^2] / SpecificHeat [J/(g*K)]
 	// The fit of reference data (A. Hameed et al., Defence Technology 2014, 10, 86–91) would be 30.4587377 g/s, but we assume that heat transfer from barrel to bullet is far less efficient than in the experimental configuration of the paper

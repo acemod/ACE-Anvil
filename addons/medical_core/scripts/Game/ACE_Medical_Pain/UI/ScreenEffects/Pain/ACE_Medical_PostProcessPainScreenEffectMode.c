@@ -9,7 +9,7 @@ class ACE_Medical_PostProcessPainScreenEffectMode : ACE_Medical_BasePainScreenEf
 	[Attribute(params: "emat")]
 	protected ResourceName m_sMaterialName;
 	
-	protected ref Material m_pEffectMaterial;
+	protected ref Material m_EffectMaterial;
 	protected static const int POST_PROCESS_EFFECT_PRIORITY = 7;
 	protected static const float POWER_FADEIN_SPEED = 2;
 	protected static const float POWER_FADEOUT_SPEED = 6;
@@ -19,7 +19,7 @@ class ACE_Medical_PostProcessPainScreenEffectMode : ACE_Medical_BasePainScreenEf
 	{
 		super.InitEffect(char, root);
 		char.GetWorld().SetCameraPostProcessEffect(char.GetWorld().GetCurrentCameraId(), POST_PROCESS_EFFECT_PRIORITY, m_ePPType, m_sMaterialName);
-		m_pEffectMaterial = Material.GetMaterial(m_sMaterialName);
+		m_EffectMaterial = Material.GetMaterial(m_sMaterialName);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -27,8 +27,8 @@ class ACE_Medical_PostProcessPainScreenEffectMode : ACE_Medical_BasePainScreenEf
 	{
 		super.EnableEffect(enable);
 		
-		if (m_pEffectMaterial)
-			m_pEffectMaterial.SetParam("Enabled", enable);
+		if (m_EffectMaterial)
+			m_EffectMaterial.SetParam("Enabled", enable);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -44,7 +44,7 @@ class ACE_Medical_PostProcessPainScreenEffectMode : ACE_Medical_BasePainScreenEf
 			strength = Math.Max(0, m_fMaxStrength - POWER_FADEOUT_SPEED * (progress - 0.5));
 		
 		strength *=  m_fStrengthScale;
-		m_pEffectMaterial.SetParam("PowerX", strength);
-		m_pEffectMaterial.SetParam("PowerY", strength);
+		m_EffectMaterial.SetParam("PowerX", strength);
+		m_EffectMaterial.SetParam("PowerY", strength);
 	}
 }

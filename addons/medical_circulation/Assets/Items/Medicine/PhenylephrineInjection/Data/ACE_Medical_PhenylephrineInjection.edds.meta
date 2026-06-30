@@ -9,7 +9,7 @@ MetaFileClass {
   }
   PNGResourceClass PS4 : "{C6CD3D8752652D2A}Configs/System/ResourceTypes/PS4/TextureUnspecified.conf" {
   }
-  PNGResourceClass PS5 : "{6248F71B9D7C1E93}configs/ResourceTypes/PS5/TextureUnspecified.conf" {
+  PNGResourceClass PS5 : "{6248F71B9D7C1E93}Configs/System/ResourceTypes/PS5/TextureUnspecified.conf" {
   }
   PNGResourceClass HEADLESS : "{699C82A6807668A7}Configs/System/ResourceTypes/HEADLESS/TextureUnspecified.conf" {
   }

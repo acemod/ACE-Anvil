@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-//! Match items based on a whitelist of ECommonItemType
+//! Match items based on a whitelist of SCR_EConsumableType
 [BaseContainerProps()]
 class ACE_ConsumableTypeWhitelistItemPredicate : ACE_InventorySearchPredicate
 {
@@ -15,7 +15,7 @@ class ACE_ConsumableTypeWhitelistItemPredicate : ACE_InventorySearchPredicate
 	//------------------------------------------------------------------------------------------------
 	override protected bool IsMatch(BaseInventoryStorageComponent storage, IEntity item, array<GenericComponent> queriedComponents, array<BaseItemAttributeData> queriedAttributes)
 	{
-		SCR_ConsumableItemComponent cosumableComponent = SCR_ConsumableItemComponent.Cast(queriedComponents[0]);
-		return m_aWhitelist.Find(cosumableComponent.GetConsumableType()) >= 0;
+		SCR_ConsumableItemComponent consumableComponent = SCR_ConsumableItemComponent.Cast(queriedComponents[0]);
+		return m_aWhitelist.Find(consumableComponent.GetConsumableType()) >= 0;
 	}
 }

@@ -3,9 +3,9 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 {
 	//-----------------------------------------------------------------------------------------------------------
 	//! Unset "m_bWasRevived" when waking up
-	override void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
+	override void OnLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState, bool isJIP)
 	{
-		super.OnLifeStateChanged(previousLifeState, newLifeState);
+		super.OnLifeStateChanged(previousLifeState, newLifeState, isJIP);
 		
 		if (!Replication.IsServer() || (previousLifeState != ECharacterLifeState.INCAPACITATED) || (newLifeState != ECharacterLifeState.ALIVE))
 			return;

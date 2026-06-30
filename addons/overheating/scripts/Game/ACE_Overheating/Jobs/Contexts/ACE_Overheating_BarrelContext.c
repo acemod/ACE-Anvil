@@ -15,4 +15,10 @@ class ACE_Overheating_BarrelContext : ACE_FrameJobScheduler_IObjectContext<ACE_O
 		m_pHelperAttachment = ACE_Overheating_HelperAttachmentComponent.Cast(muzzle.FindComponent(ACE_Overheating_HelperAttachmentComponent));
 		m_pGlowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(muzzle);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override bool IsValid()
+	{
+		return m_pOwnerChar && m_pOwnerChar.GetPhysics() && super.IsValid();
+	}
 }

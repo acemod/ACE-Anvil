@@ -16,13 +16,13 @@ class ACE_Medical_BasePainScreenEffectMode
 	protected float m_fPeriod;
 	protected bool m_bIsTerminating;
 	protected float m_fMaxStrength;
-	protected SCR_CharacterDamageManagerComponent m_pDamageManager;
+	protected SCR_CharacterDamageManagerComponent m_DamageManager;
 	
 	//------------------------------------------------------------------------------------------------
 	void InitEffect(SCR_ChimeraCharacter char, Widget root)
 	{
 		m_fPeriod = 1 / m_fFrequency;
-		m_pDamageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
+		m_DamageManager = SCR_CharacterDamageManagerComponent.Cast(char.GetDamageManager());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ class ACE_Medical_BasePainScreenEffectMode
 			return;
 		
 		m_fTimer = 0;
-		m_fMaxStrength = m_pDamageManager.ACE_Medical_GetPainIntensity();
+		m_fMaxStrength = m_DamageManager.ACE_Medical_GetPainIntensity();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ class ACE_Medical_BasePainScreenEffectMode
 			return;
 		
 		m_fTimer = 0;
-		m_fMaxStrength = m_pDamageManager.ACE_Medical_GetPainIntensity();
+		m_fMaxStrength = m_DamageManager.ACE_Medical_GetPainIntensity();
 		
 		if (m_bIsTerminating)
 			EnableEffect(false);

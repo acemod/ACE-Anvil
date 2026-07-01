@@ -1,0 +1,31 @@
+AnimSetInstanceSource {
+ Template "{C48F823FCA293568}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Activation.Pne.Idle_fingers" {
+   Resource "{C94B3FF80C6DF233}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Veh.Idle_fingers" {
+   Resource "{C94B3FF80C6DF233}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Erc.Idle_fingers" {
+   Resource "{C94B3FF80C6DF233}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Cro.Idle_fingers" {
+   Resource "{C94B3FF80C6DF233}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Cro.Activate_fingers" {
+   Resource "{05AE2263D864E087}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Erc.Activate_fingers" {
+   Resource "{05AE2263D864E087}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Pne.Activate_fingers" {
+   Resource "{05AE2263D864E087}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Veh.Activate_fingers" {
+   Resource "{05AE2263D864E087}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{60F29686350FE7BC}" {
+ }
+}

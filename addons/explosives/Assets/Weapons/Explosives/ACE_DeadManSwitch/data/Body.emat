@@ -1,0 +1,5 @@
+MatPBRBasic {
+ Emissive 0 0 0 1
+ BCRMap "{904A728970BC68F8}Assets/Weapons/Explosives/ACE_DeadManSwitch/data/Body_BCR.edds"
+ NMOMap "{A892C91BA9CB3A66}Assets/Weapons/Explosives/ACE_DeadManSwitch/data/Body_NMO.edds"
+}

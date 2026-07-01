@@ -1,0 +1,20 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{60ECF4A71E67EFBC}" {
+   Name "Activation"
+   Animations {
+    "Activate"
+    "Activate_fingers"
+    "Idle"
+    "Idle_fingers"
+    "IKOffset"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+    "Veh"
+   }
+  }
+ }
+}

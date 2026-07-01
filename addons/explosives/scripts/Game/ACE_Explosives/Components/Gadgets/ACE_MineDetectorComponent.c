@@ -88,7 +88,6 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 	//------------------------------------------------------------------------------------------------
 	override void OnWeaponActive()
 	{
-		super.OnWeaponActive();
 		m_SoundComponent = WeaponSoundComponent.Cast(GetOwner().FindComponent(WeaponSoundComponent));
 		m_SignalsManager = SignalsManagerComponent.Cast(GetOwner().FindComponent(SignalsManagerComponent));
 		m_iPitchSignal = m_SignalsManager.AddOrFindSignal(PITCH_SIGNAL_NAME);
@@ -110,6 +109,8 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 			m_fQueryTimer = m_Data.GetQueryTimeout();
 			m_fTimer = m_fTimeout;
 		}
+		
+		super.OnWeaponActive();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -194,7 +195,10 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
 	void PlayBeep(float pitch)
 	{
-		m_SignalsManager.SetSignalValue(m_iPitchSignal, pitch);
-		m_SoundComponent.SoundEvent(BEEP_SOUND_NAME);
+		if (m_SignalsManager)
+			m_SignalsManager.SetSignalValue(m_iPitchSignal, pitch);
+		
+		if (m_SoundComponent)
+			m_SoundComponent.SoundEvent(BEEP_SOUND_NAME);
 	}
 }

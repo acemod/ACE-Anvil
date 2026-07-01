@@ -106,8 +106,5 @@ GenericEntity : "{EE7028E9DF49763A}Prefabs/Weapons/Core/Handgun_Base.et" {
   WeaponGamepadEffectsManagerComponent "{61A2E5C3F4458F86}" {
    Enabled 0
   }
-  NwkPhysicsMovementComponent "{5EC2D09D38507493}" {
-   Enabled 0
-  }
  }
 }

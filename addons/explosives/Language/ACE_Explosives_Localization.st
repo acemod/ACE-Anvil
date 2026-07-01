@@ -29,6 +29,25 @@ StringTable {
    Author "Kex"
    LastChanged "Martian"
   }
+  CustomStringTableItem "{69BB4EBA14500CF5}" {
+   Id "ACE-Explosives_Item_DeadManSwitch_Name"
+   Target_en_us "Dead man's switch"
+   Target_fr_fr "Détonateur par relâchement de pression"
+   Target_it_it "Detonatore a rilascio"
+   Target_de_de "Totmannschalter"
+   Target_es_es "Detonador de hombre muerto"
+   Target_cs_cz "Spínač mrtvého muže"
+   Target_pl_pl "Czuwak"
+   Target_ru_ru "Кнопка мертвеца"
+   Target_ja_jp "自爆装置"
+   Target_ko_kr "자폭 장치"
+   Target_pt_br "Detonador do homem mort"
+   Target_zh_cn "自殺炸彈客引爆器"
+   Target_uk_ua "Кнопка мерця"
+   Modified 1773884186
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{69B577E06C24C4A5}" {
    Id "ACE-Explosives_Item_VMM3_Description"
    Target_en_us "Metal and mine detector used for clearing landmines and UXO."
@@ -58,6 +77,14 @@ StringTable {
    Modified 1750691295
    Author "Kex"
    LastChanged "Martian"
+  }
+  CustomStringTableItem "{69BB4EBA604D8752}" {
+   Id "ACE-Explosives_UserAction_ConnectToInventoryExplosives_Name"
+   Target_en_us "Connect to explosives in inventory"
+   Target_de_de "Verbinde mit Sprengladungen im Inventar"
+   Modified 1774405935
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{61B80DDD1907B555}" {
    Id "ACE-Explosives_UserAction_Disarm_Name"

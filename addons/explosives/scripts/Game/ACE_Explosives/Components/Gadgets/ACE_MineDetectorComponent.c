@@ -88,7 +88,6 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 	//------------------------------------------------------------------------------------------------
 	override void OnWeaponActive()
 	{
-		super.OnWeaponActive();
 		m_SoundComponent = WeaponSoundComponent.Cast(GetOwner().FindComponent(WeaponSoundComponent));
 		m_SignalsManager = SignalsManagerComponent.Cast(GetOwner().FindComponent(SignalsManagerComponent));
 		m_iPitchSignal = m_SignalsManager.AddOrFindSignal(PITCH_SIGNAL_NAME);
@@ -110,6 +109,8 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 			m_fQueryTimer = m_Data.GetQueryTimeout();
 			m_fTimer = m_fTimeout;
 		}
+		
+		super.OnWeaponActive();
 	}
 	
 	//------------------------------------------------------------------------------------------------

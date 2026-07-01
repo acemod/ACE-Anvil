@@ -195,7 +195,10 @@ class ACE_MineDetectorComponent : ACE_WeaponGadgetComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
 	void PlayBeep(float pitch)
 	{
-		m_SignalsManager.SetSignalValue(m_iPitchSignal, pitch);
-		m_SoundComponent.SoundEvent(BEEP_SOUND_NAME);
+		if (m_SignalsManager)
+			m_SignalsManager.SetSignalValue(m_iPitchSignal, pitch);
+		
+		if (m_SoundComponent)
+			m_SoundComponent.SoundEvent(BEEP_SOUND_NAME);
 	}
 }

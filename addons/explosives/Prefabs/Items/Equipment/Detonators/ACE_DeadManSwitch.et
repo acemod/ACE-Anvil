@@ -1,0 +1,71 @@
+GenericEntity : "{CE0AF733722B3978}Prefabs/Items/Equipment/Detonators/BlastingMachine_M34/BlastingMachine_M34.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ACE_Explosives_DeadManSwitchGadgetComponent "{5F1A794D87CB704C}" {
+  }
+  MeshObject "{5B0E90AFB5772F9F}" {
+   Object "{3505C5A044624575}Assets/Weapons/Explosives/ACE_DeadManSwitch/DeadManSwitch.xob"
+  }
+  SCR_BaseDeployableInventoryItemComponent "{5F26A42FA3F3D133}" {
+   Enabled 0
+  }
+  SCR_DeployableInventoryItemInventoryComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE-Explosives_Item_DeadManSwitch_Name"
+     Description ""
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{5F1AEE47D6FC5779}" {
+     AnimationInstance "{02893E06AEED9AEF}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch_player.asi"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{5A6C68D9E9C72006}" {
+       AnimGraph "{D67DE43FFDECE19B}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch.agr"
+       AnimInstance "{02893E06AEED9AEF}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch_player.asi"
+      }
+     }
+    }
+    CustomAttributes {
+     CharacterModifierAttributes "{611E635AE0097524}" {
+      Supress1hShooting 0
+     }
+     PreviewRenderAttributes "{5F1AD87BB91BA878}" {
+      CameraPreset Back
+      CameraOrbitAngles 33 0 80
+      CameraDistanceToItem 0.17
+      CameraOffset 0 0 0
+     }
+    }
+   }
+  }
+  SlotManagerComponent "{5F1CBB25D9EFD771}" {
+   Slots {
+    EntitySlotInfo wire {
+     Offset 0.0331 0.0178 0.0149
+     Angles 0 -10.9633 90
+    }
+   }
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    SCR_DetonateChargesAction "{5F2693EABDE4FA5A}" {
+     "Sort Priority" -1
+    }
+    ACE_Explosives_ArmInventoryExplosivesAction "{69BB0466AE1F1D9A}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo UIInfo "{5F26A42325F64668}" {
+      Name "#ACE-Explosives_UserAction_ConnectToInventoryExplosives_Name"
+     }
+     ActionTitle "Connect inventory charges"
+     Duration 2
+    }
+   }
+  }
+  GadgetAnimationComponent "{6114E06D5FC71705}" {
+   AnimGraph "{D67DE43FFDECE19B}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch.agr"
+   AnimInstance "{F9D7AF3736ECFE03}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch_weapon.asi"
+  }
+ }
+ coords 128.145 1.092 127.638
+}

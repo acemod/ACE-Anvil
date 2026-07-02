@@ -75,45 +75,48 @@ class ACE_Explosives_DeadManSwitchGadgetComponent : SCR_DetonatorGadgetComponent
 	//! Drop and detonate inventory charges
 	override protected void DetonateExplosiveCharge()
 	{
-		if (!Replication.IsServer() || !m_CharacterOwner)
+		if (!m_CharacterOwner)
 			return;
 		
-		SCR_InventoryStorageManagerComponent inventoryManager = SCR_InventoryStorageManagerComponent.Cast(m_CharacterOwner.FindComponent(SCR_InventoryStorageManagerComponent));
-		if (!inventoryManager)
-			return;
-
-		Animation charAnim = m_CharacterOwner.GetAnimation();
-		if (!charAnim)
-			return;
-		
-		TNodeId targetBoneId = charAnim.GetBoneIndex(TARGET_BONE_NAME);
-		
-		foreach (IEntity explosive : m_aConnectedInventoryCharges)
+		if (Replication.IsServer())
 		{
-			if (!explosive)
-				continue;
+			SCR_InventoryStorageManagerComponent inventoryManager = SCR_InventoryStorageManagerComponent.Cast(m_CharacterOwner.FindComponent(SCR_InventoryStorageManagerComponent));
+			if (!inventoryManager)
+				return;
+	
+			Animation charAnim = m_CharacterOwner.GetAnimation();
+			if (!charAnim)
+				return;
 			
-			RplComponent explosiveRpl = RplComponent.Cast(explosive.FindComponent(RplComponent));
-			if (!explosiveRpl)
-				continue;
+			TNodeId targetBoneId = charAnim.GetBoneIndex(TARGET_BONE_NAME);
 			
-			SCR_ExplosiveChargeInventoryItemComponent itemComponent = SCR_ExplosiveChargeInventoryItemComponent.Cast(explosive.FindComponent(SCR_ExplosiveChargeInventoryItemComponent));
-			if (!itemComponent)
-				continue;
-			
-			InventoryStorageSlot parentSlot = itemComponent.GetParentSlot();
-			if (!parentSlot)
-				continue;
-			
-			vector charTransform[4];
-			m_CharacterOwner.GetWorldTransform(charTransform);
-			vector localtargetTransform[4];
-			charAnim.GetBoneMatrix(targetBoneId, localtargetTransform);
-			vector targetTransform[4];
-			Math3D.MatrixMultiply4(charTransform, localtargetTransform, targetTransform);
-			itemComponent.SetPlacementPosition(targetTransform[0], targetTransform[1], targetTransform[2], targetTransform[3], RplId.Invalid());
-			itemComponent.RequestUserLock(itemComponent.GetOwner(), false);
-			inventoryManager.TryRemoveItemFromStorage(explosive, parentSlot.GetStorage());
+			foreach (IEntity explosive : m_aConnectedInventoryCharges)
+			{
+				if (!explosive)
+					continue;
+				
+				RplComponent explosiveRpl = RplComponent.Cast(explosive.FindComponent(RplComponent));
+				if (!explosiveRpl)
+					continue;
+				
+				SCR_ExplosiveChargeInventoryItemComponent itemComponent = SCR_ExplosiveChargeInventoryItemComponent.Cast(explosive.FindComponent(SCR_ExplosiveChargeInventoryItemComponent));
+				if (!itemComponent)
+					continue;
+				
+				InventoryStorageSlot parentSlot = itemComponent.GetParentSlot();
+				if (!parentSlot)
+					continue;
+				
+				vector charTransform[4];
+				m_CharacterOwner.GetWorldTransform(charTransform);
+				vector localtargetTransform[4];
+				charAnim.GetBoneMatrix(targetBoneId, localtargetTransform);
+				vector targetTransform[4];
+				Math3D.MatrixMultiply4(charTransform, localtargetTransform, targetTransform);
+				itemComponent.SetPlacementPosition(targetTransform[0], targetTransform[1], targetTransform[2], targetTransform[3], RplId.Invalid());
+				itemComponent.RequestUserLock(itemComponent.GetOwner(), false);
+				inventoryManager.TryRemoveItemFromStorage(explosive, parentSlot.GetStorage());
+			}
 		}
 		
 		// Delay detonation to ensure that inventory charges have a proxy
@@ -125,6 +128,9 @@ class ACE_Explosives_DeadManSwitchGadgetComponent : SCR_DetonatorGadgetComponent
 	{
 		super.DetonateExplosiveCharge();
 		
+		if (!Replication.IsServer())
+			return;
+			
 		foreach (IEntity charge : m_aConnectedInventoryCharges)
 		{
 			SCR_ExplosiveChargeComponent explosive = SCR_ExplosiveChargeComponent.Cast(charge.FindComponent(SCR_ExplosiveChargeComponent));

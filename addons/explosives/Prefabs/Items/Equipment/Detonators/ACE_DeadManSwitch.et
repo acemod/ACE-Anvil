@@ -5,6 +5,9 @@ GenericEntity : "{CE0AF733722B3978}Prefabs/Items/Equipment/Detonators/BlastingMa
   }
   MeshObject "{5B0E90AFB5772F9F}" {
    Object "{3505C5A044624575}Assets/Weapons/Explosives/ACE_DeadManSwitch/DeadManSwitch.xob"
+   LODFactors {
+    1 1 0.05 0.05 0.05 0.05
+   }
   }
   SCR_BaseDeployableInventoryItemComponent "{5F26A42FA3F3D133}" {
    Enabled 0

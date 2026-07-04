@@ -84,6 +84,7 @@ StringTable {
    Id "ACE-Explosives_UserAction_ConnectToInventoryExplosives_Name"
    Target_en_us "Connect to explosives in inventory"
    Target_de_de "Verbinde mit Sprengladungen im Inventar"
+   Target_ko_kr "소지품에 있는 폭발물에 연결하기"
    Modified 1774405935
    Author "Kexanone"
    LastChanged "Kexanone"

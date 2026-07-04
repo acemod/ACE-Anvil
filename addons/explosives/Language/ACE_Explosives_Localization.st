@@ -33,6 +33,7 @@ StringTable {
    Id "ACE-Explosives_Item_VMM3_Description"
    Target_en_us "Metal and mine detector used for clearing landmines and UXO."
    Target_de_de "Metall- und Minensuchgerät zur Räumung von Landminen und Blindgängern."
+   Target_ko_kr "지뢰나 불발탄 제거에 사용되는 금속 및 지뢰탐지기입니다."
    Modified 1773537009
    Author "Kexanone"
    LastChanged "Kexanone"
@@ -41,6 +42,7 @@ StringTable {
    Id "ACE-Explosives_Item_VMM3_Name"
    Target_en_us "BMM3 Metal/Mine Detector"
    Target_de_de "BMM3 Metall- und Minensuchgerät"
+   Target_ko_kr "BMM3 금속/지뢰탐지기"
    Modified 1773535601
    Author "Kexanone"
    LastChanged "Kexanone"

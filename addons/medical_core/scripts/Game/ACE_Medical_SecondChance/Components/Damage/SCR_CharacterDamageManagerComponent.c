@@ -17,7 +17,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			return;
 		
 		ACE_Medical_SetWasSecondChanceGranted(true);
-		m_pResilienceHitZone.SetHealthScaled(0);
+		// Delay call as workaround for https://report.bistudio.com/projects/arma-reforger/game-feedback/ARGF-169
+		GetGame().GetCallqueue().Call(m_pResilienceHitZone.SetHealthScaled, 0);
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------

@@ -10,6 +10,11 @@ class ACE_Medical_Defibrillation_ComponentManager
 		return SoundComponent.Cast(entity.FindComponent(SoundComponent));
 	}
 	
+	static ACE_Medical_Defibrillation_DefibSoundManagerComponent GetDefibSoundManagerComponent(IEntity entity)
+	{
+		return ACE_Medical_Defibrillation_DefibSoundManagerComponent.Cast(entity.FindComponent(ACE_Medical_Defibrillation_DefibSoundManagerComponent));
+	}
+	
 	static ACE_Medical_NetworkComponent GetMedicalNetworkComponent(notnull SCR_ChimeraCharacter char)
 	{
 		PlayerManager playerMgr = GetGame().GetPlayerManager();

@@ -1,0 +1,25 @@
+GameEntity : "{5F728F49C9DDF307}Prefabs/SF_patch.et" {
+ ID "69D022DD251788CE"
+ components {
+  InventoryItemComponent "{657C17E446464A0E}" {
+   Attributes SCR_ItemAttributeCollection "{657C17E446464A0D}" {
+    ItemDisplayName SCR_ItemHintUIInfo "{657C17E446464A0A}" {
+     Name "#ACE-Item_AnvilPatch_Name"
+     Description "#ACE-Item_AnvilPatch_Name"
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{657C17E446464A32}" {
+      CameraDistanceToItem 0.6
+     }
+    }
+   }
+  }
+  MeshObject "{657C17E446464A3F}" {
+   Object "{7EB6887E4E88438D}Assets/Items/Equipment/Patches/ACE_AnvilPatch.xob"
+  }
+  BaseLoadoutClothComponent "{657C17E446464A39}" {
+   WornModel "{7EB6887E4E88438D}Assets/Items/Equipment/Patches/ACE_AnvilPatch.xob"
+   ItemModel "{7EB6887E4E88438D}Assets/Items/Equipment/Patches/ACE_AnvilPatch.xob"
+  }
+ }
+}

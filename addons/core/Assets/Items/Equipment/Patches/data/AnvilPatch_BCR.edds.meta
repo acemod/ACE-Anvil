@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{6D864F2B67ADEC83}Assets/Items/Equipment/Patches/data/Patch_BCR.edds"
+ Name "{6D864F2B67ADEC83}Assets/Items/Equipment/Patches/data/AnvilPatch_BCR.edds"
  Configurations {
   PNGResourceClass PC : "{EAB5DE3219F9CBA8}Configs/System/ResourceTypes/PC/TextureColorMap.conf" {
   }

@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{555EF4B9BEDABE1D}Assets/Items/Equipment/Patches/data/Patch_NMO.edds"
+ Name "{555EF4B9BEDABE1D}Assets/Items/Equipment/Patches/data/AnvilPatch_NMO.edds"
  Configurations {
   PNGResourceClass PC : "{A968DA7F9A1E3A3E}Configs/System/ResourceTypes/PC/TextureNType.conf" {
   }

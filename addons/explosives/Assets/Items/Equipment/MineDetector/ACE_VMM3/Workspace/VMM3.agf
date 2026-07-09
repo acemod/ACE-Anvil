@@ -1,0 +1,252 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet VMM3 {
+   Nodes {
+    AnimSrcNodeGroupSelect ErcG {
+     EditorPos -0.75 2.027
+     Child "ErcSTM"
+     Group "Weapon"
+     Column "Erc"
+    }
+    AnimSrcNodeStateMachine MasterControl {
+     EditorPos 1.86 -0.26
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos -0.54 0.84
+       Child "ErcG"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 1.96 0.44
+       Child "CroG"
+       StartCondition "Stance == 1"
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 4.46 0.84
+       Child "PneG"
+       StartCondition "Stance == 2"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5496D127EC9B4104}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5496D127EC9B4125}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6EB62}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E891}" {
+       FromState "Cro"
+       ToState "Cro"
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E899}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.35"
+       Condition "Stance == 1 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E889}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.35"
+       Condition "Stance == 2 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{54A4B028D9D6E8B7}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.35"
+       Condition "Stance == 0 && HasVariableChanged(Stance)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect CroG {
+     EditorPos 2.16 2.04
+     Child "CroSTM"
+     Group "Weapon"
+     Column "Cro"
+    }
+    AnimSrcNodeGroupSelect PneG {
+     EditorPos 7.732 2.212
+     Child "Pose"
+     Group "Weapon"
+     Column "Pne"
+    }
+    AnimSrcNodePose "Pose IK" {
+     EditorPos 0.483 10.269
+     Source "Weapon.IdleIK"
+     Time "ADSAdjust"
+    }
+    AnimSrcNodeStateMachine CroSTM {
+     Tags {
+      "TagGadget"
+     }
+     EditorPos 2.42 3.891
+     states {
+      AnimSrcNodeState Idle {
+       EditorPos 1.92 5.191
+       Child "Cro AimY Compensate"
+       StartCondition "MovementSpeed == 0"
+      }
+      AnimSrcNodeState Locomotion {
+       EditorPos 4.52 5.191
+       Child "Erc Movement Compensate"
+       StartCondition "MovementSpeed > 0"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5D7286EF1F6FA3A2}" {
+       FromState "Idle"
+       ToState "Locomotion"
+       Duration "0.3"
+       Condition "MovementSpeed > 0"
+       BlendFn "S"
+      }
+      AnimSrcNodeTransition "{5D7286EF1F6FA3C7}" {
+       FromState "Locomotion"
+       ToState "Idle"
+       Duration "0.3"
+       Condition "MovementSpeed == 0"
+       BlendFn "S"
+      }
+     }
+    }
+    AnimSrcNodeProcTransform "Erc Movement Compensate" {
+     EditorPos 3.688 6.553
+     Child "Cro AimY Compensate"
+     Expression "1"
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDA78EE6513B65A}" {
+       Operation Rotate
+       Axis X
+       Amount "0.5"
+       Space Model
+       Bone "RightArm"
+      }
+     }
+    }
+    AnimSrcNodeStateMachine ErcSTM {
+     Tags {
+      "TagGadget"
+     }
+     EditorPos -3.125 3.868
+     states {
+      AnimSrcNodeState Idle {
+       EditorPos -3.625 5.168
+       Child "Erc AimY Compensate"
+       StartCondition "MovementSpeed == 0"
+      }
+      AnimSrcNodeState Locomotion {
+       EditorPos -1.025 5.153
+       Child "Cro Movement Compensate 12911"
+       StartCondition "MovementSpeed > 0"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5D7286EF1F6FA3A2}" {
+       FromState "Idle"
+       ToState "Locomotion"
+       Duration "0.3"
+       Condition "MovementSpeed > 0"
+       BlendFn "S"
+      }
+      AnimSrcNodeTransition "{5D7286EF1F6FA3C7}" {
+       FromState "Locomotion"
+       ToState "Idle"
+       Duration "0.3"
+       Condition "MovementSpeed == 0"
+       BlendFn "S"
+      }
+     }
+    }
+    AnimSrcNodeIK2Target "IK2 Target" {
+     EditorPos 0.437 9.209
+     Child "Pose IK"
+     Bones {
+      AnimSrcNodeIK2BoneTarget "{69B4007A44AC0A3A}" {
+       IkTarget "RightHand"
+       Bone "RightHand_IK_Target"
+      }
+     }
+    }
+    AnimSrcNodeProcTransform "Erc AimY Compensate" {
+     EditorPos -2.102 7.496
+     Child "IK2 Target"
+     Expression "rad(AimY)"
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDA78EE6513B65A}" {
+       Operation Rotate
+       Axis X
+       Amount "-0.6"
+       Space Model
+       Bone "RightArm"
+      }
+      AnimSrcNodeProcTrBoneItem "{5DDC8AADBB827CC6}" {
+       Operation Rotate
+       Axis Z
+       Amount "-0.05"
+       Space Model
+       Bone "RightArm"
+      }
+     }
+    }
+    AnimSrcNodeProcTransform "Cro AimY Compensate" {
+     EditorPos 2.543 7.542
+     Child "IK2 Target"
+     Expression "rad(AimY)"
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDA78EE6513B65A}" {
+       Operation Rotate
+       Axis X
+       Amount "-0.6"
+       Space Model
+       Bone "RightArm"
+      }
+      AnimSrcNodeProcTrBoneItem "{5DDC8AADBB827CC6}" {
+       Operation Rotate
+       Axis Z
+       Amount "-0.05"
+       Space Model
+       Bone "RightArm"
+      }
+     }
+    }
+    AnimSrcNodeProcTransform "Cro Movement Compensate 12911" {
+     EditorPos -0.815 6.495
+     Child "Erc AimY Compensate"
+     Expression "1"
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDA78EE6513B65A}" {
+       Operation Rotate
+       Axis X
+       Amount "0.2"
+       Space Model
+       Bone "RightArm"
+      }
+     }
+    }
+    AnimSrcNodePose Pose {
+     EditorPos 7.697 3.682
+     Source "Weapon.Idle"
+     Time "ADSAdjust"
+    }
+   }
+  }
+ }
+}

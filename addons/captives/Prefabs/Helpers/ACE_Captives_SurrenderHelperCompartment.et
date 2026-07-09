@@ -1,6 +1,14 @@
 ACE_Captives_SurrenderHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_AnimationHelperCompartment.et" {
  ID "4B42E71698F5739C"
  components {
+  SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
+   CompartmentSlots {
+    CargoCompartmentSlot Performer {
+     GetOutAction SCR_GetOutAction "{69AD265674DA6E68}" {
+     }
+    }
+   }
+  }
   VehicleAnimationComponent "{50B812962B17E60B}" {
    AnimInstance "{EF71DF39A69DC55A}Assets/Helpers/Workspace/ACE_Captives_Surrender.asi"
    AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
@@ -8,5 +16,4 @@ ACE_Captives_SurrenderHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE
    }
   }
  }
- m_eLifeStateChangedGetOutType TELEPORT
 }

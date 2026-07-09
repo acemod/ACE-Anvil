@@ -1,0 +1,122 @@
+ProcAnimProjectClass {
+ signals {
+  SignalClass {
+   id 7172
+   name "Address"
+   tl -253 -230
+   res "{FE5976A0914F2A9E}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/FillDevice_KYK13.siga"
+   inputsport {
+    1
+   }
+   outputsport {
+    2
+   }
+   inputvalues {
+    0
+   }
+   inputvaluesmin {
+    0
+   }
+   inputvaluesmax {
+    5
+   }
+  }
+ }
+ funcs {
+  BoneClass {
+   id 2054
+   name "AddressSwitch"
+   version 0
+   tl -38 -352
+   outs {
+    4102
+   }
+   bone "i_address_switch"
+  }
+  RotationMakeClass {
+   id 3078
+   name "RotationMake"
+   tl -37 -253
+   iops {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 0
+       links {
+        ConnectionClass connection {
+         id 7172
+         port 2
+        }
+       }
+      }
+     }
+    }
+   }
+   outs {
+    4102
+   }
+  }
+  RotationSetClass {
+   id 4102
+   name "RotationSet"
+   tl 180 -307
+   funcs {
+    IOPConnectionClass iopConnection {
+     port 1
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 3078
+         port 0
+        }
+       }
+      }
+     }
+    }
+    IOPConnectionClass iopConnection {
+     port 0
+     conn {
+      ConnectionsClass connections {
+       id 2
+       links {
+        ConnectionClass connection {
+         id 2054
+         port 0
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+ model "{A55D1186EB181232}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/FillDevice_KYK13.xob"
+ version 1
+ compiled ProcAnimCompiledClass {
+  visited {
+   129 1 257
+  }
+  ops {
+   ProcAnimCompiledOp {
+    data {
+     1 131072 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     1 131072 0
+    }
+   }
+   ProcAnimCompiledOp {
+    data {
+     0 4 65536 0 0 0
+    }
+   }
+  }
+  version 2
+  argsize 5
+ }
+}

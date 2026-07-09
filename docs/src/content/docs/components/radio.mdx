@@ -9,4 +9,28 @@ import Integrated from '~/components/Integrated.astro';
   author="veteran29"
 />
 
-Adds channel-specific beep sounds from ACRE2 when starting a radio transmission.
+Adds channel-specific beep sounds from ACRE2 when starting a radio transmission. Also adds KYK-13 Fill Device for copying custom encryption keys to radios.
+
+## Details
+
+### KYK-13 Fill Device
+
+A small device used for transferring cryptographic keys to radios. It can only be used if the server has [`VONCanTransmitCrossFaction`](https://community.bistudio.com/wiki/Arma_Reforger:Server_Config#VONCanTransmitCrossFaction) enabled, as otherwise you cannot transmit over non-default encrypted channels.
+
+## Usage
+
+### Load KYK-13 with an encryption key set
+
+- Equip the KYK-13 and interact with the stationary radio on a friendly command post
+- You can choose between various key sets, where a set consists of 6 keys that get simultaneously loaded
+
+
+### Copy encryption key from KYK-13 to another KYK-13 or radio
+
+- Drop the device you want to copy a key to on the floor
+- Equip the loaded KYK-13 and interact with the device on the floor to copy the key
+- You can select a different key from the key set for copying by inspecting the KYK-13 and change the address
+
+### Clear all keys from KYK-13
+
+- There is a clear all action when you inspect the KYK-13

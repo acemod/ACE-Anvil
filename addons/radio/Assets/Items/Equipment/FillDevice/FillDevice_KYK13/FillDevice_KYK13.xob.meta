@@ -1,0 +1,38 @@
+MetaFileClass {
+ Name "{A55D1186EB181232}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/FillDevice_KYK13.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   MaterialAssigns {
+    MaterialAssignClass "{666370C93E673FF6}" {
+     SourceMaterial "KYKBASE"
+     AssignedMaterial "{F2C148F2C03AA253}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Data/FillDevice_KYK13.emat"
+    }
+   }
+   MeshParams {
+    MeshParam Kyk13 {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_Item {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{CE9253778DD8FBDE}Common/Materials/Game/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+  }
+  FBXResourceClass PS4 : PC {
+  }
+  FBXResourceClass PS5 : PC {
+  }
+  FBXResourceClass HEADLESS : PC {
+  }
+ }
+}

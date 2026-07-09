@@ -118,6 +118,10 @@ modded class SCR_PlayerController : PlayerController
 		ACE_Overheating_BarrelGlowEffectComponent glowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(weapon.GetCurrentMuzzle());
 		if (glowEffect)
 			glowEffect.ForceIntensity(0);
+		
+		ACE_Overheating_SmokeEffectComponent smokeEffect = ACE_Overheating_SmokeEffectComponent.FromMuzzle(weapon.GetCurrentMuzzle());
+		if (smokeEffect)
+			smokeEffect.TerminateEffects();
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -37,6 +37,9 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "1.0", desc: "Scales the additional temperature-dependent dispersion of shots. Set to 0.0 to turn it off.", params: "0 inf")]
 	float m_fMuzzleDispersionScale;
 	
+	[Attribute(defvalue: "500", desc: "Temperature above which barrel starts smoking [K].", params: "0 1300")]
+	float m_fMinSmokeTemperature;
+	
 	[Attribute(defvalue: "800", desc: "Temperature above which barrel starts glowing [K].", params: "0 1300")]
 	float m_fMinGlowTemperature;
 }

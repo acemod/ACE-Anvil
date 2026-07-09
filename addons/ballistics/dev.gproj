@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Ballistics_Dev"
+ GUID "68F77A54920B80AF"
+ TITLE "ACE Ballistics Dev"
+ Dependencies {
+  "58D0FB3206B6F859" "65AD7D0D9941A380"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{68F76221BDA994F4}" {
+      StringTableSource "{DA71C3C62240FAC9}Language/ACE_Ballistics_localization.st"
+      Languages {
+       LanguageDefinition "{68F76221B3A582B7}" {
+        Code "cs_cz"
+        StringTableRuntime "{3D9C3869C6CB0F04}Language/ACE_Ballistics_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{68F76221B3A582F9}" {
+        Code "de_de"
+        StringTableRuntime "{E8E2225AD5681E24}Language/ACE_Ballistics_localization.de_de.conf"
+       }
+       LanguageDefinition "{68F76221B3A58279}" {
+        Code "en_us"
+        StringTableRuntime "{B612A811BF9B1B25}Language/ACE_Ballistics_localization.en_us.conf"
+       }
+       LanguageDefinition "{68F76221B3A5826E}" {
+        Code "es_es"
+        StringTableRuntime "{735EE5985199703A}Language/ACE_Ballistics_localization.es_es.conf"
+       }
+       LanguageDefinition "{68F76221B3A58242}" {
+        Code "fr_fr"
+        StringTableRuntime "{C8F610AFB71A9338}Language/ACE_Ballistics_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{68F76221B3A581BB}" {
+        Code "it_it"
+        StringTableRuntime "{48EA9F9B1A3810C1}Language/ACE_Ballistics_localization.it_it.conf"
+       }
+       LanguageDefinition "{68F76221B3A581AF}" {
+        Code "ja_jp"
+        StringTableRuntime "{58F122092449206A}Language/ACE_Ballistics_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{68F76221B3A58198}" {
+        Code "ko_kr"
+        StringTableRuntime "{F84F0AA5B7642355}Language/ACE_Ballistics_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{68F76221B3A5818C}" {
+        Code "pl_pl"
+        StringTableRuntime "{A43EAC5F098BBF29}Language/ACE_Ballistics_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{68F76221B3A581FC}" {
+        Code "pt_br"
+        StringTableRuntime "{7149369332757593}Language/ACE_Ballistics_localization.pt_br.conf"
+       }
+       LanguageDefinition "{68F76221B3A581DB}" {
+        Code "ru_ru"
+        StringTableRuntime "{2408223BAF0C10E5}Language/ACE_Ballistics_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{68F76221B3A58091}" {
+        Code "uk_ua"
+        StringTableRuntime "{AE5077CDC322AEB0}Language/ACE_Ballistics_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{68F76221B3A58082}" {
+        Code "zh_cn"
+        StringTableRuntime "{74E019F0FA827EAD}Language/ACE_Ballistics_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

@@ -80,18 +80,11 @@ StringTable {
    Target_es_es "Alto"
    Target_pl_pl "Wysoki"
    Target_ko_kr "높음"
-<<<<<<< HEAD
-   Target_zh_cn "高音"
-   Modified 1769404056
-   Author "veteran29"
-   LastChanged "YuanYu"
-=======
    Target_pt_br "Alto"
    Target_zh_cn "高音"
    Modified 1725492506
    Author "veteran29"
    LastChanged "Martian"
->>>>>>> master
   }
   CustomStringTableItem "{6448264811A5CBD7}" {
    Id "ACE_Radio-Settings-Radio_Beep_Low"
@@ -101,18 +94,11 @@ StringTable {
    Target_es_es "Bajo"
    Target_pl_pl "Niski"
    Target_ko_kr "낮음"
-<<<<<<< HEAD
-   Target_zh_cn "低音"
-   Modified 1769404064
-   Author "veteran29"
-   LastChanged "YuanYu"
-=======
    Target_pt_br "Baixo"
    Target_zh_cn "低音"
    Modified 1725492514
    Author "veteran29"
    LastChanged "Martian"
->>>>>>> master
   }
   CustomStringTableItem "{644826480D886913}" {
    Id "ACE_Radio-Settings-Radio_Beep_Off"
@@ -122,18 +108,11 @@ StringTable {
    Target_es_es "Apagado"
    Target_pl_pl "Wyłączony"
    Target_ko_kr "없음"
-<<<<<<< HEAD
-   Target_zh_cn "關閉"
-   Modified 1769404070
-   Author "veteran29"
-   LastChanged "YuanYu"
-=======
    Target_pt_br "Desligado"
    Target_zh_cn "關閉"
    Modified 1725492519
    Author "veteran29"
    LastChanged "Martian"
->>>>>>> master
   }
   CustomStringTableItem "{64482648D1C29B76}" {
    Id "ACE_Radio-Settings_Beep_Cycle"

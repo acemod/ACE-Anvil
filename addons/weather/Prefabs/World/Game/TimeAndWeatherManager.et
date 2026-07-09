@@ -1,0 +1,12 @@
+TimeAndWeatherManagerEntity {
+ ID "5244F08C9618CADD"
+ m_aACE_MonthlyAverageTemperatureAirMaxHours {
+  14.12 14.24 14.89 15.23 15.34 15.47 15.82 15.13 14.96 14.31 13.79 13.95
+ }
+ m_aACE_MonthlyAverageDailyTemperatureAirMins {
+  272.67 274.45 275.41 278.13 282.43 287.44 288.40 288.69 285.10 281.32 276.22 274.09
+ }
+ m_aACE_MonthlyAverageDailyTemperatureAirMaxs {
+  279.54 282.79 285.50 288.62 292.33 297.83 298.77 299.08 294.56 289.82 283.05 279.82
+ }
+}

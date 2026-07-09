@@ -1,0 +1,70 @@
+AnimSrcGraph {
+ AnimSetTemplate "{F0DB105B65EF631A}Assets/Items/Equipment/workspaces/Compass_SY183.ast"
+ ControlTemplate AnimSrcGCT "{54A4F2EA7A4296DB}" {
+  Variables {
+   AnimSrcGCTVarFloat AimY {
+    MinValue -90
+    MaxValue 90
+   }
+   AnimSrcGCTVarBool Focused {
+    DefaultValue 0
+   }
+   AnimSrcGCTVarInt Stance {
+    DefaultValue 0
+    MaxValue 2
+   }
+   AnimSrcGCTVarBool Low {
+    DefaultValue 0
+   }
+   AnimSrcGCTVarFloat AimX {
+    MinValue -90
+    MaxValue 90
+   }
+   AnimSrcGCTVarBool Temp {
+   }
+   AnimSrcGCTVarInt WeaponType {
+    MaxValue 20
+   }
+   AnimSrcGCTVarBool FreeLook {
+   }
+   AnimSrcGCTVarFloat TargetYOffset {
+    MinValue -180
+    MaxValue 180
+   }
+  }
+  IkChains {
+   AnimSrcGCTIkChain Head {
+    Joints {
+     "neck2"
+     "neck3"
+     "head"
+    }
+    MiddleJoint "neck3"
+    ChainAxis "+y"
+   }
+   AnimSrcGCTIkChain LeftArm {
+    Joints {
+     "leftarm"
+     "leftarmtwist"
+     "leftforearm"
+     "leftforearmtwist"
+     "lefthand"
+    }
+    MiddleJoint "leftforearm"
+    ChainAxis "+y"
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "GADGET"
+   "COMPASS"
+   "SY183"
+  }
+ }
+ Debug AnimSrcGD "{54A4F2EA7A429611}" {
+ }
+ GraphFilesResourceNames {
+  "{71D48AB6140E9994}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Workspace/Kestrel4500.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

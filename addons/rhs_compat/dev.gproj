@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_RHS_Compat_Dev"
+ GUID "69D0C0E789FF456C"
+ TITLE "ACE RHS Compat Dev"
+ Dependencies {
+  "65AD7D0D9941A380" "58D0FB3206B6F859" "595F2BF2F44836FB"
+ }
+}

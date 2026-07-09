@@ -1,0 +1,26 @@
+GameEntity : "{3C86938A05C83673}Prefabs/Items/Equipment/Patches/ACE_AnvilPatch.et" {
+ ID "69D0C619A36A0F4A"
+ components {
+  InventoryItemComponent "{5DB09136B1C985CE}" {
+   Attributes SCR_ItemAttributeCollection "{5DB09136B1C985C1}" {
+    ItemDisplayName SCR_ItemHintUIInfo "{5DB09136B1C985EB}" {
+     Name "#ACE-Item_MedicPatch_Name"
+     Description "#ACE-Item_MedicPatch_Name"
+    }
+   }
+  }
+  MeshObject "{5DB09136B1C985B5}" {
+   Materials {
+    MaterialAssignClass "{69D13EB3B870C163}" {
+     SourceMaterial "Patch"
+     AssignedMaterial "{CF004E5E514A2125}Assets/Items/Equipment/Patches/data/MedicPatch.emat"
+    }
+   }
+  }
+  BaseLoadoutClothComponent "{5DB09136B1C9859A}" {
+   ItemMaterialsOverride {
+    "{CF004E5E514A2125}Assets/Items/Equipment/Patches/data/MedicPatch.emat"
+   }
+  }
+ }
+}

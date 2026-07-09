@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Chopping_Dev"
+ GUID "65AD7BCC9F6B3B4E"
+ TITLE "ACE Chopping Dev"
+ Dependencies {
+  "58D0FB3206B6F859" "65AD7D0D9941A380"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{60EEAC80D52E72F5}" {
+      StringTableSource "{449B115472C3DAC9}Language/ACE_Chopping_localization.st"
+      Languages {
+       LanguageDefinition "{60EEAC80CB355123}" {
+        Code "cs_cz"
+        StringTableRuntime "{752FB6CC8225BB52}Language/ACE_Chopping_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{60EEAC80CB35516A}" {
+        Code "de_de"
+        StringTableRuntime "{A051ACFF9186AA72}Language/ACE_Chopping_localization.de_de.conf"
+       }
+       LanguageDefinition "{60EEAC80CB355159}" {
+        Code "en_us"
+        StringTableRuntime "{FEA126B4FB75AF73}Language/ACE_Chopping_localization.en_us.conf"
+       }
+       LanguageDefinition "{60EEAC80CB355144}" {
+        Code "es_es"
+        StringTableRuntime "{3BED6B3D1577C46C}Language/ACE_Chopping_localization.es_es.conf"
+       }
+       LanguageDefinition "{60EEAC80CB3550B6}" {
+        Code "fr_fr"
+        StringTableRuntime "{80459E0AF3F4276E}Language/ACE_Chopping_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{60EEAC80CB3550A5}" {
+        Code "it_it"
+        StringTableRuntime "{0059113E5ED6A497}Language/ACE_Chopping_localization.it_it.conf"
+       }
+       LanguageDefinition "{60EEAC80CB355090}" {
+        Code "ja_jp"
+        StringTableRuntime "{1042ACAC60A7943C}Language/ACE_Chopping_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{60EEAC80CB355083}" {
+        Code "ko_kr"
+        StringTableRuntime "{B0FC8400F38A9703}Language/ACE_Chopping_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{60EEAC80CB35508F}" {
+        Code "pl_pl"
+        StringTableRuntime "{EC8D22FA4D650B7F}Language/ACE_Chopping_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{60EEAC80CB3550FA}" {
+        Code "pt_br"
+        StringTableRuntime "{39FAB836769BC1C5}Language/ACE_Chopping_localization.pt_br.conf"
+       }
+       LanguageDefinition "{60EEAC80CB355FBD}" {
+        Code "ru_ru"
+        StringTableRuntime "{6CBBAC9EEBE2A4B3}Language/ACE_Chopping_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{60EEAC80CB355F91}" {
+        Code "uk_ua"
+        StringTableRuntime "{E6E3F96887CC1AE6}Language/ACE_Chopping_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{60EEAC80CB355F9D}" {
+        Code "zh_cn"
+        StringTableRuntime "{3C539755BE6CCAFB}Language/ACE_Chopping_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

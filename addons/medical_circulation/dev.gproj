@@ -1,0 +1,22 @@
+GameProject {
+ ID "ACE_Medical_Circulation_Dev"
+ GUID "65AD7D4F994EA327"
+ TITLE "ACE Medical Circulation Dev"
+ Dependencies {
+  "6586079789278413" "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

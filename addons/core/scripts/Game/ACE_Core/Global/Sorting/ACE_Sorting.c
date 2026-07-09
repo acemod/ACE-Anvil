@@ -2,7 +2,10 @@
 class ACE_Sorting<Class T, Class TContainer, SCR_SortCompare TCompare>
 {
 	//---------------------------------------------------------------------------------------------------
-	static void InsertSort(TContainer a, bool inverse = false)
+	//! Sorts container inplace with insertion sort, a stable and adpative sorting algorithm
+	//! \param[in] a Container to sort
+	//! \param[in] inverse Sort in ascending order when false
+	static void InsertionSort(TContainer a, bool inverse = false)
 	{
 		for (int i = 1, count = a.Count(); i < count; i++)
 		{

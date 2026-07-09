@@ -5,7 +5,7 @@ modded class SCR_EntityCatalogMultiList: SCR_EntityCatalog
 	//------------------------------------------------------------------------------------------------
 	protected override void InitCatalog()
 	{
-		ACE_Sorting<SCR_EntityCatalogMultiListEntry, array<ref SCR_EntityCatalogMultiListEntry>, ACE_CompateEntityCatalogMultiListEntryPriority>.InsertSort(m_aMultiLists);		
+		ACE_Sorting<SCR_EntityCatalogMultiListEntry, array<ref SCR_EntityCatalogMultiListEntry>, ACE_CompateEntityCatalogMultiListEntryPriority>.InsertionSort(m_aMultiLists);		
 		super.InitCatalog();
 	}
 }

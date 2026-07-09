@@ -62,6 +62,13 @@ StringTable {
    Author "Kex"
    LastChanged "Martian"
   }
+  CustomStringTableItem "{69D0F455AABC16B0}" {
+   Id "ACE-Item_AnvilPatch_Name"
+   Target_en_us "ACE Anvil Patch"
+   Modified 1775301835
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{60FD565E5C4D775C}" {
    Id "ACE-Item_Banana_Description"
    Target_en_us "Healthy potassium!"
@@ -95,6 +102,13 @@ StringTable {
    Modified 1750691073
    Author "kexanone"
    LastChanged "Martian"
+  }
+  CustomStringTableItem "{69D0F455ACDDFC84}" {
+   Id "ACE-Item_MedicPatch_Name"
+   Target_en_us "ACE Medic Patch"
+   Modified 1775301842
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
    Id "ACE-UserAction_Carry"

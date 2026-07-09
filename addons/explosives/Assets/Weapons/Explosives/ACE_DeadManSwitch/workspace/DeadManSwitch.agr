@@ -1,0 +1,62 @@
+AnimSrcGraph {
+ AnimSetTemplate "{C48F823FCA293568}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch.ast"
+ ControlTemplate AnimSrcGCT "{60ECF4A6A7E30F3B}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 3
+   }
+   AnimSrcGCTVarFloat ADSAdjust {
+    DefaultValue 1
+    MaxValue 1
+   }
+   AnimSrcGCTVarFloat AimY {
+    MinValue -90
+    MaxValue 90
+   }
+   AnimSrcGCTVarFloat TargetYOffset {
+    MinValue -180
+    MaxValue 180
+   }
+   AnimSrcGCTVarBool FreeLook {
+   }
+   AnimSrcGCTVarInt Low {
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_Item_Action {
+   }
+  }
+  IkChains {
+   AnimSrcGCTIkChain LeftArm {
+    Joints {
+     "leftarm"
+     "leftarmtwist"
+     "leftforearm"
+     "leftforearmtwist"
+     "lefthand"
+    }
+    MiddleJoint "leftforearm"
+   }
+   AnimSrcGCTIkChain Head {
+    Joints {
+     "neck2"
+     "neck3"
+     "head"
+    }
+    MiddleJoint "neck3"
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "GADGET"
+   "DETONATOR"
+   "M34"
+  }
+ }
+ Debug AnimSrcGD "{60ECF4A6A7E30EA5}" {
+ }
+ GraphFilesResourceNames {
+  "{F973FA85634F88AB}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

@@ -1,0 +1,16 @@
+$animation "" {
+ #version 2
+ #fps 30
+ #numFrames 0
+ $node "i_switch" {
+  $keys q {
+   $frame 0 {
+    #q 0.00023013 0.00034953 0.70695037 0.70726317
+   }
+  }
+ }
+ $custProps {
+  #custProp "profile" "ACE_DeadManSwitch"
+  #custProp "sourceFile" "Character_AnimationRig_DeadManSwitch.blend"
+ }
+}

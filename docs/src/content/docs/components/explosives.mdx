@@ -4,6 +4,7 @@ title: Explosives
 
 **ACE Explosives** has the following features:
 - Adds BMM3 metal/mine detector to arsenal
+- Adds dead man's switch to arsenal
 - Bury/Unbury mines with E-tool
 - AT mines cannot be triggered by projectiles or melee
 
@@ -20,6 +21,7 @@ Certain aspects of this mod can be configured in the mission header section of a
 | Field                                 | Value                | Description                                        |
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_bAnyMetalDetectionEnabled`         | Type: `bool`<br />Default: `true` | Metal/Mine detectors will detect any metal object instead of just mines when enabled. |
+| `m_bDeadManSwitchOnlyActiveInHand`    | Type: `bool`<br />Default: `true` | Dead man's switch only triggers while in hand if true. Otherwise it can trigger from anywhere in the inventory. |
 
 Example for the `missionHeader` in a server config:
 
@@ -27,7 +29,8 @@ Example for the `missionHeader` in a server config:
 "missionHeader": {
     "m_ACE_Settings": {
         "m_ACE_Explosives_Settings": {
-            "m_bAnyMetalDetectionEnabled": true
+            "m_bAnyMetalDetectionEnabled": true,
+            "m_bDeadManSwitchOnlyActiveInHand": true
         }
     }
 }

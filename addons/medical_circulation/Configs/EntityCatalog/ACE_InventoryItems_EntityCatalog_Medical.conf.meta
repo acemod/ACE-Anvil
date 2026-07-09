@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{E908001749419691}Configs/EntityCatalog/FIA/InventoryItems_EntityCatalog_FIA.conf"
+ Name "{A5E3827C546B8210}Configs/EntityCatalog/ACE_InventoryItems_EntityCatalog_Medical.conf"
  Configurations {
   CONFResourceClass PC {
   }
@@ -9,9 +9,9 @@ MetaFileClass {
   }
   CONFResourceClass PS4 : PC {
   }
-  CONFResourceClass HEADLESS : PC {
-  }
   CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
   }
  }
 }

@@ -19,7 +19,7 @@ modded class SCR_CharacterCommandHandlerComponent : CharacterCommandHandlerCompo
 			m_bACE_ForceWeaponFire = false;
 		}
 		
-		return super.HandleWeaponFire(pInputCtx, pDt, pCurrentCommandID);
+		return HandleWeaponFireDefault(pInputCtx, pDt, pCurrentCommandID);
 	}
 	
 	//------------------------------------------------------------------------------------------------

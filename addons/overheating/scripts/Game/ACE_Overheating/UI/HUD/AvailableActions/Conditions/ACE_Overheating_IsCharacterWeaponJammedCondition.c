@@ -4,7 +4,7 @@ class ACE_Overheating_IsCharacterWeaponJammedCondition : SCR_AvailableActionCond
 {
 	//------------------------------------------------------------------------------------------------
 	//! Returns true if the release action is available
-	override bool IsAvailable(SCR_AvailableActionsConditionData data)
+	override bool IsAvailable(notnull SCR_AvailableActionsConditionData data)
 	{
 		if (!data)
 			return false;

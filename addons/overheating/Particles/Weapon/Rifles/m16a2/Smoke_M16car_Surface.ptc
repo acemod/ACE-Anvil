@@ -1,0 +1,155 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef HOT_1 {
+   ShapeType Box
+   ShapeSize 0.01 0.01 0.25
+   MaxNum 65
+   BirthRate 35
+   LodMin 0
+   LodMax 0
+   Material "{D797F4753649427F}Particles/_Materials/Gas/Smoke_Weapons_03.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.1
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.1
+   VelAffect 1
+   AirResistance 3
+   AirResistanceRND 4
+   WindInfluence 0.175
+   GravityMultiply 0
+   GravityMultiplyRND -0.107
+   Spring 0.003
+   AnimOnce 1
+   AnimFPS 20
+   RandomFrame 1
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
+   Alpha {
+    0 0.4788 0.549 0.3213 0.9905 0 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.533 0.8061 1 1
+   }
+   EmittingTime 1
+  }
+  EmitterDef HOT_2 {
+   ShapeType Box
+   ShapeSize 0.005 0.005 0.25
+   MaxNum 65
+   BirthRate 35
+   LodMin 0
+   LodMax 0
+   Material "{6CF6075043D54BE3}Particles/_Materials/Gas/Whisp_01_Anim.emat"
+   SizeMultiplier 0.2
+   SizeRND 0.175
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.1
+   VelAffect 1
+   AirResistance 2
+   AirResistanceRND 3
+   WindInfluence 0.1
+   GravityMultiply 0
+   GravityMultiplyRND -0.085
+   Spring 0.003
+   AnimOnce 1
+   AnimFPS 15
+   Lifetime 1
+   Alpha {
+    0 0.4971 0.5538 0.1212 0.9915 0 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.5319 0.6909 1 1
+   }
+   EmittingTime 1
+   ColorMast {
+    0 1 1 1 0.0001 1 1 1 0.4533 0.8303 0.7697 0.7091 1 1 1 1
+   }
+  }
+  EmitterDef HOT_0 {
+   ShapeSize 0.015 0.02 0.35
+   ConeAngle 360 80 90
+   MaxNum 90
+   BirthRate 15
+   BirthRateRND 15
+   Offset 0 0 0.06
+   Angles -90 0 0
+   LodMin 0
+   LodMax 0
+   Material "{239FB3ED3B942A0B}Particles/_Materials/Gas/Smoke_Weapons_02.emat"
+   SizeMultiplier 0.1
+   SizeRND 0.222
+   CenterY 0
+   RotMultiplier 45
+   RotRND -55
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   FlipV Random
+   Velocity 0
+   VelocityRND 0.22
+   VelAffect 1
+   AirResistance 2
+   AirResistanceRND 2.5
+   WindInfluence 0.212
+   GravityMultiply 0
+   GravityMultiplyRND -0.188
+   NormalRestitution 0.232
+   TagentialRestitution 0.42
+   Friction 1
+   Spring 0.01
+   AnimOnce 1
+   AnimFPS 15
+   Lifetime 2
+   Color {
+    0 0.6788 0.6788 0.6788
+   }
+   Alpha {
+    0 0.8667 0.4056 0.503 0.9899 0 1 0
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 1 0
+   }
+   Size {
+    0 0.1189 0.533 0.8061 1 1
+   }
+   EmittingTime 1
+   AlphaMast {
+    0 1 0.4793 0.8909 1 1
+   }
+  }
+ }
+ MinFPS 30
+ CollisionPreset "{5D9EE44C68755DF5}"
+}

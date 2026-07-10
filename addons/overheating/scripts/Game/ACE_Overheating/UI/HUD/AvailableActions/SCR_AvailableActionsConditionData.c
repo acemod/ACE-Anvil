@@ -30,7 +30,7 @@ modded class SCR_AvailableActionsConditionData
 	{
 		super.FetchData(controlledEntity, timeSlice);
 		
-		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance();
+		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance(GetGame().GetWorld());
 		if (!system)
 			return;
 		

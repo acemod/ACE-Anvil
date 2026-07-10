@@ -1,0 +1,26 @@
+GenericEntity : "{C63227C0E70EA62E}Prefabs/Weapons/Rifles/M16/Rifle_M16A2_base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{CA6BE4D6B867541F}" {
+     components {
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       m_cBirthRateTemperatureCurve {
+        0 0.028 0.379 0.261 0.646 0.433 0.859 0.576 1 0.682
+       }
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6650F89005C40872}" {
+         m_sContinuousParticleEffect "{159E6A10F4BBB03B}Particles/Weapon/m16a2/Smoke_M16car_Surface.ptc"
+         m_pEffectPosition PointInfo "{6650F8903C086983}" {
+          Offset 0 -0.0086 0.0854
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

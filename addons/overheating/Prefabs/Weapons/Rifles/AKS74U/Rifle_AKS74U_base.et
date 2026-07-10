@@ -1,0 +1,27 @@
+GenericEntity : "{1FA22B1F5E7BC80B}Prefabs/Weapons/Rifles/AK74/Rifle_AK74_short_base.et" {
+ ID "CFBAA4B725411E45"
+ components {
+  WeaponComponent "{CFBAA4B706BA66E8}" {
+   components {
+    MuzzleComponent "{CA6BE4D6B867541F}" {
+     components {
+      ACE_Overheating_SmokeEffectComponent "{66316E2C8DA4986A}" {
+       m_aSomkeEffects {
+        ACE_Overheating_SmokeEffectConfig "{6650F89004554222}" {
+         m_pEffectPosition PointInfo "{6650F8903978BCB2}" {
+          Offset 0 0 0.0256
+         }
+        }
+        ACE_Overheating_SmokeEffectConfig "{6656B134909DB280}" {
+         m_pEffectPosition PointInfo "{6656B13538008E9B}" {
+          Offset 0 0.0041 -0.0901
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

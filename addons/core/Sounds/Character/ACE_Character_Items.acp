@@ -1,0 +1,322 @@
+AudioClass {
+ signals {
+  SignalClass "161805" {
+   id 161805
+   name "Signal Reverb"
+   tl -366.913 -791.81
+   res "{90D469F083C44823}Sounds/_SharedData/Signals/Reverb/Reverb_Character.sig"
+   inputsport {
+    1 35 112 136
+   }
+   outputsport {
+    39 105 106 107 110
+   }
+   inputvalues {
+    0 1 15627 0
+   }
+   inputvaluesmin {
+    0 0 0 0
+   }
+   inputvaluesmax {
+    100 1 16000 1
+   }
+  }
+ }
+ sounds {
+  SoundClass "157705" {
+   id 157705
+   name "ACE_SOUND_METAL_CLANGING"
+   version 5
+   tl -309.54 -475.286
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "156690:65" {
+       id 156690
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    48 0
+   }
+   outState 162827
+   outStatePort 79879
+   eventNoRepeatTimeMSec 2700
+   transformation Bone
+   boneName "LeftHand"
+  }
+ }
+ mixers {
+  MixerClass "162827" {
+   id 162827
+   name "OutputState"
+   version 4
+   tl -79.98 -865.077
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass "con:79879" {
+     id 79879
+     links {
+      ConnectionClass "157705:65" {
+       id 157705
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:300039" {
+     id 300039
+     links {
+      ConnectionClass "152605:65" {
+       id 152605
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:301063" {
+     id 301063
+     links {
+      ConnectionClass "153629:65" {
+       id 153629
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:302087" {
+     id 302087
+     links {
+      ConnectionClass "151581:65" {
+       id 151581
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    234889216 0
+   }
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb_OBSOLETE" "VON_Reverb_Small" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin" "VON_Reverb_Medium" "VON_Reverb_Large"
+   }
+  }
+ }
+ shaders {
+  ShaderClass "156690" {
+   id 156690
+   name "ACE_SOUND_METAL_BANGING"
+   version 5
+   tl -484.774 -476.286
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "160796:65" {
+       id 160796
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "158739:65" {
+       id 158739
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "159765:65" {
+       id 159765
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "155652:65" {
+       id 155652
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass "158739" : "{BA1F5E72DA797274}Sounds/_SharedData/Configs/Amplitude/_SharedData/Amplitude_-30LUFS_to_-25LUFS.conf" {
+   id 158739
+   comment "Voice"
+   version 5
+   tl -736.49 -402.356
+   ctl 0 -24
+   parent "{BA1F5E72DA797274}Sounds/_SharedData/Configs/Amplitude/_SharedData/Amplitude_-30LUFS_to_-25LUFS.conf"
+   outerRange 80
+  }
+ }
+ frequency {
+  FrequencyClass "159765" : "{CA912C59A9267045}Sounds/_SharedData/Configs/Frequency/_SharedData/Frequency_Base.conf" {
+   id 159765
+   version 5
+   tl -734.751 -329.313
+   parent "{CA912C59A9267045}Sounds/_SharedData/Configs/Frequency/_SharedData/Frequency_Base.conf"
+   pi {
+    16 0
+   }
+  }
+ }
+ banks_local {
+  BankLocalClass "155652" {
+   id 155652
+   name "Metal Banging"
+   version 7
+   tl -735.585 -548.713
+   Volume -14
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{12642C243AC5EE91}Sounds/Character/Samples/ACE_Metal_Banging.wav"
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass "160796" : "{E7A5A6AD7326FC7B}Sounds/_SharedData/Configs/Spatiality/Spatiality_Signal.conf" {
+   id 160796
+   version 5
+   tl -733.012 -475.4
+   parent "{E7A5A6AD7326FC7B}Sounds/_SharedData/Configs/Spatiality/Spatiality_Signal.conf"
+   pi + {
+    0
+   }
+  }
+ }
+ auxOuts {
+  AuxOutClass "151581" {
+   id 151581
+   name "AuxOut Rev Large"
+   version 5
+   tl -82.75 -419.166
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "157705:5" {
+       id 157705
+       port 5
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "161805:110" {
+       id 161805
+       port 110
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "161805:39" {
+       id 161805
+       port 39
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+   OSPort 302087
+  }
+  AuxOutClass "152605" {
+   id 152605
+   name "AuxOut Rev Small"
+   version 5
+   tl -79.21 -665.902
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "157705:5" {
+       id 157705
+       port 5
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "161805:107" {
+       id 161805
+       port 107
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "161805:39" {
+       id 161805
+       port 39
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+   OSPort 300039
+  }
+  AuxOutClass "153629" {
+   id 153629
+   name "AuxOut Rev Medium"
+   version 5
+   tl -80.658 -541.241
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "157705:5" {
+       id 157705
+       port 5
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "161805:106" {
+       id 161805
+       port 106
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "161805:39" {
+       id 161805
+       port 39
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+   OSPort 301063
+  }
+ }
+ version 2
+ listenerWindowModel "{9F3AF591CD6DFE1A}Assets/Characters/Basebody/Basebody_Male_01.xob"
+}

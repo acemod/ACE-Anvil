@@ -7,6 +7,11 @@ SCR_ChimeraCharacter {
     }
    }
   }
+  CharacterSoundComponent "{520EA1D2F659CF84}" {
+   Filenames + {
+    "{219DB0BDB3B82C4F}Sounds/Character/ACE_Character_Items.acp"
+   }
+  }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    ActionContexts {
     UserActionContext "{647772A5736E4459}" {

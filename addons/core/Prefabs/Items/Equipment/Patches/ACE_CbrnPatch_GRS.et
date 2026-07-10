@@ -1,0 +1,29 @@
+GameEntity : "{B9E98F1464E93A9E}Prefabs/Items/Equipment/Patches/ACE_AnvilPatch_GRS.et" {
+ ID "69D022DD251788CE"
+ components {
+  InventoryItemComponent "{657C17E446464A0E}" {
+   Attributes SCR_ItemAttributeCollection "{657C17E446464A0D}" {
+    ItemDisplayName SCR_ItemHintUIInfo "{657C17E446464A0A}" {
+     Name "#ACE-Item_CbrnPatch_Name"
+     Description "#ACE-Item_CbrnPatch_Name"
+    }
+   }
+  }
+  MeshObject "{657C17E446464A3F}" {
+   Materials {
+    MaterialAssignClass "{69D425A62D25B1D2}" {
+     SourceMaterial "Patch"
+     AssignedMaterial "{FD6AF2C156949B00}Assets/Items/Equipment/Patches/data/CbrnPatch.emat"
+    }
+   }
+  }
+  BaseLoadoutClothComponent "{657C17E446464A39}" {
+   WornMaterialsOverride {
+    "{FD6AF2C156949B00}Assets/Items/Equipment/Patches/data/CbrnPatch.emat"
+   }
+   ItemMaterialsOverride {
+    "{FD6AF2C156949B00}Assets/Items/Equipment/Patches/data/CbrnPatch.emat"
+   }
+  }
+ }
+}

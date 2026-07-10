@@ -117,7 +117,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_PlaySoundEvent(ACE_ESoundEvent id)
+	void ACE_PlaySoundEvent(ACE_ECharacterSoundEvent id)
 	{
 		Rpc(RpcDo_ACE_PlaySoundEventBroadcast, id);
 		
@@ -127,8 +127,8 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
-	protected void RpcDo_ACE_PlaySoundEventBroadcast(ACE_ESoundEvent id)
+	protected void RpcDo_ACE_PlaySoundEventBroadcast(ACE_ECharacterSoundEvent id)
 	{
-		m_CharacterSoundComponent.SoundEvent(typename.EnumToString(ACE_ESoundEvent, id));
+		m_CharacterSoundComponent.SoundEvent(typename.EnumToString(ACE_ECharacterSoundEvent, id));
 	}
 }

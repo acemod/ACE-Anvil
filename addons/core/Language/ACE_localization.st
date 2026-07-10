@@ -65,7 +65,8 @@ StringTable {
   CustomStringTableItem "{69D0F455AABC16B0}" {
    Id "ACE-Item_AnvilPatch_Name"
    Target_en_us "ACE Anvil Patch"
-   Modified 1775301835
+   Target_de_de "ACE Anvil Abzeichen"
+   Modified 1775505875
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -103,10 +104,27 @@ StringTable {
    Author "kexanone"
    LastChanged "Martian"
   }
+  CustomStringTableItem "{69D425A0AB2A4037}" {
+   Id "ACE-Item_CbrnPatch_Name"
+   Target_en_us "ACE CBRN Patch"
+   Target_de_de "ACE CBRN Abzeichen"
+   Modified 1775512912
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69D40E74015C3532}" {
+   Id "ACE-Item_EngineerPatch_Name"
+   Target_en_us "ACE Engineer Patch"
+   Target_de_de "ACE Pionier Abzeichen"
+   Modified 1775505883
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{69D0F455ACDDFC84}" {
    Id "ACE-Item_MedicPatch_Name"
    Target_en_us "ACE Medic Patch"
-   Modified 1775301842
+   Target_de_de "ACE Sanitäter Abzeichen"
+   Modified 1775505860
    Author "Kexanone"
    LastChanged "Kexanone"
   }

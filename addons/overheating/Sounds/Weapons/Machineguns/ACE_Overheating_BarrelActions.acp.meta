@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{1ABE61EA39D00553}Sounds/Weapons/Machineguns/ACE_Overheating_BarrelSwap.acp"
+ Name "{1ABE61EA39D00553}Sounds/Weapons/Machineguns/ACE_Overheating_BarrelActions.acp"
  Configurations {
   AudioProjectResourceClass PC {
   }

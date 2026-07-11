@@ -3,7 +3,7 @@ SCR_UISoundEntity {
  components {
   SimpleSoundComponent "{52EAE81FCD04D30C}" {
    Filenames + {
-    "{1ABE61EA39D00553}Sounds/Weapons/Machineguns/ACE_Overheating_BarrelSwap.acp"
+    "{1ABE61EA39D00553}Sounds/Weapons/Machineguns/ACE_Overheating_BarrelActions.acp"
    }
   }
  }

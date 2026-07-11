@@ -1,0 +1,22 @@
+GameProject {
+ ID "ACE_CBRN"
+ GUID "69D6208A90F483EB"
+ TITLE "ACE CBRN"
+ Dependencies {
+  "58D0FB3206B6F859" "6214CEA5DA92BFF3"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{75F8DC635BA69A3F}Prefabs/Characters/GasMask/GasMask_M50/ACE_GasMask_M50_FaceClothing.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

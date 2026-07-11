@@ -1,0 +1,28 @@
+GameEntity : "{8C279C847004CD61}Prefabs/Characters/Core/ACE_GasMask_Headgear_Base.et" {
+ ID "5112706CD4157AC7"
+ components {
+  MeshObject "{5112706CD4157AE0}" {
+   Object "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"
+  }
+  SCR_HeadgearInventoryItemComponent "{5244E4431E28A759}" {
+   Attributes SCR_ItemAttributeCollection "{5244E4431DA56D64}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5244E443130B31B9}" {
+     Name "#ACE_CBRN-Headgear_GasMask_M50_Name"
+     Description "#ACE_CBRN-Headgear_GasMask_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.86
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{52D2D35767351900}" {
+      PreviewModel "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"
+     }
+    }
+   }
+  }
+  BaseLoadoutClothComponent "{5112706CD4157AF8}" {
+   WornModel "{E61CF0DA0E8AB152}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50.xob"
+   ItemModel "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"
+  }
+ }
+}

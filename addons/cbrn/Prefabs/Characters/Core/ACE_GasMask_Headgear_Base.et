@@ -1,0 +1,24 @@
+GameEntity : "{17F335BF60DD2550}Prefabs/Characters/Core/Headgear_Base.et" {
+ ID "5112706CD4157AC7"
+ components {
+  ACE_CBRN_ProtectionComponent "{69D6FE8C8B1D823D}" {
+  }
+  SCR_HeadgearInventoryItemComponent "{5244E4431E28A759}" {
+   Attributes SCR_ItemAttributeCollection "{5244E4431DA56D64}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5244E443130B31B9}" {
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     SizeSetupStrategy Manual
+     ItemVolume 500
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{52D2D35767351900}" {
+      CameraPreset Top
+      CameraDistanceToItem 1.7
+      PreviewWornModel 0
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,11 +1,6 @@
 GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
  ID "0000000000000001"
  components {
-  WeaponSoundComponent "{5A8685198A9AEEDD}" {
-   Filenames {
-    "{1ABE61EA39D00553}Sounds/Weapons/Machineguns/ACE_Overheating_BarrelSwap.acp"
-   }
-  }
   SCR_WeaponStatsManagerComponent "{663325CDA83F057C}" {
   }
   WeaponComponent "{CFBAA4B706BA66E8}" {

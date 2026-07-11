@@ -1,7 +1,7 @@
 MatPBRBasicGlass {
  Cull none
  Sort translucent
- AlphaMul 0.933
+ AlphaMul 0.7
  AllowUserAlphaBias 1
  DisableUserAphaInShadow 1
  BCRMap "{EACB2B7E25689034}Assets/Characters/GasMask/ACE_GasMask_M50/Data/Glasses_BCR.edds"

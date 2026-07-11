@@ -66,6 +66,9 @@ class ACE_Medical_Circulation_Settings : ACE_ModSettings
 		if (!m_CardiacArrestDamageEffect)
 			m_CardiacArrestDamageEffect = new ACE_Medical_CardiacArrestDamageEffect();
 		
+		m_CardiacArrestDamageEffect.SetMaxDuration(0);
+		m_CardiacArrestDamageEffect.SetDamageType(EDamageType.ACE_MEDICAL_HYPOXIA);
+		
 		// Derive default SVR from other values
 		m_fDefaultSystemicVascularResistance = m_fDefaultMeanArterialPressureKPA / (m_fDefaultHeartRateBPM * m_fDefaultStrokeVolumeML);
 		// MAP multiplied by this value yields PP

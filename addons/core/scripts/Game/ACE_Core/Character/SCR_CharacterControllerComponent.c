@@ -73,6 +73,10 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	bool ACE_CanCarry(IEntity entity, out string cannotPerformReason)
 	{
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar || ownerChar.IsInVehicle())
+			return false;
+		
 		if (ACE_IsCarrier())
 		{
 			cannotPerformReason = "#ACE-UserAction_Carrying";
@@ -110,5 +114,21 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		}
 				
 		return false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_PlaySoundEvent(ACE_ECharacterSoundEvent id)
+	{
+		Rpc(RpcDo_ACE_PlaySoundEventBroadcast, id);
+		
+		if (!System.IsConsoleApp())
+			RpcDo_ACE_PlaySoundEventBroadcast(id);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_ACE_PlaySoundEventBroadcast(ACE_ECharacterSoundEvent id)
+	{
+		m_CharacterSoundComponent.SoundEvent(typename.EnumToString(ACE_ECharacterSoundEvent, id));
 	}
 }

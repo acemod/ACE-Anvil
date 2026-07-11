@@ -7,6 +7,67 @@ GameProject {
  }
  Configurations {
   GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{69D731111E61283F}" {
+      StringTableSource "{D020D5D69D799F55}Language/ACE_CBRN_localizations.st"
+      Languages {
+       LanguageDefinition "{69D731111C4A1289}" {
+        Code "cs_cz"
+        StringTableRuntime "{643D9B2FC7E8F6F1}Language/ACE_CBRN_localizations.cs_cz.conf"
+       }
+       LanguageDefinition "{69D731111C4A1233}" {
+        Code "de_de"
+        StringTableRuntime "{B143811CD44BE7D1}Language/ACE_CBRN_localizations.de_de.conf"
+       }
+       LanguageDefinition "{69D731111C4A1221}" {
+        Code "en_us"
+        StringTableRuntime "{EFB30B57BEB8E2D0}Language/ACE_CBRN_localizations.en_us.conf"
+       }
+       LanguageDefinition "{69D731111C4A1211}" {
+        Code "es_es"
+        StringTableRuntime "{2AFF46DE50BA89CF}Language/ACE_CBRN_localizations.es_es.conf"
+       }
+       LanguageDefinition "{69D731111C4A1202}" {
+        Code "fr_fr"
+        StringTableRuntime "{9157B3E9B6396ACD}Language/ACE_CBRN_localizations.fr_fr.conf"
+       }
+       LanguageDefinition "{69D731111C4A1271}" {
+        Code "it_it"
+        StringTableRuntime "{114B3CDD1B1BE934}Language/ACE_CBRN_localizations.it_it.conf"
+       }
+       LanguageDefinition "{69D731111C4A127D}" {
+        Code "ja_jp"
+        StringTableRuntime "{0150814F256AD99F}Language/ACE_CBRN_localizations.ja_jp.conf"
+       }
+       LanguageDefinition "{69D731111C4A126A}" {
+        Code "ko_kr"
+        StringTableRuntime "{A1EEA9E3B647DAA0}Language/ACE_CBRN_localizations.ko_kr.conf"
+       }
+       LanguageDefinition "{69D731111C4A125B}" {
+        Code "pl_pl"
+        StringTableRuntime "{FD9F0F1908A846DC}Language/ACE_CBRN_localizations.pl_pl.conf"
+       }
+       LanguageDefinition "{69D731111C4A1245}" {
+        Code "pt_br"
+        StringTableRuntime "{28E895D533568C66}Language/ACE_CBRN_localizations.pt_br.conf"
+       }
+       LanguageDefinition "{69D731111C4A11BB}" {
+        Code "ru_ru"
+        StringTableRuntime "{7DA9817DAE2FE910}Language/ACE_CBRN_localizations.ru_ru.conf"
+       }
+       LanguageDefinition "{69D731111C4A11D1}" {
+        Code "uk_ua"
+        StringTableRuntime "{F7F1D48BC2015745}Language/ACE_CBRN_localizations.uk_ua.conf"
+       }
+       LanguageDefinition "{69D731111C4A11DC}" {
+        Code "zh_cn"
+        StringTableRuntime "{2D41BAB6FBA18758}Language/ACE_CBRN_localizations.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
   }
   GameProjectConfig XBOX_ONE {
   }

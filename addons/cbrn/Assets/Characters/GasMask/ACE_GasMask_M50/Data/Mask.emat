@@ -1,0 +1,7 @@
+MatPBRBasic {
+ Cull none
+ AllowUserAlphaBias 1
+ DisableUserAphaInShadow 1
+ BCRMap "{782717726D1DF107}Assets/Characters/GasMask/ACE_GasMask_M50/Data/Mask_BCR.edds"
+ NMOMap "{40FFACE0B46AA399}Assets/Characters/GasMask/ACE_GasMask_M50/Data/Mask_NMO.edds"
+}

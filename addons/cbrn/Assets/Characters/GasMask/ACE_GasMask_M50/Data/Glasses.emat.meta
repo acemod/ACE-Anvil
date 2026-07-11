@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{64708F0794BE5C25}Assets/Characters/GasMask/ACE_GasMask_M50/Data/Glasses.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

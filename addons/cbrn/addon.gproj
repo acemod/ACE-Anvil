@@ -3,7 +3,7 @@ GameProject {
  GUID "69D6208A90F483EB"
  TITLE "ACE CBRN"
  Dependencies {
-  "58D0FB3206B6F859" "6214CEA5DA92BFF3"
+  "58D0FB3206B6F859" "60C4C12DAE90727B"
  }
  Configurations {
   GameProjectConfig PC {

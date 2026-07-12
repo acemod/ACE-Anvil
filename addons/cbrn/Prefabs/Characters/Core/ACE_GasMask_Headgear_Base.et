@@ -1,7 +1,10 @@
 GameEntity : "{17F335BF60DD2550}Prefabs/Characters/Core/Headgear_Base.et" {
  ID "5112706CD4157AC7"
  components {
-  ACE_CBRN_ProtectionComponent "{69D6FE8C8B1D823D}" {
+  ACE_CBRN_ProtectiveGadgetComponent "{69D942AB256FEE7D}" {
+   m_eProtectedAreas 3
+   m_eAnimVariable ADRIANOV
+   m_eUseMask 7
   }
   SCR_HeadgearInventoryItemComponent "{5244E4431E28A759}" {
    Attributes SCR_ItemAttributeCollection "{5244E4431DA56D64}" {
@@ -10,6 +13,15 @@ GameEntity : "{17F335BF60DD2550}Prefabs/Characters/Core/Headgear_Base.et" {
     ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
      SizeSetupStrategy Manual
      ItemVolume 500
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{69D942AABD496CED}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{69D942AADF6B3C7A}" {
+       BindingName "Gadget"
+      }
+     }
     }
     CustomAttributes {
      PreviewRenderAttributes "{52D2D35767351900}" {

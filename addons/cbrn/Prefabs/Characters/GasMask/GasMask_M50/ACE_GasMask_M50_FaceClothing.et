@@ -1,6 +1,12 @@
 GameEntity : "{7A478DEDD82AA320}Prefabs/Characters/Core/ACE_GasMask_FaceClothing_Base.et" {
  ID "69D725621AB5D129"
  components {
+  ACE_CBRN_ProtectiveGadgetComponent "{69D942AB256FEE7D}" {
+   m_eUseMask 7
+  }
+  MeshObject "{5CDD764EFD8327C0}" {
+   Object "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"
+  }
   InventoryItemComponent "{5CDD764EFD83273E}" {
    Attributes SCR_ItemAttributeCollection "{5CDD764EFD83273D}" {
     ItemDisplayName SCR_InventoryUIInfo "{5CDD764EFD83273B}" {
@@ -10,15 +16,20 @@ GameEntity : "{7A478DEDD82AA320}Prefabs/Characters/Core/ACE_GasMask_FaceClothing
     ItemPhysAttributes ItemPhysicalAttributes "{5CDD764EFD8327C6}" {
      Weight 0.86
     }
+    ItemAnimationAttributes ItemAnimationAttributes "{69D942AABD496CED}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{69D942AADF6B3C7A}" {
+       AnimGraph "{25B5CD66792F60F4}Assets/Items/Medicine/Workspaces/MorphineInjection_01.agr"
+       AnimInstance "{B900F61FD4D7F1DA}Assets/Items/Medicine/Workspaces/morphine_injection_player.asi"
+      }
+     }
+    }
     CustomAttributes {
      PreviewRenderAttributes "{5CDD764EFD8327C5}" {
       PreviewModel "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"
      }
     }
    }
-  }
-  MeshObject "{5CDD764EFD8327C0}" {
-   Object "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"
   }
   BaseLoadoutClothComponent "{5CDD764EFD8327CA}" {
    WornModel "{E61CF0DA0E8AB152}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50.xob"

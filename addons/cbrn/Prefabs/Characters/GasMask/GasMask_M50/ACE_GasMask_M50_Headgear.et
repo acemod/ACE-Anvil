@@ -1,6 +1,9 @@
 GameEntity : "{8C279C847004CD61}Prefabs/Characters/Core/ACE_GasMask_Headgear_Base.et" {
  ID "5112706CD4157AC7"
  components {
+  ACE_CBRN_ProtectiveGadgetComponent "{69D942AB256FEE7D}" {
+   m_eUseMask 7
+  }
   MeshObject "{5112706CD4157AE0}" {
    Object "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"
   }
@@ -12,6 +15,14 @@ GameEntity : "{8C279C847004CD61}Prefabs/Characters/Core/ACE_GasMask_Headgear_Bas
     }
     ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
      Weight 0.86
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{69D9509E3E29F1C5}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{69D9509E51A9B10A}" {
+       AnimGraph "{25B5CD66792F60F4}Assets/Items/Medicine/Workspaces/MorphineInjection_01.agr"
+       AnimInstance "{B900F61FD4D7F1DA}Assets/Items/Medicine/Workspaces/morphine_injection_player.asi"
+      }
+     }
     }
     CustomAttributes {
      PreviewRenderAttributes "{52D2D35767351900}" {

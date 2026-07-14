@@ -5,6 +5,10 @@ GameEntity : "{17F335BF60DD2550}Prefabs/Characters/Core/Headgear_Base.et" {
    m_eProtectedAreas 3
    m_eAnimVariable ADRIANOV
    m_eUseMask 7
+   m_ConsumableEffect ACE_ConsumableWearableItems "{69D976EAA9CCC10B}" {
+    m_bDeleteOnUse 0
+    m_eWearableType ACE_CBRN_GAS_MASK
+   }
   }
   SCR_HeadgearInventoryItemComponent "{5244E4431E28A759}" {
    Attributes SCR_ItemAttributeCollection "{5244E4431DA56D64}" {

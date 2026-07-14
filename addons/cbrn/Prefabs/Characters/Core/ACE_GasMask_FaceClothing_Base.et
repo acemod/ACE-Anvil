@@ -5,6 +5,11 @@ GameEntity : "{C07A52D13353AB2E}Prefabs/Clothing/ZEL_FaceClothing_Base.et" {
    m_eProtectedAreas 3
    m_eAnimVariable ADRIANOV
    m_eUseMask 7
+   m_ConsumableEffect ACE_ConsumableWearableItems "{69D976EAA9CCC10B}" {
+    m_bDeleteOnUse 0
+    m_TargetAreaType LoadoutHeadCoverArea "{69D976E9CC3D6CD9}" {
+    }
+   }
   }
   InventoryItemComponent "{5CDD764EFD83273E}" {
    Attributes SCR_ItemAttributeCollection "{5CDD764EFD83273D}" {

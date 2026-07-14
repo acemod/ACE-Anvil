@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------------------------
-class ACE_CBRN_ProtectiveGadgetComponentClass : SCR_ConsumableItemComponentClass
+class ACE_CBRN_ProtectiveGadgetComponentClass : ACE_WearableGadgetComponentClass
 {
-	[Attribute(uiwidget: UIWidgets.Flags, enums: ParamEnumArray.FromEnum(ACE_CBRN_ECharacterProtectedArea))]
+	[Attribute(desc: "Character areas protected when worn", uiwidget: UIWidgets.Flags, enums: ParamEnumArray.FromEnum(ACE_CBRN_ECharacterProtectedArea))]
 	protected ACE_CBRN_ECharacterProtectedArea m_eProtectedAreas;
 	
 	//------------------------------------------------------------------------------------------------
@@ -13,42 +13,30 @@ class ACE_CBRN_ProtectiveGadgetComponentClass : SCR_ConsumableItemComponentClass
 
 //------------------------------------------------------------------------------------------------
 //! Gadgets that are protective equipment, which characters can equip themselves or put on patients
-class ACE_CBRN_ProtectiveGadgetComponent : SCR_ConsumableItemComponent
+class ACE_CBRN_ProtectiveGadgetComponent : ACE_WearableGadgetComponent
 {
 	//------------------------------------------------------------------------------------------------
-	//! Update update visibility when gadget is moved from or to loadout slot
+	//! Signal change in protection state
 	override void OnParentSlotChanged(InventoryStorageSlot oldSlot, InventoryStorageSlot newSlot)
 	{
 		super.OnParentSlotChanged(oldSlot, newSlot);
 		
-		if (LoadoutSlotInfo.Cast(oldSlot) || LoadoutSlotInfo.Cast(newSlot))
-			UpdateVisibility(m_iMode);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Show gadget when in loadout slot
-	override void UpdateVisibility(EGadgetMode mode)
-	{
-		super.UpdateVisibility(mode);
-		
-		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(GetOwner().FindComponent(InventoryItemComponent));
-		if (!itemComponent)
+		LoadoutSlotInfo oldLoadoutSlot = LoadoutSlotInfo.Cast(oldSlot);
+		LoadoutSlotInfo newLoadoutSlot = LoadoutSlotInfo.Cast(newSlot);
+		if (!oldLoadoutSlot && !newLoadoutSlot)
 			return;
 		
-		if (!LoadoutSlotInfo.Cast(itemComponent.GetParentSlot()))
-			return;
-			
-		itemComponent.ShowOwner();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Cannot be held while worn
-	override bool CanBeHeld()
-	{
-		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(GetOwner().FindComponent(InventoryItemComponent));
-		if (!itemComponent)
-			return false;
+		IEntity char;
+		if (newLoadoutSlot)
+			char = newLoadoutSlot.GetStorage().GetOwner();
+		else
+			char = oldLoadoutSlot.GetStorage().GetOwner();
 		
-		return !LoadoutSlotInfo.Cast(itemComponent.GetParentSlot());
+		ACE_CBRN_CharacterProtectionComponent charProtection = ACE_CBRN_CharacterProtectionComponent.Cast(char.FindComponent(ACE_CBRN_CharacterProtectionComponent));
+		if (!charProtection)
+			return;
+		
+		// Delay call to ensure EquipedLoadoutStorageComponent::GetAll is up to date
+		GetGame().GetCallqueue().Call(charProtection.OnProtectiveEquipmentChanged);		
 	}
 }

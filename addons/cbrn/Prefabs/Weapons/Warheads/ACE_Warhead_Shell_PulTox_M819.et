@@ -1,0 +1,18 @@
+GenericEntity : "{1CAEE2299E962EDE}Prefabs/Weapons/Warheads/Warhead_Shell_Smoke_M819.et" {
+ ID "9D9BE68EA2672F76"
+ components {
+  BaseTriggerComponent "{55129E81CBAA1390}" {
+   PROJECTILE_EFFECTS {
+    SpawnParticleEffect "{6178813019C18F86}" {
+     ParticleEffect "{097AE51D447DB862}Particles/Weapon/ACE_PulTox_Mortar_Shell.ptc"
+    }
+    SpawnPrefabEffect "{69DB09597F1B9BF4}" {
+     EffectPrefab "{8185136DC0564064}Prefabs/Systems/DamageAreas/E_ACE_CBRN_DamageArea.et"
+    }
+   }
+  }
+  HitEffectComponent "{9D9BE68D6F65A10F}" {
+   ParticleEffect "{097AE51D447DB862}Particles/Weapon/ACE_PulTox_Mortar_Shell.ptc"
+  }
+ }
+}

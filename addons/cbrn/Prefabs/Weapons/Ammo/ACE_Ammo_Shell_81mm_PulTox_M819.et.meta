@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{6875C47758E07D63}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_PulTox_M819.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

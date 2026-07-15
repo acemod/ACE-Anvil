@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{AB26FC33B07A6703}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_82mm_PulTox_D832DU.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

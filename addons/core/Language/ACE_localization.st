@@ -146,6 +146,14 @@ StringTable {
    Author "Kex"
    LastChanged "Martian"
   }
+  CustomStringTableItem "{69DE154BA53EC4D1}" {
+   Id "ACE-UserAction_PutOnWearable"
+   Target_en_us "Put on %1"
+   Target_de_de "%1 anlegen"
+   Modified 1776169830
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{649D4AEF943234F2}" {
    Id "ACE-UserAction_Release"
    Target_en_us "Release"

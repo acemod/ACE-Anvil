@@ -1,0 +1,7 @@
+Projectile : "{6875C47758E07D63}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_PulTox_M819.et" {
+ ID "5098E3DEA78F878B"
+ components {
+  SCR_EffectsModuleChildComponent "{69DB54FC45B2D088}" {
+  }
+ }
+}

@@ -1,0 +1,15 @@
+GenericEntity : "{4B3828A8AFFB60A2}PrefabsEditable/EffectsModules/Mortar/Smoke/EffectModule_MortarShell_Smoke.et" {
+ ID "5CA2D832A4C193FA"
+ components {
+  SCR_EditableEffectsModuleComponent "{5CA2D83089A8F56E}" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5CA90815AF19C85A}" {
+    Name "#ACE_CBRN-EditableEntity_EffectModule_Mortar_PulTox"
+   }
+  }
+  SCR_EffectsModuleComponent "{5CA2DE492D8BBCF5}" {
+   m_EffectConfig SCR_EffectsModule "{5CA90A5EA190549D}" {
+    m_sModuleEntityPrefab "{EA328A62488870AE}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_PulTox_M819_EffectModule.et"
+   }
+  }
+ }
+}

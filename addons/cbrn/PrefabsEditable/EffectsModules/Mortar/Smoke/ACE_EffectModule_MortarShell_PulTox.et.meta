@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{B9ADA89641AE25E3}PrefabsEditable/EffectsModules/Mortar/Smoke/ACE_EffectModule_MortarShell_PulTox.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

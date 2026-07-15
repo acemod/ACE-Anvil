@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{097AE51D447DB862}Particles/Weapon/ACE_PulTox_Mortar_Shell.ptc"
+ Name "{097AE51D447DB862}Particles/Weapon/ACE_ChokingAgent_Mortar_Shell.ptc"
  Configurations {
   PTCResourceClass PC : "{4B4500E061CCD624}Configs/System/ResourceTypes/PC/ParticleEffect.conf" {
   }

@@ -6,5 +6,5 @@ ParticleEffectEntity : "{15BAFA81731FC155}Prefabs/Particles/Smoke_Trail_Phosphor
   }
  }
  UseFrameEvent 1
- EffectPath "{1931A9EC14986D63}Particles/Weapon/ACE_PulTox_Trail_Phosphor.ptc"
+ EffectPath "{1931A9EC14986D63}Particles/Weapon/ACE_ChokingAgent_Trail_Phosphor.ptc"
 }

@@ -10,7 +10,7 @@ StringTable {
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{69DE154D8B1BAEFD}" {
-   Id "ACE_CBRN-EditableEntity_EffectModule_Mortar_PulTox"
+   Id "ACE_CBRN-EditableEntity_EffectModule_Mortar_ChokingAgent"
    Target_en_us "Pulmonary Agent Mortar Shell"
    Target_de_de "Pneumotoxisches Mörsergeschoss"
    Modified 1776166582

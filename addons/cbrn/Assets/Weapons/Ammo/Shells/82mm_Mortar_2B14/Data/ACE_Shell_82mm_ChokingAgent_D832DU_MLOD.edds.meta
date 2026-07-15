@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{B8CDC19A8CA64F59}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/ACE_Shell_82mm_PulTox_D832DU_MLOD.edds"
+ Name "{B8CDC19A8CA64F59}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/ACE_Shell_82mm_ChokingAgent_D832DU_MLOD.edds"
  Configurations {
   PNGResourceClass PC : "{EAB5DE3219F9CBA8}Configs/System/ResourceTypes/PC/TextureColorMap.conf" {
    ColorSpace ToLinear

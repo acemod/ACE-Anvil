@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{1931A9EC14986D63}Particles/Weapon/ACE_PulTox_Trail_Phosphor.ptc"
+ Name "{1931A9EC14986D63}Particles/Weapon/ACE_ChokingAgent_Trail_Phosphor.ptc"
  Configurations {
   PTCResourceClass PC : "{4B4500E061CCD624}Configs/System/ResourceTypes/PC/ParticleEffect.conf" {
   }

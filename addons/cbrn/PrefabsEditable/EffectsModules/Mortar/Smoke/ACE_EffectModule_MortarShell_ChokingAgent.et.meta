@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{B9ADA89641AE25E3}PrefabsEditable/EffectsModules/Mortar/Smoke/ACE_EffectModule_MortarShell_PulTox.et"
+ Name "{B9ADA89641AE25E3}PrefabsEditable/EffectsModules/Mortar/Smoke/ACE_EffectModule_MortarShell_ChokingAgent.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

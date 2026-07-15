@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{EA328A62488870AE}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_PulTox_M819_EffectModule.et"
+ Name "{6875C47758E07D63}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_ChokingAgent_M819.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

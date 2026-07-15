@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{03A771EC4F277EF3}Prefabs/Weapons/Warheads/ACE_Warhead_Shell_PulTox_M819.et"
+ Name "{E3272FF2D89AB361}Prefabs/Particles/ACE_ChokingAgent_Trail_Phosphor.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

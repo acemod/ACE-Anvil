@@ -2,7 +2,7 @@ Turret : "{89BB7489D53FBB6C}Prefabs/Weapons/Core/Mortar_Base.et" {
  ID "5CF87D15B3D0A976"
  components {
   SCR_AIStaticArtilleryVehicleUsageComponent "{6198B1F775D79BED}" {
-   m_sACE_CBRN_AmmoPoison "{6875C47758E07D63}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_PulTox_M819.et"
+   m_sACE_CBRN_AmmoPoison "{6875C47758E07D63}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_ChokingAgent_M819.et"
   }
  }
 }

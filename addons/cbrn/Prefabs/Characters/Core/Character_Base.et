@@ -1,0 +1,21 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ACE_CBRN_CharacterProtectionComponent "{69D976E0042EDF5C}" {
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    SCR_MorphineUserAction "{69DA29C459BBA6E5}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo SCR_ActionUIInfo "{5A5CCAE2BF554957}" {
+      Name "Put protective mask on"
+     }
+     ActionTitle "Gas Mask"
+     m_eConsumableType ACE_CBRN_GAS_MASK
+    }
+   }
+  }
+ }
+}

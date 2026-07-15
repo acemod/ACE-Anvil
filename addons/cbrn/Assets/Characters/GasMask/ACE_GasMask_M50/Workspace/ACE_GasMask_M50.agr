@@ -1,0 +1,32 @@
+AnimSrcGraph {
+ AnimSetTemplate "{49F9262B7567E494}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/ACE_GasMask_M50.ast"
+ ControlTemplate AnimSrcGCT "{69DCD5835092D858}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+   AnimSrcGCTVarFloat LookX {
+    MaxValue 1
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_HealOther {
+   }
+   AnimSrcGCTCmd CMD_Revive {
+   }
+   AnimSrcGCTCmd CMD_HealSelf {
+   }
+  }
+  GlobalTags {
+   "ITEM"
+   "MEDICAL"
+   "ACE_Medical_ChestSeal"
+  }
+ }
+ Debug AnimSrcGD "{69DCD5835092D866}" {
+ }
+ GraphFilesResourceNames {
+  "{74055E91DC015957}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/ACE_GasMask_M50.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{C171F4B0E6EC766B}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/ACE_GasMask_M50.aw"
+ Configurations {
+  AnimWorkspaceResourceClass PC {
+  }
+  AnimWorkspaceResourceClass XBOX_ONE : PC {
+  }
+  AnimWorkspaceResourceClass XBOX_SERIES : PC {
+  }
+  AnimWorkspaceResourceClass PS4 : PC {
+  }
+  AnimWorkspaceResourceClass PS5 : PC {
+  }
+  AnimWorkspaceResourceClass HEADLESS : PC {
+  }
+ }
+}

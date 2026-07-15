@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{5B0B402B42A23067}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/ACE_GasMask_M50.agr"
+ Configurations {
+  AnimGraphResourceClass PC {
+  }
+  AnimGraphResourceClass XBOX_ONE : PC {
+  }
+  AnimGraphResourceClass XBOX_SERIES : PC {
+  }
+  AnimGraphResourceClass PS4 : PC {
+  }
+  AnimGraphResourceClass PS5 : PC {
+  }
+  AnimGraphResourceClass HEADLESS : PC {
+  }
+ }
+}

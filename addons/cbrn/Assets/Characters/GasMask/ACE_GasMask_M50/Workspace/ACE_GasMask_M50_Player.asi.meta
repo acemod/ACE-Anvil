@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{AC6AA8C92BFD9EFD}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/ACE_GasMask_M50_Player.asi"
+ Configurations {
+  AnimSetInstanceResourceClass PC {
+  }
+  AnimSetInstanceResourceClass XBOX_ONE : PC {
+  }
+  AnimSetInstanceResourceClass XBOX_SERIES : PC {
+  }
+  AnimSetInstanceResourceClass PS4 : PC {
+  }
+  AnimSetInstanceResourceClass PS5 : PC {
+  }
+  AnimSetInstanceResourceClass HEADLESS : PC {
+  }
+ }
+}

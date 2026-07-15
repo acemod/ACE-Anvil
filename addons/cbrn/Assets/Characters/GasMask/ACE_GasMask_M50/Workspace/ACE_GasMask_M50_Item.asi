@@ -1,0 +1,10 @@
+AnimSetInstanceSource {
+ Template "{49F9262B7567E494}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/ACE_GasMask_M50.ast"
+ Lines {
+  AnimSetInstanceSource_Line "M50.Cro.ReviveOther" {
+   Resource "{BA2347AD009FF1DE}Assets/Items/Medicine/ChestSeal/Workspace/i_cro_chestseal_revive.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{69DCD58350945455}" {
+ }
+}

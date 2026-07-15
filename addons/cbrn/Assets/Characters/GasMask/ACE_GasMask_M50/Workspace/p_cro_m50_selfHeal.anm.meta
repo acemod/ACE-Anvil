@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{E1C051836C9E5EE1}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_cro_m50_selfHeal.anm"
+ Configurations {
+  TXAResourceClass PC {
+   SourcePath "Character_AnimationRig_M50.blend"
+   SourceProfile "101_FullBodyABS"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

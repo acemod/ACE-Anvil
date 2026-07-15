@@ -1,0 +1,43 @@
+AnimSetInstanceSource {
+ Template "{49F9262B7567E494}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/ACE_GasMask_M50.ast"
+ Lines {
+  AnimSetInstanceSource_Line "M50.Cro.ReviveOther" {
+   Resource "{2FE8D7B25EFAE912}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_cro_m50_revive.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Cro.Idle" {
+   Resource "{7736A0739EC2EF3C}Assets/Items/Medicine/MorphineInjection_01/anim/anm/p_cro_morphine_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Erc.Idle" {
+   Resource "{D66F8A9D1CD604C3}Assets/Items/Medicine/MorphineInjection_01/anim/anm/p_erc_morphine_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Pne.Idle" {
+   Resource "{882AED3D600E702E}Assets/Items/Medicine/MorphineInjection_01/anim/anm/p_pne_morphine_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Erc.FingerAnim" {
+   Resource "{A2B976A0F9BA97FB}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_cro_m50_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSealAmbulance.LeftPatient.ReviveOther" {
+   Resource "{890624C491AE5144}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_healing_morphin_L.anm"
+  }
+  AnimSetInstanceSource_Line "ChestSealAmbulance.RightPatient.ReviveOther" {
+   Resource "{780D1C90E2F164A8}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_healing_morphin_R.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Cro.FingerAnim" {
+   Resource "{A2B976A0F9BA97FB}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_cro_m50_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Cro.HealSelf" {
+   Resource "{A81E5DE60EE02B88}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_m50_selfHeal.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Erc.HealSelf" {
+   Resource "{A81E5DE60EE02B88}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_m50_selfHeal.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Pne.HealSelf" {
+   Resource "{E1C051836C9E5EE1}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_cro_m50_selfHeal.anm"
+  }
+  AnimSetInstanceSource_Line "M50.Pne.FingerAnim" {
+   Resource "{A2B976A0F9BA97FB}Assets/Characters/GasMask/ACE_GasMask_M50/Workspace/p_cro_m50_fingerAnim.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{69DCD58350958625}" {
+ }
+}

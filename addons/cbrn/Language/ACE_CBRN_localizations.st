@@ -11,7 +11,7 @@ StringTable {
   }
   CustomStringTableItem "{69DE154D8B1BAEFD}" {
    Id "ACE_CBRN-EditableEntity_EffectModule_Mortar_PulTox"
-   Target_en_us "Pulmonary Toxin Mortar Shell"
+   Target_en_us "Pulmonary Agent Mortar Shell"
    Target_de_de "Pneumotoxisches Mörsergeschoss"
    Modified 1776166582
    Author "Kexanone"
@@ -34,7 +34,7 @@ StringTable {
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{69DE1546254C75F8}" {
-   Id "ACE_CBRN-Magazine_D832DU_PulmonaryToxin_Description"
+   Id "ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Description"
    Target_en_us "Phosgene–chlorine mixture shell for Soviet 82mm mortars."
    Target_de_de "Phosgen-Chlor Gemisch für sowjetische 82mm-Mörser."
    Modified 1776163566
@@ -42,15 +42,15 @@ StringTable {
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{69DE15462032AD08}" {
-   Id "ACE_CBRN-Magazine_D832DU_PulmonaryToxin_Name"
-   Target_en_us "82mm D-832DU Pulmonary Toxin Shell"
+   Id "ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Name"
+   Target_en_us "82mm D-832DU Pulmonary Agent Shell"
    Target_de_de "82mm D-832DU Pneumotoxisches Geschoss"
    Modified 1776163502
    Author "Kexanone"
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{69DE1544E6AF83E1}" {
-   Id "ACE_CBRN-Magazine_M819_PulmonaryToxin_Description"
+   Id "ACE_CBRN-Magazine_M819_PulmonaryAgent_Description"
    Target_en_us "Phosgene–chlorine mixture shell for US 81mm mortars."
    Target_de_de "Phosgen-Chlor Mix für US-amerikanische 81mm-Mörser."
    Modified 1776163216
@@ -58,8 +58,8 @@ StringTable {
    LastChanged "Kexanone"
   }
   CustomStringTableItem "{69DE1544E5BD8DAD}" {
-   Id "ACE_CBRN-Magazine_M819_PulmonaryToxin_Name"
-   Target_en_us "81mm M819 Pulmonary Toxin Shell"
+   Id "ACE_CBRN-Magazine_M819_PulmonaryAgent_Name"
+   Target_en_us "81mm M819 Pulmonary Agent Shell"
    Target_de_de "82mm M819 Pneumotoxisches Geschoss"
    Modified 1776163600
    Author "Kexanone"

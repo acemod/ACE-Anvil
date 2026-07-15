@@ -16,8 +16,8 @@ Projectile : "{F7807293E94D3C88}Prefabs/Weapons/Ammo/Ammo_Shell_81mm_Smoke_M819.
   }
   MagazineComponent "{51A2B9D6DA866EF0}" {
    UIInfo MagazineUIInfo "{60AC9440C81EC976}" {
-    Name "#ACE_CBRN-Magazine_M819_PulmonaryToxin_Name"
-    Description "#ACE_CBRN-Magazine_M819_PulmonaryToxin_Description"
+    Name "#ACE_CBRN-Magazine_M819_PulmonaryAgent_Name"
+    Description "#ACE_CBRN-Magazine_M819_PulmonaryAgent_Description"
     m_eAmmoTypeFlags SMOKE
    }
   }
@@ -32,8 +32,8 @@ Projectile : "{F7807293E94D3C88}Prefabs/Weapons/Ammo/Ammo_Shell_81mm_Smoke_M819.
   SCR_VisibleInventoryItemComponent "{52627A115A9FDADB}" {
    Attributes SCR_ItemAttributeCollection "{52627A1159C64CDD}" {
     ItemDisplayName UIInfo "{527A9664E2A82E20}" {
-     Name "#ACE_CBRN-Magazine_M819_PulmonaryToxin_Name"
-     Description "#ACE_CBRN-Magazine_M819_PulmonaryToxin_Description"
+     Name "#ACE_CBRN-Magazine_M819_PulmonaryAgent_Name"
+     Description "#ACE_CBRN-Magazine_M819_PulmonaryAgent_Description"
     }
    }
   }

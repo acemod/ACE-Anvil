@@ -6,16 +6,36 @@ class ACE_ConsumableWearableItems : SCR_ConsumableEffectHealthItems
 	[Attribute(uiwidget: UIWidgets.SearchComboBox, desc: "Type of wearable", enums: ParamEnumArray.FromEnum(SCR_EConsumableType))]
 	protected SCR_EConsumableType m_eWearableType;
 	
+	[Attribute(desc: "Whether it can only be applied to unconscious patients")]
+	protected bool m_bUnconOnly;
+	
 	//------------------------------------------------------------------------------------------------
 	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
 	{
+		if (!m_bUnconOnly)
+			return true;
+		
+		SCR_ChimeraCharacter targetChar = SCR_ChimeraCharacter.Cast(target);
+		if (!targetChar)
+			return false;
+		
+		SCR_CharacterControllerComponent targetCharController = SCR_CharacterControllerComponent.Cast(targetChar.GetCharacterController());
+		if (!targetCharController)
+			return false;
+		
+		if (targetCharController.GetLifeState() != ECharacterLifeState.INCAPACITATED)
+		{
+			failReason = SCR_EConsumableFailReason.UNDAMAGED;
+			return false;
+		}
+		
 		return true;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	override bool CanApplyEffectToHZ(notnull IEntity target, notnull IEntity user, ECharacterHitZoneGroup group, out SCR_EConsumableFailReason failReason = SCR_EConsumableFailReason.NONE)
 	{
-		return true;
+		return CanApplyEffect(target, user, failReason);
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -3,6 +3,9 @@ GameEntity : "{8C279C847004CD61}Prefabs/Characters/Core/ACE_GasMask_Headgear_Bas
  components {
   ACE_CBRN_ProtectiveGadgetComponent "{69D942AB256FEE7D}" {
    m_eUseMask 7
+   m_ConsumableEffect ACE_ConsumableWearableItems "{69D976EAA9CCC10B}" {
+    m_bUnconOnly 1
+   }
   }
   MeshObject "{5112706CD4157AE0}" {
    Object "{74E27DCDB9888279}Assets/Characters/GasMask/ACE_GasMask_M50/GasMask_M50_Item.xob"

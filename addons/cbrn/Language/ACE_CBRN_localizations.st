@@ -1,6 +1,14 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{69DE1550112E09A5}" {
+   Id "ACE_CBRN-AmmunitionType_Poison"
+   Target_en_us "Poison"
+   Target_de_de "Giftstoff"
+   Modified 1776172139
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{69DE154D8B1BAEFD}" {
    Id "ACE_CBRN-EditableEntity_EffectModule_Mortar_PulTox"
    Target_en_us "Pulmonary Toxin Mortar Shell"

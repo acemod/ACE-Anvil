@@ -1,6 +1,14 @@
 StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
+  CustomStringTableItem "{69DE154D8B1BAEFD}" {
+   Id "ACE_CBRN-EditableEntity_EffectModule_Mortar_PulTox"
+   Target_en_us "Pulmonary Toxin Mortar Shell"
+   Target_de_de "Pneumotoxisches Mörsergeschoss"
+   Modified 1776166582
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{69D73111C5F0A103}" {
    Id "ACE_CBRN-Headgear_GasMask_Description"
    Target_en_us "Mask for eye and respiratory protection."

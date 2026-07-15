@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{DE766F7F733EDE54}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/ACE_Shell_82mm_Poison_D832DU_MLOD.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

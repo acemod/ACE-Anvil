@@ -1,0 +1,4 @@
+MatPBRBasic : "{E030B8A25C337FF8}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/Shell_82mm_Smoke_D832DU.emat" {
+ Color 0.238 0.238 0.238 1
+ BCRMap "{6B3049C36C1E0A0F}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/Shell_82mm_Smoke_D832DU_NMO.edds"
+}

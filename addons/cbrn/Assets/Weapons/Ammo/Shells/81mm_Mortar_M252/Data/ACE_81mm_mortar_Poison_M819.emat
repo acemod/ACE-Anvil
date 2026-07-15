@@ -1,0 +1,4 @@
+MatPBRBasic : "{F512025117D7E874}Assets/Weapons/Ammo/Shells/81mm_Mortar_M252/Data/81mm_mortar_M819.emat" {
+ Color 0.238 0.238 0.238 1
+ BCRMap "{D9E1E4948005E11C}Assets/Weapons/Ammo/Shells/81mm_Mortar_M252/Data/81mm_mortar_M819_NMO.edds"
+}

@@ -18,6 +18,7 @@ Projectile : "{A544A2C131DE2C64}Prefabs/Weapons/Ammo/Ammo_Shell_82mm_Smoke_D832D
    UIInfo MagazineUIInfo "{60AC9440C81EC976}" {
     Name "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Name"
     Description "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Description"
+    m_eAmmoTypeFlags 0
    }
   }
   MeshObject "{5098E3DEA78F87BE}" {
@@ -30,9 +31,15 @@ Projectile : "{A544A2C131DE2C64}Prefabs/Weapons/Ammo/Ammo_Shell_82mm_Smoke_D832D
   }
   SCR_VisibleInventoryItemComponent "{52627A115A9FDADB}" {
    Attributes SCR_ItemAttributeCollection "{52627A1159C64CDD}" {
-    ItemDisplayName UIInfo "{52C6F8E23C4C773F}" {
+    ItemDisplayName SCR_InventoryUIInfo "{52C6F8E23C4C773F}" {
      Name "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Name"
      Description "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{69DEF78B8F281B01}" {
+       Name "#ACE_CBRN-AmmunitionType_ChemicalWeapon"
+       Icon "{855625FE8D6A87A8}UI/Textures/DamageState/damageState-dead.edds"
+      }
+     }
     }
    }
   }

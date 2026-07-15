@@ -1,14 +1,14 @@
 //----------------------------------------------------------------------------------------
 modded enum SCR_EAIArtilleryAmmoType
 {
-	ACE_CBRN_POISON = 42
+	ACE_CBRN_CHEMICAL_WEAPON = 42
 }
 
 //----------------------------------------------------------------------------------------
 modded class SCR_AIStaticArtilleryVehicleUsageComponentClass : SCR_AIVehicleUsageComponentClass
 {
 	[Attribute("", UIWidgets.ResourceNamePicker, params: "et", category: "Ammo Prefabs")]
-	protected ResourceName m_sACE_CBRN_AmmoPoison;
+	protected ResourceName m_sACE_CBRN_ChemicalWeapon;
 	
 	//----------------------------------------------------------------------------------------
 	override ResourceName GetAmmoResourceName(SCR_EAIArtilleryAmmoType ammoType)
@@ -19,8 +19,8 @@ modded class SCR_AIStaticArtilleryVehicleUsageComponentClass : SCR_AIVehicleUsag
 		
 		switch (ammoType)
 		{
-			case SCR_EAIArtilleryAmmoType.ACE_CBRN_POISON:
-				return m_sACE_CBRN_AmmoPoison;
+			case SCR_EAIArtilleryAmmoType.ACE_CBRN_CHEMICAL_WEAPON:
+				return m_sACE_CBRN_ChemicalWeapon;
 		}
 		
 		return string.Empty;

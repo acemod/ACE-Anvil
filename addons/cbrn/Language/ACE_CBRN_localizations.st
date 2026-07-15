@@ -2,9 +2,9 @@ StringTable {
  ItemClassName "CustomStringTableItem"
  Items {
   CustomStringTableItem "{69DE1550112E09A5}" {
-   Id "ACE_CBRN-AmmunitionType_Poison"
-   Target_en_us "Poison"
-   Target_de_de "Giftstoff"
+   Id "ACE_CBRN-AmmunitionType_ChemicalWeapon"
+   Target_en_us "Chemical Weapon"
+   Target_de_de "Chemische Waffe"
    Modified 1776172139
    Author "Kexanone"
    LastChanged "Kexanone"

@@ -3,7 +3,6 @@ class ACE_CBRN_CharacterProtectionComponentClass : ScriptComponentClass
 {
 }
 
-
 //------------------------------------------------------------------------------------------------
 //! Holds data on how well the character is protected from CBRN hazards
 class ACE_CBRN_CharacterProtectionComponent : ScriptComponent

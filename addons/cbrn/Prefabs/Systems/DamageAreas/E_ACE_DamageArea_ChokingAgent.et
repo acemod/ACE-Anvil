@@ -1,0 +1,33 @@
+GenericEntity : "{EAB82C6A899FA97D}Prefabs/Systems/DamageAreas/ACE_DamageArea_ChokingAgent.et" {
+ ID "6646D262F297B9DB"
+ components {
+  ACE_DamageAreaMeshComponent "{69DB095EE31329A0}" {
+   m_vResolution 10
+   m_bStretchMaterial 1
+   m_Material "{788C42E96DB8587C}Assets/Editor/VirtualArea/VirtualArea_01_Danger.emat"
+  }
+  SCR_EditableDescriptorComponent "{69DB09506404AF7A}" {
+   m_EntityType SYSTEM
+   m_UIInfo SCR_EditableDescriptorUIInfo "{69DB095FA9C7B988}" {
+    Name "CBRN Hazard Area"
+    Icon "{54B61CF30B644B48}UI/Textures/Editor/EditableEntities/Characters/EditableEntity_Character_Dead.edds"
+    m_aAuthoredLabels {
+     ENTITYTYPE_SYSTEM
+    }
+    m_EntityBudgetCost {
+     SCR_EntityBudgetValue "{69DB095FC5D7F567}" {
+      m_BudgetType SYSTEMS
+      m_Value 15
+     }
+    }
+    m_bFullBackgroundAssetCard 0
+   }
+   m_bAutoRegister ALWAYS
+   m_AccessKey DEFAULT
+   m_Flags 32835
+  }
+  SCR_EditableEntityVisibilityChildComponent "{69DB095D8B34AFE8}" {
+   m_State 96
+  }
+ }
+}

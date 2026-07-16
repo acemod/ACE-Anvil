@@ -23,7 +23,7 @@ class ACE_ConsumableWearableItems : SCR_ConsumableEffectHealthItems
 		if (!targetCharController)
 			return false;
 		
-		if (targetCharController.GetLifeState() != ECharacterLifeState.INCAPACITATED)
+		if ((target != user) && (targetCharController.GetLifeState() != ECharacterLifeState.INCAPACITATED))
 		{
 			failReason = SCR_EConsumableFailReason.UNDAMAGED;
 			return false;

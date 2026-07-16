@@ -43,4 +43,14 @@ class ACE_WearableGadgetComponent : SCR_ConsumableItemComponent
 		
 		return !LoadoutSlotInfo.Cast(itemComponent.GetParentSlot());
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Same as SCR_ConsumableItemComponent::ActivateAction, but pass currect user
+	override void ActivateAction()
+	{
+		if (!m_ConsumableEffect || !m_ConsumableEffect.CanApplyEffect(m_CharacterOwner, m_CharacterOwner))
+			return;
+
+		m_ConsumableEffect.ActivateEffect(m_CharacterOwner, m_CharacterOwner, GetOwner());
+	}
 }

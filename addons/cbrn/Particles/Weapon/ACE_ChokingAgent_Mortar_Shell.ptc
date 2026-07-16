@@ -65,7 +65,7 @@ EffectDef {
    BirthRate 100
    Offset 0 1 0
    ParticleType Prefab
-   Prefab "{E3272FF2D89AB361}Prefabs/Particles/ACE_Poison_Trail_Phosphor.et"
+   Prefab "{E3272FF2D89AB361}Prefabs/Particles/ACE_ChokingAgent_Trail_Phosphor.et"
    Velocity 10
    VelocityRND 30
    AirResistance 1
@@ -73,7 +73,7 @@ EffectDef {
    GravityMultiply 2
    EnableCollisions 1
    Friction 1
-   Lifetime 45
+   Lifetime 60
    EmittingTime 0.25
    Repeat 0
   }

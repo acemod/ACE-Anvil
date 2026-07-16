@@ -41,7 +41,7 @@ EffectDef {
    Size {
     0 0.02 0.088 0.425 0.408 0.598 1 0.65
    }
-   EmittingTime 40
+   EmittingTime 55
    Repeat 0
    ColorMast {
     0 0.7451 0.8039 0.2745

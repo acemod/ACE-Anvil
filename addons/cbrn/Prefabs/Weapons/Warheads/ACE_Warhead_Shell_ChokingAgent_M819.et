@@ -6,8 +6,9 @@ GenericEntity : "{1CAEE2299E962EDE}Prefabs/Weapons/Warheads/Warhead_Shell_Smoke_
     SpawnParticleEffect "{6178813019C18F86}" {
      ParticleEffect "{097AE51D447DB862}Particles/Weapon/ACE_ChokingAgent_Mortar_Shell.ptc"
     }
-    SpawnPrefabEffect "{69DB09597F1B9BF4}" {
-     EffectPrefab "{8185136DC0564064}Prefabs/Systems/DamageAreas/E_ACE_CBRN_DamageArea.et"
+    ACE_DamageAreaAmmoEffect "{69DF4D3320AED4B5}" {
+     m_DamageAreaPrefabName "{EAB82C6A899FA97D}Prefabs/Systems/DamageAreas/ACE_DamageArea_ChokingAgent.et"
+     m_fLifetime 50
     }
    }
   }

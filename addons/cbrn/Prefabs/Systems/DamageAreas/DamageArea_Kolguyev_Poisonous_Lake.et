@@ -1,0 +1,18 @@
+GenericEntity : "{AE528A0B674FA712}Prefabs/Systems/DamageAreas/DamageArea_base.et" {
+ ID "6646D262F297B9DB"
+ components {
+  SCR_DamageAreaComponent "{6646D2612811A3C6}" {
+   DamageAreas {
+    SCR_DotDamageArea "{6646DB3FF2DCC4EC}" {
+     m_eDamageType 2147483647
+     m_fDamageValue 0
+     m_CustomHitZoneSelector ACE_NamedHitZoneSelector "{6646DB3F887A5CE3}" {
+      m_sName "Resilience"
+     }
+     m_fDotDamage 0.4
+     m_fEffectDuration 10
+    }
+   }
+  }
+ }
+}

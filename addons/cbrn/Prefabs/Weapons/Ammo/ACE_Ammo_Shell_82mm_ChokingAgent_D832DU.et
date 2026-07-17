@@ -16,8 +16,8 @@ Projectile : "{A544A2C131DE2C64}Prefabs/Weapons/Ammo/Ammo_Shell_82mm_Smoke_D832D
   }
   MagazineComponent "{51A2B9D6DA866EF0}" {
    UIInfo MagazineUIInfo "{60AC9440C81EC976}" {
-    Name "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Name"
-    Description "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Description"
+    Name "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Name"
+    Description "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Description"
     m_eAmmoTypeFlags 0
    }
   }
@@ -32,12 +32,13 @@ Projectile : "{A544A2C131DE2C64}Prefabs/Weapons/Ammo/Ammo_Shell_82mm_Smoke_D832D
   SCR_VisibleInventoryItemComponent "{52627A115A9FDADB}" {
    Attributes SCR_ItemAttributeCollection "{52627A1159C64CDD}" {
     ItemDisplayName SCR_InventoryUIInfo "{52C6F8E23C4C773F}" {
-     Name "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Name"
-     Description "#ACE_CBRN-Magazine_D832DU_PulmonaryAgent_Description"
+     Name "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Name"
+     Description "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Description"
      m_aItemHints {
       SCR_InventoryItemHintUIInfo "{69DEF78B8F281B01}" {
-       Name "#ACE_CBRN-AmmunitionType_ChemicalWeapon"
-       Icon "{855625FE8D6A87A8}UI/Textures/DamageState/damageState-dead.edds"
+       Name "#ACE_CBRN-InfoWidget_ChemicalWeaponBan"
+       Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+       IconSetName "disable"
       }
      }
     }

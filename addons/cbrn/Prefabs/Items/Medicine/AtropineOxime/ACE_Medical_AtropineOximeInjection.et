@@ -1,0 +1,39 @@
+GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01_base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_CBRN-Item_AtropineOxime_Name"
+     Description "#ACE_CBRN-Item_AtropineOxime_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{5E04DAAE66DE1E77}" {
+       Name "#ACE_CBRN-InfoWidget_Atropine"
+      }
+      SCR_InventoryItemHintUIInfo "{69E161C4F1654991}" {
+       Name "#ACE_CBRN-InfoWidget_Oxime"
+       Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+       IconSetName "Morphine_UI"
+      }
+     }
+    }
+   }
+  }
+  MeshObject "{59CE87DB17B6B1C5}" {
+   Materials {
+    MaterialAssignClass "{69E107ACB7B11981}" {
+     SourceMaterial "MorphineInjection_01"
+     AssignedMaterial "{E8D878A267406B62}Assets/Items/Medicine/AtropineOximeInjection/Data/ACE_Medical_AtropineOximeInjection.emat"
+    }
+   }
+  }
+  SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
+   m_ConsumableEffect ACE_CBRN_ConsumableAtropineOxime "{59E68C74C1F3910E}" {
+    m_aDamageEffectsToLoad {
+     ACE_CBRN_AtropineOximeDamageEffect "{6122D60861B541E7}" {
+     }
+    }
+   }
+  }
+ }
+}

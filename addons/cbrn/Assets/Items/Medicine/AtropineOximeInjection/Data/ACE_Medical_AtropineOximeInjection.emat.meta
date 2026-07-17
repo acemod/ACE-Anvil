@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{E8D878A267406B62}Assets/Items/Medicine/EpinephrineInjection/Data/ACE_Medical_AtropineOximeInjection.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+ }
+}

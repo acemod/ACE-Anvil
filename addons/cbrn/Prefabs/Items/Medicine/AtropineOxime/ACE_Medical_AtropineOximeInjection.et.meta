@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{F58403F31A12E76B}Prefabs/Items/Medicine/EpinephrineInjection/ACE_Medical_AtropineOximeInjection.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

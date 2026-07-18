@@ -1,0 +1,10 @@
+ParticleEffectEntity : "{15BAFA81731FC155}Prefabs/Particles/Smoke_Trail_Phosphor.et" {
+ ID "62686DBD077F6ADA"
+ components {
+  MeshObject "{69E203184E8DDE11}" {
+   Object "{1724A28A76DF2D57}Assets/Props/Debris/Concrete/FragmentConcrete_dbr_04.xob"
+  }
+ }
+ UseFrameEvent 1
+ EffectPath "{3C285F5E92D2AF4D}Particles/Weapon/ACE_Sarin_Trail_Phosphor.ptc"
+}

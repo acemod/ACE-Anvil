@@ -5,8 +5,31 @@ class ACE_CBRN_ConsumableAtropineOxime : SCR_ConsumableEffectHealthItems
 	//------------------------------------------------------------------------------------------------
 	override bool CanApplyEffect(notnull IEntity target, notnull IEntity user, out SCR_EConsumableFailReason failReason)
 	{
-		Debug.Error("Not implemented");
-		return false;
+		ChimeraCharacter targetChar = ChimeraCharacter.Cast(target);
+		if (!targetChar)
+			return false;
+		
+		SCR_CharacterDamageManagerComponent targetDamageManager = SCR_CharacterDamageManagerComponent.Cast(targetChar.GetDamageManager());
+		if (!targetDamageManager)
+			return false;
+		
+		if (targetDamageManager.FindDamageEffectOfType(ACE_CBRN_AtropineOximeDamageEffect))
+		{
+			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
+			return false;
+		}
+		
+		ACE_CBRN_NervousSystemHitZone nervousSystem = targetDamageManager.ACE_Medical_GetNervousSystemHitZone();
+		if (!nervousSystem)
+			return false;
+		
+		if (nervousSystem.GetDamageState() == ECharacterResilienceState.UNDAMAGED)
+		{
+			failReason = SCR_EConsumableFailReason.UNDAMAGED;
+			return false;
+		}
+		
+		return true;
 	}
 
 	//------------------------------------------------------------------------------------------------

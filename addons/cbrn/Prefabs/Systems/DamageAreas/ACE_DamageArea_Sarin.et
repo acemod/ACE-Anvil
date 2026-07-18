@@ -1,0 +1,14 @@
+GenericEntity : "{937A301126F57C03}Prefabs/Systems/DamageAreas/ACE_DamageArea_ChemAgentBase.et" {
+ ID "6646D262F297B9DB"
+ components {
+  SCR_DamageAreaComponent "{6646D2612811A3C6}" {
+   DamageAreas {
+    SCR_DotDamageArea "{6646DB3FF2DCC4EC}" {
+     m_CustomHitZoneSelector ACE_NamedHitZoneSelector "{6646DB3F887A5CE3}" {
+      m_sName "ACE_CBRN_NervousSystem"
+     }
+    }
+   }
+  }
+ }
+}

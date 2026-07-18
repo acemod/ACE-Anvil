@@ -2,6 +2,5 @@
 //! Type of consumable gadget
 modded enum SCR_EConsumableType
 {
-	ACE_CBRN_ATROPINE_OXIME,
-	ACE_CBRN_GAS_MASK
+	ACE_CBRN_ATROPINE_OXIME
 }

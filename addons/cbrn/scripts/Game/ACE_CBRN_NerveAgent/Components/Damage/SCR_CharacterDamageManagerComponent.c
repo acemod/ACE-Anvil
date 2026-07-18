@@ -3,21 +3,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 {
 	protected ACE_CBRN_NervousSystemHitZone m_ACE_CBRN_NervousSystemHitZone;
 	
-	protected static ACE_CBRN_Settings s_ACE_CBRN_Settings;
-	
-	//-----------------------------------------------------------------------------------------------------------
-	//! Initialize members
-	override void OnPostInit(IEntity owner)
-	{
-		super.OnPostInit(owner);
-		
-		if (!GetGame().InPlayMode())
-			return;
-				
-		if (!s_ACE_CBRN_Settings)
-			s_ACE_CBRN_Settings = ACE_SettingsHelperT<ACE_CBRN_Settings>.GetModSettings();
-	}
-	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Called by ACE_CBRN_NervousSystemHitZone.OnInit to initialize the hit zone
 	void ACE_Medical_SetNervousSystemHitZone(HitZone hitZone)
@@ -116,13 +101,5 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 		
 		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! Remove poison
-	override void FullHeal(bool ignoreHealingDOT = true)
-	{
-		super.FullHeal(ignoreHealingDOT);
-		TerminateDamageEffectsOfType(SCR_PoisonDamageEffect);
 	}
 }

@@ -5,6 +5,16 @@ SCR_ChimeraCharacter {
   }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
+    SCR_MorphineUserAction "{69E401D0638FE893}" {
+     ParentContextList {
+      "LeftLeg" "RightLeg" "LeftArm" "RightArm"
+     }
+     UIInfo SCR_ActionUIInfo "{5A5CCAE2BF554957}" {
+      Name "#ACE_CBRN-AtropineOximeInjectionAction"
+     }
+     ActionTitle "Inject atropine/oxime"
+     m_eConsumableType ACE_CBRN_ATROPINE_OXIME
+    }
     ACE_EquipWearableOnPatientUserAction "{69DA29C459BBA6E5}" {
      ParentContextList {
       "Head"

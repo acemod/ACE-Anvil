@@ -1,17 +1,3 @@
-GenericEntity : "{A19A22F731C8C3E6}Prefabs/Systems/DamageAreas/DamageArea_Kolguyev_Poisonous_Lake.et" {
+GenericEntity : "{937A301126F57C03}Prefabs/Systems/DamageAreas/ACE_DamageArea_ChemAgentBase.et" {
  ID "6646D262F297B9DB"
- components {
-  SCR_DamageAreaComponent "{6646D2612811A3C6}" {
-   DamageAreas {
-    SCR_DotDamageArea "{6646DB3FF2DCC4EC}" {
-     "Area shape" ACE_DamageAreaShapeCylinder "{69DF4D37AF364CA0}" {
-      m_fRadius 30
-      m_fHeight 16
-     }
-     m_fDotDamage 0.3
-     m_fEffectDuration 20
-    }
-   }
-  }
- }
 }

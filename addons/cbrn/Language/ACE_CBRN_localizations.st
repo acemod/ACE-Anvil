@@ -17,6 +17,22 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{69E224AC57B2E30B}" {
+   Id "ACE_CBRN-EditableEntity_EffectModule_Mortar_Sarin"
+   Target_en_us "Sarin Nerve Agent Mortar Shell"
+   Target_de_de "Sarin Nervenkampfstoff Mörsergeschoss"
+   Modified 1776430389
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69E2EEFA4186B2F8}" {
+   Id "ACE_CBRN-FailReason_Paralyzed"
+   Target_en_us "Paralyzed"
+   Target_de_de "Gelähmt"
+   Modified 1776490983
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{69D73111C5F0A103}" {
    Id "ACE_CBRN-Headgear_GasMask_Description"
    Target_en_us "Mask for eye and respiratory protection."
@@ -59,9 +75,9 @@ StringTable {
   }
   CustomStringTableItem "{69E1591B2CA49E10}" {
    Id "ACE_CBRN-Item_AtropineOxime_Description"
-   Target_en_us "Administered to patients poisoned by nerve agents."
+   Target_en_us "Administered to patients paralyzed by nerve agents."
    Target_de_de "Verabreicht an Patienten mit Vergiftung durch Nervenkampfstoffe."
-   Modified 1776376734
+   Modified 1776486936
    Author "Kexanone"
    LastChanged "Kexanone"
   }
@@ -89,6 +105,22 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{69E224AE7722B9F4}" {
+   Id "ACE_CBRN-Magazine_D832DU_NerveAgent_Name"
+   Target_en_us "82mm D-832DU Nerve Agent Shell"
+   Target_de_de "82mm D-832DU Nervenkapfstoff Geschoss"
+   Modified 1776430035
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69E224A99DB28870}" {
+   Id "ACE_CBRN-Magazine_D832DU_Sarin_Description"
+   Target_en_us "Sarin shell for Soviet 82mm mortars."
+   Target_de_de "Sarin für sowjetische 82mm-Mörser."
+   Modified 1776430082
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{69DE1544E6AF83E1}" {
    Id "ACE_CBRN-Magazine_M819_ChokingAgent_Description"
    Target_en_us "Phosgene–chlorine mixture shell for US 81mm mortars."
@@ -102,6 +134,22 @@ StringTable {
    Target_en_us "81mm M819 Choking Agent Shell"
    Target_de_de "82mm M819 Lungenkampfstoff Geschoss"
    Modified 1776385062
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69E224AF46F09DDC}" {
+   Id "ACE_CBRN-Magazine_M819_NerveAgent_Name"
+   Target_en_us "81mm M819 Nerve Agent Shell"
+   Target_de_de "82mm M819 Nervenkampfstoff Geschoss"
+   Modified 1776429981
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69E224AF58E886BF}" {
+   Id "ACE_CBRN-Magazine_M819_Sarin_Description"
+   Target_en_us "Sarin nerve agent shell for US 81mm mortars."
+   Target_de_de "Sarin für US-amerikanische 81mm-Mörser."
+   Modified 1776429987
    Author "Kexanone"
    LastChanged "Kexanone"
   }

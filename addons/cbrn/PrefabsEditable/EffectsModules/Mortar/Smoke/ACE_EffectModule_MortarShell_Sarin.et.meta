@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{E7FCD07D7A78DEA2}PrefabsEditable/EffectsModules/Mortar/Smoke/ACE_EffectModule_MortarShell_ChemicalAgentbase.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

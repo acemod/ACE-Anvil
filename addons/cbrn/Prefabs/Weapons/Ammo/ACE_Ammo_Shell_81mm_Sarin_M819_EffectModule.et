@@ -1,0 +1,7 @@
+Projectile : "{949E1BF946479654}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_Sarin_M819.et" {
+ ID "5098E3DEA78F878B"
+ components {
+  SCR_EffectsModuleChildComponent "{69E224ACEE816F8B}" {
+  }
+ }
+}

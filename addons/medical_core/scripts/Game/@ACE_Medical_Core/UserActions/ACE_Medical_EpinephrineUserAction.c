@@ -26,18 +26,40 @@ class ACE_Medical_EpinephrineUserAction : SCR_MorphineUserAction
 		int reason;
 		if (!consumableComponent.GetConsumableEffect().CanApplyEffect(GetOwner(), userCharacter, reason))
 		{
-			if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED)
-				SetCannotPerformReason(m_sNotIncapacitated);
-			else if (reason == SCR_EConsumableFailReason.ALREADY_APPLIED)
-				SetCannotPerformReason(m_sAlreadyApplied);
-			else if (reason == SCR_EConsumableFailReason.IS_BLEEDING)
-				SetCannotPerformReason(m_sIsBleeding);
-			else if (reason == SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED)
-				SetCannotPerformReason(m_sTooDamaged);
-			
+			SetCannotPerformReason(reason);
 			return false;
 		}
 		
 		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool SetCannotPerformReason(SCR_EConsumableFailReason reason)
+	{
+		switch (reason)
+		{
+			case SCR_EConsumableFailReason.ACE_MEDICAL_NOT_INCAPACITATED:
+			{
+				SetCannotPerformReason(m_sNotIncapacitated);
+				return true;
+			}
+			case SCR_EConsumableFailReason.ALREADY_APPLIED:
+			{
+			SetCannotPerformReason(m_sAlreadyApplied);
+				return true;
+			}
+			case SCR_EConsumableFailReason.IS_BLEEDING:
+			{
+				SetCannotPerformReason(m_sIsBleeding);
+				return true;
+			}
+			case SCR_EConsumableFailReason.ACE_MEDICAL_TOO_DAMAGED:
+			{
+				SetCannotPerformReason(m_sTooDamaged);
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

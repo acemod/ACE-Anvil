@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{B7C2BFD3C7E4A689}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_81mm_ChemAgentBase_M819.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{98BD59EC909DD6A8}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_82mm_ChemAgentBase_D832DU.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

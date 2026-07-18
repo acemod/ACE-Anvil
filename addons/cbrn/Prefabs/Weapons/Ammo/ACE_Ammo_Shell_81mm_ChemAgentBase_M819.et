@@ -1,0 +1,44 @@
+Projectile : "{F7807293E94D3C88}Prefabs/Weapons/Ammo/Ammo_Shell_81mm_Smoke_M819.et" {
+ ID "5098E3DEA78F878B"
+ components {
+  ACE_RetextureMeshComponent "{69E224ADD4D1209B}" {
+   m_aMaterialsOverride {
+    "{DB22E4DCFF5AA222}Assets/Weapons/Ammo/Shells/81mm_Mortar_M252/Data/ACE_81mm_mortar_ChokingAgent_M819.emat"
+   }
+  }
+  CollisionTriggerComponent "{60AC9441243E3504}" {
+   PROJECTILE_EFFECTS {
+    ExplosionEffect "{66448E9CBD7626AB}" {
+     EffectPrefab ""
+     ParticleEffect ""
+    }
+   }
+  }
+  MagazineComponent "{51A2B9D6DA866EF0}" {
+   UIInfo MagazineUIInfo "{60AC9440C81EC976}" {
+    m_eAmmoTypeFlags 0
+   }
+  }
+  MeshObject "{5098E3DEA78F87BE}" {
+   Materials {
+    MaterialAssignClass "{69E224ADD4D120FC}" {
+     SourceMaterial "81mm_mortar_M819"
+     AssignedMaterial "{DB22E4DCFF5AA222}Assets/Weapons/Ammo/Shells/81mm_Mortar_M252/Data/ACE_81mm_mortar_ChokingAgent_M819.emat"
+    }
+   }
+  }
+  SCR_VisibleInventoryItemComponent "{52627A115A9FDADB}" {
+   Attributes SCR_ItemAttributeCollection "{52627A1159C64CDD}" {
+    ItemDisplayName SCR_InventoryUIInfo "{527A9664E2A82E20}" {
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{69E224ADD4D120E4}" {
+       Name "#ACE_CBRN-InfoWidget_ChemicalWeaponBan"
+       Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+       IconSetName "disable"
+      }
+     }
+    }
+   }
+  }
+ }
+}

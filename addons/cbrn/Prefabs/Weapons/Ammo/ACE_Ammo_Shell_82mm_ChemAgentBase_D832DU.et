@@ -1,6 +1,11 @@
-Projectile : "{98BD59EC909DD6A8}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_82mm_ChemAgentBase_D832DU.et" {
+Projectile : "{A544A2C131DE2C64}Prefabs/Weapons/Ammo/Ammo_Shell_82mm_Smoke_D832DU.et" {
  ID "5098E3DEA78F878B"
  components {
+  ACE_RetextureMeshComponent "{69E224ADC9DE865A}" {
+   m_aMaterialsOverride {
+    "{EA1EF74EFB925EF5}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/ACE_Shell_82mm_ChokingAgent_D832DU.emat" "{DE766F7F733EDE54}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/ACE_Shell_82mm_ChokingAgent_D832DU_MLOD.emat"
+   }
+  }
   CollisionTriggerComponent "{60AC9441243E3504}" {
    PROJECTILE_EFFECTS {
     ExplosionEffect "{66448E9CBD7626AB}" {
@@ -13,11 +18,12 @@ Projectile : "{98BD59EC909DD6A8}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_82mm_ChemAge
    UIInfo MagazineUIInfo "{60AC9440C81EC976}" {
     Name "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Name"
     Description "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Description"
+    m_eAmmoTypeFlags 0
    }
   }
   MeshObject "{5098E3DEA78F87BE}" {
    Materials {
-    MaterialAssignClass "{69DB409080C5F019}" {
+    MaterialAssignClass "{69E224ADC9DE8644}" {
      SourceMaterial "Shell_82mm_Smoke"
      AssignedMaterial "{EA1EF74EFB925EF5}Assets/Weapons/Ammo/Shells/82mm_Mortar_2B14/Data/ACE_Shell_82mm_ChokingAgent_D832DU.emat"
     }
@@ -28,6 +34,13 @@ Projectile : "{98BD59EC909DD6A8}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_82mm_ChemAge
     ItemDisplayName SCR_InventoryUIInfo "{52C6F8E23C4C773F}" {
      Name "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Name"
      Description "#ACE_CBRN-Magazine_D832DU_ChokingAgent_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{69E224ADC9DE864F}" {
+       Name "#ACE_CBRN-InfoWidget_ChemicalWeaponBan"
+       Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+       IconSetName "disable"
+      }
+     }
     }
    }
   }

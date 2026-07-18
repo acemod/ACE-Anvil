@@ -1,0 +1,15 @@
+SCR_CharacterDamageManagerComponent {
+ "Additional hit zones" {
+  ACE_CBRN_NervousSystemHitZone ACE_CBRN_NervousSystem {
+   IgnoreExplosions 1
+   BaseDamageMultiplier 0.8
+   MaxHealth 100
+   "DamageState threshold" {
+    0.75
+    0.5
+    0.333
+   }
+   m_fFullRegenerationTime 400
+  }
+ }
+}

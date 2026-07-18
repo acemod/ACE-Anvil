@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{9244B4DC75D45352}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_82mm_Sarin_D832DU.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

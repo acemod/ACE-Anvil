@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{E908001749419691}Configs/EntityCatalog/FIA/FIA_InventoryItems.conf"
+ Name "{E908001749419691}Configs/EntityCatalog/FIA/InventoryItems_EntityCatalog_FIA.conf"
  Configurations {
   CONFResourceClass PC {
   }

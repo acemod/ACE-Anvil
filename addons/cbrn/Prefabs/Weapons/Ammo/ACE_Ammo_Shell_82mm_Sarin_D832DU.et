@@ -1,0 +1,27 @@
+Projectile : "{98BD59EC909DD6A8}Prefabs/Weapons/Ammo/ACE_Ammo_Shell_82mm_ChemAgentBase_D832DU.et" {
+ ID "5098E3DEA78F878B"
+ components {
+  CollisionTriggerComponent "{60AC9441243E3504}" {
+   PROJECTILE_EFFECTS {
+    ExplosionEffect "{66448E9CBD7626AB}" {
+     EffectPrefab "{202F402D1C0C88D4}Prefabs/Weapons/Warheads/ACE_Warhead_Shell_Sarin_M819.et"
+     ParticleEffect "{9B0BB916CFDEFC59}Particles/Weapon/ACE_Sarin_Mortar_Shell.ptc"
+    }
+   }
+  }
+  MagazineComponent "{51A2B9D6DA866EF0}" {
+   UIInfo MagazineUIInfo "{60AC9440C81EC976}" {
+    Name "#ACE_CBRN-Magazine_D832DU_NerveAgent_Name"
+    Description "#ACE_CBRN-Magazine_D832DU_Sarin_Description"
+   }
+  }
+  SCR_VisibleInventoryItemComponent "{52627A115A9FDADB}" {
+   Attributes SCR_ItemAttributeCollection "{52627A1159C64CDD}" {
+    ItemDisplayName SCR_InventoryUIInfo "{52C6F8E23C4C773F}" {
+     Name "#ACE_CBRN-Magazine_D832DU_NerveAgent_Name"
+     Description "#ACE_CBRN-Magazine_D832DU_Sarin_Description"
+    }
+   }
+  }
+ }
+}

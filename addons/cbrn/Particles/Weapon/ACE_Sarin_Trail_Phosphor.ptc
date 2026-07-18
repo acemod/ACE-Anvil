@@ -1,0 +1,57 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef Trail {
+   MaxNum 150
+   BirthRate 15
+   BirthRateVel 2
+   Material "{6717581547F2F2B2}Particles/_Materials/Gas/Smoke_Cloud_Anim_2.emat"
+   SizeMultiplier 4
+   SizeRND 2
+   CenterX -0.35
+   CenterY 0.35
+   RotMultiplier 8
+   RotRND 20
+   RandomRotDir 1
+   RandomAngle 1
+   FlipU Random
+   Velocity 0
+   VelAffect 0.2
+   AirResistance 0.1
+   AirResistanceRND 0.5
+   WindInfluence 0.2
+   GravityMultiply 0.005
+   GravityMultiplyRND -0.005
+   AnimOnce 1
+   AnimFPS 25
+   Lifetime 2
+   LifetimeRND 1
+   Color {
+    0.05 1 1 1
+   }
+   Alpha {
+    0 0.7 1 0.02
+   }
+   Emissivity {
+    0 0
+   }
+   RotationSpeed {
+    0 1 0.557 0.582 1 0
+   }
+   Size {
+    0 0.02 0.088 0.425 0.408 0.598 1 0.65
+   }
+   EmittingTime 7
+   Repeat 0
+   ColorMast {
+    0 1 1 1
+   }
+   AlphaMast {
+    0 0.2
+   }
+   SizeMast {
+    0.0011 1 0.4667 0.8712 1 0
+   }
+  }
+ }
+}

@@ -45,7 +45,7 @@ class ACE_WearableGadgetComponent : SCR_ConsumableItemComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Same as SCR_ConsumableItemComponent::ActivateAction, but pass currect user
+	//! Same as SCR_ConsumableItemComponent::ActivateAction, but pass correct user
 	override void ActivateAction()
 	{
 		if (!m_ConsumableEffect || !m_ConsumableEffect.CanApplyEffect(m_CharacterOwner, m_CharacterOwner))

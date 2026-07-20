@@ -9,6 +9,22 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{69E41A49A04582D5}" {
+   Id "ACE_CBRN-EditableEntity_DamageArea_ChokingAgent"
+   Target_en_us "Choking Agent Contaminated Area"
+   Target_de_de "Lungenkampfstoff Kontaminiertes Gebiet"
+   Modified 1776557283
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69E41A49ACF6A801}" {
+   Id "ACE_CBRN-EditableEntity_DamageArea_Sarin"
+   Target_en_us "Sarin Nerve Agent Contaminated Area"
+   Target_de_de "Sarin Nervenkampfstoff Kontaminiertes Gebiet"
+   Modified 1776557523
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{69DE154D8B1BAEFD}" {
    Id "ACE_CBRN-EditableEntity_EffectModule_Mortar_ChokingAgent"
    Target_en_us "Choking Agent Mortar Shell"

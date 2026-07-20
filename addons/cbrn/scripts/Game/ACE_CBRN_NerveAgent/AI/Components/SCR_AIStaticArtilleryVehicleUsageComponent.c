@@ -1,14 +1,14 @@
 //----------------------------------------------------------------------------------------
 modded enum SCR_EAIArtilleryAmmoType
 {
-	ACE_CBRN_CHOCKING_AGENT = 42
+	ACE_CBRN_SARIN = 43
 }
 
 //----------------------------------------------------------------------------------------
 modded class SCR_AIStaticArtilleryVehicleUsageComponentClass : SCR_AIVehicleUsageComponentClass
 {
 	[Attribute(uiwidget: UIWidgets.ResourceNamePicker, params: "et", category: "Ammo Prefabs")]
-	protected ResourceName m_sACE_CBRN_ChokingAgent;
+	protected ResourceName m_sACE_CBRN_Sarin;
 	
 	//----------------------------------------------------------------------------------------
 	override ResourceName GetAmmoResourceName(SCR_EAIArtilleryAmmoType ammoType)
@@ -19,8 +19,8 @@ modded class SCR_AIStaticArtilleryVehicleUsageComponentClass : SCR_AIVehicleUsag
 		
 		switch (ammoType)
 		{
-			case SCR_EAIArtilleryAmmoType.ACE_CBRN_CHOCKING_AGENT:
-				return m_sACE_CBRN_ChokingAgent;
+			case SCR_EAIArtilleryAmmoType.ACE_CBRN_SARIN:
+				return m_sACE_CBRN_Sarin;
 		}
 		
 		return string.Empty;

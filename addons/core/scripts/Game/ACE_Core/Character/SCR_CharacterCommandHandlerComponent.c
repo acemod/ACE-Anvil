@@ -8,6 +8,8 @@ modded class SCR_CharacterCommandHandlerComponent : CharacterCommandHandlerCompo
 	//------------------------------------------------------------------------------------------------
 	override bool HandleWeaponFire(CharacterInputContext pInputCtx, float pDt, int pCurrentCommandID)
 	{
+		super.HandleWeaponFire(pInputCtx, pDt, pCurrentCommandID);
+		
 		if (!m_bACE_CanHandleWeaponFire)
 			return false;
 		

@@ -36,7 +36,6 @@ StringTable {
    Target_de_de "Liegestützen"
    Target_es_es "Lagartijas"
    Target_ko_kr "팔굽혀펴기"
-   Target_pt_br "Flexões"
    Target_zh_cn "伏地挺身"
    Modified 1750690968
    Author "Kex"
@@ -49,7 +48,6 @@ StringTable {
    Target_de_de "Salutieren"
    Target_es_es "Saludo militar"
    Target_ko_kr "경례"
-   Target_pt_br "Comprimeto militar"
    Target_zh_cn "敬禮"
    Modified 1750691025
    Author "Kex"
@@ -62,7 +60,6 @@ StringTable {
    Target_de_de "Auf den Boden sitzen"
    Target_es_es "Sentarse en el suelo"
    Target_ko_kr "바닥에 앉기"
-   Target_pt_br "Sentar no chão"
    Target_zh_cn "席地而坐"
    Modified 1750691043
    Author "Kex"
@@ -78,7 +75,6 @@ StringTable {
    Target_cs_cz "Zdravá dávka draslíku!"
    Target_ru_ru "Здоровый калий!"
    Target_ko_kr "건강한 칼륨덩어리입니다!"
-   Target_pt_br "Potássio saudável!"
    Target_zh_cn "香蕉含鉀量高，腎功能不良者應諮詢醫生後食用"
    Target_uk_ua "Здоровий калій!"
    Modified 1750691061
@@ -95,7 +91,6 @@ StringTable {
    Target_cs_cz "Banán"
    Target_ru_ru "Банан"
    Target_ko_kr "바나나"
-   Target_pt_br "Banana"
    Target_zh_cn "香蕉"
    Target_uk_ua "Банан"
    Modified 1750691073
@@ -117,7 +112,6 @@ StringTable {
    Target_fr_fr "Porter"
    Target_it_it "Trasporta"
    Target_de_de "Tragen"
-   Target_es_es "Llevar"
    Target_cs_cz "Nést"
    Target_pl_pl "Nieś"
    Target_ru_ru "Перенести"
@@ -140,7 +134,6 @@ StringTable {
    Target_cs_cz "Nošení"
    Target_ru_ru "Перенос"
    Target_ko_kr "업는 중"
-   Target_pt_br "Levar"
    Target_zh_cn "背負中"
    Target_uk_ua "Перенесення"
    Modified 1750691202
@@ -154,7 +147,6 @@ StringTable {
    Target_de_de "Getragener laden:"
    Target_es_es "Cargar paciente:"
    Target_ko_kr "업힌 사람 싣기:"
-   Target_pt_br "Carregar paciente:"
    Target_zh_cn "將隨行單位移進載具"
    Modified 1750691215
    Author "Kex"
@@ -172,7 +164,6 @@ StringTable {
    Target_ru_ru "Отпустить"
    Target_ja_jp "離す"
    Target_ko_kr "놓기"
-   Target_pt_br "Solta"
    Target_zh_cn "放下"
    Target_uk_ua "Відпустити"
    Modified 1750691228
@@ -189,7 +180,6 @@ StringTable {
    Target_cs_cz "Výbušná dávka draslíku!"
    Target_ru_ru "Взрывной калий!"
    Target_ko_kr "폭발하는 칼륨덩어리입니다!"
-   Target_pt_br "Potássio explosivo!"
    Target_zh_cn "注意高爆破片"
    Target_uk_ua "Вибуховий калій!"
    Modified 1750691236
@@ -200,13 +190,11 @@ StringTable {
    Id "ACE-Weapon_FragBanana_Name"
    Target_en_us "Frag Banana"
    Target_fr_fr "Banane à fragmentation"
-   Target_it_it "Banana Frag."
    Target_de_de "Granat-Banane"
    Target_es_es "Plátano frag."
    Target_cs_cz "Výbušný banán"
    Target_ru_ru "Осколочный банан"
    Target_ko_kr "세열바나나"
-   Target_pt_br "Frag Banana"
    Target_zh_cn "香蕉手榴彈"
    Target_uk_ua "Осколковий банан"
    Modified 1750692631
@@ -219,7 +207,6 @@ StringTable {
    Target_it_it "Core"
    Target_es_es "Core"
    Target_ko_kr "코어"
-   Target_pt_br "Core"
    Modified 1750768621
    Author "Kex"
    LastChanged "KingDaddyBoyz"

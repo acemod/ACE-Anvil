@@ -24,6 +24,7 @@ StringTable {
    Id "ACE-ControlsHint_InspectTurret"
    Target_en_us "Inspect Turret"
    Target_de_de "Geschütz untersuchen"
+   Target_ko_kr "포탑 조사하기"
    Modified 1715082397
    Author "Kexanone"
    LastChanged "Kexanone"
@@ -130,6 +131,7 @@ StringTable {
    Id "ACE-RadialMenu_ChangeMagazine"
    Target_en_us "Change magazine"
    Target_de_de "Magazin wechseln"
+   Target_ko_kr "탄창 교환"
    Modified 1752960450
    Author "Kexanone"
    LastChanged "Kexanone"

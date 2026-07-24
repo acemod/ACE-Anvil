@@ -72,4 +72,12 @@ modded class SCR_ItemPlacementComponent : ScriptComponent
 		if (float.AlmostEqual(GetGame().GetWorld().TraceMove(params, null), 1) || !ACE_SurfaceHelper.HasLabel(params.SurfaceProps, label))
 			cantPlaceReason = ENotification.PLACEABLE_ITEM_CANT_PLACE_GENERIC;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Base game fix: Clear traced entity cache
+	override void SetPlaceableItemComponent(SCR_PlaceableItemComponent placeableItemComp)
+	{
+		super.SetPlaceableItemComponent(placeableItemComp);
+		m_TargetEntity = null;
+	}
 }

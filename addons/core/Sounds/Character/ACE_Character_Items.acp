@@ -27,7 +27,7 @@ AudioClass {
    id 157705
    name "ACE_SOUND_METAL_CLANGING"
    version 5
-   tl -309.54 -475.286
+   tl -309.54 -474.286
    ins {
     ConnectionsClass "con:64" {
      id 64
@@ -42,6 +42,7 @@ AudioClass {
    pi {
     48 0
    }
+   volume_dB -6
    outState 162827
    outStatePort 79879
    eventNoRepeatTimeMSec 2700
@@ -188,14 +189,15 @@ AudioClass {
   }
  }
  spatialities {
-  SpatialityClass "160796" : "{E7A5A6AD7326FC7B}Sounds/_SharedData/Configs/Spatiality/Spatiality_Signal.conf" {
+  SpatialityClass "160796" {
    id 160796
+   name "Spatiality"
    version 5
    tl -733.012 -475.4
-   parent "{E7A5A6AD7326FC7B}Sounds/_SharedData/Configs/Spatiality/Spatiality_Signal.conf"
-   pi + {
-    0
+   pi {
+    1 0
    }
+   spatialFactor 1
   }
  }
  auxOuts {
@@ -203,7 +205,7 @@ AudioClass {
    id 151581
    name "AuxOut Rev Large"
    version 5
-   tl -82.75 -419.166
+   tl -83.75 -419.166
    ins {
     ConnectionsClass "con:0" {
      id 0

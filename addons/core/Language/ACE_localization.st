@@ -24,6 +24,7 @@ StringTable {
    Id "ACE-Emotes_Emote_MetalClanging_Name"
    Target_en_us "Metal clanging"
    Target_de_de "Metallklirren"
+   Target_ko_kr "금속 부딪히는 소리 내기"
    Modified 1775596321
    Author "Kexanone"
    LastChanged "Kexanone"

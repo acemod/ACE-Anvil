@@ -17,7 +17,7 @@ StringTable {
    Target_zh_cn "拖行"
    Modified 1725224988
    Author "Kex"
-   LastChanged "YuanYu"
+   LastChanged "KingDaddyBoyz"
   }
  }
 }

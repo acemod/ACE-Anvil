@@ -221,7 +221,7 @@ StringTable {
    Target_de_de "Ammoniumcarbonat"
    Target_ru_ru "Карбонат аммония"
    Target_pt_br "Carbonato de Amônio"
-   Target_zh_cn "碳酸銨 (嗅鹽)"
+   Target_zh_cn "碳酸铵 (嗅鹽)"
    Target_uk_ua "Амонію карбонат (нюхальна сіль)"
    Target_ko_kr "탄산암모늄"
    Modified 1722592801

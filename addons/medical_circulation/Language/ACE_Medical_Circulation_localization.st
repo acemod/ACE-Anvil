@@ -22,7 +22,7 @@ StringTable {
    Target_pt_br "Hemorragia de Classe I"
    Target_zh_cn "I 級出血"
    Target_uk_ua "Кровотеча I ступеня"
-   Target_ko_kr "경미한 실혈"
+   Target_ko_kr "경미한 실혈 (1급)"
    Modified 1722592586
    Author "Kexanone"
    LastChanged "Psycool"
@@ -35,7 +35,7 @@ StringTable {
    Target_pt_br "Hemorragia de Classe II"
    Target_zh_cn "II 級出血"
    Target_uk_ua "Кровотеча II ступеня"
-   Target_ko_kr "보통 실혈"
+   Target_ko_kr "보통 실혈 (2급)"
    Modified 1722592593
    Author "Kexanone"
    LastChanged "Psycool"
@@ -48,7 +48,7 @@ StringTable {
    Target_pt_br "Hemorragia de Classe III"
    Target_zh_cn "III 級出血"
    Target_uk_ua "Кровотеча III ступеня"
-   Target_ko_kr "심한 실혈"
+   Target_ko_kr "심한 실혈 (3급)"
    Modified 1722592601
    Author "Kexanone"
    LastChanged "Psycool"
@@ -61,7 +61,7 @@ StringTable {
    Target_pt_br "Hemorragia de Classe IV"
    Target_zh_cn "IV 級出血"
    Target_uk_ua "Кровотеча IV ступеня"
-   Target_ko_kr "극심한 실혈"
+   Target_ko_kr "극심한 실혈 (4급)"
    Modified 1722592610
    Author "Kexanone"
    LastChanged "Psycool"
@@ -132,7 +132,6 @@ StringTable {
    Id "ACE_Medical-FailReason_NotOnBack"
    Target_en_us "Not on back"
    Target_de_de "Nicht auf dem Rücken"
-   Target_zh_cn "非仰躺"
    Target_ko_kr "똑바로 눕혀지지 않음"
    Modified 1730199717
    Author "Kexanone"

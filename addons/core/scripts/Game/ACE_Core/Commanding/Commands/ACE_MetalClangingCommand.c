@@ -28,6 +28,10 @@ class ACE_MetalClangingCommand : SCR_BaseRadialCommand
 		if (!super.CanBePerformed(user))
 			return false;
 		
+		CharacterControllerComponent charController = user.GetCharacterController();
+		if (!charController || charController.IsUnconscious() || charController.IsSwimming() || charController.IsFalling())
+			return false;
+		
 		BaseWeaponManagerComponent weaponManager = user.GetWeaponManager();
 		if (!weaponManager)
 			return false;

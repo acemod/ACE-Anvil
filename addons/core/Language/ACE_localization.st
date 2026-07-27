@@ -164,6 +164,7 @@ StringTable {
    Target_ru_ru "Отпустить"
    Target_ja_jp "離す"
    Target_ko_kr "놓기"
+   Target_pt_br "Soltar"
    Target_zh_cn "放下"
    Target_uk_ua "Відпустити"
    Modified 1750691228
@@ -191,6 +192,7 @@ StringTable {
    Target_en_us "Frag Banana"
    Target_fr_fr "Banane à fragmentation"
    Target_de_de "Granat-Banane"
+   Target_it_it "Banana Frag"
    Target_es_es "Plátano frag."
    Target_cs_cz "Výbušný banán"
    Target_ru_ru "Осколочный банан"

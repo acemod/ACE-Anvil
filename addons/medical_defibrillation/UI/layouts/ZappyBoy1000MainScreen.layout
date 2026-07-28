@@ -1,0 +1,154 @@
+FrameWidgetClass {
+ Name "WrapIntoRT"
+ {
+  SizeLayoutWidgetClass "{69B54065EDF9C956}" {
+   Name "SizeLayout0"
+   Slot FrameWidgetSlot "{69B54065EDF9C944}" {
+    OffsetLeft 0
+    OffsetTop 0
+    OffsetRight -100
+    OffsetBottom -30
+    SizeToContent 1
+   }
+   AllowWidthOverride 1
+   WidthOverride 640
+   AllowHeightOverride 1
+   HeightOverride 360
+   {
+    VerticalLayoutWidgetClass "{69B5406605CD84B9}" {
+     Name "VerticalLayout0"
+     Slot AlignableSlot "{69B54065EBDDDB46}" {
+     }
+     {
+      SizeLayoutWidgetClass "{69B5406955450317}" {
+       Name "SizeLayout0"
+       Slot LayoutSlot "{69B5406955450361}" {
+       }
+       AllowWidthOverride 1
+       WidthOverride 640
+       {
+        HorizontalLayoutWidgetClass "{69B54066027AEC29}" {
+         Name "HorizontalLayout0"
+         Slot AlignableSlot "{69B5406952523892}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         {
+          TextWidgetClass "{69B54065FB8E7624}" {
+           Name "Text1"
+           Slot LayoutSlot "{69B54065F33263CE}" {
+            SizeMode Fill
+           }
+           Color 0 0 0 1
+           Text "CONNECTED"
+           "Horizontal Alignment" Center
+           "Vertical Alignment" Center
+          }
+          TextWidgetClass "{69B54065AF0680A0}" {
+           Name "Time"
+           Slot LayoutSlot "{69B5406F4A9039D1}" {
+            SizeMode Auto
+            FillWeight 0.25
+           }
+           Color 0 0 0 1
+           Text "09:58"
+           "Horizontal Alignment" Center
+          }
+          ImageWidgetClass "{69B54065F99D6C0F}" {
+           Name "Text2"
+           Slot LayoutSlot "{69B54065F33263CE}" {
+           }
+           Color 0 0 0 1
+           Texture "{FDD5423E69D007F8}UI/Textures/Icons/icons_wrapperUI-128.imageset"
+           Image "veh_battery"
+           Size 32 32
+          }
+         }
+        }
+       }
+      }
+      HorizontalLayoutWidgetClass "{69B54069A85844FB}" {
+       Name "HorizontalLayout1"
+       Slot LayoutSlot "{69B54069A85844C4}" {
+       }
+       {
+        SizeLayoutWidgetClass "{69B54068FFD54806}" {
+         Name "SizeLayout1"
+         Slot LayoutSlot "{69B54068FFD54812}" {
+         }
+         AllowWidthOverride 1
+         WidthOverride 40
+         {
+          ProgressBarWidgetClass "{69B5406912AE2C7D}" {
+           Name "ProgressBar0"
+           Slot AlignableSlot "{69B54068FC99877F}" {
+            HorizontalAlign 3
+            VerticalAlign 3
+           }
+           Color 0 0 0 1
+           style Simple
+           Vertical 1
+           Flipped 1
+          }
+         }
+        }
+        SizeLayoutWidgetClass "{69B540686430CD02}" {
+         Name "SizeLayout2"
+         Slot LayoutSlot "{69B540686430CD6C}" {
+         }
+         {
+          ImageWidgetClass "{69B540686087FB9B}" {
+           Name "Image0"
+           Slot AlignableSlot "{69B540686087FBEA}" {
+           }
+           Color 0 0 0 1
+           Texture "{2BB9FACCC5A47EEB}UI/Imagesets/Conflict/services-icons-bw.imageset"
+           Image "Antenna"
+           Size 32 32
+          }
+         }
+        }
+        SizeLayoutWidgetClass "{69B540642783E62F}" {
+         Name "SizeLayout0"
+         Slot LayoutSlot "{69B540642783E63B}" {
+         }
+         AllowWidthOverride 1
+         WidthOverride 568
+         AllowHeightOverride 1
+         HeightOverride 328
+         {
+          VerticalLayoutWidgetClass "{69B54069D3412D54}" {
+           Name "VerticalLayout0"
+           Slot AlignableSlot "{69B54069D3412DA7}" {
+           }
+           {
+            TextWidgetClass "{69B54069D13835F5}" {
+             Name "Text0"
+             Slot LayoutSlot "{69B54069D13835C5}" {
+             }
+             Color 0 0 0 1
+             Text "CONTINUE CPR"
+             "Horizontal Alignment" Center
+             "Vertical Alignment" Center
+            }
+            TextWidgetClass "{69B54069DCB8A162}" {
+             Name "Text1"
+             Slot LayoutSlot "{69B54069DCB8A14D}" {
+             }
+             Color 0 0 0 1
+             Text "120 Seconds"
+             "Horizontal Alignment" Center
+             "Vertical Alignment" Center
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

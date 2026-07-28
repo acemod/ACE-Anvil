@@ -1,0 +1,68 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SignalsManagerComponent "{655C16EC9DB5136B}" {
+  }
+  SoundComponent "{655C16ECB615B046}" {
+   Filenames {
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp"
+   }
+  }
+  ACE_Medical_Defibrillation_DefibComponent "{671C09EFE7878C09}" {
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
+    ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
+     Name "#ACE_MedicalDefibrillation_Defibrillator_DisplayName"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{64FB47C8B694DDEE}" {
+     Weight 1
+    }
+    m_Size SLOT_1x1
+    m_eQuickSlotSize SLOT_1x1
+    m_SlotType SLOT_GADGETS_STORAGE
+    m_bStackable 0
+   }
+  }
+  MeshObject "{64FB47CE0046FB12}" {
+  }
+  RigidBody "{68483DE61388D41E}" {
+   Mass 3.2
+   ModelGeometry 1
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    ACE_Medical_Defibrillation_PickupItemAction_DefibPickup "{51EC842E3A187379}" {
+     Duration 1
+     "Sort Priority" 999
+    }
+    ACE_Medical_Defibrillation_ScriptedUserAction_DefibDisconnect "{69B21D14B1E5B88E}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{69B21D14B1E5B92F}" {
+      Name "#ACE-MedicalDefibrillation_UserAction_DisconnectPatient"
+      m_sIconName "cancel"
+     }
+     Duration 1
+     "Sort Priority" 998
+    }
+    ACE_Medical_Defibrillation_ScriptedUserAction_DefibShock "{69B21D1498D8F2B5}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{69B21D1498D8F37A}" {
+      Name "#ACE-MedicalDefibrillation_UserAction_DeliverShock"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Unconscious_UI"
+     }
+     Duration 1
+    }
+   }
+  }
+  ACE_Medical_Defibrillation_DefibSoundManagerComponent "{69B5407ACE8A5084}" {
+  }
+ }
+ coords 0 0 0
+}

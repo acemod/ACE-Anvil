@@ -38,51 +38,6 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
-  CustomStringTableItem "{64771570B1AFAB10}" {
-   Id "ACE-Emotes_Emote_Pushups_Name"
-   Target_en_us "Push-ups"
-   Target_fr_fr "Faire des pompes"
-   Target_it_it "Flessioni"
-   Target_de_de "Liegestützen"
-   Target_es_es "Lagartijas"
-   Target_ja_jp "腕立て伏せ"
-   Target_ko_kr "팔굽혀펴기"
-   Target_pt_br "Flexões"
-   Target_zh_cn "伏地挺身"
-   Modified 1750690968
-   Author "Kex"
-   LastChanged "michy_REV19"
-  }
-  CustomStringTableItem "{64771570304E885F}" {
-   Id "ACE-Emotes_Emote_Salute_Name"
-   Target_en_us "Salute"
-   Target_fr_fr "Salut militaire"
-   Target_it_it "Saluto militare"
-   Target_de_de "Salutieren"
-   Target_es_es "Saludo militar"
-   Target_ja_jp "敬礼"
-   Target_ko_kr "경례"
-   Target_pt_br "Comprimeto militar"
-   Target_zh_cn "敬禮"
-   Modified 1750691025
-   Author "Kex"
-   LastChanged "michy_REV19"
-  }
-  CustomStringTableItem "{64771570B4AF7606}" {
-   Id "ACE-Emotes_Emote_SitOnFloor_Name"
-   Target_en_us "Sit on the floor"
-   Target_fr_fr "Asseyez-vous par terre"
-   Target_it_it "Sedersi per terra"
-   Target_de_de "Auf den Boden sitzen"
-   Target_es_es "Sentarse en el suelo"
-   Target_ja_jp "地面に座る"
-   Target_ko_kr "바닥에 앉기"
-   Target_pt_br "Sentar no chão"
-   Target_zh_cn "席地而坐"
-   Modified 1750691043
-   Author "Kex"
-   LastChanged "michy_REV19"
-  }
   CustomStringTableItem "{69D0F455AABC16B0}" {
    Id "ACE-Item_AnvilPatch_Name"
    Target_en_us "ACE Anvil Patch"

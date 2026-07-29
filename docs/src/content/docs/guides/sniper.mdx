@@ -1,0 +1,118 @@
+---
+title: Long-Range Shooting
+---
+import { Image } from 'astro:assets';
+
+This guide covers long-range shooting by accounting for bullet drop and windage.
+
+## Requirements
+
+The following mods are required for this guide, but can be exchanged with mods providing equivalent features:
+- **RHS Status Quo** for [Vector 21](https://docs.rhsmods.org/rhs-status-quo-user-documentation/arma-reforger/rhs-status-quo/blufor/gadgets/vector-21) range finder
+- **ACE Scopes** for [advanced zeroing](../../components/scopes)
+- **ACE Ballistics** for [ballistic tables](../../components/ballistics)
+- **ACE Weather** for [Kacetrel 4500](../../components/weather) pocket weather meter
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/items.png`} alt="items.png" width="768px" height="432px" />
+
+M21, Kacetrel 4500, Vector 21 and ballistic table from left to right.
+
+## Workflow
+
+Our goal is to target the gunner of a stationary armed UAZ. We will first measure the distance and bearing of the target, then measure the crosswind and finally derive the corresponding bullet drop and windage.
+
+### Acquiring the Target
+
+1. Look through the Vector 21 and aim at the target.
+2. Hold <kbd>R</kbd>+<kbd>V</kbd> for 2 seconds to get the bearing and distance.
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/vector21.png`} alt="items.png" width="768px" height="432px" />
+
+In our case, the Vector 21 reports a bearing of 028° and distance of 539 m.
+
+### Measure Crosswind Speed
+
+1. Put the Kacetrel 4500 in hand and hold <kbd>R</kbd> to inspect it. A mouse cursor will appear.
+2. Switch to the `Direction` data screen (Click with the mouse on the <kbd>↑</kbd> or <kbd>↓</kbd> button to switch between the different data screens).
+3. We have to make sure that the correct direction mode is selected: `Magnetic North` vs `True N X.X W/E` (_i.e._ true north), which is shown at the bottom of the screen. The two modes are identical, unless you are running **ACE Compass** with magnetic declination enabled. Vanilla compasses report magnetic direction. In contrast, **RHS Status Quo**'s Vector 21 reports true direction, unlike its real life counterpart, so we have to switch to `True` mode.
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/direction-mode.png`} alt="direction-mode.png" width="768px" height="619px" />
+
+① **Magnetic direction data screen**. You can modify the direction mode by clicking on the <kbd>—</kbd> button.
+
+② **Direction mode selection screen**. Click the <kbd>←</kbd> or <kbd>→</kbd> button to switch from `Magnetic` to `True` mode. The `Variation` corresponds to the declination and is already correctly configured out of the box, so no further changes are needed. Click the <kbd>—</kbd> button to confirm the selection. You will be back in the direction data screen, but in the `True N X.X W/E` mode ③.
+
+③ **True direction data screen**.
+
+4. Switch to the `Crosswind` data screen (Click the <kbd>↑</kbd> or <kbd>↓</kbd> button to switch between the different data screens).
+5. Set the reference direction to the direction of the target (_i.e._ the 028° we measured before).
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/reference-direction.png`} alt="reference-direction.png" width="768px" height="619px" />
+
+① **Crosswind data screen**. You can modify the reference direction by clicking on the <kbd>—</kbd> button.
+
+② **Reference direction screen**. Click again the <kbd>—</kbd> button to enter `Auto Set`.
+
+③ **Auto set screen**. Hold <kbd>R</kbd> to exit inspection and turn until the reference direction matches the target (_i.e._ 028° in our case). Hold <kbd>R</kbd> to enter inspection mode and click the <kbd>—</kbd> button to confirm the reference. You will be back at the crosswind data screen ①.
+
+6. Hold <kbd>R</kbd> to exit inspection. Press <kbd>Shift</kbd>+<kbd>K</kbd> to open the wind info display (you will see a wind barb at the bottom right of the screen).
+7. Turn until the wind barb points up on your screen. The reported speed value on the Kacetrel corresponds to the crosswind speed, which is 4.5 m/s in our case. A positive speed means that the crosswind component comes from the right of our target, while a negative means left. The sign will be relevant later for setting the `WIND` zeroing.
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/read-crosswind.png`} alt="read-crosswind.png" width="768px" height="432px" />
+
+Kacetrel aligned with wind barb for reading the correct crosswind speed.
+
+### Derive Zeroings
+
+1. Put the ballistic table in hand and hold <kbd>R</kbd> to inspect it.
+2. Switch the pages until you get the correct bullet type. In our case we have the M21 loaded with M118 special ball cartridges, so we switch to `Ammo_752x51_Ball_M118`. If not sure about the type, open the inventory and hover with the mouse over the magazine to see the description in the tooltip.
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/magazine.png`} alt="magazine.png" width="377px" height="277px" />
+
+Tooltip confirms that we have M118 rounds.
+
+3. Read the drop and wind from the table. In our case we get a drop of -3.2 mrad and wind of 1.8 mrad from interpolation (see details below).
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/table.png`} alt="table.png" width="768px" height="432px" />
+
+Ballistic data page for M118 rounds. Our measured distance from earlier is 539 m, which lies between 500 m and 550 m. If it has to go fast, take the closer distance (550 m in this case), but you will lose precision. We will instead demonstrate how to get more accurate values from interpolation.
+
+| Range [m] | Drop [mrad] | Wind 4 m/s [mrad] |
+| --------- | ----------- | ----------------- |
+| 500       | -2.7        | 1.5               |
+| 539       | -?.?        | ?.?               |
+| 550       | -3.4        | 1.6               |
+
+We first calculate the differences (Δ) of the entries relative to 500 m:
+
+| ΔRange [m] | ΔDrop [mrad] | ΔWind 4 m/s [mrad] |
+| ---------- | ------------ | ------------------ |
+| 0          | 0.0          | 0.0                |
+| 539 - 500 = **39** | ---  | ---                |
+| 550 - 500 = **50** | -3.4 - (-2.7) = **-0.7** | 1.6 - 1.5 = **0.1** |
+
+We can then calculate the interpolation scale by dividing the 39 m by 50 m, which yields **0.78**. We can finally get the data for 539 m by multiplying the 50 m difference data with the interpolation scale and add the 500 m data to it:
+
+| Range [m] | Drop [mrad] | Wind 4 m/s [mrad] |
+| --------- | ----------- | ----------------- |
+| 539       | 0.78 * (-0.7) + (-2.7) ≈ **-3.2** | 0.78 * 0.1 + 1.5 ≈ **1.6** |
+
+We obtain **-3.2 mrad** as the final value for the drop. The value for 4 m/s wind is 1.6, but we measured 4.5 m/s. We can obtain the correct value by multiplying the value with our actual speed and divide it by 4 m/s , which is (1.6 mrad) * (4.5 m/s) / (4 m/s) = **1.8 mrad**.
+
+### Set Zeroings
+
+1. Adjust the DROP and WIND zeroings with [advanced zeroing keybinds](../../components/scopes). For our case `ELEV=3.2` (elevation has the opposite sign of drop) and `WIND=1.8R` (`R` for positive crosswind speed, _i.e._ crosswind component comes from the right).
+2. Aim at the target and take the shot.
+
+<Image src={`${import.meta.env.BASE_URL}images/sniper/aim.png`} alt="aim.png" width="768px" height="432px" />
+
+Aiming at the target with the correct zeroings.
+
+## Additional Corrections
+### Firing at Moving Target
+
+If a target moves, you will have to lead the target (_i.e._ fire ahead). Some ballistic tables have an additional column called `LEAD 1 m/s`, which states how many mrads you have to lead a target that moves at 1 m/s for a given distance. For instance, if the target moves at 14 m/s and the correction in the table reports 0.3 mrad, you have to lead the target by (0.3 mrad) * 14 = **4.2 mrad**. This value can then be added or subtracted from the wind correction depending on the direction of travel.
+
+### Firing Uphill/Downhill
+
+Ballistic tables are calibrated for horizontal shooting. Firing uphill or downhill with these elevation corrections will overshoot the target if the slant angle (_i.e._ angle between horizontal plane and line of sight) is large enough (roughly 7°, respective -7°). The slant angle can be obtained with the Vector 21 by tapping `V` once and then pressing and holding `V` for 2 seconds. The simplest way to compensate for the overshooting is to apply the [Rifleman's rule](https://en.wikipedia.org/wiki/Rifleman%27s_rule), which states that you should use the horizontal distance to the target instead of the slant distance (_i.e._ line of sight distance) for looking up the drop. Given a slant distance $R_S$ and slant angle $\alpha$, the horizontal distance is $R_H = R_S \cdot \cos(\alpha)$. Note that the rule only applies to drops. You should always look up the wind correction based on the slant distance regardless of the slant angle. For instance, if the Vector 21 reports a slant distance of 539 m and a slant angle of -13°, then the horizontal distance is (539 m) * cos(-13°) ≈ **525 m**. You should therefore look up the drop for 525 m and the wind for 539 m.

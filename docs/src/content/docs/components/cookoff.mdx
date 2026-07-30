@@ -1,0 +1,28 @@
+---
+title: Cook-Off
+---
+
+Adds detonation of ammunition in burning vehicles.
+
+## Settings
+
+Certain aspects of this mod can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_fMinCookOffDelay`                  | Type: `float`**<br />Range: 0 to ∞<br />Default: `5.0` | Minimum time required for ammo cook-off to start after vehicle caught fire [s] |
+| `m_fMaxCookOffDelay`                  | Type: `float`**<br />Range: 0 to ∞<br />Default: `11.0` | Maximum time required for ammo cook-off to start after vehicle caught fire [s] |
+
+\*\* Note that floats need a decimal point to get properly read.
+
+Example for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_CookOff_Settings": {
+            "m_fMinCookOffDelay": 5.0,
+            "m_fMaxCookOffDelay": 11.0
+        }
+    }
+}
+```

@@ -22,6 +22,7 @@ SCR_ChimeraCharacter {
       m_sInteractionIcon "{2EFEA2AF1F38E7F0}UI/Textures/Icons/icons_wrapperUI-64.imageset"
       m_sIconName "connection"
      }
+     VisibilityRange 1.5
      "Sort Priority" 1
     }
     ACE_Captives_ReleaseCaptiveUserAction "{64D908D36A98FF2D}" {

@@ -1,6 +1,7 @@
 BaseSource {
  AnimSetTemplate "{2255EA04D2FD8565}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.ast"
  AnimSetInstances {
+  "{A0A5BCBD5629BADB}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.asi"
  }
  AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.agr"
  PreviewModels {

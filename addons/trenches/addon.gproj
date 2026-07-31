@@ -7,6 +7,67 @@ GameProject {
  }
  Configurations {
   GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{670D1E4C2F90BCC4}" {
+      StringTableSource "{959D5DBC2DA78E19}Language/ACE_Trenches_localization.st"
+      Languages {
+       LanguageDefinition "{670D1E4C2C71E91D}" {
+        Code "cs_cz"
+        StringTableRuntime "{90A646E1A5D144CA}Language/ACE_Trenches_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E943}" {
+        Code "de_de"
+        StringTableRuntime "{45D85CD2B67255EA}Language/ACE_Trenches_localization.de_de.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E8BB}" {
+        Code "en_us"
+        StringTableRuntime "{1B28D699DC8150EB}Language/ACE_Trenches_localization.en_us.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E8A8}" {
+        Code "es_es"
+        StringTableRuntime "{DE649B1032833BF4}Language/ACE_Trenches_localization.es_es.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E89E}" {
+        Code "fr_fr"
+        StringTableRuntime "{65CC6E27D400D8F6}Language/ACE_Trenches_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E8F0}" {
+        Code "it_it"
+        StringTableRuntime "{E5D0E11379225B0F}Language/ACE_Trenches_localization.it_it.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E8E4}" {
+        Code "ja_jp"
+        StringTableRuntime "{F5CB5C8147536BA4}Language/ACE_Trenches_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E8D8}" {
+        Code "ko_kr"
+        StringTableRuntime "{5575742DD47E689B}Language/ACE_Trenches_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E8CC}" {
+        Code "pl_pl"
+        StringTableRuntime "{0904D2D76A91F4E7}Language/ACE_Trenches_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E820}" {
+        Code "pt_br"
+        StringTableRuntime "{DC73481B516F3E5D}Language/ACE_Trenches_localization.pt_br.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71E818}" {
+        Code "ru_ru"
+        StringTableRuntime "{89325CB3CC165B2B}Language/ACE_Trenches_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71D7E5}" {
+        Code "uk_ua"
+        StringTableRuntime "{036A0945A038E57E}Language/ACE_Trenches_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{670D1E4C2C71D7D4}" {
+        Code "zh_cn"
+        StringTableRuntime "{D9DA677899983563}Language/ACE_Trenches_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
   }
   GameProjectConfig XBOX_ONE {
   }

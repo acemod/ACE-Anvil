@@ -7,12 +7,10 @@ GenericEntity : "{AE4206993ACBAE48}Prefabs/Compositions/Misc/FreeRoamBuilding/AC
    m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
     Name "#AR-EditableEntity_DirtCover_01_long_v1_Name"
     m_Image "{5EFA9ECADE0076BD}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_DirtCover_01_long_v1.edds"
-    m_sFaction "US"
     m_aAuthoredLabels {
-     108 11
+     THEME_MILITARY ENTITYTYPE_OBJECT SIZE_M FACTION_US FACTION_USSR FACTION_FIA
     }
     m_aAutoLabels {
-     1 121
     }
     m_EntityBudgetCost {
      SCR_EntityBudgetValue "{60EB074AC0F6DB35}" {

@@ -1,0 +1,7 @@
+Turret : "{419D5A88C92E2540}Prefabs/Vehicles/Helicopters/Mi8MT/VehParts/WeapSystems/Mi8MT_PKMT_mount_base.et" {
+ ID "51ACD0965653D003"
+ components {
+  SCR_TurretControllerComponent "{51ACD09C61C183E4}" {
+  }
+ }
+}

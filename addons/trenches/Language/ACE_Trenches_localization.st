@@ -41,5 +41,21 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{69FF5E55F8D175DB}" {
+   Id "ACE_Trenches-Item_SandbagContainer_Description"
+   Target_en_us "Container for empty sandbags."
+   Target_de_de "Behälter für leere Sandsäcke."
+   Modified 1778345524
+   Author "Kex"
+   LastChanged "Kex"
+  }
+  CustomStringTableItem "{69FF5E55FEC70DF4}" {
+   Id "ACE_Trenches-Item_SandbagContainer_Name"
+   Target_en_us "Sandbag Container"
+   Target_de_de "Sandsackbehälter"
+   Modified 1778345374
+   Author "Kex"
+   LastChanged "Kex"
+  }
  }
 }

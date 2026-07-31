@@ -1,0 +1,14 @@
+GenericEntity : "{25C084725870741B}Prefabs/Items/Misc/ACE_SandbagsStack_US.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SCR_UniversalInventoryStorageComponent "{5222EB4D0C73006B}" {
+   MultiSlots {
+    MultiSlotConfiguration "{69FF23343CC188D2}" {
+     SlotTemplate InventoryStorageSlot d2 {
+      Prefab "{07BC23F8D9223863}Prefabs/Items/Misc/Sandbags/Part_Sandbag_Burlap.et"
+     }
+    }
+   }
+  }
+ }
+}

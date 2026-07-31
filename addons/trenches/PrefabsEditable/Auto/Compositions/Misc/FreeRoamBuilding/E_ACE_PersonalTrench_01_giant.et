@@ -1,0 +1,39 @@
+GenericEntity : "{6F4723C97FDDE101}Prefabs/Compositions/Misc/FreeRoamBuilding/ACE_PersonalTrench_01_giant.et" {
+ ID "5282DCB5DFC8538F"
+ components {
+  ACE_Trenches_OutlineGarbageComponent "{670D4C246CE510ED}" {
+  }
+  SCR_EditableEntityComponent "{5E50727929EC2547}" : "{8B8F72167C615EAA}Prefabs/Editor/Components/Compositions_SCR_EditableEntityComponent.ct" {
+   m_UIInfo SCR_EditableEntityUIInfo "{5298E609432D192D}" {
+    Name "#ACE_Trenches-EditableEntity_PersonalTrench_01_giant_Name"
+    m_Image "{B979394E7A87F73A}UI/Textures/EditorPreviews/Auto/Structures/Military/Fortifications/E_ACE_PersonalTrench_01_giant.edds"
+    m_aAuthoredLabels {
+     THEME_MILITARY ENTITYTYPE_OBJECT SIZE_M FACTION_US FACTION_USSR FACTION_FIA
+    }
+    m_aAutoLabels {
+    }
+    m_EntityBudgetCost {
+     SCR_EntityBudgetValue "{670D4C246CE510DF}" {
+      m_BudgetType CAMPAIGN
+     }
+    }
+    m_EntityChildrenBudgetCost {
+     SCR_EntityBudgetValue "{670D4C246CE510DD}" {
+      m_BudgetType PROPS
+      m_Value 1
+     }
+    }
+   }
+  }
+  SCR_EditorLinkComponent "{670D4C246CE510C2}" {
+   m_aEntries {
+    SCR_EditorLinkEntry "{670D4C246CE510C1}" {
+     m_Prefab "{161A7A442A90AB64}PrefabsEditable/Auto/Structures/Military/Fortifications/E_ACE_PersonalTrench_01_giant.et"
+     m_vPosition 0 0 0
+     m_vAngles 0 0 0
+     m_fScale 1
+    }
+   }
+  }
+ }
+}

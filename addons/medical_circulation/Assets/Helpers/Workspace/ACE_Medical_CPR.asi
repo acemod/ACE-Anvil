@@ -1,0 +1,14 @@
+AnimSetInstanceSource "{F60AB4D2CE8917ED}" {
+ Template "{2255EA04D2FD8565}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Animation.Default.In" {
+   Resource "{53DD1932ED812D70}anims/anm/player/injury/p_cro_revive_CPR_in.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Loop" {
+   Resource "{0CCED80870DD8150}anims/anm/player/injury/p_cro_revive_CPR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Animation.Default.Out" {
+   Resource "{226002617FC7B0AB}anims/anm/player/injury/p_cro_revive_CPR_out.anm"
+  }
+ }
+}

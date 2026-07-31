@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{C743E213F3F50576}Assets/Items/Medicine/NaloxoneInjection/Data/ACE_Medical_NaloxoneInjection.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -46,7 +46,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
    MaxItemSize 15 15 15
    MultiSlots {
     MultiSlotConfiguration "{69FF23343CC188D2}" {
-     SlotTemplate InventoryStorageSlot d2 {
+     SlotTemplate InventoryStorageSlot s1 {
       Prefab "{1742632597955A55}Prefabs/Items/Misc/Sandbags/Part_Sandbag_Plastic.et"
      }
      NumSlots 15

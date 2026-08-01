@@ -84,6 +84,27 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
     SCR_AudioSourceConfiguration "{5B18D20930D9E274}" {
      m_sSoundProject "{DD4620A1A4BAEBED}Sounds/Items/_SharedData/Drop/Items_Drop_Supply_Portable_Container_Medium.acp"
     }
+    SCR_AudioSourceConfiguration "{69FF74DF66CE9A79}" {
+     m_sSoundProject "{A73D28179B395F19}Sounds/Props/Military/AmmoBoxes/AmmoBox_Big_Wooden/Props_AmmoBox_Big_Wooden.acp"
+     m_sSoundEventName "SOUND_CONTAINER_OPEN"
+    }
+    SCR_AudioSourceConfiguration "{69FF74DC83C672A3}" {
+     m_sSoundProject "{A73D28179B395F19}Sounds/Props/Military/AmmoBoxes/AmmoBox_Big_Wooden/Props_AmmoBox_Big_Wooden.acp"
+     m_sSoundEventName "SOUND_CONTAINER_CLOSE"
+    }
+   }
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    SCR_OpenStorageAction "{69FF74DE62707203}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{69FF74DE64CC2CC6}" {
+      Name "#AR-Inventory_OpenStorage"
+     }
+     "Sort Priority" 1
+    }
    }
   }
  }

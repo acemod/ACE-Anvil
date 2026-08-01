@@ -13,10 +13,30 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      ItemDimensions 15 15 15
      ItemVolume 1950
     }
+    ItemAnimationAttributes ItemAnimationAttributes "{69FF74DDACE2A42F}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{69FF74DDC4E7833C}" {
+       AnimGraph "{44A1E0130301E5F5}Assets/Items/Equipment/workspaces/MedicalKit_supplies.agr"
+       AnimInstance "{A9CBB5C81F08B71B}Assets/Items/Equipment/workspaces/MedicalKit_supplies.asi"
+       BindingName "Gadget"
+      }
+     }
+     HandAdditiveRotation 0 90 -90
+     HandAdditiveTranslation 0 0.05 -0.1
+    }
     CustomAttributes {
      PreviewRenderAttributes "{69FF3EC9953163B8}" {
       CameraPreset Top
       CameraDistanceToItem 0.45
+     }
+     CharacterModifierAttributes "{69FF7C52759AA0E0}" {
+      StanceLimits 0.025 1
+      SpeedLimit 1.7
+      ADSSpeedLimit 1.7
+      SpeedLimitItemPrimaryAction 0
+      SpeedLimitHighready 1.7
+      CanBeEquippedInVehicle 0
+      AllowJumping 0
      }
     }
     m_Size SLOT_2x2
@@ -49,6 +69,9 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   RigidBody "{69FF2337E5478DD7}" {
    ModelGeometry 1
+  }
+  SCR_GadgetComponent "{69FF74DDB296D8FB}" {
+   m_eAnimVariable ADRIANOV
   }
   SCR_SoundDataComponent "{5B18D20ED0099A17}" {
    m_aAudioSourceConfiguration {

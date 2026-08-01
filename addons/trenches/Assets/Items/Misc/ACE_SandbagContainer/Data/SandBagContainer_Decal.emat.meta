@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{FEF6EB25A3DC7ED9}Assets/Props/Military/SupplyBox/SupplyPortableContainers/Data/SandBagContainer_Decal.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

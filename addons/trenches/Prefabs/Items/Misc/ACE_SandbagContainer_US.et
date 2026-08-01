@@ -1,0 +1,111 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ACE_Trenches_ContainerInventoryStorageComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Trenches-Item_SandbagContainer_Name"
+     Description "#ACE_Trenches-Item_SandbagContainer_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes "{69FF233489BF8200}" {
+     Weight 1
+     SizeSetupStrategy Manual
+     ItemDimensions 15 15 15
+     ItemVolume 1950
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{69FF74DDACE2A42F}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{69FF74DDC4E7833C}" {
+       AnimGraph "{44A1E0130301E5F5}Assets/Items/Equipment/workspaces/MedicalKit_supplies.agr"
+       AnimInstance "{A9CBB5C81F08B71B}Assets/Items/Equipment/workspaces/MedicalKit_supplies.asi"
+       BindingName "Gadget"
+      }
+     }
+     HandAdditiveRotation 0 90 -90
+     HandAdditiveTranslation 0 0.05 -0.1
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{69FF3EC9953163B8}" {
+      CameraPreset Top
+      CameraDistanceToItem 0.45
+     }
+     CharacterModifierAttributes "{69FF7C52759AA0E0}" {
+      StanceLimits 0.025 1
+      SpeedLimit 1.7
+      ADSSpeedLimit 1.7
+      SpeedLimitItemPrimaryAction 0
+      SpeedLimitHighready 1.7
+      CanBeEquippedInVehicle 0
+      AllowJumping 0
+     }
+    }
+    m_Size SLOT_2x2
+   }
+   UseCapacityCoefficient 0
+   MaxCumulativeVolume 1951
+   MaxItemSize 15 15 15
+   MultiSlots {
+    MultiSlotConfiguration "{69FF23343CC188D2}" {
+     SlotTemplate InventoryStorageSlot s1 {
+      Prefab "{1742632597955A55}Prefabs/Items/Misc/Sandbags/Part_Sandbag_Plastic.et"
+     }
+     NumSlots 15
+    }
+   }
+   m_fMaxWeight 2.701
+  }
+  MeshObject "{69FF2337F2122562}" {
+   Object "{4D84BA9E2DB4A692}Assets/Props/Military/SupplyBox/SupplyPortableContainers/SupplyPortableContainer_01_large_packaged.xob"
+   Materials {
+    MaterialAssignClass "{69FF5E56B927E5EB}" {
+     SourceMaterial "PortableSupplyContainer_01_Decal"
+     AssignedMaterial "{FEF6EB25A3DC7ED9}Assets/Items/Misc/ACE_SandbagContainer/Data/SandBagContainer_Decal.emat"
+    }
+    MaterialAssignClass "{69FF5E56B927E5C3}" {
+     SourceMaterial "PortableSupplyContainer_Large"
+     AssignedMaterial "{89271C433A7FA78B}Assets/Items/Misc/ACE_SandbagContainer/Data/SandbagContainer.emat"
+    }
+   }
+  }
+  RigidBody "{69FF2337E5478DD7}" {
+   ModelGeometry 1
+  }
+  SCR_GadgetComponent "{69FF74DDB296D8FB}" {
+   m_eAnimVariable ADRIANOV
+  }
+  SCR_SoundDataComponent "{5B18D20ED0099A17}" {
+   m_aAudioSourceConfiguration {
+    SCR_AudioSourceConfiguration "{5B18D209080A5D15}" {
+     m_sSoundProject "{FEFAE53BD7C6D7CC}Sounds/Items/_SharedData/PickUp/Items_PickUp_Supply_Portable_Container_Medium.acp"
+    }
+    SCR_AudioSourceConfiguration "{5B18D2091B885AE6}" {
+     m_sSoundProject "{FEFAE53BD7C6D7CC}Sounds/Items/_SharedData/PickUp/Items_PickUp_Supply_Portable_Container_Medium.acp"
+    }
+    SCR_AudioSourceConfiguration "{5B18D20930D9E274}" {
+     m_sSoundProject "{DD4620A1A4BAEBED}Sounds/Items/_SharedData/Drop/Items_Drop_Supply_Portable_Container_Medium.acp"
+    }
+    SCR_AudioSourceConfiguration "{69FF74DF66CE9A79}" {
+     m_sSoundProject "{A73D28179B395F19}Sounds/Props/Military/AmmoBoxes/AmmoBox_Big_Wooden/Props_AmmoBox_Big_Wooden.acp"
+     m_sSoundEventName "SOUND_CONTAINER_OPEN"
+    }
+    SCR_AudioSourceConfiguration "{69FF74DC83C672A3}" {
+     m_sSoundProject "{A73D28179B395F19}Sounds/Props/Military/AmmoBoxes/AmmoBox_Big_Wooden/Props_AmmoBox_Big_Wooden.acp"
+     m_sSoundEventName "SOUND_CONTAINER_CLOSE"
+    }
+   }
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    SCR_OpenStorageAction "{69FF74DE62707203}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{69FF74DE64CC2CC6}" {
+      Name "#AR-Inventory_OpenStorage"
+     }
+     "Sort Priority" 1
+    }
+   }
+  }
+ }
+}

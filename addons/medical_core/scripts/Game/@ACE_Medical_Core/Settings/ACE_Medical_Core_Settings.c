@@ -13,4 +13,10 @@ class ACE_Medical_Core_Settings : ACE_ModSettings
 	
 	[Attribute(defvalue: "false", desc: "Whether players can never die")]
 	bool m_bPlayerCannotDie;
+	
+	[Attribute(defvalue: "true", desc: "Whether treatments should produce litter.")]
+	bool m_bLitterEnabled;
+	
+	[Attribute(defvalue: "600.0", desc: "After how many seconds litter should be deleted.")]
+	float m_fLitterCleanUpTime;
 }

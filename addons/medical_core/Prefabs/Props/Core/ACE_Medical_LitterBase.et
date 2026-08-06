@@ -1,0 +1,10 @@
+GenericEntity : "{8DD1DFFD18C12DAB}Prefabs/Props/Core/Garbage_Base.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  ACE_Medical_LitterComponent "{6A0CF37DCA0623F1}" {
+  }
+  RplComponent "{5624A88DC2D9928D}" {
+   Enabled 1
+  }
+ }
+}

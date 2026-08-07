@@ -63,7 +63,7 @@ modded class SCR_ConsumableItemComponent : SCR_GadgetComponent
 	{
 		super.OnApplyToCharacter(item, successful, animParams);
 		
-		if (!Replication.IsServer())
+		if (!Replication.IsServer() || !successful)
 			return;
 		
 		// Check whether litter can be spawned

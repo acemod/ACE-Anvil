@@ -75,11 +75,14 @@ modded class SCR_ConsumableItemComponent : SCR_GadgetComponent
 		if (!data || !data.ACE_Medical_ShouldSpawnLitterOnItemUseComplete())
 			return;
 		
-		IEntity target = GetTargetCharacter();
-		if (!target)
-			target = m_CharacterOwner;
+		ChimeraCharacter patient = ChimeraCharacter.Cast(GetTargetCharacter());
+		if (!patient)
+			patient = m_CharacterOwner;
+		
+		if (!patient || patient.IsInVehicle())
+			return;
 
-		ACE_Medical_SpawnLitter(target.GetOrigin());
+		ACE_Medical_SpawnLitter(patient.GetOrigin());
 	}
 	
 	//------------------------------------------------------------------------------------------------

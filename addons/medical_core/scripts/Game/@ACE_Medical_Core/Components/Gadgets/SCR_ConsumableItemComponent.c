@@ -14,6 +14,9 @@ modded class SCR_ConsumableItemComponentClass : SCR_GadgetComponentClass
 	[Attribute(defvalue: "true", desc: "Whether litter should automatically be spawned when item has been used.", category: "Litter")]
 	protected bool m_bACE_Medical_SpawnLitterOnItemUseComplete;
 	
+	protected const float ACE_MEDICAL_LITTER_TRACE_START_HEIGHT = 0.65; // Height in meters relative to patient to start trace
+	protected const float ACE_MEDICAL_LITTER_MIN_WALL_DISTANCE = 0.25; // Minimum distance from walls in meters
+	
 	//------------------------------------------------------------------------------------------------
 	array<ref ACE_PrefabVariantsConfig> ACE_Medical_GetLitterPrefabConfigs()
 	{
@@ -27,8 +30,20 @@ modded class SCR_ConsumableItemComponentClass : SCR_GadgetComponentClass
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		Math3D.AnglesToMatrix(Vector(Math.RandomFloat(0, 360), 0, 0), params.Transform);
-		params.Transform[3] = SCR_Math2D.GenerateRandomPointInRadius(m_fACE_Medical_MinLitterDistance, m_fACE_Medical_MaxLitterDistance, patientPos);
-		SCR_TerrainHelper.SnapAndOrientToTerrain(params.Transform);
+		vector xzOffset = SCR_Math2D.GenerateRandomPointInRadius(m_fACE_Medical_MinLitterDistance, m_fACE_Medical_MaxLitterDistance, vector.Zero);
+		// Trace walls
+		TraceSphere traceParam = new TraceSphere();
+		traceParam.Flags = TraceFlags.WORLD | TraceFlags.ENTS;
+		traceParam.TargetLayers = EPhysicsLayerPresets.Building;
+		traceParam.Radius = ACE_MEDICAL_LITTER_MIN_WALL_DISTANCE;
+		traceParam.Start = patientPos + ACE_MEDICAL_LITTER_TRACE_START_HEIGHT * vector.Up;
+		traceParam.End = traceParam.Start + xzOffset;
+		params.Transform[3] = traceParam.Start + GetGame().GetWorld().TraceMove(traceParam) * xzOffset;
+		// Trace floor
+		TraceParam traceParam2 = new TraceParam();
+		traceParam2.Flags = TraceFlags.WORLD | TraceFlags.ENTS;
+		traceParam2.TargetLayers = EPhysicsLayerPresets.Building;
+		SCR_TerrainHelper.SnapAndOrientToTerrain(params.Transform, trace: traceParam2);
 		return params;
 	}
 	
@@ -48,7 +63,7 @@ modded class SCR_ConsumableItemComponent : SCR_GadgetComponent
 	{
 		super.OnApplyToCharacter(item, successful, animParams);
 		
-		if (!Replication.IsServer())
+		if (!Replication.IsServer() || !successful)
 			return;
 		
 		// Check whether litter can be spawned
@@ -60,11 +75,14 @@ modded class SCR_ConsumableItemComponent : SCR_GadgetComponent
 		if (!data || !data.ACE_Medical_ShouldSpawnLitterOnItemUseComplete())
 			return;
 		
-		IEntity target = GetTargetCharacter();
-		if (!target)
-			target = m_CharacterOwner;
+		ChimeraCharacter patient = ChimeraCharacter.Cast(GetTargetCharacter());
+		if (!patient)
+			patient = m_CharacterOwner;
+		
+		if (!patient || patient.IsInVehicle())
+			return;
 
-		ACE_Medical_SpawnLitter(target.GetOrigin());
+		ACE_Medical_SpawnLitter(patient.GetOrigin());
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -1,0 +1,14 @@
+GenericEntity : "{D511F5C330B1697E}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_USSR_01_Base.et" {
+ ID "3472273B5965FE24"
+ components {
+  SCR_ConsumableItemComponent "{5943631460899505}" {
+   m_aACE_Medical_LitterPrefabConfigs {
+    ACE_PrefabVariantsConfig "{6A0D47DB550B76C3}" {
+     m_aVariants {
+      "{FD9D861C30BB63BF}Prefabs/Props/Garbage/Medical/FieldDressing/ACE_Medical_LitterFieldDressingPackage_USSR.et"
+     }
+    }
+   }
+  }
+ }
+}

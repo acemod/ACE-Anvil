@@ -7,6 +7,8 @@ modded class SCR_PoisonDamageEffect : SCR_DotDamageEffect
 	protected ACE_CBRN_CharacterProtectionComponent m_ACE_CBRN_ProtectionComponent;
 	protected ACE_CBRN_ECharacterProtectedArea m_eACE_CBRN_RequiredProtection = ACE_CBRN_ECharacterProtectedArea.AIRWAYS;
 	
+	protected static const float ACE_CBRN_HIT_SOUND_THRESHOLD = 0.05; // Damage below this value doesn't produce hit sound
+	
 	//------------------------------------------------------------------------------------------------
 	override bool HijackDamageEffect(SCR_ExtendedDamageManagerComponent dmgManager)
 	{
@@ -38,6 +40,25 @@ modded class SCR_PoisonDamageEffect : SCR_DotDamageEffect
 		timeSlice = GetAccurateTimeSlice(timeSlice);
 		DotDamageEffectTimerToken token = UpdateTimer(timeSlice, dmgManager);
 		DealCustomDot(GetAffectedHitZone(), m_fLocalDPSValue * timeSlice, token, dmgManager);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Only play sound if damage exceeds a threshold
+	override bool ExecuteSynchronizedSoundPlayback(notnull SCR_ExtendedDamageManagerComponent dmgManager)
+	{
+		SCR_CharacterDamageManagerComponent characterDamageMgr = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
+		if (!characterDamageMgr)
+			return false;
+
+		float damageValue = m_fLocalDPSValue;
+		SCR_BatchedPoisonDamageEffects batchedData = SCR_BatchedPoisonDamageEffects.Cast(SCR_DamageSufferingSystem.GetInstance().GetBatchedDataOfType(dmgManager, Type()));
+		if (batchedData)
+			damageValue = batchedData.m_fDamageValue;
+		
+		if (damageValue < ACE_CBRN_HIT_SOUND_THRESHOLD)
+			return false;
+		
+		return super.ExecuteSynchronizedSoundPlayback(dmgManager);
 	}
 	
 	//------------------------------------------------------------------------------------------------

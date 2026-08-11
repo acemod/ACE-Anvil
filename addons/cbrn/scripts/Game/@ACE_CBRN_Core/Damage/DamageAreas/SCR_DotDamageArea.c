@@ -11,4 +11,19 @@ modded class SCR_DotDamageArea : DamageArea
 	{
 		AddEffect(entity);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Pass settings to poison effect
+	override protected BaseDamageEffect GetDamageEffect(SCR_DamageManagerComponent dmgMgr = null, HitZone affectedHitZone = null)
+	{
+		BaseDamageEffect effect = super.GetDamageEffect(dmgMgr, affectedHitZone);
+		
+		SCR_PoisonDamageEffect poisonEffect = SCR_PoisonDamageEffect.Cast(effect);
+		if (!poisonEffect)
+			return effect;
+		
+		poisonEffect.ACE_CBRN_SetRequiredProtection(m_eACE_CBRN_RequiredProtection);
+		poisonEffect.ACE_CBRN_SetPenetrateWatertightCompartments(m_bPenetrateWatertightCompartments);
+		return poisonEffect;
+	}
 }

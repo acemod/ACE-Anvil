@@ -115,4 +115,15 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 				
 		return false;
 	}
+	
+	//-----------------------------------------------------------------------------------------------------------
+	//! Prevent conflict between using wearable gadget and hand slot handling
+	override bool ShouldGadgetBeDropped(IEntity gadget)
+	{
+		ACE_WearableGadgetComponent wearable = ACE_WearableGadgetComponent.Cast(gadget.FindComponent(ACE_WearableGadgetComponent));
+		if (wearable && wearable.IsInUse())
+			return false;
+		
+		return super.ShouldGadgetBeDropped(gadget);
+	}
 }

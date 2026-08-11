@@ -7,6 +7,8 @@ class ACE_WearableGadgetComponentClass : SCR_ConsumableItemComponentClass
 //! For gadgets that are wearables. Use action will equip them.
 class ACE_WearableGadgetComponent : SCR_ConsumableItemComponent
 {
+	protected bool m_bIsInUse = false;
+	
 	//------------------------------------------------------------------------------------------------
 	//! Update update visibility when gadget is moved from or to loadout slot
 	override void OnParentSlotChanged(InventoryStorageSlot oldSlot, InventoryStorageSlot newSlot)
@@ -52,5 +54,26 @@ class ACE_WearableGadgetComponent : SCR_ConsumableItemComponent
 			return;
 
 		m_ConsumableEffect.ActivateEffect(m_CharacterOwner, m_CharacterOwner, GetOwner());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void OnUseBegan(IEntity item, ItemUseParameters animParams)
+	{
+		m_bIsInUse = true;
+		super.OnUseBegan(item, animParams);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void OnApplyToCharacter(IEntity item, bool successful, ItemUseParameters animParams)
+	{
+		super.OnApplyToCharacter(item, successful, animParams);
+		m_bIsInUse = false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Return true if character is using the gadget
+	bool IsInUse()
+	{
+		return m_bIsInUse;
 	}
 }

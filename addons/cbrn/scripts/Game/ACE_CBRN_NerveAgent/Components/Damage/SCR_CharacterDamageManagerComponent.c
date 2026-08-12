@@ -55,6 +55,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
+	bool ACE_CBRN_HasParalysis()
+	{
+		return (m_ACE_CBRN_NervousSystemHitZone.GetDamageStateThreshold(ECharacterResilienceState.WEAKENED) >= m_ACE_CBRN_NervousSystemHitZone.GetHealthScaled());
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
 	protected bool ACE_CBRN_ShouldHaveSpasms()
 	{
 		ChimeraCharacter ownerChar = ChimeraCharacter.Cast(GetOwner());
@@ -64,7 +70,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (ownerChar.GetCharacterController().GetLifeState() != ECharacterLifeState.ALIVE)
 			return false;
 		
-		return (m_ACE_CBRN_NervousSystemHitZone.GetDamageStateThreshold(ECharacterResilienceState.WEAKENED) >= m_ACE_CBRN_NervousSystemHitZone.GetHealthScaled());
+		return ACE_CBRN_HasParalysis();
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -83,7 +89,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.ACE_Medical_UpdateResilienceRegenScale();
 		
-		if (m_ACE_CBRN_NervousSystemHitZone.GetDamageStateThreshold(ECharacterResilienceState.WEAKENED) >= m_ACE_CBRN_NervousSystemHitZone.GetHealthScaled())
+		if (ACE_CBRN_HasParalysis())
 			m_fACE_Medical_ResilienceRegenScale = 0.0;
 	}
 	
@@ -94,7 +100,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		if (!super.ACE_Medical_CanApplyEpinephrine(failReason))
 			return false;
 		
-		if  (m_ACE_CBRN_NervousSystemHitZone.GetDamageStateThreshold(ECharacterResilienceState.WEAKENED) >= m_ACE_CBRN_NervousSystemHitZone.GetHealthScaled())
+		if (ACE_CBRN_HasParalysis())
 		{
 			failReason = SCR_EConsumableFailReason.ACE_CBRN_PARALYZED;
 			return false;

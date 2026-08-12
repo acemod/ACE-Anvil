@@ -1,0 +1,48 @@
+---
+title: CBRN
+---
+import { Image } from 'astro:assets';
+import PlantUML from '~/components/PlantUML.astro';
+
+**ACE CBRN** adds chemical warfare agents and protective gear.
+
+Arsenal Items:
+- Atropine/Oxime injector
+- M50 protective mask
+- Sarin nerve agent mortar shells
+
+## Chemical Agents
+### Phosgene-Chlorine Mixture
+
+Pale green-yellow choking agent, which causes extensive damage to respiratory system and eventually pulmonary edema.
+
+### Sarin
+
+A volatile, colorless organophosphate-based nerve agent, which causes muscle spasms and respiratory paralysis in less than a minute of exposure. Sarin-based shells hit short (dissipates within minutes), but hard (fast-acting).
+
+## Treatments
+
+Below is a proposed activity diagram for treating patients:
+
+<PlantUML src="/plantumls/cbrn/nerve-agent-treatment.puml" alt="nerve-agent-treatment.puml" />
+
+## Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_bFullParalysisForAIEnabled`        | Type: `bool`<br />Default: `false` | AI will die instead of becoming paralyzed if false |
+
+<br />
+
+Template for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_CBRN": {
+            m_bFullParalysisForAIEnabled": false
+        }
+    }
+}
+```

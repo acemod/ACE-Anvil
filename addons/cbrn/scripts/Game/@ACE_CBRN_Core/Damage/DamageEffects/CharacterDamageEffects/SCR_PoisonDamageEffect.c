@@ -106,7 +106,7 @@ modded class SCR_PoisonDamageEffect : SCR_DotDamageEffect
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Set whether wateright vehicle compartments protect from posioning
+	//! Set whether watertight vehicle compartments protect from poisoning
 	void ACE_CBRN_SetPenetrateWatertightCompartments(bool shouldPenetrate)
 	{
 		m_bACE_CBRN_PenetrateWatertightCompartments = shouldPenetrate;

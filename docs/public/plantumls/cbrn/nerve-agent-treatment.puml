@@ -1,0 +1,19 @@
+@startuml
+!include ../theme-selector.iuml
+partition "Nerve Agent Treatment" {
+  start
+
+  if (Has protective gear\nequipped?) then (no)
+    :Put on protective gear\nor evacuate from area;
+  else (yes)
+  endif
+
+  if (Is paralyzed?) then (yes)
+    :Administer atropine/oxime;
+  else (no)
+  endif
+
+  :Proceed with\nmedical treatments;
+  end
+}
+@enduml

@@ -52,7 +52,11 @@ class ACE_Medical_BasePainScreenEffectMode
 			return;
 		
 		m_fTimer = 0;
-		m_fMaxStrength = m_DamageManager.ACE_Medical_GetPainIntensity();
+		
+		if (m_DamageManager)
+			m_fMaxStrength = m_DamageManager.ACE_Medical_GetPainIntensity();
+		else
+			m_fMaxStrength = 0;
 		
 		if (m_bIsTerminating)
 			EnableEffect(false);

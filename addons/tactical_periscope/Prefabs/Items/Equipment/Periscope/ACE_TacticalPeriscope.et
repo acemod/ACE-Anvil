@@ -35,16 +35,6 @@ GenericEntity : "{243948B23D90BECB}Prefabs/Items/Equipment/Binoculars/Binoculars
   }
   MeshObject "{5D0CB09DD1352E70}" {
    Object "{5607E18D1BC7ED06}Assets/Items/Periscope/ACE_TacticalPeriscope.xob"
-   Materials {
-    MaterialAssignClass "{62F4BDC448E02F1B}" {
-     SourceMaterial "DefaultGeneratedMaterial"
-     AssignedMaterial "{21E6EE7AD18931DE}Assets/Items/Ladder/Data/ladder.emat"
-    }
-    MaterialAssignClass "{62F4BDC448E02F7F}" {
-     SourceMaterial "periscope"
-     AssignedMaterial "{21E6EE7AD18931DE}Assets/Items/Ladder/Data/ladder.emat"
-    }
-   }
   }
   SCR_2DSightsComponent "{5D0CB09DD1352E4A}" {
    SightsPosition PointInfo "{5D48DB70800780B3}" {
@@ -66,10 +56,10 @@ GenericEntity : "{243948B23D90BECB}Prefabs/Items/Equipment/Binoculars/Binoculars
    ADSTime 0
    m_sReticleTexture "{DF1F056340230E00}system/textures/defBlack.edds"
    m_sReticleGlowTexture "{DF1F056340230E00}system/textures/defBlack.edds"
-   m_fMagnification 1
-   m_fReticleBaseZoom 2
-   m_fObjectiveFov 20
    m_iAnimationActivationDelay 0
+   m_fObjectiveFov 20
+   m_fReticleBaseZoom 2
+   m_fMagnification 1
   }
  }
  coords 127.122 1 127.966

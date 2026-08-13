@@ -156,6 +156,7 @@ Summary of settings that can be modified in the server config:
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_bOrganHitZonesEnabled`             | Type: `bool`*<br />Default: `true` | Whether organ hit zones should be enabled |
 | `m_fSecondChanceOnHeart`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.0` | Probability for second chance for killing blows to the heart |
+| `m_bInstantUnconOnMassiveBleeding`    | Type: `bool`<br />Default: `true` | Whether neck or femoral bleeding instantly cause unconsciousness. |
 
 <br />
 
@@ -165,7 +166,8 @@ Template for the `missionHeader` in a server config:
     "m_ACE_Settings": {
         "m_ACE_Medical_Hitzones": {
             "m_bOrganHitZonesEnabled": 1,
-            "m_fSecondChanceOnHeart": 0.0
+            "m_fSecondChanceOnHeart": 0.0,
+            "m_bInstantUnconOnMassiveBleeding": true
         }
     }
 }

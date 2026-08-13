@@ -7,4 +7,7 @@ class ACE_Medical_Hitzones_Settings : ACE_ModSettings
 	
 	[Attribute(defvalue: "0", desc: "Probability for second chance for killing blows to the heart", uiwidget: UIWidgets.Slider, params: "0 1")]
 	float m_fSecondChanceOnHeart;
+	
+	[Attribute(defvalue: "true", desc: "Whether neck or femoral bleeding instantly cause unconsciousness.")]
+	bool m_bInstantUnconOnMassiveBleeding;
 }

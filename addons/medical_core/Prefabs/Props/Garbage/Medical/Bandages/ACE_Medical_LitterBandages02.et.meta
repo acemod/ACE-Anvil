@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{31218ABFEAD60132}Prefabs/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages02.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

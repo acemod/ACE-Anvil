@@ -1,0 +1,4 @@
+MatPBRBasic {
+ Emissive 0 0 0 1
+ BCRMap "{F8574CC66461EF33}Assets/Props/Garbage/Medical/Bandages/data/LitterBandages.edds"
+}

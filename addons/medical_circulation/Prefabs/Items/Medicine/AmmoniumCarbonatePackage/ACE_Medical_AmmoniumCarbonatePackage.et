@@ -58,6 +58,13 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   RigidBody "{6214F8E90359578D}" {
   }
   SCR_ConsumableItemComponent "{6214F8ED50695075}" {
+   m_aACE_Medical_LitterPrefabConfigs {
+    ACE_PrefabVariantsConfig "{6A1E3765EF2044B7}" {
+     m_aVariants {
+      "{FCD5488D9A9A5368}Prefabs/Props/Garbage/Medical/AmmoniumCarbonate/ACE_Medical_LitterAmmoniumCarbonatePackage.et"
+     }
+    }
+   }
    m_eAnimVariable ADRIANOV
    m_ConsumableEffect ACE_Medical_ConsumableAmmoniumCarbonate "{6214F8ED57615E05}" {
     m_fItemRegenerationSpeed 30

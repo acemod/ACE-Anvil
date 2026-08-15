@@ -1,0 +1,45 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Unconscious {
+   Nodes {
+    AnimSrcNodeEvent ACE_Medical_UnconsciousBackEvent {
+     Child "HeadTilt_SM"
+    }
+    AnimSrcNodeStateMachine HeadTilt_SM {
+     EditorPos -16.5 4.682
+     states {
+      AnimSrcNodeState NoHeadTilt {
+       EditorPos -16.752 5.552
+       Child "UnconsciousBackSrc"
+      }
+      AnimSrcNodeState HeadTilt {
+       EditorPos -13.582 5.552
+       Child "HeadTiltBlend"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{67193862243530C9}" {
+       FromState "NoHeadTilt"
+       ToState "HeadTilt"
+       Duration "0.4"
+       Condition "IsCommand(ACE_Medical_CMD_HeadTilt)"
+       BlendFn "S"
+      }
+     }
+    }
+    AnimSrcNodeSource UnconsciousBackSrc {
+     EditorPos -16.773 7.705
+    }
+    AnimSrcNodeBlend HeadTiltBlend {
+     EditorPos -14.41 6.691
+     Child0 "UnconsciousHeadTilt"
+     Child1 "UnconsciousBackSrc"
+    }
+    AnimSrcNodeSource UnconsciousHeadTilt {
+     EditorPos -13.417 7.705
+     Source "ACE_Medical.Default.UnconsciousHeadTilt"
+    }
+   }
+  }
+ }
+}

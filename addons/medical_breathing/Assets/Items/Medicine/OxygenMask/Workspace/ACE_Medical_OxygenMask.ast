@@ -1,0 +1,27 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{64FF4A19F33AD71E}" {
+   Name "ChestSeal"
+   Animations {
+    "FingerAnim"
+    "Idle"
+    "ReviveOther"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{64FF4A19F33AD716}" {
+   Name "ChestSealAmbulance"
+   Animations {
+    "ReviveOther"
+   }
+   Columns {
+    "LeftPatient"
+    "RightPatient"
+   }
+  }
+ }
+}

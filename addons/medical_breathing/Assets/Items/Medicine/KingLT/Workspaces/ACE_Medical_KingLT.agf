@@ -1,0 +1,326 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Master {
+   Nodes {
+    AnimSrcNodeStateMachine MasterControl {
+     EditorPos -45.4 -4
+     states {
+      AnimSrcNodeState Idle {
+       EditorPos -45.4 -2.4
+       Child "Idle STM"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState "Apply to other" {
+       EditorPos -42.8 -2.4
+       Child "Apply to other STM"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState "Apply to other Ambulance" {
+       EditorPos -42.8 -3.4
+       Child "ReviveOtherAmbulance STM"
+       StartCondition "(IsCommand(CMD_HealOther) || IsCommand(CMD_Revive)) && IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{62DAF07B55581DD8}" {
+       FromState ""
+       ToState "Idle"
+       Duration "0.5"
+       Condition "GetCommandI(CMD_Revive) == -2 || GetCommandI(CMD_HealOther) == -2 || GetCommandI(CMD_HealSelf) == -2 || RemainingTimeLess(0.001)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62DAF00DC0749859}" {
+       FromState "Idle"
+       ToState "Apply to other"
+       Condition "(IsCommand(CMD_HealOther) || IsCommand(CMD_Revive)) && !IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{631533985887E335}" {
+       FromState "Idle"
+       ToState "Apply to other Ambulance"
+       Condition "(IsCommand(CMD_HealOther) || IsCommand(CMD_Revive)) && IsAttachment(\"Vehicle\")"
+      }
+     }
+    }
+    AnimSrcNodeStateMachine "Idle STM" {
+     EditorPos -47.5 -1
+     states {
+      AnimSrcNodeState Cro {
+       EditorPos -47.6 -0.2
+       Child "Select Idle Cro"
+       StartCondition "Stance == 1"
+      }
+      AnimSrcNodeState Erc {
+       EditorPos -49.2 0.7
+       Child "Select Idle Erc"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState Pne {
+       EditorPos -46.2 0.9
+       Child "Select Idle Pne"
+       StartCondition "Stance == 2"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{62DAF00C03A2625F}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.4"
+       Condition "HasVariableChanged(Stance, 1, 0)"
+      }
+      AnimSrcNodeTransition "{62DAF00C55B3A03F}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.4"
+       Condition "HasVariableChanged(Stance, 0, 1)"
+      }
+      AnimSrcNodeTransition "{62DAF00C43EB3526}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.4"
+       Condition "HasVariableChanged(Stance, 0, 2)"
+      }
+      AnimSrcNodeTransition "{62DAF00C40282991}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.4"
+       Condition "HasVariableChanged(Stance, 2, 0)"
+      }
+      AnimSrcNodeTransition "{62DAF00C46DA1693}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.4"
+       Condition "HasVariableChanged(Stance, 2, 1)"
+      }
+      AnimSrcNodeTransition "{62DAF00C473A3984}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.4"
+       Condition "HasVariableChanged(Stance, 1, 2)"
+      }
+     }
+    }
+    AnimSrcNodeStateMachine "Apply to other STM" {
+     Tags {
+      "TagLItemAction"
+     }
+     EditorPos -40 -0.7
+     states {
+      AnimSrcNodeState Cro {
+       EditorPos -40.1 0.7
+       Child "Heal Other Anim"
+       StartCondition "Stance == 1"
+       IsExit 1
+      }
+      AnimSrcNodeState "From Erc" {
+       EditorPos -42.7 0.7
+       Child "Start Heal Other Erc"
+       StartCondition "Stance == 0"
+      }
+      AnimSrcNodeState "From Pne" {
+       EditorPos -37.2 0.7
+       Child "Pne to Cro"
+       StartCondition "Stance == 2"
+      }
+      AnimSrcNodeState "To Pne" {
+       EditorPos -38.3 1.6
+       Child "Cro to Pne"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState "To Erc" {
+       EditorPos -41.6 1.7
+       Child "Cro to Erc"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{62DC179A4821D432}" {
+       FromState "From Erc"
+       ToState "Cro"
+       Duration "0.1"
+       Condition "RemainingTimeLess(0.1)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62DC179A4F8ACB7B}" {
+       FromState "From Pne"
+       ToState "Cro"
+       Duration "0.1"
+       Condition "RemainingTimeLess(0.001)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62DC179DDB67A63B}" {
+       FromState ""
+       ToState "Cro"
+       Duration "0.5"
+       Condition "Stance == 1 && (IsCommand(CMD_HealOther) || IsCommand(CMD_Revive))"
+       BlendFn S
+      }
+      AnimSrcNodeTransition "{62DC179DC836E3AB}" {
+       FromState ""
+       ToState "From Erc"
+       Duration "0.5"
+       Condition "Stance == 0 && (IsCommand(CMD_HealOther) || IsCommand(CMD_Revive))"
+       BlendFn S
+      }
+      AnimSrcNodeTransition "{62DC179DC38EE74A}" {
+       FromState ""
+       ToState "From Pne"
+       Duration "0.5"
+       Condition "Stance == 2 && (IsCommand(CMD_HealOther) || IsCommand(CMD_Revive))"
+       BlendFn S
+      }
+      AnimSrcNodeTransition "{62DC179193B664E8}" {
+       FromState "Cro"
+       ToState "To Erc"
+       Duration "0.1"
+       Condition "Stance == 0 && RemainingTimeLess(0.1)"
+       BlendFn S
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{62DC17919050748D}" {
+       FromState "Cro"
+       ToState "To Pne"
+       Duration "0.1"
+       Condition "Stance == 2 && RemainingTimeLess(0.1)"
+       BlendFn S
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeSource "Heal Other Arm Anim" {
+     EditorPos -41 3.6
+     Source "KingLT.Erc.HealOther"
+    }
+    AnimSrcNodeBlend "Heal Other Anim" {
+     EditorPos -39.9 2.6
+     Child0 "Heal Other Arm Anim"
+     Child1 "Crouch"
+     BlendFn S
+    }
+    AnimSrcNodePose Crouch {
+     EditorPos -38.5 3.7
+     Source "CroStance.Cro.Idle"
+    }
+    AnimSrcNodeSource "Got to Cro" {
+     EditorPos -40 6.8
+     Source "CroStance.In"
+    }
+    AnimSrcNodeGroupSelect "Erc to Cro" {
+     EditorPos -42.2 4.6
+     Child "Got to Cro"
+     Group "CroStance"
+     Column "Erc"
+    }
+    AnimSrcNodeGroupSelect "Pne to Cro" {
+     EditorPos -37 4.7
+     Child "Got to Cro"
+     Group "CroStance"
+     Column "Pne"
+    }
+    AnimSrcNodeBlend "Start Heal Other Erc" {
+     EditorPos -42.7 2.6
+     Child0 "Select Idle Erc"
+     Child1 "Erc to Cro"
+     BlendFn S
+     OptimizeMax 1
+    }
+    AnimSrcNodeSource "Exit Cro" {
+     EditorPos -37.6 6.8
+     Source "CroStance.Out"
+    }
+    AnimSrcNodeGroupSelect "Cro to Erc" {
+     EditorPos -39.6 4.6
+     Child "Exit Cro"
+     Group "CroStance"
+     Column "Erc"
+    }
+    AnimSrcNodeGroupSelect "Cro to Pne" {
+     EditorPos -34.5 4.7
+     Child "Exit Cro"
+     Group "CroStance"
+     Column "Pne"
+    }
+    AnimSrcNodePose "Idle Pose" {
+     EditorPos -49.2 5.4
+     Source "KingLT.Idle"
+    }
+    AnimSrcNodeGroupSelect "Select Idle Cro" {
+     EditorPos -48 2.8
+     Child "Idle Anim"
+     Group "KingLT"
+     Column "Cro"
+    }
+    AnimSrcNodeGroupSelect "Select Idle Erc" {
+     EditorPos -50.1 2.8
+     Child "Idle Anim"
+     Group "KingLT"
+     Column "Erc"
+    }
+    AnimSrcNodeGroupSelect "Select Idle Pne" {
+     EditorPos -45.6 2.8
+     Child "Idle Anim"
+     Group "KingLT"
+     Column "Pne"
+    }
+    AnimSrcNodeBlend "Idle Anim" {
+     EditorPos -48 4.4
+     BlendWeight "0.9"
+     Child0 "Idle Pose"
+     Child1 "Idle Finger Anim"
+     BlendFn S
+     OptimizeMax 1
+    }
+    AnimSrcNodePose "Idle Finger Anim" {
+     EditorPos -46.6 5.3
+     Source "KingLT.Erc.FingerAnim"
+    }
+    AnimSrcNodeGroupSelect RPatient {
+     EditorPos -29.7 1.5
+     Child "healOther_Src"
+     Group "KingLTAmbulance"
+     Column "RightPatient"
+    }
+    AnimSrcNodeSource healOther_Src {
+     EditorPos -31.7 2.8
+     Source "KingLTAmbulance.HealOther"
+    }
+    AnimSrcNodeGroupSelect LPatient {
+     EditorPos -33.6 1.6
+     Child "healOther_Src"
+     Group "KingLTAmbulance"
+     Column "LeftPatient"
+    }
+    AnimSrcNodeStateMachine "ReviveOtherAmbulance STM" {
+     Tags {
+      "TagLItemAction"
+     }
+     EditorPos -31.8 -0.8
+     states {
+      AnimSrcNodeState LeftPatient {
+       EditorPos -33.8 0
+       Child "LPatient"
+       StartCondition "(GetCommandI(CMD_HealOther) == 1 || GetCommandI(CMD_Revive) == 1)  && LookX <= -0.1 "
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState RightPatient {
+       EditorPos -29.8 0
+       Child "RPatient"
+       StartCondition "(GetCommandI(CMD_HealOther) == 1 || GetCommandI(CMD_Revive) == 1)  && LookX >= 0.1"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,10 @@
+AnimSetInstanceSource "{631355311DEC1637}" {
+ Template "{A0C96A478C33502E}Assets/Items/Medicine/ChestSeal/Workspace/ACE_Medical_ChestSeal.ast"
+ Lines {
+  AnimSetInstanceSource_Line "ChestSeal.Cro.ReviveOther" {
+   Resource "{BA2347AD009FF1DE}Assets/Items/Medicine/ChestSeal/Workspace/i_cro_chestseal_revive.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{631433A767BBEF14}" {
+ }
+}

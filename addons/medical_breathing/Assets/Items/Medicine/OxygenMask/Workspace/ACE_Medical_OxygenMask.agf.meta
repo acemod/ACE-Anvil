@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{AAD3F6F0BEDC207B}Assets/Items/Medicine/OxygenMask/Workspace/ACE_Medical_OxygenMask.agf"
+ Configurations {
+  AnimGraphFileResourceClass PC {
+  }
+  AnimGraphFileResourceClass XBOX_ONE : PC {
+  }
+  AnimGraphFileResourceClass XBOX_SERIES : PC {
+  }
+  AnimGraphFileResourceClass PS4 : PC {
+  }
+  AnimGraphFileResourceClass PS5 : PC {
+  }
+  AnimGraphFileResourceClass HEADLESS : PC {
+  }
+ }
+}

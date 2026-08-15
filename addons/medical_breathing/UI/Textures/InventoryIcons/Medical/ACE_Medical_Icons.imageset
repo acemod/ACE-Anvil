@@ -1,0 +1,42 @@
+ImageSetClass {
+ RefSize 140 35
+ Textures {
+  ImageSetTextureClass "{671D5630536CCA86}" {
+   screenSize FHD
+   size 140 35
+   path "{6C9DDE2CA2AC32F3}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons-100_atlas.edds"
+  }
+  ImageSetTextureClass "{671D5630536CC912}" {
+   screenSize FHD
+   size 280 70
+   path "{172A7A035D3314DC}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons-200_atlas.edds"
+  }
+  ImageSetTextureClass "{671D5630536CC90B}" {
+   screenSize FHD
+   size 420 105
+   path "{3E4719E608460939}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons-300_atlas.edds"
+  }
+  ImageSetTextureClass "{671D5630536CC976}" {
+   screenSize FHD
+   size 560 140
+   path "{6CD2603F06395A23}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons-400_atlas.edds"
+  }
+ }
+ Images {
+  ImageSetDefClass TPTX_UI {
+   Pos 2 2
+   Size 32 32
+   Flags 0 0
+  }
+  ImageSetDefClass SpO2_UI {
+   Pos 36 2
+   Size 32 32
+   Flags 0 0
+  }
+  ImageSetDefClass Lungs_UI {
+   Pos 70 2
+   Size 32 32
+   Flags 0 0
+  }
+ }
+}

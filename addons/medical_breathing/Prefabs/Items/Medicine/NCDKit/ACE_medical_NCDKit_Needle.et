@@ -1,0 +1,9 @@
+GenericEntity {
+ ID "62E122CF71A37819"
+ components {
+  MeshObject "{62E122CF5D8F7E95}" {
+   Object "{A32B1603BA463299}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle.xob"
+  }
+ }
+ coords 76.814 3.634 23.68
+}

@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{F71D1FED9F84F35E}Assets/Items/Medicine/ChestSeal/ACE_Medical_ChestSeal_BCR.edds"
+ NMOMap "{CFC5A47F46F3A1C0}Assets/Items/Medicine/ChestSeal/ACE_Medical_ChestSeal_NMO.edds"
+}

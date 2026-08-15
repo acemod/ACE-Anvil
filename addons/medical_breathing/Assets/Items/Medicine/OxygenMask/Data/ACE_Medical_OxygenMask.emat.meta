@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{E4EBB479433D4998}Assets/Items/Medicine/OxygenMask/Data/ACE_Medical_OxygenMask.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,10 @@
+AnimSetInstanceSource "{62DAF067FADCB689}" {
+ Template "{158184EF3000FB7D}Assets/Items/Medicine/KingLT/Workspaces/ACE_Medical_KingLT.ast"
+ Lines {
+  AnimSetInstanceSource_Line "KingLT.Erc.Idle" {
+   Resource "{AB849E11232CB93B}Assets/Items/Medicine/KingLT/Workspaces/i_kinlt_fingerAnim.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{62DB6D59887BE39C}" {
+ }
+}

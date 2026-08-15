@@ -1,0 +1,37 @@
+$animation "" {
+ #version 1.0
+ #fps 30
+ #numFrames 1
+ $node "Scene_Root" {
+  $keys t q {
+   $frame 0 1 {
+   }
+  }
+  $node "Armature" {
+   $keys q {
+    $frame 0 1 {
+     #q 0.49185213 -0.32158864 0.48763537 0.64565778
+    }
+   }
+   $node "i_root" {
+    $keys q {
+     $frame 0 1 {
+      #q -0.80434102 0.57220781 -0.11741279 0.10875702
+     }
+    }
+    $node "i_hose" {
+     $keys q {
+      $frame 0 1 {
+      }
+     }
+     $node "i_needle" {
+      $keys q {
+       $frame 0 1 {
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

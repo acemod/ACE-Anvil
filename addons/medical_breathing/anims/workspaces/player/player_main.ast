@@ -1,0 +1,13 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{67192CE7F1FBA49D}" {
+   Name "ACE_Medical"
+   Animations {
+    "UnconsciousHeadTilt"
+   }
+   Columns {
+    "Default"
+   }
+  }
+ }
+}

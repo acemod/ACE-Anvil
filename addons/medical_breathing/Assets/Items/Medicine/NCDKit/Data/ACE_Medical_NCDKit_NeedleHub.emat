@@ -1,0 +1,17 @@
+MatPBRBasic {
+ Color 0.521 0.521 0.521 1
+ Cull none
+ Sort translucent
+ SpecularMul 4
+ AlphaTest 0.22
+ AlphaMul 0.8
+ BlendMode AlphaBlend
+ RoughnessScale 0.05
+ MetalnessScale 0
+ DielectricReflectance 0.133
+ CavityFromAO 0.89
+ BCRMap "{3C676E9FB79A5255}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle_BCR.edds"
+ OpacityMap "{422ACF9A015955C6}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle_OPM.edds"
+ NormalPower 1.5
+ NMOMap "{CC42EDA3ECDED584}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle_NMO.edds"
+}

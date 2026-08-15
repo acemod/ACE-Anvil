@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{5E260CFC2F7F5716}Prefabs/Props/Garbage/Medical/NCDKit/ACE_Medical_LitterNCDKitHose.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

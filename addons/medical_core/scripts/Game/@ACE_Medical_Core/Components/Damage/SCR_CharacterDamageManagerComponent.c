@@ -49,6 +49,19 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
+	override void Kill(notnull Instigator instigator)
+	{
+		if (s_ACE_Medical_Core_Settings.m_bPlayerCannotDie)
+		{
+			SCR_ECharacterControlType controlType = SCR_CharacterHelper.GetCharacterControlType(GetOwner());
+			if (controlType != SCR_ECharacterControlType.AI && controlType != SCR_ECharacterControlType.POSSESSED_AI)
+				return;
+		}
+		
+		super.Kill(instigator);
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
 	protected override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
 		super.OnDamageStateChanged(newState, previousDamageState, isJIP);

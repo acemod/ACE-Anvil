@@ -263,6 +263,9 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	[RplProp()]
 	protected float m_fClearJamFailureChance = 0.1;
 	
+	[RplProp()]
+	protected bool m_bRemoveMagazineForClearingJam = true;
+	
 	protected float m_fBarrelTemperature;
 	protected float m_fAmmoTemperature;
 	protected float m_fCookOffProgress;
@@ -332,7 +335,10 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 		
 		ACE_Overheating_Settings settings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
 		if (settings)
+		{
 			m_fClearJamFailureChance = settings.m_fClearJamFailureChance;
+			m_bRemoveMagazineForClearingJam = settings.m_bRemoveMagazineForClearingJam;
+		}
 		
 		float airTemperature = ACE_WeatherHelper.GetAirTemperatureForEntity(GetOwner());
 		m_fBarrelTemperature = airTemperature;
@@ -346,7 +352,13 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	void SetState(bool isJammed)
 	{
 		if (!isJammed)
-			m_pMuzzle.ClearChamber(m_pMuzzle.GetCurrentBarrelIndex());
+		{
+			BaseMagazineComponent magazine = m_pMuzzle.GetMagazine();
+			if (magazine && magazine.GetAmmoCount() > 0)
+				magazine.SetAmmoCount(magazine.GetAmmoCount() - 1);
+			else
+				m_pMuzzle.ClearChamber(m_pMuzzle.GetCurrentBarrelIndex());
+		}
 		
 		m_bIsJammed = isJammed;
 		OnStateChanged();
@@ -471,6 +483,12 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	float GetClearJamFailureChance()
 	{
 		return m_fClearJamFailureChance;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool ShouldRemoveMagazineForClearingJam()
+	{
+		return m_bRemoveMagazineForClearingJam;
 	}
 	
 #ifdef ENABLE_DIAG

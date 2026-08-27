@@ -49,10 +49,18 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		
 		ACE_Overheating_WeaponAnimMachine stateMachine = new ACE_Overheating_WeaponAnimMachine();
 		stateMachine.SetContext(context);
-		stateMachine.AddState(new ACE_Overheating_RemoveMagState(ACE_Overheating_EWeaponAnimStateID.REMOVE_MAGAZINE));
+		
+		if (barrel.ShouldRemoveMagazineForClearingJam())
+			stateMachine.AddState(new ACE_Overheating_RemoveMagState(ACE_Overheating_EWeaponAnimStateID.REMOVE_MAGAZINE));
+		
 		stateMachine.AddState(new ACE_Overheating_RackBoltState(ACE_Overheating_EWeaponAnimStateID.RACK_BOLT));
-		stateMachine.AddTransition(new ACE_Overheating_RemoveMagCompleted(ACE_Overheating_EWeaponAnimStateID.REMOVE_MAGAZINE, ACE_Overheating_EWeaponAnimStateID.RACK_BOLT));
-		stateMachine.AddTransition(new ACE_Overheating_RemoveMagFailed(ACE_Overheating_EWeaponAnimStateID.REMOVE_MAGAZINE, ACE_Overheating_EWeaponAnimStateID.STOP));
+		
+		if (barrel.ShouldRemoveMagazineForClearingJam())
+		{
+			stateMachine.AddTransition(new ACE_Overheating_RemoveMagCompleted(ACE_Overheating_EWeaponAnimStateID.REMOVE_MAGAZINE, ACE_Overheating_EWeaponAnimStateID.RACK_BOLT));
+			stateMachine.AddTransition(new ACE_Overheating_RemoveMagFailed(ACE_Overheating_EWeaponAnimStateID.REMOVE_MAGAZINE, ACE_Overheating_EWeaponAnimStateID.STOP));
+		}
+
 		stateMachine.AddTransition(new ACE_Overheating_RackBoltCompleted(ACE_Overheating_EWeaponAnimStateID.RACK_BOLT, ACE_Overheating_EWeaponAnimStateID.STOP));
 		system.Register(stateMachine, ESystemPoint.PostFixedFrame);
 	}

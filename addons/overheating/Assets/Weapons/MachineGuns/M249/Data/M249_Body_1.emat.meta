@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{758946B2EC5F1439}Assets/Weapons/MachineGuns/M249/Data/M249_Body_1.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

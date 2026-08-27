@@ -1,0 +1,12 @@
+TimeAndWeatherManagerEntity : "{A3BAF78F6F03315B}Prefabs/World/Game/TimeAndWeatherManager.et" {
+ ID "5244F08C9618CADD"
+ m_aACE_MonthlyAverageTemperatureAirMaxHours {
+  13.60 14.32 14.75 15.21 15.05 14.89 15.47 14.80 14.53 13.40 13.44 12.68
+ }
+ m_aACE_MonthlyAverageDailyTemperatureAirMins {
+  278.02 279.37 279.66 280.99 283.89 286.94 288.08 288.51 287.02 284.95 282.06 279.77
+ }
+ m_aACE_MonthlyAverageDailyTemperatureAirMaxs {
+  282.62 283.99 285.55 288.28 290.91 293.89 294.73 295.27 293.39 290.10 286.67 283.84
+ }
+}

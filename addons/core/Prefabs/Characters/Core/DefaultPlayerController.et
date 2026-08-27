@@ -2,6 +2,26 @@ SCR_PlayerController {
  ID "1A9BA6BEFA06E3B1"
  components {
   ACE_RadialMenuComponent "{654944904311E33E}" {
+   m_aRadialMenuControllers {
+    ACE_TurretInspectionRadialMenuController "{6639115DCE6E270A}" {
+     m_RMControls SCR_RadialMenuControllerInputs "{6639115DFE9AF907}" {
+      m_sOpenAction "CharacterInspect"
+      m_bCloseOnReleaseOpen 0
+      m_bPerformOnClose 0
+      m_bCloseOnPerform 1
+      m_bShowWhileUnconcious 0
+     }
+     m_Data SCR_SelectionMenuData "{66391157A21808AD}" {
+      m_aEntries {
+       ACE_SelectTurretMagazineRadialMenuCategoryEntry "{66391150EC4B09C7}" {
+        Name "#ACE-RadialMenu_ChangeMagazine"
+        Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+        IconSetName "magazine"
+       }
+      }
+     }
+    }
+   }
   }
  }
 }

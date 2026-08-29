@@ -5,6 +5,8 @@ modded class ACE_Medical_VitalStatesSystem
 	
 	override protected void OnInit()
 	{
+        super.OnInit();
+
 		m_pDefibrillationSettings = ACE_SettingsHelperT<ACE_Medical_Defibrillation_Settings>.GetModSettings();
 	}
 	

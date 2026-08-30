@@ -1,0 +1,8 @@
+GenericEntity {
+ ID "65A2C665A8D09239"
+ components {
+  InventoryItemComponent "{65A2C665A8D092A3}" {
+   Enabled 1
+  }
+ }
+}

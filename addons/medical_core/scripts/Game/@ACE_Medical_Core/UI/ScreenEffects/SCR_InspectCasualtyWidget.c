@@ -1,6 +1,28 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_InspectCasualtyWidget : SCR_InfoDisplayExtended
 {
+	//------------------------------------------------------------------------------------------------
+	//! Add fracture data
+	override void UpdateWidgetData()
+	{
+		super.UpdateWidgetData();
+		
+		if (!m_Target || !m_wCasualtyInspectWidget)
+			return;
+		
+		SCR_InventoryDamageInfoUI damageInfoUI = SCR_InventoryDamageInfoUI.Cast(m_wCasualtyInspectWidget.FindHandler(SCR_InventoryDamageInfoUI));
+		if (!damageInfoUI)
+			return;
+		
+		SCR_CharacterDamageManagerComponent damageManager = SCR_CharacterDamageManagerComponent.Cast(m_Target.FindComponent(SCR_CharacterDamageManagerComponent));
+		if (!damageManager)
+			return;
+		
+		damageInfoUI.SetFractureStateVisible(damageManager.GetAimingDamage() > 0, damageManager.GetMovementDamage() > 0);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Get global health from ACE getter
 	override protected void GetDamageInfo(SCR_InventoryHitZonePointUI hitZonePointUI, IEntity targetEntity, inout float bleedingRate, inout array<bool> hZGroupsBleeding, inout int damageIntensity, inout bool regenerating, inout bool isTourniquetted, inout bool isSalineBagged, inout bool isMorphined)
 	{
 		super.GetDamageInfo(hitZonePointUI, targetEntity, bleedingRate, hZGroupsBleeding, damageIntensity, regenerating, isTourniquetted, isSalineBagged, isMorphined);

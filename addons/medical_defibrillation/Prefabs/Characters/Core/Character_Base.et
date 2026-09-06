@@ -1,0 +1,26 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  CharacterSoundComponent "{520EA1D2F659CF84}" {
+   Filenames + {
+    "{561CB411D5D8E866}Sounds/ACE_Medical_Defibrillation_DefibSounds.acp"
+   }
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    ACE_Medical_Defibrillation_ScriptedUserAction_DefibConnect "{69B21D140AAF17C2}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo SCR_ActionUIInfo "{69B21D17F2A0E124}" {
+      Name "#ACE-MedicalDefibrillation_UserAction_ConnectPatient"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Unconscious_UI"
+     }
+     Duration 1
+    }
+   }
+  }
+ }
+}

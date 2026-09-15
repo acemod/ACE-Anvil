@@ -20,13 +20,22 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (!s_ACE_Chopping_Config)
 			s_ACE_Chopping_Config = SCR_ConfigHelperT<ACE_Chopping_Config>.GetConfigObject(ACE_CHOPPING_CONFIG_NAME);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	override void ToolToInventory()
+	{
+		super.ToolToInventory();
+		
+		if (System.IsConsoleApp())
+			return;
+		
+		ACE_Chopping_RemoveHelpers();
+	}
 
 	//------------------------------------------------------------------------------------------------
 	// Remove all helpers when E-tool is put back in inventory
-	override protected void RemovePreviews()
+	protected void ACE_Chopping_RemoveHelpers()
 	{
-		super.RemovePreviews();
-		
 		foreach (IEntity helper : m_aACE_Chopping_HelperEntities)
 		{
 			SCR_EntityHelper.DeleteEntityAndChildren(helper);
@@ -39,11 +48,10 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 
 	//------------------------------------------------------------------------------------------------
 	//! Trace the trees in range
-	override protected bool TraceCompositionToShowPreview()
+	override protected void FoliageDetection()
 	{
-		if (!super.TraceCompositionToShowPreview())
-			return false;
-
+		super.FoliageDetection();
+		
 		// Delete helper if the associated plant is no longer in range
 		for (int i = m_aACE_Chopping_PlantsInRangeOld.Count() - 1; i >= 0; i--)
 		{
@@ -67,20 +75,18 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		}
 		
 		m_aACE_Chopping_PlantsInRange.Clear();
-		return true;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override protected bool FilterFoliage(IEntity ent)
+	{
+		return Tree.Cast(ent);
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Query callback function: Add trees in range
-	override protected bool EvaluatePreviewEntity(IEntity ent)
+	override protected bool EvaluateBush(IEntity ent)
 	{
-		super.EvaluatePreviewEntity(ent);
-		
-		if (!Tree.Cast(ent))
-			return true;
-		
 		m_aACE_Chopping_PlantsInRange.Insert(ent);
 		return true;
 	}
 }
-

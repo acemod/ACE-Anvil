@@ -2,11 +2,12 @@
 //! Adding dynamic spawning/despawning of chopping helper entities to building preview handlers
 modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 {
-	protected ref ACE_Chopping_Config m_ACE_Chopping_Config;	
+	protected static ref ACE_Chopping_Config s_ACE_Chopping_Config;	
 	protected ref array<IEntity> m_aACE_Chopping_PlantsInRange = {};
 	protected ref array<IEntity> m_aACE_Chopping_PlantsInRangeOld = {};
 	protected ref array<IEntity> m_aACE_Chopping_HelperEntities = {};
-	protected const ResourceName ACE_CHOPPING_CONFIG_NAME = "{B205BD6D8069137B}Config/ACE/Chopping.conf";
+	
+	protected static const ResourceName ACE_CHOPPING_CONFIG_NAME = "{B205BD6D8069137B}Config/ACE/Chopping.conf";
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
@@ -16,7 +17,8 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		if (!GetGame().InPlayMode())
 			return;
 		
-		m_ACE_Chopping_Config = SCR_ConfigHelperT<ACE_Chopping_Config>.GetConfigObject(ACE_CHOPPING_CONFIG_NAME);
+		if (!s_ACE_Chopping_Config)
+			s_ACE_Chopping_Config = SCR_ConfigHelperT<ACE_Chopping_Config>.GetConfigObject(ACE_CHOPPING_CONFIG_NAME);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -59,7 +61,7 @@ modded class SCR_CampaignBuildingGadgetToolComponent : SCR_GadgetComponent
 		{
 			if (plant && !m_aACE_Chopping_PlantsInRangeOld.Contains(plant))
 			{
-				m_aACE_Chopping_HelperEntities.Insert(m_ACE_Chopping_Config.SpawnHelper(plant));
+				m_aACE_Chopping_HelperEntities.Insert(s_ACE_Chopping_Config.SpawnHelper(plant));
 				m_aACE_Chopping_PlantsInRangeOld.Insert(plant);
 			}
 		}

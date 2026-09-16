@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_CookOff_Dev"
+ GUID "664AFDC993C9CE1A"
+ TITLE "ACE Cook-Off Dev"
+ Dependencies {
+  "65AD7D0D9941A380" "58D0FB3206B6F859"
+ }
+}

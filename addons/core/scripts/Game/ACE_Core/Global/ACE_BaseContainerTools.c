@@ -34,4 +34,11 @@ class ACE_BaseContainerTools
 		
 		return SCR_EditableEntityComponentClass.GetInfo(editableEntitySource);
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Converts resource name to short form
+	static ResourceName ToInternalResourcename(ResourceName path)
+	{
+		return path.Substring(0, 1 + path.IndexOf("}"));
+	}
 }

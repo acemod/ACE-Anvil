@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Ballistics_ChangePageAction : SCR_ChangeBallisticPageAction
+class ACE_Ballistics_ChangePageAction : SCR_ChangeDataPageAction
 {
 	//------------------------------------------------------------------------------------------------
 	override bool HasLocalEffectOnlyScript()

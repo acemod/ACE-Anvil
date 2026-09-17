@@ -29,6 +29,14 @@ StringTable {
    Author "Kexanone"
    LastChanged "Psycool"
   }
+  CustomStringTableItem "{6A61720AC3A3FAE8}" {
+   Id "ACE_Overheating-CoolBarrelWithItemAction"
+   Target_en_us "Cool barrel with %1"
+   Target_de_de "Lauf mit %1 kühlen"
+   Modified 1784771275
+   Author "Kex"
+   LastChanged "Kex"
+  }
   CustomStringTableItem "{65FD7BA71F3FB178}" {
    Id "ACE_Overheating-Notification_BARREL_TEMPERATURE_RESULT"
    Target_en_us "You find a barrel temperature of %1 °C"

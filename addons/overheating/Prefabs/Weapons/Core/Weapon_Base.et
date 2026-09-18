@@ -1,0 +1,46 @@
+GenericEntity {
+ ID "CFBAA4B725411E45"
+ components {
+  ActionsManagerComponent "{A29AE67FF4D82B0F}" {
+   ActionContexts {
+    UserActionContext "{65FD7BB84A032CC3}" {
+     UIInfo SCR_ActionContextUIInfo "{65FD7BB9D1A1D0C8}" : "{970293F8561231D4}Configs/UI/NearbyInteractionContext/NearbyContextWeapons.conf" {
+     }
+     ContextName "ace_barrel"
+     Position PointInfo "{65FD7BB846651587}" {
+      PivotID "barrel_chamber"
+      Offset 0 0 0.1
+     }
+     Radius 0.1
+    }
+   }
+   additionalActions {
+    ACE_Overheating_CheckWeaponUserAction "{65FD7BB8D8AC4036}" {
+     ParentContextList {
+      "ace_barrel"
+     }
+     UIInfo SCR_ActionUIInfo "{65FD7BB8D62B3C0A}" {
+      Name "#ACE_Overheating-CheckBarrelTemperaturAction"
+      m_sIconName "search"
+     }
+     Duration 0.3
+     m_eNotificationType ACE_OVERHEATING_BARREL_TEMPERATURE_RESULT
+    }
+    ACE_Overheating_CoolBarrelInWaterUserAction "{65FE31F84DF090BD}" {
+     ParentContextList {
+      "ace_barrel"
+     }
+     UIInfo SCR_ActionUIInfo "{65FE31F841A31425}" {
+      Name "#ACE_Overheating-CoolBarrelInWaterAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Blood_UI"
+     }
+     Duration 1
+     PerformPerFrame 1
+     "Sort Priority" 5
+    }
+   }
+  }
+ }
+}

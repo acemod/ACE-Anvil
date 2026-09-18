@@ -10,13 +10,14 @@ StringTable {
    Target_es_es "Remover arbusto"
    Target_cs_cz "Posekat porost"
    Target_ru_ru "Убрать куст"
+   Target_ja_jp "藪を刈る"
    Target_ko_kr "수풀 제거"
    Target_pt_br "Remover mato"
    Target_zh_cn "清除樹叢"
    Target_uk_ua "Прибрати кущ"
    Modified 1750690925
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "michy_REV19"
   }
   CustomStringTableItem "{5EB746AAD5FF74DB}" {
    Id "ACE_Chopping_RemoveTree"
@@ -27,13 +28,14 @@ StringTable {
    Target_es_es "Remover árbol"
    Target_cs_cz "Pokácet strom"
    Target_ru_ru "Убрать дерево"
+   Target_ja_jp "木を刈る"
    Target_ko_kr "나무 제거"
    Target_pt_br "Remover árvore"
    Target_zh_cn "砍樹"
    Target_uk_ua "Прибрати дерево"
    Modified 1750690903
    Author "kexanone"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "michy_REV19"
   }
  }
 }

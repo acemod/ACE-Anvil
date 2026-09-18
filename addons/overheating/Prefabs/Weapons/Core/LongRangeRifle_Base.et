@@ -1,0 +1,7 @@
+GenericEntity : "{911D6C8DC7BA2D63}Prefabs/Weapons/Core/Rifle_Base.et" {
+ ID "5260C45AAAA407F4"
+ components {
+  SCR_WeaponStatsManagerComponent "{6292D2E74B58E94A}" {
+  }
+ }
+}

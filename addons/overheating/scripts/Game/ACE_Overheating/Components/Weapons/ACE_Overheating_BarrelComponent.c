@@ -64,10 +64,13 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	protected float m_fBulletMass;
 	
 	// Fallbacks for misconfigured weapons
-	protected static const float FALLBACK_BARREL_MASS = 1.0; // kg
+	protected static const float FALLBACK_BARREL_MASS = 2.0; // kg
 	protected static const float FALLBACK_BARREL_LENGTH = 0.5; // m
 	protected static const float FALLBACK_BULLET_MASS = 0.004; // kg
 	protected static const float FALLBACK_INITIAL_BULLET_SPEED = 930; // m/s
+	// Misconfiguration detection thresholds. These values and below are considered misconfigured.
+	protected static const float INVALID_BARREL_MASS_THRESHOLD = 0.01; // kg
+	protected static const float INVALID_BARREL_LENGTH_THRESHOLD = 0.01; // m
 	
 	//------------------------------------------------------------------------------------------------
 	//! Calculate derived quantities
@@ -108,7 +111,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		}
 		
 		float mass = m_fBarrelMassFraction * attributes.GetWeight();
-		if (mass <= 0)
+		if (mass <= INVALID_BARREL_MASS_THRESHOLD)
 		{
 			Debug.Error(string.Format("\"%1\" has no mass.", weapon.GetPrefabData().GetPrefabName()));
 			mass = FALLBACK_BARREL_MASS;
@@ -135,7 +138,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		weaponAnim.GetBoneLocalMatrix(muzzleBoneID, muzzleTransform);
 		
 		float length = vector.Distance(chamberTransform[3], muzzleTransform[3]);
-		if (length <= 0)
+		if (length <= INVALID_BARREL_LENGTH_THRESHOLD)
 		{
 			Debug.Error(string.Format("Could not determine barrel length for \"%1\".", weapon.GetPrefabData().GetPrefabName()));
 			length = FALLBACK_BARREL_LENGTH;

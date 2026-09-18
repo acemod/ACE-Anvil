@@ -64,7 +64,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	protected float m_fBulletMass;
 	
 	// Fallbacks for misconfigured weapons
-	protected static const float FALLBACK_BARREL_MASS = 1.0; // kg
+	protected static const float FALLBACK_BARREL_MASS = 2.0; // kg
 	protected static const float FALLBACK_BARREL_LENGTH = 0.5; // m
 	protected static const float FALLBACK_BULLET_MASS = 0.004; // kg
 	protected static const float FALLBACK_INITIAL_BULLET_SPEED = 930; // m/s

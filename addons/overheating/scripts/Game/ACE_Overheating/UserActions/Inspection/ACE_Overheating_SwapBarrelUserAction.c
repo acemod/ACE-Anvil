@@ -1,14 +1,41 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Overheating_SwapBarrelUserAction : SCR_InspectionUserAction
+class ACE_Overheating_SwapBarrelUserAction : SCR_InventoryAction
 {
 	bool m_bSecondSoundPlayed;
 	
 	//------------------------------------------------------------------------------------------------
+	override bool CanBeShownScript(IEntity user)
+	{
+		ChimeraCharacter userChar = ChimeraCharacter.Cast(user);
+		if(!userChar)
+			return false;
+
+		CharacterControllerComponent userCharController = userChar.GetCharacterController();
+		if(!userCharController)
+			return false;
+
+		if (!userCharController.GetInspect())
+			return false;
+		
+		BaseWeaponComponent weapon = userChar.GetWeaponManager().GetCurrentWeapon();
+		if (!weapon)
+			return false;
+		
+		return (weapon.GetWeaponType() == EWeaponType.WT_MACHINEGUN);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	override protected void PerformActionInternal(SCR_InventoryStorageManagerComponent manager, IEntity pOwnerEntity, IEntity pUserEntity)
-	{		
+	{
 		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
-		if (playerController)
-			playerController.ACE_Overheating_RequestSwapBarrel(m_WeaponComponent);
+		if (!playerController)
+			return;
+
+		ChimeraCharacter userChar = ChimeraCharacter.Cast(playerController.GetLocalControlledEntity());
+		if (!userChar)
+			return;
+
+		playerController.ACE_Overheating_RequestSwapBarrel(userChar.GetWeaponManager().GetCurrentWeapon(), GetOwner());
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -15,7 +15,6 @@ StringTable {
    Target_de_de "Lauftemperatur überprüfen"
    Target_zh_cn "檢查槍管溫度"
    Target_ko_kr "총열 온도 확인"
-   Modified 1711151729
    Author "Kexanone"
    LastChanged "Psycool"
   }
@@ -36,6 +35,22 @@ StringTable {
    Modified 1784771275
    Author "Kex"
    LastChanged "Kex"
+  }
+  CustomStringTableItem "{6A6563042671799D}" {
+   Id "ACE_Overheating-Item_SpareBarrel_Description"
+   Target_en_us "Spare barrel for machine guns."
+   Target_de_de "Ersatzlauf für Maschinengewehre."
+   Modified 1785033252
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{6A656304236C2E2B}" {
+   Id "ACE_Overheating-Item_SpareBarrel_Name"
+   Target_en_us "Spare Barrel"
+   Target_de_de "Ersatzlauf"
+   Modified 1785033194
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{65FD7BA71F3FB178}" {
    Id "ACE_Overheating-Notification_BARREL_TEMPERATURE_RESULT"

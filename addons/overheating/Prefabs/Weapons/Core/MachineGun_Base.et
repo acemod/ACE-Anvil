@@ -64,20 +64,5 @@ GenericEntity : "{E1F14DB52DBFBC57}Prefabs/Weapons/Core/Weapon_Base.et" {
     }
    }
   }
-  ActionsManagerComponent "{A29AE67FF4D82B0F}" {
-   additionalActions {
-    ACE_Overheating_SwapBarrelUserAction "{65FD7BBC6DE92331}" {
-     ParentContextList {
-      "ace_barrel"
-     }
-     UIInfo SCR_ActionUIInfo "{65FD7BBD881AC491}" {
-      Name "#ACE_Overheating-SwapBarrelAction"
-      m_sIconName "repair"
-     }
-     Duration 15
-     "Sort Priority" 10
-    }
-   }
-  }
  }
 }

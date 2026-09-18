@@ -491,6 +491,19 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 		return m_bRemoveMagazineForClearingJam;
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	//! Swaps states with another barrel
+	void SwapBarrelState(ACE_Overheating_BarrelComponent other)
+	{
+		float tmpTemperature = m_fBarrelTemperature;
+		m_fBarrelTemperature = other.m_fBarrelTemperature;
+		other.m_fBarrelTemperature = tmpTemperature;
+		
+		int tmpCounter = m_iHeatCounter;
+		m_iHeatCounter = other.m_iHeatCounter;
+		other.m_iHeatCounter = tmpCounter;
+	}
+	
 #ifdef ENABLE_DIAG
 	protected float m_fHeatTransferCoefficient;
 	

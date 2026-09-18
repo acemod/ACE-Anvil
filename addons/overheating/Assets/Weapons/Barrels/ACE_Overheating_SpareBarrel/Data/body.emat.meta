@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{E9AA7D6D8C101BC3}Assets/Weapons/Barrels/ACE_Overheating_SpareBarrel/Data/body.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

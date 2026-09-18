@@ -9,18 +9,23 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      Name "Spare barrel"
     }
     ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
-     Weight 1
+     Weight 2.5
      SizeSetupStrategy Manual
-     ItemDimensions 5 5 5
+     ItemDimensions 20 5 5
+     ItemVolume 1500
     }
     CustomAttributes {
      PreviewRenderAttributes "{6A636BDD5C34750D}" {
+      CameraOrbitAngles 0 0 180
+      CameraDistanceToItem 0.55
+      FOV 30
      }
     }
+    m_Size SLOT_2x1
    }
   }
   MeshObject "{6A636BDC6B836BC2}" {
-   Object "{EBD8B99C554B442B}Assets/Structures/Walls/Pipe/Dst/PipeRailing_01_3m_00_dst.xob"
+   Object "{4B785CAF4AF17E47}Assets/Weapons/Barrels/ACE_Overheating_SpareBarrel/SpareBarrel.xob"
    InheritVisibility 1
   }
   RigidBody "{6A636BDC6F1549AE}" {

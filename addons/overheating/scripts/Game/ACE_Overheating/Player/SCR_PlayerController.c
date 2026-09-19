@@ -121,14 +121,14 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_Overheating_RequestCoolBarrel(BaseWeaponComponent weapon)
+	void ACE_Overheating_RequestCoolBarrel(BaseWeaponComponent weapon, SCR_WaterContainerComponent waterContainer = null)
 	{
-		Rpc(RpcAsk_ACE_Overheating_CoolBarrel, Replication.FindItemId(weapon));
+		Rpc(RpcAsk_ACE_Overheating_CoolBarrel, Replication.FindItemId(weapon), Replication.FindItemId(waterContainer));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_Overheating_CoolBarrel(RplId weaponId)
+	protected void RpcAsk_ACE_Overheating_CoolBarrel(RplId weaponId, RplId waterContainerId)
 	{
 		BaseWeaponComponent weapon = BaseWeaponComponent.Cast(Replication.FindItem(weaponId));
 		if (!weapon)
@@ -142,9 +142,25 @@ modded class SCR_PlayerController : PlayerController
 		if (!settings)
 			return;
 		
+		float coolingScale = settings.m_fWaterCoolingScale;
+		
+		SCR_WaterContainerComponent waterContainer = SCR_WaterContainerComponent.Cast(Replication.FindItem(waterContainerId));
+		if (waterContainer)
+		{
+			coolingScale *= waterContainer.RemoveWater_S(settings.m_fWaterCoolingFlaskConsumptionPerExecution);
+			coolingScale /= settings.m_fWaterCoolingFlaskConsumptionPerExecution;
+			
+			SCR_NotificationsComponent.SendToPlayer(
+				GetPlayerId(),
+				ENotification.PLAYER_FLASK_WATER_REMAINING,
+				Math.Round(waterContainer.GetCurrentWater() * 100),
+				Math.Round(waterContainer.GetMaximumWater() * 100)
+			);
+		}
+		
 		ACE_Overheating_BarrelTemperatureJob job = new ACE_Overheating_BarrelTemperatureJob();
 		job.SetContext(new ACE_Overheating_BarrelContext(barrel));
-		job.OnUpdate(settings.m_fWaterCoolingScale);
+		job.OnUpdate(coolingScale);
 		RpcAsk_ACE_Overheating_SendWeaponStateNotification(ENotification.ACE_OVERHEATING_BARREL_TEMPERATURE_RESULT, weaponId);
 	}
 }

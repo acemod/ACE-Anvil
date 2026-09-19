@@ -29,12 +29,21 @@ StringTable {
    Author "Kexanone"
    LastChanged "Psycool"
   }
+  CustomStringTableItem "{6A61720AC3A3FAE8}" {
+   Id "ACE_Overheating-CoolBarrelWithItemAction"
+   Target_en_us "Cool barrel with %1"
+   Target_de_de "Lauf mit %1 kühlen"
+   Targer_ko_kr "%1(으)로 총열 식히기"
+   Modified 1784771275
+   Author "Kex"
+   LastChanged "Kex"
+  }
   CustomStringTableItem "{65FD7BA71F3FB178}" {
    Id "ACE_Overheating-Notification_BARREL_TEMPERATURE_RESULT"
    Target_en_us "You find a barrel temperature of %1 °C"
    Target_de_de "Die Lauftemperatur liegt bei %1 °C"
    Target_zh_cn "你測得槍管溫度為 %1 °C"
-   Targer_ko_kr "총열 온도가 %1°C임을 알아냈습니다"
+   Targer_ko_kr "총열 온도가 %1 °C임을 알아냈습니다."
    Modified 1711152715
    Author "Kexanone"
    LastChanged "Psycool"
@@ -44,7 +53,7 @@ StringTable {
    Target_en_us "Swap barrel"
    Target_de_de "Lauf austauschen"
    Target_zh_cn "更換槍管"
-   Targer_ko_kr "총열 교체"
+   Targer_ko_kr "총열 교체하기"
    Modified 1711153953
    Author "Kexanone"
    LastChanged "Psycool"
@@ -54,7 +63,7 @@ StringTable {
    Target_en_us "Try clear weapon jam"
    Target_de_de "Versuche Waffenstörung zu beheben"
    Target_zh_cn "嘗試排除卡彈"
-   Targer_ko_kr "무기 격발불량 해결 시도하기"
+   Targer_ko_kr "격발 불량 해결 시도하기"
    Modified 1710813896
    Author "Kexanone"
    LastChanged "Psycool"

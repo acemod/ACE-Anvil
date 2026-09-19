@@ -53,7 +53,7 @@ StringTable {
    Target_en_us "Swap barrel"
    Target_de_de "Lauf austauschen"
    Target_zh_cn "更換槍管"
-   Targer_ko_kr "총열 교체"
+   Targer_ko_kr "총열 교체하기"
    Modified 1711153953
    Author "Kexanone"
    LastChanged "Psycool"

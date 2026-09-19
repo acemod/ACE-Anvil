@@ -32,7 +32,8 @@ StringTable {
    Id "ACE_Overheating-CoolBarrelWithItemAction"
    Target_en_us "Cool barrel with %1"
    Target_de_de "Lauf mit %1 kühlen"
-   Modified 1784771275
+   Target_ko_kr "%1(으)로 총열 식히기"
+   Modified 1785132665
    Author "Kex"
    LastChanged "Kex"
   }
@@ -58,8 +59,8 @@ StringTable {
    Id "ACE_Overheating-Notification_BARREL_TEMPERATURE_RESULT"
    Target_en_us "You find a barrel temperature of %1 °C"
    Target_de_de "Die Lauftemperatur liegt bei %1 °C"
-   Target_zh_cn "你測得槍管溫度為 %1 °C"
    Target_ko_kr "총열의 온도가 %1 °C임을 알아냈습니다."
+   Target_zh_cn "你測得槍管溫度為 %1 °C"
    Modified 1711152715
    Author "Kexanone"
    LastChanged "Psycool"

@@ -13,7 +13,7 @@ StringTable {
    Id "ACE_Overheating-CheckBarrelTemperaturAction"
    Target_en_us "Check barrel temperature"
    Target_de_de "Lauftemperatur überprüfen"
-   Target_ko_kr "총열 온도 확인하"
+   Target_ko_kr "총열 온도 확인하기"
    Target_zh_cn "檢查槍管溫度"
    Modified 1711151729
    Author "Kexanone"

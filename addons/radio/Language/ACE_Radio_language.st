@@ -110,6 +110,7 @@ StringTable {
    Id "ACE_Radio-Settings_Click_Off"
    Target_en_us "Click-off sound when transmission ends"
    Target_pl_pl "Dźwięk odłączenia przy zakończeniu transmisji"
+   Target_ko_kr "송신 완료 시 딸깍 소리 내기"
    Modified 1716434296
    Author "darkshifty"
    LastChanged "darkshifty"

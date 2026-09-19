@@ -1,0 +1,52 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ACE_Overheating_BarrelComponent "{6A636BDC62B87097}" {
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Overheating-Item_SpareBarrel_Name"
+     Description "#ACE_Overheating-Item_SpareBarrel_Description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 2.5
+     SizeSetupStrategy Manual
+     ItemDimensions 20 5 5
+     ItemVolume 1500
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{6A636BDD5C34750D}" {
+      CameraOrbitAngles 0 0 180
+      CameraDistanceToItem 0.55
+      FOV 30
+     }
+    }
+    m_Size SLOT_2x1
+   }
+  }
+  MeshObject "{6A636BDC6B836BC2}" {
+   Object "{4B785CAF4AF17E47}Assets/Weapons/Barrels/ACE_Overheating_SpareBarrel/SpareBarrel.xob"
+   InheritVisibility 1
+  }
+  RigidBody "{6A636BDC6F1549AE}" {
+   ModelGeometry 1
+  }
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    ACE_Overheating_SwapBarrelUserAction "{6A636BDD722CFE73}" {
+     ParentContextList {
+      "ace_barrel"
+     }
+     UIInfo SCR_ActionUIInfo "{6A636BDD6811661E}" {
+      Name "#ACE_Overheating-SwapBarrelAction"
+      m_sIconName "repair"
+     }
+     Duration 15
+     "Sort Priority" 10
+     "Inventory action" 1
+    }
+   }
+  }
+ }
+}

@@ -98,22 +98,37 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_Overheating_RequestSwapBarrel(BaseWeaponComponent weapon)
+	void ACE_Overheating_RequestSwapBarrel(BaseWeaponComponent weapon, IEntity barrelItem)
 	{
-		Rpc(RpcAsk_ACE_Overheating_SwapBarrel, Replication.FindItemId(weapon));
+		Rpc(RpcAsk_ACE_Overheating_SwapBarrel, Replication.FindItemId(weapon), SCR_EntityHelper.EntityToRplId(barrelItem));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_Overheating_SwapBarrel(RplId weaponId)
+	protected void RpcAsk_ACE_Overheating_SwapBarrel(RplId weaponId, RplId barrelItemId)
 	{
 		BaseWeaponComponent weapon = BaseWeaponComponent.Cast(Replication.FindItem(weaponId));
 		if (!weapon)
 			return;
 		
-		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
-		if (barrel)
-			barrel.SetBarrelTemperature(ACE_WeatherHelper.GetAirTemperatureForEntity(weapon.GetOwner()));
+		ACE_Overheating_BarrelComponent oldBarrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
+		if (!oldBarrel)
+			return;
+		
+		IEntity barrelItem = IEntity.Cast(SCR_EntityHelper.RplIdToEntity(barrelItemId));
+		if (!barrelItem)
+			return;
+		
+		ACE_Overheating_BarrelComponent newBarrel = ACE_Overheating_BarrelComponent.Cast(barrelItem.FindComponent(ACE_Overheating_BarrelComponent));
+		if (!newBarrel)
+			return;
+		
+		oldBarrel.SwapBarrelState(newBarrel);
+		float timestamp = GetWorld().GetWorldTime();
+		ACE_Overheating_BarrelTemperatureJob job = new ACE_Overheating_BarrelTemperatureJob();
+		job.SetContext(new ACE_Overheating_BarrelContext(oldBarrel));
+		job.OnUpdate((timestamp - newBarrel.GetLastTemperatureTimestamp()) / 1000);
+		newBarrel.SetLastTemperatureTimestamp(timestamp);
 		
 		ACE_Overheating_BarrelGlowEffectComponent glowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(weapon.GetCurrentMuzzle());
 		if (glowEffect)

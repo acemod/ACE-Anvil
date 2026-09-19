@@ -106,5 +106,13 @@ StringTable {
    Author "veteran29"
    LastChanged "michy_REV19"
   }
+  CustomStringTableItem "{664EB3C5389562D0}" {
+   Id "ACE_Radio-Settings_Click_Off"
+   Target_en_us "Click-off sound when transmission ends"
+   Target_pl_pl "Dźwięk odłączenia przy zakończeniu transmisji"
+   Modified 1716434296
+   Author "darkshifty"
+   LastChanged "darkshifty"
+  }
  }
 }

@@ -112,6 +112,7 @@ StringTable {
    Target_fr_fr "Porter"
    Target_it_it "Trasporta"
    Target_de_de "Tragen"
+   Target_es_es "Portar"
    Target_cs_cz "Nést"
    Target_pl_pl "Nieś"
    Target_ru_ru "Перенести"

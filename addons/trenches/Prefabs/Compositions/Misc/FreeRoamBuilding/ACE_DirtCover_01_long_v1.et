@@ -1,19 +1,19 @@
 GenericEntity : "{6E9190BC2713551D}Prefabs/Compositions/Slotted/BuildableComposition_Base.et" {
  ID "5282DCB5DFC8538F"
  components {
-  RigidBody "{5E96A067A67C5029}" {
-   Geometries {
-    PhysicsBoxGeometry UserAction {
-     Extents 3 2 1.5
-    }
-   }
-  }
-  SCR_CampaignBuildingCompositionComponent "{5E96A067C097D570}" {
+  ACE_Trenches_BuildingCompositionComponent "{5E96A067C097D570}" {
    m_AudioSourceConfigurationSpawn SCR_AudioSourceConfiguration "{5E96A067C355978C}" {
     m_sSoundEventName "SOUND_BUILD_SANDBAG"
    }
    m_AudioSourceConfigurationDespawn SCR_AudioSourceConfiguration "{5E96A0643BAAEAF8}" {
     m_sSoundEventName "SOUND_DESTROY_SANDBAG"
+   }
+  }
+  RigidBody "{5E96A067A67C5029}" {
+   Geometries {
+    PhysicsBoxGeometry UserAction {
+     Extents 3 2 1.5
+    }
    }
   }
   Hierarchy "{60EB074DE1A06A58}" {
@@ -37,8 +37,8 @@ GenericEntity : "{6E9190BC2713551D}Prefabs/Compositions/Slotted/BuildableComposi
     Hierarchy "{60EB074D6AE72E0A}" {
     }
    }
-   coords 0 0.3 0
    Flags 1573891
+   coords 0 0.3 0
   }
  }
 }

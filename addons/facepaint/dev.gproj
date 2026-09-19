@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Facepaint_Dev"
+ GUID "68EAA4B96976D557"
+ TITLE "ACE Facepaint Dev"
+ Dependencies {
+  "58D0FB3206B6F859" "65AD7D0D9941A380"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{68EAB69B75B2DD23}" {
+      StringTableSource "{6B0176644119893B}Languages/ACE_Facepaint_Localisation_01.st"
+      Languages {
+       LanguageDefinition "{68EAB69B77CAD892}" {
+        Code "cs_cz"
+        StringTableRuntime "{873CB27DD94FE903}Languages/ACE_Facepaint_Localisation_01.cs_cz.conf"
+       }
+       LanguageDefinition "{68EAB69B77CAD8A0}" {
+        Code "de_de"
+        StringTableRuntime "{5242A84ECAECF823}Languages/ACE_Facepaint_Localisation_01.de_de.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF5D}" {
+        Code "en_us"
+        StringTableRuntime "{0CB22205A01FFD22}Languages/ACE_Facepaint_Localisation_01.en_us.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF49}" {
+        Code "es_es"
+        StringTableRuntime "{C9FE6F8C4E1D963D}Languages/ACE_Facepaint_Localisation_01.es_es.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF47}" {
+        Code "fr_fr"
+        StringTableRuntime "{72569ABBA89E753F}Languages/ACE_Facepaint_Localisation_01.fr_fr.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF75}" {
+        Code "it_it"
+        StringTableRuntime "{F24A158F05BCF6C6}Languages/ACE_Facepaint_Localisation_01.it_it.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF61}" {
+        Code "ja_jp"
+        StringTableRuntime "{E251A81D3BCDC66D}Languages/ACE_Facepaint_Localisation_01.ja_jp.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF1D}" {
+        Code "ko_kr"
+        StringTableRuntime "{42EF80B1A8E0C552}Languages/ACE_Facepaint_Localisation_01.ko_kr.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF0A}" {
+        Code "pl_pl"
+        StringTableRuntime "{1E9E264B160F592E}Languages/ACE_Facepaint_Localisation_01.pl_pl.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADF05}" {
+        Code "pt_br"
+        StringTableRuntime "{CBE9BC872DF19394}Languages/ACE_Facepaint_Localisation_01.pt_br.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADE58}" {
+        Code "ru_ru"
+        StringTableRuntime "{9EA8A82FB088F6E2}Languages/ACE_Facepaint_Localisation_01.ru_ru.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADE4C}" {
+        Code "uk_ua"
+        StringTableRuntime "{14F0FDD9DCA648B7}Languages/ACE_Facepaint_Localisation_01.uk_ua.conf"
+       }
+       LanguageDefinition "{68EAB69B77CADE78}" {
+        Code "zh_cn"
+        StringTableRuntime "{CE4093E4E50698AA}Languages/ACE_Facepaint_Localisation_01.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

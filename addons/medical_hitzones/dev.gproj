@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_Medical_Hitzones_Dev"
+ GUID "65B343F799FB521B"
+ TITLE "ACE Medical Hitzones Dev"
+ Dependencies {
+  "6586079789278413" "58D0FB3206B6F859"
+ }
+}

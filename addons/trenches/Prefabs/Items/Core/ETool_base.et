@@ -1,0 +1,38 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "54A2D42003013D58"
+ components {
+  SCR_DeployablePlaceableItemComponent "{66AAF977B9074622}" {
+   m_aIgnoredComponents {
+    "SCR_EditableEntityComponent"
+   }
+   m_eMeasurementMethod FROM_CENTER_OF_MASS
+   m_bACE_RequiredSurfaceLabel DIGGABLE
+   m_fMaxPlacementDistance 2.5
+   m_ePlacementType XYZ
+   m_bForwardAwayFromPlayer 1
+   m_bAttachPlacedItemToTheSurfaceEntity 0
+  }
+  SCR_MultiPartDeployableItemComponent "{66AAF975E1396DF9}" {
+   m_bDeleteThisPartOnDeployment 0
+   m_aVariants {
+    SCR_DeployableVariantContainer "{66AAF97562CF2079}" {
+     m_sReplacementPrefab "{39438D0364234231}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_TrenchHalf_01_long.et"
+     m_sPreviewObject "{378B78363D168172}Assets/Structures/Military/Fortifications/Trenches/ACE_HalfTrench_01_Long.xob"
+     m_fMaxAllowedTilt 45
+    }
+    SCR_DeployableVariantContainer "{66AB0D1A9A1843D4}" {
+     m_iVariantId 1
+     m_sReplacementPrefab "{E14F00C2836CAB68}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_DirtCover_01_long_v1.et"
+     m_sPreviewObject "{B119EC6E3C59AF3B}Assets/Structures/Military/Fortifications/DirtMounds/DirtCover_01_long_01.xob"
+     m_fMaxAllowedTilt 45
+    }
+    SCR_DeployableVariantContainer "{66AB0D1A8D70C196}" {
+     m_iVariantId 2
+     m_sReplacementPrefab "{32B0F4CA468D8A56}PrefabsEditable/Auto/Compositions/Misc/FreeRoamBuilding/E_ACE_DirtCover_01_short.et"
+     m_sPreviewObject "{155FCD2AE8BA59A3}Assets/Structures/Military/Fortifications/DirtMounds/DirtCover_01_short.xob"
+     m_fMaxAllowedTilt 45
+    }
+   }
+  }
+ }
+}

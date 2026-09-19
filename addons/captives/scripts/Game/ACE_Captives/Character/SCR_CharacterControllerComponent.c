@@ -20,7 +20,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	void ACE_Captives_SetCaptive(bool isCaptive)
 	{
-		ACE_Captives_CaptiveSystem system = ACE_Captives_CaptiveSystem.GetInstance();
+		ACE_Captives_CaptiveSystem system = ACE_Captives_CaptiveSystem.GetInstance(GetOwner().GetWorld());
 		if (!system)
 			return;
 		
@@ -56,18 +56,28 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Friend setter of ACE_Captives_SurrenderHelperCompartment
-	void ACE_Captives_SetHasSurrendered(bool hasSurrendered)
+	[Friend(ACE_Captives_SurrenderHelperCompartment)]
+	protected void ACE_Captives_SetHasSurrendered(bool hasSurrendered)
 	{
 		m_bACE_Captives_HasSurrendered = hasSurrendered;
 		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Friend setter of ACE_Captives_CaptiveSystem
-	void ACE_Captives_SetIsCaptive(bool isCaptive)
+	[Friend(ACE_Captives_CaptiveSystem)]
+	protected void ACE_Captives_SetIsCaptive(bool isCaptive)
 	{
 		m_bACE_Captives_IsCaptive = isCaptive;
 		Replication.BumpMe();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Prevent captives from equipping gadgets in vehicles
+	override bool GetCanEquipGadget(IEntity gadget)
+	{
+		if (m_bACE_Captives_IsCaptive)
+			return false;
+		
+		return super.GetCanEquipGadget(gadget);
 	}
 }

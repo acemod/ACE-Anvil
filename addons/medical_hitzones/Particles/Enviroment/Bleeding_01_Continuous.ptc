@@ -1,0 +1,55 @@
+EffectDef {
+ Version 2
+ Emitters {
+  EmitterDef blood {
+   ShapeType Point
+   ShapeSize 0.1 0.1 0.1
+   ConeAngle 360 0 360
+   MaxNum 500
+   BirthRate 1
+   BirthRateVel 0
+   Offset 0 0 0
+   LocalTransform 0
+   LodMin 0
+   LodMax 1
+   Material "{96FDAEE7C1AE6B06}Particles/_Materials/Fluid/Blood_Animation_01.emat"
+   SizeMultiplier 0.05
+   SizeRND 0.5
+   ScaleX 1
+   RotMultiplier 45
+   RandomRotDir 1
+   VelAngle 1
+   RandomAngle 0
+   FlipU Random
+   Velocity 0.2
+   VelocityRND 0.2
+   VelAffect 0.4
+   AirResistance 1
+   GravityMultiply 0.2
+   GravityMultiplyRND 0.05
+   AnimOnce 1
+   AnimFPS 30
+   LifetimeByAnim 0
+   RandomFrame 0
+   Lifetime 1
+   LifetimeRND 0.2
+   LifetimeVelFactor 1
+   LifetimeVelSmoothing 1
+   LifetimeShortening 0.5
+   Alpha {
+    0 0 0.021 0.849 1 0
+   }
+   Size {
+    0 0.084 0.451 0.548 1 1
+   }
+   EmittingTime 2
+   Repeat 1
+   AlphaMast {
+    0 1 1 1
+   }
+   BRateMast {
+    0 1 0.501 0.993 0.504 0 1 0
+   }
+  }
+ }
+}

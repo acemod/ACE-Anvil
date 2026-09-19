@@ -1,0 +1,20 @@
+GameProject {
+ ID "ACE_MagRepack_Dev"
+ GUID "65AD7D4099944EBD"
+ TITLE "ACE Magazine Repack Dev"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig HEADLESS {
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+ }
+}

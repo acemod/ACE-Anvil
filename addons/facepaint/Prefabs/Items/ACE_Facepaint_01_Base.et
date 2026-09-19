@@ -1,0 +1,77 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ace-item-facepaint-us-name"
+     Description "#ace-item-facepaint-us-description"
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.1
+     SizeSetupStrategy Size
+     ItemDimensions 5 5 5
+     ItemVolume 150
+     DimensionScaler 1
+     RestingAdditiveRotationLS 0 0 0
+     RestingAdditiveOffsetLS 0 0 0
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{64976372EAF33CF7}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{64976372EAF33CEE}" {
+       AnimGraph "{883777E45A6C4DA1}Assets/Items/Medicine/Workspaces/Gauze_01.agr"
+       AnimInstance "{79BD98038DD60F88}Assets/Items/Medicine/Workspaces/Gauze_01_player.asi"
+       BindingName "Gadget"
+      }
+     }
+    }
+    CustomAttributes {
+     ItemActionAnimAttributes "{64976372EAF33C9F}" {
+      AnimationGraphTemplate "{DFFC0A34A77ADCB4}anims/workspaces/player/player_main.agr"
+      ActionAnimationCommandName "CMD_HealSelf"
+      ActionAnimDuration 5
+      ActionIntParam 2
+      AllowMovementDuringAction 1
+     }
+     CharacterModifierAttributes "{64976372EAF33C93}" {
+      SpeedLimitItemPrimaryAction 0.5
+     }
+     SCR_ItemOfInterestAttribute "{64976372EAF33C88}" {
+      m_InterestType NONE
+     }
+     SCR_SelectionMenuPreviewAttributes "{64976372EAF33C8B}" {
+     }
+     PreviewRenderAttributes "{64976372EAF33C80}" {
+      CameraOrbitAngles -180 0 -45
+      CameraDistanceToItem 0.2
+      FOV 20
+      AspectRatio 1
+      LodModel 1
+     }
+    }
+    CommonItemType "NONE"
+   }
+  }
+  MeshObject "{64976372EAF33CB8}" {
+   Object "{D4229A04F9561878}Assets/Items/ACE_CamCream_01/ACE_CamCream_01.xob"
+  }
+  RigidBody "{64976372EAF33CB9}" {
+   Mass 1
+   LinearDamping 0.5
+   AngularDamping 0.5
+   ModelGeometry 1
+  }
+  SCR_ConsumableItemComponent "{64976372EAF33CBE}" {
+   m_eAnimVariable ADRIANOV
+   m_eUseMask 7
+   m_ConsumableEffect ACE_ConsumableFacepaint "{64976372EAF33CB1}" {
+    m_bDeleteOnUse 0
+    m_fApplyToSelfDuration 10
+    m_fApplyToOtherDuration 10
+   }
+  }
+ }
+ coords 0 0 0
+}

@@ -27,7 +27,7 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!compartment)
 			return;
 		
-		if (compartment.IsOccupied() || !compartment.IsCompartmentAccessible() || compartment.IsReserved())
+		if (compartment.IsOccupied() || compartment.IsReserved())
 			return;
 		
 		SCR_CharacterControllerComponent userCharController = SCR_CharacterControllerComponent.Cast(pUserEntity.FindComponent(SCR_CharacterControllerComponent));

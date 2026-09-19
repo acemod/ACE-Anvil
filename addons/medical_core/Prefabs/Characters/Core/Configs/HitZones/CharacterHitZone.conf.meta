@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{1172EE61292B1475}Prefabs/Characters/Core/Configs/HitZones/CharacterHitZone.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

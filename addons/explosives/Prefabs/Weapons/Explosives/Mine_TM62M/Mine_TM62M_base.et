@@ -1,0 +1,13 @@
+GenericEntity : "{9C80A507960AA473}Prefabs/Weapons/Core/Mine_base.et" {
+ ID "5968D2B6A82C6019"
+ components {
+  SCR_MineDamageManager "{5A187C4DB2CF86F2}" {
+   "Additional hit zones" {
+    SCR_MineHitZone Main {
+     "Melee multiplier" 0
+     "Kinetic multiplier" 0
+    }
+   }
+  }
+ }
+}

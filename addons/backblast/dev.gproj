@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_Backblast_Dev"
+ GUID "65AD7C139EB4C1A1"
+ TITLE "ACE Backblast Dev"
+ Dependencies {
+  "58D0FB3206B6F859" "65AD7D0D9941A380"
+ }
+}

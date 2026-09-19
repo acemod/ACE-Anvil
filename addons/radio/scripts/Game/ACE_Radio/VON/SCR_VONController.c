@@ -32,7 +32,7 @@ modded class SCR_VONController: ScriptComponent
 			m_eBeepTypeCh1,
 			m_eBeepTypeCh2,
 			m_bBeepCycle,
-			m_bBeepCycle,
+			m_bClickOff,
 			level: LogLevel.DEBUG);
 	}
 

@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{9BDAB29B5674BB57}Assets/Items/Equipement/ZappyBoy1000/Data/Casing_BCR.edds"
+ NMOMap "{A30209098F03E9C9}Assets/Items/Equipement/ZappyBoy1000/Data/Casing_NMO.edds"
+}

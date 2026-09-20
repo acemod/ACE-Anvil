@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{37FBA7E7466F4CB9}Configs/EntityCatalog/UK/Arsenal Lists/UK_WeaponAttachments_All.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

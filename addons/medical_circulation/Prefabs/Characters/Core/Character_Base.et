@@ -1,0 +1,111 @@
+SCR_ChimeraCharacter {
+ ID "520EC961A090B1EE"
+ components {
+  ACE_Medical_MedicationComponent "{621B2BABDAF5867E}" {
+  }
+  ACE_Medical_VitalsComponent "{6220003330350BC2}" {
+  }
+  ActionsManagerComponent "{520EA1D2F659CE02}" {
+   additionalActions {
+    SCR_HealSupportStationAction "{5E14966CF597F6B3}" {
+     "Sort Priority" 0
+    }
+    SCR_MorphineUserAction "{60CF45A52131AD5A}" {
+     ActionTitle "Inject Epinephrine"
+     m_eConsumableType ACE_MEDICAL_EPINEPHRINE_INJECTOR
+    }
+    ACE_Medical_AmmoniumCarbonateUserAction "{62150A66FC4875D8}" {
+     ParentContextList {
+      "Head"
+     }
+     UIInfo SCR_ActionUIInfo "{62150A66E8D34DA5}" {
+      Name "#ACE_Medical-AmmoniumCarbonatePackageAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
+     }
+     m_eConsumableType ACE_MEDICAL_AMMONIUM_CARBONATE
+    }
+    SCR_MorphineUserAction "{62150A6C41D53656}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{62150A6C71EFEF99}" {
+      Name "#ACE_Medical-MetoprololInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
+     }
+     ActionTitle "Inject Metoprolol"
+     m_eConsumableType ACE_MEDICAL_METOPROLOL_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEC7ACB618B}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{6226EDEC7241F1E1}" {
+      Name "#ACE_Medical-NaloxoneInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
+     }
+     ActionTitle "Inject Naloxone"
+     m_eConsumableType ACE_MEDICAL_NALOXONE_INJECTOR
+    }
+    SCR_MorphineUserAction "{6226EDEDB4F10C69}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{6226EDEDA11A533D}" {
+      Name "#ACE_Medical-PhenylephrineInjectionAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Morphine_UI"
+     }
+     ActionTitle "Inject Phenylephrine"
+     m_eConsumableType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
+    }
+    ACE_Medical_CPRUserAction "{6216F73FC7EBD067}" {
+     ParentContextList {
+      "Chest"
+     }
+     UIInfo SCR_ActionUIInfo "{6216F73FFFACAE56}" {
+      Name "#ACE_Medical-CPRAction"
+     }
+     ActionTitle "Perfrom CPR"
+     VisibilityRange 2
+     Duration 1
+     "Sort Priority" 10
+    }
+    ACE_Medical_CheckVitalsUserAction "{621737D0C7C00B68}" {
+     ParentContextList {
+      "Head" "Chest" "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{621737D0F7FF3B55}" {
+      Name "#ACE_Medical-CheckPulseAction"
+      m_sIconName "search"
+     }
+     ActionTitle "Check Pulse"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 10
+     m_eNotificationType ACE_MEDICAL_PULSE_RESULT
+    }
+    ACE_Medical_CheckVitalsUserAction "{621737D02A688589}" {
+     ParentContextList {
+      "RightArm" "LeftArm" "RightLeg" "LeftLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{621737D025B25341}" {
+      Name "#ACE_Medical-CheckBloodPressureAction"
+      m_sIconName "search"
+     }
+     ActionTitle "Check Blood Pressure"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 11
+     m_eNotificationType ACE_MEDICAL_BLOOD_PRESSURE_RESULT
+    }
+   }
+  }
+ }
+}

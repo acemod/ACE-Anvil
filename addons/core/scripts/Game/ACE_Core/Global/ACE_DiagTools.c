@@ -7,7 +7,11 @@ class ACE_DiagTools
 	//! Return true if a target was found
 	static bool GetDiagTargetCharacter(out IEntity target, out string targetType)
 	{
-		CameraBase camera = GetGame().GetCameraManager().CurrentCamera();
+		CameraManager cameraManager = GetGame().GetCameraManager();
+		if (!cameraManager)
+			return false;
+		
+		CameraBase camera = cameraManager.CurrentCamera();
 		if (!camera)
 			return false;
 		

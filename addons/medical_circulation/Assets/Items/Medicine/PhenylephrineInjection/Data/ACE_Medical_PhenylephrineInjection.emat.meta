@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{646DB64448CDBDA5}Assets/Items/Medicine/PhenylephrineInjection/Data/ACE_Medical_PhenylephrineInjection.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

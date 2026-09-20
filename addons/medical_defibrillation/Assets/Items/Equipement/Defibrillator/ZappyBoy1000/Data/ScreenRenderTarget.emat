@@ -1,0 +1,7 @@
+MatPBRBasic {
+ Color 0 0 0 1
+ Cull none
+ Sort decal
+ BlendMode AlphaBlend
+ OpacityMap "$rendertarget"
+}

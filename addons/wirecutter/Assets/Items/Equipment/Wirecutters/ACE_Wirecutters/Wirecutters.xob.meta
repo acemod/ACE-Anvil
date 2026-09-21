@@ -1,12 +1,12 @@
 MetaFileClass {
- Name "{EC9DD5D7E83DF8E9}Assets/Items/Equipment/Wirecutters/ACE_Wirecutter/Wirecutter.xob"
+ Name "{EC9DD5D7E83DF8E9}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Wirecutters.xob"
  Configurations {
   FBXResourceClass PC {
    ExportSkinning 1
    MaterialAssigns {
     MaterialAssignClass "{6A6B5766B569DA6A}" {
      SourceMaterial "Body"
-     AssignedMaterial "{EC155430AD5B6F68}Assets/Items/Equipment/Wirecutters/ACE_Wirecutter/Data/Body.emat"
+     AssignedMaterial "{EC155430AD5B6F68}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Data/Body.emat"
     }
    }
    MeshParams {

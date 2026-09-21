@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{8D7E4D2E88A3040C}Prefabs/Items/Core/ACE_Wirecutter_Base.et"
+ Name "{8D7E4D2E88A3040C}Prefabs/Items/Core/ACE_Wirecutters_Base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

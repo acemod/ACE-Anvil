@@ -1,4 +1,4 @@
-ACE_Chopping_HelperEntity {
+ACE_ActionsHelperEntity {
  ID "61122D1A94E07FBB"
  components {
   MeshObject "{61122D1DB8A9E4AA}" {
@@ -19,16 +19,17 @@ ACE_Chopping_HelperEntity {
     }
    }
    additionalActions {
-    ACE_Chopping_UserAction "{611A26EB65D67BCE}" {
+    ACE_DestroyEntityUserAction "{611A26EB65D67BCE}" {
      ParentContextList {
       "default"
      }
      UIInfo UIInfo "{611A26EA9DC95817}" {
      }
+     m_sRequiredGadgetComponent "SCR_CampaignBuildingGadgetToolComponent"
      m_iAnimationIndex 2
     }
    }
   }
  }
- Flags 0
+ Flags 0 0x3
 }

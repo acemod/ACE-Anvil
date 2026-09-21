@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{2DF3BF7B29A93115}Assets/wirecuttermodel2.xob"
+ Name "{2DF3BF7B29A93115}Assets/Items/Equipment/Wirecutters/ACE_Wirecutter/Wirecutter.xob"
  Configurations {
   FBXResourceClass PC {
    ExportSkinning 1
@@ -7,11 +7,11 @@ MetaFileClass {
    MaterialAssigns {
     MaterialAssignClass "{62F7634662163561}" {
      SourceMaterial "DefaultGeneratedMaterial"
-     AssignedMaterial "{24C74A9E7CFC388D}Assets/Data/DefaultGeneratedMaterial.emat"
+     AssignedMaterial "{214B721DCDBFB106}Assets/Items/Equipment/Wirecutters/ACE_Wirecutter/Data/Body.emat"
     }
     MaterialAssignClass "{62F7634662163573}" {
      SourceMaterial "Material"
-     AssignedMaterial "{214B721DCDBFB106}Assets/Wirecutter.emat"
+     AssignedMaterial "{214B721DCDBFB106}Assets/Items/Equipment/Wirecutters/ACE_Wirecutter/Data/Body.emat"
     }
    }
    MeshParams {
@@ -38,7 +38,7 @@ MetaFileClass {
    }
   }
   FBXResourceClass PS5 : PC {
-   Common TXOCommonClass "{62F76346676A08D8}" : "{F62AA8E7B8EA9D26}configs/ResourceTypes/PS5/MeshObjectCommon.conf" {
+   Common TXOCommonClass "{62F76346676A08D8}" : "{F62AA8E7B8EA9D26}Configs/System/ResourceTypes/PS5/MeshObjectCommon.conf" {
    }
   }
   FBXResourceClass HEADLESS : PC {

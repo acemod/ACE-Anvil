@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{4D8024798567557F}Assets/Items/Equipment/Wirecutters/ACE_Wirecutter/Data/Tang_n.edds"
+ Configurations {
+  JPGResourceClass PC : "{A968DA7F9A1E3A3E}Configs/System/ResourceTypes/PC/TextureNType.conf" {
+  }
+  JPGResourceClass XBOX_ONE : "{7F6A4D372443A88D}Configs/System/ResourceTypes/XBOX_ONE/TextureNType.conf" {
+  }
+  JPGResourceClass XBOX_SERIES : "{065D289C7FF8B20D}Configs/System/ResourceTypes/XBOX_SERIES/TextureNType.conf" {
+  }
+  JPGResourceClass PS4 : "{29DF4A6CBBABE916}Configs/System/ResourceTypes/PS4/TextureNType.conf" {
+  }
+  JPGResourceClass PS5 : "{DED3C8CA8494EA99}Configs/System/ResourceTypes/PS5/TextureNType.conf" {
+  }
+  JPGResourceClass HEADLESS : "{AFD658E4D0EB5FBC}Configs/System/ResourceTypes/HEADLESS/TextureNType.conf" {
+  }
+ }
+}

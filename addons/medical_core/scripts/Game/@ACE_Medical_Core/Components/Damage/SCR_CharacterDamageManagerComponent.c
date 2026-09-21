@@ -117,8 +117,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 		
 		// Check if epinephrine is in the system already
-		array<ref SCR_PersistentDamageEffect> effects = GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
-		if (!effects.IsEmpty())
+		if (FindDamageEffectOfType(ACE_Medical_EpinephrineDamageEffect))
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;

@@ -1,9 +1,5 @@
 MetaFileClass {
-<<<<<<<< HEAD:addons/chopping/Prefabs/Items/Core/ETool_base.et.meta
- Name "{44FC3E59DFA001A4}Prefabs/Items/Core/ETool_base.et"
-========
- Name "{8554ED3F088BADA6}Prefabs/Items/Core/wirecutters.et"
->>>>>>>> Dax5150-wirecutter:addons/wirecutters/Prefabs/Items/Core/Wirecutters/wirecutters.et.meta
+ Name "{8BF398DB6CA80A3E}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_base.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

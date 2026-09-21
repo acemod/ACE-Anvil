@@ -1,0 +1,43 @@
+SCR_DestructibleEntity : "{ABE1EFC16D47A8C2}Prefabs/Structures/Core/Wall_MultiPhase_Base.et" {
+ ID "51E2F0F09703F07B"
+ components {
+  ActionsManagerComponent "{62F366C4C8AAF615}" {
+   ActionContexts {
+    UserActionContext "{62F366C4C876CE35}" {
+     UIInfo UIInfo "{62F366C4F61ED3E8}" {
+      Name "Wirecutter_UserAction"
+     }
+     ContextName "Wirecutter_UserAction"
+     Position PointInfo "{62F366C4F2B0E454}" {
+      Offset 1.013 0.4147 0
+     }
+     Radius 1.5
+     Height 0
+     FilterActionsUsingCache 0
+    }
+   }
+   additionalActions {
+    Wirecutter_UserAction "{62F366C4927C2E2E}" {
+     ParentContextList {
+      "Wirecutter_UserAction"
+     }
+     UIInfo SCR_ActionUIInfo "{62F3661749E2854F}" {
+      Name "Cut"
+      m_sIconName "barrel"
+     }
+     ActionTitle "Wirecutter_UserAction"
+     VisibilityRange 1.5
+     Duration 6
+     m_AudioSourceConfiguration SCR_AudioSourceConfiguration "{62F7042158164306}" {
+      m_sSoundProject "{9CA570A42444F06A}Sounds/fence_rattle.acp"
+      m_sSoundEventName "SOUND_FENCE_RATTLE"
+      m_eFlags 5
+     }
+     m_vSoundOffset 2 0 0
+    }
+   }
+  }
+  RplComponent "{62F3658A44A4BD3A}" {
+  }
+ }
+}

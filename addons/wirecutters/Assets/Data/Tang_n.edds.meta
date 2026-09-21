@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{4D8024798567557F}Assets/Tang_n.edds"
+ Configurations {
+  JPGResourceClass PC : "{CEA87F769FD618D2}Configs/System/ResourceTypes/PC/TextureNormalMap.conf" {
+  }
+  JPGResourceClass XBOX_ONE : "{5B84FAB5D39FB8AA}Configs/System/ResourceTypes/XBOX_ONE/TextureNormalMap.conf" {
+  }
+  JPGResourceClass XBOX_SERIES : "{1B409AA3788B720F}Configs/System/ResourceTypes/XBOX_SERIES/TextureNormalMap.conf" {
+  }
+  JPGResourceClass PS4 : "{9533DFD9EDDCEDD2}Configs/System/ResourceTypes/PS4/TextureNormalMap.conf" {
+  }
+  JPGResourceClass PS5 : "{5CEA2418C9F889F8}configs/ResourceTypes/PS5/TextureTerrainNormal.conf" {
+  }
+  JPGResourceClass HEADLESS : "{FC84ABE4B37D0DA0}Configs/System/ResourceTypes/HEADLESS/TextureNormalMap.conf" {
+  }
+ }
+}

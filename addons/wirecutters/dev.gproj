@@ -1,9 +1,9 @@
 GameProject {
- ID "ACE_Wirecutter"
- GUID "6A6B48909EF2D37C"
- TITLE "ACE Wirecutter"
+ ID "ACE_Wirecutters_Dev"
+ GUID "6A6B47EE931B1A21"
+ TITLE "ACE Wirecutters Dev"
  Dependencies {
-  "58D0FB3206B6F859" "60C4CE4888FF4621"
+  "58D0FB3206B6F859" "65AD7D0D9941A380"
  }
  Configurations {
   GameProjectConfig PC {

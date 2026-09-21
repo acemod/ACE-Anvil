@@ -19,7 +19,7 @@ ACE_ActionsHelperEntity {
     }
    }
    additionalActions {
-    ACE_Chopping_UserAction "{611A26EB65D67BCE}" {
+    ACE_DestroyEntityUserAction "{611A26EB65D67BCE}" {
      ParentContextList {
       "default"
      }
@@ -31,4 +31,5 @@ ACE_ActionsHelperEntity {
    }
   }
  }
+ Flags 0 0x3
 }

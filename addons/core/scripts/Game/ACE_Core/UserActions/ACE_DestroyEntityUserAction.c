@@ -1,8 +1,9 @@
 //------------------------------------------------------------------------------------------------
-//! Tree deletion user action
-class ACE_Chopping_UserAction : ACE_ShovelUserAction
+//! User action for destrying entities like a tree
+class ACE_DestroyEntityUserAction : ACE_ContinousGadgetUserAction
 {
-	protected static const int DELETE_FALLING_TREE_DELAY_MS = 3000;
+	[Attribute(defvalue: "3000", desc: "How many miliseconds after destruction should the entity get deleted.")]
+	protected int m_iDeletionDelayMS;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Request deletion of the tree
@@ -12,11 +13,11 @@ class ACE_Chopping_UserAction : ACE_ShovelUserAction
 		if (!userCtrl)
 			return;
 		
-		ACE_Chopping_HelperEntity helper = ACE_Chopping_HelperEntity.Cast(GetOwner());
+		ACE_ActionsHelperEntity helper = ACE_ActionsHelperEntity.Cast(GetOwner());
 		if (!helper)
 			return;
 		
-		Tree plant = Tree.Cast(helper.GetAssociatedPlant());
+		SCR_DestructibleEntity plant = SCR_DestructibleEntity.Cast(helper.GetAssociatedEntity());
 		if (!plant)
 			return;
 		
@@ -27,7 +28,7 @@ class ACE_Chopping_UserAction : ACE_ShovelUserAction
 		{
 			vector hitPosDirNorm[3];
 			hitPosDirNorm[0] = pOwnerEntity.GetOrigin();
-			userCtrl.ACE_RequestDestroyEntity(plant, hitPosDirNorm, DELETE_FALLING_TREE_DELAY_MS);
+			userCtrl.ACE_RequestDestroyEntity(plant, hitPosDirNorm, m_iDeletionDelayMS);
 		}
 		else
 		{

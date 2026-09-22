@@ -9,9 +9,10 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	protected float m_fEntityDetectionRadius;
 	
 	protected ref array<ref ACE_ActionsHelperEntityGroupContext> m_aContexts = {};
-	protected ref array<ref ACE_ActionsHelperEntityConfig> m_aDeletedConfigs = {};
+	protected ref array<ACE_ActionsHelperEntityComponent> m_aDeletedComponents = {};
 	protected bool m_bUpdating = false;
 	protected float m_fUpdateTimer;
+	protected SCR_PlayerController m_LocalPlayerController;
 	
 	//------------------------------------------------------------------------------------------------
 	static ACE_ActionsHelperEntitySystem GetInstance(ChimeraWorld world)
@@ -32,6 +33,99 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	override protected void OnInit()
 	{
 		Enable(!m_aContexts.IsEmpty());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Register local player controller for detecting change in controlled entity
+	void Register(notnull SCR_PlayerController playerController)
+	{
+		if (m_LocalPlayerController)
+			return;
+		
+		m_LocalPlayerController = playerController;
+		
+		IEntity controlledEntity = m_LocalPlayerController.GetControlledEntity();
+		if (controlledEntity)
+			OnControlledEntityChanged(null, controlledEntity);
+		
+		m_LocalPlayerController.m_OnControlledEntityChanged.Insert(OnControlledEntityChanged);
+		
+		SCR_EditorManagerEntity editorManagerEntity = SCR_EditorManagerEntity.GetInstance();
+		if (!editorManagerEntity)
+			return;
+
+		editorManagerEntity.GetOnOpened().Insert(OnEditorOpened);
+		editorManagerEntity.GetOnClosed().Insert(OnEditorClosed);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnControlledEntityChanged(IEntity from, IEntity to)
+	{
+		ChimeraCharacter fromChar = ChimeraCharacter.Cast(from);
+		if (fromChar)
+			Unregister(fromChar);
+		
+		ChimeraCharacter toChar = ChimeraCharacter.Cast(to);
+		if (toChar)
+			Register(toChar);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnEditorOpened()
+	{
+		m_LocalPlayerController.m_OnControlledEntityChanged.Remove(OnControlledEntityChanged);
+		
+		ChimeraCharacter char = ChimeraCharacter.Cast(m_LocalPlayerController.GetControlledEntity());
+		if (char)
+			Unregister(char);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void OnEditorClosed()
+	{
+		ChimeraCharacter char = ChimeraCharacter.Cast(m_LocalPlayerController.GetControlledEntity());
+		if (char)
+			Register(char);
+		
+		m_LocalPlayerController.m_OnControlledEntityChanged.Insert(OnControlledEntityChanged);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Start monitoring character for changes in held gadget
+	protected void Register(ChimeraCharacter char)
+	{
+		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
+		if (charController)
+			charController.m_OnGadgetStateChangedInvoker.Insert(OnGadgetStateChanged);
+		
+		SCR_GadgetManagerComponent gadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(char);
+		if (gadgetManager && gadgetManager.GetHeldGadget())
+			OnGadgetStateChanged(gadgetManager.GetHeldGadget(), true, false);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void Unregister(ChimeraCharacter char)
+	{
+		SCR_GadgetManagerComponent gadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(char);
+		if (gadgetManager && gadgetManager.GetHeldGadget())
+			OnGadgetStateChanged(gadgetManager.GetHeldGadget(), false, false);
+		
+		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(char.GetCharacterController());
+		if (charController)
+			charController.m_OnGadgetStateChangedInvoker.Remove(OnGadgetStateChanged);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected void OnGadgetStateChanged(IEntity gadget, bool isInHand, bool isOnGround)
+	{
+		ACE_ActionsHelperEntityComponent component = ACE_ActionsHelperEntityComponent.Cast(gadget.FindComponent(ACE_ActionsHelperEntityComponent));
+		if (!component)
+			return;
+
+		if (isInHand)
+			Register(component);
+		else
+			Unregister(component);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -86,12 +180,12 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 		
 		m_bUpdating = false;
 		
-		foreach (ACE_ActionsHelperEntityConfig config: m_aDeletedConfigs)
+		foreach (ACE_ActionsHelperEntityComponent component : m_aDeletedComponents)
 		{
-			Unregister(config);
+			Unregister(component);
 		}
 		
-		m_aDeletedConfigs.Clear();
+		m_aDeletedComponents.Clear();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -110,26 +204,34 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Register(ACE_ActionsHelperEntityConfig config)
+	void Register(ACE_ActionsHelperEntityComponent component)
 	{
-		foreach (ACE_ActionsHelperEntityGroupContext context : m_aContexts)
+		ACE_ActionsHelperEntityComponentClass data = ACE_ActionsHelperEntityComponentClass.Cast(component.GetComponentData(component.GetOwner()));
+		if (!data)
+			return;
+		
+		foreach (ACE_ActionsHelperEntityConfig config : data.GetConfigs())
 		{
-			if (context.m_Config == config)
-				return;
+			m_aContexts.Insert(new ACE_ActionsHelperEntityGroupContext(config));
 		}
 		
-		m_aContexts.Insert(new ACE_ActionsHelperEntityGroupContext(config));
 		Enable(true);
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void Unregister(ACE_ActionsHelperEntityConfig config)
+	void Unregister(ACE_ActionsHelperEntityComponent component)
 	{
 		if (m_bUpdating)
 		{
-			m_aDeletedConfigs.Insert(config);
+			m_aDeletedComponents.Insert(component);
+			return;
 		}
-		else
+
+		ACE_ActionsHelperEntityComponentClass data = ACE_ActionsHelperEntityComponentClass.Cast(component.GetComponentData(component.GetOwner()));
+		if (!data)
+			return;
+			
+		foreach (ACE_ActionsHelperEntityConfig config : data.GetConfigs())
 		{
 			for (int i = m_aContexts.Count() - 1; i >= 0; i--)
 			{
@@ -144,10 +246,10 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 				m_aContexts.Remove(i);
 				break;
 			}
-			
-			if (m_aContexts.IsEmpty())
-				Enable(false);
 		}
+		
+		if (m_aContexts.IsEmpty())
+			Enable(false);
 	}
 }
 

@@ -4,15 +4,13 @@ class ACE_ActionsHelperEntityComponentClass : ScriptComponentClass
 	[Attribute(desc: "Helper entities that should be spawned when the gadget is active.")]
 	protected ref array<ref ACE_ActionsHelperEntityConfig> m_Configs;
 	
-	protected bool m_bInitDone = false;
-	
 	//------------------------------------------------------------------------------------------------
-	array<ref ACE_ActionsHelperEntityConfig> GetConfigs()
+	void ACE_ActionsHelperEntityComponentClass(IEntityComponentSource componentSource, IEntitySource parentSource, IEntitySource prefabSource)
 	{
-		if (!m_bInitDone)
-			OnInit();
+		if (!GetGame().InPlayMode())
+			return;
 		
-		return m_Configs;
+		GetGame().GetCallqueue().Call(OnInit);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -23,90 +21,25 @@ class ACE_ActionsHelperEntityComponentClass : ScriptComponentClass
 			config.Init();
 		}
 		
-		m_bInitDone = true;
+		ACE_ActionsHelperEntitySystem system = ACE_ActionsHelperEntitySystem.GetInstance(GetGame().GetWorld());
+		if (!system)
+			return;
+	
+		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
+		if (!playerController)
+			return;
+		
+		system.Register(playerController);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	array<ref ACE_ActionsHelperEntityConfig> GetConfigs()
+	{
+		return m_Configs;
 	}
 }
 
 //------------------------------------------------------------------------------------------------
 class ACE_ActionsHelperEntityComponent : ScriptComponent
 {
-	//------------------------------------------------------------------------------------------------
-	override protected void OnPostInit(IEntity owner)
-	{
-		SetEventMask(owner, EntityEvent.INIT);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override protected void EOnInit(IEntity owner)
-	{
-		SCR_GadgetComponent component = SCR_GadgetComponent.Cast(owner.FindComponent(SCR_GadgetComponent));
-		if (!component)
-			return;
-
-		World world = owner.GetWorld();
-		GadgetsSystem system = GadgetsSystem.Cast(world.FindSystem(GadgetsSystem));
-		if (!system)
-			return;
-		
-		system.ConnectEventFiltered(system.ACE_OnRegister, OnStart, component);
-		system.ConnectEventFiltered(system.ACE_OnUnregister, OnStop, component);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override protected void OnDelete(IEntity owner)
-	{
-		SCR_GadgetComponent component = SCR_GadgetComponent.Cast(owner.FindComponent(SCR_GadgetComponent));
-		if (!component)
-			return;
-
-		World world = owner.GetWorld();
-		GadgetsSystem system = GadgetsSystem.Cast(world.FindSystem(GadgetsSystem));
-		if (!system)
-			return;
-		
-		system.DisconnectEventFiltered(system.ACE_OnRegister, OnStart, component);
-		system.DisconnectEventFiltered(system.ACE_OnUnregister, OnStop, component);
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[ReceiverAttribute()]
-	protected void OnStart(SCR_GadgetComponent component)
-	{
-		if (component.GetCharacterOwner() != SCR_PlayerController.GetLocalControlledEntity())
-			return;
-		
-		ACE_ActionsHelperEntitySystem system = ACE_ActionsHelperEntitySystem.GetInstance(GetOwner().GetWorld());
-		if (!system)
-			return;
-		
-		ACE_ActionsHelperEntityComponentClass data = ACE_ActionsHelperEntityComponentClass.Cast(GetComponentData(GetOwner()));
-		if (!data)
-			return;
-		
-		foreach (ACE_ActionsHelperEntityConfig config : data.GetConfigs())
-		{
-			system.Register(config);
-		}
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	[ReceiverAttribute()]
-	protected void OnStop(SCR_GadgetComponent component)
-	{
-		if (component.GetCharacterOwner() != SCR_PlayerController.GetLocalControlledEntity())
-			return;
-		
-		ACE_ActionsHelperEntitySystem system = ACE_ActionsHelperEntitySystem.GetInstance(GetOwner().GetWorld());
-		if (!system)
-			return;
-		
-		ACE_ActionsHelperEntityComponentClass data = ACE_ActionsHelperEntityComponentClass.Cast(GetComponentData(GetOwner()));
-		if (!data)
-			return;
-		
-		foreach (ACE_ActionsHelperEntityConfig config : data.GetConfigs())
-		{
-			system.Unregister(config);
-		}
-	}
 }

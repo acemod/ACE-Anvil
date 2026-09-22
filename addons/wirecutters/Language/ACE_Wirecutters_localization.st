@@ -17,5 +17,13 @@ StringTable {
    Author "Kexanone"
    LastChanged "Kexanone"
   }
+  CustomStringTableItem "{6A6B7283B2E5FA03}" {
+   Id "ACE_Wirecutters-UserAction_CutWire_Name"
+   Target_en_us "Cut wire"
+   Target_de_de "Draht schneiden"
+   Modified 1785428940
+   Author "Kex"
+   LastChanged "Kex"
+  }
  }
 }

@@ -59,6 +59,7 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Update controlled character
 	protected void OnControlledEntityChanged(IEntity from, IEntity to)
 	{
 		ChimeraCharacter fromChar = ChimeraCharacter.Cast(from);
@@ -71,6 +72,7 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Disable monitoring when player opens GM
 	protected void OnEditorOpened()
 	{
 		m_LocalPlayerController.m_OnControlledEntityChanged.Remove(OnControlledEntityChanged);
@@ -81,6 +83,7 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	}
 
 	//------------------------------------------------------------------------------------------------
+	//! Renable monitoring when player closes GM
 	protected void OnEditorClosed()
 	{
 		ChimeraCharacter char = ChimeraCharacter.Cast(m_LocalPlayerController.GetControlledEntity());
@@ -104,6 +107,7 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Stop monitoring character
 	protected void Unregister(ChimeraCharacter char)
 	{
 		SCR_GadgetManagerComponent gadgetManager = SCR_GadgetManagerComponent.GetGadgetManager(char);
@@ -116,6 +120,7 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Register if held gadget has the component
 	protected void OnGadgetStateChanged(IEntity gadget, bool isInHand, bool isOnGround)
 	{
 		ACE_ActionsHelperEntityComponent component = ACE_ActionsHelperEntityComponent.Cast(gadget.FindComponent(ACE_ActionsHelperEntityComponent));
@@ -230,7 +235,7 @@ class ACE_ActionsHelperEntitySystem : GameSystem
 		ACE_ActionsHelperEntityComponentClass data = ACE_ActionsHelperEntityComponentClass.Cast(component.GetComponentData(component.GetOwner()));
 		if (!data)
 			return;
-			
+		
 		foreach (ACE_ActionsHelperEntityConfig config : data.GetConfigs())
 		{
 			for (int i = m_aContexts.Count() - 1; i >= 0; i--)

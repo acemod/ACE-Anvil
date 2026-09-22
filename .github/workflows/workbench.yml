@@ -1,0 +1,116 @@
+name: Workbench
+
+on:
+  workflow_call:
+    inputs:
+      type:
+        required: true
+        type: string
+      game_appid:
+        required: true
+        type: string
+      tools_appid:
+        required: true
+        type: string
+
+env:
+  WORKBENCH_COMMON_ARGS: -enableWARP -exitAfterInit -noThrow -noSound -scriptAuthorizeAll -silentCrashReport -VMErrorMode fatal
+
+jobs:
+  workbench:
+    name: Workbench
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          path: ACE-Anvil
+
+      - name: Checkout pull request
+        uses: actions/checkout@v4
+        if: ${{ github.event_name == 'pull_request_target' }}
+        with:
+          path: ACE-Anvil-PullRequest
+          ref: refs/pull/${{ github.event.number }}/merge
+
+      - name: Replace addons with pull request addons
+        if: ${{ github.event_name == 'pull_request_target' }}
+        run: |
+          rm -r ACE-Anvil\addons\
+          xcopy /e /h /q ACE-Anvil-PullRequest\addons ACE-Anvil\addons\
+
+      - name: Install DepotDownloader
+        run: |
+          $url = 'https://github.com/SteamRE/DepotDownloader/releases/download/DepotDownloader_3.0.0/DepotDownloader-windows-x64.zip'
+          Invoke-RestMethod -Uri $url -OutFile DepotDownloader.zip
+          Expand-Archive DepotDownloader.zip -DestinationPath c:\DepotDownloader -Force
+          Remove-Item DepotDownloader.zip
+
+      - name: Install Arma Reforger
+        run: c:\DepotDownloader\DepotDownloader.exe -dir c:\reforger -app ${{ inputs.game_appid }} -username "${{ secrets.STEAM_USERNAME }}" -password "${{ secrets.STEAM_PASSWORD }}"
+
+      - name: Install Arma Reforger Tools
+        run: c:\DepotDownloader\DepotDownloader.exe -dir C:\tools -app ${{ inputs.tools_appid }} -username "${{ secrets.STEAM_USERNAME }}" -password "${{ secrets.STEAM_PASSWORD }}"
+
+      - name: Steam DLL
+        run: |
+          $url = '${{ secrets.STEAM_API64_DLL_URL }}'
+          Invoke-RestMethod -Uri $url -OutFile c:/tools/Workbench/steam_api64.dll
+
+      - name: Validate Scripts
+        shell: pwsh
+        run: |
+          $AddonsDir = "C:/reforger/addons/,${{ github.workspace }}/ACE-Anvil/addons/"
+          $AddonGuid = "60C4E0B49618CC62"
+          $proc = Start-Process -PassThru -Wait -FilePath "c:/tools/Workbench/ArmaReforgerWorkbenchSteamDiag.exe" -ArgumentList "-wbSilent $env:WORKBENCH_COMMON_ARGS -wbModule=ScriptEditor -addonsDir ""$AddonsDir"" -addons ""$AddonGuid"" -validate"
+
+          if ($proc.ExitCode -ne 0) {
+            echo "Script validation failed"
+            exit $proc.ExitCode
+          }
+
+      - name: Pack Addons
+        shell: pwsh
+        run: |
+          $Failure = $false
+          $AddonFiles = Get-ChildItem -Path "ACE-Anvil/addons" -Filter "addon.gproj" -Recurse -ErrorAction SilentlyContinue -Force
+
+          foreach ($AddonFile in $AddonFiles)
+          {
+            $AddonFileContent = Get-Content $AddonFile.FullName
+            $AddonGuid = ($AddonFileContent | Select-String " GUID """ | Select-Object -First 1 | Out-String).Trim().Trim("GUID ").Trim('"')
+            $AddonId = ($AddonFileContent | Select-String " ID """ | Select-Object -First 1 | Out-String).Trim().Trim("ID ").Trim('"')
+            echo "🔨Building $AddonId"
+
+            $AddonsDir = "C:/reforger/addons/,${{ github.workspace }}/ACE-Anvil/addons/"
+            $ProfileDir = "./profile/$AddonId"
+            $PackAddonDir = "./pack/$AddonId"
+
+            $proc = Start-Process -PassThru -Wait -FilePath "c:/tools/Workbench/ArmaReforgerWorkbenchSteamDiag.exe" -ArgumentList "$env:WORKBENCH_COMMON_ARGS -profile ""$ProfileDir"" -wbModule=ResourceManager -addonsDir ""$AddonsDir"" -addons ""$AddonGuid"" -packAddon -packAddonDir ""$PackAddonDir"""
+            if (Test-Path -Path $PackAddonDir && $proc.ExitCode -eq 0) {
+              echo "✅ Successfully built $AddonId"
+            } else {
+              echo "❌ Failed to build $AddonId"
+              $Failure = $true
+            }
+          }
+
+          if ($Failure) {
+            exit 1
+          }
+
+      - name: Archive profile
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ inputs.type }} Profile
+          path: profile
+          if-no-files-found: error
+
+      - name: Archive pack
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ inputs.type }} Pack
+          path: pack
+          if-no-files-found: error

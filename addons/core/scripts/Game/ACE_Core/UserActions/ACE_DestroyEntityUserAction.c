@@ -17,22 +17,22 @@ class ACE_DestroyEntityUserAction : ACE_ContinousGadgetUserAction
 		if (!helper)
 			return;
 		
-		SCR_DestructibleEntity plant = SCR_DestructibleEntity.Cast(helper.GetAssociatedEntity());
-		if (!plant)
+		SCR_DestructibleEntity entity = SCR_DestructibleEntity.Cast(helper.GetAssociatedEntity());
+		if (!entity)
 			return;
 		
 		bool enabled;
-		BaseContainer container = plant.GetPrefabData().GetPrefab();
+		BaseContainer container = entity.GetPrefabData().GetPrefab();
 		
 		if (container && container.Get("Enabled", enabled) && enabled)
 		{
 			vector hitPosDirNorm[3];
 			hitPosDirNorm[0] = pOwnerEntity.GetOrigin();
-			userCtrl.ACE_RequestDestroyEntity(plant, hitPosDirNorm, m_iDeletionDelayMS);
+			userCtrl.ACE_RequestDestroyEntity(entity, hitPosDirNorm, m_iDeletionDelayMS);
 		}
 		else
 		{
-			userCtrl.ACE_RequestDeleteEntity(plant);
+			userCtrl.ACE_RequestDeleteEntity(entity);
 		}
 		
 		delete helper;

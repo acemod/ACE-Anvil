@@ -54,7 +54,7 @@ class ACE_ActionsHelperEntityConfig
 		EntitySpawnParams params = new EntitySpawnParams();
 		params.TransformMode = ETransformMode.WORLD;
 		entity.GetWorldTransform(params.Transform);
-		params.Transform[3] = params.Transform[3] + m_vOffset;
+		params.Transform[3] = params.Transform[3] + entity.VectorToParent(m_vOffset);
 		
 		ACE_ActionsHelperEntity helper = ACE_ActionsHelperEntity.Cast(GetGame().SpawnEntityPrefabLocal(res, entity.GetWorld(), params));
 		if (!helper)

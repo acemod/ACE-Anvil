@@ -9,6 +9,7 @@ GenericEntity : "{8D7E4D2E88A3040C}Prefabs/Items/Core/ACE_Wirecutters_Base.et" {
     }
     ItemPhysAttributes ItemPhysicalAttributes "{62F35B4168194640}" {
      Weight 0.35
+     SizeSetupStrategy Manual
      ItemDimensions 5 5 5
      ItemVolume 100
     }

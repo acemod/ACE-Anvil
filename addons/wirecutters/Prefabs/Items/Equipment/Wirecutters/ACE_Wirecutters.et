@@ -2,16 +2,24 @@ GenericEntity : "{8D7E4D2E88A3040C}Prefabs/Items/Core/ACE_Wirecutters_Base.et" {
  ID "62F35B4168194668"
  components {
   InventoryItemComponent "{5222EB4D0C73006B}" {
-   Attributes SCR_ItemAttributeCollection "{62F35B4168194675}" {
-    ItemDisplayName SCR_InventoryUIInfo "{62F35B4168194649}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
      Name "#ACE_Wirecutters-Item_Wirecutters_Name"
      Description "#ACE_Wirecutters-Item_Wirecutters_Description"
     }
-    ItemPhysAttributes ItemPhysicalAttributes "{62F35B4168194640}" {
+    ItemPhysAttributes ItemPhysicalAttributes "{6A6B6430DD6D7B59}" {
      Weight 0.35
      SizeSetupStrategy Manual
      ItemDimensions 5 5 5
      ItemVolume 100
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{6A6B6AC1A0C99A54}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{62F35B4107169A7E}" {
+       AnimGraph "{BD094B2699A7F236}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters.agr"
+       AnimInstance "{50631EFD85AEA0D8}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters_player.asi"
+      }
+     }
     }
     CustomAttributes {
      PreviewRenderAttributes "{62F35B41089C2A0A}" {
@@ -23,6 +31,10 @@ GenericEntity : "{8D7E4D2E88A3040C}Prefabs/Items/Core/ACE_Wirecutters_Base.et" {
   }
   MeshObject "{62F35B411275726A}" {
    Object "{EC9DD5D7E83DF8E9}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Wirecutters.xob"
+  }
+  BaseItemAnimationComponent "{6A6D75C2E2EFAA1F}" {
+   AnimGraph "{BD094B2699A7F236}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters.agr"
+   AnimInstance "{1C32B94C06E85D15}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters_item.asi"
   }
  }
 }

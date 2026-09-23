@@ -1,6 +1,11 @@
 GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
  ID "508AB2013EEE1E00"
  components {
+  SoundComponent "{6A6E0938BFA0FCA2}" {
+   Filenames {
+    "{9CA570A42444F06A}Sounds/Items/Equipment/Wirecutters/ACE_Wirecutters.acp"
+   }
+  }
   ACE_ActionsHelperEntityComponent "{6A6B7286D1C58CC1}" {
    m_Configs {
     ACE_ActionsHelperEntityConfig "{6A6B7286D6918DC2}" {
@@ -29,6 +34,8 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
     ItemPhysAttributes ItemPhysicalAttributes "{6A6B6430DD6D7B59}" {
     }
     ItemAnimationAttributes ItemAnimationAttributes "{6A6B6AC1A0C99A54}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
      AnimationAttachments {
       AnimationAttachmentInfo "{62F35B4107169A7E}" {
        AnimGraph "{82906ACD75DF8523}Assets/Items/Equipment/workspaces/Flashlight_MX991.agr"
@@ -36,8 +43,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
        BindingName "Gadget"
       }
      }
-     HandAdditiveRotation 270 16 98.1
-     HandAdditiveTranslation -0.005 0.12 0
     }
     CustomAttributes {
      PreviewRenderAttributes "{62F35B41089C2A0A}" {
@@ -53,6 +58,8 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   SCR_WirecuttersComponent "{62F370D8F0288483}" {
    m_eAnimVariable ADRIANOV
    m_eUseMask FROM_ACTION
+  }
+  BaseItemAnimationComponent "{6A6D75C2E2EFAA1F}" {
   }
  }
 }

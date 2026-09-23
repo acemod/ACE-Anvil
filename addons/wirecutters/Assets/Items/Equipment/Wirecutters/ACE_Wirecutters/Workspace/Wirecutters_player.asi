@@ -1,0 +1,29 @@
+AnimSetInstanceSource {
+ Template "{AFFB2D26AE6226C5}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Gadget.Cro.Idle" {
+   Resource "{162D0769529BFF76}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Erc.Out" {
+   Resource "{463D3883CFF0BC2B}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_cut_out.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Erc.Idle" {
+   Resource "{849A0B7EC4DB8EA4}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_erc_wirecutters_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Erc.Loop" {
+   Resource "{0EB8AF17823CC77E}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_cut_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Erc.In" {
+   Resource "{F2C134FDDBC40135}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_cut_in.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Cro.Loop" {
+   Resource "{0EB8AF17823CC77E}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_cut_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Cro.Out" {
+   Resource "{463D3883CFF0BC2B}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_cut_out.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Cro.In" {
+   Resource "{F2C134FDDBC40135}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_cut_in.anm"
+  }
+ }
+}

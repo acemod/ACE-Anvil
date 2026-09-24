@@ -1,0 +1,153 @@
+AudioClass {
+ sounds {
+  SoundClass "7177" {
+   id 7177
+   name "ACE_WIRECUTTERS_SOUND_CUT"
+   version 5
+   tl -109 -312.333
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "5138:65" {
+       id 5138
+       port 65
+      }
+     }
+    }
+   }
+   outState 8203
+   outStatePort 79879
+  }
+ }
+ mixers {
+  MixerClass "8203" {
+   id 8203
+   name "OutputState 8"
+   version 4
+   tl 108 -309
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass "con:79879" {
+     id 79879
+     links {
+      ConnectionClass "7177:65" {
+       id 7177
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    8192 0
+   }
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb_OBSOLETE" "VON_Reverb_Small" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin" "VON_Reverb_Medium" "VON_Reverb_Large"
+   }
+  }
+ }
+ shaders {
+  ShaderClass "5138" {
+   id 5138
+   name "Shader 5"
+   version 5
+   tl -312 -312.333
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "6172:65" {
+       id 6172
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "3091:65" {
+       id 3091
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "4117:65" {
+       id 4117
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "1028:65" {
+       id 1028
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    23 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass "3091" {
+   id 3091
+   name "Amplitude 3"
+   version 5
+   tl -559 -477.333
+   curve Linear
+   outerRange 14
+   EnableDirectivity 1
+   DirectivityCurve {
+    CurvePoint "1" {
+     X 0.01402
+     Y 0.01159
+    }
+    CurvePoint "2" {
+     X 0.2952
+     Y 1.0398
+    }
+   }
+  }
+ }
+ frequency {
+  FrequencyClass "4117" {
+   id 4117
+   name "Frequency 4"
+   version 5
+   tl -558 -400.333
+   enableDirectivity 1
+   directivityFactor 0.55
+  }
+ }
+ banks_local {
+  BankLocalClass "1028" {
+   id 1028
+   name "Bank 1"
+   version 7
+   tl -744 -330.333
+   "Pitch variance" 1.5
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{9489999678495B89}Sounds/Items/Equipment/Wirecutters/Samples/ACE_WireCutter_Cut.wav"
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass "6172" {
+   id 6172
+   name "Spatiality 6"
+   version 5
+   tl -556 -547.333
+   spatialFactor 1
+  }
+ }
+ version 2
+}

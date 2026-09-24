@@ -25,5 +25,17 @@ AnimSetInstanceSource {
   AnimSetInstanceSource_Line "Gadget.Cro.In" {
    Resource "{F2C134FDDBC40135}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_cro_wirecutters_cut_in.anm"
   }
+  AnimSetInstanceSource_Line "Gadget.Pne.Idle" {
+   Resource "{35385C25CAE03DB0}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_pne_wirecutters_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Pne.In" {
+   Resource "{74709C25D9DEA632}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_pne_wirecutters_cut_in.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Pne.Loop" {
+   Resource "{2DADF45B1A4705B8}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_pne_wirecutters_cut_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Pne.Out" {
+   Resource "{CDBDA0D3F5F34E1F}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_pne_wirecutters_cut_out.anm"
+  }
  }
 }

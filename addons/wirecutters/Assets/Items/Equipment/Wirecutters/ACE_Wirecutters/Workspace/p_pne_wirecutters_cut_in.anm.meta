@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{74709C25D9DEA632}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/p_pne_wirecutters_cut_in.anm"
+ Configurations {
+  TXAResourceClass PC {
+   SourcePath "Character_AnimationRig_Wirecutters.blend"
+   SourceProfile "ACE_UpperbodyADD_LArmABS_LHandABS"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -24,7 +24,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      m_vOffset 2 1.25 0
     }
     ACE_ActionsHelperEntityConfig "{6A6C23EA447E9FCA}" {
-     m_sRequiredBasePrefabName "{923AD38CFC14EF3C}Prefabs/Structures/Walls/Net/NetFence_04/NetFence_04_base.et"
+     m_sRequiredBasePrefabName "{C289F5D866F0E46E}Prefabs/Structures/Walls/BarbedWire/BarbedTape_01/BarbedTape_01_base.et"
      m_sHelperPrefabName "{C9F7149E1C9E4C4F}Prefabs/Helpers/ACE_Wirecutters_FenceHelper.et"
     }
    }

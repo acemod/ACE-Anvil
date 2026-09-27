@@ -50,6 +50,25 @@ class ACE_Medical_MedicationComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	void StopInfusionsForDrug(ACE_Medical_EDrugType drug)
+	{
+		int idx = m_aDrugs.Find(drug);
+		if (idx < 0)
+			return;
+		
+		array<ref ACE_Medical_Dose> doses = m_aDoses[idx];
+		for (int i = doses.Count() - 1; i >= 0; i--)
+		{
+			ACE_Medical_Infusion infusion = ACE_Medical_Infusion.Cast(doses[i]);
+			if (!infusion)
+				continue;
+			
+			infusion.Stop();
+			infusion.ForceExpire();
+		}
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void AddLogEntry(string message, int authorID = -1)
 	{
 		float timeOfDay = 24 * GetGame().GetClock().GetTimeOfDay();

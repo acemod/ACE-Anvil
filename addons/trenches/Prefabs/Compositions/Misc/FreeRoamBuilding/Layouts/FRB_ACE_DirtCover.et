@@ -8,6 +8,13 @@ GenericEntity : "{BB1B3769EB8C290D}Prefabs/Compositions/Misc/FreeRoamBuilding/Co
     }
    }
   }
+  ActionsManagerComponent "{5D6CA46D33CBCC29}" {
+   additionalActions {
+    SCR_CampaignBuildingDisassemblyUserAction "{5D8E8D19F09C8CCA}" {
+     Duration 2.5
+    }
+   }
+  }
  }
  coords 1325.453 39.01 2756.153
 }

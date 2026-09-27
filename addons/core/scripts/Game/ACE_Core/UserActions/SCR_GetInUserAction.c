@@ -17,8 +17,26 @@ modded class SCR_GetInUserAction : SCR_CompartmentUserAction
 		{
 			SetCannotPerformReason("#ACE-UserAction_Carrying");
 			return false;
-		};
+		}
 		
 		return super.CanBePerformedScript(user);
-	}	
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Hide action when character is performing an loitering emote
+	override bool CanBeShownScript(IEntity user)
+	{
+		if (!super.CanBeShownScript(user))
+			return false;
+
+		SCR_ChimeraCharacter userChar = SCR_ChimeraCharacter.Cast(user);
+		if (!userChar)
+			return false;
+		
+		SCR_CharacterControllerComponent userCharController = SCR_CharacterControllerComponent.Cast(userChar.GetCharacterController());
+		if (!userCharController || userCharController.IsLoitering())
+			return false;
+		
+		return true;
+	}		
 }

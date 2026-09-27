@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{A5C6D1F5CA300DBC}AI/BehaviorTrees/Chimera/Soldier/ACE_Medical_MedicHeal.bt"
+ Configurations {
+  BehaviorTreeResourceClass PC {
+  }
+  BehaviorTreeResourceClass XBOX_ONE : PC {
+  }
+  BehaviorTreeResourceClass XBOX_SERIES : PC {
+  }
+  BehaviorTreeResourceClass PS4 : PC {
+  }
+  BehaviorTreeResourceClass PS5 : PC {
+  }
+  BehaviorTreeResourceClass HEADLESS : PC {
+  }
+ }
+}

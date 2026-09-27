@@ -10,4 +10,7 @@ class ACE_Medical_Core_Settings : ACE_ModSettings
 
 	[Attribute(defvalue: "0.33", desc: "Can only apply epinephrine when patient has at least this health (ignored in advanced medication).", uiwidget: UIWidgets.Slider, params: "0 1")]
 	float m_fMinHealthScaledForEpinephrine;
+	
+	[Attribute(defvalue: "false", desc: "Whether players can never die")]
+	bool m_bPlayerCannotDie;
 }

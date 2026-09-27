@@ -1,0 +1,8 @@
+GenericEntity : "{EF645050361A6674}Prefabs/Props/Core/ACE_Medical_LitterBase.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  MeshObject "{5872F0EB7FA40561}" {
+   Object "{29905640C02134F8}Assets/Items/Medicine/MorphineInjection_01/MorphineInjection_01_trash.xob"
+  }
+ }
+}

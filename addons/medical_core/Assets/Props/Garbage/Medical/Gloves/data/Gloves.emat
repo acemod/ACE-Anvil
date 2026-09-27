@@ -1,0 +1,7 @@
+MatPBRBasic {
+ Diffuse 0 0.251 1 1
+ EmissiveLV 12.748
+ Specular 0 0.251 1 1
+ BCRMap "{221C565C1A5A4033}Assets/Props/Garbage/Medical/Gloves/data/Gloves_BCR.edds"
+ NMOMap "{528F93530F5E7299}Assets/Props/Garbage/Medical/Gloves/data/Gloves_NMO.edds"
+}

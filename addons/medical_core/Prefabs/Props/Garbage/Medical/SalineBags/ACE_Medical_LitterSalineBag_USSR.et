@@ -1,0 +1,8 @@
+GenericEntity : "{EF645050361A6674}Prefabs/Props/Core/ACE_Medical_LitterBase.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  MeshObject "{5872F0EB7FA40561}" {
+   Object "{866D94F7C0959A61}Assets/Items/Medicine/SalineBag_01/SalineBag_USSR_01/SalineBag_USSR_01_used.xob"
+  }
+ }
+}

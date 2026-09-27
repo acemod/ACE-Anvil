@@ -1,0 +1,9 @@
+FrameWidgetClass : "{DD15734EB89D74E2}UI/layouts/Map/MapMarkerBase.layout" {
+ components {
+  SCR_MapMarkerWidgetComponent "{5D5280F6FAEE865B}" {
+   Enabled 0
+  }
+  ACE_Finger_MapPointerWidgetComponent "{69C808C9C9B8EB66}" {
+  }
+ }
+}

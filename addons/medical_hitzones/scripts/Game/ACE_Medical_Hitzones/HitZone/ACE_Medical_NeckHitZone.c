@@ -15,6 +15,9 @@ modded class ACE_Medical_NeckHitZone : SCR_CharacterHitZone
 			return;
 		
 		charDamageManager.AddBleedingEffectOnHitZone(this);
-		charDamageManager.GetResilienceHitZone().SetHealthScaled(0);
+		
+		ACE_Medical_Hitzones_Settings settings = ACE_SettingsHelperT<ACE_Medical_Hitzones_Settings>.GetModSettings();
+		if (settings && settings.m_bInstantUnconOnMassiveBleeding)
+			GetGame().GetCallqueue().Call(charDamageManager.GetResilienceHitZone().SetHealthScaled, 0);
 	}
 }

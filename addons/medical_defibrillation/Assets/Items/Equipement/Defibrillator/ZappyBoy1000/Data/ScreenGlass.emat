@@ -1,0 +1,7 @@
+MatPBRBasicGlass : "{7331730035B4315E}Assets/Vehicles/Helicopters/UH1H/Data/UH1_Glass_Green.emat" {
+ Color 0.086 0.206 0.539 1
+ DiffuseIBL 0.235 0.334 0.539 1
+ SpecularIBL 0.281 0.363 0.521 1
+ Diffuse 0.086 0.206 0.539 1
+ Specular 0.086 0.206 0.539 1
+}

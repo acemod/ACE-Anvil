@@ -1,0 +1,86 @@
+GameProject {
+ ID "ACE_Medical_Defibrillation_Dev"
+ GUID "684892630C2DFCA1"
+ TITLE "ACE Medical Defibrillation Dev"
+ Dependencies {
+  "58D0FB3206B6F859" "65AD7D4F994EA327"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   SystemModuleSettings SystemModuleSettings "{5F10A1570304557B}" {
+    DefaultConfig "{86E953538A28A98D}Configs/Systems/ChimeraSystemsConfig.conf"
+   }
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{68489263AFAE183F}" {
+      StringTableSource "{DE82B2882F49E394}Language/ACE_Medical_Defibrillation_localization.st"
+      Languages {
+       LanguageDefinition "{68489263AC1B9ACC}" {
+        Code "cs_cz"
+        StringTableRuntime "{2ED883009607422D}Language/ACE_Medical_Defibrillation_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{68489263AC1B9A71}" {
+        Code "de_de"
+        StringTableRuntime "{FBA6993385A4530D}Language/ACE_Medical_Defibrillation_localization.de_de.conf"
+       }
+       LanguageDefinition "{68489263AC1B9A6E}" {
+        Code "en_us"
+        StringTableRuntime "{A5561378EF57560C}Language/ACE_Medical_Defibrillation_localization.en_us.conf"
+       }
+       LanguageDefinition "{68489263AC1B9A42}" {
+        Code "es_es"
+        StringTableRuntime "{601A5EF101553D13}Language/ACE_Medical_Defibrillation_localization.es_es.conf"
+       }
+       LanguageDefinition "{68489263AC1B99B9}" {
+        Code "fr_fr"
+        StringTableRuntime "{DBB2ABC6E7D6DE11}Language/ACE_Medical_Defibrillation_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{68489263AC1B9997}" {
+        Code "it_it"
+        StringTableRuntime "{5BAE24F24AF45DE8}Language/ACE_Medical_Defibrillation_localization.it_it.conf"
+       }
+       LanguageDefinition "{68489263AC1B9988}" {
+        Code "ja_jp"
+        StringTableRuntime "{4BB5996074856D43}Language/ACE_Medical_Defibrillation_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{68489263AC1B99FC}" {
+        Code "ko_kr"
+        StringTableRuntime "{EB0BB1CCE7A86E7C}Language/ACE_Medical_Defibrillation_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{68489263AC1B99D8}" {
+        Code "pl_pl"
+        StringTableRuntime "{B77A17365947F200}Language/ACE_Medical_Defibrillation_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{68489263AC1B98FC}" {
+        Code "pt_br"
+        StringTableRuntime "{620D8DFA62B938BA}Language/ACE_Medical_Defibrillation_localization.pt_br.conf"
+       }
+       LanguageDefinition "{68489263AC1B98DC}" {
+        Code "ru_ru"
+        StringTableRuntime "{374C9952FFC05DCC}Language/ACE_Medical_Defibrillation_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{68489263AC1B9823}" {
+        Code "uk_ua"
+        StringTableRuntime "{BD14CCA493EEE399}Language/ACE_Medical_Defibrillation_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{68489263AC1B9819}" {
+        Code "zh_cn"
+        StringTableRuntime "{67A4A299AA4E3384}Language/ACE_Medical_Defibrillation_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

@@ -1,0 +1,9 @@
+GenericEntity : "{5C5C6EE05EE2FF1A}Prefabs/Items/Equipment/Backpacks/Backpack_ALICE_Medium_assembled.et" {
+ coords 125.45 1 129.173
+}
+GenericEntity : "{60DAD76C48BD7054}Prefabs/Items/Defibrillator/ZappyBoy1000/ACE_DefibrillatorAED.et" {
+ coords 126.182 1 128.055
+}
+SCR_ChimeraCharacter : "{C5574DAD3956486C}Prefabs/Characters/Campaign/Final/BLUFOR/US_army/Regular/Campaign_US_Player_Rifleman.et" {
+ coords 126.446 1 129.347
+}

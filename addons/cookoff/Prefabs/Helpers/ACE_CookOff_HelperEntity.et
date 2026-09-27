@@ -1,0 +1,22 @@
+ACE_CookOff_HelperEntity {
+ ID "664C169059E8ED0D"
+ components {
+  RplComponent "{664C16900E9F5093}" {
+   "Rpl State Override" Runtime
+   AutoHierarchy 1
+  }
+ }
+ coords 81.505 3.269 19.689
+ m_AudioSourceConfigBullet SCR_AudioSourceConfiguration "{664D734A2B5DD18F}" {
+  m_sSoundProject "{092D4D4212698323}Sounds/Weapons/CookOff/ACE_CookOff.acp"
+  m_sSoundEventName "SOUND_SHOT_BULLET"
+ }
+ m_AudioSourceConfigShell SCR_AudioSourceConfiguration "{664D734A283D6528}" {
+  m_sSoundProject "{092D4D4212698323}Sounds/Weapons/CookOff/ACE_CookOff.acp"
+  m_sSoundEventName "SOUND_SHOT_SHELL"
+ }
+ m_AudioSourceConfigRocket SCR_AudioSourceConfiguration "{664D734A29E08415}" {
+  m_sSoundProject "{092D4D4212698323}Sounds/Weapons/CookOff/ACE_CookOff.acp"
+  m_sSoundEventName "SOUND_SHOT_ROCKET"
+ }
+}

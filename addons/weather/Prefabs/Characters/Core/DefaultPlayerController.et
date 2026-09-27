@@ -1,0 +1,14 @@
+SCR_PlayerController {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
+   InfoDisplays {
+    ACE_Weather_WindInfoDisplay "{667B23883AA0DCAC}" {
+     m_LayoutPath "{D09C66978322D6AD}UI/layouts/HUD/Weather/ACE_WindInfo.layout"
+     m_bShowWhenCreated 0
+     m_eShow 7
+    }
+   }
+  }
+ }
+}

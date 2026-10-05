@@ -17,14 +17,11 @@ class ACE_DestroyEntityUserAction : ACE_ContinousGadgetUserAction
 		if (!helper)
 			return;
 		
-		SCR_DestructibleEntity entity = SCR_DestructibleEntity.Cast(helper.GetAssociatedEntity());
+		IEntity entity = helper.GetAssociatedEntity();
 		if (!entity)
 			return;
 		
-		bool enabled;
-		BaseContainer container = entity.GetPrefabData().GetPrefab();
-		
-		if (container && container.Get("Enabled", enabled) && enabled)
+		if (IsEntityDestructible(entity))
 		{
 			vector hitPosDirNorm[3];
 			hitPosDirNorm[0] = pOwnerEntity.GetOrigin();
@@ -36,6 +33,24 @@ class ACE_DestroyEntityUserAction : ACE_ContinousGadgetUserAction
 		}
 		
 		delete helper;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	protected bool IsEntityDestructible(IEntity entity)
+	{
+		DestructibleEntity destructible = DestructibleEntity.Cast(entity);
+		if (destructible)
+		{
+			bool enabled;
+			BaseContainer container = entity.GetPrefabData().GetPrefab();
+			return (container && container.Get("Enabled", enabled) && enabled);
+		}
+		
+		DamageManagerComponent damageManager = DamageManagerComponent.Cast(entity.FindComponent(DamageManagerComponent));
+		if (damageManager)
+			return true;
+		
+		return false;
 	}
 
 	//------------------------------------------------------------------------------------------------

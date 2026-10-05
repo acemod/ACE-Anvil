@@ -1,0 +1,24 @@
+ACE_ActionsHelperEntity {
+ ID "6A6B6C8CDE0D5F2A"
+ components {
+  MeshObject "{61122D1DB8A9E4AA}" {
+   Object "{2D84074ABE1913A3}Assets/Helpers/ACE_InteractionCube.xob"
+  }
+  RigidBody "{61122D1DB3F40486}" {
+   ModelGeometry 1
+   Static 1
+  }
+  ActionsManagerComponent "{61122D1D87E829CF}" {
+   ActionContexts {
+    UserActionContext "{6A6B6C8CDE0D5EB6}" {
+     ContextName "default"
+     Position PointInfo "{6A6B6C8CDE0D5EB4}" {
+     }
+     Radius 3
+     "Display UI At Reference Point" 1
+    }
+   }
+  }
+ }
+ Flags 0 0x3
+}

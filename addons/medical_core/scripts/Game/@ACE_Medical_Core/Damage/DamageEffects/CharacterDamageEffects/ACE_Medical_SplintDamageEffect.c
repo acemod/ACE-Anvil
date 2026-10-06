@@ -2,6 +2,7 @@
 class ACE_Medical_SplintDamageEffect: SCR_DotDamageEffect
 {
 	protected ref array<HitZone> m_aAffectedHitZones = {};
+	protected float m_fMaxHealScaled;
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnEffectAdded(SCR_ExtendedDamageManagerComponent dmgManager)
@@ -11,6 +12,8 @@ class ACE_Medical_SplintDamageEffect: SCR_DotDamageEffect
 		SCR_CharacterDamageManagerComponent charDamageManager = SCR_CharacterDamageManagerComponent.Cast(dmgManager);
 		if (!charDamageManager)
 			return;
+		
+		m_fMaxHealScaled = charDamageManager.ACE_Medical_GetSplintMaxHealScaled();
 		
 		SCR_CharacterHitZone charHitZone = SCR_CharacterHitZone.Cast(GetAffectedHitZone());
 		if (!charHitZone)
@@ -28,7 +31,7 @@ class ACE_Medical_SplintDamageEffect: SCR_DotDamageEffect
 		
 		foreach(HitZone hitZone : m_aAffectedHitZones)
 		{
-			if (hitZone.GetHealthScaled() < 0.667)
+			if (hitZone.GetHealthScaled() < m_fMaxHealScaled)
 				DealCustomDot(hitZone, damage, token, dmgManager);
 		}
 	}

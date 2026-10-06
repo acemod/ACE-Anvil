@@ -11,6 +11,9 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	[RplProp()]
 	protected float m_fACE_Medical_MinHealthScaledForEpinephrine = 0.33;
 	
+	[RplProp()]
+	protected float m_fACE_Medical_SplintMaxHealScaled = 0.666;
+	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Initialize members
 	override void OnPostInit(IEntity owner)
@@ -30,6 +33,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			m_fACE_Medical_ResilienceRegenScale = s_ACE_Medical_Core_Settings.m_fDefaultResilienceRegenScale;
 			m_fACE_Medical_ResilienceDamageScale = s_ACE_Medical_Core_Settings.m_fResilienceDamageScale;
 			m_fACE_Medical_MinHealthScaledForEpinephrine = s_ACE_Medical_Core_Settings.m_fMinHealthScaledForEpinephrine;
+			m_fACE_Medical_SplintMaxHealScaled = s_ACE_Medical_Core_Settings.m_fSplintMaxHealScaled;
 			Replication.BumpMe();
 		}
 	}
@@ -88,6 +92,12 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		return m_fACE_Medical_ResilienceDamageScale;
 	}
 
+	//------------------------------------------------------------------------------------------------
+	float ACE_Medical_GetSplintMaxHealScaled()
+	{
+		return m_fACE_Medical_SplintMaxHealScaled;
+	}
+	
 	//------------------------------------------------------------------------------------------------
 	//! Check if epinephrine can be applied to this character
 	bool ACE_Medical_CanApplyEpinephrine(out SCR_EConsumableFailReason failReason)

@@ -49,7 +49,7 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 			charCtrl.ACE_SetCarrier(null);
 		
 		if (m_bTerminateWhenReleased && !m_bHasParentTerminated)
-			m_pOwner.Terminate(EGetOutType.ANIMATED);
+			m_pOwner.Terminate();
 	}
 	
 	//------------------------------------------------------------------------------------------------

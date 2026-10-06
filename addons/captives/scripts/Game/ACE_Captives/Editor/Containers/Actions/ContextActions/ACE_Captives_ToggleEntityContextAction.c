@@ -38,7 +38,7 @@ class ACE_Captives_ToggleEntityContextAction : SCR_SelectedEntitiesContextAction
 		
 		ACE_AnimationHelperCompartment helper = ACE_AnimationHelperCompartment.Cast(char.GetParent());
 		if (helper && m_eAnimationHelperID)
-			helper.Terminate(EGetOutType.ANIMATED);
+			helper.Terminate();
 		else
 			ACE_AnimationTools.AnimateWithHelperCompartment(m_eAnimationHelperID, char);
 	}

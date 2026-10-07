@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{3130F14E13865C6E}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01_ussr.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

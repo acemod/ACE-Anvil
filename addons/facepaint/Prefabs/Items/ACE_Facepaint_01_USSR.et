@@ -1,0 +1,22 @@
+GenericEntity : "{1852DD0D0BED6182}Prefabs/Items/ACE_Facepaint_01_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ace-item-facepaint-ussr-name"
+     Description "#ace-item-facepaint-ussr-description"
+    }
+   }
+  }
+  MeshObject "{64976372EAF33CB8}" {
+   Materials {
+    MaterialAssignClass "{6698E5E819612369}" {
+     SourceMaterial "ace_camcream_01"
+     AssignedMaterial "{3130F14E13865C6E}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01_ussr.emat"
+    }
+   }
+  }
+ }
+ coords 122.555 3.005 133.766
+}

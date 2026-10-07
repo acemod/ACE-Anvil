@@ -13,7 +13,7 @@ class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override ESerializeResult Serialize(notnull Managed instance, notnull BaseSerializationSaveContext context)
+	override ESerializeResult Serialize(notnull Managed instance, notnull SaveContext context)
 	{
 		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
 		if (!manager)
@@ -38,7 +38,7 @@ class ACE_LoadtimeEntityManagerStateSerializer : ScriptedStateSerializer
 	}
 
 	//------------------------------------------------------------------------------------------------
-	override bool Deserialize(notnull Managed instance, notnull BaseSerializationLoadContext context)
+	override bool Deserialize(notnull Managed instance, notnull LoadContext context)
 	{
 		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
 		if (!manager)

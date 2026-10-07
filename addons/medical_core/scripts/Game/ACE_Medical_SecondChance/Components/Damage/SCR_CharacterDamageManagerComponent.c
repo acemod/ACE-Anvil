@@ -9,8 +9,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected static const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Friend method for SCR_CharacterHitZone and SCR_CharacterHealthHitZone
-	void ACE_Medical_OnSecondChanceGranted()
+	[Friend(ACE_Medical_SecondChanceSystem)]
+	protected void ACE_Medical_OnSecondChanceGranted()
 	{
 		// Only handle first second chance
 		if (m_bACE_Medical_WasSecondChanceGranted)

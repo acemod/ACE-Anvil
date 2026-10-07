@@ -33,7 +33,7 @@ SCR_PlayerController {
         m_sId "SelectBandage"
         m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212D9F719FA8}" {
          m_aWhitelist {
-          1 4
+          BANDAGE TOURNIQUET
          }
         }
        }
@@ -43,7 +43,7 @@ SCR_PlayerController {
         IconSetName "Saline-bag_UI"
         m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212C307419D3}" {
          m_aWhitelist {
-          3
+          SALINE
          }
         }
        }
@@ -54,7 +54,7 @@ SCR_PlayerController {
         m_sId "SelectMedication"
         m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212DB02201E2}" {
          m_aWhitelist {
-          2
+          MORPHINE
          }
         }
        }

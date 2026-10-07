@@ -1,0 +1,397 @@
+AnimSetInstanceSource "{60DCB7D6ECCF3F47}" {
+ Template "{0090D6C67F76BB44}Assets/Items/Medicine/Workspaces/Bandage_US.ast"
+ Lines {
+  AnimSetInstanceSource_Line "BandageSelf.Cro.LegL_In" {
+   Resource "{FE1FBBBF73EF2122}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_legL_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.LegL_Loop" {
+   Resource "{DF934F80C2B67C32}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_legL_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.LegL_Out" {
+   Resource "{43E7D0E4F6179E4A}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_legL_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.LegR_In" {
+   Resource "{44384F763FF8360D}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_legR_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.LegR_Loop" {
+   Resource "{DC13C7314DBF07A2}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_legR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.LegR_Out" {
+   Resource "{2F297A356241FF2E}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_legR_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.Idle" {
+   Resource "{957FD6BD12E20D3D}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_DressingUS_una_idle.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.Idle" {
+   Resource "{41EE90486A7DB070}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_DressingUS_una_idle.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.Idle" {
+   Resource "{1EFF4EED28E1FF09}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_DressingUS_una_idle.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.HeadUp_In" {
+   Resource "{F17BC90677017486}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_head_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.HeadUp_Loop" {
+   Resource "{0B86FF1929B7DE92}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_head_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.HeadUp_Out" {
+   Resource "{3BD1E113F0BB549E}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_head_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.HeadLow_In" {
+   Resource "{6C052DF4F350F9D0}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_head_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.HeadLow_Loop" {
+   Resource "{73C2AF72F52116E6}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_head_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.HeadLow_Out" {
+   Resource "{4C57C58CF7C8F04E}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_head_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.HeadUp_In" {
+   Resource "{5022E3E8F5159F79}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_head_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.HeadUp_Loop" {
+   Resource "{DF17B9EC512863DF}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_head_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.HeadUp_Out" {
+   Resource "{1A8BFA45114BE21E}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_head_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.HeadLow_In" {
+   Resource "{CE2F648A0D26B7D4}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_head_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.HeadLow_Loop" {
+   Resource "{C06FA39AD44C0888}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_head_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.HeadLow_Out" {
+   Resource "{D97F6C9A8EA3E67B}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_head_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.HeadUp_In" {
+   Resource "{0E67844889CDEB94}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_head_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.HeadUp_Loop" {
+   Resource "{8006674913B42CA6}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_head_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.HeadUp_Out" {
+   Resource "{BD6049CBF2A1F399}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_head_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.HeadLow_In" {
+   Resource "{7235B2AF536F6FBB}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_head_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.HeadLow_Loop" {
+   Resource "{F7EE24168D126758}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_head_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.HeadLow_Out" {
+   Resource "{44418FCB19AC46E6}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_head_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.TorsoLow_In" {
+   Resource "{1E7B043E0DB27DA1}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_torso_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.TorsoUp_In" {
+   Resource "{1E7B043E0DB27DA1}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_torso_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.TorsoLow_Loop" {
+   Resource "{5ACD98EE701BD820}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_torso_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.TorsoUp_Loop" {
+   Resource "{5ACD98EE701BD820}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_torso_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.TorsoLow_Out" {
+   Resource "{C7DD47B01DD64376}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_torso_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.TorsoUp_Out" {
+   Resource "{C7DD47B01DD64376}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_torso_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.TorsoUp_In" {
+   Resource "{3F211F68EC42CB21}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_torso_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.TorsoUp_Loop" {
+   Resource "{C87A94F9E65BA9F2}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_torso_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.TorsoUp_Out" {
+   Resource "{134C01456549FE3B}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_torso_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.TorsoLow_In" {
+   Resource "{013F37F380A39C55}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_torso_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.TorsoLow_Loop" {
+   Resource "{E403F99F79353556}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_torso_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.TorsoLow_Out" {
+   Resource "{F9977A31742F5C4D}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_torso_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.TorsoLow_In" {
+   Resource "{D8BF7EAED6A1568C}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_torso_2_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.TorsoLow_Loop" {
+   Resource "{8856938DBC632421}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_torso_2_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.TorsoLow_Out" {
+   Resource "{E38A952CC435BA6D}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_torso_2_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.TorsoUp_In" {
+   Resource "{98CAACE60FA8DAA6}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_torso_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.TorsoUp_Loop" {
+   Resource "{79D8C3A2E8601AE6}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_torso_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.TorsoUp_Out" {
+   Resource "{4C5DDFE027D5B142}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_torso_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.ArmR_In" {
+   Resource "{3258AE3DFBD068D0}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_armR_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.ArmR_Loop" {
+   Resource "{3CE1B1FADE3405CE}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_armR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.ArmR_Out" {
+   Resource "{F3581F764CC70CC9}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_armR_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.ArmR_In" {
+   Resource "{6C1DC99D87081C3D}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_armR_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.ArmR_Loop" {
+   Resource "{63F06F5F9CA84AB7}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_armR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.ArmR_Out" {
+   Resource "{54B3ACF8AF2D1D4E}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_armR_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.ArmL_In" {
+   Resource "{D63A3D54CB1F0B12}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_armL_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.ArmL_Loop" {
+   Resource "{6070E7EE13A13127}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_armL_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.ArmL_Out" {
+   Resource "{387D06293B7B7C2A}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_armL_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.LegL_In" {
+   Resource "{0103F6F18D23BE30}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_legL_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.LegL_Loop" {
+   Resource "{5413D7D0F8B58E06}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_legL_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.LegL_Out" {
+   Resource "{C556783CF40D394D}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_legL_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.LegR_In" {
+   Resource "{BB240238C134A91F}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_legR_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.LegR_Loop" {
+   Resource "{57935F6177BCF596}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_legR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.LegR_Out" {
+   Resource "{A998D2ED605B5829}Assets/Items/Medicine/Gauze_01/anim/anm/p_pne_self_heal_legR_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.ArmL_In" {
+   Resource "{2926701A35D39400}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_armL_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.ArmL_Loop" {
+   Resource "{EBF07FBE29A2C313}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_armL_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.ArmL_Out" {
+   Resource "{BECCAEF13961DB2D}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_armL_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.ArmR_In" {
+   Resource "{930184D379C4832F}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_armR_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.ArmR_Loop" {
+   Resource "{E870F70FA6ABB883}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_armR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.ArmR_Out" {
+   Resource "{D2020420AD37BA49}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_self_heal_armR_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.ArmL_In" {
+   Resource "{887F5AF4B7C77FFF}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_armL_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.ArmL_Loop" {
+   Resource "{3F61394B513D7E5E}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_armL_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.ArmL_Out" {
+   Resource "{9F96B5A7D8916DAD}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_self_heal_armL_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Cro.In" {
+   Resource "{AF5422CF61C5D782}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_heal_cro_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Cro.Loop" {
+   Resource "{D906B717383C0F82}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_heal_cro_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Cro.Out" {
+   Resource "{F6B63BF70F86AC19}Assets/Items/Medicine/Gauze_01/anim/anm/p_cro_heal_cro_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Erc.In" {
+   Resource "{B3C1C38FFC545C88}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_heal_erc_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Erc.Loop" {
+   Resource "{0E882771A8C053E2}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_heal_erc_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Erc.Out" {
+   Resource "{DE3FA95A1C2B1697}Assets/Items/Medicine/Gauze_01/anim/anm/p_erc_heal_erc_out.anm"
+  }
+  AnimSetInstanceSource_Line "Revive.Default.In" {
+   Resource "{3FCAC00956945732}anims/anm/player/injury/p_cro_revive_in.anm"
+  }
+  AnimSetInstanceSource_Line "Revive.Default.Loop" {
+   Resource "{A2E9D6B32A6E75C5}anims/anm/player/injury/p_cro_revive_loop.anm"
+  }
+  AnimSetInstanceSource_Line "Revive.Default.Out" {
+   Resource "{F89360FFB3D5ED3B}anims/anm/player/injury/p_cro_revive_out.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Pne.In" {
+   Resource "{230AEC66F3FE6F51}Assets/Items/Medicine/Gauze_01/anim/anm/pne_heal_pne_in.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Pne.Loop" {
+   Resource "{0FB3836AD4DE5729}Assets/Items/Medicine/Gauze_01/anim/anm/pne_heal_pne_loop.anm"
+  }
+  AnimSetInstanceSource_Line "BandageOthers.Pne.Out" {
+   Resource "{85D7DD6A5BCB3EB5}Assets/Items/Medicine/Gauze_01/anim/anm/pne_heal_pne_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.ArmL_In" {
+   Resource "{B2194151E0165814}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_armL_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.ArmL_Loop" {
+   Resource "{FBF742F8E4E88558}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_armL_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.ArmL_Out" {
+   Resource "{444D96ADF7C5BC04}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_armL_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.ArmR_In" {
+   Resource "{083EB598AC014F3B}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_armR_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.ArmR_Loop" {
+   Resource "{F877CA496BE1FEC8}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_armR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.ArmR_Out" {
+   Resource "{28833C7C6393DD60}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_armR_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.HeadLow_In" {
+   Resource "{38B40D2F36DB0AB2}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_head_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.HeadLow_Loop" {
+   Resource "{CB33A1DD2D25C416}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_head_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.HeadLow_Out" {
+   Resource "{087C02E608F4DA51}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_head_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.TorsoUp_In" {
+   Resource "{E4FA3C62C3161A88}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_torso_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.TorsoUp_Loop" {
+   Resource "{3BCDA6DCAABC16CF}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_torso_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.TorsoUp_Out" {
+   Resource "{D7DA7AF6D09C053D}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_torso_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.TorsoLow_In" {
+   Resource "{D03C598F06F4A07F}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_torso_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.TorsoLow_Loop" {
+   Resource "{ED7650D0F642295D}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_torso_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.TorsoLow_Out" {
+   Resource "{F2CB78768D4690D3}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_torso_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.ArmL_In" {
+   Resource "{E55165928827A17B}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_armL_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.ArmL_Loop" {
+   Resource "{A2CF3D0FF88B34DE}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_armL_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.ArmL_Out" {
+   Resource "{3E736B5648CDC0AE}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_armL_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.ArmR_In" {
+   Resource "{5F76915BC430B654}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_armR_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.ArmR_Loop" {
+   Resource "{A14FB5BE77824F4E}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_armR_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.ArmR_Out" {
+   Resource "{52BDC187DC9BA1CA}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_armR_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.HeadLow_In" {
+   Resource "{1C1F862C11D9AFAD}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_head_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.HeadLow_Loop" {
+   Resource "{9B69A417690D968F}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_head_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.HeadLow_Out" {
+   Resource "{26BE967B25D02250}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_head_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.TorsoUp_In" {
+   Resource "{9EC4C1997C1E6622}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_torso_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.TorsoUp_Loop" {
+   Resource "{6F1C064B06EFDB22}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_torso_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.TorsoUp_Out" {
+   Resource "{A2917DBCC96EC24A}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_torso_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.TorsoLow_In" {
+   Resource "{FEFECD122BD0587E}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_torso_low_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.TorsoLow_Loop" {
+   Resource "{0B4BE07EA49D149D}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_torso_low_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.TorsoLow_Out" {
+   Resource "{A2917DBCC96EC24A}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_torso_low_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealingOthers.LeftPatient.In" {
+   Resource "{E837F87C5B1DCADA}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_revive_bandage_L_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealingOthers.LeftPatient.Out" {
+   Resource "{C14BCEA1C98B625C}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_revive_bandage_L_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealingOthers.LeftPatient.Loop" {
+   Resource "{00962CA870AC73D9}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_revive_bandage_L_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealingOthers.RightPatient.In" {
+   Resource "{52100CB5170ADDF5}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_revive_bandage_R_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealingOthers.RightPatient.Out" {
+   Resource "{AD8564705DDD0338}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_revive_bandage_R_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealingOthers.RightPatient.Loop" {
+   Resource "{0316A419FFA50849}anims/anm/player/vehicles/Ambulances/anm/p_UAZ_ambulance_doctor_revive_bandage_R_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.HeadUp_In" {
+   Resource "{3D0CDC8ECAF541FD}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_head_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.HeadUp_Loop" {
+   Resource "{42B9BDA8F89E295F}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_head_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.HeadUp_Out" {
+   Resource "{BB6E24B481174F1D}Assets/Vehicles/Wheeled/UAZ469/anm/healing/p_UAZ469_passenger_self_heal_head_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.HeadUp_Out" {
+   Resource "{C150D94F3E1F33B7}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_head_out.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.HeadUp_In" {
+   Resource "{6A44F84DA2C4B892}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_head_in.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.HeadUp_Loop" {
+   Resource "{1B81C25FE4FD98D9}Assets/Vehicles/Wheeled/M998/anm/healing/p_M998_self_heal_head_loop.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.Idle" {
+   Resource "{2B83379182A02DEF}Assets/Vehicles/Wheeled/UAZ469/anm/p_UAZ469_US_bandage_hold_pose.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.Idle" {
+   Resource "{2B83379182A02DEF}Assets/Vehicles/Wheeled/UAZ469/anm/p_UAZ469_US_bandage_hold_pose.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Driver.HeadLook" {
+   Resource "{0A793F4ADA000847}anims/anm/player/layered/look/p_headlook.anm"
+  }
+  AnimSetInstanceSource_Line "VehicleHealing.Passanger.HeadLook" {
+   Resource "{0A793F4ADA000847}anims/anm/player/layered/look/p_headlook.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Cro.FingerAnim" {
+   Resource "{DDD1BBB305644FAF}Assets/Items/Medicine/Splint/Workspaces/p_erc_spling_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Erc.FingerAnim" {
+   Resource "{DDD1BBB305644FAF}Assets/Items/Medicine/Splint/Workspaces/p_erc_spling_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "BandageSelf.Pne.FingerAnim" {
+   Resource "{DDD1BBB305644FAF}Assets/Items/Medicine/Splint/Workspaces/p_erc_spling_fingerAnim.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{59F48432E3B1A801}" {
+ }
+}

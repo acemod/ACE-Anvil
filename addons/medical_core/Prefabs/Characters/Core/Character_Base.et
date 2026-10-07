@@ -18,6 +18,50 @@ SCR_ChimeraCharacter {
      }
      m_eConsumableType ACE_MEDICAL_EPINEPHRINE
     }
+    ACE_Medical_SplintUserAction "{66D8267967058AE6}" {
+     ParentContextList {
+      "LeftArm"
+     }
+     UIInfo SCR_ActionUIInfo "{66D8267E644F9920}" {
+      Name "#ACE_Medical-UserAction_UseSplint"
+      m_sIconName "medical"
+     }
+     m_eHitZoneGroup LEFTARM
+     m_eConsumableType ACE_MEDICAL_SPLINT
+    }
+    ACE_Medical_SplintUserAction "{66D8267E9BD929BC}" {
+     ParentContextList {
+      "RightArm"
+     }
+     UIInfo SCR_ActionUIInfo "{66D8267E6B7E2006}" {
+      Name "#ACE_Medical-UserAction_UseSplint"
+      m_sIconName "medical"
+     }
+     m_eHitZoneGroup RIGHTARM
+     m_eConsumableType ACE_MEDICAL_SPLINT
+    }
+    ACE_Medical_SplintUserAction "{66D8267E994AEA9B}" {
+     ParentContextList {
+      "LeftLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{66D8267E731769DD}" {
+      Name "#ACE_Medical-UserAction_UseSplint"
+      m_sIconName "medical"
+     }
+     m_eHitZoneGroup LEFTLEG
+     m_eConsumableType ACE_MEDICAL_SPLINT
+    }
+    ACE_Medical_SplintUserAction "{66D8267E9C8E4FE7}" {
+     ParentContextList {
+      "RightLeg"
+     }
+     UIInfo SCR_ActionUIInfo "{66D8267EA3D8D9BA}" {
+      Name "#ACE_Medical-UserAction_UseSplint"
+      m_sIconName "medical"
+     }
+     m_eHitZoneGroup RIGHTLEG
+     m_eConsumableType ACE_MEDICAL_SPLINT
+    }
     ACE_Medical_RepositionUserAction "{630C32646482C8E5}" {
      ParentContextList {
       "LowerTorso"

@@ -1,0 +1,50 @@
+GenericEntity : "{30CDE9F71FC702E8}Prefabs/Items/Medicine/FieldDressing_01/FieldDressing_US_01_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Medical-Item_Splint_Name"
+     Description "#ACE_Medical-Item_Splint_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{5E0EC111B36279BB}" {
+       Name "#ACE_Medical-InfoWidget_Splint"
+       IconSetName "Bone-Fracture_UI"
+      }
+     }
+    }
+    ItemPhysAttributes ItemPhysicalAttributes PhysicalAttributes {
+     Weight 0.128
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{551CA1C351DBEA72}" {
+     AnimationAttachments {
+      AnimationAttachmentInfo "{55EAD7272ED1ABB5}" {
+       AnimInstance "{5CE0AE42F9A043FD}Assets/Items/Medicine/Splint/Workspaces/ACE_Medical_Splint_player.asi"
+      }
+     }
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{6098B9508619B4D0}" {
+      CameraOrbitAngles 0 -30 220
+      CameraDistanceToItem 1.3
+      CameraOffset 0 0 0
+      ItemRenderRotation 0 0 0
+     }
+    }
+   }
+  }
+  MeshObject "{51F66EC3C5BC700D}" {
+   Object "{13555448DB9FBF2C}Assets/Items/Medicine/Splint/ACE_Medical_Splint.xob"
+  }
+  SCR_ConsumableItemComponent "{5943631460899505}" {
+   m_ConsumableEffect ACE_Medical_ConsumableSplint "{594363147CC4C6BE}" {
+    m_fItemRegenerationSpeed 0.7
+    m_fItemRegenerationDuration 30
+    m_aDamageEffectsToLoad {
+     ACE_Medical_SplintDamageEffect "{6122D60853A60F10}" {
+     }
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,5 @@
+MatPBRBasic "{FFA7DD84D9AF9514}Assets/Items/Medicine/Splint/data/ACE_Medical_Splint.emat" {
+ Emissive 0 0 0 1
+ BCRMap "{C5F09EBE86A7B097}Assets/Items/Medicine/Splint/data/ACE_Medical_Splint_BCR.edds"
+ NMOMap "{FD28252C5FD0E209}Assets/Items/Medicine/Splint/data/ACE_Medical_Splint_NMO.edds"
+}

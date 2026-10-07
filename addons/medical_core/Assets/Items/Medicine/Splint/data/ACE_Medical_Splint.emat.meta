@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{FFA7DD84D9AF9514}Assets/Items/Medicine/Splint/data/ACE_Medical_Splint.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

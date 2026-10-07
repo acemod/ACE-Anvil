@@ -1,0 +1,78 @@
+FrameWidgetClass {
+ {
+  FrameWidgetClass "{5CEED9EF77337926}" {
+   Prefab "{5CEED9EF77337926}"
+   {
+    SizeLayoutWidgetClass "{5CEED9EF77337922}" {
+     Prefab "{5CEED9EF77337922}"
+     {
+      FrameWidgetClass "{5CEED9EF7733792C}" {
+       Prefab "{5CEED9EF7733792C}"
+       {
+        OverlayWidgetClass "{5CEED9EF7733792D}" {
+         Prefab "{5CEED9EF7733792D}"
+         {
+          VerticalLayoutWidgetClass "{5CEED9EF7733792A}" {
+           Prefab "{5CEED9EF7733792A}"
+           {
+            VerticalLayoutWidgetClass "{5CEED9EF773378D2}" {
+             Prefab "{5CEED9EF773378D2}"
+             {
+              HorizontalLayoutWidgetClass "{70BDBA4ACA39AD0F}" {
+               Name "ACE_Medical_HorizontalSplintLayout"
+               Slot LayoutSlot "{5CEED9EEABEDE9C5}" {
+               }
+               {
+                VerticalLayoutWidgetClass "{1A2767FA6F4C04E6}" {
+                 Name "VerticalLayout1"
+                 Slot LayoutSlot "{5CEED9EEB4E3EB81}" {
+                 }
+                 {
+                  ImageWidgetClass "{6210F3CBFB41F461}" {
+                   Name "ACE_Medical_SplintInfo_icon"
+                   Slot LayoutSlot "{5CEED9EECD8ECE32}" {
+                   }
+                   "Is Visible" 0
+                   Size 48 48
+                  }
+                 }
+                }
+                VerticalLayoutWidgetClass "{5046D2B84CD2EE9E}" {
+                 Name "VerticalLayout0"
+                 Slot LayoutSlot "{5CEED9EEBB4969EB}" {
+                 }
+                 {
+                  RichTextWidgetClass "{58150D9D516C41EC}" {
+                   Name "ACE_Medical_SplintInfo_text"
+                   Slot LayoutSlot "{5CEED9EECB21336B}" {
+                    VerticalAlign 1
+                    SizeMode Fill
+                   }
+                   "Is Visible" 0
+                   "Font Size" 16
+                   "Min Font Size" 16
+                   "Vertical Alignment" Center
+                   Wrap 1
+                   FontProperties FontProperties "{610A6338296AFC28}" {
+                    Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+                   }
+                   Offset 20 0
+                  }
+                 }
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

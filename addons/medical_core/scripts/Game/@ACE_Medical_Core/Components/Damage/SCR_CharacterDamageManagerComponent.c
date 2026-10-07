@@ -99,6 +99,21 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	bool ACE_Medical_IsSplinted()
+	{
+		array<ref SCR_PersistentDamageEffect> effects = GetAllPersistentEffectsOfType(ACE_Medical_SplintDamageEffect);
+		return !effects.IsEmpty();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool ACE_Medical_IsGroupSplinted(ECharacterHitZoneGroup group)
+	{
+		array<HitZone> groupHitZones = {};
+		GetHitZonesOfGroup(group, groupHitZones);
+		return IsDamageEffectPresentOnHitZones(ACE_Medical_SplintDamageEffect, groupHitZones);
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	//! Check if epinephrine can be applied to this character
 	bool ACE_Medical_CanApplyEpinephrine(out SCR_EConsumableFailReason failReason)
 	{

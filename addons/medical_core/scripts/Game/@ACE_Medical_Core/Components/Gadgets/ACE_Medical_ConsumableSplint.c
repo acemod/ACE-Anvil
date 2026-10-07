@@ -35,7 +35,7 @@ class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 			return false;
 		}
 		
-		if (damageManager.IsDamageEffectPresentOnHitZones(ACE_Medical_SplintDamageEffect, groupHitZones))
+		if (damageManager.ACE_Medical_GetGroupSplinted(group))
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;
@@ -57,7 +57,6 @@ class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 	}
 
 	//------------------------------------------------------------------------------------------------
-	//! Set consumable type in ctor
 	void ACE_Medical_ConsumableSplint()
 	{
 		m_eConsumableType = SCR_EConsumableType.ACE_MEDICAL_SPLINT;

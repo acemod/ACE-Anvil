@@ -29,11 +29,20 @@ class ACE_Medical_SplintDamageEffect: SCR_DotDamageEffect
 		float damage = GetDPS() * accurateTimeSlice;
 		DotDamageEffectTimerToken token = UpdateTimer(accurateTimeSlice, dmgManager);
 		
+		bool isHealing = false;
+		
 		foreach(HitZone hitZone : m_aAffectedHitZones)
 		{
-			if (hitZone.GetHealthScaled() < m_fMaxHealScaled)
-				DealCustomDot(hitZone, damage, token, dmgManager);
+			float missingHealth = (m_fMaxHealScaled - hitZone.GetHealthScaled()) * hitZone.GetMaxHealth();
+			if (missingHealth <= 0)
+				continue;
+			
+			DealCustomDot(hitZone, Math.Max(damage, -missingHealth), token, dmgManager);
+			isHealing = true;
 		}
+		
+		if (!isHealing && !IsProxy())
+			dmgManager.TerminateDamageEffect(this);
 	}
 	
 	//------------------------------------------------------------------------------------------------

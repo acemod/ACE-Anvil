@@ -29,7 +29,7 @@ class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 		array<HitZone> groupHitZones = {};
 		damageManager.GetHitZonesOfGroup(group, groupHitZones);
 		
-		if (!HasHealableHitZone(groupHitZones))
+		if (!HasHealableHitZone(groupHitZones, damageManager.ACE_Medical_GetSplintMaxHealScaled()))
 		{
 			failReason = SCR_EConsumableFailReason.UNDAMAGED;
 			return false;
@@ -45,15 +45,27 @@ class ACE_Medical_ConsumableSplint : SCR_ConsumableBandage
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected bool HasHealableHitZone(array<HitZone> groupHitZones)
+	protected bool HasHealableHitZone(array<HitZone> groupHitZones, float maxHealScaled)
 	{
 		foreach (HitZone hitZone : groupHitZones)
 		{
-			if (hitZone.GetHealthScaled() < 0.667)
+			if (hitZone.GetHealthScaled() < maxHealScaled)
 				return true;
 		}
 		
 		return false;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override float GetItemRegenSpeed()
+	{
+		float regenSpeed = super.GetItemRegenSpeed();
+		
+		ACE_Medical_Core_Settings settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();
+		if (settings)
+			regenSpeed *= settings.m_fSplintHealingRateScale;
+		
+		return regenSpeed;
 	}
 
 	//------------------------------------------------------------------------------------------------

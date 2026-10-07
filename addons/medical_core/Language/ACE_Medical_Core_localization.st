@@ -14,6 +14,13 @@ StringTable {
    Author "Kexanone"
    LastChanged "michy_REV19"
   }
+  CustomStringTableItem "{E7BD7C2E95E21980}" {
+   Id "ACE_Medical-DamageInfo_SplintApplied"
+   Target_en_us "Splint applied"
+   Modified 1791333945
+   Author "Smudge"
+   LastChanged "Smudge"
+  }
   CustomStringTableItem "{660F338D19E8B527}" {
    Id "ACE_Medical-Editor_TooltipDetail_Resilience_Name"
    Target_en_us "Resilience"

@@ -1,5 +1,5 @@
 ---
-title: Magrepack
+title: Magazine Repack
 ---
 
 import Integrated from '~/components/Integrated.astro';
@@ -9,17 +9,29 @@ import Integrated from '~/components/Integrated.astro';
   author="Skamdrept and Badger 2-3"
 />
 
-"Magrepack" provides players with the ability to repack magazines.
+**Magazine Repack** modifies the base game's magazine repacking:
+- Faster repacking for ammunition belts
+- Configurable time scales
 
-## Usage
 
-Mouse & Keyboard:
+## Settings
 
-Open the inventory and drag "Magazine 1" onto "Magazine 2" to transfer rounds to the latter. If "Magazine 1" is emptied in the process, it will be dropped on the ground.
+Certain aspects of this mod can be configured in the mission header section of a server config file. An overview of available fields is given below in the table:
 
-Gamepad:
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_fPackingTimeScale`                 | Type: `float`<br />Range: 0 to ∞<br />Default: `1.0` | Scale for time it takes to transfer a round between magazines. |
+| `m_fBeltPackingTimeScale`             | Type: `float`<br />Range: 0 to ∞<br />Default: `0.1` | Scale for time it takes to transfer a round between ammunition belts. |
+<br>
 
-- Open Inventory
-- To select any Mag press "A" (in any Wearable Item Inventory (WII))
-- Highlight the same or different WII and then press "Y"
-- Highlight a second Mag and press "A"
+Example for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+          "m_ACE_MagRepack_Settings": {
+            "m_fPackingTimeScale": 1.0,
+            "m_fBeltPackingTimeScale": 0.1
+        }
+    }
+}
+```

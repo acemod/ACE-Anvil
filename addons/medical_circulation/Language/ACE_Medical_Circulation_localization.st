@@ -144,6 +144,7 @@ StringTable {
    Target_de_de "Nicht auf dem Rücken"
    Target_ja_jp "仰向けではありません"
    Target_ko_kr "똑바로 눕혀지지 않음"
+   Target_zh_cn "非仰躺"
    Modified 1787874599
    Author "Kexanone"
    LastChanged "neruha"

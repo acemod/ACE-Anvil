@@ -1,0 +1,249 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Wirecutters {
+   Nodes {
+    AnimSrcNodeGroupSelect "Group Select 30415" {
+     EditorPos 28.371 10.564
+     Child "Pose 10520"
+     Group "Gadget"
+     Column "Pne"
+    }
+    AnimSrcNodeGroupSelect "Group Select 10920" {
+     EditorPos 17.765 10.586
+     Child "State Machine 28893"
+     Group "Gadget"
+     Column "Pne"
+    }
+    AnimSrcNodeGroupSelect "Group Select 13663" {
+     EditorPos 12.965 10.586
+     Child "State Machine 28893"
+     Group "Gadget"
+     Column "Erc"
+    }
+    AnimSrcNodeTimeScale "Time Scale 34606" {
+     EditorPos 20.165 16.586
+     Child "BuildOutSrc"
+     TimeExpr "1.25"
+    }
+    AnimSrcNodeSource BuildInSrc {
+     EditorPos 11.065 16.186
+     Source "Gadget.In"
+    }
+    AnimSrcNodeSource BuildOutSrc {
+     EditorPos 20.165 17.986
+     Source "Gadget.Out"
+    }
+    AnimSrcNodeGroupSelect "Group Select 29511" {
+     EditorPos 15.365 10.586
+     Child "State Machine 28893"
+     Group "Gadget"
+     Column "Cro"
+    }
+    AnimSrcNodeStateMachine "State Machine 28893" {
+     EditorPos 15.365 14.686
+     states {
+      AnimSrcNodeState In {
+       Tags {
+        "TagLItemAction"
+       }
+       EditorPos 14.165 16.086
+       Child "BuildInSrc"
+       TimeStorage "Real Time"
+      }
+      AnimSrcNodeState Out {
+       Tags {
+        "TagActionOut" "TagLItemAction"
+       }
+       EditorPos 16.565 16.186
+       Child "Time Scale 34606"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Loop {
+       Tags {
+        "TagLItemAction"
+       }
+       EditorPos 15.365 17.586
+       Child "BuildLoopSrc"
+       TimeStorage "Real Time"
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5DC896C0C28D965F}" {
+       FromState "In"
+       ToState "Loop"
+       Duration "0.2"
+       Condition "RemainingTimeLess(0.1)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{5DC896C0C28D9652}" {
+       FromState "Loop"
+       ToState "Out"
+       Duration "0.3"
+       StartTime "1.16 * float(Stance != 1)"
+       Condition "GetCommandI(CMD_Item_Action) == -1"
+      }
+      AnimSrcNodeTransition "{5E127C933020CDDC}" {
+       FromState "In"
+       ToState "Out"
+       Duration "0.3"
+       StartTime "1-GetLowerTime()+1.3"
+       Condition "GetCommandI(CMD_Item_Action) == -1"
+       PostEval 1
+       Priority 1
+      }
+      AnimSrcNodeTransition "{604AEAD557F4C44C}" {
+       FromState "Out"
+       ToState "In"
+       Duration "0.3"
+       Condition "GetCommandI(CMD_Item_Action) == 1"
+      }
+     }
+    }
+    AnimSrcNodeSource BuildLoopSrc {
+     EditorPos 15.565 19.286
+     Source "Gadget.Loop"
+     Looptype Loop
+    }
+    AnimSrcNodeGroupSelect "Group Select 34647" {
+     EditorPos 22.621 10.706
+     Child "Pose 10520"
+     Group "Gadget"
+     Column "Erc"
+    }
+    AnimSrcNodePose "Pose 10520" {
+     EditorPos 25.172 12.804
+     Source "Gadget.Idle"
+    }
+    AnimSrcNodeStateMachine MasterControl {
+     EditorPos 23.083 2.489
+     states {
+      AnimSrcNodeState Idle {
+       EditorPos 25.503 3.654
+       Child "IdlePoseSTM"
+       StartCondition "true"
+       TimeStorage "Real Time"
+      }
+      AnimSrcNodeState Building {
+       EditorPos 21.016 3.654
+       Child "BuildingSTM"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5DC896C0C28D9732}" {
+       FromState "Idle"
+       ToState "Building"
+       Duration "0.3"
+       Condition "GetCommandI(CMD_Item_Action) == 1"
+      }
+      AnimSrcNodeTransition "{5DC896C0C28D975F}" {
+       FromState "Building"
+       ToState "Idle"
+       Duration "0.3"
+       Condition "GetCommandI(CMD_Item_Action) == -2 || RemainingTimeLess(0.1)"
+       PostEval 1
+      }
+     }
+    }
+    AnimSrcNodeStateMachine BuildingSTM {
+     EditorPos 15.365 7.586
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos 13.065 9.286
+       Child "Group Select 13663"
+       StartCondition "Stance == 0"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 15.265 9.286
+       Child "Group Select 29511"
+       StartCondition "Stance == 1"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 17.765 9.286
+       Child "Group Select 10920"
+       StartCondition "Stance == 2"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect "Group Select 32118" {
+     EditorPos 25.271 10.649
+     Child "Pose 10520"
+     Group "Gadget"
+     Column "Cro"
+    }
+    AnimSrcNodeStateMachine IdlePoseSTM {
+     EditorPos 25.356 7.764
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos 22.556 8.464
+       Child "Group Select 34647"
+       StartCondition "Stance == 0"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Cro {
+       EditorPos 25.356 9.464
+       Child "Group Select 32118"
+       StartCondition "Stance == 1"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 28.356 8.464
+       Child "Group Select 30415"
+       StartCondition "Stance == 2"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5DC8E0711DD745EB}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.2"
+       Condition "Stance == 1"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E496}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.2"
+       Condition "Stance == 0"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E485}" {
+       FromState "Cro"
+       ToState "Pne"
+       Duration "0.2"
+       Condition "Stance == 2"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E4BE}" {
+       FromState "Pne"
+       ToState "Cro"
+       Duration "0.2"
+       Condition "Stance == 1"
+      }
+      AnimSrcNodeTransition "{5DF0B3659D0D681E}" {
+       FromState "Pne"
+       ToState "Erc"
+       Duration "0.3"
+       Condition "Stance == 0"
+      }
+      AnimSrcNodeTransition "{5DF0B3659D0D680C}" {
+       FromState "Erc"
+       ToState "Pne"
+       Duration "0.3"
+       Condition "Stance == 2"
+      }
+     }
+    }
+   }
+  }
+ }
+}

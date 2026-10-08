@@ -33,16 +33,20 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Request destruction of SCR_DestructibleEntity
+	//! Request destruction of entity
 	//! Called from local player
-	void ACE_RequestDestroyEntity(SCR_DestructibleEntity entity, vector hitPosDirNorm[3], int deletionDelayMS = -1)
+	void ACE_RequestDestroyEntity(IEntity entity, vector hitPosDirNorm[3], int deletionDelayMS = -1)
 	{
-		Rpc(RpcAsk_ACE_DestroyEntity, entity.GetID(), hitPosDirNorm, deletionDelayMS);
+		RplId rplId = SCR_EntityHelper.EntityToRplId(entity);
+		if (rplId.IsValid())
+			Rpc(RpcAsk_ACE_DestroyRplEntity, rplId, hitPosDirNorm, deletionDelayMS);
+		else
+			Rpc(RpcAsk_ACE_DestroyDestructibleEntity, entity.GetID(), hitPosDirNorm, deletionDelayMS);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_DestroyEntity(EntityID entityID, vector hitPosDirNorm[3], int deletionDelayMS)
+	protected void RpcAsk_ACE_DestroyDestructibleEntity(EntityID entityID, vector hitPosDirNorm[3], int deletionDelayMS)
 	{
 		SCR_DestructibleEntity entity = SCR_DestructibleEntity.Cast(GetGame().GetWorld().FindEntityByID(entityID));
 		if (!entity)
@@ -67,6 +71,39 @@ modded class SCR_PlayerController : PlayerController
 			manager.DeleteEntitiesByIdGlobal({entity.GetID()});
 		else
 			GetGame().GetCallqueue().CallLater(manager.DeleteEntitiesByIdGlobal, deletionDelayMS, false, {entity.GetID()});
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
+	protected void RpcAsk_ACE_DestroyRplEntity(RplId entityID, vector hitPosDirNorm[3], int deletionDelayMS)
+	{
+		IEntity entity = SCR_EntityHelper.RplIdToEntity(entityID);
+		if (!entity)
+			return;
+		
+		if (!ACE_IsDeletionGrantedByServer(entity))
+			return;
+		
+		SCR_DamageManagerComponent damageManager = SCR_DamageManagerComponent.Cast(entity.FindComponent(DamageManagerComponent));
+		if (!damageManager)
+			return;
+		
+		float health = damageManager.GetHealth();
+		if (health > 0)
+			damageManager.Kill(damageManager.GetInstigator());
+		
+		if (deletionDelayMS <= 0)
+			return;
+		
+		ACE_LoadtimeEntityManager manager = ACE_LoadtimeEntityManager.GetInstance();
+		if (!manager)
+			return;
+		
+		// Delete immediately if it was already destroyed
+		if (health <= 0)
+			SCR_EntityHelper.DeleteEntityAndChildren(entity);
+		else
+			GetGame().GetCallqueue().CallLater(SCR_EntityHelper.DeleteEntityAndChildren, deletionDelayMS, false, entity);
 	}
 	
 	//------------------------------------------------------------------------------------------------

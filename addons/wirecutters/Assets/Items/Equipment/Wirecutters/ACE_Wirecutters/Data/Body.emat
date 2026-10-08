@@ -1,0 +1,5 @@
+MatPBRBasic {
+ BCRMap "{7D4F77EAB1A68050}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Data/Body_BCR.edds"
+ NormalPower 1.667
+ NMOMap "{4597CC7868D1D2CE}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Data/Body_NMO.edds"
+}

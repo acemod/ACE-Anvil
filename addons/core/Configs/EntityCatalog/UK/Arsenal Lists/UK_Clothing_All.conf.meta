@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{2A937B904F3FA670}Configs/EntityCatalog/UK/Arsenal Lists/UK_Clothing_All.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

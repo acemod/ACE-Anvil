@@ -1,0 +1,65 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SoundComponent "{6A6E0938BFA0FCA2}" {
+   Filenames {
+    "{9CA570A42444F06A}Sounds/Items/Equipment/Wirecutters/ACE_Wirecutters.acp"
+   }
+  }
+  ACE_ActionsHelperEntityComponent "{6A6B7286D1C58CC1}" {
+   m_Configs {
+    ACE_ActionsHelperEntityConfig "{6A6B7286D6918DC2}" {
+     m_sRequiredBasePrefabName "{8E065B1C87FAF088}Prefabs/Structures/Walls/Net/NetFence_02/NetFence_02_base.et"
+     m_sHelperPrefabName "{C9F7149E1C9E4C4F}Prefabs/Helpers/ACE_Wirecutters_FenceHelper.et"
+     m_vOffset 2 1.25 0
+    }
+    ACE_ActionsHelperEntityConfig "{6A6B7286F3CC0597}" {
+     m_sRequiredBasePrefabName "{8BF398DB6CA80A3E}Prefabs/Structures/Walls/Net/NetFence_03/NetFence_03_base.et"
+     m_sHelperPrefabName "{C9F7149E1C9E4C4F}Prefabs/Helpers/ACE_Wirecutters_FenceHelper.et"
+     m_vOffset 2 1.25 0
+    }
+    ACE_ActionsHelperEntityConfig "{6A6B7286F43998DE}" {
+     m_sRequiredBasePrefabName "{923AD38CFC14EF3C}Prefabs/Structures/Walls/Net/NetFence_04/NetFence_04_base.et"
+     m_sHelperPrefabName "{C9F7149E1C9E4C4F}Prefabs/Helpers/ACE_Wirecutters_FenceHelper.et"
+     m_vOffset 2 1.25 0
+    }
+    ACE_ActionsHelperEntityConfig "{6A6C23EA447E9FCA}" {
+     m_sRequiredBasePrefabName "{C289F5D866F0E46E}Prefabs/Structures/Walls/BarbedWire/BarbedTape_01/BarbedTape_01_base.et"
+     m_sHelperPrefabName "{C9F7149E1C9E4C4F}Prefabs/Helpers/ACE_Wirecutters_FenceHelper.et"
+    }
+   }
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemPhysAttributes ItemPhysicalAttributes "{6A6B6430DD6D7B59}" {
+    }
+    ItemAnimationAttributes ItemAnimationAttributes "{6A6B6AC1A0C99A54}" {
+     AnimationInstance "{4FCBEA45CAEBC9C0}anims/workspaces/player/player_main_1h.asi"
+     AnimationIKPose "{3E5C93E85F05C6B5}Assets/Weapons/Grenades/RGD5/anims/anm/p_rgd5_ik.anm"
+     AnimationAttachments {
+      AnimationAttachmentInfo "{62F35B4107169A7E}" {
+       AnimGraph "{82906ACD75DF8523}Assets/Items/Equipment/workspaces/Flashlight_MX991.agr"
+       AnimInstance "{903E4A0B96B34B8F}Assets/Items/Equipment/workspaces/MX991_player.asi"
+       BindingName "Gadget"
+      }
+     }
+    }
+    CustomAttributes {
+     PreviewRenderAttributes "{62F35B41089C2A0A}" {
+     }
+     CharacterModifierAttributes "{62F35B41347CC711}" {
+      Supress1hShooting 0
+     }
+    }
+   }
+  }
+  MeshObject "{62F35B411275726A}" {
+  }
+  SCR_WirecuttersComponent "{62F370D8F0288483}" {
+   m_eAnimVariable ADRIANOV
+   m_eUseMask FROM_ACTION
+  }
+  BaseItemAnimationComponent "{6A6D75C2E2EFAA1F}" {
+  }
+ }
+}

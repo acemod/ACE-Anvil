@@ -9,18 +9,18 @@ package "== Advanced Medical Treatment (excluding OD)" {
         package "=== Unconscious" $theme_selector("#LightYellow") {
             group "**A**irway" {
                 if (Airway blocked?) then (yes)
-                    :Remove occlusions and\nobstructions;
+                    :Remove vomit;
                 else (no)
                 endif
                 :Secure airway with\nrecovery position or King LT;
             }
             group "**R**espiration" {
+                if (Has tension pneumothorax) then (yes)
+                    :Use NCD kit;
+                else (no)
+                endif
                 if (Has pneumothorax) then (yes)
                     :Use chest seal;
-                    if (Has tension pneumothorax) then (yes)
-                        :Use NCD kit;
-                    else (no)
-                    endif
                 else (no)
                 endif
             }
@@ -29,6 +29,7 @@ package "== Advanced Medical Treatment (excluding OD)" {
                     group "**C**irculation" {
                         fork
                             :Put in supine\nposition;
+                            :Lift chin;
                             :Perform CPR;
                         fork again
                             if (SpO2 < 75%) then (yes)

@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{A4B77747F0AE2AA0}Assets/Items/Medicine/NCDKit/Workspace/ACE_Medical_NCDKit.agr"
+ Configurations {
+  AnimGraphResourceClass PC {
+  }
+  AnimGraphResourceClass XBOX_ONE : PC {
+  }
+  AnimGraphResourceClass XBOX_SERIES : PC {
+  }
+  AnimGraphResourceClass PS4 : PC {
+  }
+  AnimGraphResourceClass PS5 : PC {
+  }
+  AnimGraphResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{5429FEB641365E62}Assets/Items/Medicine/ChestSeal/Workspace/p_erc_chestseal_fingerAnim.anm"
+ Configurations {
+  TXAResourceClass PC {
+   SourcePath "Character_AnimationRig_ChestSeal.blend"
+   SourceProfile "123_LHandABS"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

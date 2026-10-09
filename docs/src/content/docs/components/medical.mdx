@@ -4,14 +4,15 @@ title: Medical
 import { Image } from 'astro:assets';
 import PlantUML from '~/components/PlantUML.astro';
 import UnpublishedModWarning from '~/components/UnpublishedModWarning.astro';
+import { Aside } from '@astrojs/starlight/components';
 
 **ACE Medical** overhauls the medical system with the aim to make it more engaging for medics. It is highly configurable, allowing communities to tailor the experience from casual to realistic. ACE Medical is split into multiple mods for increased modularity:
 
 - [ACE Medical Core](#ace-medical-core)
 - [ACE Medical Hitzones](#ace-medical-hitzones)
 - [ACE Medical Circulation](#ace-medical-circulation)
+- [ACE Medical Breathing](#ace-medical-breathing)
 - ~~[ACE Medical Defibrillation](#ace-medical-defibrillation)~~
-- ~~[ACE Medical Breathing](#ace-medical-breathing)~~
 
 ## ACE Medical Core
 
@@ -160,8 +161,6 @@ Template for the `missionHeader` in a server config:
 ```
 
 ## ACE Medical Circulation
-
-<UnpublishedModWarning />
 
 ### Overview
 
@@ -353,28 +352,117 @@ Template for the `missionHeader` in a server config:
 }
 ```
 
-## ACE Medical Defibrillation
-
-<UnpublishedModWarning />
-
-### Overview
-
-_TBD_
-
 ## ACE Medical Breathing
 
-<UnpublishedModWarning />
+<Aside>Includes models from KAT - Advanced Medical</Aside>
 
 ### Overview
 
-_TBD_
+**ACE Medical Breathing** adds the following feature:
+- **Respiratory System:**
+  - Simulation of respiratory rate, alveolar and blood O<sub>2</sub> and CO<sub>2</sub>
+  - Obstruction of airway through vomit or tongue
+  - Open and tension pneumothorax
+- **Medical Items:**
+  - Adds King LT, chest seal, NCD kit
 
 ### Details
 
-_TBD_
+#### Glossary
+
+- LT: Laryngeal tube
+- NCD: Needle chest decompression
+- PTX: Pneumothorax
+- RR: Respiratory rate
+- SpO2: Peripheral blood oxygen saturation
+
+#### Airway
+
+Airway can be blocked by either vomit or tongue. An unconscious vomiting patient will get their airway blocked, unless they have a King LT inserted or are in recovery position. Vomit that blocks the airway has to be cleared with the user action that shows up on their head. In contrast, tongue-based obstruction only happens in supine position and can be resolved by lifting the chin, inserting a King LT or putting the patient in recovery position.
+
+#### Pneumothorax
+
+Pneumothorax (PTX) is the presence of air in the pleural space between lung and chest wall. It can be caused by projectile or stab wounds and leads to a partial collapse of the affected lung. There are two variants: Open and tension. Patients with an open pneumothorax should be immediately treated with a chest seal to prevent further collapse or deterioration to a tension pneumothorax. Tension pneumothorax is an even more serious condition, as it speeds up collapse and can seriously impede the function of the heart. It will readily lead to cardiac arrest, unless resolved with a NCD kit. In both cases, you will see an elevation in RR and HR. Tension pneumothorax will additionally lead to a drop in BP.
+
+#### Vital Ranges
+
+SpO2 is added as an additional quantity that determines vital states from [`ACE Medical Circulation`](#vital-ranges).
+
+| State | HR [BPM] | BP [mmHg] | Hemorrhage class | SpO2 |
+| --- | --- | --- | --- | --- |
+| Cardiac arrest | > 220 | > 284/189 | --- | --- |
+| Stable | 40 - 220 | 69/46 - 284/189 | < II | 85 - 97 |
+| Unstable | < 40 | < 69/46 | II | < 85 |
+| Critical | < 30 | < 51/34 | III | < 75 |
+| Cardiac arrest | < 20 | < 51/34* | IV | < 65 |
+
+\* BP below 51/34 mmHg only leads to cardiac arrest if the heart rate is at least critical (_i.e._ < 30 BPM).
+
+Moreover, patients are also unstable if their airway is blocked.
 
 ### Treatments
 
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Circulation:
 
 <PlantUML src="/plantumls/medical/breathing-treatment-1.puml" alt="breathing-treatment-1.puml" />
+
+### Usage
+
+#### Lifting chin
+
+- Unconscious patients in supine position have an interaction on their head for lifting their chin.
+
+#### Clear vomit
+
+- Patients that have their airway occluded by vomit have an interaction on their head for clearing vomit.
+
+### Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_fAirwayObstructionChance`          | Type: `float`**<br />Range: 0 to 1<br />Default: `0.15` | Probability of tongue-based airway obstruction in supine position |
+| `m_fVomitChancePerMinute`             | Type: `float`**<br />Range: 0 to 1<br />Default: `0.1` | Chance for unconscious patient to vomit. Evaulated once a minute. |
+| `m_fVomitCooldown`                    | Type: `float`**<br />Range: 0 to ∞<br />Default: `6.0` | Minimum delay for vomiting again in minutes |
+| `m_fPneumothoraxChance`               | Type: `float`**<br />Range: 0 to 1<br />Default: `0.51` | Chance for pneumothorax after a critical hit to the chest |
+| `m_fPneumothoraxDeteriorationChancePerMinute` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.5` | Probability for ongoing pneumothorax to deteriorate. Evaluated once a minute. |
+| `m_fMaxPneumothoraxScale`             | Type: `float`**<br />Range: 0 to 1<br />Default: `0.75` | Maximum loss of lung volume due to pneumothorax in percentage |
+| `m_fPneumothoraxScaleDeteriorationStep` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.18` | Precentage loss of lung volume per deterioration of pneumothorax |
+| `m_fPneumothoraxArrestEnabled`        | Type: `bool`*<br />Default: `true` | Enter cardiac arrest when pneumothorax fully deteriorated. |
+| `m_fTensionPneumothoraxChance`        | Type: `float`**<br />Range: 0 to 1<br />Default: `0.15` | Chance for tension pneumothorax after a critical hit to a chest with pneumothorax |
+| `m_fDeteriorateToTensionPneumothoraxChancePerMinute` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.05` | Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute. |
+| `m_fDefaultRespiratoryRateBPM`        | Type: `float`**<br />Range: 0 to ∞<br />Default: `14.573` | Default respiratory rate [breaths per minute] |
+| `m_fMaxRespiratoryRateBPM`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `40.0` | Maximum respiratory rate [breaths per minute] |
+| `m_fDefaultSpO2`                      | Type: `float`**<br />Range: 0 to 100<br />Default: `97.149` | Default value of SpO2 |
+| `m_fDefaultPalvCO2KPA`                | Type: `float`**<br />Range: 0 to 100<br />Default: `5.21` | Default value of alveolar partial pressure of CO2 |
+| `m_bPaCO2Enabled`                     | Type: `bool`*<br />Range: 0 to ∞<br />Default: `true` | Enables simulation of PaCO2 and its influence on respiratory rate |
+
+Template for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Medical_Breathing": {
+            "m_fAirwayObstructionChance": 0.15,
+            "m_fVomitChancePerMinute": 0.1,
+            "m_fVomitCooldown": 6.0,
+            "m_fPneumothoraxChance": 0.51,
+            "m_fPneumothoraxDeteriorationChancePerMinute": 0.5,
+            "m_fMaxPneumothoraxScale": 0.75,
+            "m_fPneumothoraxScaleDeteriorationStep": 0.18,
+            "m_fPneumothoraxArrestEnabled": 1,
+            "m_fTensionPneumothoraxChance": 0.15,
+            "m_fDeteriorateToTensionPneumothoraxChancePerMinute": 0.05,
+            "m_fDefaultRespiratoryRateBPM": 14.573,
+            "m_fMaxRespiratoryRateBPM": 40.0,
+            "m_fDefaultSpO2": 97.149,
+            "m_fDefaultPalvCO2KPA": 5.21,
+            "m_bPaCO2Enabled": 1
+        }
+    }
+}
+```
+
+## ACE Medical Defibrillation
+
+<UnpublishedModWarning />

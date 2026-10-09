@@ -2,10 +2,55 @@
 title: Compass
 ---
 
-Displays bearing and cardinal when a compass is focused.
+**ACE Compass** has the following features:
+- Simulates magnetic declination based on the terrain's latitude and longitude.
+- Makes compass point to magnetic north when declination is enabled  (see `m_bMagneticDeclinationEnabled` in [Settings](#settings)).
+- Displays bearing and cardinal when a compass is focused.
 
 ## Usage
 
 ### Show Compass Bearing
 
 - Put compass in hand and use `Aiming down sight (toggle)` keybind in `Equipment` category (Default: <kbd>LMB</kbd>)
+
+## Settings
+
+Summary of settings that can be modified in the server config:
+
+| Field                                 | Value                | Description                                        |
+| ------------------------------------- | -------------------- | -------------------------------------------------- |
+| `m_bMagneticDeclinationEnabled`       | Type: `bool`<br />Default: `true` | Enables simulation of magnatic north and makes compass point to it. |
+
+<br />
+
+Template for the `missionHeader` in a server config:
+```
+"missionHeader": {
+    "m_ACE_Settings": {
+        "m_ACE_Compass": {
+            "m_bMagneticDeclinationEnabled": true
+        }
+    }
+}
+```
+
+## Modded Compass Support
+
+### Make Analog Compass Point to Magnetic North
+
+- If the compass has a `SCR_CompassComponent` and the needle gets animated based on the signal `Needle`, it should already point to the magnetic north out of the box.
+- For custom setups see below for how to obtain the magnetic north.
+
+### Get Angle for Magnetic North for Digital Compass
+
+- The declination in degrees is constant for a terrain and can be obtained with `TimeAndWeatherManagerEntity::ACE_GetMagneticDeclination`
+- The direction of the magnetic north is the direction of the true north minus the declination. _e.g._ adjust `northDirection` with declination if **ACE Compass** is loaded:
+
+```cs
+#ifdef ACE_COMPASS
+    ChimeraWorld world = GetGame().GetWorld();
+    TimeAndWeatherManagerEntity timeAndWeatherManager = world.GetTimeAndWeatherManager();
+    if (timeAndWeatherManager)
+        northDirection -= timeAndWeatherManager.ACE_GetMagneticDeclination();
+#endif
+```

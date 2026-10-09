@@ -1,0 +1,1 @@
+#define ACE_TACTICAL_PERISCOPE

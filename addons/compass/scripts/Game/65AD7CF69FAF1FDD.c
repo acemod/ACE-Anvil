@@ -1,1 +1,0 @@
-#define ACE_COMPASS

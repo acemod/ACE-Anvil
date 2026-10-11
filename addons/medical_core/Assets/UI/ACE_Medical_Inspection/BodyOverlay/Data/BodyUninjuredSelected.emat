@@ -1,0 +1,4 @@
+MatPBRBasic : "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat" {
+ EmissiveLV -3
+ AlphaMul 0.3
+}

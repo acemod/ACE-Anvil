@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{86E19C5A2FB043D7}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyHeavyBleedingSelected.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

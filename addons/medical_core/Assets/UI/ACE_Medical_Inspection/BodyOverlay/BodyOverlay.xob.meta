@@ -1,0 +1,99 @@
+MetaFileClass {
+ Name "{6DCC70A71EF9EB70}Assets/UI/ACE_Medical_Inspection/BodyOverlay/BodyOverlay.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   MaterialAssigns {
+    MaterialAssignClass "{6A96E892E795677E}" {
+     SourceMaterial "LOWERTORSO"
+     AssignedMaterial "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat"
+    }
+    MaterialAssignClass "{6A96E892E79566F7}" {
+     SourceMaterial "LEFTARM"
+     AssignedMaterial "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat"
+    }
+    MaterialAssignClass "{6A96E892E79566D0}" {
+     SourceMaterial "RIGHTARM"
+     AssignedMaterial "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat"
+    }
+    MaterialAssignClass "{6A96E892E7956644}" {
+     SourceMaterial "HEAD"
+     AssignedMaterial "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat"
+    }
+    MaterialAssignClass "{6A96E892E79565A7}" {
+     SourceMaterial "RIGHTLEG"
+     AssignedMaterial "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat"
+    }
+    MaterialAssignClass "{6A96E892E7956584}" {
+     SourceMaterial "LEFTLEG"
+     AssignedMaterial "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat"
+    }
+    MaterialAssignClass "{6A96E892E79565E4}" {
+     SourceMaterial "UPPERTORSO"
+     AssignedMaterial "{D79E43A625CB810F}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyUninjured.emat"
+    }
+   }
+   MeshParams {
+    MeshParam Basebody_ArmUpper_L {
+    }
+    MeshParam Basebody_ArmUpper_R {
+    }
+    MeshParam Basebody_Arm_L {
+    }
+    MeshParam Basebody_Arm_R {
+    }
+    MeshParam Basebody_CalfLower_L {
+    }
+    MeshParam Basebody_CalfLower_R {
+    }
+    MeshParam Basebody_Calf_L {
+    }
+    MeshParam Basebody_Calf_R {
+    }
+    MeshParam Basebody_Foot_L {
+    }
+    MeshParam Basebody_Foot_R {
+    }
+    MeshParam Basebody_Groin {
+    }
+    MeshParam Basebody_Hand_L {
+    }
+    MeshParam Basebody_Hand_R {
+    }
+    MeshParam Basebody_Leg_L {
+    }
+    MeshParam Basebody_Leg_R {
+    }
+    MeshParam Basebody_Torso {
+    }
+    MeshParam Head {
+    }
+   }
+   Common TXOCommonClass "{6A96E892E78AD8FA}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
+   }
+   ApplicationVendor "Enfusion Blender Tools"
+   ApplicationName "Enfusion Blender FBX Exporter - Validaton: Normal"
+   ApplicationVersion "4.5.14 LTS"
+  }
+  FBXResourceClass XBOX_ONE : PC {
+   Common TXOCommonClass "{6A96E892E78AABD8}" : "{9D5B6207F7628CE2}Configs/System/ResourceTypes/XBOX_ONE/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+   Common TXOCommonClass "{6A96E892E78A963F}" : "{DD9F02115C764647}Configs/System/ResourceTypes/XBOX_SERIES/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS4 : PC {
+   Common TXOCommonClass "{6A96E892E78A9253}" : "{53EC476BC921D99A}Configs/System/ResourceTypes/PS4/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS5 : PC {
+   Common TXOCommonClass "{6A96E892E78A8799}" : "{F62AA8E7B8EA9D26}Configs/System/ResourceTypes/PS5/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass HEADLESS : PC {
+   Common TXOCommonClass "{6A96E892E78A85D9}" : "{3A5B3356978039E8}Configs/System/ResourceTypes/HEADLESS/MeshObjectCommon.conf" {
+   }
+  }
+ }
+}

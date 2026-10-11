@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{3E92B7D4A06F815C}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyImprovingSelected.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

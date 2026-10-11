@@ -1,0 +1,4 @@
+MatPBRBasic : "{9EBE5A6E2C09E7C3}Assets/UI/ACE_Medical_Inspection/BodyOverlay/Data/BodyModerateBleeding.emat" {
+ AlphaMul 0.85
+ EmissiveLV -3
+}

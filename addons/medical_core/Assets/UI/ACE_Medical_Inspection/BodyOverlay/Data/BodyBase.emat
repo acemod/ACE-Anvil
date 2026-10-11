@@ -1,0 +1,14 @@
+MatPBRBasic {
+ Emissive 1 1 1 0
+ EmissiveLV -4
+ EmissiveAbsoluteLV 0
+ ApplyAlbedoToEmissive 1
+ Sort overlay
+ CastShadow 0
+ ReceiveShadow 0
+ OccludeRain 0
+ OccludeWetness 0
+ AlphaMul 0.5
+ BlendMode AlphaBlend
+ OpacityMap "{0527EB8210F1A032}system/textures/defGreyLinear.edds"
+}

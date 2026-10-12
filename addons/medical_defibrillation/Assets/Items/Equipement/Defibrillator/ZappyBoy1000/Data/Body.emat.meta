@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{7865F0F14130205D}Assets/Items/Equipement/Defibrillator/ZappyBoy1000/Data/Body.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

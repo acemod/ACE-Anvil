@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{51D8F10E7CD4C941}Assets/Items/Equipement/Defibrillator/ZappyBoy1000/Data/ScreenGlass.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

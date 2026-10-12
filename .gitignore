@@ -5,3 +5,4 @@ CHANGELOG.md
 # Enfusion files
 *.rdb
 UserMaps.desc
+/addons/medical_defibrillation/tools

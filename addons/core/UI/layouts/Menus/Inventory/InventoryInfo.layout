@@ -1,0 +1,6 @@
+FrameWidgetClass {
+ components {
+  ACE_InventoryItemMetricsComponent "{6A9B210991665250}" {
+  }
+ }
+}

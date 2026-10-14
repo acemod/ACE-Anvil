@@ -1,0 +1,35 @@
+HorizontalLayoutWidgetClass {
+ Name "ACE_VolumeRow"
+ Slot LayoutSlot {
+  VerticalAlign 1
+  Padding 4 0 0 0
+ }
+ "Ignore Cursor" 1
+ Color 0.73 0.73 0.73 1
+ {
+  RichTextWidgetClass {
+   Name "ACE_Volume"
+   Slot LayoutSlot {
+    VerticalAlign 1
+   }
+   "Inherit Color" 1
+   Text ""
+   "Font Size" 12
+   "Min Font Size" 12
+   "Vertical Alignment" Center
+   FontProperties FontProperties {
+    Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+   }
+  }
+  ImageWidgetClass {
+   Name "ACE_VolumeIcon"
+   Slot LayoutSlot {
+    VerticalAlign 1
+    Padding 4 0 0 0
+   }
+   "Inherit Color" 1
+   Texture "{6A9B210991665254}UI/Textures/Inventory/ACE_InventoryCapacity.edds"
+   Size 12 12
+  }
+ }
+}

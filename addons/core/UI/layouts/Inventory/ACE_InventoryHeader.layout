@@ -1,0 +1,66 @@
+VerticalLayoutWidgetClass {
+ Name "ACE_HeaderMetricsFooter"
+ Slot OverlayWidgetSlot {
+  HorizontalAlign 3
+  VerticalAlign 2
+  Padding 54 0 0 0
+ }
+ "Ignore Cursor" 1
+ Color 0.73 0.73 0.73 1
+ {
+  HorizontalLayoutWidgetClass {
+   Name "ACE_VolumeHolder"
+   Slot LayoutSlot {
+    HorizontalAlign 0
+    Padding 0 0 0 2
+   }
+   "Inherit Color" 1
+  }
+  HorizontalLayoutWidgetClass {
+   Name "ACE_CompartmentWeightRow"
+   Slot LayoutSlot {
+    HorizontalAlign 2
+   }
+   "Inherit Color" 1
+   {
+    HorizontalLayoutWidgetClass {
+     Name "ACE_CompartmentCountRow"
+     Slot LayoutSlot {
+      VerticalAlign 2
+      Padding 0 0 8 10
+     }
+     "Is Visible" 0
+     "Inherit Color" 1
+     {
+      TextWidgetClass {
+       Name "ACE_CompartmentCount"
+       Slot LayoutSlot {
+        VerticalAlign 1
+       }
+       "Inherit Color" 1
+       Text ""
+       "Font Size" 12
+       "Min Font Size" 12
+       "Vertical Alignment" Center
+       FontProperties FontProperties {
+        Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+       }
+      }
+      SizeLayoutWidgetClass {
+       Name "ACE_CompartmentIconHolder"
+       Slot LayoutSlot {
+        VerticalAlign 1
+        Padding 4 0 0 0
+       }
+       "Inherit Color" 1
+       AllowWidthOverride 1
+       AllowHeightOverride 1
+       WidthOverride 12
+       HeightOverride 12
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -3,25 +3,3 @@ title: Core
 ---
 
 Common functions and systems used by other mods.
-
-## Inventory measurements
-
-The vanilla inventory displays compact measurements without changing storage capacities or transfer rules.
-
-- Item tooltips use one right-aligned line: compartment count, total storage capacity, item volume, then the original weight display. Each icon appears before its value.
-- A closed cube denotes item volume, an open box denotes storage capacity, and a pocket denotes compartments. The pocket icon is used for all container types, not just clothing.
-- Container headers show the original fullness bar and remaining free volume on the first line, with compartment count and weight below. Header icons appear after their values.
-- Compartment counts appear only when there is more than one compartment. Nested bags are not added to the outer container's count or capacity.
-- Weapons retain their own volume and weight, but their internal storage is excluded from capacity summaries.
-
-Volumes are shown in litres, for example `4.5 L`. Missing or negative measurements are hidden; genuine zero free space remains `0 L`. Unknown capacities are not displayed as partial totals. An overfilled compartment contributes zero free space without reducing another compartment's available space.
-
-Combined compartment capacity is not one continuous cavity. These readouts do not predict whether an item will fit: dimension limits and other inventory restrictions can still reject a transfer.
-
-### Development verification
-
-Test both ACE Core and ACE All in One in Workbench, including magazine repacking in All in One. Check clothing, backpacks, nearby containers, nested bags, weapons, full and overfilled storage, and missing measurements. Confirm counts agree between headers and tooltips.
-
-Check transfers and multiplayer updates, repeatedly open and close inventory, change tooltip focus, and traverse nested storage. Original weight widgets must retain live updates, headers must not grow on refresh, and controller navigation must remain unchanged. Check narrow tooltips and different UI scales.
-
-The icon sources, imported textures and metadata are stored in `addons/core/UI/Textures/Inventory`. Reimport the adjacent TGA sources in Workbench if resource relocation requires rebuilding the textures. Do not load the standalone Inventory Metrics addon alongside this feature, as both extend the same vanilla inventory surfaces.

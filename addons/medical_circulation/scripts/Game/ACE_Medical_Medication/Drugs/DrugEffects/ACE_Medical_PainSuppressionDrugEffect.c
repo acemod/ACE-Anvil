@@ -2,7 +2,7 @@
 class ACE_Medical_PainSuppressionDrugEffect : ACE_Medical_HillDrugEffectConfig
 {
 	//------------------------------------------------------------------------------------------------
-	override void ApplyEffect(ACE_Medical_CharacterContext targetContext, map<ACE_Medical_EDrugType, float> concentrations)
+	override void ApplyEffect(ACE_Medical_CharacterContext targetContext, map<ACE_Medical_EDrugType, float> concentrations, float timeSlice)
 	{
 		targetContext.m_pDamageManager.ACE_Medical_SetPainSuppression(ComputeEffect(concentrations));
 	}

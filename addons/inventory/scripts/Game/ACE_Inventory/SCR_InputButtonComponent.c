@@ -18,6 +18,24 @@ modded class SCR_InputButtonComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
+	override protected bool ChangeInputDevice(EInputDeviceType inputDevice, bool hasFocus, bool resetOverride = false)
+	{
+		bool result = super.ChangeInputDevice(inputDevice, hasFocus, resetOverride);
+		if (!result || !m_bACE_Inventory_Hint)
+			return result;
+
+		if (m_ButtonDisplay)
+			m_ButtonDisplay.ForceSetHoldAction(true);
+		foreach (Widget widget : m_aComboWidgets)
+		{
+			SCR_InputButtonDisplay display = SCR_InputButtonDisplay.Cast(widget.FindHandler(SCR_InputButtonDisplay));
+			if (display)
+				display.ForceSetHoldAction(true);
+		}
+		return result;
+	}
+
+	//------------------------------------------------------------------------------------------------
 	override protected void SetInputAction()
 	{
 		// Quantity hints must not register modifier presses as inventory actions.

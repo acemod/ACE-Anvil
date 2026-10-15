@@ -61,9 +61,6 @@ modded class SCR_InventoryMenuUI
 			ACE_Inventory_Error("Configured batch sizes and arsenal All ceiling must be positive integers.");
 			return;
 		}
-		if (ACE_Inventory_Settings.DEBUG_LOGGING)
-			PrintFormat("[ACE Inventory] Enabled: Ctrl+Move for %1, Ctrl+Shift+Move for %2, Shift+Move for All (arsenal ceiling %3).",
-				ACE_Inventory_Settings.SMALL_BATCH_SIZE, ACE_Inventory_Settings.LARGE_BATCH_SIZE, ACE_Inventory_Settings.ALL_ARSENAL_LIMIT);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -171,8 +168,6 @@ modded class SCR_InventoryMenuUI
 
 		m_aACE_Inventory_Items.Clear();
 		m_aACE_Inventory_Sources.Clear();
-		if (ACE_Inventory_Settings.DEBUG_LOGGING)
-			PrintFormat("[ACE Inventory] Source snapshot: %1 entities; requested quantity=%2 (All=-1).", items.Count(), m_iACE_Inventory_Quantity);
 		foreach (IEntity item : items)
 		{
 			InventoryItemComponent component = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
@@ -222,8 +217,6 @@ modded class SCR_InventoryMenuUI
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_QuickTransfer(int quantity)
 	{
-		if (ACE_Inventory_Settings.DEBUG_LOGGING)
-			Print("[ACE Inventory] Modifier+right-click detected.");
 		if (!m_bACE_Inventory_Open || !m_pFocusedSlotUI || m_DraggedSlot)
 			return;
 
@@ -378,18 +371,16 @@ modded class SCR_InventoryMenuUI
 			}
 			if (!slot || slot != m_pFocusedSlotUI)
 			{
-				ACE_Inventory_Error("Clicked source changed before transfer.");
+				ACE_Inventory_Error("Source changed before the batch transfer.");
 				return;
 			}
-			if (ACE_Inventory_Settings.DEBUG_LOGGING)
-				PrintFormat("[ACE Inventory] Click resolved: quantity=%1 (All=-1), priority=%2.", quantity, priority);
 			ACE_Inventory_QuickTransfer(quantity);
 		}
 		else if (nativeMove)
 		{
 			if (slot != m_pFocusedSlotUI)
 			{
-				ACE_Inventory_Error("Clicked source changed before the native move.");
+				ACE_Inventory_Error("Source changed before the native move.");
 				return;
 			}
 			super.OnAction(button, action, parent, traverse);
@@ -429,9 +420,6 @@ modded class SCR_InventoryMenuUI
 		m_pACE_Inventory_DestinationRoot = destination;
 		m_bACE_Inventory_AutomaticDestination = automaticDestination;
 		m_bACE_Inventory_Dropping = dropping;
-		if (ACE_Inventory_Settings.DEBUG_LOGGING)
-			PrintFormat("[ACE Inventory] Batch %1 started; requested up to %2. Automatic storage=%3, ground drop=%4.",
-				m_iACE_Inventory_Token, m_iACE_Inventory_Quantity, automaticDestination, dropping);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -548,7 +536,7 @@ modded class SCR_InventoryMenuUI
 		BaseInventoryStorageComponent source = m_aACE_Inventory_Sources[m_iACE_Inventory_Index];
 		if (!component || currentSource != source)
 		{
-			ACE_Inventory_Finish("Source changed before the next move.");
+			ACE_Inventory_Finish("Source changed before the next move.", true);
 			return;
 		}
 
@@ -594,7 +582,7 @@ modded class SCR_InventoryMenuUI
 		if (!accepted)
 		{
 			m_bACE_Inventory_Waiting = false;
-			ACE_Inventory_Finish("Native move request rejected.");
+			ACE_Inventory_Finish("Native move request rejected.", true);
 		}
 	}
 
@@ -620,14 +608,12 @@ modded class SCR_InventoryMenuUI
 		}
 		if (!success || !membershipConfirmed)
 		{
-			ACE_Inventory_Finish("Native move failed or destination membership was not confirmed.");
+			ACE_Inventory_Finish("Native move failed or destination membership was not confirmed.", true);
 			return;
 		}
 
 		m_iACE_Inventory_Completed++;
 		m_iACE_Inventory_Index++;
-		if (ACE_Inventory_Settings.DEBUG_LOGGING)
-			PrintFormat("[ACE Inventory] Batch %1: %2/%3 moves confirmed.", token, m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity);
 		if (!m_bACE_Inventory_Open || m_bACE_Inventory_Stop)
 			ACE_Inventory_Finish("Stopped; the outstanding move completed.");
 	}
@@ -639,16 +625,15 @@ modded class SCR_InventoryMenuUI
 			return;
 
 		m_iACE_Inventory_Completed = completed;
-		if (ACE_Inventory_Settings.DEBUG_LOGGING || (!finished && reason.Contains("pending")))
-			PrintFormat("[ACE Inventory] Batch %1: %2/%3 arsenal items confirmed. %4", token, completed, m_iACE_Inventory_Quantity, reason);
 		if (finished)
 			ACE_Inventory_Finish(reason);
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_Finish(string reason)
+	protected void ACE_Inventory_Finish(string reason, bool failed = false)
 	{
-		PrintFormat("[ACE Inventory] Batch %1 ended: %2/%3 confirmed. %4", m_iACE_Inventory_Token, m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity, reason);
+		if (failed)
+			Print("[ACE Inventory] " + reason, LogLevel.WARNING);
 		if (m_pACE_Inventory_ArsenalRequester)
 			m_pACE_Inventory_ArsenalRequester.ACE_Inventory_GetResult().Remove(ACE_Inventory_OnArsenalResult);
 
@@ -694,9 +679,6 @@ modded class SCR_InventoryMenuUI
 		}
 		else if (m_bACE_Inventory_Busy && !m_bACE_Inventory_Waiting)
 			ACE_Inventory_Finish("Inventory closed; cancelled before the next move.");
-
-		if (m_bACE_Inventory_Busy)
-			PrintFormat("[ACE Inventory] Menu closed: %1/%2 confirmed; any outstanding operation may still finish.", m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity);
 
 		GetGame().GetCallqueue().Remove(ACE_Inventory_ResolveClick);
 		ACE_Inventory_ClearClick();

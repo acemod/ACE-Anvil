@@ -4,7 +4,6 @@ class ACE_Inventory_Settings
 	static const int LARGE_BATCH_SIZE = 10;
 	static const int ALL_ARSENAL_LIMIT = 100;
 	static const int ALL_ITEMS = -1;
-	static const bool DEBUG_LOGGING = false;
 
 	static bool IsValidConfiguration()
 	{

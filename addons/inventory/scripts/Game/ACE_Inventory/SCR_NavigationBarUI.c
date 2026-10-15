@@ -3,6 +3,14 @@ modded class SCR_NavigationBarUI
 	//------------------------------------------------------------------------------------------------
 	override void FillFromConfig()
 	{
+		if (m_aEntries)
+		{
+			foreach (NavigationButtonEntry entry : m_aEntries)
+			{
+				if (entry.m_sButtonID.StartsWith("ACE_Inventory_") && entry.m_Component)
+					entry.m_Component.GetRootWidget().RemoveFromHierarchy();
+			}
+		}
 		super.FillFromConfig();
 		if (!m_sConfig.GetPath().EndsWith("Configs/Inventory/InventoryNavigationBar.conf"))
 			return;

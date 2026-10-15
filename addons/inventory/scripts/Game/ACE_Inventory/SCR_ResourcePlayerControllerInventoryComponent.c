@@ -85,14 +85,7 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 			ACE_Inventory_Stack.GetGroup(sourceStorage, representative.GetOwner(), group);
 		if (!sourceStorage || group.IsEmpty() || items.Count() > group.Count())
 		{
-			BaseInventoryStorageComponent itemStorage;
-			if (representative && representative.GetParentSlot())
-				itemStorage = representative.GetParentSlot().GetStorage();
-			array<IEntity> sourceItems = {};
-			if (sourceStorage)
-				sourceStorage.GetAll(sourceItems);
-			PrintFormat("[ACE Inventory] Refund source group rejected: source=%1, item=%2, itemStorage=%3, sourceItems=%4, group=%5, requested=%6.",
-				sourceStorage, representative, itemStorage, sourceItems.Count(), group.Count(), items.Count(), level: LogLevel.WARNING);
+			Print("[ACE Inventory] Refund source group is unavailable or exceeded.", LogLevel.WARNING);
 			Rpc(ACE_Inventory_RpcDo_Result, token, 0, "Refund source group is unavailable or exceeded.", true);
 			return;
 		}
@@ -194,7 +187,7 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 		if (m_bACE_Inventory_Refunding)
 		{
 			if (!manager)
-				ACE_Inventory_Finish("Player inventory is unavailable.");
+				ACE_Inventory_Finish("Player inventory is unavailable.", true);
 			else
 				ACE_Inventory_NextRefund();
 			return;
@@ -225,7 +218,7 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 		s_pACE_Inventory_Dispatch = previousDispatch;
 
 		if (m_iACE_Inventory_Token > 0 && !m_bACE_Inventory_Captured)
-			ACE_Inventory_Finish("Native arsenal request rejected; check supplies, access and availability.");
+			ACE_Inventory_Finish("Native arsenal request rejected; check supplies, access and availability.", true);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -276,7 +269,7 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 			|| component.GetParentSlot().GetStorage() != m_aACE_Inventory_RefundSources[m_iACE_Inventory_Completed]
 			|| !ACE_Inventory_IsRefundable(component))
 		{
-			ACE_Inventory_Finish("Arsenal/source changed or item contents are not refundable.");
+			ACE_Inventory_Finish("Arsenal/source changed or item contents are not refundable.", true);
 			return;
 		}
 
@@ -296,7 +289,7 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 		if (!m_bACE_Inventory_RefundAccepted)
 		{
 			m_bACE_Inventory_Waiting = false;
-			ACE_Inventory_Finish("Native refund request rejected; no further returns issued.");
+			ACE_Inventory_Finish("Native refund request rejected; no further returns issued.", true);
 			return;
 		}
 		GetGame().GetCallqueue().CallLater(ACE_Inventory_CheckRefund, 0, false);
@@ -343,7 +336,7 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 		m_bACE_Inventory_Waiting = false;
 		if (!success)
 		{
-			ACE_Inventory_Finish("Native item insertion failed.");
+			ACE_Inventory_Finish("Native item insertion failed.", true);
 			return;
 		}
 
@@ -376,12 +369,13 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_Finish(string reason)
+	protected void ACE_Inventory_Finish(string reason, bool failed = false)
 	{
 		GetGame().GetCallqueue().Remove(ACE_Inventory_Timeout);
 		GetGame().GetCallqueue().Remove(ACE_Inventory_Next);
 		GetGame().GetCallqueue().Remove(ACE_Inventory_CheckRefund);
-		PrintFormat("[ACE Inventory] Arsenal: %1/%2 confirmed. %3", m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity, reason);
+		if (failed)
+			Print("[ACE Inventory] " + reason, LogLevel.WARNING);
 		Rpc(ACE_Inventory_RpcDo_Result, m_iACE_Inventory_Token, m_iACE_Inventory_Completed, reason, true);
 		m_iACE_Inventory_Token = 0;
 		m_bACE_Inventory_Waiting = false;

@@ -27,7 +27,21 @@ modded class SCR_InventoryStorageBaseUI
 		}
 
 		array<IEntity> visibleItems = {};
-		GetAllItems(visibleItems);
+		BaseInventoryStorageComponent source = GetCurrentNavigationStorage();
+		if (source)
+		{
+			InventoryItemComponent representative = selected.GetInventoryItemComponent();
+			if (!representative)
+			{
+				Print("[ACE Inventory] Selected stack has no inventory item.", LogLevel.WARNING);
+				return false;
+			}
+
+			// Enumerate physical contents, not an arsenal catalog on the same vehicle.
+			ACE_Inventory_Stack.GetGroup(source, representative.GetOwner(), visibleItems);
+		}
+		else
+			GetAllItems(visibleItems);
 		foreach (IEntity item : visibleItems)
 		{
 			if (!item)

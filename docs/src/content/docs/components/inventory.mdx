@@ -95,6 +95,14 @@ finite source stack: it requests until native rules reject the next item or the
 configured All ceiling is reached (default **100 confirmed acquisitions**).
 The ceiling does not truncate physical stacks or arsenal returns.
 
+Stored-stack snapshots enumerate the current navigation storage's physical
+contents, including clothing pockets, rather than the UI root. This keeps
+vehicle trunks separate from arsenal catalogs on hybrid vehicles. Loose-ground
+snapshots retain the UI's item enumeration. Outgoing transfers preserve the
+existing destination choice: if an ordinary single-item move targets a hybrid
+vehicle's trunk, batch moves do likewise rather than automatically preferring
+an arsenal refund.
+
 ACE Inventory does **not** implement equipping, weapon attachments, controller
 bindings, batch dragging, or an in-game batch-size preferences UI.
 
@@ -170,6 +178,11 @@ installed game's working directory and a separate validation profile.
 - Removing the Magazine Repack dependency compiled standalone in Workbench
   **1.8.0.13** with Game CRC `770a9727`. The log confirmed only ACE Inventory
   and vanilla were mounted; standalone gameplay retesting remains pending.
+- The current-storage stack snapshot fix was tested in the independently
+  published Inventory Stacks copy. User gameplay testing confirmed hybrid-vehicle
+  trunk and arsenal transfers working. Only the core snapshot fix is carried
+  over here.
+  This does not constitute compilation or gameplay validation of this ACE build.
 
 Still pending: recorded save/restart persistence, reset/unbind and overlapping
 rebindings; the seven-magazine quantity regression; timeout/late-outcome recovery;

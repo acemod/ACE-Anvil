@@ -22,4 +22,7 @@ modded class ACE_Medical_Core_Settings : ACE_ModSettings
 	
 	[Attribute(defvalue: "false", desc: "Whether AI can have second chance")]
 	bool m_bSecondChanceForAIEnabled;
+	
+	[Attribute(defvalue: "1000", desc: "How long in milliseconds after a non-fatal hit second chance will be deactivated for fall damage")]
+	int m_iSecondChanceDeactivationTimeoutMs;
 }

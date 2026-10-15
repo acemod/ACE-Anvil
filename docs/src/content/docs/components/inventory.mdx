@@ -10,8 +10,8 @@ It is not included in ACE All in One and is not production-ready.
 
 1. In Arma Reforger Tools, scan the repository's `addons` directory for projects.
 2. Open `ACE Inventory` (`addons/inventory/addon.gproj`).
-3. Ensure the local ACE Magazine Repack project is registered; ACE Inventory depends
-   on it and leaves its existing drag/repack behavior unchanged.
+3. ACE Magazine Repack is optional. Load it separately if magazine repacking is
+   desired; ACE Inventory does not require it.
 4. Compile Game scripts in Script Editor. Resolve compilation errors before testing.
 5. Open a test world with inventory containers and an enabled arsenal.
    The development guide recommends the vanilla `MpTest` world.
@@ -67,8 +67,8 @@ modifier was held. This input-dispatch step needs regression testing, particular
 with rebound Move inputs.
 There are no batch-drag overrides.
 
-**Dragging:** always uses vanilla behavior, including existing Magazine Repack
-behavior, regardless of modifiers or a pending batch. Dragging does not select a
+**Dragging:** always uses vanilla behavior, including Magazine Repack behavior
+when that addon is loaded, regardless of modifiers or a pending batch. Dragging does not select a
 batch quantity. If an ordinary operation changes a snapshotted source, the batch
 stops when it detects that change; it does not undo the ordinary operation.
 If modifier bindings are unavailable, ordinary native inventory actions remain available.
@@ -148,7 +148,7 @@ internal names; those names do not determine batch sizes.
 
 ## Validation status
 
-The isolated addon and its Magazine Repack dependency compile in Arma Reforger
+The addon was previously compiled alongside Magazine Repack in Arma Reforger
 Workbench **1.8.0.13** using the addon project, repository addon search path,
 installed game's working directory and a separate validation profile.
 
@@ -167,6 +167,9 @@ installed game's working directory and a separate validation profile.
 - The reviewed cleanup compiled with Game CRC `2bcae1d7`; whitespace and
   structural wiring checks passed.
 - Removing routine/debug logging compiled with Game CRC `576ccca2`.
+- Removing the Magazine Repack dependency compiled standalone in Workbench
+  **1.8.0.13** with Game CRC `770a9727`. The log confirmed only ACE Inventory
+  and vanilla were mounted; standalone gameplay retesting remains pending.
 
 Still pending: recorded save/restart persistence, reset/unbind and overlapping
 rebindings; the seven-magazine quantity regression; timeout/late-outcome recovery;

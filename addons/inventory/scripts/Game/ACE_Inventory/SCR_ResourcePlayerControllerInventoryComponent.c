@@ -1,32 +1,43 @@
 modded class SCR_ResourcePlayerControllerInventoryComponent
 {
-	protected static SCR_ResourcePlayerControllerInventoryComponent s_ACE_Inventory_Dispatch;
-	protected ref ScriptInvoker m_ACE_Inventory_Result = new ScriptInvoker();
-	protected int m_ACE_Inventory_Token;
-	protected int m_ACE_Inventory_Operation;
-	protected int m_ACE_Inventory_Completed;
-	protected int m_ACE_Inventory_Quantity;
-	protected bool m_ACE_Inventory_Waiting;
-	protected bool m_ACE_Inventory_Captured;
-	protected bool m_ACE_Inventory_Cancelled;
-	protected bool m_ACE_Inventory_AutomaticDestination;
-	protected bool m_ACE_Inventory_Refunding;
-	protected ref array<RplId> m_ACE_Inventory_RefundItems = {};
-	protected ref array<BaseInventoryStorageComponent> m_ACE_Inventory_RefundSources = {};
+	protected static SCR_ResourcePlayerControllerInventoryComponent s_pACE_Inventory_Dispatch;
+	protected static SCR_ResourcePlayerControllerInventoryComponent s_pACE_Inventory_RefundDispatch;
+	protected ref ScriptInvoker m_pACE_Inventory_Result = new ScriptInvoker();
+	protected int m_iACE_Inventory_Token;
+	protected int m_iACE_Inventory_Operation;
+	protected int m_iACE_Inventory_Completed;
+	protected int m_iACE_Inventory_Quantity;
+	protected bool m_bACE_Inventory_Waiting;
+	protected bool m_bACE_Inventory_Captured;
+	protected bool m_bACE_Inventory_Cancelled;
+	protected bool m_bACE_Inventory_AutomaticDestination;
+	protected bool m_bACE_Inventory_Refunding;
+	protected bool m_bACE_Inventory_RefundAccepted;
+	protected IEntity m_pACE_Inventory_RefundItem;
+	protected SCR_ArsenalComponent m_pACE_Inventory_RefundArsenal;
+	protected ref array<RplId> m_aACE_Inventory_RefundItems = {};
+	protected ref array<BaseInventoryStorageComponent> m_aACE_Inventory_RefundSources = {};
 	protected RplId m_ACE_Inventory_Arsenal;
-	protected BaseInventoryStorageComponent m_ACE_Inventory_Destination;
-	protected ResourceName m_ACE_Inventory_Resource;
+	protected BaseInventoryStorageComponent m_pACE_Inventory_Destination;
+	protected BaseInventoryStorageComponent m_pACE_Inventory_DestinationRoot;
+	protected ResourceName m_sACE_Inventory_Resource;
 
 	//------------------------------------------------------------------------------------------------
 	static SCR_ResourcePlayerControllerInventoryComponent ACE_Inventory_GetDispatch()
 	{
-		return s_ACE_Inventory_Dispatch;
+		return s_pACE_Inventory_Dispatch;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	static SCR_ResourcePlayerControllerInventoryComponent ACE_Inventory_GetRefundDispatch()
+	{
+		return s_pACE_Inventory_RefundDispatch;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	ScriptInvoker ACE_Inventory_GetResult()
 	{
-		return m_ACE_Inventory_Result;
+		return m_pACE_Inventory_Result;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -42,24 +53,24 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 	}
 
 	//------------------------------------------------------------------------------------------------
-	void ACE_Inventory_RequestRefund(int token, RplId arsenal, array<RplId> items, int quantity)
+	void ACE_Inventory_RequestRefund(int token, RplId arsenal, RplId source, array<RplId> items, int quantity)
 	{
-		Rpc(ACE_Inventory_RpcAsk_Refund, token, arsenal, items, quantity);
+		Rpc(ACE_Inventory_RpcAsk_Refund, token, arsenal, source, items, quantity);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void ACE_Inventory_RpcAsk_Refund(int token, RplId arsenal, array<RplId> items, int quantity)
+	protected void ACE_Inventory_RpcAsk_Refund(int token, RplId arsenal, RplId source, array<RplId> items, int quantity)
 	{
-		if (m_ACE_Inventory_Token > 0)
+		if (m_iACE_Inventory_Token > 0)
 		{
 			Print("[ACE Inventory] Rejected overlapping refund batch.", LogLevel.WARNING);
-			if (token != m_ACE_Inventory_Token)
+			if (token != m_iACE_Inventory_Token)
 				Rpc(ACE_Inventory_RpcDo_Result, token, 0, "Another arsenal operation is still pending.", true);
 			return;
 		}
 
-		if (token <= 0 || !arsenal.IsValid() || !ACE_Inventory_Settings.IsSupportedQuantity(quantity) || !items || items.IsEmpty()
+		if (token <= 0 || !arsenal.IsValid() || !source.IsValid() || !ACE_Inventory_Settings.IsSupportedQuantity(quantity) || !items || items.IsEmpty()
 			|| (quantity != ACE_Inventory_Settings.ALL_ITEMS && items.Count() > quantity))
 		{
 			Print("[ACE Inventory] Invalid refund batch.", LogLevel.WARNING);
@@ -67,32 +78,52 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 			return;
 		}
 
-		m_ACE_Inventory_RefundItems.Clear();
-		m_ACE_Inventory_RefundSources.Clear();
+		BaseInventoryStorageComponent sourceStorage = BaseInventoryStorageComponent.Cast(Replication.FindItem(source));
+		InventoryItemComponent representative = InventoryItemComponent.Cast(Replication.FindItem(items[0]));
+		array<IEntity> group = {};
+		if (representative)
+			ACE_Inventory_Stack.GetGroup(sourceStorage, representative.GetOwner(), group);
+		if (!sourceStorage || group.IsEmpty() || items.Count() > group.Count())
+		{
+			BaseInventoryStorageComponent itemStorage;
+			if (representative && representative.GetParentSlot())
+				itemStorage = representative.GetParentSlot().GetStorage();
+			array<IEntity> sourceItems = {};
+			if (sourceStorage)
+				sourceStorage.GetAll(sourceItems);
+			PrintFormat("[ACE Inventory] Refund source group rejected: source=%1, item=%2, itemStorage=%3, sourceItems=%4, group=%5, requested=%6.",
+				sourceStorage, representative, itemStorage, sourceItems.Count(), group.Count(), items.Count(), level: LogLevel.WARNING);
+			Rpc(ACE_Inventory_RpcDo_Result, token, 0, "Refund source group is unavailable or exceeded.", true);
+			return;
+		}
+
+		m_aACE_Inventory_RefundItems.Clear();
+		m_aACE_Inventory_RefundSources.Clear();
 		foreach (RplId id : items)
 		{
 			InventoryItemComponent component = InventoryItemComponent.Cast(Replication.FindItem(id));
-			if (!id.IsValid() || !component || !component.GetParentSlot() || m_ACE_Inventory_RefundItems.Find(id) >= 0)
+			if (!id.IsValid() || !component || !component.GetParentSlot() || m_aACE_Inventory_RefundItems.Find(id) >= 0
+				|| group.Find(component.GetOwner()) < 0)
 			{
 				Print("[ACE Inventory] Refund snapshot changed or contains duplicate items.", LogLevel.WARNING);
 				Rpc(ACE_Inventory_RpcDo_Result, token, 0, "Refund snapshot changed or contains duplicate items.", true);
-				m_ACE_Inventory_RefundItems.Clear();
-				m_ACE_Inventory_RefundSources.Clear();
+				m_aACE_Inventory_RefundItems.Clear();
+				m_aACE_Inventory_RefundSources.Clear();
 				return;
 			}
 
-			m_ACE_Inventory_RefundItems.Insert(id);
-			m_ACE_Inventory_RefundSources.Insert(component.GetParentSlot().GetStorage());
+			m_aACE_Inventory_RefundItems.Insert(id);
+			m_aACE_Inventory_RefundSources.Insert(component.GetParentSlot().GetStorage());
 		}
 
-		m_ACE_Inventory_Token = token;
-		m_ACE_Inventory_Operation = 0;
-		m_ACE_Inventory_Completed = 0;
-		m_ACE_Inventory_Cancelled = false;
-		m_ACE_Inventory_Refunding = true;
-		m_ACE_Inventory_Quantity = quantity;
+		m_iACE_Inventory_Token = token;
+		m_iACE_Inventory_Operation = 0;
+		m_iACE_Inventory_Completed = 0;
+		m_bACE_Inventory_Cancelled = false;
+		m_bACE_Inventory_Refunding = true;
+		m_iACE_Inventory_Quantity = quantity;
 		if (quantity == ACE_Inventory_Settings.ALL_ITEMS)
-			m_ACE_Inventory_Quantity = items.Count();
+			m_iACE_Inventory_Quantity = items.Count();
 		m_ACE_Inventory_Arsenal = arsenal;
 		ACE_Inventory_Next();
 	}
@@ -101,10 +132,10 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void ACE_Inventory_RpcAsk_Batch(int token, RplId arsenal, RplId destination, ResourceName resource, bool automaticDestination, int quantity)
 	{
-		if (m_ACE_Inventory_Token > 0)
+		if (m_iACE_Inventory_Token > 0)
 		{
 			Print("[ACE Inventory] Rejected overlapping arsenal batch.", LogLevel.WARNING);
-			if (token != m_ACE_Inventory_Token)
+			if (token != m_iACE_Inventory_Token)
 				Rpc(ACE_Inventory_RpcDo_Result, token, 0, "Another arsenal operation is still pending.", true);
 			return;
 		}
@@ -117,34 +148,35 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 			return;
 		}
 
-		m_ACE_Inventory_Destination = BaseInventoryStorageComponent.Cast(Replication.FindItem(destination));
-		m_ACE_Inventory_Token = token;
-		m_ACE_Inventory_Operation = 0;
-		m_ACE_Inventory_Completed = 0;
-		m_ACE_Inventory_Cancelled = false;
-		m_ACE_Inventory_Refunding = false;
-		m_ACE_Inventory_Quantity = quantity;
+		m_pACE_Inventory_Destination = BaseInventoryStorageComponent.Cast(Replication.FindItem(destination));
+		m_pACE_Inventory_DestinationRoot = m_pACE_Inventory_Destination;
+		m_iACE_Inventory_Token = token;
+		m_iACE_Inventory_Operation = 0;
+		m_iACE_Inventory_Completed = 0;
+		m_bACE_Inventory_Cancelled = false;
+		m_bACE_Inventory_Refunding = false;
+		m_iACE_Inventory_Quantity = quantity;
 		if (quantity == ACE_Inventory_Settings.ALL_ITEMS)
-			m_ACE_Inventory_Quantity = ACE_Inventory_Settings.ALL_ARSENAL_LIMIT;
-		m_ACE_Inventory_AutomaticDestination = automaticDestination;
+			m_iACE_Inventory_Quantity = ACE_Inventory_Settings.ALL_ARSENAL_LIMIT;
+		m_bACE_Inventory_AutomaticDestination = automaticDestination && quantity != ACE_Inventory_Settings.ALL_ITEMS;
 		m_ACE_Inventory_Arsenal = arsenal;
-		m_ACE_Inventory_Resource = resource;
+		m_sACE_Inventory_Resource = resource;
 		ACE_Inventory_Next();
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_Next()
 	{
-		if (m_ACE_Inventory_Token <= 0)
+		if (m_iACE_Inventory_Token <= 0)
 			return;
 
-		if (m_ACE_Inventory_Cancelled)
+		if (m_bACE_Inventory_Cancelled)
 		{
 			ACE_Inventory_Finish("Cancelled; no further requests issued.");
 			return;
 		}
 
-		if (m_ACE_Inventory_Completed >= m_ACE_Inventory_Quantity || (m_ACE_Inventory_Refunding && m_ACE_Inventory_Completed == m_ACE_Inventory_RefundItems.Count()))
+		if (m_iACE_Inventory_Completed >= m_iACE_Inventory_Quantity || (m_bACE_Inventory_Refunding && m_iACE_Inventory_Completed == m_aACE_Inventory_RefundItems.Count()))
 		{
 			ACE_Inventory_Finish("Finished.");
 			return;
@@ -159,7 +191,7 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 		if (character)
 			manager = SCR_InventoryStorageManagerComponent.Cast(character.FindComponent(SCR_InventoryStorageManagerComponent));
 
-		if (m_ACE_Inventory_Refunding)
+		if (m_bACE_Inventory_Refunding)
 		{
 			if (!manager)
 				ACE_Inventory_Finish("Player inventory is unavailable.");
@@ -168,26 +200,31 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 			return;
 		}
 
-		if (manager && m_ACE_Inventory_AutomaticDestination)
-			m_ACE_Inventory_Destination = manager.FindStorageForResource(m_ACE_Inventory_Resource, EStoragePurpose.PURPOSE_DEPOSIT);
+		if (manager && m_bACE_Inventory_AutomaticDestination)
+			m_pACE_Inventory_Destination = manager.FindStorageForResource(m_sACE_Inventory_Resource, EStoragePurpose.PURPOSE_DEPOSIT);
+		else if (manager && m_pACE_Inventory_DestinationRoot)
+			m_pACE_Inventory_Destination = manager.FindStorageForResourceInsert(m_sACE_Inventory_Resource, m_pACE_Inventory_DestinationRoot, EStoragePurpose.PURPOSE_DEPOSIT);
+		else
+			m_pACE_Inventory_Destination = null;
 
-		if (!manager || !m_ACE_Inventory_Destination || !manager.CanInsertResourceInStorage(m_ACE_Inventory_Resource, m_ACE_Inventory_Destination))
+		if (!manager || !m_pACE_Inventory_Destination || !manager.CanInsertResourceInStorage(m_sACE_Inventory_Resource, m_pACE_Inventory_Destination))
 		{
 			ACE_Inventory_Finish("Destination unavailable, incompatible or full.");
 			return;
 		}
 
-		m_ACE_Inventory_Operation++;
-		m_ACE_Inventory_Waiting = true;
-		m_ACE_Inventory_Captured = false;
-		GetGame().GetCallqueue().CallLater(ACE_Inventory_Timeout, 10000, false);
+		m_iACE_Inventory_Operation++;
+		m_bACE_Inventory_Waiting = true;
+		m_bACE_Inventory_Captured = false;
+		GetGame().GetCallqueue().CallLater(ACE_Inventory_Timeout, 10000, false, m_iACE_Inventory_Token, m_iACE_Inventory_Operation);
 
-		s_ACE_Inventory_Dispatch = this;
+		SCR_ResourcePlayerControllerInventoryComponent previousDispatch = s_pACE_Inventory_Dispatch;
+		s_pACE_Inventory_Dispatch = this;
 		// Keep native ownership, access, catalog, supply-cost and allocation validation.
-		super.RpcAsk_ArsenalRequestItem_(m_ACE_Inventory_Arsenal, Replication.FindItemId(m_ACE_Inventory_Destination), m_ACE_Inventory_Resource, EResourceType.SUPPLIES);
-		s_ACE_Inventory_Dispatch = null;
+		super.RpcAsk_ArsenalRequestItem_(m_ACE_Inventory_Arsenal, Replication.FindItemId(m_pACE_Inventory_Destination), m_sACE_Inventory_Resource, EResourceType.SUPPLIES);
+		s_pACE_Inventory_Dispatch = previousDispatch;
 
-		if (m_ACE_Inventory_Token > 0 && !m_ACE_Inventory_Captured)
+		if (m_iACE_Inventory_Token > 0 && !m_bACE_Inventory_Captured)
 			ACE_Inventory_Finish("Native arsenal request rejected; check supplies, access and availability.");
 	}
 
@@ -196,12 +233,12 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 	{
 		token = 0;
 		operation = 0;
-		if (!m_ACE_Inventory_Waiting || destination != m_ACE_Inventory_Destination)
+		if (!m_bACE_Inventory_Waiting || m_bACE_Inventory_Captured || destination != m_pACE_Inventory_Destination)
 			return;
 
-		m_ACE_Inventory_Captured = true;
-		token = m_ACE_Inventory_Token;
-		operation = m_ACE_Inventory_Operation;
+		m_bACE_Inventory_Captured = true;
+		token = m_iACE_Inventory_Token;
+		operation = m_iACE_Inventory_Operation;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -229,88 +266,112 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_NextRefund()
 	{
-		InventoryItemComponent component = InventoryItemComponent.Cast(Replication.FindItem(m_ACE_Inventory_RefundItems[m_ACE_Inventory_Completed]));
+		InventoryItemComponent component = InventoryItemComponent.Cast(Replication.FindItem(m_aACE_Inventory_RefundItems[m_iACE_Inventory_Completed]));
 		SCR_ResourceComponent resource = SCR_ResourceComponent.Cast(Replication.FindItem(m_ACE_Inventory_Arsenal));
 		SCR_ArsenalComponent arsenal;
 		if (resource)
 			arsenal = SCR_ArsenalComponent.FindArsenalComponent(resource.GetOwner());
 
 		if (!arsenal || !arsenal.IsArsenalEnabled() || !component || !component.GetParentSlot()
-			|| component.GetParentSlot().GetStorage() != m_ACE_Inventory_RefundSources[m_ACE_Inventory_Completed]
+			|| component.GetParentSlot().GetStorage() != m_aACE_Inventory_RefundSources[m_iACE_Inventory_Completed]
 			|| !ACE_Inventory_IsRefundable(component))
 		{
 			ACE_Inventory_Finish("Arsenal/source changed or item contents are not refundable.");
 			return;
 		}
 
-		m_ACE_Inventory_Operation++;
-		m_ACE_Inventory_Waiting = true;
-		GetGame().GetCallqueue().CallLater(ACE_Inventory_Timeout, 10000, false);
+		m_iACE_Inventory_Operation++;
+		m_bACE_Inventory_Waiting = true;
+		m_bACE_Inventory_RefundAccepted = false;
+		m_pACE_Inventory_RefundItem = component.GetOwner();
+		m_pACE_Inventory_RefundArsenal = arsenal;
+		GetGame().GetCallqueue().CallLater(ACE_Inventory_Timeout, 10000, false, m_iACE_Inventory_Token, m_iACE_Inventory_Operation);
+		SCR_ResourcePlayerControllerInventoryComponent previousDispatch = s_pACE_Inventory_RefundDispatch;
+		s_pACE_Inventory_RefundDispatch = this;
 		// Native code owns eligibility, distance checks, refund effects and resource credit.
-		super.RpcAsk_ArsenalRefundItem_(m_ACE_Inventory_Arsenal, m_ACE_Inventory_RefundItems[m_ACE_Inventory_Completed], EResourceType.SUPPLIES);
+		super.RpcAsk_ArsenalRefundItem_(m_ACE_Inventory_Arsenal, m_aACE_Inventory_RefundItems[m_iACE_Inventory_Completed], EResourceType.SUPPLIES);
+		s_pACE_Inventory_RefundDispatch = previousDispatch;
+		if (m_iACE_Inventory_Token <= 0)
+			return;
+		if (!m_bACE_Inventory_RefundAccepted)
+		{
+			m_bACE_Inventory_Waiting = false;
+			ACE_Inventory_Finish("Native refund request rejected; no further returns issued.");
+			return;
+		}
 		GetGame().GetCallqueue().CallLater(ACE_Inventory_CheckRefund, 0, false);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	void ACE_Inventory_CaptureRefundAcceptance(IEntity item, PlayerController playerController, SCR_ArsenalComponent arsenal)
+	{
+		if (m_bACE_Inventory_Refunding && m_bACE_Inventory_Waiting
+			&& item == m_pACE_Inventory_RefundItem && playerController == PlayerController.Cast(GetOwner())
+			&& arsenal == m_pACE_Inventory_RefundArsenal)
+			m_bACE_Inventory_RefundAccepted = true;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_CheckRefund()
 	{
-		if (!m_ACE_Inventory_Refunding || !m_ACE_Inventory_Waiting || m_ACE_Inventory_Token <= 0)
+		if (!m_bACE_Inventory_Refunding || !m_bACE_Inventory_RefundAccepted || !m_bACE_Inventory_Waiting || m_iACE_Inventory_Token <= 0)
 			return;
 
-		InventoryItemComponent component = InventoryItemComponent.Cast(Replication.FindItem(m_ACE_Inventory_RefundItems[m_ACE_Inventory_Completed]));
-		if (!component || !component.GetOwner() || component.GetOwner().IsDeleted())
+		if (!m_pACE_Inventory_RefundItem || m_pACE_Inventory_RefundItem.IsDeleted())
 		{
 			GetGame().GetCallqueue().Remove(ACE_Inventory_Timeout);
-			m_ACE_Inventory_Waiting = false;
-			m_ACE_Inventory_Completed++;
-			Rpc(ACE_Inventory_RpcDo_Result, m_ACE_Inventory_Token, m_ACE_Inventory_Completed, "Native refund item removal confirmed.", false);
+			m_bACE_Inventory_Waiting = false;
+			m_iACE_Inventory_Completed++;
+			Rpc(ACE_Inventory_RpcDo_Result, m_iACE_Inventory_Token, m_iACE_Inventory_Completed, "Native refund accepted and item removal confirmed.", false);
 			GetGame().GetCallqueue().CallLater(ACE_Inventory_Next, 0, false);
 			return;
 		}
 
-		GetGame().GetCallqueue().CallLater(ACE_Inventory_CheckRefund, 50, false);
+		int delay = 50;
+		if (m_bACE_Inventory_Cancelled)
+			delay = 500;
+		GetGame().GetCallqueue().CallLater(ACE_Inventory_CheckRefund, delay, false);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	void ACE_Inventory_OnSpawnResult(int token, int operation, bool success)
 	{
-		if (token != m_ACE_Inventory_Token || operation != m_ACE_Inventory_Operation || !m_ACE_Inventory_Waiting)
+		if (token != m_iACE_Inventory_Token || operation != m_iACE_Inventory_Operation || !m_bACE_Inventory_Waiting)
 			return;
 
 		GetGame().GetCallqueue().Remove(ACE_Inventory_Timeout);
-		m_ACE_Inventory_Waiting = false;
+		m_bACE_Inventory_Waiting = false;
 		if (!success)
 		{
 			ACE_Inventory_Finish("Native item insertion failed.");
 			return;
 		}
 
-		m_ACE_Inventory_Completed++;
-		Rpc(ACE_Inventory_RpcDo_Result, token, m_ACE_Inventory_Completed, "Native spawn completed.", false);
+		m_iACE_Inventory_Completed++;
+		Rpc(ACE_Inventory_RpcDo_Result, token, m_iACE_Inventory_Completed, "Native spawn completed.", false);
 		GetGame().GetCallqueue().CallLater(ACE_Inventory_Next, 0, false);
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_Timeout()
+	protected void ACE_Inventory_Timeout(int token, int operation)
 	{
-		if (!m_ACE_Inventory_Waiting)
+		if (token != m_iACE_Inventory_Token || operation != m_iACE_Inventory_Operation || !m_bACE_Inventory_Waiting)
 			return;
 
-		m_ACE_Inventory_Cancelled = true;
-		GetGame().GetCallqueue().Remove(ACE_Inventory_CheckRefund);
-		Print("[ACE Inventory] Arsenal callback timed out; no further requests will be issued.", LogLevel.WARNING);
-		Rpc(ACE_Inventory_RpcDo_Result, m_ACE_Inventory_Token, m_ACE_Inventory_Completed, "Outcome pending after timeout; batch stopped without retry.", false);
+		m_bACE_Inventory_Cancelled = true;
+		Print("[ACE Inventory] Arsenal operation timed out; no further requests will be issued. The pending outcome is still monitored.", LogLevel.WARNING);
+		Rpc(ACE_Inventory_RpcDo_Result, m_iACE_Inventory_Token, m_iACE_Inventory_Completed, "Outcome pending after timeout; batch stopped without retry.", false);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
 	protected void ACE_Inventory_RpcAsk_Cancel(int token)
 	{
-		if (token != m_ACE_Inventory_Token)
+		if (token != m_iACE_Inventory_Token)
 			return;
 
-		m_ACE_Inventory_Cancelled = true;
-		if (!m_ACE_Inventory_Waiting)
+		m_bACE_Inventory_Cancelled = true;
+		if (!m_bACE_Inventory_Waiting)
 			ACE_Inventory_Finish("Cancelled.");
 	}
 
@@ -320,21 +381,25 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 		GetGame().GetCallqueue().Remove(ACE_Inventory_Timeout);
 		GetGame().GetCallqueue().Remove(ACE_Inventory_Next);
 		GetGame().GetCallqueue().Remove(ACE_Inventory_CheckRefund);
-		PrintFormat("[ACE Inventory] Arsenal: %1/%2 confirmed. %3", m_ACE_Inventory_Completed, m_ACE_Inventory_Quantity, reason);
-		Rpc(ACE_Inventory_RpcDo_Result, m_ACE_Inventory_Token, m_ACE_Inventory_Completed, reason, true);
-		m_ACE_Inventory_Token = 0;
-		m_ACE_Inventory_Waiting = false;
-		m_ACE_Inventory_Destination = null;
-		m_ACE_Inventory_Refunding = false;
-		m_ACE_Inventory_RefundItems.Clear();
-		m_ACE_Inventory_RefundSources.Clear();
+		PrintFormat("[ACE Inventory] Arsenal: %1/%2 confirmed. %3", m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity, reason);
+		Rpc(ACE_Inventory_RpcDo_Result, m_iACE_Inventory_Token, m_iACE_Inventory_Completed, reason, true);
+		m_iACE_Inventory_Token = 0;
+		m_bACE_Inventory_Waiting = false;
+		m_pACE_Inventory_Destination = null;
+		m_pACE_Inventory_DestinationRoot = null;
+		m_bACE_Inventory_Refunding = false;
+		m_bACE_Inventory_RefundAccepted = false;
+		m_pACE_Inventory_RefundItem = null;
+		m_pACE_Inventory_RefundArsenal = null;
+		m_aACE_Inventory_RefundItems.Clear();
+		m_aACE_Inventory_RefundSources.Clear();
 	}
 
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
 	protected void ACE_Inventory_RpcDo_Result(int token, int completed, string reason, bool finished)
 	{
-		m_ACE_Inventory_Result.Invoke(token, completed, reason, finished);
+		m_pACE_Inventory_Result.Invoke(token, completed, reason, finished);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -343,8 +408,20 @@ modded class SCR_ResourcePlayerControllerInventoryComponent
 		GetGame().GetCallqueue().Remove(ACE_Inventory_Timeout);
 		GetGame().GetCallqueue().Remove(ACE_Inventory_Next);
 		GetGame().GetCallqueue().Remove(ACE_Inventory_CheckRefund);
-		if (s_ACE_Inventory_Dispatch == this)
-			s_ACE_Inventory_Dispatch = null;
+		m_iACE_Inventory_Token = 0;
+		m_bACE_Inventory_Waiting = false;
+		m_bACE_Inventory_Cancelled = true;
+		m_bACE_Inventory_RefundAccepted = false;
+		m_pACE_Inventory_RefundItem = null;
+		m_pACE_Inventory_RefundArsenal = null;
+		m_pACE_Inventory_Destination = null;
+		m_pACE_Inventory_DestinationRoot = null;
+		m_aACE_Inventory_RefundItems.Clear();
+		m_aACE_Inventory_RefundSources.Clear();
+		if (s_pACE_Inventory_Dispatch == this)
+			s_pACE_Inventory_Dispatch = null;
+		if (s_pACE_Inventory_RefundDispatch == this)
+			s_pACE_Inventory_RefundDispatch = null;
 		super.OnDelete(owner);
 	}
 }

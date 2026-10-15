@@ -1,71 +1,95 @@
 modded class SCR_InventoryMenuUI
 {
-	protected static int s_ACE_Inventory_NextToken;
-	protected int m_ACE_Inventory_DragQuantity;
-	protected int m_ACE_Inventory_Quantity;
-	protected bool m_ACE_Inventory_Open;
-	protected bool m_ACE_Inventory_InputReady;
-	protected bool m_ACE_Inventory_ControlHeld;
-	protected bool m_ACE_Inventory_ShiftHeld;
-	protected bool m_ACE_Inventory_Busy;
-	protected bool m_ACE_Inventory_Waiting;
-	protected bool m_ACE_Inventory_Stop;
-	protected bool m_ACE_Inventory_AutomaticDestination;
-	protected bool m_ACE_Inventory_Dropping;
-	protected float m_ACE_Inventory_WaitTime;
-	protected int m_ACE_Inventory_Token;
-	protected int m_ACE_Inventory_Completed;
-	protected int m_ACE_Inventory_Index;
-	protected ref array<IEntity> m_ACE_Inventory_Items = {};
-	protected ref array<BaseInventoryStorageComponent> m_ACE_Inventory_Sources = {};
-	protected ref ACE_Inventory_MoveCallback m_ACE_Inventory_Callback;
-	protected BaseInventoryStorageComponent m_ACE_Inventory_Destination;
-	protected BaseInventoryStorageComponent m_ACE_Inventory_DestinationRoot;
-	protected SCR_InventoryStorageBaseUI m_ACE_Inventory_SourceUI;
-	protected SCR_InventoryStorageBaseUI m_ACE_Inventory_DestinationUI;
-	protected SCR_ResourcePlayerControllerInventoryComponent m_ACE_Inventory_ArsenalRequester;
+	protected static int s_iACE_Inventory_NextToken;
+	protected int m_iACE_Inventory_Quantity;
+	protected bool m_bACE_Inventory_Open;
+	protected bool m_bACE_Inventory_InputReady;
+	protected bool m_bACE_Inventory_ClickQueued;
+	protected int m_iACE_Inventory_ClickPriority;
+	protected int m_iACE_Inventory_ClickQuantity;
+	protected SCR_InventorySlotUI m_pACE_Inventory_ClickSlot;
+	protected bool m_bACE_Inventory_NativeMoveQueued;
+	protected string m_sACE_Inventory_NativeMoveAction;
+	protected SCR_InputButtonComponent m_pACE_Inventory_NativeMoveButton;
+	protected SCR_InventoryStorageBaseUI m_pACE_Inventory_NativeMoveParent;
+	protected int m_iACE_Inventory_NativeMoveTraverse;
+	protected bool m_bACE_Inventory_Busy;
+	protected bool m_bACE_Inventory_Waiting;
+	protected bool m_bACE_Inventory_Stop;
+	protected bool m_bACE_Inventory_AutomaticDestination;
+	protected bool m_bACE_Inventory_Dropping;
+	protected float m_fACE_Inventory_WaitTime;
+	protected int m_iACE_Inventory_Token;
+	protected int m_iACE_Inventory_Completed;
+	protected int m_iACE_Inventory_Index;
+	protected ref array<IEntity> m_aACE_Inventory_Items = {};
+	protected ref array<BaseInventoryStorageComponent> m_aACE_Inventory_Sources = {};
+	protected ref ACE_Inventory_MoveCallback m_pACE_Inventory_Callback;
+	protected BaseInventoryStorageComponent m_pACE_Inventory_Destination;
+	protected BaseInventoryStorageComponent m_pACE_Inventory_DestinationRoot;
+	protected SCR_InventoryStorageBaseUI m_pACE_Inventory_SourceUI;
+	protected SCR_InventoryStorageBaseUI m_pACE_Inventory_DestinationUI;
+	protected SCR_ResourcePlayerControllerInventoryComponent m_pACE_Inventory_ArsenalRequester;
 
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuOpen()
 	{
 		super.OnMenuOpen();
-		m_ACE_Inventory_Open = true;
-		m_ACE_Inventory_InputReady = GetGame().GetInputManager().ActivateContext("InventoryMenuContext");
+		m_bACE_Inventory_Open = true;
+		m_bACE_Inventory_InputReady = GetGame().GetInputManager().ActivateContext("InventoryMenuContext");
 		bool quickRegistered;
-		bool shiftRegistered;
+		bool allRegistered;
+		bool largeRegistered;
 		for (int i = 0; i < GetGame().GetInputManager().GetActionCount(); i++)
 		{
-			if (GetGame().GetInputManager().GetActionName(i) == "ACE_Inventory_QuickFive")
+			if (GetGame().GetInputManager().GetActionName(i) == "ACE_Inventory_ModifierSmall")
 				quickRegistered = true;
-			if (GetGame().GetInputManager().GetActionName(i) == "ACE_Inventory_Shift")
-				shiftRegistered = true;
+			if (GetGame().GetInputManager().GetActionName(i) == "ACE_Inventory_ModifierAll")
+				allRegistered = true;
+			if (GetGame().GetInputManager().GetActionName(i) == "ACE_Inventory_ModifierLarge")
+				largeRegistered = true;
 		}
-		m_ACE_Inventory_InputReady = m_ACE_Inventory_InputReady && quickRegistered && shiftRegistered;
-		if (!m_ACE_Inventory_InputReady)
+		m_bACE_Inventory_InputReady = m_bACE_Inventory_InputReady && quickRegistered && allRegistered && largeRegistered;
+		if (!m_bACE_Inventory_InputReady)
+		{
 			ACE_Inventory_Error("Quantity input binding was not loaded. Reload the project after input configuration changes.");
-		GetGame().GetInputManager().AddActionListener("ACE_Inventory_QuickFive", EActionTrigger.DOWN, ACE_Inventory_QuickTransfer);
-		GetGame().GetInputManager().AddActionListener("ACE_Inventory_Five", EActionTrigger.DOWN, ACE_Inventory_ControlDown);
-		GetGame().GetInputManager().AddActionListener("ACE_Inventory_Five", EActionTrigger.UP, ACE_Inventory_ControlUp);
-		GetGame().GetInputManager().AddActionListener("ACE_Inventory_Shift", EActionTrigger.DOWN, ACE_Inventory_ShiftDown);
-		GetGame().GetInputManager().AddActionListener("ACE_Inventory_Shift", EActionTrigger.UP, ACE_Inventory_ShiftUp);
-		PrintFormat("[ACE Inventory] Enabled: Ctrl+right-click for %1, Ctrl+Shift+right-click for %2, Shift+right-click for All (arsenal ceiling %3); drag also captures quantity.",
-			ACE_Inventory_Settings.SMALL_BATCH_SIZE, ACE_Inventory_Settings.LARGE_BATCH_SIZE, ACE_Inventory_Settings.ALL_ARSENAL_LIMIT);
+			return;
+		}
+		if (!ACE_Inventory_Settings.IsValidConfiguration())
+		{
+			m_bACE_Inventory_InputReady = false;
+			ACE_Inventory_Error("Configured batch sizes and arsenal All ceiling must be positive integers.");
+			return;
+		}
+		if (ACE_Inventory_Settings.DEBUG_LOGGING)
+			PrintFormat("[ACE Inventory] Enabled: Ctrl+Move for %1, Ctrl+Shift+Move for %2, Shift+Move for All (arsenal ceiling %3).",
+				ACE_Inventory_Settings.SMALL_BATCH_SIZE, ACE_Inventory_Settings.LARGE_BATCH_SIZE, ACE_Inventory_Settings.ALL_ARSENAL_LIMIT);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	override void NavigationBarUpdate()
+	{
+		super.NavigationBarUpdate();
+		if (!m_pNavigationBar)
+			return;
+
+		m_pNavigationBar.ACE_Inventory_UpdateHints(m_bACE_Inventory_InputReady && !m_bIsUsingGamepad);
 	}
 
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuUpdate(float tDelta)
 	{
 		super.OnMenuUpdate(tDelta);
-		if (!m_ACE_Inventory_Busy || m_ACE_Inventory_ArsenalRequester)
+		if (!m_bACE_Inventory_Busy || m_pACE_Inventory_ArsenalRequester)
 			return;
 
-		if (m_ACE_Inventory_Waiting)
+		if (m_bACE_Inventory_Waiting)
 		{
-			m_ACE_Inventory_WaitTime += tDelta;
-			if (!m_ACE_Inventory_Stop && m_ACE_Inventory_WaitTime >= 10)
+			m_fACE_Inventory_WaitTime += tDelta;
+			if (!m_bACE_Inventory_Stop && m_fACE_Inventory_WaitTime >= 10)
 			{
-				m_ACE_Inventory_Stop = true;
-				PrintFormat("[ACE Inventory] Move outcome pending after timeout: %1/%2 confirmed. No retry.", m_ACE_Inventory_Completed, m_ACE_Inventory_Quantity, level: LogLevel.WARNING);
+				m_bACE_Inventory_Stop = true;
+				PrintFormat("[ACE Inventory] Move outcome pending after timeout: %1/%2 confirmed. No retry.", m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity, level: LogLevel.WARNING);
 			}
 			return;
 		}
@@ -74,90 +98,20 @@ modded class SCR_InventoryMenuUI
 	}
 
 	//------------------------------------------------------------------------------------------------
-	override void Action_DragDown()
+	protected bool ACE_Inventory_TryStart(SCR_InventoryStorageBaseUI destinationUI, SCR_InventorySlotUI sourceSlot, BaseInventoryStorageComponent destinationOverride, bool automaticDestination, int quantity)
 	{
-		if (m_ACE_Inventory_Busy)
-		{
-			ACE_Inventory_Error("A batch is still pending.");
-			return;
-		}
-
-		if (!m_ACE_Inventory_InputReady)
-		{
-			ACE_Inventory_Error("Dragging blocked: quantity input context is unavailable.");
-			return;
-		}
-
-		m_ACE_Inventory_DragQuantity = 0;
-		if (m_ACE_Inventory_ControlHeld || m_ACE_Inventory_ShiftHeld)
-		{
-			m_ACE_Inventory_DragQuantity = ACE_Inventory_GetHeldQuantity();
-			if (!ACE_Inventory_Settings.IsSupportedQuantity(m_ACE_Inventory_DragQuantity))
-			{
-				ACE_Inventory_Error("Configured batch sizes must be positive integers.");
-				return;
-			}
-		}
-		PrintFormat("[ACE Inventory] Drag start: quantity=%1, context=%2.", m_ACE_Inventory_DragQuantity,
-			GetGame().GetInputManager().IsContextActive("InventoryMenuContext"));
-		super.Action_DragDown();
-	}
-
-	//------------------------------------------------------------------------------------------------
-	override void Action_DragUp()
-	{
-		super.Action_DragUp();
-		m_ACE_Inventory_DragQuantity = 0;
-	}
-
-	//------------------------------------------------------------------------------------------------
-	override void MoveItem(SCR_InventoryStorageBaseUI pStorageBaseUI = null)
-	{
-		SCR_InventoryStorageBaseUI storageUI = pStorageBaseUI;
-		if (!storageUI)
-			storageUI = m_pActiveHoveredStorageUI;
-
-		if (!ACE_Inventory_TryStart(storageUI))
-			super.MoveItem(pStorageBaseUI);
-	}
-
-	//------------------------------------------------------------------------------------------------
-	override void MoveItemToStorageSlot()
-	{
-		SCR_InventoryStorageBaseUI storageUI;
-		if (m_pFocusedSlotUI)
-			storageUI = m_pFocusedSlotUI.GetStorageUI();
-
-		if (!ACE_Inventory_TryStart(storageUI))
-			super.MoveItemToStorageSlot();
-	}
-
-	//------------------------------------------------------------------------------------------------
-	protected bool ACE_Inventory_TryStart(SCR_InventoryStorageBaseUI destinationUI, SCR_InventorySlotUI sourceSlot = null, bool quick = false, BaseInventoryStorageComponent destinationOverride = null, bool automaticDestination = false)
-	{
-		if (m_ACE_Inventory_Busy)
+		if (m_bACE_Inventory_Busy)
 		{
 			ACE_Inventory_Error("A batch is still pending.");
 			return true;
 		}
 
-		if (!quick && (m_ACE_Inventory_DragQuantity == 0 || !m_DraggedSlot))
-		{
-			PrintFormat("[ACE Inventory] Single-item path: quantity=%1, draggedSlot=%2.", m_ACE_Inventory_DragQuantity, m_DraggedSlot != null);
-			return false;
-		}
-
-		m_ACE_Inventory_Quantity = m_ACE_Inventory_DragQuantity;
-		if (quick)
-			m_ACE_Inventory_Quantity = ACE_Inventory_GetHeldQuantity();
-		if (!ACE_Inventory_Settings.IsSupportedQuantity(m_ACE_Inventory_Quantity))
+		m_iACE_Inventory_Quantity = quantity;
+		if (!ACE_Inventory_Settings.IsSupportedQuantity(m_iACE_Inventory_Quantity))
 		{
 			ACE_Inventory_Error("Configured batch sizes must be positive integers.");
 			return true;
 		}
-
-		if (!sourceSlot)
-			sourceSlot = m_pSelectedSlotUI;
 
 		if (!GetCanInteract() || !sourceSlot || !destinationUI)
 		{
@@ -215,8 +169,10 @@ modded class SCR_InventoryMenuUI
 			return true;
 		}
 
-		m_ACE_Inventory_Items.Clear();
-		m_ACE_Inventory_Sources.Clear();
+		m_aACE_Inventory_Items.Clear();
+		m_aACE_Inventory_Sources.Clear();
+		if (ACE_Inventory_Settings.DEBUG_LOGGING)
+			PrintFormat("[ACE Inventory] Source snapshot: %1 entities; requested quantity=%2 (All=-1).", items.Count(), m_iACE_Inventory_Quantity);
 		foreach (IEntity item : items)
 		{
 			InventoryItemComponent component = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
@@ -245,32 +201,30 @@ modded class SCR_InventoryMenuUI
 				return true;
 			}
 
-			m_ACE_Inventory_Items.Insert(item);
-			m_ACE_Inventory_Sources.Insert(source);
-			if (m_ACE_Inventory_Items.Count() == m_ACE_Inventory_Quantity)
+			m_aACE_Inventory_Items.Insert(item);
+			m_aACE_Inventory_Sources.Insert(source);
+			if (m_aACE_Inventory_Items.Count() == m_iACE_Inventory_Quantity)
 				break;
 		}
 
-		if (m_ACE_Inventory_Items.IsEmpty())
+		if (m_aACE_Inventory_Items.IsEmpty())
 		{
 			ACE_Inventory_Error("The source stack is empty.");
 			return true;
 		}
 
-		if (m_ACE_Inventory_Quantity == ACE_Inventory_Settings.ALL_ITEMS)
-			m_ACE_Inventory_Quantity = m_ACE_Inventory_Items.Count();
+		if (m_iACE_Inventory_Quantity == ACE_Inventory_Settings.ALL_ITEMS)
+			m_iACE_Inventory_Quantity = m_aACE_Inventory_Items.Count();
 		ACE_Inventory_Begin(sourceUI, destinationUI, destination, automaticDestination, dropping);
 		return true;
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_QuickTransfer()
+	protected void ACE_Inventory_QuickTransfer(int quantity)
 	{
-		Print("[ACE Inventory] Modifier+right-click detected.");
-		if (!m_ACE_Inventory_Open || !m_pFocusedSlotUI || m_DraggedSlot)
-			return;
-
-		if (WidgetManager.GetWidgetUnderCursor() != m_pFocusedSlotUI.GetButtonWidget())
+		if (ACE_Inventory_Settings.DEBUG_LOGGING)
+			Print("[ACE Inventory] Modifier+right-click detected.");
+		if (!m_bACE_Inventory_Open || !m_pFocusedSlotUI || m_DraggedSlot)
 			return;
 
 		PlayerController controller = GetGame().GetPlayerController();
@@ -316,11 +270,23 @@ modded class SCR_InventoryMenuUI
 		else
 		{
 			destinationUI = GetActualStorageInCharacterStorageUI();
-			automaticDestination = true;
-			if (SCR_ArsenalInventorySlotUI.Cast(m_pFocusedSlotUI))
-				destination = m_InventoryManager.FindStorageForResource(m_pFocusedSlotUI.GetItemResource(), EStoragePurpose.PURPOSE_DEPOSIT);
+			if (quantity == ACE_Inventory_Settings.ALL_ITEMS)
+			{
+				if (destinationUI)
+				{
+					destination = destinationUI.GetCurrentNavigationStorage();
+					if (!destination)
+						destination = destinationUI.GetStorage();
+				}
+			}
 			else
-				destination = m_InventoryManager.FindStorageForItem(itemComponent.GetOwner(), EStoragePurpose.PURPOSE_DEPOSIT);
+			{
+				automaticDestination = true;
+				if (SCR_ArsenalInventorySlotUI.Cast(m_pFocusedSlotUI))
+					destination = m_InventoryManager.FindStorageForResource(m_pFocusedSlotUI.GetItemResource(), EStoragePurpose.PURPOSE_DEPOSIT);
+				else
+					destination = m_InventoryManager.FindStorageForItem(itemComponent.GetOwner(), EStoragePurpose.PURPOSE_DEPOSIT);
+			}
 		}
 
 		if (!destinationUI || (!destination && !fromPlayer))
@@ -329,18 +295,119 @@ modded class SCR_InventoryMenuUI
 			return;
 		}
 
-		ACE_Inventory_TryStart(destinationUI, m_pFocusedSlotUI, true, destination, automaticDestination);
+		ACE_Inventory_TryStart(destinationUI, m_pFocusedSlotUI, destination, automaticDestination, quantity);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void ACE_Inventory_CaptureQuantity()
+	{
+		if (!GetGame().GetInputManager().IsUsingMouseAndKeyboard())
+			return;
+
+		int priority;
+		int quantity;
+		if (GetGame().GetInputManager().GetActionValue("ACE_Inventory_ModifierLarge") > 0)
+		{
+			priority = 3;
+			quantity = ACE_Inventory_Settings.LARGE_BATCH_SIZE;
+		}
+		else if (GetGame().GetInputManager().GetActionValue("ACE_Inventory_ModifierAll") > 0)
+		{
+			priority = 2;
+			quantity = ACE_Inventory_Settings.ALL_ITEMS;
+		}
+		else if (GetGame().GetInputManager().GetActionValue("ACE_Inventory_ModifierSmall") > 0)
+		{
+			priority = 1;
+			quantity = ACE_Inventory_Settings.SMALL_BATCH_SIZE;
+		}
+
+		if (priority > m_iACE_Inventory_ClickPriority)
+		{
+			m_iACE_Inventory_ClickPriority = priority;
+			m_iACE_Inventory_ClickQuantity = quantity;
+		}
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void ACE_Inventory_QueueClickResolution()
+	{
+		if (m_bACE_Inventory_ClickQueued)
+			return;
+		m_bACE_Inventory_ClickQueued = true;
+		m_pACE_Inventory_ClickSlot = m_pFocusedSlotUI;
+		// Capture modifiers now; execute only once after native input dispatch.
+		GetGame().GetCallqueue().CallLater(ACE_Inventory_ResolveClick, 0, false);
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void ACE_Inventory_ClearClick()
+	{
+		m_bACE_Inventory_ClickQueued = false;
+		m_iACE_Inventory_ClickPriority = 0;
+		m_iACE_Inventory_ClickQuantity = 0;
+		m_pACE_Inventory_ClickSlot = null;
+		m_bACE_Inventory_NativeMoveQueued = false;
+		m_sACE_Inventory_NativeMoveAction = string.Empty;
+		m_pACE_Inventory_NativeMoveButton = null;
+		m_pACE_Inventory_NativeMoveParent = null;
+		m_iACE_Inventory_NativeMoveTraverse = -1;
+	}
+
+	//------------------------------------------------------------------------------------------------
+	protected void ACE_Inventory_ResolveClick()
+	{
+		int priority = m_iACE_Inventory_ClickPriority;
+		int quantity = m_iACE_Inventory_ClickQuantity;
+		SCR_InventorySlotUI slot = m_pACE_Inventory_ClickSlot;
+		bool nativeMove = m_bACE_Inventory_NativeMoveQueued;
+		string action = m_sACE_Inventory_NativeMoveAction;
+		SCR_InputButtonComponent button = m_pACE_Inventory_NativeMoveButton;
+		SCR_InventoryStorageBaseUI parent = m_pACE_Inventory_NativeMoveParent;
+		int traverse = m_iACE_Inventory_NativeMoveTraverse;
+		ACE_Inventory_ClearClick();
+
+		if (!m_bACE_Inventory_Open)
+			return;
+		if (priority > 0)
+		{
+			if (m_bACE_Inventory_Busy)
+			{
+				ACE_Inventory_Error("A batch is still pending.");
+				return;
+			}
+			if (!slot || slot != m_pFocusedSlotUI)
+			{
+				ACE_Inventory_Error("Clicked source changed before transfer.");
+				return;
+			}
+			if (ACE_Inventory_Settings.DEBUG_LOGGING)
+				PrintFormat("[ACE Inventory] Click resolved: quantity=%1 (All=-1), priority=%2.", quantity, priority);
+			ACE_Inventory_QuickTransfer(quantity);
+		}
+		else if (nativeMove)
+		{
+			if (slot != m_pFocusedSlotUI)
+			{
+				ACE_Inventory_Error("Clicked source changed before the native move.");
+				return;
+			}
+			super.OnAction(button, action, parent, traverse);
+		}
 	}
 
 	//------------------------------------------------------------------------------------------------
 	override void OnAction(SCR_InputButtonComponent comp, string action, SCR_InventoryStorageBaseUI pParentStorage = null, int traverseStorageIndex = -1)
 	{
-		if (m_ACE_Inventory_Busy && (action == "Inventory_Select" || action == "Inventory_Move"))
-			return;
-
-		if ((m_ACE_Inventory_ControlHeld || m_ACE_Inventory_ShiftHeld) && action == "Inventory_Move")
+		if (m_bACE_Inventory_InputReady && (action == "Inventory_Move" || action == "Inventory_Drop") && !m_DraggedSlot)
 		{
-			ACE_Inventory_QuickTransfer();
+			m_bACE_Inventory_NativeMoveQueued = true;
+			m_sACE_Inventory_NativeMoveAction = action;
+			m_pACE_Inventory_NativeMoveButton = comp;
+			m_pACE_Inventory_NativeMoveParent = pParentStorage;
+			m_iACE_Inventory_NativeMoveTraverse = traverseStorageIndex;
+			ACE_Inventory_CaptureQuantity();
+			ACE_Inventory_QueueClickResolution();
 			return;
 		}
 
@@ -348,60 +415,23 @@ modded class SCR_InventoryMenuUI
 	}
 
 	//------------------------------------------------------------------------------------------------
-	protected int ACE_Inventory_GetHeldQuantity()
-	{
-		if (m_ACE_Inventory_ControlHeld && m_ACE_Inventory_ShiftHeld)
-			return ACE_Inventory_Settings.LARGE_BATCH_SIZE;
-		if (m_ACE_Inventory_ShiftHeld)
-			return ACE_Inventory_Settings.ALL_ITEMS;
-		return ACE_Inventory_Settings.SMALL_BATCH_SIZE;
-	}
-
-	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_ControlDown()
-	{
-		m_ACE_Inventory_ControlHeld = true;
-		Print("[ACE Inventory] Ctrl held.");
-	}
-
-	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_ControlUp()
-	{
-		m_ACE_Inventory_ControlHeld = false;
-		Print("[ACE Inventory] Ctrl released.");
-	}
-
-	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_ShiftDown()
-	{
-		m_ACE_Inventory_ShiftHeld = true;
-		Print("[ACE Inventory] Shift held.");
-	}
-
-	//------------------------------------------------------------------------------------------------
-	protected void ACE_Inventory_ShiftUp()
-	{
-		m_ACE_Inventory_ShiftHeld = false;
-		Print("[ACE Inventory] Shift released.");
-	}
-
-	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_Begin(SCR_InventoryStorageBaseUI sourceUI, SCR_InventoryStorageBaseUI destinationUI, BaseInventoryStorageComponent destination, bool automaticDestination = false, bool dropping = false)
 	{
-		m_ACE_Inventory_Token = ++s_ACE_Inventory_NextToken;
-		m_ACE_Inventory_Busy = true;
-		m_ACE_Inventory_Waiting = false;
-		m_ACE_Inventory_Stop = false;
-		m_ACE_Inventory_Completed = 0;
-		m_ACE_Inventory_Index = 0;
-		m_ACE_Inventory_SourceUI = sourceUI;
-		m_ACE_Inventory_DestinationUI = destinationUI;
-		m_ACE_Inventory_Destination = destination;
-		m_ACE_Inventory_DestinationRoot = destination;
-		m_ACE_Inventory_AutomaticDestination = automaticDestination;
-		m_ACE_Inventory_Dropping = dropping;
-		PrintFormat("[ACE Inventory] Batch %1 started; requested up to %2. Automatic storage=%3, ground drop=%4.",
-			m_ACE_Inventory_Token, m_ACE_Inventory_Quantity, automaticDestination, dropping);
+		m_iACE_Inventory_Token = ++s_iACE_Inventory_NextToken;
+		m_bACE_Inventory_Busy = true;
+		m_bACE_Inventory_Waiting = false;
+		m_bACE_Inventory_Stop = false;
+		m_iACE_Inventory_Completed = 0;
+		m_iACE_Inventory_Index = 0;
+		m_pACE_Inventory_SourceUI = sourceUI;
+		m_pACE_Inventory_DestinationUI = destinationUI;
+		m_pACE_Inventory_Destination = destination;
+		m_pACE_Inventory_DestinationRoot = destination;
+		m_bACE_Inventory_AutomaticDestination = automaticDestination;
+		m_bACE_Inventory_Dropping = dropping;
+		if (ACE_Inventory_Settings.DEBUG_LOGGING)
+			PrintFormat("[ACE Inventory] Batch %1 started; requested up to %2. Automatic storage=%3, ground drop=%4.",
+				m_iACE_Inventory_Token, m_iACE_Inventory_Quantity, automaticDestination, dropping);
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -417,20 +447,17 @@ modded class SCR_InventoryMenuUI
 		if (controller)
 			requester = SCR_ResourcePlayerControllerInventoryComponent.Cast(controller.FindComponent(SCR_ResourcePlayerControllerInventoryComponent));
 
-		if (destination.IsInherited(ClothNodeStorageComponent))
-			destination = m_InventoryManager.FindActualStorageForItemResource(slot.GetItemResource(), destination);
-
 		if (!resource || !requester || !destination || !Replication.FindItemId(resource).IsValid() || !Replication.FindItemId(destination).IsValid())
 		{
 			ACE_Inventory_Error("Could not resolve the native arsenal request components.");
 			return true;
 		}
 
-		int requestedQuantity = m_ACE_Inventory_Quantity;
+		int requestedQuantity = m_iACE_Inventory_Quantity;
 		if (requestedQuantity == ACE_Inventory_Settings.ALL_ITEMS)
 		{
-			m_ACE_Inventory_Quantity = ACE_Inventory_Settings.ALL_ARSENAL_LIMIT;
-			if (m_ACE_Inventory_Quantity <= 0)
+			m_iACE_Inventory_Quantity = ACE_Inventory_Settings.ALL_ARSENAL_LIMIT;
+			if (m_iACE_Inventory_Quantity <= 0)
 			{
 				ACE_Inventory_Error("Configured arsenal All ceiling must be a positive integer.");
 				return true;
@@ -438,9 +465,9 @@ modded class SCR_InventoryMenuUI
 		}
 
 		ACE_Inventory_Begin(sourceUI, destinationUI, destination, automaticDestination);
-		m_ACE_Inventory_ArsenalRequester = requester;
+		m_pACE_Inventory_ArsenalRequester = requester;
 		requester.ACE_Inventory_GetResult().Insert(ACE_Inventory_OnArsenalResult);
-		requester.ACE_Inventory_RequestBatch(m_ACE_Inventory_Token, Replication.FindItemId(resource), Replication.FindItemId(destination), slot.GetItemResource(), automaticDestination, requestedQuantity);
+		requester.ACE_Inventory_RequestBatch(m_iACE_Inventory_Token, Replication.FindItemId(resource), Replication.FindItemId(destination), slot.GetItemResource(), automaticDestination, requestedQuantity);
 		return true;
 	}
 
@@ -460,9 +487,12 @@ modded class SCR_InventoryMenuUI
 			requester = SCR_ResourcePlayerControllerInventoryComponent.Cast(controller.FindComponent(SCR_ResourcePlayerControllerInventoryComponent));
 
 		SCR_InventoryStorageBaseUI sourceUI = slot.GetStorageUI();
+		BaseInventoryStorageComponent source;
+		if (sourceUI)
+			source = sourceUI.GetStorage();
 		array<IEntity> items = {};
 		if (!resource || !requester || !Replication.FindItemId(resource).IsValid()
-			|| !sourceUI || !sourceUI.ACE_Inventory_GetStack(slot, items))
+			|| !sourceUI || !source || !Replication.FindItemId(source).IsValid() || !sourceUI.ACE_Inventory_GetStack(slot, items))
 		{
 			ACE_Inventory_Error("Could not resolve the arsenal return or source stack.");
 			return true;
@@ -478,7 +508,7 @@ modded class SCR_InventoryMenuUI
 				return true;
 			}
 			ids.Insert(Replication.FindItemId(component));
-			if (ids.Count() == m_ACE_Inventory_Quantity)
+			if (ids.Count() == m_iACE_Inventory_Quantity)
 				break;
 		}
 
@@ -488,26 +518,26 @@ modded class SCR_InventoryMenuUI
 			return true;
 		}
 
-		int requestedQuantity = m_ACE_Inventory_Quantity;
+		int requestedQuantity = m_iACE_Inventory_Quantity;
 		if (requestedQuantity == ACE_Inventory_Settings.ALL_ITEMS)
-			m_ACE_Inventory_Quantity = ids.Count();
+			m_iACE_Inventory_Quantity = ids.Count();
 		ACE_Inventory_Begin(sourceUI, destinationUI, destination);
-		m_ACE_Inventory_ArsenalRequester = requester;
+		m_pACE_Inventory_ArsenalRequester = requester;
 		requester.ACE_Inventory_GetResult().Insert(ACE_Inventory_OnArsenalResult);
-		requester.ACE_Inventory_RequestRefund(m_ACE_Inventory_Token, Replication.FindItemId(resource), ids, requestedQuantity);
+		requester.ACE_Inventory_RequestRefund(m_iACE_Inventory_Token, Replication.FindItemId(resource), Replication.FindItemId(source), ids, requestedQuantity);
 		return true;
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_NextMove()
 	{
-		if (m_ACE_Inventory_Stop || m_ACE_Inventory_Index == m_ACE_Inventory_Items.Count())
+		if (m_bACE_Inventory_Stop || m_iACE_Inventory_Index == m_aACE_Inventory_Items.Count())
 		{
 			ACE_Inventory_Finish("Finished.");
 			return;
 		}
 
-		IEntity item = m_ACE_Inventory_Items[m_ACE_Inventory_Index];
+		IEntity item = m_aACE_Inventory_Items[m_iACE_Inventory_Index];
 		InventoryItemComponent component;
 		if (item)
 			component = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
@@ -515,33 +545,33 @@ modded class SCR_InventoryMenuUI
 		BaseInventoryStorageComponent currentSource;
 		if (component && component.GetParentSlot())
 			currentSource = component.GetParentSlot().GetStorage();
-		BaseInventoryStorageComponent source = m_ACE_Inventory_Sources[m_ACE_Inventory_Index];
+		BaseInventoryStorageComponent source = m_aACE_Inventory_Sources[m_iACE_Inventory_Index];
 		if (!component || currentSource != source)
 		{
 			ACE_Inventory_Finish("Source changed before the next move.");
 			return;
 		}
 
-		if (m_InventoryManager && m_ACE_Inventory_AutomaticDestination && !m_ACE_Inventory_Dropping)
-			m_ACE_Inventory_Destination = m_InventoryManager.FindStorageForItem(item, EStoragePurpose.PURPOSE_DEPOSIT);
-		else if (m_InventoryManager && m_ACE_Inventory_DestinationRoot && m_ACE_Inventory_DestinationRoot.IsInherited(ClothNodeStorageComponent))
-			m_ACE_Inventory_Destination = m_InventoryManager.FindStorageForInsert(item, m_ACE_Inventory_DestinationRoot, EStoragePurpose.PURPOSE_ANY);
+		if (m_InventoryManager && m_bACE_Inventory_AutomaticDestination && !m_bACE_Inventory_Dropping)
+			m_pACE_Inventory_Destination = m_InventoryManager.FindStorageForItem(item, EStoragePurpose.PURPOSE_DEPOSIT);
+		else if (m_InventoryManager && m_pACE_Inventory_DestinationRoot)
+			m_pACE_Inventory_Destination = m_InventoryManager.FindStorageForInsert(item, m_pACE_Inventory_DestinationRoot, EStoragePurpose.PURPOSE_DEPOSIT);
 
 		bool permitted;
 		if (m_InventoryManager && m_InventoryManager.CanMoveItem(item))
 		{
-			if (m_ACE_Inventory_Dropping)
+			if (m_bACE_Inventory_Dropping)
 				permitted = source && m_InventoryManager.CanRemoveItemFromStorage(item, source);
-			else if (m_ACE_Inventory_Destination && !IsStorageArsenal(m_ACE_Inventory_Destination)
-				&& !m_ACE_Inventory_Destination.IsInherited(CharacterInventoryStorageComponent)
-				&& !m_ACE_Inventory_Destination.IsInherited(EquipedWeaponStorageComponent)
-				&& !m_ACE_Inventory_Destination.IsInherited(SCR_WeaponAttachmentsStorageComponent)
-				&& !m_ACE_Inventory_Destination.IsInherited(SCR_HandSlotStorageComponent))
+			else if (m_pACE_Inventory_Destination && !IsStorageArsenal(m_pACE_Inventory_Destination)
+				&& !m_pACE_Inventory_Destination.IsInherited(CharacterInventoryStorageComponent)
+				&& !m_pACE_Inventory_Destination.IsInherited(EquipedWeaponStorageComponent)
+				&& !m_pACE_Inventory_Destination.IsInherited(SCR_WeaponAttachmentsStorageComponent)
+				&& !m_pACE_Inventory_Destination.IsInherited(SCR_HandSlotStorageComponent))
 			{
 				if (source)
-					permitted = m_InventoryManager.CanMoveItemToStorage(item, m_ACE_Inventory_Destination);
+					permitted = m_InventoryManager.CanMoveItemToStorage(item, m_pACE_Inventory_Destination);
 				else
-					permitted = m_InventoryManager.CanInsertItemInStorage(item, m_ACE_Inventory_Destination);
+					permitted = m_InventoryManager.CanInsertItemInStorage(item, m_pACE_Inventory_Destination);
 			}
 		}
 		if (!GetCanInteract() || !permitted)
@@ -550,32 +580,32 @@ modded class SCR_InventoryMenuUI
 			return;
 		}
 
-		m_ACE_Inventory_WaitTime = 0;
-		m_ACE_Inventory_Waiting = true;
-		m_ACE_Inventory_Callback = new ACE_Inventory_MoveCallback(this, m_ACE_Inventory_Token);
+		m_fACE_Inventory_WaitTime = 0;
+		m_bACE_Inventory_Waiting = true;
+		m_pACE_Inventory_Callback = new ACE_Inventory_MoveCallback(this, m_iACE_Inventory_Token, m_iACE_Inventory_Index);
 		bool accepted;
-		if (m_ACE_Inventory_Dropping)
-			accepted = m_InventoryManager.TryRemoveItemFromInventory(item, source, m_ACE_Inventory_Callback);
+		if (m_bACE_Inventory_Dropping)
+			accepted = m_InventoryManager.TryRemoveItemFromInventory(item, source, m_pACE_Inventory_Callback);
 		else if (source)
-			accepted = m_InventoryManager.TryMoveItemToStorage(item, m_ACE_Inventory_Destination, -1, m_ACE_Inventory_Callback);
+			accepted = m_InventoryManager.TryMoveItemToStorage(item, m_pACE_Inventory_Destination, -1, m_pACE_Inventory_Callback);
 		else
-			accepted = m_InventoryManager.TryInsertItemInStorage(item, m_ACE_Inventory_Destination, -1, m_ACE_Inventory_Callback);
+			accepted = m_InventoryManager.TryInsertItemInStorage(item, m_pACE_Inventory_Destination, -1, m_pACE_Inventory_Callback);
 
 		if (!accepted)
 		{
-			m_ACE_Inventory_Waiting = false;
+			m_bACE_Inventory_Waiting = false;
 			ACE_Inventory_Finish("Native move request rejected.");
 		}
 	}
 
 	//------------------------------------------------------------------------------------------------
-	void ACE_Inventory_OnMoveResult(int token, bool success)
+	void ACE_Inventory_OnMoveResult(int token, int operationIndex, bool success)
 	{
-		if (token != m_ACE_Inventory_Token || !m_ACE_Inventory_Busy || !m_ACE_Inventory_Waiting)
+		if (token != m_iACE_Inventory_Token || operationIndex != m_iACE_Inventory_Index || !m_bACE_Inventory_Busy || !m_bACE_Inventory_Waiting)
 			return;
 
-		m_ACE_Inventory_Waiting = false;
-		IEntity item = m_ACE_Inventory_Items[m_ACE_Inventory_Index];
+		m_bACE_Inventory_Waiting = false;
+		IEntity item = m_aACE_Inventory_Items[m_iACE_Inventory_Index];
 		InventoryItemComponent component;
 		if (item)
 			component = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
@@ -583,10 +613,10 @@ modded class SCR_InventoryMenuUI
 		bool membershipConfirmed;
 		if (component)
 		{
-			if (m_ACE_Inventory_Dropping)
+			if (m_bACE_Inventory_Dropping)
 				membershipConfirmed = component.GetParentSlot() == null;
 			else if (component.GetParentSlot())
-				membershipConfirmed = component.GetParentSlot().GetStorage() == m_ACE_Inventory_Destination;
+				membershipConfirmed = component.GetParentSlot().GetStorage() == m_pACE_Inventory_Destination;
 		}
 		if (!success || !membershipConfirmed)
 		{
@@ -594,21 +624,23 @@ modded class SCR_InventoryMenuUI
 			return;
 		}
 
-		m_ACE_Inventory_Completed++;
-		m_ACE_Inventory_Index++;
-		PrintFormat("[ACE Inventory] Batch %1: %2/%3 moves confirmed.", token, m_ACE_Inventory_Completed, m_ACE_Inventory_Quantity);
-		if (!m_ACE_Inventory_Open || m_ACE_Inventory_Stop)
+		m_iACE_Inventory_Completed++;
+		m_iACE_Inventory_Index++;
+		if (ACE_Inventory_Settings.DEBUG_LOGGING)
+			PrintFormat("[ACE Inventory] Batch %1: %2/%3 moves confirmed.", token, m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity);
+		if (!m_bACE_Inventory_Open || m_bACE_Inventory_Stop)
 			ACE_Inventory_Finish("Stopped; the outstanding move completed.");
 	}
 
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_OnArsenalResult(int token, int completed, string reason, bool finished)
 	{
-		if (token != m_ACE_Inventory_Token || !m_ACE_Inventory_Busy)
+		if (token != m_iACE_Inventory_Token || !m_bACE_Inventory_Busy)
 			return;
 
-		m_ACE_Inventory_Completed = completed;
-		PrintFormat("[ACE Inventory] Batch %1: %2/%3 arsenal items confirmed. %4", token, completed, m_ACE_Inventory_Quantity, reason);
+		m_iACE_Inventory_Completed = completed;
+		if (ACE_Inventory_Settings.DEBUG_LOGGING || (!finished && reason.Contains("pending")))
+			PrintFormat("[ACE Inventory] Batch %1: %2/%3 arsenal items confirmed. %4", token, completed, m_iACE_Inventory_Quantity, reason);
 		if (finished)
 			ACE_Inventory_Finish(reason);
 	}
@@ -616,30 +648,30 @@ modded class SCR_InventoryMenuUI
 	//------------------------------------------------------------------------------------------------
 	protected void ACE_Inventory_Finish(string reason)
 	{
-		PrintFormat("[ACE Inventory] Batch %1 ended: %2/%3 confirmed. %4", m_ACE_Inventory_Token, m_ACE_Inventory_Completed, m_ACE_Inventory_Quantity, reason);
-		if (m_ACE_Inventory_ArsenalRequester)
-			m_ACE_Inventory_ArsenalRequester.ACE_Inventory_GetResult().Remove(ACE_Inventory_OnArsenalResult);
+		PrintFormat("[ACE Inventory] Batch %1 ended: %2/%3 confirmed. %4", m_iACE_Inventory_Token, m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity, reason);
+		if (m_pACE_Inventory_ArsenalRequester)
+			m_pACE_Inventory_ArsenalRequester.ACE_Inventory_GetResult().Remove(ACE_Inventory_OnArsenalResult);
 
-		m_ACE_Inventory_ArsenalRequester = null;
-		m_ACE_Inventory_Busy = false;
-		m_ACE_Inventory_Waiting = false;
-		m_ACE_Inventory_Callback = null;
-		m_ACE_Inventory_Items.Clear();
-		m_ACE_Inventory_Sources.Clear();
-		m_ACE_Inventory_Destination = null;
-		m_ACE_Inventory_DestinationRoot = null;
-		if (m_ACE_Inventory_Open)
+		m_pACE_Inventory_ArsenalRequester = null;
+		m_bACE_Inventory_Busy = false;
+		m_bACE_Inventory_Waiting = false;
+		m_pACE_Inventory_Callback = null;
+		m_aACE_Inventory_Items.Clear();
+		m_aACE_Inventory_Sources.Clear();
+		m_pACE_Inventory_Destination = null;
+		m_pACE_Inventory_DestinationRoot = null;
+		if (m_bACE_Inventory_Open)
 		{
 			RefreshLootUIListener();
-			if (m_ACE_Inventory_SourceUI)
-				m_ACE_Inventory_SourceUI.Refresh();
-			if (m_ACE_Inventory_DestinationUI)
-				m_ACE_Inventory_DestinationUI.Refresh();
-			if (m_ACE_Inventory_Completed == 0)
+			if (m_pACE_Inventory_SourceUI)
+				m_pACE_Inventory_SourceUI.Refresh();
+			if (m_pACE_Inventory_DestinationUI)
+				m_pACE_Inventory_DestinationUI.Refresh();
+			if (m_iACE_Inventory_Completed == 0)
 				SCR_UISoundEntity.SoundEvent(SCR_SoundEvent.SOUND_INV_DROP_ERROR);
 		}
-		m_ACE_Inventory_SourceUI = null;
-		m_ACE_Inventory_DestinationUI = null;
+		m_pACE_Inventory_SourceUI = null;
+		m_pACE_Inventory_DestinationUI = null;
 	}
 
 	//------------------------------------------------------------------------------------------------
@@ -652,28 +684,25 @@ modded class SCR_InventoryMenuUI
 	//------------------------------------------------------------------------------------------------
 	override void OnMenuClose()
 	{
-		m_ACE_Inventory_Open = false;
-		m_ACE_Inventory_Stop = true;
-		m_ACE_Inventory_DragQuantity = 0;
-		m_ACE_Inventory_ControlHeld = false;
-		m_ACE_Inventory_ShiftHeld = false;
-		if (m_ACE_Inventory_ArsenalRequester)
+		m_bACE_Inventory_Open = false;
+		m_bACE_Inventory_Stop = true;
+		if (m_pACE_Inventory_ArsenalRequester)
 		{
-			m_ACE_Inventory_ArsenalRequester.ACE_Inventory_GetResult().Remove(ACE_Inventory_OnArsenalResult);
-			m_ACE_Inventory_ArsenalRequester.ACE_Inventory_Cancel(m_ACE_Inventory_Token);
-			m_ACE_Inventory_ArsenalRequester = null;
+			m_pACE_Inventory_ArsenalRequester.ACE_Inventory_Cancel(m_iACE_Inventory_Token);
+			if (m_bACE_Inventory_Busy)
+				ACE_Inventory_Finish("Inventory closed; server cancellation requested, pending operation may still settle.");
 		}
+		else if (m_bACE_Inventory_Busy && !m_bACE_Inventory_Waiting)
+			ACE_Inventory_Finish("Inventory closed; cancelled before the next move.");
 
-		if (m_ACE_Inventory_Busy)
-			PrintFormat("[ACE Inventory] Menu closed: %1/%2 confirmed; any outstanding operation may still finish.", m_ACE_Inventory_Completed, m_ACE_Inventory_Quantity);
+		if (m_bACE_Inventory_Busy)
+			PrintFormat("[ACE Inventory] Menu closed: %1/%2 confirmed; any outstanding operation may still finish.", m_iACE_Inventory_Completed, m_iACE_Inventory_Quantity);
 
-		GetGame().GetInputManager().RemoveActionListener("ACE_Inventory_QuickFive", EActionTrigger.DOWN, ACE_Inventory_QuickTransfer);
-		GetGame().GetInputManager().RemoveActionListener("ACE_Inventory_Five", EActionTrigger.DOWN, ACE_Inventory_ControlDown);
-		GetGame().GetInputManager().RemoveActionListener("ACE_Inventory_Five", EActionTrigger.UP, ACE_Inventory_ControlUp);
-		GetGame().GetInputManager().RemoveActionListener("ACE_Inventory_Shift", EActionTrigger.DOWN, ACE_Inventory_ShiftDown);
-		GetGame().GetInputManager().RemoveActionListener("ACE_Inventory_Shift", EActionTrigger.UP, ACE_Inventory_ShiftUp);
+		GetGame().GetCallqueue().Remove(ACE_Inventory_ResolveClick);
+		ACE_Inventory_ClearClick();
+		m_bACE_Inventory_InputReady = false;
 		super.OnMenuClose();
-		m_ACE_Inventory_SourceUI = null;
-		m_ACE_Inventory_DestinationUI = null;
+		m_pACE_Inventory_SourceUI = null;
+		m_pACE_Inventory_DestinationUI = null;
 	}
 }

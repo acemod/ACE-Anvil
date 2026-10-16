@@ -1,6 +1,9 @@
 SCR_ChimeraCharacter {
  ID "520EC961A090B1EE"
  components {
+  ACE_Medical_InspectionOverlayComponent "{6A95747ABAC8DAE4}" {
+   m_sMeshName "{6DCC70A71EF9EB70}Assets/UI/ACE_Medical_Inspection/BodyOverlay/BodyOverlay.xob"
+  }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    additionalActions {
     SCR_MorphineUserAction "{5A5CCAE2AF3D6445}" {

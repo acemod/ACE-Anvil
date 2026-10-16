@@ -1,0 +1,218 @@
+FrameWidgetClass {
+ Name "ACE_Medical_Inspection"
+ Clipping False
+ "Ignore Cursor" 1
+ {
+  ImageWidgetClass "{6A957738F3004865}" {
+   Name "Cursor"
+   Slot FrameWidgetSlot "{6A957738F3003AA2}" {
+    Anchor 0.5 0.5 0.5 0.5
+    OffsetLeft 0
+    OffsetTop 0
+    OffsetRight -100
+    OffsetBottom -30
+    Alignment 0.5 0.5
+    SizeToContent 1
+   }
+   Color 0.7608 0.3922 0.0784 1
+   Texture "{272DB16BAE0E7D3C}UI/Textures/Editor/Cursors/GamepadCursor_Default.edds"
+   Size 128 128
+  }
+  FrameWidgetClass "{6A953BA3F2086BD8}" {
+   Name "InspectionPanel"
+   Slot FrameWidgetSlot "{6A95F07FB1B78D85}" {
+    Anchor 0.5 0.5 0.5 0.5
+    PositionX 64
+    OffsetLeft 64
+    PositionY 64
+    OffsetTop 64
+    SizeX 280
+    OffsetRight -344
+    SizeY 450
+    OffsetBottom -514
+   }
+   Clipping False
+   {
+    ImageWidgetClass "{6A953BA3F2072AC5}" {
+     Name "DamageHeaderBackground"
+     Slot FrameWidgetSlot "{6A95AC8FA104BBDE}" {
+      Anchor 0 0 0 0
+      PositionX 0
+      OffsetLeft 0
+      OffsetTop 0
+      SizeX 280
+      OffsetRight -280
+      SizeY 28
+      OffsetBottom -28
+     }
+     Color 0.12 0.12 0.12 0.9
+    }
+    TextWidgetClass "{6A953BA3F2072AC4}" {
+     Name "SelectedBodyPart"
+     Slot FrameWidgetSlot "{6A954CC058A98690}" {
+      Anchor 0 0 0 0
+      PositionX 12
+      OffsetLeft 12
+      OffsetTop 0
+      SizeX 256
+      OffsetRight -268
+      SizeY 28
+      OffsetBottom -28
+     }
+     components {
+      ACE_Medical_BodyPartNameUIComponent "{6A95D7C49B10E863}" {
+      }
+     }
+     Text "Part"
+     "Font Size" 18
+     "Min Font Size" 18
+     "Vertical Alignment" Center
+     Wrap 1
+     FontProperties FontProperties "{6A9522DA85443AD4}" {
+      Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+      ShadowSize 2
+      ShadowColor 0 0 0 0.8
+     }
+    }
+    SizeLayoutWidgetClass "{6A953BA3F20753E3}" {
+     Name "DamageContainer"
+     Slot FrameWidgetSlot "{6A95CEBC08BD954D}" {
+      Anchor 0 0 0 0
+      OffsetLeft 0
+      PositionY 30
+      OffsetTop 30
+      SizeX 280
+      OffsetRight -280
+      SizeY 170
+      OffsetBottom -200
+      SizeToContent 1
+     }
+     Clipping False
+     AllowWidthOverride 1
+     WidthOverride 280
+     AllowMinDesiredHeight 1
+     MinDesiredHeight 170
+     {
+      OverlayWidgetClass "{6A953BA3F207531C}" {
+       Name "DamageContent"
+       Slot AlignableSlot "{6A95C4E1783F1C79}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       {
+        BlurWidgetClass "{6A962B17C31B95F0}" {
+         Name "Blur"
+         Slot OverlayWidgetSlot "{6A9765BBDF3C4886}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         Opacity 0.875
+         Intensity 0.421
+        }
+        ImageWidgetClass "{6A953BA3F207531D}" {
+         Name "DamageBackground"
+         Slot OverlayWidgetSlot "{6A95BA8F736601E9}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         Color 0 0 0 0.35
+        }
+        VerticalLayoutWidgetClass "{6A953BA3F207928C}" {
+         Name "Damage"
+         Slot OverlayWidgetSlot "{6A95A0FD34DCBB35}" {
+          HorizontalAlign 3
+          VerticalAlign 0
+          Padding 12 6 12 6
+         }
+         components {
+          ACE_Medical_DamageInfoUIComponent "{6A95E41B8D2C70A6}" {
+          }
+         }
+         {
+          HorizontalLayoutWidgetClass "{6A953BA3F207928F}" : "{36D28E08508C34AF}UI/layouts/Medical/ACE_Medical_ConditionInfo.layout" {
+           Name "DamageInfo"
+           Slot LayoutSlot "{6A952CCEA4DE6EF0}" {
+            HorizontalAlign 3
+            Padding 0 2 0 2
+           }
+          }
+          HorizontalLayoutWidgetClass "{6A953BA3F207928E}" : "{36D28E08508C34AF}UI/layouts/Medical/ACE_Medical_ConditionInfo.layout" {
+           Name "ImpairmentInfo"
+           Slot LayoutSlot "{6A952CCEA4DE6EF0}" {
+            HorizontalAlign 3
+            Padding 0 2 0 2
+           }
+          }
+          HorizontalLayoutWidgetClass "{6A953BA3F2079289}" : "{36D28E08508C34AF}UI/layouts/Medical/ACE_Medical_ConditionInfo.layout" {
+           Name "BleedingInfo"
+           Slot LayoutSlot "{6A952CCEA4DE6EF0}" {
+            HorizontalAlign 3
+            Padding 0 2 0 2
+           }
+          }
+          HorizontalLayoutWidgetClass "{6A953BA3F2079288}" : "{36D28E08508C34AF}UI/layouts/Medical/ACE_Medical_ConditionInfo.layout" {
+           Name "TourniquetInfo"
+           Slot LayoutSlot "{6A952CCEA4DE6EF0}" {
+            HorizontalAlign 3
+            Padding 0 2 0 2
+           }
+          }
+          HorizontalLayoutWidgetClass "{6A953BA3F207928B}" : "{36D28E08508C34AF}UI/layouts/Medical/ACE_Medical_ConditionInfo.layout" {
+           Name "SalineBagInfo"
+           Slot LayoutSlot "{6A952CCEA4DE6EF0}" {
+            HorizontalAlign 3
+            Padding 0 2 0 2
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+    TextWidgetClass "{6A953BA3F207FBE1}" {
+     Name "TriageStatus"
+     Slot FrameWidgetSlot "{6A9527CDA4C79ECE}" {
+      Anchor 0 0 0 0
+      PositionX 12
+      OffsetLeft 12
+      PositionY 208
+      OffsetTop 208
+      SizeX 256
+      OffsetRight -268
+      SizeY 24
+      OffsetBottom -232
+     }
+     Text ""
+     "Font Size" 18
+     "Min Font Size" 18
+     "Vertical Alignment" Center
+     Wrap 1
+     FontProperties FontProperties "{6A95A0696E1A7959}" {
+      Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+      ShadowSize 2
+      ShadowColor 0 0 0 0.8
+     }
+    }
+    RichTextWidgetClass "{6A953BA3F207FBE0}" {
+     Name "Activity"
+     Slot FrameWidgetSlot "{6A954D510053FE5E}" {
+      Anchor 0 0 0 0
+      PositionX 12
+      OffsetLeft 12
+      PositionY 238
+      OffsetTop 238
+      SizeX 256
+      OffsetRight -268
+      SizeY 72
+      OffsetBottom -310
+     }
+     Text ""
+     "Font Size" 16
+     "Min Font Size" 16
+     Wrap 1
+    }
+   }
+  }
+ }
+}

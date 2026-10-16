@@ -206,6 +206,10 @@ StringTable {
    Author "Kexanone"
    LastChanged "michy_REV19"
   }
+  CustomStringTableItem "{65515E087710DB47}" {
+   Id "ACE_Medical-KeyBind_Inspection"
+   Target_en_us "Advanced inspection"
+  }
   CustomStringTableItem "{65516A9625D01268}" {
    Id "ACE_Medical-RadialMenu_ExaminePatient"
    Target_en_us "Examine patient"

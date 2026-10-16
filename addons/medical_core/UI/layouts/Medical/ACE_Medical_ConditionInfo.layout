@@ -1,0 +1,34 @@
+HorizontalLayoutWidgetClass "{6A959D87CD872610}" {
+ Name "ACE_Medical_ConditionInfo"
+ Slot LayoutSlot "{6A952CCEA4DE6EF0}" {
+  HorizontalAlign 3
+  Padding 0 2 0 2
+ }
+ "Is Visible" 0
+ components {
+  ACE_Medical_DamageInfoEntryUIComponent "{6A950117C3D28834}" {
+  }
+ }
+ {
+  ImageWidgetClass "{6A9586C8CCCA8B5C}" {
+   Name "Icon"
+   Slot LayoutSlot "{6A955ED2E694B483}" {
+    VerticalAlign 1
+   }
+   Size 32 32
+  }
+  TextWidgetClass "{6A95BE41F72F1FEC}" {
+   Name "Text"
+   Slot LayoutSlot "{6A95385940DD7124}" {
+    VerticalAlign 1
+    SizeMode Fill
+    Padding 8 0 0 0
+   }
+   Text ""
+   "Font Size" 18
+   "Min Font Size" 18
+   "Vertical Alignment" Center
+   Wrap 1
+  }
+ }
+}

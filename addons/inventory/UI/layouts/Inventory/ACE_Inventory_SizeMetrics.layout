@@ -1,0 +1,72 @@
+HorizontalLayoutWidgetClass {
+ Name "ACE_SizeMetrics"
+ Slot LayoutSlot {
+  HorizontalAlign 2
+  Padding 0 2 0 0
+ }
+ "Ignore Cursor" 1
+ "Inherit Color" 1
+ {
+  HorizontalLayoutWidgetClass {
+   Name "ACE_ItemSizeRow"
+   Slot LayoutSlot {
+    VerticalAlign 1
+   }
+   "Inherit Color" 1
+   {
+    ImageWidgetClass {
+     Name "ACE_ItemSizeIcon"
+     Slot LayoutSlot {
+      VerticalAlign 1
+     }
+     "Inherit Color" 1
+     Texture "{73A84B209C112002}UI/Textures/Inventory/ACE_Inventory_ItemSize.edds"
+     Size 16 16
+    }
+    TextWidgetClass {
+     Name "ACE_ItemSize"
+     Slot LayoutSlot {
+      VerticalAlign 1
+      Padding 4 0 0 0
+     }
+     "Inherit Color" 1
+     Text ""
+     "Font Size" 14
+     "Min Font Size" 14
+     "Vertical Alignment" Center
+    }
+   }
+  }
+  HorizontalLayoutWidgetClass {
+   Name "ACE_AvailableSizeRow"
+   Slot LayoutSlot {
+    VerticalAlign 1
+    Padding 12 0 0 0
+   }
+   "Inherit Color" 1
+   {
+    ImageWidgetClass {
+     Name "ACE_AvailableSizeIcon"
+     Slot LayoutSlot {
+      VerticalAlign 1
+     }
+     "Inherit Color" 1
+     Texture "{73A84B209C112003}UI/Textures/Inventory/ACE_Inventory_PocketSize.edds"
+     Size 16 16
+    }
+    TextWidgetClass {
+     Name "ACE_AvailableSize"
+     Slot LayoutSlot {
+      VerticalAlign 1
+      Padding 4 0 0 0
+     }
+     "Inherit Color" 1
+     Text ""
+     "Font Size" 14
+     "Min Font Size" 14
+     "Vertical Alignment" Center
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,11 @@
+ImageWidgetClass {
+ Name "ACE_CompartmentIcon"
+ Slot AlignableSlot {
+  HorizontalAlign 3
+  VerticalAlign 3
+ }
+ "Ignore Cursor" 1
+ "Inherit Color" 1
+ Texture "{6A9B210991665255}UI/Textures/Inventory/ACE_Inventory_Pockets.edds"
+ Size 12 12
+}

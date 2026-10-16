@@ -1,0 +1,6 @@
+OverlayWidgetClass {
+ components {
+  ACE_Inventory_ContainerMetricsComponent "{6A9B210991665240}" {
+  }
+ }
+}

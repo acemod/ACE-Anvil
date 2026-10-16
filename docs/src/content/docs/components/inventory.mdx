@@ -2,25 +2,19 @@
 title: ACE Inventory
 ---
 
-Experimental PC-only MVP candidate for **modifier + Move batch transfers**,
-with configurable small and large batches (default **5 and 10**) and **All that fit**.
-Includes compact item and container metrics with per-player display preferences.
-It is not included in ACE All in One and is not production-ready.
+Compact inventory metrics for items and containers, with saved per-player display preferences.
+The addon depends only on vanilla Arma Reforger; ACE Core is not required.
+It is not included in ACE All in One.
 
 ## Loading
 
 1. In Arma Reforger Tools, scan the repository's `addons` directory for projects.
 2. Open `ACE Inventory` (`addons/inventory/addon.gproj`).
-3. ACE Magazine Repack is optional. Load it separately if magazine repacking is
-   desired; ACE Inventory does not require it.
-4. Compile Game scripts in Script Editor. Resolve compilation errors before testing.
-5. Open a test world with inventory containers and an enabled arsenal.
-   The development guide recommends the vanilla `MpTest` world.
+3. Compile Game scripts in Script Editor, then open a test world with inventory containers.
 
-The project intentionally has no resource database checked in. Allow Workbench
-to generate its resource database when registering/opening the project.
+The project intentionally has no resource database checked in. Allow Workbench to generate it when registering/opening the project.
 
-## Inventory metrics
+## Readouts
 
 - Item tooltips show total compartment count, total storage capacity, largest available pocket dimensions, item volume, item dimensions and the original weight display on one line.
 - Container headers show total free volume and the largest single pocket's free volume, for example `2.4(0.9) L`.
@@ -29,299 +23,20 @@ to generate its resource database when registering/opening the project.
 - Header counts include only pockets with positive remaining volume. Multi-compartment items retain the count at `1` and `0`; single-compartment items hide it. Tooltips retain the total count.
 - Full and overfilled pockets are excluded from available dimensions. Missing or invalid measurements hide the affected readout.
 
-Under **Settings → ACE Inventory**, independently toggle **Show dimensions**, **Show compartment count** and **Show single-pocket max values ()**. All three default to enabled and are saved locally per player. Changes refresh existing readouts without reopening inventory. Turning off single-pocket max values hides both parenthesized values, leaving main values unchanged.
+## Player preferences
 
-Volume and dimensions are separate native inventory properties. Free space cannot be combined across pockets, and the largest available dimensions may belong to a different pocket than the one with the most free volume. These readouts are storage information, not a fit guarantee; other native restrictions can prevent a transfer. Metrics do not change item sizes, capacities or transfer rules.
+Under **Settings → ACE Inventory**, independently toggle:
 
-Metrics are provided by ACE Inventory, not ACE Core. ACE Core is not required.
+- **Show dimensions**
+- **Show compartment count**
+- **Show single-pocket max values ()**
+
+All three default to enabled and are saved locally per player. Changes refresh existing readouts without reopening inventory. Turning off single-pocket max values hides both parenthesized values, leaving main values unchanged.
+
 Settings labels currently have English translations; additional translations can be added through the addon's string table.
 
-## Controls and scope
+## Limitations
 
-**Default quick transfer:** use the vanilla **Move** action on the source stack or arsenal
-catalog item while holding **left Ctrl** for the small batch (default five).
-Hold **left Ctrl + left Shift** for the large batch (default ten).
-Hold **left Shift without left Ctrl** for **All**. Left Ctrl + left Shift takes
-precedence and selects the large batch, not All.
-Move uses the player's existing bindings (normally **X or right-click**), including
-custom rebindings; ACE Inventory does not add fixed mouse/X shortcuts.
-The lower-left navigation bar shows **Ctrl / Move 5**, **Ctrl + Shift / Move 10**
-and **Shift / Move All**, alongside the vanilla Move hint showing its current
-bindings. Numeric labels use the configured batch sizes. These are informational
-modifier hints: pressing a modifier alone does not move anything. They remain
-visible when vanilla shows its Requisition, Return, Pickup, Drop or Move hint.
-They inherit vanilla's availability rules rather than adding separate checks.
-The hint keys have vanilla hold indicators: keep the quantity key(s) held while
-using Move. There is no minimum hold delay.
-Right-side modifier keys do not select a batch with the default bindings.
-The quantity is captured when Move fires, so releasing modifiers does
-not change a pending batch. Incoming small/large quick transfers use compatible player deposit storages,
-regardless of which player container is displayed. Incoming **All** transfers
-instead target only the currently displayed player container, including ground
-pickup, external-container pickup and arsenal acquisition. Open the desired
-player container before clicking. The target is the selected clothing item or
-bag, including all compatible pockets inside it, not just one internal storage.
-All stops when that item is full rather than spilling into a different clothing
-item or bag. For arsenal acquisition, native resource-storage selection is
-repeated inside the captured target root for each item; physical transfers use
-the equivalent scoped item-storage selector for their captured target roots. Automatic
-destination selection is repeated per item, so filling one pocket does not stop
-a batch when another player storage can accept the remainder. Player items go
-to the currently open external container. If the opposite panel is showing the
-ground rather than a container, modified Move on a player stack drops up
-to the selected quantity. Modified Move on a loose ground stack picks up
-to that quantity. With an arsenal
-open, modified Move on a player stack returns/refunds up to that many eligible
-items rather than dropping them on the ground.
+Volume and dimensions are separate native inventory properties. Free space cannot be combined across pockets, and the largest available dimensions may belong to a different pocket than the one with the most free volume.
 
-Three modifier-state actions are attached to vanilla's active `InventoryMenuContext`.
-When native `Inventory_Drop` (PC quick transfer) or `Inventory_Move` fires,
-the current modifier values are captured:
-Ctrl + Shift takes precedence over Shift, then Ctrl. There are no latched
-modifier listeners or separate custom transfer listeners. Deferred resolution
-executes the captured batch once, or the vanilla single-item move once if no
-modifier was held. This input-dispatch step needs regression testing, particularly
-with rebound Move inputs.
-There are no batch-drag overrides.
-
-**Dragging:** always uses vanilla behavior, including Magazine Repack behavior
-when that addon is loaded, regardless of modifiers or a pending batch. Dragging does not select a
-batch quantity. If an ordinary operation changes a snapshotted source, the batch
-stops when it detects that change; it does not undo the ordinary operation.
-If modifier bindings are unavailable, ordinary native inventory actions remain available.
-
-After updating the addon, stop Play mode and reload the Workbench project
-(or restart Workbench), then re-enter Play mode. Recompiling Game scripts alone
-does not reload changed input bindings.
-
-- Normal inventory: move up to the selected quantity from the selected visible stack.
-- Arsenal: request up to the selected quantity of the catalog item through the
-  native arsenal acquisition path, or return up to that many physical items through
-  the native refund path. Items containing non-refundable contents are rejected.
-- Ground: insert existing loose entities into inventory, or remove stored
-  entities to the ground, through the normal native pickup/drop APIs.
-- Capacity, compatibility and native arsenal rules may reduce the result.
-- Releasing modifiers after Move fires does not change the captured quantity.
-- All dragging keeps the existing inventory/magazine-repack behavior.
-
-For All, physical transfers and arsenal returns snapshot the entire selected
-visible stack, not every matching item across inventory. They stop at source
-exhaustion, changed membership, cancellation or native rejection. Items added
-to the stack after the snapshot are not included. Arsenal acquisition has no
-finite source stack: it requests until native rules reject the next item or the
-configured All ceiling is reached (default **100 confirmed acquisitions**).
-The ceiling does not truncate physical stacks or arsenal returns.
-
-Stored-stack snapshots enumerate the current navigation storage's physical
-contents, including clothing pockets, rather than the UI root. This keeps
-vehicle trunks separate from arsenal catalogs on hybrid vehicles. Loose-ground
-snapshots retain the UI's item enumeration. Outgoing transfers preserve the
-existing destination choice: if an ordinary single-item move targets a hybrid
-vehicle's trunk, batch moves do likewise rather than automatically preferring
-an arsenal refund.
-
-ACE Inventory does **not** implement equipping, weapon attachments, controller
-bindings, batch dragging, or an in-game batch-size preferences UI.
-
-## Rebinding quantity modifiers
-
-Open **Settings → Controls → ACE Inventory**. The **Small batch**, **Large batch**
-and **All items** entries change the held key or key combination for each quantity.
-These are continuous modifier bindings, not independent transfer shortcuts.
-Keep the chosen key(s) held while using the existing vanilla Move binding.
-Changing a quantity binding does not change Move or the configured batch size.
-The native Controls menu provides saving, unbinding and resetting to defaults.
-Hints use the action bindings rather than hard-coded Ctrl/Shift images.
-If overlapping quantity bindings are active, large takes precedence over All,
-then small.
-
-Avoid other inventory operations while a batch is pending. Do not use this
-experimental addon on a public server.
-
-## Configuring batch sizes
-
-Edit `SMALL_BATCH_SIZE`, `LARGE_BATCH_SIZE` and `ALL_ARSENAL_LIMIT` in
-[`ACE_Inventory_Settings.c`](../../../../../addons/inventory/scripts/Game/ACE_Inventory/ACE_Inventory_Settings.c).
-These are shared script constants, not in-game preferences:
-
-```c
-static const int SMALL_BATCH_SIZE = 5;
-static const int LARGE_BATCH_SIZE = 10;
-static const int ALL_ARSENAL_LIMIT = 100;
-```
-
-Use positive integers. Ctrl selects the small value; Ctrl + Shift selects the
-large value. Both sizes apply to normal transfers, ground pickup/drop and arsenal
-acquisition/returns. Availability/capacity still
-limits actual completion. The configuration is checked before enabling batch shortcuts. Invalid sizes
-or a nonpositive All ceiling disable batching with an explicit error, not a silent
-replacement quantity. Server RPC validation accepts the configured sizes
-and All, and rejects fixed-size refund snapshots exceeding the selected size.
-For returns, the server enumerates the supplied source root and validates every
-distinct ID against one native-style prefab/weight/ammunition group. All cannot
-exceed that group's actual size or include entities from another source group.
-The server independently resolves All acquisition to its configured ceiling;
-the client cannot supply a larger numeric ceiling. `ALL_ITEMS` is an internal
-request marker, not a batch-size setting; leave it unchanged.
-Debug instrumentation and its toggle have been removed. Successful transfers,
-per-item progress, normal capacity stops and menu closure do not produce logs.
-Only actual errors, rejected requests and unresolved-operation timeouts are logged.
-
-Recompile/reload the addon after changing these values. Multiplayer participants
-must use the same addon version and settings. Input actions retain their existing
-internal names; those names do not determine batch sizes.
-
-## Validation status
-
-The addon was previously compiled alongside Magazine Repack in Arma Reforger
-Workbench **1.8.0.13** using the addon project, repository addon search path,
-installed game's working directory and a separate validation profile.
-
-- User gameplay retesting confirmed batch transfers working with **X and
-  right-click** after correcting the PC quick-transfer route and clothing-pocket
-  refund enumeration. The subsequent hold hints and Controls entries were also
-  reported working.
-- Earlier runtime logs recorded physical All transfers of **6/6 and 11/11** and
-  capacity-limited arsenal acquisitions. These do not certify every case below.
-- Temporary engine-run guard checks covered configured/rejected quantities and
-  null-source grouping. Structural checks cover input/action wiring and the
-  absence of batch-drag overrides. Temporary probes and input traces were removed.
-- Native refund acceptance ordering was verified against the installed source.
-- Hold hints and the Controls extension compiled with Game CRC `1ba97f7b`
-  before the review cleanup.
-- The reviewed cleanup compiled with Game CRC `2bcae1d7`; whitespace and
-  structural wiring checks passed.
-- Removing routine/debug logging compiled with Game CRC `576ccca2`.
-- Removing the Magazine Repack dependency compiled standalone in Workbench
-  **1.8.0.13** with Game CRC `770a9727`. The log confirmed only ACE Inventory
-  and vanilla were mounted; standalone gameplay retesting remains pending.
-- The current-storage stack snapshot fix was tested in the independently
-  published Inventory Stacks copy. User gameplay testing confirmed hybrid-vehicle
-  trunk and arsenal transfers working. Only the core snapshot fix is carried
-  over here.
-  This does not constitute compilation or gameplay validation of this ACE build.
-
-Still pending: recorded save/restart persistence, reset/unbind and overlapping
-rebindings; the seven-magazine quantity regression; timeout/late-outcome recovery;
-and hosted/dedicated multiplayer. Supplies/allocation accounting remains
-explicitly deferred. This is an experimental MVP, not a production release.
-
-## Diagnostics and completion
-
-Look for `[ACE Inventory]` warnings/errors when an operation fails or remains
-unresolved. Routine transfer/progress summaries and debug traces are absent;
-verify successful quantities through the resulting inventory contents.
-Unavailable modifier bindings are reported explicitly and disable batch shortcuts,
-not ordinary native dragging or quick moves.
-
-Physical moves/pickups use native operation callbacks and additionally check the
-item's destination storage. Drops require a successful callback and the existing
-entity no longer having a storage parent. Stack membership uses vanilla UI grouping rather than
-prefab-only matching.
-
-Arsenal requests run one at a time on the owning player-controller component.
-The native one-item request performs access, catalog, supplies and allocation
-validation. A narrowly scoped hook captures the spawn callback constructed
-inside that request, so unrelated arsenal spawns do not advance the batch.
-ACE Inventory does not manually spawn items or change supplies balances.
-
-Refund requests use a source-group-bounded snapshot of replication IDs and
-revalidate each item's original storage and refundable contents. The native one-item refund
-owns resource credit, eligibility, distance checks and refund effects.
-Unlike acquisition, this native API does not expose a completion callback.
-A narrowly scoped hook records acceptance for the exact item, player controller
-and arsenal when native `OnItemRefunded_S` runs. Installed 1.8.0.13 source confirms
-this hook follows validation/resource generation and precedes deletion.
-Rejected requests stop immediately without watching unrelated entity deletions.
-Accepted requests then watch removal of the specific entity on the server.
-Verify supplies/allocation changes as well as item counts during testing.
-An accepted but unconfirmed refund stops issuing further requests after ten
-seconds, without retrying. Monitoring continues at a reduced frequency so a late
-removal can finish and release the batch safely.
-
-After a callback timeout, the batch stops issuing requests and does not retry.
-The outstanding operation may still complete; its result is not reported as a
-failure or success until confirmed. An unresolved arsenal callback keeps that
-player's server-side batch occupied until the outstanding outcome is confirmed.
-Reconnect/restart the test session only if the engine never settles that operation.
-
-Closing inventory cancels future work, not an already submitted operation.
-The UI detaches from server-owned arsenal batches without treating them as
-physical moves on reopening. Physical callbacks identify both batch and item index;
-late callbacks cannot advance a different operation. Deleting the player-controller
-component clears queued monitoring and invalidates its batch token.
-Check final inventory counts and supplies after that outstanding operation settles.
-
-## Development test matrix
-
-Run these in single-player first, then hosted and dedicated multiplayer.
-
-| Test | Expected result |
-| --- | --- |
-| Source stack of 1, 3, 5, or 7; enough room | Move 1, 3, 5, or 5 respectively |
-| Ctrl + Shift + right-click, source stack of 1, 7, 10, or 12; enough room | Move 1, 7, 10, or 10 respectively |
-| Large batch, destination room for only three | Move three and stop; preserve the remainder |
-| Ctrl + Shift + right-click, each inventory/ground/arsenal direction | Transfer at most ten, with no eleventh request |
-| Release Shift or Ctrl during a ten-item batch | Keep the captured ten-item limit |
-| Change configured sizes to 3 and 7, then reload | Small/large batches cap at 3/7 across all paths; logs use those limits |
-| Shift + right-click, selected physical stack larger than ten | Transfer the whole selected stack if room permits; no ten-item truncation |
-| All, destination fits only part of the stack | Transfer only what fits and leave the remainder at source |
-| All pickup/acquisition, displayed player container fits three and another has space | Transfer only three into the displayed container; leave the other container unchanged |
-| All acquisition into one clothing item with several pockets | Fill compatible pockets within that item, including hidden ones; leave other clothing items/bags untouched |
-| First pocket full, another pocket in the same target item has room | Continue within the selected item rather than stopping at the first pocket |
-| All, selected stack versus other matching stacks | Transfer only the selected snapshot; leave other stacks untouched |
-| Shift + right-click, arsenal return stack larger than 100 | Return the selected stack; acquisition ceiling does not apply |
-| All acquisition, free arsenal with room for more than 100 | Stop at exactly 100 confirmed acquisitions with the default ceiling |
-| Set All arsenal ceiling to 12, then reload | Acquire at most 12; physical All remains unrestricted by that ceiling |
-| Ctrl + Shift + right-click with All available | Still use the configured large batch (default ten) |
-| Left Ctrl, left Shift and both together, held before Move | Select small, All and large batches respectively |
-| Right Ctrl or right Shift without left modifiers | No batch; native operation only |
-| Ctrl/Ctrl + Shift/Shift with X or right-click | Both vanilla Move inputs select 5/10/All respectively |
-| Rebind vanilla Move to a different key or mouse button | The rebound input supports 5/10/All; old bindings do not independently trigger batches |
-| Press only Ctrl, Shift or Ctrl + Shift | No transfer; quantity hints are informational |
-| Focus item with or without a native Requisition/Return/Pickup/Drop/Move hint | Batch hints follow native transfer hint visibility; quantities match settings |
-| Ordinary Move without modifiers | Exactly one vanilla operation |
-| Rebind each quantity modifier, then reopen inventory | New keys and hold indicators appear in hints; old defaults no longer select that quantity |
-| Hold a rebound quantity key and use X/right-click | Captured quantity uses the rebound modifier; modifier alone does not transfer |
-| Save bindings and restart; reset or unbind in Controls | Saved bindings persist; reset restores defaults; unbound action does not select a quantity |
-| Release modifiers immediately after modified click | Captured click quantity is unchanged |
-| Right-click without modifiers | Exactly one native quick move; no batch |
-| All on a magazine stack of seven | Seven confirmed moves if compatible; no native extra move or missing representative |
-| Release Shift or close inventory during All | Release preserves captured quantity; closing cancels future requests |
-| Ctrl-click source stack with opposite inventory available | Quick-transfer up to five without dragging |
-| Ctrl-click arsenal item | Acquire up to five into the player container |
-| Ctrl-click player stack with ground panel visible | Drop up to five existing entities |
-| Ctrl-click loose ground stack | Pick up up to five, limited by available player capacity |
-| Source ground item picked up by another player mid-batch | Stop when source membership changes; no duplicate |
-| Destination room for 0, 1, or 3 | Move only 0, 1, or 3; remainder stays at source |
-| Same magazine prefab, different ammunition counts | Move only the selected UI group |
-| Drag magazines, with or without Ctrl/Shift | Existing native/Magazine Repack behavior; no batch transfer |
-| Drag while a batch is pending | Native behavior remains available; batch stops if a captured source changes |
-| Modifier bindings unavailable | Ordinary dragging and native quick moves remain usable |
-| Arsenal, enough room and supplies for five | Acquire exactly five; native total cost matches five single acquisitions |
-| Arsenal, room/supplies for fewer than five | Acquire only the accepted amount; no retry or sixth request |
-| Ctrl-click acquisition, first pocket fits four and another storage has room | Acquire five using compatible player storages |
-| All into an opened player item that fits four | Acquire four; do not spill into other clothing/bags |
-| Disabled, inaccessible, or restricted arsenal | Native rejection; no addon-created items |
-| Free arsenal | Acquire at most five; no unbounded request loop |
-| Ctrl + right-click player stack with arsenal open | Refund at most five; do not physically drop the stack |
-| Refund stacks of 1, 3, 5, or 7 | Return 1, 3, 5, or 5; native refund equals that many single returns |
-| Non-refundable item or contents | Reject without deleting items or crediting supplies |
-| Refund blocked by native rules | Stop without retry; never count requests as completed refunds |
-| Rejected refund, then unrelated deletion of that entity | Do not report a confirmed refund or advance the batch |
-| Accepted refund completes after timeout | Confirm that removal, release the stopped batch, never submit a retry |
-| Refund snapshot includes another source/group or duplicate IDs | Server rejects before issuing any refund |
-| Close/reopen during an arsenal batch | No stale physical moves; new requests wait for the server batch to settle |
-| Cancel/close inventory during refund | Submitted native operation may settle; no further returns |
-| Another player changes a refund source | Stop on changed membership; verify no duplicate credit |
-| Close inventory during transfer | No further work after cancellation; pending operation may settle |
-| Repeated modified clicks while busy | Reject overlapping batch; do not fall through to a native single-item move |
-| Artificial latency or delayed callback | At most one item operation outstanding; accurate confirmed counts |
-
-For physical transfers, verify exact source/destination entities and conserved
-total item count. For arsenal acquisition, verify both acquired entities and the
-native supplies/allocation charge. A successful compile or log message alone
-does not establish multiplayer correctness.
-
-Record the game version, environment, input gesture, initial/final counts,
-initial/final supplies, and relevant diagnostics when reporting results.
+These readouts are storage information, not a fit guarantee; other native restrictions can prevent a transfer. This feature does not change item sizes, capacities, controls or transfer rules.

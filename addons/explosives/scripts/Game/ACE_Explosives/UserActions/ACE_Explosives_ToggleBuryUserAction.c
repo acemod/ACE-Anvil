@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Explosives_ToggleBuryUserAction : ACE_ShovelUserAction
+class ACE_Explosives_ToggleBuryUserAction : ACE_ContinousGadgetUserAction
 {	
 	[Attribute(defvalue: "#ACE-Explosives_UserAction_Bury_Name", desc: "String for bury action")]
 	protected LocalizedString m_sBury;
@@ -17,6 +17,7 @@ class ACE_Explosives_ToggleBuryUserAction : ACE_ShovelUserAction
 	//------------------------------------------------------------------------------------------------
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
+		super.Init(pOwnerEntity, pManagerComponent);
 		m_pWeaponComponent = SCR_MineWeaponComponent.Cast(pOwnerEntity.FindComponent(SCR_MineWeaponComponent));
 	}
 	

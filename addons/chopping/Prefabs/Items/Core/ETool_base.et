@@ -1,0 +1,19 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "54A2D42003013D58"
+ components {
+  ACE_ActionsHelperEntityComponent "{6A6AD3A619CB3AF0}" {
+   m_Configs {
+    ACE_ActionsHelperEntityConfig "{6A6AD3A5C4F3FE8F}" {
+     m_sRequiredTypeName "Tree"
+     m_sRequiredBasePrefabName "{388AE316D09D0680}Prefabs/Vegetation/Core/Tree_Base.et"
+     m_sHelperPrefabName "{063A4F879AC2DBBB}Prefabs/Helpers/ACE_Chopping_TreeHelper.et"
+    }
+    ACE_ActionsHelperEntityConfig "{6A6AD3A5E30B2E79}" {
+     m_sRequiredTypeName "Tree"
+     m_sRequiredBasePrefabName "{D7163D1B571F4C0C}Prefabs/Vegetation/Core/Bush_Base.et"
+     m_sHelperPrefabName "{6625DCD946EC6753}Prefabs/Helpers/ACE_Chopping_BushHelper.et"
+    }
+   }
+  }
+ }
+}

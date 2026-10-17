@@ -33,9 +33,9 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Request destruction of SCR_DestructibleEntity
+	//! Request destruction of entity
 	//! Called from local player
-	void ACE_RequestDestroyEntity(SCR_DestructibleEntity entity, vector hitPosDirNorm[3], int deletionDelayMS = -1)
+	void ACE_RequestDestroyEntity(IEntity entity, vector hitPosDirNorm[3], int deletionDelayMS = -1)
 	{
 		Rpc(RpcAsk_ACE_DestroyEntity, entity.GetID(), hitPosDirNorm, deletionDelayMS);
 	}

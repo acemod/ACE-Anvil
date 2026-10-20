@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{1C32B94C06E85D15}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters_item.asi"
+ Configurations {
+  AnimSetInstanceResourceClass PC {
+  }
+  AnimSetInstanceResourceClass XBOX_ONE : PC {
+  }
+  AnimSetInstanceResourceClass XBOX_SERIES : PC {
+  }
+  AnimSetInstanceResourceClass PS4 : PC {
+  }
+  AnimSetInstanceResourceClass PS5 : PC {
+  }
+  AnimSetInstanceResourceClass HEADLESS : PC {
+  }
+ }
+}

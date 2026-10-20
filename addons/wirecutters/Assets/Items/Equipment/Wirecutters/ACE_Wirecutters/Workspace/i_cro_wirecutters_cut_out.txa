@@ -1,0 +1,17 @@
+$animation "" {
+ #version 2
+ #fps 30
+ #numFrames 20
+ $node "i_left_blade" {
+  $keys t q {
+   $frame 0 20 {
+    #t -0.0003762 0.0564232 0.0095012
+    #q 0.00000009 0 -0.0180166 0.99983776
+   }
+  }
+ }
+ $custProps {
+  #custProp "profile" "ACE_Wirecutters"
+  #custProp "sourceFile" "Character_AnimationRig_Wirecutters.blend"
+ }
+}

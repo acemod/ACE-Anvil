@@ -1,0 +1,14 @@
+AnimSetInstanceSource {
+ Template "{AFFB2D26AE6226C5}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Gadget.Cro.Idle" {
+   Resource "{D66F8A9D1CD604C3}Assets/Items/Medicine/MorphineInjection_01/anim/anm/p_erc_morphine_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Erc.Idle" {
+   Resource "{D66F8A9D1CD604C3}Assets/Items/Medicine/MorphineInjection_01/anim/anm/p_erc_morphine_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Gadget.Pne.Idle" {
+   Resource "{D66F8A9D1CD604C3}Assets/Items/Medicine/MorphineInjection_01/anim/anm/p_erc_morphine_holdpose.anm"
+  }
+ }
+}

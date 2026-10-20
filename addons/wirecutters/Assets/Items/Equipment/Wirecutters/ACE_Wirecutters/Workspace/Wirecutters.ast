@@ -1,0 +1,18 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{6A6D671D7B0FC6E2}" {
+   Name "Gadget"
+   Animations {
+    "Idle"
+    "In"
+    "Loop"
+    "Out"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+ }
+}

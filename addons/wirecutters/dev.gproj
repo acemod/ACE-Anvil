@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Wirecutters_Dev"
+ GUID "6A6B47EE931B1A21"
+ TITLE "ACE Wirecutters Dev"
+ Dependencies {
+  "58D0FB3206B6F859" "65AD7D0D9941A380"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{6A6B671E162F9B46}" {
+      StringTableSource "{E86463159DA11EAE}Language/ACE_Wirecutters_localization.st"
+      Languages {
+       LanguageDefinition "{6A6B671E14BD8238}" {
+        Code "cs_cz"
+        StringTableRuntime "{1F381D228A24AEBF}Language/ACE_Wirecutters_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD827E}" {
+        Code "de_de"
+        StringTableRuntime "{CA4607119987BF9F}Language/ACE_Wirecutters_localization.de_de.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD8256}" {
+        Code "en_us"
+        StringTableRuntime "{94B68D5AF374BA9E}Language/ACE_Wirecutters_localization.en_us.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD8245}" {
+        Code "es_es"
+        StringTableRuntime "{51FAC0D31D76D181}Language/ACE_Wirecutters_localization.es_es.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD81BF}" {
+        Code "fr_fr"
+        StringTableRuntime "{EA5235E4FBF53283}Language/ACE_Wirecutters_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD8197}" {
+        Code "it_it"
+        StringTableRuntime "{6A4EBAD056D7B17A}Language/ACE_Wirecutters_localization.it_it.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD8188}" {
+        Code "ja_jp"
+        StringTableRuntime "{7A55074268A681D1}Language/ACE_Wirecutters_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD81FF}" {
+        Code "ko_kr"
+        StringTableRuntime "{DAEB2FEEFB8B82EE}Language/ACE_Wirecutters_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD81D1}" {
+        Code "pl_pl"
+        StringTableRuntime "{869A891445641E92}Language/ACE_Wirecutters_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD81C5}" {
+        Code "pt_br"
+        StringTableRuntime "{53ED13D87E9AD428}Language/ACE_Wirecutters_localization.pt_br.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD816F}" {
+        Code "ru_ru"
+        StringTableRuntime "{06AC0770E3E3B15E}Language/ACE_Wirecutters_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD814F}" {
+        Code "uk_ua"
+        StringTableRuntime "{8CF452868FCD0F0B}Language/ACE_Wirecutters_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{6A6B671E14BD80BE}" {
+        Code "zh_cn"
+        StringTableRuntime "{56443CBBB66DDF16}Language/ACE_Wirecutters_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

@@ -1,0 +1,20 @@
+AnimSrcGraph {
+ AnimSetTemplate "{AFFB2D26AE6226C5}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters.ast"
+ ControlTemplate AnimSrcGCT "{6A6D671D411DB0BA}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+  }
+  Commands {
+   AnimSrcGCTCmd CMD_Item_Action {
+   }
+  }
+ }
+ Debug AnimSrcGD "{6A6D671D411DB0A7}" {
+ }
+ GraphFilesResourceNames {
+  "{9207559C07049B06}Assets/Items/Equipment/Wirecutters/ACE_Wirecutters/Workspace/Wirecutters.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

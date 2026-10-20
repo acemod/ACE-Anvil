@@ -1,0 +1,22 @@
+ACE_ActionsHelperEntity : "{FEC4F913DF71AFA3}Prefabs/Helpers/ACE_ActionsHelperBase.et" {
+ ID "6A6B6C8CDE0D5F2A"
+ components {
+  ActionsManagerComponent "{61122D1D87E829CF}" {
+   additionalActions {
+    ACE_DestroyEntityUserAction "{6A6B7286B778BC0F}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{6A6B7286B778BC58}" {
+      Name "#ACE_Wirecutters-UserAction_CutWire_Name"
+      m_sInteractionIcon "{10C0A9A305E8B3A4}UI/Imagesets/Tasks/Task_Icons.imageset"
+      m_sInteractionGlowIcon ""
+      m_sIconName "Icon_Task_Sabotage_UI"
+     }
+     Duration 10
+     m_sRequiredGadgetComponent "SCR_WirecuttersComponent"
+    }
+   }
+  }
+ }
+}

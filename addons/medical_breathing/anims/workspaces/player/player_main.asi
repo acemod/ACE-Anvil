@@ -1,0 +1,10 @@
+AnimSetInstanceSource "{5D8A86AE4C4C6D94}" {
+ Template "{CD0E6C3490BF0847}anims/workspaces/player/player_main.ast"
+ Lines {
+  AnimSetInstanceSource_Line "ACE_Medical.Default.UnconsciousHeadTilt" {
+   Resource "{93723BE3F1EB1D6B}anims/workspaces/player/p_unconscious_headTilt.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{59A8C1A9135415C0}" {
+ }
+}

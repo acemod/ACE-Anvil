@@ -61,8 +61,8 @@ class ACE_Explosives_ToggleBuryUserAction : ACE_ShovelUserAction
 		{
 			TraceParam params = new TraceParam();
 			params.Flags = TraceFlags.WORLD | TraceFlags.ENTS;
-			params.Start = pos + 0.01 * vector.Up;
-			params.End = pos - 0.01 * vector.Up;
+			params.Start = pos + 0.02 * vector.Up;
+			params.End = pos - 0.02 * vector.Up;
 			params.Exclude = GetOwner();
 			GetGame().GetWorld().TraceMove(params, null);
 			m_bOnDiggableSurface = ACE_SurfaceHelper.HasLabel(params.SurfaceProps, ACE_ESurfaceLabel.DIGGABLE);

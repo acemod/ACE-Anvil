@@ -441,6 +441,7 @@ Summary of settings that can be modified in the server config:
 | `m_fDefaultSpO2`                      | Type: `float`<br />Range: 0 to 100<br />Default: `97.149` | Default value of SpO2 |
 | `m_fHypoxicMetabolismSpO2`            | Type: `float`<br />Range: 0 to 100<br />Default: `75.0` | SpO2 at which hypoxic oxygen consumption and RER settings fully apply. |
 | `m_fDefaultPalvCO2KPA`                | Type: `float`<br />Range: 0 to 100<br />Default: `5.21` | Default value of alveolar partial pressure of CO2 |
+| `m_bPaCO2Enabled`                     | Type: `bool`<br />Range: 0 to ∞<br />Default: `true` | Enables simulation of PaCO2 and its influence on respiratory rate |
 
 Template for the `missionHeader` in a server config:
 ```
@@ -465,7 +466,8 @@ Template for the `missionHeader` in a server config:
             "m_fHypoxicRER": 1.2,
             "m_fDefaultSpO2": 97.149,
             "m_fHypoxicMetabolismSpO2": 75.0,
-            "m_fDefaultPalvCO2KPA": 5.21
+            "m_fDefaultPalvCO2KPA": 5.21,
+            "m_bPaCO2Enabled": true
         }
     }
 }

@@ -63,6 +63,6 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	bool m_bPaCO2Enabled;
 	
 	// TO DO: Enable kidney when implemented
-	[Attribute(defvalue: "false", desc: "Enables simulation of blood pH and kidney damage")]
-	bool m_bKidneyEnabled;
+	// [Attribute(defvalue: "false", desc: "Enables simulation of blood pH and kidney damage")]
+	// bool m_bKidneyEnabled;
 }

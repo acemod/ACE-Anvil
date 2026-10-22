@@ -60,11 +60,18 @@ class ACE_Explosives_ToggleBuryUserAction : ACE_ShovelUserAction
 		if (m_vOwnerPos != pos)
 		{
 			TraceParam params = new TraceParam();
-			params.Flags = TraceFlags.WORLD | TraceFlags.ENTS;
+			params.Flags = TraceFlags.WORLD;
 			params.Start = pos + 0.02 * vector.Up;
 			params.End = pos - 0.02 * vector.Up;
 			params.Exclude = GetOwner();
-			GetGame().GetWorld().TraceMove(params, null);
+			
+			// Trace for terrain surface and only fall back to entities when none was found
+			if (GetOwner().GetWorld().TraceMove(params, null) >= 1.0)
+			{
+				params.Flags |= TraceFlags.ENTS;
+				GetOwner().GetWorld().TraceMove(params, null);
+			}
+			
 			m_bOnDiggableSurface = ACE_SurfaceHelper.HasLabel(params.SurfaceProps, ACE_ESurfaceLabel.DIGGABLE);
 			m_vOwnerPos = pos;
 		}

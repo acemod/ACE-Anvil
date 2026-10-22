@@ -44,10 +44,13 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	//------------------------------------------------------------------------------------------------
 	protected void UpdateOxygenMetabolism(ACE_Medical_CharacterContext context, float timeSlice)
 	{
-		float lambda = Math.InverseLerp(75, 97, Math.Clamp(context.m_pVitals.GetSpO2(), 75, 97));
-		// Interpolate RER from 0.8 to 1.2 for SpO2 97% to 75%. Also overall consumption is reduced to simulate the body focusing on vital body parts at reduced SpO2
-		context.m_fOxygenConsumption = Math.Lerp(0.013, 0.208, lambda);
-		context.m_fCO2Production = Math.Lerp(0.0156, 0.1664, lambda);
+		float hypoxicSpO2 = s_pBreathingSettings.m_fHypoxicMetabolismSpO2;
+		float defaultSpO2 = s_pBreathingSettings.m_fDefaultSpO2;
+		float lambda = Math.InverseLerp(hypoxicSpO2, defaultSpO2, Math.Clamp(context.m_pVitals.GetSpO2(), hypoxicSpO2, defaultSpO2));
+		// Interpolate RER and oxygen consumption based on SpO2. Oxygen consumption  at reduced SpO2 is lowered to simulate the body focusing on vital body parts.
+		context.m_fOxygenConsumption = Math.Lerp(s_pBreathingSettings.m_fHypoxicOxygenConsumptionMMOLPS, s_pBreathingSettings.m_fDefaultOxygenConsumptionMMOLPS, lambda);
+		float rer = Math.Lerp(s_pBreathingSettings.m_fHypoxicRER, s_pBreathingSettings.m_fDefaultRER, lambda);
+		context.m_fCO2Production = context.m_fOxygenConsumption * rer;
 	}
 	
 	//------------------------------------------------------------------------------------------------

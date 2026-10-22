@@ -38,9 +38,27 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "40", desc: "Maximum respiratory rate [breaths per minute]", params: "0 inf")]
 	float m_fMaxRespiratoryRateBPM;
 	
+	[Attribute(defvalue: "0.3", desc: "Passive ventilation rate during CPR [breaths per minute]", params: "0 inf")]
+	float m_fCPRPassiveVentilationRateBPM;
+
+	[Attribute(defvalue: "0.208", desc: "Oxygen consumption at default SpO2 [mmol/s].", params: "0 inf")]
+	float m_fDefaultOxygenConsumptionMMOLPS;
+
+	[Attribute(defvalue: "0.013", desc: "Oxygen consumption at hypoxic SpO2 [mmol/s].", params: "0 inf")]
+	float m_fHypoxicOxygenConsumptionMMOLPS;
+
+	[Attribute(defvalue: "0.8", desc: "Respiratory exchange ratio at default SpO2.", params: "0 inf")]
+	float m_fDefaultRER;
+
+	[Attribute(defvalue: "1.2", desc: "Respiratory exchange ratio at hypoxic SpO2.", params: "0 inf")]
+	float m_fHypoxicRER;
+
 	[Attribute(defvalue: "97.149", desc: "Default value of SpO2", params: "0 100")]
 	float m_fDefaultSpO2;
 	
+	[Attribute(defvalue: "75", desc: "SpO2 at which hypoxic oxygen consumption and RER settings fully apply.", params: "0 100")]
+	float m_fHypoxicMetabolismSpO2;
+
 	[Attribute(defvalue: "5.21", desc: "Default value of alveolar partial pressure of CO2", params: "0 100")]
 	float m_fDefaultPalvCO2KPA;
 	
@@ -48,6 +66,6 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	bool m_bPaCO2Enabled;
 	
 	// TO DO: Enable kidney when implemented
-	[Attribute(defvalue: "false", desc: "Enables simulation of blood pH and kidney damage")]
-	bool m_bKidneyEnabled;
+	// [Attribute(defvalue: "false", desc: "Enables simulation of blood pH and kidney damage")]
+	// bool m_bKidneyEnabled;
 }

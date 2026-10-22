@@ -434,6 +434,7 @@ Summary of settings that can be modified in the server config:
 | `m_fDeteriorateToTensionPneumothoraxChancePerMinute` | Type: `float`<br />Range: 0 to 1<br />Default: `0.05` | Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute. |
 | `m_fDefaultRespiratoryRateBPM`        | Type: `float`<br />Range: 0 to ∞<br />Default: `14.573` | Default respiratory rate [breaths per minute] |
 | `m_fMaxRespiratoryRateBPM`            | Type: `float`<br />Range: 0 to ∞<br />Default: `40.0` | Maximum respiratory rate [breaths per minute] |
+| `m_fCPRPassiveVentilationRateBPM`     | Type: `float`<br />Range: 0 to ∞<br />Default: `0.3` | Passive ventilation rate during CPR [breaths per minute] |
 | `m_fDefaultOxygenConsumptionMMOLPS`   | Type: `float`<br />Range: 0 to ∞<br />Default: `0.208` | Oxygen consumption at default SpO2 [mmol/s]. |
 | `m_fHypoxicOxygenConsumptionMMOLPS`   | Type: `float`<br />Range: 0 to ∞<br />Default: `0.013` | Oxygen consumption at hypoxic SpO2 [mmol/s]. |
 | `m_fDefaultRER`                       | Type: `float`<br />Range: 0 to ∞<br />Default: `0.8` | Respiratory exchange ratio at default SpO2. |
@@ -460,6 +461,7 @@ Template for the `missionHeader` in a server config:
             "m_fDeteriorateToTensionPneumothoraxChancePerMinute": 0.05,
             "m_fDefaultRespiratoryRateBPM": 14.573,
             "m_fMaxRespiratoryRateBPM": 40.0,
+            "m_fCPRPassiveVentilationRateBPM": 0.3,
             "m_fDefaultOxygenConsumptionMMOLPS": 0.208,
             "m_fHypoxicOxygenConsumptionMMOLPS": 0.013,
             "m_fDefaultRER": 0.8,

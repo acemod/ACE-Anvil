@@ -38,6 +38,9 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "40", desc: "Maximum respiratory rate [breaths per minute]", params: "0 inf")]
 	float m_fMaxRespiratoryRateBPM;
 	
+	[Attribute(defvalue: "0.3", desc: "Passive ventilation rate during CPR [breaths per minute]", params: "0 inf")]
+	float m_fCPRPassiveVentilationRateBPM;
+
 	[Attribute(defvalue: "0.208", desc: "Oxygen consumption at default SpO2 [mmol/s].", params: "0 inf")]
 	float m_fDefaultOxygenConsumptionMMOLPS;
 

@@ -1,0 +1,9 @@
+MetaFileClass {
+ Name "{73A84B209C112008}Language/ACE_Inventory_localization.en_us.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

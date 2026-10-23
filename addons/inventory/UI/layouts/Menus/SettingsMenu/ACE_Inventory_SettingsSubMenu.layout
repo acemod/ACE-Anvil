@@ -1,0 +1,95 @@
+HorizontalLayoutWidgetClass {
+ Name "ACE_Inventory_Settings"
+ components {
+  ACE_Inventory_SettingsSubMenu "{73A84B209C112005}" {
+  }
+ }
+ {
+  ScrollLayoutWidgetClass {
+   Name "ScrollLayout0"
+   Slot LayoutSlot {
+    Padding -2 72 2 0
+    SizeMode Fill
+    FillWeight 1.433
+   }
+   style Small
+   {
+    VerticalLayoutWidgetClass {
+     Name "Content"
+     Slot AlignableSlot {
+      HorizontalAlign 3
+      VerticalAlign 3
+      Padding -4 0 10 0
+     }
+     {
+      VerticalLayoutWidgetClass : "{FEEEB639F2735BA1}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsTitle.layout" {
+       Name "ACE_Inventory_SettingsTitle"
+       components {
+        SCR_LabelComponent "{58B30C1A8E56F0FF}" {
+         m_sLabel "#ACE_Inventory-Settings_Metrics"
+        }
+       }
+      }
+      ButtonWidgetClass : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+       Name "ACE_Inventory_ShowDimensions"
+       Slot LayoutSlot {
+        Padding 4 4 4 4
+       }
+       components {
+        SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+         m_sLabel "#ACE_Inventory-Settings_Dimensions"
+         m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+         m_aElementNames {
+          "#AR-UI_No" "#AR-UI_Yes"
+         }
+         m_bUseLightArrows 1
+         m_bCycleMode 1
+        }
+       }
+      }
+      ButtonWidgetClass : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+       Name "ACE_Inventory_ShowCompartmentCount"
+       Slot LayoutSlot {
+        Padding 4 4 4 4
+       }
+       components {
+        SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+         m_sLabel "#ACE_Inventory-Settings_CompartmentCount"
+         m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+         m_aElementNames {
+          "#AR-UI_No" "#AR-UI_Yes"
+         }
+         m_bUseLightArrows 1
+         m_bCycleMode 1
+        }
+       }
+      }
+      ButtonWidgetClass : "{C9DF0E6590F6C388}UI/layouts/WidgetLibrary/SpinBox/WLib_SpinBox.layout" {
+       Name "ACE_Inventory_ShowParenthesizedValues"
+       Slot LayoutSlot {
+        Padding 4 4 4 4
+       }
+       components {
+        SCR_SpinBoxComponent "{5472C6CBC0640458}" {
+         m_sLabel "#ACE_Inventory-Settings_SinglePocketMax"
+         m_sLabelLayout "{F003823FF141983C}UI/layouts/Menus/SettingsMenu/CustomWidgets/SettingsLabel.layout"
+         m_aElementNames {
+          "#AR-UI_No" "#AR-UI_Yes"
+         }
+         m_bUseLightArrows 1
+         m_bCycleMode 1
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  VerticalLayoutWidgetClass {
+   Name "Description"
+   Slot LayoutSlot {
+    SizeMode Fill
+   }
+  }
+ }
+}

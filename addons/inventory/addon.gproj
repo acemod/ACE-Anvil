@@ -1,0 +1,27 @@
+GameProject {
+ ID "ACE_Inventory"
+ GUID "C28D51238DE842DD"
+ TITLE "ACE Inventory"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{73A84B209C112030}" {
+    StringTables {
+     StringTableDefinition "{73A84B209C112031}" {
+      StringTableSource "{73A84B209C112007}Language/ACE_Inventory_localization.st"
+      Languages {
+       LanguageDefinition "{73A84B209C112032}" {
+        Code "en_us"
+        StringTableRuntime "{73A84B209C112008}Language/ACE_Inventory_localization.en_us.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

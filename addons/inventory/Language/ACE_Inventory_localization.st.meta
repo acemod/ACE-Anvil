@@ -1,0 +1,9 @@
+MetaFileClass {
+ Name "{73A84B209C112007}Language/ACE_Inventory_localization.st"
+ Configurations {
+  StringTableResourceClass PC {
+  }
+  StringTableResourceClass HEADLESS : PC {
+  }
+ }
+}

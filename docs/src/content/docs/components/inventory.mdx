@@ -1,0 +1,42 @@
+---
+title: ACE Inventory
+---
+
+Compact inventory metrics for items and containers, with saved per-player display preferences.
+The addon depends only on vanilla Arma Reforger; ACE Core is not required.
+It is not included in ACE All in One.
+
+## Loading
+
+1. In Arma Reforger Tools, scan the repository's `addons` directory for projects.
+2. Open `ACE Inventory` (`addons/inventory/addon.gproj`).
+3. Compile Game scripts in Script Editor, then open a test world with inventory containers.
+
+The project intentionally has no resource database checked in. Allow Workbench to generate it when registering/opening the project.
+
+## Readouts
+
+- Item tooltips show total compartment count, total storage capacity, largest available pocket dimensions, item volume, item dimensions and the original weight display on one line.
+- Container headers show total free volume and the largest single pocket's free volume, for example `2.4(0.9) L`.
+- Header dimensions show the largest available pocket dimensions, followed by the dimensions of the pocket with the most free volume, for example `15³(5³) cm`. Ties for most free volume use the longest-axis dimension ranking.
+- Matching formatted values omit the parentheses. Cubes use `15³ cm`; other shapes use `15x10x5 cm`.
+- Header counts include only pockets with positive remaining volume. Multi-compartment items retain the count at `1` and `0`; single-compartment items hide it. Tooltips retain the total count.
+- Full and overfilled pockets are excluded from available dimensions. Missing or invalid measurements hide the affected readout.
+
+## Player preferences
+
+Under **Settings → ACE Inventory**, independently toggle:
+
+- **Show dimensions**
+- **Show compartment count**
+- **Show single-pocket max values ()**
+
+All three default to enabled and are saved locally per player. Changes refresh existing readouts without reopening inventory. Turning off single-pocket max values hides both parenthesized values, leaving main values unchanged.
+
+Settings labels currently have English translations; additional translations can be added through the addon's string table.
+
+## Limitations
+
+Volume and dimensions are separate native inventory properties. Free space cannot be combined across pockets, and the largest available dimensions may belong to a different pocket than the one with the most free volume.
+
+These readouts are storage information, not a fit guarantee; other native restrictions can prevent a transfer. This feature does not change item sizes, capacities, controls or transfer rules.

@@ -1,0 +1,8 @@
+GameProject {
+ ID "ACE_Medical_AI"
+ GUID "6A0B11B88222BABB"
+ TITLE "ACE Medical AI"
+ Dependencies {
+  "58D0FB3206B6F859" "60C4C12DAE90727B"
+ }
+}

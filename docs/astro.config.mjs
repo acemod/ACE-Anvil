@@ -11,6 +11,10 @@ import { config } from './src/utils/config'
 export default defineConfig({
   site: config.site.url,
 
+  image: {
+    remotePatterns: [{ protocol: 'https', hostname: 'www.plantuml.com', pathname: '/plantuml/**' }],
+  },
+
   markdown: {
     processor: unified({
       remarkPlugins: [remarkMath],

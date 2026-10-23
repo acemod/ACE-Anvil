@@ -25,4 +25,23 @@ modded class SCR_ContinuousLoiterCommand : SCR_BaseRadialCommand
 		
 		return true;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Fix missing assignment of m_pScrInputContext in vanilla implementation
+	override bool Execute(IEntity cursorTarget, IEntity groupEnt, vector targetPosition, int playerID, bool isClient)
+	{
+		if (SCR_PlayerController.GetLocalPlayerId() != playerID)
+			return true;
+		
+		IEntity playerControlledEntity = GetGame().GetPlayerController().GetControlledEntity();		
+		if (!playerControlledEntity)
+			return false;
+		
+		SCR_CharacterControllerComponent characterController = SCR_CharacterControllerComponent.Cast(playerControlledEntity.FindComponent(SCR_CharacterControllerComponent));
+		if (!characterController)
+			return false;
+		
+		m_pScrInputContext = characterController.GetScrInputContext();
+		return super.Execute(cursorTarget, groupEnt, targetPosition, playerID, isClient);
+	}
 }

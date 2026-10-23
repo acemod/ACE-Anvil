@@ -1,0 +1,154 @@
+---
+title: Overheating
+---
+
+This page summarizes the mathematical models used by [**ACE Overheating**](../../components/overheating/) and shows which parameters are exposed in the server config settings.
+
+## General Numeric Approximations
+
+### Differential Equations
+
+Given an ordinary differential equation (ODE) for simulating a quantity $f$ over time $t$:
+
+$$
+\frac{df(t)}{dt} = F\left(f(t), t\right)
+$$
+
+where $\Delta t$ is the time step and $F$ is some expression that can contain on $f$ and/or $t$. Point $f(t)$ can be propagated to the next point $f(t + \Delta t) $ via explicit Euler method:
+
+$$
+f(t + \Delta t) \approx f(t) + \Delta t \cdot F\left(f(t), t\right)
+$$
+
+The approximation can be quite crude, especially for large $\Delta t$. In case of an ODE that converges towards a fixed value, this can lead to overshooting the target, which is why clamping $f$ is often advised.
+
+## Simulation of Barrel Temperature
+
+The temperature of the barrel is simulated based on heat gained by fired bullets and heat lost by air convection and radiation. The barrel is approximated as a cylinder with uniform body temperature.
+
+### Heating
+
+The heat gained by the barrel per shot $Q_\mathrm{shot}$ is proportional to the bullet's initial kinetic energy $E_\mathrm{kin,0}$:
+
+$$
+Q_\mathrm{shot} = \lambda_\mathrm{heat} \cdot E_\mathrm{kin,0}
+$$
+$$
+E_\mathrm{kin,0} = \frac{1}{2}m v_0^2
+$$
+
+where $v_0$ is initial bullet speed, $m$ is the mass of the bullet and $\lambda_\mathrm{heat}$ is a scaling factor given by the product of the prefab's `m_fHeatingScale` and the mission header's `m_fHeatingScale`.
+
+### Passive Cooling
+
+Heat loss is simulated with Newton's law of cooling (for convective channels)  and Stefan–Boltzmann law (for radiative channel):
+
+$$
+\frac{dQ_\mathrm{loss}}{dt} = \dot{Q}_\mathrm{loss} = A_b \cdot \left[h \cdot (T_b-T_\mathrm{sur}) + \varepsilon_b \cdot \sigma \cdot(T_b^4-T_\mathrm{sur}^4)\right]
+$$
+$$
+A_b = \pi \cdot d_b \cdot l_b
+$$
+
+where $A_b$ is the area of the lateral surface derived from barrel diameter $d_b$ and length $l_b$, $h$ is the heat transfer coefficient, $T_b$ is the barrel's temperature, $T_{sur}$ is the temperature of the surroundings, $\varepsilon_b$ is the emissivity (prefab's `m_fBarrelEmissivity`) and $\sigma$ is the Stefan–Boltzmann constant. The heat transfer coefficient $h$ is given by:
+
+$$
+h = h_0 + \lambda_\mathrm{cool} \cdot\max\left(12.5,\ 4.5908 \cdot \frac{v^{0.6}}{d^{0.4}_b} + 9.3198 \cdot \frac{r}{d^{0.4}_b}\right)
+$$
+
+where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the character's relative air speed (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#References)]:
+
+$$\mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}$$
+
+with the air parameters in the table below:
+
+| Symbol | Value | Description |
+| --- | --- | --- |
+| $\mathrm{Pr}_\mathrm{air}$ | 0.714672 | Prandtl number |
+| $k_\mathrm{air}$ | 0.02614 W/(m⋅K) | Thermal conductivity |
+| $\eta_\mathrm{air}$ | $1.846 \cdot 10^{-5} \mathrm{}$ kg/(m⋅s) | Dynamic viscosity |
+| $\rho_\mathrm{air}$ | 1.1839 kg/m³ | Density |
+
+### Temperature Update
+
+The barrel's temperature is updated with the ODE below:
+
+$$
+\frac{dT_b}{dt} = \frac{\dot{Q}_{tot}}{C_b}
+$$
+
+$$
+\dot{Q}_{tot} = f_\mathrm{RoF} \cdot Q_\mathrm{shot} - \dot{Q}_{loss}
+$$
+
+$$
+C_b = c_b \cdot f_b \cdot m_w
+$$
+
+where $\dot{Q}_{tot}$ is the total rate of change of heat, $f_\mathrm{RoF}$ is the rate of fire, $C_b$ is the heat capacity of the barrel, $c_b$ is the specific heat capacity (prefab's `m_fBarrelSpecificHeatCapacity`), $f_b$ is the barrel mass fraction (prefab's `m_fBarrelMassFraction`) and $m_w$ is the mass of the weapon.
+
+## Simulation of Cook-Off
+
+Bullets are approximated with uniform body temperature and a first-order chemical reaction for the cook-off. Only conductive equilibration with the barrel is considered for heat transfer.
+
+### Heat Exchange with Barrel
+
+Ammunition always start at the temperature of the surroundings. The temperature equilibration between barrel and chambered bullet is done with Newton's law of cooling:
+
+$$
+\frac{dT_p}{dt} = \frac{\kappa}{m_p} \cdot (T_b-T_p)
+$$
+
+where $T_b$ is the barrel temperature, $T_p$ is bullet temperature, $m_p$ is bullet mass and $\kappa$ is a rate constant (`m_fBarrel2BulletMassScaledTemperatureRateConstant`). The change in heat from this process is neglected for the barrel, since the barrel has a far larger heat capacity than the bullet.
+
+### Cook-Off Progress
+
+Once the bullet temperature $T_p$ reaches the autoignition temerature $T_{\mathrm{ig}}$ (`m_fGunpowderAutoignitionTemperature`), cook-off progress $P_\mathrm{cook}$ increases based on an Arrhenius rate:
+
+$$
+\frac{dP_\mathrm{cook}}{dt} =
+\begin{cases}
+k_{\max} \cdot \exp\left(-\alpha\frac{T_{\mathrm{ig}}}{T_p}\right) & \mid T_p \geq T_{\mathrm{ig}} \\
+0 & \mid T_p < T_{\mathrm{ig}}
+\end{cases}
+$$
+
+where $k_{\max}$ and $\alpha$ are fitted parameters based on data from Ref. [[2](#References)]. The given ODE modelled the data better than applying Arrhenius rate at any temperature. Cook-off takes place when $P_\mathrm{cook}$ reaches 1.
+
+## Temperature-Dependent Effects on Weapon
+
+### Jamming
+
+The chance that a bullet jams the weapon is given below:
+
+$$
+p_\mathrm{jam} = \lambda_\mathrm{jam} \cdot f_\mathrm{jam}(T_b)\qquad p_\mathrm{jam} \in [0, 1]
+$$
+
+where $\lambda_\mathrm{jam}$ is a scale factor (`m_fJamChanceScale`), $f_\mathrm{jam}(T_b)$ is a temperature curve (prefab's `m_cJamChanceTemperatureCurve`). The chance is evaluated whenever a bullet is fired.
+
+### Muzzle Dispersion
+
+The multiplier applied to the base game muzzle dispersion is given below:
+
+$$
+F_{\mathrm{disp}} = 1 + \lambda_\mathrm{disp} \cdot f_\mathrm{disp}(T_b)\qquad F_{\mathrm{disp}} \in [1, \infty)
+$$
+
+where $\lambda_\mathrm{jam}$ is a scale factor (`m_fMuzzleDispersionScale`) and $f_\mathrm{disp}(T_b)$ is a temperature curve (prefab's `m_cMuzzleDispersionFactorTemperatureCurve`). The dispersion multiplier is related to the base game dispersion cone's half-apex angle $\theta$ and temperature-based increase $\Delta \theta(T_b)$ as below:
+
+$$
+F_\mathrm{disp} = \frac{\tan(\theta+\Delta \theta(T_b))}{\tan(\theta)}
+\approx 1 + \frac{\Delta \theta(T_b)}{\theta}
+$$
+$$
+\implies \lambda_\mathrm{disp} \cdot f_\mathrm{disp}(T_b) \approx \frac{\Delta \theta(T_b)}{\theta}
+$$
+
+the approximation is given by first-order Taylor expansion for small values of $\theta$. For instance, if the base game spread $\theta$ is 0.5 mrad and for a given temperature $\tau$, it should be 1.5 mrad, the increase $\Delta \theta(\tau)$ is therefore 1.0 mrad and $\lambda_\mathrm{disp} \cdot f_\mathrm{disp}(\tau) \approx 2.0$.
+
+## References
+
+[1]  [A. Žukauskas, _Adv. Heat Transfer_ **1972**, _8_, 131.](https://doi.org/10.1016/S0065-2717(08)70038-8)
+
+[2]  [A. Hameed, M. Azavedo, P. Pitcher, _Defence Technology_ **2014**, _10_, 86–91.](https://doi.org/10.1016/j.dt.2014.05.006)

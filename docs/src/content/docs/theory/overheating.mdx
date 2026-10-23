@@ -42,7 +42,9 @@ $$
 
 where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the character's relative air speed (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#references)]:
 
-$$\mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}$$
+$$
+\mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}
+$$
 
 with the air parameters in the table below:
 
@@ -60,11 +62,9 @@ The barrel's temperature is updated with the ODE below:
 $$
 \frac{dT_b}{dt} = \frac{\dot{Q}_{tot}}{C_b}
 $$
-
 $$
 \dot{Q}_{tot} = f_\mathrm{RoF} \cdot Q_\mathrm{shot} - \dot{Q}_{loss}
 $$
-
 $$
 C_b = c_b \cdot f_b \cdot m_w
 $$

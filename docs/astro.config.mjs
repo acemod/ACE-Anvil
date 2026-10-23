@@ -61,6 +61,10 @@ export default defineConfig({
           label: 'Components',
           autogenerate: { directory: 'components' },
         },
+        {
+          label: 'Theory',
+          items: [{ autogenerate: { directory: 'theory' } }],
+        },
       ],
       locales: {
         root: {

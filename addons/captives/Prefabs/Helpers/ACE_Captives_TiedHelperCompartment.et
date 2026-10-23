@@ -12,7 +12,7 @@ ACE_Captives_TiedHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_Anim
   SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
    CompartmentSlots {
     CargoCompartmentSlot Performer {
-     GetOutAction CompartmentUserAction "{64771541B779685D}" {
+     GetOutAction CompartmentUserAction "{69AD26567CC01AEE}" {
      }
     }
    }

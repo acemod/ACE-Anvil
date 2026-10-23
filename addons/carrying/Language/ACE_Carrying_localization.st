@@ -11,13 +11,13 @@ StringTable {
    Target_cs_cz "Táhnout"
    Target_pl_pl "Ciągnij"
    Target_ru_ru "Тащить"
-   Target_ja_jp "引きずる"
+   Target_ja_jp "引きずって運ぶ"
    Target_ko_kr "끌기"
    Target_pt_br "Arrastar"
    Target_zh_cn "拖行"
    Modified 1725224988
    Author "Kex"
-   LastChanged "KingDaddyBoyz"
+   LastChanged "michy_REV19"
   }
  }
 }

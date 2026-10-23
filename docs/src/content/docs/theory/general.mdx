@@ -20,4 +20,17 @@ $$
 f(t + \Delta t) \approx f(t) + \Delta t \cdot F\left(f(t), t\right)
 $$
 
-where $\Delta t$ is the time step. The approximation can be quite crude, especially for large $\Delta t$. In case of an ODE that converges towards a fixed value, this can lead to overshooting the target, which is why clamping $f$ is often advised.
+where $\Delta t$ is the time step. The approximation can be quite crude, especially for large $\Delta t$. In case of an ODE that converges towards a fixed value, this can lead to overshooting the target, which is why clamping $f$ is often advised. For ODEs of the form below:
+
+$$
+\frac{df(t)}{dt} = k \cdot \left(f_\infty-f(t)\right)\qquad k > 0
+$$
+
+with rate constant $k$ and target $f_\infty$. The target $f_\infty$ gets approached with exponential convergence and the clamped version of explicit Euler can be simplified with linear interpolation ($\mathrm{lerp}$):
+
+$$
+\xi_\mathrm{progress} = \min(k\cdot\Delta t,\ 1)
+$$
+$$
+f(t+\Delta t) \approx \mathrm{lerp}\left(f(t),\ f_\infty,\ \xi_\mathrm{progress}\right)
+$$

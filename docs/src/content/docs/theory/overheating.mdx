@@ -4,7 +4,7 @@ title: Overheating
 
 This page summarizes the mathematical models used by [**ACE Overheating**](../../components/overheating/) and shows which parameters are exposed in the server config settings.
 
-For the numerical methods used to solve the equations below, see [General Numeric Approximations](../general-numeric-approximations/).
+For the numerical methods used to apply the equations below, see [General Considerations](../general).
 
 ## Simulation of Barrel Temperature
 
@@ -57,7 +57,7 @@ with the air parameters in the table below:
 
 ### Temperature Update
 
-The barrel's temperature is updated with the ODE below:
+The barrel's temperature is updated with the ordinary differential equation (ODE) below:
 
 $$
 \frac{dT_b}{dt} = \frac{\dot{Q}_{tot}}{C_b}

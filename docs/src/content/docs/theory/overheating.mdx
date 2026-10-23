@@ -56,7 +56,7 @@ $$
 h = h_0 + \lambda_\mathrm{cool} \cdot\max\left(12.5,\ 4.5908 \cdot \frac{v^{0.6}}{d^{0.4}_b} + 9.3198 \cdot \frac{r}{d^{0.4}_b}\right)
 $$
 
-where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the character's relative air speed (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#References)]:
+where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the character's relative air speed (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#references)]:
 
 $$\mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}$$
 
@@ -113,7 +113,7 @@ k_{\max} \cdot \exp\left(-\alpha\frac{T_{\mathrm{ig}}}{T_p}\right) & \mid T_p \g
 \end{cases}
 $$
 
-where $k_{\max}$ and $\alpha$ are fitted parameters based on data from Ref. [[2](#References)]. The given ODE modelled the data better than applying Arrhenius rate at any temperature. Cook-off takes place when $P_\mathrm{cook}$ reaches 1.
+where $k_{\max}$ and $\alpha$ are fitted parameters based on data from Ref. [[2](#references)]. The given ODE modelled the data better than applying Arrhenius rate at any temperature. Cook-off takes place when $P_\mathrm{cook}$ reaches 1.
 
 ## Temperature-Dependent Effects on Weapon
 

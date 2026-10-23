@@ -1,0 +1,109 @@
+SCR_PlayerController {
+ ID "1A9BA6BEFA06E3B1"
+ components {
+  ACE_RadialMenuComponent "{654944904311E33E}" {
+   m_aRadialMenuControllers {
+    ACE_RadialMenuController "{65494490457B367E}" {
+     m_RMControls SCR_RadialMenuControllerInputs "{654944919FB5198A}" {
+      m_sOpenAction "ACE_Medical_OpenRadialMenu"
+      m_bCloseOnReleaseOpen 0
+      m_bPerformOnClose 0
+      m_bCloseOnPerform 1
+      m_bShowWhileUnconcious 0
+     }
+     m_Data SCR_SelectionMenuData "{654944919C4B07CF}" {
+      m_aEntries {
+       ACE_Medical_ExamineCasualtyRadialMenuCategoryEntry "{654944954316FDE9}" {
+        Name "#ACE_Medical-RadialMenu_ExaminePatient"
+        Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+        IconSetName "search"
+        m_sId "Examine"
+        m_aEntries {
+         ACE_Medical_InspectCasualtyRadialMenuEntry "{6549448BFE9B5E98}" {
+          Name "#AR-UserAction_InspectCasualty"
+          Icon "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+          IconSetName "search"
+         }
+        }
+       }
+       ACE_SelectItemRadialMenuCategoryEntry "{65494496C105E4AB}" {
+        Name "#ACE_Medical-RadialMenu_HemorrhageControl"
+        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+        IconSetName "Blood_UI"
+        m_sId "SelectBandage"
+        m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212D9F719FA8}" {
+         m_aWhitelist {
+          1 4
+         }
+        }
+       }
+       ACE_SelectItemRadialMenuCategoryEntry "{654A212CF44A6F8E}" {
+        Name "#ACE_Medical-RadialMenu_FluidReplacement"
+        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+        IconSetName "Saline-bag_UI"
+        m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212C307419D3}" {
+         m_aWhitelist {
+          3
+         }
+        }
+       }
+       ACE_SelectItemRadialMenuCategoryEntry "{654944964B95CE9B}" {
+        Name "#ACE_Medical-RadialMenu_Medication"
+        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+        IconSetName "Morphine_UI"
+        m_sId "SelectMedication"
+        m_pItemSearchPredicate ACE_CommonTypeWhitelistItemPredicate "{654A212DB02201E2}" {
+         m_aWhitelist {
+          2
+         }
+        }
+       }
+       ACE_SelectItemRadialMenuCategoryEntry "{654A2120424DD75C}" {
+        Name "#ACE_Medical-RadialMenu_FractureManagement"
+        Icon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+        IconSetName "Bone-Fracture_UI"
+        m_pItemSearchPredicate ACE_HealItemPredicate "{654A212DE452116E}" {
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+  SCR_HUDManagerComponent "{2FDC275D9EBCDB8B}" {
+   InfoDisplays {
+    SCR_ScreenEffectsManager "{5AF2CE6B10209B7D}" {
+     InfoDisplays {
+      ACE_Medical_PainScreenEffect "{6588D54E6078F4C9}" {
+       m_eLayer BACKGROUND
+       m_eShow 47
+       m_aModes {
+        ACE_Medical_ImageWidgetPainScreenEffectMode "{658EA873CFB67107}" {
+         m_eEffectType WHITE_FLASH
+         m_sImageWidgetName "ACE_Medical_WhiteFlash"
+        }
+        ACE_Medical_ImageWidgetPainScreenEffectMode "{658F01688F515CDC}" {
+         m_eEffectType GREY_FLASH
+         m_sImageWidgetName "ACE_Medical_WhiteFlash"
+         m_cColor 0.015 0.015 0.015 1
+        }
+        ACE_Medical_PostProcessPainScreenEffectMode "{658A0E42D7AA79C0}" {
+         m_eEffectType GREY_FLASH
+         m_fStrengthScale 0.02
+         m_ePPType ChromAber
+         m_sMaterialName "{0982CBB142B4BF80}UI/Materials/Editor/ACE_Medical_ChromAber.emat"
+        }
+        ACE_Medical_PostProcessPainScreenEffectMode "{658A0E42D700DAF6}" {
+         m_eEffectType CHROMATIC_ABERRATION
+         m_fStrengthScale 0.1
+         m_ePPType RadialBlur
+         m_sMaterialName "{717A9BCDB6CCB0B9}UI/Materials/Editor/ACE_Medical_RadialBlur.emat"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -8,8 +8,8 @@ class ACE_AnimationHelperCompartmentClass : GenericEntityClass
 //! --- To Do: Create derived classes of this for carrying and CPR
 class ACE_AnimationHelperCompartment : GenericEntity
 {
-	[Attribute(defvalue: "ANIMATED", uiwidget: UIWidgets.SearchComboBox, desc: "Get out type when life state has changed", enums: ParamEnumArray.FromEnum(EGetOutType))]
-	protected EGetOutType m_eLifeStateChangedGetOutType;
+	[Attribute(defvalue: "false", desc: "Whether performer should always enter ragdoll when terminating the helper compartment")]
+	protected bool m_bForceRagdollOnTermination;
 	
 	[RplProp(onRplName: "OnPerformerChanged")]
 	protected RplId m_iPerformerID;
@@ -27,10 +27,14 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	{
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(performer.FindComponent(SCR_CompartmentAccessComponent));
 		if (compartmentAccess)
+		{
+			// Already signal the access component that we are about to move into the helper compartment
+			compartmentAccess.ACE_SetIsRequestingGettingIn(true);
 			compartmentAccess.GetOnCompartmentEntered().Insert(OnCompartmentEntered);
+		}
 		
 		m_pPerformer = performer;
-		m_iPerformerID = Replication.FindItemId(m_pPerformer);
+		m_iPerformerID = Replication.FindItemId(performer);
 		OnPerformerChanged();
 		Replication.BumpMe();
 	}
@@ -65,12 +69,12 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//------------------------------------------------------------------------------------------------
 	protected void DetachHandlers()
 	{
-		if (m_pPerformer)
-		{
-			SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
-			if (charController)
-				charController.m_OnLifeStateChanged.Remove(OnPerformerLifeStateChanged);
-		}
+		if (!m_pPerformer)
+			return;
+		
+		SCR_CharacterControllerComponent charController = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
+		if (charController)
+			charController.m_OnLifeStateChanged.Remove(OnPerformerLifeStateChanged);
 		
 		// Clean-up when carried has left the compartment
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
@@ -80,11 +84,17 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	
 	//------------------------------------------------------------------------------------------------
 	//! Terminates animation
-	void Terminate(EGetOutType getOutType = EGetOutType.ANIMATED)
+	void Terminate()
 	{
 		// Reschedule termination when init is not yet done, for instance, when called before the character is moving in
 		if (!m_bInitDone)
-			GetGame().GetCallqueue().CallLater(Terminate, 100, false, getOutType);
+			GetGame().GetCallqueue().CallLater(Terminate, 100);
+		
+		if (!m_pPerformer)
+		{
+			OnCompartmentLeft();
+			return;
+		}
 		
 		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(m_pPerformer.FindComponent(SCR_CompartmentAccessComponent));
 		if (!compartmentAccess)
@@ -93,7 +103,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 			return;
 		}
 		
-		if (getOutType == EGetOutType.ANIMATED)
+		if (!m_bForceRagdollOnTermination && m_pPerformer.GetCharacterController().GetLifeState() == ECharacterLifeState.ALIVE)
 			compartmentAccess.ACE_GetOutVehicle(EGetOutType.ANIMATED, -1, ECloseDoorAfterActions.INVALID, false);
 		else
 			EjectPerformer();
@@ -112,10 +122,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 				
 		vector transform[4];
 		GetWorldTransform(transform);
-		vector pos;
-		SCR_WorldTools.FindEmptyTerrainPosition(pos, transform[3], SEARCH_POS_RADIUS_M);
-		transform[3] = pos;
-		compartmentAccess.ACE_MoveOutVehicle(transform);
+		compartmentAccess.ACE_MoveOutVehicle(transform, true);
 		
 		// Broadcast teleport on network
 		RplComponent performerRpl = RplComponent.Cast(m_pPerformer.FindComponent(RplComponent));
@@ -140,7 +147,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	//! Terminate when performer gets incapacitated or dies
 	protected void OnPerformerLifeStateChanged(ECharacterLifeState previousLifeState, ECharacterLifeState newLifeState)
 	{
-		Terminate(m_eLifeStateChangedGetOutType);
+		Terminate();
 	}
 	
 	//------------------------------------------------------------------------------------------------

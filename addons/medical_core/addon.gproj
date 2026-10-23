@@ -1,0 +1,83 @@
+GameProject {
+ ID "ACE_Medical_Core"
+ GUID "60C4C12DAE90727B"
+ TITLE "ACE Medical Core"
+ Dependencies {
+  "58D0FB3206B6F859" "60C4CE4888FF4621"
+ }
+ Configurations {
+  GameProjectConfig PC {
+   WidgetManagerSettings WidgetManagerSettings "{AC4BE58770485E02}" {
+    StringTables {
+     StringTableDefinition "{65876578934DDB12}" {
+      StringTableSource "{D393C26C894B1404}Language/ACE_Medical_Core_localization.st"
+      Languages {
+       LanguageDefinition "{658765789114E9AD}" {
+        Code "cs_cz"
+        StringTableRuntime "{EE777A352C84A41A}Language/ACE_Medical_Core_localization.cs_cz.conf"
+       }
+       LanguageDefinition "{658765789114E9D9}" {
+        Code "de_de"
+        StringTableRuntime "{3B0960063F27B53A}Language/ACE_Medical_Core_localization.de_de.conf"
+       }
+       LanguageDefinition "{658765789114E9CF}" {
+        Code "en_us"
+        StringTableRuntime "{65F9EA4D55D4B03B}Language/ACE_Medical_Core_localization.en_us.conf"
+       }
+       LanguageDefinition "{658765789114E93F}" {
+        Code "es_es"
+        StringTableRuntime "{A0B5A7C4BBD6DB24}Language/ACE_Medical_Core_localization.es_es.conf"
+       }
+       LanguageDefinition "{658765789114E92A}" {
+        Code "fr_fr"
+        StringTableRuntime "{1B1D52F35D553826}Language/ACE_Medical_Core_localization.fr_fr.conf"
+       }
+       LanguageDefinition "{658765789114E91F}" {
+        Code "it_it"
+        StringTableRuntime "{9B01DDC7F077BBDF}Language/ACE_Medical_Core_localization.it_it.conf"
+       }
+       LanguageDefinition "{658765789114E90A}" {
+        Code "ja_jp"
+        StringTableRuntime "{8B1A6055CE068B74}Language/ACE_Medical_Core_localization.ja_jp.conf"
+       }
+       LanguageDefinition "{658765789114E977}" {
+        Code "ko_kr"
+        StringTableRuntime "{2BA448F95D2B884B}Language/ACE_Medical_Core_localization.ko_kr.conf"
+       }
+       LanguageDefinition "{658765789114E97C}" {
+        Code "pl_pl"
+        StringTableRuntime "{77D5EE03E3C41437}Language/ACE_Medical_Core_localization.pl_pl.conf"
+       }
+       LanguageDefinition "{658765789114E969}" {
+        Code "pt_br"
+        StringTableRuntime "{A2A274CFD83ADE8D}Language/ACE_Medical_Core_localization.pt_br.conf"
+       }
+       LanguageDefinition "{658765789114E825}" {
+        Code "ru_ru"
+        StringTableRuntime "{F7E360674543BBFB}Language/ACE_Medical_Core_localization.ru_ru.conf"
+       }
+       LanguageDefinition "{658765789114E819}" {
+        Code "uk_ua"
+        StringTableRuntime "{7DBB3591296D05AE}Language/ACE_Medical_Core_localization.uk_ua.conf"
+       }
+       LanguageDefinition "{658765789114E805}" {
+        Code "zh_cn"
+        StringTableRuntime "{A70B5BAC10CDD5B3}Language/ACE_Medical_Core_localization.zh_cn.conf"
+       }
+      }
+     }
+    }
+   }
+  }
+  GameProjectConfig XBOX_ONE {
+  }
+  GameProjectConfig XBOX_SERIES {
+  }
+  GameProjectConfig PS4 {
+  }
+  GameProjectConfig PS5 {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

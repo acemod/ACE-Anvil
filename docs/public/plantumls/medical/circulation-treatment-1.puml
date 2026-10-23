@@ -1,0 +1,41 @@
+@startuml
+!include ../theme-selector.iuml
+partition "Advanced Medical Treatment (excluding OD)" {
+    start
+    :Stop bleedings;
+    partition "Unconscious" $theme_selector("#LightYellow") {
+        while (Is unconscious?) is (yes)
+            while (In cardiac arrest?) is (yes)
+                partition "Cardiac arrest" $theme_selector("#LightSalmon") {
+                    fork
+                        :Perform CPR;
+                    fork again
+                        if (Has at least class II\nhemorrhage) then (yes)
+                            :Give saline;
+                        else (no)
+                        endif
+                    fork again
+                        if (Has at most class II\nhemorrhage and\nlast epinephrine\ninjection > 1 min?) then (yes)
+                            :Inject epinephrine;
+                        else (no)
+                        endif
+                    end fork
+                }
+            endwhile (no)
+            if (Has stable vitals) then (no)
+                :Adjust with medication;
+            else (yes)
+                :Give ammonium carbonate;
+            endif
+        endwhile (no)
+    }
+
+    if (Is in pain and\nlast morphine\ninjection > 15 min?) then (yes)
+        :Inject morphine;
+    else (no)
+    endif
+
+    :Heal wounds with\nmedical kit;
+    end
+}
+@enduml

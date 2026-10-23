@@ -1,9 +1,6 @@
 ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicle_Cargo_Base.et" {
  ID "4B42E71698F5739C"
  components {
-  ControllersManagerComponent "{2CD4A765B3F3A3B1}" {
-   Enabled 0
-  }
   SCR_BaseCompartmentManagerComponent "{2CD4A765A7D52986}" {
    DoorInfoList {
     CompartmentDoorInfo "{62CF60C6D92648FD}" {
@@ -22,6 +19,12 @@ ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
    }
    CompartmentSlots {
     CargoCompartmentSlot Performer {
+     CompartmentAction CompartmentUserAction "{69AD265658BC24AA}" {
+     }
+     JumpOutAction CompartmentUserAction "{69AD265659781649}" {
+     }
+     SwitchSeatAction CompartmentUserAction "{69AD26565F43CFA0}" {
+     }
      PassengerPositionInfo EntitySlotInfo s1 {
      }
      ForcedFreeLook 1
@@ -48,15 +51,12 @@ ACE_AnimationHelperCompartment : "{278E487E19D82680}Prefabs/Vehicles/Core/Vehicl
    m_fDist_Desired 1
    m_fFOV 74
   }
-  ActionsManagerComponent "{2CD4A765B4482F53}" {
-   Enabled 0
-  }
   VehicleAnimationComponent "{50B812962B17E60B}" {
    AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.agr"
-   AnimInstance ""
+   AnimInstance "{A0A5BCBD5629BADB}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.asi"
    AnimInjection AnimationAttachmentInfo "{50B812961A339FD2}" {
     AnimGraph "{30A78C04E5385196}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.agr"
-    AnimInstance ""
+    AnimInstance "{A0A5BCBD5629BADB}Assets/Helpers/Workspace/ACE_AnimationHelperCompartment.asi"
    }
    AutoVariablesBind 1
    DeactivationDelay 2

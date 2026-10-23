@@ -1,8 +1,0 @@
-GenericEntity : "{0619993AE6CDBF85}Prefabs/Items/Equipment/Accessories/ETool_ALICE/ETool_ALICE.et" {
- ID "5DACB1595562B84F"
- components {
-  SCR_CampaignBuildingGadgetToolComponent "{5D60B36CF6E1B018}" {
-   m_eUseMask FROM_ACTION
-  }
- }
-}

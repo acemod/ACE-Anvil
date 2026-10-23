@@ -13,7 +13,7 @@ class ACE_Captives_SurrenderHelperCompartment : ACE_AnimationHelperCompartment
 	{
 		super.Init(performer);
 		
-		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(m_pPerformer.FindComponent(SCR_CharacterControllerComponent));
+		SCR_CharacterControllerComponent charCtrl = SCR_CharacterControllerComponent.Cast(performer.FindComponent(SCR_CharacterControllerComponent));
 		if (charCtrl)
 			charCtrl.ACE_Captives_SetHasSurrendered(true);
 		

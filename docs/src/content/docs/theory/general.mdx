@@ -1,0 +1,23 @@
+---
+title: General Considerations
+sidebar:
+  order: 0
+---
+
+# Numerical Approximations
+
+## Differential Equations
+
+Given an ordinary differential equation (ODE) for simulating a quantity $f$ over time $t$:
+
+$$
+\frac{df(t)}{dt} = F\left(f(t), t\right)
+$$
+
+where $\Delta t$ is the time step and $F$ is some expression that can depend on $f$ and/or $t$. Point $f(t)$ can be propagated to the next point $f(t + \Delta t)$ via explicit Euler method:
+
+$$
+f(t + \Delta t) \approx f(t) + \Delta t \cdot F\left(f(t), t\right)
+$$
+
+The approximation can be quite crude, especially for large $\Delta t$. In case of an ODE that converges towards a fixed value, this can lead to overshooting the target, which is why clamping $f$ is often advised.

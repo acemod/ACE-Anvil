@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark'
 import starlight from '@astrojs/starlight'
 import rehypeMathML from '@daiji256/rehype-mathml'
 import tailwindcss from '@tailwindcss/vite'
@@ -10,9 +11,16 @@ import { config } from './src/utils/config'
 export default defineConfig({
   site: config.site.url,
   base: process.env.BASE_URL || '',
+
+  image: {
+    remotePatterns: [{ protocol: 'https', hostname: 'www.plantuml.com', pathname: '/plantuml/**' }],
+  },
+
   markdown: {
-    remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeMathML],
+    processor: unified({
+      remarkPlugins: [remarkMath],
+      rehypePlugins: [rehypeMathML],
+    }),
   },
 
   integrations: [
@@ -55,11 +63,11 @@ export default defineConfig({
         // },
         {
           label: 'Guides',
-          autogenerate: { directory: 'guides' },
+          items: [{ autogenerate: { directory: 'guides' } }],
         },
         {
           label: 'Components',
-          autogenerate: { directory: 'components' },
+          items: [{ autogenerate: { directory: 'components' } }],
         },
       ],
       locales: {

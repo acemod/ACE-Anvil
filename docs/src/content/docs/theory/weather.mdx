@@ -1,0 +1,65 @@
+---
+title: Weather
+---
+
+This page summarizes the air temperature model used by [**ACE Weather**](../../components/weather/).
+
+## Simulation of Air Temperature
+
+### The SinExp Model
+
+Air temperature is simulated with the corrected SinExp model from Ref. [[1](#references)], using a sine function during daytime and an exponential decay at night. The temperature $T$ at hour $h$ for the model is given below:
+
+$$
+T(h) =
+\begin{cases}
+T_{\min} + (T_{\max}-T_{\min})\cdot\sin\left(\frac{\pi\cdot(h-h_r)}{L+2\alpha}\right) & \mid h_r \leq h < h_s \\
+\tau + (T_s-\tau)\cdot\exp\left(-\gamma\cdot\frac{h-h_s}{24-L}\right) & \mid h_s \leq h < h'_r
+\end{cases}
+$$
+$$
+L = h_s-h_r
+$$
+$$
+\alpha = h_{\max}-\frac{h_r+h_s}{2}
+$$
+$$
+\tau = \frac{T'_{\min}-T_s\cdot\exp\left(-\gamma\cdot\frac{h'_r-h_s}{24-L}\right)}{1-\exp\left(-\gamma\cdot\frac{h'_r-h_s}{24-L}\right)}
+$$
+
+where $T_{\min}$ and $T_{\max}$ are the daily minimum and maximum temperatures, $T_s$ is the temperature at sunset and $T'_{\min}$ is the next morning's minimum. $h_r$ is sunrise hour, $h_s$ is sunset hour, $h_{\max}$ is the hour of maximum temperature and $L$ is day length. $h'_r$ denotes the hour of the next sunrise. $\gamma$ is the decay coefficient (Weather manager's `m_fACE_SinExp_Gamma`). The peak hour $h_{\max}$ is interpolated from from the weather manager's `m_aACE_MonthlyAverageTemperatureAirMaxHours`.
+
+### Minimum and Maximum Temperatures
+
+The baseline minimum and maximum temperatures are interpolated between the terrain's monthly averages (Weather manager's `m_aACE_MonthlyAverageDailyTemperatureAirMins` and `m_aACE_MonthlyAverageDailyTemperatureAirMaxs`). Overcast and random variation adjust these values:
+
+$$
+\Delta T_{\max} = X_\mathrm{mean} - X_\mathrm{range} - \lambda_ơ\cdot\overline{ơ}
+$$
+$$
+\Delta T_{\min} = X_\mathrm{mean} + X_\mathrm{range} + \lambda_ơ\cdot\overline{ơ}
+$$
+
+where $\Delta T_{\max}$ and $\Delta T_{\min}$ are the shifts that get added, $\overline{ơ} \in [0, 2]$ is the estimated average overcast over the next 12 hours and $\lambda_ơ$ is the temperature factor for overcast (Weather manager's `m_fACE_OvercastTemperatureFactor`). Overcast generally decreases the diurnal temperature range (_i.e_ difference between daily maximum and minimum). Additional random samples $X_\mathrm{mean}$ and $X_\mathrm{range}$ shift the mean and diurnal temperature range respectively. Both use first-order autoregressive noise, so successive samples are correlated:
+$$
+X_n = \rho\cdot X_{n-1} + \epsilon_n\qquad X_0 \sim \mathcal{N}(0,\sigma^2)
+$$
+$$
+\epsilon_n \sim \mathcal{N}\left(0,\ \sigma^2(1-\rho^2)\right)
+$$
+
+where $\rho$ is the autoregressive coefficient, $\epsilon_n$ is the innovation, $\sigma$ is the standard deviation of the noise and $\mathcal{N}(\mu,s^2)$ denotes a normal distribution with mean $\mu$ and standard deviation $s$. The sampled temperature extrema are clamped to maintain a minimum diurnal temperature range (Weather manager's `m_fACE_MinDiurnalTemperatureRange`).
+
+### Lapse Rate (Altitude Dependence)
+
+The effective air temperature $T_\mathrm{eff}(h,z)$ is calculated based on the altitude above sea level $z$ in meters:
+
+$$
+T_\mathrm{eff}(h,z) = T(h) - 6.5\ \mathrm{K} \cdot\frac{z}{1000\ \mathrm{m}}
+$$
+
+where $T(h)$ is the SinExp-based temperature.
+
+## References
+
+[1] [T. Brandsma, G. P. Können, _Int. J. Climatol._ **2006**, _26_, 75–89.](https://doi.org/10.1002/joc.1236)

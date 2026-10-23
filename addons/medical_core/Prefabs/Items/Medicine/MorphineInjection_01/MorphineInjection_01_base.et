@@ -1,0 +1,14 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
+   m_aACE_Medical_LitterPrefabConfigs {
+    ACE_PrefabVariantsConfig "{6A0D1CDEB44F720E}" {
+     m_aVariants {
+      "{901CA3B2C754CADD}Prefabs/Props/Garbage/Medical/ACE_Medical_LitterInjector.et"
+     }
+    }
+   }
+  }
+ }
+}

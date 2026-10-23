@@ -1,0 +1,8 @@
+GenericEntity : "{EF645050361A6674}Prefabs/Props/Core/ACE_Medical_LitterBase.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  MeshObject "{5872F0EB7FA40561}" {
+   Object "{2C4FFBF34CD60067}Assets/Items/Medicine/ChestSeal/ACE_Medical_ChestSealPackage.xob"
+  }
+ }
+}

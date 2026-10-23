@@ -11,5 +11,7 @@ MetaFileClass {
   }
   EntityTemplateResourceClass HEADLESS : PC {
   }
+  EntityTemplateResourceClass PS5 : PC {
+  }
  }
 }

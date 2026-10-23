@@ -63,6 +63,13 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   RigidBody "{631348EAC4135D78}" {
   }
   SCR_ConsumableItemComponent "{631348EAC4135D63}" {
+   m_aACE_Medical_LitterPrefabConfigs {
+    ACE_PrefabVariantsConfig "{6A1E3767157D1AFE}" {
+     m_aVariants {
+      "{7422ADFB7D0A1564}Prefabs/Props/Garbage/Medical/ChestSeal/ACE_Medical_LitterChestSealPackage.et"
+     }
+    }
+   }
    m_eAnimVariable ADRIANOV
    m_eUseMask 7
    m_ConsumableEffect ACE_Medical_ConsumableChestSeal "{631348EAC4135D64}" {

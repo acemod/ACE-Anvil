@@ -32,6 +32,9 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "0.05", desc: "Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute.", params: "0 1")]
 	float m_fDeteriorateToTensionPneumothoraxChancePerMinute;
 	
+	[Attribute(defvalue: "0.455", desc: "Stroke volume gets multiplied by this scale during tension pneumothorax.", params: "0 1")]
+	float m_fTensionPneumothoraxStrokeVolumeScale;
+
 	[Attribute(defvalue: "14.573", desc: "Default respiratory rate [breaths per minute]", params: "0 inf")]
 	float m_fDefaultRespiratoryRateBPM;
 	

@@ -187,7 +187,6 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 		m_bHasTensionPneumothorax = hasTPTX;
 		Replication.BumpMe();
 		OnPneumothoraxStateChanged();
-		OnUpdateCanBreathServer();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -199,7 +198,7 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	//------------------------------------------------------------------------------------------------
 	bool CanBreath()
 	{
-		return !m_bIsAirwayObstructed && !m_bIsAirwayOccluded && !m_bHasTensionPneumothorax;
+		return !m_bIsAirwayObstructed && !m_bIsAirwayOccluded;
 	}
 	
 	//------------------------------------------------------------------------------------------------

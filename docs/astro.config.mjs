@@ -70,8 +70,8 @@ export default defineConfig({
           items: [{ autogenerate: { directory: 'components' } }],
         },
         {
-          label: 'Theory',
-          items: [{ autogenerate: { directory: 'theory' } }],
+          label: 'Mathematical Models',
+          items: [{ autogenerate: { directory: 'math' } }],
         },
       ],
       locales: {

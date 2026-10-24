@@ -117,20 +117,21 @@ The $\xi_\mathrm{PTX}$-based term accounts for loss of surface area through pneu
 $\mathrm{O_2}$ exchange tries to maintain a steady state by compensating for consumption and equilibrating alveolar and peripheral blood saturation:
 
 $$
-\varphi_{Q,O_2} = \operatorname{clamp}\left(\frac{Q}{Q_0}\cdot1\ \mathrm{mmol/s}\cdot\left(S_\mathrm{alv}-\frac{SpO2}{100\%}\right) + \min\left(\frac{Q}{Q_0},\ 1\right)\cdot\varphi_{CR,O_2},\ -\varphi_{Q,O_2}^{\max},\ \varphi_{Q,O_2}^{\max}\right)
+\varphi_{Q,O_2} = \operatorname{clamp}\left(r_Q\cdot1\ \mathrm{mmol/s}\cdot\left(S_\mathrm{alv}-\frac{SpO2}{100\%}\right) + \min\left(r_Q,\ 1\right)\cdot\varphi_{CR,O_2},\ -\varphi_{Q,O_2}^{\max},\ \varphi_{Q,O_2}^{\max}\right)
 $$
 $$
 \varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot S_\mathrm{alv}
 $$
 $$
-Q_0 = \frac{HR_0\cdot SV_0}{60\ \mathrm{s/min}}
+r_Q = \frac{Q}{Q_0} \qquad Q_0 = \frac{HR_0\cdot SV_0}{60\ \mathrm{s/min}}
 $$
 
+- $\varphi_{Q,O_2}$, $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer from alveoli to blood and its maximum value.
+- $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
+- $r_Q\ [\cdot]$: Relative perfusion to default.
 - $Q_0\ [\mathrm{ml/s}]$: Default perfusion.
 - $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
 - $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
-- $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
-- $\varphi_{Q,O_2}$, $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer from alveoli to blood and its maximum value.
 
 ### Perfusion: $\mathrm{CO_2}$ Exchange
 

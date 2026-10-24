@@ -86,17 +86,17 @@ where $T_b$ is the barrel temperature, $T_p$ is bullet temperature, $m_p$ is bul
 
 ### Cook-Off Progress
 
-Once the bullet temperature $T_p$ reaches the autoignition temerature $T_{\mathrm{ig}}$ (`m_fGunpowderAutoignitionTemperature`), cook-off progress $P_\mathrm{cook}$ increases based on an Arrhenius rate:
+Once the bullet temperature $T_p$ reaches the autoignition temperature $T_{\mathrm{ig}}$ (`m_fGunpowderAutoignitionTemperature`), cook-off progress $\xi_\mathrm{cook}$ increases based on an Arrhenius rate:
 
 $$
-\frac{dP_\mathrm{cook}}{dt} =
+\frac{d\xi_\mathrm{cook}}{dt} =
 \begin{cases}
 k_{\max} \cdot \exp\left(-\alpha\frac{T_{\mathrm{ig}}}{T_p}\right) & \mid T_p \geq T_{\mathrm{ig}} \\
 0 & \mid T_p < T_{\mathrm{ig}}
 \end{cases}
 $$
 
-where $k_{\max}$ and $\alpha$ are fitted parameters based on data from Ref. [[2](#references)]. The given ODE modelled the data better than applying Arrhenius rate at any temperature. Cook-off takes place when $P_\mathrm{cook}$ reaches 1.
+where $k_{\max}$ and $\alpha$ are fitted parameters based on data from Ref. [[2](#references)]. The given ODE modelled the data better than applying Arrhenius rate at any temperature. Cook-off takes place when $\xi_\mathrm{cook}$ reaches 1.
 
 ## Temperature-Dependent Effects on Weapon
 

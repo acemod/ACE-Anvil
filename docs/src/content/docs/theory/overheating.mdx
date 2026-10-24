@@ -40,20 +40,19 @@ $$
 h = h_0 + \lambda_\mathrm{cool} \cdot\max\left(12.5,\ 4.5908 \cdot \frac{v^{0.6}}{d^{0.4}_b} + 9.3198 \cdot \frac{r}{d^{0.4}_b}\right)
 $$
 
-where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the character's relative air speed (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#references)]:
+where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the air speed relative to the character (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#references)]:
 
 $$
-\mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}
+h = \frac{k\cdot\mathrm{Nu}}{d_b}\qquad\mathrm{with}\quad \mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}
 $$
 
-with the air parameters in the table below:
+where $k$ and $\mathrm{Pr}$ are the thermal conductivity and Prandtl number of air, $\mathrm{Nu}$ is the Nusselt number and $\mathrm{Re}$ is the Reynolds number with the relation below:
 
-| Symbol | Value | Description |
-| --- | --- | --- |
-| $\mathrm{Pr}_\mathrm{air}$ | 0.714672 | Prandtl number |
-| $k_\mathrm{air}$ | 0.02614 W/(m⋅K) | Thermal conductivity |
-| $\eta_\mathrm{air}$ | $1.846 \cdot 10^{-5} \mathrm{}$ kg/(m⋅s) | Dynamic viscosity |
-| $\rho_\mathrm{air}$ | 1.1839 kg/m³ | Density |
+$$
+\mathrm{Re} = \frac{\rho\cdot v\cdot d_b}{\mu}
+$$
+
+where $\rho$ and $\mu$ are the density and dynamic viscosity of air. Currently the crosswind correlation is used independent of the direction of $v$ relative to the barrel.
 
 ### Temperature Update
 

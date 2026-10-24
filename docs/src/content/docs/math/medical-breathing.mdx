@@ -2,7 +2,7 @@
 title: Medical Breathing
 ---
 
-This page summarizes the mathematical models used by [**ACE Medical Breathing**](../../components/medical/#ace-medical-breathing). The equations below describe the model with an unobstructed airway. For the numerical methods used to apply the differential equations, see [General Considerations](../general).
+This page summarizes the mathematical models used by [**ACE Medical Breathing**](../../components/medical/#ace-medical-breathing). For the numerical methods used to apply the differential equations, see [General Considerations](../general).
 
 ## Respiratory System
 
@@ -183,7 +183,11 @@ $$
 p = \frac{nRT}{V}
 $$
 
-## Cardiac Arrest and CPR
+### Obstructed Airway
+
+Tongue-based obstruction, vomit-based occlusion and tension pneumothorax completely shut down any ventilation.
+
+### Cardiac Arrest and CPR
 
 During cardiac arrest, all gas exchanges get shut down and cellular respiration keeps consuming $\mathrm{O_2}$ from stale blood. CPR can partially restore exchange with chest compression-induced blood flow and passive ventilation (`m_fCPRPassiveVentilationRateBPM`). An equipped $\mathrm{O_2}$ mask additionally increases ventilation as described in [Ventilation](#ventilation).
 

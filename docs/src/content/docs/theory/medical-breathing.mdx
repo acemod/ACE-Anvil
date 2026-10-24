@@ -1,0 +1,198 @@
+---
+title: Medical Breathing
+---
+
+This page summarizes the mathematical models used by [**ACE Medical Breathing**](../../components/medical/#ace-medical-breathing). The equations below describe the model with an unobstructed airway. For the numerical methods used to apply the differential equations, see [General Considerations](../general).
+
+## Respiratory System
+
+The model uses two gas reservoirs: alveoli and blood, connected as follows:
+
+$$
+\mathrm{Surroundings}
+\overset{\text{Vent.}}{\rightleftarrows}
+\mathrm{Alveoli}
+\overset{\text{Perf.}}{\rightleftarrows}
+\mathrm{Blood}
+$$
+
+Ventilation exchanges gas with the surroundings and perfusion drives exchange of gas between alveoli and blood. $\mathrm{O_2}$ in blood gets continuously converted to $\mathrm{CO_2}$. Gas exchanges are simplified as continuous flows. No simulation of actual breathing cycles is done.
+
+### Lung Volumes
+
+Tidal and capacity volumes of the lungs are scaled by pneumothorax (PTX):
+
+$$
+V_T = V_{T,0}\cdot(1-\xi_\mathrm{PTX})\qquad V_C = V_{C,0}\cdot(1-\xi_\mathrm{PTX})
+$$
+
+- $V_T\ [\mathrm{ml}]$: Tidal volume.
+- $V_C\ [\mathrm{ml}]$: Lung capacity.
+- $V_{T,0}=500\cdot2/3\ \mathrm{ml}$: Default tidal volume.
+- $V_{C,0}=6000\cdot2/3\ \mathrm{ml}$: Default lung capacity.
+- $\xi_\mathrm{PTX}\in [0, 0.75]$: PTX progress, expressed as the fraction of lung volume lost.
+
+The factors of $2/3$ account for dead space.
+
+### Respiratory Rate
+
+Respiratory rate $RR$ increases to compensate for the loss of lung volume:
+
+$$
+RR = \min\left(RR_{\max},\ \frac{RR_0}{1-\xi_\mathrm{PTX}}\right)
+$$
+
+- $RR\ [\mathrm{min^{-1}}]$: Respiratory rate in breaths per minute.
+- $RR_0\ [\mathrm{min^{-1}}]$: Default respiratory rate (`m_fDefaultRespiratoryRateBPM`).
+- $RR_{\max}\ [\mathrm{min^{-1}}]$: Maximum respiratory rate (`m_fMaxRespiratoryRateBPM`).
+
+### Ventilation
+
+The volume-fraction-based ventilation rate is given below:
+
+$$
+k_V = \frac{RR}{60\ \mathrm{s/min}}\cdot\frac{V_T}{V_C}
+$$
+
+- $k_V\ [\mathrm{s^{-1}}]$: Fractional ventilation rate.
+
+Ventilation equilibrates partial gas pressures between alveoli and surroundings:
+
+$$
+\Phi_{V,O_2} = k_V\cdot(p_{O_2}^{\max}-p_{O_2})\qquad \Phi_{V,CO_2} = k_V\cdot p_{CO_2}
+$$
+
+- $p_{O_2}$, $p_{CO_2}\ [\mathrm{kPa}]$: Alveolar $\mathrm{O_2}$ and $\mathrm{CO_2}$ partial pressures.
+- $p_{O_2}^{\max}\ [\mathrm{kPa}]$: Supplied $\mathrm{O_2}$ pressure, normally 19.925 kPa.
+- $\Phi_{V,O_2}\ [\mathrm{kPa/s}]$: Ventilation rate of increase in alveolar $\mathrm{O_2}$ partial pressure.
+- $\Phi_{V,CO_2}\ [\mathrm{kPa/s}]$: Ventilation rate of decrease in alveolar $\mathrm{CO_2}$ partial pressure.
+
+The $\mathrm{CO_2}$ partial pressure of the surroundings is currently approximated as 0 kPa.
+An equipped $\mathrm{O_2}$ mask raises $p_{O_2}^{\max}$ to 95 kPa and enforces $k_V\geq0.015\ \mathrm{s^{-1}}$.
+
+### Cellular Respiration
+
+$\mathrm{O_2}$ is consumed by cellular respiration and $\mathrm{CO_2}$ is produced in return. The ratio between production and consumption depends on the chemical reactions that take place (_i.e._ aerobic vs anaerobic conditions) and the ratio is given by the respiratory exchange rate $RER$. The values are adjusted through linear interpolation between hypoxic and normal $SpO_2$ values:
+
+$$
+\varphi_{CR,O_2} = \mathrm{lerp}\left(\varphi_{CR,O_2}^{\mathrm{hypo}},\ \varphi_{CR,O_2}^{0},\ \lambda\right)\qquad
+RER = \mathrm{lerp}(RER_\mathrm{hypo},\ RER_0,\ \lambda)
+$$
+$$
+\lambda = \operatorname{clamp}\left(\frac{SpO_2-SpO_{2,\mathrm{hypo}}}{SpO_{2,0}-SpO_{2,\mathrm{hypo}}},\ 0,\ 1\right)
+$$
+$$
+\varphi_{CR,CO_2} = \varphi_{CR,O_2}\cdot RER
+$$
+
+- $\varphi_{CR,O_2}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ consumption rate.
+- $\varphi_{CR,O_2}^{0}$, $\varphi_{CR,O_2}^{\mathrm{hypo}}\ [\mathrm{mmol/s}]$: Normal and hypoxic consumption rates (`m_fDefaultOxygenConsumptionMMOLPS` and `m_fHypoxicOxygenConsumptionMMOLPS`).
+- $RER$, $RER_0$, $RER_\mathrm{hypo}\ [\cdot]$: Current, normal, and hypoxic respiratory exchange ratios (`m_fDefaultRER` and `m_fHypoxicRER`).
+- $SpO_2\ [\%]$: Peripheral blood $\mathrm{O_2}$ saturation.
+- $SpO_{2,0}$, $SpO_{2,\mathrm{hypo}}\ [\%]$: Normal and hypoxic saturation levels (`m_fDefaultSpO2` and `m_fHypoxicMetabolismSpO2`).
+- $\lambda\ [\cdot]$: Interpolation fraction.
+- $\varphi_{CR,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ production rate.
+
+Note that both consumption and production rates are defined as positive values. The sign convention will be important later for the correct signs in the ODEs.
+
+Reduced saturation lowers consumption, which simulates the body prioritizing vital organs.
+
+### Perfusion: $\mathrm{O_2}$ Exchange
+
+Perfusion is driven by cardiac output and $\mathrm{O_2}$ binding at the alveolar pressure follows a Hill function:
+
+$$
+Q = \frac{CO}{60\ \mathrm{s/min}}\cdot(1-\xi_\mathrm{PTX})^{2/3}\qquad
+S_\mathrm{alv} = \frac{(p_{O_2}/K_D)^\gamma}{1+(p_{O_2}/K_D)^\gamma}
+$$
+
+- $Q\ [\mathrm{ml/s}]$: Lung perfusion.
+- $CO\ [\mathrm{ml/min}]$: Cardiac output.
+- $S_\mathrm{alv}\in[0,1]$: Equilibrium $\mathrm{O_2}$ saturation at the alveolar $\mathrm{O_2}$ pressure.
+- $K_D=3.6\ \mathrm{kPa}$: Hemoglobin $\mathrm{O_2}$ dissociation constant.
+- $\gamma=2.7$: Hill coefficient for hemoglobin.
+
+The $\xi_\mathrm{PTX}$-based term accounts for loss of surface area through pneumothorax. The exponent of $2/3$ comes from converting a volume-based quantity to an area-based quantity.
+
+$\mathrm{O_2}$ exchange tries to maintain a steady state by compensating for consumption and equilibrating alveolar and peripheral blood saturation:
+
+$$
+\varphi_{Q,O_2} = \operatorname{clamp}\left(\frac{Q}{Q_0}\cdot1\ \mathrm{mmol/s}\cdot\left(S_\mathrm{alv}-\frac{SpO2}{100\%}\right) + \min\left(\frac{Q}{Q_0},\ 1\right)\cdot\varphi_{CR,O_2},\ -\varphi_{Q,O_2}^{\max},\ \varphi_{Q,O_2}^{\max}\right)
+$$
+$$
+\varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot S_\mathrm{alv}
+$$
+$$
+Q_0 = \frac{HR_0\cdot SV_0}{60\ \mathrm{s/min}}
+$$
+
+- $Q_0\ [\mathrm{ml/s}]$: Default perfusion.
+- $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
+- $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
+- $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
+- $\varphi_{Q,O_2}$, $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer from alveoli to blood and its maximum value.
+
+### Perfusion: $\mathrm{CO_2}$ Exchange
+
+$\mathrm{CO_2}$ exchange is driven by a deviation from Henry's law equilibrium between venous concentration and alveolar partial pressure:
+
+$$
+\varphi_{Q,CO_2} = k_C\cdot(c_v-K_H\cdot p_{CO_2})
+$$
+
+- $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer rate from blood to alveoli.
+- $c_v\ [\mathrm{mmol/ml}]$: Venous blood $\mathrm{CO_2}$ concentration.
+- $K_H=0.000225\ \mathrm{mmol/(ml\cdot kPa)}$: Henry constant for $\mathrm{CO_2}$ in blood.
+- $k_C\ [\mathrm{ml/s}]$: Equilibration rate to restore Henry's law between blood and alveolar $\mathrm{CO_2}$.
+
+Positive $\varphi_{Q,CO_2}$ decreases venous $\mathrm{CO_2}$ concentration and increases alveolar $\mathrm{CO_2}$ partial pressure. Cellular production adds $\mathrm{CO_2}$ to blood, while ventilation removes it from the alveoli.
+
+### Net Evolution of Gas Pressures and Concentrations
+
+Ventilation, perfusion, and cellular respiration are combined in ODEs. For evolution of alveolar partial pressures:
+
+$$
+\frac{dp_{O_2}}{dt} = \Phi_{V,O_2}-\frac{RT}{V_C}\cdot \varphi_{Q,O_2}
+$$
+$$
+\frac{dp_{CO_2}}{dt} = \frac{RT}{V_C}\cdot \varphi_{Q,CO_2}-\Phi_{V,CO_2}
+$$
+
+Peripheral blood $\mathrm{O_2}$ saturation:
+
+$$
+\frac{dSpO_2}{dt} = \frac{100\%}{V_a\cdot c_\mathrm{heme}}\cdot\left(\varphi_{Q,O_2}-\varphi_{CR,O_2}\right)
+$$
+
+$\mathrm{CO_2}$ concentration in venous blood:
+
+$$
+\frac{dc_v}{dt} = \frac{1}{V_v}\cdot\left(\varphi_{CR,CO_2}-\varphi_{Q,CO_2}\right)
+$$
+
+
+- $t\ [\mathrm{s}]$: Simulation time.
+- $T\ [\mathrm{K}]$: Body temperature.
+- $R\ \mathrm{[kPa\cdot ml/(mmol\cdot K])}$: Universal gas constant.
+- $V_a$, $V_v\ [\mathrm{ml}]$: Arterial and venous blood volumes, taken as 30% and 70% of total blood volume.
+
+Conversion between partial pressure $p$ and amount of substance $n$ is done through the ideal gas law:
+
+$$
+p = \frac{nRT}{V}
+$$
+
+## Cardiac Arrest and CPR
+
+During cardiac arrest, all gas exchanges get shut down and cellular respiration keeps consuming $\mathrm{O_2}$ from stale blood. CPR can partially restore exchange with chest compression-induced blood flow and passive ventilation (`m_fCPRPassiveVentilationRateBPM`). An equipped $\mathrm{O_2}$ mask additionally increases ventilation as described in [Ventilation](#ventilation).
+
+## Changes to Cardiovascular System
+
+An elevated respiratory rate raises the base heart rate target:
+
+$$
+\Delta HR_\mathrm{base} = 2\cdot\max(RR-RR_0,\ 0)
+$$
+
+- $\Delta HR_\mathrm{base}\ [\mathrm{min^{-1}}]$: Shift added to base heart rate target.
+

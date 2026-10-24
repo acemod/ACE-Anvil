@@ -25,10 +25,6 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!captiveChar)
 			return;
 		
-		SCR_CompartmentAccessComponent captiveCompartmentAccess = SCR_CompartmentAccessComponent.Cast(captiveChar.GetCompartmentAccessComponent());
-		if (captiveCompartmentAccess)
-			captiveCompartmentAccess.KickFromVehicle(GetRelevantDoorIndex(pUserEntity));
-		
 		ACE_AnimationHelperCompartment helper = ACE_AnimationTools.AnimateWithHelperCompartment(ACE_EAnimationHelperID.TIED, captiveChar);
 		if (!helper)
 			return;
@@ -119,21 +115,21 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!userChar)
 			return false;
 		
-		// Cannot be performed when already carrying
-		SCR_CharacterControllerComponent userCharController = SCR_CharacterControllerComponent.Cast(userChar.GetCharacterController());
-		if (!userCharController || userCharController.ACE_IsCarrier())
-		{
-			SetCannotPerformReason("#ACE-UserAction_Carrying");
-			return false;
-		}
-		
-		SCR_CompartmentAccessComponent compartmentAccess = SCR_CompartmentAccessComponent.Cast(userChar.GetCompartmentAccessComponent());
-		if (!compartmentAccess)
-			return false;
-		
 		BaseCompartmentSlot compartment = GetCompartmentSlot();
 		if (!compartment)
 			return false;
+		
+		SCR_ChimeraCharacter captiveChar = SCR_ChimeraCharacter.Cast(compartment.GetOccupant());
+		if (!captiveChar)
+			return false;
+		
+		string cannotPerformReason;
+		SCR_CharacterControllerComponent userCharController = SCR_CharacterControllerComponent.Cast(userChar.GetCharacterController());
+		if (!userCharController || !userCharController.ACE_CanCarry(captiveChar, cannotPerformReason))
+		{
+			SetCannotPerformReason(cannotPerformReason);
+			return false;
+		}
 		
 		return true;
 	}

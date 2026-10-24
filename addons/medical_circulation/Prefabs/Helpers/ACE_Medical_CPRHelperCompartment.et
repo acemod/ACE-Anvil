@@ -7,6 +7,12 @@ ACE_Medical_CPRHelperCompartment : "{0D226790BE615DC7}Prefabs/Helpers/ACE_Animat
      StanceChangeOnExit Crouch
     }
    }
+   CompartmentSlots {
+    CargoCompartmentSlot Performer {
+     GetOutAction SCR_GetOutAction "{69AD479EB4813AE0}" {
+     }
+    }
+   }
   }
   VehicleAnimationComponent "{50B812962B17E60B}" {
    AnimInstance "{9591A985FDD73C7B}Assets/Helpers/Workspace/ACE_Medical_CPR.asi"

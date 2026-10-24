@@ -71,6 +71,7 @@ class ACE_TacticalLadderEntity : GenericEntity
 		// Picked up from ground
 		else if (!oldSlot)
 		{
+			GetGame().GetCallqueue().Remove(OnItemPlacedOnGroundDelayed);
 			RpcDo_OnItemPickedFromGroundBroadcast();
 			Rpc(RpcDo_OnItemPickedFromGroundBroadcast);
 		}

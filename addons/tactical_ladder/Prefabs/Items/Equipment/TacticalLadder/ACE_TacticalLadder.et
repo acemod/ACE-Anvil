@@ -101,8 +101,8 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
     }
     ItemPhysAttributes ItemPhysicalAttributes "{5A10B8E3E50A16D2}" {
      Weight 10.4
-     ItemDimensions 46 78 7
-     ItemVolume 8000
+     ItemDimensions 30 30 30
+     ItemVolume 25000
     }
     ItemAnimationAttributes ItemAnimationAttributes "{5A10B8E3C98BD0A4}" {
      IkSettings {
@@ -125,8 +125,8 @@ ACE_TacticalLadderEntity : "{49FFE8F373F55960}Prefabs/Weapons/Explosives/Mine_M1
    }
   }
   SCR_PlaceableItemComponent "{5A127CDA1D1B58E6}" {
-   m_ePlacementType ACE_XYZ_UP
    m_bACE_CanBeStacked 0
+   m_ePlacementType ACE_XYZ_UP
   }
   SCR_PressureTriggerComponent "{59E6BE151DCC9953}" {
    Enabled 0

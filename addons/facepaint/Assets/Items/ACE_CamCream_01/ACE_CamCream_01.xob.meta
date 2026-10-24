@@ -1,0 +1,52 @@
+MetaFileClass {
+ Name "{D4229A04F9561878}Assets/Items/ACE_CamCream_01/ACE_CamCream_01.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   MaterialAssigns {
+    MaterialAssignClass "{68EAF3830AD8470F}" {
+     SourceMaterial "ace_camcream_01"
+     AssignedMaterial "{5A3BD1BBBE0D06B1}Assets/Items/ACE_CamCream_01/Data/ace_camcream_01.emat"
+    }
+   }
+   MeshParams {
+    MeshParam CamCream {
+    }
+    MeshParam CamCream_Cap {
+    }
+   }
+   GeometryParams {
+    GeometryParam UCL_CamCream_IFV {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{DFAD927815FE1E61}Common/Materials/Game/Gadgets/gadget_plastic.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+   Common TXOCommonClass "{68EAF3830AD68D60}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+   Common TXOCommonClass "{68EAF3830AD68951}" : "{9D5B6207F7628CE2}Configs/System/ResourceTypes/XBOX_ONE/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+   Common TXOCommonClass "{68EAF3830AD68835}" : "{DD9F02115C764647}Configs/System/ResourceTypes/XBOX_SERIES/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS4 : PC {
+   Common TXOCommonClass "{68EAF3830AD57708}" : "{53EC476BC921D99A}Configs/System/ResourceTypes/PS4/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS5 : PC {
+   Common TXOCommonClass "{68EAF3830AD576DC}" : "{F62AA8E7B8EA9D26}Configs/System/ResourceTypes/PS5/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass HEADLESS : PC {
+   Common TXOCommonClass "{68EAF3830AD575EF}" : "{3A5B3356978039E8}Configs/System/ResourceTypes/HEADLESS/MeshObjectCommon.conf" {
+   }
+  }
+ }
+}

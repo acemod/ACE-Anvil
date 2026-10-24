@@ -14,7 +14,7 @@ $$
 \frac{df(t)}{dt} = F\left(f(t), t\right)
 $$
 
-where $F$ is some expression that can depend on $f$ and/or $t$. Point $f(t)$ can be propagated to the next point $f(t + \Delta t)$ via explicit Euler method:
+where $F$ is some expression that can depend on $f$ and $t$. Point $f(t)$ can be propagated to the next point $f(t + \Delta t)$ via explicit Euler method:
 
 $$
 f(t + \Delta t) \approx f(t) + \Delta t \cdot F\left(f(t), t\right)
@@ -26,7 +26,7 @@ $$
 \frac{df(t)}{dt} = k \cdot \left(f_\infty-f(t)\right)\qquad k > 0
 $$
 
-with rate constant $k$ and target $f_\infty$. The target $f_\infty$ gets approached with exponential convergence and the clamped version of explicit Euler can be simplified with linear interpolation ($\mathrm{lerp}$):
+with rate constant $k$ and target $f_\infty$, which gets approached with exponential convergence, the clamped version of explicit Euler can alternatively be written as linear interpolation ($\mathrm{lerp}$):
 
 $$
 \xi_\mathrm{progress} = \min(k\cdot\Delta t,\ 1)

@@ -40,20 +40,19 @@ $$
 h = h_0 + \lambda_\mathrm{cool} \cdot\max\left(12.5,\ 4.5908 \cdot \frac{v^{0.6}}{d^{0.4}_b} + 9.3198 \cdot \frac{r}{d^{0.4}_b}\right)
 $$
 
-where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the character's relative air speed (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#references)]:
+where $h_0$ is the base heat transfer coefficient  (`m_fBaseHeatTransferCoefficient`), $\lambda_\mathrm{cool}$ is the cooling scale (`m_fDefaultAirCoolingScale` or `m_fOpenBoltAirCoolingScale`), $v$ is the air speed relative to the character (_i.e._ accounts for wind), $r \in [0, 1]$ is the rain intensity and $d_b$ is the barrel's diameter. The air speed term is derived from the cylinder crossflow correlation for $\mathrm{Re} \in [1000, 20000]$ from Ref. [[1](#references)]:
 
 $$
-\mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}
+h = \frac{k\cdot\mathrm{Nu}}{d_b}\qquad\mathrm{with}\quad \mathrm{Nu}=0.26\cdot\mathrm{Re}^{0.6}\cdot\mathrm{Pr}^{0.37}
 $$
 
-with the air parameters in the table below:
+where $k$ and $\mathrm{Pr}$ are the thermal conductivity and Prandtl number of air, $\mathrm{Nu}$ is the Nusselt number and $\mathrm{Re}$ is the Reynolds number with the relation below:
 
-| Symbol | Value | Description |
-| --- | --- | --- |
-| $\mathrm{Pr}_\mathrm{air}$ | 0.714672 | Prandtl number |
-| $k_\mathrm{air}$ | 0.02614 W/(m⋅K) | Thermal conductivity |
-| $\eta_\mathrm{air}$ | $1.846 \cdot 10^{-5} \mathrm{}$ kg/(m⋅s) | Dynamic viscosity |
-| $\rho_\mathrm{air}$ | 1.1839 kg/m³ | Density |
+$$
+\mathrm{Re} = \frac{\rho\cdot v\cdot d_b}{\mu}
+$$
+
+where $\rho$ and $\mu$ are the density and dynamic viscosity of air. Currently the crosswind correlation is used independent of the direction of $v$ relative to the barrel.
 
 ### Temperature Update
 
@@ -77,7 +76,7 @@ Bullets are approximated with uniform body temperature and a first-order chemica
 
 ### Heat Exchange with Barrel
 
-Ammunition always start at the temperature of the surroundings. The temperature equilibration between barrel and chambered bullet is done with Newton's law of cooling:
+Ammunition always starts at the temperature of the surroundings. The temperature equilibration between barrel and chambered bullet is done with Newton's law of cooling:
 
 $$
 \frac{dT_p}{dt} = \frac{\kappa}{m_p} \cdot (T_b-T_p)
@@ -87,17 +86,17 @@ where $T_b$ is the barrel temperature, $T_p$ is bullet temperature, $m_p$ is bul
 
 ### Cook-Off Progress
 
-Once the bullet temperature $T_p$ reaches the autoignition temerature $T_{\mathrm{ig}}$ (`m_fGunpowderAutoignitionTemperature`), cook-off progress $P_\mathrm{cook}$ increases based on an Arrhenius rate:
+Once the bullet temperature $T_p$ reaches the autoignition temperature $T_{\mathrm{ig}}$ (`m_fGunpowderAutoignitionTemperature`), cook-off progress $\xi_\mathrm{cook}$ increases based on an Arrhenius rate:
 
 $$
-\frac{dP_\mathrm{cook}}{dt} =
+\frac{d\xi_\mathrm{cook}}{dt} =
 \begin{cases}
 k_{\max} \cdot \exp\left(-\alpha\frac{T_{\mathrm{ig}}}{T_p}\right) & \mid T_p \geq T_{\mathrm{ig}} \\
 0 & \mid T_p < T_{\mathrm{ig}}
 \end{cases}
 $$
 
-where $k_{\max}$ and $\alpha$ are fitted parameters based on data from Ref. [[2](#references)]. The given ODE modelled the data better than applying Arrhenius rate at any temperature. Cook-off takes place when $P_\mathrm{cook}$ reaches 1.
+where $k_{\max}$ and $\alpha$ are fitted parameters based on data from Ref. [[2](#references)]. The given ODE modelled the data better than applying Arrhenius rate at any temperature. Cook-off takes place when $\xi_\mathrm{cook}$ reaches 1.
 
 ## Temperature-Dependent Effects on Weapon
 
@@ -129,7 +128,7 @@ $$
 \implies \lambda_\mathrm{disp} \cdot f_\mathrm{disp}(T_b) \approx \frac{\Delta \theta(T_b)}{\theta}
 $$
 
-the approximation is given by first-order Taylor expansion for small values of $\theta$. For instance, if the base game spread $\theta$ is 0.5 mrad and for a given temperature $\tau$, it should be 1.5 mrad, the increase $\Delta \theta(\tau)$ is therefore 1.0 mrad and $\lambda_\mathrm{disp} \cdot f_\mathrm{disp}(\tau) \approx 2.0$.
+The approximation is given by first-order Taylor expansion for small values of $\theta$. For instance, if the base game spread $\theta$ is 0.5 mrad and for a given temperature $\tau$, it should be 1.5 mrad, the increase $\Delta \theta(\tau)$ is therefore 1.0 mrad and $\lambda_\mathrm{disp} \cdot f_\mathrm{disp}(\tau) \approx 2.0$.
 
 ## References
 

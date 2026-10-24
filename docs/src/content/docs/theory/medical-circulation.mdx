@@ -39,7 +39,7 @@ $$
 - $p \in [0, 1]$: Pain intensity.
 - $\Delta HR_\mathrm{med}\ [\mathrm{min^{-1}}]$: Medication-based adjustment.
 
-$HR_\mathrm{base}=HR_0$, unless the character has class III hemorrhage, in which case hypovolemic shock induced tachycardia is simulated as below:
+$HR_\mathrm{base}=HR_0$, unless the character has class III hemorrhage, in which case tachycardia induced by hypovolemic shock is simulated as below:
 
 $$
 HR_\mathrm{base}(t + \Delta t) = HR(t)\cdot\frac{14.3\ \mathrm{kPa} \cdot BV}{\max(6\ \mathrm{kPa},\ MAP)} 
@@ -114,7 +114,7 @@ $$
 - $HR_\mathrm{CPR}\ [\mathrm{min^{-1}}]$: Simulated compression rate, sampled on each vital update.
 - $X\ [\mathrm{min^{-1}}]$: Gaussian-randomized shift with mean of 0 bpm and standard deviation of $20/3$ bpm.
 
-The stroke volume $SV$ gets scaled by $\eta_\mathrm{CPR} \in [0, 1]$ (`m_fCPRStrokeVolumeScale`) for reducing effectiveness of chest compressions over heart beats:
+The stroke volume $SV$ gets scaled by $\eta_\mathrm{CPR} \in [0, 1]$ (`m_fCPRStrokeVolumeScale`) to account for the lower effectiveness of chest compressions compared with heartbeats:
 
 $$
 SV_\mathrm{CPR} = \eta_\mathrm{CPR}\cdot SV
@@ -122,7 +122,7 @@ $$
 
 ### Revival Probability
 
-The probability $p_\mathrm{revive}$ for successful revive during CPR is linearly interpolated between class IV and class II hemorrhage:
+The probability $p_\mathrm{revive}$ for successful revival during CPR is linearly interpolated between class IV and class II hemorrhage:
 
 $$
 p_\mathrm{revive} = \mathrm{lerp}(p_{\min},\ p_{\max},\ \lambda)\qquad\mathrm{with}\quad\lambda = \operatorname{clamp}\left(\frac{BV-BV_\mathrm{IV}}{BV_\mathrm{II}-BV_\mathrm{IV}},\ 0,\ 1\right)
@@ -139,7 +139,7 @@ Drug configurations are provided through `m_aPharmacokineticsConfigs` and `m_aPh
 
 ### Pharmacokinetics
 
-For the evolution of concentration of a drug over time, we consider the following model of two consecutive first order chemical reactions:
+For the evolution of concentration of a drug over time, we consider the following model of two consecutive first-order chemical reactions:
 
 $$
 \mathrm{P} \xrightarrow{k_a} \mathrm{A} \xrightarrow{k_d} \otimes
@@ -163,7 +163,7 @@ $$
 \end{pmatrix}
 $$
 
-This system as an analytical solution:
+This system has an analytical solution:
 
 $$
 \begin{pmatrix}

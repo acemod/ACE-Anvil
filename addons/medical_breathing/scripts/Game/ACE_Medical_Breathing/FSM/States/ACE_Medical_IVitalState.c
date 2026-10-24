@@ -80,10 +80,6 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		float maxFluxO2 = perfusion * context.m_pBloodHitZone.ACE_Medical_GetHemeConcentration() * alveolarOxygenSaturation;
 		float rateScale = perfusion / s_fDefaultPerfusion;
 		
-		// Limit perfusion when character cannot breathe
-		if (!context.m_pVitals.CanBreath())
-			rateScale = Math.Min(rateScale, 1/22);
-		
 		context.m_fPerfFluxO2 = Math.Clamp((Math.Min(rateScale, 1) * context.m_fOxygenConsumption + rateScale * (alveolarOxygenSaturation - context.m_pVitals.GetSpO2() / 100)), -maxFluxO2, maxFluxO2);
 		
 		float equilibriumShift = context.m_pVitals.GetCvenCO2() - ACE_MaterialProperties.KH_CO2_BLOOD * context.m_pVitals.GetPalvCO2();

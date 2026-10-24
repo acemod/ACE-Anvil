@@ -1,0 +1,14 @@
+GameProject {
+ ID "ACE_Inventory"
+ GUID "C28D51238DE842DD"
+ TITLE "ACE Inventory"
+ Dependencies {
+  "58D0FB3206B6F859"
+ }
+ Configurations {
+  GameProjectConfig PC {
+  }
+  GameProjectConfig HEADLESS {
+  }
+ }
+}

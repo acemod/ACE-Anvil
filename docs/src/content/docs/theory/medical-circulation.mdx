@@ -1,0 +1,213 @@
+---
+title: Medical Circulation
+---
+
+This page summarizes the mathematical models used by [**ACE Medical Circulation**](../../components/medical/#ace-medical-circulation).
+
+For the numerical methods used to apply the differential equations, see [General Considerations](../general).
+
+## Cardiovascular System
+
+### Cardiac Output
+
+The equation for cardiac output $CO$ is given below, where stroke volume scales linearly with blood volume:
+
+$$
+CO = HR\cdot SV\qquad SV = SV_0\cdot\left(2\cdot\frac{BV}{BV_0}- 1\right)
+$$
+
+- $CO\ [\mathrm{ml/min}]$: Cardiac output.
+- $HR\ [\mathrm{min^{-1}}]$: Heart rate in beats per minute.
+- $SV\ [\mathrm{ml}]$: Stroke volume.
+- $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
+- $BV$, $BV_0\ [\mathrm{ml}]$: Current and maximum blood volumes.
+
+### Heart Rate
+
+The ordinary differential equation (ODE) for heart rate $HR$ is given below:
+
+$$
+\frac{dHR}{dt} = 0.5\ \mathrm{s^{-1}}\cdot(HR_\mathrm{tgt}-HR)
+$$
+
+$$
+HR_\mathrm{tgt} = \max\left(0,\ \max(HR_\mathrm{base},\ HR_0+50\ \mathrm{min^{-1}}\cdot p)+\Delta HR_\mathrm{med}\right)
+$$
+
+- $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
+- $HR_\mathrm{tgt}$, $HR_\mathrm{base}\ [\mathrm{min^{-1}}]$: Target and state-dependent base target heart rates.
+- $p \in [0, 1]$: Pain intensity.
+- $\Delta HR_\mathrm{med}\ [\mathrm{min^{-1}}]$: Medication-based adjustment.
+
+$HR_\mathrm{base}=HR_0$, unless the character has class III hemorrhage, in which case hypovolemic shock induced tachycardia is simulated as below:
+
+$$
+HR_\mathrm{base}(t + \Delta t) = HR(t)\cdot\frac{14.3\ \mathrm{kPa} \cdot BV}{\max(6\ \mathrm{kPa},\ MAP)} 
+$$
+
+- $MAP\ [\mathrm{kPa}]$: Mean arterial pressure.
+
+### Systemic Vascular Resistance
+
+Systemic vascular resistance $SVR$ is kept constant, unless adjusted by medication:
+
+$$
+SVR = SVR_0 + \Delta SVR_\mathrm{med}\qquad SVR_0 = \frac{MAP_0}{HR_0\cdot SV_0}
+$$
+
+- $SVR$, $SVR_0\ [\mathrm{kPa\cdot min/ml}]$: Current and default systemic vascular resistance.
+- $\Delta SVR_\mathrm{med}\ [\mathrm{kPa\cdot min/ml}]$: Medication-based adjustment.
+- $MAP_0\ [\mathrm{kPa}]$: Default mean arterial pressure (`m_fDefaultMeanArterialPressureKPA`).
+
+### Blood Pressure
+
+Mean arterial pressure $MAP$ is calculated from cardiac output and systemic vascular resistance:
+
+$$
+MAP = CO\cdot SVR
+$$
+
+- $MAP\ [\mathrm{kPa}]$: Mean arterial pressure.
+
+The pulse pressure $PP$ is currently kept proportional to $MAP$:
+
+$$
+PP = MAP\cdot\frac{PP_0}{MAP_0}
+$$
+
+- $PP\ [\mathrm{kPa}]$: Pulse pressure.
+- $PP_0\ [\mathrm{kPa}]$: Default pulse pressure (`m_fDefaultPulsePressureKPA`).
+
+The systolic and diastolic pressures can be derived as follows:
+
+$$
+SP = MAP+\frac{2}{3}PP\qquad DP = MAP-\frac{1}{3}PP
+$$
+
+- $SP\ [\mathrm{kPa}]$: Systolic pressure.
+- $DP\ [\mathrm{kPa}]$: Diastolic pressure.
+
+### Blood Loss
+
+The total wound bleeding rate $R_\mathrm{wounds}$ is capped by $CO$ and gravity-induced maximum rate $R_g$:
+
+$$
+R_\mathrm{eff} = -f_\mathrm{med}\cdot\min\left(R_\mathrm{wounds},\ \max\left(\frac{CO}{60\ \mathrm{s/min}},\ R_g\right)\right)
+$$
+
+- $R_\mathrm{eff}$, $R_\mathrm{wounds}\ [\mathrm{ml/s}]$: Effective bleeding rate and total bleeding rate from wounds.
+
+- $f_\mathrm{flow}\in [0, 1]$: Medication-based blood flow scale (1 if no drug effect is present).
+- $R_g\ [\mathrm{ml/s}]$: Maximal gravity-induced bleeding rate (`m_fCardiacArrestMaxTotalBleedingRate`). Ensures a residual bleeding rate when in cardiac arrest.
+
+## Cardiac Arrest and CPR
+
+### Changes to Cardiovascular System
+
+During cardiac arrest, $HR$ is set to zero and during CPR it is randomized with the relation below:
+
+$$
+HR_\mathrm{CPR} = 100\ \mathrm{min^{-1}} + \min\left(|X|,\ 20\ \mathrm{min^{-1}}\right)\qquad
+X\sim\mathcal{N}\left(0,\ (20/3\ \mathrm{min^{-1}})^2\right)
+$$
+
+- $HR_\mathrm{CPR}\ [\mathrm{min^{-1}}]$: Simulated compression rate, sampled on each vital update.
+- $X\ [\mathrm{min^{-1}}]$: Gaussian-randomized shift with mean of 0 bpm and standard deviation of $20/3$ bpm.
+
+The stroke volume $SV$ gets scaled by $\eta_\mathrm{CPR} \in [0, 1]$ (`m_fCPRStrokeVolumeScale`) for reducing effectiveness of chest compressions over heart beats:
+
+$$
+SV_\mathrm{CPR} = \eta_\mathrm{CPR}\cdot SV
+$$
+
+### Revival Probability
+
+The probability $p_\mathrm{revive}$ for successful revive during CPR is linearly interpolated between class IV and class II hemorrhage:
+
+$$
+p_\mathrm{revive} = \mathrm{lerp}(p_{\min},\ p_{\max},\ \lambda)\qquad\mathrm{with}\quad\lambda = \operatorname{clamp}\left(\frac{BV-BV_\mathrm{IV}}{BV_\mathrm{II}-BV_\mathrm{IV}},\ 0,\ 1\right)
+$$
+
+- $p_{\min}$, $p_{\max}\ [\cdot]$: Probability limits (`m_fCPRSuccessChanceMin` and `m_fCPRSuccessChanceMax`).
+- $BV_\mathrm{IV}$, $BV_\mathrm{II}\ [\mathrm{ml}]$: Blood volume thresholds for class IV and class II hemorrhage.
+
+Checks occur every `m_fCPRSuccessCheckTimeoutS` seconds. Medication can reduce this timeout.
+
+## Medication
+
+Drug configurations are provided through `m_aPharmacokineticsConfigs` and `m_aPharmacodynamicsConfigs`. This section covers the models and parameters in the configs. Simulation is done in two parts: Evolution of drug concentrations (pharmacokinetics) and how they contribute to effects (pharmacodynamics).
+
+### Pharmacokinetics
+
+For the evolution of concentration of a drug over time, we consider the following model of two consecutive first order chemical reactions:
+
+$$
+\mathrm{P} \xrightarrow{k_a} \mathrm{A} \xrightarrow{k_d} \otimes
+$$
+
+where $k_a$ and $k_d$ are the activation and deactivation rate constants, $\mathrm{P}$ is a precursor state and $\mathrm{A}$ is the active state that causes effects. The corresponding coupled system of ODEs is given below:
+
+$$
+\frac{d}{dt}
+\begin{pmatrix}
+    \mathrm{[P]} \\
+    \mathrm{[A]}
+\end{pmatrix} = 
+\begin{pmatrix}
+    -k_a & 0 \\
+    k_a & - k_d
+\end{pmatrix}\cdot
+\begin{pmatrix}
+    \mathrm{[P]} \\
+    \mathrm{[A]}
+\end{pmatrix}
+$$
+
+This system as an analytical solution:
+
+$$
+\begin{pmatrix}
+    \mathrm{[P]} \\
+    \mathrm{[A]}
+\end{pmatrix}(t) =
+\begin{pmatrix}
+    \exp(-k_a t) \\
+    \frac{k_a}{k_a-k_d}\cdot\big(\exp(-k_dt)-\exp(-k_at)\big)
+\end{pmatrix}\cdot\mathrm{[P]}_0
+$$
+
+- $t\ [\mathrm{s}]$: Elapsed time since administration.
+- $\mathrm{[A]}\ [\mathrm{nM}]$: Active drug concentration.
+- $\mathrm{[P]}_0\ [\mathrm{nM}]$: Administered precursor concentration (_i.e._ dose).
+- $k_a$, $k_d\ [\mathrm{s^{-1}}]$: Activation and deactivation rate constants (`m_fActivationRateConstant` and `m_fDeactivationRateConstant`).
+
+When multiple doses are active, each dose is simulated individually and the effective active concentration of $\mathrm{A}$ is just the sum.
+
+### Pharmacodynamics
+
+Each configured contribution to a specific effect by drug $i$ is calculated from concentration of its active state $\mathrm{[A]}_i$ and optional synergistic and antagonistic contributions from other drugs. Synergistic contributions will enhance a drug's effect in the presence of another, while antagonistic contributions will competitively inhibit it. The equation for the contribution factor $\chi_i$ of drug $i$ to an effect is given below:
+
+$$
+\chi_i = \left(\frac{\mathrm{[A]}_i}{K_i}\cdot\frac{J_i^+}{J_i^-}\right)^{\gamma_i}
+$$
+$$
+J_i^\pm = 1 + \sum_j \frac{\mathrm{[A]}_j}{K_{ij}^\pm}
+$$
+
+- $\mathrm{[A]}_i\ [\mathrm{nM}]$: Total active concentration of drug $i$.
+- $K_i\ [\mathrm{nM}]$: Concentration scale (`m_fEC50`). The smaller, the stronger the effect. In case of a Hill function (see below), this is the EC50 value, which is the concentration at which half of the maximum effect is observed.
+- $\gamma_i\ [\cdot]$: Hill coefficient (`m_fGamma`).
+- $\chi_i\ [\cdot]$: Drug contribution to an effect.
+- $J_i^+$: Synergistic interactions (`m_aSynergistConfigs`).
+- $J_i^-$: Antagonistic interactions (`m_aAntagonistConfigs`).
+- $K_{ij}^\pm\ [\mathrm{nM}]$: Concentration scale for synergistic or antagonistic contribution of drug $j$ to drug $i$. It is the concentration at which drug $j$ halves the effect of drug $i$ (if antagonistic) or doubles (if synergistic).
+
+The effect $E$ is then either directly obtained from the sum over all $\chi_i$ or a Hill function is applied to the sum:
+
+$$
+E_\mathrm{linear} = \sum_i\chi_i\qquad
+E_\mathrm{Hill} = E_{\max}\cdot\frac{\sum_i\chi_i}{1+\sum_i\chi_i}
+$$
+
+- $E_\mathrm{linear}$: Linear drug effect (_e.g._ for adjustments to vitals like $HR$)
+- $E_\mathrm{Hill}$: Sigmoidal drug effect (_e.g._ for pain suppression) with saturation limit towards a maximum effect $E_{\max}$  (`m_fMaxEffect`).

@@ -42,6 +42,17 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	//! Apply reduction of volume due to tension pneumothorax
+	override protected float ComputeStrokeVolume(ACE_Medical_CharacterContext context, float timeSlice)
+	{
+		float volume = super.ComputeStrokeVolume(context, timeSlice);
+		if (context.m_pVitals.HasTensionPneumothorax())
+			volume *= s_pBreathingSettings.m_fTensionPneumothoraxStrokeVolumeScale;
+
+		return volume;
+	}
+
+	//------------------------------------------------------------------------------------------------
 	protected void UpdateOxygenMetabolism(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		float hypoxicSpO2 = s_pBreathingSettings.m_fHypoxicMetabolismSpO2;

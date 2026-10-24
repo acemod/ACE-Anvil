@@ -449,6 +449,7 @@ Summary of settings that can be modified in the server config:
 | `m_fPneumothoraxArrestEnabled`        | Type: `bool`<br />Default: `true` | Enter cardiac arrest when pneumothorax fully deteriorated. |
 | `m_fTensionPneumothoraxChance`        | Type: `float`<br />Range: 0 to 1<br />Default: `0.15` | Chance for tension pneumothorax after a critical hit to a chest with pneumothorax |
 | `m_fDeteriorateToTensionPneumothoraxChancePerMinute` | Type: `float`<br />Range: 0 to 1<br />Default: `0.05` | Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute. |
+| `m_fTensionPneumothoraxStrokeVolumeScale` | Type: `float`<br />Range: 0 to 1<br />Default: `0.455` | Stroke volume gets multiplied by this scale during tension pneumothorax. |
 | `m_fDefaultRespiratoryRateBPM`        | Type: `float`<br />Range: 0 to ∞<br />Default: `14.573` | Default respiratory rate [breaths per minute] |
 | `m_fMaxRespiratoryRateBPM`            | Type: `float`<br />Range: 0 to ∞<br />Default: `40.0` | Maximum respiratory rate [breaths per minute] |
 | `m_fCPRPassiveVentilationRateBPM`     | Type: `float`<br />Range: 0 to ∞<br />Default: `0.3` | Passive ventilation rate during CPR [breaths per minute] |
@@ -476,6 +477,7 @@ Template for the `missionHeader` in a server config:
             "m_fPneumothoraxArrestEnabled": true,
             "m_fTensionPneumothoraxChance": 0.15,
             "m_fDeteriorateToTensionPneumothoraxChancePerMinute": 0.05,
+            "m_fTensionPneumothoraxStrokeVolumeScale": 0.455,
             "m_fDefaultRespiratoryRateBPM": 14.573,
             "m_fMaxRespiratoryRateBPM": 40.0,
             "m_fCPRPassiveVentilationRateBPM": 0.3,

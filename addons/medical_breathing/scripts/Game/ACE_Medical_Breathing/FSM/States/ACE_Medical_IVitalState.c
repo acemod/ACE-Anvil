@@ -93,9 +93,11 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		
 		context.m_fPerfFluxO2 = Math.Clamp((Math.Min(rateScale, 1) * context.m_fOxygenConsumption + rateScale * (alveolarOxygenSaturation - context.m_pVitals.GetSpO2() / 100)), -maxFluxO2, maxFluxO2);
 		
-		float equilibriumShift = context.m_pVitals.GetCvenCO2() - ACE_MaterialProperties.KH_CO2_BLOOD * context.m_pVitals.GetPalvCO2();
-		float maxEquilibriumFluxScale = 1 / (1 / context.m_pBloodHitZone.ACE_Medical_GetVenousBloodVolume() + ACE_PhysicalConstants.R * context.m_pVitals.GetTemperature() * ACE_MaterialProperties.KH_CO2_BLOOD / context.m_pVitals.GetCapacityVolume());
-		context.m_fPerfFluxCO2 = equilibriumShift * Math.Clamp(perfusion * ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE_SCALE, 0, maxEquilibriumFluxScale);
+		// Compute CO2 flux
+		equilibriumShift = context.m_pVitals.GetCvenCO2() - ACE_MaterialProperties.KH_CO2_BLOOD * context.m_pVitals.GetPalvCO2();
+		float maxForewardFlux = perfusion * (context.m_pVitals.GetCvenCO2() + ACE_Medical_VitalsComponent.BLOOD_HCO3_CONCENTRATION);
+		float maxReverseFlux = Math.Min(0, perfusion * equilibriumShift);
+		context.m_fPerfFluxCO2 = Math.Clamp(rateScale * ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE * equilibriumShift, maxReverseFlux, maxForewardFlux);
 	}
 	
 	//------------------------------------------------------------------------------------------------

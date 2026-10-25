@@ -22,7 +22,8 @@ modded class ACE_Medical_VitalsComponent : ACE_BaseComponent
 	
 	static const float PALVO2_MAX = 19.925; // kPa
 	static const float PALVO2_MAX_BVM = 95.0; // kPa
-	static const float CARBONATE_DEHYDRATION_RATE_SCALE = 126.93385;
+	static const float BLOOD_HCO3_CONCENTRATION = 0.024; // mmol/ml
+	static const float CARBONATE_DEHYDRATION_RATE = 16078.288; // ml/s
 	
 	//------------------------------------------------------------------------------------------------
 	//! Sets respiratory rate in 1/min

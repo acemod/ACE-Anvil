@@ -128,17 +128,25 @@ $$
 - $K_D=3.6\ \mathrm{kPa}$: Hemoglobin $\mathrm{O_2}$ dissociation constant.
 - $\gamma=2.7$: Hill coefficient for hemoglobin.
 
+The saturation level for venous blood is derived by subtracting consumed $\mathrm{O_2}$ from $SpO2$:
+
+$$
+S_\mathrm{v} = \frac{SpO2}{100\%}-\frac{60\ \mathrm{s/min}}{CO\cdot c_\mathrm{heme}}\cdot\varphi_{CR,O_2}
+$$
+
+- $S_\mathrm{v}\in[0,1]$: $\mathrm{O_2}$ saturation of venous blood.
+- $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
+
 $\mathrm{O_2}$ exchange tries to maintain a steady state by compensating for consumption and equilibrating alveolar and peripheral blood saturation:
 
 $$
-\varphi_{Q,O_2} = \operatorname{clamp}\left(r_Q\cdot1\ \mathrm{mmol/s}\cdot\left(S_\mathrm{alv}-\frac{SpO2}{100\%}\right) + \min\left(r_Q,\ 1\right)\cdot\varphi_{CR,O_2},\ -\varphi_{Q,O_2}^{\max},\ \varphi_{Q,O_2}^{\max}\right)
+\varphi_{Q,O_2} = \operatorname{clamp}\left(r_Q\cdot1\ \mathrm{mmol/s}\cdot(S_\mathrm{alv}-S_\mathrm{v}),\ -\varphi_{Q,O_2}^{\max},\ \varphi_{Q,O_2}^{\max}\right)
 $$
 $$
-\varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot S_\mathrm{alv}
+\varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot (S_\mathrm{alv}-S_\mathrm{v})
 $$
 
 - $\varphi_{Q,O_2}$, $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer from alveoli to blood and its maximum value.
-- $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
 - $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
 - $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
 

@@ -110,12 +110,6 @@ $$
 
 The $\xi_\mathrm{PTX}$-based term accounts for loss of surface area through pneumothorax. The exponent of $2/3$ comes from converting a volume-based quantity to an area-based quantity.
 
-Perfusion $Q$ can alternatively also be expressed as a ratio $r_Q$ with respect to the default perfusion $Q_0$:
-
-$$
-r_Q = \frac{Q}{Q_0} \qquad Q_0 = \frac{HR_0\cdot SV_0}{60\ \mathrm{s/min}}
-$$
-
 #### $\mathrm{O_2}$ Exchange
 
 $\mathrm{O_2}$ binding to hemoglobin at the alveolar pressure follows a Hill function:
@@ -128,17 +122,30 @@ $$
 - $K_D=3.6\ \mathrm{kPa}$: Hemoglobin $\mathrm{O_2}$ dissociation constant.
 - $\gamma=2.7$: Hill coefficient for hemoglobin.
 
-$\mathrm{O_2}$ exchange tries to maintain a steady state by compensating for consumption and equilibrating alveolar and peripheral blood saturation:
+The saturation level for venous blood is derived by subtracting consumed $\mathrm{O_2}$ from $SpO2$:
 
 $$
-\varphi_{Q,O_2} = \operatorname{clamp}\left(r_Q\cdot1\ \mathrm{mmol/s}\cdot\left(S_\mathrm{alv}-\frac{SpO2}{100\%}\right) + \min\left(r_Q,\ 1\right)\cdot\varphi_{CR,O_2},\ -\varphi_{Q,O_2}^{\max},\ \varphi_{Q,O_2}^{\max}\right)
-$$
-$$
-\varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot S_\mathrm{alv}
+S_\mathrm{v} = \frac{SpO2}{100\%}-\frac{60\ \mathrm{s/min}}{CO\cdot c_\mathrm{heme}}\cdot\varphi_{CR,O_2}
 $$
 
-- $\varphi_{Q,O_2}$, $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer from alveoli to blood and its maximum value.
+- $S_\mathrm{v}\in[0,1]$: $\mathrm{O_2}$ saturation of venous blood.
 - $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
+
+The flux for loading hemoglobin at alveoli is calculated as follows:
+
+$$
+\varphi_{Q,O_2} = Q\cdot c_\mathrm{heme}\cdot\operatorname{clamp}\left(k_s\cdot(S_\mathrm{alv}-S_\mathrm{v}),\ \Delta S_{\min},\ \Delta S_{\max}\right)
+$$
+$$
+\Delta S_{\min} = -S_\mathrm{v}
+\qquad
+\Delta S_{\max} = \max\left(S_\mathrm{alv}-S_\mathrm{v},\ 0\right)
+$$
+
+- $\varphi_{Q,O_2}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer flux from alveoli to blood.
+- $k_s\ [\cdot]$: Saturation equilibration rate scale.
+- $\Delta S_{\max}\ [\cdot]$: Bound for saturation increase.
+- $\Delta S_{\min}\ [\cdot]$: Bound for saturation decrease.
 - $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
 - $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
 
@@ -158,19 +165,19 @@ $$
 The flux for equilibration is calculated as follows:
 
 $$
-\varphi_{Q,CO_2} = \operatorname{clamp}\left(r_Q\cdot k_C\cdot(c_v-K_H\cdot p_{CO_2}),\ \varphi_{Q,CO_2}^{\min},\ \varphi_{Q,CO_2}^{\max}\right)
+\varphi_{Q,CO_2} = Q\cdot\operatorname{clamp}\left(k_c\cdot(c_v-K_H\cdot p_{CO_2}),\ \Delta c_{\min},\ \Delta c_{\max}\right)
 $$
 $$
-\varphi_{Q,CO_2}^{\min} = Q\cdot\min\left(c_v-K_H\cdot p_{CO_2},\ 0\right)
+\Delta c_{\min} = \min\left(c_v-K_H\cdot p_{CO_2},\ 0\right)
 \qquad
-\varphi_{Q,CO_2}^{\max} = Q\cdot(c_v+c_{\mathrm{HCO_3^-}})
+\Delta c_{\max} = c_v+c_{\mathrm{HCO_3^-}}
 $$
 
-- $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer flux.
-- $k_C\ [\mathrm{ml/s}]$: Equilibration rate at default perfusion $\mathrm{CO_2}$.
+- $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer flux from blood to alveoli.
+- $k_c\ [\cdot]$: Carbonate dehydration rate scale. Determines how fast equilibration takes place.
 - $c_{\mathrm{HCO_3^-}}=0.024\ [\mathrm{mmol/ml}]$: Fixed blood $\mathrm{HCO_3^-}$ concentration.
-- $\varphi_{Q,CO_2}^{\max}\ [\mathrm{mmol/s}]$: Bound for forward flux from blood to alveoli.
-- $\varphi_{Q,CO_2}^{\min}\ [\mathrm{mmol/s}]$: Bound for reverse flux from alveoli to blood.
+- $\Delta c_{\max}\ [\mathrm{mmol/ml}]$: Bound for forward concentration change from blood to alveoli.
+- $\Delta c_{\min}\ [\mathrm{mmol/ml}]$: Bound for reverse concentration change from alveoli to blood.
 
 The flux is scaled by perfusion and capped by total $\mathrm{CO_2}$ content of blood and saturation limit given by Henry's law.
 

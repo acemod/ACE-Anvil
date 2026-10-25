@@ -58,7 +58,7 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		float hypoxicSpO2 = s_pBreathingSettings.m_fHypoxicMetabolismSpO2;
 		float defaultSpO2 = s_pBreathingSettings.m_fDefaultSpO2;
 		float lambda = Math.InverseLerp(hypoxicSpO2, defaultSpO2, Math.Clamp(context.m_pVitals.GetSpO2(), hypoxicSpO2, defaultSpO2));
-		// Interpolate RER and oxygen consumption based on SpO2. Oxygen consumption  at reduced SpO2 is lowered to simulate the body focusing on vital body parts.
+		// Interpolate RER and oxygen consumption based on SpO2. Oxygen consumption at reduced SpO2 is lowered to simulate the body focusing on vital body parts.
 		context.m_fOxygenConsumption = Math.Lerp(s_pBreathingSettings.m_fHypoxicOxygenConsumptionMMOLPS, s_pBreathingSettings.m_fDefaultOxygenConsumptionMMOLPS, lambda);
 		float rer = Math.Lerp(s_pBreathingSettings.m_fHypoxicRER, s_pBreathingSettings.m_fDefaultRER, lambda);
 		context.m_fCO2Production = context.m_fOxygenConsumption * rer;
@@ -97,9 +97,9 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		
 		// Compute CO2 flux
 		equilibriumShift = context.m_pVitals.GetCvenCO2() - ACE_MaterialProperties.KH_CO2_BLOOD * context.m_pVitals.GetPalvCO2();
-		float maxForewardFlux = perfusion * (context.m_pVitals.GetCvenCO2() + ACE_Medical_VitalsComponent.BLOOD_HCO3_CONCENTRATION);
+		float maxForwardFlux = perfusion * (context.m_pVitals.GetCvenCO2() + ACE_Medical_VitalsComponent.BLOOD_HCO3_CONCENTRATION);
 		float maxReverseFlux = Math.Min(0, perfusion * equilibriumShift);
-		context.m_fPerfFluxCO2 = Math.Clamp(rateScale * ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE * equilibriumShift, maxReverseFlux, maxForewardFlux);
+		context.m_fPerfFluxCO2 = Math.Clamp(rateScale * ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE * equilibriumShift, maxReverseFlux, maxForwardFlux);
 	}
 	
 	//------------------------------------------------------------------------------------------------

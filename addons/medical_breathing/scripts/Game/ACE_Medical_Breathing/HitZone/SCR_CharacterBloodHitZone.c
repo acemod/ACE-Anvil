@@ -6,7 +6,7 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 	//-----------------------------------------------------------------------------------------------------------
 	//! Returns blood volume in ml
 	//! Health of blood hit zone in "ACE Medical Circulations" is only 3000 ml
-	//! to reflect the death treshold at 50% blood loss
+	//! to reflect the death threshold at 50% blood loss
 	float ACE_Medical_GetBloodVolume()
 	{
 		return 3000 + GetHealth();

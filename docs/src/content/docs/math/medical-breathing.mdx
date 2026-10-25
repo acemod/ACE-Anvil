@@ -131,7 +131,7 @@ $$
 - $S_\mathrm{v}\in[0,1]$: $\mathrm{O_2}$ saturation of venous blood.
 - $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
 
-$\mathrm{O_2}$ exchange tries to maintain a steady state by compensating for consumption and equilibrating alveolar and peripheral blood saturation:
+The flux for loading hemoglobin at alveoli is calculated as follows:
 
 $$
 \varphi_{Q,O_2} = Q\cdot c_\mathrm{heme}\cdot\operatorname{clamp}\left(k_s\cdot(S_\mathrm{alv}-S_\mathrm{v}),\ \Delta S_{\min},\ \Delta S_{\max}\right)

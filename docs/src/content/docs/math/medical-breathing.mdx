@@ -165,19 +165,19 @@ $$
 The flux for equilibration is calculated as follows:
 
 $$
-\varphi_{Q,CO_2} = \operatorname{clamp}\left(r_Q\cdot k_C\cdot(c_v-K_H\cdot p_{CO_2}),\ \varphi_{Q,CO_2}^{\min},\ \varphi_{Q,CO_2}^{\max}\right)
+\varphi_{Q,CO_2} = Q\cdot\operatorname{clamp}\left(k_c\cdot(c_v-K_H\cdot p_{CO_2}),\ \Delta c_{\min},\ \Delta c_{\max}\right)
 $$
 $$
-\varphi_{Q,CO_2}^{\min} = Q\cdot\min\left(c_v-K_H\cdot p_{CO_2},\ 0\right)
+\Delta c_{\min} = \min\left(c_v-K_H\cdot p_{CO_2},\ 0\right)
 \qquad
-\varphi_{Q,CO_2}^{\max} = Q\cdot(c_v+c_{\mathrm{HCO_3^-}})
+\Delta c_{\max} = c_v+c_{\mathrm{HCO_3^-}}
 $$
 
 - $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer flux from blood to alveoli.
-- $k_C\ [\mathrm{ml/s}]$: Equilibration rate at default perfusion $\mathrm{CO_2}$.
+- $k_c\ [\cdot]$: Carbonate dehydration rate scale. Determines how fast equilibration takes place.
 - $c_{\mathrm{HCO_3^-}}=0.024\ [\mathrm{mmol/ml}]$: Fixed blood $\mathrm{HCO_3^-}$ concentration.
-- $\varphi_{Q,CO_2}^{\max}\ [\mathrm{mmol/s}]$: Bound for forward flux from blood to alveoli.
-- $\varphi_{Q,CO_2}^{\min}\ [\mathrm{mmol/s}]$: Bound for reverse flux from alveoli to blood.
+- $\Delta c_{\max}\ [\mathrm{mmol/ml}]$: Bound for forward concentration change from blood to alveoli.
+- $\Delta c_{\min}\ [\mathrm{mmol/ml}]$: Bound for reverse concentration change from alveoli to blood.
 
 The flux is scaled by perfusion and capped by total $\mathrm{CO_2}$ content of blood and saturation limit given by Henry's law.
 

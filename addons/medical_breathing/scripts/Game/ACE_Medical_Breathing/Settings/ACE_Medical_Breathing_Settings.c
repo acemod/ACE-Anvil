@@ -5,7 +5,7 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "0.15", desc: "Probability of tongue-based airway obstruction in supine position", params: "0 1")]
 	float m_fAirwayObstructionChance;
 	
-	[Attribute(defvalue: "0.1", desc: "Chance for unconscious patient to vomit. Evaulated once a minute.", params: "0 1")]
+	[Attribute(defvalue: "0.1", desc: "Chance for unconscious patient to vomit. Evaluated once a minute.", params: "0 1")]
 	float m_fVomitChancePerMinute;
 	
 	[Attribute(defvalue: "6", desc: "Minimum delay for vomiting again in minutes", params: "0 inf")]
@@ -20,7 +20,7 @@ class ACE_Medical_Breathing_Settings : ACE_ModSettings
 	[Attribute(defvalue: "0.75", desc: "Maximum loss of lung volume due to pneumothorax in percentage", params: "0 1")]
 	float m_fMaxPneumothoraxScale;
 	
-	[Attribute(defvalue: "0.18", desc: "Precentage loss of lung volume per deterioration of pneumothorax", params: "0 1")]
+	[Attribute(defvalue: "0.18", desc: "Percentage loss of lung volume per deterioration of pneumothorax", params: "0 1")]
 	float m_fPneumothoraxScaleDeteriorationStep;
 	
 	[Attribute(defvalue: "true", desc: "Enter cardiac arrest when pneumothorax fully deteriorated.")]

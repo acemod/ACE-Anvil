@@ -99,7 +99,7 @@ Reduced saturation lowers consumption, which simulates the body prioritizing vit
 
 ### Perfusion
 
-Perfusion is driven by cardiac output:
+Perfusion $Q$ is driven by cardiac output:
 
 $$
 Q = \frac{CO}{60\ \mathrm{s/min}}\cdot(1-\xi_\mathrm{PTX})^{2/3}
@@ -109,6 +109,12 @@ $$
 - $CO\ [\mathrm{ml/min}]$: Cardiac output.
 
 The $\xi_\mathrm{PTX}$-based term accounts for loss of surface area through pneumothorax. The exponent of $2/3$ comes from converting a volume-based quantity to an area-based quantity.
+
+Perfusion $Q$ can alternatively also be expressed as a ratio $r_Q$ with respect to the default perfusion $Q_0$:
+
+$$
+r_Q = \frac{Q}{Q_0} \qquad Q_0 = \frac{HR_0\cdot SV_0}{60\ \mathrm{s/min}}
+$$
 
 #### $\mathrm{O_2}$ Exchange
 
@@ -130,14 +136,9 @@ $$
 $$
 \varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot S_\mathrm{alv}
 $$
-$$
-r_Q = \frac{Q}{Q_0} \qquad Q_0 = \frac{HR_0\cdot SV_0}{60\ \mathrm{s/min}}
-$$
 
 - $\varphi_{Q,O_2}$, $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer from alveoli to blood and its maximum value.
 - $c_\mathrm{heme}=0.0098\ \mathrm{mmol/ml}$: Heme concentration in blood.
-- $r_Q\ [\cdot]$: Relative perfusion to default.
-- $Q_0\ [\mathrm{ml/s}]$: Default perfusion.
 - $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
 - $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
 

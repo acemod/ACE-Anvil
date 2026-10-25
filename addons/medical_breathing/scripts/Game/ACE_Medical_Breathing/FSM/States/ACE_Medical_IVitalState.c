@@ -2,16 +2,12 @@
 modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
 {
 	protected static ACE_Medical_Breathing_Settings s_pBreathingSettings;
-	protected static float s_fDefaultPerfusion;
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_Medical_IVitalState(ACE_FSM_EStateID id)
 	{
 		if (!s_pBreathingSettings)
-		{
 			s_pBreathingSettings = ACE_SettingsHelperT<ACE_Medical_Breathing_Settings>.GetModSettings();
-			s_fDefaultPerfusion = s_pCirculationSettings.m_fDefaultStrokeVolumeML * s_pCirculationSettings.m_fDefaultHeartRateBPM / 60;
-		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -82,24 +78,34 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 	protected void UpdatePerfusion(ACE_Medical_CharacterContext context, float timeSlice)
 	{
 		float perfusion = 0;
-		float alveolarOxygenSaturation = ACE_Math.Hill(Math.Pow(context.m_pVitals.GetPalvO2() / ACE_MaterialProperties.DEFAULT_KD_HEMOGLOBIN, ACE_MaterialProperties.HILL_COEFF_HEMOGLOBIN));
 		float pneumothoraxScale = context.m_pVitals.GetPneumothoraxScale();
 
 		if (pneumothoraxScale < 1)
 			perfusion = context.m_pVitals.GetCardiacOutput() / 60 * Math.Pow(1 - pneumothoraxScale, 2/3);
 		
-		float rateScale = perfusion / s_fDefaultPerfusion;
+		if (float.AlmostEqual(0, perfusion))
+		{
+			context.m_fPerfFluxO2 = 0;
+			context.m_fPerfFluxCO2 = 0;
+			return;
+		}
 		
 		// Compute O2 flux
-		float equilibriumShift = alveolarOxygenSaturation - context.m_pVitals.GetSpO2() / 100;
-		float maxFlux = perfusion * context.m_pBloodHitZone.ACE_Medical_GetHemeConcentration() * alveolarOxygenSaturation;
-		context.m_fPerfFluxO2 = Math.Clamp((Math.Min(rateScale, 1) * context.m_fOxygenConsumption + rateScale * equilibriumShift), -maxFlux, maxFlux);
+		float alveolarOxygenSaturation = ACE_Math.Hill(Math.Pow(context.m_pVitals.GetPalvO2() / ACE_MaterialProperties.DEFAULT_KD_HEMOGLOBIN, ACE_MaterialProperties.HILL_COEFF_HEMOGLOBIN));
+		float saturationLoss = 60 / context.m_pVitals.GetCardiacOutput() / context.m_pBloodHitZone.ACE_Medical_GetHemeConcentration() * context.m_fOxygenConsumption;
+		float venousOxygenSaturation = Math.Max(0, context.m_pVitals.GetSpO2() / 100 - saturationLoss);
+		float equilibriumShift = alveolarOxygenSaturation - venousOxygenSaturation;
+		float minChange = -venousOxygenSaturation;
+		float maxChange = Math.Max(0, equilibriumShift);
+		context.m_fPerfFluxO2 = Math.Clamp(ACE_Medical_VitalsComponent.O2_SATURATION_EQUILIBRATION_RATE_SCALE * equilibriumShift, minChange, maxChange);
+		context.m_fPerfFluxO2 *= perfusion * context.m_pBloodHitZone.ACE_Medical_GetHemeConcentration();
 		
 		// Compute CO2 flux
 		equilibriumShift = context.m_pVitals.GetCvenCO2() - ACE_MaterialProperties.KH_CO2_BLOOD * context.m_pVitals.GetPalvCO2();
-		float maxForwardFlux = perfusion * (context.m_pVitals.GetCvenCO2() + ACE_Medical_VitalsComponent.BLOOD_HCO3_CONCENTRATION);
-		float maxReverseFlux = Math.Min(0, perfusion * equilibriumShift);
-		context.m_fPerfFluxCO2 = Math.Clamp(rateScale * ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE * equilibriumShift, maxReverseFlux, maxForwardFlux);
+		minChange = Math.Min(0, equilibriumShift);
+		maxChange =  context.m_pVitals.GetCvenCO2() + ACE_Medical_VitalsComponent.BLOOD_HCO3_CONCENTRATION;
+		context.m_fPerfFluxCO2 = Math.Clamp(ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE_SCALE * equilibriumShift, minChange, maxChange);
+		context.m_fPerfFluxCO2 *= perfusion;
 	}
 	
 	//------------------------------------------------------------------------------------------------

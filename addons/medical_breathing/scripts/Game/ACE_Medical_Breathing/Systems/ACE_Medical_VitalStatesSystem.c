@@ -31,9 +31,9 @@ modded class ACE_Medical_VitalStatesSystem : GameSystem
 		
 		DbgUI.Begin(string.Format("ACE Medical Breathing CO2 (%1)", targetType), 0, 700);
 		float PalvCO2 = component.GetPalvCO2() * ACE_PhysicalConstants.KPA2MMHG;
-		DbgUI.Text(string.Format("PalvCO2:                      %1 mmHg", PalvO2));
+		DbgUI.Text(string.Format("PalvCO2:                      %1 mmHg", PalvCO2));
 		DbgUI.PlotLiveClamped("PalvCO2", 500, 400, PalvCO2, 0, 150, 100, 1000);
-		float pH = 6.1 + Math.Log10(0.024 / component.GetCvenCO2());
+		float pH = 6.1 + Math.Log10(ACE_Medical_VitalsComponent.BLOOD_HCO3_CONCENTRATION / component.GetCvenCO2());
 		DbgUI.Text(string.Format("pH:                           %1", pH));
 		DbgUI.PlotLiveClamped("pH", 500, 400, pH, 6, 9, 100, 1000);
 		DbgUI.End();

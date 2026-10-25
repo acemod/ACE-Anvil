@@ -102,9 +102,12 @@ modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterConte
 		
 		// Compute CO2 flux
 		equilibriumShift = context.m_pVitals.GetCvenCO2() - ACE_MaterialProperties.KH_CO2_BLOOD * context.m_pVitals.GetPalvCO2();
+		float maxRateScale = 1 / (1 / context.m_pBloodHitZone.ACE_Medical_GetVenousBloodVolume() + ACE_PhysicalConstants.R * context.m_pVitals.GetTemperature() * ACE_MaterialProperties.KH_CO2_BLOOD / context.m_pVitals.GetCapacityVolume());
+		maxRateScale /= (timeSlice * perfusion);
+		float rateScale = Math.Min(ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE_SCALE, maxRateScale);
 		minChange = Math.Min(0, equilibriumShift);
 		maxChange =  context.m_pVitals.GetCvenCO2() + ACE_Medical_VitalsComponent.BLOOD_HCO3_CONCENTRATION;
-		context.m_fPerfFluxCO2 = Math.Clamp(ACE_Medical_VitalsComponent.CARBONATE_DEHYDRATION_RATE_SCALE * equilibriumShift, minChange, maxChange);
+		context.m_fPerfFluxCO2 = Math.Clamp(rateScale * equilibriumShift, minChange, maxChange);
 		context.m_fPerfFluxCO2 *= perfusion;
 	}
 	

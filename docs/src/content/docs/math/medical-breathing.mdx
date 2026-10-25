@@ -140,13 +140,18 @@ $$
 $\mathrm{O_2}$ exchange tries to maintain a steady state by compensating for consumption and equilibrating alveolar and peripheral blood saturation:
 
 $$
-\varphi_{Q,O_2} = \operatorname{clamp}\left(r_Q\cdot1\ \mathrm{mmol/s}\cdot(S_\mathrm{alv}-S_\mathrm{v}),\ -\varphi_{Q,O_2}^{\max},\ \varphi_{Q,O_2}^{\max}\right)
+\varphi_{Q,O_2} = \operatorname{clamp}\left(r_Q\cdot1\ \mathrm{mmol/s}\cdot(S_\mathrm{alv}-S_\mathrm{v}),\ \varphi_{Q,O_2}^{\min},\ \varphi_{Q,O_2}^{\max}\right)
 $$
 $$
-\varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot (S_\mathrm{alv}-S_\mathrm{v})
+\varphi_{Q,O_2}^{\min} = Q\cdot c_\mathrm{heme}\cdot S_\mathrm{v}
+$$
+$$
+\varphi_{Q,O_2}^{\max} = Q\cdot c_\mathrm{heme}\cdot\max\left(S_\mathrm{alv}-S_\mathrm{v},\ 0\right)
 $$
 
-- $\varphi_{Q,O_2}$, $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer from alveoli to blood and its maximum value.
+- $\varphi_{Q,O_2}\ [\mathrm{mmol/s}]$: $\mathrm{O_2}$ transfer flux from alveoli to blood.
+- $\varphi_{Q,O_2}^{\max}\ [\mathrm{mmol/s}]$: Bound for forward flux from alveoli to blood.
+- $\varphi_{Q,O_2}^{\min}\ [\mathrm{mmol/s}]$: Bound for reverse flux from blood to alveoli.
 - $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
 - $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
 
@@ -174,7 +179,7 @@ $$
 \varphi_{Q,CO_2}^{\max} = Q\cdot(c_v+c_{\mathrm{HCO_3^-}})
 $$
 
-- $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer flux.
+- $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer flux from blood to alveoli.
 - $k_C\ [\mathrm{ml/s}]$: Equilibration rate at default perfusion $\mathrm{CO_2}$.
 - $c_{\mathrm{HCO_3^-}}=0.024\ [\mathrm{mmol/ml}]$: Fixed blood $\mathrm{HCO_3^-}$ concentration.
 - $\varphi_{Q,CO_2}^{\max}\ [\mathrm{mmol/s}]$: Bound for forward flux from blood to alveoli.

@@ -97,22 +97,30 @@ Note that both consumption and production rates are defined as positive values. 
 
 Reduced saturation lowers consumption, which simulates the body prioritizing vital organs.
 
-### Perfusion: $\mathrm{O_2}$ Exchange
+### Perfusion
 
-Perfusion is driven by cardiac output and $\mathrm{O_2}$ binding at the alveolar pressure follows a Hill function:
+Perfusion is driven by cardiac output:
 
 $$
-Q = \frac{CO}{60\ \mathrm{s/min}}\cdot(1-\xi_\mathrm{PTX})^{2/3}\qquad
-S_\mathrm{alv} = \frac{(p_{O_2}/K_D)^\gamma}{1+(p_{O_2}/K_D)^\gamma}
+Q = \frac{CO}{60\ \mathrm{s/min}}\cdot(1-\xi_\mathrm{PTX})^{2/3}
 $$
 
 - $Q\ [\mathrm{ml/s}]$: Lung perfusion.
 - $CO\ [\mathrm{ml/min}]$: Cardiac output.
+
+The $\xi_\mathrm{PTX}$-based term accounts for loss of surface area through pneumothorax. The exponent of $2/3$ comes from converting a volume-based quantity to an area-based quantity.
+
+#### $\mathrm{O_2}$ Exchange
+
+$\mathrm{O_2}$ binding to hemoglobin at the alveolar pressure follows a Hill function:
+
+$$
+S_\mathrm{alv} = \frac{(p_{O_2}/K_D)^\gamma}{1+(p_{O_2}/K_D)^\gamma}
+$$
+
 - $S_\mathrm{alv}\in[0,1]$: Equilibrium $\mathrm{O_2}$ saturation at the alveolar $\mathrm{O_2}$ pressure.
 - $K_D=3.6\ \mathrm{kPa}$: Hemoglobin $\mathrm{O_2}$ dissociation constant.
 - $\gamma=2.7$: Hill coefficient for hemoglobin.
-
-The $\xi_\mathrm{PTX}$-based term accounts for loss of surface area through pneumothorax. The exponent of $2/3$ comes from converting a volume-based quantity to an area-based quantity.
 
 $\mathrm{O_2}$ exchange tries to maintain a steady state by compensating for consumption and equilibrating alveolar and peripheral blood saturation:
 
@@ -133,20 +141,36 @@ $$
 - $HR_0\ [\mathrm{min^{-1}}]$: Default heart rate (`m_fDefaultHeartRateBPM`).
 - $SV_0\ [\mathrm{ml}]$: Default stroke volume (`m_fDefaultStrokeVolumeML`).
 
-### Perfusion: $\mathrm{CO_2}$ Exchange
+The fluxes are scaled by perfusion and capped by the loading capacity of hemoglobin.
 
-$\mathrm{CO_2}$ exchange is driven by a deviation from Henry's law equilibrium between venous concentration and alveolar partial pressure:
+#### $\mathrm{CO_2}$ Exchange
+
+$\mathrm{CO_2}$ exchange is driven by an imbalance between venous concentration $c_v$ and alveolar partial pressure $p_{CO_2}$. The equilibrium is given by Henry's law:
 
 $$
-\varphi_{Q,CO_2} = k_C\cdot(c_v-K_H\cdot p_{CO_2})
+K_H = \frac{c_v}{p_{CO_2}}
 $$
 
-- $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer rate from blood to alveoli.
-- $c_v\ [\mathrm{mmol/ml}]$: Venous blood $\mathrm{CO_2}$ concentration.
 - $K_H=0.000225\ \mathrm{mmol/(ml\cdot kPa)}$: Henry constant for $\mathrm{CO_2}$ in blood.
-- $k_C\ [\mathrm{ml/s}]$: Equilibration rate to restore Henry's law between blood and alveolar $\mathrm{CO_2}$.
+- $c_v\ [\mathrm{mmol/ml}]$: Venous blood $\mathrm{CO_2}$ concentration.
 
-Positive $\varphi_{Q,CO_2}$ decreases venous $\mathrm{CO_2}$ concentration and increases alveolar $\mathrm{CO_2}$ partial pressure. Cellular production adds $\mathrm{CO_2}$ to blood, while ventilation removes it from the alveoli.
+The flux for equilibration is calculated as follows:
+
+$$
+\varphi_{Q,CO_2} = \operatorname{clamp}\left(r_Q\cdot k_C\cdot(c_v-K_H\cdot p_{CO_2}),\ \varphi_{Q,CO_2}^{\min},\ \varphi_{Q,CO_2}^{\max}\right)
+$$
+$$
+\varphi_{Q,CO_2}^{\min} = Q\cdot\min\left(c_v-K_H\cdot p_{CO_2},\ 0\right)
+\qquad
+\varphi_{Q,CO_2}^{\max} = Q\cdot(c_v+c_{\mathrm{HCO_3^-}})
+$$
+
+- $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer flux.
+- $c_{\mathrm{HCO_3^-}}=0.024\ [\mathrm{mmol/ml}]$: Fixed blood $\mathrm{HCO_3^-}$ concentration.
+- $\varphi_{Q,CO_2}^{\max}\ [\mathrm{mmol/s}]$: Bound for forward flux from blood to alveoli.
+- $\varphi_{Q,CO_2}^{\min}\ [\mathrm{mmol/s}]$: Bound for reverse flux from alveoli to blood.
+
+The flux is scaled by perfusion and capped by total $\mathrm{CO_2}$ content of blood and saturation limit given by Henry's law.
 
 ### Net Evolution of Gas Pressures and Concentrations
 

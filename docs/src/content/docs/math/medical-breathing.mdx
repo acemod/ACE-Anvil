@@ -165,28 +165,29 @@ $$
 The flux for equilibration is calculated as follows:
 
 $$
-\varphi_{Q,CO_2} = Q\cdot\operatorname{clamp}\left(\min\left(k_c,\ k_c^{\max}\right)\cdot(c_v-K_H\cdot p_{CO_2}),\ \Delta c_{\min},\ \Delta c_{\max}\right)
+\varphi_{Q,CO_2} = Q\cdot\min\left(\min\left(k_c,\ k_c^{\max}\right)\cdot(c_v-K_H\cdot p_{CO_2}),\ \Delta c_{\max}\right)
 $$
 $$
-k_c^{\max} = \frac{1}{Q\Delta t}\cdot\left(\frac{1}{V_v}+\frac{RTK_H}{V_C}\right)^{-1}
-$$
-$$
-\Delta c_{\min} = \min\left(c_v-K_H\cdot p_{CO_2},\ 0\right)
-\qquad
 \Delta c_{\max} = c_v+c_{\mathrm{HCO_3^-}}
 $$
 
 - $\varphi_{Q,CO_2}\ [\mathrm{mmol/s}]$: $\mathrm{CO_2}$ transfer flux from blood to alveoli.
 - $k_c\ [\cdot]$: Carbonate dehydration rate scale. Determines how fast equilibration takes place.
-- $k_c^{\max}\ [\cdot]$: Maximum rate scale preventing overshoot of Henry's law equilibrium in one timestep $\Delta t$.
+- $k_c^{\max}\ [\cdot]$: Maximum rate scale preventing overshoot of Henry's law equilibrium.
+- $\Delta c_{\max}\ [\mathrm{mmol/ml}]$: Bound for forward concentration change from blood to alveoli.
+- $c_{\mathrm{HCO_3^-}}=0.024\ [\mathrm{mmol/ml}]$: Fixed blood $\mathrm{HCO_3^-}$ concentration.
+
+
+The flux is scaled by perfusion and capped by total $\mathrm{CO_2}$ content of blood. The equilibration is furthermore prone to overshooting, which is why a cap $k_c^{\max}$ is imposed on the rate:
+
+$$
+k_c^{\max} = \frac{1}{Q\Delta t}\cdot\left(\frac{1}{V_v}+\frac{RTK_H}{V_C}\right)^{-1}
+$$
+
+- $\Delta t\ [s]$: Time step of the simulation.
 - $T\ [\mathrm{K}]$: Body temperature.
 - $R\ \mathrm{[kPa\cdot ml/(mmol\cdot K])}$: Universal gas constant.
 - $V_v\ [\mathrm{ml}]$: Venous blood volumes (70% of total blood volume).
-- $c_{\mathrm{HCO_3^-}}=0.024\ [\mathrm{mmol/ml}]$: Fixed blood $\mathrm{HCO_3^-}$ concentration.
-- $\Delta c_{\max}\ [\mathrm{mmol/ml}]$: Bound for forward concentration change from blood to alveoli.
-- $\Delta c_{\min}\ [\mathrm{mmol/ml}]$: Bound for reverse concentration change from alveoli to blood.
-
-The flux is scaled by perfusion and capped by total $\mathrm{CO_2}$ content of blood and saturation limit given by Henry's law. This process is furthermore prone to overshooting, which is why a cap on the rate is imposed.
 
 ### Net Evolution of Gas Pressures and Concentrations
 

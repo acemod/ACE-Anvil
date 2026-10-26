@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{7C0B26D38E36B3BA}Assets/Items/Medicine/NCDKit/Workspace/i_cro_ncdkit_revive.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

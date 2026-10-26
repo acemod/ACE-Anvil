@@ -1,0 +1,9 @@
+MatPBRBasic {
+ BlendMode None
+ RoughnessScale 0.2
+ AOScale 0.5
+ CavityFromAO 0.6
+ BCRMap "{3C676E9FB79A5255}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle_BCR.edds"
+ OpacityMap "{422ACF9A015955C6}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle_OPM.edds"
+ NMOMap "{CC42EDA3ECDED584}Assets/Items/Medicine/NCDKit/ACE_Medical_NCDKit_Needle_NMO.edds"
+}

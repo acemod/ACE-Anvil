@@ -1,6 +1,12 @@
 SCR_ChimeraCharacter {
  ID "520EC961A090B1EE"
  components {
+  SCR_CharacterInventoryStorageComponent "{520EA1D2DB118DAC}" {
+   components {
+    ACE_EquipmentStorageComponent "{671625C6478FB2AB}" {
+    }
+   }
+  }
   ActionsManagerComponent "{520EA1D2F659CE02}" {
    ActionContexts {
     UserActionContext "{647772A5736E4459}" {

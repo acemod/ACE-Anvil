@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+ Configurations {
+  ImageSetResourceClass PC {
+  }
+  ImageSetResourceClass XBOX_ONE : PC {
+  }
+  ImageSetResourceClass XBOX_SERIES : PC {
+  }
+  ImageSetResourceClass PS4 : PC {
+  }
+  ImageSetResourceClass PS5 : PC {
+  }
+  ImageSetResourceClass HEADLESS : PC {
+  }
+ }
+}

@@ -1,0 +1,4 @@
+MatPBRBasic {
+ BCRMap "{E94C8DEA37793D50}Assets/Weapons/Barrels/ACE_Overheating_SpareBarrel/Data/body_BCR.edds"
+ NMOMap "{D1943678EE0E6FCE}Assets/Weapons/Barrels/ACE_Overheating_SpareBarrel/Data/body_NMO.edds"
+}

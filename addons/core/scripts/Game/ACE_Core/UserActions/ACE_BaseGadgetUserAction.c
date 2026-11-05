@@ -2,6 +2,10 @@
 //! Gadget entity user action
 class ACE_BaseGadgetUserAction : ScriptedUserAction
 {
+	[Attribute(desc: "Class name of required component on gadget.")]
+	protected string m_sRequiredGadgetComponent;
+	protected typename m_tRequiredGadgetComponent;
+	
 	[Attribute(defvalue: "1", desc: "Index of the gadget animation to play")]
 	protected int m_iAnimationIndex;
 	
@@ -13,7 +17,22 @@ class ACE_BaseGadgetUserAction : ScriptedUserAction
 	override void Init(IEntity pOwnerEntity, GenericComponent pManagerComponent)
 	{
 		super.Init(pOwnerEntity, pManagerComponent);
+		m_tRequiredGadgetComponent = m_sRequiredGadgetComponent.ToType();
 		m_iSoundEventID = GameAnimationUtils.RegisterAnimationEvent("Sound");
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Check whether the held gadget is the correct one
+	override bool CanBeShownScript(IEntity user)
+	{
+		IEntity gadget = GetHeldGadget(user);
+		if (!gadget)
+			return false;
+		
+		if (!gadget.FindComponent(m_tRequiredGadgetComponent))
+			return false;
+		
+		return true;
 	}
 	
 	//------------------------------------------------------------------------------------------------

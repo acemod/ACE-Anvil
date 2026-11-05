@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{0E971AC5D26926EE}Prefabs/Helpers/ACE_Chopping_HelperEntity.et"
+ Name "{0E971AC5D26926EE}Prefabs/Helpers/ACE_Chopping_BaseHelper.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

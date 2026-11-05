@@ -24,6 +24,7 @@ SCR_ChimeraCharacter {
      }
      VisibilityRange 1.5
      "Sort Priority" 1
+     m_sRequiredGadgetComponent "ACE_Captives_HandcuffsGadgetComponent"
     }
     ACE_Captives_ReleaseCaptiveUserAction "{64D908D36A98FF2D}" {
      ParentContextList {

@@ -12,6 +12,7 @@ GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
      }
      Duration 6
      "Sort Priority" -3
+     m_sRequiredGadgetComponent "SCR_CampaignBuildingGadgetToolComponent"
     }
    }
   }

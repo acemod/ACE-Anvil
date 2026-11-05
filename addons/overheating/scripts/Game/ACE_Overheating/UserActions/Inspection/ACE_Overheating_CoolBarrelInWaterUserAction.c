@@ -1,8 +1,6 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Overheating_CoolBarrelInWaterUserAction : SCR_InspectionUserAction
+class ACE_Overheating_CoolBarrelInWaterUserAction : ACE_Overheating_CoolBarrelBaseUserAction
 {
-	protected float m_fTimer;
-	
 	//------------------------------------------------------------------------------------------------
 	override bool CanBeShownScript(IEntity user)
 	{
@@ -17,24 +15,10 @@ class ACE_Overheating_CoolBarrelInWaterUserAction : SCR_InspectionUserAction
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override protected void OnActionStart(IEntity pUserEntity)
+	override void OnPreformCoolingStep()
 	{
-		SCR_UISoundEntity.SoundEvent("ACE_OVERHEATING_SOUND_COOL_BARREL");
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override float GetActionProgressScript(float fProgress, float timeSlice)
-	{
-		fProgress = super.GetActionProgressScript(fProgress, timeSlice);
-		float overProgress = fProgress - GetActionDuration();
-		
-		if (overProgress < 0)
-			return fProgress;
-		
 		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerController());
 		if (playerController)
 			playerController.ACE_Overheating_RequestCoolBarrel(m_WeaponComponent);
-		
-		return overProgress;
 	}
 }

@@ -1,0 +1,24 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    ACE_Overheating_CoolBarrelWithFlaskFromInventoryUserAction "{6A61552CDF9D03E3}" {
+     ParentContextList {
+      "ace_barrel"
+     }
+     UIInfo SCR_ActionUIInfo "{6A6020C6B0FE29AE}" {
+      Name "#ACE_Overheating-CoolBarrelWithItemAction"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Blood_UI"
+     }
+     Duration 1
+     PerformPerFrame 1
+     "Sort Priority" 15
+     "Inventory action" 1
+    }
+   }
+  }
+ }
+}

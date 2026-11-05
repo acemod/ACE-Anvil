@@ -14,6 +14,9 @@ class ACE_Overheating_Settings : ACE_ModSettings
 	[Attribute(defvalue: "18", desc: "Scale for how quickly a weapon cools down in water.", params: "0 inf")]
 	float m_fWaterCoolingScale;
 	
+	[Attribute(defvalue: "0.1", desc: "How much water in liters is consumed each execution when using a flask for cooling.", params: "0 inf")]
+	float m_fWaterCoolingFlaskConsumptionPerExecution;
+	
 	[Attribute(defvalue: "1.0", desc: "Scale for how likely a weapon jams.", params: "0 inf")]
 	float m_fJamChanceScale;
 	

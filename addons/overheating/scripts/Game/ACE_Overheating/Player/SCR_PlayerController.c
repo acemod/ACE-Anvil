@@ -98,22 +98,37 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_Overheating_RequestSwapBarrel(BaseWeaponComponent weapon)
+	void ACE_Overheating_RequestSwapBarrel(BaseWeaponComponent weapon, IEntity barrelItem)
 	{
-		Rpc(RpcAsk_ACE_Overheating_SwapBarrel, Replication.FindItemId(weapon));
+		Rpc(RpcAsk_ACE_Overheating_SwapBarrel, Replication.FindItemId(weapon), SCR_EntityHelper.EntityToRplId(barrelItem));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_Overheating_SwapBarrel(RplId weaponId)
+	protected void RpcAsk_ACE_Overheating_SwapBarrel(RplId weaponId, RplId barrelItemId)
 	{
 		BaseWeaponComponent weapon = BaseWeaponComponent.Cast(Replication.FindItem(weaponId));
 		if (!weapon)
 			return;
 		
-		ACE_Overheating_BarrelComponent barrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
-		if (barrel)
-			barrel.SetBarrelTemperature(ACE_WeatherHelper.GetAirTemperatureForEntity(weapon.GetOwner()));
+		ACE_Overheating_BarrelComponent oldBarrel = ACE_Overheating_BarrelComponent.FromWeapon(weapon);
+		if (!oldBarrel)
+			return;
+		
+		IEntity barrelItem = IEntity.Cast(SCR_EntityHelper.RplIdToEntity(barrelItemId));
+		if (!barrelItem)
+			return;
+		
+		ACE_Overheating_BarrelComponent newBarrel = ACE_Overheating_BarrelComponent.Cast(barrelItem.FindComponent(ACE_Overheating_BarrelComponent));
+		if (!newBarrel)
+			return;
+		
+		oldBarrel.SwapBarrelState(newBarrel);
+		float timestamp = GetWorld().GetWorldTime();
+		ACE_Overheating_BarrelTemperatureJob job = new ACE_Overheating_BarrelTemperatureJob();
+		job.SetContext(new ACE_Overheating_BarrelContext(oldBarrel));
+		job.OnUpdate((timestamp - newBarrel.GetLastTemperatureTimestamp()) / 1000);
+		newBarrel.SetLastTemperatureTimestamp(timestamp);
 		
 		ACE_Overheating_BarrelGlowEffectComponent glowEffect = ACE_Overheating_BarrelGlowEffectComponent.FromMuzzle(weapon.GetCurrentMuzzle());
 		if (glowEffect)
@@ -125,14 +140,14 @@ modded class SCR_PlayerController : PlayerController
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void ACE_Overheating_RequestCoolBarrel(BaseWeaponComponent weapon)
+	void ACE_Overheating_RequestCoolBarrel(BaseWeaponComponent weapon, SCR_WaterContainerComponent waterContainer = null)
 	{
-		Rpc(RpcAsk_ACE_Overheating_CoolBarrel, Replication.FindItemId(weapon));
+		Rpc(RpcAsk_ACE_Overheating_CoolBarrel, Replication.FindItemId(weapon), Replication.FindItemId(waterContainer));
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Server)]
-	protected void RpcAsk_ACE_Overheating_CoolBarrel(RplId weaponId)
+	protected void RpcAsk_ACE_Overheating_CoolBarrel(RplId weaponId, RplId waterContainerId)
 	{
 		BaseWeaponComponent weapon = BaseWeaponComponent.Cast(Replication.FindItem(weaponId));
 		if (!weapon)
@@ -146,9 +161,25 @@ modded class SCR_PlayerController : PlayerController
 		if (!settings)
 			return;
 		
+		float coolingScale = settings.m_fWaterCoolingScale;
+		
+		SCR_WaterContainerComponent waterContainer = SCR_WaterContainerComponent.Cast(Replication.FindItem(waterContainerId));
+		if (waterContainer)
+		{
+			coolingScale *= waterContainer.RemoveWater_S(settings.m_fWaterCoolingFlaskConsumptionPerExecution);
+			coolingScale /= settings.m_fWaterCoolingFlaskConsumptionPerExecution;
+			
+			SCR_NotificationsComponent.SendToPlayer(
+				GetPlayerId(),
+				ENotification.PLAYER_FLASK_WATER_REMAINING,
+				Math.Round(waterContainer.GetCurrentWater() * 100),
+				Math.Round(waterContainer.GetMaximumWater() * 100)
+			);
+		}
+		
 		ACE_Overheating_BarrelTemperatureJob job = new ACE_Overheating_BarrelTemperatureJob();
 		job.SetContext(new ACE_Overheating_BarrelContext(barrel));
-		job.OnUpdate(settings.m_fWaterCoolingScale);
+		job.OnUpdate(coolingScale);
 		RpcAsk_ACE_Overheating_SendWeaponStateNotification(ENotification.ACE_OVERHEATING_BARREL_TEMPERATURE_RESULT, weaponId);
 	}
 }

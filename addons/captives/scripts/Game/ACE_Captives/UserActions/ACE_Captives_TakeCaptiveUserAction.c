@@ -7,13 +7,6 @@ class ACE_Captives_TakeCaptiveUserAction : ACE_InstantGadgetUserAction
 		if (!super.CanBeShownScript(user))
 			return false;
 		
-		IEntity gadget = GetHeldGadget(user);
-		if (!gadget)
-			return false;
-		
-		if (!gadget.FindComponent(ACE_Captives_HandcuffsGadgetComponent))
-			return false;
-		
 		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
 		if (!ownerChar)
 			return false;

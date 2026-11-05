@@ -5,7 +5,7 @@ class ACE_MetalClangingCommand : SCR_BaseRadialCommand
 	protected static ref const array<EWeaponType> REQUIRED_WEAPON_TYPES = {EWeaponType.WT_RIFLE, EWeaponType.WT_SNIPERRIFLE, EWeaponType.WT_MACHINEGUN};
 	
 	//------------------------------------------------------------------------------------------------
-	override bool Execute(IEntity cursorTarget, IEntity target, vector targetPosition, int playerID, bool isClient)
+	override bool Execute(IEntity cursorTarget, IEntity groupEnt, vector targetPosition, int playerID, bool isClient)
 	{
 		if (isClient)
 			return false;

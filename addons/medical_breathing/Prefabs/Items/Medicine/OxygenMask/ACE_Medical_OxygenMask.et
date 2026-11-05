@@ -40,7 +40,6 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
      PreviewRenderAttributes "{64FF4A0F1EB72BC5}" {
       CameraPreset Top
       CameraDistanceToItem 0.2
-      PreviewPrefab "{66C234BE25182886}Prefabs/Items/Medicine/OxygenMask/ACE_Medical_OxygenMaskPreview.et"
      }
      CharacterModifierAttributes "{64FF4A0F1EB72BC9}" {
       SpeedLimit 4

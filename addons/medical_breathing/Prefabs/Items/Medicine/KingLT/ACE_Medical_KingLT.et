@@ -60,6 +60,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   SCR_ConsumableItemComponent "{62D6FBE3F984D66E}" {
    m_eAnimVariable ADRIANOV
+   m_fClothesOffsetStrength 0
    m_ConsumableEffect ACE_Medical_ConsumableAttachableHealthItem "{62E122EB7DB74BD0}" {
     m_bDeleteOnUse 0
     m_aDamageEffectsToLoad {

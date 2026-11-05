@@ -16,17 +16,29 @@ class ACE_EquipmentStorageComponent : SCR_EquipmentStorageComponent
 		if (rpl && rpl.IsProxy())
 			return false;
 		
-		SCR_InventoryStorageManagerComponent storageManager = SCR_InventoryStorageManagerComponent.Cast(GetOwner().FindComponent(SCR_InventoryStorageManagerComponent));
-		if (!storageManager)
+		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));
+		if (!itemComponent)
 			return false;
 		
-		if (storageManager.TryMoveItemToStorage(item, this, slotID))
-			return true;
+		InventoryStorageSlot sourceParentSlot = itemComponent.GetParentSlot();
+		if (sourceParentSlot)
+		{
+			BaseInventoryStorageComponent sourceStorage = sourceParentSlot.GetStorage();
+			if (!sourceStorage)
+				return false;
+			
+			InventoryStorageManagerComponent sourceStorageManager = sourceStorage.GetHierarchyManager();
+			if (!sourceStorageManager)
+				return false;
+
+			return sourceStorageManager.TryMoveItemToStorage(item, this, slotID);
+		}
 		
-		if (storageManager.TryInsertItemInStorage(item, this, slotID))
-			return true;
-		
-		return false;
+		SCR_InventoryStorageManagerComponent targetStorageManager = SCR_InventoryStorageManagerComponent.Cast(target.FindComponent(SCR_InventoryStorageManagerComponent));
+		if (!targetStorageManager)
+			return false;
+
+		return targetStorageManager.TryInsertItemInStorage(item, this, slotID);
 	}
 	
 	//------------------------------------------------------------------------------------------------

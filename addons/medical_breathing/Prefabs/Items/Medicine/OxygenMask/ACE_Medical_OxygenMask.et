@@ -58,6 +58,7 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   }
   SCR_ConsumableItemComponent "{64FF4A0F1EB72B39}" {
    m_eAnimVariable ADRIANOV
+   m_fClothesOffsetStrength 0
    m_ConsumableEffect ACE_Medical_ConsumableAttachableHealthItem "{64FF4A0F1EB72B21}" {
     m_bDeleteOnUse 0
     m_eDeviceType ACE_MEDICAL_OXYGEN_MASK

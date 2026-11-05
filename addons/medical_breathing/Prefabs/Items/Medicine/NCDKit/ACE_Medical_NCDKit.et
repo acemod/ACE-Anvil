@@ -59,6 +59,18 @@ GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
   RigidBody "{62DF7A9D73F38744}" {
   }
   SCR_ConsumableItemComponent "{62DF7A9D73F3869E}" {
+   m_aACE_Medical_LitterPrefabConfigs {
+    ACE_PrefabVariantsConfig "{6A1E37672B4A0C53}" {
+     m_aVariants {
+      "{5D75BE5F56128E1C}Prefabs/Props/Garbage/Medical/NCDKit/ACE_Medical_LitterNCDKitCasing.et"
+     }
+    }
+    ACE_PrefabVariantsConfig "{6A1E37672EDE4998}" {
+     m_aVariants {
+      "{5E260CFC2F7F5716}Prefabs/Props/Garbage/Medical/NCDKit/ACE_Medical_LitterNCDKitHose.et"
+     }
+    }
+   }
    m_eAnimVariable ADRIANOV
    m_ConsumableEffect ACE_Medical_ConsumableNCDKit "{62E00175D2A2F145}" {
     m_aDamageEffectsToLoad {

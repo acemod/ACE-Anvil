@@ -30,7 +30,7 @@ $$
 - $V_C\ [\mathrm{ml}]$: Lung capacity.
 - $V_{T,0}=500\cdot2/3\ \mathrm{ml}$: Default tidal volume.
 - $V_{C,0}=6000\cdot2/3\ \mathrm{ml}$: Default lung capacity.
-- $\xi_\mathrm{PTX}\in [0, 0.75]$: PTX progress, expressed as the fraction of lung volume lost.
+- $\xi_\mathrm{PTX}\in [0, 1]$: PTX progress, expressed as the fraction of lung volume lost.
 
 The factors of $2/3$ account for dead space.
 
@@ -178,7 +178,7 @@ $$
 - $c_{\mathrm{HCO_3^-}}=0.024\ [\mathrm{mmol/ml}]$: Fixed blood $\mathrm{HCO_3^-}$ concentration.
 
 
-The flux is scaled by perfusion and capped by total $\mathrm{CO_2}$ content of blood. The equilibration is furthermore prone to overshooting, which is why a cap $k_c^{\max}$ is imposed on the rate:
+The flux is scaled by perfusion and capped by total $\mathrm{CO_2}$ content of blood. The equilibration is furthermore prone to overshooting, which is why a cap $k_c^{\max}$ is imposed on the rate scale:
 
 $$
 k_c^{\max} = \frac{1}{Q\Delta t}\cdot\left(\frac{1}{V_v}+\frac{RTK_H}{V_C}\right)^{-1}

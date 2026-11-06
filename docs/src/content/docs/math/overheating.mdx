@@ -118,7 +118,7 @@ $$
 F_{\mathrm{disp}} = 1 + \lambda_\mathrm{disp} \cdot f_\mathrm{disp}(T_b)\qquad F_{\mathrm{disp}} \in [1, \infty)
 $$
 
-where $\lambda_\mathrm{jam}$ is a scale factor (`m_fMuzzleDispersionScale`) and $f_\mathrm{disp}(T_b)$ is a temperature curve (prefab's `m_cMuzzleDispersionFactorTemperatureCurve`). The dispersion multiplier is related to the base game dispersion cone's half-apex angle $\theta$ and temperature-based increase $\Delta \theta(T_b)$ as below:
+where $\lambda_\mathrm{disp}$ is a scale factor (`m_fMuzzleDispersionScale`) and $f_\mathrm{disp}(T_b)$ is a temperature curve (prefab's `m_cMuzzleDispersionFactorTemperatureCurve`). The dispersion multiplier is related to the base game dispersion cone's half-apex angle $\theta$ and temperature-based increase $\Delta \theta(T_b)$ as below:
 
 $$
 F_\mathrm{disp} = \frac{\tan(\theta+\Delta \theta(T_b))}{\tan(\theta)}

@@ -31,6 +31,61 @@ StringTable {
    Author "Kex"
    LastChanged "michy_REV19"
   }
+  CustomStringTableItem "{69B577E06C24C4A5}" {
+   Id "ACE-Explosives_Item_VMM3_Description"
+   Target_en_us "Metal and mine detector used for clearing landmines and UXO."
+   Target_de_de "Metall- und Minensuchgerät zur Räumung von Landminen und Blindgängern."
+   Target_ko_kr "지뢰나 불발탄 제거에 사용되는 금속 및 지뢰탐지기입니다."
+   Modified 1773537009
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69B577E01F72AA28}" {
+   Id "ACE-Explosives_Item_VMM3_Name"
+   Target_en_us "BMM3 Metal/Mine Detector"
+   Target_de_de "BMM3 Metall- und Minensuchgerät"
+   Target_ko_kr "BMM3 금속/지뢰탐지기"
+   Modified 1773535601
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69BB4EBA14500CF5}" {
+   Id "ACE-Explosives_Item_DeadManSwitch_Name"
+   Target_en_us "Dead man's switch"
+   Target_fr_fr "Détonateur par relâchement de pression"
+   Target_it_it "Detonatore a rilascio"
+   Target_de_de "Totmannschalter"
+   Target_es_es "Detonador de hombre muerto"
+   Target_cs_cz "Spínač mrtvého muže"
+   Target_pl_pl "Czuwak"
+   Target_ru_ru "Кнопка мертвеца"
+   Target_ja_jp "自爆装置"
+   Target_ko_kr "자폭 장치"
+   Target_pt_br "Detonador do homem mort"
+   Target_zh_cn "自殺炸彈客引爆器"
+   Target_uk_ua "Кнопка мерця"
+   Modified 1773884186
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69B577E06C24C4A5}" {
+   Id "ACE-Explosives_Item_VMM3_Description"
+   Target_en_us "Metal and mine detector used for clearing landmines and UXO."
+   Target_de_de "Metall- und Minensuchgerät zur Räumung von Landminen und Blindgängern."
+   Target_ko_kr "지뢰나 불발탄 제거에 사용되는 금속 및 지뢰탐지기입니다."
+   Modified 1773537009
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69B577E01F72AA28}" {
+   Id "ACE-Explosives_Item_VMM3_Name"
+   Target_en_us "BMM3 Metal/Mine Detector"
+   Target_de_de "BMM3 Metall- und Minensuchgerät"
+   Target_ko_kr "BMM3 금속/지뢰탐지기"
+   Modified 1773535601
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
   CustomStringTableItem "{64933B9C7DC48AD7}" {
    Id "ACE-Explosives_UserAction_Bury_Name"
    Target_en_us "Bury"
@@ -45,6 +100,15 @@ StringTable {
    Modified 1750691295
    Author "Kex"
    LastChanged "michy_REV19"
+  }
+  CustomStringTableItem "{69BB4EBA604D8752}" {
+   Id "ACE-Explosives_UserAction_ConnectToInventoryExplosives_Name"
+   Target_en_us "Connect to explosives in inventory"
+   Target_de_de "Verbinde mit Sprengladungen im Inventar"
+   Target_ko_kr "소지품에 있는 폭발물에 연결하기"
+   Modified 1774405935
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{61B80DDD1907B555}" {
    Id "ACE-Explosives_UserAction_Disarm_Name"

@@ -1,0 +1,52 @@
+AnimSrcGraph {
+ AnimSetTemplate "{8D98D8542378D3B0}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3.ast"
+ ControlTemplate AnimSrcGCT "{69B235D10710B5C6}" {
+  Variables {
+   AnimSrcGCTVarInt Stance {
+    MaxValue 2
+   }
+   AnimSrcGCTVarFloat ADSAdjust {
+    MaxValue 1
+   }
+   AnimSrcGCTVarFloat AimY {
+    MinValue -180
+    MaxValue 180
+   }
+   AnimSrcGCTVarFloat MovementSpeed {
+    MaxValue 3
+   }
+   AnimSrcGCTVarFloat AimX {
+    MinValue -90
+    MaxValue 90
+   }
+   AnimSrcGCTVarInt WeaponInspectionState {
+    MaxValue 2
+   }
+  }
+  IkChains {
+   AnimSrcGCTIkChain RHandProp {
+    Joints {
+     "rightarm"
+     "rightarmtwist"
+     "rightforearm"
+     "rightforearmtwist"
+     "righthand"
+     "righthandprop"
+    }
+   }
+   AnimSrcGCTIkChain Head {
+    Joints {
+     "neck2"
+     "neck3"
+     "head"
+    }
+   }
+  }
+ }
+ Debug AnimSrcGD "{69B235D10710B533}" {
+ }
+ GraphFilesResourceNames {
+  "{B064A0EE8A1E6E73}Assets/Items/Equipment/MineDetector/ACE_VMM3/Workspace/VMM3.agf"
+ }
+ DefaultRunNode "MasterControl"
+}

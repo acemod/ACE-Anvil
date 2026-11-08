@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{FD9D861C30BB63BF}Prefabs/Props/Garbage/Medical/FieldDressing/ACE_Medical_LitterFieldDressingPackage_USSR.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

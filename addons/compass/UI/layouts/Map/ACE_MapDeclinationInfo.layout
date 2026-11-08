@@ -1,0 +1,123 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ Slot FrameWidgetSlot "{69A426371F908E74}" {
+  Anchor 0 0 1 1
+  PositionX 0
+  OffsetLeft 0
+  PositionY 0
+  OffsetTop 0
+  SizeX 0
+  OffsetRight 0
+  SizeY 0
+  OffsetBottom 0
+ }
+ "Z Order" 1
+ Clipping False
+ components {
+  ACE_MapDeclinationUIComponent "{69A357EF102EFDB6}" {
+  }
+ }
+ {
+  VerticalLayoutWidgetClass "{69A4441EA7DBB33C}" {
+   Name "VerticalLayout0"
+   Slot FrameWidgetSlot "{69A4441EFDA9A908}" {
+    Anchor 1 1 1 1
+    OffsetLeft 0
+    OffsetTop 0
+    OffsetRight -100
+    OffsetBottom -30
+    Alignment 1 1
+    SizeToContent 1
+   }
+   {
+    SizeLayoutWidgetClass "{69A357EBEF45C8B4}" {
+     Name "Layout"
+     Slot LayoutSlot "{69A4441D9715310F}" {
+      HorizontalAlign 1
+      VerticalAlign 1
+     }
+     AllowWidthOverride 1
+     WidthOverride 512
+     AllowHeightOverride 1
+     HeightOverride 256
+     {
+      OverlayWidgetClass "{69A357EB2B908260}" {
+       Name "Overlay0"
+       Slot AlignableSlot "{69A4441EF38766EB}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       {
+        CanvasWidgetClass "{69A357EBEF45C8BB}" {
+         Name "Canvas"
+         Slot OverlayWidgetSlot "{69A357EF1CE4E178}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         ZoomLevel 0.5
+        }
+        FrameWidgetClass "{69A37C1C722DB2DD}" {
+         Name "Frame0"
+         Slot OverlayWidgetSlot "{69A37C1C722D90FB}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+         {
+          ImageWidgetClass "{69A357EB52AAE00D}" {
+           Name "Star"
+           Slot FrameWidgetSlot "{69A411507EB895B1}" {
+            OffsetLeft 0
+            OffsetTop 0
+            OffsetRight -100
+            OffsetBottom -30
+            Alignment 0.5 0.5
+            SizeToContent 1
+           }
+           Color 0 0 0 1
+           Texture "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+           Image "favourite"
+           Size 32 32
+          }
+          TextWidgetClass "{69A37C1DB55A3AE2}" {
+           Name "MN"
+           Slot FrameWidgetSlot "{69A37C1C718096D9}" {
+            OffsetLeft 0
+            PositionY 0
+            OffsetTop 0
+            OffsetRight -100
+            OffsetBottom -30
+            Alignment 0.5 0.5
+            SizeToContent 1
+           }
+           Color 0 0 0 1
+           Text "MN"
+          }
+          TextWidgetClass "{69A37C1DC63472D1}" {
+           Name "Declination"
+           Slot FrameWidgetSlot "{69A37C1FDF07DC12}" {
+            Alignment 0.5 0.5
+            SizeToContent 1
+           }
+           Color 0 0 0 1
+           Text "0°"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+    RichTextWidgetClass "{69A4441F7D5B3F37}" {
+     Name "Description"
+     Slot LayoutSlot "{69A4441D97153040}" {
+      Padding 0 0 0 80
+     }
+     Color 0 0 0 1
+     Text "2025 MAGNETIC NORTH"\
+     "DECLINATION AT CENTER OF SHEET"
+     "Horizontal Alignment" Center
+    }
+   }
+  }
+ }
+}

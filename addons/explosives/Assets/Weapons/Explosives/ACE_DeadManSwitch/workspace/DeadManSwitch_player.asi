@@ -1,0 +1,64 @@
+AnimSetInstanceSource {
+ Template "{C48F823FCA293568}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/DeadManSwitch.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Activation.Erc.Idle" {
+   Resource "{FD0EFECA86FBE7F5}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_erc_M34_IK.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Cro.Activate" {
+   Resource "{D1D63CF8C455F962}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_cro_M34_activation.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Erc.Activate" {
+   Resource "{B2757AF8645880B7}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_erc_M34_activation.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Pne.Activate" {
+   Resource "{9376C68535044426}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_pne_M34_activation.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Cro.Idle" {
+   Resource "{3219E1FB8029B106}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_cro_M34_IK.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Cro.IKOffset" {
+   Resource "{D883B74468ACCD6D}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_cro_M34_IK_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Erc.IKOffset" {
+   Resource "{F379191D21CBB89D}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_erc_M34_IK_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Pne.IKOffset" {
+   Resource "{F379191D21CBB89D}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_erc_M34_IK_offset.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Pne.Idle" {
+   Resource "{A1345B14F1956607}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_pne_M34_IK.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Cro.Idle_fingers" {
+   Resource "{B969721C4DBCDE38}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Erc.Idle_fingers" {
+   Resource "{B969721C4DBCDE38}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Pne.Idle_fingers" {
+   Resource "{B969721C4DBCDE38}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Veh.Idle_fingers" {
+   Resource "{B969721C4DBCDE38}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_idle_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Veh.Activate" {
+   Resource "{4935A6CCDA8C9E2B}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_veh_M34_activation.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Veh.Idle" {
+   Resource "{046F0FEDCC281F3B}Assets/Weapons/Explosives/BlastingMachine_M34/anims/p_veh_M34_IK.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Cro.Activate_fingers" {
+   Resource "{37F76458BC32F88A}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Erc.Activate_fingers" {
+   Resource "{37F76458BC32F88A}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Pne.Activate_fingers" {
+   Resource "{37F76458BC32F88A}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+  AnimSetInstanceSource_Line "Activation.Veh.Activate_fingers" {
+   Resource "{37F76458BC32F88A}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/p_erc_deadmanswitch_activate_fingerAnim.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{60F29686350E57AF}" {
+ }
+}

@@ -1,14 +1,6 @@
 GenericEntity : "{CD00FFBAFD036BE2}Prefabs/Weapons/Core/Explosives_base.et" {
  ID "5968D2B6A82C6019"
  components {
-  SCR_MineDamageManager "{5A187C4DB2CF86F2}" {
-   "Additional hit zones" {
-    SCR_MineHitZone Main {
-     "Melee multiplier" 0
-     "Kinetic multiplier" 0
-    }
-   }
-  }
   ActionsManagerComponent "{59E4E6938E65C2ED}" {
    additionalActions {
     ACE_Explosives_ToggleBuryUserAction "{64933B9AAC846215}" {

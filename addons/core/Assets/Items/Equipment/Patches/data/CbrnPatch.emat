@@ -1,0 +1,5 @@
+MatPBRBasic {
+ Emissive 0 0 0 1
+ BCRMap "{C5E2513B1109FB5B}Assets/Items/Equipment/Patches/data/CbrnPatch_BCR.edds"
+ NMOMap "{FD3AEAA9C87EA9C5}Assets/Items/Equipment/Patches/data/CbrnPatch_NMO.edds"
+}

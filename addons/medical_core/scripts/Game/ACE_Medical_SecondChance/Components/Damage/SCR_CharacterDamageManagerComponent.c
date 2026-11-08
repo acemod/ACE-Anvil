@@ -6,8 +6,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	protected float m_fACE_Medical_SecondChanceDeactivationTimeMS = -float.INFINITY;
 	protected float m_fACE_Medical_LastFallDamageTimeMS = -float.INFINITY;
 	
-	protected static const float ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS = 1000;
-	
 	//-----------------------------------------------------------------------------------------------------------
 	[Friend(ACE_Medical_SecondChanceSystem)]
 	protected void ACE_Medical_OnSecondChanceGranted()
@@ -25,7 +23,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	//! Second chance will be deactivated after ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS
 	void ACE_Medical_ScheduleSecondChanceDeactivation()
 	{
-		m_fACE_Medical_SecondChanceDeactivationTimeMS = GetOwner().GetWorld().GetWorldTime() + ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS;
+		m_fACE_Medical_SecondChanceDeactivationTimeMS = GetOwner().GetWorld().GetWorldTime() + s_ACE_Medical_Core_Settings.m_iSecondChanceDeactivationTimeoutMs;
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -52,8 +50,8 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		// Check for fall damage
 		if (s_ACE_Medical_Core_Settings.m_bSecondChanceForFallDamageEnabled || m_fACE_Medical_SecondChanceDeactivationTimeMS < 0)
 			return true;
-
-		if (m_fACE_Medical_SecondChanceDeactivationTimeMS - m_fACE_Medical_LastFallDamageTimeMS <= ACE_MEDICAL_SECOND_CHANCE_DEACTIVATION_TIMEOUT_MS)
+		
+		if (m_fACE_Medical_SecondChanceDeactivationTimeMS - m_fACE_Medical_LastFallDamageTimeMS <= s_ACE_Medical_Core_Settings.m_iSecondChanceDeactivationTimeoutMs)
 			return false;
 
 		return true;
@@ -102,16 +100,22 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 			m_fACE_Medical_ResilienceRegenScale = Math.Min(m_fACE_Medical_ResilienceRegenScale, s_ACE_Medical_Core_Settings.m_fSecondChanceResilienceRegenScale);
 	}
 	
+	//------------------------------------------------------------------------------------------------
+	protected void ACE_Medical_RecordFallDamageTime()
+	{
+		if (!Replication.IsServer())
+			return;
+		
+		m_fACE_Medical_LastFallDamageTimeMS = GetOwner().GetWorld().GetWorldTime();
+	}
+	
 	//-----------------------------------------------------------------------------------------------------------
 	//! Store the time of the latest fall damage
 	override void HandleAnimatedFallDamage(float damage)
 	{
 		super.HandleAnimatedFallDamage(damage);
 		
-		if (!Replication.IsServer())
-			return;
-		
-		m_fACE_Medical_LastFallDamageTimeMS = GetOwner().GetWorld().GetWorldTime();
+		ACE_Medical_RecordFallDamageTime();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -120,9 +124,6 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	{
 		super.HandleRagdollFallDamage(contactingHitZone, damage);
 		
-		if (!Replication.IsServer())
-			return;
-		
-		m_fACE_Medical_LastFallDamageTimeMS = GetOwner().GetWorld().GetWorldTime();
+		ACE_Medical_RecordFallDamageTime();
 	}
 }

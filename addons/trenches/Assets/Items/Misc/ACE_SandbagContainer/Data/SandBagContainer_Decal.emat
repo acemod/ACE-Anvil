@@ -1,0 +1,3 @@
+MatPBRDecal : "{4CE86D5258F2222C}Assets/Props/Military/SupplyBox/SupplyPortableContainers/Data/PortableSupplyContainer_01_Decal.emat" {
+ OpacityMap "{984D45C05C44EFD4}Assets/Props/Military/SupplyBox/SupplyPortableContainers/Data/SandbagContainer_Decal.edds"
+}

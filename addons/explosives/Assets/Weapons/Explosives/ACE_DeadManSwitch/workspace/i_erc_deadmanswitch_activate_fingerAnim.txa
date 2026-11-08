@@ -1,0 +1,31 @@
+$animation "" {
+ #version 2
+ #fps 30
+ #numFrames 15
+ $node "i_switch" {
+  $keys q {
+   $frame 0 {
+    #q 0.00023013 0.00034953 0.70695037 0.70726317
+   }
+   $frame 1 {
+    #q -0.00682285 -0.00670041 0.70691872 0.70723033
+   }
+   $frame 2 {
+    #q -0.02365652 -0.02352668 0.70655882 0.70686746
+   }
+   $frame 3 {
+    #q -0.04374325 -0.04360466 0.70560443 0.70590919
+   }
+   $frame 4 {
+    #q -0.06053498 -0.0603892 0.70436651 0.70466787
+   }
+   $frame 5 15 {
+    #q -0.06755909 -0.06741032 0.70372921 0.70402914
+   }
+  }
+ }
+ $custProps {
+  #custProp "profile" "ACE_DeadManSwitch"
+  #custProp "sourceFile" "Character_AnimationRig_DeadManSwitch.blend"
+ }
+}

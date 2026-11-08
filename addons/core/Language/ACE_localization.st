@@ -24,9 +24,10 @@ StringTable {
    Id "ACE-ControlsHint_InspectTurret"
    Target_en_us "Inspect Turret"
    Target_de_de "Geschütz untersuchen"
+   Target_ko_kr "포탑 조사하기"
    Modified 1715082397
    Author "Kexanone"
-   LastChanged "Kexanone"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{64771570B1AFAB10}" {
    Id "ACE-Emotes_Emote_Pushups_Name"
@@ -35,13 +36,12 @@ StringTable {
    Target_it_it "Flessioni"
    Target_de_de "Liegestützen"
    Target_es_es "Lagartijas"
-   Target_ja_jp "腕立て伏せ"
    Target_ko_kr "팔굽혀펴기"
    Target_pt_br "Flexões"
    Target_zh_cn "伏地挺身"
    Modified 1750690968
    Author "Kex"
-   LastChanged "michy_REV19"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64771570304E885F}" {
    Id "ACE-Emotes_Emote_Salute_Name"
@@ -50,13 +50,12 @@ StringTable {
    Target_it_it "Saluto militare"
    Target_de_de "Salutieren"
    Target_es_es "Saludo militar"
-   Target_ja_jp "敬礼"
    Target_ko_kr "경례"
    Target_pt_br "Comprimeto militar"
    Target_zh_cn "敬禮"
    Modified 1750691025
    Author "Kex"
-   LastChanged "michy_REV19"
+   LastChanged "Martian"
   }
   CustomStringTableItem "{64771570B4AF7606}" {
    Id "ACE-Emotes_Emote_SitOnFloor_Name"
@@ -65,13 +64,20 @@ StringTable {
    Target_it_it "Sedersi per terra"
    Target_de_de "Auf den Boden sitzen"
    Target_es_es "Sentarse en el suelo"
-   Target_ja_jp "地面に座る"
    Target_ko_kr "바닥에 앉기"
    Target_pt_br "Sentar no chão"
    Target_zh_cn "席地而坐"
    Modified 1750691043
    Author "Kex"
-   LastChanged "michy_REV19"
+   LastChanged "Martian"
+  }
+  CustomStringTableItem "{69D0F455AABC16B0}" {
+   Id "ACE-Item_AnvilPatch_Name"
+   Target_en_us "ACE Anvil Patch"
+   Target_de_de "ACE Anvil Abzeichen"
+   Modified 1775505875
+   Author "Kexanone"
+   LastChanged "Kexanone"
   }
   CustomStringTableItem "{60FD565E5C4D775C}" {
    Id "ACE-Item_Banana_Description"
@@ -109,13 +115,38 @@ StringTable {
    Author "kexanone"
    LastChanged "michy_REV19"
   }
-  CustomStringTableItem "{663A2182DD1E0961}" {
-   Id "ACE-RadialMenu_ChangeMagazine"
-   Target_en_us "Change mangazine"
-   Target_de_de "Magazin wechseln"
-   Modified 1715088550
+  CustomStringTableItem "{69D425A0AB2A4037}" {
+   Id "ACE-Item_CbrnPatch_Name"
+   Target_en_us "ACE CBRN Patch"
+   Target_de_de "ACE CBRN Abzeichen"
+   Modified 1775512912
    Author "Kexanone"
    LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69D40E74015C3532}" {
+   Id "ACE-Item_EngineerPatch_Name"
+   Target_en_us "ACE Engineer Patch"
+   Target_de_de "ACE Pionier Abzeichen"
+   Modified 1775505883
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{69D0F455ACDDFC84}" {
+   Id "ACE-Item_MedicPatch_Name"
+   Target_en_us "ACE Medic Patch"
+   Target_de_de "ACE Sanitäter Abzeichen"
+   Modified 1775505860
+   Author "Kexanone"
+   LastChanged "Kexanone"
+  }
+  CustomStringTableItem "{663A2182DD1E0961}" {
+   Id "ACE-RadialMenu_ChangeMagazine"
+   Target_en_us "Change magazine"
+   Target_de_de "Magazin wechseln"
+   Target_ko_kr "탄창 교환"
+   Modified 1752960450
+   Author "Kexanone"
+   LastChanged "Psycool"
   }
   CustomStringTableItem "{5DDEFB51C773DDD9}" {
    Id "ACE-UserAction_Carry"

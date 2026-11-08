@@ -2,5 +2,6 @@
 enum ACE_ESurfaceLabel
 {
 	NONE,
-	DIGGABLE
+	DIGGABLE,
+	MAGNETIC
 }

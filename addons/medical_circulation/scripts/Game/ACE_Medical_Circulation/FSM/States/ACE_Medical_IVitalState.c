@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
+class ACE_Medical_IVitalState : ACE_FSM_StateBase<ACE_Medical_CharacterContext>
 {
 	protected static ACE_Medical_Circulation_Settings s_pCirculationSettings;
 	

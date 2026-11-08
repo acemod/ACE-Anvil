@@ -2,11 +2,15 @@
 modded class SCR_CompassComponent : SCR_GadgetComponent
 {	
 	protected ACE_Compass_Display m_ACE_Compass_Display;
+	protected TimeAndWeatherManagerEntity m_TimaAndWeatherManager;
 	
 	//------------------------------------------------------------------------------------------------
 	override void ActivateGadgetUpdate()
 	{
 		super.ActivateGadgetUpdate();
+		
+		ChimeraWorld world = GetGame().GetWorld();
+		m_TimaAndWeatherManager = world.GetTimeAndWeatherManager();
 		
 		if (m_CharacterOwner != SCR_PlayerController.GetLocalControlledEntity())
 			return;
@@ -15,8 +19,23 @@ modded class SCR_CompassComponent : SCR_GadgetComponent
 		if (!m_ACE_Compass_Display)
 			m_ACE_Compass_Display = ACE_Compass_Display.Cast(SCR_HUDManagerComponent.GetHUDManager().FindInfoDisplay(ACE_Compass_Display));
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Make needle point at magnetic north
+	override protected void UpdateNeedleDirection(float timeSlice)
+	{
+		super.UpdateNeedleDirection(timeSlice);
+		
+		float effectiveAngle = SCR_Math.fmod(m_fNeedleAngle + m_TimaAndWeatherManager.ACE_GetMagneticDeclination(), 360);
+		if (effectiveAngle > 180)
+			effectiveAngle -= 360;
+		
+		if (m_SignalManager)
+			m_SignalManager.SetSignalValue(m_PrefabData.m_iSignalNeedle, effectiveAngle);
+	}
 
 	//------------------------------------------------------------------------------------------------
+	//! Update displayed bearing
 	override void Update(float timeSlice)
 	{
 		super.Update(timeSlice);
@@ -41,7 +60,7 @@ modded class SCR_CompassComponent : SCR_GadgetComponent
 			m_ACE_Compass_Display.Show(true, UIConstants.FADE_RATE_SLOW);
 		}
 		
-		m_ACE_Compass_Display.UpdateBearing(m_fNeedleAngle);
+		m_ACE_Compass_Display.UpdateBearing(m_SignalManager.GetSignalValue(m_PrefabData.m_iSignalNeedle));
 	}
 	
 	//------------------------------------------------------------------------------------------------

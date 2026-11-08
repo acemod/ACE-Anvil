@@ -115,4 +115,20 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 				
 		return false;
 	}
+	
+	//------------------------------------------------------------------------------------------------
+	void ACE_PlaySoundEvent(ACE_ECharacterSoundEvent id)
+	{
+		Rpc(RpcDo_ACE_PlaySoundEventBroadcast, id);
+		
+		if (!System.IsConsoleApp())
+			RpcDo_ACE_PlaySoundEventBroadcast(id);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	[RplRpc(RplChannel.Reliable, RplRcver.Broadcast)]
+	protected void RpcDo_ACE_PlaySoundEventBroadcast(ACE_ECharacterSoundEvent id)
+	{
+		m_CharacterSoundComponent.SoundEvent(typename.EnumToString(ACE_ECharacterSoundEvent, id));
+	}
 }

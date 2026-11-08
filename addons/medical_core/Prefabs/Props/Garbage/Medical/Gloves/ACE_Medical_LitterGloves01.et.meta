@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{391C14090D95CAA9}Prefabs/Props/Garbage/Medical/Gloves/ACE_Medical_LitterGloves01.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

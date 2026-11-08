@@ -46,7 +46,8 @@ modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay
 		super.OnStartDraw(owner);
 		
 		m_pACE_Finger_EditorComponent = ACE_Finger_EditorComponent.Cast(ACE_Finger_EditorComponent.GetInstance(ACE_Finger_EditorComponent, true));
-		if (!m_pACE_Finger_EditorComponent) return;
+		if (!m_pACE_Finger_EditorComponent)
+			return;
 		
 		m_pACE_Finger_EditorComponent.GetOnPingEntityRegister().Insert(OnPingEntityRegister);
 		m_pACE_Finger_EditorComponent.GetOnPingEntityUnregister().Insert(OnPingEntityUnregister);
@@ -62,7 +63,8 @@ modded class SCR_EditorPingInfoDisplay : SCR_InfoDisplay
 	{
 		super.OnStopDraw(owner);
 		
-		if (!m_pACE_Finger_EditorComponent) return;
+		if (!m_pACE_Finger_EditorComponent)
+			return;
 		
 		m_pACE_Finger_EditorComponent.GetOnPingEntityRegister().Remove(OnPingEntityRegister);
 		m_pACE_Finger_EditorComponent.GetOnPingEntityUnregister().Remove(OnPingEntityUnregister);

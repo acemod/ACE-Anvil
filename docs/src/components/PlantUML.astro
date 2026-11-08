@@ -1,7 +1,7 @@
 ---
 import fs from 'node:fs'
 import path from 'node:path'
-import { Image } from 'astro:assets'
+import { inferRemoteSize } from 'astro:assets'
 import plantUmlEncoder from 'plantuml-encoder'
 
 // Preprocesses plantuml files's !include statement
@@ -33,9 +33,14 @@ for (const [theme, content] of Object.entries(themes)) {
   const encoded = plantUmlEncoder.encode(content)
   urls[theme] = `${server}/${format}/${encoded}`
 }
+
+const [lightSize, darkSize] = await Promise.all([
+  inferRemoteSize(urls.light),
+  inferRemoteSize(urls.dark),
+])
 ---
 
 <span>
-  <Image class="dark:sl-hidden" src={urls.light} alt={alt} inferSize />
-  <Image class="light:sl-hidden" src={urls.dark} alt={alt} inferSize />
+  <img class="dark:sl-hidden" src={urls.light} alt={alt} width={lightSize.width} height={lightSize.height} decoding="async" />
+  <img class="light:sl-hidden" src={urls.dark} alt={alt} width={darkSize.width} height={darkSize.height} decoding="async" />
 </span>

@@ -1,5 +1,9 @@
 MetaFileClass {
+<<<<<<<< HEAD:addons/tactical_ladder/Configs/EntityCatalog/ACE_InventoryItems_EntityCatalog_Equipment.conf.meta
+ Name "{0AFC873567388CDE}Configs/EntityCatalog/ACE_InventoryItemsBase.conf"
+========
  Name "{A305FEB7400A2965}Configs/ACE/Settings.conf"
+>>>>>>>> master:addons/weather/Configs/ACE/Settings.conf.meta
  Configurations {
   CONFResourceClass PC {
   }

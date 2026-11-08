@@ -5,7 +5,7 @@ class ACE_Medical_DrugEffectConfig : ScriptAndConfig
 	ref array<ref ACE_Medical_PharmacodynamicsConfig> m_aDrugConfigs;
 	
 	//------------------------------------------------------------------------------------------------
-	void ApplyEffect(ACE_Medical_CharacterContext targetContext, map<ACE_Medical_EDrugType, float> concentrations);
+	void ApplyEffect(ACE_Medical_CharacterContext targetContext, map<ACE_Medical_EDrugType, float> concentrations, float timeSlice);
 	
 	//------------------------------------------------------------------------------------------------
 	//! Remove effect from target

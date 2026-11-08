@@ -65,6 +65,22 @@ SCR_ChimeraCharacter {
      ActionTitle "Inject Phenylephrine"
      m_eConsumableType ACE_MEDICAL_PHENYLEPHRINE_INJECTOR
     }
+    ACE_Medical_SalineBagUserAction "{65D2FB437001CDEF}" {
+     ParentContextList {
+      "RightArm" "LeftArm"
+     }
+     UIInfo SCR_ActionUIInfo "{65D2FB437002ABCD}" {
+      Name "Start saline infusion"
+      m_sInteractionIcon "{B9199157B90D6216}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+      m_sInteractionGlowIcon "{E4B841462701A4D7}UI/Textures/InventoryIcons/Medical/Medical-icons-glow.imageset"
+      m_sIconName "Saline-bag_UI"
+     }
+     ActionTitle "Start Saline Infusion"
+     VisibilityRange 2
+     Duration 3
+     "Sort Priority" 12
+     m_eConsumableType ACE_MEDICAL_SALINE_BAG
+    }
     ACE_Medical_CPRUserAction "{6216F73FC7EBD067}" {
      ParentContextList {
       "Chest"

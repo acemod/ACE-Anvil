@@ -32,9 +32,13 @@ class ACE_Medical_ConsumableMedication : SCR_ConsumableEffectHealthItems
 		if (!medicationComponent)
 			return;
 		
-		foreach (ACE_Medical_Dose dose : m_Doses)
+		foreach (ACE_Medical_Dose protoDose : m_Doses)
 		{
-			medicationComponent.AddMedication(dose);
+			ACE_Medical_Dose doseInstance = protoDose.CloneDose();
+			if (!doseInstance)
+				continue;
+			
+			medicationComponent.AddMedication(doseInstance);
 		}
 		
 		InventoryItemComponent itemComponent = InventoryItemComponent.Cast(item.FindComponent(InventoryItemComponent));

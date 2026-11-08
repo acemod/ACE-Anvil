@@ -1,0 +1,590 @@
+AnimSrcGraphFile {
+ Sheets {
+  AnimSrcGraphSheet Master {
+   Nodes {
+    AnimSrcNodeSource "Source 28940" {
+     EditorPos -3.17 -12.674
+     Source "Activation.Activate"
+    }
+    AnimSrcNodeStateMachine MasterControl {
+     EditorPos -19.2 -26.6
+     states {
+      AnimSrcNodeState Idle {
+       EditorPos -23.2 -24.7
+       Child "IdlePoseSTM"
+       StartCondition "true"
+      }
+      AnimSrcNodeState Activation {
+       Tags {
+        "TagLItemAction"
+       }
+       EditorPos -3.6 -25
+       Child "ActivationSTM"
+       StartCondition "GetCommandI(CMD_Item_Action) == 1"
+       TimeStorage "Real Time"
+      }
+      AnimSrcNodeState TransitionActivateIn {
+       EditorPos -13.6 -25.9
+       Child "TransitionSTM"
+       PassThrough 1
+      }
+      AnimSrcNodeState TransitionActivateOut {
+       EditorPos -13.7 -24.6
+       Child "TransitionSTM"
+       PassThrough 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{617EBC5A09BCDB58}" {
+       FromState "Activation"
+       ToState "TransitionActivateOut"
+       Duration "0.3"
+       Condition "RemainingTimeLess(0.2)"
+       PostEval 1
+      }
+      AnimSrcNodeTransition "{617EBC5BF506C437}" {
+       FromState "Idle"
+       ToState "TransitionActivateIn"
+       Duration "0.2"
+       Condition "GetCommandI(CMD_Item_Action) == 1"
+      }
+      AnimSrcNodeTransition "{617EBC5BF17001EE}" {
+       FromState "TransitionActivateIn"
+       ToState "Activation"
+       Duration "0.2"
+       Condition "true"
+      }
+      AnimSrcNodeTransition "{617EBC5BFE21D172}" {
+       FromState "TransitionActivateOut"
+       ToState "Idle"
+       Duration "0.3"
+       Condition "true"
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect ActivatePneG {
+     EditorPos 1.3 -17.1
+     Child "FingerAnimB 12963"
+     Group "Activation"
+     Column "Pne"
+    }
+    AnimSrcNodeProcTransform ADSAdjusted_Compensate_CroAdj {
+     EditorPos -1.6 -15.6
+     Child "FingerAnimB 12963"
+     Expression "1- ADSAdjust "
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDC8AADBB827CC6}" {
+       Operation Rotate
+       Axis X
+       Amount "-0.3"
+       Space Model
+       Bone "LeftArm"
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect ActivateVehG {
+     EditorPos 4.1 -17.1
+     Child "FingerAnimB 12963"
+     Group "Activation"
+     Column "Veh"
+    }
+    AnimSrcNodeBlend ActivateCroAdjB {
+     EditorPos -1.7 -18.5
+     BlendWeight "ADSAdjust"
+     Child0 "ActivateCroG"
+     Child1 "ActivateErcG"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeStateMachine ActivationSTM {
+     EditorPos -2.5 -21.5
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos -4.4 -20.1
+       Child "ActivateErcG"
+       StartCondition "Stance == 0"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Cro {
+       EditorPos -2 -20.1
+       Child "ActivateCroAdjB"
+       StartCondition "Stance == 1"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Pne {
+       EditorPos 1 -20
+       Child "ActivatePneG"
+       StartCondition "Stance == 2"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Vehicle {
+       EditorPos 4 -20
+       Child "ActivateVehG"
+       StartCondition "IsAttachment(\"Vehicle\") || IsTag(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect ActivateErcG {
+     EditorPos -4.3 -17.1
+     Child "ADSAdjusted_Compensate_ErcAdj "
+     Group "Activation"
+     Column "Erc"
+    }
+    AnimSrcNodeGroupSelect ActivateCroG {
+     EditorPos -1.6 -17.1
+     Child "ADSAdjusted_Compensate_CroAdj"
+     Group "Activation"
+     Column "Cro"
+    }
+    AnimSrcNodeProcTransform "ADSAdjusted_Compensate_ErcAdj " {
+     EditorPos -4.3 -15.617
+     Child "FingerAnimB 12963"
+     Expression "1-ADSAdjust"
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDC8AADBB827CC6}" {
+       Operation Rotate
+       Axis X
+       Amount "0.4"
+       Space Model
+       Bone "LeftArm"
+      }
+     }
+    }
+    AnimSrcNodeIK2 "IK2 22369" {
+     EditorPos -36.4 -12.8
+     Child "AimY_Compensate_ErcAdj 33500"
+     Weight "lerp(0.6, 0.9,normalize(AimY, -5, 50))"
+     Chains {
+      AnimSrcIkBinding "{6114C5233DB63BDB}" {
+       IkTarget "HeadTarget"
+       IkChain "LeftArm"
+      }
+     }
+     Solver AnimSrcNodeIK2TwoBoneSolver "{6114C5233C03B3A2}" {
+      AllowStretching 0
+     }
+     Version 1
+    }
+    AnimSrcNodeBlend "Blend 39472" {
+     EditorPos -31.5 -18.2
+     BlendWeight "ADSAdjust"
+     Child0 "IdleCroG"
+     Child1 "IdleErcG"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeProcTransform Rotate_1 {
+     EditorPos -36.4 -9.7
+     Child "IK2 Target 33808"
+     Expression "AimY/180*3.14 + (TargetYOffset/180*3.14) * 0.5"
+     IkTargets {
+      AnimSrcNodeProcTrIkTargetItem "{54D511C9EBD772A4}" {
+       Operation Rotate
+       Axis X
+       Amount "-0.3"
+       IkTarget "HeadTarget"
+      }
+     }
+    }
+    AnimSrcNodeIK2Target "IK2 Target 28086" {
+     EditorPos -33.2 -9.1
+     Child "BufferB"
+     Chains {
+      AnimSrcIkTargetBinding "{6114C520628BC394}" {
+       IkTarget "LHandTarget"
+       IkChain "LeftArm"
+      }
+     }
+    }
+    AnimSrcNodeIK2Target "IK2 Target 11302" {
+     EditorPos -36.4 -10.7
+     Child "Rotate_1"
+     Chains {
+      AnimSrcIkTargetBinding "{6114C520628BC394}" {
+       IkTarget "HeadTarget"
+       LocalSpaceOffset AnimSrcTransformOffset "{6114C52390AE29DB}" {
+        Pose "Activation.Erc.IKOffset"
+        FromBone "head"
+        ToBone "lefthand"
+        BonesAreInModelSpace 1
+       }
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect IdlePneG {
+     EditorPos -27.2 -17.9
+     Child "FingerAnimB"
+     Group "Activation"
+     Column "Pne"
+    }
+    AnimSrcNodeIK2Target "IK2 Target 33808" {
+     EditorPos -36.4 -8.4
+     Child "BufferB"
+     Chains {
+      AnimSrcIkTargetBinding "{6114C520628BC394}" {
+       IkTarget "HeadTarget"
+       IkChain "Head"
+      }
+     }
+    }
+    AnimSrcNodeStateMachine IdlePoseSTM {
+     EditorPos -31.4 -21.4
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos -35.4 -19.4
+       Child "IdleErcG"
+       StartCondition "Stance == 0 && !IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Cro {
+       EditorPos -31.5 -19.5
+       Child "Blend 39472"
+       StartCondition "Stance == 1 && !IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Pne {
+       EditorPos -27.3 -19.5
+       Child "IdlePneG"
+       StartCondition "Stance == 2 && !IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Vehicle {
+       EditorPos -24.7 -20.8
+       Child "IdleVehG"
+       StartCondition "IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5DC8E0711DD745EB}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.2"
+       Condition "Stance == 1"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E496}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.2"
+       Condition "Stance == 0"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E485}" {
+       FromState "Cro"
+       ToState "Pne"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E4BE}" {
+       FromState "Pne"
+       ToState "Cro"
+      }
+      AnimSrcNodeTransition "{617E906E8D90226B}" {
+       FromState "Pne"
+       ToState "Vehicle"
+       Duration "0.3"
+       Condition "IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E8FCBE213}" {
+       FromState "Cro"
+       ToState "Vehicle"
+       Duration "0.3"
+       Condition "IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E895F3B13}" {
+       FromState "Erc"
+       ToState "Vehicle"
+       Duration "0.3"
+       Condition "IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E7C0D3F0D}" {
+       FromState "Vehicle"
+       ToState "Pne"
+       Duration "0.3"
+       Condition "Stance == 2 && !IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E7913B25A}" {
+       FromState "Vehicle"
+       ToState "Cro"
+       Duration "0.3"
+       Condition "Stance == 1 && !IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E7ACFA6CD}" {
+       FromState "Vehicle"
+       ToState "Erc"
+       Duration "0.3"
+       Condition "Stance == 0 && !IsAttachment(\"Vehicle\")"
+      }
+     }
+    }
+    AnimSrcNodeSource FingerAnimSrc {
+     EditorPos -28.6 -4
+     Source "Activation.Idle_Fingers"
+     Looptype Loop
+    }
+    AnimSrcNodeProcTransform "AimY_Compensate_ErcAdj 10965" {
+     EditorPos -35.4 -15.2
+     Child "Blend T 27751"
+     Expression "1 - ADSAdjust"
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDC8AADBB827CC6}" {
+       Operation Rotate
+       Axis X
+       Amount "0.4"
+       Space Model
+       Bone "LeftArm"
+      }
+     }
+    }
+    AnimSrcNodeProcTransform "AimY_Compensate_ErcAdj 28532" {
+     EditorPos -31.4 -15.2
+     Child "Blend T 27751"
+     Expression "1- ADSAdjust "
+     Bones {
+      AnimSrcNodeProcTrBoneItem "{5DDC8AADBB827CC6}" {
+       Operation Rotate
+       Axis X
+       Amount "0.3"
+       Space Model
+       Bone "LeftArm"
+      }
+     }
+    }
+    AnimSrcNodeBlendT "Blend T 27751" {
+     EditorPos -33.3 -13.9
+     BlendTime "0.300"
+     Condition "FreeLook"
+     Child0 "IK2 22369"
+     Child1 "IK2 23499"
+     Optimization "Skip blended out"
+    }
+    AnimSrcNodeGroupSelect IdleCroG {
+     EditorPos -31.4 -16.5
+     Child "AimY_Compensate_ErcAdj 28532"
+     Group "Activation"
+     Column "Cro"
+    }
+    AnimSrcNodeBlend BufferB {
+     EditorPos -33.5 -7
+     BlendWeight "1"
+     Child0 "BufferUse"
+     Child1 "FingerAnimB"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeIK2 "IK2 23499" {
+     EditorPos -33.2 -11.7
+     Child "AimY_Compensate_ErcAdj 25976"
+     Chains {
+      AnimSrcIkBinding "{61248ADEF1555467}" {
+       IkTarget "LHandTarget"
+       IkChain "LeftArm"
+      }
+     }
+     Solver AnimSrcNodeIK2TwoBoneSolver "{61248ADEF361993C}" {
+     }
+     Version 1
+    }
+    AnimSrcNodeProcTransform "AimY_Compensate_ErcAdj 25976" {
+     EditorPos -33.2 -10.3
+     Child "IK2 Target 28086"
+     Expression "0.5"
+     IkTargets {
+      AnimSrcNodeProcTrIkTargetItem "{61248ADEDD5939F4}" {
+       Operation Translate
+       Axis Z
+       Amount "0.1"
+       Space Model
+       IkTarget "LHandTarget"
+      }
+     }
+    }
+    AnimSrcNodePose IdleSrc {
+     EditorPos -33.2 -2.4
+     Source "Activation.Idle"
+    }
+    AnimSrcNodeBufferUse BufferUse {
+     EditorPos -23.841 -2.833
+     BufferName "FullbodyGadget"
+    }
+    AnimSrcNodeBlend FingerAnimB {
+     EditorPos -33.2 -5.515
+     BlendWeight "1"
+     Child0 "IdleSrc"
+     Child1 "FingerAnimSrc"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeProcTransform "AimY_Compensate_ErcAdj 33500" {
+     EditorPos -36.4 -11.7
+     Child "IK2 Target 11302"
+     Expression "normalize(AimY, 20, -79)"
+     IkTargets {
+      AnimSrcNodeProcTrIkTargetItem "{6116DC5CB0E8B1F5}" {
+       Operation "Rotate Around"
+       Axis X
+       Amount "-0.6"
+       Space Pivot
+       PivotBone "head"
+       IkTarget "HeadTarget"
+      }
+     }
+    }
+    AnimSrcNodeGroupSelect IdleVehG {
+     EditorPos -24.7 -17.9
+     Child "FingerAnimB"
+     Group "Activation"
+     Column "Veh"
+    }
+    AnimSrcNodeGroupSelect IdleErcG {
+     EditorPos -35.4 -16.6
+     Child "AimY_Compensate_ErcAdj 10965"
+     Group "Activation"
+     Column "Erc"
+    }
+    AnimSrcNodeBlend TransitionBufferB {
+     EditorPos -16.295 -8.967
+     BlendWeight "1"
+     Child0 "BufferUse"
+     Child1 "FingerAnimB 40047"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeGroupSelect TransitionVehG {
+     EditorPos -9.3 -17.6
+     Child "TransitionBufferB"
+     Group "Activation"
+     Column "Veh"
+    }
+    AnimSrcNodeGroupSelect TransitionPneG {
+     EditorPos -12.2 -17.6
+     Child "TransitionBufferB"
+     Group "Activation"
+     Column "Pne"
+    }
+    AnimSrcNodeGroupSelect TransitionCroG {
+     EditorPos -15.1 -17.6
+     Child "TransitionBufferB"
+     Group "Activation"
+     Column "Cro"
+    }
+    AnimSrcNodeGroupSelect "TransitionErcG " {
+     EditorPos -17.8 -17.6
+     Child "TransitionBufferB"
+     Group "Activation"
+     Column "Erc"
+    }
+    AnimSrcNodeStateMachine TransitionSTM {
+     EditorPos -13.6 -21.8
+     states {
+      AnimSrcNodeState Erc {
+       EditorPos -17.6 -19.7
+       Child "TransitionErcG "
+       StartCondition "Stance == 0 && !IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Cro {
+       EditorPos -13.7 -19.7
+       Child "TransitionCroG"
+       StartCondition "Stance == 1 && !IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Pne {
+       EditorPos -9.5 -19.7
+       Child "TransitionPneG"
+       StartCondition "Stance == 2 && !IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+      AnimSrcNodeState Vehicle {
+       EditorPos -9.1 -21.2
+       Child "TransitionVehG"
+       StartCondition "IsAttachment(\"Vehicle\")"
+       TimeStorage "Real Time"
+       IsExit 1
+      }
+     }
+     transitions {
+      AnimSrcNodeTransition "{5DC8E0711DD745EB}" {
+       FromState "Erc"
+       ToState "Cro"
+       Duration "0.2"
+       Condition "Stance == 1"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E496}" {
+       FromState "Cro"
+       ToState "Erc"
+       Duration "0.2"
+       Condition "Stance == 0"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E485}" {
+       FromState "Cro"
+       ToState "Pne"
+      }
+      AnimSrcNodeTransition "{5DD49551A692E4BE}" {
+       FromState "Pne"
+       ToState "Cro"
+      }
+      AnimSrcNodeTransition "{617E906E8D90226B}" {
+       FromState "Pne"
+       ToState "Vehicle"
+       Duration "0.3"
+       Condition "IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E8FCBE213}" {
+       FromState "Cro"
+       ToState "Vehicle"
+       Duration "0.3"
+       Condition "IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E895F3B13}" {
+       FromState "Erc"
+       ToState "Vehicle"
+       Duration "0.3"
+       Condition "IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E7C0D3F0D}" {
+       FromState "Vehicle"
+       ToState "Pne"
+       Duration "0.3"
+       Condition "Stance == 2 && !IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E7913B25A}" {
+       FromState "Vehicle"
+       ToState "Cro"
+       Duration "0.3"
+       Condition "Stance == 1 && !IsAttachment(\"Vehicle\")"
+      }
+      AnimSrcNodeTransition "{617E906E7ACFA6CD}" {
+       FromState "Vehicle"
+       ToState "Erc"
+       Duration "0.3"
+       Condition "Stance == 0 && !IsAttachment(\"Vehicle\")"
+      }
+     }
+    }
+    AnimSrcNodeBlend "FingerAnimB 12963" {
+     EditorPos -1.887 -14.101
+     BlendWeight "1"
+     Child0 "Source 28940"
+     Child1 "FingerAnimSrc 39098"
+     Optimization "Always eval both"
+    }
+    AnimSrcNodeSource "FingerAnimSrc 39098" {
+     EditorPos -0.975 -12.691
+     Source "Activation.Activate_fingers"
+    }
+    AnimSrcNodeBlend "FingerAnimB 40047" {
+     EditorPos -21.926 -6.394
+     BlendWeight "1"
+     Child0 "IdleSrc"
+     Child1 "FingerAnimSrc"
+     Optimization "Always eval both"
+    }
+   }
+  }
+ }
+}

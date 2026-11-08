@@ -27,7 +27,7 @@ class ACE_Medical_PneumothoraxJob : ACE_IFrameJob
 		if (!m_pContext.m_pVitals.HasTensionPneumothorax() && Math.RandomFloat(0, 1) <  s_Settings.m_fDeteriorateToTensionPneumothoraxChancePerMinute)
 			m_pContext.m_pVitals.SetHasTensionPneumothorax(true);
 		
-		if (Math.RandomFloat(0, 1) >= s_Settings.m_fPneumothoraxDeteriorationChancePerMinute)
+		if (!m_pContext.m_pVitals.HasTensionPneumothorax() && Math.RandomFloat(0, 1) >= s_Settings.m_fPneumothoraxDeteriorationChancePerMinute)
 			return;
 		
 		float nextScale = m_pContext.m_pVitals.GetPneumothoraxScale() + s_Settings.m_fPneumothoraxScaleDeteriorationStep;

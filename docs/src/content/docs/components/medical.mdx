@@ -13,6 +13,7 @@ import { Aside } from '@astrojs/starlight/components';
 - [ACE Medical Circulation](#ace-medical-circulation)
 - [ACE Medical Breathing](#ace-medical-breathing)
 - ~~[ACE Medical Defibrillation](#ace-medical-defibrillation)~~
+- [ACE Medical AI](#ace-medical-ai)
 
 ## ACE Medical Core
 
@@ -71,12 +72,15 @@ Summary of settings that can be modified in the server config:
 | `m_fDefaultResilienceRegenScale`      | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.3` | Default resilience regeneration scale. The default regeneration rate (5 HP/s) will be multiplied by this factor. |
 | `m_fResilienceDamageScale`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Resilience damage scale. All incoming damage to the resilience hitzone will be multiplied by this factor. Lower values make characters less likely to fall unconscious. |
 | `m_fMinHealthScaledForEpinephrine`    | Type: `float`**<br />Range: 0 to 1<br />Default: `0.33` | Can only apply epinephrine when patient has at least this health (ignored in advanced medication). |
+| `m_bPlayerCannotDie`                  | Type: `bool`*<br />Default: `false` | Whether players can never die |
 | `m_bLitterEnabled`                    | Type: `bool`<br />Default: `true` | Whether treatments should produce litter. |
 | `m_fLitterCleanUpTime`                | Type: `float`<br />Default: `600.0` | After how many seconds litter should be deleted. |
 | `m_bBleedOutForPlayersEnabled`        | Type: `bool`*<br />Default: `true` | Whether players can bleed out |
 | `m_fBleedingRateScale`                | Type: `float`**<br />Default: `1.0` | Character bleeding rate multiplier |
 | `m_fMaxTotalBleedingRate`             | Type: `float`**<br />Default: `-1.0` | Maximum possibe bleeding rate in ml/s (Negative value means unlimited) |
 | `m_fBloodRegenScale`                  | Type: `float`**<br />Default: `1.0` | Character blood regeneration rate multiplier |
+| `m_fMedicalKitMaxHealScaled`          | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Maximum scaled health (from 0 to 1) that a medical kit can heal to outside of medical facilities. |
+| `m_fMedicalKitHealingPerExecution`    | Type: `float`**<br />Range: 0 to ∞<br />Default: `10.0` | Amount of health that is restored each execution of the medical kit outside of medical facilities. |
 | `m_ePainScreenEffectType`             | Type: `int`***<br />Default: `WHITE_FLASH`<br />Options:<br />`0` (`NONE`)<br />`1` (`WHITE_FLASH`)<br />`2` (`GREY_FLASH`)<br />`3` (`CHROMATIC_ABERRATION`)<br />`4` (`RADIAL_BLUR`) | What kind of pain screen effect is used |
 | `m_fSecondChanceResilienceRegenScale` | Type: `float`**<br />Range: 0 to ∞<br />Default: `0.0` | Resilience regeneration scale when second chance was triggered. The default regeneration rate will be multiplied by this factor. |
 | `m_fDefaultSecondChance`              | Type: `float`**<br />Range: 0 to 1<br />Default: `1.0` | Default probability for second chance for killing blows |
@@ -100,12 +104,15 @@ Template for the `missionHeader` in a server config:
             "m_fDefaultResilienceRegenScale": 0.3,
             "m_fResilienceDamageScale": 1.0,
             "m_fMinHealthScaledForEpinephrine": 0.33,
+            "m_bPlayerCannotDie": 0,
             "m_bLitterEnabled": true,
             "m_fLitterCleanUpTime": 600.0,
             "m_bBleedOutForPlayersEnabled": 1,
             "m_fBleedingRateScale": 1.0,
             "m_fMaxTotalBleedingRate": -1.0,
             "m_fBloodRegenScale": 1.0,
+            "m_fMedicalKitMaxHealScaled": 1.0,
+            "m_fMedicalKitHealingPerExecution": 10.0,
             "m_ePainScreenEffectType": 1,
             "m_fSecondChanceResilienceRegenScale": 0.0,
             "m_fDefaultSecondChance": 1.0,
@@ -149,6 +156,7 @@ Summary of settings that can be modified in the server config:
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_bOrganHitZonesEnabled`             | Type: `bool`*<br />Default: `true` | Whether organ hit zones should be enabled |
 | `m_fSecondChanceOnHeart`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.0` | Probability for second chance for killing blows to the heart |
+| `m_bInstantUnconOnMassiveBleeding`    | Type: `bool`<br />Default: `true` | Whether neck or femoral bleeding instantly cause unconsciousness. |
 
 <br />
 
@@ -158,7 +166,8 @@ Template for the `missionHeader` in a server config:
     "m_ACE_Settings": {
         "m_ACE_Medical_Hitzones": {
             "m_bOrganHitZonesEnabled": 1,
-            "m_fSecondChanceOnHeart": 0.0
+            "m_fSecondChanceOnHeart": 0.0,
+            "m_bInstantUnconOnMassiveBleeding": true
         }
     }
 }
@@ -426,21 +435,28 @@ Summary of settings that can be modified in the server config:
 
 | Field                                 | Value                | Description                                        |
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
-| `m_fAirwayObstructionChance`          | Type: `float`**<br />Range: 0 to 1<br />Default: `0.15` | Probability of tongue-based airway obstruction in supine position |
-| `m_fVomitChancePerMinute`             | Type: `float`**<br />Range: 0 to 1<br />Default: `0.1` | Chance for unconscious patient to vomit. Evaulated once a minute. |
-| `m_fVomitCooldown`                    | Type: `float`**<br />Range: 0 to ∞<br />Default: `6.0` | Minimum delay for vomiting again in minutes |
-| `m_fPneumothoraxChance`               | Type: `float`**<br />Range: 0 to 1<br />Default: `0.51` | Chance for pneumothorax after a critical hit to the chest |
-| `m_fPneumothoraxDeteriorationChancePerMinute` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.5` | Probability for ongoing pneumothorax to deteriorate. Evaluated once a minute. |
-| `m_fMaxPneumothoraxScale`             | Type: `float`**<br />Range: 0 to 1<br />Default: `0.75` | Maximum loss of lung volume due to pneumothorax in percentage |
-| `m_fPneumothoraxScaleDeteriorationStep` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.18` | Precentage loss of lung volume per deterioration of pneumothorax |
-| `m_fPneumothoraxArrestEnabled`        | Type: `bool`*<br />Default: `true` | Enter cardiac arrest when pneumothorax fully deteriorated. |
-| `m_fTensionPneumothoraxChance`        | Type: `float`**<br />Range: 0 to 1<br />Default: `0.15` | Chance for tension pneumothorax after a critical hit to a chest with pneumothorax |
-| `m_fDeteriorateToTensionPneumothoraxChancePerMinute` | Type: `float`**<br />Range: 0 to 1<br />Default: `0.05` | Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute. |
-| `m_fDefaultRespiratoryRateBPM`        | Type: `float`**<br />Range: 0 to ∞<br />Default: `14.573` | Default respiratory rate [breaths per minute] |
-| `m_fMaxRespiratoryRateBPM`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `40.0` | Maximum respiratory rate [breaths per minute] |
-| `m_fDefaultSpO2`                      | Type: `float`**<br />Range: 0 to 100<br />Default: `97.149` | Default value of SpO2 |
-| `m_fDefaultPalvCO2KPA`                | Type: `float`**<br />Range: 0 to 100<br />Default: `5.21` | Default value of alveolar partial pressure of CO2 |
-| `m_bPaCO2Enabled`                     | Type: `bool`*<br />Range: 0 to ∞<br />Default: `true` | Enables simulation of PaCO2 and its influence on respiratory rate |
+| `m_fAirwayObstructionChance`          | Type: `float`<br />Range: 0 to 1<br />Default: `0.15` | Probability of tongue-based airway obstruction in supine position |
+| `m_fVomitChancePerMinute`             | Type: `float`<br />Range: 0 to 1<br />Default: `0.1` | Chance for unconscious patient to vomit. Evaulated once a minute. |
+| `m_fVomitCooldown`                    | Type: `float`<br />Range: 0 to ∞<br />Default: `6.0` | Minimum delay for vomiting again in minutes |
+| `m_fPneumothoraxChance`               | Type: `float`<br />Range: 0 to 1<br />Default: `0.51` | Chance for pneumothorax after a critical hit to the chest |
+| `m_fPneumothoraxDeteriorationChancePerMinute` | Type: `float`<br />Range: 0 to 1<br />Default: `0.5` | Probability for ongoing pneumothorax to deteriorate. Evaluated once a minute. |
+| `m_fMaxPneumothoraxScale`             | Type: `float`<br />Range: 0 to 1<br />Default: `0.75` | Maximum loss of lung volume due to pneumothorax in percentage |
+| `m_fPneumothoraxScaleDeteriorationStep` | Type: `float`<br />Range: 0 to 1<br />Default: `0.18` | Precentage loss of lung volume per deterioration of pneumothorax |
+| `m_fPneumothoraxArrestEnabled`        | Type: `bool`<br />Default: `true` | Enter cardiac arrest when pneumothorax fully deteriorated. |
+| `m_fTensionPneumothoraxChance`        | Type: `float`<br />Range: 0 to 1<br />Default: `0.15` | Chance for tension pneumothorax after a critical hit to a chest with pneumothorax |
+| `m_fDeteriorateToTensionPneumothoraxChancePerMinute` | Type: `float`<br />Range: 0 to 1<br />Default: `0.05` | Probability for ongoing pneumothorax to deteriorate to tension pneumothorax. Evaluated once a minute. |
+| `m_fTensionPneumothoraxStrokeVolumeScale` | Type: `float`<br />Range: 0 to 1<br />Default: `0.455` | Stroke volume gets multiplied by this scale during tension pneumothorax. |
+| `m_fDefaultRespiratoryRateBPM`        | Type: `float`<br />Range: 0 to ∞<br />Default: `14.573` | Default respiratory rate [breaths per minute] |
+| `m_fMaxRespiratoryRateBPM`            | Type: `float`<br />Range: 0 to ∞<br />Default: `40.0` | Maximum respiratory rate [breaths per minute] |
+| `m_fCPRPassiveVentilationRateBPM`     | Type: `float`<br />Range: 0 to ∞<br />Default: `0.3` | Passive ventilation rate during CPR [breaths per minute] |
+| `m_fDefaultOxygenConsumptionMMOLPS`   | Type: `float`<br />Range: 0 to ∞<br />Default: `0.208` | Oxygen consumption at default SpO2 [mmol/s]. |
+| `m_fHypoxicOxygenConsumptionMMOLPS`   | Type: `float`<br />Range: 0 to ∞<br />Default: `0.013` | Oxygen consumption at hypoxic SpO2 [mmol/s]. |
+| `m_fDefaultRER`                       | Type: `float`<br />Range: 0 to ∞<br />Default: `0.8` | Respiratory exchange ratio at default SpO2. |
+| `m_fHypoxicRER`                       | Type: `float`<br />Range: 0 to ∞<br />Default: `1.2` | Respiratory exchange ratio at hypoxic SpO2. |
+| `m_fDefaultSpO2`                      | Type: `float`<br />Range: 0 to 100<br />Default: `97.149` | Default value of SpO2 |
+| `m_fHypoxicMetabolismSpO2`            | Type: `float`<br />Range: 0 to 100<br />Default: `75.0` | SpO2 at which hypoxic oxygen consumption and RER settings fully apply. |
+| `m_fDefaultPalvCO2KPA`                | Type: `float`<br />Range: 0 to 100<br />Default: `5.21` | Default value of alveolar partial pressure of CO2 |
+| `m_bPaCO2Enabled`                     | Type: `bool`<br />Range: 0 to ∞<br />Default: `true` | Enables simulation of PaCO2 and its influence on respiratory rate |
 
 Template for the `missionHeader` in a server config:
 ```
@@ -454,14 +470,21 @@ Template for the `missionHeader` in a server config:
             "m_fPneumothoraxDeteriorationChancePerMinute": 0.5,
             "m_fMaxPneumothoraxScale": 0.75,
             "m_fPneumothoraxScaleDeteriorationStep": 0.18,
-            "m_fPneumothoraxArrestEnabled": 1,
+            "m_fPneumothoraxArrestEnabled": true,
             "m_fTensionPneumothoraxChance": 0.15,
             "m_fDeteriorateToTensionPneumothoraxChancePerMinute": 0.05,
+            "m_fTensionPneumothoraxStrokeVolumeScale": 0.455,
             "m_fDefaultRespiratoryRateBPM": 14.573,
             "m_fMaxRespiratoryRateBPM": 40.0,
+            "m_fCPRPassiveVentilationRateBPM": 0.3,
+            "m_fDefaultOxygenConsumptionMMOLPS": 0.208,
+            "m_fHypoxicOxygenConsumptionMMOLPS": 0.013,
+            "m_fDefaultRER": 0.8,
+            "m_fHypoxicRER": 1.2,
             "m_fDefaultSpO2": 97.149,
+            "m_fHypoxicMetabolismSpO2": 75.0,
             "m_fDefaultPalvCO2KPA": 5.21,
-            "m_bPaCO2Enabled": 1
+            "m_bPaCO2Enabled": true
         }
     }
 }
@@ -470,3 +493,10 @@ Template for the `missionHeader` in a server config:
 ## ACE Medical Defibrillation
 
 <UnpublishedModWarning />
+
+## ACE Medical AI
+
+### Overview
+
+**ACE Medical AI** adds the ability for AI to perform additional treatments instead of just bandaging.
+The current workflow is only compatible with **ACE Medical Core**.

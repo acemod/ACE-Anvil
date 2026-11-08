@@ -8,18 +8,18 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 	protected int m_iCurrentStateIdx = -1;
 	
 	// Shared data (Can be shared between instances through ACE_FSM_Machine::CopyFrom)
-	protected ref array<ref ACE_FSM_IState<TContext>> m_aStates = {};
+	protected ref array<ref ACE_FSM_StateBase<TContext>> m_aStates = {};
 	protected ref array<ref ACE_FSM_ITransition<TContext>> m_aTransitions = {};
 	protected ref array<ref array<ACE_FSM_ITransition<TContext>>> m_aTransitionTable;
 	
 	//------------------------------------------------------------------------------------------------
 	//! Adds a state
 	//! If a state with the same ID already exists, it will replace it
-	void AddState(ACE_FSM_IState<TContext> newState)
+	void AddState(ACE_FSM_StateBase<TContext> newState)
 	{
 		ACE_FSM_EStateID newID = newState.GetID();
 		
-		foreach (int i, ACE_FSM_IState<TContext> state : m_aStates)
+		foreach (int i, ACE_FSM_StateBase<TContext> state : m_aStates)
 		{
 			if (state.GetID() == newID)
 			{
@@ -97,7 +97,7 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 		m_aTransitionTable = {};
 		m_aTransitionTable.Reserve(m_aStates.Count());
 		
-		foreach (ACE_FSM_IState<TContext> state : m_aStates)
+		foreach (ACE_FSM_StateBase<TContext> state : m_aStates)
 		{
 			ACE_FSM_EStateID id = state.GetID();
 			array<ACE_FSM_ITransition<TContext>> availableTransitions = {};
@@ -130,7 +130,7 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 	//------------------------------------------------------------------------------------------------
 	void ChangeState(ACE_FSM_EStateID newStateID)
 	{
-		foreach (int idx, ACE_FSM_IState<TContext> state : m_aStates)
+		foreach (int idx, ACE_FSM_StateBase<TContext> state : m_aStates)
 		{
 			if (newStateID == state.GetID())
 				return ChangeStateByIdx(idx);
@@ -167,7 +167,7 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 	//------------------------------------------------------------------------------------------------
 	ACE_FSM_EStateID GetCurrentStateID()
 	{
-		return m_aStates[m_iCurrentStateIdx];
+		return m_aStates[m_iCurrentStateIdx].GetID();
 	}
 	
 	//------------------------------------------------------------------------------------------------

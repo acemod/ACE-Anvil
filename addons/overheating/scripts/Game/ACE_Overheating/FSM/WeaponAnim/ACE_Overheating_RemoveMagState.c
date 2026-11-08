@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Overheating_RemoveMagState : ACE_FSM_IState<ACE_Overheating_WeaponAnimContext>
+class ACE_Overheating_RemoveMagState : ACE_FSM_StateBase<ACE_Overheating_WeaponAnimContext>
 {
 	//------------------------------------------------------------------------------------------------
 	override void OnEnter(ACE_Overheating_WeaponAnimContext context)

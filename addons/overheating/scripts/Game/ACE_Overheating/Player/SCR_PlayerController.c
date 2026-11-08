@@ -13,7 +13,7 @@ modded class SCR_PlayerController : PlayerController
 		SCR_ChimeraCharacter fromChar = SCR_ChimeraCharacter.Cast(from);
 		if (fromChar)
 		{
-			ACE_Overheating_JammingSystem jammingSystem = ACE_Overheating_JammingSystem.GetInstance();
+			ACE_Overheating_JammingSystem jammingSystem = ACE_Overheating_JammingSystem.GetInstance(fromChar.GetWorld());
 			if (jammingSystem)
 				jammingSystem.Unregister(fromChar, rpl.IsOwner());
 			
@@ -24,7 +24,7 @@ modded class SCR_PlayerController : PlayerController
 				if (weaponStorage)
 					weaponStorage.ACE_Overheating_ToggleRegisterWeapons(false);
 				
-				ACE_Overheating_AmmoTemperatureSystem ammoSystem = ACE_Overheating_AmmoTemperatureSystem.GetInstance();
+				ACE_Overheating_AmmoTemperatureSystem ammoSystem = ACE_Overheating_AmmoTemperatureSystem.GetInstance(fromChar.GetWorld());
 				if (ammoSystem)
 					ammoSystem.Unregister(fromChar);
 			}	
@@ -33,7 +33,7 @@ modded class SCR_PlayerController : PlayerController
 		SCR_ChimeraCharacter toChar = SCR_ChimeraCharacter.Cast(to);
 		if (toChar)
 		{
-			ACE_Overheating_JammingSystem jammingSystem = ACE_Overheating_JammingSystem.GetInstance();
+			ACE_Overheating_JammingSystem jammingSystem = ACE_Overheating_JammingSystem.GetInstance(toChar.GetWorld());
 			if (jammingSystem)
 				jammingSystem.Register(toChar, rpl.IsOwner());
 			
@@ -44,7 +44,7 @@ modded class SCR_PlayerController : PlayerController
 				if (weaponStorage)
 					weaponStorage.ACE_Overheating_ToggleRegisterWeapons(true);
 				
-				ACE_Overheating_AmmoTemperatureSystem ammoSystem = ACE_Overheating_AmmoTemperatureSystem.GetInstance();
+				ACE_Overheating_AmmoTemperatureSystem ammoSystem = ACE_Overheating_AmmoTemperatureSystem.GetInstance(toChar.GetWorld());
 				if (ammoSystem)
 					ammoSystem.Register(toChar);
 			}

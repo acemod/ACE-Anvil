@@ -40,7 +40,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	[Attribute(defvalue: "1", desc: "Heat transferred to the barrel is given by this scale times the kinetic energy of the bullet.")]
 	protected float m_fHeatingScale;
 	
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Probability to jam vs temperature [K]", params: "1300 0.1 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Probability to jam vs temperature [K]", params: "1300 0.1 0 0")]
 	protected ref Curve m_cJamChanceTemperatureCurve;
 	
 	// Additional temperature-dependent muzzle dispersion factor f
@@ -54,7 +54,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	// Using Reforger's M16A4 base dispersion: Cone height = 400 m; Cone diameter = 0.4 m => a ≈ 0.5 mrad
 	// and ACE3 additional dispersion: 0 mils at 0 °C, 0.5 mils at 333°C, 2.2 mils at 666 °C, 5 mils at 1000 °C
 	// => Additional dispersion factors: 0.0 at 0 °C, 1.0 at 333°C, 4.4 at 666 °C, 10.0 at 1000 °C
-	[Attribute(uiwidget: UIWidgets.GraphDialog, desc: "Additional muzzle dispersion factor vs temperature [K]", params: "1300 30 0 0")]
+	[Attribute(uiwidget: UIWidgets.CurveDialog, desc: "Additional muzzle dispersion factor vs temperature [K]", params: "1300 30 0 0")]
 	protected ref Curve m_cMuzzleDispersionFactorTemperatureCurve;
 	
 	protected bool m_bInitDone = false;
@@ -64,10 +64,13 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	protected float m_fBulletMass;
 	
 	// Fallbacks for misconfigured weapons
-	protected static const float FALLBACK_BARREL_MASS = 1.0; // kg
+	protected static const float FALLBACK_BARREL_MASS = 2.0; // kg
 	protected static const float FALLBACK_BARREL_LENGTH = 0.5; // m
 	protected static const float FALLBACK_BULLET_MASS = 0.004; // kg
 	protected static const float FALLBACK_INITIAL_BULLET_SPEED = 930; // m/s
+	// Misconfiguration detection thresholds. These values and below are considered misconfigured.
+	protected static const float INVALID_BARREL_MASS_THRESHOLD = 0.01; // kg
+	protected static const float INVALID_BARREL_LENGTH_THRESHOLD = 0.01; // m
 	
 	//------------------------------------------------------------------------------------------------
 	//! Calculate derived quantities
@@ -108,7 +111,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		}
 		
 		float mass = m_fBarrelMassFraction * attributes.GetWeight();
-		if (mass <= 0)
+		if (mass <= INVALID_BARREL_MASS_THRESHOLD)
 		{
 			Debug.Error(string.Format("\"%1\" has no mass.", weapon.GetPrefabData().GetPrefabName()));
 			mass = FALLBACK_BARREL_MASS;
@@ -135,7 +138,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		weaponAnim.GetBoneLocalMatrix(muzzleBoneID, muzzleTransform);
 		
 		float length = vector.Distance(chamberTransform[3], muzzleTransform[3]);
-		if (length <= 0)
+		if (length <= INVALID_BARREL_LENGTH_THRESHOLD)
 		{
 			Debug.Error(string.Format("Could not determine barrel length for \"%1\".", weapon.GetPrefabData().GetPrefabName()));
 			length = FALLBACK_BARREL_LENGTH;
@@ -244,13 +247,13 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	//------------------------------------------------------------------------------------------------
 	float ComputeJamChance(float temperature)
 	{
-		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cJamChanceTemperatureCurve)[1];
+		return LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cJamChanceTemperatureCurve)[1];
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	float ComputeAdditionalMuzzleDispersionFactor(float temperature)
 	{
-		return Math3D.Curve(ECurveType.CurveProperty2D, temperature, m_cMuzzleDispersionFactorTemperatureCurve)[1];
+		return LegacyCurve.Curve(ECurveType.CurveProperty2D, temperature, m_cMuzzleDispersionFactorTemperatureCurve)[1];
 	}
 }
 
@@ -262,6 +265,9 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	
 	[RplProp()]
 	protected float m_fClearJamFailureChance = 0.1;
+	
+	[RplProp()]
+	protected bool m_bRemoveMagazineForClearingJam = true;
 	
 	protected float m_fBarrelTemperature;
 	protected float m_fAmmoTemperature;
@@ -332,7 +338,10 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 		
 		ACE_Overheating_Settings settings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
 		if (settings)
+		{
 			m_fClearJamFailureChance = settings.m_fClearJamFailureChance;
+			m_bRemoveMagazineForClearingJam = settings.m_bRemoveMagazineForClearingJam;
+		}
 		
 		float airTemperature = ACE_WeatherHelper.GetAirTemperatureForEntity(GetOwner());
 		m_fBarrelTemperature = airTemperature;
@@ -346,7 +355,13 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	void SetState(bool isJammed)
 	{
 		if (!isJammed)
-			m_pMuzzle.ClearChamber(m_pMuzzle.GetCurrentBarrelIndex());
+		{
+			BaseMagazineComponent magazine = m_pMuzzle.GetMagazine();
+			if (magazine && magazine.GetAmmoCount() > 0)
+				magazine.SetAmmoCount(magazine.GetAmmoCount() - 1);
+			else
+				m_pMuzzle.ClearChamber(m_pMuzzle.GetCurrentBarrelIndex());
+		}
 		
 		m_bIsJammed = isJammed;
 		OnStateChanged();
@@ -362,7 +377,7 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	//------------------------------------------------------------------------------------------------
 	protected void OnStateChanged()
 	{
-		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance();
+		ACE_Overheating_JammingSystem system = ACE_Overheating_JammingSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.OnJamStateChanged(this, m_bIsJammed);
 	}
@@ -471,6 +486,12 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	float GetClearJamFailureChance()
 	{
 		return m_fClearJamFailureChance;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool ShouldRemoveMagazineForClearingJam()
+	{
+		return m_bRemoveMagazineForClearingJam;
 	}
 	
 #ifdef ENABLE_DIAG

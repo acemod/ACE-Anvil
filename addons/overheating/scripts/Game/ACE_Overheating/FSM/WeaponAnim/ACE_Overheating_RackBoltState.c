@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-class ACE_Overheating_RackBoltState : ACE_FSM_IState<ACE_Overheating_WeaponAnimContext>
+class ACE_Overheating_RackBoltState : ACE_FSM_StateBase<ACE_Overheating_WeaponAnimContext>
 {
 	// A reference to the context is needed for OnRackBoltAnimEvent
 	protected ref ACE_Overheating_WeaponAnimContext m_pContext;

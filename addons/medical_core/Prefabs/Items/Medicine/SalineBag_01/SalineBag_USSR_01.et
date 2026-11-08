@@ -1,0 +1,15 @@
+GenericEntity : "{8AF07D321C44DDC4}Prefabs/Items/Medicine/SalineBag_01/SalineBag_USSR_01_base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  SCR_ConsumableItemComponent "{59E68C4DC131E9FC}" {
+   m_aACE_Medical_LitterPrefabConfigs {
+    ACE_PrefabVariantsConfig "{6A0D1CDFB2C316E0}" {
+     m_aVariants {
+      "{619078BCE18D9877}Prefabs/Props/Garbage/Medical/ACE_Medical_LitterSalineBag_USSR.et"
+     }
+    }
+   }
+   m_bACE_Medical_SpawnLitterOnItemUseComplete 0
+  }
+ }
+}

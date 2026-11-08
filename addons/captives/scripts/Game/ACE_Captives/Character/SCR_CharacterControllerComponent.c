@@ -105,7 +105,7 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 		
 		ACE_Captives_ETakeCaptiveRequirement requirements = m_eACE_Captives_TakeAICaptiveRequirements;
 		
-		if (EntityUtils.IsPlayer(GetOwner()))
+		if (ACE_EntityUtils.IsPlayer(GetOwner()))
 			requirements = m_eACE_Captives_TakePlayerCaptiveRequirements;
 		
 		if (requirements == ACE_Captives_ETakeCaptiveRequirement.SURRENDER)

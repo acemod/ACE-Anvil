@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{938ABBDE3C00D2DC}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.asi"
+ Configurations {
+  AnimSetInstanceResourceClass PC {
+  }
+  AnimSetInstanceResourceClass XBOX_ONE : PC {
+  }
+  AnimSetInstanceResourceClass XBOX_SERIES : PC {
+  }
+  AnimSetInstanceResourceClass PS4 : PC {
+  }
+  AnimSetInstanceResourceClass PS5 : PC {
+  }
+  AnimSetInstanceResourceClass HEADLESS : PC {
+  }
+ }
+}

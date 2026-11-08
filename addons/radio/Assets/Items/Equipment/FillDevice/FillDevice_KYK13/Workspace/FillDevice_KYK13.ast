@@ -1,0 +1,26 @@
+AnimSetTemplateSource {
+ Groups {
+  AnimSetTemplateSource_AnimationGroup "{666B7A7B313F1AE9}" {
+   Name "Hold"
+   Animations {
+    "Pose"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+  AnimSetTemplateSource_AnimationGroup "{666B7A7B313F1A2D}" {
+   Name "Inspection"
+   Animations {
+    "Pose"
+   }
+   Columns {
+    "Cro"
+    "Erc"
+    "Pne"
+   }
+  }
+ }
+}

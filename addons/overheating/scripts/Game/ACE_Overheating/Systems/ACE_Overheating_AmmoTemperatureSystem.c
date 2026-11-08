@@ -5,10 +5,19 @@ class ACE_Overheating_AmmoTemperatureSystem : GameSystem
 	protected ref ACE_Overheating_AmmoTemperature_JobScheduler m_pScheduler;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_AmmoTemperatureSystem GetInstance()
+	static ACE_Overheating_AmmoTemperatureSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Overheating_AmmoTemperatureSystem.Cast(world.FindSystem(ACE_Overheating_AmmoTemperatureSystem));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Server)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -16,14 +25,6 @@ class ACE_Overheating_AmmoTemperatureSystem : GameSystem
 	override bool ShouldBePaused()
 	{
 		return true;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	override static void InitInfo(WorldSystemInfo outInfo)
-	{
-		outInfo.SetAbstract(false)
-			.SetUnique(true)
-			.SetLocation(ESystemLocation.Server);
 	}
 	
 	//------------------------------------------------------------------------------------------------

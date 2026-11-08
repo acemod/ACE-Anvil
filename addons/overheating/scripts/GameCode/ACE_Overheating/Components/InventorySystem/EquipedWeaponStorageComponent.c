@@ -7,7 +7,7 @@ modded class EquipedWeaponStorageComponent : BaseEquipedWeaponStorageComponent
 	//! Whether equipped weapons should be registered at temperature system
 	void ACE_Overheating_ToggleRegisterWeapons(bool enable)
 	{
-		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance();
+		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance(GetOwner().GetWorld());
 		if (!system)
 			return;
 		
@@ -42,7 +42,7 @@ modded class EquipedWeaponStorageComponent : BaseEquipedWeaponStorageComponent
 		if (!barrel)
 			return;
 		
-		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance();
+		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.Register(barrel);
 	}
@@ -60,7 +60,7 @@ modded class EquipedWeaponStorageComponent : BaseEquipedWeaponStorageComponent
 		if (!barrel)
 			return;
 		
-		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance();
+		ACE_Overheating_BarrelTemperatureSystem system = ACE_Overheating_BarrelTemperatureSystem.GetInstance(GetOwner().GetWorld());
 		if (system)
 			system.Unregister(barrel);
 	}

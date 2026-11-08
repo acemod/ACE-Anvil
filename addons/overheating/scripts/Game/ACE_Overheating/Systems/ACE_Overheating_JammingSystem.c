@@ -4,10 +4,19 @@ class ACE_Overheating_JammingSystem : GameSystem
 	protected ACE_Overheating_BarrelComponent m_pLocalActiveBarrel = null;
 	
 	//------------------------------------------------------------------------------------------------
-	static ACE_Overheating_JammingSystem GetInstance()
+	static ACE_Overheating_JammingSystem GetInstance(ChimeraWorld world)
 	{
-		ChimeraWorld world = GetGame().GetWorld();
 		return ACE_Overheating_JammingSystem.Cast(world.FindSystem(ACE_Overheating_JammingSystem));
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override static void InitInfo(WorldSystemInfo outInfo)
+	{
+		super.InitInfo(outInfo);
+		outInfo.SetAbstract(false)
+			.SetUnique(true)
+			.SetLocation(WorldSystemLocation.Both)
+			.AddPoint(WorldSystemPoint.BeforeEntitiesCreated);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -59,7 +68,7 @@ class ACE_Overheating_JammingSystem : GameSystem
 		
 		// TO DO: Move to temperature systems
 		barrel.IncremenHeatCounter();
-		barrel.SetAmmoTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+		barrel.SetAmmoTemperature(ACE_WeatherHelper.GetAirTemperatureForEntity(weapon.GetOwner()));
 		barrel.SetCookOffProgress(0);
 		
 		if (Math.RandomFloat(0, 1) < barrel.GetJamChance())

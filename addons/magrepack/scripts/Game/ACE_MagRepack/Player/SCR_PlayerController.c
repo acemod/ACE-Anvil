@@ -100,11 +100,11 @@ modded class SCR_PlayerController : PlayerController
 	void ACE_MagRepack_RequestRepack(MagazineComponent fromMag, MagazineComponent toMag, SCR_InventoryStorageManagerComponent inventoryManager, BaseInventoryStorageComponent toItemStorageComponent, BaseInventoryStorageComponent fromItemStorageComponent)
 	{
 		Rpc(ACE_MagRepack_RpcAsk_Repack,
-			Replication.FindId(fromMag),
-			Replication.FindId(toMag),
-			Replication.FindId(inventoryManager),
-			Replication.FindId(toItemStorageComponent),
-			Replication.FindId(fromItemStorageComponent),
+			Replication.FindItemId(fromMag),
+			Replication.FindItemId(toMag),
+			Replication.FindItemId(inventoryManager),
+			Replication.FindItemId(toItemStorageComponent),
+			Replication.FindItemId(fromItemStorageComponent),
 		);
 	}
 	

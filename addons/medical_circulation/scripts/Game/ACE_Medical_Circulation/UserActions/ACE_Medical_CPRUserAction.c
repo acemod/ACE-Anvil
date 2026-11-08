@@ -21,7 +21,7 @@ class ACE_Medical_CPRUserAction : ScriptedUserAction
 			return false;
 
 		CharacterControllerComponent userController = userChar.GetCharacterController();
-		if (!userController)
+		if (!userController || userController.GetLifeState() != ECharacterLifeState.ALIVE)
 			return false;
 
 		if (userController.IsSwimming() || userController.IsFalling())

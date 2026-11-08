@@ -1,0 +1,58 @@
+SizeLayoutWidgetClass {
+ Name "Header"
+ Slot LayoutSlot "{66A0E1869533A0CE}" {
+ }
+ AllowHeightOverride 1
+ HeightOverride 165
+ {
+  OverlayWidgetClass "{66A0E18D2952D607}" {
+   Name "HeaderOverlay"
+   Slot AlignableSlot "{66A0E186D65504BC}" {
+    HorizontalAlign 3
+    VerticalAlign 3
+   }
+   {
+    HorizontalLayoutWidgetClass "{66A0E18CA7523328}" {
+     Name "TitleLayout"
+     Slot OverlayWidgetSlot "{66A0E18CA7523319}" {
+      HorizontalAlign 0
+     }
+     {
+      ImageWidgetClass "{66A0E18CB26555FE}" {
+       Name "Icon"
+       Slot LayoutSlot "{66A13907A19CD2F7}" {
+        HorizontalAlign 3
+        Padding 0 0 6 0
+       }
+       Rotation 180
+       Texture "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+       Image "subscribe"
+       Size 165 165
+      }
+      TextWidgetClass "{66A0E18CF68F69FD}" {
+       Name "Title"
+       Slot LayoutSlot "{66A0E18CF68F69C6}" {
+        HorizontalAlign 0
+        VerticalAlign 1
+        Padding 14 0 0 0
+       }
+       Text "DIRECTION"
+       "Font Size" 90
+       FontProperties FontProperties "{66A0E18314850E70}" {
+        Font "{E2CBA6F76AAA42AF}UI/Fonts/Roboto/Roboto_Regular.fnt"
+       }
+      }
+     }
+    }
+    TextWidgetClass "{66A0E1839A104820}" {
+     Name "Unit"
+     Slot OverlayWidgetSlot "{66A0E1839A104812}" {
+      HorizontalAlign 2
+     }
+     Text "m/s"
+     "Font Size" 90
+    }
+   }
+  }
+ }
+}

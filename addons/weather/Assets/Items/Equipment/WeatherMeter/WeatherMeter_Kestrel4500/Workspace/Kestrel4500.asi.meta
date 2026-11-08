@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{B3B0C1D796A4A24A}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Workspace/Kestrel4500.asi"
+ Configurations {
+  AnimSetInstanceResourceClass PC {
+  }
+  AnimSetInstanceResourceClass XBOX_ONE : PC {
+  }
+  AnimSetInstanceResourceClass XBOX_SERIES : PC {
+  }
+  AnimSetInstanceResourceClass PS4 : PC {
+  }
+  AnimSetInstanceResourceClass PS5 : PC {
+  }
+  AnimSetInstanceResourceClass HEADLESS : PC {
+  }
+ }
+}

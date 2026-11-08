@@ -1,0 +1,9 @@
+MatPBRBasic : "{94099BC5F7D821FA}Assets/Weapons/MachineGuns/RPK74/Data/RPK74_Buttstock_Barrel.emat" {
+ Emissive 0 0 0 1
+ EmissiveAbsoluteLV 0
+ EmissiveMap "{272E422231C3937B}Assets/Weapons/MachineGuns/RPK74/Data/RPK74_Buttstock_EM.edds"
+ Refs {
+  "Emissive"
+  "ACE_Overheating_BarrelGlowEffectComponent.m_vColor"
+ }
+}

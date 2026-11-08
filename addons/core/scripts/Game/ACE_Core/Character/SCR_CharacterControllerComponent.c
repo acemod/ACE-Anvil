@@ -73,6 +73,10 @@ modded class SCR_CharacterControllerComponent : CharacterControllerComponent
 	//------------------------------------------------------------------------------------------------
 	bool ACE_CanCarry(IEntity entity, out string cannotPerformReason)
 	{
+		SCR_ChimeraCharacter ownerChar = SCR_ChimeraCharacter.Cast(GetOwner());
+		if (!ownerChar || ownerChar.IsInVehicle())
+			return false;
+		
 		if (ACE_IsCarrier())
 		{
 			cannotPerformReason = "#ACE-UserAction_Carrying";

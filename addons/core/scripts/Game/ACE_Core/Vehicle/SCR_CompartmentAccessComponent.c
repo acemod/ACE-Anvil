@@ -5,10 +5,6 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 	protected bool m_bACE_IsRequestingGettingIn = false;
 	protected bool m_bACE_IsRequestingGettingOut = false;
 	
-	// Parameters for rescheduling failed get in/out
-	protected static const int ATTEMPT_TIMEOUT = 500;
-	protected static const int MAX_ATTEMPTS = 20;
-	
 	//------------------------------------------------------------------------------------------------
 	void ACE_GetInVehicle(notnull IEntity vehicle, BaseCompartmentSlot compartment = null, bool forceTeleport = true, int doorInfoIndex = -1, ECloseDoorAfterActions closeDoor = ECloseDoorAfterActions.INVALID, bool performWhenPaused = false)
 	{
@@ -20,12 +16,12 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 			return;
 		
 		ACE_SetIsRequestingGettingIn(true);
-		Rpc(RpcDo_ACE_GetInVehicle_Owner, vehicleRpl.Id(), compartment.GetCompartmentSlotID(), compartment.GetCompartmentMgrID(), forceTeleport, doorInfoIndex, closeDoor, performWhenPaused, 0);
+		Rpc(RpcDo_ACE_GetInVehicle_Owner, vehicleRpl.Id(), compartment.GetCompartmentSlotID(), compartment.GetCompartmentMgrID(), forceTeleport, doorInfoIndex, closeDoor, performWhenPaused);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_ACE_GetInVehicle_Owner(RplId vehicleID, int slotID, int mgrID, bool forceTeleport, int doorInfoIndex, ECloseDoorAfterActions closeDoor, bool performWhenPaused, int iAttempt)
+	protected void RpcDo_ACE_GetInVehicle_Owner(RplId vehicleID, int slotID, int mgrID, bool forceTeleport, int doorInfoIndex, ECloseDoorAfterActions closeDoor, bool performWhenPaused)
 	{
 
 		RplComponent vehicleRpl = RplComponent.Cast(Replication.FindItem(vehicleID));
@@ -56,27 +52,8 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 			return;
 		}
 		
-		if (GetInVehicle(vehicle, compartment, forceTeleport, doorInfoIndex, closeDoor, performWhenPaused))
-		{
-			ACE_SetIsRequestingGettingIn(false);
-			return;
-		}
-		
-		if (GetVehicleIn(GetOwner()) == vehicle)
-		{
-			ACE_SetIsRequestingGettingIn(false);
-			return;
-		}
-		
-		if (++iAttempt >= MAX_ATTEMPTS)
-		{
-			Debug.Error("Maximum number of attempts exceeded!");
-			ACE_SetIsRequestingGettingIn(false);
-			return;
-		}
-		
-		// Reschedule moving out if it failed, for instance, when called while moving out
-		GetGame().GetCallqueue().CallLater(RpcDo_ACE_GetInVehicle_Owner, ATTEMPT_TIMEOUT, false, vehicleID, slotID, mgrID, forceTeleport, doorInfoIndex, closeDoor, performWhenPaused, iAttempt);
+		GetInVehicle(vehicle, compartment, forceTeleport, doorInfoIndex, closeDoor, performWhenPaused);
+		ACE_SetIsRequestingGettingIn(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -123,71 +100,32 @@ modded class SCR_CompartmentAccessComponent : CompartmentAccessComponent
 	void ACE_MoveOutVehicle(vector target_transform[4], bool sendIntoRagdoll = false, bool performWhenPaused = false)
 	{
 		ACE_SetIsRequestingGettingOut(true);
-		Rpc(RpcDo_ACE_MoveOutVehicle_Owner, target_transform[0], target_transform[1], target_transform[2], target_transform[3], sendIntoRagdoll, performWhenPaused, 0);
+		Rpc(RpcDo_ACE_MoveOutVehicle_Owner, target_transform[0], target_transform[1], target_transform[2], target_transform[3], sendIntoRagdoll, performWhenPaused);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	//! Transform is passed in parts, since fixed arrays are not supported by ScriptCallQueue::CallLater
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_ACE_MoveOutVehicle_Owner(vector v0, vector v1, vector v2, vector v3, bool sendIntoRagdoll, bool performWhenPaused, int iAttempt)
+	protected void RpcDo_ACE_MoveOutVehicle_Owner(vector v0, vector v1, vector v2, vector v3, bool sendIntoRagdoll, bool performWhenPaused)
 	{
 		vector target_transform[4] = {v0, v1, v2, v3};
-		
-		if (GetOutVehicle_NoDoor(target_transform, sendIntoRagdoll, performWhenPaused))
-		{
-			ACE_SetIsRequestingGettingOut(false);
-			return;
-		}
-		
-		if (!GetVehicleIn(GetOwner()))
-		{
-			ACE_SetIsRequestingGettingOut(false);
-			return;
-		}
-		
-		if (++iAttempt >= MAX_ATTEMPTS)
-		{
-			Debug.Error("Maximum number of attempts exceeded!");
-			ACE_SetIsRequestingGettingOut(false);
-			return;
-		}
-		
-		// Reschedule moving out if it failed, for instance, when called while moving in
-		GetGame().GetCallqueue().CallLater(RpcDo_ACE_MoveOutVehicle_Owner, ATTEMPT_TIMEOUT, false, v0, v1, v2, v3, sendIntoRagdoll, performWhenPaused, iAttempt);
+		GetOutVehicle_NoDoor(target_transform, sendIntoRagdoll, performWhenPaused);
+		ACE_SetIsRequestingGettingOut(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	void ACE_GetOutVehicle(EGetOutType type, int doorInfoIndex, ECloseDoorAfterActions closeDoor, bool performWhenPaused)
 	{
 		ACE_SetIsRequestingGettingOut(true);
-		Rpc(RpcDo_ACE_GetOutVehicle_Owner, type, doorInfoIndex, closeDoor, performWhenPaused, 0);
+		Rpc(RpcDo_ACE_GetOutVehicle_Owner, type, doorInfoIndex, closeDoor, performWhenPaused);
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	[RplRpc(RplChannel.Reliable, RplRcver.Owner)]
-	protected void RpcDo_ACE_GetOutVehicle_Owner(EGetOutType type, int doorInfoIndex, ECloseDoorAfterActions closeDoor, bool performWhenPaused, int iAttempt)
+	protected void RpcDo_ACE_GetOutVehicle_Owner(EGetOutType type, int doorInfoIndex, ECloseDoorAfterActions closeDoor, bool performWhenPaused)
 	{
-		if (GetOutVehicle(type, doorInfoIndex, closeDoor, performWhenPaused))
-		{
-			ACE_SetIsRequestingGettingOut(false);
-			return;
-		}
-		
-		if (!GetVehicleIn(GetOwner()))
-		{
-			ACE_SetIsRequestingGettingOut(false);
-			return;
-		}
-		
-		if (++iAttempt >= MAX_ATTEMPTS)
-		{
-			Debug.Error("Maximum number of attempts exceeded!");
-			ACE_SetIsRequestingGettingOut(false);
-			return;
-		}
-		
-		// Reschedule getting out if it failed, for instance, when called while getting in
-		GetGame().GetCallqueue().CallLater(RpcDo_ACE_GetOutVehicle_Owner, ATTEMPT_TIMEOUT, false, type, doorInfoIndex, closeDoor, performWhenPaused, iAttempt);
+		GetOutVehicle(type, doorInfoIndex, closeDoor, performWhenPaused);
+		ACE_SetIsRequestingGettingOut(false);
 	}
 	
 	//------------------------------------------------------------------------------------------------

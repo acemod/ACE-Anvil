@@ -1,0 +1,3 @@
+SubScene {
+ Parent "{96A8AF57260A7392}worlds/MP/MpTest/MpTest.ent"
+}

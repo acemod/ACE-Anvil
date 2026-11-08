@@ -4,7 +4,7 @@ GenericEntity : "{3B9D178DEB635AFD}PrefabsEditable/Auto/Structures/Military/Fort
   MeshObject "{60ED256B7FE9D171}" {
    Object "{B119EC6E3C59AF3B}Assets/Structures/Military/Fortifications/DirtMounds/DirtCover_01_long_01.xob"
    Materials {
-    MaterialAssignClass "{626E47F33C8B73DA}" {
+    MaterialAssignClass "{68D9119B043B91A4}" {
      SourceMaterial "DirtCover_01"
      AssignedMaterial "{30369C94C941BE87}Common/Materials/ACE_Trenches_MatTerrainObj.emat"
     }

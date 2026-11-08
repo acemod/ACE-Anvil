@@ -1,0 +1,24 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "51F66EC33748B84D"
+ components {
+  SCR_ConsumableItemComponent "{5943631460899505}" {
+   m_aACE_Medical_LitterPrefabConfigs {
+    ACE_PrefabVariantsConfig "{6A0D1CD12F2DA0DD}" {
+     m_aVariants {
+      "{391C14090D95CAA9}Prefabs/Props/Garbage/Medical/Gloves/ACE_Medical_LitterGloves01.et" "{CD6DEF4402C6E917}Prefabs/Props/Garbage/Medical/Gloves/ACE_Medical_LitterGloves02.et" "{28F1A3BD0E237E7C}Prefabs/Props/Garbage/Medical/Gloves/ACE_Medical_LitterGloves03.et"
+     }
+    }
+    ACE_PrefabVariantsConfig "{6A0D1CCA1B4600D0}" {
+     m_aVariants {
+      "{3999C10B0AE2D76B}Prefabs/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages01.et" "{31218ABFEAD60132}Prefabs/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages02.et" "{D4BDC646E6339659}Prefabs/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages03.et"
+     }
+    }
+    ACE_PrefabVariantsConfig "{6A0D1CCEBADDA4C7}" {
+     m_aVariants {
+      "{3999C10B0AE2D76B}Prefabs/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages01.et" "{31218ABFEAD60132}Prefabs/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages02.et" "{D4BDC646E6339659}Prefabs/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages03.et"
+     }
+    }
+   }
+  }
+ }
+}

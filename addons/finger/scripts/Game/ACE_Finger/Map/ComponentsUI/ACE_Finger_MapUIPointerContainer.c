@@ -5,10 +5,10 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	protected string m_sIconsContainer;
 	protected Widget m_wIconsContainer;
 	
-	[Attribute("{DD15734EB89D74E2}UI/layouts/Map/MapMarkerBase.layout", params: "layout")]
+	[Attribute("{F031C659D2F1C14B}UI/layouts/Map/ACE_Finger_MapPointer.layout", params: "layout")]
 	protected ResourceName m_sPointerElementName;
 	
-	protected ref array<ACE_Finger_MapPointerController> m_aPointers = {};
+	protected ref array<ACE_Finger_MapPointer> m_aPointers = {};
 	protected ref array<Widget> m_aWidgets = {};
 	
 	[Attribute(defvalue: "0.1", desc: "Pointer update timer [s]")]
@@ -39,7 +39,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	{
 		super.Update(timeSlice);
 		
-		ACE_Finger_MapPointerController ptr = ACE_Finger_MapPointerController.GetLocalInstance();
+		ACE_Finger_MapPointer ptr = ACE_Finger_MapPointer.GetLocalInstance();
 		if (ptr && ptr.IsToggleOn())
 		{
 			m_fPointerUpdateTimer += timeSlice;
@@ -55,14 +55,14 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 			}
 		}
 		
-		foreach (int i, ACE_Finger_MapPointerController otherPtr: m_aPointers)
+		foreach (int i, ACE_Finger_MapPointer otherPtr: m_aPointers)
 		{
 			UpdatePointerMarker(m_aWidgets[i], otherPtr);
 		}
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	protected void UpdatePointerMarker(Widget ptrWidget, ACE_Finger_MapPointerController ptr)
+	protected void UpdatePointerMarker(Widget ptrWidget, ACE_Finger_MapPointer ptr)
 	{
 		bool visible = ShouldPointerBeVisible(ptr);
 		ptrWidget.SetVisible(visible);
@@ -77,12 +77,12 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	
 	//------------------------------------------------------------------------------------------------
 	//! Should only be visible if the player that points is nearby
-	protected bool ShouldPointerBeVisible(ACE_Finger_MapPointerController ptr)
+	protected bool ShouldPointerBeVisible(ACE_Finger_MapPointer ptr)
 	{
 		if (!m_pLocalPlayerChar)
 			return false;
 		
-		IEntity ptrPlayer = GetGame().GetPlayerManager().GetPlayerControlledEntity(ptr.ACE_GetOwnerPlayerId());
+		IEntity ptrPlayer = GetGame().GetPlayerManager().GetPlayerControlledEntity(ptr.GetOwnerPlayerID());
 		if (!ptrPlayer)
 			return false;
 		
@@ -106,7 +106,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected void PointerOnAction(float value, EActionTrigger reason)
 	{
-		ACE_Finger_MapPointerController ptr = ACE_Finger_MapPointerController.GetLocalInstance();
+		ACE_Finger_MapPointer ptr = ACE_Finger_MapPointer.GetLocalInstance();
 		if (!ptr)
 			return;
 		
@@ -125,7 +125,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	//------------------------------------------------------------------------------------------------
 	protected void PointerOffAction(float value, EActionTrigger reason)
 	{
-		ACE_Finger_MapPointerController ptr = ACE_Finger_MapPointerController.GetLocalInstance();
+		ACE_Finger_MapPointer ptr = ACE_Finger_MapPointer.GetLocalInstance();
 		if (!ptr)
 			return;
 		
@@ -137,9 +137,9 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void AddPointer(ACE_Finger_MapPointerController ptr)
+	void AddPointer(ACE_Finger_MapPointer ptr)
 	{
-		if (ptr == ACE_Finger_MapPointerController.GetLocalInstance())
+		if (ptr == ACE_Finger_MapPointer.GetLocalInstance())
 			return;
 		
 		WorkspaceWidget workspace = GetGame().GetWorkspace();
@@ -150,14 +150,14 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 		FrameSlot.SetAlignment(w, 0.5, 0.2);
 		UpdatePointerMarker(w, ptr);
 		
-		SCR_MapMarkerWidgetComponent handler = SCR_MapMarkerWidgetComponent.Cast(w.FindHandler(SCR_MapMarkerWidgetComponent));
+		ACE_Finger_MapPointerWidgetComponent handler = ACE_Finger_MapPointerWidgetComponent.Cast(w.FindHandler(ACE_Finger_MapPointerWidgetComponent));
 		if (!handler)
 			return;
 		
 		handler.SetImage("{4020BDDA0BA7D5CF}UI/Textures/Icons/icons_gamepad/icons_gamepad.imageset", "stick_hold");
-		handler.ACE_ResizeImage(0.6, 0.6);
+		handler.ResizeImage(0.6, 0.6);
 		handler.SetColor(Color.Orange);
-		handler.SetAuthor(GetGame().GetPlayerManager().GetPlayerName(ptr.ACE_GetOwnerPlayerId()));
+		handler.SetAuthor(GetGame().GetPlayerManager().GetPlayerName(ptr.GetOwnerPlayerID()));
 		handler.SetAuthorVisible(true);
 		
 		m_aPointers.Insert(ptr);
@@ -165,9 +165,9 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	void RemovePointer(ACE_Finger_MapPointerController ptr)
+	void RemovePointer(ACE_Finger_MapPointer ptr)
 	{
-		if (ptr == ACE_Finger_MapPointerController.GetLocalInstance())
+		if (ptr == ACE_Finger_MapPointer.GetLocalInstance())
 			return;
 		
 		int i = m_aPointers.Find(ptr);
@@ -186,7 +186,7 @@ class ACE_Finger_MapUIPointerContainer : SCR_MapUIBaseComponent
 	//------------------------------------------------------------------------------------------------
 	void ClearPointers()
 	{
-		foreach (ACE_Finger_MapPointerController ptr : m_aPointers)
+		foreach (ACE_Finger_MapPointer ptr : m_aPointers)
 		{
 			RemovePointer(ptr);
 		}

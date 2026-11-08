@@ -12,6 +12,7 @@ import UnpublishedModWarning from '~/components/UnpublishedModWarning.astro';
 - [ACE Medical Circulation](#ace-medical-circulation)
 - ~~[ACE Medical Defibrillation](#ace-medical-defibrillation)~~
 - ~~[ACE Medical Breathing](#ace-medical-breathing)~~
+- [ACE Medical AI](#ace-medical-ai)
 
 ## ACE Medical Core
 
@@ -71,6 +72,8 @@ Summary of settings that can be modified in the server config:
 | `m_fResilienceDamageScale`            | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Resilience damage scale. All incoming damage to the resilience hitzone will be multiplied by this factor. Lower values make characters less likely to fall unconscious. |
 | `m_fMinHealthScaledForEpinephrine`    | Type: `float`**<br />Range: 0 to 1<br />Default: `0.33` | Can only apply epinephrine when patient has at least this health (ignored in advanced medication). |
 | `m_bPlayerCannotDie`                  | Type: `bool`*<br />Default: `false` | Whether players can never die |
+| `m_bLitterEnabled`                    | Type: `bool`<br />Default: `true` | Whether treatments should produce litter. |
+| `m_fLitterCleanUpTime`                | Type: `float`<br />Default: `600.0` | After how many seconds litter should be deleted. |
 | `m_bBleedOutForPlayersEnabled`        | Type: `bool`*<br />Default: `true` | Whether players can bleed out |
 | `m_fBleedingRateScale`                | Type: `float`**<br />Default: `1.0` | Character bleeding rate multiplier |
 | `m_fMaxTotalBleedingRate`             | Type: `float`**<br />Default: `-1.0` | Maximum possibe bleeding rate in ml/s (Negative value means unlimited) |
@@ -99,6 +102,8 @@ Template for the `missionHeader` in a server config:
             "m_fResilienceDamageScale": 1.0,
             "m_fMinHealthScaledForEpinephrine": 0.33,
             "m_bPlayerCannotDie": 0,
+            "m_bLitterEnabled": true,
+            "m_fLitterCleanUpTime": 600.0,
             "m_bBleedOutForPlayersEnabled": 1,
             "m_fBleedingRateScale": 1.0,
             "m_fMaxTotalBleedingRate": -1.0,
@@ -146,6 +151,7 @@ Summary of settings that can be modified in the server config:
 | ------------------------------------- | -------------------- | -------------------------------------------------- |
 | `m_bOrganHitZonesEnabled`             | Type: `bool`*<br />Default: `true` | Whether organ hit zones should be enabled |
 | `m_fSecondChanceOnHeart`              | Type: `float`**<br />Range: 0 to 1<br />Default: `0.0` | Probability for second chance for killing blows to the heart |
+| `m_bInstantUnconOnMassiveBleeding`    | Type: `bool`<br />Default: `true` | Whether neck or femoral bleeding instantly cause unconsciousness. |
 
 <br />
 
@@ -155,7 +161,8 @@ Template for the `missionHeader` in a server config:
     "m_ACE_Settings": {
         "m_ACE_Medical_Hitzones": {
             "m_bOrganHitZonesEnabled": 1,
-            "m_fSecondChanceOnHeart": 0.0
+            "m_fSecondChanceOnHeart": 0.0,
+            "m_bInstantUnconOnMassiveBleeding": true
         }
     }
 }
@@ -380,3 +387,11 @@ _TBD_
 Below is a proposed activity diagram for treating patients, which supersedes the one from ACE Medical Circulation:
 
 <PlantUML src="/plantumls/medical/breathing-treatment-1.puml" alt="breathing-treatment-1.puml" />
+
+
+## ACE Medical AI
+
+### Overview
+
+**ACE Medical AI** adds the ability for AI to perform additional treatments instead of just bandaging.
+The current workflow is only compatible with **ACE Medical Core**.

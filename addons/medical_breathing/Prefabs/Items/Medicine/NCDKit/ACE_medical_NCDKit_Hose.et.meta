@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{1323E0ADD9389CFD}Prefabs/Items/Medicine/NCDKit/ACE_medical_NCDKit_Hose.et"
+ Configurations {
+  EntityTemplateResourceClass PC {
+  }
+  EntityTemplateResourceClass XBOX_ONE : PC {
+  }
+  EntityTemplateResourceClass XBOX_SERIES : PC {
+  }
+  EntityTemplateResourceClass PS4 : PC {
+  }
+  EntityTemplateResourceClass PS5 : PC {
+  }
+  EntityTemplateResourceClass HEADLESS : PC {
+  }
+ }
+}

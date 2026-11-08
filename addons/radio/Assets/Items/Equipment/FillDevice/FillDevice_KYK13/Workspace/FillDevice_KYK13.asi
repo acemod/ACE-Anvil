@@ -1,0 +1,25 @@
+AnimSetInstanceSource "{666B7A7858524562}" {
+ Template "{6C12880517CC54C1}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/Workspace/FillDevice_KYK13.ast"
+ Lines {
+  AnimSetInstanceSource_Line "Hold.Cro.Pose" {
+   Resource "{DF27A9B98F5A4011}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_cro_kyk13_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Inspection.Cro.Pose" {
+   Resource "{90F3955745EECB15}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_cro_kyk13_inspectpose.anm"
+  }
+  AnimSetInstanceSource_Line "Hold.Erc.Pose" {
+   Resource "{BC84EFB92F5739C4}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_erc_kyk13_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Inspection.Erc.Pose" {
+   Resource "{31AABFB9C7FA20EA}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_erc_kyk13_inspectpose.anm"
+  }
+  AnimSetInstanceSource_Line "Hold.Pne.Pose" {
+   Resource "{9D8753C47E0BFD55}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_pne_kyk13_holdpose.anm"
+  }
+  AnimSetInstanceSource_Line "Inspection.Pne.Pose" {
+   Resource "{6FEFD819BB225407}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_pne_kyk13_inspectpose.anm"
+  }
+ }
+ RBF AnimSetInstanceSourceRBFArray "{666B7A7841F49297}" {
+ }
+}

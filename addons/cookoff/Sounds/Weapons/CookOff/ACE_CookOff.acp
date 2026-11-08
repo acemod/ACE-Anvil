@@ -1,0 +1,341 @@
+AudioClass {
+ sounds {
+  SoundClass {
+   id 12297
+   name "SOUND_SHOT_BULLET"
+   version 5
+   tl 83.688 -261.49
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 5138
+       port 65
+      }
+     }
+    }
+   }
+   outState 15371
+   outStatePort 8199
+  }
+  SoundClass {
+   id 13321
+   name "SOUND_SHOT_ROCKET"
+   version 5
+   tl 83.95 -83.95
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 7186
+       port 65
+      }
+     }
+    }
+   }
+   outState 15371
+   outStatePort 8199
+  }
+  SoundClass {
+   id 14345
+   name "SOUND_SHOT_SHELL"
+   version 5
+   tl 81.65 89.527
+   ins {
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 6162
+       port 65
+      }
+     }
+    }
+   }
+   outState 15371
+   outStatePort 8199
+  }
+ }
+ mixers {
+  MixerClass {
+   id 15371
+   name "OutputState"
+   version 4
+   tl 342.7 -62.1
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass connections {
+     id 8199
+     links {
+      ConnectionClass connection {
+       id 12297
+       port 65
+      }
+      ConnectionClass connection {
+       id 13321
+       port 65
+      }
+      ConnectionClass connection {
+       id 14345
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    4 0
+   }
+   path "{B764D803219C775E}Sounds/FinalMix.afm"
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "Music" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb" "VON_Reverb" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "UI" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin"
+   }
+  }
+ }
+ shaders {
+  ShaderClass {
+   id 5138
+   name "Shader"
+   version 5
+   tl -185.37 -262.658
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 8220
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 10261
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 2052
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 6162
+   name "Shader"
+   version 5
+   tl -189.604 90.231
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 8220
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 10261
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 4100
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+  ShaderClass {
+   id 7186
+   name "Shader"
+   version 5
+   tl -194.083 -84.195
+   ins {
+    ConnectionsClass connections {
+     id 0
+     links {
+      ConnectionClass connection {
+       id 8220
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 1
+     links {
+      ConnectionClass connection {
+       id 9235
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 2
+     links {
+      ConnectionClass connection {
+       id 10261
+       port 65
+      }
+     }
+    }
+    ConnectionsClass connections {
+     id 64
+     links {
+      ConnectionClass connection {
+       id 3076
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass {
+   id 9235
+   name "Amplitude"
+   version 5
+   tl -187.604 -448.103
+   curve "1/r"
+   innerRange 1.6
+   outerRange 1000
+   slopeFactor 30
+  }
+ }
+ frequency {
+  FrequencyClass {
+   id 10261
+   name "Frequency"
+   version 5
+   tl -188.589 -369.573
+   enableDistanceAtt 1
+  }
+ }
+ banks_local {
+  BankLocalClass {
+   id 2052
+   name "shotbullet"
+   version 7
+   tl -504.521 -260.167
+   Volume -11
+   "Pitch variance" 1
+   Resampler FIR_4
+   "Disable streaming" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{004637F2B6792FD2}Sounds/Weapons/CookOff/Samples/shotbullet_1.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{99588E6BAB9E1E42}Sounds/Weapons/CookOff/Samples/shotbullet_2.wav"
+     Index 1
+    }
+    AudioBankSampleClass Sample {
+     Filename "{EE52E6E35F3CF132}Sounds/Weapons/CookOff/Samples/shotbullet_3.wav"
+     Index 2
+    }
+   }
+  }
+  BankLocalClass {
+   id 3076
+   name "shotrocket"
+   version 7
+   tl -499.958 -86.435
+   Volume -9
+   "Pitch variance" 1
+   Resampler FIR_4
+   "Disable streaming" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{670615A20603ED55}Sounds/Weapons/CookOff/Samples/shotrocket_1.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{FE18AC3B1BE4DCC5}Sounds/Weapons/CookOff/Samples/shotrocket_2.wav"
+     Index 1
+    }
+    AudioBankSampleClass Sample {
+     Filename "{8912C4B3EF4633B5}Sounds/Weapons/CookOff/Samples/shotrocket_3.wav"
+     Index 2
+    }
+   }
+  }
+  BankLocalClass {
+   id 4100
+   name "shotshell"
+   version 7
+   tl -500.876 88.213
+   Volume -11
+   "Pitch variance" 1
+   Resampler FIR_4
+   "Disable streaming" 1
+   Samples {
+    AudioBankSampleClass Sample {
+     Filename "{EE40B7D6D6109D3C}Sounds/Weapons/CookOff/Samples/shotshell_1.wav"
+    }
+    AudioBankSampleClass Sample {
+     Filename "{775E0E4FCBF7ACAC}Sounds/Weapons/CookOff/Samples/shotshell_2.wav"
+     Index 1
+    }
+    AudioBankSampleClass Sample {
+     Filename "{005466C73F5543DC}Sounds/Weapons/CookOff/Samples/shotshell_3.wav"
+     Index 2
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass {
+   id 8220
+   name "Spatiality"
+   version 5
+   tl -188.083 -532.4
+   spatialFactor 1
+  }
+ }
+ version 1
+}

@@ -1,0 +1,20 @@
+GenericEntity : "{C95E11C60810F432}Prefabs/Items/Core/Item_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ActionsManagerComponent "{508AB5952B584B2E}" {
+   additionalActions {
+    ACE_Radio_CopyKeyUserAction "{666615D514B997D7}" {
+     ParentContextList {
+      "default"
+     }
+     UIInfo SCR_ActionUIInfo "{666615D50A45172C}" {
+      Name "Copy"
+     }
+     Duration 1
+     CanAggregate 1
+     "Sort Priority" -1
+    }
+   }
+  }
+ }
+}

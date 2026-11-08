@@ -107,6 +107,7 @@ class ACE_BulletTools
 		IEntitySource bulletSource = bulletRes.GetResource().ToEntitySource();
 		if (!bulletSource)
 			return 0;
+		
 
 		return GetFloatProperty(bulletSource, propertyName);
 	}

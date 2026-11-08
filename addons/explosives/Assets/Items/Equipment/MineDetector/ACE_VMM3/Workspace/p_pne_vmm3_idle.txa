@@ -1,0 +1,299 @@
+$animation "" {
+ #version 2
+ #fps 30
+ #numFrames 0
+ $nodeDiff "Spine1" {
+  $keys q {
+   $frame 0 {
+   }
+  }
+  $nodeDiff "Stomach1" {
+   $keys t q {
+    $frame 0 {
+    }
+   }
+  }
+  $nodeDiff "Spine2" {
+   $keys q {
+    $frame 0 {
+    }
+   }
+   $nodeDiff "Spine3" {
+    $keys q {
+     $frame 0 {
+     }
+    }
+    $nodeDiff "Stomach2" {
+     $keys t q {
+      $frame 0 {
+      }
+     }
+    }
+    $nodeDiff "Spine4" {
+     $keys q {
+      $frame 0 {
+      }
+     }
+     $nodeDiff "Stomach3" {
+      $keys t q {
+       $frame 0 {
+       }
+      }
+     }
+     $nodeDiff "Spine5" {
+      $keys q {
+       $frame 0 {
+       }
+      }
+      $nodeDiff "Neck1" {
+       $keys q {
+        $frame 0 {
+        }
+       }
+       $nodeDiff "Neck2" {
+        $keys q {
+         $frame 0 {
+         }
+        }
+        $nodeDiff "Neck3" {
+         $keys q {
+          $frame 0 {
+          }
+         }
+         $nodeDiff "Head" {
+          $keys q {
+           $frame 0 {
+           }
+          }
+         }
+        }
+       }
+      }
+      $node "RightShoulder" {
+       $keys q {
+        $frame 0 {
+         #q 0.47912094 -0.41360351 0.68452895 0.36165658
+        }
+       }
+       $node "RightArm" {
+        $keys q {
+         $frame 0 {
+          #q -0.18659812 0.12075809 0.04598208 0.97390163
+         }
+        }
+        $node "RightArmVolume" {
+         $keys q {
+          $frame 0 {
+          }
+         }
+        }
+        $node "RightArmTwist" {
+         $keys q {
+          $frame 0 {
+           #q -0.00046419 -0.16626853 0.00414068 0.98607165
+          }
+         }
+         $node "RightForeArm" {
+          $keys q {
+           $frame 0 {
+            #q 0.70795453 -0.0990957 0.12605584 0.68781561
+           }
+          }
+          $node "RightForeArmVolume" {
+           $keys q {
+            $frame 0 {
+             #q -0.15410402 0.33525527 -0.19600989 0.90853518
+            }
+           }
+          }
+          $node "RightForeArmTwist" {
+           $keys q {
+            $frame 0 {
+             #q -0.00007387 0.05111678 0.00003487 0.99869275
+            }
+           }
+           $node "RightHandUpperVolume" {
+            $keys q {
+             $frame 0 {
+              #q 0.12257494 0.81890738 -0.00622234 0.5606491
+             }
+            }
+           }
+           $node "RightHand" {
+            $keys q {
+             $frame 0 {
+              #q 0.15152407 0.61626047 -0.10885778 0.76512313
+             }
+            }
+            $node "RightHandThumb1" {
+             $keys q {
+              $frame 0 {
+               #q -0.04389878 -0.63337296 0.24574453 0.73247606
+              }
+             }
+             $node "RightHandThumb2" {
+              $keys q {
+               $frame 0 {
+                #q -0.03172794 0.05454458 -0.21219805 -0.9751873
+               }
+              }
+              $node "RightHandThumb3" {
+               $keys q {
+                $frame 0 {
+                 #q -0.20290419 -0.63637787 -0.15299349 0.72831744
+                }
+               }
+               $node "RightHandThumb4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.3174794 -0.00249228 0.00853352 0.94822353
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "RightHandIndex1" {
+             $keys q {
+              $frame 0 {
+               #q -0.00049778 -0.10830472 0.07434203 0.99133408
+              }
+             }
+             $node "RightHandIndex2" {
+              $keys q {
+               $frame 0 {
+                #q -0.50261247 -0.07298729 0.14597744 0.84896678
+               }
+              }
+              $node "RightHandIndex3" {
+               $keys q {
+                $frame 0 {
+                 #q -0.57278067 0.12746507 0.0877389 0.80497026
+                }
+               }
+               $node "RightHandIndex4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.51346552 0.02163073 0.02479248 0.85747933
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "RightHandMiddle1" {
+             $keys q {
+              $frame 0 {
+               #q -0.01083285 0.0179148 0.02651433 0.99942917
+              }
+             }
+             $node "RightHandMiddle2" {
+              $keys q {
+               $frame 0 {
+                #q -0.59600246 -0.02689401 -0.06787014 0.79965705
+               }
+              }
+              $node "RightHandMiddle3" {
+               $keys q {
+                $frame 0 {
+                 #q -0.61431313 -0.02995035 -0.0375016 0.78760153
+                }
+               }
+               $node "RightHandMiddle4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.45750514 -0.0174073 0.01900177 0.88883364
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "RightHandRing1" {
+             $keys q {
+              $frame 0 {
+               #q -0.00900471 0.06190639 -0.00259921 0.99803787
+              }
+             }
+             $node "RightHandRing2" {
+              $keys q {
+               $frame 0 {
+                #q -0.54215384 -0.00932313 -0.10489258 0.83365452
+               }
+              }
+              $node "RightHandRing3" {
+               $keys q {
+                $frame 0 {
+                 #q -0.6077652 -0.04438404 -0.06492509 0.79021287
+                }
+               }
+               $node "RightHandRing4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.53304148 -0.00034397 -0.00039447 0.84608889
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "RightHandPinky1" {
+             $keys q {
+              $frame 0 {
+               #q -0.0402758 -0.00114165 -0.02981281 0.99874312
+              }
+             }
+             $node "RightHandPinky2" {
+              $keys q {
+               $frame 0 {
+                #q -0.60078293 0.14979839 -0.16746429 0.76718712
+               }
+              }
+              $node "RightHandPinky3" {
+               $keys q {
+                $frame 0 {
+                 #q -0.45971093 -0.13844955 -0.07359722 0.87411731
+                }
+               }
+               $node "RightHandPinky4" {
+                $keys q {
+                 $frame 0 {
+                  #q -0.55233592 -0.02303949 0.05196664 0.83168131
+                 }
+                }
+               }
+              }
+             }
+            }
+            $node "RightHandInbetween" {
+             $keys t q {
+              $frame 0 {
+               #t 0.0419747 -0.0639501 0.0249334
+               #q -0.04689834 0.00439797 0.07037666 0.99640775
+              }
+             }
+            }
+            $node "RightHandProp" {
+             $keys t q {
+              $frame 0 {
+               #t -0.0580574 -0.1031401 -0.020458
+               #q 0.43474314 0.59226578 0.42804921 0.52630186
+              }
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+ $custProps {
+  #custProp "profile" "256bisbis_UpperbodyADD_RArmABS_RHandABS"
+  #custProp "sourceFile" "Character_AnimationRig_VMM3.blend"
+ }
+}

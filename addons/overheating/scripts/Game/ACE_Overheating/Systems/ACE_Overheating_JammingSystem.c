@@ -68,7 +68,7 @@ class ACE_Overheating_JammingSystem : GameSystem
 		
 		// TO DO: Move to temperature systems
 		barrel.IncremenHeatCounter();
-		barrel.SetAmmoTemperature(ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE);
+		barrel.SetAmmoTemperature(ACE_WeatherHelper.GetAirTemperatureForEntity(weapon.GetOwner()));
 		barrel.SetCookOffProgress(0);
 		
 		if (Math.RandomFloat(0, 1) < barrel.GetJamChance())

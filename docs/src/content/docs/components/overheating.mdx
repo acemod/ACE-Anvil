@@ -39,6 +39,7 @@ Certain aspects of this mod can be configured in the mission header section of a
 | `m_fWaterCoolingScale`                | Type: `float`**<br />Range: 0 to ∞<br />Default: `18.0` | Scale for how quickly a weapon cools down in water. |
 | `m_fJamChanceScale`                   | Type: `float`**<br />Range: 0 to ∞<br />Default: `1.0` | Scale for how likely a weapon jams. |
 | `m_fClearJamFailureChance`            | Type: `float`**<br />Range: 0 to 1<br />Default: `0.1` | Probability for clearing jam to fail. |
+| `m_bRemoveMagazineForClearingJam`     | Type: `bool`<br />Default: `true` | Whether the magazine should get removed when trying to clear a jam. |
 | `m_fGunpowderAutoignitionTemperature` | Type: `float`**<br />Range: 0 to 1300<br />Default: `473.15` | Temperature at which ammo can cook off [K]. |
 | `m_fBaseHeatTransferCoefficient`      | Type: `float`**<br />Range: 0 to ∞<br />Default: `125.63` | Base heat transfer coefficient for cooling of barrel from other channels than radiation and convection from wind and rain. |
 | `m_fBarrel2BulletMassScaledTemperatureRateConstant` | Type: `float`**<br />Range: 0 to ∞<br />Default: `2.031` | Mass-scaled temperature rate constant for heat exchange between barrel and bullet [g/s]. The larger, the faster a chambered bullet will heat up to barrel temperature. |
@@ -59,6 +60,7 @@ Example for the `missionHeader` in a server config:
             "m_fWaterCoolingScale": 18.0,
             "m_fJamChanceScale": 1.0,
             "m_fClearJamFailureChance": 0.1,
+            "m_bRemoveMagazineForClearingJam": true,
             "m_fGunpowderAutoignitionTemperature": 473.15,
             "m_fBaseHeatTransferCoefficient": 125.63,
             "m_fBarrel2BulletMassScaledTemperatureRateConstant": 2.031,

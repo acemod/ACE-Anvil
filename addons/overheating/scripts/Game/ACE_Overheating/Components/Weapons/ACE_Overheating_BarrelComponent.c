@@ -64,10 +64,13 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 	protected float m_fBulletMass;
 	
 	// Fallbacks for misconfigured weapons
-	protected static const float FALLBACK_BARREL_MASS = 1.0; // kg
+	protected static const float FALLBACK_BARREL_MASS = 2.0; // kg
 	protected static const float FALLBACK_BARREL_LENGTH = 0.5; // m
 	protected static const float FALLBACK_BULLET_MASS = 0.004; // kg
 	protected static const float FALLBACK_INITIAL_BULLET_SPEED = 930; // m/s
+	// Misconfiguration detection thresholds. These values and below are considered misconfigured.
+	protected static const float INVALID_BARREL_MASS_THRESHOLD = 0.01; // kg
+	protected static const float INVALID_BARREL_LENGTH_THRESHOLD = 0.01; // m
 	
 	//------------------------------------------------------------------------------------------------
 	//! Calculate derived quantities
@@ -108,7 +111,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		}
 		
 		float mass = m_fBarrelMassFraction * attributes.GetWeight();
-		if (mass <= 0)
+		if (mass <= INVALID_BARREL_MASS_THRESHOLD)
 		{
 			Debug.Error(string.Format("\"%1\" has no mass.", weapon.GetPrefabData().GetPrefabName()));
 			mass = FALLBACK_BARREL_MASS;
@@ -135,7 +138,7 @@ class ACE_Overheating_BarrelComponentClass : ScriptComponentClass
 		weaponAnim.GetBoneLocalMatrix(muzzleBoneID, muzzleTransform);
 		
 		float length = vector.Distance(chamberTransform[3], muzzleTransform[3]);
-		if (length <= 0)
+		if (length <= INVALID_BARREL_LENGTH_THRESHOLD)
 		{
 			Debug.Error(string.Format("Could not determine barrel length for \"%1\".", weapon.GetPrefabData().GetPrefabName()));
 			length = FALLBACK_BARREL_LENGTH;
@@ -263,6 +266,9 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	[RplProp()]
 	protected float m_fClearJamFailureChance = 0.1;
 	
+	[RplProp()]
+	protected bool m_bRemoveMagazineForClearingJam = true;
+	
 	protected float m_fBarrelTemperature;
 	protected float m_fAmmoTemperature;
 	protected float m_fCookOffProgress;
@@ -332,11 +338,14 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 		
 		ACE_Overheating_Settings settings = ACE_SettingsHelperT<ACE_Overheating_Settings>.GetModSettings();
 		if (settings)
+		{
 			m_fClearJamFailureChance = settings.m_fClearJamFailureChance;
+			m_bRemoveMagazineForClearingJam = settings.m_bRemoveMagazineForClearingJam;
+		}
 		
-		// Temporary solution: Use standard ambient temperature until we got a proper weather system
-		m_fBarrelTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
-		m_fAmmoTemperature = ACE_PhysicalConstants.STANDARD_AMBIENT_TEMPERATURE;
+		float airTemperature = ACE_WeatherHelper.GetAirTemperatureForEntity(GetOwner());
+		m_fBarrelTemperature = airTemperature;
+		m_fAmmoTemperature = airTemperature;
 		m_fJamChance = m_pData.ComputeJamChance(m_fBarrelTemperature);
 		InitCookOffCookOffProgressScale();
 		Replication.BumpMe();
@@ -346,7 +355,13 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	void SetState(bool isJammed)
 	{
 		if (!isJammed)
-			m_pMuzzle.ClearChamber(m_pMuzzle.GetCurrentBarrelIndex());
+		{
+			BaseMagazineComponent magazine = m_pMuzzle.GetMagazine();
+			if (magazine && magazine.GetAmmoCount() > 0)
+				magazine.SetAmmoCount(magazine.GetAmmoCount() - 1);
+			else
+				m_pMuzzle.ClearChamber(m_pMuzzle.GetCurrentBarrelIndex());
+		}
 		
 		m_bIsJammed = isJammed;
 		OnStateChanged();
@@ -471,6 +486,12 @@ class ACE_Overheating_BarrelComponent : ScriptComponent
 	float GetClearJamFailureChance()
 	{
 		return m_fClearJamFailureChance;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	bool ShouldRemoveMagazineForClearingJam()
+	{
+		return m_bRemoveMagazineForClearingJam;
 	}
 	
 #ifdef ENABLE_DIAG

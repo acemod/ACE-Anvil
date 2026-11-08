@@ -1,6 +1,8 @@
 //------------------------------------------------------------------------------------------------
 modded class SCR_ItemPlacementComponent : ScriptComponent
 {
+	protected static const float ACE_SURFACE_TRACER_LENGTH_M = 0.2;
+	
 	//------------------------------------------------------------------------------------------------
 	//! Add handling for SCR_EPlacementType.ACE_XYZ_UP, which forces the item to be placed upright
 	protected override void EOnFrame(IEntity owner, float timeSlice)
@@ -47,5 +49,27 @@ modded class SCR_ItemPlacementComponent : ScriptComponent
 			return true;
 		
 		return (entity.GetPrefabData() != m_PlaceableItem.GetOwner().GetPrefabData());
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Validate surface property
+	override void ValidatePlacement(vector up, IEntity tracedEntity, BaseWorld world, IEntity character, out ENotification cantPlaceReason)
+	{
+		super.ValidatePlacement(up, tracedEntity, world, character, cantPlaceReason);
+		if (cantPlaceReason > 0)
+			return;
+		
+		ACE_ESurfaceLabel label = m_PlaceableItem.ACE_RequiredSurfaceLabel();
+		if (label == ACE_ESurfaceLabel.NONE)
+			return;
+		
+		TraceParam params = new TraceParam();
+		params.Flags = TraceFlags.WORLD | TraceFlags.ENTS;
+		params.Start = m_vCurrentMat[3] + 0.5 * ACE_SURFACE_TRACER_LENGTH_M * up;
+		params.End = m_vCurrentMat[3] - 0.5 * ACE_SURFACE_TRACER_LENGTH_M * up;
+		params.Include = tracedEntity;
+		
+		if (float.AlmostEqual(GetGame().GetWorld().TraceMove(params, null), 1) || !ACE_SurfaceHelper.HasLabel(params.SurfaceProps, label))
+			cantPlaceReason = ENotification.PLACEABLE_ITEM_CANT_PLACE_GENERIC;
 	}
 }

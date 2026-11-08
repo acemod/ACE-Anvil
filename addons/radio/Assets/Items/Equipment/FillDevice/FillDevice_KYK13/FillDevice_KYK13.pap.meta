@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{4DE3FC0F7FB9B1D7}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/FillDevice_KYK13.pap"
+ Configurations {
+  ProcAnimProjectResourceClass PC {
+  }
+  ProcAnimProjectResourceClass XBOX_ONE : PC {
+  }
+  ProcAnimProjectResourceClass XBOX_SERIES : PC {
+  }
+  ProcAnimProjectResourceClass PS4 : PC {
+  }
+  ProcAnimProjectResourceClass PS5 : PC {
+  }
+  ProcAnimProjectResourceClass HEADLESS : PC {
+  }
+ }
+}

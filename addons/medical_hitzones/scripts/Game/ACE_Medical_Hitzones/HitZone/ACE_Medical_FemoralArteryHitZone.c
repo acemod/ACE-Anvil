@@ -22,7 +22,10 @@ class ACE_Medical_FemoralArteryHitZone : ACE_Medical_OrganHitZone
 		if (Replication.IsServer())
 		{
 			charDamageManager.AddBleedingEffectOnHitZone(SCR_CharacterHitZone.Cast(charDamageManager.GetHitZoneByName("Hips")));
-			charDamageManager.GetResilienceHitZone().SetHealthScaled(0);
+			
+			ACE_Medical_Hitzones_Settings settings = ACE_SettingsHelperT<ACE_Medical_Hitzones_Settings>.GetModSettings();
+			if (settings && settings.m_bInstantUnconOnMassiveBleeding)
+				GetGame().GetCallqueue().Call(charDamageManager.GetResilienceHitZone().SetHealthScaled, 0);
 		}
 		
 		if (!System.IsConsoleApp())

@@ -75,8 +75,7 @@ modded class TimeAndWeatherManagerEntity : BaseTimeAndWeatherManagerEntity
 		m_fACE_SinExp_Tmin += m_fACE_DiurnalTemperatureRangeNoiseGenerator.SamplePoint();
 		m_fACE_SinExp_Tmin += m_fACE_MeanTemperatureAirNoiseGenerator.SamplePoint();
 		ACE_UpdateSunrisePortion(GetYear(), GetMonth(), GetDay());
-		Print(m_fACE_SinExp_Hr);
-		Print(m_fACE_SinExp_Hs);
+		
 		m_bACE_IsCurrentlyDay = IsDayHour(GetTimeOfTheDay());
 		if (!m_bACE_IsCurrentlyDay)
 		{

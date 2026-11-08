@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{05AE2263D864E087}Assets/Weapons/Explosives/ACE_DeadManSwitch/workspace/i_erc_deadmanswitch_activate_fingerAnim.anm"
+ Configurations {
+  TXAResourceClass PC {
+   SourcePath "Character_AnimationRig_DeadManSwitch.blend"
+   SourceProfile "ACE_DeadManSwitch"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

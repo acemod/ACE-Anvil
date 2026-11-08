@@ -1,0 +1,8 @@
+StaticModelEntity : "{EEE62BE393A2AD4A}Prefabs/Structures/Military/Fortifications/DirtCover_01/DirtCover_01_long_base.et" {
+ ID "5272E314F01B2DBE"
+ components {
+  MeshObject "{5272E314F6439B95}" {
+   Object "{409F7F9C29BAA88A}Assets/Structures/Military/Fortifications/Trenches/TrenchSegment/ACE_PersonalTrench_01_giant.xob"
+  }
+ }
+}

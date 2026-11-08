@@ -1,0 +1,50 @@
+MetaFileClass {
+ Name "{3505C5A044624575}Assets/Weapons/Explosives/ACE_DeadManSwitch/DeadManSwitch.xob"
+ Configurations {
+  FBXResourceClass PC {
+   ExportSkinning 1
+   MaterialAssigns {
+    MaterialAssignClass "{69B95E52DA935E5D}" {
+     SourceMaterial "Body"
+     AssignedMaterial "{1D7D0A3A337BE56F}Assets/Weapons/Explosives/ACE_DeadManSwitch/data/Body.emat"
+    }
+   }
+   MeshParams {
+    MeshParam ACE_Deadmanswitch {
+    }
+   }
+   GeometryParams {
+    GeometryParam UBX_Item {
+     LayerPreset "ItemFireView"
+     SurfaceProperties {
+      "{CE9253778DD8FBDE}Common/Materials/Game/metal.gamemat"
+     }
+     Mass 0
+     Margin 0
+    }
+   }
+   Common TXOCommonClass "{69B95E4BCDB913C6}" : "{0877E7C4BB2B2C9A}Configs/System/ResourceTypes/PC/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_ONE : PC {
+   Common TXOCommonClass "{69B95E4BCDB9C945}" : "{9D5B6207F7628CE2}Configs/System/ResourceTypes/XBOX_ONE/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass XBOX_SERIES : PC {
+   Common TXOCommonClass "{69B95E4BCDB9AD8A}" : "{DD9F02115C764647}Configs/System/ResourceTypes/XBOX_SERIES/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS4 : PC {
+   Common TXOCommonClass "{69B95E4BCDB993C1}" : "{53EC476BC921D99A}Configs/System/ResourceTypes/PS4/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass PS5 : PC {
+   Common TXOCommonClass "{69B95E4BCDB991CB}" : "{F62AA8E7B8EA9D26}Configs/System/ResourceTypes/PS5/MeshObjectCommon.conf" {
+   }
+  }
+  FBXResourceClass HEADLESS : PC {
+   Common TXOCommonClass "{69B95E4BCDB999F4}" : "{3A5B3356978039E8}Configs/System/ResourceTypes/HEADLESS/MeshObjectCommon.conf" {
+   }
+  }
+ }
+}

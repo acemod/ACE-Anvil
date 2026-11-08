@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{ACA236ED0994A163}Sounds/Items/Equipment/MetalDetector/ACE_MineDetector.acp"
+ Configurations {
+  AudioProjectResourceClass PC {
+  }
+  AudioProjectResourceClass XBOX_ONE : PC {
+  }
+  AudioProjectResourceClass XBOX_SERIES : PC {
+  }
+  AudioProjectResourceClass PS4 : PC {
+  }
+  AudioProjectResourceClass PS5 : PC {
+  }
+  AudioProjectResourceClass HEADLESS : PC {
+  }
+ }
+}

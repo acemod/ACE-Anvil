@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{E9E2CA4818CAB9BF}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Data/Backlight.emat"
+ Configurations {
+  EMATResourceClass PC {
+  }
+  EMATResourceClass XBOX_ONE : PC {
+  }
+  EMATResourceClass XBOX_SERIES : PC {
+  }
+  EMATResourceClass PS4 : PC {
+  }
+  EMATResourceClass PS5 : PC {
+  }
+  EMATResourceClass HEADLESS : PC {
+  }
+ }
+}

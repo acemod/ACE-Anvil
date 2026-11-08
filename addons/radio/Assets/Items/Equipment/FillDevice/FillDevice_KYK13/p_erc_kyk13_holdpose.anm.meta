@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{BC84EFB92F5739C4}Assets/Items/Equipment/FillDevice/FillDevice_KYK13/p_erc_kyk13_holdpose.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

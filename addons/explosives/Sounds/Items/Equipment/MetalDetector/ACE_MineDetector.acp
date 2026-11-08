@@ -1,0 +1,195 @@
+AudioClass {
+ signals {
+  SignalClass "64525" {
+   id 64525
+   name "Signal"
+   tl 332.249 -125.38
+   res "{785D7F421AC19891}Sounds/_SharedData/Signals/ACE_Pitch.sig"
+   inputsport {
+    1
+   }
+   outputsport {
+    2
+   }
+   inputvalues {
+    0
+   }
+   inputvaluesmin {
+    0
+   }
+   inputvaluesmax {
+    1
+   }
+  }
+ }
+ sounds {
+  SoundClass "62473" {
+   id 62473
+   name "SOUND_BEEP"
+   version 5
+   tl 976.192 2.697
+   ins {
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "60434:65" {
+       id 60434
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    48 0
+   }
+   outState 1035
+   outStatePort 79879
+  }
+ }
+ mixers {
+  MixerClass "1035" {
+   id 1035
+   name "FinalMix"
+   version 4
+   tl 1173.901 1.872
+   res "{B764D803219C775E}Sounds/FinalMix.afm"
+   ins {
+    ConnectionsClass "con:79879" {
+     id 79879
+     links {
+      ConnectionClass "62473:65" {
+       id 62473
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    8192 0
+   }
+   inputs {
+    "WPN_Handling" "WPN_Shots" "WPN_Explosions" "WNP_BulletHits" "CHAR" "ENV_AMB_2D" "VEH_Animations" "Impacts" "Dialog" "ENV_Doors" "VEH_Engine" "VEH_Tires" "VON" "SFX" "SFX_Reverb_OBSOLETE" "VON_Reverb_Small" "Dialog_Reverb" "Impacts_EXT" "ENV_AMB_3D" "WPN_SonicCracks" "CHAR_Gear" "PA" "SFX_Reverb_Exterior" "ENV_AMB_3D_Reverb_Exterior" "SFX_Direct" "SFX_Reverb_Small" "SFX_Reverb_Medium" "SFX_Reverb_Large" "WPN_Shots_Player" "Dialog_Reverb_Small" "Dialog_Reverb_Medium" "Dialog_Reverb_Large" "WPN_TravelingProjectile" "Dialog_Delay_Exterior" "SFX_Reverb_InCabin" "VON_Reverb_Medium" "VON_Reverb_Large"
+   }
+  }
+ }
+ shaders {
+  ShaderClass "60434" {
+   id 60434
+   name "Shader"
+   version 5
+   tl 765.757 -0.782
+   ins {
+    ConnectionsClass "con:0" {
+     id 0
+     links {
+      ConnectionClass "57372:65" {
+       id 57372
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "61459:65" {
+       id 61459
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:2" {
+     id 2
+     links {
+      ConnectionClass "59413:65" {
+       id 59413
+       port 65
+      }
+     }
+    }
+    ConnectionsClass "con:64" {
+     id 64
+     links {
+      ConnectionClass "56324:65" {
+       id 56324
+       port 65
+      }
+     }
+    }
+   }
+   pi {
+    7 0
+   }
+  }
+ }
+ amplitudes {
+  AmplitudeClass "61459" {
+   id 61459
+   name "Amplitude"
+   version 5
+   tl 534.714 58.958
+   curve "1/r"
+   outerRange 25
+  }
+ }
+ frequency {
+  FrequencyClass "59413" {
+   id 59413
+   name "Frequency"
+   version 5
+   tl 533.583 129.653
+   enableDistanceAtt 1
+  }
+ }
+ banks_local {
+  BankLocalClass "56324" {
+   id 56324
+   name "Bank"
+   version 7
+   tl 536.366 -125.782
+   ins {
+    ConnectionsClass "con:1" {
+     id 1
+     links {
+      ConnectionClass "64525:2" {
+       id 64525
+       port 2
+      }
+     }
+    }
+   }
+   pi {
+    2 0
+   }
+   Volume -10
+   Samples {
+    AudioBankSampleClass "metal_detector.wav" {
+     Filename "{AA25D10896B3E136}Sounds/Items/Equipment/MetalDetector/Samples/ACE_MetalDetector.wav"
+    }
+   }
+  }
+ }
+ spatialities {
+  SpatialityClass "57372" {
+   id 57372
+   name "Spatiality"
+   version 5
+   tl 533.583 -6.868
+   spatialFactor 1
+  }
+ }
+ version 2
+ acp_ins {
+  ACPInOut "196202858" {
+   name "Shader|Frequency"
+   piid 60434
+   port 2
+   id 196202858
+  }
+  ACPInOut "1540172918" {
+   name "Shader|Spatiality"
+   piid 60434
+   port 0
+   id 1540172918
+  }
+ }
+}

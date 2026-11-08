@@ -49,6 +49,19 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 	}
 	
 	//-----------------------------------------------------------------------------------------------------------
+	override void Kill(notnull Instigator instigator)
+	{
+		if (s_ACE_Medical_Core_Settings.m_bPlayerCannotDie)
+		{
+			SCR_ECharacterControlType controlType = SCR_CharacterHelper.GetCharacterControlType(GetOwner());
+			if (controlType != SCR_ECharacterControlType.AI && controlType != SCR_ECharacterControlType.POSSESSED_AI)
+				return;
+		}
+		
+		super.Kill(instigator);
+	}
+	
+	//-----------------------------------------------------------------------------------------------------------
 	protected override void OnDamageStateChanged(EDamageState newState, EDamageState previousDamageState, bool isJIP)
 	{
 		super.OnDamageStateChanged(newState, previousDamageState, isJIP);
@@ -104,8 +117,7 @@ modded class SCR_CharacterDamageManagerComponent : SCR_DamageManagerComponent
 		}
 		
 		// Check if epinephrine is in the system already
-		array<ref SCR_PersistentDamageEffect> effects = GetAllPersistentEffectsOfType(ACE_Medical_EpinephrineDamageEffect);
-		if (!effects.IsEmpty())
+		if (FindDamageEffectOfType(ACE_Medical_EpinephrineDamageEffect))
 		{
 			failReason = SCR_EConsumableFailReason.ALREADY_APPLIED;
 			return false;

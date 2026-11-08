@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{197544D5F5C08B77}Assets/Items/Medicine/NCDKit/Workspace/p_ncdkit_fingerAnim.anm"
+ Configurations {
+  TXAResourceClass PC {
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

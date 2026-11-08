@@ -1,0 +1,41 @@
+GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01_base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Medical-Item_Naloxone_Name"
+     Description "#ACE_Medical-Item_Naloxone_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{5E04DAAE66DE1E77}" {
+       Name "#ACE_Medical-InfoWidget_Naloxone"
+      }
+     }
+    }
+   }
+  }
+  MeshObject "{59CE87DB17B6B1C5}" {
+   Materials {
+    MaterialAssignClass "{62211777D706941C}" {
+     SourceMaterial "MorphineInjection_01"
+     AssignedMaterial "{C743E213F3F50576}Assets/Items/Medicine/NaloxoneInjection/Data/ACE_Medical_NaloxoneInjection.emat"
+    }
+   }
+  }
+  SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
+   m_ConsumableEffect ACE_Medical_ConsumableMedication "{59E68C74C1F3910E}" {
+    m_aDamageEffectsToLoad {
+     UnknownDamageEffect "{6122D60861B541E7}" {
+     }
+    }
+    m_eDeviceType ACE_MEDICAL_NALOXONE_INJECTOR
+    m_Doses {
+     ACE_Medical_Bolus "{62211753E2C04DB9}" {
+      m_eDrugType NALOXONE
+      m_fConcentrationNM 600
+     }
+    }
+   }
+  }
+ }
+}

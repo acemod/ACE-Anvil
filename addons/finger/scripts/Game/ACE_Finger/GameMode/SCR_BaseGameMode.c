@@ -9,6 +9,9 @@ modded class SCR_BaseGameMode : BaseGameMode
 	{
 		super.OnPlayerRegistered(playerId);
 		
+		if (!Replication.IsServer())
+			return;
+		
 		SCR_PlayerController playerController = SCR_PlayerController.Cast(GetGame().GetPlayerManager().GetPlayerController(playerId));
 		if (!playerController)
 			return;
@@ -36,6 +39,9 @@ modded class SCR_BaseGameMode : BaseGameMode
 	override protected void OnPlayerDisconnected(int playerId, KickCauseCode cause, int timeout)
 	{
 		super.OnPlayerDisconnected(playerId, cause, timeout);
+		
+		if (!Replication.IsServer())
+			return;
 		
 		ACE_Finger_MapPointer ptr;
 		if (m_aACE_Finger_Pointers.Take(playerId, ptr))

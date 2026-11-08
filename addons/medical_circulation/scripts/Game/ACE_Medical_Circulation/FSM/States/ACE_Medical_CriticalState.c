@@ -19,6 +19,6 @@ class ACE_Medical_CriticalState : ACE_Medical_StableState
 		if (bloodVolumeRatio < context.m_pBloodHitZone.GetDamageStateThreshold(ACE_Medical_EBloodState.CLASS_3_HEMORRHAGE))
 			return context.m_pVitals.GetHeartRate() * 14.3 * Math.Lerp(0.5, 1, bloodVolumeRatio) / Math.Max(6, context.m_pVitals.GetMeanArterialPressure());
 		
-		return s_pCirculationSettings.m_fDefaultHeartRateBPM;
+		return super.ComputeBaseTargetHeartRate(context, timeSlice);
 	}
 }

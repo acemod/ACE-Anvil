@@ -1,0 +1,8 @@
+GenericEntity : "{EF645050361A6674}Prefabs/Props/Core/ACE_Medical_LitterBase.et" {
+ ID "F0DBA538AC2A0552"
+ components {
+  MeshObject "{5872F0EB7FA40561}" {
+   Object "{9E4DDE583CBE03F9}Assets/Props/Garbage/Medical/Bandages/ACE_Medical_LitterBandages01.xob"
+  }
+ }
+}

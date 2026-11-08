@@ -1,0 +1,4 @@
+MatPBRMulti : "{AC71C5F96ED4E1BF}Assets/Props/Military/SupplyBox/SupplyPortableContainers/Data/PortableSupplyContainer_Large.emat" {
+ Specular 1 0.814 0.485 1
+ SpecularMul 5
+}

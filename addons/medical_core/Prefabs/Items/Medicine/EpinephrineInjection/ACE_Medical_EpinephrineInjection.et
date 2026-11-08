@@ -1,0 +1,36 @@
+GenericEntity : "{3238FC0BDB67AA78}Prefabs/Items/Medicine/MorphineInjection_01/MorphineInjection_01_base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName SCR_InventoryUIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Medical-Item_Epinephrine_Name"
+     Description "#ACE_Medical-Item_Epinephrine_Description"
+     m_aItemHints {
+      SCR_InventoryItemHintUIInfo "{5E04DAAE66DE1E77}" {
+       Name "#ACE_Medical-InfoWidget_Epinephrine"
+      }
+     }
+    }
+   }
+  }
+  MeshObject "{59CE87DB17B6B1C5}" {
+   Materials {
+    MaterialAssignClass "{5E101C571020DAB0}" {
+     SourceMaterial "MorphineInjection_01"
+     AssignedMaterial "{BC828B62FBDE7EED}Assets/Items/Medicine/EpinephrineInjection/Data/ACE_Medical_EpinephrineInjection.emat"
+    }
+   }
+  }
+  SCR_ConsumableItemComponent "{59E68C74C5CEE74F}" {
+   m_ConsumableEffect ACE_Medical_ConsumableEpinephrine "{59E68C74C1F3910E}" {
+    m_fItemRegenerationSpeed 5
+    m_fItemRegenerationDuration 30
+    m_aDamageEffectsToLoad {
+     ACE_Medical_EpinephrineDamageEffect "{6122D60861B541E7}" {
+     }
+    }
+   }
+  }
+ }
+}

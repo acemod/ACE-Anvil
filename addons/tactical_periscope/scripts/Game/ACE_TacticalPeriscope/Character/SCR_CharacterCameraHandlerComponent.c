@@ -6,7 +6,7 @@ modded class SCR_CharacterCameraHandlerComponent : CameraHandlerComponent
 	//! Select periscopic camera when one is in zoom view
 	override int CameraSelector()
 	{
-		if (ACE_TacticalPeriscope_GadgetComponent.IsZoomedView())
+		if (SCR_PlayerController.s_pLocalPlayerController && SCR_PlayerController.s_pLocalPlayerController.GetIsBinocularsZoomed())
 			return CharacterCameraSet.ACE_TACTICAL_PERISCOPE_CHARACTERCAMERA;
 		
 		return super.CameraSelector();

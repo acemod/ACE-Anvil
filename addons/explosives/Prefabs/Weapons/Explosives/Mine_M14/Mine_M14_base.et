@@ -1,0 +1,8 @@
+GenericEntity : "{9C80A507960AA473}Prefabs/Weapons/Core/Mine_base.et" {
+ ID "5968D2B6A82C6019"
+ components {
+  SCR_MineWeaponComponent "{59F2DC2C202D1AFB}" {
+   m_vACE_Explosives_BurialOffset 0 -0.025 0
+  }
+ }
+}

@@ -10,8 +10,8 @@ modded class SCR_CharacterHitZone : SCR_RegeneratingHitZone
 	protected ref array<ACE_Medical_OrganHitZone> m_aACE_Medical_OrganHitZones = {};
 	
 	//-----------------------------------------------------------------------------------------------------------
-	//! Friend method of SCR_CharacterDamageManagerComponent
-	void ACE_Medical_InitOrganHitZones(SCR_CharacterDamageManagerComponent damageManager)
+	[Friend(SCR_CharacterDamageManagerComponent)]
+	protected void ACE_Medical_InitOrganHitZones(SCR_CharacterDamageManagerComponent damageManager)
 	{
 		foreach (string name : m_aACE_Medical_OrganHitZoneNames)
 		{

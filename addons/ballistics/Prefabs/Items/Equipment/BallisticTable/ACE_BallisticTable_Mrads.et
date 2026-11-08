@@ -1,0 +1,29 @@
+GameEntity : "{889DC9D8BF3E3DD5}Prefabs/Items/Equipment/BallisticTable/ACE_BallisticTable_Base.et" {
+ ID "508AB2013EEE1E00"
+ components {
+  ACE_BallisticTableComponent "{60CAB3ECC903C006}" {
+   m_eUnitType MILLIRADIANS
+   m_sACE_TableLayoutName "{94BEF98329CC0B81}UI/layouts/Gadgets/BallisticTable/ACE_BallisticTable_Mrads.layout"
+  }
+  InventoryItemComponent "{5222EB4D0C73006B}" {
+   Attributes SCR_ItemAttributeCollection "{5222EB4D0A2B466B}" {
+    ItemDisplayName UIInfo "{5222EB4D07D865FA}" {
+     Name "#ACE_Ballistics-Item_BallisticTables_Mrads_Name"
+     Description "#ACE_Ballistics-Item_BallisticTables_Mrads_Description"
+    }
+   }
+  }
+  MeshObject "{60CA7A7326F832F8}" {
+   Materials {
+    MaterialAssignClass "{68F60CD71F644B3F}" {
+     SourceMaterial "RangeTable_01"
+     AssignedMaterial "{798B20DC6F50AD7F}Assets/Items/Misc/BallisticTable/Data/RangeTable_01_M252.emat"
+    }
+    MaterialAssignClass "{68F60CD71F644B18}" {
+     SourceMaterial "RangeTable_01_2B14_MLOD"
+     AssignedMaterial "{F1AD919094330676}Assets/Items/Misc/BallisticTable/Data/RangeTable_01_M252_MLOD.emat"
+    }
+   }
+  }
+ }
+}

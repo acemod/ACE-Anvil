@@ -1,0 +1,19 @@
+MetaFileClass {
+ Name "{9908FF6E828E6747}Assets/Items/Equipment/WeatherMeter/WeatherMeter_Kestrel4500/Workspace/p_erc_kestrel4500_fingerAnim.anm"
+ Configurations {
+  TXAResourceClass PC {
+   SourcePath "Character_AnimationRig_Kestrel4500.blend"
+   SourceProfile "ACE_LHandTwistABS_LProp"
+  }
+  TXAResourceClass XBOX_ONE : PC {
+  }
+  TXAResourceClass XBOX_SERIES : PC {
+  }
+  TXAResourceClass PS4 : PC {
+  }
+  TXAResourceClass PS5 : PC {
+  }
+  TXAResourceClass HEADLESS : PC {
+  }
+ }
+}

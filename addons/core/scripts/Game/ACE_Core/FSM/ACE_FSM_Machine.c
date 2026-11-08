@@ -167,7 +167,7 @@ class ACE_FSM_Machine<Managed TContext> : ACE_IFrameJob
 	//------------------------------------------------------------------------------------------------
 	ACE_FSM_EStateID GetCurrentStateID()
 	{
-		return m_aStates[m_iCurrentStateIdx];
+		return m_aStates[m_iCurrentStateIdx].GetID();
 	}
 	
 	//------------------------------------------------------------------------------------------------

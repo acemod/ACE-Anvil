@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-modded class ACE_Medical_IVitalState : ACE_FSM_IState<ACE_Medical_CharacterContext>
+modded class ACE_Medical_IVitalState : ACE_FSM_StateBase<ACE_Medical_CharacterContext>
 {
 	protected static ACE_Medical_Breathing_Settings s_pBreathingSettings;
 	

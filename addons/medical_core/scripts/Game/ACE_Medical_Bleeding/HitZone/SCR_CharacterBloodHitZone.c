@@ -24,7 +24,7 @@ modded class SCR_CharacterBloodHitZone : SCR_RegeneratingHitZone
 	//! Whether the character can bleed out
 	protected bool ACE_Medical_CanBleedOut()
 	{
-		if (!EntityUtils.IsPlayer(GetOwner()))
+		if (!ACE_EntityUtils.IsPlayer(GetOwner()))
 			return true;
 		
 		ACE_Medical_Core_Settings settings = ACE_SettingsHelperT<ACE_Medical_Core_Settings>.GetModSettings();

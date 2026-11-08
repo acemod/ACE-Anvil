@@ -1,0 +1,49 @@
+FrameWidgetClass {
+ {
+  SizeLayoutWidgetClass "{5CEAF8054DC82357}" {
+   Prefab "{5CEAF8054DC82357}"
+   {
+    VerticalLayoutWidgetClass "{5CC6924FF67CE111}" {
+     Prefab "{5CC6924FF67CE111}"
+     {
+      TextWidgetClass "{66CF3B56EB27CBBE}" {
+       Name "ACE_Radio_EncryptionKeyText"
+       Slot LayoutSlot "{66CF3B56EB27B065}" {
+        HorizontalAlign 1
+        VerticalAlign 2
+       }
+       Text "Error"
+       "Font Size" 14
+       "Min Font Size" 14
+       FontProperties FontProperties "{66CF3B5375037D06}" {
+        Font "{3E7733BAC8C831F6}UI/Fonts/RobotoCondensed/RobotoCondensed_Regular.fnt"
+        OutlineSize 1
+       }
+      }
+      TextWidgetClass "{5CCC91E0C44B6341}" {
+       Prefab "{5CCC91E0C44B6341}"
+       Slot LayoutSlot "{5D0AEE0CE85C65B2}" {
+        HorizontalAlign 1
+        Padding 0 0 0 0
+       }
+       "Font Size" 14
+       "Min Font Size" 14
+       FontProperties FontProperties "{52EF3224C71893AC}" {
+        Bold 1
+        OutlineSize 1
+        ShadowSize 0
+       }
+      }
+      TextWidgetClass "{5D0A869549EE82A6}" {
+       Prefab "{5D0A869549EE82A6}"
+       Name "ChannelText"
+       FontProperties FontProperties "{5D0A869E0EE5B6B9}" {
+        Bold 0
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

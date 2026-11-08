@@ -21,6 +21,10 @@ modded class SCR_RemoveCasualtyUserAction : SCR_CompartmentUserAction
 		if (!userCharController)
 			return;
 		
+		// We just eject AI for now. Trying to carrying them immediatly breaks their animation
+		if (!ACE_EntityUtils.IsPlayer(casualtyChar))
+			return;
+		
 		string cannotPerformReason;
 		if (userCharController.ACE_Carrying_CanCarryCasualty(casualtyChar, cannotPerformReason))
 			userCharController.ACE_Carrying_CarryCasualty(casualtyChar);

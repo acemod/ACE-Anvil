@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{B15B53A88B58433F}Assets/Weapons/Explosives/workspace/ACE_TacticalLadder.aw"
+ Name "{B15B53A88B58433F}Assets/Items/TacticalLadder/Workspaces/ACE_TacticalLadder.aw"
  Configurations {
   AnimWorkspaceResourceClass PC {
   }

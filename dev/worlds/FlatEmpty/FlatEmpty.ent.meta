@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{49812F7617DF6B0B}worlds/Test/FlatEmpty.ent"
+ Name "{49812F7617DF6B0B}worlds/FlatEmpty/FlatEmpty.ent"
  Configurations {
   ENTResourceClass PC {
   }

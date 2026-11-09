@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{7063BDFDF0B3998C}UI/layouts/Gagets/ACE_ControllerButton.layout"
+ Name "{7063BDFDF0B3998C}UI/layouts/Gagets/ACE_GamepadPhysicalButton.layout"
  Configurations {
   LayoutResourceClass PC {
   }

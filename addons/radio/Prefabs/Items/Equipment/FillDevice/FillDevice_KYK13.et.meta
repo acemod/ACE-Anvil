@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{9CE05DFA1246426D}Prefabs/Items/Core/FillDevice_KYK13.et"
+ Name "{9CE05DFA1246426D}Prefabs/Items/Equipment/FillDevice/FillDevice_KYK13.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

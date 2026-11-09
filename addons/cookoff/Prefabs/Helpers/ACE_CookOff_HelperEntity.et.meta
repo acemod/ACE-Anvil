@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{503A79B1A99FEF74}Prefabs/Helpers/ACE_CookOff_SoundEntity.et"
+ Name "{503A79B1A99FEF74}Prefabs/Helpers/ACE_CookOff_HelperEntity.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

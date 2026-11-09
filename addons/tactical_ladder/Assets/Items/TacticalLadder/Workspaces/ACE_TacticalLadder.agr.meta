@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{01EED353ADD9CB79}Assets/Weapons/Explosives/workspace/ACE_TacticalLadder.agr"
+ Name "{01EED353ADD9CB79}Assets/Items/TacticalLadder/Workspaces/ACE_TacticalLadder.agr"
  Configurations {
   AnimGraphResourceClass PC {
   }

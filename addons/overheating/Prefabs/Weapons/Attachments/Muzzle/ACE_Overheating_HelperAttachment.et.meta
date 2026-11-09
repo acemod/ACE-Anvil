@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{D4B8C629F3D4A322}Prefabs/Weapons/Core/Attachment_Base.et"
+ Name "{D4B8C629F3D4A322}Prefabs/Weapons/Attachments/Muzzle/ACE_Overheating_HelperAttachment.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

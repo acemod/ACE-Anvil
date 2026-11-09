@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{AA25D10896B3E136}Sounds/Items/Equipment/MineDetectors/VMM3/Samples/metal_detector.wav"
+ Name "{AA25D10896B3E136}Sounds/Items/Equipment/MetalDetector/Samples/ACE_MetalDetector.wav"
  Configurations {
   WAVResourceClass PC : "{F72B05D02F3F135E}Configs/System/ResourceTypes/PC/Sound.conf" {
   }

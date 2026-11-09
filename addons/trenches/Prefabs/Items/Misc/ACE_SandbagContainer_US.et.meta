@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{25C084725870741B}Prefabs/Items/Core/ACE_SandbagsStack.et"
+ Name "{25C084725870741B}Prefabs/Items/Misc/ACE_SandbagContainer_US.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

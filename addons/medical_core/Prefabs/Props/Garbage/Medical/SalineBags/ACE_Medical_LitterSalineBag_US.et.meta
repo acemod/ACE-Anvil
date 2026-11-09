@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{B07474CED3DF70FE}Prefabs/Props/Garbage/Medical/ACE_Medical_LitterSaline_US.et"
+ Name "{B07474CED3DF70FE}Prefabs/Props/Garbage/Medical/SalineBags/ACE_Medical_LitterSalineBag_US.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

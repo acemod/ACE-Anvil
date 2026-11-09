@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{7422ADFB7D0A1564}Prefabs/Props/Garbage/Medical/NCDKit/ACE_Medical_LitterChestSealPackage.et"
+ Name "{7422ADFB7D0A1564}Prefabs/Props/Garbage/Medical/ChestSeal/ACE_Medical_LitterChestSealPackage.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

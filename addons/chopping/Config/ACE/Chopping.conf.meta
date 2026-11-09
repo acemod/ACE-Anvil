@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{B205BD6D8069137B}Config/Chopping/Chopping.conf"
+ Name "{B205BD6D8069137B}Config/ACE/Chopping.conf"
  Configurations {
   CONFResourceClass PC {
   }

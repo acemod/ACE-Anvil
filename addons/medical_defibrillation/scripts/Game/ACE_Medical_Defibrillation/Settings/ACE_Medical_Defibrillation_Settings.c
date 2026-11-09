@@ -73,60 +73,60 @@ enum ACE_Medical_Defibrillation_EDefibSettingDecayType
 class ACE_Medical_Defibrillation_Settings : ACE_ModSettings
 {
     // Core Settings
-    [Attribute(defvalue: "true", desc: "Enables the defibrillation system.")]
+    [Attribute(defvalue: "true", desc: "Enables the defibrillation system.", category: "Core Settings")]
     bool m_bEnabled;
     
-    [Attribute(defvalue: "false", desc: "Defibrillation is mandatory for revive.")]
+    [Attribute(defvalue: "false", desc: "Defibrillation is mandatory for revive.", category: "Core Settings")]
     bool m_bDefibIsMandatory;
     
-    [Attribute(defvalue: "3", params: "3 inf", desc: "Time (s) for AED to perform rhythm analysis.")]
+    [Attribute(defvalue: "3", params: "3 inf", desc: "Time (s) between AED analysis events where players should perform CPR.", category: "AED Settings")]
     float m_fAED_AnalysisDuration;
     
-    [Attribute(defvalue: "1", uiwidget: UIWidgets.ComboBox, desc: "Uses a preset and ignores custom settings below.", enums: ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibSettingPreset))]
+    [Attribute(defvalue: "1", uiwidget: UIWidgets.ComboBox, desc: "Uses a preset and ignores custom settings below.", enums: ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibSettingPreset), category: "Core Settings")]
     ACE_Medical_Defibrillation_EDefibSettingPreset m_eDefibSettingPreset;
     
-    [Attribute(defvalue: "120", params: "0 inf", desc: "Time (s) between AED analysis events where players should perform CPR.")]
+    [Attribute(defvalue: "120", params: "0 inf", desc: "Time (s) between AED analysis events where players should perform CPR.", category: "AED Settings")]
     float m_fAED_CPRCooldownDuration;
     
-    [Attribute(defvalue: "true", desc: "Plays pacing beats when players should be performing CPR.")]
+    [Attribute(defvalue: "true", desc: "Plays pacing beats when players should be performing CPR.", category: "AED Settings")]
     bool m_bAED_PlayCPRPacingBeats;
 
     // Shock Success
-    [Attribute(defvalue: "true", desc: "Fails to deliver a successful shock if shocks are too close together.")]
+    [Attribute(defvalue: "true", desc: "Fails to deliver a successful shock if shocks are too close together.", category: "Shock Settings")]
     bool m_bPunishSpamShocks;
     
-    [Attribute(defvalue: "108", params: "0 inf", desc: "Seconds since last shock to allow for successful shock with no time interval punishment.")]
+    [Attribute(defvalue: "108", params: "0 inf", desc: "Seconds since last shock to allow for successful shock with no time interval punishment.", category: "Shock Settings")]
     float m_fPunishSpamShocksTimeout;
     
-    [Attribute(defvalue: "true", desc: "Successful shock chance decays with subsequent shocks.")]
+    [Attribute(defvalue: "true", desc: "Shock chance decays with subsequent shocks.", category: "Shock Settings")]
     bool m_bShockChanceDecay;
     
-    [Attribute(defvalue: "0.92", desc: "Shock success decay rate. (Seconds till 0% chance for TimeBased formulas)")]
+    [Attribute(defvalue: "0.92", desc: "Shock success decay rate. (Seconds till 0% chance for TimeBased formulas)", category: "Shock Settings")]
     float m_fShockSuccessDecayRate;
     
-    [Attribute(defvalue: "0", uiwidget: UIWidgets.ComboBox, desc: "Decay formula to apply to the success rate of subsequent shocks.", enums: ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibSettingDecayType))]
+    [Attribute(defvalue: "0", uiwidget: UIWidgets.ComboBox, desc: "Decay formula to apply to the success rate of subsequent shocks.", enums: ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibSettingDecayType), category: "Shock Settings")]
     ACE_Medical_Defibrillation_EDefibSettingDecayType m_eShockDecayFormula;
 
-    [Attribute(defvalue: "0.9", desc: "Base shock success chance for first shock.", params: "0 1")]
+    [Attribute(defvalue: "0.9", desc: "Base shock success chance for first shock.", params: "0 1", category: "Shock Settings")]
     float m_fBaseShockSuccessChance;
     
-    [Attribute(defvalue: "0", desc: "Minimum shock success chance.", params: "0 1")]
+    [Attribute(defvalue: "0", desc: "Minimum shock success chance.", params: "0 1", category: "Shock Settings")]
     float m_fMinShockSuccessChance;
 
     // Revive Bonus
-    [Attribute(defvalue: "true", desc: "Revive bonus decays with subsequent shocks.")]
+    [Attribute(defvalue: "true", desc: "Revive bonus decays with subsequent shocks.", category: "Bonus Settings")]
     bool m_bReviveBonusDecay;
     
-    [Attribute(defvalue: "0.85", desc: "Revive bonus decay rate. (Seconds till 0% chance for TimeBased formulas)")]
+    [Attribute(defvalue: "0.85", desc: "Revive bonus decay rate. (Seconds till 0% chance for TimeBased formulas)", category: "Bonus Settings")]
     float m_fReviveBonusDecayRate;
     
-    [Attribute(defvalue: "0", uiwidget: UIWidgets.ComboBox, desc: "Decay formula to apply to the bonus from subsequent shocks.", enums: ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibSettingDecayType))]
+    [Attribute(defvalue: "0", uiwidget: UIWidgets.ComboBox, desc: "Decay formula to apply to the bonus from subsequent shocks.", enums: ParamEnumArray.FromEnum(ACE_Medical_Defibrillation_EDefibSettingDecayType), category: "Bonus Settings")]
     ACE_Medical_Defibrillation_EDefibSettingDecayType m_eReviveBonusDecayFormula;
 
-    [Attribute(defvalue: "0.25", desc: "Base revive bonus for first shock.", params: "0 1")]
+    [Attribute(defvalue: "0.25", desc: "Base revive bonus for first shock.", params: "0 1", category: "Bonus Settings")]
     float m_fBaseReviveBonus;
     
-    [Attribute(defvalue: "0.9", desc: "Maximum total revive bonus cap (never exceed this value).", params: "0 1")]
+    [Attribute(defvalue: "0.9", desc: "Maximum total revive bonus cap (never exceed this value).", params: "0 1", category: "Bonus Settings")]
     float m_fMaxTotalReviveBonus;
 	
 	const float m_fDefibChargeTime = 5.5;
@@ -285,37 +285,39 @@ class ACE_Medical_Defibrillation_Settings : ACE_ModSettings
         m_fAED_CPRCooldownDuration = Math.Max(m_fAED_CPRCooldownDuration, 0);
         m_fPunishSpamShocksTimeout = Math.Max(m_fPunishSpamShocksTimeout, 0);
         
-		switch (m_eShockDecayFormula)
-		{
-		    case ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased:
-		        m_fShockSuccessDecayRate = Math.Max(m_fShockSuccessDecayRate, 1.0);
-		        break;
-		    case ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential:
-		        m_fShockSuccessDecayRate = Math.Clamp(m_fShockSuccessDecayRate, 0.01, 1.0);
-		        break;
-		    case ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear:
-		        m_fShockSuccessDecayRate = Math.Max(m_fShockSuccessDecayRate, 0);
-		        break;
-		    default:
-		        m_fShockSuccessDecayRate = Math.Max(m_fShockSuccessDecayRate, 0.01);
-		        break;
-		}
-		
-		switch (m_eReviveBonusDecayFormula)
-		{
-		    case ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased:
-		        m_fReviveBonusDecayRate = Math.Max(m_fReviveBonusDecayRate, 1.0);
-		        break;
-		    case ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential:
-		        m_fReviveBonusDecayRate = Math.Clamp(m_fReviveBonusDecayRate, 0.01, 1.0);
-		        break;
-		    case ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear:
-		        m_fReviveBonusDecayRate = Math.Max(m_fReviveBonusDecayRate, 0);
-		        break;
-		    default:
-		        m_fReviveBonusDecayRate = Math.Max(m_fReviveBonusDecayRate, 0.01);
-		        break;
-		}
+        if (m_eShockDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased)
+        {
+            m_fShockSuccessDecayRate = Math.Max(m_fShockSuccessDecayRate, 1.0);
+        }
+        else if (m_eShockDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential)
+        {
+            m_fShockSuccessDecayRate = Math.Clamp(m_fShockSuccessDecayRate, 0.01, 1.0);
+        }
+        else if (m_eShockDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear)
+        {
+            m_fShockSuccessDecayRate = Math.Max(m_fShockSuccessDecayRate, 0);
+        }
+        else
+        {
+            m_fShockSuccessDecayRate = Math.Max(m_fShockSuccessDecayRate, 0.01);
+        }
+        
+        if (m_eReviveBonusDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.TimeBased)
+        {
+            m_fReviveBonusDecayRate = Math.Max(m_fReviveBonusDecayRate, 1.0);
+        }
+        else if (m_eReviveBonusDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.Exponential)
+        {
+            m_fReviveBonusDecayRate = Math.Clamp(m_fReviveBonusDecayRate, 0.01, 1.0);
+        }
+        else if (m_eReviveBonusDecayFormula == ACE_Medical_Defibrillation_EDefibSettingDecayType.Linear)
+        {
+            m_fReviveBonusDecayRate = Math.Max(m_fReviveBonusDecayRate, 0);
+        }
+        else
+        {
+            m_fReviveBonusDecayRate = Math.Max(m_fReviveBonusDecayRate, 0.01);
+        }
         
         m_fBaseShockSuccessChance = Math.Clamp(m_fBaseShockSuccessChance, 0.0, 1.0);
         m_fMinShockSuccessChance = Math.Clamp(m_fMinShockSuccessChance, 0.0, m_fBaseShockSuccessChance);

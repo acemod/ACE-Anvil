@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{A0E642090EC80F41}UI/layouts/Menus/Inventory/Medical/ACE_Medical_MedicationLayout.layout"
+ Name "{A0E642090EC80F41}UI/layouts/Menus/Inventory/Medical/ACE_Medical_MedicationTooltipEntry.layout"
  Configurations {
   LayoutResourceClass PC {
   }

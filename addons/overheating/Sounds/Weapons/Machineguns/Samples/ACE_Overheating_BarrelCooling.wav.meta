@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{6C43E01394A6190E}Sounds/Weapons/Machineguns/Samples/water_on_hot_metal_quench_sizzle_smooth_tail_compact.wav"
+ Name "{6C43E01394A6190E}Sounds/Weapons/Machineguns/Samples/ACE_Overheating_BarrelCooling.wav"
  Configurations {
   WAVResourceClass PC : "{F72B05D02F3F135E}Configs/System/ResourceTypes/PC/Sound.conf" {
   }

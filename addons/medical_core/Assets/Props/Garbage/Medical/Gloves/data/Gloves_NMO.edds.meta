@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{528F93530F5E7299}Assets/Props/Garbage/Medical/Gloves/data/gloves_NMO.edds"
+ Name "{528F93530F5E7299}Assets/Props/Garbage/Medical/Gloves/data/Gloves_NMO.edds"
  Configurations {
   PNGResourceClass PC : "{A968DA7F9A1E3A3E}Configs/System/ResourceTypes/PC/TextureNType.conf" {
   }

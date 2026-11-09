@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{744FFD0C5F124A92}PrefabsEditable/System/ACE_PointingEntity.et"
+ Name "{744FFD0C5F124A92}PrefabsEditable/System/ACE_Finger_PingEntity.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

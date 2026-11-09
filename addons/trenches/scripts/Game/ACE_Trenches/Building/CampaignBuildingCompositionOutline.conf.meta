@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{96A8B496A076F1C0}scripts/Game/Building/CampaignBuildingCompositionOutline.conf"
+ Name "{96A8B496A076F1C0}scripts/Game/ACE_Trenches/Building/CampaignBuildingCompositionOutline.conf"
  Configurations {
   CONFResourceClass PC {
   }

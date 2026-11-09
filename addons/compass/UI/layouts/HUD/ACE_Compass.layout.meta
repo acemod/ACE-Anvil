@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{F392EAC9FD9F61D4}UI/layouts/HUD/Compass.layout"
+ Name "{F392EAC9FD9F61D4}UI/layouts/HUD/ACE_Compass.layout"
  Configurations {
   LayoutResourceClass PC {
   }

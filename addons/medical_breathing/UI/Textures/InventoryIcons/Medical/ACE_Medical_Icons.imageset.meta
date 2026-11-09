@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/Medical-icons.imageset"
+ Name "{B9199157B90D6217}UI/Textures/InventoryIcons/Medical/ACE_Medical_Icons.imageset"
  Configurations {
   ImageSetResourceClass PC {
   }

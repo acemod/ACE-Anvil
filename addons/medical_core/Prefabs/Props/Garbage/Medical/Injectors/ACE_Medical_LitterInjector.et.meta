@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{901CA3B2C754CADD}Prefabs/Props/Garbage/Medical/ACE_Medical_LitterInjector.et"
+ Name "{901CA3B2C754CADD}Prefabs/Props/Garbage/Medical/Injectors/ACE_Medical_LitterInjector.et"
  Configurations {
   EntityTemplateResourceClass PC {
   }

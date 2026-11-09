@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{4E2AF3E9D54A29B4}Configs/ACE/ACE_SurfaceTypes.conf"
+ Name "{4E2AF3E9D54A29B4}Configs/ACE/ACE_SurfaceLabels.conf"
  Configurations {
   CONFResourceClass PC {
   }

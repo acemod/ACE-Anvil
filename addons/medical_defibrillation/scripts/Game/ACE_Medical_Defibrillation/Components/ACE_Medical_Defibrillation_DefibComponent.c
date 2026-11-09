@@ -104,6 +104,13 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 																		   m_fChargeDuration * 1000,
 																		   m_fCPRCooldownDuration * 1000);
 		
+		// Create sound data
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(GetOwner());
+		if (!manager)
+		{
+			manager.Reset();
+		}
+		
 		m_eDefibrillatorStateID = ACE_Medical_Defibrillation_EDefibStateID.DISCONNECTED;
 	}
 	
@@ -209,6 +216,13 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	    
 	    float cprCooldown = m_pProgressData.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
 	    m_pProgressData.SetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown, cprCooldown);
+	    
+		// Play sounds
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(GetOwner());
+		if (manager)
+		{
+			manager.PlaySoundOnPatientGlobal(ACE_Medical_Defibrillation_SharedSounds.SOUNDSHOCKTHUMP);
+		}
 		
 	    return shockSuccessful;
 	}

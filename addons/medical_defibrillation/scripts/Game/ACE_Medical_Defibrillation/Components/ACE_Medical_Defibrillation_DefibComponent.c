@@ -19,6 +19,9 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	protected int m_iPatientRplId;
 	protected IEntity m_pPatient;
 	
+	[RplProp(onRplName: "OnDefibStateChanged")]
+	protected ACE_Medical_Defibrillation_EDefibStateID m_eDefibrillatorStateID;
+	
 	[RplProp(onRplName: "OnDefibProgressChanged"), RplRpc(RplChannel.Unreliable, RplRcver.Broadcast)]
 	protected ref ACE_Medical_Defibrillation_DefibProgressData m_pProgressData;
 	
@@ -47,6 +50,20 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 																		   m_fChargeDuration * 1000,
 																		   m_fCPRCooldownDuration * 1000);
 		
+		// Subscribe to the InventoryItemComponent OnParentSlotChanged
+		// Determines if defib is already on the ground to add it to the system
+		InventoryItemComponent invComp = InventoryItemComponent.Cast(owner.FindComponent(InventoryItemComponent));
+		if (invComp)
+		{
+			invComp.m_OnParentSlotChangedInvoker.Insert(OnParentSlotChanged);
+			if (!invComp.GetParentSlot())
+			{
+				ACE_Medical_Defibrillation_DefibStatesSystem system = GetDefibStatesSystem();
+				if (system)
+					system.Register(owner);
+			}
+		}
+		
 		// Subscribe to data change events for replication
 		m_pProgressData.m_OnDataChanged.Insert(OnDefibProgressChanged);
 	}
@@ -61,6 +78,20 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	}
 	
 	//------------------------------------------------------------------------------------------------
+	ACE_Medical_Defibrillation_DefibStatesSystem GetDefibStatesSystem()
+	{
+		ChimeraWorld world = GetGame().GetWorld();
+		if (!world)
+			return null;
+		
+		ACE_Medical_Defibrillation_DefibStatesSystem system = ACE_Medical_Defibrillation_DefibStatesSystem.Cast(world.FindSystem(ACE_Medical_Defibrillation_DefibStatesSystem));
+		if (!system)
+			return null;
+		
+		return system;
+	}
+	
+	//------------------------------------------------------------------------------------------------
 	void Reset()
 	{
 		SetPatient(null);
@@ -72,12 +103,27 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 																		   m_fAnalysisDuration * 1000,
 																		   m_fChargeDuration * 1000,
 																		   m_fCPRCooldownDuration * 1000);
+		
+		m_eDefibrillatorStateID = ACE_Medical_Defibrillation_EDefibStateID.DISCONNECTED;
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	ACE_Medical_Defibrillation_EDefibEmulation GetDefibrillatorEmulation()
 	{
 		return m_eDefibrillatorEmulation;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ACE_Medical_Defibrillation_EDefibStateID GetDefibStateID()
+	{
+		return m_eDefibrillatorStateID;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	void SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID state)
+	{
+		m_eDefibrillatorStateID = state;
+		Replication.BumpMe();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -158,6 +204,8 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	        vitals.ModifyShocksDelivered(1);
 			vitals.ResetTimeSinceLastShock();
 	    }
+		    
+	    SetDefibStateID(ACE_Medical_Defibrillation_EDefibStateID.CONNECTED);
 	    
 	    float cprCooldown = m_pProgressData.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
 	    m_pProgressData.SetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown, cprCooldown);
@@ -169,6 +217,25 @@ class ACE_Medical_Defibrillation_DefibComponent : ScriptComponent
 	private void OnDefibProgressChanged()
 	{
 		Replication.BumpMe();
+	}
+	
+	
+	//------------------------------------------------------------------------------------------------
+	private void OnParentSlotChanged(InventoryStorageSlot oldSlot, InventoryStorageSlot newSlot)
+	{
+		ACE_Medical_Defibrillation_DefibStatesSystem system = GetDefibStatesSystem();
+		if (!system)
+			return;
+		
+		if (!newSlot)
+		{
+			system.Register(GetOwner());
+		}
+		else
+		{
+			system.Unregister(GetOwner());
+			Reset();
+		}
 	}
 	
 	//------------------------------------------------------------------------------------------------

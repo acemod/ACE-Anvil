@@ -41,6 +41,33 @@ class ACE_Medical_Defibrillation_AnalysingStateTransition : ACE_FSM_ITransition<
 			return false;
 		ACE_Medical_VitalsComponent vitals = ACE_Medical_VitalsComponent.Cast(patient.FindComponent(ACE_Medical_VitalsComponent));
 		
+		// Play sounds
+		// Reminder to not touch patient
+		ACE_Medical_Defibrillation_DefibSoundManagerComponent manager = ACE_Medical_Defibrillation_ComponentManager.GetDefibSoundManagerComponent(
+			context.m_pDefibrillator.GetOwner()
+		);
+		if (manager)
+		{
+			const float PATIENT_TOUCH_WARNING_DELAY_MS = 3500;
+			if (vitals.IsCPRPerformed())
+			{
+				if (manager.m_pSoundTimers.m_fPatientTouchTimer >= PATIENT_TOUCH_WARNING_DELAY_MS &&
+					context.m_pDefibrillator.GetDefibProgressData().GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown) == 0)
+				{
+					manager.PlaySoundGlobal(ACE_Medical_Defibrillation_SharedSounds.SOUNDDONOTTOUCHPATIENT);
+					
+					manager.m_pSoundTimers.m_fPatientTouchTimer = 0;
+				}
+				manager.m_pSoundTimers.m_fPatientTouchTimer += timeSlice;
+				return false;
+			}
+			else
+			{
+				manager.m_pSoundTimers.m_fPatientTouchTimer = PATIENT_TOUCH_WARNING_DELAY_MS;
+			}
+		}
+
+		
 		// Defib in Connected state for at least 2 seconds
 		ACE_Medical_Defibrillation_DefibProgressData defibProgress = context.m_pDefibrillator.GetDefibProgressData();
 		float cprCooldown = defibProgress.GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);

@@ -1,4 +1,4 @@
-class ACE_Medical_Defibrillation_IDefibState : ACE_FSM_IState<ACE_Medical_Defibrillation_DefibContext>
+class ACE_Medical_Defibrillation_IDefibState : ACE_FSM_StateBase<ACE_Medical_Defibrillation_DefibContext>
 {
 	protected ACE_Medical_CharacterContext m_pPatient;
 	

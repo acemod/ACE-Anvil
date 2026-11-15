@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{A5E3827C546B8210}Configs/EntityCatalog/ACE_InventoryItems_EntityCatalog_Medical.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

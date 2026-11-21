@@ -20,6 +20,7 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 		super.OnPostInit(owner);
 		m_pOwner = ACE_AnimationHelperCompartment.Cast(GetOwner());
 		m_pOwner.GetOnTerminated().Insert(OnParentTerminated);
+		m_pOwner.GetOnPerformerChanged().Insert(OnParentPerformerChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -65,17 +66,6 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	{
 		super.DetachHandlersOwner();
 		RestoreCarriedCollision();
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! The performer is not always known yet on the carrier's machine when the handlers get attached,
-	//! so keep trying until the collision of the carried entity could be disabled
-	override protected void EOnFrame(IEntity owner, float timeSlice)
-	{
-		super.EOnFrame(owner, timeSlice);
-		
-		if (!m_pCollisionDisabledEntity)
-			DisableCarriedCollision();
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -126,6 +116,19 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 		
 		m_pCollisionDisabledEntity = null;
 		m_aCollisionRestoreLayers = null;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! The carried entity gets replicated by the helper compartment and can become known on the carrier's
+	//! machine after the handlers got attached, in which case its collision has to be disabled here
+	protected void OnParentPerformerChanged()
+	{
+		if (!m_pCarrier)
+			return;
+		
+		RplComponent carrierRpl = m_pCarrier.GetRplComponent();
+		if (carrierRpl && carrierRpl.IsOwner())
+			DisableCarriedCollision();
 	}
 	
 	//------------------------------------------------------------------------------------------------

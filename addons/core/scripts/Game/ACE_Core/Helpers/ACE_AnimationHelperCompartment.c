@@ -17,6 +17,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	
 	protected bool m_bInitDone = false;
 	protected ref ScriptInvokerVoid m_OnTerminated;
+	protected ref ScriptInvokerVoid m_OnPerformerChanged;
 
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping performer
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
@@ -157,6 +158,9 @@ class ACE_AnimationHelperCompartment : GenericEntity
 		if (!m_pPerformer)
 			return;
 		
+		if (m_OnPerformerChanged)
+			m_OnPerformerChanged.Invoke();
+		
 		RplComponent performerRpl = m_pPerformer.GetRplComponent();
 		if (!performerRpl || !performerRpl.IsOwner())
 			return;
@@ -172,6 +176,15 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	SCR_ChimeraCharacter GetPerformer()
 	{
 		return m_pPerformer;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	ScriptInvokerVoid GetOnPerformerChanged()
+	{
+		if (!m_OnPerformerChanged)
+			m_OnPerformerChanged = new ScriptInvokerVoid();
+		
+		return m_OnPerformerChanged;
 	}
 	
 	//------------------------------------------------------------------------------------------------

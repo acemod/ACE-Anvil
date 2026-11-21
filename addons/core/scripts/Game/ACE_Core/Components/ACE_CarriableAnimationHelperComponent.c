@@ -11,7 +11,8 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	
 	protected ACE_AnimationHelperCompartment m_pOwner;
 	protected bool m_bHasParentTerminated = false;
-	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
+	protected IEntity m_pCollisionDisabledEntity;
+	protected ref array<int> m_aCollisionRestoreLayers;
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
@@ -56,6 +57,34 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	override protected void AttachHandlersOwner()
 	{
 		super.AttachHandlersOwner();
+		DisableCarriedCollision();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	override protected void DetachHandlersOwner()
+	{
+		super.DetachHandlersOwner();
+		RestoreCarriedCollision();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! The performer is not always known yet on the carrier's machine when the handlers get attached,
+	//! so keep trying until the collision of the carried entity could be disabled
+	override protected void EOnFrame(IEntity owner, float timeSlice)
+	{
+		super.EOnFrame(owner, timeSlice);
+		
+		if (!m_pCollisionDisabledEntity)
+			DisableCarriedCollision();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Stop the carried entity from colliding with the carrier.
+	//! Has to be done on the carrier's machine, since that is where the carrier's movement gets simulated.
+	protected void DisableCarriedCollision()
+	{
+		if (m_pCollisionDisabledEntity)
+			return;
 		
 		IEntity carried = m_pOwner.GetPerformer();
 		if (!carried)
@@ -65,20 +94,38 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 		if (!carriedPhys)
 			return;
 		
-		if (m_iPhysicsLayerPreset < 0)
-			m_iPhysicsLayerPreset = carriedPhys.GetInteractionLayer();
+		// Remember the layer of each geometry, since SetInteractionLayer overwrites all of them
+		m_aCollisionRestoreLayers = {};
+		int geomCount = carriedPhys.GetNumGeoms();
+		for (int i = 0; i < geomCount; i++)
+		{
+			m_aCollisionRestoreLayers.Insert(carriedPhys.GetGeomInteractionLayer(i));
+		}
 		
 		carriedPhys.SetInteractionLayer(EPhysicsLayerPresets.FireGeo);
+		m_pCollisionDisabledEntity = carried;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	override protected void DetachHandlersOwner()
+	//! Restore the layers stored by DisableCarriedCollision. Does nothing if they were never changed.
+	protected void RestoreCarriedCollision()
 	{
-		super.DetachHandlersOwner();
+		if (!m_pCollisionDisabledEntity)
+			return;
 		
-		IEntity carried = GetOwner().GetChildren();
-		if (carried)
-			carried.GetPhysics().SetInteractionLayer(m_iPhysicsLayerPreset);
+		Physics carriedPhys = m_pCollisionDisabledEntity.GetPhysics();
+		
+		// Skip when the geometries are no longer the ones we stored the layers for
+		if (carriedPhys && carriedPhys.GetNumGeoms() == m_aCollisionRestoreLayers.Count())
+		{
+			foreach (int i, int layer : m_aCollisionRestoreLayers)
+			{
+				carriedPhys.SetGeomInteractionLayer(i, layer);
+			}
+		}
+		
+		m_pCollisionDisabledEntity = null;
+		m_aCollisionRestoreLayers = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------

@@ -17,7 +17,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	
 	protected bool m_bInitDone = false;
 	protected ref ScriptInvokerVoid m_OnTerminated;
-	protected ref ScriptInvokerVoid m_OnPerformerChanged;
+	protected ref ScriptInvokerEntity m_OnPerformerChanged;
 
 	protected static const int SEARCH_POS_RADIUS_M = 5; // Search radius for safe position for dropping performer
 	protected static const float HELPER_DELETION_DELAY_MS = 1000; // Delay for helper to get deleted after release
@@ -159,7 +159,7 @@ class ACE_AnimationHelperCompartment : GenericEntity
 			return;
 		
 		if (m_OnPerformerChanged)
-			m_OnPerformerChanged.Invoke();
+			m_OnPerformerChanged.Invoke(m_pPerformer);
 		
 		RplComponent performerRpl = m_pPerformer.GetRplComponent();
 		if (!performerRpl || !performerRpl.IsOwner())
@@ -179,20 +179,21 @@ class ACE_AnimationHelperCompartment : GenericEntity
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	ScriptInvokerVoid GetOnPerformerChanged()
-	{
-		if (!m_OnPerformerChanged)
-			m_OnPerformerChanged = new ScriptInvokerVoid();
-		
-		return m_OnPerformerChanged;
-	}
-	
-	//------------------------------------------------------------------------------------------------
 	ScriptInvokerVoid GetOnTerminated()
 	{
 		if (!m_OnTerminated)
 			m_OnTerminated = new ScriptInvokerVoid();
 		
 		return m_OnTerminated;
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Invoked with the performer once it is known on this machine
+	ScriptInvokerEntity GetOnPerformerChanged()
+	{
+		if (!m_OnPerformerChanged)
+			m_OnPerformerChanged = new ScriptInvokerEntity();
+		
+		return m_OnPerformerChanged;
 	}
 }

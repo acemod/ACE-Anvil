@@ -11,8 +11,7 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	
 	protected ACE_AnimationHelperCompartment m_pOwner;
 	protected bool m_bHasParentTerminated = false;
-	protected IEntity m_pCollisionDisabledEntity;
-	protected ref array<int> m_aCollisionRestoreLayers;
+	protected ref array<int> m_aCarriedGeomLayers;
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
@@ -20,7 +19,6 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 		super.OnPostInit(owner);
 		m_pOwner = ACE_AnimationHelperCompartment.Cast(GetOwner());
 		m_pOwner.GetOnTerminated().Insert(OnParentTerminated);
-		m_pOwner.GetOnPerformerChanged().Insert(OnParentPerformerChanged);
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -58,26 +56,28 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	override protected void AttachHandlersOwner()
 	{
 		super.AttachHandlersOwner();
-		DisableCarriedCollision();
+		
+		// The carried entity might not be known yet, as the helper replicates it independently of the carrier
+		m_pOwner.GetOnPerformerChanged().Insert(DisableCarriedCollision);
+		DisableCarriedCollision(m_pOwner.GetPerformer());
 	}
 	
 	//------------------------------------------------------------------------------------------------
 	override protected void DetachHandlersOwner()
 	{
 		super.DetachHandlersOwner();
+		
+		m_pOwner.GetOnPerformerChanged().Remove(DisableCarriedCollision);
 		RestoreCarriedCollision();
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Stop the carried entity from colliding with the carrier.
-	//! Has to be done on the carrier's machine, since that is where the carrier's movement gets simulated.
-	protected void DisableCarriedCollision()
+	//! Stop the carried entity from colliding with the carrier
+	//! Has to be done on the carrier's machine, since that is where the carrier's movement gets simulated
+	protected void DisableCarriedCollision(IEntity carried)
 	{
-		if (m_pCollisionDisabledEntity)
-			return;
-		
-		IEntity carried = m_pOwner.GetPerformer();
-		if (!carried)
+		// Nothing to do if the carried entity is not known yet or its collision is already disabled
+		if (!carried || m_aCarriedGeomLayers)
 			return;
 		
 		Physics carriedPhys = carried.GetPhysics();
@@ -85,50 +85,40 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 			return;
 		
 		// Remember the layer of each geometry, since SetInteractionLayer overwrites all of them
-		m_aCollisionRestoreLayers = {};
-		int geomCount = carriedPhys.GetNumGeoms();
-		for (int i = 0; i < geomCount; i++)
+		m_aCarriedGeomLayers = {};
+		for (int i, count = carriedPhys.GetNumGeoms(); i < count; i++)
 		{
-			m_aCollisionRestoreLayers.Insert(carriedPhys.GetGeomInteractionLayer(i));
+			m_aCarriedGeomLayers.Insert(carriedPhys.GetGeomInteractionLayer(i));
 		}
 		
 		carriedPhys.SetInteractionLayer(EPhysicsLayerPresets.FireGeo);
-		m_pCollisionDisabledEntity = carried;
 	}
 	
 	//------------------------------------------------------------------------------------------------
-	//! Restore the layers stored by DisableCarriedCollision. Does nothing if they were never changed.
+	//! Restore the layers stored by DisableCarriedCollision
 	protected void RestoreCarriedCollision()
 	{
-		if (!m_pCollisionDisabledEntity)
+		if (!m_aCarriedGeomLayers)
 			return;
 		
-		Physics carriedPhys = m_pCollisionDisabledEntity.GetPhysics();
+		Physics carriedPhys;
+		IEntity carried = m_pOwner.GetPerformer();
+		if (carried)
+			carriedPhys = carried.GetPhysics();
 		
-		// Skip when the geometries are no longer the ones we stored the layers for
-		if (carriedPhys && carriedPhys.GetNumGeoms() == m_aCollisionRestoreLayers.Count())
+		if (carriedPhys)
 		{
-			foreach (int i, int layer : m_aCollisionRestoreLayers)
+			int geomCount = carriedPhys.GetNumGeoms();
+			foreach (int i, int layer : m_aCarriedGeomLayers)
 			{
+				if (i >= geomCount)
+					break;
+				
 				carriedPhys.SetGeomInteractionLayer(i, layer);
 			}
 		}
 		
-		m_pCollisionDisabledEntity = null;
-		m_aCollisionRestoreLayers = null;
-	}
-	
-	//------------------------------------------------------------------------------------------------
-	//! The carried entity gets replicated by the helper compartment and can become known on the carrier's
-	//! machine after the handlers got attached, in which case its collision has to be disabled here
-	protected void OnParentPerformerChanged()
-	{
-		if (!m_pCarrier)
-			return;
-		
-		RplComponent carrierRpl = m_pCarrier.GetRplComponent();
-		if (carrierRpl && carrierRpl.IsOwner())
-			DisableCarriedCollision();
+		m_aCarriedGeomLayers = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------

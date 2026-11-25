@@ -21,7 +21,6 @@ FrameWidgetClass {
                m_ElementLayout "{399F81816ADDA45B}UI/layouts/Menus/SettingsMenu/ACE_SettingsSubMenu.layout"
                m_sTabButtonContent "#ACE-Acronym"
                m_sTabIdentifier "ace-anvil"
-               m_bEnabled 0
               }
              }
             }

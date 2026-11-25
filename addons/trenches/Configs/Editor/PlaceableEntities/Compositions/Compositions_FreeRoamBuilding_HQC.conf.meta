@@ -1,0 +1,17 @@
+MetaFileClass {
+ Name "{00A1F19D349E18A8}Configs/Editor/PlaceableEntities/Compositions/Compositions_FreeRoamBuilding_HQC.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass XBOX_ONE : PC {
+  }
+  CONFResourceClass XBOX_SERIES : PC {
+  }
+  CONFResourceClass PS4 : PC {
+  }
+  CONFResourceClass PS5 : PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

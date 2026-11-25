@@ -1,0 +1,16 @@
+GameEntity : "{B6CC74F306F54A8D}Prefabs/Items/Equipment/Patches/Patch_Base.et" {
+ ID "69D0C619A36A0F4A"
+ components {
+  InventoryItemComponent "{5DB09136B1C985CE}" {
+   Attributes SCR_ItemAttributeCollection "{5DB09136B1C985C1}" {
+    ItemDisplayName SCR_ItemHintUIInfo "{5DB09136B1C985EB}" {
+     Name "#ACE-Item_AnvilPatch_Name"
+     Description "#ACE-Item_AnvilPatch_Name"
+    }
+   }
+  }
+  MeshObject "{5DB09136B1C985B5}" {
+   Object "{7EB6887E4E88438D}Assets/Items/Equipment/Patches/ACE_AnvilPatch.xob"
+  }
+ }
+}

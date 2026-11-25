@@ -11,7 +11,7 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	
 	protected ACE_AnimationHelperCompartment m_pOwner;
 	protected bool m_bHasParentTerminated = false;
-	protected static EPhysicsLayerPresets m_iPhysicsLayerPreset = -1;
+	protected ref array<int> m_aCarriedGeomLayers;
 	
 	//------------------------------------------------------------------------------------------------
 	override void OnPostInit(IEntity owner)
@@ -57,18 +57,9 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	{
 		super.AttachHandlersOwner();
 		
-		IEntity carried = m_pOwner.GetPerformer();
-		if (!carried)
-			return;
-		
-		Physics carriedPhys = carried.GetPhysics();
-		if (!carriedPhys)
-			return;
-		
-		if (m_iPhysicsLayerPreset < 0)
-			m_iPhysicsLayerPreset = carriedPhys.GetInteractionLayer();
-		
-		carriedPhys.SetInteractionLayer(EPhysicsLayerPresets.FireGeo);
+		// The carried entity might not be known yet, as the helper replicates it independently of the carrier
+		m_pOwner.GetOnPerformerChanged().Insert(DisableCarriedCollision);
+		DisableCarriedCollision(m_pOwner.GetPerformer());
 	}
 	
 	//------------------------------------------------------------------------------------------------
@@ -76,9 +67,58 @@ class ACE_CarriableAnimationHelperComponent : ACE_CarriableEntityComponent
 	{
 		super.DetachHandlersOwner();
 		
-		IEntity carried = GetOwner().GetChildren();
+		m_pOwner.GetOnPerformerChanged().Remove(DisableCarriedCollision);
+		RestoreCarriedCollision();
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Stop the carried entity from colliding with the carrier
+	//! Has to be done on the carrier's machine, since that is where the carrier's movement gets simulated
+	protected void DisableCarriedCollision(IEntity carried)
+	{
+		// Nothing to do if the carried entity is not known yet or its collision is already disabled
+		if (!carried || m_aCarriedGeomLayers)
+			return;
+		
+		Physics carriedPhys = carried.GetPhysics();
+		if (!carriedPhys)
+			return;
+		
+		// Remember the layer of each geometry, since SetInteractionLayer overwrites all of them
+		m_aCarriedGeomLayers = {};
+		for (int i, count = carriedPhys.GetNumGeoms(); i < count; i++)
+		{
+			m_aCarriedGeomLayers.Insert(carriedPhys.GetGeomInteractionLayer(i));
+		}
+		
+		carriedPhys.SetInteractionLayer(EPhysicsLayerPresets.FireGeo);
+	}
+	
+	//------------------------------------------------------------------------------------------------
+	//! Restore the layers stored by DisableCarriedCollision
+	protected void RestoreCarriedCollision()
+	{
+		if (!m_aCarriedGeomLayers)
+			return;
+		
+		Physics carriedPhys;
+		IEntity carried = m_pOwner.GetPerformer();
 		if (carried)
-			carried.GetPhysics().SetInteractionLayer(m_iPhysicsLayerPreset);
+			carriedPhys = carried.GetPhysics();
+		
+		if (carriedPhys)
+		{
+			int geomCount = carriedPhys.GetNumGeoms();
+			foreach (int i, int layer : m_aCarriedGeomLayers)
+			{
+				if (i >= geomCount)
+					break;
+				
+				carriedPhys.SetGeomInteractionLayer(i, layer);
+			}
+		}
+		
+		m_aCarriedGeomLayers = null;
 	}
 	
 	//------------------------------------------------------------------------------------------------

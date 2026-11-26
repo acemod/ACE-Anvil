@@ -1,0 +1,9 @@
+MetaFileClass {
+ Name "{4EE7794C9A3F11EF}Configs/System/keyBindingMenu.conf"
+ Configurations {
+  CONFResourceClass PC {
+  }
+  CONFResourceClass HEADLESS : PC {
+  }
+ }
+}

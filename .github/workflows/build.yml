@@ -1,0 +1,27 @@
+name: Workbench
+
+on:
+  push:
+    branches: [master, release]
+    paths: ['addons/**']
+  pull_request_target:
+    paths: ['addons/**']
+
+jobs:
+  stable:
+    name: Stable
+    uses: ./.github/workflows/workbench.yml
+    with:
+      type: Stable
+      game_appid: 1874880
+      tools_appid: 1874910
+    secrets: inherit
+
+  experimental:
+    name: Experimental
+    uses: ./.github/workflows/workbench.yml
+    with:
+      type: Experimental
+      game_appid: 1890860
+      tools_appid: 1890880
+    secrets: inherit

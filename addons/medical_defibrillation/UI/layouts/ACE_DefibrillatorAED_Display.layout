@@ -81,7 +81,7 @@ FrameWidgetClass {
             VerticalAlign 1
            }
             Color 1 1 1 1
-           Text "ACE   /   AED"
+           Text "NO PATIENT"
            "Font Size" 56
           }
           FrameWidgetClass "{A8D102000000000F}" {

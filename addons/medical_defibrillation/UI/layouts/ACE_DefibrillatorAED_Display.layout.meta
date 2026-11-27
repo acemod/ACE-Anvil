@@ -1,5 +1,5 @@
 MetaFileClass {
- Name "{A8D1020000000021}UI/layouts/ACE_AED_Auto.layout"
+ Name "{A8D1020000000021}UI/layouts/ACE_DefibrillatorAED_Display.layout"
  Configurations {
   LayoutResourceClass PC {
   }

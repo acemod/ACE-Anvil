@@ -7,6 +7,7 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 {
 	protected ACE_RenderTargetComponent m_RenderTarget;
 	protected ACE_Medical_Defibrillation_DefibComponent m_Defib;
+	protected TextWidget m_wPatientName;
 	protected TextWidget m_wState;
 	protected TextWidget m_wCPRCountdown;
 	protected ProgressBarWidget m_wChargeProgress;
@@ -44,6 +45,7 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 	protected void OnToggleRender(Widget rtTexture, bool active)
 	{
 		GetGame().GetCallqueue().Remove(UpdateDisplay);
+		m_wPatientName = null;
 		m_wState = null;
 		m_wCPRCountdown = null;
 		m_wChargeProgress = null;
@@ -54,6 +56,7 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 		if (!layoutRoot)
 			return;
 
+		m_wPatientName = TextWidget.Cast(layoutRoot.FindAnyWidget("Title"));
 		m_wState = TextWidget.Cast(layoutRoot.FindAnyWidget("InstructionText"));
 		m_wCPRCountdown = TextWidget.Cast(layoutRoot.FindAnyWidget("CPRCountdown"));
 		m_wChargeProgress = ProgressBarWidget.Cast(layoutRoot.FindAnyWidget("ChargeProgress"));
@@ -84,6 +87,9 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 	{
 		if (!m_wState || !m_Defib)
 			return;
+
+		if (m_wPatientName)
+			m_wPatientName.SetText(GetPatientName());
 
 		ACE_Medical_Defibrillation_EDefibStateID state = m_Defib.GetDefibStateID();
 		string stateText;
@@ -137,5 +143,34 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 				m_wCPRCountdown.SetText(string.Format("%1:%2", minutes, secondsText));
 			}
 		}
+	}
+
+	protected string GetPatientName()
+	{
+		IEntity patient = m_Defib.GetPatient();
+		if (!patient)
+			return "NO PATIENT";
+
+		PlayerManager playerManager = GetGame().GetPlayerManager();
+		if (playerManager)
+		{
+			int playerId = playerManager.GetPlayerIdFromControlledEntity(patient);
+			if (playerId > 0)
+			{
+				string playerName = playerManager.GetPlayerName(playerId);
+				if (!playerName.IsEmpty())
+					return playerName;
+			}
+		}
+
+		CharacterIdentityComponent identityComponent = CharacterIdentityComponent.Cast(patient.FindComponent(CharacterIdentityComponent));
+		if (identityComponent && identityComponent.GetIdentity())
+		{
+			string characterName = identityComponent.GetIdentity().GetFullName();
+			if (!characterName.IsEmpty())
+				return characterName;
+		}
+
+		return "UNKNOWN PATIENT";
 	}
 }

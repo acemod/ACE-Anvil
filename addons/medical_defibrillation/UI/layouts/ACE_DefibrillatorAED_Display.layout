@@ -1,0 +1,190 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  RTTextureWidgetClass "{A8D1020000000001}" {
+   Name "RTTexture0"
+   Slot FrameWidgetSlot "{A8D1020000000002}" {
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 1024
+    OffsetRight -1024
+    SizeY 1024
+    OffsetBottom -1024
+   }
+   {
+    FrameWidgetClass "{A8D1020000000005}" {
+     Name "ScreenContent"
+     Slot FrameWidgetSlot "{A8D1020000000006}" {
+      Anchor 0 1 0 1
+      PositionX 0
+      OffsetLeft 0
+      PositionY 0
+      OffsetTop 0
+      SizeX 1024
+      OffsetRight -1024
+      SizeY 1024
+      OffsetBottom -1024
+      Alignment 0 1
+     }
+     {
+      ImageWidgetClass "{A8D1020000000003}" {
+       Name "Background"
+       Slot FrameWidgetSlot "{A8D1020000000004}" {
+        Anchor 0 0 1 1
+        PositionX 0
+        OffsetLeft 0
+        PositionY 0
+        OffsetTop 0
+        SizeX 0
+        OffsetRight 0
+        SizeY 0
+        OffsetBottom 0
+       }
+       "Z Order" -1000
+        Color 0 0 0 1
+      }
+      OverlayWidgetClass "{A8D1020000000007}" {
+       Name "Header"
+       Slot FrameWidgetSlot "{A8D1020000000008}" {
+        Anchor 0 0.25 1 0.36
+        PositionX 0
+        OffsetLeft 0
+        PositionY 0
+        OffsetTop 0
+        SizeX 0
+        OffsetRight 0
+        SizeY 0
+        OffsetBottom 0
+       }
+       {
+        ImageWidgetClass "{A8D1020000000009}" {
+         Name "HeaderBand"
+         Slot OverlayWidgetSlot "{A8D102000000000A}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+         }
+          Color 0 0 0 1
+        }
+        HorizontalLayoutWidgetClass "{A8D102000000000B}" {
+         Name "HeaderContent"
+         Slot OverlayWidgetSlot "{A8D102000000000C}" {
+          HorizontalAlign 3
+          VerticalAlign 3
+          Padding 48 0 48 0
+         }
+         {
+          TextWidgetClass "{A8D102000000000D}" {
+           Name "Title"
+           Slot LayoutSlot "{A8D102000000000E}" {
+            VerticalAlign 1
+           }
+            Color 1 1 1 1
+           Text "ACE   /   AED"
+           "Font Size" 56
+          }
+          FrameWidgetClass "{A8D102000000000F}" {
+           Name "HeaderSpace"
+           Slot LayoutSlot "{A8D1020000000010}" {
+            SizeMode Fill
+           }
+          }
+          ImageWidgetClass "{A8D1020000000011}" {
+           Name "Battery"
+           Slot LayoutSlot "{A8D1020000000012}" {
+            VerticalAlign 1
+           }
+            Color 1 1 1 1
+           Texture "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+           Image "veh_battery"
+           Size 64 64
+          }
+         }
+        }
+       }
+      }
+      OverlayWidgetClass "{A8D1020000000013}" {
+       Name "Body"
+       Slot FrameWidgetSlot "{A8D1020000000014}" {
+        Anchor 0 0.15 1 0.82
+        PositionX 0
+        OffsetLeft 0
+        PositionY 0
+        OffsetTop 0
+        SizeX 0
+        OffsetRight 0
+        SizeY 0
+        OffsetBottom 0
+       }
+       {
+        VerticalLayoutWidgetClass "{A8D1020000000015}" {
+         Name "Instructions"
+         Slot OverlayWidgetSlot "{A8D1020000000016}" {
+          HorizontalAlign 1
+          VerticalAlign 1
+         }
+         {
+          TextWidgetClass "{A8D1020000000017}" {
+           Name "InstructionText"
+           Slot LayoutSlot "{A8D1020000000018}" {
+            HorizontalAlign 1
+           }
+            Color 1 1 1 1
+           Text "CONNECT PADS"
+           "Font Size" 72
+           "Horizontal Alignment" Center
+          }
+          TextWidgetClass "{A8D1020000000019}" {
+           Name "CPRCountdown"
+           Slot LayoutSlot "{A8D102000000001A}" {
+            HorizontalAlign 1
+           }
+           "Is Visible" 0
+            Color 1 1 1 1
+           Text "0:00"
+           "Font Size" 90
+           "Horizontal Alignment" Center
+          }
+         }
+        }
+       }
+      }
+      VerticalLayoutWidgetClass "{A8D102000000001B}" {
+       Name "ChargeFooter"
+       Slot FrameWidgetSlot "{A8D102000000001C}" {
+        Anchor 0.05 0.82 0.95 0.98
+        OffsetLeft 0
+        OffsetTop 0
+        SizeX 0
+        OffsetRight 0
+        SizeY 0
+        OffsetBottom 0
+       }
+       {
+        TextWidgetClass "{A8D102000000001D}" {
+         Name "ChargeLabel"
+         Slot LayoutSlot "{A8D102000000001E}" {
+          HorizontalAlign 0
+         }
+          Color 1 1 1 1
+         Text "CHARGE"
+         "Font Size" 30
+        }
+        ProgressBarWidgetClass "{A8D102000000001F}" {
+         Name "ChargeProgress"
+         Slot LayoutSlot "{A8D1020000000020}" {
+          HorizontalAlign 3
+          Padding 0 12 0 0
+          SizeMode Fill
+         }
+          Color 1 1 1 1
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

@@ -3,8 +3,11 @@ GenericEntity : "{039D069A46C6501E}Prefabs/Items/Defibrillator/ACE_Defibrillator
  components {
   ACE_Medical_Defibrillation_AEDDisplayComponent "{7D381A1200010013}" {
   }
+  ACE_Medical_Defibrillation_DefibComponent "{671C09EFE7878C09}" {
+   m_bDebugAEDAlwaysShockableRhythm 0
+  }
   ACE_RenderTargetComponent "{7D381A1200010012}" {
-   m_sLayoutName "{F82D3D700B112EED}UI/layouts/ACE_DefibrillatorAED_Screen.layout"
+   m_sLayoutName "{A8D1020000000021}UI/layouts/ACE_DefibrillatorAED_Display.layout"
    m_fRenderDistanceM 8
    m_bIsActive 1
   }

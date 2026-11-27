@@ -9,10 +9,10 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 	protected ACE_Medical_Defibrillation_DefibComponent m_Defib;
 	protected TextWidget m_wState;
 	protected TextWidget m_wCPRCountdown;
+	protected ProgressBarWidget m_wChargeProgress;
 	protected bool m_bInitialRefreshScheduled;
 	protected static const int UPDATE_INTERVAL_MS = 100;
 	protected static const int INITIAL_REFRESH_DELAY_MS = 500;
-	protected static const float CHARGE_WIDTH = 880;
 
 	override protected void OnPostInit(IEntity owner)
 	{
@@ -46,6 +46,7 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 		GetGame().GetCallqueue().Remove(UpdateDisplay);
 		m_wState = null;
 		m_wCPRCountdown = null;
+		m_wChargeProgress = null;
 		if (!active || !rtTexture)
 			return;
 
@@ -55,6 +56,12 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 
 		m_wState = TextWidget.Cast(layoutRoot.FindAnyWidget("InstructionText"));
 		m_wCPRCountdown = TextWidget.Cast(layoutRoot.FindAnyWidget("CPRCountdown"));
+		m_wChargeProgress = ProgressBarWidget.Cast(layoutRoot.FindAnyWidget("ChargeProgress"));
+		if (m_wChargeProgress)
+		{
+			m_wChargeProgress.SetMin(0);
+			m_wChargeProgress.SetMax(1);
+		}
 		UpdateDisplay();
 		GetGame().GetCallqueue().CallLater(UpdateDisplay, UPDATE_INTERVAL_MS, true);
 
@@ -85,6 +92,16 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 		if (progress)
 			cprTimeMs = progress.GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.CPRCooldown);
 
+		float charge;
+		if (state == ACE_Medical_Defibrillation_EDefibStateID.CHARGED)
+			charge = 1;
+		else if (state == ACE_Medical_Defibrillation_EDefibStateID.CHARGING && progress)
+		{
+			float duration = progress.GetDuration(ACE_Medical_Defibrillation_EDefibProgressCategory.Charge);
+			if (duration > 0)
+				charge = Math.Clamp(progress.GetTimer(ACE_Medical_Defibrillation_EDefibProgressCategory.Charge) / duration, 0, 1);
+		}
+
 		bool cprActive = state == ACE_Medical_Defibrillation_EDefibStateID.CONNECTED && cprTimeMs > 0;
 		switch (state)
 		{
@@ -104,6 +121,8 @@ class ACE_Medical_Defibrillation_AEDDisplayComponent : ScriptComponent
 		}
 
 		m_wState.SetText(stateText);
+		if (m_wChargeProgress)
+			m_wChargeProgress.SetCurrent(charge);
 		if (m_wCPRCountdown)
 		{
 			m_wCPRCountdown.SetVisible(cprActive);

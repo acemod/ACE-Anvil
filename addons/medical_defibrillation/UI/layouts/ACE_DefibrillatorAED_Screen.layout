@@ -1,0 +1,203 @@
+FrameWidgetClass {
+ Name "rootFrame"
+ {
+  FrameWidgetClass "{65612DD19175A96B}" {
+   Name "ScreenFrame"
+   Slot FrameWidgetSlot "{65612DD19175A942}" {
+    Anchor 0 1 0 1
+    PositionX 0
+    OffsetLeft 0
+    OffsetTop 0
+    SizeX 1024
+    OffsetRight -1024
+    SizeY 768
+    OffsetBottom -768
+    Alignment 0 1
+   }
+  }
+  RTTextureWidgetClass "{6560EEE98D1425A6}" {
+   Name "RTTexture0"
+   Slot FrameWidgetSlot "{60C8F51E9E680055}" {
+    PositionX 0
+    OffsetLeft 0
+    PositionY 0
+    OffsetTop 0
+    SizeX 1024
+    OffsetRight -1024
+    SizeY 1024
+    OffsetBottom -1024
+   }
+   {
+    OverlayWidgetClass "{6561244F786818E6}" {
+     Name "MainOverlay"
+     Slot FrameWidgetSlot "{6561244D698EC06B}" {
+      Anchor 0 0 1 1
+      PositionX 0
+      OffsetLeft 0
+      PositionY 0
+      OffsetTop 0
+      SizeX -1080
+      OffsetRight 0
+      SizeY -810
+      OffsetBottom 0
+     }
+     {
+      ImageWidgetClass "{65612DDF57EF0B00}" {
+       Name "Background"
+       Slot OverlayWidgetSlot "{656F5463875066BF}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       Color 0 0 0 1
+      }
+      FrameWidgetClass "{65612DD66619583C}" {
+       Name "ContentMargins"
+       Slot OverlayWidgetSlot "{656F546387506698}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       {
+        VerticalLayoutWidgetClass "{65612DCAED67DF4D}" {
+         Name "ContentLayout"
+         Slot FrameWidgetSlot "{65612DCAED67DEA2}" {
+          Anchor 0 0 1 1
+          PositionX 0
+          OffsetLeft 0
+          PositionY 0
+          OffsetTop 0
+          SizeX 0
+          OffsetRight 0
+          SizeY 0
+          OffsetBottom 0
+         }
+         {
+          OverlayWidgetClass "{65612DCA49BA6684}" {
+           Name "HeaderOverlay"
+           Slot LayoutSlot "{65612DCA49BA66FF}" {
+           }
+           {
+            ImageWidgetClass "{65612DC989BDA4A4}" {
+             Name "Background"
+             Slot OverlayWidgetSlot "{656F5463875066DE}" {
+              HorizontalAlign 3
+              VerticalAlign 3
+             }
+             Color 0.0999 0.0999 0.0999 1
+            }
+            HorizontalLayoutWidgetClass "{65612DFDD6E6733C}" {
+             Name "ShockCounterLayout"
+             Slot OverlayWidgetSlot "{65612DFDD6E67318}" {
+             }
+             {
+              ImageWidgetClass "{65612DFD1CBFDA27}" {
+               Name "Icon"
+               Slot LayoutSlot "{656F546387506626}" {
+               }
+               Color 0.7913 0.7913 0.7913 1
+               Texture "{D6B46B6655BC3FD5}UI/Textures/Editor/ContextMenu/ContextAction_LightningStrike.edds"
+               Size 64 64
+              }
+             }
+            }
+            HorizontalLayoutWidgetClass "{65612DD40110AAD3}" {
+             Name "RightLayout"
+             Slot OverlayWidgetSlot "{656F546387506CC3}" {
+              HorizontalAlign 2
+             }
+             {
+              FrameWidgetClass "{65612DFF2DED5F4D}" {
+               Name "Frame1"
+               Slot LayoutSlot "{65612DCBDEFB3136}" {
+                HorizontalAlign 1
+                VerticalAlign 1
+                Padding 0 0 20 0
+               }
+               {
+                ImageWidgetClass "{65612DD3D0FF53C5}" {
+                 Name "Battery"
+                 Slot FrameWidgetSlot "{65612DFF21E70E17}" {
+                  SizeToContent 1
+                 }
+                 Color 0.7913 0.7913 0.7913 1
+                 Texture "{3262679C50EF4F01}UI/Textures/Icons/icons_wrapperUI.imageset"
+                 Image "veh_battery"
+                 Size 64 64
+                }
+               }
+              }
+             }
+            }
+           }
+          }
+          FrameWidgetClass "{65612DC9729FB0FB}" {
+           Name "BodyFrame"
+           Slot LayoutSlot "{656F546387506C4A}" {
+            SizeMode Fill
+           }
+           {
+            VerticalLayoutWidgetClass "{65612DC8002689AF}" {
+             Name "Instructions"
+             Slot FrameWidgetSlot "{65612DC800268986}" {
+              Anchor 0.5 0.5 0.5 0.5
+              OffsetLeft 0
+              OffsetTop 0
+              OffsetRight -100
+              OffsetBottom -30
+              Alignment 0.5 0
+              SizeToContent 1
+             }
+             {
+               RichTextWidgetClass "{65612DCAAA00477B}" {
+                Name "InstructionText"
+               Slot LayoutSlot "{656F546387506B0D}" {
+               }
+               Color 0.7913 0.7913 0.7913 1
+               Text "Stand clear!"\
+               "Push SHOCK button"
+               "Font Size" 64
+               "Min Font Size" 64
+               "Horizontal Alignment" Center
+               "Vertical Alignment" Center
+               Wrap 1
+                FontProperties FontProperties "{6561244CB6536CDE}" {
+                 Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+                }
+               }
+               RichTextWidgetClass "{7D381A1200010022}" {
+                Name "CPRCountdown"
+                Slot LayoutSlot "{7D381A1200010023}" {
+                 HorizontalAlign 1
+                }
+                "Is Visible" 0
+                Color 0.7913 0.7913 0.7913 1
+                Text "0:00"
+                "Font Size" 84
+                "Min Font Size" 84
+                "Horizontal Alignment" Center
+                "Vertical Alignment" Center
+                FontProperties FontProperties "{7D381A1200010024}" {
+                 Font "{EABA4FE9D014CCEF}UI/Fonts/RobotoCondensed/RobotoCondensed_Bold.fnt"
+                }
+               }
+              }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      ImageWidgetClass "{65612DC31321086C}" {
+       Name "OffScreen"
+       Slot OverlayWidgetSlot "{656F546387506AD5}" {
+        HorizontalAlign 3
+        VerticalAlign 3
+       }
+       "Is Visible" 0
+      }
+     }
+    }
+   }
+  }
+ }
+}

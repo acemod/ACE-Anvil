@@ -1,6 +1,13 @@
 GenericEntity : "{039D069A46C6501E}Prefabs/Items/Defibrillator/ACE_DefibrillatorBase.et" {
  ID "508AB2013EEE1E00"
  components {
+  ACE_Medical_Defibrillation_AEDDisplayComponent "{7D381A1200010013}" {
+  }
+  ACE_RenderTargetComponent "{7D381A1200010012}" {
+   m_sLayoutName "{F82D3D700B112EED}UI/layouts/ACE_DefibrillatorAED_Screen.layout"
+   m_fRenderDistanceM 8
+   m_bIsActive 1
+  }
   InventoryItemComponent "{5222EB4D0C73006B}" {
    Attributes SCR_ItemAttributeCollection "{64FB47C8A824B9EC}" {
     ItemDisplayName UIInfo "{64FB47C8A9F27277}" {
